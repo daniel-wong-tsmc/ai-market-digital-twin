@@ -1,6 +1,17 @@
 # F73a — Seeded-regression canary calibration note
 
-**Status:** SCAFFOLD — live capture is a flagged follow-up (see "Open follow-up" below).
+> **PARKED 2026-07-08 (user decision) — the damage specified below does NOT work; needs a redesign.**
+> A full live capture ran on 2026-07-08 (14 Opus brains + 18 Opus graders, branch `fix/f73-canary`).
+> Result: stripping the corroboration EXCEPTION made the extract brains *more conservative* (they cap
+> secondary evidence at medium confidence), which the graders *reward*. The damaged extract seam scored
+> **6.875 — above the 6.75 baseline (a clean pass)**, no crater; the gate correctly did not reject it.
+> So this damage cannot serve as the "gate has teeth" canary. To resume, pick a damage that genuinely
+> makes output WORSE, not stricter — e.g. strip only the "distinct outlets, not syndication of one story"
+> GUARDRAIL (so brains over-claim high confidence on syndicated evidence), or strip a fidelity rule
+> ("verbatim excerpt" / "do not invent numbers"). Full write-up + the 14 preserved brain answers:
+> `work/eval-f73-canary-2026-07-08/r1/` (R1-FINDING.md) in this worktree. Test stays `@skip`.
+>
+> **Status:** SCAFFOLD — live capture attempted 2026-07-08, damage recipe found flawed, parked for redesign.
 Written in worktree `.worktrees/eval-gate-power`, branch `fix/eval-gate-power`, alongside
 the F73b/F73c gate changes. No numbers below are invented; the fields marked `TODO (live
 capture)` stay empty until a real eval run fills them.
