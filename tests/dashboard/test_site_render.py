@@ -92,3 +92,55 @@ def test_populated_calls_render_top5_names_oneliners_and_breaks_if(tmp_path):
     assert "NVDA demand durability" in html       # a known call name from the fixture
     assert 'class="callmore"' in html             # calls 6..14 render as one-liners
     assert "breaks if:" in html
+
+
+from gpu_agent.dashboard.site_render import (
+    render_appendix, render_how_alert, render_how_featured, render_how_tile,
+)
+
+
+def test_how_alert_names_the_ladder_and_todays_state():
+    m = _model()
+    html = render_how_alert(m)
+    for word in ("GREEN", "YELLOW", "ORANGE", "RED"):
+        assert word in html
+    assert m["alert"]["color"].upper() in html
+    assert 'href="../style.css"' in html
+
+
+def test_how_demand_shows_weights_findings_and_evidence_links():
+    m = _model()
+    html = render_how_tile(m, "demand")
+    rows = [r for r in m["contributions"] if r["demand_contribution"] != 0]
+    assert rows, "fixture must have demand-side rows"
+    top = rows[0]
+    assert top["label"] in html
+    assert f'{top["weight"]:g}' in html
+    assert "<details>" in html
+    ev_urls = [e["url"] for r in rows for e in r["evidence"] if e["url"]]
+    if ev_urls:
+        assert f'href="{ev_urls[0]}"' in html
+
+
+def test_how_gap_shows_the_equation_and_cross_links():
+    m = _model()
+    html = render_how_tile(m, "gap")
+    ds = m["demand_supply"]
+    assert f'{ds["sdgi"]:+.2f}' in html
+    assert 'href="demand.html"' in html and 'href="supply.html"' in html
+
+
+def test_how_featured_shows_selection_trace():
+    m = _model()
+    html = render_how_featured(m)
+    assert m["featured"]["reason_text"] in html
+    assert m["featured"]["display"] in html
+
+
+def test_appendix_has_raw_scores_findings_and_runs():
+    m = _model()
+    html = render_appendix(m)
+    assert "Raw scores" in html
+    for d in m["trend"]["dates"]:
+        assert d in html
+    assert str(len(m["runs"])) in html or m["runs"][0]["date"] in html
