@@ -122,6 +122,36 @@ def test_how_demand_shows_weights_findings_and_evidence_links():
         assert f'href="{ev_urls[0]}"' in html
 
 
+def test_how_demand_states_the_rows_total_and_why_it_can_differ():
+    # F95 item 1 (label honestly): the drill-down rows must state their own total in
+    # plain language, distinct from the blended headline score, and say why they differ.
+    m = _model()
+    total = sum(r["demand_contribution"] for r in m["contributions"])
+    html = render_how_tile(m, "demand")
+    assert f"{total:+.3f}" in html
+    assert "The tile above blends this with longer-horizon signals" in html
+
+
+def test_contrib_table_drops_non_http_scheme_links():
+    from gpu_agent.dashboard.site_render import _contrib_table
+    rows = [{
+        "label": "Synthetic indicator", "entity": "nvidia", "statement": "a statement",
+        "weight": 0.1, "magnitude": 2, "demand_contribution": 0.05,
+        "supply_contribution": 0.0,
+        "evidence": [
+            {"source": "Evil Source", "url": "javascript:alert(1)",
+             "date": "2026-07-01", "tier": "secondary"},
+            {"source": "Good Source", "url": "https://example.com/report",
+             "date": "2026-07-01", "tier": "primary"},
+            {"source": "No URL Source", "url": "", "date": "2026-07-01", "tier": "secondary"},
+        ],
+    }]
+    html = _contrib_table(rows, "demand_contribution")
+    assert "javascript:alert(1)" not in html
+    assert 'href="https://example.com/report">link</a>' in html
+    assert "Evil Source" in html and "No URL Source" in html
+
+
 def test_how_gap_shows_the_equation_and_cross_links():
     m = _model()
     html = render_how_tile(m, "gap")

@@ -203,9 +203,12 @@ def _contrib_table(rows, side_key) -> str:
            "<th>Strength (1-3)</th><th>Pull</th></tr>"]
     for r in live:
         pull = f'{r[side_key]:+.3f}'
+        # F95 item 5: only http(s) evidence URLs become links — esc() stops attribute
+        # breakout but not a clickable javascript: URL, so gate on scheme too.
         ev = "".join(
             f'<li>{esc(e["source"])} ({esc(e["date"])}, {esc(e["tier"])} source)'
-            + (f' - <a href="{esc(e["url"])}">link</a>' if e["url"] else "")
+            + (f' - <a href="{esc(e["url"])}">link</a>'
+               if e["url"] and e["url"].startswith(("http://", "https://")) else "")
             + "</li>" for e in r["evidence"])
         out.append(
             f'<tr><td><details><summary>{esc(r["label"])} ({esc(r["entity"])})</summary>'
@@ -233,6 +236,11 @@ def render_how_tile(model, side) -> str:
         return page("How the gap was computed", body, depth=1)
     key = "dmi" if side == "demand" else "smi"
     side_key = f"{side}_contribution"
+    # F95 item 1 (label honestly): the contribution rows below are this cycle's raw
+    # finding-level arithmetic; the headline tile blends that with longer-horizon
+    # signals. State both numbers and say why they can differ, so the page never lets
+    # the parts silently contradict the whole.
+    total = sum(r[side_key] for r in model["contributions"])
     body = (
         f"<h1>How the {side} tile was computed</h1>"
         f"<p>The {side} score this run is <strong>{ds[key]:+.2f}</strong>. It lands on "
@@ -241,6 +249,9 @@ def render_how_tile(model, side) -> str:
         "<h2>What pulled it (weight &times; direction &times; strength / 3, from this "
         "cycle's findings)</h2>"
         f"{_contrib_table(model['contributions'], side_key)}"
+        f"<p>These pulls add up to <strong>{total:+.3f}</strong> for this cycle's "
+        "findings. The tile above blends this with longer-horizon signals, so the "
+        f"headline score ({ds[key]:+.2f}) can differ.</p>"
         "<p>Every row expands to the finding behind it and each piece of evidence: "
         "who published it, when, and whether it is a primary source.</p>"
         '<p><a href="../index.html">Back to the page</a></p>')

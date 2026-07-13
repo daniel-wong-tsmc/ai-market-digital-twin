@@ -44,3 +44,25 @@ def test_rows_have_the_drilldown_fields_and_are_sorted():
 def test_deterministic_across_two_calls():
     sc, reg = _sc(), _reg()
     assert contribution_rows(sc.findings, reg, CAT) == contribution_rows(sc.findings, reg, CAT)
+
+
+def test_weight_overrides_mirror_scoring_and_actually_move_the_sums():
+    # F95 item 2: production scoring (pipeline.py) passes assignment.weights into
+    # dmi_smi_contribution as a per-indicator override. This must stay live in the
+    # mirror, not just plumbed-through-but-unused, so pin both parity AND movement.
+    sc, reg = _sc(), _reg()
+    ind_id = next(r["indicator_id"] for r in contribution_rows(sc.findings, reg, CAT))
+    overrides = {ind_id: 0.9}   # far from the registry default -> sums must move
+
+    rows_plain = contribution_rows(sc.findings, reg, CAT)
+    rows_overridden = contribution_rows(sc.findings, reg, CAT, weight_overrides=overrides)
+
+    dmi, smi = dmi_smi_contribution(sc.findings, reg, CAT, weight_overrides=overrides)
+    assert abs(sum(r["demand_contribution"] for r in rows_overridden) - dmi) < 1e-12
+    assert abs(sum(r["supply_contribution"] for r in rows_overridden) - smi) < 1e-12
+
+    sum_plain = sum(r["demand_contribution"] for r in rows_plain) + \
+        sum(r["supply_contribution"] for r in rows_plain)
+    sum_overridden = sum(r["demand_contribution"] for r in rows_overridden) + \
+        sum(r["supply_contribution"] for r in rows_overridden)
+    assert sum_plain != sum_overridden

@@ -22,7 +22,9 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir, price_fn=N
     cat = out / category_id
     pages = 0
 
-    label = category_id.rsplit(".", 1)[-1].replace("-", " ").title()
+    # F95 item 4: use the model's own human label (e.g. "Merchant-GPU Market") instead of
+    # deriving one from the category id, which mangled it into "Merchant Gpu".
+    label = model["category_label"]
     _write(out / "index.html",
            render_index_redirect(f"{category_id}/index.html", label))
     _write(out / "style.css", SITE_CSS)

@@ -64,6 +64,16 @@ def test_implication_read_defensively(tmp_path):
     assert read_implication(tmp_path / "nowhere", CAT, "2026-07-06") is None
 
 
+def test_what_changed_has_no_fullwidth_plus():
+    # F95 item 3: the shared change-engine (gpu_agent/report.py, FROZEN) marks a brand
+    # new entry with U+FF0B ("＋"); the public page must show plain ASCII "+" instead.
+    m = _model()
+    assert m["what_changed"], "fixture must produce at least one what_changed line"
+    for w in m["what_changed"]:
+        assert "＋" not in w["phrase"]
+        assert "＋" not in w["text"]
+
+
 def test_single_run_store_degrades_no_prior(tmp_path):
     cat_dir = tmp_path / "store" / CAT
     cat_dir.mkdir(parents=True)

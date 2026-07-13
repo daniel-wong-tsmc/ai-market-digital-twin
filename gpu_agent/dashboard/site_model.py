@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 
 from gpu_agent.config import REGISTRY_PATH
+from gpu_agent.cycle import AssignmentProvider
 from gpu_agent.registry.indicators import IndicatorRegistry
 from gpu_agent.report import _VERSION_RE, evidence_vintage, load_scorecard
 
@@ -17,6 +18,16 @@ from .contributions import contribution_rows
 from .featured import assemble_readings, load_library, select_featured
 from .glossary import load_glossary, term_swap
 from .scorecards import load_scorecards
+
+# F95 item 3: gpu_agent/report.py's shared change-engine renders a "this line is a brand
+# new entry" marker as the full-width character U+FF0B ("＋"), not ASCII "+" (see
+# _CHANGE_ARROW in report.py, FROZEN — F95 must not edit it or its byte-pinned report
+# tests). Normalized to ASCII here, at the public-page presentation layer only.
+_FULLWIDTH_PLUS = "＋"
+
+
+def _drop_fullwidth_plus(text: str) -> str:
+    return text.replace(_FULLWIDTH_PLUS, "+") if text else text
 
 # Alert-ladder rule ids -> plain English (unknown ids fall back to id with spaces).
 _RULE_PLAIN = {
@@ -128,10 +139,17 @@ def _why(model, featured, rows, sc):
     return why
 
 
-def build_site_model(category_id, store_dir, work_dir, plain_path, price_fn=None):
+def build_site_model(category_id, store_dir, work_dir, plain_path, price_fn=None,
+                     assignments_root="fixtures"):
     model, _summary = build_model(category_id, store_dir, work_dir, plain_path,
                                   generated_at="")
     g = load_glossary()
+
+    # F95 item 3: strip the shared renderer's full-width "new entry" marker (see
+    # _FULLWIDTH_PLUS above) before it reaches the public page.
+    for w in model["what_changed"]:
+        w["phrase"] = _drop_fullwidth_plus(w["phrase"])
+        w["text"] = _drop_fullwidth_plus(w["text"])
 
     # Same layout detection as build_model (build.py:57-59): store_dir either IS the
     # category dir or is the store root holding <category_id>/.
@@ -146,7 +164,13 @@ def build_site_model(category_id, store_dir, work_dir, plain_path, price_fn=None
     sc = load_scorecard(latest_path)
 
     reg = IndicatorRegistry.load(REGISTRY_PATH)
-    rows = contribution_rows(sc.findings, reg, category_id)
+    # F95 item 2: same source of truth pipeline.py uses — the per-category assignment
+    # config file (AssignmentProvider, `<root>/asg.<category_id>.json`, default root
+    # "fixtures"; see gpu_agent/cycle.py and cli.py's --assignments default). This is
+    # static per-category config, not per-run state, so the site builder can read it too.
+    assignment = AssignmentProvider(assignments_root).get(category_id)
+    weight_overrides = assignment.weights if assignment is not None else {}
+    rows = contribution_rows(sc.findings, reg, category_id, weight_overrides=weight_overrides)
     for r in rows:
         r["statement"] = term_swap(r["statement"], g)
 

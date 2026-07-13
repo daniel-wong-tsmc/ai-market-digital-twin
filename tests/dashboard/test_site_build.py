@@ -23,6 +23,15 @@ def test_emits_the_full_page_set(tmp_path):
     assert summary["pages"] >= 8 and summary["featured"] is not None
 
 
+def test_root_redirect_uses_the_model_category_label(tmp_path):
+    # F95 item 4: the redirect label must be the model's human label ("Merchant-GPU
+    # Market"), not category_id.title()'d into "Merchant Gpu".
+    _build(tmp_path)
+    html = (tmp_path / "site" / "index.html").read_text(encoding="utf-8")
+    assert "Merchant-GPU Market" in html
+    assert "Merchant Gpu<" not in html
+
+
 def test_no_price_data_drops_only_the_featured_page(tmp_path):
     _build(tmp_path, price_fn=lambda d: {})
     root = tmp_path / "site"
