@@ -65,3 +65,52 @@ def select_featured(readings: list[MetricReading], triggers: list[str]) -> Selec
     r = min(readings, key=lambda r: r.static_priority)
     return Selection(r, "priority",
                      "Shown as the standing headline metric; nothing moved more.")
+
+
+def _default_price_fn(as_of: str) -> dict:
+    """Real price feed; scrape_data is gitignored so absence is normal — degrade to {}."""
+    from gpu_agent import pricefeed
+    try:
+        return pricefeed.headline_prices(as_of)
+    except (FileNotFoundError, OSError, ValueError):
+        return {}
+
+
+def _reading(entry: dict, value: float, prior: float | None, display: str) -> MetricReading:
+    return MetricReading(
+        metric_id=entry["id"], label=entry["label"], plain_label=entry["plainLabel"],
+        unit=entry["unit"], value=value, prior=prior, scale=float(entry["scale"]),
+        static_priority=int(entry["staticPriority"]),
+        alert_rule_tags=tuple(entry.get("alertRuleTags") or []),
+        how_to_read=entry["howToRead"], honesty_note=entry.get("honestyNote"),
+        display=display)
+
+
+def assemble_readings(library, latest, prev, as_of, price_fn=None):
+    """One MetricReading per library entry whose source has data; honest skips otherwise."""
+    from gpu_agent.pricefeed import lookback_label
+    price_fn = price_fn or _default_price_fn
+    cur_prices = None   # fetched lazily, once
+    out = []
+    for entry in library:
+        src = entry.get("source") or {}
+        kind = src.get("kind")
+        if kind == "index":
+            field = src.get("field")
+            if field not in ("dmi", "smi", "sdgi"):
+                continue
+            value = float(latest[field])
+            prior = float(prev[field]) if prev else None
+            out.append(_reading(entry, value, prior, f"{value:+.2f}"))
+        elif kind == "pricefeed":
+            if cur_prices is None:
+                cur_prices = price_fn(as_of)
+            model = src.get("model")
+            if not cur_prices or model not in cur_prices:
+                continue
+            value = float(cur_prices[model])
+            prior_prices = price_fn(lookback_label(as_of, 30))
+            prior = float(prior_prices[model]) if model in (prior_prices or {}) else None
+            out.append(_reading(entry, value, prior, f"${value:.2f}/GPU-hr"))
+        # unknown kinds: forward-compatible skip (spec §8)
+    return out

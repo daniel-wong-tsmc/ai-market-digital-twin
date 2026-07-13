@@ -72,3 +72,42 @@ def test_unknown_triggers_are_ignored_and_empty_readings_give_none():
 def test_normalized_change():
     assert normalized_change(_r("a", 0.40, 0.10, 1, scale=0.5)) == pytest.approx(0.6)
     assert normalized_change(_r("a", 0.40, None, 1)) is None
+
+
+from gpu_agent.dashboard.featured import assemble_readings, load_library
+
+_LATEST = {"dmi": 0.39, "smi": 0.42, "sdgi": 0.76}
+_PREV = {"dmi": 0.30, "smi": 0.40, "sdgi": 0.10}
+
+
+def test_assemble_full_house_with_stub_price():
+    lib = load_library()
+    prices = {"2026-07-13": {"H100": 2.31}, "2026-06-13": {"H100": 2.51}}
+    rs = assemble_readings(lib, _LATEST, _PREV, "2026-07-13",
+                           price_fn=lambda d: prices.get(d, {}))
+    by_id = {r.metric_id: r for r in rs}
+    assert set(by_id) == {"gpu-rent-h100", "gap-score", "demand-momentum", "supply-momentum"}
+    p = by_id["gpu-rent-h100"]
+    assert p.value == 2.31 and p.prior == 2.51 and p.display == "$2.31/GPU-hr"
+    g = by_id["gap-score"]
+    assert g.value == 0.76 and g.prior == 0.10 and g.display == "+0.76"
+
+
+def test_assemble_price_absent_skips_entry():
+    rs = assemble_readings(load_library(), _LATEST, _PREV, "2026-07-13",
+                           price_fn=lambda d: {})
+    assert "gpu-rent-h100" not in {r.metric_id for r in rs}
+    assert len(rs) == 3
+
+
+def test_assemble_no_prev_record_gives_none_priors():
+    rs = assemble_readings(load_library(), _LATEST, None, "2026-07-13",
+                           price_fn=lambda d: {})
+    assert all(r.prior is None for r in rs)
+
+
+def test_assemble_unknown_source_kind_is_skipped():
+    lib = [{"id": "x", "label": "x", "plainLabel": "x", "unit": "u",
+            "source": {"kind": "someday"}, "howToRead": "h", "staticPriority": 9,
+            "scale": 1.0, "alertRuleTags": [], "honestyNote": None}]
+    assert assemble_readings(lib, _LATEST, _PREV, "2026-07-13", price_fn=lambda d: {}) == []
