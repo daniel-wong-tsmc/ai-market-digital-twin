@@ -74,3 +74,21 @@ def test_render_is_deterministic_and_clockless():
 def test_index_redirect_points_at_category():
     html = render_index_redirect("chips.merchant-gpu/index.html", "Merchant GPU")
     assert 'http-equiv="refresh"' in html and "chips.merchant-gpu/index.html" in html
+
+
+def test_populated_calls_render_top5_names_oneliners_and_breaks_if(tmp_path):
+    # Every other test uses work_dir="work-nonexistent" (calls=[]); this one pins the
+    # populated branch of _calls(): the top-5 cap, real call names (the `name` key from
+    # parse_calls), the one-liner rest list, and a breaks-if line.
+    work = tmp_path / "work" / "daily-2026-07-06"
+    work.mkdir(parents=True)
+    with open(f"{FIX}/report-2026-07-06.txt", encoding="utf-8", errors="replace") as fh:
+        (work / "report.txt").write_text(fh.read(), encoding="utf-8")
+    m = build_site_model(CAT, FIX, work_dir=str(tmp_path / "work"),
+                         plain_path=f"{FIX}/plain-2026-07-06.json",
+                         price_fn=lambda d: {"H100": 2.31})
+    html = render_category_page(m)
+    assert "The top calls (5 of 14)" in html      # fixture report carries 14 calls
+    assert "NVDA demand durability" in html       # a known call name from the fixture
+    assert 'class="callmore"' in html             # calls 6..14 render as one-liners
+    assert "breaks if:" in html
