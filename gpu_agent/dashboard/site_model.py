@@ -71,7 +71,7 @@ def _top_row(rows, side_key):
     return max(live, key=lambda r: (abs(r[side_key]), r["indicator_id"]))
 
 
-def _why(model, featured, rows, sc, g):
+def _why(model, featured, rows, sc):
     why = []
     a = model["alert"]
     fired = "; ".join(rule_plain(t) for t in a["triggers"]) if a["triggers"] else \
@@ -90,8 +90,10 @@ def _why(model, featured, rows, sc, g):
                  " findings pulled it this cycle.")
         else:
             pull = "up" if top[side_key] > 0 else "down"
+            # Row statements were already term_swap'd once in build_site_model's row
+            # loop (the single canonical pass); reuse them as-is — no second swap.
             t = (f"{topic.capitalize()} reads {_band_word(tile['band'])}. Biggest pull"
-                 f" {pull}: {top['label']} - {term_swap(top['statement'], g)}")
+                 f" {pull}: {top['label']} - {top['statement']}")
         why.append({"topic": topic, "text": t})
 
     ds = model["demand_supply"]
@@ -169,6 +171,6 @@ def build_site_model(category_id, store_dir, work_dir, plain_path, price_fn=None
         "featured": featured,
         "contributions": rows,
         "implication": read_implication(store_root, category_id, model["latest_date"]),
-        "why": _why(model, featured, rows, sc, g),
+        "why": _why(model, featured, rows, sc),
     })
     return model
