@@ -300,6 +300,13 @@ The scope, categories run (with scorecard paths + DMI/SMI), the thesis stage's s
 failed, with any gate violations), categories skipped/failed (with reason), and the deferred Layer/Main
 stages.
 
+After the report, rebuild the public site so the committed `site/` matches the run (F95):
+
+    .venv/Scripts/python -m gpu_agent.cli site
+
+Commit `site/` together with the run's other artifacts. The site is a pure projection of
+the store — never hand-edit its HTML.
+
 ## Daily mode (the recency-windowed daily run — sub-project 4-4d)
 
 (F62's corpus/top-up/write-back steps are the STANDARD path's; Daily mode already reads the store
