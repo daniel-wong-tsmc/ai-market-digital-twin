@@ -1,3 +1,5 @@
+import pytest
+
 from gpu_agent.dashboard.featured import (
     MetricReading, Selection, load_library, normalized_change, select_featured,
 )
@@ -68,5 +70,5 @@ def test_unknown_triggers_are_ignored_and_empty_readings_give_none():
 
 
 def test_normalized_change():
-    assert normalized_change(_r("a", 0.40, 0.10, 1, scale=0.5)) == 0.6
+    assert normalized_change(_r("a", 0.40, 0.10, 1, scale=0.5)) == pytest.approx(0.6)
     assert normalized_change(_r("a", 0.40, None, 1)) is None
