@@ -1,4 +1,29 @@
-# HANDOFF — GPU Category Agent (resume point: **F78 CLOSED + F56 MERGED** 2026-07-13 — stage 6 `77708f3` (user-directed) then F56 `0c49d6a` (clean rebase, zero conflicts); `main == origin/main == 0c49d6a` after the close-out doc commit, suite **1346/5**, eval pin green. The change-first daily brief + exec top band + alert ladder + dashboard parity are live (`gpu-agent report --change-first`); all 10 `--as-of` CLI seams validate loud. Every wave-1/wave-2 lane is now MERGED (F23/F24-s1/F25/F56/F72-v1.4.1/F80/F87 + F78 closing F64/F77). Next: the **F79 interactive brainstorm** — user + orchestrator, per the standing rule — then F65, F66, F24 stage 2, the F81–F86 wave. Housekeeping open: retire ~9 merged worktrees/branches (user's call), skipped-days decision, repo rename, F23-A4 label.)
+# HANDOFF — GPU Category Agent (resume point: **F79 SCORING v2.0 SHADOW-MERGED** 2026-07-15 — `b6db80a` (frozen-core migration, SHADOW-ONLY: v2 computes but NOTHING user-facing renders it; v1 remains the headline). `main == origin/main == b6db80a`, suite **1621/5**, F6 pin green (4 seams). All four F79 gates cleared: G1 backfill SIGNED, G2 backtest PASSED (user-signed Option-B event amendment; detection-only; original FAIL reproducible), G3 eval re-gate PASSED (seam-scoped — only extract bound; honest baseline; canary captured), final review READY (replay fidelity + shadow isolation airtight). **REMAINING for F79: shadow soak ≥5 live cycles (manual `v2-shadow` invocation per cycle; auto-hook deferred) → G4 CUTOVER (user-signed; flips v1→v2 rendering) — the last gate.** Two findings logged this session: **F96** (monthly-grain write-back collision — the live v8 cycle's corpus write-back rolled back on a same-month price re-gather id collision, F52-class residual) and the F83 journal-conformance test was RELAXED to the real contract (`gates` optional; `stageStatuses` accepted — it had silently reddened main since v8; user-approved). Concurrent: the F88 session is active (unattended-orchestrator hardening; it ran the live v8 cycle; its uncommitted `.gitignore` line was preserved as `cf79758`). Next after F79's G4: F66, the F81–F86/F88–F95 waves. Housekeeping open: retire ~12 merged worktrees/branches, skipped-days decision, repo rename, F23-A4 label, F73 survivorship-bias residual.)
+
+- **Date: 2026-07-14 — DAILY CYCLE RAN (scheduled headless) `category:chips.merchant-gpu`.**
+  Scorecard `store/chips.merchant-gpu/2026-07-v7.json` — **Strong / steady, DMI 1.287 · SMI 0.287**
+  (SDGI 1.000; binding constraint HBM3E/HBM4 memory supply; 6/6 dimensions grounded; momentum Very
+  strong, unitEconomics Strong, rest Mixed; supply track notched ACCELERATING→FIRM; WHAT-MOVED empty,
+  same-asOf prior v6). Live daily sweep: 10 docs, corpus merged 76 (fresh 7 new / 5 update / 5 duplicate,
+  L1 droppedKnown 0); extract 17 findings 0 dropped; 3 tool-less Opus judge samples; thesis 19/19
+  applied + 2 provisional proposed. Committed+pushed **`2013d87`** (store artifacts + cycle log);
+  `main == origin/main`, suite **1420/5**, F6 pin + F83 conformance green. Full journal + AFK-defaults
+  in `store/cycle-log.json`.
+  **AFK-defaults (scheduled headless — re-surface for the user):** (1) reconciled an orphaned
+  uncommitted 2026-07-13 `seen_docs` delta forward as its own recovery commit **`d3fb9f3`** before
+  starting — verified NOT another instance mid-run (no lock, no store/ writes today, isolated f65
+  worktree lane already DONE) and `git pull --ff-only` clean, so proceeded rather than STOP; (2) this
+  harness exposes no per-dispatch tool allowlist and no tools-restricted gatherer/brain agent type, so
+  the F88 gatherer no-Bash injection wall and the tool-less extract/judge/thesis brains were enforced
+  BEHAVIOURALLY via explicit no-tool-use prompts (every brain returned `tool_uses=0`; deterministic
+  gate remained the backstop; `model: opus` pinned on all brain dispatches); (3) a `route_findings`
+  same-asOf re-fetch finding-id collision (F52 class — lambda.ai/pricing + BIS notice re-fetched within
+  asOf 2026-07) was resolved via the F52-precedent LOGGED wiki-ingest exclusion of the 2 colliders
+  (`work/daily-2026-07-14/ingest-exclusions.json`) after rolling back a half-applied write-back — no
+  committed finding edited/deleted, collision check not weakened; (4) discovery-role `last30days` pass
+  and the formal `compute_coverage_gaps` step were not separately run (bounded daily top-up; gatherer
+  WebSearch covered recency discovery; manifest paywalled TrendForce/SemiAnalysis logged as gaps, never
+  fetched).
 
 - **Date: 2026-07-13 — F78 STAGE 6 MERGED (`77708f3`, pushed).** User-directed interactively
   ("merge into main"). No rebase needed on the post-merge-train main: ONE conflict
@@ -36,11 +61,30 @@
   merged, no gitignored data worth keeping; see registry); (3) repo rename before TSMC-branded
   exposure; (4) F23's A4 label call (P19.budget DEFERRED vs NOT-ENFORCED — reviewer leans
   DEFERRED, in the F23 sentinel).
-- **NEXT:** (1) user merges F78 stage 6 (closes F78, ticks F64/F77) → (2) F56 rebase+merge →
-  (3) **F79 SDEWS scoring v2.0 — INTERACTIVE brainstorm with the user BEFORE any lane
-  dispatch** (standing rule) → F65, F66, F24 stage 2 (historical page consolidation) → the
-  **F81–F86 gap wave** (F87 already done, pulled forward), beside what remains of the
-  standing track (F23 ✅, F25 ✅, F24 partial).
+- **NEXT (as of 2026-07-15; wave-1/2/3 all merged — F23/F24-s1+s2/F25/F56/F65/F72-v1.4.1/F79-shadow/
+  F80/F83/F87 + F78):**
+  1. **FINISH F79 — the one thing in flight.** It is shadow-merged but NOT live. The shadow soak
+     (≥5 live daily cycles accumulating v2 indices) is the gate before G4 cutover, BUT the per-cycle
+     `v2-shadow` computation needs MANUAL invocation — the auto-hook was deferred. **So the soak
+     will NOT happen on its own.** Immediate task: wire the shadow auto-invocation into the daily
+     run-cycle (shadow-only, safe, additive), so ≥5 cycles accumulate hands-free → then the
+     **G4 CUTOVER (user-signed; flips v1→v2 rendering)** — the last gate. Assistant recommended
+     doing the hook next; awaiting user go.
+  2. **Housekeeping (cheap, piling up):** retire the ~12 merged worktrees/branches (F65/F24-s2/F79/
+     F83/F56 + the wave-1/2 set — all merged; keep only rows the RETAINED WORKTREES REGISTRY marks
+     for gitignored data). Parked user decisions: skipped scheduled days (07-09/11/12 — 07-07
+     precedent is skip), repo rename before TSMC exposure, F23-A4 label (P19.budget DEFERRED vs
+     NOT-ENFORCED, reviewer leans DEFERRED).
+  3. **F96 (logged this session):** monthly-grain write-back collision — same-month price re-gather
+     mints a stable id over changed content (F52-class residual); found in the live v8 cycle; corpus
+     rolled back safely. Small gather/dedup-seam fix.
+  4. **Remaining feature backlog (not urgent):** F66 citation audit; the **F81–F86 gap wave** (brain
+     diversity / corrections pathway / scheduled-daily-event-wake / external scoreboard /
+     manipulation-resistance / model-swap recalibration); F24 stage-2 leftovers (5 ODMs stay
+     unregistered by user decision; multi-category counting at desk #2). The **F88 session** is
+     separately working F88–F95 (unattended-orchestrator hardening + the three-tier site).
+  - **Standing rule reminder:** design-weight items (the F81–F86 wave) get an INTERACTIVE brainstorm
+     with the user before any lane dispatch; dispatched lanes obey the question-stop rule.
 
 ## HISTORICAL — 2026-07-12 F78-stages-1–5 state (superseded 2026-07-13 by the block above)
 
@@ -370,10 +414,12 @@ User gave **"go"** 2026-07-06. Actioned:
   mid-review: drill-down reconciliation = "label honestly" (interactive 2026-07-13, not AFK).
   Full record: `.superpowers/handoffs/f95-site-DONE.md` (sanctioned deviations incl. spec
   §7.2 gitignore step unnecessary; deferred-minor list for a follow-up batch).
-  **Rebase-over-F88 (roles flipped):** F88 merged to main FIRST, so F95 — not F88 — became
-  the last prose-toucher and rebases over the F88 merge (run-cycle SKILL + cli.py overlap);
-  the orchestrator session performs that rebase + suite re-run and records the post-rebase
-  head here. **Launch gates still open (user):** repo-rename/TSMC-exposure decision +
+  **Rebase-over-F88 DONE (roles flipped):** F88 merged to main FIRST, so F95 — not F88 —
+  became the last prose-toucher and was rebased over the F88 merge by the orchestrator
+  session: ONE conflict (cli.py, both lanes' appended verb helpers — resolved keep-both;
+  run-cycle prose and the F83 step fingerprint merged clean), plus an F76 vocabulary fix
+  the handoff-integrity tripwire caught (`4e0214d`). **Post-rebase head `21cf7c7`
+  (force-pushed with lease), suite 1463/6, F6 pin + F83 conformance green.** **Launch gates still open (user):** repo-rename/TSMC-exposure decision +
   pages.dev subdomain BEFORE the first Cloudflare deploy (docs/cloudflare-pages.md has the
   checklist; building and committing site/ is fine meanwhile).
 - **F88 lane MERGED to main (2026-07-13, F88 session) — user-authorized interactively ("merge

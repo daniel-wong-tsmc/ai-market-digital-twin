@@ -1,110 +1,97 @@
 {
- "scope": "category:chips.merchant-gpu",
- "asOf": "2026-07",
- "mode": "live",
- "capturedAt": "2026-07-13T02:15:00Z",
- "note": "Second live 2026-07 cycle (v6) run same analysis month as the committed v5; monthly cadence normally uses a distinct asOf, so WHAT-MOVED vs prior shows no material moves (prior scorecard is same month) and two same-asOf price findings collided on write-back (see wikiWriteBack).",
- "entries": [
-  {
-   "category_id": "chips.merchant-gpu",
-   "assignment_path": "fixtures/asg.chips.merchant-gpu.json",
-   "status": "done",
-   "scorecard": "store/chips.merchant-gpu/2026-07-v6.json",
-   "dmi": 1.127,
-   "smi": 0.420,
-   "sdgi": 0.707,
-   "runDir": "work/mgpu-2026-07-13",
-   "gather": {
-    "mode": "live",
-    "topUp": true,
-    "cap": 10,
-    "recencyDays": 7,
-    "rounds": 1,
-    "docsIngested": 10,
-    "primaryVsSecondary": "0 primary / 10 secondary (top-up targeted open-web pricing/efficiency/share/news; no filing URLs matched manifest primaryDomains this gather)",
-    "subagents": 4,
-    "slices": [
-     "GPU cloud rental + secondary-market spot pricing (D6/gpuSpotPrice) — Lambda, RunPod, Thunder Compute, Compute Exchange",
-     "Datacenter GPU efficiency (perfPerWatt/flopsPerDollar) — Silicon Analysts, GPUAdvisor",
-     "Lead times + market share + HBM supply (leadTimes/market-share-pct/S10) — TweakTown x2",
-     "Vendor news + export controls (exportControlExposure/D2) — Reuters China H200, Forbes selloff"
-    ],
-    "webReach": {
-     "agent-reach": "ok",
-     "last30days": "ok",
-     "crawl4ai": "ok",
-     "web(jina)": "ok",
-     "rss": "ok",
-     "bilibili": "ok",
-     "v2ex": "ok",
-     "github": "warn (gh CLI not installed — not needed for this gather)",
-     "youtube/reddit/xiaohongshu/twitter": "off (not needed for this gather)"
+  "scope": "category:chips.merchant-gpu",
+  "asOf": "2026-07",
+  "mode": "live",
+  "capturedAt": "2026-07-15T10:55:20Z",
+  "note": "Live full cycle (Category tier) for chips.merchant-gpu, asOf 2026-07 -> scorecard v8. Coordinator = Claude Code session; brain = dispatched tool-less Opus subagents; deterministic CLI gated+scored+stored.",
+  "entries": [
+    {
+      "category_id": "chips.merchant-gpu",
+      "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
+      "status": "done",
+      "scorecard": "store/chips.merchant-gpu/2026-07-v8.json",
+      "dmi": 1.567,
+      "smi": 0.287,
+      "sdgi": 1.28,
+      "answers": {
+        "extract": "work/mgpu-2026-07-full/extract-answer.json",
+        "judge": "work/mgpu-2026-07-full/judge-answer.json",
+        "thesis": "work/mgpu-2026-07-full/thesis-answer.json",
+        "implication": "work/mgpu-2026-07-full/implication-answer.json"
+      },
+      "corpus": {
+        "coverage": "work/mgpu-2026-07-full/corpus-coverage.json",
+        "findings": "work/mgpu-2026-07-full/corpus-findings.json",
+        "dedupedFresh": "work/mgpu-2026-07-full/deduped-fresh.json",
+        "report": "work/mgpu-2026-07-full/corpus-report.json",
+        "counts": {
+          "storeInWindow": 74,
+          "faded": 27,
+          "freshNew": 5,
+          "update": 9,
+          "duplicate": 12,
+          "merged": 86
+        }
+      },
+      "gather": {
+        "runDir": "work/mgpu-2026-07-full",
+        "blobs": "work/mgpu-2026-07-full/blobs.json",
+        "documents": 15,
+        "primary": 1,
+        "secondary": 14,
+        "duplicates": 0,
+        "dropped": 0,
+        "pursuedDespiteAge": 10,
+        "coverageGaps": {
+          "required": 18,
+          "preferred": 0,
+          "paywalled": 2,
+          "note": "top-up: most required gaps are store-covered ground, not fresh holes; genuine fresh holes = paywalled TrendForce/SemiAnalysis + SEC filing URLs that 403'd"
+        }
+      },
+      "unregisteredEntities": {
+        "count": 2,
+        "names": [
+          "market",
+          "multi"
+        ]
+      },
+      "webReach": {
+        "agent-reach": "ok (1.5.0)",
+        "last30days": "ok",
+        "crawl4ai": "ok (0.9.0)",
+        "drift": false,
+        "licensedSourcesFetched": [
+          "trendforce.com"
+        ]
+      },
+      "stageStatuses": {
+        "category": "done",
+        "thesis": "done (14 strengthened / 5 reaffirmed / 2 weakened; 2 new provisional theses proposed)",
+        "implication": "done (6 lines; one gate re-dispatch for invented ids / ASE / 'leverage')",
+        "writeBack": "failed (finding-id collision on lambda-ai-1252bbe3-2026-07-1 — same-month live-price re-gather, id stable but content moved; partial write rolled back to keep store consistent)",
+        "layer": "deferred",
+        "main": "deferred"
+      },
+      "notes": {
+        "voiceLint": "judgment: one voice-lint re-dispatch wave (3 samples) for acronyms AI-GPU/SK/ASE, then clean",
+        "gatherMode": "live full top-up (F62 corpus-first); targeted not-covered D6/gpuSpotPrice/apiArr + weekly material updates",
+        "harnessNote": "brain subagents dispatched model=opus, Read/Write-only (no web/exec); F88 no-Bash wall enforced behaviorally (agent-type cannot scope tools); coordinator never opened a blob file (content isolation intact)"
+      }
+    }
+  ],
+  "stages": [
+    {
+      "tier": "category",
+      "status": "done"
     },
-    "blobs": "work/mgpu-2026-07-13/blobs.json",
-    "gatherLog": "work/mgpu-2026-07-13/docs/gather-log.json",
-    "coverageGaps": "18 required + 2 preferred source/indicator gaps from compute_coverage_gaps — expected for a top-up: covered series (D2, grossMargin, S9, customerConcentration, vendorRevenueGuidance, exportControlExposure) come from the store corpus, not this gather; several source gaps are URL-pattern mismatches where the indicator IS covered (e.g. market-share-pct via TweakTown). 2 paywalled never fetched (trendforce-gpu-tracker, semianalysis).",
-    "pursuedDespiteAge": "6 kept older than the 7-day sweep, each logged in blobs.json (Thunder Compute + Compute Exchange 12d; Silicon Analysts 91d; GPUAdvisor 120d; TweakTown Q1-share 32d; TweakTown 16-Hi HBM 197d)",
-    "notableSkips": [
-     "4 cap-trims (top-up cap 10): KitGuru Q4-2025 AIB share, DIGITIMES HBM4 headline, NVIDIA Newsroom index, glennklockwood B200 spec page",
-     "2 provenance drops: Intel Gaudi 3 datasheet blob + AMD MLPerf-6.0 aggregate blob (content was search-summary paraphrase / multi-page mashup, not verbatim from one fetched page) — carried as leads",
-     "Live vast.ai pricing JS-rendered and eBay item pages timed out (carried as leads); DigiTimes CoWoS-2027 (2026-07-10) IP-blocked"
-    ]
-   },
-   "corpus": {
-    "storeInWindow": 59,
-    "storeFaded": 21,
-    "freshNew": 9,
-    "freshUpdate": 4,
-    "duplicate": 14,
-    "merged": 72,
-    "coverageCoverage": "work/mgpu-2026-07-13/corpus-coverage.json",
-    "coverageReport": "work/mgpu-2026-07-13/corpus-report.json",
-    "pipelineReport": "work/mgpu-2026-07-13/corpus-pipeline-report.json"
-   },
-   "answers": {
-    "extract": "work/mgpu-2026-07-13/extract-answer.json (10 doc-objects, assembled from ext_a/ext_b/ext_c/ext_d/ext_e/ext_rp.json)",
-    "judge": "work/mgpu-2026-07-13/judge-answer.json (3 independent tool-less samples at s1.json / s2.json / s3.json)",
-    "thesis": "work/mgpu-2026-07-13/thesis-answer.json"
-   },
-   "gates": {
-    "extract": "27 drafts -> 27 findings gated, 0 dropped. First gate pass dropped 5 for 'excerpt not found' — cause was em-dash mojibake introduced by cp1252 default encoding when assembling extract-answer.json; fixed by re-assembling with explicit UTF-8, then 27/27 clean. 6 object-typed dispersion values coerced to strings to satisfy schema.",
-    "unregisteredEntity": "1: 'market' (F24 flag surfaced, not dropped)",
-    "voiceLint": "First pipeline pass flagged company acronyms not on registry/acronyms.json allowlist: 'ASE' (all 3 samples, bottleneck.rationale) and 'SK' (sample 3 narrative). Re-dispatched 3 separate tool-less samples to rephrase only the flagged strings (ASE->outside assemblers / Hanmi and other packaging firms; SK hynix->Hynix); all ratings unchanged; re-run clean. NO bypass.",
-    "sufficiency": "passed (no sufficiency lines emitted)",
-    "thesis": "17 standing theses judged, 0 gate rejections; 16 applied=True, 1 applied=False. pricing-power-persistence weakened APPLIED (corroborated secondary reversal, 3 distinct publishers; pending filing checkpoint). rising-memory-costs strengthened DEFERRED (secondary-only reversal, 2 distinct publishers < 3). custom-asic-substitution pending challenge resolved -> strengthened applied. 2 new provisional theses proposed (broadening-ai-demand-tightens-tsmc-capacity-and-pricing; hyperscaler-ai-spending-may-outrun-near-term-returns). Fixed one transcription typo in a proposal finding id before gating."
-   },
-   "wikiWriteBack": "11 of 13 deduped-fresh findings routed to 2 pages; wiki-lint clean (0 contradictions). SKIPPED 2 findings that collided with committed same-asOf (v-prior) store files (differing content): lambda-ai-1252bbe3-2026-07-1 (H100 SXM $3.99-4.29 vs prior $6.69) and www-runpod-io-bdb62dfd-2026-07-1 (B300 $7.39 vs prior $5.89) — never overwrote committed findings; the v6 scorecard already used the fresh prices via the corpus merge.",
-   "stageStatus": {
-    "category": "done",
-    "thesis": "done",
-    "layer": "deferred",
-    "main": "deferred"
-   },
-   "thesis": {
-    "judgmentsApplied": 16,
-    "judgmentsDeferred": 1,
-    "appliedReversal": "supply-constraint-binding ADJUSTED (HBM, not packaging, now the binding supply — CoWoS gap narrowing 20%->10%); pricing-power-persistence WEAKENED applied (3-publisher corroborated, H100 rentals cut up to 45%); custom-asic-substitution STRENGTHENED applied (pending challenge resolved); conditional-china-re-opening ADJUSTED (case-by-case H200 path + China buyer signals); networking-attach / prepaid-HBM / amd-growth-leans / customer-concentration / vendor-financed-circularity strengthened",
-    "deferred": "rising-memory-costs-inflate-ai-server-economics strengthened DEFERRED (secondary-only, 2 distinct publishers < 3) — still CHALLENGED-pending",
-    "proposed": [
-     "broadening-ai-demand-tightens-tsmc-capacity-and-pricing",
-     "hyperscaler-ai-spending-may-outrun-near-term-returns"
-    ]
-   },
-   "report": "rendered board-ready (standard, not --daily): Strong / improving; binding constraint HBM3E/HBM4 memory supply (shifted from advanced packaging as CoWoS eases); DMI 1.127 (Δ +0.593), SMI 0.420 (Δ +0.013), SDGI 0.707 (Δ +0.580) vs prior 2026-07 v5; 6/6 dimensions grounded, 0 under-supported; momentum Very strong, unitEconomics Strong, competitiveStructure/moat/bottleneck/strategicRisk Mixed; WHAT-MOVED empty (same-asOf prior). Price track: D6 lambda $3.99 (Δ -0.30), runpod $7.39, PMI -1.00."
-  }
- ],
- "stages": [
-  {
-   "tier": "category",
-   "status": "active"
-  },
-  {
-   "tier": "layer",
-   "status": "deferred"
-  },
-  {
-   "tier": "main",
-   "status": "deferred"
-  }
- ]
+    {
+      "tier": "layer",
+      "status": "deferred"
+    },
+    {
+      "tier": "main",
+      "status": "deferred"
+    }
+  ]
 }
