@@ -38,8 +38,8 @@ or a careless `git clean`) versus **per-user config outside the repo entirely** 
 ## 1. Fresh-clone bootstrap
 
 ```
-git clone https://github.com/daniel-wong-tsmc/random_for_fun.git
-cd random_for_fun
+git clone https://github.com/daniel-wong-tsmc/ai-market-digital-twin.git
+cd ai-market-digital-twin
 python -m venv .venv
 .venv/Scripts/python -m pip install -e ".[dev]"
 ```
@@ -243,8 +243,8 @@ Ordered, copy-pasteable, with what to expect at each step. Run from a shell at r
 
 ```
 # 1. Clone (skip if already local)
-git clone https://github.com/daniel-wong-tsmc/random_for_fun.git
-cd random_for_fun
+git clone https://github.com/daniel-wong-tsmc/ai-market-digital-twin.git
+cd ai-market-digital-twin
 
 # 2. Venv + install
 python -m venv .venv

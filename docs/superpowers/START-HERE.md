@@ -30,4 +30,4 @@ re-design, re-plan, or re-edit the charter. Read the artifacts below and build t
   re-opening settled design decisions.
 
 ## Repo
-`C:\Users\danie\random_for_fun` (local) · `https://github.com/daniel-wong-tsmc/random_for_fun.git`
+`C:\Users\danie\random_for_fun` (local) · `https://github.com/daniel-wong-tsmc/ai-market-digital-twin.git`
