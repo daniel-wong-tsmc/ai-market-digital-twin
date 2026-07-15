@@ -142,7 +142,8 @@ def build_model(category_id, store_dir, work_dir, plain_path, generated_at):
                           "sdgi": latest["sdgi"], "sdgi_direction": latest["sdgi_direction"]},
         "dimensions": dims, "runs": runs, "glossary_rows": glossary_rows,
         "slop_denylist": SLOP,
-        "alert": {"color": alert.color, "prior": alert.priorColor},
+        "alert": {"color": alert.color, "prior": alert.priorColor,
+                  "raw": alert.rawColor, "triggers": list(alert.triggers)},
         "what_changed": what_changed,
     }
     return model, {"runs": len(recs), "claims": len(calls_raw), **counters}

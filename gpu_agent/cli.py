@@ -1239,6 +1239,22 @@ def _gather_assemble(args) -> int:
     return 0
 
 
+def _site(args):
+    from pathlib import Path
+    from gpu_agent.dashboard.scorecards import load_scorecards
+    from gpu_agent.dashboard.site_build import build_site
+    plain = args.plain
+    if plain is None:
+        recs = load_scorecards(args.category, args.store)
+        if recs:
+            cand = Path(args.store) / "plain-language" / f'{recs[-1]["as_of"]}.json'
+            plain = str(cand) if cand.exists() else None
+    summary = build_site(args.category, args.store, args.work, plain, args.out)
+    print(f'[site] pages={summary["pages"]} featured={summary["featured"]} '
+          f'-> {summary["out"]}')
+    return 0
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="gpu-agent")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -1415,6 +1431,14 @@ def main(argv=None) -> int:
     grp.add_argument("--prior", default=None, help="explicit path to prior-cycle scorecard")
     grp.add_argument("--no-prior", action="store_true",
                      help="suppress prior-cycle lookup; Δ columns show —")
+    st = sub.add_parser("site", help="F95: build the static category site into site/")
+    st.add_argument("--category", default="chips.merchant-gpu")
+    st.add_argument("--store", default="store/chips.merchant-gpu")
+    st.add_argument("--work", default="work")
+    st.add_argument("--plain", default=None,
+                    help="plain-language overrides json (default: "
+                         "store/<cat>/plain-language/<latest>.json when present)")
+    st.add_argument("--out", default="site")
     wre = sub.add_parser("web-reach-ensure",
                          help="idempotently ensure web-reach tools are installed")
     wre.add_argument("--check-only", action="store_true")
@@ -1527,6 +1551,8 @@ def main(argv=None) -> int:
         return _gather_assemble(args)
     if args.cmd == "report":
         return _report(args)
+    if args.cmd == "site":
+        return _site(args)
     try:
         sc = _build(args)
     except GateError as e:
