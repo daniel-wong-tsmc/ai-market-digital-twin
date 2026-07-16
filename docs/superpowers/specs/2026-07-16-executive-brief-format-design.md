@@ -1,6 +1,6 @@
 # Executive Brief format — design spec
 
-**Date:** 2026-07-16 (v4 — key-metrics band added at the top, blocks renumbered; v3 per-block information + visual treatment; v2 outline restructure; v1 section-prose. All user-directed.)
+**Date:** 2026-07-16 (v5 — metrics band made dynamic, driven by a standing executive agenda; v4 metrics band added at top; v3 per-block information + visual treatment; v2 outline restructure; v1 section-prose. All user-directed.)
 **Status:** APPROVED design direction (user-selected anchor + spec-only deliverable, interactive 2026-07-16). Implementation is a future lane.
 **Scope:** The output FORMAT for the executive-facing market page (audience: a TSMC executive): the page outline, what each block says (information), how it looks (visual treatment), which store fields feed it, and the writing rules. It does NOT implement the renderer.
 **Origin:** User asked for a format that showcases the agent's outputs for a TSMC executive and resolves the issues found in the 2026-07-16 critique of the deployed site (`ai-market-digital-twin.pages.dev/chips.merchant-gpu/`).
@@ -35,14 +35,20 @@ This outline is the spec's backbone. Blocks appear in exactly this order; every 
 │  <monthly narrative, verbatim — what's hot, where the ceiling  │
 │   is, what to watch for relief>                                │
 ├────────────────────────────────────────────────────────────────┤
-│ C · KEY METRICS                     (the numbers we track)     │
-│  [NVIDIA DC revenue ] [CoWoS supply gap] [HBM availability]    │
-│  [ $75.2B, guide    ] [ ~10% by end-26 ] [ sold out through]   │
-│  [ $91B · rising    ] [ · narrowing    ] [ 2027; books into]   │
-│  [                  ] [                ] [ 2028 · tightening]  │
-│  [ODM AI revenue    ] [HBM maker capex ]                       │
-│  [ +69% YoY (Jun)   ] [ +50% YoY (Jun) ]                       │
-│  [ · accelerating   ] [ · expanding    ]                       │
+│ C · KEY METRICS            (five standing questions, answered  │
+│                             by whatever metric matters now)    │
+│  [DEMAND DURABILITY ] [BINDING CONSTRAINT] [CUSTOMER MIX    ]  │
+│  [ NVIDIA DC revenue] [ HBM availability ] [ ASIC vs GPU    ]  │
+│  [ $75.2B → $91B    ] [ sold out through ] [ +44.6%/yr vs   ]  │
+│  [ guide · rising   ] [ 2027; books into ] [ +16.1%/yr      ]  │
+│  [                  ] [ 2028 · tightening] [ · shifting     ]  │
+│  [                  ] [ (was: CoWoS gap) ] [                ]  │
+│  [END-MARKET ECON.  ] [DEMAND QUALITY    ]                     │
+│  [ rack components  ] [ ~210k GPUs       ]                     │
+│  [ +2–3%/wk, 10–15% ] [ vendor-financed; ]                     │
+│  [ over baseline    ] [ top customer 22% ]                     │
+│  [ · inflating      ] [ of revenue       ]                     │
+│  slot label fixed · metric under it changes with the market    │
 │  each tile: value + unit · trend word · as-of + source         │
 ├────────────────────────────────────────────────────────────────┤
 │ D · WHAT THIS MEANS FOR TSMC                    (3–5 bullets)  │
@@ -109,14 +115,23 @@ Each block lists: **Information** (what kinds of content it carries), **Visual t
 - **Visual treatment:** hero-text technique, not a chart and not a colored dot — the verdict sentence is the largest text after the H1 (display-size, semibold): `**{rating} / {direction}** — {reason, first sentence}`. The narrative sits under it as body prose at a readable measure (~66 characters per line). No box, no tile: prose lede. Bold is reserved for the rating words; everything in ink tokens, no status color.
 - **Bindings:** monthly scorecard `categoryStatus` (rating, direction, reason, constraintLabel), `narrative`.
 
-### C · Key metrics band — the numbers we track
-- **Information:** 4–6 headline market metrics, each: metric name, current value WITH its real-world unit, trend word, as-of date, source name. The set is **curated and fixed per category** — the same metrics every visit, so the reader can track them across revisions; never "whatever moved this week." Composite indices (DMI/SMI/SDGI, two-decimal scores) remain banned from this band and from the page — every tile value is a real-world quantity ($B, %, $/hr, a date horizon).
-- **Reference set for merchant-GPU** (all present in the store today): NVIDIA data-center revenue ($75.2B, guided $91B — record, rising); CoWoS supply-demand gap (~20% narrowing toward ~10% by end-2026); HBM availability (sold out through 2027, order books into 2028 — tightening); ODM AI-server revenue (+69% YoY, Jun 2026, TWSE filings); HBM maker capex (+50% YoY, Micron Jun 2026). The curated list lives in per-category registry config; changing it is an editorial decision, not a render-time computation.
-- **Visual treatment:** a **KPI row of stat tiles** directly under the verdict — the eye-catch band. Tile anatomy, top to bottom: metric name as small uppercase muted label → the value + unit as the tile's largest text (proportional figures at display size) → trend as word + glyph in meta text (`rising ↑` / `narrowing ↓` — word always present) → as-of date + source in muted meta text. All ink tokens; NO status colors (the one-alarm rule holds — a tightening metric is information, not an alarm). Hairline borders matching the G tiles; 5 tiles fit one row on desktop, wrap 2-up, then 1-up on narrow screens.
+### C · Key metrics band — the executive agenda, answered by the market
+The band is built from the reader's side. A TSMC executive does not arrive wanting "our metrics"; they arrive with standing questions about this market, and each visit the band should answer those questions with whatever number best answers them **right now**. So: the *questions* are fixed; the *metrics* under them change dynamically with the market.
+
+- **The executive agenda — five standing questions (the slot labels):**
+  1. **Demand durability** — is the demand that fills my fabs real and growing? (candidate metrics: vendor data-center revenue and guides, backlog/purchase commitments, ODM AI-server revenue YoY, hyperscaler capex direction)
+  2. **Binding constraint** — what caps shipments today, and how tight is it? (candidates: CoWoS supply-demand gap %, HBM sold-out horizon, lead times, component-cost inflation). This slot follows the scorecard's own binding constraint — when the constraint moves, the slot's metric moves with it, and that movement is itself the story.
+  3. **Customer mix** — where is share moving among the people who buy my wafers, and is any volume leaving my fabs entirely? (candidates: ASIC vs merchant-GPU growth rates, AMD share/commitments, Chinese domestic-chip milestones)
+  4. **End-market economics** — can the buyers keep paying? (candidates: GPU rental $/hr moves, cloud price hikes, token price-vs-volume economics, server component-cost inflation)
+  5. **Demand quality** — how much of this demand is self-financed or policy-capped? (candidates: vendor-financing exposure in $ or units, customer concentration %, China addressable-market size)
+- **Information per tile:** the slot label (the standing question, fixed) → the metric currently answering it (name, value WITH its real-world unit, trend word, as-of date, source). When the occupant changed since the prior revision, a one-line continuity note: `(was: CoWoS gap)` — the reader sees both the answer and that the answer moved. Composite indices (DMI/SMI/SDGI, two-decimal scores) remain banned — every tile value is a real-world quantity ($B, %, $/hr, a date horizon, units).
+- **Dynamic selection rule (per slot, per revision):** from the findings and series readings mapped to that slot's indicator families, pick the reading scoring highest on freshness, magnitude of move, and evidence grade — with a stickiness bonus for the metric shown last revision, so the band changes when the market changes, not from render-to-render noise. The slot→indicator-family mapping lives in per-category registry config (questions are configured; metrics are computed).
+- **Visual treatment:** a **KPI row of stat tiles** directly under the verdict — the eye-catch band. Tile anatomy, top to bottom: slot label as small uppercase muted text (fixed) → metric name in small text → the value + unit as the tile's largest text (proportional figures at display size) → trend as word + glyph in meta text (`rising ↑` / `tightening ↓` — word always present) → as-of date + source in muted meta text → continuity note when the occupant changed. All ink tokens; NO status colors (the one-alarm rule holds — a tightening metric is information, not an alarm). Hairline borders matching the G tiles; 5 tiles fit one row on desktop, wrap 2-up, then 1-up on narrow screens.
   - **Distinctness from G:** this band is *numbers with units* (market facts); G is *judgment words* (the agent's ratings). No metric may appear as a tile in both — the old duplicated-tile mistake must not return.
-  - **Future option (not v1):** a small sparkline per tile from the indicator's series history (the stat-tile-with-sparkline form); any such chart must then go through the full dataviz procedure.
-- **Bindings:** newest reading per curated indicator from `store/series/<indicatorId>.jsonl` (value, unit, period, publishedAt, source) where a series exists; otherwise the newest metric-kind finding carrying that headline number (e.g. NVIDIA DC revenue, HBM sold-out horizon). Trend word derived from the series' prior reading or the finding's `trend` field.
-- **Fallbacks:** a metric with no reading fresher than 90 days still renders but its as-of date is emphasized (`as of Apr 2026`) — never silently stale. An indicator with no reading at all is omitted; if fewer than 3 tiles remain, omit the band entirely (never render an empty header).
+  - **Future option (not v1):** a small sparkline per tile from the occupying indicator's series history (the stat-tile-with-sparkline form); any such chart must then go through the full dataviz procedure.
+- **Bindings:** per slot, the newest qualifying reading from `store/series/<indicatorId>.jsonl` (value, unit, period, publishedAt, source) or the newest metric-kind finding in that slot's indicator families (findings carry `indicatorId`, `magnitude`, `trend`, `observedAt`, evidence grade). Trend word from the series' prior reading or the finding's `trend`.
+- **Current answers from the July store (illustrative, not fixed):** demand durability → NVIDIA DC revenue $75.2B, guided $91B (rising); binding constraint → HBM sold out through 2027, order books into 2028 (tightening; was: CoWoS gap ~20%→~10%); customer mix → ASIC shipments +44.6%/yr vs GPUs +16.1%/yr (shifting); end-market economics → rack component costs +2–3%/week, 10–15% above baseline (inflating); demand quality → ~210k GPUs vendor-financed, top customer 22% of revenue (widening).
+- **Fallbacks:** a slot whose best reading is older than 90 days still renders but its as-of date is emphasized (`as of Apr 2026`) — never silently stale. A slot with no qualifying reading at all renders `no fresh read` with the last known as-of; if fewer than 3 slots can render a metric, omit the band entirely (never render an empty header).
 
 ### D · What this means for TSMC
 - **Information:** 3–5 implications, each: the affected TSMC lever (wafer starts, packaging allocation, customer mix, pricing), the market fact driving it, the dimension(s) it comes from, links to the evidence and to the related standing call.
@@ -190,14 +205,14 @@ Launch-checklist items from the critique that are real but OUTSIDE a format spec
 ## Interactions and constraints
 
 - **F79 scoring v2 (SHADOW):** this spec binds to v1 fields. Nothing in it may render v2 or flip the headline — that is the user-signed G4 cutover gate. The format is deliberately word-anchored (ratings, directions, rationales), so the eventual v1→v2 cutover changes bindings, not blocks.
-- **Frozen core:** the format is renderer/copy-layer only. An implementation lane must not touch extract/judge/thesis brains; the register rules bind the plain-language/render stage. The C-band curated metric list is registry config, not a brain change.
+- **Frozen core:** the format is renderer/copy-layer only. An implementation lane must not touch extract/judge/thesis brains; the register rules bind the plain-language/render stage. The C-band slot→indicator-family mapping is registry config, and slot selection is a deterministic render-time computation over already-extracted findings/series — not a brain change.
 - **F95 site:** this format replaces the F95 category-page layout for the exec surface; the daily ops detail (raw tiles, what-changed internals) remains available via appendix/method pages. Whether the old daily page layout is kept as a separate ops view is an implementation-lane decision, not required by this spec.
 - **Testability:** register rules 1–3 are string-testable against rendered output (banned-token scan; unit-presence heuristics); E non-emptiness is assertable whenever `book.json` has a registered entry; A's staleness strip is assertable by fixture clock; "status palette only in chip + staleness strip" is assertable by scanning rendered CSS classes; C/G disjointness is assertable from the curated list vs dimension names. An implementation lane should pin these as renderer tests.
 
 ## Acceptance criteria (for the future implementation lane)
 
 1. Rendered page contains blocks A–H in outline order, populated from the real store with no placeholder text.
-2. The key-metrics band (C) renders 4–6 tiles, each with a real-world unit, a trend word, an as-of date, and a source; the metric set matches the curated registry list and is identical across revisions unless the list is edited.
+2. The key-metrics band (C) renders the five agenda slots (≥3 to render at all), each tile carrying a real-world unit, a trend word, an as-of date, and a source; slot labels are identical across revisions; the occupying metric per slot matches the dynamic selection rule (freshness × magnitude × evidence grade, with stickiness), and an occupant change renders the continuity note.
 3. Calls board (E) non-empty whenever the thesis book has ≥1 registered entry.
 4. Banned-token scan of rendered exec copy passes (register rule 2 list).
 5. Attention chip wording matches the A template in both the aligned and hysteresis-lag cases.
@@ -213,5 +228,6 @@ Launch-checklist items from the critique that are real but OUTSIDE a format spec
 - Deliverable = spec only, no mockup now: **user-selected** (interactive, 2026-07-16).
 - Spec restructured around a normative page outline (blocks A–G at the time): **user-directed** (interactive, 2026-07-16). Two refinements surfaced by the outline: attention chip moved to the masthead top-right; strip renamed "Latest signal".
 - Per-block Information + Visual treatment and the Visual system section added: **user-directed** (interactive, 2026-07-16). Key call: status color is reserved for the attention chip + staleness strip, everything else in ink — one alarm on the page, not eight.
-- **Key-metrics band (new block C) added at the top; blocks renumbered A–H: user-directed** (interactive, 2026-07-16 — "make sure in the top we can see the KPIs/metrics we track"). Design constraints preserved: real-world units only (composite indices stay banned), curated fixed metric set per category, ink-only tiles, disjoint from the G rating tiles. Verdict stays above the band — conclusion first, then the numbers.
+- **Key-metrics band (new block C) added at the top; blocks renumbered A–H: user-directed** (interactive, 2026-07-16 — "make sure in the top we can see the KPIs/metrics we track"). Design constraints: real-world units only (composite indices stay banned), ink-only tiles, disjoint from the G rating tiles. Verdict stays above the band — conclusion first, then the numbers.
+- **Metrics band made DYNAMIC (v5): user-directed** (interactive, 2026-07-16 — "I want the KPIs to change dynamically... approach this with the mindset of an executive"). This SUPERSEDES v4's fixed curated metric list, which was designer judgment, not a user decision. Replacement model: five fixed executive-agenda questions (demand durability, binding constraint, customer mix, end-market economics, demand quality) as slot labels; the metric answering each is selected dynamically per revision (freshness × magnitude × evidence grade, stickiness bonus, continuity note on change). Trackability now lives in the stable questions rather than a locked metric list.
 - All other choices (block order, selection rules, register list, counterweight rule): designer judgment within the approved anchor, open to revision at spec review.
