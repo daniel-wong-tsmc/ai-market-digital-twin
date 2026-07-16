@@ -21,7 +21,11 @@ def _read_json(path):
 def latest_monthly(cat_dir):
     cat_dir = Path(cat_dir)
     revs = []
-    for p in cat_dir.iterdir():
+    try:
+        entries = list(cat_dir.iterdir())
+    except OSError:
+        entries = []
+    for p in entries:
         m = _MONTHLY_RE.match(p.name)
         if m:
             revs.append((m.group(1), int(m.group(2)), p))
