@@ -83,3 +83,59 @@ def test_read_series_reads_only_requested_files(tmp_path):
     (d / "b.jsonl").write_text("{}\n", encoding="utf-8")
     rows = read_series(d, {"a", "missing"})
     assert set(rows) == {"a"} and rows["a"][0]["value"] == 1
+
+
+import datetime as dt
+from gpu_agent.dashboard.agenda import Occupant, score, select_occupants
+
+TODAY = dt.date(2026, 7, 16)
+
+
+def _cand(ind="D2", observed="2026-07-01", mag=3, tier="primary"):
+    return Candidate(indicator_id=ind, label=ind, display="$1B",
+                     trend_word="rising", observed_at=observed, tier=tier,
+                     source_name="s", magnitude=mag, statement="st")
+
+
+def test_score_prefers_fresh_high_magnitude_primary():
+    fresh = _cand(observed="2026-07-14")
+    stale = _cand(observed="2026-04-01")
+    assert score(fresh, TODAY, None) > score(stale, TODAY, None)
+    weak = _cand(mag=1)
+    assert score(_cand(mag=3), TODAY, None) > score(weak, TODAY, None)
+    sec = _cand(tier="secondary")
+    assert score(_cand(), TODAY, None) > score(sec, TODAY, None)
+
+
+def test_score_stickiness_bonus():
+    c = _cand(ind="D2")
+    assert score(c, TODAY, "D2") > score(c, TODAY, None)
+
+
+def test_select_occupants_stickiness_holds_and_continuity_on_disappearance():
+    slot = {"id": "binding-constraint", "label": "Binding constraint",
+            "question": "q?", "indicators": ["S9", "S10"]}
+    cowos = {"indicatorId": "S9", "kind": "measured",
+             "value": {"number": 20.0, "unit": "pct"}, "trend": "falling",
+             "observedAt": "2026-06-20", "magnitude": 3,
+             "statement": "CoWoS gap.", "evidence": [{"tier": "primary", "source": "x"}]}
+    hbm = {"indicatorId": "S10", "kind": "measured",
+           "value": {"number": 2027.0, "unit": "sold_out_through"}, "trend": "rising",
+           "observedAt": "2026-07-10", "magnitude": 3,
+           "statement": "HBM sold out.", "evidence": [{"tier": "primary", "source": "y"}]}
+    # Prior revision had CoWoS; current has both, HBM fresher. Stickiness (0.75) HOLDS the
+    # slot on CoWoS/S9 -> no occupant change, no continuity note. (Code governs, per the
+    # user's pre-flight decision 2026-07-16.)
+    occ = select_occupants([slot], [cowos, hbm], {}, [cowos], TODAY)
+    assert len(occ) == 1 and occ[0].candidate.indicator_id == "S9"
+    assert occ[0].was_label is None
+    # When the sticky prior reading disappears from the candidate set, the slot moves to
+    # the fresher HBM/S10 and the continuity note fires.
+    occ2 = select_occupants([slot], [hbm], {}, [cowos], TODAY)
+    assert occ2[0].candidate.indicator_id == "S10" and occ2[0].was_label == "S9"
+
+
+def test_select_occupants_skips_empty_slot():
+    slot = {"id": "customer-mix", "label": "Customer mix", "question": "q?",
+            "indicators": ["market-share-pct"]}
+    assert select_occupants([slot], [], {}, [], TODAY) == []

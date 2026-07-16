@@ -123,3 +123,57 @@ def read_series(series_dir, indicator_ids) -> dict:
         if rows:
             out[ind] = rows
     return out
+
+
+import datetime as _dt
+
+
+@dataclass(frozen=True)
+class Occupant:
+    slot_id: str
+    slot_label: str
+    candidate: Candidate
+    was_label: str | None
+
+
+def _days_old(observed_at: str, today: _dt.date) -> int:
+    try:
+        parts = [int(x) for x in observed_at.split("-")]
+        d = _dt.date(parts[0], parts[1], parts[2] if len(parts) > 2 else 15)
+    except (ValueError, IndexError):
+        return 9999
+    return max(0, (today - d).days)
+
+
+def score(c: Candidate, today: _dt.date, sticky_indicator: str | None) -> float:
+    freshness = max(0.0, 1.0 - _days_old(c.observed_at, today) / 90.0)
+    s = 2.0 * freshness + c.magnitude / 3.0
+    if c.tier == "primary":
+        s += 0.5
+    if sticky_indicator is not None and c.indicator_id == sticky_indicator:
+        s += 0.75
+    return s
+
+
+def _pick(slot, findings, series_rows, today, sticky) -> Candidate | None:
+    cands = candidates_for_slot(slot, findings, series_rows)
+    if not cands:
+        return None
+    return max(cands, key=lambda c: (score(c, today, sticky), c.observed_at,
+                                     c.indicator_id))
+
+
+def select_occupants(slots, findings, series_rows, prior_findings, today):
+    out = []
+    for slot in slots:
+        prior = _pick(slot, prior_findings, {}, today, None)
+        sticky = prior.indicator_id if prior is not None else None
+        cur = _pick(slot, findings, series_rows, today, sticky)
+        if cur is None:
+            continue
+        was = None
+        if prior is not None and prior.indicator_id != cur.indicator_id:
+            was = prior.label
+        out.append(Occupant(slot_id=slot["id"], slot_label=slot["label"],
+                            candidate=cur, was_label=was))
+    return out
