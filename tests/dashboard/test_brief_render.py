@@ -103,3 +103,11 @@ def test_render_brief_omits_empty_optional_blocks():
     assert "What this means for TSMC" not in html   # D omitted when empty
     assert "Latest signal" not in html              # F omitted when empty
     assert "No standing calls yet" in html          # E cold-start line
+
+
+def test_agenda_and_dimension_tiles_disjoint():
+    # C tiles are metric labels; G tiles are the six dimension names.
+    dims = {"momentum", "unitEconomics", "bottleneck", "competitiveStructure",
+            "moat", "strategicRisk"}
+    for o in MODEL["agenda"]:
+        assert o["metric_label"] not in dims

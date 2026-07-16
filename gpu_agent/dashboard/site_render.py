@@ -277,18 +277,36 @@ def render_how_featured(model) -> str:
     return page("Why this number", body, depth=1)
 
 
+def _finding_li(f) -> str:
+    # F97: anchor each signal row so the brief can deep-link to its evidence
+    # (appendix.html#f-<id>); findings without an id render with no attribute.
+    fid = f.get("id")
+    attr = f' id="f-{esc(fid)}"' if fid else ""
+    return (f'<li{attr}><details><summary>{esc(f["plain"])}</summary>'
+            f'<p class="muted">observed {esc(f.get("observed_at") or "n/a")} - '
+            f'{esc(f.get("source_name") or "unnamed source")} ({esc(f.get("tier") or "?")})'
+            "</p></details></li>")
+
+
+def _appendix_dimensions(model) -> str:
+    # F97: full per-dimension rationale, anchored for the brief's "how was this
+    # rated?" links (appendix.html#dim-<name>).
+    rows = model.get("dimension_rationales") or []
+    if not rows:
+        return ""
+    items = "".join(
+        f'<h3 id="dim-{esc(d["name"])}">{esc(d["name"])} — {esc(d["rating"])}</h3>'
+        f'<p>{esc(d["rationale"])}</p>' for d in rows)
+    return f'<h2 id="dimensions">How each dimension was rated</h2>{items}'
+
+
 def render_appendix(model) -> str:
     t = model["trend"]
     head = "".join(f"<th>{esc(d)}</th>" for d in t["dates"])
     def row(label, xs):
         cells = "".join(f"<td>{x:+.2f}</td>" for x in xs)
         return f"<tr><td>{esc(label)}</td>{cells}</tr>"
-    findings = "".join(
-        f'<li><details><summary>{esc(f["plain"])}</summary>'
-        f'<p class="muted">observed {esc(f.get("observed_at") or "n/a")} - '
-        f'{esc(f.get("source_name") or "unnamed source")} ({esc(f.get("tier") or "?")})'
-        "</p></details></li>"
-        for f in model["top_signals"])
+    findings = "".join(_finding_li(f) for f in model["top_signals"])
     runs = "".join(f'<li>{esc(r["date"])}: {r["findings"]} findings, {r["sources"]} '
                    "sources</li>" for r in model["runs"])
     body = (
@@ -301,6 +319,7 @@ def render_appendix(model) -> str:
         "are the honest summary.</p>"
         "<h2>Every ranked signal this run</h2>"
         f"<ul>{findings}</ul>"
+        f"{_appendix_dimensions(model)}"
         "<h2>Run history</h2>"
         f"<ul>{runs}</ul>"
         '<p><a href="index.html">Back to the page</a></p>')

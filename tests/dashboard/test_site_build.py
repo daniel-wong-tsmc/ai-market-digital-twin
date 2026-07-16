@@ -1,3 +1,4 @@
+import datetime as dt
 import re
 from pathlib import Path
 
@@ -48,7 +49,11 @@ def test_every_local_href_resolves(tmp_path):
         for href in re.findall(r'href="([^"]+)"', html):
             if href.startswith(("http://", "https://", "#", "mailto:")):
                 continue
-            target = (html_path.parent / href).resolve()
+            # F97: the brief links cross-page fragments (e.g. "appendix.html#dim-
+            # momentum", "appendix.html#f-<id>"); only the file part names a real
+            # path on disk, so strip any "#..." fragment before resolving.
+            file_part = href.split("#", 1)[0]
+            target = (html_path.parent / file_part).resolve()
             assert target.exists(), f"{html_path.name} -> {href}"
 
 
@@ -63,3 +68,24 @@ def test_two_builds_are_byte_identical(tmp_path):
     assert fa == fb
     for rel in fa:
         assert (a / rel).read_bytes() == (b / rel).read_bytes(), rel
+
+
+def test_build_site_index_is_brief(tmp_path):
+    # F97: the category index.html is now the executive brief, not the F95 page.
+    # This fixture store has only dated daily scorecards (no monthly YYYY-MM-vN.json),
+    # so the brief renders defensively-thin (no agenda band, verdict "—") but the
+    # masthead and the cold-start "Standing calls" header are always present.
+    summary = build_site(CAT, FIX, "work-nonexistent", f"{FIX}/plain-2026-07-06.json",
+                         str(tmp_path / "site"), today=dt.date(2026, 7, 16))
+    html = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    assert "Executive Brief" in html and "Standing calls" in html
+    assert summary["brief_lint"] == []
+    css = (tmp_path / "site" / "style.css").read_text(encoding="utf-8")
+    assert ".kpis" in css and "status-elevated" in css
+
+
+def test_appendix_has_dimension_and_finding_anchors(tmp_path):
+    build_site(CAT, FIX, "work-nonexistent", f"{FIX}/plain-2026-07-06.json",
+               str(tmp_path / "site"), today=dt.date(2026, 7, 16))
+    ap = (tmp_path / "site" / CAT / "appendix.html").read_text(encoding="utf-8")
+    assert 'id="dimensions"' in ap and 'id="dim-' in ap and 'id="f-' in ap

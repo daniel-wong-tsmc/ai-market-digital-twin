@@ -163,6 +163,13 @@ def build_site_model(category_id, store_dir, work_dir, plain_path, price_fn=None
                                      int(_VERSION_RE.match(p.name).group(2))))
     sc = load_scorecard(latest_path)
 
+    # F97: full-rationale projection for the appendix's per-dimension anchors —
+    # read straight off the latest scorecard's validated dimension ratings (each
+    # DimensionRating already carries a non-empty rating and rationale).
+    dimension_rationales = [
+        {"name": name, "rating": r.rating, "rationale": r.rationale}
+        for name, r in sc.dimensionRatings.items()]
+
     reg = IndicatorRegistry.load(REGISTRY_PATH)
     # F95 item 2: same source of truth pipeline.py uses — the per-category assignment
     # config file (AssignmentProvider, `<root>/asg.<category_id>.json`, default root
@@ -196,5 +203,6 @@ def build_site_model(category_id, store_dir, work_dir, plain_path, price_fn=None
         "contributions": rows,
         "implication": read_implication(store_root, category_id, model["latest_date"]),
         "why": _why(model, featured, rows, sc),
+        "dimension_rationales": dimension_rationales,
     })
     return model
