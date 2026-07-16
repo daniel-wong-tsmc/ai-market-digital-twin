@@ -1190,3 +1190,34 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   before F88 merges (F88 goes last of the prose-touchers, per its own rule). Spec:
   `docs/superpowers/specs/2026-07-13-f95-market-site-design.md` (decisions S1–S8, all
   user-approved interactive 2026-07-13). *(Feature — spec done; next is writing-plans.)*
+
+## From the 2026-07-16 executive-brief format design (F97)
+
+- [x] **F97 — Executive Brief renderer (the exec-facing category page).** BUILT subagent-driven on
+  branch `f97-exec-brief` (13 feature/fix commits + final-review fix `7e07d8c`); **NOT merged —
+  awaiting the user's merge decision (only the user merges).** Renders blocks A–H per spec
+  `docs/superpowers/specs/2026-07-16-executive-brief-format-design.md` (v5) from the monthly
+  deep-read: masthead + attention chip, hero verdict + narrative, dynamic five-slot agenda band
+  (`registry/agenda-slots.json` + deterministic freshness×magnitude×grade selection with
+  stickiness), "what this means for TSMC" bullets, standing-calls board, dated signal strip, six
+  dimension tiles, evidence footer; a register-lint gate makes a banned-token regression
+  un-deployable. New modules `gpu_agent/dashboard/{agenda,brief_model,brief_render}.py`; the brief
+  replaces the F95 category `index.html`; appendix gained `#dim-`/`#f-` anchors. Renderer/copy
+  layer only — frozen core, brains, `report.py`, eval fixtures untouched; F6 pin green; full suite
+  **1701 passed / 6 skipped**. Real-store smoke build clean (all blocks populate; attention chip
+  resolves to real ELEVATED with hysteresis wording). Plan:
+  `docs/superpowers/plans/2026-07-16-f97-executive-brief-renderer.md`. In-lane user-approved
+  decision (interactive 2026-07-16): Task-3 stickiness "code governs" — kept the 0.75 bonus, relaxed
+  the contradicting test. *(Concurrent-mint caveat RESOLVED: F97 confirmed free — backlog max was
+  F96; no collision.)*
+  **⚠ OPEN PRE-MERGE DECISION (whole-branch review Important #1) — evidence links dead-end on the
+  real store.** The brief anchors on the MONTHLY scorecard (`2026-07-v9`), but the F95 appendix is
+  built from the DAILY `2026-07-06-v1` because `load_scorecards` string-sorts `2026-07-06` above
+  `2026-07`; so all 5 TSMC `#f-<id>` evidence links and 2 of 6 `#dim-` links dead-end (fails spec
+  acceptance criterion 6). Root-cause fix (recommended): make the site's latest-scorecard selection
+  prefer the current monthly read over older intra-month dailies (in `scorecards.py` / F95 model
+  selection — OUTSIDE this renderer lane's declared file ownership, and changes F95-wide behavior,
+  so it needs a user go). Narrower in-lane alternative: source only the appendix's finding list +
+  dimension rationales from the monthly in `site_model.py`. Not fixed AFK (design fork). Doc note:
+  the plan's Task-8 smoke command used `--store store`; the correct value is the CLI default
+  `--store store/chips.merchant-gpu`.
