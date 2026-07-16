@@ -67,6 +67,13 @@ def test_candidates_series_newest_row_with_trend_from_prior():
     assert c.observed_at == "2026-07-10" and c.tier == "secondary"
 
 
+def test_series_candidate_skips_non_numeric_value():
+    # a malformed newest series row (non-numeric value) is skipped, not crashed
+    got = candidates_for_slot(SLOT, [], {"odmMonthlyAiRevenue": [
+        {"indicatorId": "odmMonthlyAiRevenue", "value": "n/a", "unit": "pct_yoy"}]})
+    assert got == []
+
+
 def test_read_series_reads_only_requested_files(tmp_path):
     import json
     d = tmp_path / "series"

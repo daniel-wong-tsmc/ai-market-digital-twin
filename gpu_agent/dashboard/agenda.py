@@ -70,6 +70,8 @@ def _series_candidate(indicator_id: str, rows: list[dict]) -> Candidate | None:
     if not rows:
         return None
     newest = rows[-1]
+    if not isinstance(newest.get("value"), (int, float)):
+        return None
     prior = rows[-2] if len(rows) > 1 else None
     trend = ""
     if prior is not None and isinstance(newest.get("value"), (int, float)) \
