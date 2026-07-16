@@ -1,53 +1,72 @@
 {
   "scope": "category:chips.merchant-gpu",
   "asOf": "2026-07",
-  "mode": "live",
-  "capturedAt": "2026-07-15T10:55:20Z",
-  "note": "Live full cycle (Category tier) for chips.merchant-gpu, asOf 2026-07 -> scorecard v8. Coordinator = Claude Code session; brain = dispatched tool-less Opus subagents; deterministic CLI gated+scored+stored.",
+  "mode": "daily",
+  "capturedAt": "2026-07-16T13:19:10Z",
+  "runDir": "work/daily-2026-07-16",
+  "note": "Scheduled headless daily cycle. Claude Code = brain (tool-less Opus, model:opus, tool_uses=0 on every extract/judge/thesis/implication dispatch). AFK-defaults: (1) harness exposes no per-dispatch tool allowlist / tools-restricted agent type, so the F88 no-Bash gatherer wall and tool-less brains were enforced BEHAVIOURALLY via explicit no-tool prompts (all gatherers+brains reported no shell; deterministic gates remained the backstop) [same precedent as 2026-07-14]; (2) manifest primaryDomains is not exposed by the CoverageManifest model so ingest --primary-sources resolved empty, verified harmless (none of the 11 non-primary-domain docs would match the allowlist; all correctly secondary); (3) F96/F52 same-month price re-gather id collision on wiki write-back (lambda-ai + runpod D6 ids already in 2026-07 vintage with changed price content) resolved via LOGGED wiki-ingest exclusion of the 2 colliders after rolling back a half-applied write-back (work/daily-2026-07-16/ingest-exclusions.json); prior-cycle price entries retained; price side does not score so scorecard v9 unaffected; (4) gathered 11 blobs vs daily soft cap 10 (per-slice hard maxes 4/4/3; no hard-ceiling 20 breach); (5) PUSH HELD: HEAD moved during the run (concurrent F97 lane instance committed 4 unpushed docs commits to root main); cycle committed+parked on local main, push deferred to avoid publishing another active instance's unpushed WIP unattended.",
   "entries": [
     {
-      "category_id": "chips.merchant-gpu",
-      "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
+      "categoryId": "chips.merchant-gpu",
+      "assignmentPath": "fixtures/asg.chips.merchant-gpu.json",
       "status": "done",
-      "scorecard": "store/chips.merchant-gpu/2026-07-v8.json",
-      "dmi": 1.567,
-      "smi": 0.287,
-      "sdgi": 1.28,
+      "scorecard": "store/chips.merchant-gpu/2026-07-v9.json",
+      "dmi": 1.507,
+      "smi": -0.02,
       "answers": {
-        "extract": "work/mgpu-2026-07-full/extract-answer.json",
-        "judge": "work/mgpu-2026-07-full/judge-answer.json",
-        "thesis": "work/mgpu-2026-07-full/thesis-answer.json",
-        "implication": "work/mgpu-2026-07-full/implication-answer.json"
+        "extract": "work/daily-2026-07-16/extract-answer.json",
+        "judge": "work/daily-2026-07-16/judge-answer.json",
+        "thesis": "work/daily-2026-07-16/thesis-answer.json",
+        "implication": "work/daily-2026-07-16/implication-answer.json"
       },
       "corpus": {
-        "coverage": "work/mgpu-2026-07-full/corpus-coverage.json",
-        "findings": "work/mgpu-2026-07-full/corpus-findings.json",
-        "dedupedFresh": "work/mgpu-2026-07-full/deduped-fresh.json",
-        "report": "work/mgpu-2026-07-full/corpus-report.json",
-        "counts": {
-          "storeInWindow": 74,
-          "faded": 27,
-          "freshNew": 5,
-          "update": 9,
-          "duplicate": 12,
-          "merged": 86
-        }
+        "coverage": "work/daily-2026-07-16/corpus-coverage.json",
+        "findings": "work/daily-2026-07-16/corpus-findings.json",
+        "dedupedFresh": "work/daily-2026-07-16/deduped-fresh.json",
+        "report": "work/daily-2026-07-16/corpus-report.json",
+        "storeInWindow": 74,
+        "fadedOut": 27,
+        "freshNew": 8,
+        "freshUpdate": 4,
+        "freshDuplicate": 1,
+        "merged": 86,
+        "dedupedFreshCount": 12
       },
       "gather": {
-        "runDir": "work/mgpu-2026-07-full",
-        "blobs": "work/mgpu-2026-07-full/blobs.json",
-        "documents": 15,
-        "primary": 1,
-        "secondary": 14,
-        "duplicates": 0,
-        "dropped": 0,
-        "pursuedDespiteAge": 10,
+        "log": "work/daily-2026-07-16/docs/gather-log.json",
+        "documents": 11,
+        "primary": 0,
+        "secondary": 11,
+        "droppedKnown": 0,
+        "pursuedDespiteAge": 2,
         "coverageGaps": {
-          "required": 18,
-          "preferred": 0,
-          "paywalled": 2,
-          "note": "top-up: most required gaps are store-covered ground, not fresh holes; genuine fresh holes = paywalled TrendForce/SemiAnalysis + SEC filing URLs that 403'd"
-        }
+          "total": 16,
+          "required": 15,
+          "preferred": 1,
+          "paywalled": 2
+        },
+        "softCapNote": "11 gathered vs daily soft cap 10 (per-slice hard maxes 4/4/3)"
+      },
+      "extractGate": {
+        "findings": 13,
+        "dropped": 1,
+        "droppedReason": "www-bis-gov-dbeede91-2026-07-1: high-confidence secondary-only (bis.gov not on primary allowlist), 1 publisher < 3"
+      },
+      "judge": {
+        "samples": 3,
+        "voiceLint": "clean",
+        "sufficiency": "clean"
+      },
+      "writeBack": {
+        "routed": 10,
+        "pages": 4,
+        "lint": "work/daily-2026-07-16/wiki-lint.json",
+        "materialMoves": 7,
+        "f96Exclusions": "work/daily-2026-07-16/ingest-exclusions.json",
+        "excludedIds": [
+          "lambda-ai-1252bbe3-2026-07-1",
+          "www-runpod-io-bdb62dfd-2026-07-1"
+        ]
       },
       "unregisteredEntities": {
         "count": 2,
@@ -57,26 +76,45 @@
         ]
       },
       "webReach": {
-        "agent-reach": "ok (1.5.0)",
-        "last30days": "ok",
-        "crawl4ai": "ok (0.9.0)",
-        "drift": false,
-        "licensedSourcesFetched": [
-          "trendforce.com"
-        ]
+        "agent-reach": {
+          "status": "ok",
+          "version": "1.5.0",
+          "pin": "1.5.0",
+          "drift": false
+        },
+        "last30days": {
+          "status": "ok",
+          "version": "skill-present",
+          "pin": "skill-present",
+          "drift": false
+        },
+        "crawl4ai": {
+          "status": "ok",
+          "version": "0.9.0",
+          "pin": "0.9.0",
+          "drift": false
+        },
+        "unattended": true,
+        "licensedSourcesFetched": []
       },
       "stageStatuses": {
         "category": "done",
-        "thesis": "done (14 strengthened / 5 reaffirmed / 2 weakened; 2 new provisional theses proposed)",
-        "implication": "done (6 lines; one gate re-dispatch for invented ids / ASE / 'leverage')",
-        "writeBack": "failed (finding-id collision on lambda-ai-1252bbe3-2026-07-1 — same-month live-price re-gather, id stable but content moved; partial write rolled back to keep store consistent)",
+        "thesis": "done",
+        "implication": "done",
         "layer": "deferred",
         "main": "deferred"
       },
-      "notes": {
-        "voiceLint": "judgment: one voice-lint re-dispatch wave (3 samples) for acronyms AI-GPU/SK/ASE, then clean",
-        "gatherMode": "live full top-up (F62 corpus-first); targeted not-covered D6/gpuSpotPrice/apiArr + weekly material updates",
-        "harnessNote": "brain subagents dispatched model=opus, Read/Write-only (no web/exec); F88 no-Bash wall enforced behaviorally (agent-type cannot scope tools); coordinator never opened a blob file (content isolation intact)"
+      "thesis": {
+        "judged": 23,
+        "applied": 23,
+        "proposedNew": 2,
+        "status": "done"
+      },
+      "implication": {
+        "lines": 5,
+        "status": "done",
+        "reDispatched": 1,
+        "reDispatchReason": "gate: banned word 'leverage' + finding-id typo, corrected on re-dispatch"
       }
     }
   ],
@@ -87,11 +125,13 @@
     },
     {
       "tier": "layer",
-      "status": "deferred"
+      "status": "deferred",
+      "note": "not yet built (next sub-project)"
     },
     {
       "tier": "main",
-      "status": "deferred"
+      "status": "deferred",
+      "note": "market-state not yet built"
     }
   ]
 }

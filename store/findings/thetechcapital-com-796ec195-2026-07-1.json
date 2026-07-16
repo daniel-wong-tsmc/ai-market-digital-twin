@@ -1,0 +1,44 @@
+{
+  "id": "thetechcapital-com-796ec195-2026-07-1",
+  "statement": "US hyperscalers are revising 2026 capital-expenditure guidance upward: CoreWeave raised its 2026 capex to $31-35 billion (roughly double the $14.9 billion spent in 2025), following prior-week hikes by Meta, Google and Microsoft, and the four largest US hyperscalers are on track for ~$725 billion combined 2026 capex, up ~77% from ~$410 billion in 2025 with ~75% AI-directed.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "AI buildout plus higher component costs (DRAM contract prices projected +13-18% QoQ and NAND +10-15% QoQ in Q3 2026) are pushing budgets up, with builders raising the low end of ranges rather than cutting.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Upward capex revisions channel more spend into AI GPUs and datacenter buildout, a direct demand tailwind across the compute stack."
+  },
+  "evidence": [
+    {
+      "source": "The Tech Capital / Yahoo Finance / The Globe and Mail",
+      "url": "https://thetechcapital.com/coreweave-becomes-latest-data-centre-builder-to-bump-capex-on-higher-component-costs/",
+      "date": "2026-07-14",
+      "excerpt": "CoreWeave became the latest data-centre builder to raise its 2026 capex guidance, following hikes from Meta, Google and Microsoft the prior week, all citing higher component costs",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregation (page returned HTTP 403) corroborated by Yahoo Finance and Globe and Mail within one fetched document."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "multi",
+  "observedAt": "2026-07-14",
+  "capturedAt": "2026-07-16T13:19:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

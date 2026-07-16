@@ -1,0 +1,42 @@
+{
+  "id": "www-spheron-network-2e7fb452-2026-07-1",
+  "statement": "Vast.ai marketplace GPU rental spot rates (per GPU/hr) as of 2026-07-01: H100 PCIe ~$0.90-$2.27 (host-tier dependent), H100 SXM ~$1.80-$2.50, H200 SXM ~$3.50-$5.50, B200 ~$6-$12 with very limited availability.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Marketplace spot rentals give a daily overlay on merchant-GPU rental economics, but rates are host-set with no stated baseline or change, so this is a static level.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Marketplace GPU rental spot-price level is a non-scoring display overlay for merchant-GPU rental economics, not a directional demand or supply signal."
+  },
+  "evidence": [
+    {
+      "source": "Spheron Blog",
+      "url": "https://www.spheron.network/blog/vastai-pricing-2026/",
+      "date": "2026-07-01",
+      "excerpt": "B200: verified datacenter ~$6-$12/hr range, availability 'very limited.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Secondary aggregator carrying Vast.ai marketplace rates; observation ~15 days old and host-variable."
+  },
+  "dispersion": "Wide host-tier dispersion: verified datacenter hosts price above unverified, e.g. H100 SXM ~$1.80-$2.50 vs H100 PCIe unverified ~$0.90-$1.60.",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-07-01",
+  "capturedAt": "2026-07-16T13:19:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

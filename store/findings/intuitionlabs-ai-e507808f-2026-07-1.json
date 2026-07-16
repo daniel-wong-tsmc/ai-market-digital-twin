@@ -1,0 +1,41 @@
+{
+  "id": "intuitionlabs-ai-e507808f-2026-07-1",
+  "statement": "Secondary-market retail purchase prices for datacenter GPUs (undated 2026 estimates): H100 80GB SXM can cost ~$27,000-$40,000/unit, H200 141GB ~$31,000-$32,000, B200 192GB ~$30,000-$50,000, B300 288GB ~$37,500-$43,750; 8-GPU systems range from ~$216K (H100) to over $500K (B200).",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Concrete secondary-market hardware buy prices give a confirmation overlay on merchant-GPU hardware value, but the source states no baseline or change, so this is a static level.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Physical GPU resale/retail price level is a non-scoring display overlay for merchant-GPU hardware value, not a directional demand or supply signal."
+  },
+  "evidence": [
+    {
+      "source": "IntuitionLabs (NVIDIA AI GPU Pricing Guide)",
+      "url": "https://intuitionlabs.ai/articles/nvidia-ai-gpu-pricing-guide",
+      "date": "2026-07-16",
+      "excerpt": "can cost anywhere from $27,000 to $40,000",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Single secondary aggregator citing undated 2026 estimates from multiple resellers; no per-day timestamp."
+  },
+  "dispersion": "Wide per-model ranges across resellers, e.g. H100 ~$27K-$40K and B200 ~$30K-$50K per GPU.",
+  "asOf": "2026-07",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-16T13:19:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

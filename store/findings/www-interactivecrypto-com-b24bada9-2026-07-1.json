@@ -1,0 +1,41 @@
+{
+  "id": "www-interactivecrypto-com-b24bada9-2026-07-1",
+  "statement": "AMD has secured data-center AI-accelerator design wins with Meta and OpenAI, with rising customer interest in its MI400 Instinct accelerators and Venice EPYC CPUs extending into 2027 ahead of its Advancing AI 2026 event.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Named hyperscaler and frontier-lab customers adopting AMD Instinct signal durable merchant-GPU demand and competitive traction against Nvidia.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Hyperscaler and frontier-lab design wins convert into recurring AMD accelerator orders, expanding merchant-GPU demand and diversifying away from a single vendor."
+  },
+  "evidence": [
+    {
+      "source": "InteractiveCrypto (interactivecrypto.com)",
+      "url": "https://www.interactivecrypto.com/amd-s-ai-chip-surge-and-zen-6-launch-drive-stock-higher-amid-sector-rally-jul-2026",
+      "date": "2026-07-12",
+      "excerpt": "rising interest in AMD's MI400 AI accelerators and Venice processors extending well into 2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary source citing a Morgan Stanley note; not a primary filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-12",
+  "capturedAt": "2026-07-16T13:19:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

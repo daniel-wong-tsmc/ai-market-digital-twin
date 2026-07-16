@@ -1,0 +1,45 @@
+{
+  "id": "thetechcapital-com-796ec195-2026-07-2",
+  "statement": "CoreWeave's contracted revenue backlog reached $99.4 billion as of March 31, 2026, up from $66.8 billion in February 2026, with Meta, OpenAI and Anthropic locking in long-term compute agreements.",
+  "kind": "measured",
+  "value": {
+    "number": 99.4,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Large customers signing long-term compute contracts convert into committed future GPU and datacenter demand for the neocloud.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "A rapidly growing contracted backlog signals locked-in future demand for GPU compute capacity."
+  },
+  "evidence": [
+    {
+      "source": "The Tech Capital / Yahoo Finance / The Globe and Mail",
+      "url": "https://thetechcapital.com/coreweave-becomes-latest-data-centre-builder-to-bump-capex-on-higher-component-costs/",
+      "date": "2026-07-14",
+      "excerpt": "CoreWeave contracted revenue backlog reached $99.4 billion as of March 31, 2026, up from $66.8 billion in February 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting corroborated by Yahoo Finance and Globe and Mail; figure dates to CoreWeave's Q1 print."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-03-31",
+  "capturedAt": "2026-07-16T13:19:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

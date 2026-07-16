@@ -1,0 +1,42 @@
+{
+  "id": "www-interactivecrypto-com-b24bada9-2026-07-2",
+  "statement": "AMD's data-center GPU revenue is projected to grow sharply in 2026, with analyst consensus at ~+114% YoY to ~$15 billion and the Instinct MI400 series alone potentially ~$7.2 billion (~25% of AMD data-center sales).",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "An MI400 ramp plus Meta/OpenAI adoption underpins a large forecast increase in AMD merchant-GPU revenue; AMD's own Q2 2026 total-revenue guidance of ~$11.2 billion (+46% YoY) corroborates broad demand strength.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "positive",
+    "mechanism": "A large forecast ramp in AMD DC-GPU revenue implies rising merchant-GPU shipments and, via MI400's 432GB HBM4, additional HBM pull-through."
+  },
+  "evidence": [
+    {
+      "source": "InteractiveCrypto (interactivecrypto.com)",
+      "url": "https://www.interactivecrypto.com/amd-s-ai-chip-surge-and-zen-6-launch-drive-stock-higher-amid-sector-rally-jul-2026",
+      "date": "2026-07-12",
+      "excerpt": "AMD data-center GPU revenue is forecast to rise 114% year-on-year to ~$15 billion in 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "These are analyst-consensus forecasts explicitly labeled not AMD-official, extrapolating from the MI400 ramp and design wins, so they are treated as a hypothesis pending AMD's own disclosures at Advancing AI 2026.",
+  "confidence": {
+    "level": "medium",
+    "basis": "Analyst-consensus forecast from secondary trade coverage, not vendor-official guidance."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-12",
+  "capturedAt": "2026-07-16T13:19:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

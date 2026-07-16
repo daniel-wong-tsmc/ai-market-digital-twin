@@ -1,0 +1,42 @@
+{
+  "id": "mlq-ai-4e0c06bd-2026-07-1",
+  "statement": "Chinese demand for Nvidia H200 is very large but only trivially fulfilled under export licensing: ~10 Chinese firms (Alibaba, Tencent, ByteDance, JD.com) are cleared to buy up to 75,000 chips each and ~$10 billion of H200 licenses are approved, yet actual shipments remain 'trivial'; Chinese firms had ordered over 2 million H200 for 2026 against ~700,000 units of Nvidia inventory, and Blackwell remains banned.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Case-by-case licensing has begun to reopen a China channel for H200-class chips amid enormous latent Chinese demand, but a 25% tariff, volume caps, limited inventory and a continued Blackwell ban keep realized shipments minimal.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "A reopened but tightly capped China licensing regime unlocks only a sliver of a very large latent demand pool for Nvidia H200s, so the addressable-demand upside is real but heavily constrained."
+  },
+  "evidence": [
+    {
+      "source": "MLQ News (mlq.ai)",
+      "url": "https://mlq.ai/news/us-official-confirms-nvidia-h200-chip-shipments-to-china-have-begun-calls-volume-trivial/",
+      "date": "2026-07-15",
+      "excerpt": "For the American people, the bottom line is very few shipments against licenses for H200s and equivalents have taken place",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Congressional testimony relayed by a single secondary outlet (mlq.ai citing CNBC/Bloomberg/Reuters); no primary transcript fetched."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: Investing.com, MLQ News (mlq.ai)",
+  "asOf": "2026-07",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-14",
+  "capturedAt": "2026-07-16T13:19:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

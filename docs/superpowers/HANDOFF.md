@@ -1,5 +1,36 @@
 # HANDOFF — GPU Category Agent (resume point: **F79 SCORING v2.0 SHADOW-MERGED** 2026-07-15 — `b6db80a` (frozen-core migration, SHADOW-ONLY: v2 computes but NOTHING user-facing renders it; v1 remains the headline). `main == origin/main == 2725578` (repo MIGRATED 2026-07-15 to the private **ai-market-digital-twin** repo; **F95 market-site MERGED** `2725578`), suite **1665/5**, F6 pin green (4 seams). All four F79 gates cleared: G1 backfill SIGNED, G2 backtest PASSED (user-signed Option-B event amendment; detection-only; original FAIL reproducible), G3 eval re-gate PASSED (seam-scoped — only extract bound; honest baseline; canary captured), final review READY (replay fidelity + shadow isolation airtight). **REMAINING for F79: shadow soak ≥5 live cycles (manual `v2-shadow` invocation per cycle; auto-hook deferred) → G4 CUTOVER (user-signed; flips v1→v2 rendering) — the last gate.** Two findings logged this session: **F96** (monthly-grain write-back collision — the live v8 cycle's corpus write-back rolled back on a same-month price re-gather id collision, F52-class residual) and the F83 journal-conformance test was RELAXED to the real contract (`gates` optional; `stageStatuses` accepted — it had silently reddened main since v8; user-approved). Concurrent: the F88 session is active (unattended-orchestrator hardening; it ran the live v8 cycle; its uncommitted `.gitignore` line was preserved as `cf79758`). Next after F79's G4: F66, the F81–F86/F88–F95 waves. Housekeeping open: retire ~13 merged worktrees/branches (incl. f95-market-site), skipped-days decision, F23-A4 label, F73 survivorship-bias residual, OLD public random_for_fun repo disposition (make private/delete). Repo-rename/exposure gate RESOLVED 2026-07-15 — migrated to the private ai-market-digital-twin repo.)
 
+- **Date: 2026-07-16 — DAILY CYCLE RAN (scheduled headless) `category:chips.merchant-gpu`.**
+  Scorecard `store/chips.merchant-gpu/2026-07-v9.json` — **Strong / improving, DMI 1.507 · SMI −0.020**
+  (momentum Very strong/improving, unitEconomics Strong/steady, competitiveStructure Mixed/improving,
+  moat Mixed/steady, bottleneck Weak/steady, strategicRisk Mixed/worsening; binding constraint HBM
+  memory + CoWoS packaging; WHAT-MOVED empty vs same-asOf prior v8). Live daily sweep (top-up over a
+  74-finding store): 11 docs gathered (all secondary, droppedKnown 0, pursuedDespiteAge 2, coverageGaps
+  16 incl. 2 paywalled), corpus merged 86 (fresh 8 new / 4 update / 1 duplicate); extract 13 findings /
+  1 dropped (BIS high-conf secondary-only); 3 tool-less Opus judge samples (voice-lint + sufficiency
+  clean); thesis 23/23 applied + 2 new provisional proposed; implication 5 lines (1 re-dispatch for a
+  banned word + finding-id typo); site rebuilt (8 pages). F6 pin + F83 conformance + journal integrity
+  green. Full journal + AFK-defaults in `store/cycle-log.json`.
+  **⚠ COMMITTED + PARKED — PUSH HELD (AFK-default, needs user):** HEAD moved during the run — a
+  concurrent **F97 exec-brief lane** instance (Claude Fable 5) committed **4 unpushed docs commits**
+  (`2d00554`, `13aed39`, `874412a`, `df3936f`) to **root main**. My cycle is committed on top and parked
+  on local main; I did **not** push, because the push range would publish that active instance's unpushed
+  WIP without consent. `origin/main` unchanged at `2725578`; nothing lost. **User (or the F97 instance):
+  push when ready** — a plain `git push` will carry the F97 docs commits + 2 older spec commits + this
+  cycle commit.
+  **AFK-defaults (scheduled headless — re-surface):** (1) harness has no per-dispatch tool allowlist, so
+  the F88 no-Bash gatherer wall + tool-less extract/judge/thesis/implication brains were enforced
+  BEHAVIOURALLY via explicit no-tool prompts (every gatherer + brain reported no shell / tool_uses=0;
+  `model:opus` pinned on all brains; deterministic gates the backstop) — same precedent as 2026-07-14;
+  (2) **F96/F52 recurred** — same-month price re-gather id collision on wiki write-back (`lambda-ai` +
+  `www-runpod-io` D6 ids already in the 2026-07 vintage with changed price content) resolved via the
+  F52-precedent LOGGED wiki-ingest exclusion of the 2 colliders after rolling back a half-applied
+  write-back (`work/daily-2026-07-16/ingest-exclusions.json`); prior-cycle price entries retained; price
+  side does not score, so v9 is unaffected; (3) manifest `primaryDomains` is not exposed by the
+  `CoverageManifest` model, so `ingest --primary-sources` resolved empty — verified harmless (none of the
+  11 non-primary-domain docs would match; all correctly `secondary`); (4) 11 blobs gathered vs daily soft
+  cap 10 (per-slice hard maxes 4/4/3; no hard-ceiling breach).
+
 - **Date: 2026-07-15 — F95 (three-tier market site) MERGED to main `2725578` + pushed; repo
   MIGRATED to the private `ai-market-digital-twin` repo (both user-directed, interactive).**
   (1) **Repo migration:** the project moved off the public `random_for_fun` repo to a NEW

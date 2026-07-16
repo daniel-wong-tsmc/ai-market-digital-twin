@@ -1,0 +1,45 @@
+{
+  "id": "www-tradingkey-com-855cb780-2026-07-2",
+  "statement": "TSMC reported Q2 2026 gross margin of 67.7% (up 9.1 percentage points YoY) with revenue up 36% YoY, and raised full-year 2026 revenue-growth guidance to 'exceeded 40%' (from 'over 30%'), citing highly robust AI-server and high-performance-computing demand (HPC revenue +20% QoQ).",
+  "kind": "measured",
+  "value": {
+    "number": 67.7,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "Strong, sustained AI compute demand gives TSMC pricing power that lifts margins and supports an upgraded revenue outlook, a read-through to robust downstream AI-GPU demand.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising foundry gross margin and raised revenue guidance confirm robust, largely price-inelastic AI-compute demand feeding the merchant-GPU chain."
+  },
+  "evidence": [
+    {
+      "source": "TradingKey",
+      "url": "https://www.tradingkey.com/analysis/stocks/more/262034508-tsmc-q2-earnings-beat-expectations-raises-full-year-outlook-tradingkey",
+      "date": "2026-07-16",
+      "excerpt": "Gross margin: 67.7%, up 9.1 percentage points YoY.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet reporting TSMC's primary earnings release; single publisher."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-16T13:19:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
