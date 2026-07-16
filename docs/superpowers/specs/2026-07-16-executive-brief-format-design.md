@@ -1,8 +1,8 @@
 # Executive Brief format — design spec
 
-**Date:** 2026-07-16 (v2 — restructured around the page outline, user-directed; v1 was section-prose)
-**Status:** APPROVED design direction (user-selected anchor + spec-only deliverable, interactive 2026-07-16); outline-first structure user-directed same day. Implementation is a future lane.
-**Scope:** The output FORMAT for the executive-facing market page (audience: a TSMC executive): the page outline, what each block says, which store fields feed it, and the writing rules. It does NOT implement the renderer.
+**Date:** 2026-07-16 (v3 — per-block information + visual treatment added; v2 restructured around the page outline; v1 section-prose. All user-directed.)
+**Status:** APPROVED design direction (user-selected anchor + spec-only deliverable, interactive 2026-07-16). Implementation is a future lane.
+**Scope:** The output FORMAT for the executive-facing market page (audience: a TSMC executive): the page outline, what each block says (information), how it looks (visual treatment), which store fields feed it, and the writing rules. It does NOT implement the renderer.
 **Origin:** User asked for a format that showcases the agent's outputs for a TSMC executive and resolves the issues found in the 2026-07-16 critique of the deployed site (`ai-market-digital-twin.pages.dev/chips.merchant-gpu/`).
 
 ## Problem
@@ -15,7 +15,7 @@ The deployed page anchors on the daily run. On quiet days it reads "FLAT / no ch
 
 ## The page outline (normative)
 
-This outline is the spec's backbone. Blocks appear in exactly this order; every block below has a matching subsection defining content, bindings, and fallbacks. Example content shows the real July 2026 data.
+This outline is the spec's backbone. Blocks appear in exactly this order; every block below has a matching subsection defining information, visual treatment, bindings, and fallbacks. Example content shows the real July 2026 data.
 
 ```
 ┌────────────────────────────────────────────────────────────────┐
@@ -81,47 +81,61 @@ This outline is the spec's backbone. Blocks appear in exactly this order; every 
 
 ## Block specifications
 
+Each block lists: **Information** (what kinds of content it carries), **Visual treatment** (the techniques that carry it), **Bindings** (store fields), and fallbacks. Visual treatments follow the dataviz discipline: form first, color last, status colors reserved and never color-alone.
+
 ### A · Masthead — honesty about time
-- Crumb `AI market › Chips layer › Merchant GPU` (segments become links when sibling pages exist; plain text until then). Title, then a one-line scope statement saying what the page tracks and why it matters one layer down the supply chain.
-- Dual date line: `Monthly read: {month} {year} ({K}th revision) · Last signal check: {date}`.
-- **Attention chip, top-right:** `Attention: {calm|watch|elevated|critical}` mapping GREEN/YELLOW/ORANGE/RED. When the shown level differs from the raw read, subtext uses this fixed wording: `steps down after two calm days; today's raw read was {raw}`. The phrase "because no alert rule fired" is banned — it reads as a bug.
-- **Self-aware staleness:** if the last signal check is more than 3 days old, the masthead itself says `Signal checks paused since {date}` — the reader never discovers staleness on their own.
-- Bindings: latest `store/chips.merchant-gpu/<YYYY-MM>-v<K>.json` (highest K of newest month) for the monthly read; `store/cycle-log.json` `capturedAt` for the last-check date (fallback: newest dated scorecard). Alert ladder state from the daily page model.
+- **Information:** market identity (crumb path through the twin's hierarchy); page name; one-line scope statement (what is tracked and why it matters one layer down: wafers, packaging, memory); currency (monthly-read month + revision number, last-signal-check date); attention level; staleness notice when applicable.
+- **Visual treatment:**
+  - Crumb in small uppercase muted text (segments become links when sibling pages exist; plain text until then). H1 page title; scope line in muted body text.
+  - Date line in small meta text; dates in tabular figures.
+  - **Attention chip, top-right:** a pill with icon + word — `Attention: {calm|watch|elevated|critical}` mapping GREEN/YELLOW/ORANGE/RED onto the status palette roles good/warning/serious/critical. Status color never carries meaning alone (icon + word always present) and the status palette appears NOWHERE else on the page (reserved). When the shown level differs from the raw read, chip subtext uses this fixed wording: `steps down after two calm days; today's raw read was {raw}`. The phrase "because no alert rule fired" is banned — it reads as a bug.
+  - **Self-aware staleness:** if the last signal check is more than 3 days old, a full-width muted warning strip (warning status color + icon + text) under the date line: `Signal checks paused since {date}` — the reader never discovers staleness on their own.
+- **Bindings:** latest `store/chips.merchant-gpu/<YYYY-MM>-v<K>.json` (highest K of newest month) for the monthly read; `store/cycle-log.json` `capturedAt` for the last-check date (fallback: newest dated scorecard). Alert ladder state from the daily page model.
 
 ### B · Verdict — lead with the conclusion
-- Category status as a sentence, not a colored dot: `**{rating} / {direction}** — {categoryStatus.reason, first sentence}`, with the binding constraint named in words (`categoryStatus.constraintLabel`).
-- The monthly `narrative` verbatim underneath (already exec-grade prose: what's running hot, where the ceiling is, what to watch).
-- Bindings: monthly scorecard `categoryStatus`, `narrative`.
+- **Information:** the category rating + direction; the binding constraint named in words; the one-sentence reason; the monthly narrative (what's running hot, where the ceiling is, what to watch for relief); counterweight cross-references where triggered.
+- **Visual treatment:** hero-text technique, not a chart and not a colored dot — the verdict sentence is the largest text after the H1 (display-size, semibold): `**{rating} / {direction}** — {reason, first sentence}`. The narrative sits under it as body prose at a readable measure (~66 characters per line). No box, no tile: prose lede. Bold is reserved for the rating words; everything in ink tokens, no status color.
+- **Bindings:** monthly scorecard `categoryStatus` (rating, direction, reason, constraintLabel), `narrative`.
 
 ### C · What this means for TSMC
-- 3–5 bullets, each one implication line's `watchItem`, tagged with its dimension(s), linking to its evidence (findingIds → appendix anchors) and related standing calls (thesisIds → block D rows).
-- Placement directly after the verdict — the audience anchor. Meituan-class signals (competitive threats to the customer base, wafer/packaging exposure) must never again live only in the appendix.
-- Bindings: `store/implications/chips.merchant-gpu/<YYYY-MM>.json` → `lines[]`.
-- Fallback: no implication file for the anchor month → use the newest available, labeled with its month; none at all → omit the block entirely (never render an empty header).
+- **Information:** 3–5 implications, each: the affected TSMC lever (wafer starts, packaging allocation, customer mix, pricing), the market fact driving it, the dimension(s) it comes from, links to the evidence and to the related standing call.
+- **Visual treatment:** bulleted list directly after the verdict — the audience anchor. Each bullet opens with the lever phrase in bold, an em-dash, then the fact in plain prose. Dimension tags as tiny uppercase muted text at bullet end; evidence and related-call links as quiet inline links (accent color, the page's only link treatment). No tiles, no color coding — the content is prose and reads as prose.
+- **Bindings:** `store/implications/chips.merchant-gpu/<YYYY-MM>.json` → `lines[]` (watchItem, dimensions, findingIds → appendix anchors, thesisIds → block D rows).
+- **Fallback:** no implication file for the anchor month → use the newest available, labeled with its month; none at all → omit the block entirely (never render an empty header). Meituan-class signals (competitive threats to the customer base) must never again live only in the appendix.
 
 ### D · Standing calls board
-- Source: the thesis book — NOT "what moved today". The board persists across runs, so it is never empty after cold start.
-- Selection: `status == "registered"` first, ordered by conviction (high > medium > low), then streak descending. Cap 7 rows; below the table: `All {N} calls, including {M} provisional →` linking to the full book page.
-- Columns: Call (title) · Lens (demand/supply/competitive/risk) · Conviction · Latest verdict (`strengthened ▲` / `weakened ▼` / `reaffirmed ◆` — word plus glyph, never glyph alone) · Held (`{n} checks`) · **What would change our mind** (`falsifiableTrigger`, verbatim). The trigger column is the credibility maker: every call states, in advance, the observable condition that kills it.
-- Bindings: `store/theses/chips.merchant-gpu/book.json` → `entries[]` (title, lens, conviction, lastVerdict, streak, status, falsifiableTrigger).
-- Cold start (book empty): render one line — `No standing calls yet; first reads are being established.`
+- **Information:** per call: title, lens (demand/supply/competitive/risk), conviction, latest verdict, checks held, and **what would change our mind** (the falsifiable trigger, verbatim — the credibility maker: every call states in advance the observable condition that kills it). Board level: how many shown of how many tracked, link to the full book.
+- **Visual treatment:** a table — the honest form for >7 enumerable classes; no chart, no per-lens colors. Inside a horizontal-scroll container so the page body never scrolls sideways. Verdict column: glyph + word, never glyph alone (`strengthened ▲` / `weakened ▼` / `reaffirmed ◆`), set in ink — not status colors (a weakening call is information, not an alarm; the attention chip owns alarm). Conviction as plain text (high/medium/low). Lens in small uppercase muted text. Held column right-aligned, tabular figures. Trigger column in smaller muted type, allowed to wrap. Hairline row separators; no zebra striping; row order IS the ranking (registered first, conviction high→low, then streak).
+- **Selection:** `status == "registered"` first, ordered by conviction (high > medium > low), then streak descending. Cap 7 rows; below the table: `All {N} calls, including {M} provisional →` linking to the full book page.
+- **Bindings:** `store/theses/chips.merchant-gpu/book.json` → `entries[]` (title, lens, conviction, lastVerdict, streak, status, falsifiableTrigger).
+- **Cold start** (book empty): render one line — `No standing calls yet; first reads are being established.`
 
 ### E · Latest signal (dated strip)
-- The last ~7 signal checks as a dated list, newest first, ONE plain sentence per check: that check's single biggest mover (highest-magnitude fresh finding), stated as prose with its source named. Register example: `06 Jul — Rack component costs inflating 2–3% per week on memory and storage scarcity. (BigGo Finance)`
-- Checks that didn't happen simply don't appear; visible dates make gaps self-explanatory. No "no run yet at this horizon" placeholder lines.
-- Banned here: bare arrows/symbols, counts of unnamed movers ("+15 more moved"), and the word "run" in page copy (say "signal check").
-- Bindings: one entry per scorecard revision (dated by that revision's newest fresh-finding `capturedAt`), plus dated daily scorecards where they exist; the existing what-changed computation may feed it, but its output must be re-rendered as prose.
+- **Information:** the last ~7 signal checks: date, ONE plain sentence per check (that check's single biggest mover — highest-magnitude fresh finding — as prose), source name. Gaps between dates are self-explanatory; checks that didn't happen simply don't appear. No "no run yet at this horizon" placeholder lines.
+- **Visual treatment:** a two-column timeline list, newest first: fixed-width date column (tabular figures, muted ink) beside the sentence in body text, source in muted parentheses at the end. Optional thin vertical rule joining the dates. No arrows, no symbols, no counts of unnamed movers — the strip is prose with dates.
+- **Bindings:** one entry per scorecard revision (dated by that revision's newest fresh-finding `capturedAt`), plus dated daily scorecards where they exist; the existing what-changed computation may feed it, but its output must be re-rendered as prose.
 
 ### F · The six dimensions
-- Replaces the old four-tile row (which showed the same gap metric twice and a scale-less +0.07). Six tiles in a 2×3 grid: momentum, unit economics, bottleneck, competitive structure, moat, strategic risk.
-- Each tile: rating word · direction word · confidence level · the FIRST sentence of the dimension's `rationale` · a "how was this rated?" link to the existing method page.
-- Index numbers (DMI/SMI/SDGI, anchors, two-decimal scores) move entirely to the appendix. Words carry the page; the appendix keeps the arithmetic.
-- Bindings: monthly scorecard `dimensionRatings.<dim>` (rating, direction, confidence.level, rationale); `dimensionStatus.<dim>` for evidence caveats (e.g. confidence capped).
+- **Information:** per dimension (momentum, unit economics, bottleneck, competitive structure, moat, strategic risk): rating word, direction word, confidence level, the FIRST sentence of the rationale, any evidence caveat (e.g. confidence capped), and a "how was this rated?" method link. Replaces the old four-tile row (same gap metric twice, scale-less +0.07).
+- **Visual treatment:** a KPI row of six **stat tiles** in a 2×3 grid (single column on narrow screens). Tile anatomy, top to bottom: dimension name as small uppercase muted label → the rating WORD as the tile's value (the tile's largest text — a word, deliberately not a number) → direction as word + glyph in meta text (`improving ↑` / `steady →` / `worsening ↓` — word always present) → confidence level in meta text → one rationale sentence in small body text → method link. All ink tokens; NO status colors on tiles — a worsening dimension is information, not an alarm, and repainting tiles red/green would make six alarms compete with the one real chip in the masthead. Hairline borders, consistent radius, whitespace over boxes.
+  - **Future option (not v1):** a small sparkline per tile (the stat-tile-with-sparkline form) once ≥6 months of rating history accumulate; any such chart must then go through the full dataviz procedure (form → color → validator → hover → accessibility).
+- **Bindings:** monthly scorecard `dimensionRatings.<dim>` (rating, direction, confidence.level, rationale); `dimensionStatus.<dim>` for caveats. Index numbers (DMI/SMI/SDGI, anchors, two-decimal scores) move entirely to the appendix — words carry the page; the appendix keeps the arithmetic.
 
 ### G · Evidence & method footer
-- One framed line: `{n} signals this check · median observation {date} · oldest {date} · {p} trace to primary sources` linking to the appendix (every finding, its statement, source, observation date, primary/secondary tag — the existing appendix content, kept).
-- One method line: built by an autonomous research agent; every claim on the page links to its evidence; method pages explain each rating.
-- Bindings: monthly/daily scorecard `sources`, findings' `observedAt`, existing trust computation.
+- **Information:** evidence framing (signal count, median observation date, oldest date, primary-source count) linking to the full appendix (every finding, statement, source, observation date, primary/secondary tag — existing appendix content, kept); one method line (built by an autonomous research agent; every claim links to its evidence; method pages explain each rating).
+- **Visual treatment:** a footer strip above a hairline rule: one muted meta-text line with interpunct separators — `{n} signals this check · median observation {date} · oldest {date} · {p} trace to primary sources · full appendix →`. The appendix link is the line's only accent-colored element. Method line beneath in the same muted register. Deliberately quiet: the footer certifies, it doesn't perform.
+- **Bindings:** monthly/daily scorecard `sources`, findings' `observedAt`, existing trust computation.
+
+## Visual system (cross-cutting)
+
+- **Type scale, five steps:** page title (H1) → hero verdict → block headers → body → meta/muted. One sans family (system stack is fine). Body at 16px/1.5; narrative prose capped near a 66-character measure.
+- **Color discipline:** near-black ink on white; one accent hue for links only; muted gray for meta; hairline gray for rules and borders. The **status palette (good/warning/serious/critical) appears exactly twice at most**: the attention chip and the staleness strip — always icon + word, never color alone, never reused for anything else. Direction and verdict glyphs stay in ink. Text always wears text tokens, never a status or accent color.
+- **Numbers:** tabular figures in table columns and the date columns; proportional figures everywhere else. Every number keeps its unit; scale anchors where the scale isn't self-evident.
+- **Layout:** single column, whitespace over boxes; the only bordered containers are the six tiles and the calls table. Tables and any future wide content scroll inside their own `overflow-x` container — the page body never scrolls horizontally.
+- **Responsive:** tiles 2×3 → 1 column; calls table scrolls; masthead chip wraps under the title on narrow screens.
+- **Print/PDF:** executives forward PDFs — the page must print clean in grayscale: chip meaning survives via icon + word; hairlines and ink survive; no page break inside a tile or table row.
+- **Charts:** none on v1 of the page. The only sanctioned future chart forms are the per-tile sparkline (F) and a single trend line in the appendix; each must follow the full dataviz procedure (form → color-by-job → palette validator → hover layer → accessibility pass) when introduced.
+- **Dark mode:** out of scope for v1 (light-only, print-first). If added later, dark steps are selected and validated, not auto-flipped.
 
 ## Cross-cutting rules (apply across blocks)
 
@@ -130,7 +144,7 @@ Wherever a block cites a positive whose evidence also feeds a risk-lens thesis (
 
 ### Writing register (contract for renderer copy and the plain-language stage)
 1. Industry vocabulary used straight, no glosses: HBM, CoWoS, ASIC, hyperscaler, parameters, gross margin, take-or-pay, lead time, wafer starts. The audience is a semiconductor executive; "1.6 trillion internal settings" style glosses are banned in exec copy ("parameters" is the word).
-2. Banned tokens in exec copy: `+N more moved`; bare direction symbols (↓ + →) outside the calls-board verdict glyphs (which always carry the word too); the word "run" (use "signal check" or "revision"); "because no alert rule fired"; internal feature codenames (F65 etc.).
+2. Banned tokens in exec copy: `+N more moved`; bare direction symbols (↓ + →) outside the calls-board verdict glyphs and tile direction cues (which always carry the word too); the word "run" (use "signal check" or "revision"); "because no alert rule fired"; internal feature codenames (F65 etc.).
 3. Every number carries its unit and, where the scale is not self-evident, an anchor ("narrowing from ~20% toward 10%"). Two-decimal composite indices never appear on the main page.
 4. Every claim either links to its evidence anchor or names its source inline.
 5. Sentences, not fragments; one idea per sentence; no marketing adjectives.
@@ -139,7 +153,7 @@ Wherever a block cites a positive whose evidence also feeds a risk-lens thesis (
 
 | # | Critique finding (2026-07-16) | Resolved by |
 |---|---|---|
-| 1 | Page ten days stale, silently | A: dual date + self-aware staleness line |
+| 1 | Page ten days stale, silently | A: dual date + self-aware staleness strip |
 | 2 | "ORANGE because no alert rule fired" reads as a bug | A: attention chip, fixed wording; phrase banned |
 | 3 | "No tracked calls this run" — flagship section empty; all-FLAT page | B verdict anchor + D standing calls board |
 | 4 | Most TSMC-relevant signal buried in appendix | C directly after the verdict |
@@ -157,7 +171,7 @@ Launch-checklist items from the critique that are real but OUTSIDE a format spec
 - **F79 scoring v2 (SHADOW):** this spec binds to v1 fields. Nothing in it may render v2 or flip the headline — that is the user-signed G4 cutover gate. The format is deliberately word-anchored (ratings, directions, rationales), so the eventual v1→v2 cutover changes bindings, not blocks.
 - **Frozen core:** the format is renderer/copy-layer only. An implementation lane must not touch extract/judge/thesis brains; the register rules bind the plain-language/render stage.
 - **F95 site:** this format replaces the F95 category-page layout for the exec surface; the daily ops detail (raw tiles, what-changed internals) remains available via appendix/method pages. Whether the old daily page layout is kept as a separate ops view is an implementation-lane decision, not required by this spec.
-- **Testability:** register rules 1–3 are string-testable against rendered output (banned-token scan; unit-presence heuristics); D non-emptiness is assertable whenever `book.json` has a registered entry; A's staleness line is assertable by fixture clock. An implementation lane should pin these as renderer tests.
+- **Testability:** register rules 1–3 are string-testable against rendered output (banned-token scan; unit-presence heuristics); D non-emptiness is assertable whenever `book.json` has a registered entry; A's staleness strip is assertable by fixture clock; "status palette only in chip + staleness strip" is assertable by scanning rendered CSS classes. An implementation lane should pin these as renderer tests.
 
 ## Acceptance criteria (for the future implementation lane)
 
@@ -166,11 +180,14 @@ Launch-checklist items from the critique that are real but OUTSIDE a format spec
 3. Banned-token scan of rendered exec copy passes (register rule 2 list).
 4. Attention chip wording matches the A template in both the aligned and hysteresis-lag cases.
 5. Every finding statement rendered on the page carries a working link to its appendix anchor.
-6. Existing suite, F6 pin, and F83 conformance untouched (renderer-only change).
+6. Status colors appear only in the attention chip and staleness strip, always paired with icon + word.
+7. The page body never scrolls horizontally at any viewport width (wide content scrolls in its own container).
+8. Existing suite, F6 pin, and F83 conformance untouched (renderer-only change).
 
 ## Decision log
 
 - Page anchor = monthly brief + daily strip: **user-selected** (interactive, 2026-07-16) from three presented options.
 - Deliverable = spec only, no mockup now: **user-selected** (interactive, 2026-07-16).
-- Spec restructured around a normative page outline (blocks A–G): **user-directed** (interactive, 2026-07-16). Two refinements surfaced by the outline: attention chip moved to the masthead top-right (was: verdict block); strip renamed "Latest signal" (was: "This week's signal" — honest even when checks pause).
+- Spec restructured around a normative page outline (blocks A–G): **user-directed** (interactive, 2026-07-16). Two refinements surfaced by the outline: attention chip moved to the masthead top-right (was: verdict block); strip renamed "Latest signal" (was: "This week's signal").
+- Per-block Information + Visual treatment and the Visual system section added: **user-directed** (interactive, 2026-07-16). Visual choices follow the dataviz skill discipline; key call: status color is reserved for the attention chip + staleness strip, everything else in ink — one alarm on the page, not eight.
 - All other choices (block order, selection rules, register list, counterweight rule): designer judgment within the approved anchor, open to revision at spec review.
