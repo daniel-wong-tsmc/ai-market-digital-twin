@@ -171,3 +171,31 @@ def test_build_brief_model_assembles(tmp_path, monkeypatch):
     assert m["evidence"]["n"] == 1 and m["evidence"]["primary"] == 1
     stale = build_brief_model("chips.merchant-gpu", root, dt.date(2026, 7, 25))
     assert stale["stale"] is True
+
+
+def test_build_brief_model_defensive_on_missing_and_corrupt(tmp_path):
+    import datetime as dt
+    root = tmp_path / "store"
+    root.mkdir()
+    # missing category dir -> build_brief_model never raises
+    m = build_brief_model("chips.merchant-gpu", root, dt.date(2026, 7, 16))
+    assert m["strip"] == [] and m["agenda"] == [] and m["revision"] == 0
+    # corrupt monthly: non-dict findings items + non-dict dimensionRatings value -> no raise
+    cat = root / "chips.merchant-gpu"
+    cat.mkdir()
+    (cat / "2026-07-v1.json").write_text(json.dumps({
+        "asOf": "2026-07", "narrative": "n",
+        "categoryStatus": {"rating": "Strong"},
+        "findings": ["not-a-dict", 5, None,
+                     {"id": "a", "magnitude": 1, "statement": "S.",
+                      "observedAt": "2026-07-01", "capturedAt": "2026-07-02T00:00:00Z",
+                      "indicatorId": "D2", "kind": "measured",
+                      "value": {"number": 1.0, "unit": "pct"},
+                      "evidence": [{"tier": "primary", "source": "x"}]}],
+        "dimensionRatings": {"momentum": "not-a-dict",
+                             "moat": {"rating": "Mixed", "direction": "steady",
+                                      "rationale": "R."}},
+        "dimensionStatus": {}}), encoding="utf-8")
+    m2 = build_brief_model("chips.merchant-gpu", root, dt.date(2026, 7, 16))
+    assert m2["evidence"]["n"] == 1 and m2["evidence"]["primary"] == 1
+    assert [d["name"] for d in m2["dimensions"]] == ["moat"]

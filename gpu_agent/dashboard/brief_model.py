@@ -139,8 +139,12 @@ def _strip_entry(findings, prior_ids):
 
 def signal_strip(cat_dir, limit=7):
     cat_dir = Path(cat_dir)
+    try:
+        paths = list(cat_dir.iterdir())
+    except OSError:
+        return []
     revs = sorted(((m.group(1), int(m.group(2)), p)
-                   for p in cat_dir.iterdir()
+                   for p in paths
                    for m in [_MONTHLY_RE.match(p.name)] if m),
                   key=lambda t: (t[0], t[1]))
     out = []
@@ -155,7 +159,7 @@ def signal_strip(cat_dir, limit=7):
             prior_ids = {f.get("id") for f in findings}
         out = entries[::-1][:limit]
     else:
-        dailies = sorted((p for p in cat_dir.iterdir() if _DAILY_RE.match(p.name)),
+        dailies = sorted((p for p in paths if _DAILY_RE.match(p.name)),
                          key=lambda p: p.name, reverse=True)[:limit]
         for p in dailies:
             findings = (_read_json(p) or {}).get("findings") or []
@@ -197,7 +201,7 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
     latest = latest or {}
     status = latest.get("categoryStatus") or {}
     year, month = (as_of.split("-") + ["1"])[:2]
-    findings = latest.get("findings") or []
+    findings = [f for f in (latest.get("findings") or []) if isinstance(f, dict)]
 
     slots = load_slots()
     wanted = {i for s in slots for i in s["indicators"]}
@@ -221,19 +225,33 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
         stale = (today - _dt.date(y, mo, d)).days > 3
 
     dims = []
-    ratings = latest.get("dimensionRatings") or {}
-    dstat = latest.get("dimensionStatus") or {}
+    ratings = latest.get("dimensionRatings")
+    dstat = latest.get("dimensionStatus")
+    if not isinstance(ratings, dict):
+        ratings = {}
+    if not isinstance(dstat, dict):
+        dstat = {}
     for name, r in ratings.items():
+        if not isinstance(r, dict):
+            continue
+        conf = r.get("confidence")
+        conf_level = conf.get("level") if isinstance(conf, dict) else ""
+        ds = dstat.get(name)
+        capped = bool(ds.get("confidenceCap")) if isinstance(ds, dict) else False
         dims.append({"name": name, "rating": r.get("rating") or "—",
                      "direction": r.get("direction") or "steady",
-                     "confidence": (r.get("confidence") or {}).get("level") or "",
+                     "confidence": conf_level or "",
                      "sentence": _first_sentence(r.get("rationale")),
-                     "capped": bool((dstat.get(name) or {}).get("confidenceCap"))})
+                     "capped": capped})
 
     observed = sorted((f.get("observedAt") or "")[:10] for f in findings
                       if f.get("observedAt"))
-    primary = sum(1 for f in findings if any(
-        e.get("tier") == "primary" for e in (f.get("evidence") or [])))
+    primary = 0
+    for f in findings:
+        ev = f.get("evidence")
+        if isinstance(ev, list) and any(
+                isinstance(e, dict) and e.get("tier") == "primary" for e in ev):
+            primary += 1
 
     return {
         "category_id": category_id, "category_label": "Merchant GPU",
