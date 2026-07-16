@@ -1,4 +1,22 @@
-# HANDOFF — GPU Category Agent (resume point: **F79 SCORING v2.0 SHADOW-MERGED** 2026-07-15 — `b6db80a` (frozen-core migration, SHADOW-ONLY: v2 computes but NOTHING user-facing renders it; v1 remains the headline). `main == origin/main == 2725578` (repo MIGRATED 2026-07-15 to the private **ai-market-digital-twin** repo; **F95 market-site MERGED** `2725578`), suite **1665/5**, F6 pin green (4 seams). All four F79 gates cleared: G1 backfill SIGNED, G2 backtest PASSED (user-signed Option-B event amendment; detection-only; original FAIL reproducible), G3 eval re-gate PASSED (seam-scoped — only extract bound; honest baseline; canary captured), final review READY (replay fidelity + shadow isolation airtight). **REMAINING for F79: shadow soak ≥5 live cycles (manual `v2-shadow` invocation per cycle; auto-hook deferred) → G4 CUTOVER (user-signed; flips v1→v2 rendering) — the last gate.** Two findings logged this session: **F96** (monthly-grain write-back collision — the live v8 cycle's corpus write-back rolled back on a same-month price re-gather id collision, F52-class residual) and the F83 journal-conformance test was RELAXED to the real contract (`gates` optional; `stageStatuses` accepted — it had silently reddened main since v8; user-approved). Concurrent: the F88 session is active (unattended-orchestrator hardening; it ran the live v8 cycle; its uncommitted `.gitignore` line was preserved as `cf79758`). Next after F79's G4: F66, the F81–F86/F88–F95 waves. Housekeeping open: retire ~13 merged worktrees/branches (incl. f95-market-site), skipped-days decision, F23-A4 label, F73 survivorship-bias residual, OLD public random_for_fun repo disposition (make private/delete). Repo-rename/exposure gate RESOLVED 2026-07-15 — migrated to the private ai-market-digital-twin repo.)
+# HANDOFF — GPU Category Agent (resume point: **F97 EXECUTIVE-BRIEF LANE READY TO DISPATCH** 2026-07-16 — spec `docs/superpowers/specs/2026-07-16-executive-brief-format-design.md` (v5) + plan `docs/superpowers/plans/2026-07-16-f97-executive-brief-renderer.md` (9 TDD tasks) committed; execution = subagent-driven in a NEW instance (user-directed); claim branch `f97-exec-brief` + worktree `.worktrees/f97-exec-brief` (not yet created); coordination entry below has the full claim. `main == origin/main` (pushed 2026-07-16 this session: 4 F97 docs commits `2d00554…df3936f`, the parked v9 cycle `bb594a5` per its own "push when ready" note, the v9 replay-pin registration, and this handoff), suite **green post v9-pin registration** (2026-07-16 full run: 1664/1F/5 → the 1F was the v1-replay tripwire demanding deliberate registration of the new `2026-07-v9.json`; registered per the v7/v8 precedent, pin file 28/28 incl. v9 exact-replay, F6 pin green; final full-suite count in the session bullet below). Standing prior state: **F79 SCORING v2.0 SHADOW-MERGED** 2026-07-15 — `b6db80a` (frozen-core migration, SHADOW-ONLY: v2 computes but NOTHING user-facing renders it; v1 remains the headline; repo MIGRATED 2026-07-15 to the private **ai-market-digital-twin** repo; **F95 market-site MERGED** `2725578`), F6 pin green (4 seams). All four F79 gates cleared: G1 backfill SIGNED, G2 backtest PASSED (user-signed Option-B event amendment; detection-only; original FAIL reproducible), G3 eval re-gate PASSED (seam-scoped — only extract bound; honest baseline; canary captured), final review READY (replay fidelity + shadow isolation airtight). **REMAINING for F79: shadow soak ≥5 live cycles (manual `v2-shadow` invocation per cycle; auto-hook deferred) → G4 CUTOVER (user-signed; flips v1→v2 rendering) — the last gate.** Two findings logged this session: **F96** (monthly-grain write-back collision — the live v8 cycle's corpus write-back rolled back on a same-month price re-gather id collision, F52-class residual) and the F83 journal-conformance test was RELAXED to the real contract (`gates` optional; `stageStatuses` accepted — it had silently reddened main since v8; user-approved). Concurrent: the F88 session is active (unattended-orchestrator hardening; it ran the live v8 cycle; its uncommitted `.gitignore` line was preserved as `cf79758`). Next after F79's G4: F66, the F81–F86/F88–F95 waves. Housekeeping open: retire ~13 merged worktrees/branches (incl. f95-market-site), skipped-days decision, F23-A4 label, F73 survivorship-bias residual, OLD public random_for_fun repo disposition (make private/delete). Repo-rename/exposure gate RESOLVED 2026-07-15 — migrated to the private ai-market-digital-twin repo.)
+
+- **Date: 2026-07-16 — F97 EXECUTIVE-BRIEF DESIGN SESSION (interactive) — spec + plan SHIPPED, lane READY TO DISPATCH.**
+  Arc: user asked for a critique of the deployed Cloudflare page (`ai-market-digital-twin.pages.dev/chips.merchant-gpu/`)
+  as seen by a TSMC executive → 10-finding critique → format spec brainstormed interactively and committed through
+  five user-directed revisions (`d0b076c` v1 anchor decision, `5b2a628` v2 outline restructure, `2d00554` v3 per-block
+  info+visual treatment, `13aed39` v4 key-metrics band, `874412a` v5 DYNAMIC agenda band — five fixed executive
+  questions, metrics selected per revision; supersedes v4's fixed list) → implementation plan `df3936f`
+  (9 TDD tasks). Spec: `docs/superpowers/specs/2026-07-16-executive-brief-format-design.md`. Plan:
+  `docs/superpowers/plans/2026-07-16-f97-executive-brief-renderer.md`. **F97 minted against a backlog max of F96
+  (renumber if collided). NO code written yet — no worktree, no branch.** Execution mode user-selected:
+  **subagent-driven-development, to be run by a SEPARATE instance** (user-directed handoff). Key decisions were ALL
+  interactive user selections (anchor, spec-only-then-plan, outline restructure, KPI band, dynamic agenda, execution
+  mode) — **zero AFK-defaults this session.** This session also pushed main (carrying the parked v9 cycle commit
+  below, per that entry's own "push when ready" note). **Suite repair en route:** the full run came back
+  1664/1F/5 — the 1F was `test_scoring_v1_replay_pin::test_all_pinned_files_known`, the designed tripwire firing
+  on the v9 cycle's new `2026-07-v9.json`; registered it as `W_CURRENT` per the v7/v8 one-line precedent
+  (deliberate-registration act the test demands, NOT a gate weakening; v9 exact-replay verified green).
+  **Full suite after: 1666 passed / 5 skipped**, F6 pin green.
 
 - **Date: 2026-07-16 — DAILY CYCLE RAN (scheduled headless) `category:chips.merchant-gpu`.**
   Scorecard `store/chips.merchant-gpu/2026-07-v9.json` — **Strong / improving, DMI 1.507 · SMI −0.020**
@@ -451,6 +469,19 @@ User gave **"go"** 2026-07-06. Actioned:
   the authoritative full HANDOFF still lives on the f63-corroboration-doctrine branch.)
 
 ## ⚠ CONCURRENT-INSTANCE COORDINATION (still live)
+
+- **F97 lane READY TO DISPATCH (2026-07-16, design session; execution assigned to a NEW instance by the user).**
+  CLAIM: branch `f97-exec-brief`, worktree `.worktrees/f97-exec-brief` — create on claim (does not exist yet).
+  Deliverable: the Executive Brief renderer per plan `docs/superpowers/plans/2026-07-16-f97-executive-brief-renderer.md`
+  (9 TDD tasks, subagent-driven per the user's choice) against spec
+  `docs/superpowers/specs/2026-07-16-executive-brief-format-design.md` (v5). Renderer/copy layer ONLY —
+  frozen core, brains, `gpu_agent/report.py`, and eval fixtures untouched; F6 pin must stay green untouched.
+  OWNS (new files): `gpu_agent/dashboard/{agenda,brief_model,brief_render}.py`, `registry/agenda-slots.json`,
+  `tests/dashboard/test_{agenda,brief_model,brief_render}.py`; MODIFIES: `site_build.py`, `site_render.py`
+  (appendix anchors), `site_model.py` (6-line rationale projection), `tests/dashboard/test_site_build.py`.
+  No store/ writes. Question-stop rule applies to lane subagents (repo CLAUDE.md). Stop before merge:
+  branch pushed + `f97-exec-brief-DONE.md` sentinel; only the user merges. F79 NOTE: the brief binds v1
+  fields only; it must NOT render v2 (G4 cutover is user-signed, unrelated to this lane).
 
 - **F95 lane DONE — READY TO MERGE (2026-07-13, orchestrator session; only the user merges).**
   Branch `f95-market-site`, worktree `.worktrees/f95-site`. Category page static site (E2
