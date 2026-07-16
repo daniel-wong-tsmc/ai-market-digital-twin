@@ -119,13 +119,25 @@ _DAILY_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-v(\d+)\.json$")
 _ATTENTION = {"green": "calm", "yellow": "watch", "orange": "elevated",
               "red": "critical"}
 _GLYPHS = {"strengthened": "▲", "weakened": "▼", "reaffirmed": "◆"}
+_ABBREV = {"e.g", "i.e", "vs", "inc", "corp", "ltd", "co", "mr", "mrs", "dr",
+           "st", "no", "etc", "jr", "sr", "approx", "fig", "u.s", "u.k", "u.n"}
 
 
 def _first_sentence(text):
     text = (text or "").strip()
     for i, ch in enumerate(text):
-        if ch == "." and (i + 1 == len(text) or text[i + 1] == " "):
-            return text[:i + 1]
+        if ch != ".":
+            continue
+        if i + 1 != len(text) and text[i + 1] != " ":
+            continue
+        # skip abbreviation dots: a single uppercase letter (initialism like "U.S.")…
+        if i >= 1 and text[i - 1].isupper() and (i < 2 or not text[i - 2].isalpha()):
+            continue
+        # …or a known abbreviation token ending at this period
+        tail = text[max(0, i - 6):i].lower().split()
+        if tail and tail[-1] in _ABBREV:
+            continue
+        return text[:i + 1]
     return text
 
 

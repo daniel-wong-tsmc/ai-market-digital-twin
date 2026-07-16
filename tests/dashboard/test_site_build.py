@@ -2,6 +2,8 @@ import datetime as dt
 import re
 from pathlib import Path
 
+import pytest
+
 from gpu_agent.dashboard.site_build import build_site
 
 FIX = "tests/dashboard/fixtures"
@@ -89,3 +91,15 @@ def test_appendix_has_dimension_and_finding_anchors(tmp_path):
                str(tmp_path / "site"), today=dt.date(2026, 7, 16))
     ap = (tmp_path / "site" / CAT / "appendix.html").read_text(encoding="utf-8")
     assert 'id="dimensions"' in ap and 'id="dim-' in ap and 'id="f-' in ap
+
+
+def test_build_site_lint_gate_aborts_build(tmp_path, monkeypatch):
+    import datetime as dt
+    import gpu_agent.dashboard.site_build as sb
+    monkeypatch.setattr(sb, "lint_exec_copy",
+                        lambda html: ["because no alert rule fired"])
+    with pytest.raises(ValueError):
+        build_site(CAT, FIX, "work-nonexistent", f"{FIX}/plain-2026-07-06.json",
+                   str(tmp_path / "site"), today=dt.date(2026, 7, 16))
+    # a register violation aborts before the brief index is written
+    assert not (tmp_path / "site" / CAT / "index.html").exists()

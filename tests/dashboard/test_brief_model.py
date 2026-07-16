@@ -219,3 +219,13 @@ def test_signal_strip_and_model_defensive_on_corrupt_multi_revision(tmp_path):
     # full assembly also never raises on this store
     m = build_brief_model("chips.merchant-gpu", root, dt.date(2026, 7, 16))
     assert isinstance(m["strip"], list)
+
+
+def test_first_sentence_skips_common_abbreviations():
+    from gpu_agent.dashboard.brief_model import _first_sentence
+    assert _first_sentence("NVIDIA will contribute $485 billion to U.S. buyers. More.") \
+        == "NVIDIA will contribute $485 billion to U.S. buyers."
+    assert _first_sentence("Growth, e.g. in HBM, is strong. Next.") \
+        == "Growth, e.g. in HBM, is strong."
+    assert _first_sentence("Revenue set a record. The next quarter guides up.") \
+        == "Revenue set a record."
