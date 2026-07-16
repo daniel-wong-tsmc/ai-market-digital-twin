@@ -18,6 +18,11 @@ def _read_json(path):
         return None
 
 
+def _dict_findings(art):
+    raw = (art or {}).get("findings")
+    return [f for f in raw if isinstance(f, dict)] if isinstance(raw, list) else []
+
+
 def latest_monthly(cat_dir):
     cat_dir = Path(cat_dir)
     revs = []
@@ -152,7 +157,7 @@ def signal_strip(cat_dir, limit=7):
         prior_ids = set()
         entries = []
         for _, _, p in revs:
-            findings = (_read_json(p) or {}).get("findings") or []
+            findings = _dict_findings(_read_json(p))
             e = _strip_entry(findings, prior_ids)
             if e is not None:
                 entries.append(e)
@@ -162,7 +167,7 @@ def signal_strip(cat_dir, limit=7):
         dailies = sorted((p for p in paths if _DAILY_RE.match(p.name)),
                          key=lambda p: p.name, reverse=True)[:limit]
         for p in dailies:
-            findings = (_read_json(p) or {}).get("findings") or []
+            findings = _dict_findings(_read_json(p))
             e = _strip_entry(findings, set())
             if e is not None:
                 out.append(e)
@@ -201,13 +206,13 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
     latest = latest or {}
     status = latest.get("categoryStatus") or {}
     year, month = (as_of.split("-") + ["1"])[:2]
-    findings = [f for f in (latest.get("findings") or []) if isinstance(f, dict)]
+    findings = _dict_findings(latest)
 
     slots = load_slots()
     wanted = {i for s in slots for i in s["indicators"]}
     series = read_series(store_root / "series", wanted)
     occupants = select_occupants(slots, findings, series,
-                                 (prior or {}).get("findings") or [], today)
+                                 _dict_findings(prior), today)
 
     book = read_thesis_book(store_root, category_id)
     rows, total, prov = select_calls(book)

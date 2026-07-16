@@ -199,3 +199,23 @@ def test_build_brief_model_defensive_on_missing_and_corrupt(tmp_path):
     m2 = build_brief_model("chips.merchant-gpu", root, dt.date(2026, 7, 16))
     assert m2["evidence"]["n"] == 1 and m2["evidence"]["primary"] == 1
     assert [d["name"] for d in m2["dimensions"]] == ["moat"]
+
+
+def test_signal_strip_and_model_defensive_on_corrupt_multi_revision(tmp_path):
+    import datetime as dt
+    root = tmp_path / "store"
+    cat = root / "chips.merchant-gpu"
+    cat.mkdir(parents=True)
+    good = {"id": "a", "magnitude": 2, "statement": "Real mover.",
+            "observedAt": "2026-07-01", "capturedAt": "2026-07-02T00:00:00Z"}
+    # two revisions: v1 findings array holds non-dict junk; v2 findings is a non-list
+    # scalar. signal_strip (multi-revision path) must not raise.
+    (cat / "2026-07-v1.json").write_text(json.dumps(
+        {"asOf": "2026-07", "findings": ["junk", 5, good]}), encoding="utf-8")
+    (cat / "2026-07-v2.json").write_text(json.dumps(
+        {"asOf": "2026-07", "findings": 99}), encoding="utf-8")
+    strip = signal_strip(cat)
+    assert any(e["text"] == "Real mover." for e in strip)
+    # full assembly also never raises on this store
+    m = build_brief_model("chips.merchant-gpu", root, dt.date(2026, 7, 16))
+    assert isinstance(m["strip"], list)
