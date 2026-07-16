@@ -82,3 +82,24 @@ def test_brief_css_defines_status_and_tiles():
     for cls in ("status-calm", "status-watch", "status-elevated",
                 "status-critical", ".kpis", ".hero"):
         assert cls in BRIEF_CSS
+
+
+def test_render_brief_escapes_category_label_uppercase_ordering():
+    html = render_brief(dict(MODEL, category_label="A&B"))
+    assert "A&amp;B" in html          # escaped correctly AFTER uppercasing
+    assert "&AMP;" not in html        # not the escape-then-uppercase garble
+
+
+def test_render_brief_escapes_calls_glyph():
+    row = dict(MODEL["calls"]["rows"][0], glyph="<x>")
+    m = dict(MODEL, calls={"rows": [row], "total": 1, "provisional": 0})
+    assert "&lt;x&gt;" in render_brief(m)
+
+
+def test_render_brief_omits_empty_optional_blocks():
+    m = dict(MODEL, tsmc=[], strip=[],
+             calls={"rows": [], "total": 0, "provisional": 0})
+    html = render_brief(m)
+    assert "What this means for TSMC" not in html   # D omitted when empty
+    assert "Latest signal" not in html              # F omitted when empty
+    assert "No standing calls yet" in html          # E cold-start line

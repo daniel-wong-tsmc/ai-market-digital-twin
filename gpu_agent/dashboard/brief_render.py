@@ -71,7 +71,7 @@ def _masthead(m) -> str:
     return (
         f'{_chip(m["attention"])}'
         f'<p class="crumb">AI market › Chips layer › {e(m["category_label"])}</p>'
-        f'<h1>{e(m["category_label"]).upper()} — Executive Brief</h1>'
+        f'<h1>{e(m["category_label"].upper())} — Executive Brief</h1>'
         f'<p class="muted">Tracks the merchant AI-GPU market — demand, supply,'
         f' pricing, competition — and what it means one layer down: wafers,'
         f' packaging, memory.</p>'
@@ -123,7 +123,7 @@ def _calls(m) -> str:
                 ' first reads are being established.</p>')
     rows = []
     for r in c["rows"]:
-        verdict = f'{e(r["verdict"])} {r["glyph"]}'.strip()
+        verdict = f'{e(r["verdict"])} {e(r["glyph"])}'.strip()
         rows.append(
             f'<tr><td>{e(r["title"])}</td><td class="tag">{e(r["lens"])}</td>'
             f'<td>{e(r["conviction"])}</td><td>{verdict}</td>'
