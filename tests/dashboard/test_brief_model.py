@@ -105,3 +105,69 @@ def test_readers_defensive_on_missing_and_corrupt(tmp_path):
     cat = root / CAT
     cat.mkdir(parents=True, exist_ok=True)
     assert last_signal_check(root, cat) == ""
+
+
+import datetime as dt
+from gpu_agent.dashboard.brief_model import (
+    build_brief_model, counterweight_ids, signal_strip)
+
+TODAY = dt.date(2026, 7, 16)
+
+
+def _finding(fid, mag, statement, observed="2026-07-01", captured="2026-07-06T00:00:00Z",
+             indicator="D2", kind="measured", value={"number": 1.0, "unit": "pct"}):
+    return {"id": fid, "magnitude": mag, "statement": statement,
+            "observedAt": observed, "capturedAt": captured,
+            "indicatorId": indicator, "kind": kind, "value": value, "trend": "rising",
+            "evidence": [{"tier": "primary", "source": "src"}]}
+
+
+def test_signal_strip_biggest_new_finding_per_revision(tmp_path):
+    cat = tmp_path / "c"
+    cat.mkdir()
+    f1 = _finding("a", 2, "First sentence. Second.", captured="2026-07-02T09:00:00Z")
+    f2 = _finding("b", 3, "Big mover statement.", captured="2026-07-14T09:00:00Z")
+    (cat / "2026-07-v1.json").write_text(json.dumps({"asOf": "2026-07",
+        "findings": [f1]}), encoding="utf-8")
+    (cat / "2026-07-v2.json").write_text(json.dumps({"asOf": "2026-07",
+        "findings": [f1, f2]}), encoding="utf-8")
+    strip = signal_strip(cat)
+    assert [e["date"] for e in strip] == ["2026-07-14", "2026-07-02"]
+    assert strip[0]["text"] == "Big mover statement." and strip[0]["source"] == "src"
+    assert strip[1]["text"] == "First sentence."
+
+
+def test_counterweight_ids_maps_risk_thesis_evidence():
+    entries = [{"title": "Circularity", "lens": "risk",
+                "findingIds": ["f9"], "status": "registered"},
+               {"title": "Demand", "lens": "demand", "findingIds": ["f1"]}]
+    assert counterweight_ids(entries) == {"f9": "Circularity"}
+
+
+def test_build_brief_model_assembles(tmp_path, monkeypatch):
+    root = tmp_path / "store"
+    cat = root / "chips.merchant-gpu"
+    cat.mkdir(parents=True)
+    monthly = {"asOf": "2026-07", "narrative": "The story.",
+               "categoryStatus": {"rating": "Strong", "direction": "steady",
+                                  "reason": "Supply caps it. More.",
+                                  "constraintLabel": "HBM supply"},
+               "dimensionRatings": {"momentum": {
+                   "rating": "Very strong", "direction": "improving",
+                   "confidence": {"level": "high"},
+                   "rationale": "First reason. Extra."}},
+               "dimensionStatus": {"momentum": {"confidenceCap": None}},
+               "findings": [_finding("a", 3, "NVIDIA revenue was $75.2B.")],
+               "sources": []}
+    (cat / "2026-07-v1.json").write_text(json.dumps(monthly), encoding="utf-8")
+    (root / "cycle-log.json").write_text(json.dumps(
+        {"capturedAt": "2026-07-15T10:00:00Z"}), encoding="utf-8")
+    m = build_brief_model("chips.merchant-gpu", root, TODAY)
+    assert m["month_label"] == "July 2026" and m["revision"] == 1
+    assert m["status"]["constraint"] == "HBM supply"
+    assert m["last_check"] == "2026-07-15" and m["stale"] is False
+    assert m["dimensions"][0]["sentence"] == "First reason."
+    assert m["agenda"] and m["agenda"][0]["display"]           # slot filled
+    assert m["evidence"]["n"] == 1 and m["evidence"]["primary"] == 1
+    stale = build_brief_model("chips.merchant-gpu", root, dt.date(2026, 7, 25))
+    assert stale["stale"] is True
