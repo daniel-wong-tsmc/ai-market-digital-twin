@@ -82,3 +82,26 @@ def test_last_signal_check_prefers_cycle_log(tmp_path):
     assert last_signal_check(root, cat) == "2026-07-15"
     (root / "cycle-log.json").unlink()
     assert last_signal_check(root, cat) == "2026-07-06"
+
+
+def test_readers_defensive_on_missing_and_corrupt(tmp_path):
+    root = tmp_path / "store"
+    root.mkdir()
+    # missing category dir -> latest_monthly never raises (locks in d9b9444)
+    assert latest_monthly(root / "nope") == (None, None, "", 0)
+    assert last_signal_check(root, root / "nope") == ""
+    # corrupt thesis book: non-list "entries" -> [] (never raises)
+    book = root / "theses" / CAT
+    book.mkdir(parents=True)
+    (book / "book.json").write_text(json.dumps({"entries": 5}), encoding="utf-8")
+    assert read_thesis_book(root, CAT) == []
+    # corrupt implications: non-list "lines" -> [] (never raises)
+    impl = root / "implications" / CAT
+    impl.mkdir(parents=True)
+    (impl / "2026-07.json").write_text(json.dumps({"lines": 5}), encoding="utf-8")
+    assert read_implication_lines(root, CAT, "2026-07") == []
+    # corrupt cycle-log: top-level list -> falls back to monthly (empty) -> "" (never raises)
+    (root / "cycle-log.json").write_text(json.dumps([1, 2, 3]), encoding="utf-8")
+    cat = root / CAT
+    cat.mkdir(parents=True, exist_ok=True)
+    assert last_signal_check(root, cat) == ""

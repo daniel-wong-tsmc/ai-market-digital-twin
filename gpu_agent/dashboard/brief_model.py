@@ -44,7 +44,15 @@ def read_thesis_book(store_root, category_id):
     art = _read_json(Path(store_root) / "theses" / category_id / "book.json")
     if not isinstance(art, dict):
         return []
-    return [e for e in (art.get("entries") or []) if isinstance(e, dict)]
+    entries = art.get("entries")
+    if not isinstance(entries, list):
+        return []
+    return [e for e in entries if isinstance(e, dict)]
+
+
+def _neg_streak(e):
+    s = e.get("streak")
+    return -s if isinstance(s, (int, float)) else 0
 
 
 def select_calls(entries, cap=7):
@@ -53,7 +61,7 @@ def select_calls(entries, cap=7):
     ordered = sorted(entries, key=lambda e: (
         0 if e.get("status") == "registered" else 1,
         _CONVICTION_ORDER.get(e.get("conviction"), 3),
-        -(e.get("streak") or 0),
+        _neg_streak(e),
         e.get("title") or ""))
     return ordered[:cap], total, prov
 
@@ -69,8 +77,11 @@ def read_implication_lines(store_root, category_id, as_of):
         art = _read_json(candidates[-1]) if candidates else None
     if not isinstance(art, dict):
         return []
+    lines = art.get("lines")
+    if not isinstance(lines, list):
+        return []
     out = []
-    for ln in art.get("lines") or []:
+    for ln in lines:
         if isinstance(ln, dict) and (ln.get("watchItem") or ln.get("text")):
             out.append({"text": ln.get("watchItem") or ln.get("text"),
                         "dims": list(ln.get("dimensions") or []),
@@ -81,10 +92,13 @@ def read_implication_lines(store_root, category_id, as_of):
 
 def last_signal_check(store_root, cat_dir):
     log = _read_json(Path(store_root) / "cycle-log.json")
-    stamp = (log or {}).get("capturedAt") or ""
+    stamp = log.get("capturedAt") if isinstance(log, dict) else ""
     if stamp:
         return stamp[:10]
     latest, _, _, _ = latest_monthly(cat_dir)
-    stamps = [f.get("capturedAt") or "" for f in (latest or {}).get("findings", [])]
-    stamps = [s[:10] for s in stamps if s]
+    findings = (latest or {}).get("findings")
+    if not isinstance(findings, list):
+        findings = []
+    stamps = [(f.get("capturedAt") or "")[:10] for f in findings if isinstance(f, dict)]
+    stamps = [s for s in stamps if s]
     return max(stamps) if stamps else ""
