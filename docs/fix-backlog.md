@@ -1222,3 +1222,30 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   Small follow-up noted: `build.py`'s selector (feeds alert/change, no anchor) isn't independently
   test-locked (correct by code symmetry). Doc note: the plan's Task-8 smoke command used
   `--store store`; the correct value is the CLI default `--store store/chips.merchant-gpu`.
+
+## From the 2026-07-17 SDEWS cross-reference (F98)
+
+- [ ] **F98 — Agenda-band completeness + unit hygiene (Part A, renderer/config) and S4 upstream
+  lead-time adoption (Part B, gated).** Provenance: user-directed cross-reference of the SDEWS v1.0
+  spec (docx) against the taxonomy and the live F97 brief, building on
+  `docs/2026-07-11-sdews-metric-extraction.md` (whose lane calls stand: S3/P1/P4 → chips.hbm-memory;
+  D7/X2 → energy; S5/S6/S7/S8/P5/P6/X1/D10 → other agents or layer tier).
+  **Part A — renderer/config only, NO F6 exposure:** (1) slot-family fixes in
+  `registry/agenda-slots.json` — move `S9` (alternative supply) out of *binding-constraint* into
+  *customer-mix*; decide `S10`'s home; add the tracked-but-unslotted merchant-gpu indicators
+  `gpuSpotPrice` (SDEWS P3, early-glut), `apiArr` (D5, demand self-funding), `releaseCadence` (D8),
+  `flopsPerDollar` to their agreed families. (2) Unit hygiene in `agenda.format_value` +
+  candidates: canonicalize unit aliases (`"USD billion"` → `USD_B` — live bug: the
+  binding-constraint tile renders "500 USD billion"), format `USD_B` as `$NB`, add
+  `flops_per_USD`, and word-map index-style units (`credit_condition_index` 1.0 currently renders
+  as "1 credit_condition_index"). (3) Plain-English tile metric labels (registry labels/glossary
+  instead of raw indicator ids). DATA CAVEAT (2026-07-17 store check): `gpuSpotPrice` /
+  `apiArr` / `releaseCadence` currently have NO measured-value findings and no series files —
+  slotting alone renders nothing until readings land; Part A scope decision (config-only vs.
+  also making these data-ready) is a brainstorm question.
+  **Part B — gated, one change at a time:** adopt **S4 — upstream long-lead component lead-time
+  index** (optics/CPO, liquid-cooling CDU/UQD, 800V power, high-end PCB/CCL) into
+  `registry/indicators.json` per the extraction doc's candidate #3 (complements coincident
+  `leadTimes` with the leading upstream view). Prompt-affecting data → brainstorm → spec →
+  F6 eval gate (run-eval → rebaseline), per the standing rule. *(Concurrent-mint caveat: F98
+  chosen against a backlog max of F97 on 2026-07-17; renumber if collided.)*
