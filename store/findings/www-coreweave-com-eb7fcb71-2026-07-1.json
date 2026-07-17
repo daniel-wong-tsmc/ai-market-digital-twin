@@ -1,0 +1,45 @@
+{
+  "id": "www-coreweave-com-eb7fcb71-2026-07-1",
+  "statement": "CoreWeave on-demand rental for the NVIDIA GB200 NVL72 is $42.00 per 4-GPU instance per hour, i.e. $10.50 per GPU per hour.",
+  "kind": "measured",
+  "value": {
+    "number": 10.5,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Live neocloud rental price level for an NVIDIA GPU instance, derived per-GPU from the page's stated per-instance price and GPU count; no stated baseline or change, a static price overlay.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Cloud GPU rental price level on a neocloud; a price overlay auto-excluded from the demand and supply index."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-07-17",
+      "excerpt": "NVIDIA GB200 NVL72 (4 GPUs): On-Demand \"$42.00\"/hr",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own live pricing page captured 2026-07-17; per-GPU derived from the page's stated per-instance price and GPU count, secondary tier."
+  },
+  "dispersion": "conflicting same-key reports: value 6.5 -> 10.5 (tol 1%); sources: CoreWeave",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "coreweave",
+  "observedAt": "2026-07-17",
+  "capturedAt": "2026-07-17T01:01:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "www-techtimes-com-669598b1-2026-07-3",
+  "statement": "Microsoft, Google and Meta have used capital reserves to secure long-term HBM supply contracts, keeping HBM supply concentrated at the hyperscale tier.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "Hyperscaler long-term HBM lock-in concentrates critical GPU-memory supply among a few buyers, constraining access for smaller cloud and system builders.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Hyperscaler HBM contracts pre-allocate supply, limiting HBM (and thus GPU) availability for non-hyperscale buyers - a supply-access concentration risk."
+  },
+  "evidence": [
+    {
+      "source": "TechTimes (reporting Inventec warning)",
+      "url": "https://www.techtimes.com/articles/320681/20260716/inventec-warns-ai-memory-crunch-has-reached-servers-lead-times-hit-40-plus-weeks.htm",
+      "date": "2026-07-16",
+      "excerpt": "Microsoft, Google and Meta have used their capital reserves to secure long-term HBM supply contracts, effectively guaranteeing that supply will remain concentrated at the hyperscale tier.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary: TechTimes via web-search index; single-publisher for this specific claim, capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "hyperscalers (Microsoft, Google, Meta)",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-17T01:01:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

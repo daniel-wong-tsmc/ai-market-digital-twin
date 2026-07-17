@@ -2,77 +2,82 @@
   "scope": "category:chips.merchant-gpu",
   "asOf": "2026-07",
   "mode": "daily",
-  "capturedAt": "2026-07-16T13:19:10Z",
-  "runDir": "work/daily-2026-07-16",
-  "note": "Scheduled headless daily cycle. Claude Code = brain (tool-less Opus, model:opus, tool_uses=0 on every extract/judge/thesis/implication dispatch). AFK-defaults: (1) harness exposes no per-dispatch tool allowlist / tools-restricted agent type, so the F88 no-Bash gatherer wall and tool-less brains were enforced BEHAVIOURALLY via explicit no-tool prompts (all gatherers+brains reported no shell; deterministic gates remained the backstop) [same precedent as 2026-07-14]; (2) manifest primaryDomains is not exposed by the CoverageManifest model so ingest --primary-sources resolved empty, verified harmless (none of the 11 non-primary-domain docs would match the allowlist; all correctly secondary); (3) F96/F52 same-month price re-gather id collision on wiki write-back (lambda-ai + runpod D6 ids already in 2026-07 vintage with changed price content) resolved via LOGGED wiki-ingest exclusion of the 2 colliders after rolling back a half-applied write-back (work/daily-2026-07-16/ingest-exclusions.json); prior-cycle price entries retained; price side does not score so scorecard v9 unaffected; (4) gathered 11 blobs vs daily soft cap 10 (per-slice hard maxes 4/4/3; no hard-ceiling 20 breach); (5) PUSH HELD: HEAD moved during the run (concurrent F97 lane instance committed 4 unpushed docs commits to root main); cycle committed+parked on local main, push deferred to avoid publishing another active instance's unpushed WIP unattended.",
+  "capturedAt": "2026-07-17T01:01:02Z",
+  "runDir": "work/daily-2026-07-17",
+  "note": "Scheduled headless daily cycle (2026-07-17). Claude Code = brain: every extract/judge/thesis/implication dispatch was model:opus and did its REASONING tool-less (tool_uses=0 during reasoning), then made a single Write to persist its own answer file (tool_uses=1). AFK-defaults recorded: (1) Harness exposes no per-dispatch tool allowlist / tools-restricted agent type, so the F88 no-Bash gatherer wall and tool-less brains were enforced BEHAVIOURALLY via explicit no-tool prompts (all gatherers instructed Read/Write/WebSearch/WebFetch-only + no shell; brains instructed no-tools-then-single-Write). Deterministic gates remained the backstop. Same precedent as 2026-07-14/16. (2) FIXED vs 2026-07-16: manifest top-level primaryDomains passed to ingest --primary-sources -> NVIDIA Newsroom stamped primary (1 primary / 6 secondary), correcting the prior primary:0 default. (3) F96/F52 same-month price re-gather id collision on wiki write-back: lambda-ai-1252bbe3-2026-07-1 (H100 $4.29 committed vs B200 $6.69 fresh) and www-runpod-io-bdb62dfd-2026-07-1 (H100 $3.29 committed vs B300 $7.39 fresh) collide with the immutable committed 2026-07 gate-store; resolved by LOGGED wiki-ingest exclusion (work/daily-2026-07-17/ingest-exclusions.json) after rolling back a half-applied write-back; prior-cycle price entries retained; price side does not score so scorecard v10 is unaffected. Same 2 colliders as v9. (4) Provenance flag: www-techtimes lead-time blob was HTTP-403 to direct WebFetch; content captured from the web-search index snapshot plus an embedded fetchable ComparetheCloud corroborator (secondary, confidence-capped by gate). (5) voice-lint demanded ONE rewrite (judge sample 2 narrative used disallowed acronym 'AI-GPU'); re-dispatched that sample only, corrected, pipeline then clean. sufficiency clean; implication gate clean first try. (6) DMI rose +0.513 to 2.020 vs v9 (1.507), driven by a strong demand week (Rubin Japan NVL72 design win, hyperscaler capex hikes, memory demand outrunning supply); frozen deterministic scorer, not adjusted. (7) Per user global CLAUDE.md (plain-English, short) the session's final message summarizes the rendered report rather than pasting it verbatim; full deterministic report at work/daily-2026-07-17/report.txt (minor deviation from run-cycle F67 verbatim rule, justified for a headless run).",
   "entries": [
     {
       "categoryId": "chips.merchant-gpu",
       "assignmentPath": "fixtures/asg.chips.merchant-gpu.json",
       "status": "done",
-      "scorecard": "store/chips.merchant-gpu/2026-07-v9.json",
-      "dmi": 1.507,
-      "smi": -0.02,
+      "scorecard": "store/chips.merchant-gpu/2026-07-v10.json",
+      "dmi": 2.02,
+      "smi": 0.007,
       "answers": {
-        "extract": "work/daily-2026-07-16/extract-answer.json",
-        "judge": "work/daily-2026-07-16/judge-answer.json",
-        "thesis": "work/daily-2026-07-16/thesis-answer.json",
-        "implication": "work/daily-2026-07-16/implication-answer.json"
+        "extract": "work/daily-2026-07-17/extract-answer.json",
+        "judge": "work/daily-2026-07-17/judge-answer.json",
+        "thesis": "work/daily-2026-07-17/thesis-answer.json",
+        "implication": "work/daily-2026-07-17/implication-answer.json"
       },
       "corpus": {
-        "coverage": "work/daily-2026-07-16/corpus-coverage.json",
-        "findings": "work/daily-2026-07-16/corpus-findings.json",
-        "dedupedFresh": "work/daily-2026-07-16/deduped-fresh.json",
-        "report": "work/daily-2026-07-16/corpus-report.json",
-        "storeInWindow": 74,
-        "fadedOut": 27,
-        "freshNew": 8,
-        "freshUpdate": 4,
-        "freshDuplicate": 1,
-        "merged": 86,
-        "dedupedFreshCount": 12
+        "coverage": "work/daily-2026-07-17/corpus-coverage.json",
+        "findings": "work/daily-2026-07-17/corpus-findings.json",
+        "dedupedFresh": "work/daily-2026-07-17/deduped-fresh.json",
+        "report": "work/daily-2026-07-17/corpus-report.json",
+        "storeInWindow": 83,
+        "fadedOut": 28,
+        "freshNew": 12,
+        "freshUpdate": 2,
+        "freshDuplicate": 16,
+        "merged": 97,
+        "dedupedFreshCount": 14
       },
       "gather": {
-        "log": "work/daily-2026-07-16/docs/gather-log.json",
-        "documents": 11,
-        "primary": 0,
-        "secondary": 11,
+        "log": "work/daily-2026-07-17/docs/gather-log.json",
+        "documents": 7,
+        "primary": 1,
+        "secondary": 6,
         "droppedKnown": 0,
-        "pursuedDespiteAge": 2,
+        "pursuedDespiteAge": 1,
         "coverageGaps": {
-          "total": 16,
-          "required": 15,
+          "total": 15,
+          "required": 14,
           "preferred": 1,
           "paywalled": 2
         },
-        "softCapNote": "11 gathered vs daily soft cap 10 (per-slice hard maxes 4/4/3)"
+        "softCapNote": "7 gathered vs daily soft cap 10 (no hard-ceiling 20 breach); D6 not-covered required indicator closed via 3 live pricing pages"
       },
       "extractGate": {
-        "findings": 13,
-        "dropped": 1,
-        "droppedReason": "www-bis-gov-dbeede91-2026-07-1: high-confidence secondary-only (bis.gov not on primary allowlist), 1 publisher < 3"
+        "findings": 30,
+        "dropped": 0
       },
       "judge": {
         "samples": 3,
-        "voiceLint": "clean",
+        "voiceLint": "1 rewrite (sample 2: 'AI-GPU' acronym), then clean",
         "sufficiency": "clean"
       },
       "writeBack": {
-        "routed": 10,
-        "pages": 4,
-        "lint": "work/daily-2026-07-16/wiki-lint.json",
-        "materialMoves": 7,
-        "f96Exclusions": "work/daily-2026-07-16/ingest-exclusions.json",
+        "routed": 12,
+        "pages": 10,
+        "lint": "work/daily-2026-07-17/wiki-lint.json",
+        "materialMoves": 15,
+        "f96Exclusions": "work/daily-2026-07-17/ingest-exclusions.json",
         "excludedIds": [
           "lambda-ai-1252bbe3-2026-07-1",
           "www-runpod-io-bdb62dfd-2026-07-1"
         ]
       },
       "unregisteredEntities": {
-        "count": 2,
+        "count": 8,
         "names": [
-          "market",
-          "multi"
+          "AI-accelerator market",
+          "Broadcom and Marvell",
+          "Samsung / SK Hynix",
+          "hyperscalers",
+          "hyperscalers (Microsoft, Google, Meta)",
+          "memory / AI-server supply chain",
+          "memory manufacturers",
+          "runpod"
         ]
       },
       "webReach": {
@@ -105,16 +110,15 @@
         "main": "deferred"
       },
       "thesis": {
-        "judged": 23,
-        "applied": 23,
+        "judged": 25,
+        "applied": 25,
         "proposedNew": 2,
         "status": "done"
       },
       "implication": {
-        "lines": 5,
+        "lines": 6,
         "status": "done",
-        "reDispatched": 1,
-        "reDispatchReason": "gate: banned word 'leverage' + finding-id typo, corrected on re-dispatch"
+        "reDispatched": 0
       }
     }
   ],

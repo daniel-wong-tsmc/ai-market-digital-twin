@@ -1,0 +1,52 @@
+{
+  "id": "www-faf-ae-6bcac1ba-2026-07-5",
+  "statement": "Combined hyperscaler capex is guided to $660-690 billion in 2026 with about 75% directed at AI infrastructure, and Meta alone carries $115-135 billion of 2026 capex guidance - a large forward-demand backdrop.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Very large AI-directed hyperscaler capex sustains forward demand across accelerators, datacenter capacity, and power.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "$660-690B in 2026 hyperscaler capex, 75% AI-directed, funds continued large-scale purchases of accelerators, datacenter build-out, and power."
+  },
+  "evidence": [
+    {
+      "source": "Foreign Affairs Forum (faf.ae)",
+      "url": "https://www.faf.ae/home/2026/7/13/silicons-new-sovereignty-how-nvidias-asic-gambit-is-redrawing-the-map-of-global-ai-power",
+      "date": "2026-07-13",
+      "excerpt": "Combined hyperscaler capital expenditure reaches $660 to $690 billion in 2026, with 75% directed at AI-specific infrastructure",
+      "tier": "secondary"
+    },
+    {
+      "source": "Foreign Affairs Forum (faf.ae)",
+      "url": "https://www.faf.ae/home/2026/7/13/silicons-new-sovereignty-how-nvidias-asic-gambit-is-redrawing-the-map-of-global-ai-power",
+      "date": "2026-07-13",
+      "excerpt": "Meta alone carries $115 to $135 billion in 2026 capital expenditure guidance.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary opinion/analysis (faf.ae); single publisher, capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "hyperscalers",
+  "observedAt": "2026-07-13",
+  "capturedAt": "2026-07-17T01:01:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,52 @@
+{
+  "id": "www-techtimes-com-669598b1-2026-07-4",
+  "statement": "Corroborating coverage cites Samsung increasing HBM capacity by 50% in 2026 and SK Hynix beginning mass production of HBM4, expanding HBM bit-supply.",
+  "kind": "measured",
+  "value": {
+    "number": 50.0,
+    "unit": "pct_yoy"
+  },
+  "trend": "rising",
+  "why": "Expanding HBM capacity and HBM4 mass production increase memory bit-supply, easing the GPU-attached-memory bottleneck over time.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "A 50% HBM capacity increase and HBM4 mass production add HBM bit-supply, gradually relieving the memory constraint on GPU/AI-server build-out."
+  },
+  "evidence": [
+    {
+      "source": "ComparetheCloud (corroboration, reproduced in document)",
+      "url": "https://www.techtimes.com/articles/320681/20260716/inventec-warns-ai-memory-crunch-has-reached-servers-lead-times-hit-40-plus-weeks.htm",
+      "date": "2026-07-16",
+      "excerpt": "increase HBM capacity by 50% in 2026",
+      "tier": "secondary"
+    },
+    {
+      "source": "ComparetheCloud (corroboration, reproduced in document)",
+      "url": "https://www.techtimes.com/articles/320681/20260716/inventec-warns-ai-memory-crunch-has-reached-servers-lead-times-hit-40-plus-weeks.htm",
+      "date": "2026-07-16",
+      "excerpt": "begun mass production of HBM4",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary: figures from ComparetheCloud (7 May 2026) reproduced in this document; capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "Samsung / SK Hynix",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-17T01:01:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

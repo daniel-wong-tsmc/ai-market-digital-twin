@@ -1,0 +1,44 @@
+{
+  "id": "techcrunch-com-bed0b1c2-2026-07-2",
+  "statement": "Meta plans to deploy 7 gigawatts of compute in 2026 and roughly double that in 2027, a strong forward-demand signal across accelerators, datacenter capacity, and power.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A hyperscaler doubling its deployed compute year over year signals rising capital deployment and forward demand across the AI compute stack.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Doubling deployed compute from 7GW to about 14GW implies large incremental purchases of accelerators, datacenter build-out, and power procurement."
+  },
+  "evidence": [
+    {
+      "source": "TechCrunch (citing Reuters internal-memo report)",
+      "url": "https://techcrunch.com/2026/07/09/metas-new-ai-chips-will-begin-production-in-september/",
+      "date": "2026-07-09",
+      "excerpt": "deploy 7 gigawatts of compute this year, and double that next.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary: TechCrunch citing a Reuters-reported internal memo; single-source, capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "meta",
+  "observedAt": "2026-07-09",
+  "capturedAt": "2026-07-17T01:01:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

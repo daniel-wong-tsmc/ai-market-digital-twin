@@ -1,0 +1,42 @@
+{
+  "id": "www-faf-ae-6bcac1ba-2026-07-1",
+  "statement": "Nvidia still holds roughly 70-80% of the AI accelerator market by revenue, a dominant share underpinning its pricing power.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "A durable ~70-80% revenue share is a competitive moat that supports Nvidia's pricing power and merchant-GPU demand capture.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Dominant AI-accelerator revenue share sustains merchant-GPU demand and pricing power while framing the ceiling for custom-ASIC alternatives."
+  },
+  "evidence": [
+    {
+      "source": "Foreign Affairs Forum (faf.ae)",
+      "url": "https://www.faf.ae/home/2026/7/13/silicons-new-sovereignty-how-nvidias-asic-gambit-is-redrawing-the-map-of-global-ai-power",
+      "date": "2026-07-13",
+      "excerpt": "Nvidia still holds roughly 70 to 80% of the AI accelerator market by revenue.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary opinion/analysis (faf.ae) citing industry figures; single publisher, capped at medium."
+  },
+  "dispersion": "Reported as a 70-80% range.",
+  "asOf": "2026-07",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-13",
+  "capturedAt": "2026-07-17T01:01:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

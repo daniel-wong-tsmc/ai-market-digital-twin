@@ -1,0 +1,43 @@
+{
+  "id": "www-faf-ae-6bcac1ba-2026-07-2",
+  "statement": "TrendForce projects 44.6% ASIC growth versus 16.1% for merchant GPUs in 2026, with ASIC-based AI servers reaching 27.8% of the market and ASIC shipments projected to surpass GPU shipments by 2028 - an accelerating custom-silicon alternative to merchant GPUs.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Custom ASICs growing far faster than merchant GPUs and projected to overtake them expand alternative compute supply and threaten merchant-GPU share.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.eda-ip"
+    ],
+    "direction": "mixed",
+    "mechanism": "Faster ASIC growth and rising ASIC server share erode merchant-GPU share while expanding hyperscaler custom-silicon (alternative) supply."
+  },
+  "evidence": [
+    {
+      "source": "Foreign Affairs Forum (faf.ae)",
+      "url": "https://www.faf.ae/home/2026/7/13/silicons-new-sovereignty-how-nvidias-asic-gambit-is-redrawing-the-map-of-global-ai-power",
+      "date": "2026-07-13",
+      "excerpt": "TrendForce projects 44.6% ASIC growth against 16.1% for merchant GPUs in 2026, with ASIC-based AI server shipments reaching 27.8% of the total market.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary opinion/analysis (faf.ae) citing a TrendForce projection; single publisher, capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": -1,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "AI-accelerator market",
+  "observedAt": "2026-07-13",
+  "capturedAt": "2026-07-17T01:01:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

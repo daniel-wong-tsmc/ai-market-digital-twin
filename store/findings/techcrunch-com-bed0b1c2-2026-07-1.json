@@ -1,0 +1,51 @@
+{
+  "id": "techcrunch-com-bed0b1c2-2026-07-1",
+  "statement": "Meta's four new MTIA custom AI accelerators enter production in September 2026, targeting inference workloads to reduce purchases of NVIDIA and AMD GPUs, though Meta still expects heavy continued GPU spend.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A major merchant-GPU customer shifting high-volume inference to in-house custom silicon expands non-GPU alternative compute supply and partially substitutes for merchant-GPU demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.foundry-packaging",
+      "chips.eda-ip"
+    ],
+    "direction": "mixed",
+    "mechanism": "MTIA inference accelerators, co-designed with Broadcom and manufactured by TSMC, substitute for some NVIDIA and AMD GPU inference volume, adding alternative supply while tempering incremental merchant-GPU demand; Meta still buys GPUs for training."
+  },
+  "evidence": [
+    {
+      "source": "TechCrunch (citing Reuters internal-memo report)",
+      "url": "https://techcrunch.com/2026/07/09/metas-new-ai-chips-will-begin-production-in-september/",
+      "date": "2026-07-09",
+      "excerpt": "September 2026",
+      "tier": "secondary"
+    },
+    {
+      "source": "TechCrunch (citing Reuters internal-memo report)",
+      "url": "https://techcrunch.com/2026/07/09/metas-new-ai-chips-will-begin-production-in-september/",
+      "date": "2026-07-09",
+      "excerpt": "help the company save on buying GPUs from chipmakers like Nvidia and AMD, although it still expects to spend plenty with those providers as well.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary: TechCrunch citing a Reuters-reported internal memo; corroborating outlets are referenced within the single article rather than independently fetched, so capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": -1,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "meta",
+  "observedAt": "2026-07-09",
+  "capturedAt": "2026-07-17T01:01:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

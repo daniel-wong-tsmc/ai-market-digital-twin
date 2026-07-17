@@ -1,0 +1,43 @@
+{
+  "id": "www-faf-ae-6bcac1ba-2026-07-4",
+  "statement": "Broadcom and Marvell together control an estimated 95% of the custom AI ASIC co-design market, concentrating the custom-silicon supply chain in two vendors.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "Extreme concentration of custom-ASIC co-design in two firms is a structural supply-chain dependency and bottleneck risk for the ASIC alternative.",
+  "impact": {
+    "targets": [
+      "chips.eda-ip",
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "With ~95% of ASIC co-design in two vendors, custom-silicon supply depends on limited capacity - a concentration risk that both enables and constrains the ASIC alternative to merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "Foreign Affairs Forum (faf.ae)",
+      "url": "https://www.faf.ae/home/2026/7/13/silicons-new-sovereignty-how-nvidias-asic-gambit-is-redrawing-the-map-of-global-ai-power",
+      "date": "2026-07-13",
+      "excerpt": "Broadcom and Marvell together control an estimated 95% of the custom AI ASIC co-design market.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary opinion/analysis (faf.ae); single publisher, capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "Broadcom and Marvell",
+  "observedAt": "2026-07-13",
+  "capturedAt": "2026-07-17T01:01:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

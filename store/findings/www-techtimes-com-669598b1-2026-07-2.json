@@ -1,0 +1,43 @@
+{
+  "id": "www-techtimes-com-669598b1-2026-07-2",
+  "statement": "Memory manufacturers are prioritizing higher-margin HBM and server-grade DDR5 and cutting standard DDR4/embedded output, with new fabrication capacity not online until late 2026 - conditions that may persist into 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Reallocation of memory capacity toward HBM and server DDR5 tightens whole-chain memory supply for standard parts and concentrates output on AI-grade memory.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.ai-storage"
+    ],
+    "direction": "mixed",
+    "mechanism": "Prioritizing HBM/server DDR5 favors GPU-attached memory supply (supportive for accelerators) while starving standard DRAM, keeping overall memory supply tight until new capacity arrives late 2026."
+  },
+  "evidence": [
+    {
+      "source": "TechTimes (reporting Inventec warning)",
+      "url": "https://www.techtimes.com/articles/320681/20260716/inventec-warns-ai-memory-crunch-has-reached-servers-lead-times-hit-40-plus-weeks.htm",
+      "date": "2026-07-16",
+      "excerpt": "Memory manufacturers are prioritizing higher-margin products, such as HBM and server-grade DDR5, reducing output for standard DDR4 and embedded-focused parts, with new memory fabrication capacity not expected to come online until late 2026, meaning current conditions may persist into 2027.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary: TechTimes via web-search index, corroborated by an independently fetched source (ComparetheCloud); two publishers, capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory manufacturers",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-17T01:01:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
