@@ -1226,7 +1226,18 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
 ## From the 2026-07-17 SDEWS cross-reference (F98)
 
 - [ ] **F98 — Agenda-band completeness + unit hygiene (Part A, renderer/config) and S4 upstream
-  lead-time adoption (Part B, gated).** Provenance: user-directed cross-reference of the SDEWS v1.0
+  lead-time adoption (Part B, gated).**
+  **► PART A DONE + MERGED 2026-07-17 (merge `7e2f657`, subagent-driven branch `f98-agenda-data`).**
+  Shipped: new `price-sync` CLI verb + run-cycle step turn the local `gpu_agent/data/gpu_leasing_data/`
+  folder into `store/series/*.jsonl` (gpuSpotPrice + rental on-demand/1-year; DISPLAY-ONLY, never scoring);
+  curated `registry/price-benchmarks.json` trust boundary; slot-family fixes; unit hygiene
+  ("500 USD billion"→`$500B`, "1 credit_condition_index"→`loosening`, plain labels, `[DSPX]\d` tile-label
+  lint, money-unit change-line); manifest sources for apiArr/releaseCadence. Full suite 1724/6, F6 pin +
+  F83 conformance green, frozen core untouched. User decisions (interactive, not AFK): price tiles insist
+  on the newest chip (dim when its price is stale); apiArr/releaseCadence manifest priority = optional.
+  Known non-blockers: spot series empty (source has no GPU spot rows); rental graceful-degradation
+  roll-down retained but dormant; record `.superpowers/handoffs/f98-agenda-data-DONE.md` (in the retained
+  worktree). **Part B (S4) remains OPEN — separate gated lane.** Provenance: user-directed cross-reference of the SDEWS v1.0
   spec (docx) against the taxonomy and the live F97 brief, building on
   `docs/2026-07-11-sdews-metric-extraction.md` (whose lane calls stand: S3/P1/P4 → chips.hbm-memory;
   D7/X2 → energy; S5/S6/S7/S8/P5/P6/X1/D10 → other agents or layer tier).
