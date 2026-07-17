@@ -91,6 +91,18 @@
       "dimension": "momentum",
       "priority": "optional",
       "sourceIds": ["gpu-marketplaces"]
+    },
+    {
+      "indicatorId": "apiArr",
+      "dimension": "momentum",
+      "priority": "required",
+      "sourceIds": ["ai-app-revenue"]
+    },
+    {
+      "indicatorId": "releaseCadence",
+      "dimension": "competitiveStructure",
+      "priority": "required",
+      "sourceIds": ["frontier-release-funding"]
     }
   ],
   "expectedSources": [
@@ -252,6 +264,28 @@
       "license": "public",
       "refresh": "daily",
       "indicators": ["gpuSpotPrice"]
+    },
+    {
+      "id": "ai-app-revenue",
+      "label": "Hyperscaler AI run-rate and model-lab ARR disclosures",
+      "urlPatterns": ["microsoft.com", "blogs.microsoft.com", "openai.com", "anthropic.com", "blog.google", "aws.amazon.com/machine-learning", "semianalysis.com"],
+      "accessMethod": "free-web",
+      "tier": "secondary",
+      "costUsd": 0,
+      "license": "public",
+      "refresh": "quarterly",
+      "indicators": ["apiArr"]
+    },
+    {
+      "id": "frontier-release-funding",
+      "label": "Frontier model release and funding trackers (company newsrooms + industry press)",
+      "urlPatterns": ["openai.com", "anthropic.com", "blog.google", "techcrunch.com", "semianalysis.com"],
+      "accessMethod": "free-web",
+      "tier": "secondary",
+      "costUsd": 0,
+      "license": "public",
+      "refresh": "on-demand",
+      "indicators": ["releaseCadence"]
     }
   ]
 }
