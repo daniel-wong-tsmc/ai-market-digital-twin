@@ -93,3 +93,55 @@ def test_read_rental_points_ignores_unwanted_models_and_missing_files(tmp_path):
     d = _mk_leasing(tmp_path)
     assert read_rental_points(d, {"B200"}, "260708") == []
     assert read_rental_points(tmp_path / "nope", {"H100"}, "260708") == []
+
+
+# --- Task 3: series emission + price-sync CLI verb ---------------------------------
+
+from gpu_agent.price_local import latest_generation, sync_series
+
+
+def test_latest_generation_rolls_with_freshness(tmp_path):
+    hw = [HardwarePoint("hopper", "H100 NVL card", "260701", 29999.0, "f", "r"),
+          HardwarePoint("blackwell", "B200 platform, per GPU", "260305",
+                        32516.0, "f", "r")]
+    # blackwell newest reading is >90d old at 2026-07-08 -> hopper wins
+    g = latest_generation(BENCH, hw, "260708")
+    assert g["id"] == "hopper"
+    hw.append(HardwarePoint("blackwell", "B200 platform, per GPU", "260630",
+                            32516.0, "f", "r"))
+    assert latest_generation(BENCH, hw, "260708")["id"] == "blackwell"
+    assert latest_generation(BENCH, [], "260708") is None
+
+
+def test_sync_series_backfills_and_is_idempotent(tmp_path):
+    d = _mk_leasing(tmp_path)
+    _write_hw(tmp_path, ["NVIDIA H100 Card,30000.0,29500.0,29999.0",
+                         "HGX B200 8-GPU,,260000.0,260128.0"])
+    series = tmp_path / "series"
+    s1 = sync_series(d, series, "2026-07-08", benchmarks=BENCH)
+    rows = [json.loads(l) for l in
+            (series / "gpuSpotPrice.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert [r["period"] for r in rows] == ["2025-06", "2025-07", "2026-07"]
+    assert rows[-1]["unit"] == "USD" and rows[-1]["label"]
+    # blackwell has a fresh 2026-07 point -> latest month is blackwell per-GPU
+    assert rows[-1]["value"] == pytest.approx(260128.0 / 8)
+    assert "blackwell" in rows[-1]["note"]
+    # rentals written too
+    od = [json.loads(l) for l in
+          (series / "gpuRentalOnDemand.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert od[-1]["unit"] == "USD_per_hr"
+    # idempotent: run again, same as_of -> same row count, current month replaced
+    s2 = sync_series(d, series, "2026-07-08", benchmarks=BENCH)
+    rows2 = (series / "gpuSpotPrice.jsonl").read_text(encoding="utf-8").splitlines()
+    assert len(rows2) == len(rows)
+
+
+def test_sync_series_stale_folder_warns_and_freezes(tmp_path):
+    d = _mk_leasing(tmp_path)
+    _write_hw(tmp_path, ["NVIDIA H100 Card,30000.0,29500.0,29999.0"])
+    series = tmp_path / "series"
+    out = sync_series(d, series, "2026-11-30", benchmarks=BENCH)   # data ends 260708
+    assert any("stale" in w.lower() for w in out["warnings"])
+    rows = [json.loads(l) for l in
+            (series / "gpuSpotPrice.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert all(r["period"] != "2026-11" for r in rows)
