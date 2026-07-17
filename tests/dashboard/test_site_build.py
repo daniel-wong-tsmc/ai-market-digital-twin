@@ -103,3 +103,85 @@ def test_build_site_lint_gate_aborts_build(tmp_path, monkeypatch):
                    str(tmp_path / "site"), today=dt.date(2026, 7, 16))
     # a register violation aborts before the brief index is written
     assert not (tmp_path / "site" / CAT / "index.html").exists()
+
+
+def test_brief_evidence_anchors_resolve_in_appendix(tmp_path):
+    # F97 acceptance criterion 6: every evidence link the brief (index.html) points at
+    # (#f-<finding-id>, #dim-<dimension-name>) must resolve to a real anchor in
+    # appendix.html. A competing SAME-MONTH legacy daily scorecard (fewer dimensions,
+    # a different finding id) sits alongside the monthly deep-read in the same category
+    # dir, so this reproduces the real-store bug: if any of the three "latest scorecard"
+    # selectors (load_scorecards, build.py's build_model, site_model.py's
+    # build_site_model) still preferred the daily over the monthly, a #dim-<name>
+    # anchor for a dimension only the monthly has (moat, unitEconomics) would dead-end.
+    import json
+    root = tmp_path / "store"
+    cat = root / CAT
+    cat.mkdir(parents=True)
+
+    def dim(rating="Mixed", direction="steady", conf="high", rationale="reason"):
+        return {"rating": rating, "direction": direction,
+                "confidence": {"level": conf, "basis": "self-consistency"},
+                "findingIds": ["src-abc-2026-07-1"], "rationale": rationale}
+
+    dims = {d: dim(rationale=f"{d} reason.") for d in
+            ("momentum", "unitEconomics", "competitiveStructure",
+             "moat", "bottleneck", "strategicRisk")}
+
+    finding = {
+        "id": "src-abc-2026-07-1", "statement": "Big demand move this month.",
+        "kind": "measured", "value": {"number": 75.0, "unit": "USD_B"},
+        "trend": "rising", "why": "Demand signal strengthened.",
+        "impact": {"targets": [CAT], "direction": "positive",
+                   "mechanism": "Expands addressable demand."},
+        "evidence": [{"source": "IR", "url": "https://example.com/ir",
+                     "date": "2026-07-02", "excerpt": "excerpt text.",
+                     "tier": "primary"}],
+        "reasoning": None,
+        "confidence": {"level": "high", "basis": "primary source"},
+        "dispersion": None, "asOf": "2026-07", "indicatorId": "D2",
+        "side": "demand", "polarityDemand": 1, "polaritySupply": 0,
+        "magnitude": 3, "entity": "NVIDIA", "observedAt": "2026-07-01",
+        "capturedAt": "2026-07-02T00:00:00Z",
+    }
+
+    scorecard = {
+        "categoryId": CAT, "asOf": "2026-07", "findings": [finding],
+        "dimensionRatings": dims,
+        "demandSupply": {"dmiContribution": 0.5, "smiContribution": 0.1,
+                         "sdgi": 0.4, "sdgiDirection": "demand-led"},
+        "narrative": "n", "confidence": {"level": "high", "basis": "n"},
+        "sources": [], "dimensionStatus": {},
+        "categoryStatus": {"rating": "Strong", "direction": "steady",
+                          "bottleneck": "bottleneck", "reason": "r.",
+                          "constraintLabel": "HBM"},
+    }
+    (cat / "2026-07-v1.json").write_text(json.dumps(scorecard), encoding="utf-8")
+
+    # Competing legacy daily: same month, higher-sorting filename ("2026-07-06" >
+    # "2026-07" lexicographically), but only 4 of 6 dimensions and a different finding
+    # id — a stand-in for a real pre-cadence-change intra-month scorecard.
+    daily_dims = {d: dim(rationale=f"{d} daily reason.") for d in
+                 ("momentum", "competitiveStructure", "bottleneck", "strategicRisk")}
+    daily_finding = {**finding, "id": "daily-legacy-2026-07-06-1",
+                     "observedAt": "2026-07-06", "asOf": "2026-07-06",
+                     "capturedAt": "2026-07-06T00:00:00Z"}
+    daily_scorecard = {**scorecard, "asOf": "2026-07-06", "findings": [daily_finding],
+                       "dimensionRatings": daily_dims}
+    (cat / "2026-07-06-v1.json").write_text(json.dumps(daily_scorecard), encoding="utf-8")
+
+    impl = root / "implications" / CAT
+    impl.mkdir(parents=True)
+    (impl / "2026-07.json").write_text(json.dumps({"lines": [
+        {"watchItem": "Wafer exposure.", "dimensions": ["momentum"],
+         "thesisIds": [], "findingIds": ["src-abc-2026-07-1"]}]}), encoding="utf-8")
+
+    build_site(CAT, str(cat), "work-nonexistent", None, str(tmp_path / "site"),
+               today=dt.date(2026, 7, 16))
+    site = tmp_path / "site" / CAT
+    index = (site / "index.html").read_text(encoding="utf-8")
+    appendix = (site / "appendix.html").read_text(encoding="utf-8")
+    targets = set(re.findall(r'appendix\.html#([a-zA-Z0-9-]+)', index))
+    assert targets, "brief should link to appendix anchors"
+    for frag in targets:
+        assert f'id="{frag}"' in appendix, f"dead anchor: {frag}"

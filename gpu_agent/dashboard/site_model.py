@@ -158,7 +158,12 @@ def build_site_model(category_id, store_dir, work_dir, plain_path, price_fn=None
         store_root, cat_dir = store_dir, store_dir / category_id
     else:
         store_root, cat_dir = store_dir.parent, store_dir
-    latest_path = max((p for p in cat_dir.iterdir() if _VERSION_RE.match(p.name)),
+    _cands = [p for p in cat_dir.iterdir() if _VERSION_RE.match(p.name)]
+    # Prefer the monthly deep-read (YYYY-MM) over legacy intra-month dailies (YYYY-MM-DD)
+    # when both exist — same rule as load_scorecards, so the whole dashboard reads the same
+    # current scorecard the F97 brief anchors on.
+    _monthly = [p for p in _cands if len(_VERSION_RE.match(p.name).group(1)) == 7]
+    latest_path = max(_monthly or _cands,
                       key=lambda p: (_VERSION_RE.match(p.name).group(1),
                                      int(_VERSION_RE.match(p.name).group(2))))
     sc = load_scorecard(latest_path)
