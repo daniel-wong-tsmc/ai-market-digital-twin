@@ -2,9 +2,10 @@ import json
 import re
 from pathlib import Path
 
-# Day-level cycles only (YYYY-MM-DD). Month-granularity rollups like
-# 2026-06-vN.json are intentionally excluded — the dashboard trends over daily cycles.
-_DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})-v(\d+)\.json$")
+# Matches both monthly (YYYY-MM-vN.json) and daily (YYYY-MM-DD-vN.json) scorecards.
+# The optional day group is greedy, so a daily filename still resolves its full
+# YYYY-MM-DD date string rather than being truncated to YYYY-MM.
+_DATE_RE = re.compile(r"(\d{4}-\d{2}(?:-\d{2})?)-v(\d+)\.json$")
 
 
 def _read_json(path):
@@ -69,7 +70,15 @@ def load_scorecards(category_id, store_dir):
         d_str, ver = m.group(1), int(m.group(2))
         if d_str not in latest or ver > latest[d_str][0]:
             latest[d_str] = (ver, p)
-    files = sorted((d_str, vp[1]) for d_str, vp in latest.items())
+    keys = list(latest)
+    # When monthly deep-read scorecards (YYYY-MM) exist they are the current cadence;
+    # older intra-month dailies (YYYY-MM-DD) are legacy snapshots — use the monthly grain
+    # only, so the whole site (appendix, alert, featured) reads the same deep-read the
+    # F97 brief anchors on.
+    monthly = [k for k in keys if len(k) == 7]
+    if monthly:
+        keys = monthly
+    files = sorted((k, latest[k][1]) for k in keys)
     records = []
     for as_of, path in files:
         d = _read_json(path)

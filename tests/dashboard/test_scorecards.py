@@ -54,3 +54,14 @@ def test_latest_version_wins_one_record_per_date(tmp_path):
 def test_best_tier_prefers_primary_and_defaults_secondary():
     assert _best_tier([{"tier": "secondary"}, {"tier": "primary"}]) == "primary"
     assert _best_tier([]) == "secondary"
+
+def test_load_scorecards_prefers_monthly_over_intramonth_dailies(tmp_path):
+    def sc(as_of):
+        return {"asOf": as_of, "categoryStatus": {"rating": "Strong"},
+                "demandSupply": {}, "dimensionRatings": {}, "findings": []}
+    (tmp_path / "2026-07-02-v1.json").write_text(json.dumps(sc("2026-07-02")), encoding="utf-8")
+    (tmp_path / "2026-07-06-v1.json").write_text(json.dumps(sc("2026-07-06")), encoding="utf-8")
+    (tmp_path / "2026-06-v3.json").write_text(json.dumps(sc("2026-06")), encoding="utf-8")
+    (tmp_path / "2026-07-v9.json").write_text(json.dumps(sc("2026-07")), encoding="utf-8")
+    recs = load_scorecards("chips.merchant-gpu", str(tmp_path))
+    assert [r["as_of"] for r in recs] == ["2026-06", "2026-07"]   # monthly grain only, sorted

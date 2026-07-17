@@ -1,0 +1,22 @@
+{
+  "slots": [
+    {"id": "demand-durability", "label": "Demand durability",
+     "question": "Is the demand that fills the fabs real and growing?",
+     "indicators": ["D2", "vendorRevenueGuidance", "rpoBacklog",
+                    "odmMonthlyAiRevenue", "hyperscalerCapexRevision", "D6"]},
+    {"id": "binding-constraint", "label": "Binding constraint",
+     "question": "What caps shipments today, and how tight is it?",
+     "indicators": ["S9", "S10", "leadTimes", "pkgCapacityOrderSpread",
+                    "hbmSupplyCapex"]},
+    {"id": "customer-mix", "label": "Customer mix",
+     "question": "Where is share moving among wafer buyers?",
+     "indicators": ["market-share-pct", "designWins"]},
+    {"id": "end-market-economics", "label": "End-market economics",
+     "question": "Can the buyers keep paying?",
+     "indicators": ["grossMargin", "tokenEconomics", "perfPerWatt"]},
+    {"id": "demand-quality", "label": "Demand quality",
+     "question": "How much demand is self-financed or policy-capped?",
+     "indicators": ["customerConcentration", "exportControlExposure",
+                    "marginalBuyerFinancing"]}
+  ]
+}

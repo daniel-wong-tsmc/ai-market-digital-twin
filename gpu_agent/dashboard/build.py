@@ -57,7 +57,12 @@ def build_model(category_id, store_dir, work_dir, plain_path, generated_at):
     store_dir = Path(store_dir)
     store_root = store_dir if (store_dir / category_id).is_dir() else store_dir.parent
     cat_dir = store_dir
-    latest_path = max((p for p in cat_dir.iterdir() if _VERSION_RE.match(p.name)),
+    _cands = [p for p in cat_dir.iterdir() if _VERSION_RE.match(p.name)]
+    # Prefer the monthly deep-read (YYYY-MM) over legacy intra-month dailies (YYYY-MM-DD)
+    # when both exist — same rule as load_scorecards, so the whole dashboard reads the same
+    # current scorecard the F97 brief anchors on.
+    _monthly = [p for p in _cands if len(_VERSION_RE.match(p.name).group(1)) == 7]
+    latest_path = max(_monthly or _cands,
                       key=lambda p: (_VERSION_RE.match(p.name).group(1),
                                      int(_VERSION_RE.match(p.name).group(2))))
     sc = load_scorecard(latest_path)
