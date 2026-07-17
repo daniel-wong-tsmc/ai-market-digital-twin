@@ -203,3 +203,13 @@ def test_finding_candidate_plain_label():
     got = candidates_for_slot(SLOT, [F_MEASURED], {},
                               labels={"D2": "DC revenue structure"})
     assert got[0].label == "DC revenue structure"
+
+
+def test_real_slot_families_match_f98_spec():
+    fam = {s["id"]: set(s["indicators"]) for s in load_slots()}
+    assert "S9" in fam["customer-mix"] and "S9" not in fam["binding-constraint"]
+    assert "S10" in fam["binding-constraint"]
+    assert {"gpuSpotPrice", "gpuRentalOnDemand", "gpuRentalSpot", "gpuRental1yr",
+            "flopsPerDollar"} <= fam["end-market-economics"]
+    assert "apiArr" in fam["demand-quality"]
+    assert "releaseCadence" in fam["demand-durability"]
