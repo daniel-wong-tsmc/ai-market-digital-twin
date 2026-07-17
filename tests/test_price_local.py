@@ -145,3 +145,51 @@ def test_sync_series_stale_folder_warns_and_freezes(tmp_path):
     rows = [json.loads(l) for l in
             (series / "gpuSpotPrice.jsonl").read_text(encoding="utf-8").splitlines()]
     assert all(r["period"] != "2026-11" for r in rows)
+
+
+def test_sync_series_survives_malformed_series_file(tmp_path):
+    # M3: a corrupt existing series line (bad JSON, not just a missing file)
+    # must degrade gracefully -- _read_jsonl broadened to catch ValueError too
+    # -- rather than crashing sync_series/price-sync (run-cycle documents this
+    # step as "never fatal").
+    d = _mk_leasing(tmp_path)
+    _write_hw(tmp_path, ["NVIDIA H100 Card,30000.0,29500.0,29999.0",
+                         "HGX B200 8-GPU,,260000.0,260128.0"])
+    series = tmp_path / "series"
+    series.mkdir()
+    (series / "gpuSpotPrice.jsonl").write_text(
+        '{"period": "2025-01", "value": 1}\n' + "not valid json\n", encoding="utf-8")
+    out = sync_series(d, series, "2026-07-08", benchmarks=BENCH)   # must not raise
+    assert isinstance(out, dict)
+    rows = [json.loads(l) for l in
+            (series / "gpuSpotPrice.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert rows[-1]["period"] == "2026-07"   # current-month upsert still worked
+
+
+def _mk_leasing_no_spot(tmp_path):
+    # Same on-demand/1yr data as _mk_leasing, but the spot CSV has zero rows
+    # for any GPU instance (header only) -- simulates a modality that never
+    # surfaces data for this benchmark set.
+    (tmp_path / "aws_price.csv").write_text(
+        "instance,term,region,260601,260708\n"
+        "p5.48xlarge,on_demand,US East (N. Virginia),98.32,96.00\n"
+        "p5.48xlarge,1 year,US East (N. Virginia),63.20,60.80\n",
+        encoding="utf-8")
+    (tmp_path / "aws_spot_price.csv").write_text(
+        ",instance,region,date,avg_price,high,low\n",
+        encoding="utf-8")
+    return tmp_path
+
+
+def test_sync_series_empty_modality_writes_no_file(tmp_path):
+    # M2: gpuRentalSpot never has data in this fixture -> no series file should
+    # be created for it, while gpuRentalOnDemand (which does have data) still
+    # gets written normally.
+    d = _mk_leasing_no_spot(tmp_path)
+    _write_hw(tmp_path, ["NVIDIA H100 Card,30000.0,29500.0,29999.0",
+                         "HGX B200 8-GPU,,260000.0,260128.0"])
+    series = tmp_path / "series"
+    out = sync_series(d, series, "2026-07-08", benchmarks=BENCH)
+    assert (series / "gpuRentalOnDemand.jsonl").exists()
+    assert (series / "gpuRentalSpot.jsonl").exists() is False
+    assert out["written"]["gpuRentalSpot"] == 0

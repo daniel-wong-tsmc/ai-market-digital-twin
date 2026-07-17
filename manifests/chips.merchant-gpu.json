@@ -95,13 +95,13 @@
     {
       "indicatorId": "apiArr",
       "dimension": "momentum",
-      "priority": "required",
+      "priority": "optional",
       "sourceIds": ["ai-app-revenue"]
     },
     {
       "indicatorId": "releaseCadence",
       "dimension": "competitiveStructure",
-      "priority": "required",
+      "priority": "optional",
       "sourceIds": ["frontier-release-funding"]
     }
   ],

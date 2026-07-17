@@ -245,7 +245,7 @@ def _read_jsonl(path: Path) -> list[dict]:
     try:
         return [json.loads(l) for l in path.read_text(encoding="utf-8").splitlines()
                 if l.strip()]
-    except OSError:
+    except (OSError, ValueError):
         return []
 
 
@@ -261,6 +261,11 @@ def _upsert(path: Path, new_rows: list[dict], current_period: str):
     known = {r["period"] for r in old}
     merged = old + [r for r in new_rows
                     if r["period"] == current_period or r["period"] not in known]
+    if not merged:
+        # No rows at all (no prior data, no new data): leave no file on disk
+        # rather than committing an empty series (M2) -- a modality that never
+        # surfaces data (e.g. no GPU spot listings) should have no series file.
+        return
     merged.sort(key=lambda r: r["period"])
     _write_jsonl(path, merged)
 
