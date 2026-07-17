@@ -1,0 +1,19 @@
+{
+  "generations": [
+    {"id": "blackwell", "rank": 3,
+     "hardware": [{"file": "serversimply_gpu_price.csv",
+                   "row": "NVIDIA HGX B200 8-GPU", "perGpuDivisor": 8,
+                   "label": "B200 platform, per GPU"}],
+     "rental": {"models": ["B200", "GB200", "B300"]}},
+    {"id": "hopper", "rank": 2,
+     "hardware": [{"file": "thinkmate_gpu_price.csv",
+                   "row": "NVIDIA® H100 NVL GPU Computing Accelerator - 94GB HBM3 - PCIe 5.0 x16 - Passive Cooling", "perGpuDivisor": 1,
+                   "label": "H100 NVL card"}],
+     "rental": {"models": ["H100", "H200"]}},
+    {"id": "ampere", "rank": 1,
+     "hardware": [{"file": "thinkmate_gpu_price.csv",
+                   "row": "NVIDIA® A100 GPU Computing Accelerator - 80GB HBM2 - PCIe 4.0 x16 - Passive Cooling", "perGpuDivisor": 1,
+                   "label": "A100 80GB card"}],
+     "rental": {"models": ["A100"]}}
+  ]
+}
