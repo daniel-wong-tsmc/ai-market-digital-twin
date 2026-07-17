@@ -19,6 +19,23 @@ _UNIT_FMT = {
     "units": lambda n: f"{n:,.0f} units",
 }
 
+# F98: unit-string aliases (registry/series data may spell units in ways that
+# don't match the formatter table keys above) applied at the top of
+# format_value, before any lookup.
+_UNIT_ALIASES = {"USD billion": "USD_B", "USD_billion": "USD_B", "percent": "pct"}
+
+# F98: units whose "value" is really a coded direction/state — render the word,
+# never the bare number.
+WORD_UNITS = {
+    "credit_condition_index": {1: "loosening", 0: "neutral", -1: "tightening"},
+    "revision_direction": {1: "raised", 0: "held", -1: "cut"},
+}
+
+_UNIT_FMT.update({
+    "USD": lambda n: f"${n/1e6:.1f}M" if abs(n) >= 1e6 else f"${n:,.0f}",
+    "flops_per_USD": lambda n: f"{n/1e9:,.0f} GFLOPS/$",
+})
+
 
 def load_slots(path: str = AGENDA_REGISTRY_PATH) -> list[dict]:
     with open(Path(path), encoding="utf-8") as fh:
@@ -26,6 +43,13 @@ def load_slots(path: str = AGENDA_REGISTRY_PATH) -> list[dict]:
 
 
 def format_value(number: float, unit: str) -> str:
+    unit = _UNIT_ALIASES.get(unit, unit)
+    words = WORD_UNITS.get(unit)
+    if words is not None:
+        w = words.get(int(round(number)))
+        if w is not None:
+            return w
+        return f"{number:g} {unit}"
     fmt = _UNIT_FMT.get(unit)
     if fmt is not None:
         return fmt(number)
@@ -47,9 +71,10 @@ class Candidate:
     source_name: str
     magnitude: int
     statement: str
+    delta_line: str = ""   # F98: change vs a reading ~90 days back, e.g. "-12% vs Apr"
 
 
-def _finding_candidate(f: dict) -> Candidate | None:
+def _finding_candidate(f: dict, label: str | None = None) -> Candidate | None:
     v = f.get("value")
     if f.get("kind") != "measured" or not isinstance(v, dict):
         return None
@@ -57,13 +82,47 @@ def _finding_candidate(f: dict) -> Candidate | None:
     tier = "primary" if any(e.get("tier") == "primary" for e in ev) else "secondary"
     src = next((e.get("source") for e in ev if e.get("source")), "")
     return Candidate(
-        indicator_id=f["indicatorId"], label=f["indicatorId"],
+        indicator_id=f["indicatorId"], label=label or f["indicatorId"],
         display=format_value(float(v["number"]), str(v.get("unit") or "")),
         trend_word=_TREND_WORDS.get((f.get("trend") or "").lower(), ""),
         observed_at=f.get("observedAt") or f.get("asOf") or "",
         tier=tier, source_name=src or "",
         magnitude=int(f.get("magnitude") or 0),
         statement=f.get("statement") or "")
+
+
+_MONTH_ABBR = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+               "Sep", "Oct", "Nov", "Dec"]
+
+
+def _days_key(row):
+    s = row.get("publishedAt") or (row.get("period", "") + "-15")
+    try:
+        y, m, d = (int(x) for x in s[:10].split("-"))
+        return _dt.date(y, m, d)
+    except (ValueError, IndexError):
+        return None
+
+
+def _delta_line(rows: list[dict]) -> str:
+    if len(rows) < 2:
+        return ""
+    newest = rows[-1]
+    unit = _UNIT_ALIASES.get(str(newest.get("unit") or ""), newest.get("unit"))
+    if unit in WORD_UNITS or not isinstance(newest.get("value"), (int, float)):
+        return ""
+    nd = _days_key(newest)
+    base = None
+    for r in rows[-2::-1]:
+        if isinstance(r.get("value"), (int, float)) and _days_key(r) is not None \
+                and nd is not None and (nd - _days_key(r)).days >= 80:
+            base = r
+            break
+    if base is None or not base["value"]:
+        return ""
+    pct = (newest["value"] - base["value"]) / abs(base["value"]) * 100
+    month = _MONTH_ABBR[int((base.get("period") or "0000-01")[5:7])]
+    return f"{pct:+.0f}% vs {month}"
 
 
 def _series_candidate(indicator_id: str, rows: list[dict]) -> Candidate | None:
@@ -79,21 +138,24 @@ def _series_candidate(indicator_id: str, rows: list[dict]) -> Candidate | None:
         d = newest["value"] - prior["value"]
         trend = "rising" if d > 0 else ("falling" if d < 0 else "steady")
     return Candidate(
-        indicator_id=indicator_id, label=indicator_id,
+        indicator_id=indicator_id, label=newest.get("label") or indicator_id,
         display=format_value(float(newest["value"]), str(newest.get("unit") or "")),
         trend_word=trend,
         observed_at=newest.get("publishedAt") or newest.get("period") or "",
         tier="secondary",
         source_name=(newest.get("source") or {}).get("title", ""),
-        magnitude=0, statement=newest.get("note") or "")
+        magnitude=0, statement=newest.get("note") or "",
+        delta_line=_delta_line(rows))
 
 
-def candidates_for_slot(slot, findings, series_rows) -> list[Candidate]:
+def candidates_for_slot(slot, findings, series_rows, labels=None) -> list[Candidate]:
+    labels = labels or {}
     wanted = set(slot["indicators"])
     out = []
     for f in findings:
-        if f.get("indicatorId") in wanted:
-            c = _finding_candidate(f)
+        ind = f.get("indicatorId")
+        if ind in wanted:
+            c = _finding_candidate(f, labels.get(ind, ind))
             if c is not None:
                 out.append(c)
     for ind in slot["indicators"]:
@@ -155,20 +217,20 @@ def score(c: Candidate, today: _dt.date, sticky_indicator: str | None) -> float:
     return s
 
 
-def _pick(slot, findings, series_rows, today, sticky) -> Candidate | None:
-    cands = candidates_for_slot(slot, findings, series_rows)
+def _pick(slot, findings, series_rows, today, sticky, labels=None) -> Candidate | None:
+    cands = candidates_for_slot(slot, findings, series_rows, labels)
     if not cands:
         return None
     return max(cands, key=lambda c: (score(c, today, sticky), c.observed_at,
                                      c.indicator_id))
 
 
-def select_occupants(slots, findings, series_rows, prior_findings, today):
+def select_occupants(slots, findings, series_rows, prior_findings, today, labels=None):
     out = []
     for slot in slots:
-        prior = _pick(slot, prior_findings, {}, today, None)
+        prior = _pick(slot, prior_findings, {}, today, None, labels)
         sticky = prior.indicator_id if prior is not None else None
-        cur = _pick(slot, findings, series_rows, today, sticky)
+        cur = _pick(slot, findings, series_rows, today, sticky, labels)
         if cur is None:
             continue
         was = None

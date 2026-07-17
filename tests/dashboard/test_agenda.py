@@ -139,3 +139,36 @@ def test_select_occupants_skips_empty_slot():
     slot = {"id": "customer-mix", "label": "Customer mix", "question": "q?",
             "indicators": ["market-share-pct"]}
     assert select_occupants([slot], [], {}, [], TODAY) == []
+
+
+def test_format_value_aliases_and_new_units():
+    assert format_value(500.0, "USD billion") == "$500B"
+    assert format_value(29999.0, "USD") == "$29,999"
+    assert format_value(2.09e11, "flops_per_USD") == "209 GFLOPS/$"
+    assert format_value(1.0, "credit_condition_index") == "loosening"
+    assert format_value(-1.0, "revision_direction") == "cut"
+    assert format_value(7.0, "credit_condition_index") == "7 credit_condition_index"
+
+
+def test_series_candidate_label_and_delta(tmp_path):
+    # PF-2: base row must be >= 80 days older than the newest reading for the
+    # delta rule to fire ("~90 days back" per spec intent). 2026-04-08 is 91
+    # days before 2026-07-08, still in April, still -12% (34000 -> 29999).
+    rows = [
+        {"indicatorId": "gpuSpotPrice", "period": "2026-04", "value": 34000.0,
+         "unit": "USD", "publishedAt": "2026-04-08", "label": "H100 NVL card"},
+        {"indicatorId": "gpuSpotPrice", "period": "2026-07", "value": 29999.0,
+         "unit": "USD", "publishedAt": "2026-07-08", "label": "H100 NVL card"},
+    ]
+    got = candidates_for_slot(
+        {"id": "x", "label": "X", "question": "q", "indicators": ["gpuSpotPrice"]},
+        [], {"gpuSpotPrice": rows})
+    c = got[0]
+    assert c.label == "H100 NVL card"
+    assert c.delta_line == "-12% vs Apr"
+
+
+def test_finding_candidate_plain_label():
+    got = candidates_for_slot(SLOT, [F_MEASURED], {},
+                              labels={"D2": "DC revenue structure"})
+    assert got[0].label == "DC revenue structure"

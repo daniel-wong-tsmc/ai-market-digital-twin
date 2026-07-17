@@ -5,7 +5,7 @@ import datetime
 from pathlib import Path
 
 from .brief_model import build_brief_model
-from .brief_render import BRIEF_CSS, lint_exec_copy, render_brief
+from .brief_render import BRIEF_CSS, lint_exec_copy, lint_tile_labels, render_brief
 from .site_model import build_site_model
 from .site_render import (
     SITE_CSS, render_appendix, render_how_alert, render_how_featured,
@@ -31,7 +31,7 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
         store_root = store_root.parent
     brief_model = build_brief_model(category_id, store_root, today, price_fn=price_fn)
     brief_html = render_brief(brief_model)
-    lint = lint_exec_copy(brief_html)
+    lint = lint_exec_copy(brief_html) + lint_tile_labels(brief_model)
     if lint:
         # F97: the exec-copy register gate — a banned-token regression must never
         # reach the deployed site.

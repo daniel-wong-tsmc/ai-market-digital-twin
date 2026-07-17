@@ -1,5 +1,6 @@
 import re
-from gpu_agent.dashboard.brief_render import BRIEF_CSS, lint_exec_copy, render_brief
+from gpu_agent.dashboard.brief_render import (
+    BRIEF_CSS, lint_exec_copy, lint_tile_labels, render_brief)
 
 MODEL = {
     "category_id": "chips.merchant-gpu", "category_label": "Merchant GPU",
@@ -11,13 +12,16 @@ MODEL = {
     "last_check": "2026-07-15", "stale": False,
     "agenda": [{"slot_label": "Demand durability", "metric_label": "D2",
                 "display": "$75.2B", "trend_word": "rising",
-                "as_of": "2026-07-01", "source": "NVIDIA IR", "was": None},
+                "as_of": "2026-07-01", "source": "NVIDIA IR", "was": None,
+                "delta_line": ""},
                {"slot_label": "Binding constraint", "metric_label": "S10",
                 "display": "2027 sold out", "trend_word": "tightening",
-                "as_of": "2026-07-10", "source": "TrendForce", "was": "S9"},
+                "as_of": "2026-07-10", "source": "TrendForce", "was": "S9",
+                "delta_line": ""},
                {"slot_label": "Customer mix", "metric_label": "m",
                 "display": "44.6%", "trend_word": "shifting",
-                "as_of": "2026-07-02", "source": "s", "was": None}],
+                "as_of": "2026-07-02", "source": "s", "was": None,
+                "delta_line": ""}],
     "tsmc": [{"text": "Wafer starts exposure.", "dims": ["momentum"],
               "thesis_ids": [], "finding_ids": ["f1"]}],
     "calls": {"rows": [{"title": "HBM binds supply", "lens": "supply",
@@ -111,3 +115,15 @@ def test_agenda_and_dimension_tiles_disjoint():
             "moat", "strategicRisk"}
     for o in MODEL["agenda"]:
         assert o["metric_label"] not in dims
+
+
+def test_tile_renders_delta_line():
+    m = dict(MODEL)
+    m["agenda"] = [dict(MODEL["agenda"][0], delta_line="-12% vs Apr")] + \
+        MODEL["agenda"][1:]
+    assert "-12% vs Apr" in render_brief(m)
+
+
+def test_lint_tile_labels_flags_raw_codes():
+    assert lint_tile_labels({"agenda": [{"metric_label": "D2"}]})
+    assert lint_tile_labels({"agenda": [{"metric_label": "DC revenue structure"}]}) == []
