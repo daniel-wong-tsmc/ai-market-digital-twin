@@ -1210,14 +1210,15 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   decision (interactive 2026-07-16): Task-3 stickiness "code governs" — kept the 0.75 bonus, relaxed
   the contradicting test. *(Concurrent-mint caveat RESOLVED: F97 confirmed free — backlog max was
   F96; no collision.)*
-  **⚠ OPEN PRE-MERGE DECISION (whole-branch review Important #1) — evidence links dead-end on the
-  real store.** The brief anchors on the MONTHLY scorecard (`2026-07-v9`), but the F95 appendix is
-  built from the DAILY `2026-07-06-v1` because `load_scorecards` string-sorts `2026-07-06` above
-  `2026-07`; so all 5 TSMC `#f-<id>` evidence links and 2 of 6 `#dim-` links dead-end (fails spec
-  acceptance criterion 6). Root-cause fix (recommended): make the site's latest-scorecard selection
-  prefer the current monthly read over older intra-month dailies (in `scorecards.py` / F95 model
-  selection — OUTSIDE this renderer lane's declared file ownership, and changes F95-wide behavior,
-  so it needs a user go). Narrower in-lane alternative: source only the appendix's finding list +
-  dimension rationales from the monthly in `site_model.py`. Not fixed AFK (design fork). Doc note:
-  the plan's Task-8 smoke command used `--store store`; the correct value is the CLI default
-  `--store store/chips.merchant-gpu`.
+  **Evidence-anchor bug — RESOLVED (user-approved interactive fix, commit `e866c3d`).** The brief
+  anchors on the MONTHLY read (`2026-07-v9`) but the F95 dashboard was reading a stale DAILY
+  (`2026-07-06-v1`) for the appendix/alert/featured, so the brief's `#f-`/`#dim-` links dead-ended
+  (spec criterion 6). Root cause: `load_scorecards`' regex matched daily-only (excluded the monthly),
+  and two more selectors (`build.py` + `site_model.py` `latest_path = max()`) let a same-month daily
+  outrank the monthly by raw-string compare. Fix (user chose "prefer the monthly read as latest"):
+  all THREE latest-scorecard selectors now prefer the monthly grain when present (legacy intra-month
+  dailies ignored); `report.py` (frozen change engine) untouched. All 11/11 real-store brief anchors
+  now resolve; full suite **1703 passed / 6 skipped**; F6 pin green; OPUS review "ready to merge."
+  Small follow-up noted: `build.py`'s selector (feeds alert/change, no anchor) isn't independently
+  test-locked (correct by code symmetry). Doc note: the plan's Task-8 smoke command used
+  `--store store`; the correct value is the CLI default `--store store/chips.merchant-gpu`.
