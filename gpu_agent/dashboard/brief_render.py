@@ -54,6 +54,16 @@ def lint_exec_copy(html_text: str) -> list[str]:
     return [p.pattern for p in _BANNED if p.search(html_text)]
 
 
+# F98: catches a raw indicator code (e.g. "D2", "S10") slipping through as a
+# tile label instead of the plain-English label it should have been mapped to.
+_TILE_CODE = re.compile(r"\b[DSPX]\d{1,2}\b")
+
+
+def lint_tile_labels(model) -> list[str]:
+    return [o["metric_label"] for o in (model.get("agenda") or [])
+            if _TILE_CODE.search(o.get("metric_label") or "")]
+
+
 def _chip(a) -> str:
     sub = ""
     if a["lagging"]:
@@ -94,13 +104,15 @@ def _agenda(m) -> str:
     tiles = []
     for o in m["agenda"]:
         was = f'<div class="meta">(was: {e(o["was"])})</div>' if o["was"] else ""
+        delta = (f'<div class="meta">{e(o["delta_line"])}</div>'
+                 if o.get("delta_line") else "")
         tiles.append(
             f'<div class="tile"><div class="k">{e(o["slot_label"])}</div>'
             f'<div class="m">{e(o["metric_label"])}</div>'
             f'<div class="v">{e(o["display"])}</div>'
             f'<div class="t">{e(o["trend_word"])}</div>'
             f'<div class="meta">as of {e(o["as_of"])} · {e(o["source"])}</div>'
-            f'{was}</div>')
+            f'{delta}{was}</div>')
     return f'<div class="kpis">{"".join(tiles)}</div>'
 
 

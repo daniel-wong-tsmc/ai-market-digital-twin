@@ -113,6 +113,20 @@ import datetime as _dt
 
 from .agenda import load_slots, read_series, select_occupants
 
+
+def _indicator_labels():
+    # F98: plain-English tile labels come from the indicator registry's own
+    # `label` field. IndicatorRegistry.indicators is a dict of RAW dicts (not
+    # model objects), so this reads v.get("label"), not v.label. Never allowed
+    # to raise: any registry-load problem just means no label overrides.
+    try:
+        from gpu_agent.config import REGISTRY_PATH
+        from gpu_agent.registry.indicators import IndicatorRegistry
+        reg = IndicatorRegistry.load(REGISTRY_PATH)
+        return {k: v.get("label") for k, v in reg.indicators.items() if v.get("label")}
+    except Exception:
+        return {}
+
 _MONTHS = ["January", "February", "March", "April", "May", "June", "July",
            "August", "September", "October", "November", "December"]
 _DAILY_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-v(\d+)\.json$")
@@ -223,8 +237,9 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
     slots = load_slots()
     wanted = {i for s in slots for i in s["indicators"]}
     series = read_series(store_root / "series", wanted)
+    labels = _indicator_labels()
     occupants = select_occupants(slots, findings, series,
-                                 _dict_findings(prior), today)
+                                 _dict_findings(prior), today, labels)
 
     book = read_thesis_book(store_root, category_id)
     rows, total, prov = select_calls(book)
@@ -284,7 +299,8 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
                     "display": o.candidate.display,
                     "trend_word": o.candidate.trend_word,
                     "as_of": o.candidate.observed_at,
-                    "source": o.candidate.source_name, "was": o.was_label}
+                    "source": o.candidate.source_name, "was": o.was_label,
+                    "delta_line": o.candidate.delta_line}
                    for o in occupants],
         "tsmc": read_implication_lines(store_root, category_id, as_of),
         "calls": {"rows": call_rows, "total": total, "provisional": prov},

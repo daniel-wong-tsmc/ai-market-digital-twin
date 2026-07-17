@@ -49,7 +49,7 @@ report the rest `skipped-no-assignment` (surfaced, never dropped).
 
 ## Procedure
 
-<!-- run-cycle-step-fingerprint: sha256=270d2d2f114e3f341c1cf9c58dfcc7ca0367a6708975c57c9c888bf5267e8b1b — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
+<!-- run-cycle-step-fingerprint: sha256=8417214130e4b0dcbd832fff3c57f56e8ccdb771ba7bab4f49873d788982544c — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
 
 ### 1. Resolve the scope to a cycle plan (deterministic — no LLM)
 ```
@@ -283,10 +283,10 @@ stop-slop skill's rules to any prose the session itself writes around the report
 report text is deterministic and must not be edited).
 
 Scope note: for a single-category run, the final message is that category's rendered report
-verbatim, the ≤3 run-health lines, and Step 7's status items (scope, thesis stage status,
+verbatim, the ≤3 run-health lines, and Step 8's status items (scope, thesis stage status,
 deferred stages) folded into ONE compact footer list. For `layer:`/`all` runs, the final message
-is each category's rendered report verbatim in sequence, followed by Step 7's aggregate summary
-as the closing section — the per-report verbatim rule and Step 7's aggregate view compose, they
+is each category's rendered report verbatim in sequence, followed by Step 8's aggregate summary
+as the closing section — the per-report verbatim rule and Step 8's aggregate view compose, they
 do not replace each other.
 
 If the gate or judgment rejects the answer (non-zero exit / `JudgmentError`), **re-dispatch** the relevant
@@ -327,7 +327,14 @@ run, possibly another instance's, owns it (restore or wait; never overwrite it).
 the suite's `tests/test_store_cycle_log_integrity.py` tripwire goes red on a skeleton and blocks
 the commit.
 
-### 7. Report
+### 7. Price-sync (deterministic — no LLM)
+Refresh the local price series before the site is rebuilt (F98):
+```
+.venv/Scripts/python -m gpu_agent.cli price-sync --as-of <asOf>
+```
+Warnings are logged, never fatal — this step never blocks the cycle.
+
+### 8. Report
 The scope, categories run (with scorecard paths + DMI/SMI), the thesis and implication stages' status per
 category (done / failed, with any gate violations), categories skipped/failed (with reason), and the
 deferred Layer/Main stages.

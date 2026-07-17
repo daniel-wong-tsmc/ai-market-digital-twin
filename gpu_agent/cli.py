@@ -1255,6 +1255,24 @@ def _site(args):
     return 0
 
 
+def _price_sync(args):
+    """F98: local curated price folder -> store/series JSONL (renderer-side, display-only).
+
+    Wall-clock isolation: `--as-of` defaults to today's ISO date computed HERE at the
+    CLI edge only -- price_local.sync_series() itself takes as_of as a plain parameter
+    and never touches the clock."""
+    from gpu_agent.price_local import DEFAULT_LEASING_DIR, sync_series
+    as_of = args.as_of
+    if not as_of:
+        import datetime
+        as_of = datetime.date.today().isoformat()   # wall-clock isolated here only
+    out = sync_series(args.data or DEFAULT_LEASING_DIR, args.series, as_of)
+    for w in out["warnings"]:
+        print(f"[price-sync] WARNING: {w}")
+    print(f"[price-sync] written={out['written']} as_of={as_of}")
+    return 0
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="gpu-agent")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -1439,6 +1457,11 @@ def main(argv=None) -> int:
                     help="plain-language overrides json (default: "
                          "store/<cat>/plain-language/<latest>.json when present)")
     st.add_argument("--out", default="site")
+    ps = sub.add_parser("price-sync",
+                        help="F98: local price folder -> store/series (renderer-side)")
+    ps.add_argument("--data", default=None)
+    ps.add_argument("--series", default="store/series")
+    ps.add_argument("--as-of", dest="as_of", default=None)
     wre = sub.add_parser("web-reach-ensure",
                          help="idempotently ensure web-reach tools are installed")
     wre.add_argument("--check-only", action="store_true")
@@ -1553,6 +1576,8 @@ def main(argv=None) -> int:
         return _report(args)
     if args.cmd == "site":
         return _site(args)
+    if args.cmd == "price-sync":
+        return _price_sync(args)
     try:
         sc = _build(args)
     except GateError as e:

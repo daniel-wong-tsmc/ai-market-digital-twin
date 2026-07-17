@@ -139,3 +139,77 @@ def test_select_occupants_skips_empty_slot():
     slot = {"id": "customer-mix", "label": "Customer mix", "question": "q?",
             "indicators": ["market-share-pct"]}
     assert select_occupants([slot], [], {}, [], TODAY) == []
+
+
+def test_format_value_aliases_and_new_units():
+    assert format_value(500.0, "USD billion") == "$500B"
+    assert format_value(29999.0, "USD") == "$29,999"
+    assert format_value(2.09e11, "flops_per_USD") == "209 GFLOPS/$"
+    assert format_value(1.0, "credit_condition_index") == "loosening"
+    assert format_value(-1.0, "revision_direction") == "cut"
+    assert format_value(7.0, "credit_condition_index") == "7 credit_condition_index"
+
+
+def test_series_candidate_label_and_delta(tmp_path):
+    # PF-2: base row must be >= 80 days older than the newest reading for the
+    # delta rule to fire ("~90 days back" per spec intent). 2026-04-08 is 91
+    # days before 2026-07-08, still in April, still -12% (34000 -> 29999).
+    rows = [
+        {"indicatorId": "gpuSpotPrice", "period": "2026-04", "value": 34000.0,
+         "unit": "USD", "publishedAt": "2026-04-08", "label": "H100 NVL card"},
+        {"indicatorId": "gpuSpotPrice", "period": "2026-07", "value": 29999.0,
+         "unit": "USD", "publishedAt": "2026-07-08", "label": "H100 NVL card"},
+    ]
+    got = candidates_for_slot(
+        {"id": "x", "label": "X", "question": "q", "indicators": ["gpuSpotPrice"]},
+        [], {"gpuSpotPrice": rows})
+    c = got[0]
+    assert c.label == "H100 NVL card"
+    assert c.delta_line == "-12% vs Apr"
+
+
+def test_series_candidate_no_delta_for_non_money_units():
+    # Review fix (F98 Task-4): a percentage delta is only meaningful for
+    # money/price units. A "pct" series (e.g. market share) must NOT get a
+    # "+13% vs Apr"-style delta line, even though the >= 80-day lookback and
+    # a real value change would otherwise make one fire.
+    rows = [
+        {"indicatorId": "marketSharePct", "period": "2026-04", "value": 40.0,
+         "unit": "pct", "publishedAt": "2026-04-08", "label": "Merchant GPU share"},
+        {"indicatorId": "marketSharePct", "period": "2026-07", "value": 45.0,
+         "unit": "pct", "publishedAt": "2026-07-08", "label": "Merchant GPU share"},
+    ]
+    got = candidates_for_slot(
+        {"id": "x", "label": "X", "question": "q", "indicators": ["marketSharePct"]},
+        [], {"marketSharePct": rows})
+    assert got[0].delta_line == ""
+
+
+def test_series_candidate_delta_still_fires_for_money_price_unit():
+    # Pin: USD_per_hr (an end-market-economics price unit) still gets a delta.
+    rows = [
+        {"indicatorId": "gpuHourlyRate", "period": "2026-04", "value": 8.00,
+         "unit": "USD_per_hr", "publishedAt": "2026-04-08", "label": "H100 spot rate"},
+        {"indicatorId": "gpuHourlyRate", "period": "2026-07", "value": 6.00,
+         "unit": "USD_per_hr", "publishedAt": "2026-07-08", "label": "H100 spot rate"},
+    ]
+    got = candidates_for_slot(
+        {"id": "x", "label": "X", "question": "q", "indicators": ["gpuHourlyRate"]},
+        [], {"gpuHourlyRate": rows})
+    assert got[0].delta_line == "-25% vs Apr"
+
+
+def test_finding_candidate_plain_label():
+    got = candidates_for_slot(SLOT, [F_MEASURED], {},
+                              labels={"D2": "DC revenue structure"})
+    assert got[0].label == "DC revenue structure"
+
+
+def test_real_slot_families_match_f98_spec():
+    fam = {s["id"]: set(s["indicators"]) for s in load_slots()}
+    assert "S9" in fam["customer-mix"] and "S9" not in fam["binding-constraint"]
+    assert "S10" in fam["binding-constraint"]
+    assert {"gpuSpotPrice", "gpuRentalOnDemand", "gpuRentalSpot", "gpuRental1yr",
+            "flopsPerDollar"} <= fam["end-market-economics"]
+    assert "apiArr" in fam["demand-quality"]
+    assert "releaseCadence" in fam["demand-durability"]
