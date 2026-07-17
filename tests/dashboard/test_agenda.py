@@ -168,6 +168,37 @@ def test_series_candidate_label_and_delta(tmp_path):
     assert c.delta_line == "-12% vs Apr"
 
 
+def test_series_candidate_no_delta_for_non_money_units():
+    # Review fix (F98 Task-4): a percentage delta is only meaningful for
+    # money/price units. A "pct" series (e.g. market share) must NOT get a
+    # "+13% vs Apr"-style delta line, even though the >= 80-day lookback and
+    # a real value change would otherwise make one fire.
+    rows = [
+        {"indicatorId": "marketSharePct", "period": "2026-04", "value": 40.0,
+         "unit": "pct", "publishedAt": "2026-04-08", "label": "Merchant GPU share"},
+        {"indicatorId": "marketSharePct", "period": "2026-07", "value": 45.0,
+         "unit": "pct", "publishedAt": "2026-07-08", "label": "Merchant GPU share"},
+    ]
+    got = candidates_for_slot(
+        {"id": "x", "label": "X", "question": "q", "indicators": ["marketSharePct"]},
+        [], {"marketSharePct": rows})
+    assert got[0].delta_line == ""
+
+
+def test_series_candidate_delta_still_fires_for_money_price_unit():
+    # Pin: USD_per_hr (an end-market-economics price unit) still gets a delta.
+    rows = [
+        {"indicatorId": "gpuHourlyRate", "period": "2026-04", "value": 8.00,
+         "unit": "USD_per_hr", "publishedAt": "2026-04-08", "label": "H100 spot rate"},
+        {"indicatorId": "gpuHourlyRate", "period": "2026-07", "value": 6.00,
+         "unit": "USD_per_hr", "publishedAt": "2026-07-08", "label": "H100 spot rate"},
+    ]
+    got = candidates_for_slot(
+        {"id": "x", "label": "X", "question": "q", "indicators": ["gpuHourlyRate"]},
+        [], {"gpuHourlyRate": rows})
+    assert got[0].delta_line == "-25% vs Apr"
+
+
 def test_finding_candidate_plain_label():
     got = candidates_for_slot(SLOT, [F_MEASURED], {},
                               labels={"D2": "DC revenue structure"})

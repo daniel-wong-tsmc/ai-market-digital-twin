@@ -59,6 +59,13 @@ def format_value(number: float, unit: str) -> str:
 _TREND_WORDS = {"rising": "rising", "falling": "falling", "stable": "steady",
                 "steady": "steady", "mixed": "mixed"}
 
+# F98 review fix: a percentage delta ("+13% vs Apr") is only meaningful for
+# money/price units. Applying it to an already-percentage unit (e.g. market
+# share 40% -> 45%) yields a confusing "percent-of-a-percent" figure, and it's
+# meaningless for raw counts. Restrict to money + $-denominated efficiency —
+# the end-market-economics price/efficiency units per spec §4.
+_DELTA_PCT_UNITS = {"USD", "USD_B", "USD_per_hr", "flops_per_USD"}
+
 
 @dataclass(frozen=True)
 class Candidate:
@@ -110,6 +117,8 @@ def _delta_line(rows: list[dict]) -> str:
     newest = rows[-1]
     unit = _UNIT_ALIASES.get(str(newest.get("unit") or ""), newest.get("unit"))
     if unit in WORD_UNITS or not isinstance(newest.get("value"), (int, float)):
+        return ""
+    if unit not in _DELTA_PCT_UNITS:
         return ""
     nd = _days_key(newest)
     base = None
