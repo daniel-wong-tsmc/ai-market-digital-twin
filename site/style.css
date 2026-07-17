@@ -27,3 +27,34 @@ th, td { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid var(-
 ul { padding-left: 1.2rem; }
 details { margin: .3rem 0; }
 .callmore { color: var(--muted); }
+
+.hero { font-size: 1.45rem; font-weight: 600; margin: 1rem 0 .5rem; }
+.hero .rating { text-transform: uppercase; }
+.narrative { max-width: 66ch; }
+.chip { float: right; border-radius: 1em; padding: .25em .8em; font-size: .9rem;
+        color: #fff; }
+.chip small { display: block; font-size: .7rem; font-weight: 400; }
+.status-calm { background: #0ca30c; }
+.status-watch { background: #b97f00; }
+.status-elevated { background: #c85f00; }
+.status-critical { background: #d03b3b; }
+.stalestrip { padding: .5rem .8rem; border-radius: .4rem; color: #fff;
+              margin: .6rem 0; }
+.kpis, .dims { display: flex; flex-wrap: wrap; gap: .8rem; margin: 1rem 0; }
+.kpis .tile, .dims .tile { flex: 1 1 11rem; border: 1px solid var(--line);
+        border-radius: .5rem; padding: .8rem; }
+.tile .k { font-size: .75rem; letter-spacing: .05em; color: var(--muted);
+           text-transform: uppercase; }
+.tile .m { font-size: .85rem; margin-top: .15rem; }
+.tile .v { font-size: 1.3rem; font-weight: 600; margin: .15rem 0; }
+.tile .t, .tile .meta { font-size: .8rem; color: var(--muted); }
+.calls td, .calls th { vertical-align: top; }
+.calls .trigger { font-size: .85rem; color: var(--muted); }
+.strip { list-style: none; padding: 0; }
+.strip li { margin: .3rem 0; }
+.strip .d { display: inline-block; width: 6.5rem; color: var(--muted);
+            font-variant-numeric: tabular-nums; }
+.footer { border-top: 1px solid var(--line); margin-top: 2rem; padding-top: .8rem;
+          color: var(--muted); font-size: .9rem; }
+.tag { font-size: .7rem; letter-spacing: .05em; color: var(--muted);
+       text-transform: uppercase; }
