@@ -78,3 +78,114 @@ def read_hardware_points(data_dir, benchmarks) -> list[HardwarePoint]:
                                          date=d, usd_per_gpu=v / div,
                                          source_file=fname, row_name=hw["row"]))
     return out
+
+
+# --- Task 2: rental-modality readers (on-demand / spot / 1-year) --------------------
+
+import statistics
+
+from gpu_agent.pricefeed import (AWS_INSTANCE_MAP, _nearest_at_or_before,
+                                 load_points)
+
+
+@dataclass(frozen=True)
+class RentalPoint:
+    modality: str        # "on_demand" | "spot" | "1yr"
+    model: str
+    date: str            # YYMMDD actually used
+    usd_per_gpu_hour: float
+    source: str
+
+
+def _yymmdd_to_label(yymmdd: str) -> str:
+    return f"20{yymmdd[:2]}-{yymmdd[2:4]}-{yymmdd[4:6]}"
+
+
+def _map_rows_for(models):
+    return {inst: (vendor, model, cnt)
+            for inst, (vendor, model, klass, cnt) in AWS_INSTANCE_MAP.items()
+            if klass == "gpu" and model in models}
+
+
+def _spot_points(leasing_dir, models, month_end) -> list[RentalPoint]:
+    path = Path(leasing_dir) / "aws_spot_price.csv"
+    if not path.exists():
+        return []
+    wanted = _map_rows_for(models)
+    newest = {}   # (instance, region) -> (date, price_per_gpu)
+    with open(path, newline="", encoding="utf-8", errors="replace") as f:
+        for row in csv.DictReader(f):
+            inst = (row.get("instance") or "").strip()
+            if inst not in wanted:
+                continue
+            d = (row.get("date") or "").strip()
+            if not d or d > month_end:
+                continue
+            try:
+                price = float(row.get("avg_price") or "")
+            except ValueError:
+                continue
+            _, model, cnt = wanted[inst]
+            key = (inst, row.get("region") or "")
+            if key not in newest or d > newest[key][0]:
+                newest[key] = (d, price / cnt, model)
+    if not newest:
+        return []
+    per_gpu = [v[1] for v in newest.values()]
+    used_date = max(v[0] for v in newest.values())
+    model = sorted({v[2] for v in newest.values()})[0]
+    return [RentalPoint("spot", model, used_date,
+                        statistics.median(per_gpu), "aws_spot_price.csv")]
+
+
+def _term_points(leasing_dir, models, month_end) -> list[RentalPoint]:
+    path = Path(leasing_dir) / "aws_price.csv"
+    if not path.exists():
+        return []
+    wanted = _map_rows_for(models)
+    with open(path, newline="", encoding="utf-8", errors="replace") as f:
+        rows = list(csv.reader(f))
+    if not rows:
+        return []
+    header = rows[0]
+    date_cols = {h: i for i, h in enumerate(header) if h.strip().isdigit()}
+    per_gpu = []
+    used = None
+    for r in rows[1:]:
+        if len(r) < 4:
+            continue
+        inst, term = r[0].strip(), r[1].strip().lower()
+        if inst not in wanted or term != "1 year":
+            continue
+        avail = [d for d in date_cols if r[date_cols[d]].strip()]
+        d = _nearest_at_or_before(month_end, avail)
+        if d is None:
+            continue
+        try:
+            price = float(r[date_cols[d]])
+        except ValueError:
+            continue
+        _, model, cnt = wanted[inst]
+        per_gpu.append(price / cnt)
+        used = (d, model)
+    if not per_gpu:
+        return []
+    return [RentalPoint("1yr", used[1], used[0],
+                        statistics.median(per_gpu), "aws_price.csv")]
+
+
+def read_rental_points(leasing_dir, models, month_end_yymmdd) -> list[RentalPoint]:
+    out: list[RentalPoint] = []
+    try:
+        pts = load_points(_yymmdd_to_label(month_end_yymmdd), data_dir=leasing_dir)
+    except Exception:
+        pts = []
+    od = [p for p in pts if p.gpu_class == "gpu" and p.model in models]
+    if od:
+        med = statistics.median(p.usd_per_gpu_hour for p in od)
+        used = max(p.price_date for p in od)
+        model = sorted({p.model for p in od})[0]
+        out.append(RentalPoint("on_demand", model, used, med, "pricefeed"))
+    out += _spot_points(leasing_dir, models, month_end_yymmdd)
+    out += _term_points(leasing_dir, models, month_end_yymmdd)
+    return out

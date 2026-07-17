@@ -57,3 +57,39 @@ def test_read_hardware_points_duplicate_rows_keep_longest(tmp_path):
 
 def test_read_hardware_points_missing_file_is_empty(tmp_path):
     assert read_hardware_points(tmp_path, BENCH) == []
+
+
+from gpu_agent.price_local import RentalPoint, read_rental_points
+
+
+def _mk_leasing(tmp_path):
+    # aws_price.csv: on-demand + 1yr rows for p5.48xlarge (H100 x8 per AWS_INSTANCE_MAP)
+    (tmp_path / "aws_price.csv").write_text(
+        "instance,term,region,260601,260708\n"
+        "p5.48xlarge,on_demand,US East (N. Virginia),98.32,96.00\n"
+        "p5.48xlarge,1 year,US East (N. Virginia),63.20,60.80\n",
+        encoding="utf-8")
+    (tmp_path / "aws_spot_price.csv").write_text(
+        ",instance,region,date,avg_price,high,low\n"
+        "1,p5.48xlarge,us-east-1a,260705,41.60,42.0,41.0\n"
+        "2,p5.48xlarge,us-east-1b,260706,44.80,45.0,44.0\n",
+        encoding="utf-8")
+    return tmp_path
+
+
+def test_read_rental_points_all_three_modalities(tmp_path):
+    d = _mk_leasing(tmp_path)
+    pts = read_rental_points(d, {"H100"}, "260708")
+    by_mod = {p.modality: p for p in pts}
+    assert by_mod["on_demand"].usd_per_gpu_hour == pytest.approx(96.00 / 8)
+    assert by_mod["1yr"].usd_per_gpu_hour == pytest.approx(60.80 / 8)
+    # spot: median of the two newest-per-instance readings (same instance, two
+    # regions -> both kept; median of 41.60/8 and 44.80/8)
+    assert by_mod["spot"].usd_per_gpu_hour == pytest.approx((41.60 + 44.80) / 2 / 8)
+    assert all(p.model == "H100" for p in pts)
+
+
+def test_read_rental_points_ignores_unwanted_models_and_missing_files(tmp_path):
+    d = _mk_leasing(tmp_path)
+    assert read_rental_points(d, {"B200"}, "260708") == []
+    assert read_rental_points(tmp_path / "nope", {"H100"}, "260708") == []
