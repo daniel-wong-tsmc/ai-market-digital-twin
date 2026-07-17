@@ -173,7 +173,8 @@ EXPECTED_STEPS: tuple[tuple[str, str], ...] = (
     ("4", "layer stage"),
     ("5", "main stage"),
     ("6", "finalize the cycle log"),
-    ("7", "report"),
+    ("7", "price-sync"),
+    ("8", "report"),
 )
 
 _FINGERPRINT_RE = re.compile(r"run-cycle-step-fingerprint:\s*sha256=([0-9a-f]{64})")
