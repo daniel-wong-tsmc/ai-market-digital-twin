@@ -213,3 +213,4 @@ def test_real_slot_families_match_f98_spec():
             "flopsPerDollar"} <= fam["end-market-economics"]
     assert "apiArr" in fam["demand-quality"]
     assert "releaseCadence" in fam["demand-durability"]
+    assert "upstreamLeadTimes" in fam["binding-constraint"]

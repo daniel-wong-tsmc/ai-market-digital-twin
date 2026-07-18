@@ -8,7 +8,7 @@
     {"id": "binding-constraint", "label": "Binding constraint",
      "question": "What caps shipments today, and how tight is it?",
      "indicators": ["S10", "leadTimes", "pkgCapacityOrderSpread",
-                    "hbmSupplyCapex"]},
+                    "hbmSupplyCapex", "upstreamLeadTimes"]},
     {"id": "customer-mix", "label": "Customer mix",
      "question": "Where is share moving among wafer buyers?",
      "indicators": ["market-share-pct", "designWins", "S9"]},
