@@ -1,0 +1,41 @@
+{
+  "id": "nvidianews-nvidia-com-898b9ab4-2026-07-1",
+  "statement": "Intel's first data-center GPU 'Crescent Island' (Xe3P, 160GB LPDDR5X) is guided to customer sampling in the second half of 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A new merchant data-center GPU entrant adds alternative accelerator supply beyond NVIDIA and AMD.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Intel entering DC GPU sampling expands alternative merchant-GPU supply over time."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom / Intel Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-and-intel-to-develop-ai-infrastructure-and-personal-computing-products",
+      "date": "2026-07-16",
+      "excerpt": "'Crescent Island,' targets 160GB LPDDR5X memory and is guided to customer sampling in the second half of 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary source citing HPCwire."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

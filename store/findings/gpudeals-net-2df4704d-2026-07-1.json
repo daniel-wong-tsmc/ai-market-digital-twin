@@ -1,0 +1,44 @@
+{
+  "id": "gpudeals-net-2df4704d-2026-07-1",
+  "statement": "NVIDIA RTX 5090 street prices ran from $3,660 (eBay) to $4,500 (Amazon) versus $1,999 MSRP, described as a decreasing trend.",
+  "kind": "measured",
+  "value": {
+    "number": 3660.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "falling",
+  "why": "Secondary-market hardware price level shown as a market overlay; the page reports a decreasing trend.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Resale hardware price is a daily overlay and does not score demand or supply."
+  },
+  "evidence": [
+    {
+      "source": "gpudeals.net",
+      "url": "https://gpudeals.net/gpus/rtx-5090.html",
+      "date": "2026-07-18",
+      "excerpt": "The RTX 5090 is currently showing a decreasing price trend",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Single secondary listings aggregator; document flags an internal inconsistency in its peak figure."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-07-18",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

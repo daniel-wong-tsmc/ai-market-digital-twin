@@ -1,0 +1,42 @@
+{
+  "id": "www-tweaktown-com-390fc475-2026-07-1",
+  "statement": "AMD is raising Radeon GPU bundle prices ~10% (channel reports 10-15%) in July, citing tight global memory supply and rising GDDR6 prices, with GDDR6 spot prices roughly tripled since late 2025.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Memory supply tightness is forcing GPU price increases, a supply-side cost constraint on merchant GPUs.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "negative",
+    "mechanism": "Tight GDDR6 memory supply raises GPU bill-of-materials cost and pressures merchant-GPU supply economics."
+  },
+  "evidence": [
+    {
+      "source": "TweakTown",
+      "url": "https://www.tweaktown.com/news/112416/amd-reportedly-raising-prices-on-radeon-gpus-by-10-percent-in-july/index.html",
+      "date": "2026-07-01",
+      "excerpt": "AMD has begun informing its partners that a 10% price increase for Radeon GPU bundles is coming in July",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "TweakTown plus corroborating Board Channels/VideoCardz channel reports; two related secondary outlets."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-01",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

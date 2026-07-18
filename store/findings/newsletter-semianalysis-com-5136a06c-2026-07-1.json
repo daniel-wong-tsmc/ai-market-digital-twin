@@ -1,0 +1,42 @@
+{
+  "id": "newsletter-semianalysis-com-5136a06c-2026-07-1",
+  "statement": "AMD's rack-scale MI455X UALoE72 sees engineering samples/low-volume in H2 2026, but mass-production ramp and first production tokens only by Q2 2027 due to manufacturing delays.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "AMD's rack-scale alternative to NVIDIA is delayed, pushing meaningful non-NVIDIA supply into 2027.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "Adds alternative rack-scale GPU supply, though delayed timing limits near-term relief."
+  },
+  "evidence": [
+    {
+      "source": "SemiAnalysis",
+      "url": "https://newsletter.semianalysis.com/p/amd-advancing-ai-mi350x-and-mi400-ualoe72-mi500-ual256",
+      "date": "2026-07-15",
+      "excerpt": "the mass-production ramp and first production tokens will only be generated on an MI455X UALoE72 by Q2 2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Search-aggregated summary, not a verbatim fetch of the licensed source."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-15",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

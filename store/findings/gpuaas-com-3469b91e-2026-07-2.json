@@ -1,0 +1,41 @@
+{
+  "id": "gpuaas-com-3469b91e-2026-07-2",
+  "statement": "B200 order backlog stood at approximately 3.6 million units as of April 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A multi-million-unit backlog reflects demand far exceeding current shipment capacity.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Large unfilled backlog evidences sustained excess demand for merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "GPUaaS.com",
+      "url": "https://gpuaas.com/blog/b200-gpu-availability-report-q2-2026",
+      "date": "2026-05-23",
+      "excerpt": "B200 backlog stands at ~3.6 million units as of April 2026.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary report; unit is stated in GPUs, not USD."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-04-30",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

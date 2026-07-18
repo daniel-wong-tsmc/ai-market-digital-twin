@@ -1,0 +1,43 @@
+{
+  "id": "www-globenewswire-com-78ee2d38-2026-07-1",
+  "statement": "A Japan national AI infrastructure will deploy 27,500 NVIDIA Rubin GPUs and 13,750 Vera CPUs across 140 MW of data-center capacity on Vera Rubin NVL72 racks.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A confirmed 27,500-GPU Rubin deployment evidences strong forward demand and that Rubin is reaching the field.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Large national-scale Rubin commitment adds firm forward merchant-GPU demand plus datacenter and power buildout."
+  },
+  "evidence": [
+    {
+      "source": "GlobeNewswire (NVIDIA press release)",
+      "url": "https://www.globenewswire.com/news-release/2026/07/16/3328258/0/en/Japan-Government-Industrial-Leaders-and-NVIDIA-Launch-the-World-s-First-National-AI-Infrastructure.html",
+      "date": "2026-07-16",
+      "excerpt": "13,750 NVIDIA Vera CPUs and 27,500 NVIDIA Rubin GPUs, 140 megawatts of data-center capacity",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor press release via secondary newswire; no independent corroboration."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "newsletter-semianalysis-com-5136a06c-2026-07-2",
+  "statement": "AMD states MI355X total cost of ownership is 33% lower than HGX B200 for self-owned clusters.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A large TCO advantage strengthens AMD's competitive pull for buyer design wins against NVIDIA.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Lower cost of ownership can shift buyer demand toward AMD Instinct in merchant-GPU procurement."
+  },
+  "evidence": [
+    {
+      "source": "SemiAnalysis",
+      "url": "https://newsletter.semianalysis.com/p/amd-advancing-ai-mi350x-and-mi400-ualoe72-mi500-ual256",
+      "date": "2026-07-15",
+      "excerpt": "MI355X total cost of ownership is stated as 33% lower than HGX B200 for self-owned clusters",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Search-aggregated summary of a vendor-favorable claim, not verbatim fetch."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: SemiAnalysis, Yahoo Tech",
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-15",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

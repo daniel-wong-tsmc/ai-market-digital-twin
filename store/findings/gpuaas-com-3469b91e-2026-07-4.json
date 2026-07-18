@@ -1,0 +1,44 @@
+{
+  "id": "gpuaas-com-3469b91e-2026-07-4",
+  "statement": "B200 cloud rental industry-average price was $4.71/hr across 22+ providers as of 2026-05-14.",
+  "kind": "measured",
+  "value": {
+    "number": 4.71,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Static rental price level provided as a market overlay.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rental price level is a display overlay and does not score demand or supply."
+  },
+  "evidence": [
+    {
+      "source": "GPUaaS.com",
+      "url": "https://gpuaas.com/blog/b200-gpu-availability-report-q2-2026",
+      "date": "2026-05-23",
+      "excerpt": "industry average $4.71/hr across 22+ providers",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary aggregator across 22+ providers."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-05-14",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

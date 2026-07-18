@@ -1,0 +1,45 @@
+{
+  "id": "gpuaas-com-3469b91e-2026-07-1",
+  "statement": "B200 enterprise lead times improved to 8-16 weeks from 12-24 weeks in Q4 2025 for OEM buyers.",
+  "kind": "measured",
+  "value": {
+    "number": 16.0,
+    "unit": "weeks"
+  },
+  "trend": "falling",
+  "why": "Shorter delivery times indicate easing merchant-GPU supply as OEM allocation improves.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Falling lead times signal loosening merchant-GPU supply as packaging allocation catches up to orders."
+  },
+  "evidence": [
+    {
+      "source": "GPUaaS.com",
+      "url": "https://gpuaas.com/blog/b200-gpu-availability-report-q2-2026",
+      "date": "2026-05-23",
+      "excerpt": "enterprise buyers with OEM relationships 8-16 weeks delivery (improved from 12-24 weeks in Q4 2025)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary availability report citing broker data."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-05-23",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

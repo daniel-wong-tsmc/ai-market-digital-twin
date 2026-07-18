@@ -1,0 +1,42 @@
+{
+  "id": "gpuaas-com-3469b91e-2026-07-3",
+  "statement": "TSMC CoWoS advanced packaging is the primary bottleneck, fully allocated through at least mid-2027 even as wafer capacity expands toward 120,000-130,000 wafers/month by end-2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Advanced-packaging allocation caps how fast GPU supply can grow despite wafer capacity additions.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "CoWoS allocation ceiling constrains merchant-GPU output regardless of demand."
+  },
+  "evidence": [
+    {
+      "source": "GPUaaS.com",
+      "url": "https://gpuaas.com/blog/b200-gpu-availability-report-q2-2026",
+      "date": "2026-05-23",
+      "excerpt": "primary bottleneck is TSMC CoWoS advanced packaging, fully allocated through at least mid-2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary report aggregating other supply pieces."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-05-23",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

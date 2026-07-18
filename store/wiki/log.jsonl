@@ -153,3 +153,16 @@
 {"seq":152,"asOf":"2026-07","kind":"append-observation","pageId":"entity:meta","findingId":"techcrunch-com-bed0b1c2-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":153,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-3f1f3a13-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":154,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-faf-ae-6bcac1ba-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":155,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"www-tweaktown-com-390fc475-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":156,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"newsletter-semianalysis-com-5136a06c-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":157,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"newsletter-semianalysis-com-5136a06c-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":158,"asOf":"2026-07","kind":"append-observation","pageId":"entity:intel","findingId":"nvidianews-nvidia-com-898b9ab4-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":159,"asOf":"2026-07","kind":"append-observation","pageId":"entity:intel","findingId":"nvidianews-nvidia-com-898b9ab4-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":160,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"gpuaas-com-3469b91e-2026-07-4","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":161,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"www-techtimes-com-b90d06bb-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":162,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"gpuaas-com-3469b91e-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":163,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"www-techtimes-com-b90d06bb-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":164,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"gpuaas-com-3469b91e-2026-07-3","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":165,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"gpuaas-com-3469b91e-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":166,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"gpudeals-net-2df4704d-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":167,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-globenewswire-com-78ee2d38-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}

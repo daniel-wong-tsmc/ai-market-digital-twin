@@ -1,0 +1,42 @@
+{
+  "id": "www-techtimes-com-b90d06bb-2026-07-2",
+  "statement": "Custom silicon from Google, Microsoft, Amazon, Meta and OpenAI reportedly consumes roughly two-thirds of all AI compute.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Hyperscaler ASICs taking the majority of AI compute pressures merchant-GPU share of the workload.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rising custom-silicon share raises hyperscaler-ASIC demand while eroding merchant-GPU share of AI compute."
+  },
+  "evidence": [
+    {
+      "source": "TechTimes / Network World",
+      "url": "https://www.techtimes.com/articles/319338/20260629/amd-helios-faces-nvidia-vera-rubin-july-23-keynote-memory-leads-training-trails.htm",
+      "date": "2026-06-29",
+      "excerpt": "Custom silicon from Google, Microsoft, Amazon, Meta, and OpenAI now reportedly consumes roughly two-thirds of all AI compute",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary article using approximate 'roughly two-thirds' framing."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend flat -> rising); sources: TechTimes / Network World",
+  "asOf": "2026-07",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-06-29",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

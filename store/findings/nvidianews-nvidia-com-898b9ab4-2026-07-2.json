@@ -1,0 +1,42 @@
+{
+  "id": "nvidianews-nvidia-com-898b9ab4-2026-07-2",
+  "statement": "NVIDIA will invest $5 billion in Intel common stock at $23.28 per share, with Intel building custom x86 CPUs featuring NVLink for NVIDIA's AI platforms (deal terms dated 2025-09-18).",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "The partnership ties Intel CPUs and manufacturing into NVIDIA's AI infrastructure, supporting demand for Intel's data-center and foundry role.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "NVLink-enabled custom x86 CPUs deepen Intel's role in NVIDIA AI platforms, a structural design-win channel."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom / Intel Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-and-intel-to-develop-ai-infrastructure-and-personal-computing-products",
+      "date": "2026-07-16",
+      "excerpt": "NVIDIA will invest $5 billion in Intel common stock at $23.28 per share",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary newsroom summary; core deal terms carry a 2025-09-18 primary date outside the recent window."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -4,103 +4,103 @@
   "lines": [
     {
       "dimensions": [
-        "momentum",
-        "bottleneck"
-      ],
-      "findingIds": [
-        "nvidianews-nvidia-com-7b7a02ff-2026-07-1",
-        "thetechcapital-com-796ec195-2026-07-1",
-        "www-faf-ae-6bcac1ba-2026-07-5",
-        "nvidianews-nvidia-com-7b7a02ff-2026-07-2"
-      ],
-      "thesisIds": [
-        "nvda-demand-durability",
-        "backlog-duration-lengthens-as-demand-is-booked-years-ahead"
-      ],
-      "watchItem": "Merchant-GPU demand momentum runs very strong, with hyperscaler capex guided up about 77 percent for 2026 and NVIDIA data-center revenue setting records, all of which pulls leading-node wafer demand higher. How much of that booked demand converts into wafer starts turns on whether memory and packaging supply keep pace."
-    },
-    {
-      "dimensions": [
         "bottleneck"
       ],
       "findingIds": [
         "www-forbes-com-7c91863a-2026-07-1",
         "www-tradingkey-com-855cb780-2026-07-1",
-        "www-forbes-com-335e62f0-2026-07-1",
+        "www-trendforce-com-368d8402-2026-07-1",
         "www-trendforce-com-368d8402-2026-07-2",
-        "finance-yahoo-com-ea29a8bf-2026-07-1"
+        "gpuaas-com-3469b91e-2026-07-3"
       ],
       "thesisIds": [
         "supply-constraint-binding",
-        "ai-packaging-supply-is-concentrated-in-a-few-buyers"
+        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing"
       ],
-      "watchItem": "Advanced packaging stays sold out through 2027 with lead times of 52 to 78 weeks, yet the supply-demand gap is narrowing as CoWoS capacity climbs from about 75,000 toward 125,000 wafers a month. Memory supply, not packaging, is now the tighter cap on how much GPU revenue vendors can book, so watch whether packaging or memory sets the ceiling."
+      "watchItem": "TSMC's CoWoS packaging stays sold out into 2027 with waits of 52 to 78 weeks, yet the supply gap is set to narrow from about 20% to 10% by end 2026 as its capacity ramps and outside packagers add lines. Watch whether that easing holds or fresh demand refills the freed capacity."
+    },
+    {
+      "dimensions": [
+        "bottleneck"
+      ],
+      "findingIds": [
+        "en-sedaily-com-c7890a6b-2026-07-1"
+      ],
+      "thesisIds": [
+        "supply-constraint-binding"
+      ],
+      "watchItem": "High-bandwidth memory is tightening into the harder cap on bookable GPU revenue, with HBM4 contract prices set to roughly double into 2027 and each part eating three times the wafer space of standard memory. Watch whether memory, rather than packaging, becomes the limiting input."
+    },
+    {
+      "dimensions": [
+        "momentum"
+      ],
+      "findingIds": [
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-1",
+        "www-digitimes-com-e48a6e49-2026-07-05-1"
+      ],
+      "thesisIds": [
+        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing"
+      ],
+      "watchItem": "Merchant-GPU pull is very strong, with NVIDIA data-center revenue at a record $75.2 billion, up 92% year over year, and AI demand spreading across nodes keeps leading-edge capacity full. Watch whether that pull sustains planned wafer starts."
     },
     {
       "dimensions": [
         "competitiveStructure",
-        "moat"
+        "moat",
+        "strategicRisk"
       ],
       "findingIds": [
-        "www-tomshardware-com-f77e9757-2026-07-1",
         "www-faf-ae-6bcac1ba-2026-07-2",
-        "techcrunch-com-bed0b1c2-2026-07-1",
-        "www-forbes-com-7c91863a-2026-07-4",
-        "www-faf-ae-6bcac1ba-2026-07-1"
+        "www-tomshardware-com-f77e9757-2026-07-1",
+        "www-forbes-com-7c91863a-2026-07-2"
       ],
       "thesisIds": [
         "custom-asic-substitution",
-        "amd-credible-second-source",
-        "the-custom-ai-chip-alternative-depends-on-two-design-houses"
+        "ai-packaging-supply-is-concentrated-in-a-few-buyers"
       ],
-      "watchItem": "Custom AI chips are growing faster than merchant GPUs, about 45 percent versus 16 percent this year, and are projected to pass GPU shipments by 2028, gradually broadening the leading-node customer base beyond NVIDIA. AMD is also winning share, with Meta reportedly planning up to 6 gigawatts of AMD accelerators, so watch how the mix of GPU vendors and hyperscaler custom silicon settles."
+      "watchItem": "Custom ASICs are projected to grow 44.6% in 2026 versus 16.1% for merchant GPUs and to pass GPU shipments by 2028, while the top three packaging clients hold over 85% of output with NVIDIA near 60%. Watch how the leading-node customer base tilts between merchant GPUs and hyperscaler custom silicon."
     },
     {
       "dimensions": [
-        "unitEconomics",
-        "momentum"
+        "competitiveStructure",
+        "strategicRisk"
       ],
       "findingIds": [
-        "nvidianews-nvidia-com-7b7a02ff-2026-07-3",
+        "techcrunch-com-6b79ddb7-1"
+      ],
+      "thesisIds": [
+        "custom-asic-substitution",
+        "the-custom-ai-chip-alternative-depends-on-two-design-houses"
+      ],
+      "watchItem": "Anthropic is in early talks with Samsung to build a custom AI chip on a 2nm process, one sign hyperscalers are spreading leading-node work beyond merchant GPUs. Watch whether such second-source moves pull custom-silicon volume toward other foundries."
+    },
+    {
+      "dimensions": [
+        "unitEconomics"
+      ],
+      "findingIds": [
         "www-tradingkey-com-855cb780-2026-07-2",
-        "www-techtimes-com-669598b1-2026-07-1",
+        "www-digitimes-com-e48a6e49-2026-07-05-1",
         "en-sedaily-com-c7890a6b-2026-07-1"
       ],
       "thesisIds": [
-        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing",
-        "rising-memory-costs-inflate-ai-server-economics"
+        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing"
       ],
-      "watchItem": "End-market GPU pricing holds firm, with NVIDIA gross margin at 75 percent and TSMC at 67.7 percent on revenue up 36 percent and raised full-year guidance. Demand running well ahead of supply keeps pricing strength across the chain, though memory prices up about 90 percent are lifting what each AI server costs to build."
-    },
-    {
-      "dimensions": [
-        "strategicRisk",
-        "competitiveStructure"
-      ],
-      "findingIds": [
-        "finance-yahoo-com-acf60faa-2026-07-1",
-        "s201-q4cdn-com-f9f138ac-2026-07-2",
-        "ir-amd-com-c9dc9d6e-2026-07-1",
-        "mlq-ai-4e0c06bd-2026-07-1"
-      ],
-      "thesisIds": [
-        "export-control-exposure"
-      ],
-      "watchItem": "Export-control policy stays the biggest swing on foundry demand, since China signaled possible H200 approvals yet licenses granted from February have produced no revenue and NVIDIA booked zero Hopper shipments to China against 4.6 billion dollars a year earlier. AMD took about 440 million dollars in related charges, so watch how policy access opens or closes addressable GPU demand."
+      "watchItem": "TSMC posted a 67.7% gross margin, up 9.1 points year over year, and AI demand broadening across nodes and packaging is handing foundries pricing power, with HBM prices set to double. Watch whether firm end-market pricing keeps that pricing power across the chain."
     },
     {
       "dimensions": [
         "strategicRisk"
       ],
       "findingIds": [
-        "www-forbes-com-7c91863a-2026-07-2",
-        "www-sec-gov-125b52f2-2026-07-1"
+        "finance-yahoo-com-f1703d5e-2026-07-05-1",
+        "www-datacenterdynamics-com-0c76f530-2026-07-06-1"
       ],
       "thesisIds": [
-        "customer-concentration-risk",
-        "ai-packaging-supply-is-concentrated-in-a-few-buyers"
+        "export-control-exposure"
       ],
-      "watchItem": "TSMC's advanced-packaging output is concentrated in a handful of customers, with the top three CoWoS clients taking over 85 percent and NVIDIA near 60 percent. NVIDIA's own revenue is likewise concentrated, with three direct customers at 21, 17 and 16 percent, so a pullback by any one of them would ripple straight into packaging load."
+      "watchItem": "Taiwanese prosecutors have escalated a smuggling probe into Nvidia AI chips routed to China, raiding Supermicro sites over roughly $2.5 billion of servers as export enforcement intensifies. Watch how tighter controls bear on addressable merchant-GPU demand."
     }
   ]
 }

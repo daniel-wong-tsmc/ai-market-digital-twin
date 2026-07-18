@@ -1,0 +1,42 @@
+{
+  "id": "www-techtimes-com-b90d06bb-2026-07-1",
+  "statement": "Meta has committed to deploying up to 6 gigawatts of AMD Instinct GPUs across its AI infrastructure.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A 6 GW hyperscaler commitment is a major AMD design win and large incremental accelerator demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Meta's multi-gigawatt AMD commitment lifts demand for AMD merchant GPUs and associated power capacity."
+  },
+  "evidence": [
+    {
+      "source": "TechTimes / Network World",
+      "url": "https://www.techtimes.com/articles/319338/20260629/amd-helios-faces-nvidia-vera-rubin-july-23-keynote-memory-leads-training-trails.htm",
+      "date": "2026-06-29",
+      "excerpt": "Meta has committed to deploying up to 6 gigawatts of AMD Instinct GPUs across its AI infrastructure",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary article."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "market",
+  "observedAt": "2026-06-29",
+  "capturedAt": "2026-07-18T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
