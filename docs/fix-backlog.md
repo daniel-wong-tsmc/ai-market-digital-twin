@@ -1237,7 +1237,16 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   on the newest chip (dim when its price is stale); apiArr/releaseCadence manifest priority = optional.
   Known non-blockers: spot series empty (source has no GPU spot rows); rental graceful-degradation
   roll-down retained but dormant; record `.superpowers/handoffs/f98-agenda-data-DONE.md` (in the retained
-  worktree). **Part B (S4) remains OPEN — separate gated lane.** Provenance: user-directed cross-reference of the SDEWS v1.0
+  worktree). **► PART B (S4 `upstreamLeadTimes`) BUILT 2026-07-18 (subagent-driven, branch
+  `f98b-s4-leadtimes`) — AWAITING USER MERGE.** Adopted `upstreamLeadTimes` as a scoring supply indicator
+  (weight 0.12, bottleneck/supply/slope, weekly-leading cadence tag) through the F6 eval gate: eval PASS
+  (seam-scoped to extract; r1 clean, r1+r2 mean 6.688), 3-run governance rebaseline (no `--force`), replay
+  pin + F6 pin green; manifest source + binding-constraint slot added. Whole-branch Opus review: READY TO
+  MERGE. Live-extraction of an `upstreamLeadTimes` finding is verified on the next scheduled cycle (spec
+  criterion 6), not in-lane. **Side effect handled (user Option B):** the rebaseline widened the extract
+  noise band below the F79 canary's 6.25 damaged score, so that canary test is parked — tracked as **F99**.
+  Records: `.superpowers/handoffs/f98b-s4-leadtimes-DONE.md` +
+  `docs/superpowers/eval-notes/2026-07-18-f98b-upstreamLeadTimes-regate-note.md`. Provenance: user-directed cross-reference of the SDEWS v1.0
   spec (docx) against the taxonomy and the live F97 brief, building on
   `docs/2026-07-11-sdews-metric-extraction.md` (whose lane calls stand: S3/P1/P4 → chips.hbm-memory;
   D7/X2 → energy; S5/S6/S7/S8/P5/P6/X1/D10 → other agents or layer tier).
