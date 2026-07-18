@@ -19,6 +19,15 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 CANARY = ROOT / "fixtures/evals/canary/extract-series-vocab-stripped/report.json"
 
 
+# PARKED (F99, 2026-07-18, user-directed): the F98b upstreamLeadTimes rebaseline widened the
+# extract seam's noise band (eps 0.382 -> 0.901, bar 6.285 -> 5.599) below this canary's damaged-run
+# extract score (6.25), so the seam-scoped gate no longer rejects it and this "gate has teeth" proof
+# fails. The damage was calibrated too tightly to survive real extract-seam noise (the old bar caught
+# it by only 0.035). Re-capturing with more-severe damage needs a human-driven eval run (a safety
+# guard blocks an agent from running the gate on an edited prompt) — tracked as F99 in docs/fix-backlog.md.
+# See docs/superpowers/eval-notes/2026-07-18-f98b-upstreamLeadTimes-regate-note.md.
+@pytest.mark.skip(reason="F99: canary lost teeth after the F98b extract rebaseline widened the noise "
+                         "band below its 6.25 damaged score; needs re-capture with harder damage.")
 @pytest.mark.skipif(not CANARY.exists(),
                     reason="F79 canary fixture pending live capture in the G3 re-gate run")
 def test_f79_series_vocab_stripped_is_rejected():

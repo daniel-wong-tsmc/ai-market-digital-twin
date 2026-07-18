@@ -1260,3 +1260,21 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   `leadTimes` with the leading upstream view). Prompt-affecting data → brainstorm → spec →
   F6 eval gate (run-eval → rebaseline), per the standing rule. *(Concurrent-mint caveat: F98
   chosen against a backlog max of F97 on 2026-07-17; renumber if collided.)*
+
+- [ ] **F99 — Re-capture the F79 seeded-regression canary with more-severe extract damage
+  (restore gate teeth).** Surfaced by F98 Part B (2026-07-18). The F98b `upstreamLeadTimes` governance
+  rebaseline widened the extract seam's noise band (epsilon 0.382 → 0.901, bar 6.285 → 5.599 — an
+  n=3 replicate spread within the dispersion guard, but wide) below the F79 canary's damaged-run extract
+  score (6.25), so `tests/test_evals_canary_f79.py::test_f79_series_vocab_stripped_is_rejected` no longer
+  holds — the seam-scoped gate no longer rejects that damaged run. **Root cause is the canary's own
+  calibration, not the F98b change:** the original canary (F79 G3, `accc064`) stripped only the 6 series
+  ids, damaging just 2 of 8 extract cases → a razor-thin 6.25-vs-6.285 catch that the 2026-07-15 note
+  itself flagged as fragile. Any honest re-measurement of the real (wider) extract noise drops the bar
+  below 6.25. **Fix:** re-capture the canary with a *more-severe* damage whose extract score lands clearly
+  below the current noise band (a broad vocab strip is fenced in by the eval cases' own indicator
+  references; the effective lever is corrupting the extract prompt template — a human-driven capture,
+  since a safety guard blocks an agent from running the eval on an edited prompt). Until then the canary
+  test is **skipped** (user-directed 2026-07-18, Option B) with the reason recorded in the test + the
+  eval-note `docs/superpowers/eval-notes/2026-07-18-f98b-upstreamLeadTimes-regate-note.md`. The F6 hash
+  pin still catches any prompt change; only this "gate has teeth" meta-proof is parked. *(Concurrent-mint
+  caveat: F99 chosen against a backlog max of F98 on 2026-07-18; renumber if collided.)*
