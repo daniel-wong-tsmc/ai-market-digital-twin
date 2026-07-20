@@ -113,9 +113,9 @@ def test_agenda_and_dimension_tiles_disjoint():
 
 def test_kpi_card_renders_trend_delta():
     m = dict(MODEL)
-    m["agenda"] = [dict(MODEL["agenda"][0], trend_word="rising")] + \
+    m["agenda"] = [dict(MODEL["agenda"][0], trend_word="surging")] + \
         MODEL["agenda"][1:]
-    assert "rising" in render_brief(m)
+    assert "surging" in render_brief(m)
 
 
 def test_lint_tile_labels_flags_raw_codes():

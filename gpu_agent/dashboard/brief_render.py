@@ -22,7 +22,6 @@ _DIR_GLYPH = {"improving": "↑", "steady": "→", "worsening": "↓"}
 BRIEF_CSS = """
 .hero { font-size: 1.45rem; font-weight: 600; margin: 1rem 0 .5rem; }
 .hero .rating { text-transform: uppercase; }
-.narrative { max-width: 66ch; }
 .chip { float: right; border-radius: 1em; padding: .25em .8em; font-size: .9rem;
         color: #fff; }
 .chip small { display: block; font-size: .7rem; font-weight: 400; }
@@ -189,7 +188,7 @@ def _kpi_cards(m) -> str:
 def _chart(m) -> str:
     c = m.get("chart") or {}
     dem, sup = c.get("demand") or [], c.get("supply") or []
-    if len(dem) < 2:
+    if len(dem) < 2 or len(sup) < 2:
         return ""
     xs = dem + sup
     mn, mx = min(xs), max(xs)

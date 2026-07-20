@@ -34,16 +34,21 @@ def build_deepdive_targets(latest, rating_history, book_entries, implication_lin
     dstat = latest.get("dimensionStatus")
     dstat = dstat if isinstance(dstat, dict) else {}
     fbi = _findings_by_id(latest)
+    rating_history = rating_history if isinstance(rating_history, dict) else {}
 
     # pre-group folded content by dimension
     impl_by_dim = {}
     for ln in (implication_lines or []):
+        if not isinstance(ln, dict):
+            continue
         text = ln.get("text") or ln.get("watchItem")
         for dim in (ln.get("dimensions") or []):
             if text:
                 impl_by_dim.setdefault(dim, []).append(text)
     calls_by_dim = {}
     for e in (book_entries or []):
+        if not isinstance(e, dict):
+            continue
         dim = LENS_TO_DIMENSION.get(e.get("lens"))
         if dim:
             calls_by_dim.setdefault(dim, []).append({
@@ -55,7 +60,7 @@ def build_deepdive_targets(latest, rating_history, book_entries, implication_lin
     for name, r in ratings.items():
         if not isinstance(r, dict):
             continue
-        rating = r.get("rating") or "—"
+        rating = str(r.get("rating") or "—")
         direction = r.get("direction") or "steady"
         conf = r.get("confidence")
         conf = conf if isinstance(conf, dict) else {}

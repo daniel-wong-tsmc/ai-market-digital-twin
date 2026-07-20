@@ -16,3 +16,11 @@ def test_panel_shell_has_hooks():
 def test_panel_script_builds_appendix_fulllink():
     html = render_deepdive_panel()
     assert "appendix.html#dim-" in html
+
+def test_evidence_link_href_is_quote_safe():
+    # The evidence "open source" link is built client-side; e.url (store-sourced,
+    # untrusted) must be percent-encoded with encodeURI() before landing inside the
+    # href="..." attribute, not passed through esc() (which does not escape ").
+    html = render_deepdive_panel()
+    assert "encodeURI(e.url)" in html
+    assert 'href="\'+esc(e.url)+\'"' not in html

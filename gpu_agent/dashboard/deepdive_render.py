@@ -38,7 +38,7 @@ _PANEL = """
     if(d.why){h+='<div class="dd-l">Why it\\'s rated this way</div><p class="dd-why">'+esc(d.why)+'</p>';}
     if(d.trend&&d.trend.length){h+='<div class="dd-l">Trend</div>'+spark(d.trend,d.trend_good);}
     if(d.evidence&&d.evidence.length){h+='<div class="dd-l">Evidence ('+d.evidence.length+')</div>';
-      d.evidence.forEach(function(e){var a=/^https?:/.test(e.url||'')?' <a href="'+esc(e.url)+'">open source \\u2192</a>':'';
+      d.evidence.forEach(function(e){var a=/^https?:/.test(e.url||'')?' <a href="'+encodeURI(e.url)+'">open source \\u2192</a>':'';
         h+='<div class="dd-ev"><b>'+esc(e.source)+'</b> <span class="dd-t">'+esc(e.trend)+'</span><div>'+esc(e.text)+'</div>'+a+'</div>';});}
     if(d.confidence){h+='<div class="dd-l">Confidence</div><div class="dd-box">'+esc(d.confidence)+'</div>';}
     if(d.change){h+='<div class="dd-l">What would change our mind</div><div class="dd-box">'+esc(d.change)+'</div>';}
