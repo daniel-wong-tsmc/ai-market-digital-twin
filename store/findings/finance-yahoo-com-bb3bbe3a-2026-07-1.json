@@ -1,0 +1,43 @@
+{
+  "id": "finance-yahoo-com-bb3bbe3a-2026-07-1",
+  "statement": "Chip stocks fell on July 16 2026 amid AI-spending jitters; Micron plunged almost 6% and TSMC declined despite record earnings.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Market skepticism about AI-capex sustainability could presage downward demand revisions.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Investor concern over AI spending signals possible pullback in AI-infrastructure demand."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/stock-market-today-july-16-212320677.html",
+      "date": "2026-07-17",
+      "excerpt": "Chip stocks fell today as growing investor AI jitters and escalating violence between the U.S. and Iran further reduced risk appetite",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Single secondary source, one-day sentiment move."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-07-17",
+  "capturedAt": "2026-07-20T12:03:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

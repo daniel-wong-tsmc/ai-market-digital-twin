@@ -1,0 +1,43 @@
+{
+  "id": "blogs-nvidia-com-b4ddc904-2026-07-1",
+  "statement": "Bristol Myers Squibb is deploying eight DGX Vera Rubin NVL72 systems as a second SuperPOD, a Rubin-generation enterprise design win in life sciences.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named enterprise commits to Rubin-generation DGX infrastructure, signaling forward demand for next-gen NVIDIA GPUs.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "applications.vertical-saas"
+    ],
+    "direction": "positive",
+    "mechanism": "Enterprise adoption of DGX Vera Rubin drives demand for Rubin GPUs and AI-factory buildout."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Blog",
+      "url": "https://blogs.nvidia.com/blog/bristol-myers-squibb-building-life-science-industrys-most-advanced-ai-factory-on-nvidia-vera-rubin/",
+      "date": "2026-07-20",
+      "excerpt": "eight DGX Vera Rubin NVL72 systems",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary NVIDIA announcement of a named customer deployment."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: NVIDIA Blog, NVIDIA Newsroom",
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-20",
+  "capturedAt": "2026-07-20T12:03:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

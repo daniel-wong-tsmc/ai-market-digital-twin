@@ -1,0 +1,45 @@
+{
+  "id": "byteiota-com-066038aa-2026-07-1",
+  "statement": "CoreWeave has raised $18.81B in debt against $3.5B equity, a 5.4:1 debt-to-equity ratio, with total debt $24.86B up 16.1% in one quarter.",
+  "kind": "measured",
+  "value": {
+    "number": 5.4,
+    "unit": "debt_to_equity_ratio"
+  },
+  "trend": "rising",
+  "why": "High leverage raises financing risk for a marginal GPU buyer, threatening the sustainability of its GPU demand.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Rising leverage and interest burden constrain a major neocloud's ability to keep buying GPUs."
+  },
+  "evidence": [
+    {
+      "source": "ByteIota",
+      "url": "https://byteiota.com/coreweaves-35b-debt-loop-and-your-gpu-cloud-risk/",
+      "date": "2026-07-12",
+      "excerpt": "CoreWeave has raised $18.81 billion in debt against $3.5 billion in equity — a 5.4:1 ratio.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary publisher."
+  },
+  "dispersion": "conflicting same-key reports: value 6.3 -> 5.4 (tol 1%); sources: ByteIota",
+  "asOf": "2026-07",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "coreweave",
+  "observedAt": "2026-07-12",
+  "capturedAt": "2026-07-20T12:03:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

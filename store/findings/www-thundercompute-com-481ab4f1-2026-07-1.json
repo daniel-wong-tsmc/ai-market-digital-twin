@@ -1,0 +1,44 @@
+{
+  "id": "www-thundercompute-com-481ab4f1-2026-07-1",
+  "statement": "NVIDIA H100 80GB on-demand rental ranges roughly $2.01-$11.06/GPU-hr across providers as of July 1 2026 (static level, no baseline change).",
+  "kind": "measured",
+  "value": {
+    "number": 3.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Static rental price level with no stated baseline or change; provides pricing context only.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rental price level context; not directional."
+  },
+  "evidence": [
+    {
+      "source": "Thunder Compute",
+      "url": "https://www.thundercompute.com/blog/nvidia-h100-pricing",
+      "date": "2026-07-01",
+      "excerpt": "Lambda '$3.99'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary pricing guide."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-07-01",
+  "capturedAt": "2026-07-20T12:03:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

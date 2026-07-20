@@ -1,0 +1,46 @@
+{
+  "id": "blogs-nvidia-com-b4ddc904-2026-07-2",
+  "statement": "Each DGX Vera Rubin system delivers up to 10x the performance per megawatt of the infrastructure it replaces.",
+  "kind": "measured",
+  "value": {
+    "number": 10.0,
+    "unit": "x_perf_per_MW"
+  },
+  "trend": "rising",
+  "why": "Large perf-per-megawatt gains improve AI-factory economics and pull forward upgrade demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.efficiency",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher performance per megawatt lets operators do more compute per unit of power, supporting Rubin adoption."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Blog",
+      "url": "https://blogs.nvidia.com/blog/bristol-myers-squibb-building-life-science-industrys-most-advanced-ai-factory-on-nvidia-vera-rubin/",
+      "date": "2026-07-20",
+      "excerpt": "up to 10x the performance per megawatt of the infrastructure it replaces.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary NVIDIA announcement."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-20",
+  "capturedAt": "2026-07-20T12:03:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "siliconanalysts-com-79e017b3-2026-07-2",
+  "statement": "HBM suppliers sold out their entire 2026 production under non-cancellable contracts, with Micron meeting only 50-66% of customer demand.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Fully allocated HBM is a hard supply constraint on AI GPUs.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Sold-out HBM limits GPU output regardless of demand."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts",
+      "url": "https://siliconanalysts.com/tools/allocation",
+      "date": "2026-04-01",
+      "excerpt": "sold out their entire 2026 production under non-cancellable contracts.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary tracker."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "memory",
+  "observedAt": "2026-04-01",
+  "capturedAt": "2026-07-20T12:03:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

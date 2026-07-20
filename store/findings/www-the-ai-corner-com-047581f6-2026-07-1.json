@@ -1,0 +1,46 @@
+{
+  "id": "www-the-ai-corner-com-047581f6-2026-07-1",
+  "statement": "Anthropic ARR reached $30B+ as of April 2026, up from $1B in January 2025 (30x in 15 months).",
+  "kind": "measured",
+  "value": {
+    "number": 30.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Rapid ARR growth at a frontier lab signals surging inference and compute demand.",
+  "impact": {
+    "targets": [
+      "models.frontier-closed",
+      "applications.enterprise-copilots",
+      "applications.ai-coding"
+    ],
+    "direction": "positive",
+    "mechanism": "Lab revenue growth reflects and funds rising GPU compute demand."
+  },
+  "evidence": [
+    {
+      "source": "The AI Corner",
+      "url": "https://www.the-ai-corner.com/p/anthropic-30b-arr-passed-openai-revenue-2026",
+      "date": "2026-04-07",
+      "excerpt": "Anthropic ARR: $30B+",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary source; total ARR not API-only."
+  },
+  "dispersion": "conflicting same-key reports: value 25.0 -> 30.0 (tol 1%); sources: The AI Corner",
+  "asOf": "2026-07",
+  "indicatorId": "apiArr",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "multi",
+  "observedAt": "2026-04-07",
+  "capturedAt": "2026-07-20T12:03:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

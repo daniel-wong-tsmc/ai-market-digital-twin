@@ -166,3 +166,17 @@
 {"seq":165,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"gpuaas-com-3469b91e-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":166,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"gpudeals-net-2df4704d-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":167,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-globenewswire-com-78ee2d38-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":168,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"rocm-blogs-amd-com-f017899d-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":169,"asOf":"2026-07","kind":"append-observation","pageId":"entity:coreweave","findingId":"byteiota-com-066038aa-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":170,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"www-thundercompute-com-481ab4f1-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":171,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"finance-yahoo-com-bb3bbe3a-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":172,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"www-thundercompute-com-481ab4f1-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":173,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"featherless-ai-1a3abbab-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":174,"asOf":"2026-07","kind":"create-page","pageId":"entity:memory","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":175,"asOf":"2026-07","kind":"append-observation","pageId":"entity:memory","findingId":"siliconanalysts-com-79e017b3-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":176,"asOf":"2026-07","kind":"append-observation","pageId":"entity:memory","findingId":"siliconanalysts-com-79e017b3-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":177,"asOf":"2026-07","kind":"append-observation","pageId":"entity:multi","findingId":"www-the-ai-corner-com-047581f6-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":178,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"blogs-nvidia-com-b4ddc904-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":179,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"blogs-nvidia-com-b4ddc904-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":180,"asOf":"2026-07","kind":"create-page","pageId":"entity:odm","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":181,"asOf":"2026-07","kind":"append-observation","pageId":"entity:odm","findingId":"www-digitimes-com-a374dff3-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}

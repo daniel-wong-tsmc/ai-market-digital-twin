@@ -1,0 +1,45 @@
+{
+  "id": "siliconanalysts-com-79e017b3-2026-07-1",
+  "statement": "TSMC CoWoS packaging is fully booked with 52+ week lead times at 80K WPM (2026 target 130K WPM); NVIDIA takes ~60% of capacity.",
+  "kind": "measured",
+  "value": {
+    "number": 52.0,
+    "unit": "weeks"
+  },
+  "trend": "rising",
+  "why": "Extended advanced-packaging lead times constrain how many GPUs can be assembled.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "CoWoS bottleneck caps GPU output."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts",
+      "url": "https://siliconanalysts.com/tools/allocation",
+      "date": "2026-04-01",
+      "excerpt": "52+ wks",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary tracker, page ~3 months old."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-04-01",
+  "capturedAt": "2026-07-20T12:03:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

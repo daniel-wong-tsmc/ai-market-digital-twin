@@ -1,0 +1,44 @@
+{
+  "id": "rocm-blogs-amd-com-f017899d-2026-07-1",
+  "statement": "AMD's GEAK-optimized MLA kernel on MI355 improved DeepSeek-V4 end-to-end throughput 2.10x and cut TTFT 3.71x, strengthening Instinct inference competitiveness.",
+  "kind": "measured",
+  "value": {
+    "number": 2.1,
+    "unit": "x_throughput"
+  },
+  "trend": "rising",
+  "why": "Software gains make MI355 a more viable alternative to NVIDIA for inference, expanding supply options.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Better AMD inference performance increases alternative GPU supply and competition."
+  },
+  "evidence": [
+    {
+      "source": "AMD ROCm Blogs",
+      "url": "https://rocm.blogs.amd.com/software-tools-optimization/geak-mla-optimization/README.html",
+      "date": "2026-07-13",
+      "excerpt": "the optimized MLA kernel improved E2E throughput by 2.10x and reduced TTFT by 3.71x",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary vendor blog."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-13",
+  "capturedAt": "2026-07-20T12:03:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

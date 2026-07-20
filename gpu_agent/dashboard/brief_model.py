@@ -114,16 +114,25 @@ import datetime as _dt
 from .agenda import load_slots, read_series, select_occupants
 
 
+_TILE_CODE_SUFFIX = re.compile(r"\s*\([DSPX]\d{1,2}\)\s*$")
+
+
 def _indicator_labels():
     # F98: plain-English tile labels come from the indicator registry's own
     # `label` field. IndicatorRegistry.indicators is a dict of RAW dicts (not
     # model objects), so this reads v.get("label"), not v.label. Never allowed
     # to raise: any registry-load problem just means no label overrides.
+    # Several registry labels append the internal doctrine code, e.g.
+    # "Marginal-buyer financing conditions (X5)"; strip that trailing code so
+    # the exec-facing tile shows plain English and the exec-copy register lint
+    # (lint_tile_labels) does not reject it the first time such an indicator
+    # becomes an agenda occupant.
     try:
         from gpu_agent.config import REGISTRY_PATH
         from gpu_agent.registry.indicators import IndicatorRegistry
         reg = IndicatorRegistry.load(REGISTRY_PATH)
-        return {k: v.get("label") for k, v in reg.indicators.items() if v.get("label")}
+        return {k: _TILE_CODE_SUFFIX.sub("", v.get("label")).strip()
+                for k, v in reg.indicators.items() if v.get("label")}
     except Exception:
         return {}
 

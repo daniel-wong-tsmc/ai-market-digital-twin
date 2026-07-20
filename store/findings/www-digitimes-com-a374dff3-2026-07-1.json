@@ -1,0 +1,46 @@
+{
+  "id": "www-digitimes-com-a374dff3-2026-07-1",
+  "statement": "Wistron posted record June 2026 revenue of NT$321.82B, up 53.9% YoY and 10.9% MoM, on strong AI-server and networking shipments.",
+  "kind": "measured",
+  "value": {
+    "number": 53.9,
+    "unit": "pct_yoy"
+  },
+  "trend": "rising",
+  "why": "Strong ODM AI-server revenue growth signals rising GPU-system demand.",
+  "impact": {
+    "targets": [
+      "infrastructure.datacenter-colo",
+      "chips.merchant-gpu",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "ODM AI-server revenue growth reflects GPU buildout demand."
+  },
+  "evidence": [
+    {
+      "source": "DIGITIMES",
+      "url": "https://www.digitimes.com/news/a20260708PD254/wistron-ai-server-shipments-revenue-2026.html",
+      "date": "2026-07-09",
+      "excerpt": "Wistron reported June 2026 revenue of NT$321.82 billion (approx. US$10.04 billion), up 10.9% from the previous month and 53.9% from a year earlier",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary publisher."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: DIGITIMES",
+  "asOf": "2026-07",
+  "indicatorId": "odmMonthlyAiRevenue",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "odm",
+  "observedAt": "2026-07-09",
+  "capturedAt": "2026-07-20T12:03:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

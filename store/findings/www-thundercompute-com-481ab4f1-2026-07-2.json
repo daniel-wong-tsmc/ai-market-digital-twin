@@ -1,0 +1,42 @@
+{
+  "id": "www-thundercompute-com-481ab4f1-2026-07-2",
+  "statement": "H100 availability is extremely low across cloud providers as of July 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Low availability signals constrained GPU rental supply.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Scarce H100 availability indicates tight rental supply."
+  },
+  "evidence": [
+    {
+      "source": "Thunder Compute",
+      "url": "https://www.thundercompute.com/blog/nvidia-h100-pricing",
+      "date": "2026-07-01",
+      "excerpt": "H100 availability is extremely low across cloud providers",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary pricing guide."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-07-01",
+  "capturedAt": "2026-07-20T12:03:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
