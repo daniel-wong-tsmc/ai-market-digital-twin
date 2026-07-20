@@ -1,6 +1,6 @@
 import re
 from gpu_agent.dashboard.brief_render import (
-    BRIEF_CSS, lint_exec_copy, lint_tile_labels, render_brief)
+    BRIEF_CSS, DASHBOARD_CSS, lint_exec_copy, lint_tile_labels, render_brief)
 
 MODEL = {
     "category_id": "chips.merchant-gpu", "category_label": "Merchant GPU",
@@ -127,3 +127,8 @@ def test_tile_renders_delta_line():
 def test_lint_tile_labels_flags_raw_codes():
     assert lint_tile_labels({"agenda": [{"metric_label": "D2"}]})
     assert lint_tile_labels({"agenda": [{"metric_label": "DC revenue structure"}]}) == []
+
+
+def test_dashboard_css_covers_core_classes():
+    for sel in [".kcard", ".dd-drawer", ".dd-scrim", ".dimrow", ".ddchart", ".brief-two"]:
+        assert sel in DASHBOARD_CSS
