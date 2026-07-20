@@ -10,12 +10,38 @@ from pathlib import Path
 _MONTHLY_RE = re.compile(r"^(\d{4}-\d{2})-v(\d+)\.json$")
 _CONVICTION_ORDER = {"high": 0, "medium": 1, "low": 2}
 
+RATING_ORDINAL = {"weak": 0.0, "mixed": 1.0, "moderate": 1.0,
+                  "strong": 2.0, "very strong": 3.0}
+
 
 def _read_json(path):
     try:
         return json.loads(Path(path).read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return None
+
+
+def dimension_rating_history(cat_dir, limit=12):
+    cat_dir = Path(cat_dir)
+    try:
+        paths = list(cat_dir.iterdir())
+    except OSError:
+        return {}
+    revs = sorted(((m.group(1), int(m.group(2)), p)
+                   for p in paths for m in [_MONTHLY_RE.match(p.name)] if m),
+                  key=lambda t: (t[0], t[1]))[-limit:]
+    hist = {}
+    for _, _, p in revs:
+        art = _read_json(p) or {}
+        ratings = art.get("dimensionRatings")
+        if not isinstance(ratings, dict):
+            continue
+        for name, r in ratings.items():
+            if not isinstance(r, dict):
+                continue
+            word = (r.get("rating") or "").strip().lower()
+            hist.setdefault(name, []).append(RATING_ORDINAL.get(word, 1.0))
+    return hist
 
 
 def _dict_findings(art):

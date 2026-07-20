@@ -271,3 +271,20 @@ def test_chart_series_orders_and_limits(tmp_path):
 def test_chart_series_missing_dir_is_empty(tmp_path):
     s = chart_series(tmp_path / "nope")
     assert s == {"labels": [], "demand": [], "supply": []}
+
+
+from gpu_agent.dashboard.brief_model import dimension_rating_history
+
+
+def _rev_dims(cat, name, bott):
+    (cat / name).write_text(json.dumps({
+        "dimensionRatings": {"bottleneck": {"rating": bott}}, "findings": []}),
+        encoding="utf-8")
+
+
+def test_dimension_rating_history_ordinals(tmp_path):
+    cat = tmp_path / "store" / CAT; cat.mkdir(parents=True)
+    _rev_dims(cat, "2026-07-v1.json", "Weak")
+    _rev_dims(cat, "2026-07-v2.json", "Strong")
+    h = dimension_rating_history(cat)
+    assert h["bottleneck"] == [0.0, 2.0]   # Weak=0, Strong=2
