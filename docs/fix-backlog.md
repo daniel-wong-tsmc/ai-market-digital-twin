@@ -1287,3 +1287,15 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   eval-note `docs/superpowers/eval-notes/2026-07-18-f98b-upstreamLeadTimes-regate-note.md`. The F6 hash
   pin still catches any prompt change; only this "gate has teeth" meta-proof is parked. *(Concurrent-mint
   caveat: F99 chosen against a backlog max of F98 on 2026-07-18; renumber if collided.)*
+
+- [ ] **F100 — Merchant-GPU deep-dive dashboard revamp (renderer/copy layer).** DESIGNED + PLANNED
+  interactively 2026-07-20 (spec `1c93f68`, 12-task TDD plan `7aab4d6`, both docs-only on local main). Rebuilds
+  the `chips.merchant-gpu` category page (`site/`): light editorial theme, 2-sentence brief, the existing agenda
+  band restyled as 5 dynamic KPI cards (DMI/SMI excluded), a demand-vs-supply dual-line chart, a clickable
+  six-dimensions list, and a **slide-in "why" panel on every element** (rationale, evidence, rating trend,
+  confidence, trigger). Folds the "What this means for TSMC" bullets (by `dimensions` tag) and Standing calls (by
+  a lens→dimension map) into the panels; keeps the latest-signal strip on the page; per-topic "full page →" reuses
+  appendix `#dim-` anchors. Adds one self-contained inline `<script>` on the category page (scoped relaxation of
+  the F95 no-scripting convention, user-approved). **Frozen core / F6 / F83 untouched; scope = merchant-GPU page
+  only.** Build lane: `.worktrees/f100-dashboard`, subagent-driven, STOP-before-merge → user merges.
+  *(Concurrent-mint caveat: F100 chosen against a backlog max of F99 on 2026-07-20; renumber if collided.)*
