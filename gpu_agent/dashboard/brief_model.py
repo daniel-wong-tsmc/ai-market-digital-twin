@@ -191,6 +191,26 @@ def _strip_entry(findings, prior_ids):
             "text": _first_sentence(top.get("statement")), "source": src}
 
 
+def chart_series(cat_dir, limit=12):
+    cat_dir = Path(cat_dir)
+    try:
+        paths = list(cat_dir.iterdir())
+    except OSError:
+        return {"labels": [], "demand": [], "supply": []}
+    revs = sorted(((m.group(1), int(m.group(2)), p)
+                   for p in paths for m in [_MONTHLY_RE.match(p.name)] if m),
+                  key=lambda t: (t[0], t[1]))[-limit:]
+    labels, demand, supply = [], [], []
+    for as_of, rev, p in revs:
+        art = _read_json(p) or {}
+        ds = art.get("demandSupply")
+        ds = ds if isinstance(ds, dict) else {}
+        labels.append(f"{as_of}-v{rev}")
+        demand.append(float(ds.get("dmiContribution") or 0.0))
+        supply.append(float(ds.get("smiContribution") or 0.0))
+    return {"labels": labels, "demand": demand, "supply": supply}
+
+
 def signal_strip(cat_dir, limit=7):
     cat_dir = Path(cat_dir)
     try:
@@ -329,6 +349,7 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
         "tsmc": read_implication_lines(store_root, category_id, as_of),
         "calls": {"rows": call_rows, "total": total, "provisional": prov},
         "strip": signal_strip(cat_dir),
+        "chart": chart_series(cat_dir),
         "dimensions": dims,
         "evidence": {"n": len(findings),
                      "median": observed[len(observed) // 2] if observed else "",
