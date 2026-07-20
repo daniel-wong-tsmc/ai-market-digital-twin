@@ -7,3 +7,11 @@ def test_manifest_covers_apiArr_and_releaseCadence():
     assert {"apiArr", "releaseCadence"} <= listed
     covered = {ind for s in m.expectedSources for ind in s.indicators}
     assert {"apiArr", "releaseCadence"} <= covered
+
+
+def test_manifest_covers_upstreamLeadTimes():
+    m = load_manifest("manifests/chips.merchant-gpu.json")
+    listed = {i.indicatorId for i in m.expectedIndicators}
+    covered = {ind for s in m.expectedSources for ind in s.indicators}
+    assert "upstreamLeadTimes" in listed
+    assert "upstreamLeadTimes" in covered

@@ -81,6 +81,12 @@
       "sourceIds": ["channel-checks", "semianalysis"]
     },
     {
+      "indicatorId": "upstreamLeadTimes",
+      "dimension": "bottleneck",
+      "priority": "preferred",
+      "sourceIds": ["upstream-component-leadtimes"]
+    },
+    {
       "indicatorId": "designWins",
       "dimension": "competitiveStructure",
       "priority": "optional",
@@ -286,6 +292,17 @@
       "license": "public",
       "refresh": "on-demand",
       "indicators": ["releaseCadence"]
+    },
+    {
+      "id": "upstream-component-leadtimes",
+      "label": "Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)",
+      "urlPatterns": ["digitimes.com", "tomshardware.com", "semianalysis.com"],
+      "accessMethod": "free-web",
+      "tier": "secondary",
+      "costUsd": 0,
+      "license": "public",
+      "refresh": "weekly",
+      "indicators": ["upstreamLeadTimes"]
     }
   ]
 }

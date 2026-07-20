@@ -3,36 +3,36 @@
     "extract-2026-07-01": 6,
     "extract-2026-07-02": 6,
     "extract-2026-07-03": 7,
-    "extract-2026-07-03-01": 7,
-    "extract-2026-07-03-02": 8,
+    "extract-2026-07-03-01": 6,
+    "extract-2026-07-03-02": 7,
     "extract-2026-07-04": 7,
     "extract-2026-07-05": 6,
     "extract-2026-07-06": 7,
     "implication-2026-07-01": 8,
-    "judge-2026-07-01": 7,
+    "judge-2026-07-01": 8,
     "judge-2026-07-02": 8,
-    "judge-2026-07-03-01": 7,
-    "judge-2026-07-03-02": 7,
-    "thesis-2026-07-01": 7,
-    "thesis-2026-07-03-01": 5
+    "judge-2026-07-03-01": 8,
+    "judge-2026-07-03-02": 8,
+    "thesis-2026-07-01": 6,
+    "thesis-2026-07-03-01": 6
   },
   "epsilon": {
-    "extract": 0.3818813079129867,
+    "extract": 0.9013878188659973,
     "implication": 1.0,
-    "judge": 0.7637626158259734,
+    "judge": 0.25,
     "thesis": 0.5
   },
   "promptHashes": {
-    "extract": "88b6f4f03f374502daa8b0388d7ac76661378f9038fc22e4274a147d1603cbd9",
+    "extract": "242aff1a198a596b43f2a904c850c1a969d9226c0f4c21980f1348266e6bfdd7",
     "implication": "576cbe871837e453ee027a4416d1dd083fe543aac379a5f0936a1b0ea8276162",
     "judge": "31cd7bd9e80a00702fec838bcc63f28dcb6ce5ff2dcafd159b9daed39771ec28",
     "thesis": "4a9d9817951ca31684bd7f139911df04b5fc677d6c144906199153a6d132d0c7"
   },
   "provenance": {
-    "asOf": "2026-07-15",
+    "asOf": "2026-07-18",
     "forceReason": null,
     "graderModel": "opus",
-    "humanReview": "F79 G3 bundled re-gate 2026-07-15 (user-authorized interactive). Seam-scoped verdict PASS: extract two-run mean (r1+r2) 6.75 = bar; r3 unfiltered top-up. Only extract binds (hash moved); judge/thesis/implication hash-identical/informational. Spot-checked negatives calibrated in all 3 runs."
+    "humanReview": "F98b upstreamLeadTimes (S4) adoption. Sole prompt change is the extract seam (verified char-level: one +87-char indicator line; judge/thesis/implication hash-identical). Decision r1 clean PASS extract=7.00; r1+r2 PASS mean=6.69. r3 top-up marginal-fail extract=6.12; 3-run extract mean=6.50 > bar 6.285; dispersion 0.875 < 1.0 (noise, not breakage). No --force."
   },
   "quanta": {
     "extract": 0.125,
@@ -42,7 +42,7 @@
   },
   "replicates": [
     {
-      "asOf": "2026-07-15",
+      "asOf": "2026-07-18",
       "cases": {
         "extract-2026-07-01": {
           "grades": {
@@ -55,21 +55,21 @@
         },
         "extract-2026-07-02": {
           "grades": {
-            "completeness": 1,
+            "completeness": 2,
             "fidelity": 2,
             "provenance-honesty": 1,
             "signal-selection": 2
           },
-          "total": 6
+          "total": 7
         },
         "extract-2026-07-03": {
           "grades": {
-            "completeness": 1,
+            "completeness": 2,
             "fidelity": 2,
             "provenance-honesty": 2,
             "signal-selection": 2
           },
-          "total": 7
+          "total": 8
         },
         "extract-2026-07-03-01": {
           "grades": {
@@ -79,198 +79,6 @@
             "signal-selection": 2
           },
           "total": 7
-        },
-        "extract-2026-07-03-02": {
-          "grades": {
-            "completeness": 2,
-            "fidelity": 2,
-            "provenance-honesty": 2,
-            "signal-selection": 2
-          },
-          "total": 8
-        },
-        "extract-2026-07-04": {
-          "grades": {
-            "completeness": 1,
-            "fidelity": 2,
-            "provenance-honesty": 2,
-            "signal-selection": 2
-          },
-          "total": 7
-        },
-        "extract-2026-07-05": {
-          "grades": {
-            "completeness": 0,
-            "fidelity": 2,
-            "provenance-honesty": 2,
-            "signal-selection": 2
-          },
-          "total": 6
-        },
-        "extract-2026-07-06": {
-          "grades": {
-            "completeness": 2,
-            "fidelity": 2,
-            "provenance-honesty": 2,
-            "signal-selection": 2
-          },
-          "total": 8
-        },
-        "extract-2026-07-90": {
-          "grades": {
-            "completeness": 0,
-            "fidelity": 0,
-            "provenance-honesty": 0,
-            "signal-selection": 2
-          },
-          "total": 2
-        },
-        "implication-2026-07-01": {
-          "grades": {
-            "citation-discipline": 2,
-            "customer-relevance": 2,
-            "decision-usefulness": 2,
-            "exposure-not-recommendation": 2
-          },
-          "total": 8
-        },
-        "implication-2026-07-90": {
-          "grades": {
-            "citation-discipline": 0,
-            "customer-relevance": 1,
-            "decision-usefulness": 0,
-            "exposure-not-recommendation": 0
-          },
-          "total": 1
-        },
-        "judge-2026-07-01": {
-          "grades": {
-            "crux": 2,
-            "evidence-discipline": 2,
-            "mechanism": 2,
-            "sensitivity-differentiation": 2
-          },
-          "total": 8
-        },
-        "judge-2026-07-02": {
-          "grades": {
-            "crux": 2,
-            "evidence-discipline": 2,
-            "mechanism": 2,
-            "sensitivity-differentiation": 2
-          },
-          "total": 8
-        },
-        "judge-2026-07-03-01": {
-          "grades": {
-            "crux": 2,
-            "evidence-discipline": 2,
-            "mechanism": 2,
-            "sensitivity-differentiation": 2
-          },
-          "total": 8
-        },
-        "judge-2026-07-03-02": {
-          "grades": {
-            "crux": 2,
-            "evidence-discipline": 1,
-            "mechanism": 2,
-            "sensitivity-differentiation": 2
-          },
-          "total": 7
-        },
-        "judge-2026-07-90": {
-          "grades": {
-            "crux": 0,
-            "evidence-discipline": 1,
-            "mechanism": 0,
-            "sensitivity-differentiation": 0
-          },
-          "total": 1
-        },
-        "thesis-2026-07-01": {
-          "grades": {
-            "delta-discipline": 2,
-            "mechanism": 2,
-            "steelman": 1,
-            "trigger-quality": 2
-          },
-          "total": 7
-        },
-        "thesis-2026-07-03-01": {
-          "grades": {
-            "delta-discipline": 1,
-            "mechanism": 1,
-            "steelman": 1,
-            "trigger-quality": 2
-          },
-          "total": 5
-        },
-        "thesis-2026-07-90": {
-          "grades": {
-            "delta-discipline": 1,
-            "mechanism": 0,
-            "steelman": 0,
-            "trigger-quality": 0
-          },
-          "total": 1
-        },
-        "thesis-2026-07-91": {
-          "grades": {
-            "delta-discipline": 0,
-            "mechanism": 0,
-            "steelman": 0,
-            "trigger-quality": 2
-          },
-          "total": 2
-        }
-      },
-      "runDir": "work\\eval-2026-07-15\\r1",
-      "seamMeans": {
-        "extract": 6.875,
-        "implication": 8.0,
-        "judge": 7.75,
-        "thesis": 6.0
-      }
-    },
-    {
-      "asOf": "2026-07-15",
-      "cases": {
-        "extract-2026-07-01": {
-          "grades": {
-            "completeness": 1,
-            "fidelity": 2,
-            "provenance-honesty": 1,
-            "signal-selection": 2
-          },
-          "total": 6
-        },
-        "extract-2026-07-02": {
-          "grades": {
-            "completeness": 1,
-            "fidelity": 2,
-            "provenance-honesty": 1,
-            "signal-selection": 2
-          },
-          "total": 6
-        },
-        "extract-2026-07-03": {
-          "grades": {
-            "completeness": 1,
-            "fidelity": 2,
-            "provenance-honesty": 2,
-            "signal-selection": 2
-          },
-          "total": 7
-        },
-        "extract-2026-07-03-01": {
-          "grades": {
-            "completeness": 1,
-            "fidelity": 2,
-            "provenance-honesty": 1,
-            "signal-selection": 2
-          },
-          "total": 6
         },
         "extract-2026-07-03-02": {
           "grades": {
@@ -338,11 +146,11 @@
         "judge-2026-07-01": {
           "grades": {
             "crux": 2,
-            "evidence-discipline": 1,
+            "evidence-discipline": 2,
             "mechanism": 2,
             "sensitivity-differentiation": 2
           },
-          "total": 7
+          "total": 8
         },
         "judge-2026-07-02": {
           "grades": {
@@ -356,20 +164,20 @@
         "judge-2026-07-03-01": {
           "grades": {
             "crux": 2,
-            "evidence-discipline": 1,
+            "evidence-discipline": 2,
             "mechanism": 2,
             "sensitivity-differentiation": 2
           },
-          "total": 7
+          "total": 8
         },
         "judge-2026-07-03-02": {
           "grades": {
             "crux": 2,
-            "evidence-discipline": 1,
+            "evidence-discipline": 2,
             "mechanism": 2,
             "sensitivity-differentiation": 2
           },
-          "total": 7
+          "total": 8
         },
         "judge-2026-07-90": {
           "grades": {
@@ -417,16 +225,16 @@
           "total": 2
         }
       },
-      "runDir": "work\\eval-2026-07-15\\r2",
+      "runDir": "work\\eval-2026-07-18\\r1",
       "seamMeans": {
-        "extract": 6.625,
+        "extract": 7.0,
         "implication": 8.0,
-        "judge": 7.25,
+        "judge": 8.0,
         "thesis": 6.0
       }
     },
     {
-      "asOf": "2026-07-15",
+      "asOf": "2026-07-18",
       "cases": {
         "extract-2026-07-01": {
           "grades": {
@@ -457,30 +265,30 @@
         },
         "extract-2026-07-03-01": {
           "grades": {
-            "completeness": 2,
+            "completeness": 1,
             "fidelity": 2,
             "provenance-honesty": 1,
             "signal-selection": 2
           },
-          "total": 7
+          "total": 6
         },
         "extract-2026-07-03-02": {
           "grades": {
-            "completeness": 2,
+            "completeness": 1,
             "fidelity": 2,
             "provenance-honesty": 2,
             "signal-selection": 2
           },
-          "total": 8
+          "total": 7
         },
         "extract-2026-07-04": {
           "grades": {
-            "completeness": 1,
-            "fidelity": 1,
-            "provenance-honesty": 1,
+            "completeness": 0,
+            "fidelity": 2,
+            "provenance-honesty": 2,
             "signal-selection": 2
           },
-          "total": 5
+          "total": 6
         },
         "extract-2026-07-05": {
           "grades": {
@@ -530,11 +338,11 @@
         "judge-2026-07-01": {
           "grades": {
             "crux": 2,
-            "evidence-discipline": 1,
+            "evidence-discipline": 2,
             "mechanism": 2,
-            "sensitivity-differentiation": 1
+            "sensitivity-differentiation": 2
           },
-          "total": 6
+          "total": 8
         },
         "judge-2026-07-02": {
           "grades": {
@@ -548,11 +356,203 @@
         "judge-2026-07-03-01": {
           "grades": {
             "crux": 2,
-            "evidence-discipline": 1,
-            "mechanism": 1,
+            "evidence-discipline": 2,
+            "mechanism": 2,
             "sensitivity-differentiation": 2
           },
+          "total": 8
+        },
+        "judge-2026-07-03-02": {
+          "grades": {
+            "crux": 2,
+            "evidence-discipline": 2,
+            "mechanism": 2,
+            "sensitivity-differentiation": 2
+          },
+          "total": 8
+        },
+        "judge-2026-07-90": {
+          "grades": {
+            "crux": 0,
+            "evidence-discipline": 1,
+            "mechanism": 0,
+            "sensitivity-differentiation": 0
+          },
+          "total": 1
+        },
+        "thesis-2026-07-01": {
+          "grades": {
+            "delta-discipline": 1,
+            "mechanism": 2,
+            "steelman": 1,
+            "trigger-quality": 2
+          },
           "total": 6
+        },
+        "thesis-2026-07-03-01": {
+          "grades": {
+            "delta-discipline": 2,
+            "mechanism": 1,
+            "steelman": 1,
+            "trigger-quality": 2
+          },
+          "total": 6
+        },
+        "thesis-2026-07-90": {
+          "grades": {
+            "delta-discipline": 1,
+            "mechanism": 0,
+            "steelman": 0,
+            "trigger-quality": 0
+          },
+          "total": 1
+        },
+        "thesis-2026-07-91": {
+          "grades": {
+            "delta-discipline": 0,
+            "mechanism": 0,
+            "steelman": 0,
+            "trigger-quality": 2
+          },
+          "total": 2
+        }
+      },
+      "runDir": "work\\eval-2026-07-18\\r2",
+      "seamMeans": {
+        "extract": 6.375,
+        "implication": 8.0,
+        "judge": 8.0,
+        "thesis": 6.0
+      }
+    },
+    {
+      "asOf": "2026-07-18",
+      "cases": {
+        "extract-2026-07-01": {
+          "grades": {
+            "completeness": 1,
+            "fidelity": 2,
+            "provenance-honesty": 1,
+            "signal-selection": 2
+          },
+          "total": 6
+        },
+        "extract-2026-07-02": {
+          "grades": {
+            "completeness": 1,
+            "fidelity": 2,
+            "provenance-honesty": 1,
+            "signal-selection": 2
+          },
+          "total": 6
+        },
+        "extract-2026-07-03": {
+          "grades": {
+            "completeness": 1,
+            "fidelity": 2,
+            "provenance-honesty": 2,
+            "signal-selection": 2
+          },
+          "total": 7
+        },
+        "extract-2026-07-03-01": {
+          "grades": {
+            "completeness": 1,
+            "fidelity": 2,
+            "provenance-honesty": 1,
+            "signal-selection": 2
+          },
+          "total": 6
+        },
+        "extract-2026-07-03-02": {
+          "grades": {
+            "completeness": 0,
+            "fidelity": 2,
+            "provenance-honesty": 2,
+            "signal-selection": 2
+          },
+          "total": 6
+        },
+        "extract-2026-07-04": {
+          "grades": {
+            "completeness": 1,
+            "fidelity": 2,
+            "provenance-honesty": 2,
+            "signal-selection": 2
+          },
+          "total": 7
+        },
+        "extract-2026-07-05": {
+          "grades": {
+            "completeness": 0,
+            "fidelity": 1,
+            "provenance-honesty": 2,
+            "signal-selection": 2
+          },
+          "total": 5
+        },
+        "extract-2026-07-06": {
+          "grades": {
+            "completeness": 1,
+            "fidelity": 2,
+            "provenance-honesty": 1,
+            "signal-selection": 2
+          },
+          "total": 6
+        },
+        "extract-2026-07-90": {
+          "grades": {
+            "completeness": 0,
+            "fidelity": 0,
+            "provenance-honesty": 0,
+            "signal-selection": 2
+          },
+          "total": 2
+        },
+        "implication-2026-07-01": {
+          "grades": {
+            "citation-discipline": 2,
+            "customer-relevance": 2,
+            "decision-usefulness": 2,
+            "exposure-not-recommendation": 2
+          },
+          "total": 8
+        },
+        "implication-2026-07-90": {
+          "grades": {
+            "citation-discipline": 0,
+            "customer-relevance": 1,
+            "decision-usefulness": 1,
+            "exposure-not-recommendation": 0
+          },
+          "total": 2
+        },
+        "judge-2026-07-01": {
+          "grades": {
+            "crux": 2,
+            "evidence-discipline": 2,
+            "mechanism": 2,
+            "sensitivity-differentiation": 2
+          },
+          "total": 8
+        },
+        "judge-2026-07-02": {
+          "grades": {
+            "crux": 2,
+            "evidence-discipline": 2,
+            "mechanism": 2,
+            "sensitivity-differentiation": 2
+          },
+          "total": 8
+        },
+        "judge-2026-07-03-01": {
+          "grades": {
+            "crux": 2,
+            "evidence-discipline": 2,
+            "mechanism": 2,
+            "sensitivity-differentiation": 2
+          },
+          "total": 8
         },
         "judge-2026-07-03-02": {
           "grades": {
@@ -592,12 +592,12 @@
         },
         "thesis-2026-07-90": {
           "grades": {
-            "delta-discipline": 1,
+            "delta-discipline": 0,
             "mechanism": 0,
             "steelman": 0,
             "trigger-quality": 0
           },
-          "total": 1
+          "total": 0
         },
         "thesis-2026-07-91": {
           "grades": {
@@ -609,11 +609,11 @@
           "total": 2
         }
       },
-      "runDir": "work\\eval-2026-07-15\\r3",
+      "runDir": "work\\eval-2026-07-18\\r3",
       "seamMeans": {
-        "extract": 6.5,
+        "extract": 6.125,
         "implication": 8.0,
-        "judge": 7.0,
+        "judge": 8.0,
         "thesis": 6.0
       }
     }
@@ -621,9 +621,9 @@
   "schemaVersion": 2,
   "seamHistory": {
     "extract": [
-      6.875,
-      6.625,
-      6.5
+      7.0,
+      6.375,
+      6.125
     ],
     "implication": [
       8.0,
@@ -631,9 +631,9 @@
       8.0
     ],
     "judge": [
-      7.75,
-      7.25,
-      7.0
+      8.0,
+      8.0,
+      8.0
     ],
     "thesis": [
       6.0,
@@ -642,9 +642,9 @@
     ]
   },
   "seamMeans": {
-    "extract": 6.666666666666667,
+    "extract": 6.5,
     "implication": 8.0,
-    "judge": 7.333333333333333,
+    "judge": 8.0,
     "thesis": 6.0
   }
 }
