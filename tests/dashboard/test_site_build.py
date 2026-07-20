@@ -48,7 +48,12 @@ def test_every_local_href_resolves(tmp_path):
     root = tmp_path / "site"
     for html_path in root.rglob("*.html"):
         html = html_path.read_text(encoding="utf-8")
-        for href in re.findall(r'href="([^"]+)"', html):
+        # F100: the category page now carries the deep-dive panel's self-contained
+        # inline <script>, whose JS source contains string literals like
+        # "href='+esc(e.url)+'\"" that look like href="..." to this regex but are not
+        # real links. Strip script blocks before scanning for hrefs.
+        scanned = re.sub(r'(?is)<script\b.*?</script>', '', html)
+        for href in re.findall(r'href="([^"]+)"', scanned):
             if href.startswith(("http://", "https://", "#", "mailto:")):
                 continue
             # F97: the brief links cross-page fragments (e.g. "appendix.html#dim-
@@ -86,6 +91,12 @@ def test_build_site_index_is_brief(tmp_path):
     assert ".kpis" in css and "status-elevated" in css
 
 
+def test_style_css_includes_dashboard_theme(tmp_path):
+    _build(tmp_path)
+    css = (tmp_path / "site" / CAT / "style.css").read_text(encoding="utf-8")
+    assert ".kcard" in css and ".dd-drawer" in css
+
+
 def test_appendix_has_dimension_and_finding_anchors(tmp_path):
     build_site(CAT, FIX, "work-nonexistent", f"{FIX}/plain-2026-07-06.json",
                str(tmp_path / "site"), today=dt.date(2026, 7, 16))
@@ -114,6 +125,9 @@ def test_brief_evidence_anchors_resolve_in_appendix(tmp_path):
     # selectors (load_scorecards, build.py's build_model, site_model.py's
     # build_site_model) still preferred the daily over the monthly, a #dim-<name>
     # anchor for a dimension only the monthly has (moat, unitEconomics) would dead-end.
+    # F100 retarget: the brief now surfaces dimensions via the deep-dive panel's
+    # embedded JSON blob instead of appendix.html# links; the assertions below check
+    # the same regression through that blob.
     import json
     root = tmp_path / "store"
     cat = root / CAT
@@ -181,7 +195,18 @@ def test_brief_evidence_anchors_resolve_in_appendix(tmp_path):
     site = tmp_path / "site" / CAT
     index = (site / "index.html").read_text(encoding="utf-8")
     appendix = (site / "appendix.html").read_text(encoding="utf-8")
-    targets = set(re.findall(r'appendix\.html#([a-zA-Z0-9-]+)', index))
-    assert targets, "brief should link to appendix anchors"
-    for frag in targets:
-        assert f'id="{frag}"' in appendix, f"dead anchor: {frag}"
+    # F100: the brief no longer emits <a href="appendix.html#..."> links; the
+    # dimensions it surfaces now live in the deep-dive panel's embedded JSON blob
+    # (id="dd-data"), keyed by dimension name. The F97 regression intent survives:
+    # every dimension the brief surfaces must resolve to a real #dim-<name> anchor in
+    # the appendix (brief & appendix must agree on the winning MONTHLY scorecard).
+    m = re.search(r'id="dd-data"[^>]*>(.*?)</script>', index, re.S)
+    assert m, "brief should embed the deep-dive data blob"
+    dd = json.loads(m.group(1))          # json.loads decodes the < escapes
+    dims = set(dd.keys())
+    assert dims, "deep-dive blob should carry the brief's dimensions"
+    # the monthly (6 dims incl. moat + unitEconomics) must have won over the same-month
+    # legacy daily (4 dims); if the daily wrongly won, these keys would be absent.
+    assert {"moat", "unitEconomics"} <= dims, "monthly scorecard must win over same-month daily"
+    for name in dims:
+        assert f'id="dim-{name}"' in appendix, f"dead dimension anchor: {name}"
