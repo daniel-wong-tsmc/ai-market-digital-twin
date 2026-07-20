@@ -1,10 +1,12 @@
 import re
 from gpu_agent.dashboard.brief_render import (
-    BRIEF_CSS, DASHBOARD_CSS, lint_exec_copy, lint_tile_labels, render_brief)
+    BRIEF_CSS, DASHBOARD_CSS, lint_exec_copy, lint_tile_labels, render_brief,
+    _verdict, _kpi_cards, _chart, _dims_list)
 
 MODEL = {
     "category_id": "chips.merchant-gpu", "category_label": "Merchant GPU",
     "month_label": "July 2026", "revision": 8, "narrative": "The <story>.",
+    "brief_two": "The <story>. Second sentence.",
     "status": {"rating": "Strong", "direction": "steady",
                "reason": "Supply caps it.", "constraint": "HBM supply"},
     "attention": {"word": "elevated", "css": "elevated", "raw_word": "calm",
@@ -132,3 +134,31 @@ def test_lint_tile_labels_flags_raw_codes():
 def test_dashboard_css_covers_core_classes():
     for sel in [".kcard", ".dd-drawer", ".dd-scrim", ".dimrow", ".ddchart", ".brief-two"]:
         assert sel in DASHBOARD_CSS
+
+
+def test_verdict_uses_two_sentence_and_rating():
+    m = {"status": {"rating": "Strong", "direction": "improving"}, "brief_two": "One. Two."}
+    h = _verdict(m)
+    assert "Strong" in h and "One. Two." in h and "brief-two" in h
+
+
+def test_kpi_cards_clickable_to_dimension():
+    card = {"slot_label": "Binding constraint", "metric_label": "Lead times",
+            "display": "40 wk", "trend_word": "rising", "as_of": "2026-07-16",
+            "source": "TechTimes", "was": "", "delta_line": ""}
+    m = {"agenda": [card] * 3}
+    h = _kpi_cards(m)
+    assert "openDD('bottleneck')" in h and "40 wk" in h and "Lead times" in h
+
+
+def test_chart_draws_two_polylines():
+    m = {"chart": {"labels": ["a", "b"], "demand": [1.0, 2.0], "supply": [-0.1, 0.1]}}
+    h = _chart(m)
+    assert h.count("<polyline") >= 2 and "ddchart" in h
+
+
+def test_dims_list_rows_clickable():
+    m = {"dimensions": [{"name": "bottleneck", "rating": "Weak", "direction": "improving",
+                         "confidence": "medium", "sentence": "s", "capped": True}]}
+    h = _dims_list(m)
+    assert "openDD('bottleneck')" in h and "Weak" in h

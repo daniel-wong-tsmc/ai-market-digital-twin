@@ -5,6 +5,8 @@ import html
 import re
 
 from .site_render import page
+from .deepdive_model import SLOT_TO_DIMENSION
+from .agenda import load_slots
 
 e = html.escape
 
@@ -142,12 +144,82 @@ def _masthead(m) -> str:
         f'{stale}')
 
 
+_RATING_DOT = {"very strong": "#2e7d32", "strong": "#2e7d32", "mixed": "#f9a825",
+               "moderate": "#f9a825", "weak": "#ef6c00"}
+_DELTA_GOOD = {"rising": "#1e7a34", "falling": "#c0632a"}  # default green up / amber down
+
+
+def _slot_label_to_id():
+    try:
+        return {s["label"]: s["id"] for s in load_slots()}
+    except Exception:
+        return {}
+
+
+_SLOT_LABEL_TO_ID = _slot_label_to_id()
+
+
 def _verdict(m) -> str:
     s = m["status"]
-    dash = f" / {e(s['direction'])}" if s["direction"] else ""
-    return (f'<p class="hero"><span class="rating">{e(s["rating"])}{dash}</span>'
-            f' — {e(s["reason"])}</p>'
-            f'<p class="narrative">{e(m["narrative"])}</p>')
+    dash = f" / {e(s['direction'])}" if s.get("direction") else ""
+    return (f'<div class="rating-label">{e(s["rating"])}{dash}</div>'
+            f'<p class="brief-two">{e(m.get("brief_two") or "")}</p>')
+
+
+def _kpi_cards(m) -> str:
+    if len(m.get("agenda") or []) < 3:
+        return ""
+    cards = []
+    for o in m["agenda"]:
+        sid = _SLOT_LABEL_TO_ID.get(o["slot_label"], "")
+        dim = SLOT_TO_DIMENSION.get(sid, "")
+        onclick = f"openDD('{e(dim)}')" if dim else ""
+        col = _DELTA_GOOD.get(o.get("trend_word"), "#999")
+        cards.append(
+            f'<div class="kcard" onclick="{onclick}">'
+            f'<div class="kq">{e(o["slot_label"])}</div>'
+            f'<div class="km">{e(o["metric_label"])}</div>'
+            f'<div class="kv">{e(o["display"])}</div>'
+            f'<div class="kd" style="color:{col}">{e(o["trend_word"])}</div></div>')
+    return f'<div class="kcards">{"".join(cards)}</div>'
+
+
+def _chart(m) -> str:
+    c = m.get("chart") or {}
+    dem, sup = c.get("demand") or [], c.get("supply") or []
+    if len(dem) < 2:
+        return ""
+    xs = dem + sup
+    mn, mx = min(xs), max(xs)
+    rng = (mx - mn) or 1.0
+    W, H = 520, 150
+
+    def pts(series):
+        return " ".join(
+            f"{i/(len(series)-1)*W:.0f},{H-6-(y-mn)/rng*(H-16):.0f}"
+            for i, y in enumerate(series))
+    return (
+        '<div class="ddchart-cap">Demand vs supply momentum</div>'
+        f'<svg viewBox="0 0 {W} {H}" width="100%" height="170" class="ddchart">'
+        f'<polyline fill="none" stroke="#4f8cff" stroke-width="2.5" points="{pts(dem)}"/>'
+        f'<polyline fill="none" stroke="#e5843b" stroke-width="2" stroke-dasharray="5 3" points="{pts(sup)}"/>'
+        '</svg><div class="ddchart-legend">'
+        '<span style="color:#4f8cff">&#9473; demand</span> &nbsp; '
+        '<span style="color:#e5843b">&#9548; supply</span></div>')
+
+
+def _dims_list(m) -> str:
+    rows = []
+    for d in m["dimensions"]:
+        dot = _RATING_DOT.get((d["rating"] or "").lower(), "#999")
+        glyph = _DIR_GLYPH.get(d["direction"], "")
+        rows.append(
+            f'<div class="dimrow" onclick="openDD(\'{e(d["name"])}\')">'
+            f'<span class="ddot" style="background:{dot}"></span> {e(d["name"])}'
+            f'<span class="spacer"></span><b>{e(d["rating"])} {glyph}</b>'
+            ' <span style="color:#8a6d3b">&#8594;</span></div>')
+    return (f'<div class="ddchart-cap" style="margin-bottom:.4rem">Six dimensions</div>'
+            f'<div class="dimlist">{"".join(rows)}</div>')
 
 
 def _agenda(m) -> str:
