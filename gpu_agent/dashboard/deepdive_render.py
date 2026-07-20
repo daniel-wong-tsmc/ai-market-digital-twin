@@ -46,6 +46,7 @@ _PANEL = """
       d.tsmc.forEach(function(t){h+='<p class="dd-why">'+esc(t)+'</p>';});}
     if(d.calls&&d.calls.length){h+='<div class="dd-l">Standing calls</div>';
       d.calls.forEach(function(c){h+='<div class="dd-ev"><b>'+esc(c.title)+'</b> \\u2014 '+esc(c.verdict)+'<div class="dd-t">'+esc(c.trigger)+'</div></div>';});}
+    h+='<a class="dd-full" href="appendix.html#dim-'+encodeURIComponent(k)+'">Open full page for this topic \\u2192</a>';
     document.getElementById('dd-body').innerHTML=h;
     document.getElementById('dd-scrim').classList.add('open');
     var dr=document.getElementById('dd-drawer');dr.classList.add('open');dr.setAttribute('aria-hidden','false');

@@ -102,6 +102,7 @@ h1 { font-family:Georgia,serif; font-size:1.75rem; }
 .dd-t { font-size:.65rem; color:#8a6d3b; }
 .dd-box { background:#f4efe5; border-radius:.45rem; padding:.5rem .7rem; font:.75rem/1.5 system-ui; }
 .dd-good{color:#2e7d32;} .dd-bad{color:#c0632a;}
+.dd-full{display:inline-block;margin-top:1rem;font:600 .75rem system-ui;color:#2e7d32;}
 """
 
 

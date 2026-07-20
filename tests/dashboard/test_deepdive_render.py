@@ -12,3 +12,7 @@ def test_panel_shell_has_hooks():
     html = render_deepdive_panel()
     assert 'id="dd-scrim"' in html and 'id="dd-drawer"' in html
     assert "window.openDD" in html and "dd-data" in html
+
+def test_panel_script_builds_appendix_fulllink():
+    html = render_deepdive_panel()
+    assert "appendix.html#dim-" in html
