@@ -7,6 +7,7 @@ import re
 from .site_render import page
 from .deepdive_model import SLOT_TO_DIMENSION
 from .agenda import load_slots
+from .deepdive_render import deepdive_json, render_deepdive_panel
 
 e = html.escape
 
@@ -312,8 +313,16 @@ def _footer(m) -> str:
 
 
 def render_brief(model) -> str:
-    body = "".join([_masthead(model), _verdict(model), _agenda(model),
-                    _tsmc(model), _calls(model), _strip(model), _dims(model),
-                    _footer(model)])
+    body = "".join([
+        _masthead(model),
+        _verdict(model),
+        _kpi_cards(model),
+        '<div class="dash2"><div>', _chart(model), '</div><div>',
+        _dims_list(model), '</div></div>',
+        _strip(model),
+        _footer(model),
+        deepdive_json(model.get("deepdive") or {}),
+        render_deepdive_panel(),
+    ])
     return page(f"{model['category_label']} — Executive Brief ·"
                 f" {model['month_label']}", body)
