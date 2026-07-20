@@ -1,0 +1,45 @@
+{
+  "id": "www-gigenet-com-b3aab89b-2026-07-1",
+  "statement": "AI data-center power is becoming a binding constraint: Gartner projects 40% of AI data centers power-constrained by 2027 as global DC electricity roughly doubles from ~485 TWh (2025) to ~950 TWh.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Power availability is emerging as a hard ceiling on AI compute deployment, throttling how much GPU capacity can be brought online.",
+  "impact": {
+    "targets": [
+      "energy.grid-transmission",
+      "energy.power-generation",
+      "energy.electrical-equipment",
+      "infrastructure.datacenter-colo",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Grid and power-equipment shortfalls cap datacenter buildout, constraining the supply of deployable GPU capacity."
+  },
+  "evidence": [
+    {
+      "source": "GigeNET (gigenet.com)",
+      "url": "https://www.gigenet.com/blog/ai-data-center-power-crisis/",
+      "date": "2026-07-06",
+      "excerpt": "40% of AI data centers will be power-constrained by 2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary blog aggregating Deloitte/Gartner figures within a single document."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "power",
+  "observedAt": "2026-07-06",
+  "capturedAt": "2026-07-20T13:42:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

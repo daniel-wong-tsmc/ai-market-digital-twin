@@ -1,0 +1,50 @@
+{
+  "id": "finance-biggo-com-ae5dcd41-2026-07-1",
+  "statement": "TSMC's advanced-packaging (CoWoS) capacity is sold out through 2026 with lead times ~52-78 weeks and bookings into 2027, tightly constraining merchant-GPU accelerator output.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "CoWoS packaging is the binding constraint on NVIDIA/AMD accelerator supply; TSMC's CEO says tightness is limiting customer growth.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "negative",
+    "mechanism": "Sold-out CoWoS with 52-78 week lead times caps how many accelerators can be packaged, limiting merchant-GPU shipment volume."
+  },
+  "evidence": [
+    {
+      "source": "TSMC Q2 2026 earnings (via BigGo Finance, Investing.com, Tech Times)",
+      "url": "https://finance.biggo.com/news/US_TSM_2026-07-16",
+      "date": "2026-07-16",
+      "excerpt": "Our packaging capacity is so tight that now it's limiting my customers' growth.",
+      "tier": "secondary"
+    },
+    {
+      "source": "TSMC Q2 2026 earnings (via BigGo Finance, Investing.com, Tech Times)",
+      "url": "https://finance.biggo.com/news/US_TSM_2026-07-16",
+      "date": "2026-07-16",
+      "excerpt": "lead times ~52-78 weeks with bookings into 2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary earnings summary syndicated across outlets within one document; no primary filing fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "tsmc",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-20T13:42:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

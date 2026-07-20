@@ -180,3 +180,15 @@
 {"seq":179,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"blogs-nvidia-com-b4ddc904-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":180,"asOf":"2026-07","kind":"create-page","pageId":"entity:odm","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":181,"asOf":"2026-07","kind":"append-observation","pageId":"entity:odm","findingId":"www-digitimes-com-a374dff3-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":182,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"www-amd-com-9fb86a52-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":183,"asOf":"2026-07","kind":"create-page","pageId":"entity:liquid-cooling","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":184,"asOf":"2026-07","kind":"append-observation","pageId":"entity:liquid-cooling","findingId":"www-digitimes-com-0a9926f5-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":185,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-cnbc-com-9d898f2b-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":186,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-cnbc-com-9d898f2b-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":187,"asOf":"2026-07","kind":"create-page","pageId":"entity:optics","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":188,"asOf":"2026-07","kind":"append-observation","pageId":"entity:optics","findingId":"www-vitextech-com-893c21f5-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":189,"asOf":"2026-07","kind":"create-page","pageId":"entity:power","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":190,"asOf":"2026-07","kind":"append-observation","pageId":"entity:power","findingId":"www-gigenet-com-b3aab89b-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":191,"asOf":"2026-07","kind":"create-page","pageId":"entity:tsmc","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":192,"asOf":"2026-07","kind":"append-observation","pageId":"entity:tsmc","findingId":"finance-biggo-com-ae5dcd41-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":193,"asOf":"2026-07","kind":"append-observation","pageId":"entity:tsmc","findingId":"finance-biggo-com-ae5dcd41-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}

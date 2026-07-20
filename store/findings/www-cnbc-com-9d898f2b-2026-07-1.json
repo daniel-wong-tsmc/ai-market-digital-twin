@@ -1,0 +1,42 @@
+{
+  "id": "www-cnbc-com-9d898f2b-2026-07-1",
+  "statement": "NVIDIA H200 shipments to China remain 'trivial' despite ~$10B in approved export licenses to roughly ten Chinese firms, with a 25% tariff on China-routed chips.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "Approved licenses are not translating into shipments, so China-tied H200 revenue is largely unrealized, a demand-realization drag.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Export-control friction and tariffs suppress realized H200 sales into China despite large approved license value."
+  },
+  "evidence": [
+    {
+      "source": "CNBC / Reuters / Tech Times (multiple)",
+      "url": "https://www.cnbc.com/2026/07/14/nvidia-h200-ai-chips-china.html",
+      "date": "2026-07-14",
+      "excerpt": "very few shipments against licenses for H200s and equivalents have taken place",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting of US Commerce testimony; single document."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-14",
+  "capturedAt": "2026-07-20T13:42:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

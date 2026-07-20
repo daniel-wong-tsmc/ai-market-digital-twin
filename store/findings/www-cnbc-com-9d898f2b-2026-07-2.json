@@ -1,0 +1,42 @@
+{
+  "id": "www-cnbc-com-9d898f2b-2026-07-2",
+  "statement": "Chinese firms ordered more than two million H200 chips for 2026 against NVIDIA's total inventory of roughly 700,000 units, so orders far exceed available supply.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A roughly 3x order-to-inventory gap signals strong latent demand against tight whole-chain supply.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "An order book well above inventory indicates undersupplied H200 stock and strong demand pull."
+  },
+  "evidence": [
+    {
+      "source": "CNBC / Reuters / Tech Times (multiple)",
+      "url": "https://www.cnbc.com/2026/07/14/nvidia-h200-ai-chips-china.html",
+      "date": "2026-07-14",
+      "excerpt": "Chinese tech companies collectively ordered more than two million H200 chips for 2026 against a total NVIDIA inventory of roughly 700,000 units",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting; single document."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-14",
+  "capturedAt": "2026-07-20T13:42:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

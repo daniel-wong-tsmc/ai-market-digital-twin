@@ -1,0 +1,43 @@
+{
+  "id": "www-vitextech-com-893c21f5-2026-07-1",
+  "statement": "Co-packaged optics adoption is set to ramp from ~0.5% of AI optical modules in 2026 to ~35% by 2030, with NVIDIA Spectrum-X Photonics (up to 409.6 Tb/s) due 2H 2026 and Quantum-X shipping early 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A steep CPO adoption curve plus shipping high-radix photonic switches expands networking-fabric bandwidth supply for AI clusters.",
+  "impact": {
+    "targets": [
+      "chips.networking-silicon",
+      "infrastructure.networking-fabric",
+      "energy.efficiency"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising CPO penetration and multi-hundred-Tb/s photonic platforms add scalable interconnect capacity for GPU clusters."
+  },
+  "evidence": [
+    {
+      "source": "Vitex LLC (vitextech.com)",
+      "url": "https://www.vitextech.com/blogs/blog/co-packaged-optics-cpo-2026-the-complete-technical-guide",
+      "date": "2026-06-03",
+      "excerpt": "CPO penetration in AI data centers 'roughly 0.5% of optical modules in AI' (2026), projected 'to reach 35% by 2030'.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary technical guide, older than the recency window."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "optics",
+  "observedAt": "2026-06-03",
+  "capturedAt": "2026-07-20T13:42:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

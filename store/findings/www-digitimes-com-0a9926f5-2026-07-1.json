@@ -1,0 +1,43 @@
+{
+  "id": "www-digitimes-com-0a9926f5-2026-07-1",
+  "statement": "Liquid-cooling requirements are doubling in under a year as NVL72 Vera Rubin racks (2H 2026) arrive, with CDUs, manifolds, and connectors flagged as an extended-lead-time deployment bottleneck.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Cooling components are becoming a long-lead constraint on AI-server deployment as rack thermal density rises sharply.",
+  "impact": {
+    "targets": [
+      "energy.cooling",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Doubling cooling load plus extended CDU/manifold procurement lead times slow deployment of Rubin-class GPU racks."
+  },
+  "evidence": [
+    {
+      "source": "DIGITIMES (digitimes.com)",
+      "url": "https://www.digitimes.com/news/a20260520PD236/ai-server-liquid-cooling-nvidia-2026.html",
+      "date": "2026-05-20",
+      "excerpt": "Cooling requirements are doubling in less than a year, with the NVL72 rack based on the Vera Rubin architecture, expected in the second half of 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Headline plus one accessible quote; lead-time figures paywalled and remaining context is unverified web synthesis."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "liquid-cooling",
+  "observedAt": "2026-05-20",
+  "capturedAt": "2026-07-20T13:42:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

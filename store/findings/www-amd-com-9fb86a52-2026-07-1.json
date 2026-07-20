@@ -1,0 +1,42 @@
+{
+  "id": "www-amd-com-9fb86a52-2026-07-1",
+  "statement": "AMD's Advancing AI 2026 event (July 22-23) is expected to deliver MI400 production timelines and pricing plus early MI500 detail, the next major merchant-GPU catalyst landing just past the sweep.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "A confirmed flagship event with pending MI400/MI500 disclosures signals imminent expansion of competitive merchant-GPU supply.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "positive",
+    "mechanism": "A new Instinct generation (432 GB HBM4, Helios rack) adds an alternative accelerator supplier, increasing merchant-GPU supply and competition."
+  },
+  "evidence": [
+    {
+      "source": "AMD Newsroom / Tweaktown / DCD",
+      "url": "https://www.amd.com/en/corporate/events/advancing-ai.html",
+      "date": "2026-07-16",
+      "excerpt": "AMD's flagship 'Advancing AI 2026' event is scheduled for July 22-23, 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The event is scheduled and press expects MI400 pricing and benchmarks plus MI500 detail, but no hard new numbers have been released yet; treated as a forward expectation to re-capture after July 23.",
+  "confidence": {
+    "level": "low",
+    "basis": "Forward calendar signal, secondary press, no confirmed figures this week."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-20T13:42:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
