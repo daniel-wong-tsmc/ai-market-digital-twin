@@ -295,6 +295,8 @@ def _attention_state(store_root, category_id):
 
 
 def build_brief_model(category_id, store_dir, today, price_fn=None):
+    from .deepdive_model import build_deepdive_targets
+
     store_root = Path(store_dir)
     cat_dir = store_root / category_id
     latest, prior, as_of, rev = latest_monthly(cat_dir)
@@ -311,6 +313,7 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
                                  _dict_findings(prior), today, labels)
 
     book = read_thesis_book(store_root, category_id)
+    impl_lines = read_implication_lines(store_root, category_id, as_of)
     rows, total, prov = select_calls(book)
     call_rows = [{"title": e.get("title") or "", "lens": e.get("lens") or "",
                   "conviction": e.get("conviction") or "",
@@ -372,8 +375,10 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
                     "source": o.candidate.source_name, "was": o.was_label,
                     "delta_line": o.candidate.delta_line}
                    for o in occupants],
-        "tsmc": read_implication_lines(store_root, category_id, as_of),
+        "tsmc": impl_lines,
         "calls": {"rows": call_rows, "total": total, "provisional": prov},
+        "deepdive": build_deepdive_targets(
+            latest, dimension_rating_history(cat_dir), book, impl_lines),
         "strip": signal_strip(cat_dir),
         "chart": chart_series(cat_dir),
         "dimensions": dims,

@@ -288,3 +288,23 @@ def test_dimension_rating_history_ordinals(tmp_path):
     _rev_dims(cat, "2026-07-v2.json", "Strong")
     h = dimension_rating_history(cat)
     assert h["bottleneck"] == [0.0, 2.0]   # Weak=0, Strong=2
+
+
+from gpu_agent.dashboard.brief_model import build_brief_model
+import datetime
+
+
+def test_build_brief_model_has_deepdive(tmp_path):
+    root = tmp_path / "store"; cat = root / CAT; cat.mkdir(parents=True)
+    (cat / "2026-07-v1.json").write_text(json.dumps({
+        "asOf": "2026-07", "narrative": "One. Two. Three.",
+        "categoryStatus": {"rating": "Strong", "direction": "improving", "reason": "r."},
+        "dimensionRatings": {"bottleneck": {"rating": "Weak", "direction": "improving",
+            "confidence": {"level": "medium", "basis": "b"}, "rationale": "Why text.",
+            "findingIds": [], "voteSpread": "3/3 Weak"}},
+        "dimensionStatus": {}, "findings": []}), encoding="utf-8")
+    m = build_brief_model(CAT, root, datetime.date(2026, 7, 20))
+    assert "bottleneck" in m["deepdive"]
+    assert m["deepdive"]["bottleneck"]["why"] == "Why text."
+    assert m["brief_two"] == "One. Two."
+    assert "demand" in m["chart"]
