@@ -164,6 +164,20 @@ def _first_sentence(text):
     return text
 
 
+def first_n_sentences(text, n=2):
+    text = (text or "").strip()
+    out, rest = [], text
+    for _ in range(n):
+        s = _first_sentence(rest)
+        if not s:
+            break
+        out.append(s)
+        rest = rest[len(s):].strip()
+        if not rest:
+            break
+    return " ".join(out)
+
+
 def _strip_entry(findings, prior_ids):
     fresh = [f for f in findings if f.get("id") not in prior_ids]
     if not fresh:
@@ -298,6 +312,7 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
         "category_id": category_id, "category_label": "Merchant GPU",
         "month_label": f"{_MONTHS[int(month) - 1]} {year}" if as_of else "",
         "revision": rev, "narrative": latest.get("narrative") or "",
+        "brief_two": first_n_sentences(latest.get("narrative") or "", 2),
         "status": {"rating": status.get("rating") or "—",
                    "direction": status.get("direction") or "",
                    "reason": _first_sentence(status.get("reason")),

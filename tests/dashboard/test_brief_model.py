@@ -229,3 +229,19 @@ def test_first_sentence_skips_common_abbreviations():
         == "Growth, e.g. in HBM, is strong."
     assert _first_sentence("Revenue set a record. The next quarter guides up.") \
         == "Revenue set a record."
+
+
+def test_first_n_sentences_takes_two():
+    from gpu_agent.dashboard.brief_model import first_n_sentences
+    t = "Demand is at record levels. The gap is narrowing. A third point."
+    assert first_n_sentences(t, 2) == "Demand is at record levels. The gap is narrowing."
+
+
+def test_first_n_sentences_short_input_returns_all():
+    from gpu_agent.dashboard.brief_model import first_n_sentences
+    assert first_n_sentences("Only one here.", 2) == "Only one here."
+
+
+def test_first_n_sentences_empty():
+    from gpu_agent.dashboard.brief_model import first_n_sentences
+    assert first_n_sentences("", 2) == "" and first_n_sentences(None, 2) == ""
