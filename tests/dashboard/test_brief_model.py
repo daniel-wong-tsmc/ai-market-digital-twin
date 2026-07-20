@@ -229,3 +229,82 @@ def test_first_sentence_skips_common_abbreviations():
         == "Growth, e.g. in HBM, is strong."
     assert _first_sentence("Revenue set a record. The next quarter guides up.") \
         == "Revenue set a record."
+
+
+def test_first_n_sentences_takes_two():
+    from gpu_agent.dashboard.brief_model import first_n_sentences
+    t = "Demand is at record levels. The gap is narrowing. A third point."
+    assert first_n_sentences(t, 2) == "Demand is at record levels. The gap is narrowing."
+
+
+def test_first_n_sentences_short_input_returns_all():
+    from gpu_agent.dashboard.brief_model import first_n_sentences
+    assert first_n_sentences("Only one here.", 2) == "Only one here."
+
+
+def test_first_n_sentences_empty():
+    from gpu_agent.dashboard.brief_model import first_n_sentences
+    assert first_n_sentences("", 2) == "" and first_n_sentences(None, 2) == ""
+
+
+from gpu_agent.dashboard.brief_model import chart_series
+
+
+def _rev(cat, name, dmi, smi):
+    (cat / name).write_text(json.dumps({
+        "asOf": name[:7], "demandSupply": {"dmiContribution": dmi, "smiContribution": smi},
+        "findings": []}), encoding="utf-8")
+
+
+def test_chart_series_orders_and_limits(tmp_path):
+    cat = tmp_path / "store" / CAT; cat.mkdir(parents=True)
+    _rev(cat, "2026-07-v1.json", 1.0, -0.2)
+    _rev(cat, "2026-07-v2.json", 1.5, -0.1)
+    _rev(cat, "2026-07-v3.json", 2.0, 0.1)
+    (cat / "2026-07-05-v1.json").write_text(json.dumps({"demandSupply": {}, "findings": []}), encoding="utf-8")  # daily excluded
+    s = chart_series(cat, limit=2)
+    assert s["demand"] == [1.5, 2.0]        # last 2, chronological
+    assert s["supply"] == [-0.1, 0.1]
+    assert s["labels"] == ["2026-07-v2", "2026-07-v3"]
+
+
+def test_chart_series_missing_dir_is_empty(tmp_path):
+    s = chart_series(tmp_path / "nope")
+    assert s == {"labels": [], "demand": [], "supply": []}
+
+
+from gpu_agent.dashboard.brief_model import dimension_rating_history
+
+
+def _rev_dims(cat, name, bott):
+    (cat / name).write_text(json.dumps({
+        "dimensionRatings": {"bottleneck": {"rating": bott}}, "findings": []}),
+        encoding="utf-8")
+
+
+def test_dimension_rating_history_ordinals(tmp_path):
+    cat = tmp_path / "store" / CAT; cat.mkdir(parents=True)
+    _rev_dims(cat, "2026-07-v1.json", "Weak")
+    _rev_dims(cat, "2026-07-v2.json", "Strong")
+    h = dimension_rating_history(cat)
+    assert h["bottleneck"] == [0.0, 2.0]   # Weak=0, Strong=2
+
+
+from gpu_agent.dashboard.brief_model import build_brief_model
+import datetime
+
+
+def test_build_brief_model_has_deepdive(tmp_path):
+    root = tmp_path / "store"; cat = root / CAT; cat.mkdir(parents=True)
+    (cat / "2026-07-v1.json").write_text(json.dumps({
+        "asOf": "2026-07", "narrative": "One. Two. Three.",
+        "categoryStatus": {"rating": "Strong", "direction": "improving", "reason": "r."},
+        "dimensionRatings": {"bottleneck": {"rating": "Weak", "direction": "improving",
+            "confidence": {"level": "medium", "basis": "b"}, "rationale": "Why text.",
+            "findingIds": [], "voteSpread": "3/3 Weak"}},
+        "dimensionStatus": {}, "findings": []}), encoding="utf-8")
+    m = build_brief_model(CAT, root, datetime.date(2026, 7, 20))
+    assert "bottleneck" in m["deepdive"]
+    assert m["deepdive"]["bottleneck"]["why"] == "Why text."
+    assert m["brief_two"] == "One. Two."
+    assert "demand" in m["chart"]

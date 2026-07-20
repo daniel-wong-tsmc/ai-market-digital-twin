@@ -1,5 +1,7 @@
+import datetime as dt
 import json, os
 from gpu_agent.dashboard.build import build_dashboard
+from gpu_agent.dashboard.site_build import build_site
 
 FIX = "tests/dashboard/fixtures"
 
@@ -54,3 +56,17 @@ def test_build_model_change_parity_sees_fixture_history(tmp_path):
                        f"{FIX}/plain-2026-07-06.json", "2026-07-06 09:20")
     assert m["alert"]["prior"] is not None                # 4 runs of history -> a prior color
     assert any("no run yet" not in w["text"] for w in m["what_changed"])
+
+def test_e2e_index_has_panel_and_no_folded_headers(tmp_path):
+    # F100 Task 12: the category index.html is the executive brief (built via
+    # build_site, mirroring test_site_build.py's _build helper), and it must carry
+    # the deep-dive panel shell while the old "Standing calls" <h2> is gone (folded
+    # into the panel). The fixture store only has dated daily scorecards, so the
+    # brief itself renders thin -- that's fine; this asserts panel presence + the
+    # folded section's absence, not brief content richness.
+    build_site("chips.merchant-gpu", FIX, work_dir="work-nonexistent",
+               plain_path=f"{FIX}/plain-2026-07-06.json",
+               out_dir=str(tmp_path / "site"), price_fn=lambda d: {"H100": 2.31})
+    html = (tmp_path / "site" / "chips.merchant-gpu" / "index.html").read_text(encoding="utf-8")
+    assert 'id="dd-drawer"' in html
+    assert "<h2>Standing calls</h2>" not in html

@@ -10,12 +10,38 @@ from pathlib import Path
 _MONTHLY_RE = re.compile(r"^(\d{4}-\d{2})-v(\d+)\.json$")
 _CONVICTION_ORDER = {"high": 0, "medium": 1, "low": 2}
 
+RATING_ORDINAL = {"weak": 0.0, "mixed": 1.0, "moderate": 1.0,
+                  "strong": 2.0, "very strong": 3.0}
+
 
 def _read_json(path):
     try:
         return json.loads(Path(path).read_text(encoding="utf-8"))
     except (OSError, ValueError):
         return None
+
+
+def dimension_rating_history(cat_dir, limit=12):
+    cat_dir = Path(cat_dir)
+    try:
+        paths = list(cat_dir.iterdir())
+    except OSError:
+        return {}
+    revs = sorted(((m.group(1), int(m.group(2)), p)
+                   for p in paths for m in [_MONTHLY_RE.match(p.name)] if m),
+                  key=lambda t: (t[0], t[1]))[-limit:]
+    hist = {}
+    for _, _, p in revs:
+        art = _read_json(p) or {}
+        ratings = art.get("dimensionRatings")
+        if not isinstance(ratings, dict):
+            continue
+        for name, r in ratings.items():
+            if not isinstance(r, dict):
+                continue
+            word = (r.get("rating") or "").strip().lower()
+            hist.setdefault(name, []).append(RATING_ORDINAL.get(word, 1.0))
+    return hist
 
 
 def _dict_findings(art):
@@ -164,6 +190,20 @@ def _first_sentence(text):
     return text
 
 
+def first_n_sentences(text, n=2):
+    text = (text or "").strip()
+    out, rest = [], text
+    for _ in range(n):
+        s = _first_sentence(rest)
+        if not s:
+            break
+        out.append(s)
+        rest = rest[len(s):].strip()
+        if not rest:
+            break
+    return " ".join(out)
+
+
 def _strip_entry(findings, prior_ids):
     fresh = [f for f in findings if f.get("id") not in prior_ids]
     if not fresh:
@@ -175,6 +215,26 @@ def _strip_entry(findings, prior_ids):
                 if e.get("source")), "")
     return {"date": max(d for d in dates if d) if any(dates) else "",
             "text": _first_sentence(top.get("statement")), "source": src}
+
+
+def chart_series(cat_dir, limit=12):
+    cat_dir = Path(cat_dir)
+    try:
+        paths = list(cat_dir.iterdir())
+    except OSError:
+        return {"labels": [], "demand": [], "supply": []}
+    revs = sorted(((m.group(1), int(m.group(2)), p)
+                   for p in paths for m in [_MONTHLY_RE.match(p.name)] if m),
+                  key=lambda t: (t[0], t[1]))[-limit:]
+    labels, demand, supply = [], [], []
+    for as_of, rev, p in revs:
+        art = _read_json(p) or {}
+        ds = art.get("demandSupply")
+        ds = ds if isinstance(ds, dict) else {}
+        labels.append(f"{as_of}-v{rev}")
+        demand.append(float(ds.get("dmiContribution") or 0.0))
+        supply.append(float(ds.get("smiContribution") or 0.0))
+    return {"labels": labels, "demand": demand, "supply": supply}
 
 
 def signal_strip(cat_dir, limit=7):
@@ -235,6 +295,8 @@ def _attention_state(store_root, category_id):
 
 
 def build_brief_model(category_id, store_dir, today, price_fn=None):
+    from .deepdive_model import build_deepdive_targets
+
     store_root = Path(store_dir)
     cat_dir = store_root / category_id
     latest, prior, as_of, rev = latest_monthly(cat_dir)
@@ -251,6 +313,7 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
                                  _dict_findings(prior), today, labels)
 
     book = read_thesis_book(store_root, category_id)
+    impl_lines = read_implication_lines(store_root, category_id, as_of)
     rows, total, prov = select_calls(book)
     call_rows = [{"title": e.get("title") or "", "lens": e.get("lens") or "",
                   "conviction": e.get("conviction") or "",
@@ -298,6 +361,7 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
         "category_id": category_id, "category_label": "Merchant GPU",
         "month_label": f"{_MONTHS[int(month) - 1]} {year}" if as_of else "",
         "revision": rev, "narrative": latest.get("narrative") or "",
+        "brief_two": first_n_sentences(latest.get("narrative") or "", 2),
         "status": {"rating": status.get("rating") or "—",
                    "direction": status.get("direction") or "",
                    "reason": _first_sentence(status.get("reason")),
@@ -311,9 +375,12 @@ def build_brief_model(category_id, store_dir, today, price_fn=None):
                     "source": o.candidate.source_name, "was": o.was_label,
                     "delta_line": o.candidate.delta_line}
                    for o in occupants],
-        "tsmc": read_implication_lines(store_root, category_id, as_of),
+        "tsmc": impl_lines,
         "calls": {"rows": call_rows, "total": total, "provisional": prov},
+        "deepdive": build_deepdive_targets(
+            latest, dimension_rating_history(cat_dir), book, impl_lines),
         "strip": signal_strip(cat_dir),
+        "chart": chart_series(cat_dir),
         "dimensions": dims,
         "evidence": {"n": len(findings),
                      "median": observed[len(observed) // 2] if observed else "",

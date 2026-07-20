@@ -5,7 +5,7 @@ import datetime
 from pathlib import Path
 
 from .brief_model import build_brief_model
-from .brief_render import BRIEF_CSS, lint_exec_copy, lint_tile_labels, render_brief
+from .brief_render import BRIEF_CSS, DASHBOARD_CSS, lint_exec_copy, lint_tile_labels, render_brief
 from .site_model import build_site_model
 from .site_render import (
     SITE_CSS, render_appendix, render_how_alert, render_how_featured,
@@ -46,8 +46,8 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
     label = model["category_label"]
     _write(out / "index.html",
            render_index_redirect(f"{category_id}/index.html", label))
-    _write(out / "style.css", SITE_CSS + BRIEF_CSS)
-    _write(cat / "style.css", SITE_CSS + BRIEF_CSS)
+    _write(out / "style.css", SITE_CSS + BRIEF_CSS + DASHBOARD_CSS)
+    _write(cat / "style.css", SITE_CSS + BRIEF_CSS + DASHBOARD_CSS)
     _write(cat / "index.html", brief_html); pages += 1
     _write(cat / "appendix.html", render_appendix(model)); pages += 1
     _write(cat / "how" / "alert.html", render_how_alert(model)); pages += 1
