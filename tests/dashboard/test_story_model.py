@@ -99,3 +99,51 @@ def test_missing_series_chip_skipped(tmp_path):
     (st / "series" / "odmMonthlyAiRevenue.jsonl").unlink()
     m = build_story_model(CAT, st, dt.date(2026, 7, 22))
     assert "Servers actually shipped" not in [p["label"] for p in m["kpis"]["picks"]]
+
+
+def test_scenes_assembled(tmp_path):
+    m = build_story_model(CAT, _store(tmp_path), dt.date(2026, 7, 22))
+    titles = [s["title"] for s in m["scenes"]]
+    assert titles[0] == "What tightened"
+    assert titles[-1] == "What would close the gap"
+    s1 = m["scenes"][0]
+    assert s1["n"] == 1 and s1["accent"] == "amber"
+    assert any("memory makers cut back" in p.lower() for p in s1["paragraphs"])
+    assert s1["visual"]["kind"] == "spark" and s1["visual"]["series"]
+    assert s1["source_line"].startswith("Source: ")
+    assert "momentum" not in " ".join(
+        p for s in m["scenes"] for p in s["paragraphs"]).lower()
+
+
+def test_scene_evidence_and_related(tmp_path):
+    m = build_story_model(CAT, _store(tmp_path), dt.date(2026, 7, 22))
+    ev = m["evidence"]["scene:1"]
+    assert ev["findings"][0]["source"] == "Micron call"
+    assert ev["findings"][0]["url"] == "https://x.example/a"
+    demand_scene = next(s for s in m["scenes"] if s["title"] == "Demand kept climbing")
+    assert demand_scene["related"][0]["outlet"] == "CNBC"
+
+
+def test_forward_scene_from_implications(tmp_path):
+    m = build_story_model(CAT, _store(tmp_path), dt.date(2026, 7, 22))
+    last = m["scenes"][-1]
+    assert any("memory supply recovery" in p.lower() for p in last["paragraphs"])
+
+
+def test_kpi_scene_links_and_callouts(tmp_path):
+    m = build_story_model(CAT, _store(tmp_path), dt.date(2026, 7, 22))
+    linked = [p["scene"] for p in m["kpis"]["picks"] if p["scene"]]
+    assert linked and linked == sorted(linked)
+    assert m["callouts"] and m["callouts"][0]["claim"].startswith("scene:")
+
+
+def test_archive_and_explore_counts(tmp_path):
+    st = _store(tmp_path)
+    (st / "wiki" / "entity").mkdir(parents=True)
+    (st / "wiki" / "entity" / "nvidia.md").write_text("x", encoding="utf-8")
+    (st / "findings").mkdir()
+    (st / "findings" / "a.json").write_text("{}", encoding="utf-8")
+    m = build_story_model(CAT, st, dt.date(2026, 7, 22))
+    assert m["explore"] == {"entities": 1, "findings": 1, "series": 5,
+                            "history": 2}
+    assert m["archive"] and m["archive"][-1]["key"] == "2026-06"

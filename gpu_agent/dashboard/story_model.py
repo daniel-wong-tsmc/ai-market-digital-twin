@@ -137,6 +137,146 @@ def build_story_model(category_id: str, store_dir: str | Path,
     return model
 
 
+_ACCENTS = ["amber", "terracotta", "teal", "green"]
+
+
+def _resolve_findings(latest: dict, ids: list[str]) -> list[dict]:
+    by_id = {f.get("id"): f for f in latest.get("findings") or []}
+    return [by_id[i] for i in ids if i in by_id]
+
+
+def _finding_rows(findings: list[dict]) -> list[dict]:
+    rows, seen = [], set()
+    for f in findings:
+        for e in f.get("evidence") or []:
+            url = e.get("url", "")
+            if not url or url in seen:
+                continue
+            seen.add(url)
+            rows.append({"source": e.get("source", "source"),
+                        "date": e.get("date", ""),
+                        "take": (f.get("statement") or "")[:90],
+                        "url": url})
+    return rows[:3]
+
+
+def _related(findings: list[dict]) -> list[dict]:
+    out, seen = [], set()
+    for f in findings:
+        for e in f.get("evidence") or []:
+            if e.get("tier") != "secondary":
+                continue
+            url = e.get("url", "")
+            if not url or url in seen:
+                continue
+            seen.add(url)
+            out.append({"outlet": e.get("source", ""),
+                        "title": (e.get("excerpt") or f.get("statement") or "")[:60],
+                        "date": e.get("date", ""), "url": url})
+            if len(out) == 2:
+                return out
+    return out
+
+
+def _source_line(findings: list[dict]) -> str:
+    names = []
+    for f in findings:
+        for e in f.get("evidence") or []:
+            s = e.get("source")
+            if s and s not in names:
+                names.append(s)
+    return "Source: " + ("; ".join(names[:3]) if names
+                        else "agent-tracked filings and reporting")
+
+
+def _mk_scene(n, title, paragraphs, series_vals, series_label, findings):
+    return {"n": n, "accent": _ACCENTS[(n - 1) % 4], "title": title,
+            "paragraphs": [p for p in paragraphs if p],
+            "visual": {"kind": "spark", "series": series_vals,
+                       "label": series_label},
+            "source_line": _source_line(findings),
+            "related": _related(findings),
+            "claims": [f"scene:{n}"]}
+
+
 def _add_scenes(model, latest, store_root, cat_dir, series, gl):
-    """Filled in by Task 4."""
-    return None
+    dims = latest.get("dimensionRatings") or {}
+    status = latest.get("categoryStatus") or {}
+    sv = lambda ind: [r["value"] for r in series.get(ind, [])[-8:]]
+    plain = lambda t, n=2: first_n_sentences(term_swap(t or "", gl), n)
+
+    specs = []
+    if dims.get("bottleneck"):
+        d = dims["bottleneck"]
+        specs.append(("What tightened",
+                      [plain(d.get("rationale")), plain(status.get("reason"), 1)],
+                      sv("hbmSupplyCapex"), "Memory factory spending",
+                      _resolve_findings(latest, d.get("findingIds") or [])))
+    if dims.get("momentum"):
+        d = dims["momentum"]
+        specs.append(("Demand kept climbing", [plain(d.get("rationale"))],
+                      sv("hyperscalerCapexRevision"), "Big buyers' spending plans",
+                      _resolve_findings(latest, d.get("findingIds") or [])))
+    if dims.get("unitEconomics") or series.get("odmMonthlyAiRevenue"):
+        d = dims.get("unitEconomics") or {}
+        specs.append(("Where supply is gaining", [plain(d.get("rationale"))],
+                      sv("odmMonthlyAiRevenue"), "Servers actually shipped",
+                      _resolve_findings(latest, d.get("findingIds") or [])))
+    lines = read_implication_lines(store_root, model["category_id"],
+                                   model["as_of"]) or []
+    watch = [plain(l.get("text") or "", 1) for l in lines[:3]]
+    watch_f = _resolve_findings(
+        latest, [i for l in lines for i in l.get("finding_ids") or []])
+    if watch:
+        specs.append(("What would close the gap", watch,
+                      sv("hbmSupplyCapex"), "Memory factory spending", watch_f))
+
+    for i, (title, paras, vals, vlabel, finds) in enumerate(specs, start=1):
+        sc = _mk_scene(i, title, paras, vals, vlabel, finds)
+        if not sc["paragraphs"]:
+            continue
+        model["scenes"].append(sc)
+        model["evidence"][f"scene:{sc['n']}"] = {
+            "title": f"{title} — says who?",
+            "claim_text": sc["paragraphs"][0],
+            "findings": _finding_rows(finds) or model["evidence"].get(
+                "kpi:gpuRentalOnDemand", {}).get("findings", []),
+            "series": vals, "explore": "appendix.html"}
+
+    for i, pick in enumerate(model["kpis"]["picks"]):
+        if i < len(model["scenes"]):
+            pick["scene"] = model["scenes"][i]["n"]
+            pick["caption"] = pick["caption"] or "picked by today's story"
+
+    if model["gap"] and model["scenes"]:
+        month = model["gap"]["months"][-1]
+        model["callouts"] = [{
+            "month_key": month["key"],
+            "text": f"{month['label']}: {model['scenes'][0]['title'].lower()}",
+            "claim": "scene:1"}]
+
+    from gpu_agent.dashboard.gap_chart import _monthly_records
+    recs = _monthly_records(cat_dir)
+    arch = []
+    # Each entry is keyed to the earlier month of the pair being compared
+    # (recs[j - 1]), so the loop's own bounds already stop one short of the
+    # current month — no separate "drop today's story" trim is needed, and
+    # this also works with as few as 2 monthly snapshots (see deviation note
+    # in task-4-report.md: the brief's original `key = recs[j]["key"]` +
+    # trailing `arch[:-1]` trim produced an empty archive whenever there
+    # were only 2 monthly records, failing the brief's own test).
+    for j in range(max(1, len(recs) - 4), len(recs)):
+        d_ = recs[j]["dmi"] - recs[j]["smi"]
+        p_ = recs[j - 1]["dmi"] - recs[j - 1]["smi"]
+        word = "widened" if d_ > p_ else ("narrowed" if d_ < p_ else "held")
+        key = recs[j - 1]["key"]
+        label = dt.date(int(key[:4]), int(key[5:7]), 1).strftime("%B %Y")
+        arch.append({"key": key, "label": label,
+                    "text": _HEADLINES.get(word, "")})
+    model["archive"] = arch
+
+    model["explore"] = {
+        "entities": len(list((store_root / "wiki" / "entity").glob("*.md"))),
+        "findings": len(list((store_root / "findings").glob("*.json"))),
+        "series": len(list((store_root / "series").glob("*.jsonl"))),
+        "history": len(list(cat_dir.glob("*.json")))}
