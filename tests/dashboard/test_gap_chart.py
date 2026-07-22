@@ -47,3 +47,39 @@ def test_spark_svg_shape():
     svg = spark_svg([1.0, 2.0, 1.5])
     assert svg.startswith("<svg") and "polyline" in svg and "viewBox" in svg
     assert spark_svg([]) == ""
+
+
+from gpu_agent.dashboard.gap_chart import render_gap_svg
+
+
+def _data(tmp_path):
+    _mk_monthly(tmp_path, "2026-05", 1, 1.0, 0.5)
+    _mk_monthly(tmp_path, "2026-06", 1, 1.0, 1.0)
+    _mk_monthly(tmp_path, "2026-07", 1, 2.0, 0.2)
+    return build_gap_data(tmp_path)
+
+
+def test_render_gap_svg_structure(tmp_path):
+    svg = render_gap_svg(_data(tmp_path))
+    assert svg.count("<svg") == 1 and svg.count("</svg>") == 1
+    assert "polyline" in svg and "polygon" in svg          # lines + shaded gap
+    assert "the gap, this week" in svg
+    assert "What buyers want (demand)" in svg
+    assert "What can be shipped (supply)" in svg
+    assert "orders vs. chips shipped, indexed" in svg
+    assert 'stroke-dasharray' in svg                        # now-line
+    assert ">Jul<" in svg and ">May<" in svg                # month ticks
+
+
+def test_render_gap_svg_callout_is_panel_trigger(tmp_path):
+    svg = render_gap_svg(_data(tmp_path), callouts=[
+        {"month_key": "2026-06", "text": "Jun: memory makers cut back",
+         "claim": "callout:1"}])
+    assert 'data-ev="callout:1"' in svg
+    assert "Jun: memory makers cut back" in svg
+
+
+def test_render_gap_svg_escapes_callout_text(tmp_path):
+    svg = render_gap_svg(_data(tmp_path), callouts=[
+        {"month_key": "2026-06", "text": "<img src=x>", "claim": None}])
+    assert "<img" not in svg and "&lt;img" in svg
