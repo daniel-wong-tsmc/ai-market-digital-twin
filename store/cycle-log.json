@@ -1,222 +1,149 @@
 {
- "scope": "category:chips.merchant-gpu",
- "asOf": "2026-07",
- "mode": "live",
- "capturedAt": "2026-07-20T12:03:52Z",
- "runDir": "work/merchant-gpu-2026-07",
- "note": "Manual live merchant-GPU cycle (2026-07-20), Claude Code = brain: every extract/judge/thesis/implication dispatch was model:opus and reasoned tool-less, session saved each answer to a file; deterministic gates were the backstop. This is a top-up (F62): store showed 106 in-window findings, so the gather targeted the 5 not-covered indicators (apiArr, marginalBuyerFinancing, odmMonthlyAiRevenue, tokenEconomics, upstreamLeadTimes) plus week-over-week material moves, capped at min(manifest maxDocuments,10)=10. AFK-defaults/notes: (1) Harness exposes no per-dispatch tool allowlist, so the F88 no-Bash gatherer wall and tool-less brains were enforced BEHAVIOURALLY via explicit no-shell prompts (3 gatherers instructed Read/Write/WebSearch/WebFetch-only; all brains tool-less). (2) Gathered 12 blobs against the top-up cap of 10 (3 parallel gatherers each produced 3-4 independently); kept all 12 as all bear on not-covered indicators or material moves, and intra-batch/corpus dedup dropped 7 duplicates downstream -- logged, not silently over-cap. (3) 8 kept documents were older than the 7-day sweep and recorded in pursuedDespiteAge (each still-authoritative for a not-covered indicator); 1 licensed source fetched and flagged (siliconanalysts.com). (4) Extraction: 19 findings, 0 dropped, UNREGISTERED-ENTITY 4 (market/memory/multi/odm -- proxy entities, flagged not rejected). (5) Judge: 3 separate tool-less opus samples; voice-lint rejected sample 3 for acronym 'MI355X' not on allowlist -- re-dispatched only sample 3 to drop it, then pipeline passed clean (voice-lint + sufficiency OK). (6) Thesis: raw answer had ~16 abbreviated finding-id citations (dropped the '-2026-07' middle segment); remapped each to the exact valid id present in <findings> (unambiguous, so a direct correction not a re-dispatch); gate then accepted all 27 judgments, 26 applied, 1 deferred by anti-whipsaw (model-provider-revenue reversal weakened->strengthened was secondary-only, 2 publishers < 3 -- recorded not applied), 2 new provisional theses registered. (7) Implication gate rejected first answer (acronyms ASE/OSAT/EPYC + banned word 'leverage'); re-dispatched the brain to fix only those, gate then passed 7 lines. (8) DMI 2.153 (was 0.507 prior monthly v-baseline), SMI -0.193 -- frozen deterministic scorer over today's evidence mix, not adjusted. (9) price-sync crashed with the same pre-existing bug the 2026-07-18 log flagged (ValueError in gpu_agent/price_local.py _yymmdd_date, empty-string date parse); per the skill price-sync never blocks the cycle, so logged and proceeded. Not fixed mid-run. (10) AFK-DEFAULT (re-surface): site build first failed the F97/F98 exec-copy register lint -- tile label 'Marginal-buyer financing conditions (X5)' carried the raw doctrine code. marginalBuyerFinancing reached the site for the first time this cycle (it was a not-covered indicator until now); all 7 coded indicator labels (pkgCapacityOrderSpread S1, hbmSupplyCapex S2, upstreamLeadTimes S4, hyperscalerCapexRevision D1, odmMonthlyAiRevenue D9, tokenEconomics D4, marginalBuyerFinancing X5) would trip the lint once they became agenda tiles. Applied a display-layer fix in gpu_agent/dashboard/brief_model.py::_indicator_labels() to strip a trailing ' (code)' suffix from tile labels (aligns with F98's plain-English-tile-label intent; does NOT touch the frozen brain, schema, gate, or scoring). Site then built pages=8. Dashboard/site test subset (280) + F6 eval-baseline pin both green; full-suite run in progress at commit time.",
- "entries": [
-  {
-   "categoryId": "chips.merchant-gpu",
-   "assignmentPath": "fixtures/asg.chips.merchant-gpu.json",
-   "status": "done",
-   "scorecard": "store/chips.merchant-gpu/2026-07-v12.json",
-   "dmi": 2.153,
-   "smi": -0.193,
-   "answers": {
-    "extract": "work/merchant-gpu-2026-07/extract-answer.json",
-    "judge": "work/merchant-gpu-2026-07/judge-answer.json",
-    "thesis": "work/merchant-gpu-2026-07/thesis-answer.json",
-    "implication": "work/merchant-gpu-2026-07/implication-answer.json"
-   },
-   "corpus": {
-    "coverage": "work/merchant-gpu-2026-07/corpus-coverage.json",
-    "merged": "work/merchant-gpu-2026-07/corpus-findings.json",
-    "dedupedFresh": "work/merchant-gpu-2026-07/deduped-fresh.json",
-    "report": "work/merchant-gpu-2026-07/corpus-report.json",
-    "counts": {
-     "storeInWindow": 106,
-     "faded": 30,
-     "freshNew": 7,
-     "update": 5,
-     "duplicate": 7,
-     "merged": 118
+  "asOf": "2026-07",
+  "mode": "daily",
+  "capturedAt": "2026-07-22T13:42:00Z",
+  "scope": "category:chips.merchant-gpu",
+  "entries": [
+    {
+      "category_id": "chips.merchant-gpu",
+      "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
+      "status": "done",
+      "scorecard": "store/chips.merchant-gpu/2026-07-v14.json",
+      "dmi": 2.353,
+      "smi": -0.887,
+      "answers": {
+        "extract": "work/daily-2026-07-22/extract-answer.json",
+        "judge": "work/daily-2026-07-22/judge-answer.json",
+        "thesis": "work/daily-2026-07-22/thesis-answer.json",
+        "implication": "work/daily-2026-07-22/implication-answer.json"
+      },
+      "corpus": {
+        "coverage": "work/daily-2026-07-22/corpus-coverage.json",
+        "merged": "work/daily-2026-07-22/corpus-findings.json",
+        "dedupedFresh": "work/daily-2026-07-22/deduped-fresh.json",
+        "report": "work/daily-2026-07-22/corpus-report.json",
+        "counts": {
+          "storeInWindow": 123,
+          "freshNew": 3,
+          "freshUpdate": 8,
+          "freshDuplicate": 5
+        }
+      },
+      "dedupL2": {
+        "report": "store/chips.merchant-gpu/dedup-2026-07.json",
+        "new": 3,
+        "update": 8,
+        "duplicate": 5
+      },
+      "gather": {
+        "documents": 10,
+        "droppedKnown": 0,
+        "log": "work/daily-2026-07-22/docs/gather-log.json",
+        "skipped": [
+          "round 2 not run: maxDocuments (10, daily cap) reached in round 1 \u2014 unfetched leads logged in gather-log",
+          "discovery tool last30days skipped this run (AFK-default: daily budget; healthy per web-reach-ensure)",
+          "lead thundercompute B200 pricing not chased: maxDocuments reached",
+          "lead techtimes Inventec 40+ week DRAM lead-times (403) not retried: maxDocuments reached",
+          "lead digitimes CoWoS 52-78wk booking windows: paywalled at fetch time, logged not fetched",
+          "lead techtimes TSMC Arizona $265B four-fab packaging: 403 at fetch, maxDocuments reached",
+          "lead datacenterknowledge July 2026 hardware roundup not chased: maxDocuments reached",
+          "lead AMD Advancing AI 2026 official announcements (Jul 22-23) not chased: maxDocuments reached",
+          "round 2 not run: maxDocuments (10, daily cap) reached in round 1 \u2014 unfetched leads logged in gather-log",
+          "discovery tool last30days skipped this run (AFK-default: daily budget; healthy per web-reach-ensure)",
+          "lead thundercompute B200 pricing not chased: maxDocuments reached",
+          "lead techtimes Inventec 40+ week DRAM lead-times (403) not retried: maxDocuments reached",
+          "lead digitimes CoWoS 52-78wk booking windows: paywalled at fetch time, logged not fetched",
+          "lead techtimes TSMC Arizona $265B four-fab packaging: 403 at fetch, maxDocuments reached",
+          "lead datacenterknowledge July 2026 hardware roundup not chased: maxDocuments reached",
+          "lead AMD Advancing AI 2026 official announcements (Jul 22-23) not chased: maxDocuments reached"
+        ],
+        "pursuedDespiteAge": [
+          {
+            "ref": "https://www.supplychainconnect.com/procurement/article/55384522/the-2026-supply-chain-supercycle-why-ai-infrastructure-shortages-run-deeper-than-the-chip",
+            "date": "2026-06-23",
+            "ageDays": 29,
+            "reason": "structural upstream-component shortage overview (optics/cooling/power/PCB) with no fresher restatement found in-window"
+          },
+          {
+            "ref": "https://www.koreaherald.com/article/10795719",
+            "date": "2026-07-02",
+            "ageDays": 20,
+            "reason": "Samsung/SK Hynix HBM packaging-fab capex announcement, structural and uncorrected by newer coverage"
+          },
+          {
+            "ref": "https://www.versalogic.com/blog/supply-chain-brief-memory-market-conditions-in-2026/",
+            "date": "2026-07-09",
+            "ageDays": 13,
+            "reason": "memory lead-time/price brief still the latest monthly snapshot for server DRAM conditions"
+          },
+          {
+            "ref": "https://finance.yahoo.com/technology/ai/articles/nvidia-halves-asia-buyer-list-033140201.html",
+            "date": "2026-07-14",
+            "ageDays": 8,
+            "reason": "one day outside the sweep; material export-control move (Asia buyer whitelist halved) not restated since"
+          }
+        ],
+        "coverageGapsCount": 21
+      },
+      "unregisteredEntities": {
+        "count": 2,
+        "names": [
+          "memory",
+          "multi"
+        ]
+      },
+      "webReach": {
+        "agent-reach": {
+          "tool": "agent-reach",
+          "status": "ok",
+          "version": "1.5.0",
+          "pin": "1.5.0",
+          "drift": false
+        },
+        "last30days": {
+          "tool": "last30days",
+          "status": "ok",
+          "version": "skill-present",
+          "pin": "skill-present",
+          "drift": false
+        },
+        "crawl4ai": {
+          "tool": "crawl4ai",
+          "status": "ok",
+          "version": "0.9.0",
+          "pin": "0.9.0",
+          "drift": false
+        }
+      },
+      "licensedSourcesFetched": [],
+      "stageStatuses": {
+        "category": "done",
+        "thesis": "done",
+        "implication": "done",
+        "layer": "deferred",
+        "main": "deferred"
+      },
+      "notes": [
+        "voice-lint: sample 3 ODM acronym -> re-dispatched, fixed (one rewrite, no bypass)",
+        "wiki-ingest finding-id collision nvidianews-nvidia-com-3f1f3a13-2026-07-1 (F96/F52-class): AFK-default excluded from write-back, store copy kept per corpus ID-OVERLAP",
+        "thesis gate attempt 1 rejected (truncated finding ids); re-dispatched with violations, attempt 2 applied clean",
+        "AFK-default: last30days discovery pass skipped (daily budget); judge dispatches carried condensed MEMORY section (briefing + citation groups verbatim)",
+        "price-sync FAILED non-blocking (exit 1: ValueError in price_local._yymmdd_date on a local gpu_leasing_data file; store/series not refreshed this cycle) - follow-up needed"
+      ]
     }
-   },
-   "gather": {
-    "log": "work/merchant-gpu-2026-07/gather-log.json",
-    "blobs": "work/merchant-gpu-2026-07/blobs.json",
-    "docsGathered": 12,
-    "primary": 3,
-    "secondary": 9,
-    "duplicates": 0,
-    "dropped": 0,
-    "topUpCap": 10,
-    "pursuedDespiteAge": [
-     {
-      "ref": "https://byteiota.com/coreweaves-35b-debt-loop-and-your-gpu-cloud-risk/",
-      "date": "2026-07-12",
-      "ageDays": 8,
-      "reason": "CoreWeave GPU-backed-debt analysis for not-covered marginalBuyerFinancing; 8d old, just outside the 7-day sweep."
-     },
-     {
-      "ref": "https://featherless.ai/blog/llm-api-pricing-comparison-2026-complete-guide-inference-costs",
-      "date": "2026-03-04",
-      "ageDays": 138,
-      "reason": "Still-authoritative token/inference cost reference for not-covered tokenEconomics."
-     },
-     {
-      "ref": "https://siliconanalysts.com/tools/allocation",
-      "date": "2026-04-01",
-      "ageDays": 110,
-      "reason": "Still-authoritative CoWoS/HBM capacity + lead-time reference for not-covered upstreamLeadTimes; no fresher structural restatement (licensed source)."
-     },
-     {
-      "ref": "https://www.digitimes.com/news/a20260706PD223/foxconn-revenue-growth-2026-shipments.html",
-      "date": "2026-07-06",
-      "ageDays": 14,
-      "reason": "June-2026 monthly ODM revenue — freshest available datapoint for the not-covered odmMonthlyAiRevenue indicator (monthly cadence)."
-     },
-     {
-      "ref": "https://www.digitimes.com/news/a20260707PD238/quanta-demand-revenue-notebook-shipments-macbook.html",
-      "date": "2026-07-07",
-      "ageDays": 13,
-      "reason": "June-2026 record monthly revenue — freshest available for not-covered odmMonthlyAiRevenue."
-     },
-     {
-      "ref": "https://www.digitimes.com/news/a20260708PD254/wistron-ai-server-shipments-revenue-2026.html",
-      "date": "2026-07-09",
-      "ageDays": 11,
-      "reason": "1H26 / June AI-server ODM revenue — freshest available for not-covered odmMonthlyAiRevenue."
-     },
-     {
-      "ref": "https://www.the-ai-corner.com/p/anthropic-30b-arr-passed-openai-revenue-2026",
-      "date": "2026-04-07",
-      "ageDays": 104,
-      "reason": "Still-current AI model-API ARR reference — proxy for not-covered apiArr demand durability; no fresher single-source restatement."
-     },
-     {
-      "ref": "https://www.thundercompute.com/blog/nvidia-h100-pricing",
-      "date": "2026-07-01",
-      "ageDays": 19,
-      "reason": "Current H100/H200 rental/spot pricing page, still-authoritative for D6/gpuSpotPrice."
-     }
-    ],
-    "licensedSourcesFetched": [
-     "siliconanalysts.com"
-    ],
-    "coverageGaps": {
-     "required": 19,
-     "preferred": 2,
-     "paywalled": 2,
-     "note": "Most required gaps are store-covered ground this top-up did not re-fetch (earnings, export controls, margins); corpus merge fills them. Genuinely paywalled: trendforce-gpu-tracker, semianalysis.",
-     "requiredIds": [
-      "nvda-earnings",
-      "amd-earnings",
-      "intc-earnings",
-      "lambda-gpu-pricing",
-      "coreweave-pricing",
-      "trendforce-gpu-tracker",
-      "open-web-gpu-share",
-      "open-web-asic",
-      "bis-export-controls",
-      "nvda-10k-risk-factors",
-      "semianalysis",
-      "gpu-marketplaces",
-      "ai-app-revenue",
-      "frontier-release-funding",
-      "grossMargin",
-      "S9",
-      "exportControlExposure",
-      "customerConcentration",
-      "vendorRevenueGuidance"
-     ]
-    }
-   },
-   "extractGate": {
-    "findings": 19,
-    "dropped": 0
-   },
-   "judge": {
-    "samples": 3,
-    "voiceLintReDispatch": [
-     "sample 3: acronym MI355X removed"
-    ],
-    "sufficiency": "clean"
-   },
-   "writeBack": {
-    "wikiIngest": "routed 12 finding(s) to 7 page(s)",
-    "wikiLint": "clean"
-   },
-   "unregisteredEntities": {
-    "count": 4,
-    "names": [
-     "market",
-     "memory",
-     "multi",
-     "odm"
-    ]
-   },
-   "webReach": {
-    "agent-reach": {
-     "status": "ok",
-     "version": "1.5.0",
-     "pin": "1.5.0",
-     "drift": false
+  ],
+  "stages": [
+    {
+      "tier": "category",
+      "status": "active"
     },
-    "last30days": {
-     "status": "ok",
-     "version": "skill-present",
-     "pin": "skill-present",
-     "drift": false
+    {
+      "tier": "layer",
+      "status": "deferred"
     },
-    "crawl4ai": {
-     "status": "ok",
-     "version": "0.9.0",
-     "pin": "0.9.0",
-     "drift": false
+    {
+      "tier": "main",
+      "status": "deferred"
     }
-   },
-   "stageStatuses": {
-    "category": "done",
-    "thesis": "done",
-    "implication": "done",
-    "layer": "deferred",
-    "main": "deferred"
-   },
-   "thesis": {
-    "answer": "work/merchant-gpu-2026-07/thesis-answer.json",
-    "judged": 27,
-    "applied": 26,
-    "deferred": [
-     "model-provider-revenue-scales-to-underpin-the-buildout (secondary-only reversal, 2 publishers < 3)"
-    ],
-    "proposedNew": [
-     "odm-ai-server-revenue-confirms-real-shipments",
-     "neocloud-gpu-buyers-carry-heavy-debt-loads"
-    ]
-   },
-   "implication": {
-    "artifact": "store/implications/chips.merchant-gpu/2026-07.json",
-    "lines": 7,
-    "gateReDispatch": [
-     "dropped acronyms ASE/OSAT/EPYC; replaced banned word 'leverage'"
-    ]
-   },
-   "priceSync": {
-    "status": "failed",
-    "reason": "pre-existing ValueError in price_local._yymmdd_date (empty-string date); non-blocking per skill",
-    "fixedThisRun": false
-   },
-   "site": {
-    "status": "built",
-    "pages": 8,
-    "fix": "brief_model._indicator_labels strips trailing (code) from tile labels (F98 exec-copy lint); AFK-default"
-   }
-  }
- ],
- "stages": [
-  {
-   "tier": "category",
-   "status": "active"
-  },
-  {
-   "tier": "layer",
-   "status": "deferred"
-  },
-  {
-   "tier": "main",
-   "status": "deferred"
-  }
- ]
+  ]
 }

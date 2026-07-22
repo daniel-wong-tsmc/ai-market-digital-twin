@@ -1,0 +1,45 @@
+{
+  "id": "getdeploying-com-6f11aead-2026-07-1",
+  "statement": "Median Nvidia H100 on-demand rental is $3.85/hr on GPU clouds vs $7.43/hr on hyperscalers, with GPU prices up 24% from their November 2025 low.",
+  "kind": "measured",
+  "value": {
+    "number": 3.85,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "rising",
+  "why": "Rental rates have recovered 24% off the November 2025 low with week-over-week volatility, a price overlay on GPU demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rising rental prices can reflect tightening GPU-cloud availability but the price side does not score the index."
+  },
+  "evidence": [
+    {
+      "source": "GetDeploying GPU Price Index",
+      "url": "https://getdeploying.com/gpu-price-index",
+      "date": "2026-07-20",
+      "excerpt": "GPU prices are up +24% from their November 2025 low",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary median price tracker."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-07-20",
+  "capturedAt": "2026-07-22T13:42:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

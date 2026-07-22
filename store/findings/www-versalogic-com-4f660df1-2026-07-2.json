@@ -1,0 +1,43 @@
+{
+  "id": "www-versalogic-com-4f660df1-2026-07-2",
+  "statement": "Samsung is seeking up to a 20% 3Q26 DRAM contract price increase and suppliers have cut quote validity to 72 hours amid rapid price escalation.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Aggressive DRAM price hikes and 72-hour quotes reflect acute memory supply tightness driven by AI demand.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.ai-storage"
+    ],
+    "direction": "negative",
+    "mechanism": "Tight, rapidly repricing memory raises AI-server bill of materials and gates supply."
+  },
+  "evidence": [
+    {
+      "source": "VersaLogic Supply Chain Brief",
+      "url": "https://www.versalogic.com/blog/supply-chain-brief-memory-market-conditions-in-2026/",
+      "date": "2026-07-09",
+      "excerpt": "up to a 20% increase in 3Q26 DRAM contract pricing",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary supply-chain brief."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: The Korea Herald, VersaLogic Supply Chain Brief",
+  "asOf": "2026-07",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-07-09",
+  "capturedAt": "2026-07-22T13:42:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

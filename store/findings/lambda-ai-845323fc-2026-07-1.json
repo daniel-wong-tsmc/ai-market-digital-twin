@@ -1,0 +1,45 @@
+{
+  "id": "lambda-ai-845323fc-2026-07-1",
+  "statement": "Lambda on-demand list price for NVIDIA H100 SXM is $3.99/hr and B200 SXM6 is $6.69/hr on an 8x instance.",
+  "kind": "measured",
+  "value": {
+    "number": 3.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Standing list prices with no stated baseline or change are a static price-level overlay.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Provider list price is a display-only reference and does not score the index."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (lambda.ai) GPU Cloud pricing",
+      "url": "https://lambda.ai/service/gpu-cloud",
+      "date": "2026-07-22",
+      "excerpt": "NVIDIA H100 SXM: $3.99",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary vendor list-price page."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-22T13:42:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "www-fool-com-f229964a-2026-07-1",
+  "statement": "TSMC says advanced-packaging (CoWoS) capacity is so tight it is limiting customer growth, with the AI demand-supply gap 'very big' through 2029-2030.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Packaging is the primary bottleneck limiting AI accelerator output even as demand runs far ahead of supply.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "Tight CoWoS capacity constrains GPU supply while very strong demand persists, keeping the market supply-limited."
+  },
+  "evidence": [
+    {
+      "source": "The Motley Fool (TSMC Q2 2026 earnings call transcript)",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/07/16/tsm-tsm-q2-2026-earnings-call-transcript/",
+      "date": "2026-07-16",
+      "excerpt": "Our packaging capacity is so tight that it's limiting my customers' growth.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary transcript of the earnings call; no primary filing fetched."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: The Motley Fool (TSMC Q2 2026 earnings call transcript)",
+  "asOf": "2026-07",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "tsmc",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-22T13:42:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

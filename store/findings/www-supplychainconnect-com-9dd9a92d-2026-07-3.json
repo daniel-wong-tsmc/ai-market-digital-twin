@@ -1,0 +1,42 @@
+{
+  "id": "www-supplychainconnect-com-9dd9a92d-2026-07-3",
+  "statement": "Samsung, SK Hynix and Micron are at full HBM capacity with all 2026 production pre-allocated and contracts locked in at high-teen to low-twenties percent price increases.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Fully allocated HBM with double-digit price hikes signals tight memory supply gating AI accelerator output.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "HBM allocation limits GPU assembly volumes and raises accelerator costs."
+  },
+  "evidence": [
+    {
+      "source": "Supply Chain Connect",
+      "url": "https://www.supplychainconnect.com/procurement/article/55384522/the-2026-supply-chain-supercycle-why-ai-infrastructure-shortages-run-deeper-than-the-chip",
+      "date": "2026-06-23",
+      "excerpt": "Samsung, SK Hynix, Micron at full capacity with all 2026 production allocated pre-year",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade compendium; price range not a single figure."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-06-23",
+  "capturedAt": "2026-07-22T13:42:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "finance-yahoo-com-bdd5c46e-2026-07-1",
+  "statement": "AMD Data Center segment revenue reached $5.78 billion in Q1 2026, up 57% year over year.",
+  "kind": "measured",
+  "value": {
+    "number": 5.78,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Data Center is AMD's AI accelerator revenue line; a 57% YoY gain signals accelerating merchant-GPU demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising AMD Instinct data-center revenue reflects growing demand for merchant GPUs from cloud buyers."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (24/7 Wall St.)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/amd-just-got-potential-ai-133035921.html",
+      "date": "2026-07-20",
+      "excerpt": "Data Center revenue $5.78 billion (+57% YoY)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary source restating company figures; no primary filing fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-20",
+  "capturedAt": "2026-07-22T13:42:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

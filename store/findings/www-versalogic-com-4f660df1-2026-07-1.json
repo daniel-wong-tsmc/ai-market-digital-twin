@@ -1,0 +1,46 @@
+{
+  "id": "www-versalogic-com-4f660df1-2026-07-1",
+  "statement": "Standard DRAM module lead times run 30-40+ weeks with all DRAM categories under strict allocation.",
+  "kind": "measured",
+  "value": {
+    "number": 40.0,
+    "unit": "weeks"
+  },
+  "trend": "rising",
+  "why": "Long DRAM lead times and blanket allocation constrain memory availability for AI servers and storage.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "infrastructure.ai-storage",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Allocation and long lead times limit incremental memory supply."
+  },
+  "evidence": [
+    {
+      "source": "VersaLogic Supply Chain Brief",
+      "url": "https://www.versalogic.com/blog/supply-chain-brief-memory-market-conditions-in-2026/",
+      "date": "2026-07-09",
+      "excerpt": "lead times remain very long (often 30-40+ weeks for standard DRAM modules)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary supply-chain brief."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-07-09",
+  "capturedAt": "2026-07-22T13:42:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

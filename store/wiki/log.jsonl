@@ -192,3 +192,13 @@
 {"seq":191,"asOf":"2026-07","kind":"create-page","pageId":"entity:tsmc","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":192,"asOf":"2026-07","kind":"append-observation","pageId":"entity:tsmc","findingId":"finance-biggo-com-ae5dcd41-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":193,"asOf":"2026-07","kind":"append-observation","pageId":"entity:tsmc","findingId":"finance-biggo-com-ae5dcd41-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":194,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"finance-yahoo-com-bdd5c46e-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":195,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"finance-yahoo-com-bdd5c46e-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":196,"asOf":"2026-07","kind":"append-observation","pageId":"entity:memory","findingId":"www-versalogic-com-4f660df1-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":197,"asOf":"2026-07","kind":"append-observation","pageId":"entity:memory","findingId":"www-versalogic-com-4f660df1-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":198,"asOf":"2026-07","kind":"append-observation","pageId":"entity:multi","findingId":"www-supplychainconnect-com-9dd9a92d-2026-07-3","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":199,"asOf":"2026-07","kind":"append-observation","pageId":"entity:multi","findingId":"www-supplychainconnect-com-9dd9a92d-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":200,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"getdeploying-com-6f11aead-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":201,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"lambda-ai-845323fc-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":202,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"finance-yahoo-com-c4ceeee1-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":203,"asOf":"2026-07","kind":"append-observation","pageId":"entity:tsmc","findingId":"www-fool-com-f229964a-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}

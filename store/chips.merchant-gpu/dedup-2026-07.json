@@ -3,57 +3,25 @@
   "docsDroppedKnown": [],
   "findingsNew": [
     {
-      "findingId": "www-runpod-io-bdb62dfd-2026-07-1",
-      "entity": "RunPod",
+      "findingId": "www-supplychainconnect-com-9dd9a92d-2026-07-3",
+      "entity": "multi",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-supplychainconnect-com-9dd9a92d-2026-07-1",
+      "entity": "multi",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "getdeploying-com-6f11aead-2026-07-1",
+      "entity": "nvidia",
       "indicatorId": "D6",
-      "verdict": "new",
-      "priorFindingId": null,
-      "detail": ""
-    },
-    {
-      "findingId": "lambda-ai-1252bbe3-2026-07-1",
-      "entity": "lambda-labs",
-      "indicatorId": "D6",
-      "verdict": "new",
-      "priorFindingId": null,
-      "detail": ""
-    },
-    {
-      "findingId": "www-digitimes-com-0a9926f5-2026-07-1",
-      "entity": "liquid-cooling",
-      "indicatorId": "upstreamLeadTimes",
-      "verdict": "new",
-      "priorFindingId": null,
-      "detail": ""
-    },
-    {
-      "findingId": "www-vitextech-com-893c21f5-2026-07-1",
-      "entity": "optics",
-      "indicatorId": "S9",
-      "verdict": "new",
-      "priorFindingId": null,
-      "detail": ""
-    },
-    {
-      "findingId": "www-gigenet-com-b3aab89b-2026-07-1",
-      "entity": "power",
-      "indicatorId": "upstreamLeadTimes",
-      "verdict": "new",
-      "priorFindingId": null,
-      "detail": ""
-    },
-    {
-      "findingId": "finance-biggo-com-ae5dcd41-2026-07-2",
-      "entity": "tsmc",
-      "indicatorId": "pkgCapacityOrderSpread",
-      "verdict": "new",
-      "priorFindingId": null,
-      "detail": ""
-    },
-    {
-      "findingId": "finance-biggo-com-ae5dcd41-2026-07-1",
-      "entity": "tsmc",
-      "indicatorId": "upstreamLeadTimes",
       "verdict": "new",
       "priorFindingId": null,
       "detail": ""
@@ -61,28 +29,44 @@
   ],
   "findingsUpdate": [
     {
-      "findingId": "www-amd-com-9fb86a52-2026-07-1",
+      "findingId": "finance-yahoo-com-bdd5c46e-2026-07-2",
       "entity": "amd",
       "indicatorId": "designWins",
       "verdict": "update",
-      "priorFindingId": "newsletter-semianalysis-com-5136a06c-2026-07-2",
-      "detail": "statement/trend changed (trend unknown -> rising)"
+      "priorFindingId": "www-amd-com-9fb86a52-2026-07-1",
+      "detail": "magnitude 2 -> 3"
     },
     {
-      "findingId": "www-coreweave-com-eb7fcb71-2026-07-1",
-      "entity": "coreweave",
+      "findingId": "finance-yahoo-com-bdd5c46e-2026-07-1",
+      "entity": "amd",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "update",
+      "priorFindingId": "www-interactivecrypto-com-b24bada9-2026-07-2",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "www-versalogic-com-4f660df1-2026-07-2",
+      "entity": "memory",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "siliconanalysts-com-79e017b3-2026-07-2",
+      "detail": "magnitude 3 -> 2"
+    },
+    {
+      "findingId": "www-versalogic-com-4f660df1-2026-07-1",
+      "entity": "memory",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "update",
+      "priorFindingId": "siliconanalysts-com-79e017b3-2026-07-1",
+      "detail": "value 52.0 -> 40.0 (tol 1%)"
+    },
+    {
+      "findingId": "lambda-ai-845323fc-2026-07-1",
+      "entity": "nvidia",
       "indicatorId": "D6",
       "verdict": "update",
-      "priorFindingId": "www-coreweave-com-eb7fcb71-2026-07-1",
-      "detail": "value 10.5 -> 6.16 (tol 1%)"
-    },
-    {
-      "findingId": "www-cnbc-com-9d898f2b-2026-07-2",
-      "entity": "nvidia",
-      "indicatorId": "S10",
-      "verdict": "update",
-      "priorFindingId": "www-tweaktown-com-a0083106-2026-07-1",
-      "detail": "statement/trend changed (trend rising -> rising)"
+      "priorFindingId": "lambda-ai-845323fc-2026-07-06-1",
+      "detail": "value 6.69 -> 3.99 (tol 1%)"
     },
     {
       "findingId": "nvidianews-nvidia-com-3f1f3a13-2026-07-1",
@@ -90,38 +74,62 @@
       "indicatorId": "designWins",
       "verdict": "update",
       "priorFindingId": "blogs-nvidia-com-b4ddc904-2026-07-1",
-      "detail": "magnitude 2 -> 3"
+      "detail": "statement/trend changed (trend rising -> rising)"
     },
     {
-      "findingId": "www-cnbc-com-9d898f2b-2026-07-1",
+      "findingId": "finance-yahoo-com-c4ceeee1-2026-07-1",
       "entity": "nvidia",
       "indicatorId": "exportControlExposure",
       "verdict": "update",
-      "priorFindingId": "mlq-ai-4e0c06bd-2026-07-1",
-      "detail": "statement/trend changed (trend rising -> flat)"
+      "priorFindingId": "www-cnbc-com-9d898f2b-2026-07-1",
+      "detail": "statement/trend changed (trend flat -> rising)"
+    },
+    {
+      "findingId": "www-fool-com-f229964a-2026-07-1",
+      "entity": "tsmc",
+      "indicatorId": "pkgCapacityOrderSpread",
+      "verdict": "update",
+      "priorFindingId": "finance-biggo-com-ae5dcd41-2026-07-2",
+      "detail": "magnitude 2 -> 3"
     }
   ],
   "findingsDuplicate": [
     {
-      "findingId": "www-runpod-io-bdb62dfd-2026-07-2",
-      "entity": "RunPod",
-      "indicatorId": "D6",
+      "findingId": "newsroom-amd-com-8484d632-2026-07-1",
+      "entity": "amd",
+      "indicatorId": "designWins",
       "verdict": "duplicate",
       "priorFindingId": null,
       "detail": "superseded by intra-batch latest vintage"
     },
     {
-      "findingId": "www-coreweave-com-eb7fcb71-2026-07-2",
-      "entity": "coreweave",
-      "indicatorId": "D6",
+      "findingId": "finance-yahoo-com-bdd5c46e-2026-07-3",
+      "entity": "amd",
+      "indicatorId": "designWins",
       "verdict": "duplicate",
       "priorFindingId": null,
       "detail": "superseded by intra-batch latest vintage"
     },
     {
-      "findingId": "lambda-ai-1252bbe3-2026-07-2",
-      "entity": "lambda-labs",
-      "indicatorId": "D6",
+      "findingId": "www-koreaherald-com-5a79d73e-2026-07-1",
+      "entity": "memory",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-supplychainconnect-com-9dd9a92d-2026-07-2",
+      "entity": "multi",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-fool-com-f229964a-2026-07-2",
+      "entity": "tsmc",
+      "indicatorId": "pkgCapacityOrderSpread",
       "verdict": "duplicate",
       "priorFindingId": null,
       "detail": "superseded by intra-batch latest vintage"

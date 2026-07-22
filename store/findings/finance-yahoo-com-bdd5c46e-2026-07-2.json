@@ -1,0 +1,43 @@
+{
+  "id": "finance-yahoo-com-bdd5c46e-2026-07-2",
+  "statement": "AMD has secured gigawatt-scale Instinct commitments across Microsoft, OpenAI (6 GW), Meta (up to 6 GW) and Oracle (50,000-GPU Helios cluster).",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A broadening roster of hyperscale customers committing multi-gigawatt Instinct deployments expands AMD's merchant-GPU design-win base.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Multiple large-scale customer commitments increase AMD's addressable accelerator demand."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (24/7 Wall St.)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/amd-just-got-potential-ai-133035921.html",
+      "date": "2026-07-20",
+      "excerpt": "OpenAI - committed to 6 gigawatts of AMD GPUs; Meta - deploying up to 6 GW of Instinct GPUs with custom MI450-based silicon; Oracle - building 50,000-GPU Helios supercluster",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary source summarizing customer roster; not a primary filing."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: Yahoo Finance (24/7 Wall St.)",
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-07-20",
+  "capturedAt": "2026-07-22T13:42:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

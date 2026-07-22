@@ -1,0 +1,46 @@
+{
+  "id": "www-supplychainconnect-com-9dd9a92d-2026-07-1",
+  "statement": "Power transformer lead times average 128 weeks (up to 200 weeks for specialty semiconductor-fab units), with transformer prices up 77% since 2019.",
+  "kind": "measured",
+  "value": {
+    "number": 128.0,
+    "unit": "weeks"
+  },
+  "trend": "rising",
+  "why": "Extreme transformer lead times and price inflation are a hard upstream constraint on data-center power build-out.",
+  "impact": {
+    "targets": [
+      "energy.electrical-equipment",
+      "energy.grid-transmission",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Long-lead electrical gear delays AI data-center energisation, constraining deployable supply."
+  },
+  "evidence": [
+    {
+      "source": "Supply Chain Connect",
+      "url": "https://www.supplychainconnect.com/procurement/article/55384522/the-2026-supply-chain-supercycle-why-ai-infrastructure-shortages-run-deeper-than-the-chip",
+      "date": "2026-06-23",
+      "excerpt": "power transformers average lead times ran 128 weeks for large units, specialty semiconductor fab units stretched to 200 weeks",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade compendium."
+  },
+  "dispersion": "conflicting same-key reports: value 50.0 -> 128.0 (tol 1%); sources: Supply Chain Connect",
+  "asOf": "2026-07",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "multi",
+  "observedAt": "2026-06-23",
+  "capturedAt": "2026-07-22T13:42:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
