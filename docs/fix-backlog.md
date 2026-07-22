@@ -1299,3 +1299,16 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   the F95 no-scripting convention, user-approved). **Frozen core / F6 / F83 untouched; scope = merchant-GPU page
   only.** Build lane: `.worktrees/f100-dashboard`, subagent-driven, STOP-before-merge → user merges.
   *(Concurrent-mint caveat: F100 chosen against a backlog max of F99 on 2026-07-20; renumber if collided.)*
+
+- [ ] **F101 — Narrative-first category page: "Is supply catching up to demand?" (page redesign + daily narrator step).**
+  DESIGNED interactively 2026-07-22 (spec `docs/superpowers/specs/2026-07-22-f101-narrative-page-design.md`;
+  full visual-companion brainstorm, all decisions interactive, zero AFK). Rebuilds the `chips.merchant-gpu`
+  page around ONE question answered in plain newspaper English: headline verdict → demand-vs-supply time
+  chart with the shaded gap as the graphic → KPI band (anchored rent gauge + story-picked gauges, one per
+  scene) → NYT-graphics scroll story (scenes with own charts, "Source:" lines, related outside coverage,
+  hover tooltips + the slide-in evidence panel on every claim) → archive strip → Explore band. Adds a NEW
+  daily narrator run-cycle step writing structured scene artifacts (`store/<cat>/story/`) — additive,
+  never touches scores; new brain prompt = F6 eval gate; new step = F83 lockstep re-record. Supersedes
+  F100 as the index page (F100's panel/model plumbing = salvage donors). Three phases: A renderer
+  skeleton on existing data (no F6), B narrator (gated lane), C Explore sub-pages + story archive.
+  *(Concurrent-mint caveat: F101 chosen against a backlog max of F100 on 2026-07-22; renumber if collided.)*
