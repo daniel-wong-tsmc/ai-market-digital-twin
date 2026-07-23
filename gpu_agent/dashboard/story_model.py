@@ -64,10 +64,19 @@ def _story_glossary(gl: dict) -> dict:
 # when the repeated word is the first or last word of one of the
 # translation table's own replacement values -- that provably covers every
 # stutter a translation swap can create (the swap can only ever strand its
-# own first/last word against the stored text on either side of it) and
-# cannot touch a genuine repeat like "had had", since "had" is never the
-# first/last word of a replacement value.
-_REPEATED_WORD = re.compile(r"\b(\w+)[ \t]+\1\b", re.IGNORECASE)
+# own first/last word against the stored text on either side of it). This
+# does NOT by itself guarantee "had had" or "that that" survive -- that
+# depends on "had"/"that" never being a boundary word, which is asserted
+# separately by test_translation_boundary_words_exclude_common_english
+# rather than claimed here as a property of the regex.
+#
+# The (?<![\w-]) / (?![\w-]) lookarounds (rather than \b) additionally keep
+# the match from reaching into a hyphenated compound: \b alone treats the
+# hyphen in "chip-level" as a word boundary, so "chip chip-level" would
+# match on "chip" and silently delete it. Requiring a non-word/non-hyphen
+# character (or start/end of string) on both sides of the whole match means
+# the repeated word must stand alone, not lead into a hyphenated compound.
+_REPEATED_WORD = re.compile(r"(?<![\w-])(\w+)[ \t]+\1(?![\w-])", re.IGNORECASE)
 
 
 def _translation_boundary_words(gl: dict) -> set[str]:

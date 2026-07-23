@@ -149,7 +149,16 @@ def test_build_site_index_is_story(tmp_path):
     assert "Executive Brief" not in idx
     assert summary["story_lint"] == []
     css = (tmp_path / "site" / CAT / "style.css").read_text(encoding="utf-8")
-    assert ".st-chip" in css and ".ev-panel" in css
+    # style.css is SITE_CSS + BRIEF_CSS + DASHBOARD_CSS + STORY_CSS concatenated
+    # (site_build.py). `.st-chip in css` alone would only ever prove STORY_CSS's
+    # own literal text landed in a constant STORY_CSS itself defines -- it can
+    # never fail. Assert one marker rule from each bundle instead, so dropping
+    # any bundle from the concatenation (including the older appendix/"how"-page
+    # rules that still need to ship) breaks this test.
+    assert ".how" in css  # SITE_CSS -- appendix/"how" pages' crumb/tile chrome
+    assert ".hero" in css  # BRIEF_CSS -- retired brief's rules, still shared
+    assert ".kcard" in css  # DASHBOARD_CSS -- deep-dive drawer's KPI cards
+    assert ".st-chip" in css and ".ev-panel" in css  # STORY_CSS -- this page's own rules
 
 
 def test_style_css_includes_dashboard_theme(tmp_path):
@@ -211,7 +220,13 @@ def test_story_page_degrades_gracefully_with_only_daily_scorecards_and_no_series
                          today=dt.date(2026, 7, 16))
     assert summary["story_lint"] == []
     idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
-    assert "<svg" not in idx
+    # Narrowed per final review: "<svg" not in idx is over-broad and would
+    # break the first time any decorative graphic (e.g. a sparkline) is
+    # added to the degraded page. What this test actually cares about is
+    # the demand-vs-supply gap chart specifically, which render_gap_svg
+    # renders as an <svg class="gapchart" ...> element (gap_chart.py) --
+    # assert that one element is absent, not svg elements in general.
+    assert 'class="gapchart"' not in idx
     assert "Not enough" in idx
     assert "says who?" not in idx
     assert "The story, step by step" not in idx

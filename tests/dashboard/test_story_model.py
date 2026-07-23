@@ -376,6 +376,61 @@ def test_collapse_repeated_word_is_bounded_to_translation_boundary_words():
         "advanced chip packaging"
 
 
+def test_collapse_repeated_word_does_not_eat_word_before_hyphenated_compound():
+    # Reviewer-found bug: \b treats the hyphen in "supply-chain" as a word
+    # boundary, so "supply supply-chain" matched on "supply" and silently
+    # deleted the first copy. The fix requires a non-word/non-hyphen
+    # character (or start/end of string) on both sides of the match, so a
+    # word standing next to a hyphenated compound that starts the same way
+    # must survive untouched.
+    bw = {"supply", "memory", "demand", "chip", "packaging"}
+    assert _collapse_repeated_word("the supply supply-chain risk", bw) == \
+        "the supply supply-chain risk"
+    assert _collapse_repeated_word("memory memory-maker capex", bw) == \
+        "memory memory-maker capex"
+    assert _collapse_repeated_word("a demand demand-led market", bw) == \
+        "a demand demand-led market"
+    assert _collapse_repeated_word("custom chip chip-level packaging", bw) == \
+        "custom chip chip-level packaging"
+    # The real stutter case (no hyphenated compound following) must still collapse:
+    assert _collapse_repeated_word("advanced chip packaging packaging", bw) == \
+        "advanced chip packaging"
+
+
+def test_translation_boundary_words_exclude_common_english(tmp_path):
+    # Item 2: the safety of the boundary bound depends on which words
+    # actually begin or end the translation table's replacement values.
+    # That set is derived at runtime from glossary.json (shared) plus
+    # _STORY_TERMS (page-local) -- build it the same way the code does and
+    # assert it doesn't contain ordinary function words a future glossary
+    # entry could accidentally introduce. "the" and "up" are the two real
+    # exceptions today (from "the leader's chip software" and "speeding
+    # up") -- both are allowed here because "the the" / "up up" read as
+    # typos, not legitimate English, so collapsing them is fine. A new
+    # boundary word like "had" or "that" is NOT allowed and must fail this
+    # test if introduced.
+    from gpu_agent.dashboard.glossary import load_glossary
+    from gpu_agent.dashboard.story_model import (_STORY_TERMS,
+                                                  _story_glossary,
+                                                  _translation_boundary_words)
+
+    gl = _story_glossary(load_glossary())
+    boundary_words = _translation_boundary_words(gl)
+
+    allowed_exceptions = {"the", "up"}
+    common_english = {
+        "had", "that", "is", "a", "an", "and", "or", "but", "if", "it",
+        "he", "she", "they", "we", "you", "was", "were", "be", "been",
+        "to", "of", "in", "on", "at", "as", "for", "with", "this",
+    } - allowed_exceptions
+
+    offenders = boundary_words & common_english
+    assert not offenders, (
+        f"boundary word set now includes common English word(s) {offenders} -- "
+        "a new glossary/prose_terms replacement widened the collapser's bound "
+        "in a way that could rewrite legitimate English")
+
+
 def test_truncate_breaks_on_word_boundary_with_ellipsis():
     text = "fully booked through 2026, with wait time from order to delivery varying widely"
     out = _truncate(text, 60)
@@ -393,35 +448,44 @@ def test_truncate_is_a_noop_under_the_limit():
     assert _truncate("short text", 90) == "short text"
 
 
-def test_translate_then_truncate_never_cuts_a_translated_word_in_half(tmp_path):
+def test_translate_then_truncate_never_blows_the_length_budget(tmp_path):
     # Real-world case: truncating BEFORE translating a jargon term produces
-    # a rendered line that blows the length budget and ends mid-word (a
-    # 60-char cap on the untranslated text produced an 81-char rendered
-    # line). The stored statement below is short enough to survive a
-    # naive pre-translate 90-char cut mid-word through "packaging", but
-    # once "CoWoS" expands to "advanced chip packaging" the translated
-    # text is longer -- proving translation happened BEFORE truncation
-    # only if the rendered text still ends on a whole word (or ellipsis),
-    # never mid-word.
+    # a rendered line that blows the length budget (a 60-char cap on the
+    # untranslated text produced an 81-char rendered line). The stored
+    # statement below reproduces the shape: "CoWoS" -> "advanced chip
+    # packaging" lengthens the text enough that truncating-then-translating
+    # (the WRONG order) would push the result past the 90-char budget,
+    # while translating-then-truncating (the actual pipeline) never does.
+    #
+    # This replaces a prior version of this test whose "mid-word" assertion
+    # never actually fired: _truncate always backs up to a word boundary
+    # regardless of which text it's given, so it can never produce a
+    # literal mid-word cut either way -- the real, order-dependent failure
+    # is the length budget being blown, which is what this test now pins.
     st = _store(tmp_path)
     cat = st / CAT
+    statement = ("Deep packaging lines are fully booked through 2026, with CoWoS "
+                 "packaging capacity the binding constraint on shipments")
     for f in cat.glob("2026-07-v1.json"):
         data = json.loads(f.read_text(encoding="utf-8"))
-        data["findings"][0]["statement"] = (
-            "Deep packaging lines are fully booked through 2026, with CoWoS "
-            "packaging capacity the binding constraint on shipments")
+        data["findings"][0]["statement"] = statement
         f.write_text(json.dumps(data), encoding="utf-8")
     m = build_story_model(CAT, st, dt.date(2026, 7, 22))
     ev = m["evidence"]["scene:1"]
     take = ev["findings"][0]["take"]
-    assert len(take) <= 91
-    body = take[:-1].rstrip() if take.endswith("…") else take
-    last_word = body.split()[-1] if body.split() else ""
-    # The last word must be a WHOLE word: if it happens to be a prefix of
-    # "packaging" (the translated form of the stored "CoWoS"), it must be
-    # the full word -- a shorter prefix would mean translation happened
-    # AFTER truncation and cut the translated word in half.
-    assert not ("packaging".startswith(last_word) and last_word != "packaging")
+    assert len(take) <= 91  # what the real (correct-order) pipeline produces
+
+    # Simulate the WRONG order directly against the same primitives the
+    # pipeline uses, to prove the 91-char budget above is a real constraint
+    # this fixture can actually violate -- not a limit the fixture happens
+    # to never approach.
+    from gpu_agent.dashboard.glossary import load_glossary
+    from gpu_agent.dashboard.story_model import _story_glossary, _translate
+    gl = _story_glossary(load_glossary())
+    wrong_order = _translate(_truncate(statement, 90), gl)
+    assert len(wrong_order) > 91, (
+        "fixture no longer demonstrates the ordering bug -- truncating "
+        "before translating should blow the length budget")
 
 
 def test_archive_multi_month_semantics(tmp_path):
