@@ -710,15 +710,19 @@ def _narrator(args) -> int:
 
     if args.recorded:
         try:
-            answer = NarratorAnswer.model_validate_json(
-                pathlib.Path(args.recorded).read_text("utf-8"))
+            recorded_text = pathlib.Path(args.recorded).read_text("utf-8")
+        except (OSError, ValueError) as e:
+            print(f"gpu-agent narrator: error: {e}", file=sys.stderr)
+            return 1
+        try:
+            answer = NarratorAnswer.model_validate_json(recorded_text)
         except ValidationError as e:
             print(f"NARRATOR GATE FAILED\n{e}")
             return 1
         inputs = build_narrator_inputs(args.category, args.store, today, args.run_dir)
         violations = gate_narrator(answer, inputs)
         if violations:
-            print("NARRATOR GATE FAILED:", *violations, sep="\n  ")
+            print("NARRATOR GATE FAILED", *violations, sep="\n  ")
             return 1
         meta = NarratorMeta(model=args.model, promptHash=_narrator_prompt_hash(inputs),
                             retries=args.retries, fellBack=False,
@@ -735,7 +739,11 @@ def _narrator(args) -> int:
             print("gpu-agent narrator: error: --record-fallback requires --reasons",
                   file=sys.stderr)
             return 2
-        reasons = json.loads(pathlib.Path(args.reasons).read_text("utf-8"))
+        try:
+            reasons = json.loads(pathlib.Path(args.reasons).read_text("utf-8"))
+        except (OSError, ValueError, json.JSONDecodeError) as e:
+            print(f"gpu-agent narrator: error: {e}", file=sys.stderr)
+            return 1
         inputs = build_narrator_inputs(args.category, args.store, today, args.run_dir)
         meta = NarratorMeta(model=args.model, promptHash=_narrator_prompt_hash(inputs),
                             retries=args.retries, fellBack=True,

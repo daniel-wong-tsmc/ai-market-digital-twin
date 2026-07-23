@@ -3,10 +3,13 @@
 from __future__ import annotations
 
 import os
+import re
 import sys
 from pathlib import Path
 
 from gpu_agent.narrator.schema import StoryArtifact
+
+_DATE_STEM_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 
 class StoryStore:
@@ -46,6 +49,12 @@ class StoryStore:
         out = []
         for p in sorted(d.glob("*.json"), reverse=True):
             date = p.stem
+            if not _DATE_STEM_RE.match(date):
+                # F101b Task 4 fix pass 1: sidecar files like <date>.fallback.json
+                # live in this same directory (glob("*.json") matches them too) but
+                # are not story artifacts -- skip by construction rather than trying
+                # and failing to parse them as one.
+                continue
             if date >= before:
                 continue
             art = self.read(category_id, date)

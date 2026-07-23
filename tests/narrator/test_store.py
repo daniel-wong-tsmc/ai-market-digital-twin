@@ -44,3 +44,19 @@ def test_recent_headlines_window(tmp_path):
     heads = st.recent_headlines(CAT, before="2026-07-23", limit=7)
     assert [h["date"] for h in heads] == ["2026-07-22", "2026-07-16", "2026-07-15"]
     assert heads[1]["fellBack"] is True
+
+
+def test_recent_headlines_ignores_fallback_sidecar(tmp_path, capsys):
+    # Important 2: --record-fallback writes a sibling <date>.fallback.json in the same
+    # story/ directory that recent_headlines globs with *.json. It must be skipped by
+    # construction (non-date-shaped stem), not parsed and warned about as a corrupt
+    # StoryArtifact.
+    st = StoryStore(tmp_path)
+    for d in ["2026-07-15", "2026-07-22", "2026-07-23"]:
+        st.write(_art(d, headline=f"H {d}"))
+    story_dir = tmp_path / CAT / "story"
+    (story_dir / "2026-07-22.fallback.json").write_text(
+        '["some fallback reason"]', encoding="utf-8")
+    heads = st.recent_headlines(CAT, before="2026-07-23", limit=7)
+    assert [h["date"] for h in heads] == ["2026-07-22", "2026-07-15"]
+    assert capsys.readouterr().err == ""
