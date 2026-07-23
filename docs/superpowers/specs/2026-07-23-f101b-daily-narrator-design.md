@@ -86,8 +86,13 @@ The page stays fresh; the artifact for that date is written with `fellBack: true
 
 ## 7. Gate crossings (their own plan tasks, by the book)
 
-- **F6:** the narrator prompt joins the emitted-prompt set → pin red by design → register in
-  the pin under eval-driver governance as a REGISTRATION (user decision §2: no scored bar).
+- **Narrator prompt pin (amended 2026-07-23 at plan time):** the F6 baseline's integrity test
+  hard-codes the four SCORED seams and requires eval scores (`seamMeans`/`epsilon`) for every
+  pinned seam — incompatible with the §2 "no scored bar" decision, and `fixtures/evals/*` is
+  MUST-NOT-TOUCH. So the narrator gets its OWN dedicated hash pin (`fixtures/narrator/prompt-pin.json`
+  + tripwire test) with identical red-by-design semantics: any future narrator prompt edit fails
+  the pin test and demands a deliberate re-record. The F6 baseline stays byte-untouched, so this
+  lane CANNOT redden F6 — strictly safer than the original wording.
   Seam-scope proof: extract/judge/thesis/implication prompts byte-identical before/after.
 - **F83:** run-cycle step addition → fingerprint + `EXPECTED_STEPS` lockstep re-record.
 - Scoring v1 replay pin: must stay green untouched (the narrator cannot reach scores).
