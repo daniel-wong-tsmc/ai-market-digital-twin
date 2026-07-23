@@ -143,7 +143,25 @@
    "thesis": "done",
    "implication": "done",
    "layer": "deferred",
-   "main": "deferred"
+   "main": "deferred",
+   "stageStatuses": {
+    "gather": "done",
+    "extract": "done (27 findings, 0 dropped; 1 shape re-dispatch)",
+    "corpus": "done",
+    "dedupL2": "done",
+    "judge": "done (voice-lint passed, sufficiency passed)",
+    "score": "done (store/chips.merchant-gpu/2026-07-v15.json)",
+    "writeBack": "failed (partial: 12/17 findings ingested; finding-id collision, F52-class)",
+    "wikiLint": "done",
+    "thesis": "done",
+    "implication": "done (1 re-dispatch: banned word)",
+    "report": "done (--daily)",
+    "priceSync": "failed (month-grain --as-of parse error; non-blocking)",
+    "site": "done",
+    "category": "done",
+    "layer": "deferred",
+    "main": "deferred"
+   }
   }
  ],
  "stages": [
