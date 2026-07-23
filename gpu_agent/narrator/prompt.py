@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 
+from gpu_agent.dashboard.story_model import ANCHORED_INDICATOR_ID
 from gpu_agent.narrator.schema import NarratorAnswer
 
 # Spec §4's banned-word list, spelled out verbatim so the phrases survive
@@ -22,6 +23,7 @@ NARRATOR_SYSTEM = f"""You write a short daily market story for a non-technical e
 Your only job: answer one question -- why isn't supply catching up to demand, and what would change that. Nothing you write should wander off that question.
 
 Editorial rules:
+- The page always shows what a GPU rents for right now (indicatorId "{ANCHORED_INDICATOR_ID}") on its own, above everything you write. Never choose that indicatorId as one of your kpiPicks -- that would show the same number twice. Pick your kpiPicks from the other series in seriesPool instead.
 - A scene that doesn't change what the reader understands doesn't run. Cut it.
 - Write between 2 and 5 scenes. A quiet day, with nothing new worth saying, may run as few as 2 scenes.
 - The last scene is always forward-looking: what to watch next, not a recap of what already happened.

@@ -109,6 +109,17 @@ def test_scene_bounds_upper_limit(tmp_path):
     assert any("between 2 and 5" in v and "6" in v for v in violations)
 
 
+def test_kpi_pick_cannot_be_the_anchored_indicator(tmp_path):
+    # The page always shows gpuRentalOnDemand as its own anchored chip
+    # (story_model._base_model); a kpiPick naming that same indicator would
+    # render the exact same chip a second time. The gate must reject it and
+    # name the offending id so the brain can correct itself.
+    a = _ok(tmp_path)
+    a.kpiPicks[0].indicatorId = "gpuRentalOnDemand"
+    violations = gate_narrator(a, _inp(tmp_path))
+    assert any("gpuRentalOnDemand" in v for v in violations)
+
+
 def test_kpi_and_callout_membership(tmp_path):
     a = _ok(tmp_path)
     a.kpiPicks[0].indicatorId = "notASeries"

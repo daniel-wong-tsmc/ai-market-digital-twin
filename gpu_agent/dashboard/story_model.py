@@ -21,6 +21,24 @@ from gpu_agent.narrator.store import StoryStore
 _SERIES_IDS = ["gpuRentalOnDemand", "hyperscalerCapexRevision",
                "odmMonthlyAiRevenue", "hbmSupplyCapex", "gpuSpotPrice"]
 
+# The renderer always shows this series as the anchored KPI chip (see
+# `_base_model` below), so it must never also appear as a narrator kpiPick --
+# that would render the same chip twice. `_SERIES_IDS[0]` is the one place
+# that decision already lives (`_base_model`'s `anchored = _chip(...)` call
+# and its `picks` loop over `_SERIES_IDS[1:]`); every other spot that needs
+# "the anchored indicator's id" (the gate, the prompt, the narrated-path
+# mapper) imports this constant instead of repeating the string literal.
+ANCHORED_INDICATOR_ID = _SERIES_IDS[0]
+
+# The exact sourceLine wording a sourceless scene (empty claimFindingIds)
+# must carry. `gate.py` enforces this at write time so the brain can never
+# ship a scene that claims nothing but writes a source line anyway; the
+# narrated-path mapper below enforces it again at render time so a
+# hand-edited or legacy artifact that slipped past (or predates) the gate
+# still can't render a fabricated source line verbatim. One literal, shared
+# by both enforcement points.
+NO_SOURCE_LINE = "No new sourced evidence today."
+
 # F101 Phase A / Task 8 Decision B: plain-English replacements for the analyst
 # words lint_story_copy's _BANNED_STORY bans from rendered prose. These are
 # story-page-LOCAL (not added to glossary.json's shared prose_terms) because
@@ -241,8 +259,10 @@ def _base_model(category_id: str, store_root: Path, today: dt.date):
     Returns `(model, ctx)`: `model` already carries the exact keys the final
     dict needs from the shared tail (category_id, as_of, revision, dateline,
     gap, kpis, evidence, archive, explore); `ctx` carries the raw
-    ingredients (`latest`, `gl`, `series`, `cat_dir`, `store_root`) that the
-    two callers still need to build their own headline/deck/scenes/callouts.
+    ingredients (`latest`, `gl`, `series`, `cat_dir`) that the two callers
+    still need to build their own headline/deck/scenes/callouts. (Both
+    callers already have `store_root` as their own function parameter, so
+    it is not duplicated into `ctx`.)
     """
     cat_dir = store_root / category_id
     latest, _prior, as_of, rev = latest_monthly(cat_dir)
@@ -254,7 +274,7 @@ def _base_model(category_id: str, store_root: Path, today: dt.date):
 
     series = read_series(store_root / "series", _SERIES_IDS)
     evidence: dict[str, dict] = {}
-    anchored = _chip("gpuRentalOnDemand", series.get("gpuRentalOnDemand", []))
+    anchored = _chip(ANCHORED_INDICATOR_ID, series.get(ANCHORED_INDICATOR_ID, []))
     picks = []
     for ind in _SERIES_IDS[1:]:
         c = _chip(ind, series.get(ind, []))
@@ -310,8 +330,7 @@ def _base_model(category_id: str, store_root: Path, today: dt.date):
              "dateline": dateline, "gap": gap,
              "kpis": {"anchored": anchored, "picks": picks},
              "evidence": evidence, "archive": arch, "explore": explore}
-    ctx = {"latest": latest, "gl": gl, "series": series,
-           "cat_dir": cat_dir, "store_root": store_root}
+    ctx = {"latest": latest, "gl": gl, "series": series, "cat_dir": cat_dir}
     return model, ctx
 
 
@@ -322,7 +341,7 @@ def _assemble_model(category_id: str, store_root: Path, today: dt.date) -> dict:
     `_base_model` so the artifact-driven path can reuse it verbatim."""
     base, ctx = _base_model(category_id, store_root, today)
     latest, gl = ctx["latest"], ctx["gl"]
-    series, cat_dir = ctx["series"], ctx["cat_dir"]
+    series = ctx["series"]
     status = latest.get("categoryStatus") or {}
 
     headline = _HEADLINES.get((base["gap"] or {}).get("gap_word"),
@@ -333,7 +352,7 @@ def _assemble_model(category_id: str, store_root: Path, today: dt.date) -> dict:
 
     model = {**base, "headline": headline, "deck": deck, "callouts": [],
              "scenes": []}
-    _add_scenes(model, latest, store_root, cat_dir, series, gl)
+    _add_scenes(model, latest, store_root, series, gl)
     return model
 
 
@@ -358,15 +377,24 @@ def read_story_artifact(category_id: str, store_root: Path,
                 if sc.visual else [])
         vlabel = sc.visual.label if sc.visual else ""
         findings = _resolve_findings(latest, sc.claimFindingIds)
-        scenes.append({
-            "n": sc.n, "accent": _ACCENTS[(sc.n - 1) % 4], "title": sc.title,
-            "paragraphs": list(sc.paragraphs),
-            "visual": {"kind": "spark", "series": vals, "label": vlabel},
-            "source_line": sc.sourceLine,
-            "related": [{"outlet": r.outlet, "title": r.title,
-                        "date": r.date, "url": r.url}
-                       for r in sc.relatedDocs],
-            "claims": [f"scene:{sc.n}"]})
+        # Reuse the assembler's own scene-dict shape instead of hand-rebuilding
+        # it here, then override the two fields the artifact actually supplies
+        # (`_mk_scene` would otherwise derive them from `findings`/`gl`, which
+        # is the assembler's job, not the narrated path's).
+        scene_dict = _mk_scene(sc.n, sc.title, sc.paragraphs, vals, vlabel,
+                               findings, gl)
+        # An empty claimFindingIds list means "nothing sourced today" -- the
+        # mapper substitutes the exact required wording itself rather than
+        # trusting the artifact's own sourceLine, so a hand-edited or legacy
+        # artifact can never render a fabricated source line for a claim it
+        # didn't actually make (gate.py enforces the same rule at write time;
+        # this is the read-time backstop the plan's consistency note calls for).
+        scene_dict["source_line"] = (sc.sourceLine if sc.claimFindingIds
+                                     else NO_SOURCE_LINE)
+        scene_dict["related"] = [{"outlet": r.outlet, "title": r.title,
+                                  "date": r.date, "url": r.url}
+                                 for r in sc.relatedDocs]
+        scenes.append(scene_dict)
         evidence[f"scene:{sc.n}"] = {
             "title": f"{sc.title} — says who?",
             "claim_text": sc.paragraphs[0] if sc.paragraphs else "",
@@ -378,6 +406,14 @@ def read_story_artifact(category_id: str, store_root: Path,
 
     picks = []
     for kp in art.kpiPicks:
+        # The renderer always shows the anchored indicator as its own chip
+        # (see `_base_model` above); a kpiPick naming that same indicator
+        # would render it a second time. `gate.py` already rejects this at
+        # write time, but a hand-edited or legacy artifact could still slip
+        # one through, so skip it here too -- mirrors the assembler's own
+        # structural exclusion (`_SERIES_IDS[1:]` in `_base_model`).
+        if kp.indicatorId == ANCHORED_INDICATOR_ID:
+            continue
         c = _chip(kp.indicatorId, series.get(kp.indicatorId, []))
         if c is None:
             continue
@@ -466,7 +502,7 @@ def _mk_scene(n, title, paragraphs, series_vals, series_label, findings, gl):
             "claims": [f"scene:{n}"]}
 
 
-def _add_scenes(model, latest, store_root, cat_dir, series, gl):
+def _add_scenes(model, latest, store_root, series, gl):
     dims = latest.get("dimensionRatings") or {}
     status = latest.get("categoryStatus") or {}
     sv = lambda ind: [r["value"] for r in series.get(ind, [])[-8:]]

@@ -14,10 +14,12 @@ from __future__ import annotations
 
 import html
 
+from gpu_agent.dashboard.story_model import (ANCHORED_INDICATOR_ID,
+                                             NO_SOURCE_LINE)
 from gpu_agent.dashboard.story_render import lint_story_copy
 from gpu_agent.narrator.schema import NarratorAnswer
 
-_NO_SOURCE = "No new sourced evidence today."
+_NO_SOURCE = NO_SOURCE_LINE
 _FORWARD_MARKERS = ("close", "watch", "ahead", "next")
 
 
@@ -88,6 +90,12 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
     # Check 6: kpiPicks/calloutMonths membership; kpiPicks scene uniqueness.
     kpi_scenes_seen: list[int] = []
     for kpi in answer.kpiPicks:
+        if kpi.indicatorId == ANCHORED_INDICATOR_ID:
+            violations.append(
+                f"kpiPicks: indicatorId '{kpi.indicatorId}' is the anchored "
+                f"indicator the page always shows on its own -- it must not "
+                f"also be chosen as a kpi pick; pick from the other series "
+                f"in inputs.seriesPool instead")
         if kpi.indicatorId not in series_ids:
             violations.append(
                 f"kpiPicks: unknown indicatorId '{kpi.indicatorId}' is not "
