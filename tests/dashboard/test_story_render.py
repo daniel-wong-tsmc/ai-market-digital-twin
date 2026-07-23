@@ -181,3 +181,34 @@ def test_lint_catches_banned_words_outside_scripts():
 def test_scene_first_paragraph_is_evidence_trigger(tmp_path):
     html = render_story_page(_model(tmp_path))
     assert 'data-ev="scene:1"' in html
+
+
+from gpu_agent.dashboard.story_render import _scene_html
+
+
+def test_scene_related_link_rejects_non_http_scheme():
+    # "httpjavascript://..." passes a naive str.startswith("http") check but
+    # is not an http(s) URL at all — it must not become a clickable link.
+    scene = {
+        "n": 1, "accent": "amber", "title": "Test scene",
+        "paragraphs": ["Some plain words making up the scene body text."],
+        "visual": {"series": [], "label": ""},
+        "source_line": "Source: test data",
+        "related": [
+            {"url": "httpjavascript://evil.example/x", "outlet": "Evil",
+             "title": "Bad link", "date": "2026-01-01"},
+        ],
+    }
+    html = _scene_html(scene)
+    assert "Related coverage" in html
+    assert "<a href" not in html
+    assert "evil.example" not in html
+
+
+def test_lint_survives_script_containing_literal_closing_tag_text():
+    # A script body that contains the literal text of a closing </script>
+    # tag inside a JS string used to truncate the non-greedy strip early,
+    # leaving the rest of the script scanned as if it were page prose.
+    html = ("<script>var x='</script>'; var leverage=1;</script>"
+            "<p>ok copy.</p>")
+    assert lint_story_copy(html) == []

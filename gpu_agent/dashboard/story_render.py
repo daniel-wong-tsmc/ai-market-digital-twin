@@ -2,9 +2,11 @@
 from __future__ import annotations
 
 import json
+import re as _re
 
 from gpu_agent.dashboard.gap_chart import render_gap_svg, spark_svg
 from gpu_agent.dashboard.render import esc
+from gpu_agent.dashboard.site_render import page as _page
 
 
 def evidence_json(evidence: dict) -> str:
@@ -169,18 +171,31 @@ def render_condense_script() -> str:
     return _CONDENSE
 
 
-import re as _re
-
-from gpu_agent.dashboard.site_render import page as _page
-
 _BANNED_STORY = ["DMI", "SMI", "momentum", "strengthening", "tightening",
                  "accelerating", "allocation", "doctrine", "robust", "leverage"]
 
+# Non-greedy "<script>...</script>" stripping stops at the *first* literal
+# "</script>" it finds, so a script whose own body contains that literal
+# text (e.g. inside a JS string) would end the strip early and leave the
+# rest of the script scanned as page prose. The lookahead below rejects a
+# candidate close tag whenever another "</script>" follows before the next
+# "<script" open tag, forcing the match to extend to the *last* such close
+# tag in that run instead — which still stops correctly at the boundary
+# between two separate, real script blocks.
+_SCRIPT_RE = _re.compile(
+    r"<script.*?</script>(?!(?:(?!<script).)*</script)", _re.S | _re.I)
+
 
 def lint_story_copy(html_text: str) -> list[str]:
-    prose = _re.sub(r"<script.*?</script>", "", html_text,
-                    flags=_re.S | _re.I)
+    prose = _SCRIPT_RE.sub("", html_text)
     hits = []
+    # Word-boundary matching runs on the rendered HTML, not a markup-aware
+    # text extraction, so a banned word split across tags (e.g.
+    # "Lever<b>age</b>") would slip past this scan undetected. That gap is
+    # accepted for now: every piece of data text in this lane is escaped
+    # and inserted as plain, untagged text, so no code path here can
+    # produce mid-word markup today. A future page that inserts richer
+    # (tag-wrapped) content will need a markup-aware scanner instead.
     for w in _BANNED_STORY:
         if _re.search(rf"\b{w}\b", prose, _re.I):
             hits.append(f"banned word in page prose: {w}")
@@ -209,7 +224,8 @@ def _scene_html(scene: dict) -> str:
         links = " ".join(
             f'<a href="{esc(r["url"])}" target="_blank" rel="noopener">'
             f'{esc(r["outlet"])} · {esc(r["title"])} · {esc(r["date"])}</a>'
-            for r in scene["related"] if r["url"].startswith("http"))
+            for r in scene["related"]
+            if r["url"].startswith(("http://", "https://")))
         rel = f'<p class="st-related">Related coverage: {links}</p>'
     return (f'<article class="st-scene st-scene-{scene["accent"]}">'
             f'<i class="st-dot st-dot-{scene["accent"]}">{scene["n"]}</i>'
