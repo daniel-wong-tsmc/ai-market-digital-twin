@@ -210,17 +210,20 @@ def _add_scenes(model, latest, store_root, cat_dir, series, gl):
         d = dims["bottleneck"]
         specs.append(("What tightened",
                       [plain(d.get("rationale")), plain(status.get("reason"), 1)],
-                      sv("hbmSupplyCapex"), "Memory factory spending",
+                      "hbmSupplyCapex", sv("hbmSupplyCapex"),
+                      "Memory factory spending",
                       _resolve_findings(latest, d.get("findingIds") or [])))
     if dims.get("momentum"):
         d = dims["momentum"]
         specs.append(("Demand kept climbing", [plain(d.get("rationale"))],
-                      sv("hyperscalerCapexRevision"), "Big buyers' spending plans",
+                      "hyperscalerCapexRevision", sv("hyperscalerCapexRevision"),
+                      "Big buyers' spending plans",
                       _resolve_findings(latest, d.get("findingIds") or [])))
     if dims.get("unitEconomics") or series.get("odmMonthlyAiRevenue"):
         d = dims.get("unitEconomics") or {}
         specs.append(("Where supply is gaining", [plain(d.get("rationale"))],
-                      sv("odmMonthlyAiRevenue"), "Servers actually shipped",
+                      "odmMonthlyAiRevenue", sv("odmMonthlyAiRevenue"),
+                      "Servers actually shipped",
                       _resolve_findings(latest, d.get("findingIds") or [])))
     lines = read_implication_lines(store_root, model["category_id"],
                                    model["as_of"]) or []
@@ -229,9 +232,11 @@ def _add_scenes(model, latest, store_root, cat_dir, series, gl):
         latest, [i for l in lines for i in l.get("finding_ids") or []])
     if watch:
         specs.append(("What would close the gap", watch,
-                      sv("hbmSupplyCapex"), "Memory factory spending", watch_f))
+                      "hbmSupplyCapex", sv("hbmSupplyCapex"),
+                      "Memory factory spending", watch_f))
 
-    for i, (title, paras, vals, vlabel, finds) in enumerate(specs, start=1):
+    scene_by_indicator: dict[str, int] = {}
+    for i, (title, paras, ind, vals, vlabel, finds) in enumerate(specs, start=1):
         sc = _mk_scene(i, title, paras, vals, vlabel, finds)
         if not sc["paragraphs"]:
             continue
@@ -242,34 +247,53 @@ def _add_scenes(model, latest, store_root, cat_dir, series, gl):
             "findings": _finding_rows(finds) or model["evidence"].get(
                 "kpi:gpuRentalOnDemand", {}).get("findings", []),
             "series": vals, "explore": "appendix.html"}
+        # A pick links to the scene whose visual is built from the pick's
+        # own indicator series — the topical rule (owner decision). If
+        # several scenes draw from the same series, keep the first
+        # (lowest-numbered) one.
+        scene_by_indicator.setdefault(ind, sc["n"])
 
-    for i, pick in enumerate(model["kpis"]["picks"]):
-        if i < len(model["scenes"]):
-            pick["scene"] = model["scenes"][i]["n"]
+    for pick in model["kpis"]["picks"]:
+        ind = pick["claim"].split(":", 1)[1]
+        n = scene_by_indicator.get(ind)
+        if n is not None:
+            pick["scene"] = n
             pick["caption"] = pick["caption"] or "picked by today's story"
 
     if model["gap"] and model["scenes"]:
         month = model["gap"]["months"][-1]
+        first = model["scenes"][0]
         model["callouts"] = [{
             "month_key": month["key"],
-            "text": f"{month['label']}: {model['scenes'][0]['title'].lower()}",
-            "claim": "scene:1"}]
+            "text": f"{month['label']}: {first['title'].lower()}",
+            "claim": f"scene:{first['n']}"}]
 
-    from gpu_agent.dashboard.gap_chart import _monthly_records
+    # Archive contract (owner decision): a chip for month M shows what
+    # happened DURING month M, i.e. the change from month M-1 to M — so an
+    # entry needs a predecessor. The current (latest) month is today's
+    # story, not archive, and is always excluded. With only 2 monthly
+    # snapshots (today's data) there is no month that has both a
+    # predecessor and is not the latest, so the archive is empty.
+    #
+    # The gap level is a running sum (see gap_chart.build_gap_data), so the
+    # change in gap from M-1 to M collapses to _SCALE * (dmi_M - smi_M) —
+    # exactly the same quantity, scale, and dead-band threshold that
+    # decides the current month's own gap_word. Reuse those constants so
+    # archive headlines are computed by the identical rule.
+    from gpu_agent.dashboard.gap_chart import (_DEAD_BAND, _SCALE,
+                                                _monthly_records)
     recs = _monthly_records(cat_dir)
+    candidates = list(range(1, len(recs) - 1))  # has a predecessor, not latest
     arch = []
-    # Each entry is keyed to the earlier month of the pair being compared
-    # (recs[j - 1]), so the loop's own bounds already stop one short of the
-    # current month — no separate "drop today's story" trim is needed, and
-    # this also works with as few as 2 monthly snapshots (see deviation note
-    # in task-4-report.md: the brief's original `key = recs[j]["key"]` +
-    # trailing `arch[:-1]` trim produced an empty archive whenever there
-    # were only 2 monthly records, failing the brief's own test).
-    for j in range(max(1, len(recs) - 4), len(recs)):
-        d_ = recs[j]["dmi"] - recs[j]["smi"]
-        p_ = recs[j - 1]["dmi"] - recs[j - 1]["smi"]
-        word = "widened" if d_ > p_ else ("narrowed" if d_ < p_ else "held")
-        key = recs[j - 1]["key"]
+    for j in candidates[-4:]:
+        delta = _SCALE * (recs[j]["dmi"] - recs[j]["smi"])
+        if delta > _DEAD_BAND:
+            word = "widened"
+        elif delta < -_DEAD_BAND:
+            word = "narrowed"
+        else:
+            word = "held"
+        key = recs[j]["key"]
         label = dt.date(int(key[:4]), int(key[5:7]), 1).strftime("%B %Y")
         arch.append({"key": key, "label": label,
                     "text": _HEADLINES.get(word, "")})
