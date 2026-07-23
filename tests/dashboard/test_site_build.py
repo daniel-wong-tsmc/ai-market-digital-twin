@@ -77,18 +77,88 @@ def test_two_builds_are_byte_identical(tmp_path):
         assert (a / rel).read_bytes() == (b / rel).read_bytes(), rel
 
 
-def test_build_site_index_is_brief(tmp_path):
-    # F97: the category index.html is now the executive brief, not the F95 page.
-    # This fixture store has only dated daily scorecards (no monthly YYYY-MM-vN.json),
-    # so the brief renders defensively-thin (no agenda band, verdict "—") but the
-    # masthead and the cold-start "Standing calls" header are always present.
-    summary = build_site(CAT, FIX, "work-nonexistent", f"{FIX}/plain-2026-07-06.json",
-                         str(tmp_path / "site"), today=dt.date(2026, 7, 16))
-    html = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
-    assert "Executive Brief" in html and "Standing calls" in html
-    assert summary["brief_lint"] == []
-    css = (tmp_path / "site" / "style.css").read_text(encoding="utf-8")
-    assert ".kpis" in css and "status-elevated" in css
+def test_build_site_index_is_story(tmp_path):
+    # F101a final review (item f): the shared _build()/FIX fixture set has
+    # only daily-grain scorecards and no series/ dir, so it degrades to zero
+    # scenes/chips (see test_story_page_degrades_gracefully_with_only_daily_
+    # scorecards_and_no_series above) -- asserting "the story page has real
+    # content" against it would only ever exercise the always-rendered
+    # static text, which is exactly the weak-assertion shape the review
+    # flagged. Build a small store with a real monthly scorecard and one
+    # series file instead, so these assertions can actually break.
+    import json
+    root = tmp_path / "store"
+    cat = root / CAT
+    cat.mkdir(parents=True)
+    finding = {
+        "id": "f-1", "statement": "Memory makers cut back supply.",
+        "kind": "measured", "value": {"number": 75.0, "unit": "USD_B"},
+        "trend": "rising", "why": "Demand signal strengthened.",
+        "impact": {"targets": [CAT], "direction": "positive",
+                   "mechanism": "Expands addressable demand."},
+        "evidence": [{"source": "Micron call", "url": "https://x.example/a",
+                     "date": "2026-06-24", "excerpt": "e", "tier": "primary"}],
+        "reasoning": None,
+        "confidence": {"level": "high", "basis": "primary source"},
+        "dispersion": None, "asOf": "2026-07", "indicatorId": "D2",
+        "side": "demand", "polarityDemand": 1, "polaritySupply": 0,
+        "magnitude": 3, "entity": "NVIDIA", "observedAt": "2026-07-01",
+        "capturedAt": "2026-07-02T00:00:00Z",
+    }
+    (cat / "2026-07-v1.json").write_text(json.dumps({
+        "categoryId": CAT, "asOf": "2026-07",
+        "findings": [finding],
+        "dimensionRatings": {
+            "bottleneck": {"rating": "Weak", "direction": "worsening",
+                           "confidence": {"level": "high", "basis": "self-consistency"},
+                           "findingIds": ["f-1"], "rationale": "Memory makers cut back supply."}},
+        "demandSupply": {"dmiContribution": 1.0, "smiContribution": 0.2,
+                         "sdgi": 0.4, "sdgiDirection": "demand-led"},
+        "narrative": "n", "confidence": {"level": "high", "basis": "n"},
+        "sources": [], "dimensionStatus": {},
+        "categoryStatus": {"rating": "Strong", "direction": "steady",
+                          "bottleneck": "bottleneck", "reason": "r.",
+                          "constraintLabel": "HBM"},
+    }), encoding="utf-8")
+    (cat / "2026-06-v1.json").write_text((cat / "2026-07-v1.json").read_text(
+        encoding="utf-8").replace('"2026-07"', '"2026-06"'), encoding="utf-8")
+    series = root / "series"
+    series.mkdir()
+    (series / "gpuRentalOnDemand.jsonl").write_text("\n".join(json.dumps({
+        "indicatorId": "gpuRentalOnDemand", "period": p, "value": v, "unit": "x",
+        "publishedAt": p + "-28",
+        "source": {"url": "https://src.example/gpu", "title": "gpu source"},
+    }) for p, v in [("2026-05", 15.1), ("2026-06", 14.6)]), encoding="utf-8")
+
+    summary = build_site(CAT, str(cat), "work-nonexistent", None,
+                         str(tmp_path / "site"), price_fn=lambda d: {"H100": 2.31},
+                         today=dt.date(2026, 7, 16))
+    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    # "The story, step by step" is a hard-coded literal that renders
+    # unconditionally whenever the story section exists at all -- pin it
+    # together with real scene markup (which only renders when there's
+    # actual scene content) so this can't pass on a build with zero scenes.
+    assert "The story, step by step" in idx
+    assert '<article class="st-scene' in idx
+    # "says who?" alone is satisfied by the KPI band's static caption even
+    # when the page has zero chips -- pin it together with a real per-chip
+    # evidence hookup so this can't pass on a build with zero chips.
+    assert "says who?" in idx
+    assert 'data-ev="kpi:' in idx
+    assert 'id="ev-data"' in idx
+    assert "Executive Brief" not in idx
+    assert summary["story_lint"] == []
+    css = (tmp_path / "site" / CAT / "style.css").read_text(encoding="utf-8")
+    # style.css is SITE_CSS + BRIEF_CSS + DASHBOARD_CSS + STORY_CSS concatenated
+    # (site_build.py). `.st-chip in css` alone would only ever prove STORY_CSS's
+    # own literal text landed in a constant STORY_CSS itself defines -- it can
+    # never fail. Assert one marker rule from each bundle instead, so dropping
+    # any bundle from the concatenation (including the older appendix/"how"-page
+    # rules that still need to ship) breaks this test.
+    assert ".how" in css  # SITE_CSS -- appendix/"how" pages' crumb/tile chrome
+    assert ".hero" in css  # BRIEF_CSS -- retired brief's rules, still shared
+    assert ".kcard" in css  # DASHBOARD_CSS -- deep-dive drawer's KPI cards
+    assert ".st-chip" in css and ".ev-panel" in css  # STORY_CSS -- this page's own rules
 
 
 def test_style_css_includes_dashboard_theme(tmp_path):
@@ -105,15 +175,62 @@ def test_appendix_has_dimension_and_finding_anchors(tmp_path):
 
 
 def test_build_site_lint_gate_aborts_build(tmp_path, monkeypatch):
+    # Task 8 Decision A item 2: retargeted from the retired brief lint
+    # (lint_exec_copy) to the story-page copy lint that now gates the index
+    # write, keeping this a real abort test rather than a stale mechanism check.
     import datetime as dt
     import gpu_agent.dashboard.site_build as sb
-    monkeypatch.setattr(sb, "lint_exec_copy",
+    monkeypatch.setattr(sb, "lint_story_copy",
                         lambda html: ["because no alert rule fired"])
     with pytest.raises(ValueError):
         build_site(CAT, FIX, "work-nonexistent", f"{FIX}/plain-2026-07-06.json",
                    str(tmp_path / "site"), today=dt.date(2026, 7, 16))
-    # a register violation aborts before the brief index is written
+    # a copy-lint violation aborts before the story index is written
     assert not (tmp_path / "site" / CAT / "index.html").exists()
+
+
+def test_story_page_degrades_gracefully_with_only_daily_scorecards_and_no_series(tmp_path):
+    # Built against a category with no monthly scorecards (only a legacy
+    # daily-grain one, which the story page's own monthly-over-daily guard
+    # -- a settled, do-not-change rule -- never surfaces) and no series/
+    # dir at all: the story page must degrade honestly (no chart, no empty
+    # KPI band/caption, no empty "story, step by step" section) instead of
+    # emitting a shell that reads as broken. build_site itself (fed by
+    # site_model.py's own daily-tolerant selector) must still succeed.
+    import json
+    root = tmp_path / "store"
+    cat = root / CAT
+    cat.mkdir(parents=True)
+
+    scorecard = {
+        "categoryId": CAT, "asOf": "2026-07-06", "findings": [],
+        "dimensionRatings": {},
+        "demandSupply": {"dmiContribution": 0.5, "smiContribution": 0.1,
+                         "sdgi": 0.4, "sdgiDirection": "demand-led"},
+        "narrative": "n", "confidence": {"level": "high", "basis": "n"},
+        "sources": [], "dimensionStatus": {},
+        "categoryStatus": {"rating": "Strong", "direction": "steady",
+                          "bottleneck": "bottleneck", "reason": "r.",
+                          "constraintLabel": "HBM"},
+    }
+    (cat / "2026-07-06-v1.json").write_text(json.dumps(scorecard), encoding="utf-8")
+
+    summary = build_site(CAT, str(cat), "work-nonexistent", None,
+                         str(tmp_path / "site"), price_fn=lambda d: {},
+                         today=dt.date(2026, 7, 16))
+    assert summary["story_lint"] == []
+    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    # Narrowed per final review: "<svg" not in idx is over-broad and would
+    # break the first time any decorative graphic (e.g. a sparkline) is
+    # added to the degraded page. What this test actually cares about is
+    # the demand-vs-supply gap chart specifically, which render_gap_svg
+    # renders as an <svg class="gapchart" ...> element (gap_chart.py) --
+    # assert that one element is absent, not svg elements in general.
+    assert 'class="gapchart"' not in idx
+    assert "Not enough" in idx
+    assert "says who?" not in idx
+    assert "The story, step by step" not in idx
+    assert "picked by today's story" not in idx
 
 
 def test_brief_evidence_anchors_resolve_in_appendix(tmp_path):
@@ -125,9 +242,26 @@ def test_brief_evidence_anchors_resolve_in_appendix(tmp_path):
     # selectors (load_scorecards, build.py's build_model, site_model.py's
     # build_site_model) still preferred the daily over the monthly, a #dim-<name>
     # anchor for a dimension only the monthly has (moat, unitEconomics) would dead-end.
-    # F100 retarget: the brief now surfaces dimensions via the deep-dive panel's
-    # embedded JSON blob instead of appendix.html# links; the assertions below check
-    # the same regression through that blob.
+    # F100 retarget: the brief surfaced dimensions via the deep-dive panel's embedded
+    # JSON blob instead of appendix.html# links; the assertions checked the same
+    # regression through that blob.
+    # Task 8 Decision C retarget: index.html is now the F101 story page. Its own
+    # evidence blob ("ev-data") is keyed by claim id ("kpi:...", "scene:N"), not by
+    # dimension name, AND story_model.py's scene-building (see its _add_scenes) only
+    # ever surfaces the bottleneck, momentum, and unitEconomics dimensions -- it has no
+    # code path that puts moat, competitiveStructure, or strategicRisk on the page at
+    # all. So the regression guard now splits across the two pages that still exist:
+    #  - unitEconomics (which story_model DOES expose) is checked through the story
+    #    page itself: the "Where supply is gaining" scene is only built when
+    #    dims.get("unitEconomics") is truthy, which is true only for the monthly
+    #    scorecard in this fixture (the daily has no unitEconomics dimension at all) --
+    #    so that scene's presence in index.html is direct proof that build_story_model's
+    #    own selector (brief_model.latest_monthly, which story_model.py reuses) chose
+    #    the monthly read over the daily.
+    #  - moat (which story_model has NO path to expose, regardless of which scorecard
+    #    wins) is checked the pre-F100 way, directly against appendix.html: a
+    #    #dim-moat anchor there is still proof that site_model.py's own (unchanged by
+    #    this lane) selector also chose the monthly read.
     import json
     root = tmp_path / "store"
     cat = root / CAT
@@ -195,18 +329,22 @@ def test_brief_evidence_anchors_resolve_in_appendix(tmp_path):
     site = tmp_path / "site" / CAT
     index = (site / "index.html").read_text(encoding="utf-8")
     appendix = (site / "appendix.html").read_text(encoding="utf-8")
-    # F100: the brief no longer emits <a href="appendix.html#..."> links; the
-    # dimensions it surfaces now live in the deep-dive panel's embedded JSON blob
-    # (id="dd-data"), keyed by dimension name. The F97 regression intent survives:
-    # every dimension the brief surfaces must resolve to a real #dim-<name> anchor in
-    # the appendix (brief & appendix must agree on the winning MONTHLY scorecard).
-    m = re.search(r'id="dd-data"[^>]*>(.*?)</script>', index, re.S)
-    assert m, "brief should embed the deep-dive data blob"
-    dd = json.loads(m.group(1))          # json.loads decodes the < escapes
-    dims = set(dd.keys())
-    assert dims, "deep-dive blob should carry the brief's dimensions"
-    # the monthly (6 dims incl. moat + unitEconomics) must have won over the same-month
-    # legacy daily (4 dims); if the daily wrongly won, these keys would be absent.
-    assert {"moat", "unitEconomics"} <= dims, "monthly scorecard must win over same-month daily"
-    for name in dims:
-        assert f'id="dim-{name}"' in appendix, f"dead dimension anchor: {name}"
+
+    # story_model.py's own "latest scorecard" selector (brief_model.latest_monthly,
+    # reused verbatim by build_story_model) chose the monthly read over the
+    # same-month daily: proven by the unitEconomics-only scene existing at all. The
+    # daily scorecard has no "unitEconomics" dimension, so if it had wrongly won,
+    # story_model.py's `dims.get("unitEconomics")` check would be falsy and this
+    # scene would never be built.
+    assert "Where supply is gaining" in index, (
+        "story page should surface the unitEconomics scene, proving "
+        "build_story_model's selector chose the monthly scorecard over the daily")
+    assert 'id="ev-data"' in index, "story page should embed its evidence blob"
+
+    # site_model.py's selector (unchanged by this lane) also chose the monthly read:
+    # moat has no code path onto the story page at all (story_model.py's
+    # _add_scenes only ever builds bottleneck/momentum/unitEconomics scenes), so its
+    # half of the regression guard stays on appendix.html, exactly as it did before
+    # F100 introduced the now-retired deep-dive-panel blob.
+    assert 'id="dim-moat"' in appendix, "dead dimension anchor: moat"
+    assert 'id="dim-unitEconomics"' in appendix, "dead dimension anchor: unitEconomics"
