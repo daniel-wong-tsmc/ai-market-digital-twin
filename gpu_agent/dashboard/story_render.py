@@ -3,7 +3,8 @@ from __future__ import annotations
 
 import json
 
-from gpu_agent.dashboard.render import esc  # noqa: F401  (used from Task 6 on)
+from gpu_agent.dashboard.gap_chart import render_gap_svg, spark_svg
+from gpu_agent.dashboard.render import esc
 
 
 def evidence_json(evidence: dict) -> str:
@@ -49,3 +50,108 @@ if(t){e.preventDefault();openEV(t.getAttribute('data-ev'));}});
 
 def render_evidence_panel() -> str:
     return _PANEL
+
+
+STORY_CSS = """
+.st-page{max-width:860px;margin:0 auto;padding:0 16px;color:#1c1c1c;
+ background:#fff;font-family:Georgia,'Times New Roman',serif}
+.st-head{position:sticky;top:0;background:#fff;padding:18px 0 10px;
+ border-bottom:1px solid #eee;z-index:20}
+.st-head h1{font-size:38px;line-height:1.08;margin:0 0 8px;font-weight:800}
+.st-head.condensed h1{font-size:19px;margin:0}
+.st-head.condensed .st-deck,.st-head.condensed .st-date{display:none}
+.st-deck{font-size:17px;color:#444;margin:0 0 4px}
+.st-date{font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.04em}
+svg.gapchart{width:100%;height:auto;overflow:visible}
+.gc-tick{font-size:11px;fill:#666;font-family:system-ui,sans-serif}
+.gc-axis{font-size:11px;fill:#888;font-style:italic}
+.gc-gap{font-size:12px;font-weight:700;fill:#a33}
+.gc-note{font-size:11px;fill:#333;font-family:system-ui,sans-serif}
+.gc-leader{stroke:#999;stroke-width:1}
+.gc-i{fill:#1f7a8c}
+.st-srcline{font-size:11px;color:#888;font-style:italic;margin:4px 0 18px}
+.st-band{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 26px;
+ font-family:system-ui,sans-serif}
+.st-chip{position:relative;border:1px solid #ddd;border-radius:8px;
+ padding:8px 12px;background:#fafafa;text-align:left;cursor:pointer;flex:1 1 140px}
+.st-chip-anchor{border:1.5px solid #333;background:#fff8ef}
+.st-pin::before{content:'\\2693';font-size:10px;margin-right:4px}
+.st-chip .st-val{font-size:17px;font-weight:700}
+.st-chip .st-lab{font-size:12px;color:#555}
+.st-chip .st-cap{font-size:10px;color:#999}
+.st-dot{display:inline-block;width:15px;height:15px;border-radius:50%;
+ color:#fff;font-size:10px;line-height:15px;text-align:center;font-style:normal}
+.st-dot-amber{background:#d69b26}.st-dot-terracotta{background:#b0562e}
+.st-dot-teal{background:#1f7a8c}.st-dot-green{background:#3d8b4f}
+.st-tip{display:none;position:absolute;left:0;top:100%;z-index:30;width:230px;
+ background:#1c1c1c;color:#fff;font-size:12px;padding:8px 10px;border-radius:6px}
+.st-chip:hover .st-tip,.st-chip:focus .st-tip{display:block}
+.ev-scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:40}
+.ev-scrim.on{display:block}
+.ev-panel{position:fixed;top:0;right:-360px;width:340px;height:100%;z-index:41;
+ background:#fff;border-left:1px solid #ddd;padding:18px;overflow-y:auto;
+ transition:right .2s;font-family:system-ui,sans-serif}
+.ev-panel.on{right:0}
+.ev-close{float:right;border:0;background:none;font-size:22px;cursor:pointer}
+.ev-title{font-size:16px;margin:0 0 6px}.ev-claim{font-size:13px;color:#444}
+.ev-step{font-size:11px;text-transform:uppercase;color:#888;margin:10px 0 4px}
+.ev-row{border-top:1px solid #eee;padding:6px 0;font-size:12px;display:flex;
+ gap:6px;align-items:baseline}
+.ev-src{color:#666;white-space:nowrap}.ev-take{flex:1}
+.ev-link{color:#1f7a8c;text-decoration:none}
+.ev-explore{display:block;margin-top:12px;font-size:13px;color:#1f7a8c}
+.ev-spark{color:#1f7a8c;display:block;margin:6px 0}
+a.ev{cursor:pointer;text-decoration:underline dotted}
+@media (max-width:640px){.st-head h1{font-size:27px}
+ .st-band{flex-direction:column}.ev-panel{width:88%}}
+"""
+
+
+def _headline_block(model: dict) -> str:
+    return (f'<header class="st-head"><h1>{esc(model["headline"])}</h1>'
+            f'<p class="st-deck">{esc(model["deck"])}</p>'
+            f'<p class="st-date">{esc(model["dateline"])}</p></header>')
+
+
+def _chart_block(model: dict) -> str:
+    if not model.get("gap"):
+        return ""
+    months = model["gap"]["months"]
+    span = f'{months[0]["label"]}–{months[-1]["label"]} {months[-1]["key"][:4]}'
+    return (f'<section class="st-chart">'
+            f'{render_gap_svg(model["gap"], model.get("callouts"))}'
+            f'<p class="st-srcline">Source: agent-tracked orders and shipment '
+            f'data; company filings · {esc(span)}</p></section>')
+
+
+def _chip_html(c: dict, anchored: bool = False) -> str:
+    marker = ('<i class="st-pin"></i>' if anchored else
+              (f'<i class="st-dot st-dot-{["amber","terracotta","teal","green"][(c["scene"]-1)%4]}">'
+               f'{c["scene"]}</i>' if c.get("scene") else ""))
+    cls = "st-chip st-chip-anchor" if anchored else "st-chip"
+    return (f'<button class="{cls}" data-ev="{esc(c["claim"])}">'
+            f'{marker}<span class="st-val">{esc(c["value"])} {c["arrow"]}</span>'
+            f'<span class="st-lab">{esc(c["label"])}</span>'
+            f'{spark_svg(c["spark"])}'
+            f'<span class="st-cap">{esc(c["caption"])}</span>'
+            f'<span class="st-tip">{esc(c["tip"])}</span></button>')
+
+
+def _kpi_band(model: dict) -> str:
+    k = model["kpis"]
+    chips = []
+    if k.get("anchored"):
+        chips.append(_chip_html(k["anchored"], anchored=True))
+    chips += [_chip_html(c) for c in k["picks"]]
+    cap = ('<p class="st-srcline">picked by today\'s story · '
+           'tap any number to ask: says who?</p>')
+    return f'<section class="st-band">{"".join(chips)}</section>{cap}'
+
+
+_CONDENSE = ("<script>(function(){var h=document.querySelector('.st-head');"
+             "if(!h)return;addEventListener('scroll',function(){"
+             "h.classList.toggle('condensed',scrollY>120);});})();</script>")
+
+
+def render_condense_script() -> str:
+    return _CONDENSE

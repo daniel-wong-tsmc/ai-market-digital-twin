@@ -86,3 +86,46 @@ def test_explore_link_href_only_inside_scheme_guard():
     assert not guard_allows("javascript:alert(1)")
     assert not guard_allows("data:text/html,<script>alert(1)</script>")
     assert not guard_allows("vbscript:msgbox(1)")
+
+
+import datetime as dt
+from tests.dashboard.test_story_model import _store, CAT
+from gpu_agent.dashboard.story_model import build_story_model
+from gpu_agent.dashboard.story_render import (_chart_block, _headline_block,
+                                              _kpi_band, STORY_CSS,
+                                              render_condense_script)
+
+
+def _model(tmp_path):
+    return build_story_model(CAT, _store(tmp_path), dt.date(2026, 7, 22))
+
+
+def test_headline_block(tmp_path):
+    h = _headline_block(_model(tmp_path))
+    assert "The GPU shortage got worse this month." in h
+    assert "updated with each run" in h
+    assert 'class="st-head"' in h
+
+
+def test_chart_block_has_svg_and_source_line(tmp_path):
+    c = _chart_block(_model(tmp_path))
+    assert "<svg" in c and "the gap, this week" in c
+    assert "Source: agent-tracked orders and shipment data" in c
+
+
+def test_kpi_band_chips(tmp_path):
+    band = _kpi_band(_model(tmp_path))
+    assert 'data-ev="kpi:gpuRentalOnDemand"' in band
+    assert "price of scarcity" in band
+    assert 'class="st-tip"' in band          # hover tooltip content present
+    assert 'class="st-pin"' in band          # anchored marker
+    assert "st-dot" in band                  # scene dots on picks
+    assert band.count("st-chip") >= 3
+
+
+def test_css_and_condense_script():
+    assert ".st-chip:hover .st-tip" in STORY_CSS
+    assert "overflow:visible" in STORY_CSS.replace(" ", "")
+    assert "@media" in STORY_CSS
+    js = render_condense_script()
+    assert "condensed" in js and js.count("<script>") == 1
