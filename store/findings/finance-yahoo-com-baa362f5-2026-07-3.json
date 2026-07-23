@@ -1,0 +1,54 @@
+{
+  "id": "finance-yahoo-com-baa362f5-2026-07-3",
+  "statement": "Google Cloud revenue grew 82% year-over-year to $24.8 billion in 2Q26, accelerating from 63% in Q1 2026 and 48% in Q4 2025, with cloud operating income of $8.8 billion versus $2.8 billion a year earlier.",
+  "kind": "measured",
+  "value": {
+    "number": 24.8,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Accelerating cloud revenue with sharply higher operating income shows AI infrastructure spending is being monetized, which supports continued willingness to buy accelerators rather than pause.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "applications.enterprise-copilots"
+    ],
+    "direction": "positive",
+    "mechanism": "Cloud growth accelerating across three consecutive quarters alongside expanding operating income funds and justifies further accelerator and data-center purchases."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Bloomberg wire) — \"Google increases capex forecast again after cloud-driven earnings beat\"",
+      "url": "https://finance.yahoo.com/technology/articles/google-quarterly-cloud-revenue-growth-200517715.html",
+      "date": "2026-07-22",
+      "excerpt": "revenue rising 82% to $24.8 billion,",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (Bloomberg wire) — \"Google increases capex forecast again after cloud-driven earnings beat\"",
+      "url": "https://finance.yahoo.com/technology/articles/google-quarterly-cloud-revenue-growth-200517715.html",
+      "date": "2026-07-22",
+      "excerpt": "$8.8 billion (vs. $2.8 billion prior year).",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary wire report of quarterly results; no filing fetched and no distinct corroborating publishers, so capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-23T01:05:51Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

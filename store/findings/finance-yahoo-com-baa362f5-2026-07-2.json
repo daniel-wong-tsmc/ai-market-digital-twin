@@ -1,0 +1,54 @@
+{
+  "id": "finance-yahoo-com-baa362f5-2026-07-2",
+  "statement": "Google Cloud backlog rose by more than $50 billion sequentially to $514 billion in 2Q26, from $462 billion in Q1 2026, with just over half expected to convert to revenue within 24 months.",
+  "kind": "measured",
+  "value": {
+    "number": 514.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Backlog is contracted future work, so a half-trillion-dollar book that keeps growing is the strongest available evidence that AI compute demand is committed rather than merely forecast.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "A growing contracted backlog obliges the cloud provider to keep adding compute capacity, which sustains accelerator and data-center purchasing."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Bloomberg wire) — \"Google increases capex forecast again after cloud-driven earnings beat\"",
+      "url": "https://finance.yahoo.com/technology/articles/google-quarterly-cloud-revenue-growth-200517715.html",
+      "date": "2026-07-22",
+      "excerpt": "Google Cloud's backlog increased by more than $50 billion sequentially, reaching $514 billion in the second quarter.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (Bloomberg wire) — \"Google increases capex forecast again after cloud-driven earnings beat\"",
+      "url": "https://finance.yahoo.com/technology/articles/google-quarterly-cloud-revenue-growth-200517715.html",
+      "date": "2026-07-22",
+      "excerpt": "the company expects to recognize just over 50% of the total backlog as revenue over the next 24 months.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary wire coverage of an earnings release; the backlog figure is explicitly attributed to corroborating coverage rather than a fetched filing, so capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "market",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-23T01:05:51Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

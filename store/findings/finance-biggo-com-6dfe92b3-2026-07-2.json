@@ -1,0 +1,54 @@
+{
+  "id": "finance-biggo-com-6dfe92b3-2026-07-2",
+  "statement": "DDR4 16GB spot prices reached $81.20, up 17.5% in a month and above the prior peak of $79, while DDR5 16GB broke $50 for the first time after languishing at $39-$41 during the March-to-May correction.",
+  "kind": "measured",
+  "value": {
+    "number": 17.5,
+    "unit": "pct_yoy"
+  },
+  "trend": "rising",
+  "why": "Spot memory prices moving to record highs off a spring trough is the fastest visible signal that memory supply is tightening, and it feeds through to the cost of every AI server built.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.ai-storage",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Record spot DRAM prices with a stated month-over-month increase indicate scarce memory supply and rising input cost for accelerator and server builds."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance — \"DRAM Spot Prices Hit Record Highs; 'Q3 Contract Prices to Surge Another 25%+'\"",
+      "url": "https://finance.biggo.com/news/bba3a886-3c51-48e4-b42b-6f8aa36fa008",
+      "date": "2026-07-22",
+      "excerpt": "$81.20 (approximately 116,000 won) as of the previous day, a 17.5% increase from a month earlier",
+      "tier": "secondary"
+    },
+    {
+      "source": "BigGo Finance — \"DRAM Spot Prices Hit Record Highs; 'Q3 Contract Prices to Surge Another 25%+'\"",
+      "url": "https://finance.biggo.com/news/bba3a886-3c51-48e4-b42b-6f8aa36fa008",
+      "date": "2026-07-22",
+      "excerpt": "breaking through the $50 level (approximately 71,000 won) for the first time ever",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary finance outlet reporting spot-market quotes; no primary filing and no separately fetched cross-publisher corroboration."
+  },
+  "dispersion": "DDR4 16GB ranged from about $58 in mid-May to $81.20 now; DDR5 16GB from $39-$41 during the correction to above $50.",
+  "asOf": "2026-07",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-23T01:05:51Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

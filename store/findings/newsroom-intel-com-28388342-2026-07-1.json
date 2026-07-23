@@ -1,0 +1,50 @@
+{
+  "id": "newsroom-intel-com-28388342-2026-07-1",
+  "statement": "Intel Foundry signed Fortinet as a named external customer for the Fortinet Security Processor 6, with Intel providing design, packaging and manufacturing; no dollar value or volume was disclosed.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named outside foundry customer is evidence that alternative leading-edge manufacturing capacity outside TSMC is becoming commercially usable, which over time widens the supply base for custom silicon.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.networking-silicon",
+      "chips.eda-ip"
+    ],
+    "direction": "positive",
+    "mechanism": "Winning a purpose-built ASIC program gives Intel Foundry a reference customer, supporting diversification of wafer and advanced-packaging supply away from a single dominant foundry."
+  },
+  "evidence": [
+    {
+      "source": "Intel Newsroom press release (newsroom.intel.com)",
+      "url": "https://newsroom.intel.com/manufacturing/intel-and-fortinet-collaborate-to-advance-cybersecurity-innovation-and-strengthen-global-supply-chain-resilience",
+      "date": "2026-07-21",
+      "excerpt": "Intel and Fortinet Collaborate to Advance Cybersecurity Innovation and Strengthen Global Supply Chain Resilience",
+      "tier": "secondary"
+    },
+    {
+      "source": "Intel Newsroom press release (newsroom.intel.com)",
+      "url": "https://newsroom.intel.com/manufacturing/intel-and-fortinet-collaborate-to-advance-cybersecurity-innovation-and-strengthen-global-supply-chain-resilience",
+      "date": "2026-07-21",
+      "excerpt": "No dollar value, unit volume, or revenue figure is given in the Intel release.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company newsroom item recorded here as a secondary-tier document with no financial disclosure; trade-press corroboration was noted but not separately fetched, so capped at medium."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend flat -> rising); sources: Intel Newsroom press release (newsroom.intel.com), ServeTheHome",
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-07-21",
+  "capturedAt": "2026-07-23T01:05:51Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

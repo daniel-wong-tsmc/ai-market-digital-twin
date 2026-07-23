@@ -1,0 +1,51 @@
+{
+  "id": "ir-amd-com-80607c6d-2026-07-2",
+  "statement": "AMD landed Anthropic as a named MI450 design win and, per the same investor-relations index, will begin shipping Helios rack-scale systems to customers including Microsoft in the second half of 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Two marquee customers announced within three days shows AMD's rack-scale platform is being adopted by the largest AI buyers, which is the practical test of whether a second merchant-GPU source exists.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "models.frontier-closed",
+      "chips.networking-silicon"
+    ],
+    "direction": "positive",
+    "mechanism": "Named hyperscaler and frontier-lab commitments to Helios racks establish an alternative rack-scale platform alongside the incumbent, broadening buyer choice."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations press release (ir.amd.com)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1292/amd-and-anthropic-announce-strategic-partnership-to-deploy-up-to-2-gigawatts-of-amd-instinct-mi450-series-gpus",
+      "date": "2026-07-22",
+      "excerpt": "will begin shipping Helios to customers, including Microsoft, in the second half of 2026",
+      "tier": "primary"
+    },
+    {
+      "source": "AMD Investor Relations press release (ir.amd.com)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1292/amd-and-anthropic-announce-strategic-partnership-to-deploy-up-to-2-gigawatts-of-amd-instinct-mi450-series-gpus",
+      "date": "2026-07-22",
+      "excerpt": "Running across a diversified range of hardware lets us map the right workloads to the right hardware.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary investor-relations releases from the vendor naming its own customers and shipping window."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-23T01:05:51Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

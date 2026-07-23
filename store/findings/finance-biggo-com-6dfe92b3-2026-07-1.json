@@ -1,0 +1,54 @@
+{
+  "id": "finance-biggo-com-6dfe92b3-2026-07-1",
+  "statement": "Morgan Stanley expects server memory contract prices to rise more than 25% quarter-over-quarter in Q3 2026, with HBM capacity effectively sold out through 2026 and much of 2027 already pre-booked.",
+  "kind": "measured",
+  "value": {
+    "number": 25.0,
+    "unit": "pct_yoy"
+  },
+  "trend": "rising",
+  "why": "Memory is a hard input constraint for AI accelerators; sold-out HBM capacity and steeply rising contract prices mean GPU makers face both tighter supply and higher bill-of-materials cost, which caps how fast systems can ship.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.ai-storage"
+    ],
+    "direction": "negative",
+    "mechanism": "HBM sold out through 2026 with 2027 pre-booked, plus 25%+ quarterly contract price increases, tightens the memory bottleneck feeding accelerator assembly and raises input cost for every accelerator program."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance — \"DRAM Spot Prices Hit Record Highs; 'Q3 Contract Prices to Surge Another 25%+'\"",
+      "url": "https://finance.biggo.com/news/bba3a886-3c51-48e4-b42b-6f8aa36fa008",
+      "date": "2026-07-22",
+      "excerpt": "server memory contract prices will climb more than 25% quarter-over-quarter in the third quarter",
+      "tier": "secondary"
+    },
+    {
+      "source": "BigGo Finance — \"DRAM Spot Prices Hit Record Highs; 'Q3 Contract Prices to Surge Another 25%+'\"",
+      "url": "https://finance.biggo.com/news/bba3a886-3c51-48e4-b42b-6f8aa36fa008",
+      "date": "2026-07-22",
+      "excerpt": "HBM production capacity is reportedly effectively sold out through 2026, with a significant portion of 2027 output already pre-booked",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying a Morgan Stanley forecast; no filing-grade evidence and no separately fetched corroborating publishers, so capped at medium."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: BigGo Finance — \"DRAM Spot Prices Hit Record Highs; 'Q3 Contract Prices to Surge Another 25%+'\", DIGITIMES — \"Memory shortage to worsen in 2027 as AI inference strains supply\"",
+  "asOf": "2026-07",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "memory",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-23T01:05:51Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

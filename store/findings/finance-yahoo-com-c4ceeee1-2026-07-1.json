@@ -1,0 +1,43 @@
+{
+  "id": "finance-yahoo-com-c4ceeee1-2026-07-1",
+  "statement": "Nvidia more than halved the number of Asian customers authorised to buy its AI chips under a new compliance whitelist.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Removing over half of prior Asian customers, particularly neo-clouds, tightens Nvidia's authorised sales channel and raises export-control exposure.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Whitelist removal cuts authorised buyers in Singapore, Malaysia and Japan, constraining near-term addressable GPU demand."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Reuters wire, citing Financial Times)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-halves-asia-buyer-list-033140201.html",
+      "date": "2026-07-14",
+      "excerpt": "more than halved the number of Asian customers authorised to buy its AI chips",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary wire report of an FT story; no primary filing or exposure figures."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-14",
+  "capturedAt": "2026-07-22T13:42:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

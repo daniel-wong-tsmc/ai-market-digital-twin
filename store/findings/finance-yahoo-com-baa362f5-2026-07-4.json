@@ -1,0 +1,54 @@
+{
+  "id": "finance-yahoo-com-baa362f5-2026-07-4",
+  "statement": "Alphabet funded its 2Q26 build-out with $49.6 billion of equity issuance and $20.3 billion of senior unsecured notes, and reported its first-ever negative free cash flow of $5.9 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 69.9,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "When even the best-capitalized buyer turns to equity and debt markets and runs negative free cash flow, the pace of AI buying starts to depend on financing conditions rather than operating cash alone.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "External funding sustains the current buying pace but ties future accelerator and data-center orders to continued access to cheap capital, a fragility if credit conditions tighten."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Bloomberg wire) — \"Google increases capex forecast again after cloud-driven earnings beat\"",
+      "url": "https://finance.yahoo.com/technology/articles/google-quarterly-cloud-revenue-growth-200517715.html",
+      "date": "2026-07-22",
+      "excerpt": "Alphabet raised $49.6 billion through equity issuance in June and obtained $20.3 billion via senior unsecured notes in Q2.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (Bloomberg wire) — \"Google increases capex forecast again after cloud-driven earnings beat\"",
+      "url": "https://finance.yahoo.com/technology/articles/google-quarterly-cloud-revenue-growth-200517715.html",
+      "date": "2026-07-22",
+      "excerpt": "first-ever negative free cash flow of $5.9 billion that quarter.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary wire report; figures are specific but not drawn from the filing itself and not corroborated across separately fetched publishers."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-23T01:05:51Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
