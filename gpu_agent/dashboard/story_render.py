@@ -73,7 +73,7 @@ svg.gapchart{width:100%;height:auto;overflow:visible}
 .st-band{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 26px;
  font-family:system-ui,sans-serif}
 .st-chip{position:relative;border:1px solid #ddd;border-radius:8px;
- padding:8px 12px;background:#fafafa;text-align:left;cursor:pointer;flex:1 1 140px}
+ padding:8px 12px;background:#fafafa;text-align:left;cursor:pointer;flex:1 1 140px;display:flex;flex-direction:column}
 .st-chip-anchor{border:1.5px solid #333;background:#fff8ef}
 .st-pin::before{content:'\\2693';font-size:10px;margin-right:4px}
 .st-chip .st-val{font-size:17px;font-weight:700}

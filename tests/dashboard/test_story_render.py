@@ -133,3 +133,16 @@ def test_css_and_condense_script():
     assert "@media" in STORY_CSS
     js = render_condense_script()
     assert "condensed" in js and js.count("<script>") == 1
+
+
+def test_chip_stacking_rule():
+    # KPI chip fields (value, label, sparkline, caption, tooltip) must stack
+    # vertically instead of flowing on one line. Verify the stacking rule is
+    # present in .st-chip by checking for flex-direction:column, which makes
+    # direct children stack into a column. This is added to .st-chip which is
+    # already a flex item; the new rule makes it also a flex container.
+    assert "flex-direction:column" in STORY_CSS
+    # Absolutely positioned .st-tip must stay out of flex flow and hidden until
+    # hover/focus; verify its rules are still present and unchanged.
+    assert ".st-chip:hover .st-tip" in STORY_CSS
+    assert ".st-chip:focus .st-tip" in STORY_CSS
