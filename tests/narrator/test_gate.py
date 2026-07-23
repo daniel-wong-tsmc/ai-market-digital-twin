@@ -78,12 +78,14 @@ def test_scene_bounds_and_forward_close(tmp_path):
     a.scenes[0].title = "What to watch"           # forward-looking, so only
                                                    # the count check can fire
     violations = gate_narrator(a, _inp(tmp_path))
-    assert any("between 2 and 5" in v for v in violations)
+    assert any("between 2 and 5" in v and "1" in v for v in violations)
     assert not any("forward-looking" in v for v in violations)
 
     b = _ok(tmp_path)
     b.scenes[-1].title = "Another grim chapter"   # not forward-looking
-    assert any("forward-looking" in v for v in gate_narrator(b, _inp(tmp_path)))
+    violations_b = gate_narrator(b, _inp(tmp_path))
+    assert any("forward-looking" in v and "Another grim chapter" in v
+               for v in violations_b)
 
 
 def test_scene_bounds_upper_limit(tmp_path):
@@ -138,6 +140,11 @@ def test_scene_n_values_must_be_contiguous(tmp_path):
     violations = gate_narrator(a, _inp(tmp_path))
     assert any("[1, 7]" in v or ("1" in v and "7" in v and "contiguous" in v)
                for v in violations)
+
+    b = _ok(tmp_path)
+    b.scenes[0].n, b.scenes[1].n = 2, 1   # right set of values, wrong order
+    violations_b = gate_narrator(b, _inp(tmp_path))
+    assert any("[2, 1]" in v and "contiguous" in v for v in violations_b)
 
 
 def test_scene_source_line_must_not_be_empty(tmp_path):
@@ -194,3 +201,25 @@ def test_missing_inputs_keys_fail_closed_instead_of_raising(tmp_path):
     a = _ok(tmp_path)
     violations = gate_narrator(a, {})
     assert violations
+
+
+def test_content_free_answer_with_empty_inputs_is_still_rejected():
+    # A structurally legal but content-free answer -- no claim ids (using the
+    # exact no-source sentence), no relatedDocs, no kpiPicks, no
+    # calloutMonths -- references nothing in `inputs`, so checks 2/3/6 stay
+    # silent no matter what `inputs` contains. Before the missing-keys check,
+    # gate_narrator(a, {}) returned [] (a silent pass) instead of failing
+    # closed on the fact that `inputs` itself is empty.
+    a = NarratorAnswer.model_validate(_answer(
+        scenes=[_scene(claimFindingIds=[],
+                       sourceLine="No new sourced evidence today.",
+                       relatedDocs=[]),
+                _scene(n=2, title="What would close the gap",
+                       claimFindingIds=[],
+                       sourceLine="No new sourced evidence today.",
+                       relatedDocs=[])],
+        kpiPicks=[], calloutMonths=[]))
+    violations = gate_narrator(a, {})
+    assert violations
+    for k in ("findings", "docPool", "seriesPool", "gapMonths"):
+        assert any(k in v for v in violations)

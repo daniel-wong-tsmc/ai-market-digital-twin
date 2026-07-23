@@ -24,6 +24,10 @@ _FORWARD_MARKERS = ("close", "watch", "ahead", "next")
 def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
     violations: list[str] = []
 
+    for k in ("findings", "docPool", "seriesPool", "gapMonths"):
+        if k not in inputs:
+            violations.append(f"inputs is missing '{k}'")
+
     finding_ids = {f["id"] for f in inputs.get("findings", [])}
     doc_urls = {d["url"] for d in inputs.get("docPool", [])}
     series_ids = {s["indicatorId"] for s in inputs.get("seriesPool", [])}
