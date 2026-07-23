@@ -4,112 +4,160 @@
   "lines": [
     {
       "dimensions": [
+        "bottleneck",
         "momentum"
       ],
       "findingIds": [
-        "nvidianews-nvidia-com-7b7a02ff-2026-07-1",
-        "nvidianews-nvidia-com-7b7a02ff-2026-07-2",
-        "thetechcapital-com-796ec195-2026-07-1"
-      ],
-      "thesisIds": [
-        "nvda-demand-durability",
-        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing"
-      ],
-      "watchItem": "Merchant-GPU demand is running far ahead of supply this cycle, with record data-center sales and roughly $725B of hyperscaler spending planned for 2026. That gap keeps leading-edge wafer demand pointed sharply upward while the supply side stays tight."
-    },
-    {
-      "dimensions": [
-        "bottleneck"
-      ],
-      "findingIds": [
-        "www-tradingkey-com-855cb780-2026-07-1",
+        "finance-biggo-com-ae5dcd41-2026-07-1",
+        "finance-biggo-com-ae5dcd41-2026-07-2",
         "gpuaas-com-3469b91e-2026-07-3",
-        "www-trendforce-com-368d8402-2026-07-1",
-        "finance-biggo-com-ae5dcd41-2026-07-2"
+        "www-fool-com-f229964a-2026-07-1",
+        "www-forbes-com-335e62f0-2026-07-1",
+        "www-tradingkey-com-855cb780-2026-07-1",
+        "www-trendforce-com-368d8402-2026-07-1"
       ],
       "thesisIds": [
         "supply-constraint-binding",
         "ai-packaging-supply-is-concentrated-in-a-few-buyers"
       ],
-      "watchItem": "Advanced packaging, not the wafer itself, is the tight point: CoWoS is booked out through 2027 with year-plus lead times, and it is named as the binding constraint on how much GPU revenue can actually ship. The gap is easing toward about 10% by end-2026 but stays short."
+      "watchItem": "Advanced packaging stays sold out with 52-78 week lead times even as monthly CoWoS capacity climbs toward 125,000-130,000 wafers, and the supply-demand gap is only expected to narrow from about 20% to about 10% by end-2026. Whether that gap closes or reopens sets how much of the booked accelerator demand can actually ship."
     },
     {
       "dimensions": [
         "bottleneck",
-        "strategicRisk"
+        "strategicRisk",
+        "competitiveStructure"
       ],
       "findingIds": [
         "www-forbes-com-7c91863a-2026-07-2",
         "www-forbes-com-7c91863a-2026-07-3"
       ],
       "thesisIds": [
-        "customer-concentration-risk",
-        "ai-packaging-supply-is-concentrated-in-a-few-buyers"
+        "ai-packaging-supply-is-concentrated-in-a-few-buyers",
+        "amd-credible-second-source"
       ],
-      "watchItem": "Packaging output is heavily tied to a handful of buyers: the top three CoWoS clients take over 85%, with one vendor near 60%. That concentration ties realizable output to a very small customer set."
+      "watchItem": "Packaging output is heavily tied to three buyers, with one at about 60% and another at about 11%, and that second buyer is splitting its slice between server CPUs and its new accelerators. Any swing in one customer's ordering moves a large share of packaging loading."
     },
     {
       "dimensions": [
-        "competitiveStructure"
-      ],
-      "findingIds": [
-        "www-faf-ae-6bcac1ba-2026-07-2",
-        "www-techtimes-com-b90d06bb-2026-07-2",
-        "www-faf-ae-6bcac1ba-2026-07-4"
-      ],
-      "thesisIds": [
-        "custom-asic-substitution",
-        "the-custom-ai-chip-alternative-depends-on-two-design-houses"
-      ],
-      "watchItem": "Custom chips designed for the big cloud buyers are growing much faster than merchant GPUs and reportedly already run about two-thirds of AI compute. How the leading-node base splits between merchant GPUs and this custom silicon is shifting toward the custom side."
-    },
-    {
-      "dimensions": [
+        "bottleneck",
         "unitEconomics"
       ],
       "findingIds": [
-        "www-tradingkey-com-855cb780-2026-07-2",
-        "investor-nvidia-com-c649ac13-2026-07-3",
         "en-sedaily-com-c7890a6b-2026-07-1",
-        "getdeploying-com-6f11aead-2026-07-1"
+        "finance-yahoo-com-ea29a8bf-2026-07-1",
+        "siliconanalysts-com-79e017b3-2026-07-2",
+        "www-investing-com-09606ac9-2026-07-1",
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "www-supplychainconnect-com-9dd9a92d-2026-07-3"
       ],
       "thesisIds": [
-        "pricing-power-persistence",
-        "rising-memory-costs-inflate-ai-server-economics"
+        "supply-constraint-binding",
+        "rising-memory-costs-inflate-ai-server-economics",
+        "prepaid-hbm-take-or-pay-locks-in-accelerator-demand"
       ],
-      "watchItem": "End-market pricing stays firm across the chain: foundry margins near 68%, lead-chip vendor margins at 75%, memory contract prices roughly doubling into 2027, and rental GPU prices up. Tight supply is holding pricing power in place for now."
+      "watchItem": "High-bandwidth memory is sold out through 2026 with much of 2027 pre-booked, contract prices are forecast to roughly double into 2027, and one supplier says it cannot see when supply catches up. Memory scarcity can cap accelerator shipments even when packaging and wafer capacity are available."
     },
     {
       "dimensions": [
-        "moat",
-        "strategicRisk"
-      ],
-      "findingIds": [
-        "www-digitimes-com-f88ca4e6-2",
-        "newsroom-intel-com-297a8b5b-2026-07-1",
-        "www-sec-gov-125b52f2-2026-07-2",
-        "tech-yahoo-com-71aaa132-2026-07-05-1"
-      ],
-      "thesisIds": [
-        "multi-vendor-accelerator-supply-wave-in-second-half-2026",
-        "export-control-exposure",
-        "china-domestic-accelerators-displace-banned-nvidia-gpus"
-      ],
-      "watchItem": "Several competing accelerators are moving into mass production at once and a rival is expanding its own foundry capacity, while China exposure keeps eroding. These developments cut against the current lead and raise second-source and policy exposure around foundry demand."
-    },
-    {
-      "dimensions": [
+        "momentum",
         "bottleneck"
       ],
       "findingIds": [
-        "finance-yahoo-com-ea29a8bf-2026-07-1",
-        "www-investing-com-09606ac9-2026-07-1",
-        "siliconanalysts-com-79e017b3-2026-07-2"
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-1",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-2",
+        "thetechcapital-com-796ec195-2026-07-1",
+        "www-faf-ae-6bcac1ba-2026-07-5",
+        "finance-yahoo-com-baa362f5-2026-07-1",
+        "finance-yahoo-com-baa362f5-2026-07-2",
+        "www-digitimes-com-f88ca4e6-1"
       ],
       "thesisIds": [
-        "prepaid-hbm-take-or-pay-locks-in-accelerator-demand"
+        "nvda-demand-durability",
+        "backlog-duration-lengthens-as-demand-is-booked-years-ahead",
+        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing"
       ],
-      "watchItem": "Memory supply is its own choke point alongside packaging: HBM is sold out through 2027 with order books into 2028 and suppliers meeting only part of demand. Firm HBM availability bears directly on how much accelerator volume can be built."
+      "watchItem": "Demand momentum is very strong across the value chain: record data-center revenue up 92% year over year, hyperscaler 2026 capex guided near $660-725 billion, and cloud backlog rising past $500 billion. Wafer-start planning at the leading edge sits directly under that pull, with the caveat that memory and packaging gate what converts to shipments."
+    },
+    {
+      "dimensions": [
+        "competitiveStructure",
+        "moat"
+      ],
+      "findingIds": [
+        "www-faf-ae-6bcac1ba-2026-07-2",
+        "www-tomshardware-com-f77e9757-2026-07-1",
+        "www-techtimes-com-b90d06bb-2026-07-2",
+        "techcrunch-com-bed0b1c2-2026-07-1",
+        "www-faf-ae-6bcac1ba-2026-07-4",
+        "www-tomshardware-com-f77e9757-2026-07-2"
+      ],
+      "thesisIds": [
+        "custom-asic-substitution",
+        "the-custom-ai-chip-alternative-depends-on-two-design-houses",
+        "cuda-software-lock-in-sustains-the-moat"
+      ],
+      "watchItem": "Custom accelerators are growing far faster than merchant GPUs \u2014 forecast 44.6% versus 16.1% for 2026, with custom silicon already reported at roughly two-thirds of AI compute and new in-house parts entering production this September. The leading-node customer base is shifting from a few merchant-GPU vendors toward hyperscaler programs, most of which run through two design houses."
+    },
+    {
+      "dimensions": [
+        "competitiveStructure",
+        "momentum"
+      ],
+      "findingIds": [
+        "finance-yahoo-com-bdd5c46e-2026-07-2",
+        "ir-amd-com-80607c6d-2026-07-1",
+        "ir-amd-com-80607c6d-2026-07-2",
+        "www-stocktitan-net-fe36e810-2026-07-1",
+        "newsletter-semianalysis-com-5136a06c-2026-07-1",
+        "www-amd-com-49475e6c-2026-07-2",
+        "ir-amd-com-c9dc9d6e-2026-07-2"
+      ],
+      "thesisIds": [
+        "amd-credible-second-source",
+        "amd-growth-leans-on-a-few-mega-deals"
+      ],
+      "watchItem": "The second merchant vendor is converting gigawatt-scale commitments \u2014 Meta, OpenAI, Oracle, Microsoft and now a 2 GW Anthropic deal \u2014 into data-center revenue up 57% year over year, but its rack-scale ramp slips to Q2 2027 and its share is still only about 5-7%. How fast those commitments turn into volume changes the mix of leading-node customers."
+    },
+    {
+      "dimensions": [
+        "unitEconomics",
+        "bottleneck"
+      ],
+      "findingIds": [
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-3",
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "getdeploying-com-6f11aead-2026-07-1",
+        "finance-biggo-com-c310c4ca-2026-07-06-1",
+        "www-digitimes-com-e48a6e49-2026-07-05-1"
+      ],
+      "thesisIds": [
+        "pricing-power-persistence",
+        "nvidia-holds-a-premium-gross-margin-as-it-ramps-new-chips",
+        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing"
+      ],
+      "watchItem": "Pricing along the chain stays firm: 75% non-GAAP gross margin at the lead vendor, 67.7% foundry gross margin with 2026 revenue growth guided above 40%, rental prices up 24% off their late-2025 low, and rack component costs inflating 2-3% per week on memory scarcity. Firm end pricing and scarce capacity are what keep sellers in the stronger bargaining position."
+    },
+    {
+      "dimensions": [
+        "strategicRisk",
+        "competitiveStructure"
+      ],
+      "findingIds": [
+        "www-bis-gov-dbeede91-2026-07-1",
+        "www-cnbc-com-9d898f2b-2026-07-1",
+        "www-sec-gov-125b52f2-2026-07-2",
+        "www-datacenterdynamics-com-0c76f530-2026-07-06-1",
+        "newsroom-intel-com-297a8b5b-2026-07-1",
+        "newsroom-intel-com-28388342-2026-07-1",
+        "tech-yahoo-com-71aaa132-2026-07-05-1"
+      ],
+      "thesisIds": [
+        "export-control-exposure",
+        "conditional-china-re-opening-with-a-capped-ceiling",
+        "china-domestic-accelerators-displace-banned-nvidia-gpus"
+      ],
+      "watchItem": "Policy and competitive moves cut both ways: China licensing moved to case-by-case review with a cap under half of comparable US sales while actual shipments stay trivial and one vendor's China revenue halved, a smuggling probe is widening, a rival foundry added Intel 3 capacity in Ireland and signed a named external customer, and Chinese labs trained a frontier model on 50,000 domestic accelerators. Each is a path by which foundry demand could shift."
     }
   ]
 }

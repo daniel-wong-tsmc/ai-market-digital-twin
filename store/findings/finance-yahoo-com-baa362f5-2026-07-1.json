@@ -1,0 +1,56 @@
+{
+  "id": "finance-yahoo-com-baa362f5-2026-07-1",
+  "statement": "Alphabet raised its 2026 capital expenditure guidance to $195-$205 billion from $180-$190 billion, its second upward revision this year, and reaffirmed plans for another significant increase in 2027.",
+  "kind": "measured",
+  "value": {
+    "number": 200.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Hyperscaler capex guidance is the most direct read on how many accelerators and how much data-center capacity will be bought; a second consecutive raise with an explicit demand-outpaces-investment rationale signals continuing order flow to GPU and infrastructure vendors.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo",
+      "infrastructure.networking-fabric",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "A raised capex range plus a stated plan for another significant increase in 2027 converts into accelerator, networking, data-center and power purchase orders across the build-out chain."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Bloomberg wire) — \"Google increases capex forecast again after cloud-driven earnings beat\"",
+      "url": "https://finance.yahoo.com/technology/articles/google-quarterly-cloud-revenue-growth-200517715.html",
+      "date": "2026-07-22",
+      "excerpt": "Alphabet raised its 2026 capital expenditure forecast to $195-$205 billion, up from the previous $180-$190 billion guidance announced last quarter.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (Bloomberg wire) — \"Google increases capex forecast again after cloud-driven earnings beat\"",
+      "url": "https://finance.yahoo.com/technology/articles/google-quarterly-cloud-revenue-growth-200517715.html",
+      "date": "2026-07-22",
+      "excerpt": "We have increased our capacity quite significantly over the past three years. The demand still outpaces that investment.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary wire report of an earnings release rather than the filing itself; figures are specific and quoted, but with one publisher fetched confidence is capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "market",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-23T01:05:51Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

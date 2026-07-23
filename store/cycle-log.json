@@ -1,149 +1,163 @@
 {
-  "asOf": "2026-07",
-  "mode": "daily",
-  "capturedAt": "2026-07-22T13:42:00Z",
-  "scope": "category:chips.merchant-gpu",
-  "entries": [
-    {
-      "category_id": "chips.merchant-gpu",
-      "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
-      "status": "done",
-      "scorecard": "store/chips.merchant-gpu/2026-07-v14.json",
-      "dmi": 2.353,
-      "smi": -0.887,
-      "answers": {
-        "extract": "work/daily-2026-07-22/extract-answer.json",
-        "judge": "work/daily-2026-07-22/judge-answer.json",
-        "thesis": "work/daily-2026-07-22/thesis-answer.json",
-        "implication": "work/daily-2026-07-22/implication-answer.json"
-      },
-      "corpus": {
-        "coverage": "work/daily-2026-07-22/corpus-coverage.json",
-        "merged": "work/daily-2026-07-22/corpus-findings.json",
-        "dedupedFresh": "work/daily-2026-07-22/deduped-fresh.json",
-        "report": "work/daily-2026-07-22/corpus-report.json",
-        "counts": {
-          "storeInWindow": 123,
-          "freshNew": 3,
-          "freshUpdate": 8,
-          "freshDuplicate": 5
-        }
-      },
-      "dedupL2": {
-        "report": "store/chips.merchant-gpu/dedup-2026-07.json",
-        "new": 3,
-        "update": 8,
-        "duplicate": 5
-      },
-      "gather": {
-        "documents": 10,
-        "droppedKnown": 0,
-        "log": "work/daily-2026-07-22/docs/gather-log.json",
-        "skipped": [
-          "round 2 not run: maxDocuments (10, daily cap) reached in round 1 \u2014 unfetched leads logged in gather-log",
-          "discovery tool last30days skipped this run (AFK-default: daily budget; healthy per web-reach-ensure)",
-          "lead thundercompute B200 pricing not chased: maxDocuments reached",
-          "lead techtimes Inventec 40+ week DRAM lead-times (403) not retried: maxDocuments reached",
-          "lead digitimes CoWoS 52-78wk booking windows: paywalled at fetch time, logged not fetched",
-          "lead techtimes TSMC Arizona $265B four-fab packaging: 403 at fetch, maxDocuments reached",
-          "lead datacenterknowledge July 2026 hardware roundup not chased: maxDocuments reached",
-          "lead AMD Advancing AI 2026 official announcements (Jul 22-23) not chased: maxDocuments reached",
-          "round 2 not run: maxDocuments (10, daily cap) reached in round 1 \u2014 unfetched leads logged in gather-log",
-          "discovery tool last30days skipped this run (AFK-default: daily budget; healthy per web-reach-ensure)",
-          "lead thundercompute B200 pricing not chased: maxDocuments reached",
-          "lead techtimes Inventec 40+ week DRAM lead-times (403) not retried: maxDocuments reached",
-          "lead digitimes CoWoS 52-78wk booking windows: paywalled at fetch time, logged not fetched",
-          "lead techtimes TSMC Arizona $265B four-fab packaging: 403 at fetch, maxDocuments reached",
-          "lead datacenterknowledge July 2026 hardware roundup not chased: maxDocuments reached",
-          "lead AMD Advancing AI 2026 official announcements (Jul 22-23) not chased: maxDocuments reached"
-        ],
-        "pursuedDespiteAge": [
-          {
-            "ref": "https://www.supplychainconnect.com/procurement/article/55384522/the-2026-supply-chain-supercycle-why-ai-infrastructure-shortages-run-deeper-than-the-chip",
-            "date": "2026-06-23",
-            "ageDays": 29,
-            "reason": "structural upstream-component shortage overview (optics/cooling/power/PCB) with no fresher restatement found in-window"
-          },
-          {
-            "ref": "https://www.koreaherald.com/article/10795719",
-            "date": "2026-07-02",
-            "ageDays": 20,
-            "reason": "Samsung/SK Hynix HBM packaging-fab capex announcement, structural and uncorrected by newer coverage"
-          },
-          {
-            "ref": "https://www.versalogic.com/blog/supply-chain-brief-memory-market-conditions-in-2026/",
-            "date": "2026-07-09",
-            "ageDays": 13,
-            "reason": "memory lead-time/price brief still the latest monthly snapshot for server DRAM conditions"
-          },
-          {
-            "ref": "https://finance.yahoo.com/technology/ai/articles/nvidia-halves-asia-buyer-list-033140201.html",
-            "date": "2026-07-14",
-            "ageDays": 8,
-            "reason": "one day outside the sweep; material export-control move (Asia buyer whitelist halved) not restated since"
-          }
-        ],
-        "coverageGapsCount": 21
-      },
-      "unregisteredEntities": {
-        "count": 2,
-        "names": [
-          "memory",
-          "multi"
-        ]
-      },
-      "webReach": {
-        "agent-reach": {
-          "tool": "agent-reach",
-          "status": "ok",
-          "version": "1.5.0",
-          "pin": "1.5.0",
-          "drift": false
-        },
-        "last30days": {
-          "tool": "last30days",
-          "status": "ok",
-          "version": "skill-present",
-          "pin": "skill-present",
-          "drift": false
-        },
-        "crawl4ai": {
-          "tool": "crawl4ai",
-          "status": "ok",
-          "version": "0.9.0",
-          "pin": "0.9.0",
-          "drift": false
-        }
-      },
-      "licensedSourcesFetched": [],
-      "stageStatuses": {
-        "category": "done",
-        "thesis": "done",
-        "implication": "done",
-        "layer": "deferred",
-        "main": "deferred"
-      },
-      "notes": [
-        "voice-lint: sample 3 ODM acronym -> re-dispatched, fixed (one rewrite, no bypass)",
-        "wiki-ingest finding-id collision nvidianews-nvidia-com-3f1f3a13-2026-07-1 (F96/F52-class): AFK-default excluded from write-back, store copy kept per corpus ID-OVERLAP",
-        "thesis gate attempt 1 rejected (truncated finding ids); re-dispatched with violations, attempt 2 applied clean",
-        "AFK-default: last30days discovery pass skipped (daily budget); judge dispatches carried condensed MEMORY section (briefing + citation groups verbatim)",
-        "price-sync FAILED non-blocking (exit 1: ValueError in price_local._yymmdd_date on a local gpu_leasing_data file; store/series not refreshed this cycle) - follow-up needed"
-      ]
+ "asOf": "2026-07",
+ "mode": "daily",
+ "capturedAt": "2026-07-23T01:05:51Z",
+ "scope": "category:chips.merchant-gpu",
+ "entries": [
+  {
+   "category_id": "chips.merchant-gpu",
+   "assignment_path": "fixtures\u0007sg.chips.merchant-gpu.json",
+   "status": "done",
+   "scorecard": "store/chips.merchant-gpu/2026-07-v15.json",
+   "dmi": 2.933,
+   "smi": -1.08,
+   "answers": {
+    "extract": "work/daily-2026-07-23/extract-answer.json",
+    "judge": "work/daily-2026-07-23/judge-answer.json",
+    "thesis": "work/daily-2026-07-23/thesis-answer.json",
+    "implication": "work/daily-2026-07-23/implication-answer.json"
+   },
+   "corpus": {
+    "coverage": "work/daily-2026-07-23/corpus-coverage.json",
+    "merged": "work/daily-2026-07-23/corpus-findings.json",
+    "dedupedFresh": "work/daily-2026-07-23/deduped-fresh.json",
+    "report": "work/daily-2026-07-23/corpus-report.json",
+    "pipelineReport": "work/daily-2026-07-23/corpus-pipeline-report.json",
+    "counts": {
+     "storeInWindow": 133,
+     "storeFadedOut": 33,
+     "freshNew": 5,
+     "freshUpdate": 12,
+     "freshDuplicate": 10,
+     "merged": 150
     }
-  ],
-  "stages": [
-    {
-      "tier": "category",
-      "status": "active"
+   },
+   "dedupL2": {
+    "report": "store/chips.merchant-gpu/dedup-2026-07.json",
+    "new": 5,
+    "update": 12,
+    "duplicate": 10,
+    "findings": "work/daily-2026-07-23/deduped.json"
+   },
+   "gather": {
+    "documents": 10,
+    "primary": 3,
+    "secondary": 7,
+    "duplicates": 0,
+    "dropped": 0,
+    "droppedKnown": 0,
+    "rounds": 1,
+    "blobs": "work/daily-2026-07-23/blobs.json",
+    "docs": "work/daily-2026-07-23/docs",
+    "maxDocuments": 10,
+    "maxRounds": 2,
+    "maxSubagentsPerRound": 3,
+    "skipped": [
+     "maxDocuments=10 (daily cap) reached in round 1 -- round 2 not spawned; remaining on-topic leads unchased",
+     "price class capped at 2 blobs: vast.ai/pricing and coreweave.com/pricing not fetched",
+     "lead not chased: nvidianews wistron-fort-worth-manufacturing-plant (2026-07-21) -- maxDocuments reached",
+     "lead not chased: nvidianews nvidia-spectrum-6-gigascale-ai-factories (2026-07-21) -- maxDocuments reached",
+     "lead not chased: digitimes tsmc-taiwan-capacity-cowos-earnings (2026-07-17) -- paywalled body; recaps the 2026-07-16 call already in store",
+     "lead not chased: digitimes siph-packaging-demand-cpo-ai-server (2026-07-22) -- maxDocuments reached",
+     "lead not chased: digitimes anthropic-amd-nvidia-training-silicon (2026-07-23) -- maxDocuments reached",
+     "fetch blocked HTTP 403: cnbc intel-foundry-fortinet, datacenterdynamics amd-mi400-lineup, wccftech amd-helios, thinkcomputers ddr5",
+     "AMD 'Advancing AI 2026' keynote day 2 (2026-07-23) release not yet published at gather time",
+     "Intel Q2 2026 results due 2026-07-23 after US market close -- not available at gather time",
+     "market-share-pct: no new quarterly GPU share release inside the 7-day window",
+     "odmMonthlyAiRevenue: no June/July 2026 monthly ODM revenue datapoint inside the window",
+     "discovery tool last30days not run this cycle (AFK-default: daily budget; tool healthy per web-reach-ensure)"
+    ],
+    "pursuedDespiteAge": [],
+    "coverageGaps": [
+     {
+      "type": "source",
+      "id": "trendforce-gpu-tracker",
+      "priority": "required",
+      "acquisitionStatus": "paywalled",
+      "reason": "licensed-api tracker declared paywalled in the manifest; logged, never fetched",
+      "paywalledNote": "licensed subscription"
+     },
+     {
+      "type": "source",
+      "id": "semianalysis",
+      "priority": "preferred",
+      "acquisitionStatus": "paywalled",
+      "reason": "licensed-api source declared paywalled in the manifest; logged, never fetched",
+      "paywalledNote": "licensed subscription"
+     }
+    ],
+    "licensedSourcesFetched": []
+   },
+   "unregisteredEntities": {
+    "count": 2,
+    "names": [
+     "market",
+     "memory"
+    ]
+   },
+   "webReach": {
+    "agent-reach": {
+     "tool": "agent-reach",
+     "status": "ok",
+     "version": "1.5.0",
+     "pin": "1.5.0",
+     "drift": false
     },
-    {
-      "tier": "layer",
-      "status": "deferred"
+    "last30days": {
+     "tool": "last30days",
+     "status": "ok",
+     "version": "skill-present",
+     "pin": "skill-present",
+     "drift": false
     },
-    {
-      "tier": "main",
-      "status": "deferred"
-    }
-  ]
+    "crawl4ai": {
+     "tool": "crawl4ai",
+     "status": "ok",
+     "version": "0.9.0",
+     "pin": "0.9.0",
+     "drift": false
+    },
+    "mode": "--unattended (scheduled run; never installs)",
+    "agentReachDoctor": "web ok (Jina Reader), rss ok, bilibili ok, v2ex ok; github/twitter/reddit/youtube/facebook/instagram/xiaohongshu/linkedin unavailable -- run continued on WebSearch/WebFetch"
+   },
+   "voiceLint": "passed (judge samples clean on first pass)",
+   "sufficiency": "passed (no rating change flagged)",
+   "writeBack": "FAILED (partial): wiki-ingest aborted with 'finding id collision with differing content: www-runpod-io-bdb62dfd-2026-07-1'. 12 of 17 deduped findings were written to store/findings before the abort; the RunPod pricing page was re-fetched inside the same month (2026-07) with a changed price ($3.29 -> $2.99), and month-grain doc-id vintage scoping mints the same finding id as the 2026-07-05 cycle. F52-class defect, NOT hand-fixed. Un-ingested: www-runpod-io-bdb62dfd-2026-07-1, lambda-ai-1252bbe3-2026-07-2, blogs-nvidia-com-ffef75ff-2026-07-1/-2/-4.",
+   "wikiLint": "ran (exit 0) after the partial ingest",
+   "priceSync": "FAILED: ValueError in gpu_agent/price_local.py::_yymmdd_date -- month-grain --as-of 2026-07 is parsed as YYMMDD and the day field is empty. Non-blocking per run-cycle step 7; logged, not worked around.",
+   "site": "rebuilt (pages=8, featured=gap-score)",
+   "report": "rendered with --daily",
+   "brainDispatch": {
+    "model": "opus",
+    "extractSubagents": 1,
+    "judgeSubagents": 3,
+    "thesisSubagents": 1,
+    "implicationSubagents": 1,
+    "note": "brains dispatched with an explicit no-tools instruction; the Agent tool has no per-dispatch tool-allowlist parameter on this harness, so tool-lessness is instructed rather than structurally enforced (AFK-default, recorded for review)"
+   },
+   "reDispatches": [
+    "extract: 1 re-dispatch -- first answer returned bare FindingDraft objects instead of the {\"drafts\": [...]} envelope; gate produced 0 findings, 0 dropped",
+    "implication: 1 re-dispatch -- IMPLICATION GATE FAILED 'line 7: banned word leverage'; passed on the rewrite"
+   ],
+   "category": "done",
+   "thesis": "done",
+   "implication": "done",
+   "layer": "deferred",
+   "main": "deferred"
+  }
+ ],
+ "stages": [
+  {
+   "tier": "category",
+   "status": "active"
+  },
+  {
+   "tier": "layer",
+   "status": "deferred"
+  },
+  {
+   "tier": "main",
+   "status": "deferred"
+  }
+ ]
 }

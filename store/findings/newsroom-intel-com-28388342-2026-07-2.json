@@ -1,0 +1,52 @@
+{
+  "id": "newsroom-intel-com-28388342-2026-07-2",
+  "statement": "Intel guided second-quarter 2026 revenue of $13.8-$14.8 billion with GAAP gross margin of 37.5%, results due July 23, 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 37.5,
+    "unit": "pct"
+  },
+  "trend": "unknown",
+  "why": "Gross margin is the clearest read on whether a chipmaker's manufacturing is earning its keep; a level in the high thirties shows Intel's foundry build-out is still a drag rather than a profit engine.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Thin gross margin limits the cash Intel can reinvest in leading-edge capacity, slowing how fast it can become a credible second source of advanced manufacturing."
+  },
+  "evidence": [
+    {
+      "source": "Intel Newsroom press release (newsroom.intel.com)",
+      "url": "https://newsroom.intel.com/manufacturing/intel-and-fortinet-collaborate-to-advance-cybersecurity-innovation-and-strengthen-global-supply-chain-resilience",
+      "date": "2026-07-21",
+      "excerpt": "second-quarter 2026 revenue of $13.8 billion to $14.8 billion",
+      "tier": "secondary"
+    },
+    {
+      "source": "Intel Newsroom press release (newsroom.intel.com)",
+      "url": "https://newsroom.intel.com/manufacturing/intel-and-fortinet-collaborate-to-advance-cybersecurity-innovation-and-strengthen-global-supply-chain-resilience",
+      "date": "2026-07-21",
+      "excerpt": "GAAP gross margin of 37.5%",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Prior-quarter guidance restated inside a secondary-tier document rather than fetched from the earnings release itself; no cross-publisher corroboration."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-07-21",
+  "capturedAt": "2026-07-23T01:05:51Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
