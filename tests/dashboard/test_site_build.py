@@ -78,10 +78,73 @@ def test_two_builds_are_byte_identical(tmp_path):
 
 
 def test_build_site_index_is_story(tmp_path):
-    summary = _build(tmp_path)          # existing helper @test_site_build.py:13
+    # F101a final review (item f): the shared _build()/FIX fixture set has
+    # only daily-grain scorecards and no series/ dir, so it degrades to zero
+    # scenes/chips (see test_story_page_degrades_gracefully_with_only_daily_
+    # scorecards_and_no_series above) -- asserting "the story page has real
+    # content" against it would only ever exercise the always-rendered
+    # static text, which is exactly the weak-assertion shape the review
+    # flagged. Build a small store with a real monthly scorecard and one
+    # series file instead, so these assertions can actually break.
+    import json
+    root = tmp_path / "store"
+    cat = root / CAT
+    cat.mkdir(parents=True)
+    finding = {
+        "id": "f-1", "statement": "Memory makers cut back supply.",
+        "kind": "measured", "value": {"number": 75.0, "unit": "USD_B"},
+        "trend": "rising", "why": "Demand signal strengthened.",
+        "impact": {"targets": [CAT], "direction": "positive",
+                   "mechanism": "Expands addressable demand."},
+        "evidence": [{"source": "Micron call", "url": "https://x.example/a",
+                     "date": "2026-06-24", "excerpt": "e", "tier": "primary"}],
+        "reasoning": None,
+        "confidence": {"level": "high", "basis": "primary source"},
+        "dispersion": None, "asOf": "2026-07", "indicatorId": "D2",
+        "side": "demand", "polarityDemand": 1, "polaritySupply": 0,
+        "magnitude": 3, "entity": "NVIDIA", "observedAt": "2026-07-01",
+        "capturedAt": "2026-07-02T00:00:00Z",
+    }
+    (cat / "2026-07-v1.json").write_text(json.dumps({
+        "categoryId": CAT, "asOf": "2026-07",
+        "findings": [finding],
+        "dimensionRatings": {
+            "bottleneck": {"rating": "Weak", "direction": "worsening",
+                           "confidence": {"level": "high", "basis": "self-consistency"},
+                           "findingIds": ["f-1"], "rationale": "Memory makers cut back supply."}},
+        "demandSupply": {"dmiContribution": 1.0, "smiContribution": 0.2,
+                         "sdgi": 0.4, "sdgiDirection": "demand-led"},
+        "narrative": "n", "confidence": {"level": "high", "basis": "n"},
+        "sources": [], "dimensionStatus": {},
+        "categoryStatus": {"rating": "Strong", "direction": "steady",
+                          "bottleneck": "bottleneck", "reason": "r.",
+                          "constraintLabel": "HBM"},
+    }), encoding="utf-8")
+    (cat / "2026-06-v1.json").write_text((cat / "2026-07-v1.json").read_text(
+        encoding="utf-8").replace('"2026-07"', '"2026-06"'), encoding="utf-8")
+    series = root / "series"
+    series.mkdir()
+    (series / "gpuRentalOnDemand.jsonl").write_text("\n".join(json.dumps({
+        "indicatorId": "gpuRentalOnDemand", "period": p, "value": v, "unit": "x",
+        "publishedAt": p + "-28",
+        "source": {"url": "https://src.example/gpu", "title": "gpu source"},
+    }) for p, v in [("2026-05", 15.1), ("2026-06", 14.6)]), encoding="utf-8")
+
+    summary = build_site(CAT, str(cat), "work-nonexistent", None,
+                         str(tmp_path / "site"), price_fn=lambda d: {"H100": 2.31},
+                         today=dt.date(2026, 7, 16))
     idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    # "The story, step by step" is a hard-coded literal that renders
+    # unconditionally whenever the story section exists at all -- pin it
+    # together with real scene markup (which only renders when there's
+    # actual scene content) so this can't pass on a build with zero scenes.
     assert "The story, step by step" in idx
+    assert '<article class="st-scene' in idx
+    # "says who?" alone is satisfied by the KPI band's static caption even
+    # when the page has zero chips -- pin it together with a real per-chip
+    # evidence hookup so this can't pass on a build with zero chips.
     assert "says who?" in idx
+    assert 'data-ev="kpi:' in idx
     assert 'id="ev-data"' in idx
     assert "Executive Brief" not in idx
     assert summary["story_lint"] == []
@@ -115,6 +178,44 @@ def test_build_site_lint_gate_aborts_build(tmp_path, monkeypatch):
                    str(tmp_path / "site"), today=dt.date(2026, 7, 16))
     # a copy-lint violation aborts before the story index is written
     assert not (tmp_path / "site" / CAT / "index.html").exists()
+
+
+def test_story_page_degrades_gracefully_with_only_daily_scorecards_and_no_series(tmp_path):
+    # Built against a category with no monthly scorecards (only a legacy
+    # daily-grain one, which the story page's own monthly-over-daily guard
+    # -- a settled, do-not-change rule -- never surfaces) and no series/
+    # dir at all: the story page must degrade honestly (no chart, no empty
+    # KPI band/caption, no empty "story, step by step" section) instead of
+    # emitting a shell that reads as broken. build_site itself (fed by
+    # site_model.py's own daily-tolerant selector) must still succeed.
+    import json
+    root = tmp_path / "store"
+    cat = root / CAT
+    cat.mkdir(parents=True)
+
+    scorecard = {
+        "categoryId": CAT, "asOf": "2026-07-06", "findings": [],
+        "dimensionRatings": {},
+        "demandSupply": {"dmiContribution": 0.5, "smiContribution": 0.1,
+                         "sdgi": 0.4, "sdgiDirection": "demand-led"},
+        "narrative": "n", "confidence": {"level": "high", "basis": "n"},
+        "sources": [], "dimensionStatus": {},
+        "categoryStatus": {"rating": "Strong", "direction": "steady",
+                          "bottleneck": "bottleneck", "reason": "r.",
+                          "constraintLabel": "HBM"},
+    }
+    (cat / "2026-07-06-v1.json").write_text(json.dumps(scorecard), encoding="utf-8")
+
+    summary = build_site(CAT, str(cat), "work-nonexistent", None,
+                         str(tmp_path / "site"), price_fn=lambda d: {},
+                         today=dt.date(2026, 7, 16))
+    assert summary["story_lint"] == []
+    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    assert "<svg" not in idx
+    assert "Not enough" in idx
+    assert "says who?" not in idx
+    assert "The story, step by step" not in idx
+    assert "picked by today's story" not in idx
 
 
 def test_brief_evidence_anchors_resolve_in_appendix(tmp_path):

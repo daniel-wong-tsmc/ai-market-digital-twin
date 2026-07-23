@@ -25,12 +25,10 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
                              price_fn=price_fn)
     today = today or datetime.date.today()
 
-    # Same store-layout detection build_site_model uses (store_dir either IS the
-    # category dir or is the store root holding <category_id>/).
-    store_root = Path(store_dir)
-    if not (store_root / category_id).is_dir():
-        store_root = store_root.parent
-    story_model = build_story_model(category_id, store_root, today)
+    # story_model.build_story_model does its own store-layout detection now
+    # (resolve_store_root, reused from there rather than re-implemented
+    # here) -- see its docstring. Pass store_dir straight through.
+    story_model = build_story_model(category_id, store_dir, today)
     index_html = render_story_page(story_model)
     story_lint = lint_story_copy(index_html)
     if story_lint:

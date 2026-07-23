@@ -28,6 +28,15 @@ def test_panel_script_contract():
     assert js.count("<script>") == 1 and js.count("</script>") == 1
 
 
+def test_panel_script_shows_honest_empty_state_for_no_findings():
+    # A claim with no linked evidence must show a plain, honest message --
+    # never silently render nothing (which reads as broken) and never a
+    # borrowed source from another claim.
+    js = render_evidence_panel()
+    assert "No linked sources for this yet." in js
+    assert "finds.length" in js and "ev-empty" in js
+
+
 # NOTE on the two tests below: we have no JS engine here (stdlib-only, no
 # browser), so we cannot execute openEV() and observe a real DOM. Instead we
 # pin the *source structure* of each guard: the regex requires the href
@@ -95,8 +104,9 @@ def test_explore_link_href_only_inside_scheme_guard():
 import datetime as dt
 from tests.dashboard.test_story_model import _store, CAT
 from gpu_agent.dashboard.story_model import build_story_model
-from gpu_agent.dashboard.story_render import (_chart_block, _headline_block,
-                                              _kpi_band, STORY_CSS,
+from gpu_agent.dashboard.story_render import (_chart_block, _chip_html,
+                                              _headline_block, _kpi_band,
+                                              STORY_CSS,
                                               render_condense_script)
 
 
@@ -125,6 +135,28 @@ def test_kpi_band_chips(tmp_path):
     assert 'class="st-pin"' in band          # anchored marker
     assert "st-dot" in band                  # scene dots on picks
     assert band.count("st-chip") >= 3
+
+
+def test_chip_html_omits_arrow_without_stray_spacing():
+    # A categorical chip (arrow == "") must not leave a trailing space
+    # after the value where the arrow used to sit.
+    chip = {"claim": "kpi:x", "label": "Big buyers' spending plans",
+            "value": "raised again", "arrow": "", "spark": [1.0, 2.0],
+            "caption": "", "tip": "tip text"}
+    html = _chip_html(chip)
+    assert "<span class=\"st-val\">raised again</span>" in html
+    assert "raised again </span>" not in html
+    assert "raised again  " not in html
+
+    numeric_chip = {**chip, "value": "$14.62/hr", "arrow": "▼"}
+    numeric_html = _chip_html(numeric_chip)
+    assert "<span class=\"st-val\">$14.62/hr ▼</span>" in numeric_html
+
+
+def test_sparkline_locked_to_intended_size_inside_chip():
+    # The sparkline is a flex item inside .st-chip (flex-direction:column);
+    # without an explicit rule it stretches to the chip's full width.
+    assert ".st-chip .spark{align-self:flex-start}" in STORY_CSS
 
 
 def test_css_and_condense_script():
@@ -170,6 +202,60 @@ def test_page_passes_its_own_lint(tmp_path):
     assert lint_story_copy(render_story_page(_model(tmp_path))) == []
 
 
+def test_render_story_page_links_sibling_stylesheet(tmp_path):
+    # The page sits at site/<category>/index.html; its sibling appendix.html
+    # correctly links style.css at depth 0. This page must too -- depth=1
+    # emits "../style.css", which resolves to the wrong file (only masked
+    # in the build because two identical copies of the stylesheet get
+    # written).
+    html = render_story_page(_model(tmp_path))
+    assert 'href="style.css"' in html
+    assert 'href="../style.css"' not in html
+
+
+def _empty_model():
+    return {"category_id": CAT, "as_of": None, "revision": 0,
+            "headline": "The state of the GPU market.", "deck": "",
+            "dateline": "Wednesday, July 22, 2026 · updated with each run",
+            "gap": None, "callouts": [], "kpis": {"anchored": None, "picks": []},
+            "evidence": {}, "scenes": [], "archive": [],
+            "explore": {"entities": 0, "findings": 0, "series": 0, "history": 0}}
+
+
+def test_kpi_band_suppressed_when_no_chips():
+    assert _kpi_band(_empty_model()) == ""
+
+
+def test_chart_block_says_so_plainly_when_no_gap_data():
+    block = _chart_block(_empty_model())
+    assert "<svg" not in block
+    assert "Not enough" in block and "history" in block
+
+
+def test_chart_block_span_carries_both_years_across_new_year():
+    model = {"gap": {
+        "months": [{"key": "2026-11", "label": "Nov"},
+                   {"key": "2026-12", "label": "Dec"},
+                   {"key": "2027-01", "label": "Jan"},
+                   {"key": "2027-02", "label": "Feb"}],
+        "demand": [100, 101, 102, 103], "supply": [100, 99, 98, 97],
+        "gap_now": 6, "gap_prev": 4, "gap_word": "widened"}, "callouts": []}
+    block = _chart_block(model)
+    assert "Nov 2026" in block and "Feb 2027" in block
+    assert "Nov–Feb 2027" not in block   # the mislabelling this fixes
+
+
+def test_render_story_page_degrades_gracefully_with_no_chips_or_scenes():
+    html = render_story_page(_empty_model())
+    # No empty band-with-caption shell, no empty story section, no <svg>
+    # chart -- and no crash.
+    assert "says who?" not in html
+    assert "The story, step by step" not in html
+    assert "<svg" not in html
+    assert "Not enough" in html
+    assert lint_story_copy(html) == []
+
+
 def test_lint_catches_banned_words_outside_scripts():
     bad = "<p>Demand momentum is strengthening.</p><script>var momentum=1;</script>"
     hits = lint_story_copy(bad)
@@ -200,7 +286,10 @@ def test_scene_related_link_rejects_non_http_scheme():
         ],
     }
     html = _scene_html(scene)
-    assert "Related coverage" in html
+    # Every candidate link fails the http/https check, so the row must not
+    # render at all -- a dangling "Related coverage:" label with nothing
+    # after it is dishonest, not just cosmetic.
+    assert "Related coverage" not in html
     assert "<a href" not in html
     assert "evil.example" not in html
 

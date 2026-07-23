@@ -34,12 +34,14 @@ panel.appendChild(el('h3','ev-title',d.title||''));
 panel.appendChild(el('p','ev-claim',d.claim_text||''));
 if(d.series&&d.series.length>1){var sv=spark(d.series);if(sv)panel.appendChild(sv);}
 var list=el('div','ev-chain');list.appendChild(el('div','ev-step','What we collected → where it came from'));
-(d.findings||[]).forEach(function(f){var row=el('div','ev-row');
+var finds=d.findings||[];
+if(finds.length){finds.forEach(function(f){var row=el('div','ev-row');
 row.appendChild(el('span','ev-src',(f.source||'')+' · '+(f.date||'')));
 row.appendChild(el('span','ev-take',f.take||''));
 if(f.url&&/^https?:/.test(f.url)){var a=el('a','ev-link','↗');
 a.href=encodeURI(f.url);a.target='_blank';a.rel='noopener';row.appendChild(a);}
-list.appendChild(row);});panel.appendChild(list);
+list.appendChild(row);});}else{list.appendChild(el('div','ev-empty','No linked sources for this yet.'));}
+panel.appendChild(list);
 if(d.explore&&(/^https?:/i.test(d.explore)||!/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(d.explore))&&!/^\/\//.test(d.explore)){var ex=el('a','ev-explore','see everything we have →');
 ex.href=encodeURI(d.explore);panel.appendChild(ex);}
 scrim.classList.add('on');panel.classList.add('on');};
@@ -78,6 +80,7 @@ svg.gapchart{width:100%;height:auto;overflow:visible}
  padding:8px 12px;background:#fafafa;text-align:left;cursor:pointer;flex:1 1 140px;display:flex;flex-direction:column}
 .st-chip-anchor{border:1.5px solid #333;background:#fff8ef}
 .st-pin::before{content:'\\2693';font-size:10px;margin-right:4px}
+.st-chip .spark{align-self:flex-start}
 .st-chip .st-val{font-size:17px;font-weight:700}
 .st-chip .st-lab{font-size:12px;color:#555}
 .st-chip .st-cap{font-size:10px;color:#999}
@@ -100,6 +103,7 @@ svg.gapchart{width:100%;height:auto;overflow:visible}
 .ev-row{border-top:1px solid #eee;padding:6px 0;font-size:12px;display:flex;
  gap:6px;align-items:baseline}
 .ev-src{color:#666;white-space:nowrap}.ev-take{flex:1}
+.ev-empty{padding:6px 0;font-size:12px;color:#888;font-style:italic}
 .ev-link{color:#1f7a8c;text-decoration:none}
 .ev-explore{display:block;margin-top:12px;font-size:13px;color:#1f7a8c}
 .ev-spark{color:#1f7a8c;display:block;margin:6px 0}
@@ -129,9 +133,20 @@ def _headline_block(model: dict) -> str:
 
 def _chart_block(model: dict) -> str:
     if not model.get("gap"):
-        return ""
+        # Not enough monthly history to draw the demand-vs-supply chart --
+        # say so plainly instead of rendering nothing, which reads as broken.
+        return ('<section class="st-chart"><p class="st-srcline">Not enough '
+                'monthly history yet to draw the demand-vs-supply chart.'
+                '</p></section>')
     months = model["gap"]["months"]
-    span = f'{months[0]["label"]}–{months[-1]["label"]} {months[-1]["key"][:4]}'
+    y0, y1 = months[0]["key"][:4], months[-1]["key"][:4]
+    if y0 == y1:
+        span = f'{months[0]["label"]}–{months[-1]["label"]} {y1}'
+    else:
+        # A window crossing New Year (e.g. Nov 2026 - Feb 2027) must carry
+        # the year on both ends -- otherwise "Nov" silently reads as if it
+        # were the same year as "Feb".
+        span = f'{months[0]["label"]} {y0}–{months[-1]["label"]} {y1}'
     return (f'<section class="st-chart">'
             f'{render_gap_svg(model["gap"], model.get("callouts"))}'
             f'<p class="st-srcline">Source: agent-tracked orders and shipment '
@@ -143,8 +158,11 @@ def _chip_html(c: dict, anchored: bool = False) -> str:
               (f'<i class="st-dot st-dot-{["amber","terracotta","teal","green"][(c["scene"]-1)%4]}">'
                f'{c["scene"]}</i>' if c.get("scene") else ""))
     cls = "st-chip st-chip-anchor" if anchored else "st-chip"
+    # A categorical chip (see story_model._CHIP_DEFS) carries no arrow --
+    # avoid leaving a stray trailing space after the value in that case.
+    val = f'{esc(c["value"])} {c["arrow"]}' if c["arrow"] else esc(c["value"])
     return (f'<button class="{cls}" data-ev="{esc(c["claim"])}">'
-            f'{marker}<span class="st-val">{esc(c["value"])} {c["arrow"]}</span>'
+            f'{marker}<span class="st-val">{val}</span>'
             f'<span class="st-lab">{esc(c["label"])}</span>'
             f'{spark_svg(c["spark"])}'
             f'<span class="st-cap">{esc(c["caption"])}</span>'
@@ -157,6 +175,11 @@ def _kpi_band(model: dict) -> str:
     if k.get("anchored"):
         chips.append(_chip_html(k["anchored"], anchored=True))
     chips += [_chip_html(c) for c in k["picks"]]
+    if not chips:
+        # No chips to show (e.g. a category with no series data at all) --
+        # an empty band still carrying the "tap any number" caption reads as
+        # broken. Suppress the whole band and its caption.
+        return ""
     cap = ('<p class="st-srcline">picked by today\'s story · '
            'tap any number to ask: says who?</p>')
     return f'<section class="st-band">{"".join(chips)}</section>{cap}'
@@ -226,7 +249,11 @@ def _scene_html(scene: dict) -> str:
             f'{esc(r["outlet"])} · {esc(r["title"])} · {esc(r["date"])}</a>'
             for r in scene["related"]
             if r["url"].startswith(("http://", "https://")))
-        rel = f'<p class="st-related">Related coverage: {links}</p>'
+        # Only render the row if at least one link survived the http/https
+        # check -- otherwise it's a dangling "Related coverage:" label with
+        # nothing after it.
+        if links:
+            rel = f'<p class="st-related">Related coverage: {links}</p>'
     return (f'<article class="st-scene st-scene-{scene["accent"]}">'
             f'<i class="st-dot st-dot-{scene["accent"]}">{scene["n"]}</i>'
             f'<h2>{esc(scene["title"])}</h2>{"".join(paras)}{vis}'
@@ -260,13 +287,21 @@ def _explore_band(model: dict) -> str:
 
 def render_story_page(model: dict) -> str:
     scenes = "".join(_scene_html(s) for s in model["scenes"])
+    # No scenes (e.g. a category with no monthly scorecards) -- an empty
+    # "The story, step by step" section reads as broken. Suppress it.
+    story_section = (
+        f'<section class="st-story"><h2 class="st-storyhead">The story, '
+        f'step by step</h2>{scenes}</section>' if model["scenes"] else "")
     body = (f'<div class="st-page">{_headline_block(model)}'
             f'{_chart_block(model)}{_kpi_band(model)}'
-            f'<section class="st-story"><h2 class="st-storyhead">The story, '
-            f'step by step</h2>{scenes}</section>'
+            f'{story_section}'
             f'{_closing_strip(model)}{_explore_band(model)}'
             f'<footer class="st-foot">Built by an autonomous research agent '
             f'· evidence-linked · revision {model["revision"]}</footer>'
             f'</div>{evidence_json(model["evidence"])}'
             f'{render_evidence_panel()}{render_condense_script()}')
-    return _page(f'Merchant GPU — {model["headline"]}', body, depth=1)
+    # This page sits at site/<category>/index.html -- its sibling style.css
+    # lives right beside it (depth 0), not one level up. depth=1 only
+    # "worked" because the build happens to write two identical copies of
+    # the stylesheet (out/style.css and out/<category>/style.css).
+    return _page(f'Merchant GPU — {model["headline"]}', body, depth=0)

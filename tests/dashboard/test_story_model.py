@@ -4,7 +4,9 @@ import re
 from pathlib import Path
 from gpu_agent.dashboard.story_model import (_STORY_TERMS,
                                               _collapse_repeated_word,
-                                              build_story_model)
+                                              _truncate,
+                                              build_story_model,
+                                              resolve_store_root)
 from gpu_agent.dashboard.story_render import _BANNED_STORY
 
 CAT = "chips.merchant-gpu"
@@ -128,6 +130,51 @@ def test_scene_evidence_and_related(tmp_path):
     assert demand_scene["related"][0]["outlet"] == "CNBC"
 
 
+def test_scene_with_no_findings_shows_honest_empty_evidence_not_a_borrowed_source(tmp_path):
+    # Real-data reproduction: an implication line with its finding ids
+    # stripped (common in real data) leaves the "What would close the gap"
+    # scene with no resolvable findings of its own. The evidence entry for
+    # that scene must show an honest empty list -- never fall back to
+    # another claim's sources (e.g. the always-present gpuRentalOnDemand
+    # chip), which would attribute the claim to a source that never made
+    # it, defeating the page's whole "says who?" promise.
+    st = _store(tmp_path)
+    impl_path = st / "implications" / CAT / "2026-07.json"
+    impl = json.loads(impl_path.read_text(encoding="utf-8"))
+    for line in impl["lines"]:
+        line["findingIds"] = []
+    impl_path.write_text(json.dumps(impl), encoding="utf-8")
+
+    m = build_story_model(CAT, st, dt.date(2026, 7, 22))
+    watch_scene = next(s for s in m["scenes"] if s["title"] == "What would close the gap")
+    ev = m["evidence"][f"scene:{watch_scene['n']}"]
+    assert ev["findings"] == []
+    # The GPU-rental chip's own evidence is real and non-empty -- proving
+    # the empty list above is an honest empty state, not an accident of the
+    # fixture having no evidence anywhere.
+    rental_ev = m["evidence"]["kpi:gpuRentalOnDemand"]
+    assert rental_ev["findings"]
+
+
+def test_categorical_chip_suppresses_arrow(tmp_path):
+    # The "Big buyers' spending plans" chip's value text is categorical
+    # ("raised again"/"trimmed"/"holding"), not a number -- so an arrow
+    # comparing the raw numbers behind it can contradict the word (a
+    # smaller-but-still-positive revision reads "raised again" next to a
+    # down arrow). The chip must carry no arrow at all.
+    st = _store(tmp_path)
+    series_path = st / "series" / "hyperscalerCapexRevision.jsonl"
+    rows = [{"indicatorId": "hyperscalerCapexRevision", "period": p, "value": v,
+             "unit": "x", "publishedAt": p + "-28",
+             "source": {"url": "https://src.example/hcr", "title": "hcr source"}}
+            for p, v in [("2026-05", 5.0), ("2026-06", 0.4)]]  # smaller but still positive
+    series_path.write_text("\n".join(json.dumps(r) for r in rows), encoding="utf-8")
+    m = build_story_model(CAT, st, dt.date(2026, 7, 22))
+    pick = next(p for p in m["kpis"]["picks"] if p["label"] == "Big buyers' spending plans")
+    assert pick["value"] == "raised again"
+    assert pick["arrow"] == ""
+
+
 def test_forward_scene_from_implications(tmp_path):
     m = build_story_model(CAT, _store(tmp_path), dt.date(2026, 7, 22))
     last = m["scenes"][-1]
@@ -214,6 +261,35 @@ def test_archive_and_explore_counts(tmp_path):
     assert m["archive"] == []
 
 
+def test_explore_counts_same_either_invocation_shape(tmp_path):
+    # The four explore tiles (entities/findings/series/history) must count
+    # the same regardless of how the caller invokes the build: passing the
+    # store root (holding <category>/ alongside series/, findings/,
+    # wiki/) or passing the category directory itself (whose parent is the
+    # store root -- the CLI's own established convention, and the shape
+    # that used to leave the entity/findings globs pointed at a
+    # non-existent nested directory while series happened to still resolve).
+    st = _store(tmp_path)
+    (st / "wiki" / "entity").mkdir(parents=True)
+    (st / "wiki" / "entity" / "nvidia.md").write_text("x", encoding="utf-8")
+    (st / "findings").mkdir()
+    (st / "findings" / "a.json").write_text("{}", encoding="utf-8")
+
+    m_root = build_story_model(CAT, st, dt.date(2026, 7, 22))
+    m_catdir = build_story_model(CAT, st / CAT, dt.date(2026, 7, 22))
+
+    expected = {"entities": 1, "findings": 1, "series": 5, "history": 2}
+    assert m_root["explore"] == expected
+    assert m_catdir["explore"] == expected
+
+
+def test_resolve_store_root_handles_both_shapes(tmp_path):
+    cat = tmp_path / CAT
+    cat.mkdir(parents=True)
+    assert resolve_store_root(CAT, tmp_path) == tmp_path       # store root
+    assert resolve_store_root(CAT, cat) == tmp_path             # category dir
+
+
 def test_constraint_label_with_banned_word_is_translated(tmp_path):
     # Real-world case: a scorecard's constraintLabel is "CoWoS and HBM4
     # allocation" -- "allocation" is on the copy lint's banned-word list.
@@ -264,33 +340,88 @@ def test_cowos_translation_does_not_stutter(tmp_path):
 def test_collapse_repeated_word_leaves_punctuated_repeat_alone():
     # A legitimate repeat separated by punctuation (or any non-whitespace)
     # is not the "stranded word" shape the translation bug produces, and
-    # must survive untouched.
-    assert (_collapse_repeated_word("Packaging, packaging capacity is booked.")
+    # must survive untouched -- regardless of the boundary-word bound.
+    bw = {"packaging", "is"}
+    assert (_collapse_repeated_word("Packaging, packaging capacity is booked.", bw)
             == "Packaging, packaging capacity is booked.")
-    assert (_collapse_repeated_word("what it is, is the bottleneck")
+    assert (_collapse_repeated_word("what it is, is the bottleneck", bw)
             == "what it is, is the bottleneck")
 
 
 def test_collapse_repeated_word_keeps_first_casing_and_is_case_insensitive():
-    assert _collapse_repeated_word("Logistics logistics delays") == "Logistics delays"
-    assert _collapse_repeated_word("packaging Packaging supply") == "packaging supply"
-    assert _collapse_repeated_word("the the") == "the"
+    bw = {"logistics", "packaging", "the"}
+    assert _collapse_repeated_word("Logistics logistics delays", bw) == "Logistics delays"
+    assert _collapse_repeated_word("packaging Packaging supply", bw) == "packaging supply"
+    assert _collapse_repeated_word("the the", bw) == "the"
 
 
-def test_collapse_repeated_word_judgement_call_is_general_not_translation_only():
-    # Judgement call: collapse ANY immediately-repeated word, not only ones
-    # a translation created. This means a genuine doubled word like "had
-    # had" or "that that" would also be collapsed if it ever showed up in
-    # stored text. A repo-wide scan of every stored/test fixture in this
-    # project (JSON, Markdown, Python) turned up zero adjacent same-word
-    # repeats outside the CoWoS bug itself, so in this codebase's actual
-    # data the general rule never fires on legitimate prose -- but the
-    # trade-off is real and worth pinning down explicitly here rather than
-    # discovering it later.
-    assert _collapse_repeated_word("He had had enough of the delays.") == \
-        "He had enough of the delays."
-    assert _collapse_repeated_word("I know that that reading is stale.") == \
-        "I know that reading is stale."
+def test_collapse_repeated_word_is_bounded_to_translation_boundary_words():
+    # Reviewer-mandated bound: only collapse a duplicate when that word is
+    # the first or last word of one of the translation table's own
+    # replacement values. That provably covers every stutter a translation
+    # swap can create (the swap can only ever strand its own first/last
+    # word against the text immediately beside it) and -- unlike the old
+    # unbounded rule -- cannot touch legitimate English like "had had" or
+    # "that that", since neither "had" nor "that" is ever the first/last
+    # word of a replacement value. This test replaces the one that used to
+    # pin the unbounded (collapse-anything) behaviour, keeping the
+    # trade-off documented rather than silently dropped.
+    bw = {"packaging", "logistics"}
+    assert _collapse_repeated_word("He had had enough of the delays.", bw) == \
+        "He had had enough of the delays."
+    assert _collapse_repeated_word("I know that that reading is stale.", bw) == \
+        "I know that that reading is stale."
+    # But a real stutter shape (the word IS a boundary word) still collapses:
+    assert _collapse_repeated_word("advanced chip packaging packaging", bw) == \
+        "advanced chip packaging"
+
+
+def test_truncate_breaks_on_word_boundary_with_ellipsis():
+    text = "fully booked through 2026, with wait time from order to delivery varying widely"
+    out = _truncate(text, 60)
+    assert len(out) <= 61  # 60 + the ellipsis character
+    assert out.endswith("…")
+    assert not out[:-1].endswith(" ")   # no trailing space before the ellipsis
+    # Never cuts mid-word: what's left (minus the ellipsis) is a prefix of
+    # the original text ending exactly at a word boundary.
+    body = out[:-1].rstrip()
+    assert text.startswith(body)
+    assert text[len(body):len(body) + 1] in (" ", "")
+
+
+def test_truncate_is_a_noop_under_the_limit():
+    assert _truncate("short text", 90) == "short text"
+
+
+def test_translate_then_truncate_never_cuts_a_translated_word_in_half(tmp_path):
+    # Real-world case: truncating BEFORE translating a jargon term produces
+    # a rendered line that blows the length budget and ends mid-word (a
+    # 60-char cap on the untranslated text produced an 81-char rendered
+    # line). The stored statement below is short enough to survive a
+    # naive pre-translate 90-char cut mid-word through "packaging", but
+    # once "CoWoS" expands to "advanced chip packaging" the translated
+    # text is longer -- proving translation happened BEFORE truncation
+    # only if the rendered text still ends on a whole word (or ellipsis),
+    # never mid-word.
+    st = _store(tmp_path)
+    cat = st / CAT
+    for f in cat.glob("2026-07-v1.json"):
+        data = json.loads(f.read_text(encoding="utf-8"))
+        data["findings"][0]["statement"] = (
+            "Deep packaging lines are fully booked through 2026, with CoWoS "
+            "packaging capacity the binding constraint on shipments")
+        f.write_text(json.dumps(data), encoding="utf-8")
+    m = build_story_model(CAT, st, dt.date(2026, 7, 22))
+    ev = m["evidence"]["scene:1"]
+    take = ev["findings"][0]["take"]
+    assert len(take) <= 91
+    body = take[:-1].rstrip() if take.endswith("…") else take
+    last_word = body.split()[-1] if body.split() else ""
+    # The last word must be a WHOLE word: if it happens to be a prefix of
+    # "packaging" (the translated form of the stored "CoWoS"), it must be
+    # the full word -- a shorter prefix would mean translation happened
+    # AFTER truncation and cut the translated word in half.
+    assert not ("packaging".startswith(last_word) and last_word != "packaging")
 
 
 def test_archive_multi_month_semantics(tmp_path):

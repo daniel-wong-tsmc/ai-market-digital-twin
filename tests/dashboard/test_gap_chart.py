@@ -37,6 +37,24 @@ def test_build_gap_data_daily_files_ignored_and_none_when_thin(tmp_path):
     assert build_gap_data(tmp_path) is None  # one monthly point is not enough
 
 
+def test_impossible_month_filename_is_skipped_not_crashed(tmp_path):
+    # A scorecard filename can match the "YYYY-MM-vN.json" pattern with an
+    # impossible month (e.g. "2026-13-v1.json") and still exist on disk.
+    # Such a file must be skipped, not crash the build when something later
+    # turns the key into a real month (dt.date(...), the month-label table).
+    _mk_monthly(tmp_path, "2026-05", 1, 1.0, 0.5)
+    _mk_monthly(tmp_path, "2026-06", 1, 1.0, 1.0)
+    (tmp_path / "2026-13-v1.json").write_text(json.dumps({
+        "asOf": "2026-13",
+        "demandSupply": {"dmiContribution": 5.0, "smiContribution": 5.0},
+        "categoryStatus": {"rating": "Strong", "direction": "improving",
+                           "reason": "", "constraintLabel": "HBM memory"},
+        "dimensionRatings": {}, "findings": [],
+    }), encoding="utf-8")
+    data = build_gap_data(tmp_path)
+    assert [m["key"] for m in data["months"]] == ["2026-05", "2026-06"]
+
+
 def test_gap_word_dead_band(tmp_path):
     _mk_monthly(tmp_path, "2026-06", 1, 1.0, 1.0)
     _mk_monthly(tmp_path, "2026-07", 1, 1.02, 1.0)  # gap moves 0.2 < 0.5

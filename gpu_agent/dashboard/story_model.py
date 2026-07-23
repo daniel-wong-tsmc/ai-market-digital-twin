@@ -58,25 +58,71 @@ def _story_glossary(gl: dict) -> dict:
 # The same shape of bug can happen with any replacement whose first/last
 # word matches the stored word immediately before/after it. Collapse it
 # after translation, everywhere translated text reaches the page.
+#
+# Bounded per final review: collapsing ANY adjacent duplicate word also
+# rewrites legitimate English ("had had" -> "had"). The bound only fires
+# when the repeated word is the first or last word of one of the
+# translation table's own replacement values -- that provably covers every
+# stutter a translation swap can create (the swap can only ever strand its
+# own first/last word against the stored text on either side of it) and
+# cannot touch a genuine repeat like "had had", since "had" is never the
+# first/last word of a replacement value.
 _REPEATED_WORD = re.compile(r"\b(\w+)[ \t]+\1\b", re.IGNORECASE)
 
 
-def _collapse_repeated_word(text: str) -> str:
+def _translation_boundary_words(gl: dict) -> set[str]:
+    """The first and last word (lowercased) of every replacement value in
+    the translation table -- the only words a translation swap can ever
+    leave stuttering against the stored text immediately before/after it."""
+    words: set[str] = set()
+    for repl in (gl.get("prose_terms") or {}).values():
+        parts = str(repl).split()
+        if parts:
+            words.add(parts[0].lower())
+            words.add(parts[-1].lower())
+    return words
+
+
+def _collapse_repeated_word(text: str, boundary_words: set[str]) -> str:
     """Collapse an immediately-repeated word (case-insensitive match,
-    whitespace-only separator), keeping the first occurrence's casing.
-    Repeats split by punctuation or another word (e.g. "that, that" or a
-    genuine "had had") are left untouched -- only a bare word directly
-    followed by whitespace and itself gets collapsed."""
+    whitespace-only separator), keeping the first occurrence's casing --
+    but only when that word is a translation boundary word (see above).
+    Repeats split by punctuation or another word (e.g. "that, that"), and
+    any bare repeated word that isn't a boundary word (e.g. a genuine
+    "had had"), are left untouched."""
     if not text:
         return text
-    return _REPEATED_WORD.sub(r"\1", text)
+
+    def _repl(m: re.Match) -> str:
+        word = m.group(1)
+        if word.lower() in boundary_words:
+            return word
+        return m.group(0)
+
+    return _REPEATED_WORD.sub(_repl, text)
 
 
 def _translate(text: str, gl: dict) -> str:
-    """term_swap() plus the stutter cleanup above, in one call. Every place
-    in this module that renders stored text onto the story page should call
-    this instead of term_swap() directly."""
-    return _collapse_repeated_word(term_swap(text, gl))
+    """term_swap() plus the bounded stutter cleanup above, in one call.
+    Every place in this module that renders stored text onto the story page
+    should call this instead of term_swap() directly."""
+    return _collapse_repeated_word(term_swap(text, gl), _translation_boundary_words(gl))
+
+
+def _truncate(text: str, limit: int) -> str:
+    """Truncate to at most `limit` characters, breaking on a word boundary
+    and adding a trailing ellipsis rather than cutting mid-word. Callers
+    MUST translate the text first -- translating after truncation can
+    expand a jargon word into a longer plain-English phrase and blow the
+    length budget (real case: a 60-char cap on the untranslated text
+    produced an 81-char rendered line, cut mid-word)."""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    sp = cut.rfind(" ")
+    if sp > 0:
+        cut = cut[:sp]
+    return cut.rstrip() + "…"
 
 _CHIP_DEFS = {
     "gpuRentalOnDemand": {
@@ -88,6 +134,12 @@ _CHIP_DEFS = {
     "hyperscalerCapexRevision": {
         "label": "Big buyers' spending plans",
         "fmt": lambda v: "raised again" if v > 0 else ("trimmed" if v < 0 else "holding"),
+        # The value text above is categorical (words, not a number), but the
+        # arrow (see _arrow()) compares the raw numbers behind the last two
+        # readings -- a smaller-but-still-positive revision reads "raised
+        # again" with a down arrow next to it, which contradicts itself.
+        # Suppress the arrow for any chip whose value text is categorical.
+        "categorical": True,
         "tip": ("Whether the largest data-center builders raised or cut their "
                 "spending plans most recently. Rising plans mean demand keeps growing."),
     },
@@ -127,8 +179,9 @@ def _chip(ind: str, rows: list[dict]) -> dict | None:
     if not rows:
         return None
     d = _CHIP_DEFS[ind]
+    arrow = "" if d.get("categorical") else _arrow(rows)
     return {"claim": f"kpi:{ind}", "label": d["label"],
-            "value": d["fmt"](rows[-1]["value"]), "arrow": _arrow(rows),
+            "value": d["fmt"](rows[-1]["value"]), "arrow": arrow,
             "spark": [r["value"] for r in rows[-8:]],
             "caption": "", "tip": d["tip"], "scene": None}
 
@@ -141,18 +194,34 @@ def _series_evidence(ind: str, rows: list[dict], gl: dict) -> list[dict]:
         if not key or key in seen:
             continue
         seen.add(key)
-        take = (r.get("note") or r.get("label") or "latest reading")[:90]
+        take_raw = r.get("note") or r.get("label") or "latest reading"
         out.append({"source": _translate(src.get("title", "source"), gl),
                     "date": r.get("publishedAt", ""),
-                    "take": _translate(take, gl), "url": key})
+                    "take": _truncate(_translate(take_raw, gl), 90), "url": key})
         if len(out) == 3:
             break
     return out
 
 
+def resolve_store_root(category_id: str, store_dir: str | Path) -> Path:
+    """Store-layout detection: `store_dir` either IS the store root (holding
+    a <category_id>/ subdir alongside series/, findings/, wiki/) or IS the
+    category directory itself (whose parent is the store root). Both shapes
+    are real invocations (the CLI's own established convention passes the
+    category directory; some callers pass the store root directly) and must
+    resolve to the same store root either way. Mirrors build.py's and
+    site_model.py's own detection (build.py:57-59) -- this is the one place
+    it lives for the story page, so every caller of build_story_model gets
+    it for free instead of having to pre-resolve store_dir themselves."""
+    store_dir = Path(store_dir)
+    if (store_dir / category_id).is_dir():
+        return store_dir
+    return store_dir.parent
+
+
 def build_story_model(category_id: str, store_dir: str | Path,
                       today: dt.date) -> dict:
-    store_root = Path(store_dir)
+    store_root = resolve_store_root(category_id, store_dir)
     cat_dir = store_root / category_id
     latest, _prior, as_of, rev = latest_monthly(cat_dir)
     latest = latest or {}
@@ -214,7 +283,8 @@ def _finding_rows(findings: list[dict], gl: dict) -> list[dict]:
             seen.add(url)
             rows.append({"source": _translate(e.get("source", "source"), gl),
                         "date": e.get("date", ""),
-                        "take": _translate((f.get("statement") or "")[:90], gl),
+                        "take": _truncate(
+                            _translate(f.get("statement") or "", gl), 90),
                         "url": url})
     return rows[:3]
 
@@ -229,9 +299,9 @@ def _related(findings: list[dict], gl: dict) -> list[dict]:
             if not url or url in seen:
                 continue
             seen.add(url)
+            title_raw = e.get("excerpt") or f.get("statement") or ""
             out.append({"outlet": _translate(e.get("source", ""), gl),
-                        "title": _translate(
-                            (e.get("excerpt") or f.get("statement") or "")[:60], gl),
+                        "title": _truncate(_translate(title_raw, gl), 60),
                         "date": e.get("date", ""), "url": url})
             if len(out) == 2:
                 return out
@@ -304,8 +374,12 @@ def _add_scenes(model, latest, store_root, cat_dir, series, gl):
         model["evidence"][f"scene:{sc['n']}"] = {
             "title": f"{title} — says who?",
             "claim_text": sc["paragraphs"][0],
-            "findings": _finding_rows(finds, gl) or model["evidence"].get(
-                "kpi:gpuRentalOnDemand", {}).get("findings", []),
+            # No fallback: a scene with no findings of its own must show an
+            # honest empty state (see story_render's evidence panel), never
+            # borrow another claim's sources -- attributing a claim to a
+            # source that never made it defeats the page's whole "says who?"
+            # promise.
+            "findings": _finding_rows(finds, gl),
             "series": vals, "explore": "appendix.html"}
         # A pick links to the scene whose visual is built from the pick's
         # own indicator series — the topical rule (owner decision). If

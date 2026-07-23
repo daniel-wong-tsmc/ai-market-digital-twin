@@ -10,6 +10,8 @@ import json
 import re
 from pathlib import Path
 
+from gpu_agent.dashboard.render import esc
+
 _MONTHLY = re.compile(r"^(\d{4}-\d{2})-v(\d+)\.json$")
 _MONTH_LABEL = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -28,6 +30,13 @@ def _monthly_records(cat_dir: Path) -> list[dict]:
             best[key] = (rev, p)
     out = []
     for key in sorted(best):
+        # A filename can match the pattern with an impossible month (e.g.
+        # "2026-13-v1.json") and later blow up any code that turns the key
+        # into a real date/month-name (dt.date(...), the month-label
+        # lookup). Skip such a file rather than let the build crash.
+        month_num = int(key[5:7])
+        if not (1 <= month_num <= 12):
+            continue
         try:
             d = json.loads(best[key][1].read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
@@ -81,8 +90,6 @@ def spark_svg(values: list[float], w: int = 60, h: int = 18) -> str:
             f'<polyline points="{" ".join(pts)}" fill="none" '
             f'stroke="currentColor" stroke-width="1.5"/></svg>')
 
-
-from gpu_agent.dashboard.render import esc
 
 _W, _H = 780, 270
 _PAD_L, _PAD_R, _PAD_T, _PAD_B = 46, 16, 46, 34
