@@ -1153,6 +1153,11 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   URL not content for price rows), or scope price-row ids by capture time within the month. Small,
   gather/dedup-seam. *(Concurrent-mint caveat: F96 chosen against a backlog max of F95 on
   2026-07-15; if the F88 session also minted F96, renumber this one.)*
+  **PROMOTED 2026-07-23 (third sighting: v8, v14, v15).** The v15 daily cycle could NOT resolve it
+  by logged exclusion (that would mean hand-editing the deduped stream) — `wiki-ingest` aborted
+  partway, 12/17 findings written, 5 left un-ingested (ids in the v15 HANDOFF entry; partial wiki
+  state left as-is, fix-forward). The v15 run's recommendation stands: a real fix (day-grain or
+  content-hash finding-id scoping for price rows), not another exclusion.
 - [ ] **F79 (original scope) — SDEWS-style index rebuild (scoring v2.0 migration; the backtest becomes real).**
   Re-architect the index layer per the SDEWS spec (`docs/2026-07-11-sdews-metric-extraction.md`
   maps it): every scoring indicator becomes a monthly, vintage-stamped time series (2023→now
@@ -1312,3 +1317,12 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   F100 as the index page (F100's panel/model plumbing = salvage donors). Three phases: A renderer
   skeleton on existing data (no F6), B narrator (gated lane), C Explore sub-pages + story archive.
   *(Concurrent-mint caveat: F101 chosen against a backlog max of F100 on 2026-07-22; renumber if collided.)*
+
+- [ ] **F102 — `price-sync` crashes on month-grain as-of; series stale (repeat: v11, v14, v15 cycles).**
+  `ValueError` in `gpu_agent/price_local.py::_yymmdd_date` — a month-grain `--as-of 2026-07` is parsed as
+  `YYMMDD` and the day field comes back empty (v11 saw the sibling empty-string date parse). Non-blocking
+  per run-cycle step 7 ("price-sync never blocks the cycle"), but `store/series/*` did not refresh on the
+  affected cycles. **Priority raised 2026-07-23:** the F101 story page's KPI band — including the anchored
+  "what a GPU rents for" gauge — reads these series directly, so a stale series now shows on the front
+  page. Small dedicated fix lane: parse both grains + regression tests; verify next cycle refreshes.
+  *(Concurrent-mint caveat: F102 chosen against a backlog max of F101 on 2026-07-23; renumber if collided.)*
