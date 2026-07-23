@@ -146,3 +146,38 @@ def test_chip_stacking_rule():
     # hover/focus; verify its rules are still present and unchanged.
     assert ".st-chip:hover .st-tip" in STORY_CSS
     assert ".st-chip:focus .st-tip" in STORY_CSS
+
+
+from gpu_agent.dashboard.story_render import (render_story_page,
+                                              lint_story_copy)
+
+
+def test_render_story_page_end_to_end(tmp_path):
+    html = render_story_page(_model(tmp_path))
+    assert "The GPU shortage got worse this month." in html
+    assert "the gap, this week" in html
+    assert 'data-ev="kpi:gpuRentalOnDemand"' in html
+    assert "What tightened" in html and "What would close the gap" in html
+    assert "Related coverage" in html and "CNBC" in html
+    assert html.count("Source: ") >= 2       # chart + at least one scene
+    assert "Tomorrow" in html
+    assert "Entities" in html and "Findings" in html
+    assert 'id="ev-data"' in html and "window.openEV" in html
+    assert "revision" in html.lower()
+
+
+def test_page_passes_its_own_lint(tmp_path):
+    assert lint_story_copy(render_story_page(_model(tmp_path))) == []
+
+
+def test_lint_catches_banned_words_outside_scripts():
+    bad = "<p>Demand momentum is strengthening.</p><script>var momentum=1;</script>"
+    hits = lint_story_copy(bad)
+    assert any("momentum" in h for h in hits)
+    assert any("strengthening" in h for h in hits)
+    assert lint_story_copy("<script>var momentum=1;</script>") == []
+
+
+def test_scene_first_paragraph_is_evidence_trigger(tmp_path):
+    html = render_story_page(_model(tmp_path))
+    assert 'data-ev="scene:1"' in html

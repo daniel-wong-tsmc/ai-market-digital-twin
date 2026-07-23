@@ -104,6 +104,18 @@ svg.gapchart{width:100%;height:auto;overflow:visible}
 a.ev{cursor:pointer;text-decoration:underline dotted}
 @media (max-width:640px){.st-head h1{font-size:27px}
  .st-band{flex-direction:column}.ev-panel{width:88%}}
+.st-scene{border-left:3px solid #eee;padding:4px 0 10px 18px;margin:0 0 8px;position:relative}
+.st-scene .st-dot{position:absolute;left:-9px;top:6px}
+.st-storyhead{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:#888}
+.st-related{font-size:12px;color:#666}
+.st-related a{color:#1f7a8c;margin-right:10px}
+.st-visual{margin:8px 0;color:#1f7a8c}
+.st-closing{border-top:1px solid #eee;padding:14px 0;font-size:13px}
+.st-arch{display:inline-block;border:1px solid #ddd;border-radius:14px;padding:2px 10px;margin:0 6px 6px 0;font-size:12px;color:#555}
+.st-explore{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.st-tile{flex:1 1 150px;border:1px solid #ddd;border-radius:8px;padding:10px;text-decoration:none;color:#1c1c1c;font-size:12px}
+.st-tile b{display:block;font-size:14px}
+.st-foot{font-size:11px;color:#999;padding:16px 0;border-top:1px solid #eee}
 """
 
 
@@ -155,3 +167,90 @@ _CONDENSE = ("<script>(function(){var h=document.querySelector('.st-head');"
 
 def render_condense_script() -> str:
     return _CONDENSE
+
+
+import re as _re
+
+from gpu_agent.dashboard.site_render import page as _page
+
+_BANNED_STORY = ["DMI", "SMI", "momentum", "strengthening", "tightening",
+                 "accelerating", "allocation", "doctrine", "robust", "leverage"]
+
+
+def lint_story_copy(html_text: str) -> list[str]:
+    prose = _re.sub(r"<script.*?</script>", "", html_text,
+                    flags=_re.S | _re.I)
+    hits = []
+    for w in _BANNED_STORY:
+        if _re.search(rf"\b{w}\b", prose, _re.I):
+            hits.append(f"banned word in page prose: {w}")
+    if len(_re.findall(r"\bindexed?\b", prose, _re.I)) > 1:
+        hits.append("'index/indexed' appears more than once")
+    return hits
+
+
+def _scene_html(scene: dict) -> str:
+    paras = []
+    for i, p in enumerate(scene["paragraphs"]):
+        if i == 0:
+            words = p.split(" ")
+            head, tail = " ".join(words[:6]), " ".join(words[6:])
+            paras.append(f'<p><a class="ev" href="#" '
+                         f'data-ev="scene:{scene["n"]}">{esc(head)}'
+                         f'<sup>ⓘ</sup></a> {esc(tail)}</p>')
+        else:
+            paras.append(f"<p>{esc(p)}</p>")
+    vis = ""
+    if scene["visual"]["series"]:
+        vis = (f'<div class="st-visual">{spark_svg(scene["visual"]["series"], 300, 60)}'
+               f'<span class="st-lab">{esc(scene["visual"]["label"])}</span></div>')
+    rel = ""
+    if scene["related"]:
+        links = " ".join(
+            f'<a href="{esc(r["url"])}" target="_blank" rel="noopener">'
+            f'{esc(r["outlet"])} · {esc(r["title"])} · {esc(r["date"])}</a>'
+            for r in scene["related"] if r["url"].startswith("http"))
+        rel = f'<p class="st-related">Related coverage: {links}</p>'
+    return (f'<article class="st-scene st-scene-{scene["accent"]}">'
+            f'<i class="st-dot st-dot-{scene["accent"]}">{scene["n"]}</i>'
+            f'<h2>{esc(scene["title"])}</h2>{"".join(paras)}{vis}'
+            f'<p class="st-srcline">{esc(scene["source_line"])}</p>{rel}'
+            f'</article>')
+
+
+def _closing_strip(model: dict) -> str:
+    chips = "".join(
+        f'<span class="st-arch">{esc(a["label"])} · {esc(a["text"])}</span>'
+        for a in model["archive"])
+    return (f'<section class="st-closing"><p>Tomorrow’s entry will update '
+            f'this story.</p>{chips}<a href="#">story archive →</a></section>')
+
+
+_EXPLORE_DESC = {
+    "entities": "companies and players, each with its own page",
+    "findings": "every piece of evidence we’ve collected",
+    "series": "the raw numbers over time",
+    "history": "how our answer has changed"}
+
+
+def _explore_band(model: dict) -> str:
+    tiles = "".join(
+        f'<a class="st-tile" href="appendix.html"><b>{k.title()} '
+        f'({model["explore"].get(k, 0)})</b>'
+        f'<span>{_EXPLORE_DESC[k]}</span></a>'
+        for k in ["entities", "findings", "series", "history"])
+    return f'<section class="st-explore">{tiles}</section>'
+
+
+def render_story_page(model: dict) -> str:
+    scenes = "".join(_scene_html(s) for s in model["scenes"])
+    body = (f'<div class="st-page">{_headline_block(model)}'
+            f'{_chart_block(model)}{_kpi_band(model)}'
+            f'<section class="st-story"><h2 class="st-storyhead">The story, '
+            f'step by step</h2>{scenes}</section>'
+            f'{_closing_strip(model)}{_explore_band(model)}'
+            f'<footer class="st-foot">Built by an autonomous research agent '
+            f'· evidence-linked · revision {model["revision"]}</footer>'
+            f'</div>{evidence_json(model["evidence"])}'
+            f'{render_evidence_panel()}{render_condense_script()}')
+    return _page(f'Merchant GPU — {model["headline"]}', body, depth=1)
