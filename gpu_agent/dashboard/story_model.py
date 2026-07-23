@@ -133,7 +133,7 @@ def build_story_model(category_id: str, store_dir: str | Path,
 
     headline = _HEADLINES.get((gap or {}).get("gap_word"),
                               "The state of the GPU market.")
-    label = status.get("constraintLabel") or "supply of key components"
+    label = term_swap(status.get("constraintLabel") or "supply of key components", gl)
     reason = first_n_sentences(term_swap(status.get("reason") or "", gl), 1)
     deck = f"The main chokepoint is {label}. {reason}".strip()
     dateline = (today.strftime("%A, %B %d, %Y").replace(" 0", " ")

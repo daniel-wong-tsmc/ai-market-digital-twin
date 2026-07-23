@@ -1,7 +1,9 @@
 import datetime as dt
 import json
+import re
 from pathlib import Path
-from gpu_agent.dashboard.story_model import build_story_model
+from gpu_agent.dashboard.story_model import _STORY_TERMS, build_story_model
+from gpu_agent.dashboard.story_render import _BANNED_STORY
 
 CAT = "chips.merchant-gpu"
 
@@ -208,6 +210,34 @@ def test_archive_and_explore_counts(tmp_path):
     # monthly snapshots (June + July) no month has both a predecessor and
     # is not the latest, so the archive is empty.
     assert m["archive"] == []
+
+
+def test_constraint_label_with_banned_word_is_translated(tmp_path):
+    # Real-world case: a scorecard's constraintLabel is "CoWoS and HBM4
+    # allocation" -- "allocation" is on the copy lint's banned-word list.
+    # The deck sentence must carry the translated label, not the raw one,
+    # or the page-build lint fires the day this scorecard becomes latest.
+    st = _store(tmp_path)
+    cat = st / CAT
+    for f in cat.glob("2026-07-v1.json"):
+        data = json.loads(f.read_text(encoding="utf-8"))
+        data["categoryStatus"]["constraintLabel"] = "CoWoS and HBM4 allocation"
+        f.write_text(json.dumps(data), encoding="utf-8")
+    m = build_story_model(CAT, st, dt.date(2026, 7, 22))
+    assert "allocation" not in m["deck"].lower()
+    assert "how supply is split" in m["deck"]
+
+
+def test_story_terms_replacements_contain_no_banned_word(tmp_path):
+    # The translation table exists to strip banned words from stored text.
+    # If a replacement value itself contained a banned word, the table
+    # would silently reintroduce the very jargon it's meant to remove.
+    # Compare against the page lint's own banned-word list rather than a
+    # second hardcoded copy, so the two can't drift apart unnoticed.
+    for replacement in _STORY_TERMS.values():
+        for banned in _BANNED_STORY:
+            assert not re.search(rf"\b{banned}\b", replacement, re.I), (
+                f"replacement {replacement!r} contains banned word {banned!r}")
 
 
 def test_archive_multi_month_semantics(tmp_path):
