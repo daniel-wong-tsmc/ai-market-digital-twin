@@ -19,6 +19,36 @@ from gpu_agent.dashboard.glossary import load_glossary, term_swap
 _SERIES_IDS = ["gpuRentalOnDemand", "hyperscalerCapexRevision",
                "odmMonthlyAiRevenue", "hbmSupplyCapex", "gpuSpotPrice"]
 
+# F101 Phase A / Task 8 Decision B: plain-English replacements for the analyst
+# words lint_story_copy's _BANNED_STORY bans from rendered prose. These are
+# story-page-LOCAL (not added to glossary.json's shared prose_terms) because
+# glossary.json is also read by the appendix/"how" pages' plain-language guide
+# table, which lists every prose_terms key verbatim — adding these there made
+# "leverage" and "robust" literally appear in that table's raw-term column and
+# tripped test_build_e2e.py::test_generated_html_has_no_slop_or_raw_cowos (a
+# test outside Task 8's reconciliation list). None of the replacements below
+# contain any of the banned words themselves.
+_STORY_TERMS = {
+    "strengthening": "getting stronger",
+    "tightening": "getting scarcer",
+    "accelerating": "speeding up",
+    "allocation": "how supply is split",
+    "leverage": "negotiating power",
+    "doctrine": "standard practice",
+    "robust": "solid",
+    "momentum": "pace",
+    "DMI": "demand pace",
+    "SMI": "supply pace",
+}
+
+
+def _story_glossary(gl: dict) -> dict:
+    """The shared glossary, extended with the story-local translation table
+    above. Callers pass this (not the raw `gl`) into every term_swap() call
+    that touches text destined for the story page, so stored-text jargon is
+    translated before it ever reaches lint_story_copy's banned-word gate."""
+    return {**gl, "prose_terms": {**gl.get("prose_terms", {}), **_STORY_TERMS}}
+
 _CHIP_DEFS = {
     "gpuRentalOnDemand": {
         "label": "What a GPU rents for",
@@ -74,7 +104,7 @@ def _chip(ind: str, rows: list[dict]) -> dict | None:
             "caption": "", "tip": d["tip"], "scene": None}
 
 
-def _series_evidence(ind: str, rows: list[dict]) -> list[dict]:
+def _series_evidence(ind: str, rows: list[dict], gl: dict) -> list[dict]:
     out, seen = [], set()
     for r in reversed(rows):
         src = r.get("source") or {}
@@ -83,9 +113,9 @@ def _series_evidence(ind: str, rows: list[dict]) -> list[dict]:
             continue
         seen.add(key)
         take = (r.get("note") or r.get("label") or "latest reading")[:90]
-        out.append({"source": src.get("title", "source"),
-                    "date": r.get("publishedAt", ""), "take": take,
-                    "url": key})
+        out.append({"source": term_swap(src.get("title", "source"), gl),
+                    "date": r.get("publishedAt", ""),
+                    "take": term_swap(take, gl), "url": key})
         if len(out) == 3:
             break
     return out
@@ -97,7 +127,7 @@ def build_story_model(category_id: str, store_dir: str | Path,
     cat_dir = store_root / category_id
     latest, _prior, as_of, rev = latest_monthly(cat_dir)
     latest = latest or {}
-    gl = load_glossary()
+    gl = _story_glossary(load_glossary())
     gap = build_gap_data(cat_dir)
     status = latest.get("categoryStatus") or {}
 
@@ -124,7 +154,7 @@ def build_story_model(category_id: str, store_dir: str | Path,
         evidence[c["claim"]] = {
             "title": f"{c['label']}: {c['value']} — says who?",
             "claim_text": c["tip"].split(". ")[0] + ".",
-            "findings": _series_evidence(ind, series.get(ind, [])),
+            "findings": _series_evidence(ind, series.get(ind, []), gl),
             "series": c["spark"], "explore": "appendix.html"}
 
     model = {"category_id": category_id, "as_of": as_of, "revision": rev,
@@ -145,7 +175,7 @@ def _resolve_findings(latest: dict, ids: list[str]) -> list[dict]:
     return [by_id[i] for i in ids if i in by_id]
 
 
-def _finding_rows(findings: list[dict]) -> list[dict]:
+def _finding_rows(findings: list[dict], gl: dict) -> list[dict]:
     rows, seen = [], set()
     for f in findings:
         for e in f.get("evidence") or []:
@@ -153,14 +183,14 @@ def _finding_rows(findings: list[dict]) -> list[dict]:
             if not url or url in seen:
                 continue
             seen.add(url)
-            rows.append({"source": e.get("source", "source"),
+            rows.append({"source": term_swap(e.get("source", "source"), gl),
                         "date": e.get("date", ""),
-                        "take": (f.get("statement") or "")[:90],
+                        "take": term_swap((f.get("statement") or "")[:90], gl),
                         "url": url})
     return rows[:3]
 
 
-def _related(findings: list[dict]) -> list[dict]:
+def _related(findings: list[dict], gl: dict) -> list[dict]:
     out, seen = [], set()
     for f in findings:
         for e in f.get("evidence") or []:
@@ -170,32 +200,33 @@ def _related(findings: list[dict]) -> list[dict]:
             if not url or url in seen:
                 continue
             seen.add(url)
-            out.append({"outlet": e.get("source", ""),
-                        "title": (e.get("excerpt") or f.get("statement") or "")[:60],
+            out.append({"outlet": term_swap(e.get("source", ""), gl),
+                        "title": term_swap(
+                            (e.get("excerpt") or f.get("statement") or "")[:60], gl),
                         "date": e.get("date", ""), "url": url})
             if len(out) == 2:
                 return out
     return out
 
 
-def _source_line(findings: list[dict]) -> str:
+def _source_line(findings: list[dict], gl: dict) -> str:
     names = []
     for f in findings:
         for e in f.get("evidence") or []:
             s = e.get("source")
             if s and s not in names:
                 names.append(s)
-    return "Source: " + ("; ".join(names[:3]) if names
-                        else "agent-tracked filings and reporting")
+    return "Source: " + term_swap(
+        "; ".join(names[:3]) if names else "agent-tracked filings and reporting", gl)
 
 
-def _mk_scene(n, title, paragraphs, series_vals, series_label, findings):
+def _mk_scene(n, title, paragraphs, series_vals, series_label, findings, gl):
     return {"n": n, "accent": _ACCENTS[(n - 1) % 4], "title": title,
             "paragraphs": [p for p in paragraphs if p],
             "visual": {"kind": "spark", "series": series_vals,
                        "label": series_label},
-            "source_line": _source_line(findings),
-            "related": _related(findings),
+            "source_line": _source_line(findings, gl),
+            "related": _related(findings, gl),
             "claims": [f"scene:{n}"]}
 
 
@@ -237,14 +268,14 @@ def _add_scenes(model, latest, store_root, cat_dir, series, gl):
 
     scene_by_indicator: dict[str, int] = {}
     for i, (title, paras, ind, vals, vlabel, finds) in enumerate(specs, start=1):
-        sc = _mk_scene(i, title, paras, vals, vlabel, finds)
+        sc = _mk_scene(i, title, paras, vals, vlabel, finds, gl)
         if not sc["paragraphs"]:
             continue
         model["scenes"].append(sc)
         model["evidence"][f"scene:{sc['n']}"] = {
             "title": f"{title} — says who?",
             "claim_text": sc["paragraphs"][0],
-            "findings": _finding_rows(finds) or model["evidence"].get(
+            "findings": _finding_rows(finds, gl) or model["evidence"].get(
                 "kpi:gpuRentalOnDemand", {}).get("findings", []),
             "series": vals, "explore": "appendix.html"}
         # A pick links to the scene whose visual is built from the pick's

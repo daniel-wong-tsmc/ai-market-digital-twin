@@ -58,15 +58,19 @@ def test_build_model_change_parity_sees_fixture_history(tmp_path):
     assert any("no run yet" not in w["text"] for w in m["what_changed"])
 
 def test_e2e_index_has_panel_and_no_folded_headers(tmp_path):
-    # F100 Task 12: the category index.html is the executive brief (built via
-    # build_site, mirroring test_site_build.py's _build helper), and it must carry
-    # the deep-dive panel shell while the old "Standing calls" <h2> is gone (folded
-    # into the panel). The fixture store only has dated daily scorecards, so the
-    # brief itself renders thin -- that's fine; this asserts panel presence + the
-    # folded section's absence, not brief content richness.
+    # F100 Task 12, retargeted per Task 8 Decision A item 1: the category
+    # index.html is now the F101 story page (built via build_site, mirroring
+    # test_site_build.py's _build helper), not the executive brief -- the old
+    # deep-dive drawer ("dd-drawer") is by design no longer on index.html. This
+    # keeps the test's original intent: the index page carries a working
+    # evidence panel (the story page's own equivalent: the "ev-panel" shell and
+    # its "ev-data" JSON blob) and does not carry the folded headers it was
+    # written to forbid ("Standing calls" was the brief's folded section; the
+    # story page must not regress into showing it either).
     build_site("chips.merchant-gpu", FIX, work_dir="work-nonexistent",
                plain_path=f"{FIX}/plain-2026-07-06.json",
                out_dir=str(tmp_path / "site"), price_fn=lambda d: {"H100": 2.31})
     html = (tmp_path / "site" / "chips.merchant-gpu" / "index.html").read_text(encoding="utf-8")
-    assert 'id="dd-drawer"' in html
+    assert 'id="ev-data"' in html
+    assert "window.openEV" in html and "ev-panel" in html
     assert "<h2>Standing calls</h2>" not in html

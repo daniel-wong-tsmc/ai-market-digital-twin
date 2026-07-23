@@ -4,13 +4,14 @@ from __future__ import annotations
 import datetime
 from pathlib import Path
 
-from .brief_model import build_brief_model
-from .brief_render import BRIEF_CSS, DASHBOARD_CSS, lint_exec_copy, lint_tile_labels, render_brief
+from .brief_render import BRIEF_CSS, DASHBOARD_CSS
 from .site_model import build_site_model
 from .site_render import (
     SITE_CSS, render_appendix, render_how_alert, render_how_featured,
     render_how_tile, render_index_redirect,
 )
+from .story_model import build_story_model
+from .story_render import STORY_CSS, lint_story_copy, render_story_page
 
 
 def _write(path: Path, text: str):
@@ -29,13 +30,13 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
     store_root = Path(store_dir)
     if not (store_root / category_id).is_dir():
         store_root = store_root.parent
-    brief_model = build_brief_model(category_id, store_root, today, price_fn=price_fn)
-    brief_html = render_brief(brief_model)
-    lint = lint_exec_copy(brief_html) + lint_tile_labels(brief_model)
-    if lint:
-        # F97: the exec-copy register gate — a banned-token regression must never
-        # reach the deployed site.
-        raise ValueError(f"exec-copy register violations: {lint}")
+    story_model = build_story_model(category_id, store_root, today)
+    index_html = render_story_page(story_model)
+    story_lint = lint_story_copy(index_html)
+    if story_lint:
+        # F101 Phase A: the story-copy register gate — a lint failure must never
+        # reach the deployed site (mirrors the retired brief-lint abort).
+        raise ValueError(f"story copy lint failed: {story_lint}")
 
     out = Path(out_dir)
     cat = out / category_id
@@ -46,9 +47,9 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
     label = model["category_label"]
     _write(out / "index.html",
            render_index_redirect(f"{category_id}/index.html", label))
-    _write(out / "style.css", SITE_CSS + BRIEF_CSS + DASHBOARD_CSS)
-    _write(cat / "style.css", SITE_CSS + BRIEF_CSS + DASHBOARD_CSS)
-    _write(cat / "index.html", brief_html); pages += 1
+    _write(out / "style.css", SITE_CSS + BRIEF_CSS + DASHBOARD_CSS + STORY_CSS)
+    _write(cat / "style.css", SITE_CSS + BRIEF_CSS + DASHBOARD_CSS + STORY_CSS)
+    _write(cat / "index.html", index_html); pages += 1
     _write(cat / "appendix.html", render_appendix(model)); pages += 1
     _write(cat / "how" / "alert.html", render_how_alert(model)); pages += 1
     for side in ("demand", "supply", "gap"):
@@ -60,4 +61,4 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
     return {"pages": pages + 1,   # +1 for the root redirect
             "out": str(out),
             "featured": featured["metric_id"] if featured else None,
-            "brief_lint": lint}
+            "story_lint": story_lint}

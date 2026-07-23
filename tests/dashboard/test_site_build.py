@@ -77,18 +77,16 @@ def test_two_builds_are_byte_identical(tmp_path):
         assert (a / rel).read_bytes() == (b / rel).read_bytes(), rel
 
 
-def test_build_site_index_is_brief(tmp_path):
-    # F97: the category index.html is now the executive brief, not the F95 page.
-    # This fixture store has only dated daily scorecards (no monthly YYYY-MM-vN.json),
-    # so the brief renders defensively-thin (no agenda band, verdict "—") but the
-    # masthead and the cold-start "Standing calls" header are always present.
-    summary = build_site(CAT, FIX, "work-nonexistent", f"{FIX}/plain-2026-07-06.json",
-                         str(tmp_path / "site"), today=dt.date(2026, 7, 16))
-    html = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
-    assert "Executive Brief" in html and "Standing calls" in html
-    assert summary["brief_lint"] == []
-    css = (tmp_path / "site" / "style.css").read_text(encoding="utf-8")
-    assert ".kpis" in css and "status-elevated" in css
+def test_build_site_index_is_story(tmp_path):
+    summary = _build(tmp_path)          # existing helper @test_site_build.py:13
+    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    assert "The story, step by step" in idx
+    assert "says who?" in idx
+    assert 'id="ev-data"' in idx
+    assert "Executive Brief" not in idx
+    assert summary["story_lint"] == []
+    css = (tmp_path / "site" / CAT / "style.css").read_text(encoding="utf-8")
+    assert ".st-chip" in css and ".ev-panel" in css
 
 
 def test_style_css_includes_dashboard_theme(tmp_path):
@@ -105,14 +103,17 @@ def test_appendix_has_dimension_and_finding_anchors(tmp_path):
 
 
 def test_build_site_lint_gate_aborts_build(tmp_path, monkeypatch):
+    # Task 8 Decision A item 2: retargeted from the retired brief lint
+    # (lint_exec_copy) to the story-page copy lint that now gates the index
+    # write, keeping this a real abort test rather than a stale mechanism check.
     import datetime as dt
     import gpu_agent.dashboard.site_build as sb
-    monkeypatch.setattr(sb, "lint_exec_copy",
+    monkeypatch.setattr(sb, "lint_story_copy",
                         lambda html: ["because no alert rule fired"])
     with pytest.raises(ValueError):
         build_site(CAT, FIX, "work-nonexistent", f"{FIX}/plain-2026-07-06.json",
                    str(tmp_path / "site"), today=dt.date(2026, 7, 16))
-    # a register violation aborts before the brief index is written
+    # a copy-lint violation aborts before the story index is written
     assert not (tmp_path / "site" / CAT / "index.html").exists()
 
 
