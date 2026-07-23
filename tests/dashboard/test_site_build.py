@@ -126,9 +126,26 @@ def test_brief_evidence_anchors_resolve_in_appendix(tmp_path):
     # selectors (load_scorecards, build.py's build_model, site_model.py's
     # build_site_model) still preferred the daily over the monthly, a #dim-<name>
     # anchor for a dimension only the monthly has (moat, unitEconomics) would dead-end.
-    # F100 retarget: the brief now surfaces dimensions via the deep-dive panel's
-    # embedded JSON blob instead of appendix.html# links; the assertions below check
-    # the same regression through that blob.
+    # F100 retarget: the brief surfaced dimensions via the deep-dive panel's embedded
+    # JSON blob instead of appendix.html# links; the assertions checked the same
+    # regression through that blob.
+    # Task 8 Decision C retarget: index.html is now the F101 story page. Its own
+    # evidence blob ("ev-data") is keyed by claim id ("kpi:...", "scene:N"), not by
+    # dimension name, AND story_model.py's scene-building (see its _add_scenes) only
+    # ever surfaces the bottleneck, momentum, and unitEconomics dimensions -- it has no
+    # code path that puts moat, competitiveStructure, or strategicRisk on the page at
+    # all. So the regression guard now splits across the two pages that still exist:
+    #  - unitEconomics (which story_model DOES expose) is checked through the story
+    #    page itself: the "Where supply is gaining" scene is only built when
+    #    dims.get("unitEconomics") is truthy, which is true only for the monthly
+    #    scorecard in this fixture (the daily has no unitEconomics dimension at all) --
+    #    so that scene's presence in index.html is direct proof that build_story_model's
+    #    own selector (brief_model.latest_monthly, which story_model.py reuses) chose
+    #    the monthly read over the daily.
+    #  - moat (which story_model has NO path to expose, regardless of which scorecard
+    #    wins) is checked the pre-F100 way, directly against appendix.html: a
+    #    #dim-moat anchor there is still proof that site_model.py's own (unchanged by
+    #    this lane) selector also chose the monthly read.
     import json
     root = tmp_path / "store"
     cat = root / CAT
@@ -196,18 +213,22 @@ def test_brief_evidence_anchors_resolve_in_appendix(tmp_path):
     site = tmp_path / "site" / CAT
     index = (site / "index.html").read_text(encoding="utf-8")
     appendix = (site / "appendix.html").read_text(encoding="utf-8")
-    # F100: the brief no longer emits <a href="appendix.html#..."> links; the
-    # dimensions it surfaces now live in the deep-dive panel's embedded JSON blob
-    # (id="dd-data"), keyed by dimension name. The F97 regression intent survives:
-    # every dimension the brief surfaces must resolve to a real #dim-<name> anchor in
-    # the appendix (brief & appendix must agree on the winning MONTHLY scorecard).
-    m = re.search(r'id="dd-data"[^>]*>(.*?)</script>', index, re.S)
-    assert m, "brief should embed the deep-dive data blob"
-    dd = json.loads(m.group(1))          # json.loads decodes the < escapes
-    dims = set(dd.keys())
-    assert dims, "deep-dive blob should carry the brief's dimensions"
-    # the monthly (6 dims incl. moat + unitEconomics) must have won over the same-month
-    # legacy daily (4 dims); if the daily wrongly won, these keys would be absent.
-    assert {"moat", "unitEconomics"} <= dims, "monthly scorecard must win over same-month daily"
-    for name in dims:
-        assert f'id="dim-{name}"' in appendix, f"dead dimension anchor: {name}"
+
+    # story_model.py's own "latest scorecard" selector (brief_model.latest_monthly,
+    # reused verbatim by build_story_model) chose the monthly read over the
+    # same-month daily: proven by the unitEconomics-only scene existing at all. The
+    # daily scorecard has no "unitEconomics" dimension, so if it had wrongly won,
+    # story_model.py's `dims.get("unitEconomics")` check would be falsy and this
+    # scene would never be built.
+    assert "Where supply is gaining" in index, (
+        "story page should surface the unitEconomics scene, proving "
+        "build_story_model's selector chose the monthly scorecard over the daily")
+    assert 'id="ev-data"' in index, "story page should embed its evidence blob"
+
+    # site_model.py's selector (unchanged by this lane) also chose the monthly read:
+    # moat has no code path onto the story page at all (story_model.py's
+    # _add_scenes only ever builds bottleneck/momentum/unitEconomics scenes), so its
+    # half of the regression guard stays on appendix.html, exactly as it did before
+    # F100 introduced the now-retired deep-dive-panel blob.
+    assert 'id="dim-moat"' in appendix, "dead dimension anchor: moat"
+    assert 'id="dim-unitEconomics"' in appendix, "dead dimension anchor: unitEconomics"
