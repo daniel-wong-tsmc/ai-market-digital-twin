@@ -12,6 +12,8 @@ from.
 """
 from __future__ import annotations
 
+import html
+
 from gpu_agent.dashboard.story_render import lint_story_copy
 from gpu_agent.narrator.schema import NarratorAnswer
 
@@ -19,20 +21,13 @@ _NO_SOURCE = "No new sourced evidence today."
 _FORWARD_MARKERS = ("close", "watch", "ahead", "next")
 
 
-def _url_of(doc) -> str:
-    # Test fixtures sometimes reassign a scene's relatedDocs to plain dicts
-    # (no validate_assignment on the schema), so accept either a RelatedDoc
-    # model or a raw dict here.
-    return doc["url"] if isinstance(doc, dict) else doc.url
-
-
 def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
     violations: list[str] = []
 
-    finding_ids = {f["id"] for f in inputs["findings"]}
-    doc_urls = {d["url"] for d in inputs["docPool"]}
-    series_ids = {s["indicatorId"] for s in inputs["seriesPool"]}
-    gap_months = set(inputs["gapMonths"])
+    finding_ids = {f["id"] for f in inputs.get("findings", [])}
+    doc_urls = {d["url"] for d in inputs.get("docPool", [])}
+    series_ids = {s["indicatorId"] for s in inputs.get("seriesPool", [])}
+    gap_months = set(inputs.get("gapMonths", []))
 
     # Check 2: claimFindingIds membership; sourceless scenes need exact wording.
     for scene in answer.scenes:
@@ -49,7 +44,7 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
     # Check 3: relatedDocs.url membership.
     for scene in answer.scenes:
         for doc in scene.relatedDocs:
-            url = _url_of(doc)
+            url = doc.url
             if url not in doc_urls:
                 violations.append(
                     f"scene {scene.n}: related doc url '{url}' is not in "
@@ -63,7 +58,8 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
         prose_bits.append(scene.sourceLine)
     prose_bits.extend(k.whyCaption for k in answer.kpiPicks)
     prose_bits.extend(c.text for c in answer.calloutMonths)
-    violations.extend(lint_story_copy("<p>" + " ".join(prose_bits) + "</p>"))
+    escaped_prose = [html.escape(bit) for bit in prose_bits]
+    violations.extend(lint_story_copy("<p>" + " ".join(escaped_prose) + "</p>"))
 
     # Check 5: scene count/order bounds, forward-looking close, non-empty sourceLine.
     n_scenes = len(answer.scenes)
