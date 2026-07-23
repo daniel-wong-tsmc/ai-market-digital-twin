@@ -16,6 +16,7 @@ from gpu_agent.dashboard.brief_model import (first_n_sentences,
                                              read_implication_lines)
 from gpu_agent.dashboard.gap_chart import build_gap_data
 from gpu_agent.dashboard.glossary import load_glossary, term_swap
+from gpu_agent.narrator.store import StoryStore
 
 _SERIES_IDS = ["gpuRentalOnDemand", "hyperscalerCapexRevision",
                "odmMonthlyAiRevenue", "hbmSupplyCapex", "gpuSpotPrice"]
@@ -228,21 +229,26 @@ def resolve_store_root(category_id: str, store_dir: str | Path) -> Path:
     return store_dir.parent
 
 
-def build_story_model(category_id: str, store_dir: str | Path,
-                      today: dt.date) -> dict:
-    store_root = resolve_store_root(category_id, store_dir)
+def _base_model(category_id: str, store_root: Path, today: dt.date):
+    """The shared tail of `build_story_model`: everything that comes from
+    committed store data regardless of whether an artifact or the assembler
+    ends up supplying headline/deck/scenes/kpis.picks/callouts. Both
+    `_assemble_model` (Phase A, no artifact) and `read_story_artifact`
+    (Phase B, narrated) call this and build on top of it, so gap chart,
+    archive, explore, the anchored KPI chip, and the series-backed evidence
+    entries are computed identically -- and only once -- either way.
+
+    Returns `(model, ctx)`: `model` already carries the exact keys the final
+    dict needs from the shared tail (category_id, as_of, revision, dateline,
+    gap, kpis, evidence, archive, explore); `ctx` carries the raw
+    ingredients (`latest`, `gl`, `series`, `cat_dir`, `store_root`) that the
+    two callers still need to build their own headline/deck/scenes/callouts.
+    """
     cat_dir = store_root / category_id
     latest, _prior, as_of, rev = latest_monthly(cat_dir)
     latest = latest or {}
     gl = _story_glossary(load_glossary())
     gap = build_gap_data(cat_dir)
-    status = latest.get("categoryStatus") or {}
-
-    headline = _HEADLINES.get((gap or {}).get("gap_word"),
-                              "The state of the GPU market.")
-    label = _translate(status.get("constraintLabel") or "supply of key components", gl)
-    reason = first_n_sentences(_translate(status.get("reason") or "", gl), 1)
-    deck = f"The main chokepoint is {label}. {reason}".strip()
     dateline = (today.strftime("%A, %B %d, %Y").replace(" 0", " ")
                 + " · updated with each run")
 
@@ -264,14 +270,136 @@ def build_story_model(category_id: str, store_dir: str | Path,
             "findings": _series_evidence(ind, series.get(ind, []), gl),
             "series": c["spark"], "explore": "appendix.html"}
 
+    # Archive contract (owner decision): a chip for month M shows what
+    # happened DURING month M, i.e. the change from month M-1 to M — so an
+    # entry needs a predecessor. The current (latest) month is today's
+    # story, not archive, and is always excluded. With only 2 monthly
+    # snapshots (today's data) there is no month that has both a
+    # predecessor and is not the latest, so the archive is empty.
+    #
+    # The gap level is a running sum (see gap_chart.build_gap_data), so the
+    # change in gap from M-1 to M collapses to _SCALE * (dmi_M - smi_M) —
+    # exactly the same quantity, scale, and dead-band threshold that
+    # decides the current month's own gap_word. Reuse those constants so
+    # archive headlines are computed by the identical rule.
+    from gpu_agent.dashboard.gap_chart import (_DEAD_BAND, _SCALE,
+                                                _monthly_records)
+    recs = _monthly_records(cat_dir)
+    candidates = list(range(1, len(recs) - 1))  # has a predecessor, not latest
+    arch = []
+    for j in candidates[-4:]:
+        delta = _SCALE * (recs[j]["dmi"] - recs[j]["smi"])
+        if delta > _DEAD_BAND:
+            word = "widened"
+        elif delta < -_DEAD_BAND:
+            word = "narrowed"
+        else:
+            word = "held"
+        key = recs[j]["key"]
+        label = dt.date(int(key[:4]), int(key[5:7]), 1).strftime("%B %Y")
+        arch.append({"key": key, "label": label,
+                    "text": _HEADLINES.get(word, "")})
+
+    explore = {
+        "entities": len(list((store_root / "wiki" / "entity").glob("*.md"))),
+        "findings": len(list((store_root / "findings").glob("*.json"))),
+        "series": len(list((store_root / "series").glob("*.jsonl"))),
+        "history": len(list(cat_dir.glob("*.json")))}
+
     model = {"category_id": category_id, "as_of": as_of, "revision": rev,
-             "headline": headline, "deck": deck, "dateline": dateline,
-             "gap": gap, "callouts": [], "kpis": {"anchored": anchored,
-                                                  "picks": picks},
-             "evidence": evidence, "scenes": [], "archive": [],
-             "explore": {}}
+             "dateline": dateline, "gap": gap,
+             "kpis": {"anchored": anchored, "picks": picks},
+             "evidence": evidence, "archive": arch, "explore": explore}
+    ctx = {"latest": latest, "gl": gl, "series": series,
+           "cat_dir": cat_dir, "store_root": store_root}
+    return model, ctx
+
+
+def _assemble_model(category_id: str, store_root: Path, today: dt.date) -> dict:
+    """Phase A: the original assembler, now built on the shared `_base_model`
+    tail. Behaviorally unchanged from the pre-Phase-B assembler -- only the
+    gap/archive/explore/anchored-chip/evidence-series computation moved into
+    `_base_model` so the artifact-driven path can reuse it verbatim."""
+    base, ctx = _base_model(category_id, store_root, today)
+    latest, gl = ctx["latest"], ctx["gl"]
+    series, cat_dir = ctx["series"], ctx["cat_dir"]
+    status = latest.get("categoryStatus") or {}
+
+    headline = _HEADLINES.get((base["gap"] or {}).get("gap_word"),
+                              "The state of the GPU market.")
+    label = _translate(status.get("constraintLabel") or "supply of key components", gl)
+    reason = first_n_sentences(_translate(status.get("reason") or "", gl), 1)
+    deck = f"The main chokepoint is {label}. {reason}".strip()
+
+    model = {**base, "headline": headline, "deck": deck, "callouts": [],
+             "scenes": []}
     _add_scenes(model, latest, store_root, cat_dir, series, gl)
     return model
+
+
+def read_story_artifact(category_id: str, store_root: Path,
+                        today: dt.date) -> dict | None:
+    """Phase B: load today's narrator artifact and map it onto the exact
+    model dict shape `_assemble_model` produces. Returns None when there is
+    no artifact for the date, or when the artifact has `fellBack` set --
+    either way the caller must fall back to the assembler, indistinguishable
+    from Phase A behavior."""
+    art = StoryStore(store_root).read(category_id, today.isoformat())
+    if art is None or art.narratorMeta.fellBack:
+        return None
+
+    base, ctx = _base_model(category_id, store_root, today)
+    latest, gl, series = ctx["latest"], ctx["gl"], ctx["series"]
+
+    scenes = []
+    evidence = dict(base["evidence"])
+    for sc in art.scenes:
+        vals = ([r["value"] for r in series.get(sc.visual.seriesId, [])[-8:]]
+                if sc.visual else [])
+        vlabel = sc.visual.label if sc.visual else ""
+        findings = _resolve_findings(latest, sc.claimFindingIds)
+        scenes.append({
+            "n": sc.n, "accent": _ACCENTS[(sc.n - 1) % 4], "title": sc.title,
+            "paragraphs": list(sc.paragraphs),
+            "visual": {"kind": "spark", "series": vals, "label": vlabel},
+            "source_line": sc.sourceLine,
+            "related": [{"outlet": r.outlet, "title": r.title,
+                        "date": r.date, "url": r.url}
+                       for r in sc.relatedDocs],
+            "claims": [f"scene:{sc.n}"]})
+        evidence[f"scene:{sc.n}"] = {
+            "title": f"{sc.title} — says who?",
+            "claim_text": sc.paragraphs[0] if sc.paragraphs else "",
+            # Same rule as the assembler (Phase A review finding #1): a
+            # scene with no claimFindingIds of its own gets an honest empty
+            # findings list -- never borrowed from another scene/claim.
+            "findings": _finding_rows(findings, gl),
+            "series": vals, "explore": "appendix.html"}
+
+    picks = []
+    for kp in art.kpiPicks:
+        c = _chip(kp.indicatorId, series.get(kp.indicatorId, []))
+        if c is None:
+            continue
+        c["caption"] = kp.whyCaption
+        c["scene"] = kp.scene
+        picks.append(c)
+
+    callouts = [{"month_key": cm.monthKey, "text": cm.text,
+                "claim": f"scene:{cm.scene}"} for cm in art.calloutMonths]
+
+    return {**base, "headline": art.headline, "deck": art.deck,
+            "scenes": scenes, "callouts": callouts, "evidence": evidence,
+            "kpis": {"anchored": base["kpis"]["anchored"], "picks": picks}}
+
+
+def build_story_model(category_id: str, store_dir: str | Path,
+                      today: dt.date) -> dict:
+    store_root = resolve_store_root(category_id, store_dir)
+    artifact_model = read_story_artifact(category_id, store_root, today)
+    if artifact_model is not None:
+        return artifact_model
+    return _assemble_model(category_id, store_root, today)
 
 
 _ACCENTS = ["amber", "terracotta", "teal", "green"]
@@ -410,40 +538,7 @@ def _add_scenes(model, latest, store_root, cat_dir, series, gl):
             "month_key": month["key"],
             "text": f"{month['label']}: {first['title'].lower()}",
             "claim": f"scene:{first['n']}"}]
-
-    # Archive contract (owner decision): a chip for month M shows what
-    # happened DURING month M, i.e. the change from month M-1 to M — so an
-    # entry needs a predecessor. The current (latest) month is today's
-    # story, not archive, and is always excluded. With only 2 monthly
-    # snapshots (today's data) there is no month that has both a
-    # predecessor and is not the latest, so the archive is empty.
-    #
-    # The gap level is a running sum (see gap_chart.build_gap_data), so the
-    # change in gap from M-1 to M collapses to _SCALE * (dmi_M - smi_M) —
-    # exactly the same quantity, scale, and dead-band threshold that
-    # decides the current month's own gap_word. Reuse those constants so
-    # archive headlines are computed by the identical rule.
-    from gpu_agent.dashboard.gap_chart import (_DEAD_BAND, _SCALE,
-                                                _monthly_records)
-    recs = _monthly_records(cat_dir)
-    candidates = list(range(1, len(recs) - 1))  # has a predecessor, not latest
-    arch = []
-    for j in candidates[-4:]:
-        delta = _SCALE * (recs[j]["dmi"] - recs[j]["smi"])
-        if delta > _DEAD_BAND:
-            word = "widened"
-        elif delta < -_DEAD_BAND:
-            word = "narrowed"
-        else:
-            word = "held"
-        key = recs[j]["key"]
-        label = dt.date(int(key[:4]), int(key[5:7]), 1).strftime("%B %Y")
-        arch.append({"key": key, "label": label,
-                    "text": _HEADLINES.get(word, "")})
-    model["archive"] = arch
-
-    model["explore"] = {
-        "entities": len(list((store_root / "wiki" / "entity").glob("*.md"))),
-        "findings": len(list((store_root / "findings").glob("*.json"))),
-        "series": len(list((store_root / "series").glob("*.jsonl"))),
-        "history": len(list(cat_dir.glob("*.json")))}
+    # Archive and explore are computed once by `_base_model` (the shared
+    # tail both the assembler and the artifact-driven path build on) --
+    # `model["archive"]`/`model["explore"]` already carry those values from
+    # there and are not recomputed here.
