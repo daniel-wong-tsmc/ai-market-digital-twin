@@ -7,6 +7,7 @@ store/<cat>/story/<date>.json, and the renderer must not notice.
 from __future__ import annotations
 
 import datetime as dt
+import re
 from pathlib import Path
 
 from gpu_agent.dashboard.agenda import read_series
@@ -48,6 +49,34 @@ def _story_glossary(gl: dict) -> dict:
     that touches text destined for the story page, so stored-text jargon is
     translated before it ever reaches lint_story_copy's banned-word gate."""
     return {**gl, "prose_terms": {**gl.get("prose_terms", {}), **_STORY_TERMS}}
+
+
+# A translation can leave a stutter behind: glossary.json's "CoWoS" ->
+# "advanced chip packaging" already ends in "packaging", and the stored text
+# right after it ("CoWoS packaging and HBM supply") also starts with
+# "packaging" -- so the swap produces "advanced chip packaging packaging".
+# The same shape of bug can happen with any replacement whose first/last
+# word matches the stored word immediately before/after it. Collapse it
+# after translation, everywhere translated text reaches the page.
+_REPEATED_WORD = re.compile(r"\b(\w+)[ \t]+\1\b", re.IGNORECASE)
+
+
+def _collapse_repeated_word(text: str) -> str:
+    """Collapse an immediately-repeated word (case-insensitive match,
+    whitespace-only separator), keeping the first occurrence's casing.
+    Repeats split by punctuation or another word (e.g. "that, that" or a
+    genuine "had had") are left untouched -- only a bare word directly
+    followed by whitespace and itself gets collapsed."""
+    if not text:
+        return text
+    return _REPEATED_WORD.sub(r"\1", text)
+
+
+def _translate(text: str, gl: dict) -> str:
+    """term_swap() plus the stutter cleanup above, in one call. Every place
+    in this module that renders stored text onto the story page should call
+    this instead of term_swap() directly."""
+    return _collapse_repeated_word(term_swap(text, gl))
 
 _CHIP_DEFS = {
     "gpuRentalOnDemand": {
@@ -113,9 +142,9 @@ def _series_evidence(ind: str, rows: list[dict], gl: dict) -> list[dict]:
             continue
         seen.add(key)
         take = (r.get("note") or r.get("label") or "latest reading")[:90]
-        out.append({"source": term_swap(src.get("title", "source"), gl),
+        out.append({"source": _translate(src.get("title", "source"), gl),
                     "date": r.get("publishedAt", ""),
-                    "take": term_swap(take, gl), "url": key})
+                    "take": _translate(take, gl), "url": key})
         if len(out) == 3:
             break
     return out
@@ -133,8 +162,8 @@ def build_story_model(category_id: str, store_dir: str | Path,
 
     headline = _HEADLINES.get((gap or {}).get("gap_word"),
                               "The state of the GPU market.")
-    label = term_swap(status.get("constraintLabel") or "supply of key components", gl)
-    reason = first_n_sentences(term_swap(status.get("reason") or "", gl), 1)
+    label = _translate(status.get("constraintLabel") or "supply of key components", gl)
+    reason = first_n_sentences(_translate(status.get("reason") or "", gl), 1)
     deck = f"The main chokepoint is {label}. {reason}".strip()
     dateline = (today.strftime("%A, %B %d, %Y").replace(" 0", " ")
                 + " · updated with each run")
@@ -183,9 +212,9 @@ def _finding_rows(findings: list[dict], gl: dict) -> list[dict]:
             if not url or url in seen:
                 continue
             seen.add(url)
-            rows.append({"source": term_swap(e.get("source", "source"), gl),
+            rows.append({"source": _translate(e.get("source", "source"), gl),
                         "date": e.get("date", ""),
-                        "take": term_swap((f.get("statement") or "")[:90], gl),
+                        "take": _translate((f.get("statement") or "")[:90], gl),
                         "url": url})
     return rows[:3]
 
@@ -200,8 +229,8 @@ def _related(findings: list[dict], gl: dict) -> list[dict]:
             if not url or url in seen:
                 continue
             seen.add(url)
-            out.append({"outlet": term_swap(e.get("source", ""), gl),
-                        "title": term_swap(
+            out.append({"outlet": _translate(e.get("source", ""), gl),
+                        "title": _translate(
                             (e.get("excerpt") or f.get("statement") or "")[:60], gl),
                         "date": e.get("date", ""), "url": url})
             if len(out) == 2:
@@ -216,7 +245,7 @@ def _source_line(findings: list[dict], gl: dict) -> str:
             s = e.get("source")
             if s and s not in names:
                 names.append(s)
-    return "Source: " + term_swap(
+    return "Source: " + _translate(
         "; ".join(names[:3]) if names else "agent-tracked filings and reporting", gl)
 
 
@@ -234,7 +263,7 @@ def _add_scenes(model, latest, store_root, cat_dir, series, gl):
     dims = latest.get("dimensionRatings") or {}
     status = latest.get("categoryStatus") or {}
     sv = lambda ind: [r["value"] for r in series.get(ind, [])[-8:]]
-    plain = lambda t, n=2: first_n_sentences(term_swap(t or "", gl), n)
+    plain = lambda t, n=2: first_n_sentences(_translate(t or "", gl), n)
 
     specs = []
     if dims.get("bottleneck"):

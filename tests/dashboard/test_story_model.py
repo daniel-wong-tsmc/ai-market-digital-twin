@@ -2,7 +2,9 @@ import datetime as dt
 import json
 import re
 from pathlib import Path
-from gpu_agent.dashboard.story_model import _STORY_TERMS, build_story_model
+from gpu_agent.dashboard.story_model import (_STORY_TERMS,
+                                              _collapse_repeated_word,
+                                              build_story_model)
 from gpu_agent.dashboard.story_render import _BANNED_STORY
 
 CAT = "chips.merchant-gpu"
@@ -238,6 +240,57 @@ def test_story_terms_replacements_contain_no_banned_word(tmp_path):
         for banned in _BANNED_STORY:
             assert not re.search(rf"\b{banned}\b", replacement, re.I), (
                 f"replacement {replacement!r} contains banned word {banned!r}")
+
+
+def test_cowos_translation_does_not_stutter(tmp_path):
+    # Real-world case: the stored constraintLabel is literally
+    # "CoWoS packaging and HBM supply". Translating "CoWoS" ->
+    # "advanced chip packaging" (glossary.json) leaves the stored word
+    # "packaging" stranded right after it -- "advanced chip packaging
+    # packaging" -- unless the doubled word gets collapsed.
+    st = _store(tmp_path)
+    cat = st / CAT
+    for f in cat.glob("2026-07-v1.json"):
+        data = json.loads(f.read_text(encoding="utf-8"))
+        data["categoryStatus"]["constraintLabel"] = "CoWoS packaging and HBM supply"
+        f.write_text(json.dumps(data), encoding="utf-8")
+    m = build_story_model(CAT, st, dt.date(2026, 7, 22))
+    assert "advanced chip packaging" in m["deck"]
+    assert "packaging packaging" not in m["deck"].lower()
+    assert m["deck"].startswith(
+        "The main chokepoint is advanced chip packaging and high-bandwidth memory supply.")
+
+
+def test_collapse_repeated_word_leaves_punctuated_repeat_alone():
+    # A legitimate repeat separated by punctuation (or any non-whitespace)
+    # is not the "stranded word" shape the translation bug produces, and
+    # must survive untouched.
+    assert (_collapse_repeated_word("Packaging, packaging capacity is booked.")
+            == "Packaging, packaging capacity is booked.")
+    assert (_collapse_repeated_word("what it is, is the bottleneck")
+            == "what it is, is the bottleneck")
+
+
+def test_collapse_repeated_word_keeps_first_casing_and_is_case_insensitive():
+    assert _collapse_repeated_word("Logistics logistics delays") == "Logistics delays"
+    assert _collapse_repeated_word("packaging Packaging supply") == "packaging supply"
+    assert _collapse_repeated_word("the the") == "the"
+
+
+def test_collapse_repeated_word_judgement_call_is_general_not_translation_only():
+    # Judgement call: collapse ANY immediately-repeated word, not only ones
+    # a translation created. This means a genuine doubled word like "had
+    # had" or "that that" would also be collapsed if it ever showed up in
+    # stored text. A repo-wide scan of every stored/test fixture in this
+    # project (JSON, Markdown, Python) turned up zero adjacent same-word
+    # repeats outside the CoWoS bug itself, so in this codebase's actual
+    # data the general rule never fires on legitimate prose -- but the
+    # trade-off is real and worth pinning down explicitly here rather than
+    # discovering it later.
+    assert _collapse_repeated_word("He had had enough of the delays.") == \
+        "He had enough of the delays."
+    assert _collapse_repeated_word("I know that that reading is stale.") == \
+        "I know that reading is stale."
 
 
 def test_archive_multi_month_semantics(tmp_path):
