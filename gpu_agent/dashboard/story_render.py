@@ -222,7 +222,7 @@ def lint_story_copy(html_text: str) -> list[str]:
     for w in _BANNED_STORY:
         if _re.search(rf"\b{w}\b", prose, _re.I):
             hits.append(f"banned word in page prose: {w}")
-    if len(_re.findall(r"\bindexed?\b", prose, _re.I)) > 1:
+    if len(_re.findall(r"\bindex(?:ed)?\b", prose, _re.I)) > 1:
         hits.append("'index/indexed' appears more than once")
     return hits
 

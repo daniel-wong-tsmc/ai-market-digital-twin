@@ -264,6 +264,16 @@ def test_lint_catches_banned_words_outside_scripts():
     assert lint_story_copy("<script>var momentum=1;</script>") == []
 
 
+def test_lint_flags_bare_word_index_appearing_twice():
+    # \bindexed?\b reads as "indexe" + optional "d", so it matches "indexed"
+    # but never the bare word "index" -- the "index/indexed may appear once
+    # at most" rule was only half-enforced. "index" twice must now trip it,
+    # while a single occurrence is still fine.
+    hits = lint_story_copy("<p>The index rose. Another index move today.</p>")
+    assert any("index" in h for h in hits)
+    assert lint_story_copy("<p>The index rose today.</p>") == []
+
+
 def test_scene_first_paragraph_is_evidence_trigger(tmp_path):
     html = render_story_page(_model(tmp_path))
     assert 'data-ev="scene:1"' in html
