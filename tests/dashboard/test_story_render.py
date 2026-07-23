@@ -59,12 +59,14 @@ def test_explore_link_href_only_inside_scheme_guard():
     # javascript:alert(1) comes back unchanged), so the explore link — whose
     # value is normally a relative path like "appendix.html" — must be gated
     # so relative paths and http(s) URLs render, while javascript:, data:,
-    # vbscript: and any other scheme do not produce a link at all.
+    # vbscript: and any other scheme and protocol-relative URLs do not produce a link at all.
     guarded = re.search(
         r"if\(d\.explore&&\("
         r"/\^https\?:/i\.test\(d\.explore\)\|\|"
         r"!/\^\[a-zA-Z\]\[a-zA-Z0-9\+\.\-\]\*:/\.test\(d\.explore\)"
-        r"\)\)\{"
+        r"\)&&"
+        + r"!/\^" + r"\\" + r"/\\" + r"//"
+        + r"\.test\(d\.explore\)\)\{"
         r"var ex=el\('a','ev-explore','see everything we have →'\);\s*"
         r"ex\.href=encodeURI\(d\.explore\);",
         js,
@@ -74,11 +76,11 @@ def test_explore_link_href_only_inside_scheme_guard():
 
     # Belt-and-suspenders: the guard regex itself, applied in Python, must
     # accept relative paths and http(s) URLs and reject javascript:/data:/
-    # vbscript: schemes. This mirrors (without executing) the JS logic.
+    # vbscript: schemes and protocol-relative URLs. This mirrors (without executing) the JS logic.
     def guard_allows(value: str) -> bool:
-        return bool(re.match(r"^https?:", value, re.I)) or not re.match(
+        return (bool(re.match(r"^https?:", value, re.I)) or not re.match(
             r"^[a-zA-Z][a-zA-Z0-9+.-]*:", value
-        )
+        )) and not re.match(r"^//", value)
 
     assert guard_allows("appendix.html")
     assert guard_allows("https://s.example/appendix.html")
@@ -86,6 +88,8 @@ def test_explore_link_href_only_inside_scheme_guard():
     assert not guard_allows("javascript:alert(1)")
     assert not guard_allows("data:text/html,<script>alert(1)</script>")
     assert not guard_allows("vbscript:msgbox(1)")
+    assert not guard_allows("//evil.example")
+    assert not guard_allows("//evil.example/path")
 
 
 import datetime as dt

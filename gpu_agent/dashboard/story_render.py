@@ -38,7 +38,7 @@ row.appendChild(el('span','ev-take',f.take||''));
 if(f.url&&/^https?:/.test(f.url)){var a=el('a','ev-link','↗');
 a.href=encodeURI(f.url);a.target='_blank';a.rel='noopener';row.appendChild(a);}
 list.appendChild(row);});panel.appendChild(list);
-if(d.explore&&(/^https?:/i.test(d.explore)||!/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(d.explore))){var ex=el('a','ev-explore','see everything we have →');
+if(d.explore&&(/^https?:/i.test(d.explore)||!/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(d.explore))&&!/^\/\//.test(d.explore)){var ex=el('a','ev-explore','see everything we have →');
 ex.href=encodeURI(d.explore);panel.appendChild(ex);}
 scrim.classList.add('on');panel.classList.add('on');};
 window.closeEV=function(){scrim.classList.remove('on');panel.classList.remove('on');};
