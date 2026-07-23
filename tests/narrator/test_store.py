@@ -21,6 +21,15 @@ def test_write_read_roundtrip(tmp_path):
     assert st.read(CAT, "2026-01-01") is None
 
 
+def test_read_corrupt_artifact_returns_none(tmp_path, capsys):
+    st = StoryStore(tmp_path)
+    p = st._path(CAT, "2026-07-23")
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text("{not valid json", encoding="utf-8")
+    assert st.read(CAT, "2026-07-23") is None
+    assert "unreadable" in capsys.readouterr().err
+
+
 def test_same_date_overwrites(tmp_path):
     st = StoryStore(tmp_path)
     st.write(_art("2026-07-23", headline="first"))

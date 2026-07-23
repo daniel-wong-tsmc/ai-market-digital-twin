@@ -2,8 +2,8 @@
 """Story artifacts: store/<category>/story/YYYY-MM-DD.json."""
 from __future__ import annotations
 
-import json
 import os
+import sys
 from pathlib import Path
 
 from gpu_agent.narrator.schema import StoryArtifact
@@ -31,7 +31,11 @@ class StoryStore:
         try:
             return StoryArtifact.model_validate_json(
                 p.read_text(encoding="utf-8"))
-        except Exception:
+        except Exception as e:  # noqa: BLE001 — a corrupt/incompatible artifact must
+            # fall back to None for callers, but must not fail silently.
+            print(f"gpu-agent narrator: warning: story artifact at {p} is unreadable "
+                  f"({type(e).__name__}: {e}); falling back to no artifact for this date",
+                  file=sys.stderr)
             return None
 
     def recent_headlines(self, category_id: str, before: str,
