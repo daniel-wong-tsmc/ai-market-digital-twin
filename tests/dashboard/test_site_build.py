@@ -159,6 +159,7 @@ def test_build_site_index_is_story(tmp_path):
     assert ".hero" in css  # BRIEF_CSS -- retired brief's rules, still shared
     assert ".kcard" in css  # DASHBOARD_CSS -- deep-dive drawer's KPI cards
     assert ".st-chip" in css and ".ev-panel" in css  # STORY_CSS -- this page's own rules
+    assert ".xp-" in css  # EXPLORE_CSS -- the Explore layer's own scaffold rules
 
 
 def test_style_css_includes_dashboard_theme(tmp_path):
@@ -348,3 +349,144 @@ def test_brief_evidence_anchors_resolve_in_appendix(tmp_path):
     # F100 introduced the now-retired deep-dive-panel blob.
     assert 'id="dim-moat"' in appendix, "dead dimension anchor: moat"
     assert 'id="dim-unitEconomics"' in appendix, "dead dimension anchor: unitEconomics"
+
+
+
+# --- F101c Task 7: Explore-layer emission + narrative-first wiring + link gate
+
+import json as _json
+
+from tests.dashboard.test_explore_fixtures import _explore_store, _wiki_page
+
+
+def _full_scorecard(as_of, *, rationale, finding_id="f-1", entity="NVIDIA"):
+    """A schema-complete monthly scorecard (build_site_model validates the full
+    report schema via report.load_scorecard, unlike the lenient story reader)."""
+    finding = {
+        "id": finding_id, "statement": "Nvidia demand kept climbing.",
+        "kind": "measured", "value": {"number": 75.0, "unit": "USD_B"},
+        "trend": "rising", "why": "Demand signal grew.",
+        "impact": {"targets": [CAT], "direction": "positive",
+                   "mechanism": "Expands addressable demand."},
+        "evidence": [{"source": "Micron call", "url": "https://x.example/a",
+                      "date": "2026-06-24", "excerpt": "e", "tier": "primary"}],
+        "reasoning": None,
+        "confidence": {"level": "high", "basis": "primary source"},
+        "dispersion": None, "asOf": as_of, "indicatorId": "D2",
+        "side": "demand", "polarityDemand": 1, "polaritySupply": 0,
+        "magnitude": 3, "entity": entity, "observedAt": "2026-07-01",
+        "capturedAt": "2026-07-02T00:00:00Z",
+    }
+    return {
+        "categoryId": CAT, "asOf": as_of, "findings": [finding],
+        "dimensionRatings": {"bottleneck": {
+            "rating": "Weak", "direction": "worsening",
+            "confidence": {"level": "high", "basis": "self-consistency"},
+            "findingIds": [finding_id], "rationale": rationale}},
+        "demandSupply": {"dmiContribution": 2.0, "smiContribution": 0.2,
+                         "sdgi": 0.4, "sdgiDirection": "demand-led"},
+        "narrative": "n", "confidence": {"level": "high", "basis": "n"},
+        "sources": [], "dimensionStatus": {},
+        "categoryStatus": {"rating": "Strong", "direction": "steady",
+                           "bottleneck": "bottleneck", "reason": "r.",
+                           "constraintLabel": "HBM"},
+    }
+
+
+def _full_explore_store(tmp_path, rationale="Memory makers cut back supply badly this quarter."):
+    # _explore_store gives wiki entities, standalone findings and story
+    # artifacts, but its monthly scorecards are the lenient story-reader shape.
+    # Overwrite them with schema-complete ones so build_site_model validates.
+    root = _explore_store(tmp_path)
+    cat = root / CAT
+    for m in ("2026-06", "2026-07"):
+        (cat / f"{m}-v1.json").write_text(
+            _json.dumps(_full_scorecard(m, rationale=rationale)), encoding="utf-8")
+    return root
+
+
+def test_emits_the_explore_page_families(tmp_path):
+    root = _full_explore_store(tmp_path)
+    summary = build_site(CAT, str(root / CAT), "work-nonexistent", None,
+                         str(tmp_path / "site"), price_fn=lambda d: {},
+                         today=dt.date(2026, 7, 22))
+    site = tmp_path / "site" / CAT
+    for rel in ("story/index.html", "findings/index.html", "series/index.html",
+                "entities/index.html", "entities/nvidia.html", "entities/tsmc.html",
+                "history.html"):
+        assert (site / rel).exists(), rel
+    # every narrated day gets its own permalink
+    assert (site / "story" / "2026-07-22.html").exists()
+    assert (site / "story" / "2026-07-21.html").exists()
+    assert summary["explore_pages"] >= 8
+
+
+def test_front_index_links_findings_page(tmp_path):
+    root = _full_explore_store(tmp_path)
+    build_site(CAT, str(root / CAT), "work-nonexistent", None,
+               str(tmp_path / "site"), price_fn=lambda d: {},
+               today=dt.date(2026, 7, 22))
+    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    assert 'href="findings/"' in idx
+
+
+def _wired_store(tmp_path):
+    # Assembler path (no story artifact for `today`): a dimension rationale
+    # mentions the entity title past word 6 so it lands in the scene tail and
+    # gets entity-linked; a matching wiki entity supplies the link target.
+    root = tmp_path / "store"
+    cat = root / CAT
+    cat.mkdir(parents=True)
+    rationale = "The main supply constraint now clearly runs through Nvidia order books."
+    for m in ("2026-06", "2026-07"):
+        (cat / f"{m}-v1.json").write_text(
+            _json.dumps(_full_scorecard(m, rationale=rationale)), encoding="utf-8")
+    series = root / "series"
+    series.mkdir()
+    (series / "gpuRentalOnDemand.jsonl").write_text("\n".join(_json.dumps({
+        "indicatorId": "gpuRentalOnDemand", "period": p, "value": v, "unit": "x",
+        "publishedAt": p + "-28",
+        "source": {"url": "https://src.example/g", "title": "g"},
+    }) for p, v in [("2026-05", 15.1), ("2026-06", 14.6)]), encoding="utf-8")
+    findings = root / "findings"
+    findings.mkdir()
+    (findings / "fa.json").write_text(_json.dumps({
+        "id": "fa", "statement": "Nvidia demand finding.", "side": "demand",
+        "entity": "nvidia", "observedAt": "2026-07-20",
+        "impact": {"targets": [CAT], "direction": "positive", "mechanism": "m"},
+        "evidence": [{"source": "s", "url": "https://x.example/z",
+                      "date": "2026-07-20", "tier": "primary"}],
+    }), encoding="utf-8")
+    wiki = root / "wiki" / "entity"
+    wiki.mkdir(parents=True)
+    (wiki / "nvidia.md").write_text(_wiki_page("nvidia", "Nvidia"), encoding="utf-8")
+    return root
+
+
+def test_scene_prose_carries_entity_link(tmp_path):
+    root = _wired_store(tmp_path)
+    build_site(CAT, str(root / CAT), "work-nonexistent", None,
+               str(tmp_path / "site"), price_fn=lambda d: {},
+               today=dt.date(2026, 7, 16))
+    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    assert '<a href="entities/nvidia.html">Nvidia</a>' in idx
+
+
+def test_front_index_panel_explore_carries_dim(tmp_path):
+    root = _wired_store(tmp_path)
+    build_site(CAT, str(root / CAT), "work-nonexistent", None,
+               str(tmp_path / "site"), price_fn=lambda d: {},
+               today=dt.date(2026, 7, 16))
+    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    assert "#dim=" in idx
+
+
+def test_link_gate_aborts_on_dead_href(tmp_path, monkeypatch):
+    import gpu_agent.dashboard.site_build as sb
+    monkeypatch.setattr(sb, "render_findings_page",
+                        lambda *a, **k: '<a href="does-not-exist.html">x</a>')
+    root = _full_explore_store(tmp_path)
+    with pytest.raises(ValueError):
+        build_site(CAT, str(root / CAT), "work-nonexistent", None,
+                   str(tmp_path / "site"), price_fn=lambda d: {},
+                   today=dt.date(2026, 7, 22))

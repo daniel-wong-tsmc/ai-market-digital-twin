@@ -147,8 +147,15 @@ def _chart_block(model: dict) -> str:
         # the year on both ends -- otherwise "Nov" silently reads as if it
         # were the same year as "Feb".
         span = f'{months[0]["label"]} {y0}–{months[-1]["label"]} {y1}'
+    # F101c Task 7: the "the gap, this week" label opens the verdict-history
+    # page. render_gap_svg lives in gap_chart.py (outside this lane's scope), so
+    # the label is wrapped here in an SVG <a> as a pure link-target addition —
+    # the SVG's own structure is untouched.
+    svg = render_gap_svg(model["gap"], model.get("callouts"))
+    svg = _re.sub(r'(<text[^>]*class="gc-gap"[^>]*>the gap, this week</text>)',
+                  r'<a href="history.html">\1</a>', svg)
     return (f'<section class="st-chart">'
-            f'{render_gap_svg(model["gap"], model.get("callouts"))}'
+            f'{svg}'
             f'<p class="st-srcline">Source: agent-tracked orders and shipment '
             f'data; company filings · {esc(span)}</p></section>')
 
@@ -227,17 +234,44 @@ def lint_story_copy(html_text: str) -> list[str]:
     return hits
 
 
-def _scene_html(scene: dict) -> str:
+def _link_entities(text_html: str, entity_links: dict, used: set) -> str:
+    """Wrap the first still-unlinked occurrence of each entity title in `text_html`
+    (already esc()'d) with a link to its dossier. Word-boundary match so a title
+    never matches mid-word; `used` tracks titles already linked earlier in the
+    same scene so each entity is linked at most once per scene."""
+    for title, href in entity_links.items():
+        if title in used:
+            continue
+        et = esc(title)
+        m = _re.search(rf"(?<![\w-]){_re.escape(et)}(?![\w-])", text_html)
+        if m:
+            text_html = (text_html[:m.start()]
+                         + f'<a href="{esc(href)}">{et}</a>'
+                         + text_html[m.end():])
+            used.add(title)
+    return text_html
+
+
+def _scene_html(scene: dict, entity_links: dict | None = None) -> str:
+    # `entity_links` (title -> dossier href) is the F101c Task 7 narrative-first
+    # wiring: entity names mentioned in scene prose become links to their
+    # Explore dossier. Default None keeps the front page's original behavior
+    # byte-identical; the link pass runs server-side only when a map is supplied.
+    used: set = set()
     paras = []
     for i, p in enumerate(scene["paragraphs"]):
         if i == 0:
             words = p.split(" ")
             head, tail = " ".join(words[:6]), " ".join(words[6:])
+            # Only the tail is entity-linked: the head is already inside the
+            # evidence-trigger anchor, and nesting <a> tags is invalid.
+            tail_html = _link_entities(esc(tail), entity_links, used) if entity_links else esc(tail)
             paras.append(f'<p><a class="ev" href="#" '
                          f'data-ev="scene:{scene["n"]}">{esc(head)}'
-                         f'<sup>ⓘ</sup></a> {esc(tail)}</p>')
+                         f'<sup>ⓘ</sup></a> {tail_html}</p>')
         else:
-            paras.append(f"<p>{esc(p)}</p>")
+            p_html = _link_entities(esc(p), entity_links, used) if entity_links else esc(p)
+            paras.append(f"<p>{p_html}</p>")
     vis = ""
     if scene["visual"]["series"]:
         vis = (f'<div class="st-visual">{spark_svg(scene["visual"]["series"], 300, 60)}'
@@ -262,11 +296,15 @@ def _scene_html(scene: dict) -> str:
 
 
 def _closing_strip(model: dict) -> str:
+    # F101c Task 7: archive chips and the "story archive →" link route into the
+    # story archive (link-target change only — the chip content is unchanged).
     chips = "".join(
-        f'<span class="st-arch">{esc(a["label"])} · {esc(a["text"])}</span>'
+        f'<a class="st-arch" href="story/">{esc(a["label"])} · '
+        f'{esc(a["text"])}</a>'
         for a in model["archive"])
     return (f'<section class="st-closing"><p>Tomorrow’s entry will update '
-            f'this story.</p>{chips}<a href="#">story archive →</a></section>')
+            f'this story.</p>{chips}'
+            f'<a href="story/">story archive →</a></section>')
 
 
 _EXPLORE_DESC = {
@@ -275,18 +313,29 @@ _EXPLORE_DESC = {
     "series": "the raw numbers over time",
     "history": "how our answer has changed"}
 
+# F101c Task 7: each explore-band tile routes to its own deep page instead of
+# the retired catch-all appendix. Directory routes (served by Cloudflare Pages
+# as each dir's index.html) so no visible front-page link carries the word
+# "index" -- the front page already spends its one allowed index/indexed
+# occurrence on the gap-chart axis label, and lint_story_copy bans a second.
+_EXPLORE_ROUTES = {
+    "entities": "entities/",
+    "findings": "findings/",
+    "series": "series/",
+    "history": "history.html"}
+
 
 def _explore_band(model: dict) -> str:
     tiles = "".join(
-        f'<a class="st-tile" href="appendix.html"><b>{k.title()} '
+        f'<a class="st-tile" href="{_EXPLORE_ROUTES[k]}"><b>{k.title()} '
         f'({model["explore"].get(k, 0)})</b>'
         f'<span>{_EXPLORE_DESC[k]}</span></a>'
         for k in ["entities", "findings", "series", "history"])
     return f'<section class="st-explore">{tiles}</section>'
 
 
-def render_story_page(model: dict) -> str:
-    scenes = "".join(_scene_html(s) for s in model["scenes"])
+def render_story_page(model: dict, entity_links: dict | None = None) -> str:
+    scenes = "".join(_scene_html(s, entity_links) for s in model["scenes"])
     # No scenes (e.g. a category with no monthly scorecards) -- an empty
     # "The story, step by step" section reads as broken. Suppress it.
     story_section = (

@@ -221,6 +221,40 @@ def _arrow(rows: list[dict]) -> str:
     return "▲" if b > a else ("▼" if b < a else "→")
 
 
+# F101c Task 7: narrative-first evidence-panel targets. The panel's "see
+# everything we have →" link points a reader from a claim straight at the deep
+# page that backs it, pre-filtered. These build the RELATIVE hrefs used from
+# the story permalink pages (site/<cat>/story/<date>.html, two levels down) —
+# the front page embeds the identical evidence blob, so the "../" prefix is the
+# shared value both surfaces carry (the link gate never reads the JSON blob).
+_FINDINGS_ALIAS = {"nvda": "nvidia", "intc": "intel"}
+
+
+def _series_explore(ind: str) -> str:
+    """A KPI chip's evidence panel opens the series page at that indicator.
+    Directory route (Cloudflare serves series/ as series/index.html)."""
+    return f"../series/#s-{ind}"
+
+
+def _scene_explore(finds: list[dict]) -> str:
+    """A scene's evidence panel opens the findings browser pre-filtered on the
+    claim's own finding (dimension target + entity). Falls back to the plain
+    findings index when the scene has no finding carrying those fields."""
+    for f in finds or []:
+        targets = (f.get("impact") or {}).get("targets") or []
+        entity = str(f.get("entity") or "").casefold()
+        slug = _FINDINGS_ALIAS.get(entity, entity)
+        dim = str(targets[0]) if targets else ""
+        parts = []
+        if dim:
+            parts.append(f"dim={dim}")
+        if slug:
+            parts.append(f"entity={slug}")
+        if parts:
+            return "../findings/index.html#" + "&".join(parts)
+    return "../findings/index.html"
+
+
 def _chip(ind: str, rows: list[dict]) -> dict | None:
     if not rows:
         return None
@@ -306,7 +340,7 @@ def _base_model(category_id: str, store_root: Path, today: dt.date):
             "title": f"{c['label']}: {c['value']} — says who?",
             "claim_text": c["tip"].split(". ")[0] + ".",
             "findings": _series_evidence(ind, series.get(ind, []), gl),
-            "series": c["spark"], "explore": "appendix.html"}
+            "series": c["spark"], "explore": _series_explore(ind)}
 
     # Archive contract (owner decision): a chip for month M shows what
     # happened DURING month M, i.e. the change from month M-1 to M — so an
@@ -425,7 +459,7 @@ def read_story_artifact(category_id: str, store_root: Path,
             # scene with no claimFindingIds of its own gets an honest empty
             # findings list -- never borrowed from another scene/claim.
             "findings": _finding_rows(findings, gl),
-            "series": vals, "explore": "appendix.html"}
+            "series": vals, "explore": _scene_explore(findings)}
 
     picks = []
     for kp in art.kpiPicks:
@@ -589,7 +623,7 @@ def _add_scenes(model, latest, store_root, series, gl):
             # source that never made it defeats the page's whole "says who?"
             # promise.
             "findings": _finding_rows(finds, gl),
-            "series": vals, "explore": "appendix.html"}
+            "series": vals, "explore": _scene_explore(finds)}
         # A pick links to the scene whose visual is built from the pick's
         # own indicator series — the topical rule (owner decision). If
         # several scenes draw from the same series, keep the first
