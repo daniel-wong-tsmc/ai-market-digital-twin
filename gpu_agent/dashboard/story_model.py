@@ -223,17 +223,22 @@ def _arrow(rows: list[dict]) -> str:
 
 # F101c Task 7: narrative-first evidence-panel targets. The panel's "see
 # everything we have →" link points a reader from a claim straight at the deep
-# page that backs it, pre-filtered. These build the RELATIVE hrefs used from
-# the story permalink pages (site/<cat>/story/<date>.html, two levels down) —
-# the front page embeds the identical evidence blob, so the "../" prefix is the
-# shared value both surfaces carry (the link gate never reads the JSON blob).
+# page that backs it, pre-filtered. These hrefs are stored CATEGORY-ROOT-RELATIVE
+# (no "../"), so they resolve as-is from the FRONT page (site/<cat>/index.html,
+# at the category root). The identical evidence blob is also embedded on the
+# story permalink pages (site/<cat>/story/<date>.html, one dir below the root),
+# where render_story_day re-bases these values with a "../" prefix at embed time
+# — one stored value can't be literally correct at two different depths, so the
+# depth is applied per surface, not baked in here. The link gate never reads the
+# JSON blob, so the front-page resolution is covered by an explicit disk-resolve
+# test instead.
 _FINDINGS_ALIAS = {"nvda": "nvidia", "intc": "intel"}
 
 
 def _series_explore(ind: str) -> str:
     """A KPI chip's evidence panel opens the series page at that indicator.
     Directory route (Cloudflare serves series/ as series/index.html)."""
-    return f"../series/#s-{ind}"
+    return f"series/#s-{ind}"
 
 
 def _scene_explore(finds: list[dict]) -> str:
@@ -251,8 +256,8 @@ def _scene_explore(finds: list[dict]) -> str:
         if slug:
             parts.append(f"entity={slug}")
         if parts:
-            return "../findings/index.html#" + "&".join(parts)
-    return "../findings/index.html"
+            return "findings/index.html#" + "&".join(parts)
+    return "findings/index.html"
 
 
 def _chip(ind: str, rows: list[dict]) -> dict | None:

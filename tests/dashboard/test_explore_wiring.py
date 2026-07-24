@@ -109,7 +109,8 @@ def test_scene_evidence_explore_is_findings_hash(tmp_path):
     m = build_story_model(CAT, _impact_store(tmp_path), dt.date(2026, 7, 16))
     scene = next(s for s in m["scenes"] if s["title"] == "What tightened")
     ev = m["evidence"][f"scene:{scene['n']}"]
-    assert ev["explore"].startswith("../findings/index.html#")
+    # Stored category-root-relative (front-page correct); permalinks re-base it.
+    assert ev["explore"].startswith("findings/index.html#")
     assert "dim=" in ev["explore"]
     assert "entity=nvidia" in ev["explore"]
 
@@ -117,4 +118,4 @@ def test_scene_evidence_explore_is_findings_hash(tmp_path):
 def test_kpi_evidence_explore_is_series_anchor(tmp_path):
     m = build_story_model(CAT, _impact_store(tmp_path), dt.date(2026, 7, 16))
     ev = m["evidence"]["kpi:gpuRentalOnDemand"]
-    assert ev["explore"] == "../series/#s-gpuRentalOnDemand"
+    assert ev["explore"] == "series/#s-gpuRentalOnDemand"

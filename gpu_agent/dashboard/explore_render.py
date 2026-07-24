@@ -13,6 +13,8 @@ from __future__ import annotations
 import posixpath
 import re
 
+from gpu_agent.reader import DIM_LABEL
+
 from .explore_model import ENTITY_SERIES, SERIES_MEANING, markdown_to_html, series_groups
 from .gap_chart import render_timeline_svg, spark_svg
 from .render import esc
@@ -40,6 +42,23 @@ _NO_NARRATED_ENTRY = ("No narrated entry this day — the page ran on "
                       "assembled data.")
 
 
+def _rebase_explore(evidence: dict, prefix: str) -> dict:
+    """Return a copy of the evidence blob with each entry's `explore` href
+    prepended by `prefix`. story_model stores these hrefs CATEGORY-ROOT-RELATIVE
+    (correct as-is on the front page at site/<cat>/index.html); a story permalink
+    sits one directory below the category root (site/<cat>/story/<date>.html), so
+    it re-bases them with "../" when it embeds the same blob. Absolute, external
+    and fragment-only values are left untouched. Copies each touched entry (never
+    mutates the shared model dict)."""
+    out: dict = {}
+    for k, v in evidence.items():
+        exp = v.get("explore") if isinstance(v, dict) else None
+        if exp and not exp.startswith(("http://", "https://", "/", "#", "..")):
+            v = {**v, "explore": prefix + exp}
+        out[k] = v
+    return out
+
+
 def render_story_day(artifact_model: dict | None, date: str) -> str:
     """A story-archive permalink page for one narrated day. `artifact_model`
     is the SAME dict shape `story_model.read_story_artifact` returns for
@@ -60,7 +79,7 @@ def render_story_day(artifact_model: dict | None, date: str) -> str:
             f'<h1>{esc(artifact_model["headline"])}</h1>'
             f'<p class="st-deck">{esc(artifact_model["deck"])}</p></header>'
             f'{scenes}</article>'
-            f'{evidence_json(artifact_model["evidence"])}'
+            f'{evidence_json(_rebase_explore(artifact_model["evidence"], "../"))}'
             f'{render_evidence_panel()}{render_condense_script()}')
     return page_scaffold(f"Story archive — {date}: {artifact_model['headline']}",
                          artifact_model["headline"], body, depth=2)
@@ -346,18 +365,13 @@ def render_entities_index(entities: list[dict], roles: dict[str, str]) -> str:
                          body, depth=2)
 
 
-# Dimension ids -> plain-English display labels for the history page. Kept
-# LOCAL (not gpu_agent.reader.DIM_LABEL) because that table's "Momentum
-# rating" would trip lint_story_copy's own "momentum" ban -- these values
-# are picked to never contain a banned word.
-_DIM_DISPLAY = {
-    "momentum": "Demand pace",
-    "unitEconomics": "Unit economics",
-    "competitiveStructure": "Competitive structure",
-    "moat": "Moat",
-    "bottleneck": "Bottleneck",
-    "strategicRisk": "Strategic risk",
-}
+# Dimension ids -> plain-English display labels for the history page. Sourced
+# from the canonical table (gpu_agent.reader.DIM_LABEL) with two deliberate
+# overrides, so the four shared labels never drift: "momentum" (canonical
+# "Momentum rating" would itself trip lint_story_copy's "momentum" ban) and
+# "bottleneck" (canonical "Supply bottleneck"; kept as the shorter "Bottleneck"
+# these pages have always shown). Both overrides are lint-safe.
+_DIM_DISPLAY = {**DIM_LABEL, "momentum": "Demand pace", "bottleneck": "Bottleneck"}
 
 
 def _month_details(month: dict) -> str:

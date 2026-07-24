@@ -490,3 +490,40 @@ def test_link_gate_aborts_on_dead_href(tmp_path, monkeypatch):
         build_site(CAT, str(root / CAT), "work-nonexistent", None,
                    str(tmp_path / "site"), price_fn=lambda d: {},
                    today=dt.date(2026, 7, 22))
+
+
+def _explore_targets(html):
+    # Pull each evidence entry's `explore` href out of the ev-data JSON blob.
+    # check_links structurally can't see these (they're JSON, and only become an
+    # href via JS at runtime), so they need their own disk-resolve assertion.
+    import re as _re
+    m = _re.search(r'<script type="application/json" id="ev-data">(.*?)</script>',
+                   html, _re.S)
+    assert m, "ev-data blob missing"
+    data = _json.loads(m.group(1))
+    return [v["explore"] for v in data.values()
+            if isinstance(v, dict) and v.get("explore")]
+
+
+def test_evidence_explore_targets_resolve_on_both_surfaces(tmp_path):
+    # Closes the gate blind spot: the pre-filtered "see everything we have →"
+    # explore CTA lives in the lint-stripped ev-data JSON, so check_links never
+    # sees it. Assert it resolves to a really-emitted page on BOTH the front
+    # page (category root, depth 0) and a story permalink (one dir down).
+    root = _full_explore_store(tmp_path)
+    build_site(CAT, str(root / CAT), "work-nonexistent", None,
+               str(tmp_path / "site"), price_fn=lambda d: {},
+               today=dt.date(2026, 7, 22))
+    site = tmp_path / "site" / CAT
+
+    idx = (site / "index.html").read_text(encoding="utf-8")
+    front = _explore_targets(idx)
+    assert any("#dim=" in t for t in front), "no pre-filtered findings CTA on front page"
+    for t in front:
+        file_part = t.split("#", 1)[0]
+        assert (site / file_part).resolve().exists(), f"front-page dead explore: {t}"
+
+    perm = (site / "story" / "2026-07-22.html").read_text(encoding="utf-8")
+    for t in _explore_targets(perm):
+        file_part = t.split("#", 1)[0]
+        assert (site / "story" / file_part).resolve().exists(), f"permalink dead explore: {t}"
