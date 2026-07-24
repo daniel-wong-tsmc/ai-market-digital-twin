@@ -174,3 +174,14 @@ a.ev{cursor:pointer;text-decoration:underline dotted}
 .st-tile{flex:1 1 150px;border:1px solid #ddd;border-radius:8px;padding:10px;text-decoration:none;color:#1c1c1c;font-size:12px}
 .st-tile b{display:block;font-size:14px}
 .st-foot{font-size:11px;color:#999;padding:16px 0;border-top:1px solid #eee}
+
+.xp-crumb { margin: 0 0 .8rem; }
+.xp-crumb a { text-decoration: none; }
+.xp-tieback { color: var(--muted); font-size: .9rem; margin: 0 0 1.2rem; }
+.xp-notice { font-style: italic; color: var(--muted); }
+.xp-arch-row { border-bottom: 1px solid var(--line); padding: .5rem 0; }
+.xp-arch-row .xp-fellback { color: var(--muted); font-style: italic; }
+.xp-timeline { margin: 0 0 1rem; }
+.xp-srcline { color: var(--muted); font-size: .85rem; }
+.xp-dim-row { margin: .2rem 0; }
+.xp-constraint { color: var(--muted); }
