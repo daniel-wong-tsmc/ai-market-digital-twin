@@ -28,7 +28,7 @@ Editorial rules:
 - Write between 2 and 5 scenes. A quiet day, with nothing new worth saying, may run as few as 2 scenes.
 - The last scene is always forward-looking: what to watch next, not a recap of what already happened.
 - Plain newspaper English. Short sentences. No analyst jargon.
-- Never use any of these words, in any form: {", ".join(_BANNED_WORDS)}.
+- Never use any of these words, in any form: {", ".join(_BANNED_WORDS)}. This rule applies to every piece of text the page shows -- not just your story paragraphs, but also scene chart/visual labels and the title and outlet of any related coverage you cite.
 - The words "index" or "indexed" may appear at most once in your entire answer.
 - Every claim you make must cite finding ids drawn ONLY from the finding list provided to you today. Never invent a finding id, and never cite one that isn't in that list.
 - Any related document you link must come ONLY from today's provided document pool. Never invent a URL.

@@ -510,3 +510,32 @@ def test_archive_multi_month_semantics(tmp_path):
     assert texts["2026-04"] == "The GPU shortage got worse this month."
     assert texts["2026-05"] == "Supply gained ground on demand this month."
     assert texts["2026-06"] == "The GPU shortage held steady this month."
+
+
+def test_build_story_model_guards_a_broken_artifact_mapper(tmp_path, monkeypatch, capsys):
+    # RECOMMENDATION 4: read_story_artifact's whole point is to be
+    # indistinguishable from "no artifact" whenever it can't safely drive the
+    # page -- a hand-edited or legacy artifact that passes schema validation
+    # but breaks the mapper in some way the gate never anticipated must not
+    # crash the live page. This module's own defensive code (see
+    # read_story_artifact and _mk_scene) already guards every place we could
+    # find that a schema-valid-but-nonsensical artifact might reach -- so
+    # this test forces the failure directly (monkeypatching
+    # read_story_artifact to raise) to prove build_story_model's own
+    # try/except actually falls through to the assembler and warns, rather
+    # than propagating the exception to the caller.
+    import gpu_agent.dashboard.story_model as story_model_mod
+
+    def _boom(*a, **kw):
+        raise RuntimeError("simulated broken artifact mapper")
+
+    monkeypatch.setattr(story_model_mod, "read_story_artifact", _boom)
+
+    st = _store(tmp_path)
+    assembled = story_model_mod._assemble_model(
+        CAT, story_model_mod.resolve_store_root(CAT, st), dt.date(2026, 7, 22))
+    model = build_story_model(CAT, st, dt.date(2026, 7, 22))
+    assert model == assembled
+    err = capsys.readouterr().err
+    assert "gpu-agent narrator: warning:" in err
+    assert CAT in err

@@ -66,6 +66,38 @@ def test_related_doc_outside_pool_rejected(tmp_path):
     assert any("elsewhere" in v for v in gate_narrator(a, _inp(tmp_path)))
 
 
+def _inp_with_docpool(tmp_path, docs):
+    # _inp(tmp_path) is built with run_dir=None, so its own docPool is always
+    # empty (see build_narrator_inputs's `if run_dir is not None:` guard).
+    # The outlet-match check (Important 2b) needs a real pooled doc to check
+    # against, so tests exercising it build inputs by hand rather than going
+    # through build_narrator_inputs's run_dir/blobs.json plumbing.
+    return {**_inp(tmp_path), "docPool": docs}
+
+
+def test_related_doc_outlet_must_match_pooled_source(tmp_path):
+    a = _ok(tmp_path)
+    a.scenes[0].relatedDocs = [RelatedDoc(url="https://x.example/hbm",
+                                          title="t", outlet="CNBC", date="d")]
+    inp = _inp_with_docpool(tmp_path, [
+        {"url": "https://x.example/hbm", "source": "Reuters", "date": "2026-07-22"}])
+    violations = gate_narrator(a, inp)
+    assert any("CNBC" in v and "https://x.example/hbm" in v for v in violations)
+
+    # Same url, matching outlet -- must not be rejected by the outlet check.
+    a2 = _ok(tmp_path)
+    a2.scenes[0].relatedDocs = [RelatedDoc(url="https://x.example/hbm",
+                                           title="t", outlet="Reuters", date="d")]
+    assert not any("outlet" in v for v in gate_narrator(a2, inp))
+
+
+def test_visual_series_id_must_be_known(tmp_path):
+    a = _ok(tmp_path)
+    a.scenes[0].visual.seriesId = "notASeries"
+    violations = gate_narrator(a, _inp(tmp_path))
+    assert any("notASeries" in v for v in violations)
+
+
 def test_banned_word_rejected(tmp_path):
     a = _ok(tmp_path)
     a.deck = "Demand momentum is strengthening."
@@ -174,6 +206,7 @@ _BANNED_WORD = "momentum"
 @pytest.mark.parametrize("field", [
     "headline", "deck", "scene_title", "scene_paragraph", "scene_sourceLine",
     "kpi_whyCaption", "callout_text",
+    "visual_label", "related_title", "related_outlet",
 ])
 def test_prose_sweep_covers_every_location(tmp_path, field):
     a = _ok(tmp_path)
@@ -192,6 +225,22 @@ def test_prose_sweep_covers_every_location(tmp_path, field):
         a.kpiPicks[0].whyCaption = f"the {_BANNED_WORD} lever"
     elif field == "callout_text":
         a.calloutMonths[0].text = f"Jul: {_BANNED_WORD} shift"
+    elif field == "visual_label":
+        # CRITICAL 1: scene.visual.label renders as visible page text
+        # (story_render._scene_html's `st-lab` span) but was never part of
+        # the gate's banned-word sweep before this fix.
+        a.scenes[0].visual.label = f"{_BANNED_WORD} tracker"
+    elif field == "related_title":
+        # CRITICAL 1: each relatedDocs.title renders as visible page text
+        # too (story_render._scene_html's "Related coverage:" links).
+        a.scenes[0].relatedDocs = [RelatedDoc(
+            url="https://x.example/a", title=f"{_BANNED_WORD} builds",
+            outlet="Reuters", date="d")]
+    elif field == "related_outlet":
+        # CRITICAL 1: same for relatedDocs.outlet.
+        a.scenes[0].relatedDocs = [RelatedDoc(
+            url="https://x.example/a", title="t",
+            outlet=f"{_BANNED_WORD} Wire", date="d")]
     violations = gate_narrator(a, _inp(tmp_path))
     assert any("momentum" in v for v in violations)
 
@@ -206,6 +255,24 @@ def test_prose_sweep_catches_banned_word_hidden_by_angle_bracket_noise(tmp_path)
     a.deck = "Before. <script>the outlook shows momentum</script> After."
     violations = gate_narrator(a, _inp(tmp_path))
     assert any("momentum" in v for v in violations)
+
+
+def test_callout_months_cap_at_two(tmp_path):
+    a = _ok(tmp_path)
+    a.calloutMonths = [
+        a.calloutMonths[0].model_copy(),
+        a.calloutMonths[0].model_copy(),
+        a.calloutMonths[0].model_copy(),
+    ]
+    violations = gate_narrator(a, _inp(tmp_path))
+    assert any("at most 2" in v and "3" in v for v in violations)
+
+
+def test_callout_scene_must_exist(tmp_path):
+    a = _ok(tmp_path)
+    a.calloutMonths[0].scene = 99
+    violations = gate_narrator(a, _inp(tmp_path))
+    assert any("calloutMonths" in v and "99" in v for v in violations)
 
 
 def test_missing_inputs_keys_fail_closed_instead_of_raising(tmp_path):

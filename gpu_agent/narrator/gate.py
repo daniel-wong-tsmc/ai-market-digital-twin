@@ -31,7 +31,8 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
             violations.append(f"inputs is missing '{k}'")
 
     finding_ids = {f["id"] for f in inputs.get("findings", [])}
-    doc_urls = {d["url"] for d in inputs.get("docPool", [])}
+    doc_by_url = {d["url"]: d for d in inputs.get("docPool", [])}
+    doc_urls = set(doc_by_url)
     series_ids = {s["indicatorId"] for s in inputs.get("seriesPool", [])}
     gap_months = set(inputs.get("gapMonths", []))
 
@@ -47,7 +48,11 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
                 f"scene {scene.n} has no claimed findings, so sourceLine must "
                 f"be exactly '{_NO_SOURCE}' (got '{scene.sourceLine}')")
 
-    # Check 3: relatedDocs.url membership.
+    # Check 3: relatedDocs.url membership, and (2b) outlet must match the
+    # pooled doc's own `source` field for that url. `title` has no pooled
+    # counterpart to check against (the gather blob contract carries no
+    # `title` field -- it is inherently brain-authored) and is deliberately
+    # left unvalidated here.
     for scene in answer.scenes:
         for doc in scene.relatedDocs:
             url = doc.url
@@ -55,13 +60,36 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
                 violations.append(
                     f"scene {scene.n}: related doc url '{url}' is not in "
                     f"inputs.docPool")
+                continue
+            pooled_source = doc_by_url[url].get("source", "")
+            if doc.outlet != pooled_source:
+                violations.append(
+                    f"scene {scene.n}: related doc outlet '{doc.outlet}' for "
+                    f"url '{url}' does not match its source in "
+                    f"inputs.docPool ('{pooled_source}')")
+
+    # Check 3b: scene.visual.seriesId must name a real series.
+    for scene in answer.scenes:
+        if scene.visual is not None and scene.visual.seriesId not in series_ids:
+            violations.append(
+                f"scene {scene.n}: visual seriesId '{scene.visual.seriesId}' "
+                f"is not in inputs.seriesPool")
 
     # Check 4: banned-word / style lint over all prose, reusing lint_story_copy.
+    # This must cover EXACTLY what story_render._scene_html later shows as
+    # visible page text -- headline/deck/scene copy, chart labels, and
+    # related-coverage titles/outlets alike -- so a gate pass can never leave
+    # a banned word for build-time lint_story_copy to trip over.
     prose_bits = [answer.headline, answer.deck]
     for scene in answer.scenes:
         prose_bits.append(scene.title)
         prose_bits.extend(scene.paragraphs)
         prose_bits.append(scene.sourceLine)
+        if scene.visual is not None:
+            prose_bits.append(scene.visual.label)
+        for doc in scene.relatedDocs:
+            prose_bits.append(doc.title)
+            prose_bits.append(doc.outlet)
     prose_bits.extend(k.whyCaption for k in answer.kpiPicks)
     prose_bits.extend(c.text for c in answer.calloutMonths)
     escaped_prose = [html.escape(bit) for bit in prose_bits]
@@ -109,10 +137,18 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
                 f"kpiPicks: scene {kpi.scene} is used by more than one pick; "
                 f"scene values must be unique")
         kpi_scenes_seen.append(kpi.scene)
+    n_callouts = len(answer.calloutMonths)
+    if n_callouts > 2:
+        violations.append(
+            f"calloutMonths: at most 2 callouts are allowed; got {n_callouts}")
     for callout in answer.calloutMonths:
         if callout.monthKey not in gap_months:
             violations.append(
                 f"calloutMonths: unknown monthKey '{callout.monthKey}' is "
                 f"not in inputs.gapMonths")
+        if callout.scene not in scene_ns:
+            violations.append(
+                f"calloutMonths: scene {callout.scene} does not exist "
+                f"(scenes are {scene_ns})")
 
     return violations

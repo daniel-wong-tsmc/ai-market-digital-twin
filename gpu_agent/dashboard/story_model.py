@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import datetime as dt
 import re
+import sys
 from pathlib import Path
 
 from gpu_agent.dashboard.agenda import read_series
@@ -436,7 +437,20 @@ def read_story_artifact(category_id: str, store_root: Path,
 def build_story_model(category_id: str, store_dir: str | Path,
                       today: dt.date) -> dict:
     store_root = resolve_store_root(category_id, store_dir)
-    artifact_model = read_story_artifact(category_id, store_root, today)
+    # A hand-edited or legacy (un-gated) artifact could pass StoryStore.read's
+    # own schema validation yet still break this mapper in some way the gate
+    # never anticipated -- and a raise here would crash the live page instead
+    # of degrading. read_story_artifact's whole point is to be
+    # indistinguishable from "no artifact" whenever it can't safely drive the
+    # page, so any exception during the read+map gets the same treatment as a
+    # missing/fellBack artifact: warn to stderr, fall through to the assembler.
+    try:
+        artifact_model = read_story_artifact(category_id, store_root, today)
+    except Exception as exc:
+        print(f"gpu-agent narrator: warning: failed to read/map story "
+              f"artifact for {category_id} {today.isoformat()}, falling "
+              f"back to the assembler: {exc}", file=sys.stderr)
+        artifact_model = None
     if artifact_model is not None:
         return artifact_model
     return _assemble_model(category_id, store_root, today)
