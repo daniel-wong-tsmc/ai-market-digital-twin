@@ -15,7 +15,7 @@ from gpu_agent.dashboard.agenda import read_series
 from gpu_agent.dashboard.brief_model import (first_n_sentences,
                                              latest_monthly,
                                              read_implication_lines)
-from gpu_agent.dashboard.gap_chart import build_gap_data
+from gpu_agent.dashboard.gap_chart import _DEAD_BAND, _SCALE, build_gap_data
 from gpu_agent.dashboard.glossary import load_glossary, term_swap
 from gpu_agent.narrator.store import StoryStore
 
@@ -197,11 +197,67 @@ _HEADLINES = {"widened": "The GPU shortage got worse this month.",
               "held": "The GPU shortage held steady this month."}
 
 
+def _gap_word(dmi: float, smi: float) -> str:
+    """The Phase A gap-word derivation, shared by the story headline (via
+    `build_gap_data`'s own copy of this same comparison), the archive
+    section below, and the Explore verdict timeline
+    (`explore_model.verdict_timeline`). `build_gap_data`'s gap level is a
+    running sum, so the change in gap from one month to the next collapses
+    to exactly this same-month scaled quantity -- `_SCALE * (dmi - smi)`
+    compared against the dead-band -- there is no need (and it would be
+    wrong) to diff this month's value against the prior month's."""
+    delta = _SCALE * (dmi - smi)
+    if delta > _DEAD_BAND:
+        return "widened"
+    if delta < -_DEAD_BAND:
+        return "narrowed"
+    return "held"
+
+
 def _arrow(rows: list[dict]) -> str:
     if len(rows) < 2:
         return "→"
     a, b = rows[-2]["value"], rows[-1]["value"]
     return "▲" if b > a else ("▼" if b < a else "→")
+
+
+# F101c Task 7: narrative-first evidence-panel targets. The panel's "see
+# everything we have →" link points a reader from a claim straight at the deep
+# page that backs it, pre-filtered. These hrefs are stored CATEGORY-ROOT-RELATIVE
+# (no "../"), so they resolve as-is from the FRONT page (site/<cat>/index.html,
+# at the category root). The identical evidence blob is also embedded on the
+# story permalink pages (site/<cat>/story/<date>.html, one dir below the root),
+# where render_story_day re-bases these values with a "../" prefix at embed time
+# — one stored value can't be literally correct at two different depths, so the
+# depth is applied per surface, not baked in here. The link gate never reads the
+# JSON blob, so the front-page resolution is covered by an explicit disk-resolve
+# test instead.
+_FINDINGS_ALIAS = {"nvda": "nvidia", "intc": "intel"}
+
+
+def _series_explore(ind: str) -> str:
+    """A KPI chip's evidence panel opens the series page at that indicator.
+    Directory route (Cloudflare serves series/ as series/index.html)."""
+    return f"series/#s-{ind}"
+
+
+def _scene_explore(finds: list[dict]) -> str:
+    """A scene's evidence panel opens the findings browser pre-filtered on the
+    claim's own finding (dimension target + entity). Falls back to the plain
+    findings index when the scene has no finding carrying those fields."""
+    for f in finds or []:
+        targets = (f.get("impact") or {}).get("targets") or []
+        entity = str(f.get("entity") or "").casefold()
+        slug = _FINDINGS_ALIAS.get(entity, entity)
+        dim = str(targets[0]) if targets else ""
+        parts = []
+        if dim:
+            parts.append(f"dim={dim}")
+        if slug:
+            parts.append(f"entity={slug}")
+        if parts:
+            return "findings/index.html#" + "&".join(parts)
+    return "findings/index.html"
 
 
 def _chip(ind: str, rows: list[dict]) -> dict | None:
@@ -289,7 +345,7 @@ def _base_model(category_id: str, store_root: Path, today: dt.date):
             "title": f"{c['label']}: {c['value']} — says who?",
             "claim_text": c["tip"].split(". ")[0] + ".",
             "findings": _series_evidence(ind, series.get(ind, []), gl),
-            "series": c["spark"], "explore": "appendix.html"}
+            "series": c["spark"], "explore": _series_explore(ind)}
 
     # Archive contract (owner decision): a chip for month M shows what
     # happened DURING month M, i.e. the change from month M-1 to M — so an
@@ -303,19 +359,12 @@ def _base_model(category_id: str, store_root: Path, today: dt.date):
     # exactly the same quantity, scale, and dead-band threshold that
     # decides the current month's own gap_word. Reuse those constants so
     # archive headlines are computed by the identical rule.
-    from gpu_agent.dashboard.gap_chart import (_DEAD_BAND, _SCALE,
-                                                _monthly_records)
+    from gpu_agent.dashboard.gap_chart import _monthly_records
     recs = _monthly_records(cat_dir)
     candidates = list(range(1, len(recs) - 1))  # has a predecessor, not latest
     arch = []
     for j in candidates[-4:]:
-        delta = _SCALE * (recs[j]["dmi"] - recs[j]["smi"])
-        if delta > _DEAD_BAND:
-            word = "widened"
-        elif delta < -_DEAD_BAND:
-            word = "narrowed"
-        else:
-            word = "held"
+        word = _gap_word(recs[j]["dmi"], recs[j]["smi"])
         key = recs[j]["key"]
         label = dt.date(int(key[:4]), int(key[5:7]), 1).strftime("%B %Y")
         arch.append({"key": key, "label": label,
@@ -358,13 +407,21 @@ def _assemble_model(category_id: str, store_root: Path, today: dt.date) -> dict:
 
 
 def read_story_artifact(category_id: str, store_root: Path,
-                        today: dt.date) -> dict | None:
-    """Phase B: load today's narrator artifact and map it onto the exact
-    model dict shape `_assemble_model` produces. Returns None when there is
-    no artifact for the date, or when the artifact has `fellBack` set --
+                        today: dt.date,
+                        story_date: str | None = None) -> dict | None:
+    """Phase B: load a narrator artifact and map it onto the exact model
+    dict shape `_assemble_model` produces. Returns None when there is no
+    artifact for the date, or when the artifact has `fellBack` set --
     either way the caller must fall back to the assembler, indistinguishable
-    from Phase A behavior."""
-    art = StoryStore(store_root).read(category_id, today.isoformat())
+    from Phase A behavior.
+
+    `story_date` (F101c Task 3) is which date's artifact to read --
+    defaults to `today.isoformat()`, preserving the original Phase B
+    behavior exactly when omitted. This lets the story-archive permalink
+    pages point the same reader at an arbitrary past day without
+    duplicating this method's mapping logic."""
+    art = StoryStore(store_root).read(
+        category_id, story_date if story_date is not None else today.isoformat())
     if art is None or art.narratorMeta.fellBack:
         return None
 
@@ -407,7 +464,7 @@ def read_story_artifact(category_id: str, store_root: Path,
             # scene with no claimFindingIds of its own gets an honest empty
             # findings list -- never borrowed from another scene/claim.
             "findings": _finding_rows(findings, gl),
-            "series": vals, "explore": "appendix.html"}
+            "series": vals, "explore": _scene_explore(findings)}
 
     picks = []
     for kp in art.kpiPicks:
@@ -571,7 +628,7 @@ def _add_scenes(model, latest, store_root, series, gl):
             # source that never made it defeats the page's whole "says who?"
             # promise.
             "findings": _finding_rows(finds, gl),
-            "series": vals, "explore": "appendix.html"}
+            "series": vals, "explore": _scene_explore(finds)}
         # A pick links to the scene whose visual is built from the pick's
         # own indicator series — the topical rule (owner decision). If
         # several scenes draw from the same series, keep the first
