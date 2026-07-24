@@ -37,7 +37,7 @@ if(d.series&&d.series.length>1){var sv=spark(d.series);if(sv)panel.appendChild(s
 var list=el('div','ev-chain');list.appendChild(el('div','ev-step','What we collected → where it came from'));
 var finds=d.findings||[];
 if(finds.length){finds.forEach(function(f){var row=el('div','ev-row');
-if(f.weight!=null&&f.weight<0.25){row.className+=' ev-aging';}
+if(f.weight!=null&&f.weight<__AGING_THRESHOLD__){row.className+=' ev-aging';}
 row.appendChild(el('span','ev-src',(f.source||'')+' · '+(f.date||'undated')));
 row.appendChild(el('span','ev-take',f.take||''));
 if(f.url&&/^https?:/.test(f.url)){var a=el('a','ev-link','↗');
@@ -55,7 +55,12 @@ if(t){e.preventDefault();openEV(t.getAttribute('data-ev'));}});
 
 
 def render_evidence_panel() -> str:
-    return _PANEL
+    # The panel's aging-dim check must never drift from AGING_THRESHOLD (the
+    # same constant the scene-related "st-aging" class is computed against
+    # server-side) -- _PANEL is a raw triple-quoted JS blob, so the numeric
+    # value is substituted via a placeholder token rather than an f-string
+    # (which would force escaping every JS `{`/`}` in the template).
+    return _PANEL.replace("__AGING_THRESHOLD__", repr(AGING_THRESHOLD))
 
 
 STORY_CSS = """
