@@ -20,7 +20,7 @@ def _narrated(tmp_path, **meta):
                   scenes=[_scene(claimFindingIds=["f-1"], relatedDocs=[]),
                           _scene(n=2, title="What would close the gap",
                                  claimFindingIds=[], relatedDocs=[],
-                                 sourceLine="No new sourced evidence today.")]),
+                                 sourceLine="Source: trust me")]),
         "narratorMeta": m}))
     return st
 
@@ -39,7 +39,11 @@ def test_empty_claim_scene_has_empty_evidence_and_exact_wording(tmp_path):
     # Both named requirements together: a scene with no claimFindingIds must
     # (a) render an honest empty evidence list, never borrowed from another
     # scene/claim, and (b) carry the exact required sourceLine wording, even
-    # if the mapper had to substitute it itself.
+    # if the mapper had to substitute it itself. The fixture's scene 2 is
+    # given a deliberately WRONG sourceLine ("Source: trust me") precisely so
+    # this test can only pass if the mapper's read-time backstop actually
+    # substitutes the constant -- trusting the artifact's own sourceLine here
+    # would fail the assertion below.
     st = _narrated(tmp_path)
     model = build_story_model(CAT, st, TODAY)
     scene2 = next(s for s in model["scenes"] if s["n"] == 2)

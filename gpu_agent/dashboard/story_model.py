@@ -397,7 +397,11 @@ def read_story_artifact(category_id: str, store_root: Path,
         scenes.append(scene_dict)
         evidence[f"scene:{sc.n}"] = {
             "title": f"{sc.title} — says who?",
-            "claim_text": sc.paragraphs[0] if sc.paragraphs else "",
+            # Same filtered paragraph list `_mk_scene` used for `scene_dict`
+            # above (empty-string paragraphs dropped), so the evidence panel
+            # can never show blank claim text while the scene itself renders.
+            "claim_text": (scene_dict["paragraphs"][0]
+                           if scene_dict["paragraphs"] else ""),
             # Same rule as the assembler (Phase A review finding #1): a
             # scene with no claimFindingIds of its own gets an honest empty
             # findings list -- never borrowed from another scene/claim.
