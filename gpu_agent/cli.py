@@ -1,5 +1,5 @@
 from __future__ import annotations
-import argparse, json, pathlib, re, sys
+import argparse, hashlib, json, pathlib, re, sys
 from datetime import datetime, timezone
 from pydantic import ValidationError
 from gpu_agent.assignment import load_assignment
@@ -35,6 +35,11 @@ from gpu_agent.thesis import (
 from gpu_agent.implication import (
     ImplicationAnswer, ImplicationArtifact, ImplicationRegistry, ImplicationStore,
     ImplicationError, build_implication_system, build_implication_user_prompt, gate_implication)
+from gpu_agent.narrator.schema import NarratorAnswer, NarratorMeta, StoryArtifact
+from gpu_agent.narrator.store import StoryStore
+from gpu_agent.narrator.inputs import build_narrator_inputs
+from gpu_agent.narrator.prompt import emit_narrator_bundle
+from gpu_agent.narrator.gate import gate_narrator
 from gpu_agent.memory import build_memory_bundle, render_memory_text
 from gpu_agent.sufficiency import check_sufficiency
 from gpu_agent.gathering.ingest import normalize_documents
@@ -69,6 +74,12 @@ def _as_of_opt(s: str) -> str:
     # eval's --as-of is optional (default "" = not supplied); validate the shape only
     # when a value is actually given, so the "" sentinel still parses.
     return s if s == "" else _as_of(s)
+
+_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+def _narrator_date(s: str) -> str:
+    if not _DATE_RE.match(s):
+        raise argparse.ArgumentTypeError(f"--date {s!r} must be YYYY-MM-DD")
+    return s
 
 def _load_docs(docs_dir: str) -> list[RawDocument]:
     return [RawDocument.model_validate(json.loads(p.read_text("utf-8")))
@@ -662,6 +673,92 @@ def _implication(args) -> int:
 
     print("gpu-agent implication: error: exactly one of --emit-prompt or --recorded is required",
           file=sys.stderr)
+    return 2
+
+def _narrator_prompt_hash(inputs: dict) -> str:
+    """SHA-256 of the canonically emitted narrator bundle for `inputs`. Uses the same
+    canonicalization Task 6's baseline pin recipe uses (gpu_agent/evals/prompt_hash.py:
+    json.dumps(bundle, sort_keys=True, ensure_ascii=False)) so a promptHash recomputed here
+    from the same inputs always matches the pin -- narrator code may not import
+    gpu_agent/evals (gated lane), so the recipe is copied, not imported."""
+    bundle = emit_narrator_bundle(inputs)
+    canonical = json.dumps(bundle, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+def _narrator(args) -> int:
+    """Handler for `gpu-agent narrator` (F101b Task 4): emit the daily narrator's
+    prompt bundle, or gate + store a recorded answer, or record an honest fallback when
+    the brain failed twice. Mirrors _implication's emit->recorded shape; a parse or gate
+    failure exits 1 and writes nothing (the store stays byte-unchanged) -- a half-written
+    artifact would render a broken story page.
+
+    Steps: --emit-prompt builds narrator inputs from the store and prints
+    system/schema/user, exit 0. --recorded parses -> gates -> wraps into a StoryArtifact
+    (narratorMeta.promptHash recomputed from the same inputs so it matches what
+    --emit-prompt would have printed for the same store state) -> writes -> exit 0.
+    --record-fallback writes the honest-gap artifact (empty headline/deck/scenes, the
+    renderer never shows a fellBack story) plus a sibling `<date>.fallback.json` carrying
+    the reasons for the log. Exactly one of the three flags is required, else exit 2.
+    """
+    today = datetime.strptime(args.date, "%Y-%m-%d").date()
+    store = StoryStore(pathlib.Path(args.store))
+
+    if args.emit_prompt:
+        inputs = build_narrator_inputs(args.category, args.store, today, args.run_dir)
+        print(json.dumps(emit_narrator_bundle(inputs)))
+        return 0
+
+    if args.recorded:
+        try:
+            recorded_text = pathlib.Path(args.recorded).read_text("utf-8")
+        except (OSError, ValueError) as e:
+            print(f"gpu-agent narrator: error: {e}", file=sys.stderr)
+            return 1
+        try:
+            answer = NarratorAnswer.model_validate_json(recorded_text)
+        except ValidationError as e:
+            print(f"NARRATOR GATE FAILED\n{e}")
+            return 1
+        inputs = build_narrator_inputs(args.category, args.store, today, args.run_dir)
+        violations = gate_narrator(answer, inputs)
+        if violations:
+            print("NARRATOR GATE FAILED", *violations, sep="\n  ")
+            return 1
+        meta = NarratorMeta(model=args.model, promptHash=_narrator_prompt_hash(inputs),
+                            retries=args.retries, fellBack=False,
+                            wroteAt=datetime.now(timezone.utc).isoformat())
+        artifact = StoryArtifact(schemaVersion=1, categoryId=args.category,
+                                 storyDate=args.date, narratorMeta=meta,
+                                 **answer.model_dump())
+        path = store.write(artifact)
+        print(f"wrote {path}")
+        return 0
+
+    if args.record_fallback:
+        if not args.reasons:
+            print("gpu-agent narrator: error: --record-fallback requires --reasons",
+                  file=sys.stderr)
+            return 2
+        try:
+            reasons = json.loads(pathlib.Path(args.reasons).read_text("utf-8"))
+        except (OSError, ValueError, json.JSONDecodeError) as e:
+            print(f"gpu-agent narrator: error: {e}", file=sys.stderr)
+            return 1
+        inputs = build_narrator_inputs(args.category, args.store, today, args.run_dir)
+        meta = NarratorMeta(model=args.model, promptHash=_narrator_prompt_hash(inputs),
+                            retries=args.retries, fellBack=True,
+                            wroteAt=datetime.now(timezone.utc).isoformat())
+        artifact = StoryArtifact(schemaVersion=1, categoryId=args.category,
+                                 storyDate=args.date, headline="", deck="", scenes=[],
+                                 kpiPicks=[], calloutMonths=[], narratorMeta=meta)
+        path = store.write(artifact)
+        fallback_log = path.with_name(f"{args.date}.fallback.json")
+        fallback_log.write_text(json.dumps(reasons, indent=2), encoding="utf-8")
+        print(f"wrote fallback {path}")
+        return 0
+
+    print("gpu-agent narrator: error: exactly one of --emit-prompt, --recorded, or "
+          "--record-fallback is required", file=sys.stderr)
     return 2
 
 def _eval(args) -> int:
@@ -1383,6 +1480,20 @@ def main(argv=None) -> int:
     im.add_argument("--emit-prompt", action="store_true",
                     help="print the canonical implication prompt + schema (no LLM) and exit")
     im.add_argument("--recorded", default=None, help="path to a recorded ImplicationAnswer JSON")
+    nr = sub.add_parser("narrator")
+    nr.add_argument("--store", default="store", help="store root (holds <category>/story/)")
+    nr.add_argument("--category", required=True, help="indicator category id (e.g. chips.merchant-gpu)")
+    nr.add_argument("--date", required=True, type=_narrator_date, help="story date, YYYY-MM-DD")
+    nr.add_argument("--run-dir", default=None, help="run dir (holds blobs.json for today's doc pool)")
+    nr.add_argument("--emit-prompt", action="store_true",
+                    help="print the canonical narrator prompt + schema (no LLM) and exit")
+    nr.add_argument("--recorded", default=None, help="path to a recorded NarratorAnswer JSON")
+    nr.add_argument("--record-fallback", action="store_true",
+                    help="record the honest-gap fellBack artifact after two failed brain attempts")
+    nr.add_argument("--reasons", default=None,
+                    help="JSON file of violation sentences (required with --record-fallback)")
+    nr.add_argument("--model", default="opus", help="narratorMeta.model (default: opus)")
+    nr.add_argument("--retries", type=int, default=0, help="narratorMeta.retries (default: 0)")
     ev = sub.add_parser("eval", help="F6 eval harness: golden-set emit/record + rebaseline")
     ev.add_argument("action", choices=["emit-brain", "record-brain", "emit-grade",
                                        "record-grade", "verdict", "rebaseline"])
@@ -1548,6 +1659,8 @@ def main(argv=None) -> int:
         except ImplicationError as e:
             print(f"IMPLICATION ERROR: {e}", file=sys.stderr)
             return 1
+    if args.cmd == "narrator":
+        return _narrator(args)
     if args.cmd == "eval":
         try:
             return _eval(args)

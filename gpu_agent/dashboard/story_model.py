@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import datetime as dt
 import re
+import sys
 from pathlib import Path
 
 from gpu_agent.dashboard.agenda import read_series
@@ -16,9 +17,28 @@ from gpu_agent.dashboard.brief_model import (first_n_sentences,
                                              read_implication_lines)
 from gpu_agent.dashboard.gap_chart import build_gap_data
 from gpu_agent.dashboard.glossary import load_glossary, term_swap
+from gpu_agent.narrator.store import StoryStore
 
 _SERIES_IDS = ["gpuRentalOnDemand", "hyperscalerCapexRevision",
                "odmMonthlyAiRevenue", "hbmSupplyCapex", "gpuSpotPrice"]
+
+# The renderer always shows this series as the anchored KPI chip (see
+# `_base_model` below), so it must never also appear as a narrator kpiPick --
+# that would render the same chip twice. `_SERIES_IDS[0]` is the one place
+# that decision already lives (`_base_model`'s `anchored = _chip(...)` call
+# and its `picks` loop over `_SERIES_IDS[1:]`); every other spot that needs
+# "the anchored indicator's id" (the gate, the prompt, the narrated-path
+# mapper) imports this constant instead of repeating the string literal.
+ANCHORED_INDICATOR_ID = _SERIES_IDS[0]
+
+# The exact sourceLine wording a sourceless scene (empty claimFindingIds)
+# must carry. `gate.py` enforces this at write time so the brain can never
+# ship a scene that claims nothing but writes a source line anyway; the
+# narrated-path mapper below enforces it again at render time so a
+# hand-edited or legacy artifact that slipped past (or predates) the gate
+# still can't render a fabricated source line verbatim. One literal, shared
+# by both enforcement points.
+NO_SOURCE_LINE = "No new sourced evidence today."
 
 # F101 Phase A / Task 8 Decision B: plain-English replacements for the analyst
 # words lint_story_copy's _BANNED_STORY bans from rendered prose. These are
@@ -228,27 +248,34 @@ def resolve_store_root(category_id: str, store_dir: str | Path) -> Path:
     return store_dir.parent
 
 
-def build_story_model(category_id: str, store_dir: str | Path,
-                      today: dt.date) -> dict:
-    store_root = resolve_store_root(category_id, store_dir)
+def _base_model(category_id: str, store_root: Path, today: dt.date):
+    """The shared tail of `build_story_model`: everything that comes from
+    committed store data regardless of whether an artifact or the assembler
+    ends up supplying headline/deck/scenes/kpis.picks/callouts. Both
+    `_assemble_model` (Phase A, no artifact) and `read_story_artifact`
+    (Phase B, narrated) call this and build on top of it, so gap chart,
+    archive, explore, the anchored KPI chip, and the series-backed evidence
+    entries are computed identically -- and only once -- either way.
+
+    Returns `(model, ctx)`: `model` already carries the exact keys the final
+    dict needs from the shared tail (category_id, as_of, revision, dateline,
+    gap, kpis, evidence, archive, explore); `ctx` carries the raw
+    ingredients (`latest`, `gl`, `series`, `cat_dir`) that the two callers
+    still need to build their own headline/deck/scenes/callouts. (Both
+    callers already have `store_root` as their own function parameter, so
+    it is not duplicated into `ctx`.)
+    """
     cat_dir = store_root / category_id
     latest, _prior, as_of, rev = latest_monthly(cat_dir)
     latest = latest or {}
     gl = _story_glossary(load_glossary())
     gap = build_gap_data(cat_dir)
-    status = latest.get("categoryStatus") or {}
-
-    headline = _HEADLINES.get((gap or {}).get("gap_word"),
-                              "The state of the GPU market.")
-    label = _translate(status.get("constraintLabel") or "supply of key components", gl)
-    reason = first_n_sentences(_translate(status.get("reason") or "", gl), 1)
-    deck = f"The main chokepoint is {label}. {reason}".strip()
     dateline = (today.strftime("%A, %B %d, %Y").replace(" 0", " ")
                 + " · updated with each run")
 
     series = read_series(store_root / "series", _SERIES_IDS)
     evidence: dict[str, dict] = {}
-    anchored = _chip("gpuRentalOnDemand", series.get("gpuRentalOnDemand", []))
+    anchored = _chip(ANCHORED_INDICATOR_ID, series.get(ANCHORED_INDICATOR_ID, []))
     picks = []
     for ind in _SERIES_IDS[1:]:
         c = _chip(ind, series.get(ind, []))
@@ -264,14 +291,169 @@ def build_story_model(category_id: str, store_dir: str | Path,
             "findings": _series_evidence(ind, series.get(ind, []), gl),
             "series": c["spark"], "explore": "appendix.html"}
 
+    # Archive contract (owner decision): a chip for month M shows what
+    # happened DURING month M, i.e. the change from month M-1 to M — so an
+    # entry needs a predecessor. The current (latest) month is today's
+    # story, not archive, and is always excluded. With only 2 monthly
+    # snapshots (today's data) there is no month that has both a
+    # predecessor and is not the latest, so the archive is empty.
+    #
+    # The gap level is a running sum (see gap_chart.build_gap_data), so the
+    # change in gap from M-1 to M collapses to _SCALE * (dmi_M - smi_M) —
+    # exactly the same quantity, scale, and dead-band threshold that
+    # decides the current month's own gap_word. Reuse those constants so
+    # archive headlines are computed by the identical rule.
+    from gpu_agent.dashboard.gap_chart import (_DEAD_BAND, _SCALE,
+                                                _monthly_records)
+    recs = _monthly_records(cat_dir)
+    candidates = list(range(1, len(recs) - 1))  # has a predecessor, not latest
+    arch = []
+    for j in candidates[-4:]:
+        delta = _SCALE * (recs[j]["dmi"] - recs[j]["smi"])
+        if delta > _DEAD_BAND:
+            word = "widened"
+        elif delta < -_DEAD_BAND:
+            word = "narrowed"
+        else:
+            word = "held"
+        key = recs[j]["key"]
+        label = dt.date(int(key[:4]), int(key[5:7]), 1).strftime("%B %Y")
+        arch.append({"key": key, "label": label,
+                    "text": _HEADLINES.get(word, "")})
+
+    explore = {
+        "entities": len(list((store_root / "wiki" / "entity").glob("*.md"))),
+        "findings": len(list((store_root / "findings").glob("*.json"))),
+        "series": len(list((store_root / "series").glob("*.jsonl"))),
+        "history": len(list(cat_dir.glob("*.json")))}
+
     model = {"category_id": category_id, "as_of": as_of, "revision": rev,
-             "headline": headline, "deck": deck, "dateline": dateline,
-             "gap": gap, "callouts": [], "kpis": {"anchored": anchored,
-                                                  "picks": picks},
-             "evidence": evidence, "scenes": [], "archive": [],
-             "explore": {}}
-    _add_scenes(model, latest, store_root, cat_dir, series, gl)
+             "dateline": dateline, "gap": gap,
+             "kpis": {"anchored": anchored, "picks": picks},
+             "evidence": evidence, "archive": arch, "explore": explore}
+    ctx = {"latest": latest, "gl": gl, "series": series, "cat_dir": cat_dir}
+    return model, ctx
+
+
+def _assemble_model(category_id: str, store_root: Path, today: dt.date) -> dict:
+    """Phase A: the original assembler, now built on the shared `_base_model`
+    tail. Behaviorally unchanged from the pre-Phase-B assembler -- only the
+    gap/archive/explore/anchored-chip/evidence-series computation moved into
+    `_base_model` so the artifact-driven path can reuse it verbatim."""
+    base, ctx = _base_model(category_id, store_root, today)
+    latest, gl = ctx["latest"], ctx["gl"]
+    series = ctx["series"]
+    status = latest.get("categoryStatus") or {}
+
+    headline = _HEADLINES.get((base["gap"] or {}).get("gap_word"),
+                              "The state of the GPU market.")
+    label = _translate(status.get("constraintLabel") or "supply of key components", gl)
+    reason = first_n_sentences(_translate(status.get("reason") or "", gl), 1)
+    deck = f"The main chokepoint is {label}. {reason}".strip()
+
+    model = {**base, "headline": headline, "deck": deck, "callouts": [],
+             "scenes": []}
+    _add_scenes(model, latest, store_root, series, gl)
     return model
+
+
+def read_story_artifact(category_id: str, store_root: Path,
+                        today: dt.date) -> dict | None:
+    """Phase B: load today's narrator artifact and map it onto the exact
+    model dict shape `_assemble_model` produces. Returns None when there is
+    no artifact for the date, or when the artifact has `fellBack` set --
+    either way the caller must fall back to the assembler, indistinguishable
+    from Phase A behavior."""
+    art = StoryStore(store_root).read(category_id, today.isoformat())
+    if art is None or art.narratorMeta.fellBack:
+        return None
+
+    base, ctx = _base_model(category_id, store_root, today)
+    latest, gl, series = ctx["latest"], ctx["gl"], ctx["series"]
+
+    scenes = []
+    evidence = dict(base["evidence"])
+    for sc in art.scenes:
+        vals = ([r["value"] for r in series.get(sc.visual.seriesId, [])[-8:]]
+                if sc.visual else [])
+        vlabel = sc.visual.label if sc.visual else ""
+        findings = _resolve_findings(latest, sc.claimFindingIds)
+        # Reuse the assembler's own scene-dict shape instead of hand-rebuilding
+        # it here, then override the two fields the artifact actually supplies
+        # (`_mk_scene` would otherwise derive them from `findings`/`gl`, which
+        # is the assembler's job, not the narrated path's).
+        scene_dict = _mk_scene(sc.n, sc.title, sc.paragraphs, vals, vlabel,
+                               findings, gl)
+        # An empty claimFindingIds list means "nothing sourced today" -- the
+        # mapper substitutes the exact required wording itself rather than
+        # trusting the artifact's own sourceLine, so a hand-edited or legacy
+        # artifact can never render a fabricated source line for a claim it
+        # didn't actually make (gate.py enforces the same rule at write time;
+        # this is the read-time backstop the plan's consistency note calls for).
+        scene_dict["source_line"] = (sc.sourceLine if sc.claimFindingIds
+                                     else NO_SOURCE_LINE)
+        scene_dict["related"] = [{"outlet": r.outlet, "title": r.title,
+                                  "date": r.date, "url": r.url}
+                                 for r in sc.relatedDocs]
+        scenes.append(scene_dict)
+        evidence[f"scene:{sc.n}"] = {
+            "title": f"{sc.title} — says who?",
+            # Same filtered paragraph list `_mk_scene` used for `scene_dict`
+            # above (empty-string paragraphs dropped), so the evidence panel
+            # can never show blank claim text while the scene itself renders.
+            "claim_text": (scene_dict["paragraphs"][0]
+                           if scene_dict["paragraphs"] else ""),
+            # Same rule as the assembler (Phase A review finding #1): a
+            # scene with no claimFindingIds of its own gets an honest empty
+            # findings list -- never borrowed from another scene/claim.
+            "findings": _finding_rows(findings, gl),
+            "series": vals, "explore": "appendix.html"}
+
+    picks = []
+    for kp in art.kpiPicks:
+        # The renderer always shows the anchored indicator as its own chip
+        # (see `_base_model` above); a kpiPick naming that same indicator
+        # would render it a second time. `gate.py` already rejects this at
+        # write time, but a hand-edited or legacy artifact could still slip
+        # one through, so skip it here too -- mirrors the assembler's own
+        # structural exclusion (`_SERIES_IDS[1:]` in `_base_model`).
+        if kp.indicatorId == ANCHORED_INDICATOR_ID:
+            continue
+        c = _chip(kp.indicatorId, series.get(kp.indicatorId, []))
+        if c is None:
+            continue
+        c["caption"] = kp.whyCaption
+        c["scene"] = kp.scene
+        picks.append(c)
+
+    callouts = [{"month_key": cm.monthKey, "text": cm.text,
+                "claim": f"scene:{cm.scene}"} for cm in art.calloutMonths]
+
+    return {**base, "headline": art.headline, "deck": art.deck,
+            "scenes": scenes, "callouts": callouts, "evidence": evidence,
+            "kpis": {"anchored": base["kpis"]["anchored"], "picks": picks}}
+
+
+def build_story_model(category_id: str, store_dir: str | Path,
+                      today: dt.date) -> dict:
+    store_root = resolve_store_root(category_id, store_dir)
+    # A hand-edited or legacy (un-gated) artifact could pass StoryStore.read's
+    # own schema validation yet still break this mapper in some way the gate
+    # never anticipated -- and a raise here would crash the live page instead
+    # of degrading. read_story_artifact's whole point is to be
+    # indistinguishable from "no artifact" whenever it can't safely drive the
+    # page, so any exception during the read+map gets the same treatment as a
+    # missing/fellBack artifact: warn to stderr, fall through to the assembler.
+    try:
+        artifact_model = read_story_artifact(category_id, store_root, today)
+    except Exception as exc:
+        print(f"gpu-agent narrator: warning: failed to read/map story "
+              f"artifact for {category_id} {today.isoformat()}, falling "
+              f"back to the assembler: {exc}", file=sys.stderr)
+        artifact_model = None
+    if artifact_model is not None:
+        return artifact_model
+    return _assemble_model(category_id, store_root, today)
 
 
 _ACCENTS = ["amber", "terracotta", "teal", "green"]
@@ -338,7 +520,7 @@ def _mk_scene(n, title, paragraphs, series_vals, series_label, findings, gl):
             "claims": [f"scene:{n}"]}
 
 
-def _add_scenes(model, latest, store_root, cat_dir, series, gl):
+def _add_scenes(model, latest, store_root, series, gl):
     dims = latest.get("dimensionRatings") or {}
     status = latest.get("categoryStatus") or {}
     sv = lambda ind: [r["value"] for r in series.get(ind, [])[-8:]]
@@ -410,40 +592,7 @@ def _add_scenes(model, latest, store_root, cat_dir, series, gl):
             "month_key": month["key"],
             "text": f"{month['label']}: {first['title'].lower()}",
             "claim": f"scene:{first['n']}"}]
-
-    # Archive contract (owner decision): a chip for month M shows what
-    # happened DURING month M, i.e. the change from month M-1 to M — so an
-    # entry needs a predecessor. The current (latest) month is today's
-    # story, not archive, and is always excluded. With only 2 monthly
-    # snapshots (today's data) there is no month that has both a
-    # predecessor and is not the latest, so the archive is empty.
-    #
-    # The gap level is a running sum (see gap_chart.build_gap_data), so the
-    # change in gap from M-1 to M collapses to _SCALE * (dmi_M - smi_M) —
-    # exactly the same quantity, scale, and dead-band threshold that
-    # decides the current month's own gap_word. Reuse those constants so
-    # archive headlines are computed by the identical rule.
-    from gpu_agent.dashboard.gap_chart import (_DEAD_BAND, _SCALE,
-                                                _monthly_records)
-    recs = _monthly_records(cat_dir)
-    candidates = list(range(1, len(recs) - 1))  # has a predecessor, not latest
-    arch = []
-    for j in candidates[-4:]:
-        delta = _SCALE * (recs[j]["dmi"] - recs[j]["smi"])
-        if delta > _DEAD_BAND:
-            word = "widened"
-        elif delta < -_DEAD_BAND:
-            word = "narrowed"
-        else:
-            word = "held"
-        key = recs[j]["key"]
-        label = dt.date(int(key[:4]), int(key[5:7]), 1).strftime("%B %Y")
-        arch.append({"key": key, "label": label,
-                    "text": _HEADLINES.get(word, "")})
-    model["archive"] = arch
-
-    model["explore"] = {
-        "entities": len(list((store_root / "wiki" / "entity").glob("*.md"))),
-        "findings": len(list((store_root / "findings").glob("*.json"))),
-        "series": len(list((store_root / "series").glob("*.jsonl"))),
-        "history": len(list(cat_dir.glob("*.json")))}
+    # Archive and explore are computed once by `_base_model` (the shared
+    # tail both the assembler and the artifact-driven path build on) --
+    # `model["archive"]`/`model["explore"]` already carry those values from
+    # there and are not recomputed here.

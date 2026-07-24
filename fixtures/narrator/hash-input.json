@@ -1,0 +1,76 @@
+{
+  "scorecard": {
+    "asOf": "2026-07-22",
+    "revision": 3,
+    "categoryStatus": {
+      "status": "yellow",
+      "summary": "Rental prices are flat while lead times stretch."
+    },
+    "dimensionRatings": {
+      "supply": "amber",
+      "demand": "green",
+      "price": "amber"
+    }
+  },
+  "findings": [
+    {
+      "id": "f-1",
+      "statement": "A major cloud provider extended GPU lead times to 14 weeks.",
+      "evidence": [
+        {
+          "source": "TechWire",
+          "url": "https://example.com/techwire/lead-times",
+          "date": "2026-07-20",
+          "tier": "1"
+        }
+      ]
+    },
+    {
+      "id": "f-2",
+      "statement": "Spot rental prices held steady for the third week in a row.",
+      "evidence": [
+        {
+          "source": "MarketDesk",
+          "url": "https://example.com/marketdesk/spot-prices",
+          "date": "2026-07-21",
+          "tier": "2"
+        }
+      ]
+    }
+  ],
+  "implicationLines": [
+    {
+      "text": "If lead times keep stretching while prices hold flat, buyers will start prepaying for future capacity.",
+      "findingIds": ["f-1", "f-2"]
+    }
+  ],
+  "seriesPool": [
+    {
+      "indicatorId": "gpu_rental_price_usd_hr",
+      "label": "GPU rental price ($/hr)",
+      "latestValue": 2.15,
+      "unit": "usd_per_hr",
+      "tail": [2.1, 2.12, 2.14, 2.15]
+    },
+    {
+      "indicatorId": "gpu_lead_time_weeks",
+      "label": "GPU lead time (weeks)",
+      "latestValue": 14.0,
+      "unit": "weeks",
+      "tail": [11.0, 12.0, 13.0, 14.0]
+    }
+  ],
+  "memory": {
+    "yesterday": null,
+    "recentHeadlines": []
+  },
+  "docPool": [
+    {
+      "url": "https://example.com/techwire/lead-times",
+      "source": "TechWire",
+      "date": "2026-07-20"
+    }
+  ],
+  "gapMonths": ["2026-06", "2026-07"],
+  "storyDate": "2026-07-23"
+}

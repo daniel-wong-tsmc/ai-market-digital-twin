@@ -1,0 +1,66 @@
+# gpu_agent/narrator/store.py
+"""Story artifacts: store/<category>/story/YYYY-MM-DD.json."""
+from __future__ import annotations
+
+import os
+import re
+import sys
+from pathlib import Path
+
+from gpu_agent.narrator.schema import StoryArtifact
+
+_DATE_STEM_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+
+class StoryStore:
+    def __init__(self, root: Path):
+        self.root = Path(root)
+
+    def _path(self, category_id: str, story_date: str) -> Path:
+        return self.root / category_id / "story" / f"{story_date}.json"
+
+    def write(self, artifact: StoryArtifact) -> Path:
+        p = self._path(artifact.categoryId, artifact.storyDate)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        tmp = p.with_suffix(".json.tmp")
+        tmp.write_text(artifact.model_dump_json(indent=2), encoding="utf-8")
+        os.replace(tmp, p)
+        return p
+
+    def read(self, category_id: str, story_date: str) -> StoryArtifact | None:
+        p = self._path(category_id, story_date)
+        if not p.exists():
+            return None
+        try:
+            return StoryArtifact.model_validate_json(
+                p.read_text(encoding="utf-8"))
+        except Exception as e:  # noqa: BLE001 — a corrupt/incompatible artifact must
+            # fall back to None for callers, but must not fail silently.
+            print(f"gpu-agent narrator: warning: story artifact at {p} is unreadable "
+                  f"({type(e).__name__}: {e}); falling back to no artifact for this date",
+                  file=sys.stderr)
+            return None
+
+    def recent_headlines(self, category_id: str, before: str,
+                         limit: int = 7) -> list[dict]:
+        d = self.root / category_id / "story"
+        if not d.exists():
+            return []
+        out = []
+        for p in sorted(d.glob("*.json"), reverse=True):
+            date = p.stem
+            if not _DATE_STEM_RE.match(date):
+                # F101b Task 4 fix pass 1: sidecar files like <date>.fallback.json
+                # live in this same directory (glob("*.json") matches them too) but
+                # are not story artifacts -- skip by construction rather than trying
+                # and failing to parse them as one.
+                continue
+            if date >= before:
+                continue
+            art = self.read(category_id, date)
+            if art:
+                out.append({"date": date, "headline": art.headline,
+                            "fellBack": art.narratorMeta.fellBack})
+            if len(out) == limit:
+                break
+        return out
