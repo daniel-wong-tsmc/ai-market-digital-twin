@@ -15,7 +15,7 @@ from gpu_agent.dashboard.agenda import read_series
 from gpu_agent.dashboard.brief_model import (first_n_sentences,
                                              latest_monthly,
                                              read_implication_lines)
-from gpu_agent.dashboard.gap_chart import build_gap_data
+from gpu_agent.dashboard.gap_chart import _DEAD_BAND, _SCALE, build_gap_data
 from gpu_agent.dashboard.glossary import load_glossary, term_swap
 from gpu_agent.narrator.store import StoryStore
 
@@ -197,6 +197,23 @@ _HEADLINES = {"widened": "The GPU shortage got worse this month.",
               "held": "The GPU shortage held steady this month."}
 
 
+def _gap_word(dmi: float, smi: float) -> str:
+    """The Phase A gap-word derivation, shared by the story headline (via
+    `build_gap_data`'s own copy of this same comparison), the archive
+    section below, and the Explore verdict timeline
+    (`explore_model.verdict_timeline`). `build_gap_data`'s gap level is a
+    running sum, so the change in gap from one month to the next collapses
+    to exactly this same-month scaled quantity -- `_SCALE * (dmi - smi)`
+    compared against the dead-band -- there is no need (and it would be
+    wrong) to diff this month's value against the prior month's."""
+    delta = _SCALE * (dmi - smi)
+    if delta > _DEAD_BAND:
+        return "widened"
+    if delta < -_DEAD_BAND:
+        return "narrowed"
+    return "held"
+
+
 def _arrow(rows: list[dict]) -> str:
     if len(rows) < 2:
         return "→"
@@ -303,19 +320,12 @@ def _base_model(category_id: str, store_root: Path, today: dt.date):
     # exactly the same quantity, scale, and dead-band threshold that
     # decides the current month's own gap_word. Reuse those constants so
     # archive headlines are computed by the identical rule.
-    from gpu_agent.dashboard.gap_chart import (_DEAD_BAND, _SCALE,
-                                                _monthly_records)
+    from gpu_agent.dashboard.gap_chart import _monthly_records
     recs = _monthly_records(cat_dir)
     candidates = list(range(1, len(recs) - 1))  # has a predecessor, not latest
     arch = []
     for j in candidates[-4:]:
-        delta = _SCALE * (recs[j]["dmi"] - recs[j]["smi"])
-        if delta > _DEAD_BAND:
-            word = "widened"
-        elif delta < -_DEAD_BAND:
-            word = "narrowed"
-        else:
-            word = "held"
+        word = _gap_word(recs[j]["dmi"], recs[j]["smi"])
         key = recs[j]["key"]
         label = dt.date(int(key[:4]), int(key[5:7]), 1).strftime("%B %Y")
         arch.append({"key": key, "label": label,

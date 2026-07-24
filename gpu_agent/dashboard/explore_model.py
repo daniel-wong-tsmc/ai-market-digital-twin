@@ -12,10 +12,10 @@ import json
 import re
 from pathlib import Path
 
-from gpu_agent.dashboard.gap_chart import (_DEAD_BAND, _MONTHLY, _SCALE,
-                                            _monthly_records, build_gap_data)
+from gpu_agent.dashboard.gap_chart import (_MONTHLY, _monthly_records,
+                                            build_gap_data)
 from gpu_agent.dashboard.render import esc
-from gpu_agent.dashboard.story_model import _HEADLINES
+from gpu_agent.dashboard.story_model import _gap_word, _HEADLINES
 from gpu_agent.narrator.store import StoryStore
 from gpu_agent.wiki.page import WikiFormatError, load_page
 
@@ -173,19 +173,12 @@ def verdict_timeline(cat_dir: Path) -> dict:
     files = _monthly_best_files(cat_dir)
 
     months = []
-    for i, r in enumerate(recs):
-        cur = r["dmi"] - r["smi"]
-        if i == 0:
-            word = "held"
-        else:
-            prev = recs[i - 1]["dmi"] - recs[i - 1]["smi"]
-            change = _SCALE * (cur - prev)
-            if change > _DEAD_BAND:
-                word = "widened"
-            elif change < -_DEAD_BAND:
-                word = "narrowed"
-            else:
-                word = "held"
+    for r in recs:
+        # Same-month gap-word derivation, reused verbatim from story_model
+        # (build_gap_data's gap level is a running sum, so the change in gap
+        # from one month to the next collapses to this same-month scaled
+        # quantity -- see _gap_word's own docstring).
+        word = _gap_word(r["dmi"], r["smi"])
         headline = _HEADLINES.get(word, "")
         label = dt.date(int(r["key"][:4]), int(r["key"][5:7]), 1).strftime("%B %Y")
 
