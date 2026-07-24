@@ -8,6 +8,7 @@ from gpu_agent.dashboard.story_model import (_STORY_TERMS,
                                               build_story_model,
                                               resolve_store_root)
 from gpu_agent.dashboard.story_render import _BANNED_STORY
+from gpu_agent.freshness import AGING_THRESHOLD
 
 CAT = "chips.merchant-gpu"
 
@@ -33,8 +34,22 @@ def _store(tmp_path, dmi_smi=((1.0, 0.5), (2.0, 0.2)), months=None):
                               "rationale": "Buyers raised budgets again."}},
             "findings": [
                 {"id": "f-1", "statement": "SK Hynix shifted HBM output",
-                 "evidence": [{"source": "Micron call", "url": "https://x.example/a",
-                                "date": "2026-06-24", "excerpt": "…", "tier": "primary"}]},
+                 "evidence": [
+                     {"source": "Micron call", "url": "https://x.example/a",
+                      "date": "2026-06-24", "excerpt": "…", "tier": "primary"},
+                     # Same registrable domain as the row above but a newer
+                     # date -- exercises the one-row-per-publisher cap
+                     # (F103 Task 2), which must keep this freshest row.
+                     {"source": "Micron follow-up", "url": "https://x.example/a-followup",
+                      "date": "2026-07-18", "excerpt": "…", "tier": "primary"},
+                     # A stale investor-relations filing -- filingsDomains
+                     # match ("investor.") on a half-life-5 kind, dated a
+                     # month before "today" (2026-07-22), so it must rank
+                     # last and be flagged aging (weight < AGING_THRESHOLD).
+                     {"source": "Nvidia investor update",
+                      "url": "https://investor.nvidia.com/news/2026-05",
+                      "date": "2026-05-28", "excerpt": "…", "tier": "primary"}],
+                 },
                 {"id": "f-2", "statement": "Oracle capex up 162%",
                  "evidence": [{"source": "CNBC", "url": "https://x.example/b",
                                 "date": "2026-06-10", "excerpt": "…", "tier": "secondary"}]}],
@@ -122,12 +137,55 @@ def test_scenes_assembled(tmp_path):
 
 
 def test_scene_evidence_and_related(tmp_path):
+    # F103 Task 2: evidence rows are now weight-sorted with a one-row-per-
+    # publisher cap. f-1 carries two x.example evidence rows (see _store) --
+    # the newer "Micron follow-up" row decays less than the older "Micron
+    # call" row, so it wins the publisher-diversity cap and sorts first.
     m = build_story_model(CAT, _store(tmp_path), dt.date(2026, 7, 22))
     ev = m["evidence"]["scene:1"]
-    assert ev["findings"][0]["source"] == "Micron call"
-    assert ev["findings"][0]["url"] == "https://x.example/a"
+    assert ev["findings"][0]["source"] == "Micron follow-up"
+    assert ev["findings"][0]["url"] == "https://x.example/a-followup"
     demand_scene = next(s for s in m["scenes"] if s["title"] == "Demand kept climbing")
     assert demand_scene["related"][0]["outlet"] == "CNBC"
+
+
+def test_evidence_rows_sorted_by_weight_and_dated(tmp_path):
+    # F103 Task 2: scene:1's evidence rows (backed by f-1's two surviving
+    # publishers -- see _store's x.example and investor.nvidia.com entries)
+    # must be sorted with the highest-decay-weight row first, and every row
+    # must carry both a "date" key (even when non-empty) and a "weight" key.
+    m = build_story_model(CAT, _store(tmp_path), dt.date(2026, 7, 22))
+    rows = m["evidence"]["scene:1"]["findings"]
+    assert len(rows) >= 2
+    weights = [r["weight"] for r in rows]
+    assert weights == sorted(weights, reverse=True)
+    for r in rows:
+        assert "date" in r
+        assert isinstance(r["weight"], float)
+
+
+def test_one_row_per_publisher_keeps_freshest(tmp_path):
+    # f-1 carries two evidence rows on the SAME registrable domain
+    # (x.example): an older "Micron call" (2026-06-24) and a newer "Micron
+    # follow-up" (2026-07-18). The publisher cap must collapse them to one
+    # row -- the newer, higher-weight one.
+    m = build_story_model(CAT, _store(tmp_path), dt.date(2026, 7, 22))
+    rows = m["evidence"]["scene:1"]["findings"]
+    x_example_rows = [r for r in rows if "x.example" in r["url"]]
+    assert len(x_example_rows) == 1
+    assert x_example_rows[0]["url"] == "https://x.example/a-followup"
+    assert x_example_rows[0]["source"] == "Micron follow-up"
+
+
+def test_may_filing_ranks_last_and_flags_aging(tmp_path):
+    # The stale investor.nvidia.com filing (dated 2026-05-28, a filings-kind
+    # half life of 5 days) must decay under AGING_THRESHOLD by "today"
+    # (2026-07-22) and rank last among scene:1's evidence rows.
+    m = build_story_model(CAT, _store(tmp_path), dt.date(2026, 7, 22))
+    rows = m["evidence"]["scene:1"]["findings"]
+    filing_row = next(r for r in rows if "investor.nvidia.com" in r["url"])
+    assert filing_row["weight"] < AGING_THRESHOLD
+    assert rows[-1] is filing_row
 
 
 def test_scene_with_no_findings_shows_honest_empty_evidence_not_a_borrowed_source(tmp_path):
