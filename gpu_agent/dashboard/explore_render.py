@@ -14,7 +14,7 @@ import posixpath
 import re
 
 from .explore_model import ENTITY_SERIES, SERIES_MEANING, markdown_to_html, series_groups
-from .gap_chart import spark_svg
+from .gap_chart import render_timeline_svg, spark_svg
 from .render import esc
 from .site_render import page
 from .story_model import _CHIP_DEFS
@@ -30,6 +30,10 @@ EXPLORE_CSS = """
 .xp-notice { font-style: italic; color: var(--muted); }
 .xp-arch-row { border-bottom: 1px solid var(--line); padding: .5rem 0; }
 .xp-arch-row .xp-fellback { color: var(--muted); font-style: italic; }
+.xp-timeline { margin: 0 0 1rem; }
+.xp-srcline { color: var(--muted); font-size: .85rem; }
+.xp-dim-row { margin: .2rem 0; }
+.xp-constraint { color: var(--muted); }
 """
 
 _NO_NARRATED_ENTRY = ("No narrated entry this day — the page ran on "
@@ -340,6 +344,59 @@ def render_entities_index(entities: list[dict], roles: dict[str, str]) -> str:
     body = f"<h1>Entities</h1>{''.join(sections)}"
     return page_scaffold("Entities", "who's involved in this category's story",
                          body, depth=2)
+
+
+# Dimension ids -> plain-English display labels for the history page. Kept
+# LOCAL (not gpu_agent.reader.DIM_LABEL) because that table's "Momentum
+# rating" would trip lint_story_copy's own "momentum" ban -- these values
+# are picked to never contain a banned word.
+_DIM_DISPLAY = {
+    "momentum": "Demand pace",
+    "unitEconomics": "Unit economics",
+    "competitiveStructure": "Competitive structure",
+    "moat": "Moat",
+    "bottleneck": "Bottleneck",
+    "strategicRisk": "Strategic risk",
+}
+
+
+def _month_details(month: dict) -> str:
+    """One `<details id="m-<key>">` block: the month's rating/direction up
+    front, then each dimension's own rating/direction, then the binding
+    constraint that month landed on."""
+    dims = month.get("dims") or {}
+    dim_rows = "".join(
+        f'<p class="xp-dim-row"><b>{esc(_DIM_DISPLAY.get(name, name))}:</b> '
+        f'{esc(d.get("rating") or "")} ({esc(d.get("direction") or "")})</p>'
+        for name, d in dims.items())
+    constraint = month.get("constraint") or ""
+    constraint_line = (f'<p class="xp-constraint">Binding constraint: '
+                       f'{esc(constraint)}</p>' if constraint else "")
+    summary = (f'{esc(month["label"])} — {esc(month.get("rating") or "")} '
+              f'({esc(month.get("direction") or "")})')
+    return (f'<details id="m-{esc(month["key"])}"><summary>{summary}</summary>'
+           f'{dim_rows}{constraint_line}</details>')
+
+
+def render_history_page(timeline: dict, today) -> str:
+    """The verdict timeline: the gap chart over every month on record with
+    each month's headline pinned to it, then one expandable `<details>` row
+    per month carrying that month's dimension ratings/directions and its
+    binding constraint. `today` is accepted for scaffold-signature parity
+    with the other Explore pages; this page has no date-bounded control
+    that needs it."""
+    months = timeline.get("months") or []
+    headlines = [m.get("headline") or "" for m in months]
+    svg = render_timeline_svg(timeline.get("gap"), headlines)
+    chart_section = (f'<section class="xp-timeline">{svg}'
+                     f'<p class="xp-srcline">Source: agent-tracked orders and '
+                     f'shipment data; company filings</p></section>' if svg else "")
+    rows = "".join(_month_details(m) for m in months)
+    body = (f'<h1>Verdict history</h1>{chart_section}{rows}'
+           f'<p class="xp-appendix-link"><a href="appendix.html">'
+           f'How this desk works</a></p>')
+    return page_scaffold("Verdict history", "every month this category's verdict has landed on",
+                         body, depth=1)
 
 
 def check_links(pages: dict[str, str]) -> list[str]:

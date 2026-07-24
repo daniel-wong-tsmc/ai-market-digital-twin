@@ -157,3 +157,57 @@ def render_gap_svg(data: dict, callouts: list[dict] | None = None) -> str:
 <circle cx="{_PAD_L+216}" cy="{_H-2}" r="4" fill="{_SUPPLY}"/>
 <text x="{_PAD_L+224}" y="{_H+2}" class="gc-tick">What can be shipped (supply)</text></g>
 </svg>"""
+
+
+_TL_ROWS = 3
+_TL_ROW_STEP = 12
+
+
+def render_timeline_svg(gap_data: dict | None, month_headlines: list[str]) -> str:
+    """The full-history gap chart (every month `gap_data` carries, not just
+    the front page's last 7) with each month's own headline pinned above
+    the plot as a small label + leader line down to that month's point on
+    the demand line. Reuses `_scale` (and the same `_W`/`_H`/`_PAD_*`
+    canvas) verbatim -- this does not change how the front-page gap chart
+    is laid out, it only draws more months into the same coordinate system.
+    Labels cycle across `_TL_ROWS` vertical rows (by month index) so
+    adjacent months' leader lines don't all land on the same baseline.
+    `month_headlines` is expected to line up 1:1 with `gap_data["months"]`;
+    a short list (or a blank headline) just means fewer labels are drawn,
+    it never raises."""
+    if not gap_data or not gap_data.get("months"):
+        return ""
+    px, py = _scale(gap_data)
+    n = len(gap_data["months"])
+    d_pts = " ".join(f"{px(i):.1f},{py(gap_data['demand'][i]):.1f}" for i in range(n))
+    s_pts = " ".join(f"{px(i):.1f},{py(gap_data['supply'][i]):.1f}" for i in range(n))
+    band = (d_pts + " " +
+            " ".join(f"{px(i):.1f},{py(gap_data['supply'][i]):.1f}"
+                     for i in reversed(range(n))))
+    ticks = "".join(
+        f'<text x="{px(i):.1f}" y="{_H-12}" class="gc-tick" '
+        f'text-anchor="middle">{esc(m["label"])}</text>'
+        for i, m in enumerate(gap_data["months"]))
+    labels = []
+    for i, m in enumerate(gap_data["months"]):
+        headline = month_headlines[i] if i < len(month_headlines) else ""
+        if not headline:
+            continue
+        x = px(i)
+        y = 12 + (i % _TL_ROWS) * _TL_ROW_STEP
+        labels.append(
+            f'<line x1="{x:.1f}" y1="{y+4:.1f}" x2="{x:.1f}" y2="{_PAD_T-2}" '
+            f'class="gc-leader"/>'
+            f'<text x="{x:.1f}" y="{y:.1f}" class="gc-note" '
+            f'text-anchor="middle">{esc(headline)}</text>')
+    return f"""<svg viewBox="0 0 {_W} {_H}" class="gapchart gc-timeline" role="img"
+ aria-label="Demand and supply over every month on record, with each month's headline pinned above it">
+<polygon points="{band}" fill="{_GAP_FILL}" opacity="0.28"/>
+<polyline points="{d_pts}" fill="none" stroke="{_DEMAND}" stroke-width="2"/>
+<polyline points="{s_pts}" fill="none" stroke="{_SUPPLY}" stroke-width="2"/>
+{ticks}{"".join(labels)}
+<g class="gc-legend"><circle cx="{_PAD_L+6}" cy="{_H-2}" r="4" fill="{_DEMAND}"/>
+<text x="{_PAD_L+14}" y="{_H+2}" class="gc-tick">What buyers want (demand)</text>
+<circle cx="{_PAD_L+216}" cy="{_H-2}" r="4" fill="{_SUPPLY}"/>
+<text x="{_PAD_L+224}" y="{_H+2}" class="gc-tick">What can be shipped (supply)</text></g>
+</svg>"""
