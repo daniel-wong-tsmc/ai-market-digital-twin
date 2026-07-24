@@ -23,6 +23,12 @@ def test_system_carries_editorial_rules():
     assert ANCHORED_INDICATOR_ID in s
 
 
+def test_system_carries_freshness_rules():
+    s = build_narrator_system()
+    assert "freshnessWeight" in s
+    assert "never present old news as new" in s.lower()
+
+
 def test_user_prompt_sections(tmp_path):
     inp = build_narrator_inputs(CAT, _store(tmp_path), dt.date(2026, 7, 23), None)
     u = build_narrator_user_prompt(inp)

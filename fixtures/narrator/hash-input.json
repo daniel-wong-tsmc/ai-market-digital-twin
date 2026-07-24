@@ -23,7 +23,8 @@
           "date": "2026-07-20",
           "tier": "1"
         }
-      ]
+      ],
+      "freshnessWeight": 0.5
     },
     {
       "id": "f-2",
@@ -35,7 +36,8 @@
           "date": "2026-07-21",
           "tier": "2"
         }
-      ]
+      ],
+      "freshnessWeight": 0.63
     }
   ],
   "implicationLines": [
@@ -68,7 +70,8 @@
     {
       "url": "https://example.com/techwire/lead-times",
       "source": "TechWire",
-      "date": "2026-07-20"
+      "date": "2026-07-20",
+      "freshnessWeight": 0.5
     }
   ],
   "gapMonths": ["2026-06", "2026-07"],

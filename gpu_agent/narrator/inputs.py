@@ -16,26 +16,37 @@ from gpu_agent.dashboard.agenda import read_series
 from gpu_agent.dashboard.brief_model import latest_monthly, read_implication_lines
 from gpu_agent.dashboard.gap_chart import build_gap_data
 from gpu_agent.dashboard.story_model import _CHIP_DEFS, _SERIES_IDS, resolve_store_root
+from gpu_agent.freshness import FreshnessConfig, classify, load_freshness, weight
 from gpu_agent.narrator.store import StoryStore
 
 # Matches story_model's own sparkline window (_chip() there slices series[-8:]).
 _TAIL_LEN = 8
 
 
-def _finding_trim(f: dict) -> dict:
+def _finding_trim(f: dict, today: dt.date, cfg: FreshnessConfig) -> dict:
+    evidence = [
+        {"source": e.get("source") or "", "url": e.get("url") or "",
+         "date": e.get("date") or "", "tier": e.get("tier") or ""}
+        for e in (f.get("evidence") or [])
+    ]
+    if evidence:
+        freshness_weight = max(
+            weight(e["date"], today, classify(e["url"], None, cfg), cfg)
+            for e in evidence
+        )
+    else:
+        freshness_weight = weight(None, today, "news", cfg)
     return {
         "id": f.get("id"),
         "statement": f.get("statement") or "",
-        "evidence": [
-            {"source": e.get("source") or "", "url": e.get("url") or "",
-             "date": e.get("date") or "", "tier": e.get("tier") or ""}
-            for e in (f.get("evidence") or [])
-        ],
+        "evidence": evidence,
+        "freshnessWeight": freshness_weight,
     }
 
 
 def build_narrator_inputs(category_id: str, store_dir: str | Path,
                           today: dt.date, run_dir: str | Path | None) -> dict:
+    cfg = load_freshness()
     store_root = resolve_store_root(category_id, store_dir)
     cat_dir = store_root / category_id
     latest, _prior, as_of, rev = latest_monthly(cat_dir)
@@ -47,7 +58,7 @@ def build_narrator_inputs(category_id: str, store_dir: str | Path,
         "categoryStatus": latest.get("categoryStatus") or {},
         "dimensionRatings": latest.get("dimensionRatings") or {},
     }
-    findings = [_finding_trim(f) for f in (latest.get("findings") or [])
+    findings = [_finding_trim(f, today, cfg) for f in (latest.get("findings") or [])
                 if isinstance(f, dict)]
 
     impl_lines = read_implication_lines(store_root, category_id, as_of) or []
@@ -89,8 +100,11 @@ def build_narrator_inputs(category_id: str, store_dir: str | Path,
             for b in data.get("blobs") or []:
                 url = b.get("url") or ""
                 if url.startswith("https://"):
-                    doc_pool.append({"url": url, "source": b.get("source") or "",
-                                     "date": b.get("date") or ""})
+                    date = b.get("date") or ""
+                    doc_pool.append({
+                        "url": url, "source": b.get("source") or "", "date": date,
+                        "freshnessWeight": weight(date, today, classify(url, None, cfg), cfg),
+                    })
 
     gap = build_gap_data(cat_dir)
     gap_months = [m["key"] for m in gap["months"]] if gap else []
