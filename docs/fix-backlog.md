@@ -1326,3 +1326,16 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   "what a GPU rents for" gauge — reads these series directly, so a stale series now shows on the front
   page. Small dedicated fix lane: parse both grains + regression tests; verify next cycle refreshes.
   *(Concurrent-mint caveat: F102 chosen against a backlog max of F101 on 2026-07-23; renumber if collided.)*
+
+- [ ] **F103 — Evidence freshness: half-life decay + stale-official-source fixes (user critique 2026-07-24).**
+  Official NVIDIA earnings-call material (May vintage) keeps surfacing as current evidence on the live
+  page. Root chain: manifest primaryDomains steer gatherers to IR domains daily; no downstream decay;
+  evidence rows undated, judge-ordered. Fix (spec `docs/superpowers/specs/2026-07-24-f103-freshness-decay-design.md`):
+  new `gpu_agent/freshness.py` half-life engine (weight = 0.5^(age/half-life), anchored publishedAt,
+  NEVER capturedAt) + curated `registry/freshness.json` (**user-set half-lives: news 3d / filings 5d /
+  structural 45d**, tunable by JSON edit); applied to page evidence rows (dates always shown, weight
+  sort, dim <0.25, one row per publisher per scene), narrator inputs + prose-dating rule (dedicated
+  narrator pin re-record, NOT F6) and an aged-claim gate check, and manifest earnings-window cadence
+  for official IR domains. **Judge explicitly untouched (user decision — scores comparable, no F6);
+  judge-side decay is a separate gated follow-up if ratings still skew stale.**
+  *(Concurrent-mint caveat: F103 chosen against a backlog max of F102 on 2026-07-24; renumber if collided.)*
