@@ -13,8 +13,11 @@ from __future__ import annotations
 import posixpath
 import re
 
+from .explore_model import ENTITY_SERIES, SERIES_MEANING, markdown_to_html, series_groups
+from .gap_chart import spark_svg
 from .render import esc
 from .site_render import page
+from .story_model import _CHIP_DEFS
 from .story_render import (_scene_html, evidence_json, render_condense_script,
                             render_evidence_panel)
 
@@ -204,6 +207,138 @@ def render_findings_page(findings: list[dict], sides: dict[str, list[dict]], tod
     body = (f'<h1>Findings</h1>{count_line}{filters}'
            f'{"".join(sections)}{_FIND_SCRIPT}')
     return page_scaffold("Findings", "every finding behind this category's verdict",
+                         body, depth=2)
+
+
+def _fmt_series_value(v) -> str:
+    if isinstance(v, bool) or v is None:
+        return ""
+    if isinstance(v, float):
+        return f"{v:,.2f}"
+    if isinstance(v, int):
+        return str(v)
+    return str(v)
+
+
+def _series_indicator_html(indicator_id: str, rows: list[dict]) -> str:
+    """One indicator's block on the series page (and, reused as-is, an
+    entity dossier's "owned series" block): anchor heading, full-history
+    chart, latest value + unit, the story page's own plain-words chip
+    description (when this indicator has one), the series' one-line
+    meaning, and a deduped source table. An indicator with no rows yet
+    renders a "no data yet" row instead of touching rows[-1] or charting
+    an empty series -- it must never crash the page."""
+    chip = _CHIP_DEFS.get(indicator_id)
+    label = chip["label"] if chip else indicator_id
+    heading = f'<h3 id="s-{esc(indicator_id)}">{esc(label)}</h3>'
+    meaning = SERIES_MEANING.get(indicator_id, "")
+    meaning_line = f'<p class="xp-meaning">{esc(meaning)}</p>' if meaning else ""
+
+    if not rows:
+        return (f'<section class="xp-series">{heading}{meaning_line}'
+                f'<p class="xp-notice">No data yet.</p></section>')
+
+    values = [r["value"] for r in rows if isinstance(r.get("value"), (int, float))]
+    chart = spark_svg(values, 640, 120) if values else ""
+
+    latest = rows[-1]
+    unit = latest.get("unit") or ""
+    value_line = (f'<p class="xp-latest">Latest: '
+                 f'{esc(_fmt_series_value(latest.get("value")))} {esc(unit)}</p>')
+
+    tip_line = f'<p class="xp-tip">{esc(chip["tip"])}</p>' if chip else ""
+
+    seen = set()
+    src_rows = []
+    for r in rows:
+        src = r.get("source") or {}
+        title = src.get("title") or ""
+        date = r.get("publishedAt") or r.get("date") or ""
+        key = (title, date)
+        if not title or key in seen:
+            continue
+        seen.add(key)
+        src_rows.append(f"<tr><td>{esc(title)}</td><td>{esc(date)}</td></tr>")
+    if not src_rows:
+        src_rows = ['<tr><td colspan="2">No sources recorded.</td></tr>']
+    table = (f'<table class="xp-sources"><thead><tr><th>Source</th>'
+            f'<th>Date</th></tr></thead><tbody>{"".join(src_rows)}</tbody></table>')
+
+    return (f'<section class="xp-series">{heading}{chart}{value_line}'
+           f'{tip_line}{meaning_line}{table}</section>')
+
+
+def render_series_page(series: dict, today) -> str:
+    """One section per `series_groups()` entry, rendered in that fixed
+    order; `series` maps indicatorId -> rows, and an indicator absent (or
+    empty) in `series` still renders its heading and a "no data yet" row
+    rather than being skipped or crashing."""
+    sections = []
+    for group in series_groups():
+        items = "".join(_series_indicator_html(ind, series.get(ind) or [])
+                        for ind in group["indicatorIds"])
+        sections.append(f'<section class="xp-series-group">'
+                        f'<h2>{esc(group["label"])}</h2>{items}</section>')
+    body = f"<h1>Series</h1>{''.join(sections)}"
+    return page_scaffold("Series", "the underlying numbers behind this category's verdict",
+                         body, depth=2)
+
+
+def render_entity_page(entity: dict, role: str, findings: list[dict],
+                       series: dict, today) -> str:
+    """An entity dossier: role line, the wiki page's own markdown body,
+    any series this entity owns (`explore_model.ENTITY_SERIES`), and a
+    "What we've observed" section of that entity's own findings, rendered
+    with the same finding-card markup Task 4 uses (but with no filter
+    script -- a single entity's findings never need client-side filtering)."""
+    slug = entity.get("slug") or ""
+    title = entity.get("title") or slug
+
+    own_findings = [f for f in findings if f.get("entitySlug") == slug]
+    cards = "".join(_find_card(f) for f in own_findings)
+    if not cards:
+        cards = '<p class="xp-notice">No findings recorded yet.</p>'
+
+    charts = "".join(_series_indicator_html(ind, series.get(ind) or [])
+                     for ind in ENTITY_SERIES.get(slug, []))
+
+    body = (f'<h1>{esc(title)}</h1>'
+           f'<p class="xp-role">{esc(role)}</p>'
+           f'{markdown_to_html(entity.get("body_md") or "")}'
+           f'{charts}'
+           f'<section class="xp-observed"><h2>What we have observed</h2>{cards}</section>')
+    return page_scaffold(title, f"{title} — {role}", body, depth=2)
+
+
+_ROLE_TO_GROUP = {
+    "where the supply bottleneck lives": "Supply chain",
+    "a supply-side player": "Makers",
+    "a demand driver": "Buyers",
+}
+_INDEX_GROUP_ORDER = ("Supply chain", "Buyers", "Makers", "Other")
+
+
+def render_entities_index(entities: list[dict], roles: dict[str, str]) -> str:
+    """Entities grouped by `explore_model.entity_roles`' own role strings:
+    supply-bottleneck entities under "Supply chain", other supply-side
+    players under "Makers", demand drivers under "Buyers", everything else
+    (including any entity `roles` has no opinion on) under "Other"."""
+    groups: dict[str, list[dict]] = {g: [] for g in _INDEX_GROUP_ORDER}
+    for e in entities:
+        role = roles.get(e.get("slug") or "", "")
+        groups[_ROLE_TO_GROUP.get(role, "Other")].append(e)
+
+    sections = []
+    for label in _INDEX_GROUP_ORDER:
+        ents = groups[label]
+        if not ents:
+            continue
+        rows = "".join(
+            f'<p class="xp-ent-row"><a href="{esc(e["slug"])}.html">{esc(e["title"])}</a></p>'
+            for e in ents)
+        sections.append(f'<section class="xp-ent-group"><h2>{esc(label)}</h2>{rows}</section>')
+    body = f"<h1>Entities</h1>{''.join(sections)}"
+    return page_scaffold("Entities", "who's involved in this category's story",
                          body, depth=2)
 
 
