@@ -206,7 +206,7 @@ _BANNED_WORD = "momentum"
 @pytest.mark.parametrize("field", [
     "headline", "deck", "scene_title", "scene_paragraph", "scene_sourceLine",
     "kpi_whyCaption", "callout_text",
-    "visual_label", "related_title", "related_outlet",
+    "visual_label", "related_title", "related_outlet", "related_date",
 ])
 def test_prose_sweep_covers_every_location(tmp_path, field):
     a = _ok(tmp_path)
@@ -241,8 +241,41 @@ def test_prose_sweep_covers_every_location(tmp_path, field):
         a.scenes[0].relatedDocs = [RelatedDoc(
             url="https://x.example/a", title="t",
             outlet=f"{_BANNED_WORD} Wire", date="d")]
+    elif field == "related_date":
+        # Divergence 1: relatedDocs.date is brain-authored freeform text
+        # (the schema places no validation on it) but story_render._scene_html
+        # renders it as visible page text too, in the same
+        # "outlet · title · date" related-coverage link as title/outlet.
+        a.scenes[0].relatedDocs = [RelatedDoc(
+            url="https://x.example/a", title="t", outlet="Reuters",
+            date=f"{_BANNED_WORD} 2026")]
     violations = gate_narrator(a, _inp(tmp_path))
     assert any("momentum" in v for v in violations)
+
+
+def test_headline_single_index_now_rejected(tmp_path):
+    # Divergence 2: the headline renders TWICE on the page (site_render.page's
+    # <title>Merchant GPU — {headline}</title> and story_render._headline_block's
+    # <h1>{headline}</h1>). A headline with "index" exactly once therefore
+    # shows up as "index" TWICE on the real page, which trips build-time
+    # lint_story_copy's "index/indexed appears at most once" rule. Before this
+    # fix, gate_narrator counted the headline only once and passed this
+    # answer -- confirmed reproducible: gate-pass, build-crash.
+    a = _ok(tmp_path)
+    a.headline = "The index rose last week"
+    violations = gate_narrator(a, _inp(tmp_path))
+    assert any("index" in v.lower() for v in violations)
+
+
+def test_index_once_outside_headline_still_passes(tmp_path):
+    # Only the headline is double-rendered (title + h1); every other field is
+    # rendered (and swept) once. "index" appearing exactly once in a
+    # non-headline field, with no other "index" anywhere including the
+    # headline, must still pass -- the duplicate append must not cause
+    # over-rejection of fields that are genuinely rendered only once.
+    a = _ok(tmp_path)
+    a.scenes[0].paragraphs = ["The index rose modestly this week."]
+    assert gate_narrator(a, _inp(tmp_path)) == []
 
 
 def test_prose_sweep_catches_banned_word_hidden_by_angle_bracket_noise(tmp_path):

@@ -80,7 +80,18 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
     # visible page text -- headline/deck/scene copy, chart labels, and
     # related-coverage titles/outlets alike -- so a gate pass can never leave
     # a banned word for build-time lint_story_copy to trip over.
-    prose_bits = [answer.headline, answer.deck]
+    #
+    # answer.headline is appended TWICE (not a typo): site_render.page()
+    # renders it once in <title>Merchant GPU — {headline}</title> and
+    # story_render._headline_block renders it again in <h1>{headline}</h1>,
+    # so it is visible page text twice. The banned list's only count-based
+    # rule ("index/indexed" appears at most once) must be checked against
+    # that same two-occurrences-per-headline-index reality, or a headline
+    # with exactly one "index" (which renders as two on the page) would
+    # gate-pass and then crash the build-time lint. This only affects the
+    # count-based rule -- boolean banned-word presence checks are unchanged
+    # by a duplicate append.
+    prose_bits = [answer.headline, answer.headline, answer.deck]
     for scene in answer.scenes:
         prose_bits.append(scene.title)
         prose_bits.extend(scene.paragraphs)
@@ -90,6 +101,13 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
         for doc in scene.relatedDocs:
             prose_bits.append(doc.title)
             prose_bits.append(doc.outlet)
+            # doc.date is brain-authored freeform text (the schema places no
+            # validation on it) and story_render._scene_html renders it as
+            # visible page text in the "outlet · title · date" related-
+            # coverage link, so it must be swept like title/outlet or a
+            # banned word here would gate-pass and crash the build-time
+            # lint.
+            prose_bits.append(doc.date)
     prose_bits.extend(k.whyCaption for k in answer.kpiPicks)
     prose_bits.extend(c.text for c in answer.calloutMonths)
     escaped_prose = [html.escape(bit) for bit in prose_bits]
