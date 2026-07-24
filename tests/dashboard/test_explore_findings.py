@@ -5,6 +5,7 @@ import re
 from gpu_agent.dashboard import explore_model as em
 from gpu_agent.dashboard import explore_render as xr
 from gpu_agent.dashboard.story_render import lint_story_copy
+from gpu_agent.freshness import AGING_THRESHOLD, load_freshness
 from tests.dashboard.test_explore_fixtures import _explore_store
 
 TODAY = dt.date(2026, 7, 22)
@@ -76,3 +77,63 @@ def test_statements_and_evidence_links_present(tmp_path):
     html = xr.render_findings_page(findings, sides, TODAY)
     for f in findings:
         assert f["statement"] in html
+
+
+# --- F103 Task 3: weight sort + aging mark ------------------------------
+
+def _plain_finding(fid: str, *, entity: str, observed_at: str,
+                    statement: str | None = None) -> dict:
+    """A minimal finding dict — enough for `_find_card`/`render_findings_page`
+    to render, without going through the full Finding schema. No evidence
+    urls, so `classify` always lands on "news" (3-day half life)."""
+    return {
+        "id": fid,
+        "statement": statement or f"{entity} finding {fid}",
+        "impact": {"targets": [entity]},
+        "entitySlug": entity,
+        "entity": entity,
+        "evidence": [],
+        "observedAt": observed_at,
+    }
+
+
+def test_within_group_sorted_by_weight_descending():
+    fresh = _plain_finding("f-fresh", entity="nvidia", observed_at="2026-07-21")
+    stale = _plain_finding("f-stale", entity="nvidia", observed_at="2026-05-20")
+    sides = {"demand": [stale, fresh], "supply": [], "other": []}
+    html = xr.render_findings_page([stale, fresh], sides, TODAY)
+    assert html.index("nvidia finding f-fresh") < html.index("nvidia finding f-stale")
+
+
+def test_aging_chip_and_class_on_old_finding():
+    cfg = load_freshness()
+    old = _plain_finding("f-old", entity="nvidia", observed_at="2026-05-01")
+    w = xr._find_weight(old, TODAY, cfg)
+    assert w < AGING_THRESHOLD, "fixture must actually be stale for this test to mean anything"
+    sides = {"demand": [old], "supply": [], "other": []}
+    html = xr.render_findings_page([old], sides, TODAY)
+    assert "xp-aging" in html
+    assert "aging" in html
+
+
+def test_fresh_finding_has_no_aging_mark():
+    fresh = _plain_finding("f-fresh2", entity="nvidia", observed_at="2026-07-21")
+    sides = {"demand": [fresh], "supply": [], "other": []}
+    html = xr.render_findings_page([fresh], sides, TODAY)
+    assert "xp-aging" not in html
+
+
+def test_cards_carry_data_weight(tmp_path):
+    findings, sides = _model(tmp_path)
+    html = xr.render_findings_page(findings, sides, TODAY)
+    cards = re.findall(r'<article class="xp-find[^>]*>', html)
+    assert len(cards) == len(findings)
+    for card in cards:
+        assert 'data-weight="' in card
+
+
+def test_find_script_is_byte_unchanged():
+    # Light guard: Task 3 must not touch the inline filter script at all.
+    assert len(xr._FIND_SCRIPT) == 1371
+    assert "location.hash" in xr._FIND_SCRIPT
+    assert "xp-aging" not in xr._FIND_SCRIPT

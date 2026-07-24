@@ -13,6 +13,8 @@ from __future__ import annotations
 import posixpath
 import re
 
+from gpu_agent.freshness import AGING_THRESHOLD, FreshnessConfig, classify, load_freshness
+from gpu_agent.freshness import weight as freshness_weight
 from gpu_agent.reader import DIM_LABEL
 
 from .explore_model import ENTITY_SERIES, SERIES_MEANING, markdown_to_html, series_groups
@@ -36,6 +38,7 @@ EXPLORE_CSS = """
 .xp-srcline { color: var(--muted); font-size: .85rem; }
 .xp-dim-row { margin: .2rem 0; }
 .xp-constraint { color: var(--muted); }
+.xp-aging { opacity: .55; }
 """
 
 _NO_NARRATED_ENTRY = ("No narrated entry this day — the page ran on "
@@ -169,10 +172,25 @@ _FIND_SCRIPT = ("<script>(function(){"
     "})();</script>")
 
 
-def _find_card(f: dict) -> str:
+def _find_weight(f: dict, today, cfg: FreshnessConfig) -> float:
+    """The freshness weight for one finding: date is `observedAt or asOf`,
+    kind is classified off its first evidence entry's url (empty string when
+    it has none) plus its indicatorId. Shared by `_find_card` (display) and
+    `render_findings_page` (sort key) so the two never drift apart."""
+    date = f.get("observedAt") or f.get("asOf") or ""
+    evidence = f.get("evidence") or []
+    first_url = (evidence[0].get("url", "") if evidence and isinstance(evidence[0], dict) else "")
+    kind = classify(first_url, f.get("indicatorId"), cfg)
+    return freshness_weight(date, today, kind, cfg)
+
+
+def _find_card(f: dict, today, cfg: FreshnessConfig) -> str:
     """One `.xp-find` finding card, carrying all four filter data-*
     attributes so the inline script (and this module's own tests) never
-    have to reach past the DOM to know what a card is about."""
+    have to reach past the DOM to know what a card is about. Also carries
+    the finding's freshness weight (`data-weight`) and, when that weight has
+    decayed below AGING_THRESHOLD, an `xp-aging` class plus a visible
+    "aging" chip."""
     targets = (f.get("impact") or {}).get("targets") or []
     dim = ",".join(str(t) for t in targets)
     entity = f.get("entitySlug") or ""
@@ -180,14 +198,18 @@ def _find_card(f: dict) -> str:
     tiers = {e.get("tier") for e in evidence if isinstance(e, dict)}
     tier = "primary" if "primary" in tiers else ("secondary" if "secondary" in tiers else "")
     date = f.get("observedAt") or f.get("asOf") or ""
+    w = _find_weight(f, today, cfg)
+    aging = w < AGING_THRESHOLD
+    css_class = "xp-find xp-aging" if aging else "xp-find"
+    aging_chip = '<span class="xp-tag xp-aging-chip">aging</span>' if aging else ""
     tags = "".join(f'<span class="xp-tag">{esc(t)}</span>' for t in targets)
     links = " ".join(
         f'<a href="{esc(e["url"])}" target="_blank" rel="noopener">{esc(e.get("source") or "source")}</a>'
         for e in evidence
         if isinstance(e, dict) and str(e.get("url") or "").startswith("https://"))
-    return (f'<article class="xp-find" data-dim="{esc(dim)}" data-entity="{esc(entity)}" '
-            f'data-tier="{esc(tier)}" data-date="{esc(date)}">'
-            f'<p class="xp-stmt">{esc(f.get("statement") or "")}</p>'
+    return (f'<article class="{css_class}" data-dim="{esc(dim)}" data-entity="{esc(entity)}" '
+            f'data-tier="{esc(tier)}" data-date="{esc(date)}" data-weight="{w}">'
+            f'<p class="xp-stmt">{esc(f.get("statement") or "")}{aging_chip}</p>'
             f'<p class="xp-tags">{tags}</p>'
             f'<p class="xp-meta">{esc(f.get("entity") or "")} &middot; {esc(date)}</p>'
             f'<p class="xp-evidence">{links}</p>'
@@ -198,9 +220,12 @@ def render_findings_page(findings: list[dict], sides: dict[str, list[dict]], tod
     """The question-grouped findings browser: `sides` is `explore_model.
     split_by_side(findings)`'s own {"demand": [...], "supply": [...],
     "other": [...]} shape -- this function renders groups in that fixed
-    order (demand, supply, then a muted "other" group) and does not re-sort
-    within a group. `today` only bounds the date filter's `max`; it is never
-    read from the clock here."""
+    order (demand, supply, then a muted "other" group). Within each group,
+    findings are sorted (stable) descending by freshness weight -- freshest
+    first -- so a decayed finding sinks toward the bottom of its own group
+    rather than the whole page. `today` also bounds the date filter's `max`;
+    it is never read from the clock here."""
+    cfg = load_freshness()
     all_entities = sorted({f["entitySlug"] for f in findings if f.get("entitySlug")})
     all_dims = sorted({str(t) for f in findings
                        for t in (f.get("impact") or {}).get("targets") or []})
@@ -210,7 +235,9 @@ def render_findings_page(findings: list[dict], sides: dict[str, list[dict]], tod
 
     sections = []
     for key, label, css in _FIND_GROUPS:
-        cards = "".join(_find_card(f) for f in sides.get(key, []))
+        group = sorted(sides.get(key, []),
+                       key=lambda f: _find_weight(f, today, cfg), reverse=True)
+        cards = "".join(_find_card(f, today, cfg) for f in group)
         sections.append(f'<section class="xp-group{css}"><h2>{esc(label)}</h2>{cards}</section>')
 
     filters = (
@@ -317,8 +344,11 @@ def render_entity_page(entity: dict, role: str, findings: list[dict],
     slug = entity.get("slug") or ""
     title = entity.get("title") or slug
 
+    cfg = load_freshness()
     own_findings = [f for f in findings if f.get("entitySlug") == slug]
-    cards = "".join(_find_card(f) for f in own_findings)
+    own_findings = sorted(own_findings,
+                          key=lambda f: _find_weight(f, today, cfg), reverse=True)
+    cards = "".join(_find_card(f, today, cfg) for f in own_findings)
     if not cards:
         cards = '<p class="xp-notice">No findings recorded yet.</p>'
 
