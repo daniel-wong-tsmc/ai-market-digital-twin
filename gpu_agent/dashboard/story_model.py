@@ -368,13 +368,21 @@ def _assemble_model(category_id: str, store_root: Path, today: dt.date) -> dict:
 
 
 def read_story_artifact(category_id: str, store_root: Path,
-                        today: dt.date) -> dict | None:
-    """Phase B: load today's narrator artifact and map it onto the exact
-    model dict shape `_assemble_model` produces. Returns None when there is
-    no artifact for the date, or when the artifact has `fellBack` set --
+                        today: dt.date,
+                        story_date: str | None = None) -> dict | None:
+    """Phase B: load a narrator artifact and map it onto the exact model
+    dict shape `_assemble_model` produces. Returns None when there is no
+    artifact for the date, or when the artifact has `fellBack` set --
     either way the caller must fall back to the assembler, indistinguishable
-    from Phase A behavior."""
-    art = StoryStore(store_root).read(category_id, today.isoformat())
+    from Phase A behavior.
+
+    `story_date` (F101c Task 3) is which date's artifact to read --
+    defaults to `today.isoformat()`, preserving the original Phase B
+    behavior exactly when omitted. This lets the story-archive permalink
+    pages point the same reader at an arbitrary past day without
+    duplicating this method's mapping logic."""
+    art = StoryStore(store_root).read(
+        category_id, story_date if story_date is not None else today.isoformat())
     if art is None or art.narratorMeta.fellBack:
         return None
 
