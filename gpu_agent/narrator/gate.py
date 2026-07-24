@@ -13,6 +13,7 @@ from.
 from __future__ import annotations
 
 import html
+import re
 
 from gpu_agent.dashboard.story_model import (ANCHORED_INDICATOR_ID,
                                              NO_SOURCE_LINE)
@@ -21,6 +22,12 @@ from gpu_agent.narrator.schema import NarratorAnswer
 
 _NO_SOURCE = NO_SOURCE_LINE
 _FORWARD_MARKERS = ("close", "watch", "ahead", "next")
+
+# Mirrors story_render.py's own pattern for the "index/indexed appears at
+# most once" rule exactly (case-insensitive, same word boundaries), so the
+# gate's count and the build-time page-level lint's count can never disagree
+# on what counts as an occurrence.
+_INDEX_WORD_RE = re.compile(r"\bindex(?:ed)?\b", re.I)
 
 
 def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
@@ -111,7 +118,35 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
     prose_bits.extend(k.whyCaption for k in answer.kpiPicks)
     prose_bits.extend(c.text for c in answer.calloutMonths)
     escaped_prose = [html.escape(bit) for bit in prose_bits]
-    violations.extend(lint_story_copy("<p>" + " ".join(escaped_prose) + "</p>"))
+    joined_prose = " ".join(escaped_prose)
+    violations.extend(lint_story_copy("<p>" + joined_prose + "</p>"))
+
+    # Check 4b: chrome-aware index/indexed budget. gap_chart.py renders a
+    # fixed axis label containing "indexed" whenever gapMonths is non-empty
+    # (gpu_agent/dashboard/gap_chart.py's "orders vs. chips shipped, indexed"
+    # text), and story_render.lint_story_copy's count-based rule scans the
+    # WHOLE rendered page, not just narrator prose. That fixed chrome
+    # occurrence is invisible to the lint_story_copy(prose_bits) call above,
+    # which only ever sees narrator-authored text. So when a gap chart WILL
+    # render, the page's single index/indexed budget is already spent by the
+    # chart's own axis label, and the narrator's share of that budget is
+    # zero -- any index/indexed in narrator prose would push the page-level
+    # count to 2 and crash site_build.build_site's lint at build time. We key
+    # this off gapMonths being non-empty (the actual rendering condition)
+    # rather than hardcoding "narrator budget = page budget - 1": that way the
+    # narrator can never ADD an occurrence on top of chrome that has already
+    # spent the budget, and the rule keeps working even if the exact axis
+    # wording in gap_chart.py changes later. When gapMonths is empty, no gap
+    # chart renders, there is no fixed chrome occurrence, and the existing
+    # lint_story_copy-over-prose_bits "at most once" rule above is already
+    # the correct (and only) check.
+    if gap_months and _INDEX_WORD_RE.search(joined_prose):
+        violations.append(
+            "narrator prose contains 'index'/'indexed', but a gap chart will "
+            "render (inputs.gapMonths is non-empty) and its fixed axis label "
+            "already uses the page's one allowed 'index/indexed' occurrence "
+            "-- narrator prose must contain zero occurrences of "
+            "'index'/'indexed' whenever a gap chart renders")
 
     # Check 5: scene count/order bounds, forward-looking close, non-empty sourceLine.
     n_scenes = len(answer.scenes)

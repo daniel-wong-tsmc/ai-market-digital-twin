@@ -267,15 +267,35 @@ def test_headline_single_index_now_rejected(tmp_path):
     assert any("index" in v.lower() for v in violations)
 
 
-def test_index_once_outside_headline_still_passes(tmp_path):
-    # Only the headline is double-rendered (title + h1); every other field is
-    # rendered (and swept) once. "index" appearing exactly once in a
-    # non-headline field, with no other "index" anywhere including the
-    # headline, must still pass -- the duplicate append must not cause
-    # over-rejection of fields that are genuinely rendered only once.
+def test_index_once_with_gap_chart_now_rejected(tmp_path):
+    # Divergence 3 (certified): story_render.lint_story_copy scans the WHOLE
+    # rendered page, and whenever inputs.gapMonths is non-empty (the normal
+    # live state) gap_chart.py renders a fixed axis label containing
+    # "indexed" ("orders vs. chips shipped, indexed"). That fixed chrome
+    # occurrence already spends the page's entire "index/indexed appears at
+    # most once" budget, so the narrator's own budget is zero. The fixture
+    # used throughout this file (_inp(tmp_path)) has a non-empty gapMonths,
+    # so a single "index" in narrator prose here must now be REJECTED --
+    # before the fix, gate_narrator counted only narrator prose (0 there + 1
+    # here = 1, "at most once" satisfied) and returned [], while the real
+    # page had chrome's 1 + narrator's 1 = 2 and crashed build_site.
     a = _ok(tmp_path)
     a.scenes[0].paragraphs = ["The index rose modestly this week."]
-    assert gate_narrator(a, _inp(tmp_path)) == []
+    assert _inp(tmp_path)["gapMonths"]  # sanity: fixture really has gap months
+    violations = gate_narrator(a, _inp(tmp_path))
+    assert any("index" in v.lower() for v in violations)
+
+
+def test_index_once_without_gap_chart_still_passes(tmp_path):
+    # Companion to the above: with gapMonths EMPTY, no gap chart renders, so
+    # there is no fixed "indexed" chrome eating the page's budget. The plan's
+    # original "once max" rule is then the correct (and only) check, and a
+    # single narrator "index" occurrence must still pass.
+    inp = {**_inp(tmp_path), "gapMonths": []}
+    a = _ok(tmp_path)
+    a.scenes[0].paragraphs = ["The index rose modestly this week."]
+    a.calloutMonths = []  # no gapMonths left for the fixture's callout to reference
+    assert gate_narrator(a, inp) == []
 
 
 def test_prose_sweep_catches_banned_word_hidden_by_angle_bracket_noise(tmp_path):
