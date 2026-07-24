@@ -1,0 +1,53 @@
+{
+  "id": "www-intc-com-0fa743ed-2026-07-1",
+  "statement": "Intel's Data Center and AI segment posted Q2 2026 revenue of $6.3 billion, up 59% year-over-year, which Intel attributes to accelerating demand for AI-driven compute.",
+  "kind": "measured",
+  "value": {
+    "number": 6.3,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Near-60% growth at the third merchant CPU/accelerator vendor confirms AI compute demand is broad enough to lift suppliers well outside the leaders.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Strong reported data center revenue growth is direct evidence that AI compute orders are converting into shipments across multiple vendors."
+  },
+  "evidence": [
+    {
+      "source": "Intel Corporation Investor Relations (intc.com)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Data Center and AI (DCAI): \"$6.3 billion, up 59% YoY\" -- reflecting accelerating demand for AI-driven compute.",
+      "tier": "primary"
+    },
+    {
+      "source": "Intel Corporation Investor Relations (intc.com)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "AI is driving unprecedented demand for compute, and as we continue to execute, Intel is well-positioned to capture sustainable growth across our CPU franchise, ASICs, advanced packaging and vast wafer foundry network.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: Intel's own quarterly results press release from its investor relations site."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

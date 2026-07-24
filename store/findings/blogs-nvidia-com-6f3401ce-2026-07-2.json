@@ -1,0 +1,51 @@
+{
+  "id": "blogs-nvidia-com-6f3401ce-2026-07-2",
+  "statement": "CoreWeave, Microsoft, Nebius, SpaceXAI and Tesla are named among the first customers deploying NVIDIA Spectrum-6 in their AI factories.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named roster of hyperscale and neocloud early adopters for a new NVIDIA platform component is direct evidence of committed demand for the Vera Rubin generation.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "Early-adopter commitments from large buyers signal ordering intent for the full NVIDIA rack platform, of which the switch is one bundled element."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Blog",
+      "url": "https://blogs.nvidia.com/blog/nvidia-spectrum-six-arrives-in-gigascale-ai-factories/",
+      "date": "2026-07-21",
+      "excerpt": "Early adopter partners named as among the first to bring in Spectrum-6: CoreWeave, Microsoft, Nebius, SpaceXAI, and Tesla.",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA Blog",
+      "url": "https://blogs.nvidia.com/blog/nvidia-spectrum-six-arrives-in-gigascale-ai-factories/",
+      "date": "2026-07-21",
+      "excerpt": "Bringing NVIDIA Spectrum-6 and liquid-cooled Spectrum-X Ethernet infrastructure into our AI factories will help us deliver the bandwidth, resilience and efficiency customers need to train frontier models and deploy inference faster.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary NVIDIA announcement naming specific customers, with a direct attributed customer quote."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-21",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

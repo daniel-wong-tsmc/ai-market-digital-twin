@@ -1,0 +1,44 @@
+{
+  "id": "www-servethehome-com-b11b71a3-2026-07-5",
+  "statement": "AT&T is described at the AMD keynote as burning roughly 1 trillion tokens monthly while launching OTel 2.0 models.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Trillion-token monthly consumption at a traditional telco shows inference demand has spread well beyond AI-native companies into mainstream enterprises.",
+  "impact": {
+    "targets": [
+      "applications.enterprise-copilots",
+      "chips.merchant-gpu",
+      "models.reasoning-agentic",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Large-scale token consumption by a mainstream enterprise translates into sustained inference capacity purchases, supporting accelerator demand."
+  },
+  "evidence": [
+    {
+      "source": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+      "url": "https://www.servethehome.com/amd-advancing-ai-2026-keynote-live-coverage/",
+      "date": "2026-07-23",
+      "excerpt": "AT&T: described as \"burning ~1 trillion tokens monthly\"; launching \"OTel 2.0 models.\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary live-blog relaying a vendor keynote slide; no primary customer disclosure or corroborating publishers."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "tokenEconomics",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

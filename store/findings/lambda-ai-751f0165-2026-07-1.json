@@ -1,0 +1,52 @@
+{
+  "id": "lambda-ai-751f0165-2026-07-1",
+  "statement": "Lambda lists NVIDIA B200 on-demand rental at $6.69-$6.99 per GPU-hour and H100 SXM at $3.99-$4.29 per GPU-hour as of 2026-07-24.",
+  "kind": "measured",
+  "value": {
+    "number": 6.69,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Published on-demand rental rates are the visible clearing price for merchant GPU capacity and act as a daily confirmation overlay for tightness or slack.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rental list prices reflect where rentable accelerator capacity is clearing, but with no stated baseline or change this is a static level only."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (lambda.ai)",
+      "url": "https://lambda.ai/service/gpu-cloud/pricing",
+      "date": "2026-07-24",
+      "excerpt": "B200 SXM6: $6.69 to $6.99 per GPU/hour",
+      "tier": "secondary"
+    },
+    {
+      "source": "Lambda (lambda.ai)",
+      "url": "https://lambda.ai/service/gpu-cloud/pricing",
+      "date": "2026-07-24",
+      "excerpt": "H100 SXM: $3.99 to $4.29 per GPU/hour",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary source: a single vendor's live public pricing page, no independent corroboration."
+  },
+  "dispersion": "conflicting same-key reports: value 8.87 -> 6.69 (tol 1%); sources: Lambda (lambda.ai)",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-07-24",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

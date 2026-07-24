@@ -1,0 +1,44 @@
+{
+  "id": "www-digitimes-com-fd99903d-2026-07-1",
+  "statement": "Digitimes reports that exploding AI server compute demand is accelerating data-center architecture upgrades, with co-packaged optics entering commercialization and Taiwan OSATs newly competing for silicon photonics packaging business.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "New entrants chasing silicon photonics packaging work is a sign that optical interconnect capacity is being built out to relieve a networking constraint on large GPU clusters.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "infrastructure.networking-fabric",
+      "chips.networking-silicon",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "More packaging suppliers entering silicon photonics expands assembly capacity for co-packaged optics, which is needed to interconnect large accelerator clusters."
+  },
+  "evidence": [
+    {
+      "source": "Digitimes",
+      "url": "https://www.digitimes.com/news/a20260722PD228/siph-packaging-demand-cpo-ai-server.html",
+      "date": "2026-07-22",
+      "excerpt": "Exploding demand for AI server computing power is pushing data-center architectures to upgrade at a faster pace, with co-packaged optics (CPO) and related solutions entering their [first year of commercialization]...",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Secondary source and only a paywalled preview snippet was accessible; no capacity, lead-time or dollar figures were retrievable to verify the claim."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

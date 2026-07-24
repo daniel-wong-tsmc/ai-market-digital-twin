@@ -1,0 +1,43 @@
+{
+  "id": "blogs-nvidia-com-6f3401ce-2026-07-3",
+  "statement": "NVIDIA claims Spectrum-X Ethernet Photonics delivers 5x higher power efficiency and up to 95% network efficiency across deployments exceeding 100,000 GPUs.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Power efficiency at the fabric layer determines how many GPUs fit inside a fixed power envelope, so gains here effectively expand deployable compute per megawatt.",
+  "impact": {
+    "targets": [
+      "infrastructure.networking-fabric",
+      "energy.efficiency",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Lower networking power draw per unit of bandwidth frees power budget for accelerators, raising usable GPU density in power-constrained sites."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Blog",
+      "url": "https://blogs.nvidia.com/blog/nvidia-spectrum-six-arrives-in-gigascale-ai-factories/",
+      "date": "2026-07-21",
+      "excerpt": "up to 95% network efficiency across deployments exceeding 100,000 GPUs; a 1.7x reduction in switches needed for data centers; 5x higher power efficiency for Spectrum-X Ethernet Photonics",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Primary source but vendor-marketing performance claims without an independent benchmark or stated baseline configuration."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-07-21",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

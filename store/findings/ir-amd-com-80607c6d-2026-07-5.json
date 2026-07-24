@@ -1,0 +1,43 @@
+{
+  "id": "ir-amd-com-80607c6d-2026-07-5",
+  "statement": "Anthropic's chief compute officer states that access to compute is central to keeping Claude at the frontier and meeting customer demand.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A frontier lab publicly framing compute access as the binding constraint indicates demand pressure is coming from end-customer usage, not just capacity land-grabbing.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "models.reasoning-agentic"
+    ],
+    "direction": "positive",
+    "mechanism": "Stated compute scarcity at a leading lab implies continued accelerator procurement across vendors to serve growing inference and training workloads."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (ir.amd.com)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1292/amd-and-anthropic-announce-strategic-partnership-to-deploy-up-to-2-gigawatts-of-amd-instinct-mi450-series-gpus",
+      "date": "2026-07-22",
+      "excerpt": "Access to compute is central to keeping Claude at the frontier and meeting demand from our customers.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: attributed executive quote in AMD's own press release."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

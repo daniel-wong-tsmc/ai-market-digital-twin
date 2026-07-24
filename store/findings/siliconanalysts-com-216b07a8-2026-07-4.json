@@ -1,0 +1,44 @@
+{
+  "id": "siliconanalysts-com-216b07a8-2026-07-4",
+  "statement": "HBM supply shortage persists, with HBM described as sold out through 2026 and TSMC CoWoS advanced-packaging lead times reported exceeding twelve months as the binding bottleneck.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "If packaging capacity rather than memory wafers is the true limit, then adding HBM wafer capacity alone will not increase finished accelerator output.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "Advanced-packaging lead times beyond a year cap how much HBM can be assembled into shipping accelerators, holding effective supply below demand."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts",
+      "url": "https://siliconanalysts.com/market/hbm-supply-shortage-persists-as-sk-hynix-commands-56-4-market-share-micron-commi-2026-07-10",
+      "date": "2026-07-10",
+      "excerpt": "TSMC CoWoS advanced-packaging lead times reported exceeding twelve months, cited as the binding bottleneck limiting HBM output expansion; HBM described as \"sold out through 2026.\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary source, and this passage is explicitly flagged in the document as corroborating background from a search round rather than the article's own reporting."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "memory",
+  "observedAt": "2026-07-10",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

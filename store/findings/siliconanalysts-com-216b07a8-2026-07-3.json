@@ -1,0 +1,53 @@
+{
+  "id": "siliconanalysts-com-216b07a8-2026-07-3",
+  "statement": "Micron committed $250 billion to US DRAM manufacturing through 2035, targeting 40% of total output domestically, and broke ground on its New York fab on July 9, 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 250.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Very large multi-year memory capex is the mechanism by which today's shortage eventually resolves, but on a timeline measured in years, not quarters.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed fab capital and a started groundbreaking add future DRAM and HBM bit supply, easing the memory constraint on accelerator production over the long run."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts",
+      "url": "https://siliconanalysts.com/market/hbm-supply-shortage-persists-as-sk-hynix-commands-56-4-market-share-micron-commi-2026-07-10",
+      "date": "2026-07-10",
+      "excerpt": "Micron has committed $250 billion in US DRAM manufacturing investment through 2035.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Silicon Analysts",
+      "url": "https://siliconanalysts.com/market/hbm-supply-shortage-persists-as-sk-hynix-commands-56-4-market-share-micron-commi-2026-07-10",
+      "date": "2026-07-10",
+      "excerpt": "Micron US DRAM capacity target: 40% of total output domestically by 2035.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary open-web article; figures not verified against a primary Micron filing in this document."
+  },
+  "dispersion": "conflicting same-key reports: value 26.5 -> 250.0 (tol 1%); sources: Silicon Analysts",
+  "asOf": "2026-07",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-07-10",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

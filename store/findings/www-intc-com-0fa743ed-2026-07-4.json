@@ -1,0 +1,53 @@
+{
+  "id": "www-intc-com-0fa743ed-2026-07-4",
+  "statement": "Intel guided Q3 2026 revenue to $15.8-$16.8 billion, above the $15.1 billion analyst expectation, after Q2 revenue of $16.1 billion beat consensus by 11.64%.",
+  "kind": "measured",
+  "value": {
+    "number": 16.3,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Guidance set above consensus is the clearest forward statement a vendor makes about whether it expects demand to hold up next quarter.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Above-consensus forward revenue guidance signals the vendor sees continued order strength, supporting the demand track into the next quarter."
+  },
+  "evidence": [
+    {
+      "source": "Intel Corporation Investor Relations (intc.com)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Revenue range: \"$15.8 billion to $16.8 billion\" (above analyst expectations of $15.1 billion).",
+      "tier": "primary"
+    },
+    {
+      "source": "Intel Corporation Investor Relations (intc.com)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "$16.1 billion, up 25% year-over-year",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: guidance range stated in Intel's own quarterly results press release."
+  },
+  "dispersion": "Guidance is a range of $15.8B to $16.8B; the value shown is the midpoint.",
+  "asOf": "2026-07",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

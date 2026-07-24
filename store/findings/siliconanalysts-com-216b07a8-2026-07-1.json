@@ -1,0 +1,46 @@
+{
+  "id": "siliconanalysts-com-216b07a8-2026-07-1",
+  "statement": "SK Hynix holds 56.4% of the HBM market, making high-bandwidth memory supply structurally concentrated in one vendor.",
+  "kind": "measured",
+  "value": {
+    "number": 56.4,
+    "unit": "pct"
+  },
+  "trend": "unknown",
+  "why": "When one supplier holds a majority of HBM output, accelerator makers' build plans depend on that vendor's capacity and pricing decisions.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Majority share in a bottleneck component gives one supplier pricing and allocation power, constraining the effective supply available to GPU builders."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts",
+      "url": "https://siliconanalysts.com/market/hbm-supply-shortage-persists-as-sk-hynix-commands-56-4-market-share-micron-commi-2026-07-10",
+      "date": "2026-07-10",
+      "excerpt": "SK Hynix holds 56.4% market share",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary open-web analyst article; no primary filing and no corroboration across three distinct publishers in this document."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-07-10",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

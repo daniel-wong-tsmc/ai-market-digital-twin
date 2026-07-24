@@ -1,0 +1,47 @@
+{
+  "id": "siliconanalysts-com-47ffeeeb-2026-07-2",
+  "statement": "NVIDIA data center revenue reached $75.2 billion in the quarter ended April 26, 2026, out of $81.6 billion total, after a record $62.3 billion (up 75% YoY) reported in February 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 75.2,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Sequential growth of roughly $13 billion in a single quarter of data center revenue is the strongest available read on how fast accelerator demand is actually converting to shipments.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Record and still-accelerating data center revenue confirms that orders are being filled at scale, pulling through memory, packaging and networking supply chains."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts",
+      "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026",
+      "date": "2026-07-24",
+      "excerpt": "NVIDIA reported quarterly Data Center revenue of $62.3 billion (record, up 75% YoY) in a February 2026 report; most recent quarter (ended April 26, 2026) reported $81.6 billion total revenue, $75.2 billion from data center.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary source restating reported results; the underlying company filing was not fetched, and this passage is flagged as a cross-check from general web search."
+  },
+  "dispersion": "conflicting same-key reports: value 200.0 -> 75.2 (tol 1%); sources: Silicon Analysts",
+  "asOf": "2026-07",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "market",
+  "observedAt": "2026-07-24",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

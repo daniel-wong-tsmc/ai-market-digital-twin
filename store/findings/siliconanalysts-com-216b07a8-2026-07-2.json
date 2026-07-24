@@ -1,0 +1,53 @@
+{
+  "id": "siliconanalysts-com-216b07a8-2026-07-2",
+  "statement": "Micron's data center segment reported $11.5B revenue, up 103% quarter-over-quarter, at an 87% gross margin.",
+  "kind": "measured",
+  "value": {
+    "number": 11.5,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A doubling of data center memory revenue in one quarter at an extreme gross margin is the clearest sign that memory demand is running far ahead of available supply.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rapid revenue growth at exceptional margin indicates buyers are bidding up scarce memory, which raises accelerator bill-of-materials cost while confirming strong end demand."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts",
+      "url": "https://siliconanalysts.com/market/hbm-supply-shortage-persists-as-sk-hynix-commands-56-4-market-share-micron-commi-2026-07-10",
+      "date": "2026-07-10",
+      "excerpt": "Micron data center segment gross margin reached 87% on $11.5B revenue",
+      "tier": "secondary"
+    },
+    {
+      "source": "Silicon Analysts",
+      "url": "https://siliconanalysts.com/market/hbm-supply-shortage-persists-as-sk-hynix-commands-56-4-market-share-micron-commi-2026-07-10",
+      "date": "2026-07-10",
+      "excerpt": "$11.5B revenue (up 103% QoQ)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary open-web article restating segment figures; the underlying filing was not fetched and no multi-publisher corroboration is present."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "memory",
+  "observedAt": "2026-07-10",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

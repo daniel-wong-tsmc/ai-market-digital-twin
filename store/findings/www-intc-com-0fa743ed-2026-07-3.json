@@ -1,0 +1,52 @@
+{
+  "id": "www-intc-com-0fa743ed-2026-07-3",
+  "statement": "Intel's GAAP gross margin rose to 40.4% in Q2 2026 from 27.5% a year earlier, with Q3 guidance of about 41.0% GAAP.",
+  "kind": "measured",
+  "value": {
+    "number": 40.4,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "A near-13-point margin jump shows pricing and utilization are firm, which is what you see when supply is tight relative to demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Expanding gross margin alongside volume growth indicates buyers are absorbing prices without resistance, a signature of demand exceeding available supply."
+  },
+  "evidence": [
+    {
+      "source": "Intel Corporation Investor Relations (intc.com)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "GAAP gross margin: \"40.4%\" (vs. 27.5% in Q2 2025).",
+      "tier": "primary"
+    },
+    {
+      "source": "Intel Corporation Investor Relations (intc.com)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "GAAP gross margin guidance: \"~41.0%\".",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: reported and guided margin figures taken from Intel's own results release."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

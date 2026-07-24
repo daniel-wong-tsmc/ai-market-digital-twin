@@ -1,0 +1,46 @@
+{
+  "id": "siliconanalysts-com-47ffeeeb-2026-07-1",
+  "statement": "NVIDIA's AI accelerator share is projected to fall from a 2024 peak of 87% to 81% in 2025E and 75% in 2026E.",
+  "kind": "measured",
+  "value": {
+    "number": 75.0,
+    "unit": "pct"
+  },
+  "trend": "falling",
+  "why": "A steady share decline from the peak means the incumbent is capturing a shrinking slice of a growing market, which changes who benefits from the next wave of accelerator spend.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "negative",
+    "mechanism": "Share erosion toward custom silicon and second-source merchant GPUs reduces the incumbent's capture rate of total accelerator spending even as the market expands."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts",
+      "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026",
+      "date": "2026-07-24",
+      "excerpt": "NVIDIA share by year (verbatim): 2022 \"75%\"; 2023 \"86%\"; 2024 \"87% (peak)\"; 2025E \"81%\"; 2026E \"75%\".",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analyst estimate, and the document itself notes estimates range 70%-86% depending on methodology."
+  },
+  "dispersion": "The same document notes analyst estimates for 2026 range 70%-86% depending on whether hyperscaler custom silicon is included.",
+  "asOf": "2026-07",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-07-24",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

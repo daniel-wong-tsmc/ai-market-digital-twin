@@ -1,0 +1,44 @@
+{
+  "id": "www-servethehome-com-b11b71a3-2026-07-2",
+  "statement": "AMD's Helios rack-scale system reached full production status with Q3 2026 shipment start and ramp into H2 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A dated production and shipment schedule turns announced gigawatt commitments into an actual supply timeline the market can plan around.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.cooling",
+      "chips.hbm-memory"
+    ],
+    "direction": "positive",
+    "mechanism": "Full production status with a near-term shipment start adds a second rack-scale accelerator supply line, pulling through memory, rack and cooling supply chains."
+  },
+  "evidence": [
+    {
+      "source": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+      "url": "https://www.servethehome.com/amd-advancing-ai-2026-keynote-live-coverage/",
+      "date": "2026-07-23",
+      "excerpt": "announced as reaching \"full production status\"; \"Q3 2026 shipment start; ramping into H2 2027\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary live-blog coverage of a vendor keynote; no primary filing fetched and no multi-publisher corroboration in this document."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: AMD Investor Relations (ir.amd.com), ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

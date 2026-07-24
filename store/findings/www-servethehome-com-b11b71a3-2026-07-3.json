@@ -1,0 +1,51 @@
+{
+  "id": "www-servethehome-com-b11b71a3-2026-07-3",
+  "statement": "AMD disclosed or reiterated large deployment partnerships at Advancing AI 2026: Anthropic at 2GW of Helios, OpenAI at 6GW with pre-production Helios by end of 2026, Meta co-developing rack-scale OCP standards, plus AT&T and Cisco.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A stack of named multi-gigawatt customers is the strongest available evidence that buyers are committing real volume to a non-incumbent accelerator vendor.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.hyperscale-cloud",
+      "applications.enterprise-copilots"
+    ],
+    "direction": "positive",
+    "mechanism": "Named gigawatt-scale design wins convert into forward accelerator orders and validate second-source supply for frontier training and inference."
+  },
+  "evidence": [
+    {
+      "source": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+      "url": "https://www.servethehome.com/amd-advancing-ai-2026-keynote-live-coverage/",
+      "date": "2026-07-23",
+      "excerpt": "OpenAI: previously announced 6GW AMD hardware deployment; pre-production Helios deployment planned for end of 2026.",
+      "tier": "secondary"
+    },
+    {
+      "source": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+      "url": "https://www.servethehome.com/amd-advancing-ai-2026-keynote-live-coverage/",
+      "date": "2026-07-23",
+      "excerpt": "Anthropic: committing to 2GW of Helios hardware (see companion AMD/Anthropic press release dated 2026-07-22)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary keynote live-blog; the Anthropic element is separately backed by an AMD press release but the rest is single-outlet reporting of vendor statements."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: AMD Investor Relations (ir.amd.com), ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

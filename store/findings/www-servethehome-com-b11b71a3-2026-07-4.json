@@ -1,0 +1,50 @@
+{
+  "id": "www-servethehome-com-b11b71a3-2026-07-4",
+  "statement": "AMD claims Helios delivers 30% more tokens per dollar than competing systems, with ROCm software gains of 3.3x inference and 2.4x training over ROCm 7.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "If a challenger genuinely improves tokens per dollar, it pressures the incumbent's pricing and lowers the cost of serving inference across the market.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.cluster-software",
+      "models.reasoning-agentic"
+    ],
+    "direction": "positive",
+    "mechanism": "Better cost per token from a second vendor plus large software throughput gains reduces the effective price of inference capacity and pressures incumbent margins."
+  },
+  "evidence": [
+    {
+      "source": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+      "url": "https://www.servethehome.com/amd-advancing-ai-2026-keynote-live-coverage/",
+      "date": "2026-07-23",
+      "excerpt": "claimed to deliver \"30% more tokens per dollar than competition.\"",
+      "tier": "secondary"
+    },
+    {
+      "source": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+      "url": "https://www.servethehome.com/amd-advancing-ai-2026-keynote-live-coverage/",
+      "date": "2026-07-23",
+      "excerpt": "ROCm software performance claims: \"3.3x inference performance improvement over ROCm 7\"; \"2.4x training performance gains.\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary coverage of vendor marketing claims with unspecified competitor baselines and no independent verification."
+  },
+  "dispersion": "Competitive claims cite unspecified baselines, including a separate \"2x performance/agents per watt advantage over competitors\" with no named comparator.",
+  "asOf": "2026-07",
+  "indicatorId": "flopsPerDollar",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
