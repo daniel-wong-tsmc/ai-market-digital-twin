@@ -1,0 +1,41 @@
+{
+  "id": "www-sahmcapital-com-dbab27f1-2026-07-1",
+  "statement": "NVIDIA H200 shipments to China have begun under a shift to case-by-case export review, though volumes remain minimal, with about 10 approved Chinese buyers including Tencent, ByteDance and Alibaba.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Reopened China access restores a large addressable demand market for NVIDIA, though subject to a 25% fee and 50% volume cap.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Resumed exports reopen China demand for advanced GPUs, partially offset by the volume cap and tariff."
+  },
+  "evidence": [
+    {
+      "source": "Sahm Capital",
+      "url": "https://www.sahmcapital.com/news/content/nvidia-starts-h200-ai-chip-shipments-to-china-as-us-approves-limited-exports-2026-07-15",
+      "date": "2026-07-15",
+      "excerpt": "There have been minimal exports of any H200s to China so far",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary source reporting government testimony; corroboration quoted within one document."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-15",
+  "capturedAt": "2026-07-25T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

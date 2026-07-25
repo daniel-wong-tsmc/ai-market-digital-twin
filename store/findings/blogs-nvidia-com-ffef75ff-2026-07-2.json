@@ -1,0 +1,45 @@
+{
+  "id": "blogs-nvidia-com-ffef75ff-2026-07-2",
+  "statement": "Vera Rubin NVL72 delivers 10x more throughput per megawatt than Grace Blackwell NVL72.",
+  "kind": "measured",
+  "value": {
+    "number": 10.0,
+    "unit": "perf_per_W"
+  },
+  "trend": "rising",
+  "why": "A large performance-per-watt gain lowers energy and cost per unit of compute.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.efficiency"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher throughput per megawatt improves compute economics and energy efficiency."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Blog",
+      "url": "https://blogs.nvidia.com/blog/vera-rubin/",
+      "date": "2026-07-21",
+      "excerpt": "10x more throughput per megawatt than Grace Blackwell NVL72",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor benchmark (CoreWeave on DeepSeek-R1)."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-21",
+  "capturedAt": "2026-07-25T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

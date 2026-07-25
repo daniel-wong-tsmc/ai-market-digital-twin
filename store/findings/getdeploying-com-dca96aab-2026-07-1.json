@@ -1,0 +1,45 @@
+{
+  "id": "getdeploying-com-dca96aab-2026-07-1",
+  "statement": "H100 cloud rental averages $3.58/hr per GPU across 48 tracked providers, ranging from $0.93/hr to $14.90/hr.",
+  "kind": "measured",
+  "value": {
+    "number": 3.58,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Establishes the current H100 rental price level as a market display overlay.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rental price level is a display overlay and does not by itself move demand or supply."
+  },
+  "evidence": [
+    {
+      "source": "getdeploying.com",
+      "url": "https://getdeploying.com/reference/cloud-gpu/nvidia-h100",
+      "date": "2026-07-25",
+      "excerpt": "Average sits at $3.58/hr; full range $0.93/hr to $14.90/hr per GPU including spot and reserved terms.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator; static price level without stated baseline change."
+  },
+  "dispersion": "$0.93-$14.90/hr across 48 providers",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-07-25",
+  "capturedAt": "2026-07-25T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "ir-amd-com-6a5e41b9-2026-07-2",
+  "statement": "AMD Helios claims up to 30% more tokens per dollar than NVIDIA's Vera Rubin NVL72, and MI455X claims 34x higher token throughput than MI355X.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Improved tokens-per-dollar strengthens AMD's cost competitiveness and lowers inference cost.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.reasoning-agentic"
+    ],
+    "direction": "positive",
+    "mechanism": "Better cost-efficiency shifts accelerator demand toward AMD and lowers serving costs."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era",
+      "date": "2026-07-23",
+      "excerpt": "up to 30% more tokens per dollar than the leading competitive solution",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Primary source but vendor-reported competitive benchmark."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "flopsPerDollar",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-25T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

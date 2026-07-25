@@ -1,0 +1,43 @@
+{
+  "id": "blogs-nvidia-com-ffef75ff-2026-07-1",
+  "statement": "Vera Rubin NVL72 has entered production ramp with deployments across CoreWeave, Google Cloud, Microsoft Azure, Oracle and others, and OpenAI planning Q3 adoption at scale.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Broad adoption of the next-gen platform by major clouds and neoclouds signals strong merchant-GPU demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Next-generation GPU adoption by leading cloud providers expands data-center accelerator demand."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Blog",
+      "url": "https://blogs.nvidia.com/blog/vera-rubin/",
+      "date": "2026-07-21",
+      "excerpt": "Vera Rubin NVL72 production is ramping up",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor source naming specific customer deployments."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-07-21",
+  "capturedAt": "2026-07-25T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

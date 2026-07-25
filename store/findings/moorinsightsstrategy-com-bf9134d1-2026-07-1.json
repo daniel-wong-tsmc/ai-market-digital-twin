@@ -1,0 +1,42 @@
+{
+  "id": "moorinsightsstrategy-com-bf9134d1-2026-07-1",
+  "statement": "AMD launched Helios, its first production rack-scale AI architecture (72 MI455X GPUs, 31TB HBM4, 2.9 exaFLOPS FP4 per rack), positioned as an answer to NVIDIA's NVL72.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A production rack-scale platform makes AMD a credible alternative supply to NVIDIA.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "A new competitive rack-scale system expands alternative accelerator supply."
+  },
+  "evidence": [
+    {
+      "source": "Moor Insights & Strategy",
+      "url": "https://moorinsightsstrategy.com/field-notes/amd-comes-to-play-a-quick-take-on-advancing-ai-2026/",
+      "date": "2026-07-23",
+      "excerpt": "AMD launched Helios, its first production rack-scale AI reference architecture and its answer to NVIDIA's NVL72 platforms.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analyst coverage."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-25T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -235,3 +235,14 @@
 {"seq":234,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"lambda-ai-751f0165-2026-07-3","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":235,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"blogs-nvidia-com-6f3401ce-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":236,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"blogs-nvidia-com-6f3401ce-2026-07-3","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":237,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"moorinsightsstrategy-com-bf9134d1-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":238,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"ir-amd-com-6a5e41b9-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":239,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"ir-amd-com-6a5e41b9-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":240,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"moorinsightsstrategy-com-bf9134d1-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":241,"asOf":"2026-07","kind":"append-observation","pageId":"entity:intel","findingId":"finance-yahoo-com-4fa97194-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":242,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"getdeploying-com-dca96aab-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":243,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-6d94ef96-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":244,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"blogs-nvidia-com-ffef75ff-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":245,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-sahmcapital-com-dbab27f1-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":246,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"blogs-nvidia-com-ffef75ff-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":247,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"blogs-nvidia-com-ffef75ff-2026-07-3","state":null,"trajectory":null,"salience":null,"detail":""}

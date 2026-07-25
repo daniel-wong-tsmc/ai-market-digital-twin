@@ -1,0 +1,42 @@
+{
+  "id": "nvidianews-nvidia-com-6d94ef96-2026-07-1",
+  "statement": "Wistron opened a 324,000-square-foot greenfield plant in Fort Worth, Texas, to manufacture NVIDIA AI systems.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "New U.S. manufacturing capacity expands the supply of NVIDIA AI systems.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "A new plant adds AI-system build-and-test capacity, easing supply of finished systems."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/built-in-fort-worth-wistron-opens-advanced-manufacturing-plant-to-produce-nvidia-ai-systems",
+      "date": "2026-07-21",
+      "excerpt": "Wistron opened its first U.S. manufacturing facility, a 324,000-square-foot greenfield plant in Fort Worth, Texas",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Primary source but no capacity, ramp or timeline figures disclosed."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-07-21",
+  "capturedAt": "2026-07-25T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "moorinsightsstrategy-com-bf9134d1-2026-07-2",
+  "statement": "AMD projects approximately $7.2 billion in first-year revenue for the MI400 GPU lineup.",
+  "kind": "measured",
+  "value": {
+    "number": 7.2,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A sizeable first-year revenue projection reflects strong expected demand for MI400 accelerators.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Projected first-year revenue reflects an order pipeline and demand for the new GPU line."
+  },
+  "evidence": [
+    {
+      "source": "Moor Insights & Strategy",
+      "url": "https://moorinsightsstrategy.com/field-notes/amd-comes-to-play-a-quick-take-on-advancing-ai-2026/",
+      "date": "2026-07-23",
+      "excerpt": "AMD projects ~$7.2 billion first-year revenue for the MI400 lineup",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary source reporting a forward-looking company projection."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-25T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "blogs-nvidia-com-ffef75ff-2026-07-3",
+  "statement": "Google Cloud A5X (Vera Rubin) delivers 10x lower inference cost per token versus the prior generation and one-tenth the cost per million tokens versus GB200 NVL72.",
+  "kind": "measured",
+  "value": {
+    "number": 10.0,
+    "unit": "price_vs_volume_rate"
+  },
+  "trend": "falling",
+  "why": "Sharply lower cost per token expands inference demand via price elasticity.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.reasoning-agentic",
+      "applications.agent-platforms"
+    ],
+    "direction": "positive",
+    "mechanism": "Falling token cost lowers the price of inference and stimulates volume demand."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Blog",
+      "url": "https://blogs.nvidia.com/blog/vera-rubin/",
+      "date": "2026-07-21",
+      "excerpt": "10x lower inference cost per token and 10x higher token throughput per megawatt",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor source with named customer benchmark."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "tokenEconomics",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-21",
+  "capturedAt": "2026-07-25T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
