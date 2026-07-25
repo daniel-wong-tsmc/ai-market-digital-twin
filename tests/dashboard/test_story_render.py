@@ -304,6 +304,31 @@ def test_scene_related_link_rejects_non_http_scheme():
     assert "evil.example" not in html
 
 
+def test_panel_js_dim_contract():
+    # F103 Task 2: the evidence-panel row renderer must dim aging rows and
+    # always show a date (falling back to "undated"), keyed off a computed
+    # weight the model now supplies per row.
+    js = render_evidence_panel()
+    assert "ev-aging" in js
+    assert "undated" in js
+    assert "f.weight" in js
+
+
+def test_scene_related_aging_class(tmp_path):
+    # F103 Task 2: a scene's "related coverage" links must carry a
+    # server-side st-aging class when the row's computed weight decays
+    # below AGING_THRESHOLD -- the CNBC row in the fixture (2026-06-10,
+    # "news" kind, 42 days old by "today") is well past that threshold.
+    from gpu_agent.freshness import AGING_THRESHOLD
+    m = build_story_model(CAT, _store(tmp_path), dt.date(2026, 7, 22))
+    demand_scene = next(s for s in m["scenes"] if s["title"] == "Demand kept climbing")
+    cnbc_row = next(r for r in demand_scene["related"] if r["outlet"] == "CNBC")
+    assert cnbc_row["weight"] < AGING_THRESHOLD
+    html = _scene_html(demand_scene)
+    assert 'class="st-aging"' in html
+    assert "CNBC" in html
+
+
 def test_lint_survives_script_containing_literal_closing_tag_text():
     # A script body that contains the literal text of a closing </script>
     # tag inside a JS string used to truncate the non-greedy strip early,

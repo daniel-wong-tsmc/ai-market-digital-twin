@@ -7,6 +7,7 @@ import re as _re
 from gpu_agent.dashboard.gap_chart import render_gap_svg, spark_svg
 from gpu_agent.dashboard.render import esc
 from gpu_agent.dashboard.site_render import page as _page
+from gpu_agent.freshness import AGING_THRESHOLD
 
 
 def evidence_json(evidence: dict) -> str:
@@ -36,7 +37,8 @@ if(d.series&&d.series.length>1){var sv=spark(d.series);if(sv)panel.appendChild(s
 var list=el('div','ev-chain');list.appendChild(el('div','ev-step','What we collected → where it came from'));
 var finds=d.findings||[];
 if(finds.length){finds.forEach(function(f){var row=el('div','ev-row');
-row.appendChild(el('span','ev-src',(f.source||'')+' · '+(f.date||'')));
+if(f.weight!=null&&f.weight<__AGING_THRESHOLD__){row.className+=' ev-aging';}
+row.appendChild(el('span','ev-src',(f.source||'')+' · '+(f.date||'undated')));
 row.appendChild(el('span','ev-take',f.take||''));
 if(f.url&&/^https?:/.test(f.url)){var a=el('a','ev-link','↗');
 a.href=encodeURI(f.url);a.target='_blank';a.rel='noopener';row.appendChild(a);}
@@ -53,7 +55,12 @@ if(t){e.preventDefault();openEV(t.getAttribute('data-ev'));}});
 
 
 def render_evidence_panel() -> str:
-    return _PANEL
+    # The panel's aging-dim check must never drift from AGING_THRESHOLD (the
+    # same constant the scene-related "st-aging" class is computed against
+    # server-side) -- _PANEL is a raw triple-quoted JS blob, so the numeric
+    # value is substituted via a placeholder token rather than an f-string
+    # (which would force escaping every JS `{`/`}` in the template).
+    return _PANEL.replace("__AGING_THRESHOLD__", repr(AGING_THRESHOLD))
 
 
 STORY_CSS = """
@@ -103,6 +110,8 @@ svg.gapchart{width:100%;height:auto;overflow:visible}
 .ev-row{border-top:1px solid #eee;padding:6px 0;font-size:12px;display:flex;
  gap:6px;align-items:baseline}
 .ev-src{color:#666;white-space:nowrap}.ev-take{flex:1}
+.ev-aging{opacity:.55}
+.ev-aging .ev-take::after{content:" · aging";color:#a33;font-size:10px}
 .ev-empty{padding:6px 0;font-size:12px;color:#888;font-style:italic}
 .ev-link{color:#1f7a8c;text-decoration:none}
 .ev-explore{display:block;margin-top:12px;font-size:13px;color:#1f7a8c}
@@ -115,6 +124,7 @@ a.ev{cursor:pointer;text-decoration:underline dotted}
 .st-storyhead{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:#888}
 .st-related{font-size:12px;color:#666}
 .st-related a{color:#1f7a8c;margin-right:10px}
+.st-related a.st-aging{opacity:.55}
 .st-visual{margin:8px 0;color:#1f7a8c}
 .st-closing{border-top:1px solid #eee;padding:14px 0;font-size:13px}
 .st-arch{display:inline-block;border:1px solid #ddd;border-radius:14px;padding:2px 10px;margin:0 6px 6px 0;font-size:12px;color:#555}
@@ -278,10 +288,14 @@ def _scene_html(scene: dict, entity_links: dict | None = None) -> str:
                f'<span class="st-lab">{esc(scene["visual"]["label"])}</span></div>')
     rel = ""
     if scene["related"]:
+        def _rel_link(r: dict) -> str:
+            cls = ' class="st-aging"' if (
+                r.get("weight") is not None and r["weight"] < AGING_THRESHOLD
+            ) else ""
+            return (f'<a{cls} href="{esc(r["url"])}" target="_blank" rel="noopener">'
+                    f'{esc(r["outlet"])} · {esc(r["title"])} · {esc(r["date"])}</a>')
         links = " ".join(
-            f'<a href="{esc(r["url"])}" target="_blank" rel="noopener">'
-            f'{esc(r["outlet"])} · {esc(r["title"])} · {esc(r["date"])}</a>'
-            for r in scene["related"]
+            _rel_link(r) for r in scene["related"]
             if r["url"].startswith(("http://", "https://")))
         # Only render the row if at least one link survived the http/https
         # check -- otherwise it's a dangling "Related coverage:" label with

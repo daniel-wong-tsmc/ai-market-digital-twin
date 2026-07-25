@@ -10,6 +10,7 @@ import datetime as dt
 import re
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 from gpu_agent.dashboard.agenda import read_series
 from gpu_agent.dashboard.brief_model import (first_n_sentences,
@@ -17,6 +18,8 @@ from gpu_agent.dashboard.brief_model import (first_n_sentences,
                                              read_implication_lines)
 from gpu_agent.dashboard.gap_chart import _DEAD_BAND, _SCALE, build_gap_data
 from gpu_agent.dashboard.glossary import load_glossary, term_swap
+from gpu_agent.freshness import (FreshnessConfig, classify, load_freshness,
+                                 weight)
 from gpu_agent.narrator.store import StoryStore
 
 _SERIES_IDS = ["gpuRentalOnDemand", "hyperscalerCapexRevision",
@@ -271,8 +274,37 @@ def _chip(ind: str, rows: list[dict]) -> dict | None:
             "caption": "", "tip": d["tip"], "scene": None}
 
 
-def _series_evidence(ind: str, rows: list[dict], gl: dict) -> list[dict]:
-    out, seen = [], set()
+def _registrable_domain(url: str) -> str:
+    """The URL's netloc, lowercased, with a leading "www." stripped -- the
+    publisher-diversity key evidence rows are capped on (F103 Task 2)."""
+    netloc = urlparse(url).netloc.lower()
+    if netloc.startswith("www."):
+        netloc = netloc[4:]
+    return netloc
+
+
+def _cap_by_publisher(rows: list[dict], cap: int) -> list[dict]:
+    """One row per registrable domain (keep the highest-weight row per
+    domain), then sort descending by weight (stable), then cap to `cap`
+    rows. `rows` must already carry a "weight" key on every entry."""
+    best: dict[str, dict] = {}
+    order: list[str] = []
+    for r in rows:
+        dom = _registrable_domain(r["url"])
+        if dom not in best:
+            order.append(dom)
+            best[dom] = r
+        elif r["weight"] > best[dom]["weight"]:
+            best[dom] = r
+    kept = [best[dom] for dom in order]
+    kept.sort(key=lambda r: r["weight"], reverse=True)
+    return kept[:cap]
+
+
+def _series_evidence(ind: str, rows: list[dict], gl: dict, today: dt.date,
+                     cfg: FreshnessConfig | None = None) -> list[dict]:
+    cfg = cfg or load_freshness()
+    candidates, seen = [], set()
     for r in reversed(rows):
         src = r.get("source") or {}
         key = src.get("url", "")
@@ -280,12 +312,13 @@ def _series_evidence(ind: str, rows: list[dict], gl: dict) -> list[dict]:
             continue
         seen.add(key)
         take_raw = r.get("note") or r.get("label") or "latest reading"
-        out.append({"source": _translate(src.get("title", "source"), gl),
-                    "date": r.get("publishedAt", ""),
-                    "take": _truncate(_translate(take_raw, gl), 90), "url": key})
-        if len(out) == 3:
-            break
-    return out
+        date = r.get("publishedAt", "")
+        kind = classify(key, ind, cfg)
+        candidates.append({"source": _translate(src.get("title", "source"), gl),
+                           "date": date,
+                           "take": _truncate(_translate(take_raw, gl), 90),
+                           "url": key, "weight": weight(date, today, kind, cfg)})
+    return _cap_by_publisher(candidates, 3)
 
 
 def resolve_store_root(category_id: str, store_dir: str | Path) -> Path:
@@ -304,7 +337,8 @@ def resolve_store_root(category_id: str, store_dir: str | Path) -> Path:
     return store_dir.parent
 
 
-def _base_model(category_id: str, store_root: Path, today: dt.date):
+def _base_model(category_id: str, store_root: Path, today: dt.date,
+                cfg: FreshnessConfig | None = None):
     """The shared tail of `build_story_model`: everything that comes from
     committed store data regardless of whether an artifact or the assembler
     ends up supplying headline/deck/scenes/kpis.picks/callouts. Both
@@ -321,6 +355,7 @@ def _base_model(category_id: str, store_root: Path, today: dt.date):
     callers already have `store_root` as their own function parameter, so
     it is not duplicated into `ctx`.)
     """
+    cfg = cfg or load_freshness()
     cat_dir = store_root / category_id
     latest, _prior, as_of, rev = latest_monthly(cat_dir)
     latest = latest or {}
@@ -344,7 +379,7 @@ def _base_model(category_id: str, store_root: Path, today: dt.date):
         evidence[c["claim"]] = {
             "title": f"{c['label']}: {c['value']} — says who?",
             "claim_text": c["tip"].split(". ")[0] + ".",
-            "findings": _series_evidence(ind, series.get(ind, []), gl),
+            "findings": _series_evidence(ind, series.get(ind, []), gl, today, cfg),
             "series": c["spark"], "explore": _series_explore(ind)}
 
     # Archive contract (owner decision): a chip for month M shows what
@@ -384,12 +419,14 @@ def _base_model(category_id: str, store_root: Path, today: dt.date):
     return model, ctx
 
 
-def _assemble_model(category_id: str, store_root: Path, today: dt.date) -> dict:
+def _assemble_model(category_id: str, store_root: Path, today: dt.date,
+                    cfg: FreshnessConfig | None = None) -> dict:
     """Phase A: the original assembler, now built on the shared `_base_model`
     tail. Behaviorally unchanged from the pre-Phase-B assembler -- only the
     gap/archive/explore/anchored-chip/evidence-series computation moved into
     `_base_model` so the artifact-driven path can reuse it verbatim."""
-    base, ctx = _base_model(category_id, store_root, today)
+    cfg = cfg or load_freshness()
+    base, ctx = _base_model(category_id, store_root, today, cfg)
     latest, gl = ctx["latest"], ctx["gl"]
     series = ctx["series"]
     status = latest.get("categoryStatus") or {}
@@ -402,13 +439,14 @@ def _assemble_model(category_id: str, store_root: Path, today: dt.date) -> dict:
 
     model = {**base, "headline": headline, "deck": deck, "callouts": [],
              "scenes": []}
-    _add_scenes(model, latest, store_root, series, gl)
+    _add_scenes(model, latest, store_root, series, gl, today, cfg)
     return model
 
 
 def read_story_artifact(category_id: str, store_root: Path,
                         today: dt.date,
-                        story_date: str | None = None) -> dict | None:
+                        story_date: str | None = None,
+                        cfg: FreshnessConfig | None = None) -> dict | None:
     """Phase B: load a narrator artifact and map it onto the exact model
     dict shape `_assemble_model` produces. Returns None when there is no
     artifact for the date, or when the artifact has `fellBack` set --
@@ -425,7 +463,8 @@ def read_story_artifact(category_id: str, store_root: Path,
     if art is None or art.narratorMeta.fellBack:
         return None
 
-    base, ctx = _base_model(category_id, store_root, today)
+    cfg = cfg or load_freshness()
+    base, ctx = _base_model(category_id, store_root, today, cfg)
     latest, gl, series = ctx["latest"], ctx["gl"], ctx["series"]
 
     scenes = []
@@ -440,7 +479,7 @@ def read_story_artifact(category_id: str, store_root: Path,
         # (`_mk_scene` would otherwise derive them from `findings`/`gl`, which
         # is the assembler's job, not the narrated path's).
         scene_dict = _mk_scene(sc.n, sc.title, sc.paragraphs, vals, vlabel,
-                               findings, gl)
+                               findings, gl, today, cfg)
         # An empty claimFindingIds list means "nothing sourced today" -- the
         # mapper substitutes the exact required wording itself rather than
         # trusting the artifact's own sourceLine, so a hand-edited or legacy
@@ -449,9 +488,15 @@ def read_story_artifact(category_id: str, store_root: Path,
         # this is the read-time backstop the plan's consistency note calls for).
         scene_dict["source_line"] = (sc.sourceLine if sc.claimFindingIds
                                      else NO_SOURCE_LINE)
-        scene_dict["related"] = [{"outlet": r.outlet, "title": r.title,
-                                  "date": r.date, "url": r.url}
-                                 for r in sc.relatedDocs]
+        # Narrated related docs gain the same computed decay weight as every
+        # other evidence row (F103 Task 2) -- kind is classified with no
+        # indicator (a related doc isn't itself a series reading), per the
+        # brief's decision. These are NOT publisher-capped/re-sorted: the
+        # narrator already chose and ordered them.
+        scene_dict["related"] = [
+            {"outlet": r.outlet, "title": r.title, "date": r.date, "url": r.url,
+             "weight": weight(r.date, today, classify(r.url, None, cfg), cfg)}
+            for r in sc.relatedDocs]
         scenes.append(scene_dict)
         evidence[f"scene:{sc.n}"] = {
             "title": f"{sc.title} — says who?",
@@ -463,7 +508,7 @@ def read_story_artifact(category_id: str, store_root: Path,
             # Same rule as the assembler (Phase A review finding #1): a
             # scene with no claimFindingIds of its own gets an honest empty
             # findings list -- never borrowed from another scene/claim.
-            "findings": _finding_rows(findings, gl),
+            "findings": _finding_rows(findings, gl, today, cfg),
             "series": vals, "explore": _scene_explore(findings)}
 
     picks = []
@@ -494,6 +539,11 @@ def read_story_artifact(category_id: str, store_root: Path,
 def build_story_model(category_id: str, store_dir: str | Path,
                       today: dt.date) -> dict:
     store_root = resolve_store_root(category_id, store_dir)
+    # F103 Task 2: load the freshness config ONCE here and thread it down
+    # through _base_model / _assemble_model / read_story_artifact / _mk_scene
+    # into the three evidence-row builders, so every row on a single page
+    # build is scored against the identical config snapshot.
+    cfg = load_freshness()
     # A hand-edited or legacy (un-gated) artifact could pass StoryStore.read's
     # own schema validation yet still break this mapper in some way the gate
     # never anticipated -- and a raise here would crash the live page instead
@@ -502,7 +552,8 @@ def build_story_model(category_id: str, store_dir: str | Path,
     # page, so any exception during the read+map gets the same treatment as a
     # missing/fellBack artifact: warn to stderr, fall through to the assembler.
     try:
-        artifact_model = read_story_artifact(category_id, store_root, today)
+        artifact_model = read_story_artifact(category_id, store_root, today,
+                                             cfg=cfg)
     except Exception as exc:
         print(f"gpu-agent narrator: warning: failed to read/map story "
               f"artifact for {category_id} {today.isoformat()}, falling "
@@ -510,7 +561,7 @@ def build_story_model(category_id: str, store_dir: str | Path,
         artifact_model = None
     if artifact_model is not None:
         return artifact_model
-    return _assemble_model(category_id, store_root, today)
+    return _assemble_model(category_id, store_root, today, cfg=cfg)
 
 
 _ACCENTS = ["amber", "terracotta", "teal", "green"]
@@ -521,7 +572,9 @@ def _resolve_findings(latest: dict, ids: list[str]) -> list[dict]:
     return [by_id[i] for i in ids if i in by_id]
 
 
-def _finding_rows(findings: list[dict], gl: dict) -> list[dict]:
+def _finding_rows(findings: list[dict], gl: dict, today: dt.date,
+                  cfg: FreshnessConfig | None = None) -> list[dict]:
+    cfg = cfg or load_freshness()
     rows, seen = [], set()
     for f in findings:
         for e in f.get("evidence") or []:
@@ -529,15 +582,19 @@ def _finding_rows(findings: list[dict], gl: dict) -> list[dict]:
             if not url or url in seen:
                 continue
             seen.add(url)
+            date = e.get("date", "")
+            kind = classify(url, f.get("indicatorId"), cfg)
             rows.append({"source": _translate(e.get("source", "source"), gl),
-                        "date": e.get("date", ""),
+                        "date": date,
                         "take": _truncate(
                             _translate(f.get("statement") or "", gl), 90),
-                        "url": url})
-    return rows[:3]
+                        "url": url, "weight": weight(date, today, kind, cfg)})
+    return _cap_by_publisher(rows, 3)
 
 
-def _related(findings: list[dict], gl: dict) -> list[dict]:
+def _related(findings: list[dict], gl: dict, today: dt.date,
+            cfg: FreshnessConfig | None = None) -> list[dict]:
+    cfg = cfg or load_freshness()
     out, seen = [], set()
     for f in findings:
         for e in f.get("evidence") or []:
@@ -548,12 +605,13 @@ def _related(findings: list[dict], gl: dict) -> list[dict]:
                 continue
             seen.add(url)
             title_raw = e.get("excerpt") or f.get("statement") or ""
+            date = e.get("date", "")
+            kind = classify(url, f.get("indicatorId"), cfg)
             out.append({"outlet": _translate(e.get("source", ""), gl),
                         "title": _truncate(_translate(title_raw, gl), 60),
-                        "date": e.get("date", ""), "url": url})
-            if len(out) == 2:
-                return out
-    return out
+                        "date": date, "url": url,
+                        "weight": weight(date, today, kind, cfg)})
+    return _cap_by_publisher(out, 2)
 
 
 def _source_line(findings: list[dict], gl: dict) -> str:
@@ -567,17 +625,21 @@ def _source_line(findings: list[dict], gl: dict) -> str:
         "; ".join(names[:3]) if names else "agent-tracked filings and reporting", gl)
 
 
-def _mk_scene(n, title, paragraphs, series_vals, series_label, findings, gl):
+def _mk_scene(n, title, paragraphs, series_vals, series_label, findings, gl,
+             today: dt.date, cfg: FreshnessConfig | None = None):
+    cfg = cfg or load_freshness()
     return {"n": n, "accent": _ACCENTS[(n - 1) % 4], "title": title,
             "paragraphs": [p for p in paragraphs if p],
             "visual": {"kind": "spark", "series": series_vals,
                        "label": series_label},
             "source_line": _source_line(findings, gl),
-            "related": _related(findings, gl),
+            "related": _related(findings, gl, today, cfg),
             "claims": [f"scene:{n}"]}
 
 
-def _add_scenes(model, latest, store_root, series, gl):
+def _add_scenes(model, latest, store_root, series, gl, today: dt.date,
+                cfg: FreshnessConfig | None = None):
+    cfg = cfg or load_freshness()
     dims = latest.get("dimensionRatings") or {}
     status = latest.get("categoryStatus") or {}
     sv = lambda ind: [r["value"] for r in series.get(ind, [])[-8:]]
@@ -615,7 +677,7 @@ def _add_scenes(model, latest, store_root, series, gl):
 
     scene_by_indicator: dict[str, int] = {}
     for i, (title, paras, ind, vals, vlabel, finds) in enumerate(specs, start=1):
-        sc = _mk_scene(i, title, paras, vals, vlabel, finds, gl)
+        sc = _mk_scene(i, title, paras, vals, vlabel, finds, gl, today, cfg)
         if not sc["paragraphs"]:
             continue
         model["scenes"].append(sc)
@@ -627,7 +689,7 @@ def _add_scenes(model, latest, store_root, series, gl):
             # borrow another claim's sources -- attributing a claim to a
             # source that never made it defeats the page's whole "says who?"
             # promise.
-            "findings": _finding_rows(finds, gl),
+            "findings": _finding_rows(finds, gl, today, cfg),
             "series": vals, "explore": _scene_explore(finds)}
         # A pick links to the scene whose visual is built from the pick's
         # own indicator series — the topical rule (owner decision). If

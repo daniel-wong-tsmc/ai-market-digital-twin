@@ -144,6 +144,14 @@ handful of spot-price scrapes can never crowd out news/forward coverage. A class
 reach its minimum before a cap trips is logged in `skipped[]` like any other truncation (Part
 29) — these numbers set seeding priority, they don't override the hard cap.
 
+**Earnings-window cadence.** Before allocating the doc budget above, check each `cadence:
+earnings-window` official-IR source (e.g. `nvda-earnings`, `amd-earnings`,
+`nvda-10k-risk-factors`) via `gpu_agent.manifest.gather_priority(source, manifest, today)`.
+`heavy` — today is within **±7 days** of that entity's next earnings date (from
+`earningsDates`) — means fetch it every cycle, ahead of the filing floor above. `light` —
+outside the window — means it ranks **LAST** for the doc budget and is fetched **at most
+weekly**.
+
 **Don't re-fetch seen filings.** For `accessMethod == "filing"` seeds, thread the L1 seen-doc
 filter (today daily-only; Daily mode step 5) into this standard path too: before fetching a
 filing URL, check it against the dedup store's known-hash index and skip already-known,

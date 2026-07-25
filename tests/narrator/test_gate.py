@@ -30,10 +30,18 @@ def _inp(tmp_path):
 
 def _ok(tmp_path):
     # an answer aligned with the fixture store: finding f-1, series pool ids, month keys
+    #
+    # scene 2's only cited finding (f-2) has a single evidence date of
+    # 2026-06-10 against the fixture store's storyDate of 2026-07-23 -- 43
+    # days into the "news" half life's decay curve, deep under
+    # AGING_THRESHOLD. Check 7 (F103 Task 4) requires a scene that leans
+    # only on aged evidence to date its claims in prose, so scene 2's
+    # paragraph carries a month/year token here to stay gate-clean.
     return NarratorAnswer.model_validate(_answer(
         scenes=[_scene(claimFindingIds=["f-1"], relatedDocs=[]),
                 _scene(n=2, title="What would close the gap",
-                       claimFindingIds=["f-2"], relatedDocs=[])],
+                       claimFindingIds=["f-2"], relatedDocs=[],
+                       paragraphs=["Cut back on output in June 2026."])],
         kpiPicks=[{"indicatorId": "hbmSupplyCapex", "whyCaption": "relief lever",
                     "scene": 1}],
         calloutMonths=[{"monthKey": "2026-07", "text": "Jul: memory cut",
@@ -326,6 +334,68 @@ def test_callout_scene_must_exist(tmp_path):
     a.calloutMonths[0].scene = 99
     violations = gate_narrator(a, _inp(tmp_path))
     assert any("calloutMonths" in v and "99" in v for v in violations)
+
+
+def _inp_with_findings_and_date(tmp_path, findings, story_date):
+    # Check 7 tests need full control over finding evidence dates and the
+    # story's reference date, independent of whatever the fixture store
+    # happens to contain -- override both on top of the normal fixture
+    # inputs (which still supplies seriesPool/gapMonths/docPool so the
+    # earlier checks don't spuriously fire).
+    return {**_inp(tmp_path), "findings": findings, "storyDate": story_date}
+
+
+_AGED_FINDING = {
+    "id": "f-aged", "statement": "SK Hynix shifted HBM output",
+    "evidence": [{"source": "s", "url": "https://x.example/aged",
+                  "date": "2026-05-24", "tier": "primary"}],
+}
+_FRESH_FINDING = {
+    "id": "f-fresh", "statement": "Oracle capex up 162%",
+    "evidence": [{"source": "s", "url": "https://x.example/fresh",
+                  "date": "2026-07-24", "tier": "primary"}],
+}
+
+
+def test_check7_aged_only_scene_without_date_token_flagged(tmp_path):
+    # Evidence dated 2026-05-24 against a storyDate two months later is deep
+    # into the "news" half life's decay curve -- well under AGING_THRESHOLD.
+    inp = _inp_with_findings_and_date(tmp_path, [_AGED_FINDING], "2026-07-24")
+    a = _ok(tmp_path)
+    a.scenes[0].claimFindingIds = ["f-aged"]
+    a.scenes[0].paragraphs = ["Supply stayed tight across the board."]
+    violations = gate_narrator(a, inp)
+    assert ("scene 1 leans only on aged evidence and must date its claims "
+            "in prose") in violations
+
+
+def test_check7_aged_scene_passes_when_dated_in_prose(tmp_path):
+    inp = _inp_with_findings_and_date(tmp_path, [_AGED_FINDING], "2026-07-24")
+    a = _ok(tmp_path)
+    a.scenes[0].claimFindingIds = ["f-aged"]
+    a.scenes[0].paragraphs = ["Supply stayed tight in late May 2026."]
+    violations = gate_narrator(a, inp)
+    assert not any("leans only on aged evidence" in v for v in violations)
+
+
+def test_check7_scene_with_fresh_finding_not_flagged(tmp_path):
+    inp = _inp_with_findings_and_date(
+        tmp_path, [_AGED_FINDING, _FRESH_FINDING], "2026-07-24")
+    a = _ok(tmp_path)
+    a.scenes[0].claimFindingIds = ["f-aged", "f-fresh"]
+    a.scenes[0].paragraphs = ["Supply stayed tight across the board."]
+    violations = gate_narrator(a, inp)
+    assert not any("leans only on aged evidence" in v for v in violations)
+
+
+def test_check7_skipped_when_story_date_missing_or_garbage(tmp_path):
+    inp = _inp_with_findings_and_date(
+        tmp_path, [_AGED_FINDING], "not-a-date")
+    a = _ok(tmp_path)
+    a.scenes[0].claimFindingIds = ["f-aged"]
+    a.scenes[0].paragraphs = ["Supply stayed tight across the board."]
+    violations = gate_narrator(a, inp)
+    assert not any("leans only on aged evidence" in v for v in violations)
 
 
 def test_missing_inputs_keys_fail_closed_instead_of_raising(tmp_path):

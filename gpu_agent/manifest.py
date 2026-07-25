@@ -8,9 +8,10 @@ Defines:
 """
 from __future__ import annotations
 
+import datetime as dt
 import json
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Optional
 from urllib.parse import urlparse
 
 from pydantic import BaseModel, Field
@@ -41,6 +42,7 @@ class ExpectedSource(BaseModel):
     refresh: Literal["realtime", "daily", "weekly", "quarterly", "annual", "on-demand"]
     indicators: list[str] = Field(default_factory=list)
     paywalledNote: str | None = None
+    cadence: Optional[Literal["earnings-window", "weekly"]] = None
 
     @property
     def is_paywalled(self) -> bool:
@@ -62,6 +64,8 @@ class CoverageManifest(BaseModel):
     description: str = ""
     expectedIndicators: list[ExpectedIndicator] = Field(default_factory=list)
     expectedSources: list[ExpectedSource] = Field(default_factory=list)
+    earningsDates: dict[str, str] = Field(default_factory=dict)
+    primaryDomains: list[str] = Field(default_factory=list)
 
     def source_by_id(self, source_id: str) -> ExpectedSource | None:
         return next((s for s in self.expectedSources if s.id == source_id), None)
@@ -127,6 +131,36 @@ def _url_matches(url: str, pattern: str) -> bool:
     if not host:
         return False
     return host == pattern or host.endswith("." + pattern)
+
+
+# ── Gather priority (pure — no I/O) ──────────────────────────────────────────
+
+def gather_priority(
+    source: ExpectedSource, manifest: CoverageManifest, today: dt.date
+) -> str:
+    """Return "heavy", "light", or "normal" gather priority for a source.
+
+    - No cadence set → "normal".
+    - cadence == "earnings-window" and any manifest.earningsDates value falls
+      within +/-7 days of `today` → "heavy".
+    - Otherwise (cadence set but not currently in an earnings window,
+      including cadence == "weekly") → "light".
+
+    Pure: `today` must be passed in — never reads the real clock.
+    """
+    if source.cadence is None:
+        return "normal"
+
+    if source.cadence == "earnings-window":
+        for raw_date in manifest.earningsDates.values():
+            try:
+                earnings_date = dt.date.fromisoformat(raw_date)
+            except ValueError:
+                continue
+            if abs((earnings_date - today).days) <= 7:
+                return "heavy"
+
+    return "light"
 
 
 # ── Gap computation (pure — no I/O) ──────────────────────────────────────────

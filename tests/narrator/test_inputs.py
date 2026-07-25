@@ -30,3 +30,38 @@ def test_inputs_assembled(tmp_path):
 def test_inputs_no_run_dir_no_memory(tmp_path):
     inp = build_narrator_inputs(CAT, _store(tmp_path), dt.date(2026, 7, 23), None)
     assert inp["docPool"] == [] and inp["memory"]["yesterday"] is None
+
+
+def test_findings_and_docpool_carry_freshness_weight(tmp_path):
+    store = _store(tmp_path)
+    run = tmp_path / "run"
+    run.mkdir()
+    (run / "blobs.json").write_text(json.dumps({"rounds": 1, "skipped": [],
+        "blobs": [{"source": "Reuters", "url": "https://r.example/hbm",
+                    "date": "2026-07-23", "entity": "market", "content": "x"}]}),
+        encoding="utf-8")
+    inp = build_narrator_inputs(CAT, store, dt.date(2026, 7, 23), run)
+    for f in inp["findings"]:
+        assert isinstance(f["freshnessWeight"], float)
+    for d in inp["docPool"]:
+        assert isinstance(d["freshnessWeight"], float)
+
+
+def test_finding_freshness_weight_is_max_over_evidence():
+    from gpu_agent.narrator.inputs import _finding_trim
+    from gpu_agent.freshness import load_freshness
+
+    cfg = load_freshness()
+    today = dt.date(2026, 7, 23)
+    f = {
+        "id": "f-x",
+        "statement": "s",
+        "evidence": [
+            {"source": "Old", "url": "https://example.com/old", "date": "2026-06-01", "tier": "1"},
+            {"source": "New", "url": "https://example.com/new", "date": "2026-07-22", "tier": "1"},
+        ],
+    }
+    trimmed = _finding_trim(f, today, cfg)
+    # freshest evidence (2026-07-22, age 1 day) should dominate over the
+    # much older 2026-06-01 evidence -- max-over-evidence, not min or average.
+    assert trimmed["freshnessWeight"] > 0.5

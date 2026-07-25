@@ -1,14 +1,17 @@
 """gpu_agent/narrator/gate.py — deterministic quality gate for the daily narrator.
 
 Phase B's brain is tool-less and unsupervised, so there is no scored eval bar
-for its output. These six checks are the entire quality mechanism: a gate
+for its output. These seven checks are the entire quality mechanism: a gate
 that passes bad output silently ships a wrong story to a live,
-executive-facing page. `gate_narrator` is pure (no I/O) and returns a list of
-plain-sentence violations naming the offending value; an empty list is a
-pass. Task 4's CLI verb refuses to write an artifact when the list is
-non-empty and re-dispatches the brain once with these sentences appended, so
-every message must be specific enough for a language model to fix itself
-from.
+executive-facing page. `gate_narrator` is deterministic (same inputs always
+produce the same violations) but, unlike a purely computational function, it
+reads the freshness registry once via `gpu_agent.freshness.load_freshness()`
+for Check 7 when a `cfg` is not injected by the caller -- otherwise it does
+no I/O. It returns a list of plain-sentence violations naming the offending
+value; an empty list is a pass. Task 4's CLI verb refuses to write an
+artifact when the list is non-empty and re-dispatches the brain once with
+these sentences appended, so every message must be specific enough for a
+language model to fix itself from.
 """
 from __future__ import annotations
 
@@ -18,6 +21,7 @@ import re
 from gpu_agent.dashboard.story_model import (ANCHORED_INDICATOR_ID,
                                              NO_SOURCE_LINE)
 from gpu_agent.dashboard.story_render import lint_story_copy
+from gpu_agent.freshness import AGING_THRESHOLD, classify, load_freshness, parse_date, weight
 from gpu_agent.narrator.schema import NarratorAnswer
 
 _NO_SOURCE = NO_SOURCE_LINE
@@ -29,8 +33,25 @@ _FORWARD_MARKERS = ("close", "watch", "ahead", "next")
 # on what counts as an occurrence.
 _INDEX_WORD_RE = re.compile(r"\bindex(?:ed)?\b", re.I)
 
+# Check 7's date token: a four-digit year, or an English month name (any
+# case). Either is enough evidence that a scene leaning on aged findings has
+# dated its claims in prose rather than presenting them as if fresh.
+_DATE_TOKEN_RE = re.compile(
+    r"\b\d{4}\b|\b(?:january|february|march|april|may|june|july|august|"
+    r"september|october|november|december)\b", re.I)
 
-def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
+
+def _finding_weight(finding: dict, today, cfg) -> float:
+    """A finding's weight is the freshest (max) weight over its evidence."""
+    evidence = finding.get("evidence") or []
+    if not evidence:
+        return weight(None, today, "news", cfg)
+    return max(
+        weight(e.get("date"), today, classify(e.get("url", ""), None, cfg), cfg)
+        for e in evidence)
+
+
+def gate_narrator(answer: NarratorAnswer, inputs: dict, cfg=None) -> list[str]:
     violations: list[str] = []
 
     for k in ("findings", "docPool", "seriesPool", "gapMonths"):
@@ -203,5 +224,26 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict) -> list[str]:
             violations.append(
                 f"calloutMonths: scene {callout.scene} does not exist "
                 f"(scenes are {scene_ns})")
+
+    # Check 7: a scene that leans only on aged evidence must date its claims
+    # in prose. `today` comes from inputs["storyDate"]; if it's missing or
+    # unparseable there is no reference point to assess aging against, so
+    # Check 7 is skipped entirely rather than crashing or guessing.
+    today = parse_date(inputs.get("storyDate"))
+    if today is not None:
+        cfg = cfg or load_freshness()
+        findings_by_id = {f["id"]: f for f in inputs.get("findings", [])}
+        for scene in answer.scenes:
+            cited = [findings_by_id[fid] for fid in scene.claimFindingIds
+                     if fid in findings_by_id]
+            if not cited:
+                continue
+            if all(_finding_weight(f, today, cfg) < AGING_THRESHOLD
+                   for f in cited):
+                prose = " ".join(scene.paragraphs)
+                if not _DATE_TOKEN_RE.search(prose):
+                    violations.append(
+                        f"scene {scene.n} leans only on aged evidence and "
+                        f"must date its claims in prose")
 
     return violations

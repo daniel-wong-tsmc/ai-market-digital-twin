@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "halfLivesDays": {"news": 3, "filings": 5, "structural": 45},
+  "filingsDomains": ["investor.", "ir.", "sec.gov", "nvidianews.nvidia.com",
+                      "blogs.nvidia.com", "intc.com", "q4cdn.com",
+                      "federalregister.gov", "bis.doc.gov", "mopsov.twse.com.tw"],
+  "structuralIndicators": ["leadTimes", "upstreamLeadTimes",
+                            "pkgCapacityOrderSpread", "hbmSupplyCapex"]
+}

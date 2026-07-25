@@ -1,13 +1,16 @@
 """Tests for gpu_agent.manifest — models, loader, and gap computation."""
+import datetime as dt
 import json
 import pytest
 from pathlib import Path
 from gpu_agent.manifest import (
     CoverageManifest,
     CoverageGap,
+    ExpectedSource,
     ManifestLoadError,
     load_manifest,
     compute_coverage_gaps,
+    gather_priority,
 )
 
 # ── Fixtures ────────────────────────────────────────────────────────────────
@@ -236,3 +239,94 @@ def test_semianalysis_source_is_paywalled_gap():
     assert sa is not None
     assert sa.acquisitionStatus == "paywalled"
     assert sa.type == "source"
+
+
+# ── Earnings-window cadence (F103 Task 5) ────────────────────────────────────
+
+def test_manifest_round_trips_cadence_earnings_dates_primary_domains():
+    """A manifest JSON round-trips and exposes cadence, earningsDates, primaryDomains."""
+    data = {
+        **MINIMAL_MANIFEST,
+        "primaryDomains": ["investor.nvidia.com", "sec.gov"],
+        "earningsDates": {"nvidia": "2026-08-26", "amd": "2026-08-04"},
+        "expectedSources": [
+            {**MINIMAL_MANIFEST["expectedSources"][0], "cadence": "earnings-window"},
+        ],
+    }
+    m = CoverageManifest(**data)
+    assert m.primaryDomains == ["investor.nvidia.com", "sec.gov"]
+    assert m.earningsDates == {"nvidia": "2026-08-26", "amd": "2026-08-04"}
+    assert m.expectedSources[0].cadence == "earnings-window"
+
+
+def test_manifest_defaults_earnings_dates_and_primary_domains_when_absent():
+    m = CoverageManifest(**MINIMAL_MANIFEST)
+    assert m.earningsDates == {}
+    assert m.primaryDomains == []
+    assert m.expectedSources[0].cadence is None
+
+
+def test_manifest_rejects_unknown_cadence_value():
+    bad = {**MINIMAL_MANIFEST}
+    bad["expectedSources"] = [
+        {**MINIMAL_MANIFEST["expectedSources"][0], "cadence": "daily"}
+    ]
+    with pytest.raises(Exception):
+        CoverageManifest(**bad)
+
+
+def test_load_manifest_rejects_unknown_cadence_value(tmp_path):
+    bad = {**MINIMAL_MANIFEST}
+    bad["expectedSources"] = [
+        {**MINIMAL_MANIFEST["expectedSources"][0], "cadence": "daily"}
+    ]
+    f = tmp_path / "manifest.json"
+    f.write_text(json.dumps(bad), encoding="utf-8")
+    with pytest.raises(ManifestLoadError):
+        load_manifest(f)
+
+
+def test_gather_priority_normal_when_no_cadence():
+    source = ExpectedSource(**MINIMAL_MANIFEST["expectedSources"][0])
+    manifest = CoverageManifest(**MINIMAL_MANIFEST)
+    today = dt.date(2026, 7, 25)
+    assert gather_priority(source, manifest, today) == "normal"
+
+
+def test_gather_priority_heavy_within_earnings_window():
+    source = ExpectedSource(**{**MINIMAL_MANIFEST["expectedSources"][0], "cadence": "earnings-window"})
+    manifest = CoverageManifest(**{**MINIMAL_MANIFEST, "earningsDates": {"nvidia": "2026-08-01"}})
+    today = dt.date(2026, 7, 25)  # 7 days before 2026-08-01
+    assert gather_priority(source, manifest, today) == "heavy"
+
+
+def test_gather_priority_light_outside_earnings_window():
+    source = ExpectedSource(**{**MINIMAL_MANIFEST["expectedSources"][0], "cadence": "earnings-window"})
+    manifest = CoverageManifest(**{**MINIMAL_MANIFEST, "earningsDates": {"nvidia": "2026-10-01"}})
+    today = dt.date(2026, 7, 25)
+    assert gather_priority(source, manifest, today) == "light"
+
+
+def test_gather_priority_light_for_weekly_cadence():
+    source = ExpectedSource(**{**MINIMAL_MANIFEST["expectedSources"][0], "cadence": "weekly"})
+    manifest = CoverageManifest(**{**MINIMAL_MANIFEST, "earningsDates": {"nvidia": "2026-07-25"}})
+    today = dt.date(2026, 7, 25)
+    assert gather_priority(source, manifest, today) == "light"
+
+
+def test_gather_priority_ignores_unparseable_earnings_date():
+    source = ExpectedSource(**{**MINIMAL_MANIFEST["expectedSources"][0], "cadence": "earnings-window"})
+    manifest = CoverageManifest(**{**MINIMAL_MANIFEST, "earningsDates": {"nvidia": "not-a-date"}})
+    today = dt.date(2026, 7, 25)
+    assert gather_priority(source, manifest, today) == "light"
+
+
+def test_real_manifest_still_validates_with_cadence_fields():
+    """The shipped manifest still loads after adding cadence/earningsDates fields."""
+    manifest = load_manifest("manifests/chips.merchant-gpu.json")
+    for sid in ("nvda-earnings", "amd-earnings", "nvda-10k-risk-factors"):
+        src = manifest.source_by_id(sid)
+        assert src is not None
+        assert src.cadence == "earnings-window"
+    assert "nvidia" in manifest.earningsDates
+    assert "amd" in manifest.earningsDates

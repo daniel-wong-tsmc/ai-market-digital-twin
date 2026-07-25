@@ -13,6 +13,10 @@
     "bis.doc.gov",
     "federalregister.gov"
   ],
+  "earningsDates": {
+    "nvidia": "2026-08-26",
+    "amd": "2026-08-04"
+  },
   "expectedIndicators": [
     {
       "indicatorId": "D2",
@@ -122,7 +126,8 @@
       "costUsd": 0,
       "license": "public",
       "refresh": "quarterly",
-      "indicators": ["D2", "grossMargin", "S9", "S10", "rpoBacklog", "vendorRevenueGuidance"]
+      "indicators": ["D2", "grossMargin", "S9", "S10", "rpoBacklog", "vendorRevenueGuidance"],
+      "cadence": "earnings-window"
     },
     {
       "id": "amd-earnings",
@@ -133,7 +138,8 @@
       "costUsd": 0,
       "license": "public",
       "refresh": "quarterly",
-      "indicators": ["D2", "grossMargin", "S9", "rpoBacklog", "vendorRevenueGuidance"]
+      "indicators": ["D2", "grossMargin", "S9", "rpoBacklog", "vendorRevenueGuidance"],
+      "cadence": "earnings-window"
     },
     {
       "id": "intc-earnings",
@@ -235,7 +241,8 @@
       "costUsd": 0,
       "license": "public",
       "refresh": "annual",
-      "indicators": ["exportControlExposure", "customerConcentration"]
+      "indicators": ["exportControlExposure", "customerConcentration"],
+      "cadence": "earnings-window"
     },
     {
       "id": "vendor-pr-trade-press",
