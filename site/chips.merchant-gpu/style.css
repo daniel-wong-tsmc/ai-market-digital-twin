@@ -155,6 +155,8 @@ svg.gapchart{width:100%;height:auto;overflow:visible}
 .ev-row{border-top:1px solid #eee;padding:6px 0;font-size:12px;display:flex;
  gap:6px;align-items:baseline}
 .ev-src{color:#666;white-space:nowrap}.ev-take{flex:1}
+.ev-aging{opacity:.55}
+.ev-aging .ev-take::after{content:" · aging";color:#a33;font-size:10px}
 .ev-empty{padding:6px 0;font-size:12px;color:#888;font-style:italic}
 .ev-link{color:#1f7a8c;text-decoration:none}
 .ev-explore{display:block;margin-top:12px;font-size:13px;color:#1f7a8c}
@@ -167,6 +169,7 @@ a.ev{cursor:pointer;text-decoration:underline dotted}
 .st-storyhead{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:#888}
 .st-related{font-size:12px;color:#666}
 .st-related a{color:#1f7a8c;margin-right:10px}
+.st-related a.st-aging{opacity:.55}
 .st-visual{margin:8px 0;color:#1f7a8c}
 .st-closing{border-top:1px solid #eee;padding:14px 0;font-size:13px}
 .st-arch{display:inline-block;border:1px solid #ddd;border-radius:14px;padding:2px 10px;margin:0 6px 6px 0;font-size:12px;color:#555}
@@ -185,3 +188,4 @@ a.ev{cursor:pointer;text-decoration:underline dotted}
 .xp-srcline { color: var(--muted); font-size: .85rem; }
 .xp-dim-row { margin: .2rem 0; }
 .xp-constraint { color: var(--muted); }
+.xp-aging { opacity: .55; }
