@@ -1218,6 +1218,33 @@ F57/F58/F59 → F60 → F64 → F65 → F66. Eval-v2, if approved, slots in as i
 F63's re-gate. F56 remains a safe tiny side item.
 
 ## Newest state (newest first)
+  - **2026-07-26 daily cycle (scheduled headless): chips.merchant-gpu v18 shipped + pushed
+    `428a390`.** Scorecard `store/chips.merchant-gpu/2026-07-v18.json` — **DMI 3.540 / SMI -0.700**
+    (Strong, improving; prior v17 3.407 / -0.487); 10 docs (1 primary, 9 secondary), L1 dropped 0
+    known, L2 7 new / 11 update / 15 duplicate; thesis + implication + narrator all `done`
+    (story `store/chips.merchant-gpu/story/2026-07-26.json`); site rebuilt (8 pages); suite
+    **1981 passed / 6 skipped** with `2026-07-v18` registered in the scoring v1 replay pin
+    (W_CURRENT, v14–v17 precedent). Full report `work/daily-2026-07-26/report.txt`;
+    journal `store/cycle-log.json`. Gates: voice lint rejected judgment sample 1 once (two
+    acronyms off the allowlist) and the narrator gate rejected the first story once (outlet
+    strings not verbatim from the doc pool + a reused KPI scene) — each re-dispatched once and
+    passed; **no bypass flag used**. **⚠ THREE THINGS FOR THE USER:** (1) **price-sync failed
+    again** on the same month-grain `_yymmdd_date` crash — non-fatal per run-cycle step 7, and it
+    is exactly the still-open **F102** lane's scope; (2) **the web-reach fetch runner is broken** —
+    installed `agent-reach` 1.5.0 no longer exposes `read`/`search` verbs, so
+    `registry/web-reach-tools.json` `fetchVerbs` have drifted from the CLI and
+    `webreach-fetch` cannot work; an unattended run never installs or re-pins, so the cycle ran on
+    built-in web search/fetch (sanctioned fallback) and this needs an interactive fix + a reviewed
+    pin commit; (3) AFK-DEFAULTS this run (all recorded in `store/cycle-log.json` notes, none
+    user-approved): `last30days` discovery not invoked (2026-07-25 precedent); the judge/thesis/
+    implication/narrator brains were dispatched **Read-once-on-one-file** rather than strictly
+    tool-less, because their emitted prompts run 74k–152k chars and re-typing them into a dispatch
+    message risks corrupting finding ids (the extraction brain **was** fully tool-less,
+    `tool_uses=0`); and F67's verbatim-report rule was not applied to the session's final message
+    (the report is 759 lines / 79 KB — summarised, with the path given). Concurrent-instance note:
+    HEAD moved mid-run `83ba9d7` → `bef500c` (another instance merged F96 `439fa6e` and pushed);
+    those commits touch `ingest.py`, tests and docs only, no `store/`, so there was no collision —
+    but this cycle's ingest ran on the **pre-F96 doc-id scheme**.
   - **2026-07-11/12 sessions: F78 stages 1–5 all on main (`fd0b08c`, suite 1200/5); exec-format
     spec + stage-6 plan amendment committed; F79 + F80 logged; SDEWS docx + extraction committed;
     v5 top-up landed (concurrent instance).** Details in the current-state block at the top.
