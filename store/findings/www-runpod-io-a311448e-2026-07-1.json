@@ -1,0 +1,45 @@
+{
+  "id": "www-runpod-io-a311448e-2026-07-1",
+  "statement": "RunPod's pricing page, last updated July 17, 2026, lists H100 SXM at $2.69/hr on Community Cloud and $2.99/hr on Secure Cloud, with H100 PCIe from $1.99/hr.",
+  "kind": "measured",
+  "value": {
+    "number": 2.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A dated rental card from a lower-cost provider shows the bottom of the rentable Hopper market, but the page states no prior price to compare against.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Per-GPU hourly list rates mark the observable clearing price for rented Hopper capacity at the discount tier of the market."
+  },
+  "evidence": [
+    {
+      "source": "RunPod (runpod.io)",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-07-17",
+      "excerpt": "H100 SXM (80GB VRAM, 125GB RAM, 20 vCPUs) - Community Cloud $2.69/hr, Secure Cloud $2.99/hr.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor pricing page carrying its own 'Last Updated: July 17, 2026' stamp; secondary source and a single provider."
+  },
+  "dispersion": "conflicting same-key reports: value 5.89 -> 2.99 (tol 1%); sources: RunPod (runpod.io)",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-07-17",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

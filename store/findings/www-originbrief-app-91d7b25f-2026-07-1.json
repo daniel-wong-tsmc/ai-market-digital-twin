@@ -1,0 +1,48 @@
+{
+  "id": "www-originbrief-app-91d7b25f-2026-07-1",
+  "statement": "Server DRAM prices are expected to rise 18% in Q3 2026, attributed to AI server demand outpacing supply additions.",
+  "kind": "measured",
+  "value": {
+    "number": 18.0,
+    "unit": "pct_yoy"
+  },
+  "trend": "rising",
+  "why": "A double-digit quarterly jump in server memory pricing is a direct read that memory supply is not keeping up with AI server build, and it raises the bill of materials for every accelerator system.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Rising server DRAM prices signal a tight memory market and lift AI server costs, squeezing system margins and constraining how much compute a fixed budget can buy."
+  },
+  "evidence": [
+    {
+      "source": "OriginBrief - Semiconductor & Chip Industry Weekly",
+      "url": "https://www.originbrief.app/en/reports/semiconductor-chip-industry/2026-07-20/weekly",
+      "date": "2026-07-20",
+      "excerpt": "Server DRAM prices are expected to rise by 18% in Q3 2026,",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Forward expectation aggregated by one weekly newsletter from unnamed reporting dated 2026-07-17; it is a forecast, not a realised price, and the registered unit is year-over-year while the figure is quarterly."
+  },
+  "dispersion": "conflicting same-key reports: value 50.0 -> 18.0 (tol 1%); sources: OriginBrief - Semiconductor & Chip Industry Weekly",
+  "asOf": "2026-07",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-07-20",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

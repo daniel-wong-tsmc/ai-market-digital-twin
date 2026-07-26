@@ -1,0 +1,53 @@
+{
+  "id": "www-ad-hoc-news-de-94ca546c-2026-07-4",
+  "statement": "SK Hynix shares closed at 1,919,000 won in Seoul, up 4.86% in one session, with the article attributing the move to Alphabet's raised 2026 capex range of $195-205 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 4.86,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "The market immediately repricing the largest HBM supplier on a hyperscaler capex raise shows how directly memory demand is expected to track cloud spending.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Raised hyperscaler capex flows through server orders into HBM bit demand, which is why the memory supplier's equity reprices on the same news."
+  },
+  "evidence": [
+    {
+      "source": "ad-hoc-news.de",
+      "url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/sk-hynix-rides-alphabet-s-capex-bombshell-to-a-4-86-percent-surge-but/69854646",
+      "date": "2026-07-23",
+      "excerpt": "closed at 1,919,000 won in Seoul, climbing 4.86% in a single session",
+      "tier": "secondary"
+    },
+    {
+      "source": "ad-hoc-news.de",
+      "url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/sk-hynix-rides-alphabet-s-capex-bombshell-to-a-4-86-percent-surge-but/69854646",
+      "date": "2026-07-23",
+      "excerpt": "its 2026 capital expenditure forecast to between $195 billion and $205 billion",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "A single session's share move with a cause assigned by one outlet's narrative; market attribution is not measurement of demand."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "memory",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

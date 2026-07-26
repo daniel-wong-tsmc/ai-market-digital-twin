@@ -1,0 +1,44 @@
+{
+  "id": "nvidianews-nvidia-com-5c5b4b41-2026-07-3",
+  "statement": "NVIDIA entered a long-term partnership with SK hynix to secure next-generation memory supply and jointly develop HBM for AI training, AI agents, and physical AI.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Locking in HBM supply from the largest HBM maker directly addresses the memory bottleneck that has gated accelerator output, and it reserves scarce bits ahead of competitors.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "mixed",
+    "mechanism": "A long-term supply lock improves NVIDIA's own HBM availability while reducing uncommitted memory bits available to rival accelerator vendors, easing supply for one buyer and tightening it for the rest."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/sk-group-and-nvidia-expand-strategic-partnership-across-ai-factories-and-next-generation-memory",
+      "date": "2026-07-24",
+      "excerpt": "a long-term partnership with SK hynix to secure next-generation memory supply for NVIDIA and jointly develop HBM for AI training, AI agents, and physical AI applications",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary NVIDIA announcement stating the supply partnership directly; no volumes or contract terms are disclosed."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-24",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

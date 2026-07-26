@@ -1,0 +1,177 @@
+{
+  "headline": "The memory makers finally start writing cheques",
+  "deck": "The parts that go inside each AI chip are still the holdup. This week the biggest memory supplier put billions into fixing that, and signed a long-term deal with NVIDIA. The relief arrives later, not now.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The holdup has not moved",
+      "paragraphs": [
+        "Nothing about the shortage changed this week. The two walls are the same as they were: the advanced packaging that binds each chip together, and the stacked memory that sits beside it.",
+        "Packaging is fully booked through 2026, with waits of 52 to 78 weeks and orders already running into 2027. Memory is worse. Morgan Stanley says server memory contract prices will rise more than 25 percent in the coming quarter and sees no sign the shortage is easing, and it warns it could get worse in 2027 and 2028. The head of the largest memory maker said the same on 23 July: the squeeze may last through 2027."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending, year over year"
+      },
+      "claimFindingIds": [
+        "www-forbes-com-7c91863a-2026-07-1",
+        "www-tradingkey-com-855cb780-2026-07-1",
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "finance-biggo-com-6dfe92b3-2026-07-3",
+        "www-ad-hoc-news-de-94ca546c-2026-07-2"
+      ],
+      "sourceLine": "Forbes, TradingKey, BigGo Finance, ad-hoc-news.de",
+      "relatedDocs": []
+    },
+    {
+      "n": 2,
+      "title": "Real money aimed at the narrow part",
+      "paragraphs": [
+        "Here is what is new. On 23 July, SK Hynix's board approved 7.09 trillion won, about $4.83 billion, for a new packaging plant in Cheongju, to open clean rooms sooner and make more of the stacked memory that AI chips need.",
+        "A day later, SK Group and NVIDIA announced a partnership they describe as worth more than $500 billion, signed as letters of intent covering both new AI plants and next-generation memory supply. The point of that deal, for NVIDIA, is to lock in the one part it cannot buy off a shelf.",
+        "Neither move puts a single extra chip in a customer's rack this quarter. Building and filling a plant takes years. But it is the first week in a while where the money went straight at the narrowest point rather than around it."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending, year over year"
+      },
+      "claimFindingIds": [
+        "www-ad-hoc-news-de-94ca546c-2026-07-1",
+        "nvidianews-nvidia-com-5c5b4b41-2026-07-1",
+        "nvidianews-nvidia-com-5c5b4b41-2026-07-3"
+      ],
+      "sourceLine": "ad-hoc-news.de, StockTitan, NVIDIA Newsroom",
+      "relatedDocs": [
+        {
+          "url": "https://nvidianews.nvidia.com/news/sk-group-and-nvidia-expand-strategic-partnership-across-ai-factories-and-next-generation-memory",
+          "title": "SK Group and NVIDIA Expand Partnership Across AI Factories and Next-Generation Memory",
+          "outlet": "NVIDIA Newsroom",
+          "date": "2026-07-24"
+        },
+        {
+          "url": "https://www.stocktitan.net/sec-filings/SKHY/6-k-sk-hynix-inc-current-report-foreign-issuer-c5d395b69375.html",
+          "title": "SK Hynix Files Current Report on New Packaging Investment",
+          "outlet": "StockTitan (SEC/6-K filing aggregator)",
+          "date": "2026-07-22"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Buyers are still ahead of the factories",
+      "paragraphs": [
+        "Demand did not pause to wait. Alphabet raised its 2026 spending plan again on 22 July, to $195 to $205 billion from $180 to $190 billion, and its cloud business grew 82 percent from a year ago. Intel's data-centre unit reported revenue up 59 percent.",
+        "There are more sellers than a year ago. AMD's Helios rack system reached full production on 23 July, with shipments starting this quarter and named deals covering two large model builders. But AMD gave no order numbers or revenue figures with its new chip launch, and NVIDIA's share of the market is only expected to slip from 87 percent in 2024 to about 75 percent this year. More choice does not mean more total chips while the same packaging lines and memory plants feed everyone."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "abc-xyz-33e70a64-2026-07-1",
+        "abc-xyz-33e70a64-2026-07-3",
+        "www-intc-com-0fa743ed-2026-07-1",
+        "www-servethehome-com-b11b71a3-2026-07-2",
+        "www-servethehome-com-b11b71a3-2026-07-3",
+        "newsroom-amd-com-cf6c6318-2026-07-3",
+        "siliconanalysts-com-47ffeeeb-2026-07-1"
+      ],
+      "sourceLine": "Alphabet Investor Relations, Intel Investor Relations, ServeTheHome, AMD Newsroom, Silicon Analysts",
+      "relatedDocs": [
+        {
+          "url": "https://abc.xyz/investor/news/news-details/2026/Alphabet-Announces-Second-Quarter-2026-Results-2026-Y3uQ6H4ZJa/default.aspx",
+          "title": "Alphabet Announces Second Quarter 2026 Results",
+          "outlet": "Alphabet Investor Relations (press release dated 2026-07-22) via CNBC / MLQ News reporting",
+          "date": "2026-07-22"
+        },
+        {
+          "url": "https://newsroom.amd.com/news/aai-2026-mi400-instinct-update/",
+          "title": "AMD Instinct MI400 Series Update",
+          "outlet": "AMD Newsroom",
+          "date": "2026-07-23"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Two things decide the next few months. First, memory prices. If the coming quarter really lands the 25 percent-plus rise the forecasters expect, the cost of every finished chip goes up and the shortage keeps its grip. Second, packaging output: the ramp toward roughly 125,000 to 130,000 units a month by the end of this year is the only near-term way to widen the pipe.",
+        "Watch the rental market for the first sign either one is working. Today's listed rates still show plenty of supply at the older end, with 8-chip H100 nodes at $49.24 an hour on CoreWeave and single chips at $3.99 an hour on Lambda. When the new plants and packaging lines start to bite, prices at the newest end will move first."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per chip"
+      },
+      "claimFindingIds": [
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "finance-biggo-com-ae5dcd41-2026-07-2",
+        "www-coreweave-com-dffa6e69-2026-07-1",
+        "lambda-ai-c205c6dc-2026-07-1"
+      ],
+      "sourceLine": "BigGo Finance, CoreWeave, Lambda",
+      "relatedDocs": [
+        {
+          "url": "https://www.coreweave.com/pricing",
+          "title": "CoreWeave Cloud Pricing",
+          "outlet": "CoreWeave (coreweave.com)",
+          "date": "2026-07-26"
+        },
+        {
+          "url": "https://lambda.ai/service/gpu-cloud",
+          "title": "Lambda GPU Cloud Pricing",
+          "outlet": "Lambda (lambda.ai)",
+          "date": "2026-07-26"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Servers actually shipped shows how much of the ordering is getting past the holdup.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Spending on new memory plants is the clearest early sign the tightest part will loosen.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Which way the biggest buyers revise their budgets tells you if demand keeps pressing on supply.",
+      "scene": 3
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "The street price per chip is where relief would show up first.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-07",
+      "text": "Memory plant spending is running about 50 percent above a year ago, and this week's new packaging plant adds to it.",
+      "scene": 2
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "Street price per chip sits near $32,500, back up after a dip, as parts stay scarce.",
+      "scene": 4
+    }
+  ],
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-07-26",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "3f4a1e9373450078848914c24ea7865f49d6fb190e3519805c0451093db57a4f",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-07-26T08:21:29.833689+00:00"
+  }
+}

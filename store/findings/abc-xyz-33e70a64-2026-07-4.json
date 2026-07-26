@@ -1,0 +1,43 @@
+{
+  "id": "abc-xyz-33e70a64-2026-07-4",
+  "statement": "Alphabet shares fell roughly 6% on the earnings day and other AI-infrastructure-adjacent names (Amazon, Oracle, Meta, Microsoft) also declined, suggesting investors treated the larger capex budget as a cost rather than a growth signal.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "If equity markets start penalising rather than rewarding AI capex, the financing conditions facing the marginal buyer of compute tighten, which eventually feeds back into order books.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "A negative share-price reaction to raised capex raises the cost of capital and board-level scrutiny for further AI build, which can slow the pace of incremental compute commitments even while current budgets rise."
+  },
+  "evidence": [
+    {
+      "source": "Alphabet Investor Relations (press release dated 2026-07-22) via CNBC / MLQ News reporting",
+      "url": "https://abc.xyz/investor/news/news-details/2026/Alphabet-Announces-Second-Quarter-2026-Results-2026-Y3uQ6H4ZJa/default.aspx",
+      "date": "2026-07-22",
+      "excerpt": "Alphabet shares dropped roughly 6% after the earnings announcement",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Single-day market reaction reported by one secondary outlet; a one-session move is weak evidence of a durable financing-condition change."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "hyperscalers",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

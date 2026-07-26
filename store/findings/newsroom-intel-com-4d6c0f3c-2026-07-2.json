@@ -1,0 +1,45 @@
+{
+  "id": "newsroom-intel-com-4d6c0f3c-2026-07-2",
+  "statement": "Intel shares surged 8.64% on July 21, 2026, attributed in trade press partly to the Google Cloud collaboration, partly to a new foundry customer (Fortinet) and memory-performance items ahead of Q2 earnings.",
+  "kind": "measured",
+  "value": {
+    "number": 8.64,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "A named new foundry customer is a concrete sign that alternative fabrication capacity is winning work, which matters for how much non-incumbent supply the chain can eventually carry.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Foundry customer additions at Intel expand the pool of non-TSMC leading-edge capacity, a slow-moving relief valve on the chain's single-foundry dependence."
+  },
+  "evidence": [
+    {
+      "source": "Intel Newsroom",
+      "url": "https://newsroom.intel.com/artificial-intelligence/intel-google-cloud-announce-collaboration-to-accelerate-intel-ai-enabled-enterprise-transformation",
+      "date": "2026-07-16",
+      "excerpt": "surged 8.64% on July 21, 2026,",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Share move and the Fortinet foundry item are relayed second-hand from unnamed trade press inside one document, with the cause split across several unquantified factors."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: Intel Newsroom",
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-07-21",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

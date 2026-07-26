@@ -1,0 +1,44 @@
+{
+  "id": "newsroom-amd-com-cf6c6318-2026-07-1",
+  "statement": "AMD launched the Instinct MI400 Series on July 23, 2026, split into the MI455X for frontier AI and AI-factory deployments and the MI430X for sovereign AI and HPC.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A shipping second-source accelerator family is the main path by which buyers get an alternative to the incumbent merchant GPU, and a segmented launch widens the addressable slots AMD can compete for.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud"
+    ],
+    "direction": "positive",
+    "mechanism": "A launched two-model accelerator line adds credible alternative accelerator supply into frontier, sovereign and HPC buying tracks, easing single-vendor dependence for compute buyers."
+  },
+  "evidence": [
+    {
+      "source": "AMD Newsroom",
+      "url": "https://newsroom.amd.com/news/aai-2026-mi400-instinct-update/",
+      "date": "2026-07-23",
+      "excerpt": "AMD officially launched the AMD Instinct MI400 Series, comprising two GPU models: the MI455X, designed for 'frontier AI and AI factory deployments,' and the MI430X, designed for 'sovereign AI and HPC.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor newsroom announcement classified secondary here; product launch is well attested but no volumes, orders or shipment dates are disclosed."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: AMD Newsroom",
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

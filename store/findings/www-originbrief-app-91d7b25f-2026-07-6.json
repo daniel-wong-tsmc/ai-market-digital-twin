@@ -1,0 +1,42 @@
+{
+  "id": "www-originbrief-app-91d7b25f-2026-07-6",
+  "statement": "The report explicitly contains no figures on GPU or AI-server lead times, TSMC CoWoS capacity constraints, or foundry allocation policies for NVIDIA, AMD and Intel AI chips this cycle.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Knowing that a weekly industry roundup carried no lead-time or packaging-allocation data means the supply-tightness picture for this week rests on other sources, and the gap should not be read as easing.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "mixed",
+    "mechanism": "Absence of lead-time and CoWoS allocation data in the week's roundup leaves the packaging-constraint read unrefreshed, so prior tightness assumptions carry forward unverified."
+  },
+  "evidence": [
+    {
+      "source": "OriginBrief - Semiconductor & Chip Industry Weekly",
+      "url": "https://www.originbrief.app/en/reports/semiconductor-chip-industry/2026-07-20/weekly",
+      "date": "2026-07-20",
+      "excerpt": "it contains no specific figures on GPU/AI-server lead times, TSMC CoWoS capacity constraints, or foundry allocation policies for NVIDIA/AMD/Intel AI chips this cycle.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "This is an absence of data in one aggregator, not a measurement; it carries no information about the direction of actual lead times."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-07-20",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

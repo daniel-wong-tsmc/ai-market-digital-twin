@@ -1,0 +1,47 @@
+{
+  "id": "www-originbrief-app-91d7b25f-2026-07-5",
+  "statement": "TSMC announced an incremental $100 billion U.S. investment linked to the U.S.-Taiwan trade and investment deal announced in January 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 100.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Additional leading-edge capacity from the dominant foundry, sited in the United States, changes both how much accelerator supply exists and where geopolitical risk sits.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "positive",
+    "mechanism": "Incremental foundry capital expands future leading-edge wafer and packaging capacity for AI silicon and diversifies its geographic concentration."
+  },
+  "evidence": [
+    {
+      "source": "OriginBrief - Semiconductor & Chip Industry Weekly",
+      "url": "https://www.originbrief.app/en/reports/semiconductor-chip-industry/2026-07-20/weekly",
+      "date": "2026-07-20",
+      "excerpt": "TSMC announced an incremental $100 billion U.S. investment",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Headline investment figure relayed by one secondary aggregator with no timeline, node mix, or capacity detail; effect on accelerator supply is multi-year."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: OriginBrief - Semiconductor & Chip Industry Weekly",
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-07-20",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

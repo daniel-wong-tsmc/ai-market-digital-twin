@@ -7,86 +7,104 @@
         "momentum"
       ],
       "findingIds": [
-        "nvidianews-nvidia-com-7b7a02ff-2026-07-1",
-        "www-digitimes-com-f88ca4e6-2"
+        "thetechcapital-com-796ec195-2026-07-1",
+        "abc-xyz-33e70a64-2026-07-1",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-2",
+        "www-digitimes-com-e48a6e49-2026-07-05-1",
+        "www-forbes-com-9a1166d5-2026-07-1"
       ],
       "thesisIds": [
         "nvda-demand-durability",
-        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing"
+        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing",
+        "hyperscaler-ai-spending-may-outrun-near-term-returns"
       ],
-      "watchItem": "Merchant-GPU demand runs very strong with record data-center revenue, and the next wave of accelerators from NVIDIA, AMD, Amazon, and Google all reach mass production in the second half of 2026. Leading-edge wafer-start planning is exposed to that broad, simultaneous ramp; watch whether all four programs hold their volumes."
+      "watchItem": "Accelerator demand keeps running ahead of what the chain can ship, and the largest cloud spenders raised 2026 budgets again this cycle. Wafer-start planning across leading-edge nodes carries the exposure if that spending pace turns."
     },
     {
       "dimensions": [
         "bottleneck"
       ],
       "findingIds": [
+        "www-forbes-com-7c91863a-2026-07-1",
         "www-tradingkey-com-855cb780-2026-07-1",
         "www-fool-com-f229964a-2026-07-1",
+        "www-trendforce-com-368d8402-2026-07-1",
         "finance-biggo-com-ae5dcd41-2026-07-2"
       ],
       "thesisIds": [
-        "supply-constraint-binding",
-        "ai-packaging-supply-is-concentrated-in-a-few-buyers"
+        "supply-constraint-binding"
       ],
-      "watchItem": "Advanced packaging is sold out through 2027 with lead times of 52 to 78 weeks, and suppliers describe the shortfall as large into 2029-2030. Realizable GPU revenue is capped by this packaging line; watch the monthly wafer ramp toward 125-130k and how fast the order gap narrows."
+      "watchItem": "Advanced packaging is still the gate on how much accelerator revenue can actually ship, with lead times of roughly 52 to 78 weeks and bookings running into 2027. The capacity ramp toward about 125,000 to 130,000 wafers a month narrows the gap but does not close it this year."
     },
     {
       "dimensions": [
-        "competitiveStructure"
-      ],
-      "findingIds": [
-        "www-faf-ae-6bcac1ba-2026-07-2",
-        "siliconanalysts-com-47ffeeeb-2026-07-1",
-        "siliconanalysts-com-47ffeeeb-2026-07-3"
-      ],
-      "thesisIds": [
-        "custom-asic-substitution",
-        "the-custom-ai-chip-alternative-depends-on-two-design-houses"
-      ],
-      "watchItem": "Custom hyperscaler chips are growing far faster than merchant GPUs and are taking share as NVIDIA's slips from 87 percent toward 75 percent. The leading-node customer base is exposed to a shift from a few GPU vendors toward in-house designs; watch how much of that custom volume lands on the leading node."
-    },
-    {
-      "dimensions": [
-        "unitEconomics"
-      ],
-      "findingIds": [
-        "www-tradingkey-com-855cb780-2026-07-2",
-        "www-forbes-com-7c91863a-2026-07-1"
-      ],
-      "thesisIds": [
-        "pricing-power-persistence",
-        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing"
-      ],
-      "watchItem": "TSMC gross margin rose to 67.7 percent while packaging stays fully booked and end-market demand is firm. How much pricing power holds across the chain tracks how long this sold-out condition lasts; watch margin and lead times for any loosening."
-    },
-    {
-      "dimensions": [
+        "bottleneck",
         "strategicRisk"
       ],
       "findingIds": [
         "www-forbes-com-7c91863a-2026-07-2",
-        "www-sec-gov-125b52f2-2026-07-1"
+        "www-forbes-com-7c91863a-2026-07-3"
       ],
       "thesisIds": [
-        "customer-concentration-risk",
         "ai-packaging-supply-is-concentrated-in-a-few-buyers"
       ],
-      "watchItem": "The top three packaging clients take more than 85 percent of output, with one buyer near 60 percent, and that same buyer's largest three customers make up over half its revenue. The packaging book is exposed to a narrow set of buyers; watch whether any single program slips."
+      "watchItem": "Three clients take more than 85% of advanced-packaging output, with one at roughly 60% and another at about 11% that it splits between server processors and accelerators. Any single order cut leaves scarce capacity that is hard to refill quickly."
     },
     {
       "dimensions": [
-        "bottleneck"
+        "bottleneck",
+        "unitEconomics"
       ],
       "findingIds": [
         "finance-yahoo-com-ea29a8bf-2026-07-1",
-        "en-sedaily-com-c7890a6b-2026-07-1",
-        "finance-biggo-com-6dfe92b3-2026-07-1"
+        "siliconanalysts-com-79e017b3-2026-07-2",
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "siliconanalysts-com-216b07a8-2026-07-1",
+        "www-investing-com-09606ac9-2026-07-1"
       ],
       "thesisIds": [
-        "memory-supply-is-the-new-choke-point-on-accelerator-shipments"
+        "memory-supply-is-the-new-choke-point-on-accelerator-shipments",
+        "stacked-memory-supply-sits-with-one-dominant-maker"
       ],
-      "watchItem": "Memory supply is now capping shipments, with HBM sold out through 2026, contract prices set to roughly double, and Micron's output gating GPU availability. Even ample packaging is exposed to this second choke point; watch HBM supply as a limit on realizable GPU output."
+      "watchItem": "Stacked memory now caps accelerator output alongside packaging: 2026 output is fully committed, 2027 is largely pre-booked, and one supplier holds about 56% of that market. Packaging relief alone would not lift shipments while memory stays the tighter of the two limits."
+    },
+    {
+      "dimensions": [
+        "competitiveStructure",
+        "moat"
+      ],
+      "findingIds": [
+        "www-faf-ae-6bcac1ba-2026-07-2",
+        "siliconanalysts-com-47ffeeeb-2026-07-3",
+        "siliconanalysts-com-47ffeeeb-2026-07-1",
+        "www-faf-ae-6bcac1ba-2026-07-4",
+        "www-servethehome-com-b11b71a3-2026-07-3"
+      ],
+      "thesisIds": [
+        "custom-asic-substitution",
+        "amd-credible-second-source",
+        "the-custom-ai-chip-alternative-depends-on-two-design-houses"
+      ],
+      "watchItem": "The leading-node customer base is broadening away from a single dominant accelerator vendor: custom AI chips are forecast to grow 44.6% this year against 16.1% for merchant accelerators, and AMD is converting gigawatt-scale commitments into volume. Two design houses account for roughly 95% of the custom-chip co-design work, so the alternative demand is itself concentrated."
+    },
+    {
+      "dimensions": [
+        "unitEconomics",
+        "momentum"
+      ],
+      "findingIds": [
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-3",
+        "finance-biggo-com-c310c4ca-2026-07-06-1",
+        "getdeploying-com-6f11aead-2026-07-1",
+        "www-digitimes-com-e48a6e49-2026-07-05-1"
+      ],
+      "thesisIds": [
+        "pricing-power-persistence",
+        "nvidia-holds-a-premium-gross-margin-as-it-ramps-new-chips",
+        "rising-memory-costs-inflate-ai-server-economics"
+      ],
+      "watchItem": "Pricing across the chain stays firm: foundry gross margin reached 67.7% with full-year revenue growth guidance lifted above 40%, and the lead accelerator vendor holds a 75% gross margin. Rack component costs are climbing 2% to 3% a week on memory scarcity, so the pressure point shifts to who absorbs that input inflation."
     },
     {
       "dimensions": [
@@ -95,26 +113,34 @@
       ],
       "findingIds": [
         "www-intc-com-0fa743ed-2026-07-2",
-        "www-intc-com-0fa743ed-2026-07-1"
+        "newsroom-intel-com-28388342-2026-07-1",
+        "newsroom-intel-com-297a8b5b-2026-07-1",
+        "techcrunch-com-6b79ddb7-1",
+        "www-originbrief-app-91d7b25f-2026-07-5"
       ],
       "thesisIds": [
-        "intel-returns-as-a-data-center-supplier"
+        "intel-returns-as-a-data-center-supplier",
+        "us-onshoring-broadens-the-ai-hardware-supply-base"
       ],
-      "watchItem": "Intel's foundry revenue grew 31 percent and its data-center chip line grew 59 percent, marking a returning second source. Foundry demand is exposed to buyers gaining an alternative supplier; watch Intel's foundry traction for any pull on leading-node orders."
+      "watchItem": "A second-source foundry track is gaining visible traction: Intel Foundry revenue rose 31% year over year with a named external customer and new node capacity in Ireland, while one large model developer is in early talks with Samsung about a 2-nanometer custom chip. These are early signals rather than volume shifts."
     },
     {
       "dimensions": [
         "strategicRisk"
       ],
       "findingIds": [
+        "www-bis-gov-dbeede91-2026-07-1",
+        "www-cnbc-com-9d898f2b-2026-07-1",
         "www-sec-gov-125b52f2-2026-07-2",
-        "www-sahmcapital-com-dbab27f1-2026-07-1"
+        "finance-yahoo-com-f1703d5e-2026-07-05-1",
+        "finance-yahoo-com-c4ceeee1-2026-07-1"
       ],
       "thesisIds": [
         "export-control-exposure",
-        "conditional-china-re-opening-with-a-capped-ceiling"
+        "conditional-china-re-opening-with-a-capped-ceiling",
+        "enforcement-closes-the-gray-route-into-china"
       ],
-      "watchItem": "NVIDIA's China revenue fell by more than half as only about ten buyers cleared case-by-case export review. Foundry demand tied to China-bound parts is exposed to policy swings; watch approval volumes as a swing factor on that slice of orders."
+      "watchItem": "China access reopened only on paper: licensing moved to case-by-case review with a cap and a 25% tariff, yet shipments remain trivial and China data-center revenue halved year over year. Smuggling prosecutions and a shortened customer whitelist tighten the informal route at the same time."
     }
   ]
 }

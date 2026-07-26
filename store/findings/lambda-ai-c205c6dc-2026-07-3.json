@@ -1,0 +1,42 @@
+{
+  "id": "lambda-ai-c205c6dc-2026-07-3",
+  "statement": "Lambda's on-demand catalogue lists only NVIDIA parts (B200, H100, A100, GH200) with no H200 and no AMD MI300X or MI355X instances.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A major GPU cloud offering no AMD accelerator instances is a visible read on how little alternative-supply capacity is reaching rentable inventory.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Absence of AMD instances at a significant neocloud indicates alternative accelerator supply is not displacing NVIDIA in rentable capacity, sustaining concentration of demand on the incumbent merchant-GPU vendor."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (lambda.ai)",
+      "url": "https://lambda.ai/service/gpu-cloud",
+      "date": "2026-07-26",
+      "excerpt": "No H200 or AMD MI300X/MI355X instances appear in the pricing tables.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Direct observation of one vendor's public catalogue; single provider, secondary source, and absence from a page is weaker than a stated policy."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> unknown); sources: Lambda (lambda.ai), RunPod (runpod.io)",
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-07-26",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

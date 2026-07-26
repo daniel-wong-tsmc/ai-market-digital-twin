@@ -1,0 +1,45 @@
+{
+  "id": "lambda-ai-c205c6dc-2026-07-1",
+  "statement": "Lambda GPU Cloud lists on-demand H100 SXM at $3.99 per GPU-hour on the 8-GPU plan, with per-GPU rates rising to $4.29 for a single-GPU plan.",
+  "kind": "measured",
+  "value": {
+    "number": 3.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Published rental rates from a named GPU cloud are a daily confirmation overlay on where merchant-GPU compute clears, though no baseline or prior price appears on the page.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Listed rental rates set the observable clearing price for renting merchant-GPU capacity; without a stated prior level this is a static level only."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (lambda.ai)",
+      "url": "https://lambda.ai/service/gpu-cloud",
+      "date": "2026-07-26",
+      "excerpt": "NVIDIA H100 SXM 8x GPU plan: $3.99 per GPU/hour.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own public pricing page, but a secondary open-web source with no stated update date; treated as a captured snapshot."
+  },
+  "dispersion": "conflicting same-key reports: value 6.69 -> 3.99 (tol 1%); sources: Lambda (lambda.ai)",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-07-26",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
