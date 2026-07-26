@@ -1138,7 +1138,8 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   isolation both airtight). **REMAINING: shadow soak ≥5 live cycles (needs manual `v2-shadow`
   CLI invocation per cycle — the auto-hook is deferred to G4) → G4 CUTOVER (user-signed; flips
   v1→v2 rendering).** Absorbs F60's deferred scoring half. Original scope below.
-- [ ] **F96 — Monthly-grain write-back collision: same-period price re-gather mints a stable id
+- [x] **F96 — Monthly-grain write-back collision: same-period price re-gather mints a stable id
+  **✓ DONE 2026-07-26** — content-vintage ids merged `439fa6e`; live criterion PASSED (v18: 11 same-month updates, zero collisions).
   over changed content (F52-class residual).** Found in the live 2026-07-15 v8 daily cycle
   (`store/cycle-log.json` stageStatuses.writeBack = "failed (finding-id collision on
   lambda-ai-1252bbe3-2026-07-1 — same-month live-price re-gather, id stable but content moved;
@@ -1180,7 +1181,8 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
 
 ## From the 2026-07-13 three-tier site brainstorm (F95)
 
-- [ ] **F95 — Three-tier market site on Cloudflare Pages (category page build-now; layer/market
+- [x] **F95 — Three-tier market site on Cloudflare Pages (category page build-now; layer/market
+  **✓ DONE 2026-07-15→24** — merged `2725578`; live at ai-market-digital-twin.pages.dev since; index page since superseded by F101.
   rollup contract pinned).** Public static site rendering the exec page per tier: E2 word tiles
   + alert dot PLUS one dynamic numerical "featured metric" (library-backed,
   `registry/featured-metrics.json`, deterministic selector — rule-hit → biggest-move →
@@ -1231,7 +1233,8 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
 
 ## From the 2026-07-17 SDEWS cross-reference (F98)
 
-- [ ] **F98 — Agenda-band completeness + unit hygiene (Part A, renderer/config) and S4 upstream
+- [x] **F98 — Agenda-band completeness + unit hygiene (Part A, renderer/config) and S4 upstream
+  **✓ DONE 2026-07-17/20** — Part A merged `7e2f657`, Part B merged `6b0bf37` (gated lane cleared by the book).
   lead-time adoption (Part B, gated).**
   **► PART A DONE + MERGED 2026-07-17 (merge `7e2f657`, subagent-driven branch `f98-agenda-data`).**
   Shipped: new `price-sync` CLI verb + run-cycle step turn the local `gpu_agent/data/gpu_leasing_data/`
@@ -1294,7 +1297,8 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   pin still catches any prompt change; only this "gate has teeth" meta-proof is parked. *(Concurrent-mint
   caveat: F99 chosen against a backlog max of F98 on 2026-07-18; renumber if collided.)*
 
-- [ ] **F100 — Merchant-GPU deep-dive dashboard revamp (renderer/copy layer).** DESIGNED + PLANNED
+- [x] **F100 — Merchant-GPU deep-dive dashboard revamp (renderer/copy layer).** DESIGNED + PLANNED
+  **✓ DONE 2026-07-21** — merged `2e1effa`, deployed at rev 13; superseded as index by F101 (panel/model = donors).
   interactively 2026-07-20 (spec `1c93f68`, 12-task TDD plan `7aab4d6`, both docs-only on local main). Rebuilds
   the `chips.merchant-gpu` category page (`site/`): light editorial theme, 2-sentence brief, the existing agenda
   band restyled as 5 dynamic KPI cards (DMI/SMI excluded), a demand-vs-supply dual-line chart, a clickable
@@ -1306,7 +1310,8 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   only.** Build lane: `.worktrees/f100-dashboard`, subagent-driven, STOP-before-merge → user merges.
   *(Concurrent-mint caveat: F100 chosen against a backlog max of F99 on 2026-07-20; renumber if collided.)*
 
-- [ ] **F101 — Narrative-first category page: "Is supply catching up to demand?" (page redesign + daily narrator step).**
+- [x] **F101 — Narrative-first category page: "Is supply catching up to demand?" (page redesign + daily narrator step).**
+  **✓ DONE 2026-07-23/24** — Phase A `d01bb11`, Phase B `3e1049e`, Phase C `fcf996a`; deployed `ed5a332`; narrator live criterion PASSED 2026-07-25 (fellBack:false).
   DESIGNED interactively 2026-07-22 (spec `docs/superpowers/specs/2026-07-22-f101-narrative-page-design.md`;
   full visual-companion brainstorm, all decisions interactive, zero AFK). Rebuilds the `chips.merchant-gpu`
   page around ONE question answered in plain newspaper English: headline verdict → demand-vs-supply time
@@ -1329,7 +1334,8 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   *(Concurrent-mint caveat: F102 chosen against a backlog max of F101 on 2026-07-23; renumber if collided.)*
   FIXED 2026-07-26 — `_parse_as_of` (day + month grain, month-end anchor), graceful skip on malformed input (spec docs/superpowers/specs/2026-07-25-f102-price-sync-grain-design.md / plan docs/superpowers/plans/2026-07-25-f102-price-sync-grain.md). Live criterion: next cycle's price-sync refreshes store/series and the front-page rent gauge drops its aging mark.
 
-- [ ] **F103 — Evidence freshness: half-life decay + stale-official-source fixes (user critique 2026-07-24).**
+- [x] **F103 — Evidence freshness: half-life decay + stale-official-source fixes (user critique 2026-07-24).**
+  **✓ DONE 2026-07-24/25** — merged `62676f6`, deployed `dce8dbd`; the aging treatment is live.
   Official NVIDIA earnings-call material (May vintage) keeps surfacing as current evidence on the live
   page. Root chain: manifest primaryDomains steer gatherers to IR domains daily; no downstream decay;
   evidence rows undated, judge-ordered. Fix (spec `docs/superpowers/specs/2026-07-24-f103-freshness-decay-design.md`):
