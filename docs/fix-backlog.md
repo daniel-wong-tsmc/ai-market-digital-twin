@@ -1341,3 +1341,16 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   for official IR domains. **Judge explicitly untouched (user decision — scores comparable, no F6);
   judge-side decay is a separate gated follow-up if ratings still skew stale.**
   *(Concurrent-mint caveat: F103 chosen against a backlog max of F102 on 2026-07-24; renumber if collided.)*
+
+- [ ] **F104 — Social-media signal ingestion (RSS-first, via the repaired webreach path).**
+  User wants agent-reach-style social reach feeding the GPU market view. Design direction (interactive
+  2026-07-26, to be brainstormed fully before any lane): (1) CORE: curated social RSS feeds (subreddits
+  r/hardware / r/LocalLLaMA / r/nvidia, key YouTube channels, HN query feeds) registered in the coverage
+  manifest as a social slice, fetched through the healthy `rss` channel via webreach (recorded manifest
+  rows; keyless; enters as secondary-tier docs — no brain prompts touched, no gates); (2) COMPLEMENT:
+  promote `last30days` as a weekly social-discovery pass; (3) DEFERRED: per-platform agent-reach backends
+  (twitter/reddit/youtube native) — credentialed + fragile, only on demand. **OPEN DESIGN QUESTION for the
+  brainstorm: should social-sourced findings carry a visibly distinct "community signal" treatment on the
+  page (e.g., excluded from scene evidence, confined to related coverage / a dedicated strip)?** Platform
+  health snapshot 2026-07-26: web/rss/bilibili/v2ex ok; twitter/github/xueqiu warn; rest off.
+  *(Concurrent-mint caveat: F104 chosen against a backlog max of F103 on 2026-07-26; renumber if collided.)*
