@@ -39,13 +39,13 @@
           "agent-reach install --env=auto"
         ]
       },
-      "invokeHint": "agent-reach <verb> <target>   # e.g. read <url>, search <query>, twitter/reddit/youtube ...",
+      "invokeHint": "router CLI (v1.5.0 has no top-level read/search verb); web read routes to Jina Reader (curl https://r.jina.ai/<url>), web search routes to Exa (mcporter call exa.web_search_exa). Run `agent-reach doctor --json` for per-platform backends.",
       "capabilities": ["web", "search", "twitter", "reddit", "youtube", "github", "bilibili", "xiaohongshu", "rss"],
       "defaultTier": "secondary",
-      "notes": "FETCH role — unified internet-access CLI; auto-fallback backends; zero mandatory API fees. Returns raw content ingested as secondary blobs. Credentials local-only.",
+      "notes": "FETCH role — unified internet-access ROUTER; auto-fallback backends; zero mandatory API fees. Returns raw content ingested as secondary blobs. Credentials local-only. As of agent-reach 1.5.0 the CLI is a router/doctor tool (setup|install|configure|doctor|uninstall|skill|format|transcribe|check-update|watch|version) and no longer exposes top-level `read`/`search` verbs; the fetchVerbs below invoke the backends agent-reach 1.5.0 documents for each channel (Jina Reader for web read, Exa for web search). healthCmd `agent-reach --version` still pins the router itself. NOTE: the `read` (Jina/curl) path is verified working; the `search` (Exa/mcporter) path requires mcporter + the Exa MCP to be configured locally and will fail-clean (recorded as an error row, batch continues) until it is.",
       "fetchVerbs": {
-        "read":   {"argv": ["agent-reach", "read", "{target}"],   "kind": "url"},
-        "search": {"argv": ["agent-reach", "search", "{target}"], "kind": "query"}
+        "read":   {"argv": ["curl", "-sL", "https://r.jina.ai/{target}"], "kind": "url"},
+        "search": {"argv": ["mcporter", "call", "exa.web_search_exa(query: \"{target}\", numResults: 5)"], "kind": "query"}
       }
     },
     {

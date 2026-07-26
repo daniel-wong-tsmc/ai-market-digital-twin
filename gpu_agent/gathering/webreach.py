@@ -90,8 +90,17 @@ def licensed_source_host(target: str, licensed_domains: set[str]) -> str | None:
 
 
 def build_argv(tool: dict, req: FetchRequest) -> list[str]:
+    """Render a verb's argv template, substituting the request `target` for every
+    `{target}` occurrence. A bare `{target}` slot becomes the raw target (one argv
+    element, metacharacters and all); a slot that EMBEDS `{target}` in a larger
+    string (e.g. `https://r.jina.ai/{target}` for the Jina-Reader read path, or a
+    quoted `mcporter` call expression) gets the target spliced in-place. Slots with
+    no `{target}` are copied verbatim (so `--flag{x}` stays literal). Substitution
+    never splits a slot into multiple argv elements and the result is always run
+    shell=False, so an attacker-controlled target can never break argv boundaries
+    or reach a shell."""
     template = tool["fetchVerbs"][req.verb]["argv"]
-    return [req.target if slot == "{target}" else slot for slot in template]
+    return [slot.replace("{target}", req.target) for slot in template]
 
 
 def _sanitize_slug(text: str, max_len: int = _SLUG_MAX_LEN) -> str:
