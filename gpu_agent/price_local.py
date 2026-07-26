@@ -279,12 +279,39 @@ def _reading(indicator, period, value, unit, date_yymmdd, as_of, source_title,
             "estimateGrade": True, "label": label, "note": note}
 
 
+def _parse_as_of(as_of: str) -> str | None:
+    """`as_of` -> YYMMDD, tolerant of month-grain input, never raising.
+
+    `YYYY-MM-DD` is validated via a real `datetime.date` round-trip (not
+    slicing) so malformed day-grain input (e.g. "2026-07-99") is rejected
+    rather than silently truncated. `YYYY-MM` resolves to that month's true
+    calendar last day via `_month_end_yymmdd`. Anything else -> None.
+    """
+    try:
+        d = _dt.date.fromisoformat(as_of)
+        return f"{d.year % 100:02d}{d.month:02d}{d.day:02d}"
+    except ValueError:
+        pass
+    try:
+        year_s, month_s = as_of.split("-")
+        if len(year_s) == 4 and len(month_s) == 2:
+            year, month = int(year_s), int(month_s)
+            if 1 <= month <= 12:
+                return _month_end_yymmdd(as_of)
+    except ValueError:
+        pass
+    return None
+
+
 def sync_series(data_dir, series_dir, as_of, benchmarks=None):
     benchmarks = benchmarks or load_benchmarks()
     series_dir = Path(series_dir)
-    as_of_yymmdd = as_of[2:4] + as_of[5:7] + as_of[8:10]
-    current_period = as_of[:7]
     warnings = []
+    as_of_yymmdd = _parse_as_of(as_of)
+    if as_of_yymmdd is None:
+        warnings.append(f"price-sync: unusable as-of {as_of!r} — skipped (no rows written)")
+        return {"written": {}, "warnings": warnings}
+    current_period = as_of[:7]
 
     hw = read_hardware_points(data_dir, benchmarks)
     written = {}

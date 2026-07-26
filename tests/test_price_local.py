@@ -193,3 +193,53 @@ def test_sync_series_empty_modality_writes_no_file(tmp_path):
     assert (series / "gpuRentalOnDemand.jsonl").exists()
     assert (series / "gpuRentalSpot.jsonl").exists() is False
     assert out["written"]["gpuRentalSpot"] == 0
+
+
+# --- F102: month-grain --as-of + malformed-input tolerance -------------------------
+
+import datetime as dt
+from gpu_agent.price_local import _parse_as_of
+
+
+def test_parse_as_of_day_grain():
+    assert _parse_as_of("2026-07-17") == "260717"
+
+
+def test_parse_as_of_month_grain_true_month_end():
+    assert _parse_as_of("2026-07") == "260731"
+    assert _parse_as_of("2026-02") == "260228"
+    assert _parse_as_of("2028-02") == "280229"      # leap year
+
+
+def test_parse_as_of_rejects_garbage_without_raising():
+    for bad in ("", "garbage", "2026", "2026-7", "2026-07-99", "26-07-01"):
+        assert _parse_as_of(bad) is None
+
+
+def test_sync_series_month_grain_completes(tmp_path):
+    # the four-sighting reproduction (v11/v14/v15/v17): month-grain as-of must
+    # sync cleanly.
+    d = _mk_leasing(tmp_path)
+    _write_hw(tmp_path, ["NVIDIA H100 Card,30000.0,29500.0,29999.0",
+                         "HGX B200 8-GPU,,260000.0,260128.0"])
+    series = tmp_path / "series"
+    result = sync_series(d, series, "2026-07", benchmarks=BENCH)
+    assert sum(result["written"].values()) > 0
+    assert not any("unusable as-of" in w for w in result["warnings"])
+    assert (series / "gpuSpotPrice.jsonl").exists()
+
+
+def test_sync_series_bad_as_of_warns_and_writes_nothing(tmp_path):
+    d = _mk_leasing(tmp_path)
+    _write_hw(tmp_path, ["NVIDIA H100 Card,30000.0,29500.0,29999.0",
+                         "HGX B200 8-GPU,,260000.0,260128.0"])
+    series = tmp_path / "series"
+    series.mkdir()
+    before = sorted(series.iterdir())
+    before_bytes = {p.name: p.read_bytes() for p in before}
+    result = sync_series(d, series, "garbage", benchmarks=BENCH)
+    assert any("unusable as-of" in w and "garbage" in w for w in result["warnings"])
+    after = sorted(series.iterdir())
+    assert [p.name for p in after] == [p.name for p in before]
+    for p in after:
+        assert p.read_bytes() == before_bytes[p.name]
