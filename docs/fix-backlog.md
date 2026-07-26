@@ -1319,7 +1319,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   skeleton on existing data (no F6), B narrator (gated lane), C Explore sub-pages + story archive.
   *(Concurrent-mint caveat: F101 chosen against a backlog max of F100 on 2026-07-22; renumber if collided.)*
 
-- [ ] **F102 — `price-sync` crashes on month-grain as-of; series stale (repeat: v11, v14, v15 cycles).**
+- [x] **F102 — `price-sync` crashes on month-grain as-of; series stale (repeat: v11, v14, v15 cycles).**
   `ValueError` in `gpu_agent/price_local.py::_yymmdd_date` — a month-grain `--as-of 2026-07` is parsed as
   `YYMMDD` and the day field comes back empty (v11 saw the sibling empty-string date parse). Non-blocking
   per run-cycle step 7 ("price-sync never blocks the cycle"), but `store/series/*` did not refresh on the
@@ -1327,6 +1327,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   "what a GPU rents for" gauge — reads these series directly, so a stale series now shows on the front
   page. Small dedicated fix lane: parse both grains + regression tests; verify next cycle refreshes.
   *(Concurrent-mint caveat: F102 chosen against a backlog max of F101 on 2026-07-23; renumber if collided.)*
+  FIXED 2026-07-26 — `_parse_as_of` (day + month grain, month-end anchor), graceful skip on malformed input (spec docs/superpowers/specs/2026-07-25-f102-price-sync-grain-design.md / plan docs/superpowers/plans/2026-07-25-f102-price-sync-grain.md). Live criterion: next cycle's price-sync refreshes store/series and the front-page rent gauge drops its aging mark.
 
 - [ ] **F103 — Evidence freshness: half-life decay + stale-official-source fixes (user critique 2026-07-24).**
   Official NVIDIA earnings-call material (May vintage) keeps surfacing as current evidence on the live
