@@ -1158,6 +1158,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   partway, 12/17 findings written, 5 left un-ingested (ids in the v15 HANDOFF entry; partial wiki
   state left as-is, fix-forward). The v15 run's recommendation stands: a real fix (day-grain or
   content-hash finding-id scoping for price rows), not another exclusion.
+  FIXED 2026-07-26 — content-vintage ids (spec docs/superpowers/specs/2026-07-25-f96-content-vintage-ids-design.md, plan docs/superpowers/plans/2026-07-25-f96-content-vintage-ids.md); store tripwire retained; un-ingested v15/v17 findings accepted as history (spec §3.5). Live criterion: next monthly-grain price re-gather logs zero collisions.
 - [ ] **F79 (original scope) — SDEWS-style index rebuild (scoring v2.0 migration; the backtest becomes real).**
   Re-architect the index layer per the SDEWS spec (`docs/2026-07-11-sdews-metric-extraction.md`
   maps it): every scoring indicator becomes a monthly, vintage-stamped time series (2023→now

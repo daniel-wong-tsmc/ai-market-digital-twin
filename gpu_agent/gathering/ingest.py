@@ -36,18 +36,18 @@ def _tier(url: str, primary_sources: list[str]) -> str:
             return "primary"
     return "secondary"
 
-def _doc_id(normalized_url: str, as_of: str) -> str:
+def _doc_id(normalized_url: str, as_of: str, content_digest: str) -> str:
     host = urlparse(normalized_url).netloc.lower()
     slug = re.sub(r"[^a-z0-9]+", "-", host).strip("-") or "doc"
-    digest = hashlib.sha256(normalized_url.encode("utf-8")).hexdigest()[:8]
-    return f"{slug}-{digest}-{as_of}"   # F52: vintage-scoped — a re-gathered URL on a
-                                        # later asOf is a NEW snapshot, so downstream
-                                        # {docId}-{n} finding ids never collide cross-day
+    digest = hashlib.sha256(f"{normalized_url}\n{content_digest}".encode("utf-8")).hexdigest()[:8]
+    return f"{slug}-{digest}-{as_of}"   # F96: same URL + same folded content + same vintage
+                                        # month -> same id; changed content -> new id
 
 def normalize_documents(blobs: list[dict], *, primary_sources: list[str],
                         as_of: str) -> IngestOutcome:
     if not as_of.strip():
         raise ValueError("normalize_documents: as_of is required (F52 vintage-scoped ids)")
+    from gpu_agent.gathering.dedup import content_hash
     documents: list[RawDocument] = []
     dropped: list[Dropped] = []
     duplicates = 0
@@ -68,7 +68,7 @@ def normalize_documents(blobs: list[dict], *, primary_sources: list[str],
         op = blob.get("originatingPublisher")
         originating = op.strip() if isinstance(op, str) and op.strip() else None
         documents.append(RawDocument(
-            id=_doc_id(norm, as_of), source=blob["source"], url=blob["url"], date=blob["date"],
+            id=_doc_id(norm, as_of, content_hash(blob["content"])), source=blob["source"], url=blob["url"], date=blob["date"],
             tier=_tier(blob["url"], primary_sources), entity=blob["entity"], content=blob["content"],
             originatingPublisher=originating))
     return IngestOutcome(documents=documents, dropped=dropped, duplicates=duplicates)
