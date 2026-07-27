@@ -264,3 +264,12 @@
 {"seq":263,"asOf":"2026-07","kind":"append-observation","pageId":"entity:multi","findingId":"www-originbrief-app-91d7b25f-2026-07-6","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":264,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-5c5b4b41-2026-07-3","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":265,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-5c5b4b41-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":266,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"ir-amd-com-7f18efdc-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":267,"asOf":"2026-07","kind":"append-observation","pageId":"entity:coreweave","findingId":"www-coreweave-com-d16f3599-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":268,"asOf":"2026-07","kind":"append-observation","pageId":"entity:hyperscalers","findingId":"finance-yahoo-com-2f05647b-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":269,"asOf":"2026-07","kind":"append-observation","pageId":"entity:intel","findingId":"newsroom-intel-com-0ca8d907-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":270,"asOf":"2026-07","kind":"append-observation","pageId":"entity:market","findingId":"intuitionlabs-ai-322b5fbd-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":271,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-runpod-io-6fa9df75-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":272,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-scmp-com-1f0c67f4-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":273,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"tech-yahoo-com-10bdc5b3-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":274,"asOf":"2026-07","kind":"append-observation","pageId":"entity:tsmc","findingId":"economy-ac-24d4d647-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}

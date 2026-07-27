@@ -1,0 +1,60 @@
+{
+  "id": "www-scmp-com-1f0c67f4-2026-07-1",
+  "statement": "Chinese Nvidia alternatives are scaling fast under export controls: Moore Threads guided first-half revenue up 135.1% to 149.4% year on year to 1.65-1.75 billion yuan, and Hygon guided first-half growth of 55.6% to 70.2% to 8.5-9.3 billion yuan.",
+  "kind": "measured",
+  "value": {
+    "number": 0.2435,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Domestic Chinese accelerator vendors tripling revenue shows the demand Nvidia is barred from serving is being captured by local rivals, which permanently shrinks Nvidia's addressable China market.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Export curbs plus Beijing's push to buy domestic redirect Chinese AI compute spending to local GPU makers, eroding Nvidia's share of that demand while adding non-Nvidia accelerator supply inside China."
+  },
+  "evidence": [
+    {
+      "source": "South China Morning Post",
+      "url": "https://www.scmp.com/tech/tech-trends/article/3360908/chinese-nvidia-alternatives-project-massive-sales-ai-chip-demand-surges",
+      "date": "2026-07-17",
+      "excerpt": "expected revenue for the first half to jump 135.1 to 149.4 percent year on year, reaching between 1.65 billion yuan and 1.75 billion yuan (about US$243.5 million)",
+      "tier": "secondary"
+    },
+    {
+      "source": "South China Morning Post",
+      "url": "https://www.scmp.com/tech/tech-trends/article/3360908/chinese-nvidia-alternatives-project-massive-sales-ai-chip-demand-surges",
+      "date": "2026-07-17",
+      "excerpt": "projected first-half revenue growth of 55.6 to 70.2 percent, reaching between 8.5 billion yuan and 9.3 billion yuan",
+      "tier": "secondary"
+    },
+    {
+      "source": "South China Morning Post",
+      "url": "https://www.scmp.com/tech/tech-trends/article/3360908/chinese-nvidia-alternatives-project-massive-sales-ai-chip-demand-surges",
+      "date": "2026-07-17",
+      "excerpt": "U.S. export curbs on Nvidia's chips to China have prompted Beijing to encourage local firms to buy domestic alternatives, with companies like Huawei stepping in to fill the void.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet reporting company-guided preliminary half-year ranges; performance-parity claims are vendor assertions and revenue base is small in absolute terms."
+  },
+  "dispersion": "Both figures are guidance ranges, not reported results, and the two companies' growth rates differ widely (135-149% vs 56-70%).",
+  "asOf": "2026-07",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-17",
+  "capturedAt": "2026-07-27T10:49:29Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

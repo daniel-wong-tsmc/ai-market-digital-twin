@@ -1,0 +1,60 @@
+{
+  "id": "intuitionlabs-ai-322b5fbd-2026-07-1",
+  "statement": "Median on-demand rental for GB200 across providers is reported at $18.77 per GPU-hour, up about 42% since July 2025 from $13.25, with H200 and B200 medians each up about 11% over the same window.",
+  "kind": "measured",
+  "value": {
+    "number": 18.77,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "rising",
+  "why": "Rental rates for the newest rack-scale systems rising year over year says buyers are competing for scarce current-generation capacity rather than benefiting from the usual price decay.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising cloud rental clearing prices indicate demand outrunning deployed accelerator capacity, improving economics for rental operators and signalling continued pull on new GPU supply."
+  },
+  "evidence": [
+    {
+      "source": "IntuitionLabs",
+      "url": "https://intuitionlabs.ai/articles/data-center-gpu-pricing-2026",
+      "date": "2026-07-20",
+      "excerpt": "The median on-demand price across providers has risen about 42% since July 2025, from $13.25 to $18.77/hr per GPU",
+      "tier": "secondary"
+    },
+    {
+      "source": "IntuitionLabs",
+      "url": "https://intuitionlabs.ai/articles/data-center-gpu-pricing-2026",
+      "date": "2026-07-20",
+      "excerpt": "the median on-demand price for B200 across providers has risen about 11% since July 2025, from $5.50 to $6.12/hr per GPU",
+      "tier": "secondary"
+    },
+    {
+      "source": "IntuitionLabs",
+      "url": "https://intuitionlabs.ai/articles/data-center-gpu-pricing-2026",
+      "date": "2026-07-20",
+      "excerpt": "The median on-demand price for H200 across providers has risen about 11% since July 2025, from $3.54 to $3.94/hr per GPU",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary pricing tracker with no independent corroboration; provider spread is wide and the underlying provider set is not disclosed."
+  },
+  "dispersion": "GB200 average across providers is $21.53/hr against a low of $10.50/hr, and the quoted range is $10.50 to $27 per GPU-hour.",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-07-20",
+  "capturedAt": "2026-07-27T10:49:29Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

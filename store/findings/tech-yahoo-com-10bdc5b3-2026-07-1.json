@@ -1,0 +1,58 @@
+{
+  "id": "tech-yahoo-com-10bdc5b3-2026-07-1",
+  "statement": "Nvidia's Rubin-generation context memory storage tier is expected to pull NAND demand from about 35 million terabytes this year to more than 100 million terabytes next year, with each CMX unit carrying 576 SSDs for 9,600 TB of capacity.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "If Nvidia's next server generation adds a storage tier of this size, it creates a new and very large claim on NAND supply that competes with everyone else buying flash.",
+  "impact": {
+    "targets": [
+      "infrastructure.ai-storage",
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "mixed",
+    "mechanism": "A large new NAND draw tied to Rubin servers tightens flash supply and raises component costs for AI systems, while making storage capacity a gating input for shipping the platform."
+  },
+  "evidence": [
+    {
+      "source": "tech.yahoo.com (PC Gamer syndication)",
+      "url": "https://tech.yahoo.com/ai/articles/analyst-claims-nvidia-rubin-soak-113035335.html",
+      "date": "2026-07-22",
+      "excerpt": "Nvidia's Rubin CMX will quite literally soak up NAND supply like a sponge absorbs water.",
+      "tier": "secondary"
+    },
+    {
+      "source": "tech.yahoo.com (PC Gamer syndication)",
+      "url": "https://tech.yahoo.com/ai/articles/analyst-claims-nvidia-rubin-soak-113035335.html",
+      "date": "2026-07-22",
+      "excerpt": "Nvidia's CMX is equipped with 576 SSDs, providing a total storage capacity of 9,600 TB",
+      "tier": "secondary"
+    },
+    {
+      "source": "tech.yahoo.com (PC Gamer syndication)",
+      "url": "https://tech.yahoo.com/ai/articles/analyst-claims-nvidia-rubin-soak-113035335.html",
+      "date": "2026-07-22",
+      "excerpt": "industry estimates suggest that NAND demand for CMX will surge from 35 million TB this year to more than 100 million TB next year",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The demand figures are unattributed industry estimates relayed by an individual analyst on X from a machine-translated Korean press report and syndicated onward, so the scale of the NAND draw is a forward projection rather than a confirmed order book; treating it as a hypothesis keeps the directional signal without adopting the numbers as measured fact.",
+  "confidence": {
+    "level": "low",
+    "basis": "Syndicated secondary article relaying one analyst's social post citing a machine-translated report; no primary vendor or supplier confirmation and the product has not shipped."
+  },
+  "dispersion": "Next-year figure is stated only as 'more than 100 million TB' with no upper bound or source methodology.",
+  "asOf": "2026-07",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-27T10:49:29Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

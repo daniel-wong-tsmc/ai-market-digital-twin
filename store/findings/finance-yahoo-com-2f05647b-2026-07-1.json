@@ -1,0 +1,64 @@
+{
+  "id": "finance-yahoo-com-2f05647b-2026-07-1",
+  "statement": "Google, Microsoft, Meta and Amazon collectively plan about $725 billion of 2026 capital spending, up 77% from $410 billion last year, with Alphabet raising its own 2026 guidance to $195-205 billion on July 22.",
+  "kind": "measured",
+  "value": {
+    "number": 725.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Hyperscaler capex is the single largest funding pool for AI accelerator purchases, so an upward revision of this size directly raises the demand ceiling for merchant GPUs and everything around them.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "chips.hyperscaler-asic",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "Raised capex budgets translate into more accelerator, memory, data-center and power procurement, though management attributes part of the increase to higher component prices rather than more units."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Tech)",
+      "url": "https://finance.yahoo.com/sectors/technology/articles/google-microsoft-meta-amazon-capex-131823436.html",
+      "date": "2026-07-22",
+      "excerpt": "Google, Microsoft, Meta, and Amazon collectively plan capex of $725 billion in 2026, up 77% from last year's $410 billion.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (Tech)",
+      "url": "https://finance.yahoo.com/sectors/technology/articles/google-microsoft-meta-amazon-capex-131823436.html",
+      "date": "2026-07-22",
+      "excerpt": "Alphabet raised its 2026 capex guidance to $195 billion to $205 billion on July 22, a $15 billion jump from its prior estimate of $180 billion to $190 billion",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (Tech)",
+      "url": "https://finance.yahoo.com/sectors/technology/articles/google-microsoft-meta-amazon-capex-131823436.html",
+      "date": "2026-07-22",
+      "excerpt": "rising memory chip and component costs",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet aggregating company guidance; no filing fetched directly, and part of the dollar increase is explicitly cost inflation rather than incremental capacity."
+  },
+  "dispersion": "Per-company figures are ranges or approximations (Microsoft ~$190B, Meta topping $145B, Amazon around $200B), and Meta's prior guidance is reported inconsistently.",
+  "asOf": "2026-07",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "hyperscalers",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-27T10:49:29Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

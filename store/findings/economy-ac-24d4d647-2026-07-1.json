@@ -1,0 +1,58 @@
+{
+  "id": "economy-ac-24d4d647-2026-07-1",
+  "statement": "Advanced packaging, not wafer fabrication, is described as the binding constraint on AI chip production, with TSMC CoWoS capacity estimated at roughly 50,000-60,000 wafers per month last year and Nvidia reportedly weighing a shift of some next-generation GPU output to Intel's EMIB packaging.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "If packaging rather than fabrication caps AI accelerator output, then TSMC's CoWoS line sets the ceiling on how many merchant GPUs can ship, and customers exploring rival packaging routes signals that ceiling is binding.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "A packaging bottleneck at TSMC limits accelerator units available to buyers, delays rack-scale platforms, and pushes both vendors and memory suppliers to fund alternative packaging capacity."
+  },
+  "evidence": [
+    {
+      "source": "economy.ac (The Economy), citing SemiAnalysis",
+      "url": "https://economy.ac/news/2026/07/202607289543",
+      "date": "2026-07-15",
+      "excerpt": "estimated at approximately 50,000 to 60,000 wafers per month last year",
+      "tier": "secondary"
+    },
+    {
+      "source": "economy.ac (The Economy), citing SemiAnalysis",
+      "url": "https://economy.ac/news/2026/07/202607289543",
+      "date": "2026-07-15",
+      "excerpt": "considering allocating a portion of its next-generation graphics processing unit (GPU) production -- believed to be codenamed \"Feynman\" -- to Intel's EMIB process",
+      "tier": "secondary"
+    },
+    {
+      "source": "economy.ac (The Economy), citing SemiAnalysis",
+      "url": "https://economy.ac/news/2026/07/202607289543",
+      "date": "2026-07-15",
+      "excerpt": "likely to be delayed by more than 12 months, potentially pushing its launch into 2028",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying SemiAnalysis reporting; capacity figure is an estimate and the Intel EMIB allocation is described as under consideration, not confirmed."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend falling -> unknown); sources: TrendForce, economy.ac (The Economy), citing SemiAnalysis",
+  "asOf": "2026-07",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "tsmc",
+  "observedAt": "2026-07-15",
+  "capturedAt": "2026-07-27T10:49:29Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
