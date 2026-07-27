@@ -1360,3 +1360,16 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   page (e.g., excluded from scene evidence, confined to related coverage / a dedicated strip)?** Platform
   health snapshot 2026-07-26: web/rss/bilibili/v2ex ok; twitter/github/xueqiu warn; rest off.
   *(Concurrent-mint caveat: F104 chosen against a backlog max of F103 on 2026-07-26; renumber if collided.)*
+
+- [ ] **F105 — `extract --recorded` silently reports "0 findings" on a malformed answer envelope (v19 sighting 2026-07-27).**
+  `ExtractionResult` (`gpu_agent/extraction/extractor.py`) is the ONLY brain-answer model without
+  `extra="forbid"`, and its `drafts` field defaults to `[]`. A recorded answer that is a bare
+  `FindingDraft` object (or any wrong-shaped JSON object) validates as an EMPTY ExtractionResult —
+  extra keys ignored, drafts defaulted — so `extract --recorded` reports "0 findings, 0 dropped" and
+  exits 0. The v19 headless run hit exactly this (brain returned bare drafts without the
+  `{"drafts":[…]}` wrapper) and only a human noticing "0 findings" caught it; a scheduled run could
+  publish an empty-looking cycle as a success. Fix: `extra="forbid"` + `drafts` required (no default)
+  so a malformed envelope fails validation loudly and enters the standard retry path, matching every
+  sibling answer model (judge/thesis/implication/narrator). Schema-only; no prompt text changes — the
+  F6 pin must stay green.
+  *(Concurrent-mint caveat: F105 chosen against a backlog max of F104 on 2026-07-27; renumber if collided.)*
