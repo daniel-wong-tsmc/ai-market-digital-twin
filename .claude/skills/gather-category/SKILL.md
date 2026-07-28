@@ -195,6 +195,46 @@ itself as a blob or a finding** — it is another model's judgment, not evidence
 raw material only). If the tool is unhealthy (per the preamble health check), skip it and log it —
 never block the round on a discovery tool.
 
+**2c. HuggingNews tiered discovery (D1 — leads first, fallback logged).** When the manifest
+declares a non-empty `huggingnewsTags` list, the coordinator issues ONE `webreach-fetch` request
+against the `huggingnews` tool, verb `latest`, target = the manifest's tags comma-joined (e.g.
+`ai-compute-chips`) — run via the same runner as step 3:
+`.venv/Scripts/python -m gpu_agent.cli webreach-fetch --requests <requests-file> --out-dir work/<run-dir>/webreach/`.
+When `huggingnewsTags` is absent or empty on the manifest, skip this sub-step silently — no gap
+entry, no log line, it simply isn't part of this manifest. The `latest` call is keyed
+automatically when `HUGGINGNEWS_API_KEY` is present in the machine-local gitignored secrets file
+(or its env var); anonymous access still covers roughly the last 3 days, which is enough for the
+daily window. The keyed 21-day `search` verb is DEFERRED (D3) — do NOT add a search pass here or
+anywhere else in this flow.
+
+For each returned story that looks on-topic for the assignment's entities/metrics, fetch verb
+`detail` (target = the story's slug) via the same runner. HuggingNews stories are AI-written
+summaries of somebody else's reporting, so treat every detail response as a LEAD SOURCE, never as
+evidence on its own: pull `selectedTweets[].url` plus any URLs embedded in the `summary` or quoted
+text, and chase each one exactly like any other lead — fetch the underlying primary page as its
+own raw blob. These leads join the SAME candidate pool as every other discovery channel (step 2b,
+standard slices, headline/forward slices): normal freshness/primacy ranking, the normal
+10-document cap, and NO reserved slots or special ranking for HuggingNews leads (D3). Record
+HuggingNews as the lead's referrer in the gather log so the trail from wire story to primary
+source stays visible.
+
+**Fallback — ingesting a story itself (D1, the narrow exception).** Only when EVERY primary
+source behind a wanted story turns out unreachable (paywalled, deleted, dead link — record which
+for each) may the story's own detail page be ingested as a document, and only then: tier
+`secondary`, source/publisher `huggingnews.com`, url `https://huggingnews.com/ai/<slug>`, content
+= the detail's `summary` plus its selected quotes. Log every such fallback doc in the gather
+record's `huggingnewsFallback[]` array together with the unreachable primary URLs it stands in
+for. Never ingest a story whose primary WAS reachable — the primary is always preferred once
+found. Never ingest the `latest` feed listing itself — it's an index, not a document. When
+several fallback docs land in the same run, corroboration counts them all as ONE publisher
+(huggingnews.com), never one per story.
+
+Any HuggingNews call that fails (timeout, error, empty result) is logged and the gather continues
+— a HuggingNews outage never aborts the cycle (never-blocks discipline). The
+`HUGGINGNEWS_API_KEY` value itself never appears in briefs, blobs, or logs; it lives only in the
+machine-local gitignored secrets file, and webreach's own error scrubbing keeps it out of failure
+messages.
+
 **3. Fan out gatherer subagents** (use the superpowers:dispatching-parallel-agents pattern), at most
 `maxSubagentsPerRound` per round. Dispatch each with tools **Read, Write, WebSearch, WebFetch
 ONLY — never Bash** (Invariants above). Give each subagent ONE slice and this contract:
@@ -401,7 +441,9 @@ window). Every cap that truncates is logged in `skipped[]` with what it skipped 
 Everything else (the role-aware gatherer contract, receipts+tiers, the frozen brain, the coverage-gap check) is
 identical to the standard procedure — including **discovery-role lead sourcing (step 2b)**, which is especially
 apt here since `last30days` is itself a last-30-days recency tool: run it on the recency-windowed topics for
-leads, then fetch the underlying sources as raw blobs. Daily mode changes *what you seed and how you dedup*,
+leads, then fetch the underlying sources as raw blobs — and including **HuggingNews tiered discovery
+(step 2c)**, unchanged in daily mode: same tags, same lead-first/fallback-logged contract, same 10-document cap.
+Daily mode changes *what you seed and how you dedup*,
 never *who pulls facts* (still the one frozen brain under the gate) and never lets a discovery brief become a blob.
 
 ## Snapshot determinism
