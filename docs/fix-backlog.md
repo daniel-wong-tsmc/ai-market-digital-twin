@@ -390,13 +390,32 @@
   **UPDATE 2026-07-11: both residuals fold into F79** (SDEWS-style scoring v2.0 — the v1.5
   side-semantics slot is superseded by v2.0, and leading supply arrives as backfilled series
   S1/S2 per the extraction doc). F60 stays open until F79 lands them.
-- [ ] **F61 — Staleness & coverage banner; honest confidence label.** The brief renders
-  "confidence: high (self-consistency over 3 samples)" — vote agreement, not evidence currency
-  — atop evidence with a ~6-week median age, while the gather-log quietly records
-  TrendForce / SemiAnalysis / channel-checks as not-covered. Render an evidence-vintage line
-  (median + oldest evidence date vs `asOf`, share older than N weeks) and the coverage gaps in
-  the brief header, and relabel the confidence basis. `report.py` only — pure projection,
-  replayable for $0.
+- [x] **F61 — Staleness banner; honest confidence label. DONE — story-page half built on branch
+  `f61-honesty-banner` (2026-07-28, awaiting user merge); `report.py` half done-by-F67
+  (`b0e8061`, 2026-07-04).** Original entry: the brief renders "confidence: high
+  (self-consistency over 3 samples)" — vote agreement, not evidence currency — atop evidence
+  with a ~6-week median age, while the gather-log quietly records TrendForce / SemiAnalysis /
+  channel-checks as not-covered. Render an evidence-vintage line (median + oldest evidence date
+  vs `asOf`, share older than N weeks) and the coverage gaps in the brief header, and relabel
+  the confidence basis. `report.py` only — pure projection, replayable for $0.
+  **Resolution (2026-07-28, all forks answered interactively by the user — zero AFK):**
+  (1) The `report.py` half shipped inside F67 four months' worth of lanes ago —
+  `report.evidence_vintage()` + the `render_header` vintage and vote-agreement lines are
+  F61's original text verbatim. It was never ticked. (2) F103 did NOT overlap: F103 is per-row
+  (dating, weight-sorting, publisher cap, aging dim) and computes no aggregate. (3) The
+  **surface moved** — since F101 the live category page is the story page, which carried none
+  of it; the two other renderers that still compute an aggregate vintage
+  (`site_model._why`'s trust entry, the F97 `brief_render` footer) feed pages `site_build` no
+  longer emits. So the repo computed the number three times and showed the reader zero times.
+  **Built:** one quiet plain-English line under the story-page dateline —
+  `story_model.evidence_honesty()` (reusing `report.evidence_vintage` via a duck-typed adapter,
+  `report.py` untouched) + `story_render._honesty_line()`; humanised dates at day/month/year
+  grain; each half renders alone and nothing renders when neither is available; malformed data
+  degrades with a warning instead of crashing the page. Renderer-only; all four pins untouched.
+  Spec `docs/superpowers/specs/2026-07-28-f61-honesty-banner-design.md`, plan
+  `docs/superpowers/plans/2026-07-28-f61-honesty-banner.md`.
+  **Coverage gaps are OUT of F61 by user decision** — they are not obtainable from committed
+  data today; filed as F106 below.
 
 ### Features (per repo convention: brainstorming → spec → plan, own sub-project — not lane work)
 
@@ -1373,3 +1392,22 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   sibling answer model (judge/thesis/implication/narrator). Schema-only; no prompt text changes — the
   F6 pin must stay green.
   *(Concurrent-mint caveat: F105 chosen against a backlog max of F104 on 2026-07-27; renumber if collided.)*
+
+- [ ] **F106 — Coverage gaps are computed but never recorded durably (found while building F61, 2026-07-28).**
+  Nothing downstream can render or audit what the gather run failed to cover.
+  `manifest.compute_coverage_gaps()` has **no production caller in the package** — it runs only
+  from the gather skill's inline snippet, and its output is written to
+  `work/<cycle>/docs/gather-log.json` under `coverageGaps`, in the **gitignored** `work/` tree.
+  Scorecards carry no coverage field at all, so a rebuild on any other machine — or any rebuild
+  after the work dir is swept — has no coverage data whatsoever.
+  **Worse, it is currently not being written even there:** the 2026-07-27 (v19) cycle's
+  `gather-log.json` has **no `coverageGaps` key**, and `corpus-report.json`'s `notCovered` is
+  `[]`, while that same cycle's log prose claims "Coverage gaps this cycle: 21 (13 source,
+  8 indicator)" — the only surviving record of those 21 gaps is a free-text sentence in
+  `store/cycle-log.json`. So the number is unverifiable and un-renderable.
+  Fix: persist the structured gap list into committed store data at cycle end (alongside the
+  scorecard), so the renderer and any audit can read it, and so "what we did NOT look at" stops
+  being a claim only the run itself can make. Blocks the coverage half of F61 (deliberately
+  descoped there, 2026-07-28) and is a prerequisite for any honest coverage disclosure on the
+  page.
+  *(Concurrent-mint caveat: F106 chosen against a backlog max of F105 on 2026-07-28; renumber if collided.)*
