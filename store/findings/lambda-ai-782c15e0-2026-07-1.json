@@ -1,0 +1,45 @@
+{
+  "id": "lambda-ai-782c15e0-2026-07-1",
+  "statement": "Lambda lists on-demand single-GPU B200 SXM6 180GB capacity at $6.99 per GPU-hour.",
+  "kind": "measured",
+  "value": {
+    "number": 6.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A named provider list price for current-generation Blackwell capacity anchors what a buyer pays without a contract.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Static list price with no stated baseline or change; a display overlay rather than a demand or supply signal."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (lambda.ai) GPU Cloud pricing",
+      "url": "https://lambda.ai/service/gpu-cloud",
+      "date": "2026-07-28",
+      "excerpt": "NVIDIA B200 SXM6 180 GB $6.99",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor list page, secondary for market-wide pricing; single provider only."
+  },
+  "dispersion": "conflicting same-key reports: value 2.79 -> 6.99 (tol 1%); sources: Lambda (lambda.ai) GPU Cloud pricing",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-07-28",
+  "capturedAt": "2026-07-28T12:30:28Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

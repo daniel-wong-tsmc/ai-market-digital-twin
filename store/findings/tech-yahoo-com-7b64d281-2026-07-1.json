@@ -1,0 +1,44 @@
+{
+  "id": "tech-yahoo-com-7b64d281-2026-07-1",
+  "statement": "Industry estimates cited in the report project NAND demand for Nvidia Rubin CMX context-memory servers rising from 35 million TB this year to more than 100 million TB next year, described as adding an Apple-sized source of demand.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A new AI-server memory tier that consumes NAND at this scale would absorb a large share of industry bit output and tighten allocation for everyone else.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "infrastructure.ai-storage",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "mixed",
+    "mechanism": "A step change in AI-server NAND consumption tightens memory and storage supply available to other buyers even as it lifts revenue for memory makers."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Tech (syndicated PC Gamer)",
+      "url": "https://tech.yahoo.com/ai/articles/analyst-claims-nvidia-rubin-soak-113035335.html",
+      "date": "2026-07-22",
+      "excerpt": "Industry estimates suggest that NAND demand for CMX will surge from 35 million TB this year to more than 100 million TB next year.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary enthusiast outlet syndicating an analyst comment and Korean press report; figures are forward projections, not measured shipments, so no value is recorded."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-28T12:30:28Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

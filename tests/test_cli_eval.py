@@ -115,3 +115,57 @@ def test_record_grade_regression_exits_1(tmp_path):
         "caseMedians": {"extract-t-01": 4}, "provenance": {}}), "utf-8")
     assert main(["eval", "record-grade", "--cases", str(cases_dir), "--out", str(run),
                  "--as-of", "2026-07-04", "--baseline", str(baseline)]) == 1
+
+
+# --- F108: seam-scoped rebaseline through the CLI -----------------------------
+
+def _bootstrapped_baseline(tmp_path):
+    """Run the offline cycle far enough to leave a v2 baseline plus 3 replicate run dirs."""
+    import shutil
+    cases_dir = _write_cases(tmp_path)
+    run = tmp_path / "run"
+    main(["eval", "emit-brain", "--cases", str(cases_dir), "--out", str(run)])
+    (run / "brain-answers.json").write_text(
+        json.dumps({"extract-t-01": json.dumps({"findings": []})}), "utf-8")
+    main(["eval", "record-brain", "--cases", str(cases_dir), "--out", str(run)])
+    main(["eval", "emit-grade", "--cases", str(cases_dir), "--out", str(run)])
+    (run / "grade-answers.json").write_text(json.dumps({
+        "extract-t-01": _grade("extract-t-01", 2),
+        "extract-t-02": _grade("extract-t-02", 0)}), "utf-8")
+    baseline = tmp_path / "baseline.json"
+    main(["eval", "record-grade", "--cases", str(cases_dir), "--out", str(run),
+          "--as-of", "2026-07-04", "--baseline", str(baseline)])
+    r2, r3 = tmp_path / "run2", tmp_path / "run3"
+    shutil.copytree(run, r2); shutil.copytree(run, r3)
+    dirs = [str(run), str(r2), str(r3)]
+    assert main(["eval", "rebaseline", "--runs", *dirs, "--cases", str(cases_dir),
+                 "--baseline", str(baseline)]) == 0
+    return cases_dir, baseline, dirs
+
+def test_eval_rebaseline_seams_flag_scopes_the_rebuild(tmp_path, capsys):
+    cases_dir, baseline, dirs = _bootstrapped_baseline(tmp_path)
+    before = json.loads(baseline.read_text("utf-8"))
+    # extract's prompt is unchanged here, so the scoped path needs an explicit reason
+    assert main(["eval", "rebaseline", "--runs", *dirs, "--cases", str(cases_dir),
+                 "--baseline", str(baseline), "--seams", "extract",
+                 "--force", "--reason", "cli scope test"]) == 0
+    after = json.loads(baseline.read_text("utf-8"))
+    assert after["provenance"]["seamRebaselines"]["extract"]["forceReason"] == "cli scope test"
+    assert after["provenance"]["forceReason"] == before["provenance"]["forceReason"]
+    assert after["promptHashes"] == before["promptHashes"]
+    out = capsys.readouterr().out
+    assert "rebuilt: extract" in out and "carried forward unchanged" in out
+
+def test_eval_rebaseline_unknown_seam_exits_1(tmp_path, capsys):
+    cases_dir, baseline, dirs = _bootstrapped_baseline(tmp_path)
+    assert main(["eval", "rebaseline", "--runs", *dirs, "--cases", str(cases_dir),
+                 "--baseline", str(baseline), "--seams", "no-such-seam"]) == 1
+    assert "unknown seam" in capsys.readouterr().err
+
+def test_eval_rebaseline_without_seams_is_unscoped(tmp_path):
+    cases_dir, baseline, dirs = _bootstrapped_baseline(tmp_path)
+    assert main(["eval", "rebaseline", "--runs", *dirs, "--cases", str(cases_dir),
+                 "--baseline", str(baseline), "--force", "--reason", "whole"]) == 0
+    b = json.loads(baseline.read_text("utf-8"))
+    assert "seamRebaselines" not in b["provenance"]
+    assert b["provenance"]["forceReason"] == "whole"

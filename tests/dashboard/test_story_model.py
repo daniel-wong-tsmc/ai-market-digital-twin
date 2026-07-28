@@ -597,3 +597,117 @@ def test_build_story_model_guards_a_broken_artifact_mapper(tmp_path, monkeypatch
     err = capsys.readouterr().err
     assert "gpu-agent narrator: warning:" in err
     assert CAT in err
+
+
+# ── F61: evidence-vintage + honest-confidence line ──────────────────────────
+
+def _patch_latest(store, **updates):
+    """Rewrite the latest (2026-07) scorecard in a `_store` fixture with
+    `updates` merged in. A value of None deletes the key."""
+    p = store / CAT / "2026-07-v1.json"
+    raw = json.loads(p.read_text(encoding="utf-8"))
+    for k, v in updates.items():
+        if v is None:
+            raw.pop(k, None)
+        else:
+            raw[k] = v
+    p.write_text(json.dumps(raw), encoding="utf-8")
+    return store
+
+
+def _honesty(tmp_path, **updates):
+    st = _patch_latest(_store(tmp_path), **updates)
+    return build_story_model(CAT, st, dt.date(2026, 7, 22))["honesty"]
+
+
+def test_honesty_carries_vintage_and_confidence(tmp_path):
+    h = _honesty(tmp_path, confidence={"level": "high",
+                                       "basis": "self-consistency over 3 samples"})
+    # Evidence dates in the fixture: 2026-05-28, 2026-06-10, 2026-06-24, 2026-07-18.
+    assert h["median"] == "2026-06-24"
+    assert h["oldest"] == "2026-05-28"
+    assert h["stale_pct"] == 0          # asOf 2026-07 -> cutoff 2026-05-20
+    assert h["level"] == "high"
+    assert h["votes"] == 3
+
+
+def test_honesty_numbers_match_report_evidence_vintage(tmp_path):
+    """One implementation of the date math: the story page must report exactly
+    what report.evidence_vintage computes for the same scorecard."""
+    from gpu_agent.report import evidence_vintage
+    from gpu_agent.dashboard.story_model import _VintageAdapter
+
+    st = _store(tmp_path)
+    raw = json.loads((st / CAT / "2026-07-v1.json").read_text(encoding="utf-8"))
+    median, oldest, share = evidence_vintage(_VintageAdapter(raw))
+    h = build_story_model(CAT, st, dt.date(2026, 7, 22))["honesty"]
+    assert (h["median"], h["oldest"]) == (median, oldest)
+    assert h["stale_pct"] == round(share * 100)
+
+
+def test_honesty_counts_stale_evidence(tmp_path):
+    """An evidence date well before the asOf cutoff lifts the stale share."""
+    st = _store(tmp_path)
+    p = st / CAT / "2026-07-v1.json"
+    raw = json.loads(p.read_text(encoding="utf-8"))
+    raw["findings"][1]["evidence"][0]["date"] = "2026-01-05"
+    p.write_text(json.dumps(raw), encoding="utf-8")
+    h = build_story_model(CAT, st, dt.date(2026, 7, 22))["honesty"]
+    assert h["oldest"] == "2026-01-05"
+    assert h["stale_pct"] == 25          # 1 of 4 dated pieces
+
+
+def test_honesty_votes_none_when_basis_has_no_number(tmp_path):
+    h = _honesty(tmp_path, confidence={"level": "medium",
+                                       "basis": "agreement between reads"})
+    assert h["level"] == "medium" and h["votes"] is None
+
+
+def test_honesty_without_confidence_keeps_vintage(tmp_path):
+    h = _honesty(tmp_path, confidence=None)
+    assert h["median"] and h["level"] is None and h["votes"] is None
+
+
+def test_honesty_without_dated_evidence_keeps_confidence(tmp_path):
+    st = _store(tmp_path)
+    p = st / CAT / "2026-07-v1.json"
+    raw = json.loads(p.read_text(encoding="utf-8"))
+    raw["confidence"] = {"level": "low", "basis": "one read"}
+    for f in raw["findings"]:
+        for e in f["evidence"]:
+            e["date"] = ""
+    p.write_text(json.dumps(raw), encoding="utf-8")
+    h = build_story_model(CAT, st, dt.date(2026, 7, 22))["honesty"]
+    assert h["median"] is None and h["oldest"] is None and h["stale_pct"] is None
+    assert h["level"] == "low"
+
+
+def test_honesty_none_when_nothing_to_say(tmp_path):
+    st = _store(tmp_path)
+    p = st / CAT / "2026-07-v1.json"
+    raw = json.loads(p.read_text(encoding="utf-8"))
+    raw.pop("confidence", None)
+    for f in raw["findings"]:
+        f["evidence"] = []
+    p.write_text(json.dumps(raw), encoding="utf-8")
+    assert build_story_model(CAT, st, dt.date(2026, 7, 22))["honesty"] is None
+
+
+def test_honesty_degrades_on_malformed_date(tmp_path, capsys):
+    """A date the vintage math cannot parse must drop the line, not crash the
+    live page -- the same contract build_story_model uses for a bad artifact."""
+    st = _store(tmp_path)
+    p = st / CAT / "2026-07-v1.json"
+    raw = json.loads(p.read_text(encoding="utf-8"))
+    raw["findings"][0]["evidence"][0]["date"] = "last spring"
+    p.write_text(json.dumps(raw), encoding="utf-8")
+    assert build_story_model(CAT, st, dt.date(2026, 7, 22))["honesty"] is None
+    assert "evidence vintage" in capsys.readouterr().err
+
+
+def test_honesty_is_deterministic(tmp_path):
+    st = _patch_latest(_store(tmp_path),
+                       confidence={"level": "high", "basis": "3 samples"})
+    a = build_story_model(CAT, st, dt.date(2026, 7, 22))["honesty"]
+    b = build_story_model(CAT, st, dt.date(2026, 7, 22))["honesty"]
+    assert a == b

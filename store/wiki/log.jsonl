@@ -273,3 +273,15 @@
 {"seq":272,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-scmp-com-1f0c67f4-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":273,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"tech-yahoo-com-10bdc5b3-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":274,"asOf":"2026-07","kind":"append-observation","pageId":"entity:tsmc","findingId":"economy-ac-24d4d647-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":275,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"www-storagereview-com-e4725124-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":276,"asOf":"2026-07","kind":"append-observation","pageId":"entity:amd","findingId":"www-storagereview-com-e4725124-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":277,"asOf":"2026-07","kind":"append-observation","pageId":"entity:intel","findingId":"newsroom-intel-com-8cfebac7-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":278,"asOf":"2026-07","kind":"append-observation","pageId":"entity:intel","findingId":"newsroom-intel-com-8cfebac7-2026-07-3","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":279,"asOf":"2026-07","kind":"append-observation","pageId":"entity:intel","findingId":"newsroom-intel-com-8cfebac7-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":280,"asOf":"2026-07","kind":"append-observation","pageId":"entity:memory","findingId":"tech-yahoo-com-7b64d281-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":281,"asOf":"2026-07","kind":"append-observation","pageId":"entity:memory","findingId":"tech-yahoo-com-7b64d281-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":282,"asOf":"2026-07","kind":"append-observation","pageId":"entity:multi","findingId":"getdeploying-com-66413625-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":283,"asOf":"2026-07","kind":"append-observation","pageId":"entity:multi","findingId":"lambda-ai-782c15e0-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":284,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-87ea0942-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":285,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"finance-yahoo-com-2185ba22-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":286,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"finance-yahoo-com-2185ba22-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
