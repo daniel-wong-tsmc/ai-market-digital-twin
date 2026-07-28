@@ -198,7 +198,7 @@ never block the round on a discovery tool.
 **2c. HuggingNews tiered discovery (D1 — leads first, fallback logged).** When the manifest
 declares a non-empty `huggingnewsTags` list, the coordinator issues ONE `webreach-fetch` request
 against the `huggingnews` tool, verb `latest`, target = the manifest's tags comma-joined (e.g.
-`ai-compute-chips`) — run via the same runner as step 3:
+`ai-compute-chips,edge-inference` for a manifest listing two tags) — run via the same runner as step 3:
 `.venv/Scripts/python -m gpu_agent.cli webreach-fetch --requests <requests-file> --out-dir work/<run-dir>/webreach/`.
 When `huggingnewsTags` is absent or empty on the manifest, skip this sub-step silently — no gap
 entry, no log line, it simply isn't part of this manifest. The `latest` call is keyed
@@ -219,15 +219,19 @@ HuggingNews as the lead's referrer in the gather log so the trail from wire stor
 source stays visible.
 
 **Fallback — ingesting a story itself (D1, the narrow exception).** Only when EVERY primary
-source behind a wanted story turns out unreachable (paywalled, deleted, dead link — record which
-for each) may the story's own detail page be ingested as a document, and only then: tier
-`secondary`, source/publisher `huggingnews.com`, url `https://huggingnews.com/ai/<slug>`, content
-= the detail's `summary` plus its selected quotes. Log every such fallback doc in the gather
-record's `huggingnewsFallback[]` array together with the unreachable primary URLs it stands in
-for. Never ingest a story whose primary WAS reachable — the primary is always preferred once
-found. Never ingest the `latest` feed listing itself — it's an index, not a document. When
-several fallback docs land in the same run, corroboration counts them all as ONE publisher
-(huggingnews.com), never one per story.
+source behind a story you chased for leads turns out unreachable (paywalled, deleted, dead link —
+record which for each) may the story's own detail page be ingested as a document, and only then:
+tier `secondary`, source/publisher `huggingnews.com`, url `https://huggingnews.com/ai/<slug>`,
+content = the detail's `summary` plus its selected quotes. This fallback is for leads that were
+found and then went dead, never for a story that never yielded a lead in the first place: a story
+whose detail response had zero extractable leads (no `selectedTweets[].url`, nothing embedded in
+the summary or quotes) has nothing to have gone unreachable, so it is simply dropped — never
+gathered, not a fallback candidate, no `huggingnewsFallback[]` entry. Log every genuine fallback
+doc in the gather record's `huggingnewsFallback[]` array together with the unreachable primary
+URLs it stands in for. Never ingest a story whose primary WAS reachable — the primary is always
+preferred once found. Never ingest the `latest` feed listing itself — it's an index, not a
+document. When several fallback docs land in the same run, corroboration counts them all as ONE
+publisher (huggingnews.com), never one per story.
 
 Any HuggingNews call that fails (timeout, error, empty result) is logged and the gather continues
 — a HuggingNews outage never aborts the cycle (never-blocks discipline). The
