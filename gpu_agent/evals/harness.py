@@ -2,6 +2,7 @@
 calibrate, compare against baseline. A gate rejection of a fresh answer is SIGNAL (the
 candidate prompt produces invalid output), not an eval bug."""
 from __future__ import annotations
+import copy
 import json
 import pathlib
 import statistics
@@ -162,6 +163,17 @@ BASELINE_SCHEMA_VERSION = 2
 CRATER_DROP = 3          # a positive case craters at baseline-median - 3
 HARD_CRATER_EXTRA = 2    # ...and hard-fails at baseline-median - 5
 DISPERSION_LIMIT = 1.0   # replicate seam-mean range above this refuses to baseline
+
+
+def case_seam(cid: str, seams) -> str | None:
+    """Map a case id to its seam by longest seam-name match (`cid == seam`, or `cid`
+    starting with `seam + '-'`). Returns None when nothing matches; every caller fails
+    closed on that rather than guessing. Shared by the verdict (F65g) and the seam-scoped
+    rebaseline (F108) so the two cannot drift apart."""
+    for s in sorted(seams, key=len, reverse=True):
+        if cid == s or cid.startswith(s + "-"):
+            return s
+    return None
 
 
 def seam_quanta(cases: list[EvalCase]) -> dict[str, float]:
@@ -330,10 +342,7 @@ def evaluate_v2(baseline: dict, reports: list[dict]) -> dict:
             seams[seam] = {"value": value, "new": True, "gated": False}
 
     def _case_seam(cid: str):
-        for s in sorted(seams, key=len, reverse=True):
-            if cid == s or cid.startswith(s + "-"):
-                return s
-        return None   # unmappable -> fail-closed (treated as gated)
+        return case_seam(cid, seams)   # unmappable -> None -> fail-closed (treated as gated)
 
     for cid, median in baseline["caseMedians"].items():
         totals = [r["scores"][cid]["total"] for r in reports if cid in r.get("scores", {})]
@@ -343,8 +352,8 @@ def evaluate_v2(baseline: dict, reports: list[dict]) -> dict:
         if value <= median - CRATER_DROP + _EPS:
             crater = {"caseId": cid, "value": value if len(reports) > 1 else totals[0],
                       "median": median}
-            case_seam = _case_seam(cid)
-            if case_seam is not None and not _is_gated(case_seam):
+            owning_seam = _case_seam(cid)
+            if owning_seam is not None and not _is_gated(owning_seam):
                 # F65g: crater in a hash-identical seam's case — recorded, cannot fail.
                 crater["informational"] = True
                 craters.append(crater)
@@ -398,9 +407,133 @@ def build_baseline_v2(reports: list[dict], run_dirs: list[str], cases: list[Eval
     }
 
 
+def merge_baseline_seam_scoped(existing: dict, fresh: dict, seams: list[str],
+                               run_dirs: list[str], force_reason: str | None,
+                               human_review: str) -> dict:
+    """F108: a baseline whose NAMED seams come from `fresh` and whose every other seam is
+    carried forward from `existing` unchanged. Returns a new dict; mutates neither input.
+    Spec: docs/superpowers/specs/2026-07-28-f108-seam-scoped-rebaseline-design.md."""
+    named = set(seams)
+    known = set(existing["seamMeans"]) | set(fresh["seamMeans"])
+
+    def _by_seam(field: str) -> dict:
+        out = {}
+        for s in sorted(set(existing[field]) | named):
+            out[s] = copy.deepcopy((fresh if s in named else existing)[field][s])
+        return out
+
+    medians = {cid: v for cid, v in existing["caseMedians"].items()
+               if case_seam(cid, known) not in named}
+    medians.update({cid: v for cid, v in fresh["caseMedians"].items()
+                    if case_seam(cid, known) in named})
+
+    # The replicate block is spliced per seam (user pick 2026-07-28): each seam's stored
+    # numbers come from the runs that set ITS bar. `runDir`/`asOf` keep the incumbent
+    # entry's identity; `seamRunDirs` is the visible note of where each seam's numbers
+    # actually came from — and a seam rebuilt by an EARLIER scoped run keeps its own
+    # recorded dir rather than falling back to the entry's `runDir`.
+    replicates = []
+    for i, old in enumerate(existing["replicates"]):
+        new = fresh["replicates"][i]
+        entry = copy.deepcopy(old)
+        entry["seamMeans"] = {s: (new if s in named else old)["seamMeans"][s]
+                              for s in sorted(set(old["seamMeans"]) | named)}
+        merged_cases = {cid: copy.deepcopy(v) for cid, v in old["cases"].items()
+                        if case_seam(cid, known) not in named}
+        merged_cases.update({cid: copy.deepcopy(v) for cid, v in new["cases"].items()
+                             if case_seam(cid, known) in named})
+        entry["cases"] = dict(sorted(merged_cases.items()))
+        prior = old.get("seamRunDirs") or {}
+        entry["seamRunDirs"] = {
+            s: (str(run_dirs[i]) if s in named else prior.get(s, old["runDir"]))
+            for s in sorted(entry["seamMeans"])}
+        replicates.append(entry)
+
+    provenance = copy.deepcopy(existing["provenance"])
+    scoped = dict(provenance.get("seamRebaselines") or {})
+    for s in sorted(named):
+        scoped[s] = {"asOf": fresh["provenance"]["asOf"],
+                     "runDirs": [str(d) for d in run_dirs],
+                     "humanReview": human_review, "forceReason": force_reason}
+    provenance["seamRebaselines"] = dict(sorted(scoped.items()))
+
+    return {"schemaVersion": existing["schemaVersion"],
+            "promptHashes": _by_seam("promptHashes"),
+            "replicates": replicates,
+            "seamMeans": _by_seam("seamMeans"),
+            "quanta": _by_seam("quanta"),
+            "seamHistory": _by_seam("seamHistory"),
+            "epsilon": _by_seam("epsilon"),
+            "caseMedians": dict(sorted(medians.items())),
+            "provenance": provenance}
+
+
+def _check_seam_scope_structure(existing: dict | None, named: list[str], reports: list[dict],
+                                current_hashes: dict) -> None:
+    """F108 guards that must hold before anything is computed: there is something to carry
+    forward, the names are real, and no un-named seam has silently drifted."""
+    if existing is None:
+        raise ValueError("a seam-scoped rebaseline needs an incumbent baseline to carry the "
+                         "un-named seams forward from; none exists at this path")
+    if existing.get("schemaVersion") != BASELINE_SCHEMA_VERSION:
+        raise ValueError("the incumbent baseline is not schema v2 — migrate it with a whole "
+                         "rebaseline (no --seams) before scoping to individual seams")
+    if len(existing.get("replicates") or []) != 3:
+        raise ValueError("a seam-scoped rebaseline needs an incumbent with exactly 3 replicate "
+                         "entries to splice against; this one has "
+                         f"{len(existing.get('replicates') or [])}")
+    valid = set(existing["seamMeans"]) | set(reports[0]["seamMeans"])
+    unknown = [s for s in named if s not in valid]
+    if unknown:
+        raise ValueError(f"unknown seam(s) {sorted(unknown)} — valid seams: {sorted(valid)}")
+    drifted = sorted(s for s, h in existing["promptHashes"].items()
+                     if s not in named and current_hashes.get(s) != h)
+    if drifted:
+        raise ValueError(
+            f"seam(s) {drifted} changed prompt but are not named in --seams: carrying their "
+            "old hashes forward would pin a bundle the working tree no longer has and leave "
+            "the F6 pin red — name them too, or rebaseline the whole bundle")
+    unmappable = sorted({cid for r in reports for cid in r.get("scores", {})
+                         if case_seam(cid, valid) is None}
+                        | {cid for cid in existing.get("caseMedians", {})
+                           if case_seam(cid, valid) is None})
+    if unmappable:
+        raise ValueError(f"case id(s) {unmappable} map to no known seam — a seam-scoped "
+                         "rebaseline cannot guess which seam they belong to")
+
+
+def _check_seam_scope_governance(existing: dict, named: list[str], current_hashes: dict,
+                                 verdict: dict | None, force_reason: str | None) -> None:
+    """F108: a named seam earns its new bar either because its prompt moved AND a PASS
+    verdict shows that seam gated and clearing its bar, or because a human forced it."""
+    for seam in named:
+        if current_hashes.get(seam) == existing["promptHashes"].get(seam):
+            if not force_reason:
+                raise ValueError(
+                    f"seam '{seam}' prompt is unchanged from the incumbent — re-measuring an "
+                    "unchanged seam's bar is a judgment call; pass force_reason to override")
+            continue
+        if force_reason:
+            continue
+        v = verdict or {}
+        if v.get("decision") != "pass" or v.get("promptHashes") != current_hashes:
+            raise ValueError(f"accepting the prompt change on seam '{seam}' requires a PASS "
+                             "verdict for this bundle (--verdict) or force_reason")
+        info = (v.get("seams") or {}).get(seam) or {}
+        if not info.get("gated"):
+            raise ValueError(f"seam '{seam}' is informational (hash-identical) in the supplied "
+                             "verdict, so that verdict did not judge it — it cannot earn a new "
+                             "bar; pass force_reason to override")
+        if not info.get("ok"):
+            raise ValueError(f"seam '{seam}' did not clear its bar in the supplied verdict — "
+                             "a seam that failed cannot set its own new bar; pass force_reason "
+                             "to override")
+
+
 def rebaseline_v2(run_dirs: list, baseline_path, current_hashes: dict,
                   cases: list[EvalCase], verdict: dict | None = None,
-                  force_reason: str | None = None, human_review: str = "") -> dict:
+                  force_reason: str | None = None, human_review: str = "",
+                  seams: list[str] | None = None) -> dict:
     if len(run_dirs) != 3:
         raise ValueError(f"rebaseline needs exactly 3 replicate run dirs, got {len(run_dirs)}")
     reports = []
@@ -422,14 +555,22 @@ def rebaseline_v2(run_dirs: list, baseline_path, current_hashes: dict,
     if reports[0]["promptHashes"] != current_hashes:
         raise ValueError("replicate prompt hashes do not match the current working "
                          "tree — stale runs cannot baseline the current bundle")
-    for seam in reports[0]["seamMeans"]:
+    existing = load_baseline(baseline_path)
+    # F108: with --seams, only the named seams are rebuilt — so only they are guarded on
+    # dispersion, and only they need to earn a new bar. Without --seams nothing below
+    # changes: the whole-baseline path is byte-identical to its pre-F108 behaviour.
+    named = list(dict.fromkeys(seams or []))
+    if named:
+        _check_seam_scope_structure(existing, named, reports, current_hashes)
+    for seam in (named or list(reports[0]["seamMeans"])):
         vals = [r["seamMeans"][seam] for r in reports]
         if max(vals) - min(vals) > DISPERSION_LIMIT and not force_reason:
             raise ValueError(f"dispersion guard: seam '{seam}' replicate range "
                              f"{max(vals) - min(vals):.3f} > {DISPERSION_LIMIT} — "
                              "this is breakage, not noise; pass force_reason to override")
-    existing = load_baseline(baseline_path)
-    if existing is not None and not force_reason:
+    if named:
+        _check_seam_scope_governance(existing, named, current_hashes, verdict, force_reason)
+    elif existing is not None and not force_reason:
         if existing["promptHashes"] == current_hashes:
             if existing.get("schemaVersion") == BASELINE_SCHEMA_VERSION:
                 raise ValueError("re-baselining the same bundle over a v2 baseline is a "
@@ -442,6 +583,10 @@ def rebaseline_v2(run_dirs: list, baseline_path, current_hashes: dict,
                                  "this bundle (--verdict) or force_reason")
     baseline = build_baseline_v2(reports, [str(d) for d in run_dirs], cases,
                                  force_reason, human_review)
+    if named:
+        baseline = merge_baseline_seam_scoped(existing, baseline, named,
+                                              [str(d) for d in run_dirs],
+                                              force_reason, human_review)
     p = pathlib.Path(baseline_path)
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(baseline, indent=2, sort_keys=True), "utf-8")

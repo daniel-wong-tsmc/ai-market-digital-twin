@@ -1408,7 +1408,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   item is the real fix for the underlying noise.
   *(Concurrent-mint caveat: F107 chosen against a backlog max of F106 on 2026-07-28; renumber if collided.)*
 
-- [ ] **F108 — seam-scoped rebaseline (`eval rebaseline --seams <seam> ...`).**
+- [x] **F108 — seam-scoped rebaseline (`eval rebaseline --seams <seam> ...`).**
   `rebaseline_v2` today rebuilds the entire baseline from all four seams at once: every seam's mean,
   epsilon, quantum, history and case medians are recomputed, and the dispersion guard is applied to
   every seam. That makes a single-seam prompt change hostage to unrelated noise in seams the change
@@ -1422,3 +1422,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   = today's whole-baseline behaviour, unchanged and byte-identical on the default path. Harness code
   only — no prompt text, no hand-edited baseline content; all four pins must stay green.
   *(Concurrent-mint caveat: F108 chosen against a backlog max of F107 on 2026-07-28; renumber if collided.)*
+  **BUILT 2026-07-28** in `.worktrees/f108-seam-rebaseline` — spec
+  `docs/superpowers/specs/2026-07-28-f108-seam-scoped-rebaseline-design.md`, plan
+  `docs/superpowers/plans/2026-07-28-f108-seam-scoped-rebaseline.md`. Awaiting user merge; the F105
+  lane then runs `eval rebaseline --seams extract` to land its change.

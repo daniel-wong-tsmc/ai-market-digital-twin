@@ -117,6 +117,11 @@ Added or narrowed for the scoped path:
    overrides, as today.
 7. **Unmappable case id** → refuse rather than guess, matching the verdict's fail-closed treatment.
 
+Consequence of 6, recorded rather than designed around: a brand-new seam (no incumbent entry) is
+marked `gated: false` by the verdict — F65g says a new seam has no bar until its first rebaseline — so
+adopting one through the scoped path requires `force_reason`. A whole-baseline rebuild adopts it
+normally. Fail-closed, with the escape hatch available; no reason to special-case it.
+
 `--force` (Q6) is scoped: the reason overrides the guards for this invocation and is recorded against
 the named seams in `provenance.seamRebaselines`. It never writes the top-level `forceReason`, so a
 forced single-seam rebuild can never later be misread as "the whole baseline was forced."
