@@ -1,5 +1,6 @@
 from __future__ import annotations
 import json
+import os
 import pathlib
 import re
 import subprocess
@@ -10,6 +11,7 @@ from pydantic import BaseModel
 from gpu_agent.web_reach_ensure import detect_os
 
 LICENSED_REGISTRY = pathlib.Path("registry/licensed-sources.json")
+SECRETS_DIR = pathlib.Path(".superpowers/secrets")
 
 _TOOL_VERSION_TIMEOUT = 30  # health-check-style probe; keep it snappy
 _SLUG_MAX_LEN = 80
@@ -89,6 +91,32 @@ def licensed_source_host(target: str, licensed_domains: set[str]) -> str | None:
     return None
 
 
+def resolve_secret(name: str, *, secrets_dir: pathlib.Path | None = None) -> str | None:
+    """Env var wins; else the machine-local gitignored secrets file; else None.
+    The value must NEVER be written to any committed file, manifest, or log."""
+    val = os.environ.get(name)
+    if val:
+        return val
+    path = (secrets_dir if secrets_dir is not None else SECRETS_DIR) / name
+    if path.is_file():
+        text = path.read_text(encoding="utf-8").strip()
+        return text or None
+    return None
+
+
+def _auth_spec(tool: dict, req: FetchRequest) -> dict | None:
+    return tool["fetchVerbs"][req.verb].get("auth")
+
+
+def auth_secrets_used(tool: dict, req: FetchRequest) -> list[str]:
+    """Resolved secret VALUES a request's argv may contain — for log scrubbing."""
+    spec = _auth_spec(tool, req)
+    if not spec:
+        return []
+    val = resolve_secret(spec["secretName"])
+    return [val] if val else []
+
+
 def build_argv(tool: dict, req: FetchRequest) -> list[str]:
     """Render a verb's argv template, substituting the request `target` for every
     `{target}` occurrence. A bare `{target}` slot becomes the raw target (one argv
@@ -98,9 +126,19 @@ def build_argv(tool: dict, req: FetchRequest) -> list[str]:
     no `{target}` are copied verbatim (so `--flag{x}` stays literal). Substitution
     never splits a slot into multiple argv elements and the result is always run
     shell=False, so an attacker-controlled target can never break argv boundaries
-    or reach a shell."""
+    or reach a shell. If the verb declares an `auth` block and its secret resolves
+    (env var or the gitignored secrets file — see resolve_secret), the auth argv
+    slots are rendered (substituting `{secret}`) and appended; if the secret does
+    not resolve, the auth slots are omitted entirely (anonymous degrade) rather
+    than sent with a blank/missing credential."""
     template = tool["fetchVerbs"][req.verb]["argv"]
-    return [slot.replace("{target}", req.target) for slot in template]
+    argv = [slot.replace("{target}", req.target) for slot in template]
+    spec = _auth_spec(tool, req)
+    if spec:
+        val = resolve_secret(spec["secretName"])
+        if val:   # missing secret = anonymous degrade: omit the auth slots entirely
+            argv += [slot.replace("{secret}", val) for slot in spec["argv"]]
+    return argv
 
 
 def _sanitize_slug(text: str, max_len: int = _SLUG_MAX_LEN) -> str:
@@ -148,6 +186,14 @@ def _tool_version(tool: dict, os_key: str, timeout: int = _TOOL_VERSION_TIMEOUT)
     return first_line[0].strip() if first_line and first_line[0].strip() else "unknown"
 
 
+def _scrub(text: str | None, secrets: list[str]) -> str | None:
+    if not text:
+        return text
+    for s in secrets:
+        text = text.replace(s, "[redacted]")
+    return text
+
+
 def run_requests(requests_path, out_dir, registry: dict, licensed_domains: set[str],
                  timeout: int = 120) -> dict:
     """Read a JSON array of FetchRequest objects from requests_path, validate each
@@ -186,6 +232,7 @@ def run_requests(requests_path, out_dir, registry: dict, licensed_domains: set[s
 
         tool = _tool_entry(registry, req.toolId)
         argv = build_argv(tool, req)
+        secrets = auth_secrets_used(tool, req)
         if req.toolId not in used_tool_ids:
             used_tool_ids.append(req.toolId)
 
@@ -193,13 +240,13 @@ def run_requests(requests_path, out_dir, registry: dict, licensed_domains: set[s
             cp = subprocess.run(argv, shell=False, capture_output=True, text=True,
                                 encoding="utf-8", errors="replace", timeout=timeout)
         except (subprocess.TimeoutExpired, OSError) as e:
-            row["error"] = str(e)
+            row["error"] = _scrub(str(e), secrets)
             results.append(row)
             continue
         except Exception as e:
             # Catch-all: an unexpected exception executing/writing THIS ONE request must
             # never abort the batch or drop the manifest for every other request.
-            row["error"] = f"{type(e).__name__}: {e}"
+            row["error"] = _scrub(f"{type(e).__name__}: {e}", secrets)
             results.append(row)
             continue
 
@@ -219,7 +266,7 @@ def run_requests(requests_path, out_dir, registry: dict, licensed_domains: set[s
         if truncated:
             row["error"] = "truncated: output exceeded MAX_RESULT_BYTES"
         elif cp.returncode != 0:
-            row["error"] = (cp.stderr or "")[-500:]
+            row["error"] = _scrub((cp.stderr or "")[-500:], secrets)
         results.append(row)
 
     os_key = detect_os()
