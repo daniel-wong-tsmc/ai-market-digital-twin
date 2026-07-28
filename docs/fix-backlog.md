@@ -415,7 +415,7 @@
   Spec `docs/superpowers/specs/2026-07-28-f61-honesty-banner-design.md`, plan
   `docs/superpowers/plans/2026-07-28-f61-honesty-banner.md`.
   **Coverage gaps are OUT of F61 by user decision** — they are not obtainable from committed
-  data today; filed as F106 below.
+  data today; filed as F109 below.
 
 ### Features (per repo convention: brainstorming → spec → plan, own sub-project — not lane work)
 
@@ -1393,7 +1393,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   F6 pin must stay green.
   *(Concurrent-mint caveat: F105 chosen against a backlog max of F104 on 2026-07-27; renumber if collided.)*
 
-- [ ] **F106 — Coverage gaps are computed but never recorded durably (found while building F61, 2026-07-28).**
+- [ ] **F109 — Coverage gaps are computed but never recorded durably (found while building F61, 2026-07-28).**
   Nothing downstream can render or audit what the gather run failed to cover.
   `manifest.compute_coverage_gaps()` has **no production caller in the package** — it runs only
   from the gather skill's inline snippet, and its output is written to
@@ -1410,4 +1410,4 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   being a claim only the run itself can make. Blocks the coverage half of F61 (deliberately
   descoped there, 2026-07-28) and is a prerequisite for any honest coverage disclosure on the
   page.
-  *(Concurrent-mint caveat: F106 chosen against a backlog max of F105 on 2026-07-28; renumber if collided.)*
+  *(Concurrent-mint caveat: renumbered F106→F109 at merge time 2026-07-29 — F106 (HuggingNews), F107, F108 were minted concurrently on main.)*

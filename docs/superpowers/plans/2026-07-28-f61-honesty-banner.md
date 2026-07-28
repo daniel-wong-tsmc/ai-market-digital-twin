@@ -69,7 +69,7 @@ TDD throughout: test first, watch it fail for the right reason, then implement.
 
 - Tick the report.py half of F61 as done-by-F67 and rewrite the F61 entry to describe what
   actually shipped (story page; coverage out of scope), linking spec + plan.
-- New entry **F106 — the gather step stopped recording coverage gaps durably**: gaps are
+- New entry **F109 — the gather step stopped recording coverage gaps durably** (renumbered from F106 at merge time: number collided with the concurrent HuggingNews mint): gaps are
   computed only by the gather skill's inline snippet, written to gitignored
   `work/<cycle>/docs/gather-log.json`, and as of the 2026-07-27 cycle not written at all (no
   `coverageGaps` key; `notCovered: []`), so the "21 gaps" figure lives only as prose in
