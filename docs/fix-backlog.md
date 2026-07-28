@@ -1373,3 +1373,19 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   sibling answer model (judge/thesis/implication/narrator). Schema-only; no prompt text changes — the
   F6 pin must stay green.
   *(Concurrent-mint caveat: F105 chosen against a backlog max of F104 on 2026-07-27; renumber if collided.)*
+
+- [ ] **F106 — HuggingNews as a desk-wide news source (all categories, not just GPU).**
+  User-provided keyed API access to huggingnews.com — an AI-news wire whose stories are AI-written
+  from primary source material (X posts, announcements, filings, papers) with per-story source links
+  and topic tags (`ai-compute-chips`, `ai-model-releases`, `ai-fundraising`, …). Read-only JSON API:
+  `api.huggingnews.com/api/stories` (latest/search/detail; skill contract published at
+  `huggingnews.com/SKILL.md`; env `HUGGINGNEWS_API_KEY`). Verified live 2026-07-28: anonymous covers
+  3 ET days; the key unlocks feed pagination + 21-day search; detail returns `summary` +
+  `selectedTweets` with source URLs. **Key handling: machine-local gitignored
+  `.superpowers/secrets/HUGGINGNEWS_API_KEY` — the key never enters git, briefs, prompts, or logs.**
+  Design direction to brainstorm (interactive, standing rule): role (discovery/leads channel chased
+  to primary sources per the last30days precedent vs direct secondary-tier ingest — its articles are
+  aggregator-written), per-category tag mapping in manifests, registry entry on the web-reach path
+  (relates to F104's social-ingestion design space), cost/budget per cycle, and whether the desk's
+  D6 licensed-source discipline applies. *(Feature — own brainstorm/spec/plan when it starts.)*
+  *(Concurrent-mint caveat: F106 chosen against a backlog max of F105 on 2026-07-28; renumber if collided.)*
