@@ -1002,6 +1002,21 @@ User gave **"go"** 2026-07-06. Actioned:
 
 ## ⚠ CONCURRENT-INSTANCE COORDINATION (still live)
 
+- **F106 lane OPEN — CLAIMED 2026-07-28 (this instance):** branch `f106-huggingnews`, worktree
+  `.worktrees/f106-huggingnews`. Deliverable: the 5-task plan
+  `docs/superpowers/plans/2026-07-28-f106-huggingnews-source.md` (spec `52c41fb`). Files claimed:
+  `gpu_agent/gathering/webreach.py`, `gpu_agent/web_reach_ensure.py`,
+  `registry/web-reach-tools.json`, `gpu_agent/manifest.py`, `manifests/chips.merchant-gpu.json`,
+  `.claude/skills/gather-category/SKILL.md`, new tests. Non-gated; F6 / replay / narrator / F83 all
+  stay green (gather-category SKILL.md is NOT fingerprint-pinned; run-cycle SKILL.md untouched).
+  Disjoint from F79-G4 / F61 / F66 / F105 except the shared `docs/fix-backlog.md` tail (append-only
+  close-out notes; resolve at merge). **Key hygiene: HUGGINGNEWS_API_KEY lives only in gitignored
+  `.superpowers/secrets/` — any commit containing `ak_` fails review.** STOP before merge →
+  `.superpowers/handoffs/f106-huggingnews-DONE.md`; only the user merges.
+- **⚠ FLEET SEQUENCING FLAG (2026-07-28): F66's build MUST NOT start until F79-G4 merges.** F66's
+  answered Q3 puts its audit sub-step in run-cycle SKILL.md with an F83 re-record; F79-G4 has
+  ALREADY re-recorded F83 on its branch (`040333d`). Two concurrent F83 re-records = guaranteed
+  fingerprint conflict. Serialize: merge F79-G4 first, then rebase/dispatch the F66 build.
 - **F79-G4 lane OPEN — CLAIM ON DISPATCH (2026-07-28):** branch `f79-g4-refresh`, worktree
   `.worktrees/f79-g4-refresh`. Deliverable: the 5-task plan
   `docs/superpowers/plans/2026-07-28-f79-g4-series-refresh-soak.md`. Non-gated; F6 / scoring-v1
