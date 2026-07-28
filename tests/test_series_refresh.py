@@ -4,8 +4,9 @@ import pytest
 from pydantic import ValidationError
 from gpu_agent.series_refresh import (
     CalendarEntry, SeriesGap, expected_period, find_gaps, load_calendar)
+from gpu_agent.series_refresh import CandidateEnvelope, IngestResult, ingest_candidates
 from gpu_agent.series_registry import SeriesRegistry
-from gpu_agent.series_store import SeriesPoint, SeriesSource, append_point
+from gpu_agent.series_store import SeriesPoint, SeriesSource, append_point, read_series
 
 CAL = "registry/series-calendar.json"
 REG = "registry/series-indicators.json"
@@ -68,3 +69,63 @@ def test_find_gaps_raises_on_uncovered_series(tmp_path):
     calendar.popitem()
     with pytest.raises(ValueError, match="calendar"):
         find_gaps(registry, calendar, tmp_path, datetime.date(2026, 7, 28))
+
+
+def _envelope(*points):
+    return json.dumps({"candidates": [json.loads(p.model_dump_json()) for p in points]})
+
+def _registry():
+    return SeriesRegistry.load(REG)
+
+def test_ingest_valid_candidate_appends_with_restamped_capture(tmp_path):
+    reg = _registry()
+    iid = sorted(reg.specs)[0]
+    pt = _point(iid, "2026-07", unit=reg.specs[iid].unit)
+    out = ingest_candidates(_envelope(pt), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert out.written == [f"{iid} 2026-07"] and not out.rejected
+    stored = read_series(tmp_path, iid)
+    assert stored[-1].capturedAt == "2026-07-28"   # capture vintage is CODE-stamped
+
+def test_ingest_missing_envelope_key_fails_loud(tmp_path):
+    reg = _registry()
+    iid = sorted(reg.specs)[0]
+    bare = json.loads(_point(iid, "2026-07").model_dump_json())
+    out = ingest_candidates(json.dumps(bare), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert not out.written and len(out.rejected) == 1
+    assert "envelope" in out.rejected[0]
+
+def test_ingest_rejects_unknown_id_and_wrong_unit(tmp_path):
+    reg = _registry()
+    iid = sorted(reg.specs)[0]
+    ghost = _point("noSuchSeries", "2026-07")
+    wrong = _point(iid, "2026-07", unit="bananas_per_wafer")
+    out = ingest_candidates(_envelope(ghost, wrong), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert not out.written and len(out.rejected) == 2
+    assert not list(tmp_path.iterdir())            # nothing written, append-only intact
+
+def test_ingest_rejects_implausible_magnitude(tmp_path):
+    reg = _registry()
+    iid = sorted(reg.specs)[0]
+    unit = reg.specs[iid].unit
+    for m in ("2026-04", "2026-05", "2026-06"):
+        append_point(tmp_path, _point(iid, m, value=5.0, unit=unit))
+    wild = _point(iid, "2026-07", value=5000.0, unit=unit)
+    out = ingest_candidates(_envelope(wild), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert not out.written and "implausible" in out.rejected[0]
+
+def test_ingest_duplicate_skips_but_revision_appends(tmp_path):
+    reg = _registry()
+    iid = sorted(reg.specs)[0]
+    unit = reg.specs[iid].unit
+    existing = _point(iid, "2026-06", unit=unit, published="2026-06-28")
+    append_point(tmp_path, existing)
+    dup = _point(iid, "2026-06", unit=unit, published="2026-06-28")
+    rev = _point(iid, "2026-06", value=2.0, unit=unit, published="2026-07-20")
+    out = ingest_candidates(_envelope(dup, rev), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert out.alreadyPresent == [f"{iid} 2026-06"]
+    assert out.written == [f"{iid} 2026-06"]       # later vintage = legitimate revision

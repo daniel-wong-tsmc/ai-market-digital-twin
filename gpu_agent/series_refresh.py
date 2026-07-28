@@ -10,13 +10,14 @@ from __future__ import annotations
 
 import datetime
 import json
+import math
 import pathlib
 from typing import Literal, Optional
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, ValidationError
 
 from gpu_agent.series_registry import SeriesRegistry
-from gpu_agent.series_store import latest_by_period
+from gpu_agent.series_store import SeriesPoint, append_point, latest_by_period, read_series
 
 CALENDAR_PATH = "registry/series-calendar.json"
 
@@ -89,3 +90,56 @@ def find_gaps(registry: SeriesRegistry, calendar: dict[str, CalendarEntry],
             gaps.append(SeriesGap(indicatorId=iid, expectedPeriod=expected,
                                   latestPeriod=latest, sourceHint=entry.sourceHint))
     return gaps
+
+
+PLAUSIBILITY_FACTOR = 10.0   # reject |value| > 10 x max(1, historical max |value|)
+
+
+class CandidateEnvelope(BaseModel):
+    model_config = ConfigDict(extra="forbid")   # F105: a wrong shape fails loud, never empty
+    candidates: list[SeriesPoint]
+
+
+class IngestResult(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    written: list[str] = []
+    rejected: list[str] = []
+    alreadyPresent: list[str] = []
+
+
+def ingest_candidates(envelope_text: str, registry: SeriesRegistry, series_root,
+                      *, today: datetime.date) -> IngestResult:
+    out = IngestResult()
+    try:
+        env = CandidateEnvelope.model_validate_json(envelope_text)
+    except ValidationError as e:
+        out.rejected.append(f"envelope: {e.error_count()} validation errors "
+                            f"(candidates key required, extras forbidden): {e}")
+        return out
+    for cand in env.candidates:
+        label = f"{cand.indicatorId} {cand.period}"
+        spec = registry.specs.get(cand.indicatorId)
+        if spec is None:
+            out.rejected.append(f"{label}: unknown series id")
+            continue
+        if cand.unit != spec.unit:
+            out.rejected.append(f"{label}: unit {cand.unit!r} != registry {spec.unit!r}")
+            continue
+        if not math.isfinite(cand.value):
+            out.rejected.append(f"{label}: non-finite value")
+            continue
+        history = read_series(series_root, cand.indicatorId)
+        bound = PLAUSIBILITY_FACTOR * max(
+            [1.0] + [abs(p.value) for p in history])
+        if history and abs(cand.value) > bound:
+            out.rejected.append(f"{label}: implausible magnitude {cand.value} "
+                                f"(bound {bound})")
+            continue
+        if any(p.period == cand.period and p.publishedAt == cand.publishedAt
+               for p in history):
+            out.alreadyPresent.append(label)
+            continue
+        stamped = cand.model_copy(update={"capturedAt": today.isoformat()})
+        append_point(series_root, stamped)
+        out.written.append(label)
+    return out
