@@ -97,14 +97,28 @@ def version_of(tool: dict, os_key: str, timeout: int = _HEALTH_TIMEOUT) -> str:
     return "unknown"
 
 
+def _keyed_suffix(tool: dict) -> str:
+    """For a tool with a `secretName`, report whether that secret resolves
+    locally (env var or the gitignored secrets file) -- a LOCAL check only,
+    never a network call. Deferred import: webreach.py imports this module
+    at module level, so a top-level back-import here would cycle (mirrors
+    the publisher.py/F96 idiom)."""
+    secret_name = tool.get("secretName")
+    if not secret_name:
+        return ""
+    from gpu_agent.gathering.webreach import resolve_secret
+    return " (keyed)" if resolve_secret(secret_name) else " (anonymous-only)"
+
+
 def ensure_tool(tool: dict, os_key: str, *, check_only: bool = False,
                 timeout: int = 600, log=print) -> dict:
     tid = tool["id"]
+    suffix = _keyed_suffix(tool)
     if health_ok(tool, os_key):
-        log(f"web-reach: {tid} ok")
+        log(f"web-reach: {tid} ok{suffix}")
         return {"tool": tid, "status": "ok"}
     if check_only:
-        log(f"web-reach: {tid} missing (check-only; not installing)")
+        log(f"web-reach: {tid} missing (check-only; not installing){suffix}")
         return {"tool": tid, "status": "missing"}
     cmds = (tool.get("install") or {}).get(os_key) or []
     if not cmds:
@@ -123,7 +137,7 @@ def ensure_tool(tool: dict, os_key: str, *, check_only: bool = False,
             return {"tool": tid, "status": "failed",
                     "detail": f"install cmd failed ({r.returncode}): {c}\n{tail}"}
     if health_ok(tool, os_key):
-        log(f"web-reach: {tid} installed-ok")
+        log(f"web-reach: {tid} installed-ok{suffix}")
         return {"tool": tid, "status": "installed-ok"}
     return {"tool": tid, "status": "failed", "detail": "healthCmd still failing after install"}
 

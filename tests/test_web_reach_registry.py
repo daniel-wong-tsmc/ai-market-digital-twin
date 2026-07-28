@@ -124,6 +124,15 @@ def test_enabled_tools_have_per_os_install_recipes():
             continue
         inst = t.get("install")
         assert isinstance(inst, dict), f"{t['id']} missing install object"
+        if t.get("installNotNeeded"):
+            # Explicit escape hatch (F106) for tools with genuinely nothing to
+            # install (e.g. a pure read-only public API): the flag may ONLY be
+            # used when every per-OS list really is empty, so it can't be used
+            # to hide a half-filled recipe.
+            for os_key in OSES:
+                cmds = inst.get(os_key)
+                assert cmds == [], f"{t['id']} installNotNeeded but install.{os_key} non-empty"
+            continue
         for os_key in OSES:
             cmds = inst.get(os_key)
             assert isinstance(cmds, list) and cmds, f"{t['id']} install.{os_key} empty"
