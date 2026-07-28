@@ -1,0 +1,44 @@
+{
+  "id": "finance-yahoo-com-2185ba22-2026-07-2",
+  "statement": "A growing share of Nvidia demand is supported by Nvidia itself guaranteeing or financing customer purchases, including a discussed $350 billion facility for OpenAI chip purchases and a backstop of OpenAI data-center debt.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "When the seller funds the buyer, reported demand depends on the seller staying willing and able to extend credit, so the same order book carries more credit risk than arms-length demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "models.frontier-closed"
+    ],
+    "direction": "mixed",
+    "mechanism": "Vendor financing pulls purchases forward and supports near-term volumes, but concentrates counterparty and refinancing risk that could reverse demand if credit conditions tighten."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (syndicated Bloomberg)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-750-billion-deals-revive-102003935.html",
+      "date": "2026-07-27",
+      "excerpt": "Nvidia guaranteeing more of OpenAI's data center debt deepens vendor financing that's already under scrutiny.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary syndicated report quoting analysts; company disputes the characterization and no filing confirms terms."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-27",
+  "capturedAt": "2026-07-28T12:30:28Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "getdeploying-com-66413625-2026-07-1",
+  "statement": "Median cloud rental price for an Nvidia H100 80GB is $2.97 per GPU-hour across listed providers.",
+  "kind": "measured",
+  "value": {
+    "number": 2.97,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A cross-provider median rental level is a reference point for what buyers currently pay for prior-generation training and inference capacity.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rental price is a display level only; with no baseline or change stated it does not indicate whether demand or supply is tightening."
+  },
+  "evidence": [
+    {
+      "source": "GetDeploying cloud GPU price reference",
+      "url": "https://getdeploying.com/reference/cloud-gpu",
+      "date": "2026-07-28",
+      "excerpt": "Nvidia H100 | 80GB HBM3 | $2.97 /hr median | Vast.ai, GPU.ai, UpCloud",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary aggregator page; methodology behind the median is not disclosed."
+  },
+  "dispersion": "conflicting same-key reports: value 1.59 -> 2.97 (tol 1%); sources: GetDeploying cloud GPU price reference",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-07-28",
+  "capturedAt": "2026-07-28T12:30:28Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

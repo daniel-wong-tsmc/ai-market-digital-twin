@@ -1,0 +1,146 @@
+{
+  "asOf": "2026-07",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "getdeploying-com-66413625-2026-07-1",
+      "entity": "multi",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-2185ba22-2026-07-2",
+      "entity": "nvidia",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "www-storagereview-com-e4725124-2026-07-1",
+      "entity": "amd",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "newsroom-amd-com-cf6c6318-2026-07-1",
+      "detail": "magnitude 2 -> 3"
+    },
+    {
+      "findingId": "www-storagereview-com-e4725124-2026-07-2",
+      "entity": "amd",
+      "indicatorId": "flopsPerDollar",
+      "verdict": "update",
+      "priorFindingId": "ir-amd-com-6a5e41b9-2026-07-2",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "newsroom-intel-com-8cfebac7-2026-07-1",
+      "entity": "intel",
+      "indicatorId": "D2",
+      "verdict": "update",
+      "priorFindingId": "www-intc-com-0fa743ed-2026-07-1",
+      "detail": "value 6.3 -> 6.3 (tol 1%)"
+    },
+    {
+      "findingId": "newsroom-intel-com-8cfebac7-2026-07-3",
+      "entity": "intel",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "newsroom-intel-com-0ca8d907-2026-07-1",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "newsroom-intel-com-8cfebac7-2026-07-2",
+      "entity": "intel",
+      "indicatorId": "grossMargin",
+      "verdict": "update",
+      "priorFindingId": "www-intc-com-0fa743ed-2026-07-3",
+      "detail": "value 40.4 -> 41.8 (tol 1%)"
+    },
+    {
+      "findingId": "tech-yahoo-com-7b64d281-2026-07-2",
+      "entity": "memory",
+      "indicatorId": "S10",
+      "verdict": "update",
+      "priorFindingId": "www-ad-hoc-news-de-94ca546c-2026-07-2",
+      "detail": "statement/trend changed (trend flat -> rising)"
+    },
+    {
+      "findingId": "tech-yahoo-com-7b64d281-2026-07-1",
+      "entity": "memory",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "www-ad-hoc-news-de-94ca546c-2026-07-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "lambda-ai-782c15e0-2026-07-1",
+      "entity": "multi",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "lambda-ai-1252bbe3-2026-07-1",
+      "detail": "value 4.29 -> 6.99 (tol 1%)"
+    },
+    {
+      "findingId": "nvidianews-nvidia-com-87ea0942-2026-07-1",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "nvidianews-nvidia-com-5c5b4b41-2026-07-1",
+      "detail": "magnitude 3 -> 2"
+    },
+    {
+      "findingId": "finance-yahoo-com-2185ba22-2026-07-1",
+      "entity": "nvidia",
+      "indicatorId": "rpoBacklog",
+      "verdict": "update",
+      "priorFindingId": "www-globenewswire-com-78ee2d38-2026-07-1",
+      "detail": "magnitude 2 -> 3"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "getdeploying-com-66413625-2026-07-2",
+      "entity": "multi",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "getdeploying-com-66413625-2026-07-3",
+      "entity": "multi",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "getdeploying-com-66413625-2026-07-4",
+      "entity": "multi",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "lambda-ai-782c15e0-2026-07-2",
+      "entity": "multi",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "lambda-ai-782c15e0-2026-07-3",
+      "entity": "multi",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

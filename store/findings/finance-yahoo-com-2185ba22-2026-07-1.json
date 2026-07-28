@@ -1,0 +1,49 @@
+{
+  "id": "finance-yahoo-com-2185ba22-2026-07-1",
+  "statement": "Nvidia is negotiating more than $750 billion of potential AI infrastructure agreements, including a $500+ billion arrangement with SK Group for 2+ gigawatts of Korean data centers and up to $250 billion of backstop for OpenAI compute leases.",
+  "kind": "measured",
+  "value": {
+    "number": 750.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Deal value at this scale signals a very large forward pipeline of accelerator and data-center purchases tied to Nvidia platforms, well beyond current shipped revenue.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Announced multi-hundred-billion-dollar infrastructure and financing commitments convert into orders for merchant GPUs, memory, colocation capacity and power, lifting the forward demand pipeline."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (syndicated Bloomberg)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-750-billion-deals-revive-102003935.html",
+      "date": "2026-07-27",
+      "excerpt": "Nvidia is working on a fresh round of AI deals worth more than $750 billion in potential AI infrastructure agreements.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary syndicated wire report; the Bloomberg original was not fetchable and no filing corroborates the figure, and the deals are described as in-progress rather than signed."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-07-27",
+  "capturedAt": "2026-07-28T12:30:28Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

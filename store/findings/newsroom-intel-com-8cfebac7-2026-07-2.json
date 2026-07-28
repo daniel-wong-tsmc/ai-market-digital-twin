@@ -1,0 +1,46 @@
+{
+  "id": "newsroom-intel-com-8cfebac7-2026-07-2",
+  "statement": "Intel non-GAAP gross margin was 41.8% in Q2 2026, up 12.1 percentage points year over year and 2.8 points above guidance.",
+  "kind": "measured",
+  "value": {
+    "number": 41.8,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "Sharply higher margins alongside higher revenue indicate pricing power and better factory loading rather than volume bought with discounts.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Margin expansion in a competitive silicon supplier signals demand is strong enough to absorb price, reinforcing the demand track."
+  },
+  "evidence": [
+    {
+      "source": "Intel Newsroom / Intel Q2 2026 earnings release",
+      "url": "https://newsroom.intel.com/corporate/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Non-GAAP gross margin: 41.8%, up 12.1 percentage points YoY and 2.8 points above guidance",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Earnings figures relayed through secondary coverage; primary filing returned an error and was not read."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-28T12:30:28Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
