@@ -1149,6 +1149,11 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   now closed) **starts counting on the next scheduled cycle after this lane is merged** — it has
   not started yet. The pass/fail terms for finishing the soak were already agreed and written
   down in the G4 spec before this build started, so no new sign-off is needed to grade it later.
+  **Correction: that "next cycle after merge" start applies to the ≥5-cycle count only.** The
+  spec's second term — ≥2 cycles after the first 2026-07 series points land — cannot start that
+  early: the gap check reports nothing today (no monthly print is due yet on the calendar) and the
+  first real gap appears **2026-08-12**, so that term cannot be met before roughly **2026-08-14**.
+  Both terms must hold, so the earliest possible G4 package is mid-August regardless of merge date.
   **Flag for the record: the publication-calendar numbers (expected release day, allowed lag,
   tolerance) seeded in `registry/series-calendar.json` are the assistant's proposed starting
   defaults, not numbers the user has reviewed and approved — they are plain JSON and can be

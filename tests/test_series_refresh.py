@@ -129,3 +129,135 @@ def test_ingest_duplicate_skips_but_revision_appends(tmp_path):
                             today=datetime.date(2026, 7, 28))
     assert out.alreadyPresent == [f"{iid} 2026-06"]
     assert out.written == [f"{iid} 2026-06"]       # later vintage = legitimate revision
+
+
+# --- final-review regressions -------------------------------------------------
+
+def _monthly_id(reg, calendar):
+    return sorted(i for i in reg.specs if calendar[i].cadence == "monthly")[0]
+
+def _quarterly_id(reg, calendar):
+    return sorted(i for i in reg.specs if calendar[i].cadence == "quarterly")[0]
+
+def test_ingest_rejects_future_period(tmp_path):
+    """CRITICAL 1: a period after the cycle month is never written."""
+    reg, cal = _registry(), load_calendar(CAL)
+    iid = _monthly_id(reg, cal)
+    far = _point(iid, "2099-12", unit=reg.specs[iid].unit, published="2026-07-28")
+    out = ingest_candidates(_envelope(far), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert not out.written and "future period" in out.rejected[0]
+    assert not list(tmp_path.iterdir())
+
+def test_find_gaps_ignores_a_pre_existing_future_period(tmp_path):
+    """CRITICAL 1 second half: a bad row already in the store cannot hide the gap."""
+    reg, cal = _registry(), load_calendar(CAL)
+    iid = _monthly_id(reg, cal)
+    append_point(tmp_path, _point(iid, "2099-12", unit=reg.specs[iid].unit,
+                                  published="2026-07-28"))
+    for when in (datetime.date(2026, 8, 15), datetime.date(2030, 8, 15)):
+        flagged = [g for g in find_gaps(reg, cal, tmp_path, when) if g.indicatorId == iid]
+        assert flagged, f"future row must not blind the gap check on {when}"
+        assert flagged[0].latestPeriod is None
+
+def test_ingest_rejects_malformed_and_future_published_at(tmp_path):
+    """IMPORTANT 2: a point that would be written yet invisible to every read."""
+    reg = _registry()
+    iid = sorted(reg.specs)[0]
+    unit = reg.specs[iid].unit
+    prose = _point(iid, "2026-06", unit=unit, published="sometime last week")
+    ahead = _point(iid, "2026-06", unit=unit, published="9999-01-01")
+    out = ingest_candidates(_envelope(prose, ahead), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert not out.written and len(out.rejected) == 2
+    assert "malformed publishedAt" in out.rejected[0]
+    assert "future publishedAt" in out.rejected[1]
+    assert not list(tmp_path.iterdir())
+
+def test_gap_carries_unit_and_latest_construction(tmp_path):
+    """IMPORTANT 3 + 4: the reader needs the unit verbatim and the prior construction."""
+    reg, cal = _registry(), load_calendar(CAL)
+    iid = _monthly_id(reg, cal)
+    unit = reg.specs[iid].unit
+    seeded = SeriesPoint(
+        indicatorId=iid, period="2026-05", value=7.5, unit=unit,
+        publishedAt="2026-06-10", capturedAt="2026-06-10",
+        source=SeriesSource(url="https://example.com/x", title="t"),
+        note="sum YoY of Quanta+Wistron+Wiwynn monthly rev")
+    append_point(tmp_path, seeded)
+    gaps = {g.indicatorId: g for g in
+            find_gaps(reg, cal, tmp_path, datetime.date(2026, 7, 28))}
+    assert gaps[iid].unit == unit
+    assert gaps[iid].latestNote == "sum YoY of Quanta+Wistron+Wiwynn monthly rev"
+    assert gaps[iid].latestValue == 7.5
+    empty = {g.indicatorId: g for g in
+             find_gaps(reg, cal, tmp_path / "nothing", datetime.date(2026, 7, 28))}
+    assert empty[iid].latestNote is None and empty[iid].latestValue is None
+    assert all(g.unit == reg.specs[g.indicatorId].unit for g in empty.values())
+
+def test_ingest_flags_conflicting_same_vintage_value(tmp_path):
+    """IMPORTANT 6: a same-day disagreement is a finding, not a duplicate."""
+    reg = _registry()
+    iid = sorted(reg.specs)[0]
+    unit = reg.specs[iid].unit
+    append_point(tmp_path, _point(iid, "2026-06", value=1.0, unit=unit,
+                                  published="2026-07-28"))
+    clash = _point(iid, "2026-06", value=1.5, unit=unit, published="2026-07-28")
+    out = ingest_candidates(_envelope(clash), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert not out.written and not out.alreadyPresent
+    assert "conflicting same-vintage value" in out.rejected[0]
+    assert "1.5" in out.rejected[0] and "1.0" in out.rejected[0]
+
+def test_ingest_exact_same_vintage_repeat_is_already_present(tmp_path):
+    reg = _registry()
+    iid = sorted(reg.specs)[0]
+    unit = reg.specs[iid].unit
+    append_point(tmp_path, _point(iid, "2026-06", value=1.0, unit=unit,
+                                  published="2026-07-28"))
+    same = _point(iid, "2026-06", value=1.0, unit=unit, published="2026-07-28")
+    out = ingest_candidates(_envelope(same), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert out.alreadyPresent == [f"{iid} 2026-06"] and not out.rejected
+
+def test_ingest_rejects_candidate_when_store_file_is_malformed(tmp_path):
+    reg = _registry()
+    iid = sorted(reg.specs)[0]
+    (tmp_path / f"{iid}.jsonl").write_text('{"indicatorId": "junk"}\n', "utf-8")
+    cand = _point(iid, "2026-06", unit=reg.specs[iid].unit, published="2026-07-01")
+    out = ingest_candidates(_envelope(cand), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert not out.written and "malformed" in out.rejected[0]
+
+def test_ingest_rejects_quarterly_off_quarter_period(tmp_path):
+    reg, cal = _registry(), load_calendar(CAL)
+    iid = _quarterly_id(reg, cal)
+    unit = reg.specs[iid].unit
+    off = _point(iid, "2026-05", unit=unit, published="2026-07-01")
+    on = _point(iid, "2026-03", unit=unit, published="2026-07-01")
+    out = ingest_candidates(_envelope(off, on), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28), calendar=cal)
+    assert out.written == [f"{iid} 2026-03"]
+    assert len(out.rejected) == 1 and "quarter-end" in out.rejected[0]
+
+def test_ingest_without_calendar_keeps_the_old_signature(tmp_path):
+    """The calendar arg is optional: omitting it skips only the cadence check."""
+    reg, cal = _registry(), load_calendar(CAL)
+    iid = _quarterly_id(reg, cal)
+    off = _point(iid, "2026-05", unit=reg.specs[iid].unit, published="2026-07-01")
+    out = ingest_candidates(_envelope(off), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert out.written == [f"{iid} 2026-05"]
+
+def test_intra_envelope_duplicate_is_deduped(tmp_path):
+    """Pins the per-candidate re-read of the store: two identical candidates in ONE
+    envelope must land once. Do NOT hoist read_series out of the loop."""
+    reg = _registry()
+    iid = sorted(reg.specs)[0]
+    unit = reg.specs[iid].unit
+    twin = _point(iid, "2026-06", unit=unit, published="2026-07-01")
+    out = ingest_candidates(_envelope(twin, twin), reg, tmp_path,
+                            today=datetime.date(2026, 7, 28))
+    assert out.written == [f"{iid} 2026-06"]
+    assert out.alreadyPresent == [f"{iid} 2026-06"]
+    assert len(read_series(tmp_path, iid)) == 1

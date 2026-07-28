@@ -1384,28 +1384,39 @@ def _series_refresh(args) -> int:
         print(f"[series-refresh] malformed --as-of {args.as_of!r} "
               "(need YYYY-MM-DD)", file=sys.stderr)
         return 2
+    # every way a hand-edited config file can be structurally wrong, listed explicitly:
+    # a bare `except Exception` here would swallow genuine bugs.
+    cfg_errors = (OSError, json.JSONDecodeError, UnicodeDecodeError, ValidationError,
+                  KeyError, TypeError, AttributeError)
     try:
         registry = SeriesRegistry.load(args.series_registry)
-    except (OSError, json.JSONDecodeError, ValidationError) as e:
+    except cfg_errors as e:
         print(f"[series-refresh] unreadable --series-registry "
               f"{args.series_registry!r}: {e}", file=sys.stderr)
         return 2
+    try:
+        calendar = load_calendar(args.calendar)
+    except cfg_errors as e:
+        print(f"[series-refresh] unreadable --calendar {args.calendar!r}: {e}",
+              file=sys.stderr)
+        return 2
     if args.check:
-        try:
-            calendar = load_calendar(args.calendar)
-        except (OSError, json.JSONDecodeError, ValidationError) as e:
-            print(f"[series-refresh] unreadable --calendar {args.calendar!r}: {e}",
-                  file=sys.stderr)
-            return 2
         try:
             gaps = find_gaps(registry, calendar, args.series_root, today)
         except ValueError as e:
             print(f"[series-refresh] calendar/registry mismatch: {e}", file=sys.stderr)
             return 2
         payload = json.dumps(
-            {"gaps": [g.model_dump() for g in gaps]}, indent=1)
+            {"gaps": [g.model_dump() for g in gaps]}, indent=2)
         if args.out:
-            pathlib.Path(args.out).write_text(payload, "utf-8")
+            out_path = pathlib.Path(args.out)
+            try:
+                out_path.parent.mkdir(parents=True, exist_ok=True)
+                out_path.write_text(payload, "utf-8")
+            except OSError as e:
+                print(f"[series-refresh] cannot write --out {args.out!r}: {e}",
+                      file=sys.stderr)
+                return 2
         print(payload)
         return 0
     cand_path = pathlib.Path(args.ingest)
@@ -1413,9 +1424,15 @@ def _series_refresh(args) -> int:
         print(f"[series-refresh] candidates file not found: {cand_path}",
               file=sys.stderr)
         return 2
-    result = ingest_candidates(cand_path.read_text("utf-8"), registry,
-                               args.series_root, today=today)
-    print(result.model_dump_json(indent=1))
+    try:
+        envelope_text = cand_path.read_text("utf-8")
+    except (OSError, UnicodeDecodeError) as e:
+        print(f"[series-refresh] unreadable --ingest {cand_path}: {e}",
+              file=sys.stderr)
+        return 2
+    result = ingest_candidates(envelope_text, registry, args.series_root,
+                               today=today, calendar=calendar)
+    print(result.model_dump_json(indent=2))
     return 0
 
 
