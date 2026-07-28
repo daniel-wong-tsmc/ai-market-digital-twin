@@ -53,6 +53,14 @@ Mechanical choices made in-lane (no design weight, recorded here per convention)
   reason. The story model therefore hands `evidence_vintage` a minimal adapter exposing only
   those two paths. **`report.py` is not touched**, and there remains exactly one implementation
   of the date math.
+- **`evidence_vintage` is imported at function level, not module level.** `report.py` and
+  `brief.py` already import each other and resolve at call time; a new top-level edge from the
+  dashboard into that pair is avoidable risk for zero benefit. Same idiom as `publisher.py`, and
+  the F96 precedent (user-chosen there for the same reason).
+- **Wording amended during the build (recorded here, not a re-opened fork):** the confidence
+  sentence says *how much* the reads agreed, never *that* they agreed. The first draft read
+  "from 3 separate reads that agreed", which is only true at level "high" — the live scorecard
+  on the day of the build read "medium". A regression test pins this at all three levels.
 - **Confidence is read straight off the raw scorecard dict** (`confidence.level` +
   `confidence.basis`); the vote count is the first integer in `basis`, the same rule
   `report.render_header` uses.
