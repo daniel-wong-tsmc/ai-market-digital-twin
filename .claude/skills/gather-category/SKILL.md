@@ -198,7 +198,7 @@ never block the round on a discovery tool.
 **2c. HuggingNews tiered discovery (D1 — leads first, fallback logged).** When the manifest
 declares a non-empty `huggingnewsTags` list, the coordinator issues ONE `webreach-fetch` request
 against the `huggingnews` tool, verb `latest`, target = the manifest's tags comma-joined (e.g.
-`ai-compute-chips,edge-inference` for a manifest listing two tags) — run via the same runner as step 3:
+`ai-compute-chips,ai-infrastructure` for a manifest listing two tags) — run via the same runner as step 3:
 `.venv/Scripts/python -m gpu_agent.cli webreach-fetch --requests <requests-file> --out-dir work/<run-dir>/webreach/`.
 When `huggingnewsTags` is absent or empty on the manifest, skip this sub-step silently — no gap
 entry, no log line, it simply isn't part of this manifest. The `latest` call is keyed
