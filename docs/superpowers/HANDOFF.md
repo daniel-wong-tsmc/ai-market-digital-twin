@@ -1017,6 +1017,26 @@ User gave **"go"** 2026-07-06. Actioned:
   answered Q3 puts its audit sub-step in run-cycle SKILL.md with an F83 re-record; F79-G4 has
   ALREADY re-recorded F83 on its branch (`040333d`). Two concurrent F83 re-records = guaranteed
   fingerprint conflict. Serialize: merge F79-G4 first, then rebase/dispatch the F66 build.
+- **F79-G4 lane BUILT + PARKED AWAITING THE USER'S MERGE (2026-07-28).** Branch `f79-g4-refresh`
+  parked at **`bf684fb`** (8 commits off `4f3ae7b`), worktree `.worktrees/f79-g4-refresh` retained
+  (holds the gitignored DONE sentinel + SDD ledger). Built subagent-driven: 5 TDD tasks, fresh
+  implementer + per-task spec+quality review each, 3 fix rounds, whole-branch Opus review +
+  one fix wave + a scoped re-review = **all findings addressed, 0 open Critical/Important**.
+  Suite **2025 passed / 7 skipped**; F6 / scoring-v1 replay / narrator pins GREEN and unmoved;
+  **F83 re-recorded ONCE in lockstep (`dd96709`), fingerprint `b49e744d…` → `c0de43da…6e5c9d2`**;
+  forbidden-diff EMPTY (`registry/` shows only the new `registry/series-calendar.json`).
+  Shipped: `gpu_agent/series_refresh.py` (calendar gap check + strict candidate ingest),
+  `registry/series-calendar.json`, a `series-refresh` CLI verb, run-cycle steps 7b/7c.
+  **ONE user decision, interactive (NOT AFK):** the Task-3 review's Important finding was
+  plan-mandated (the plan's own sample had no error handling) — the user ruled "harden it now"
+  (`542fbd5`). **⚠ The seed calendar values are assistant-proposed tunable defaults, NOT
+  user-approved numbers.** Sentinel `.superpowers/handoffs/f79-g4-refresh-DONE.md`.
+  **STOP — only the user merges.** Merge-time: expect an ordinary `docs/fix-backlog.md` text
+  conflict (main moved on). **Merging this UNBLOCKS the F66 build** (F83 serialization flag above).
+  **Soak arithmetic:** the ≥5-cycle count starts on the first post-merge cycle, but the second
+  pass term (≥2 cycles after the first 2026-07 points land) cannot be met before ~**2026-08-14**
+  — the first calendar gap is 2026-08-12 — so the earliest possible G4 package is mid-August,
+  whatever the merge date. Original claim entry below.
 - **F79-G4 lane OPEN — CLAIM ON DISPATCH (2026-07-28):** branch `f79-g4-refresh`, worktree
   `.worktrees/f79-g4-refresh`. Deliverable: the 5-task plan
   `docs/superpowers/plans/2026-07-28-f79-g4-series-refresh-soak.md`. Non-gated; F6 / scoring-v1
