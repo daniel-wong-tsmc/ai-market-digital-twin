@@ -19,7 +19,7 @@ def reg():
 def test_extract_empty_answer_gates_clean(reg):
     registry, taxonomy = reg
     si = load_hash_input(HASH_INPUT)["extract"]
-    result = gate_brain_answer("extract", si, json.dumps({"findings": []}), registry, taxonomy)
+    result = gate_brain_answer("extract", si, json.dumps({"drafts": []}), registry, taxonomy)
     assert result.ok and result.violations == []
 
 def test_extract_malformed_answer_rejects(reg):

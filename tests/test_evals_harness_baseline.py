@@ -13,7 +13,7 @@ def _case(case_id, kind="positive"):
     return EvalCase.model_validate({
         "caseId": case_id, "seam": "extract", "kind": kind, "source": "t",
         "input": {"doc": DOC, "asOf": "2026-07-03"},
-        "recordedAnswer": json.dumps({"findings": []}),
+        "recordedAnswer": json.dumps({"drafts": []}),
         "checks": {"gateOutcome": "pass"}, "notes": "n",
     })
 

@@ -15,7 +15,7 @@ def _write_cases(tmp_path):
         (cases_dir / f"{cid}.json").write_text(json.dumps({
             "caseId": cid, "seam": "extract", "kind": kind, "source": "t",
             "input": {"doc": DOC, "asOf": "2026-07-03"},
-            "recordedAnswer": json.dumps({"findings": []}),
+            "recordedAnswer": json.dumps({"drafts": []}),
             "checks": {"gateOutcome": "pass"}, "notes": "n",
         }), "utf-8")
     return cases_dir
@@ -34,7 +34,7 @@ def test_eval_full_offline_cycle(tmp_path, capsys):
     assert set(prompts["extract-t-01"]) == {"system", "schema", "user"}
 
     (run / "brain-answers.json").write_text(
-        json.dumps({"extract-t-01": json.dumps({"findings": []})}), "utf-8")
+        json.dumps({"extract-t-01": json.dumps({"drafts": []})}), "utf-8")
     assert main(["eval", "record-brain", "--cases", str(cases_dir), "--out", str(run)]) == 0
     gates = json.loads((run / "brain-gates.json").read_text("utf-8"))
     assert gates["extract-t-01"]["ok"] is True
@@ -86,7 +86,7 @@ def test_record_steps_missing_stage_input_exit_2(tmp_path, capsys):
     assert "emit-brain" in err
 
     (run / "brain-answers.json").write_text(
-        json.dumps({"extract-t-01": json.dumps({"findings": []})}), "utf-8")
+        json.dumps({"extract-t-01": json.dumps({"drafts": []})}), "utf-8")
     assert main(["eval", "record-brain", "--cases", str(cases_dir), "--out", str(run)]) == 0
     assert main(["eval", "emit-grade", "--cases", str(cases_dir), "--out", str(run)]) == 0
 
@@ -102,7 +102,7 @@ def test_record_grade_regression_exits_1(tmp_path):
     run = tmp_path / "run"
     main(["eval", "emit-brain", "--cases", str(cases_dir), "--out", str(run)])
     (run / "brain-answers.json").write_text(
-        json.dumps({"extract-t-01": json.dumps({"findings": []})}), "utf-8")
+        json.dumps({"extract-t-01": json.dumps({"drafts": []})}), "utf-8")
     main(["eval", "record-brain", "--cases", str(cases_dir), "--out", str(run)])
     main(["eval", "emit-grade", "--cases", str(cases_dir), "--out", str(run)])
     (run / "grade-answers.json").write_text(json.dumps({

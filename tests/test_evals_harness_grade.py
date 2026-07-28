@@ -12,7 +12,7 @@ def _case(case_id, kind="positive", seam="extract"):
     return EvalCase.model_validate({
         "caseId": case_id, "seam": seam, "kind": kind, "source": "t",
         "input": {"doc": DOC, "asOf": "2026-07-03"},
-        "recordedAnswer": json.dumps({"findings": []}),
+        "recordedAnswer": json.dumps({"drafts": []}),
         "checks": {"gateOutcome": "pass"}, "notes": "good extraction keeps units exact",
     })
 
