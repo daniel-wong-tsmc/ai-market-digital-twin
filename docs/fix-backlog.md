@@ -1389,3 +1389,36 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   (relates to F104's social-ingestion design space), cost/budget per cycle, and whether the desk's
   D6 licensed-source discipline applies. *(Feature — own brainstorm/spec/plan when it starts.)*
   *(Concurrent-mint caveat: F106 chosen against a backlog max of F105 on 2026-07-28; renumber if collided.)*
+
+- [ ] **F107 — thesis seam replicate instability: range 2.5 on an UNCHANGED prompt (2026-07-28).**
+  The F105 3-replicate eval run showed the thesis seam scoring 5.000 / 7.500 / 5.500 across three
+  independent draws — a 2.5-point spread on a prompt whose hash (`4a9d9817951c`) did not move and is
+  identical to the incumbent baseline. Three-run mean is 6.000, exactly the incumbent baseline mean,
+  so the seam is not drifting — it is *noisy*. Historical thesis dispersion has been <= 0.5 (the
+  stored baseline replicates are 6.0 / 6.0 / 6.0). The swing traces to the `steelman` criterion,
+  which moves 0 <-> 2 on whether the answer is judged to argue against itself; the other three
+  criteria are comparatively stable. This tripped the `DISPERSION_LIMIT = 1.0` guard in
+  `rebaseline_v2` and blocked F105's rebaseline (see `.superpowers/handoffs/f105-extract-strict-QUESTIONS.md`).
+  Investigate: is this grader disagreement on the same material (rubric anchor ambiguity in
+  `steelman`), or genuine brain-answer variance? Evidence: the three thesis grade files and reports
+  under `.worktrees/f105-extract-strict/work/eval-2026-07-28/{r1,r2,r3}/` (gitignored `work/` — read
+  in place). Likely outcome is a sharpened `steelman` anchor in `gpu_agent/evals/rubric.py`, which is
+  a rubric change, not a prompt change (the F6 pin covers brain prompts only) — but confirm before
+  assuming. F108 (seam-scoped rebaseline) unblocks F105 without needing this answered first; this
+  item is the real fix for the underlying noise.
+  *(Concurrent-mint caveat: F107 chosen against a backlog max of F106 on 2026-07-28; renumber if collided.)*
+
+- [ ] **F108 — seam-scoped rebaseline (`eval rebaseline --seams <seam> ...`).**
+  `rebaseline_v2` today rebuilds the entire baseline from all four seams at once: every seam's mean,
+  epsilon, quantum, history and case medians are recomputed, and the dispersion guard is applied to
+  every seam. That makes a single-seam prompt change hostage to unrelated noise in seams the change
+  never touched — the F105 case exactly (extract passed cleanly at 6.50 / 6.75 / 7.125, range 0.625,
+  but thesis's unrelated 2.5 range refused the whole rebaseline; see F107). The only escape hatches
+  today are a whole-baseline `--force`, which would have collapsed the thesis bar 5.50 -> 3.35 and
+  loosened judge and implication too, or parking the fix. Build a seam-scoped mode: named seams get
+  new mean/epsilon/quantum/history/case-medians from the replicate reports, every unnamed seam's
+  baseline entry carries forward BYTE-IDENTICAL from the incumbent, the dispersion guard applies only
+  to the seams being rebuilt, and the baseline records which seams were rebuilt when. No seams named
+  = today's whole-baseline behaviour, unchanged and byte-identical on the default path. Harness code
+  only — no prompt text, no hand-edited baseline content; all four pins must stay green.
+  *(Concurrent-mint caveat: F108 chosen against a backlog max of F107 on 2026-07-28; renumber if collided.)*
