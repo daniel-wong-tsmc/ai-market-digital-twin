@@ -1384,10 +1384,24 @@ def _series_refresh(args) -> int:
         print(f"[series-refresh] malformed --as-of {args.as_of!r} "
               "(need YYYY-MM-DD)", file=sys.stderr)
         return 2
-    registry = SeriesRegistry.load(args.series_registry)
+    try:
+        registry = SeriesRegistry.load(args.series_registry)
+    except (OSError, json.JSONDecodeError, ValidationError) as e:
+        print(f"[series-refresh] unreadable --series-registry "
+              f"{args.series_registry!r}: {e}", file=sys.stderr)
+        return 2
     if args.check:
-        calendar = load_calendar(args.calendar)
-        gaps = find_gaps(registry, calendar, args.series_root, today)
+        try:
+            calendar = load_calendar(args.calendar)
+        except (OSError, json.JSONDecodeError, ValidationError) as e:
+            print(f"[series-refresh] unreadable --calendar {args.calendar!r}: {e}",
+                  file=sys.stderr)
+            return 2
+        try:
+            gaps = find_gaps(registry, calendar, args.series_root, today)
+        except ValueError as e:
+            print(f"[series-refresh] calendar/registry mismatch: {e}", file=sys.stderr)
+            return 2
         payload = json.dumps(
             {"gaps": [g.model_dump() for g in gaps]}, indent=1)
         if args.out:

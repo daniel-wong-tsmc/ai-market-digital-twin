@@ -3,6 +3,7 @@
 # each test file carries its own helpers.
 import datetime
 import json
+import pathlib
 from gpu_agent.cli import main
 from gpu_agent.series_registry import SeriesRegistry
 from gpu_agent.series_store import SeriesPoint, SeriesSource, read_series
@@ -45,3 +46,35 @@ def test_operator_errors_exit_2(tmp_path, capsys):
     assert main(["series-refresh", "--ingest", str(tmp_path / "absent.json"),
                  "--as-of", "2026-07-28"]) == 2                            # missing file
     assert main(["series-refresh", "--check", "--as-of", "2026-13-99"]) == 2  # bad as-of
+
+def test_check_bad_series_registry_path_exit_2(tmp_path, capsys):
+    rc = main(["series-refresh", "--check", "--as-of", "2026-07-28",
+               "--series-root", str(tmp_path / "series"),
+               "--series-registry", str(tmp_path / "absent-registry.json")])
+    assert rc == 2
+
+def test_check_bad_calendar_path_exit_2(tmp_path, capsys):
+    rc = main(["series-refresh", "--check", "--as-of", "2026-07-28",
+               "--series-root", str(tmp_path / "series"),
+               "--calendar", str(tmp_path / "absent-calendar.json")])
+    assert rc == 2
+
+def test_check_malformed_calendar_exit_2(tmp_path, capsys):
+    bad_cal = tmp_path / "calendar.json"
+    bad_cal.write_text("not json at all {{{", "utf-8")
+    rc = main(["series-refresh", "--check", "--as-of", "2026-07-28",
+               "--series-root", str(tmp_path / "series"),
+               "--calendar", str(bad_cal)])
+    assert rc == 2
+
+def test_check_calendar_under_covers_registry_exit_2(tmp_path, capsys):
+    real = json.loads(
+        pathlib.Path("registry/series-calendar.json").read_text("utf-8"))
+    dropped_key = next(iter(real["seriesCalendar"]))
+    del real["seriesCalendar"][dropped_key]
+    short_cal = tmp_path / "calendar.json"
+    short_cal.write_text(json.dumps(real), "utf-8")
+    rc = main(["series-refresh", "--check", "--as-of", "2026-07-28",
+               "--series-root", str(tmp_path / "series"),
+               "--calendar", str(short_cal)])
+    assert rc == 2
