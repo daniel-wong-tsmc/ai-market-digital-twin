@@ -1,0 +1,44 @@
+{
+  "id": "siliconanalysts-com-528fac70-2026-07-1",
+  "statement": "TSMC CoWoS advanced-packaging lead times are reported at 52-78 weeks (both -S and -L variants), with N2/A16 at 78-156 weeks, N3 at 52-78 weeks, and N7 plus mature nodes at 4-17 weeks.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Advanced-packaging and leading-edge wafer lead times of a year or more mean accelerator output is set by capacity booked long ago, not by current order intake; no single point figure is stated so no number is asserted.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "negative",
+    "mechanism": "Long upstream lead times cap how fast accelerator supply can respond to demand, holding the binding constraint at packaging and leading-edge wafers."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts analysis article",
+      "url": "https://siliconanalysts.com/analysis/foundry-allocation-status-q1-2026",
+      "date": "2026-06-16",
+      "excerpt": "CoWoS (both -S and -L variants): \"52-78 weeks\" (page qualifies this as of late 2025).",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Independent analysis site, not a primary foundry disclosure, and the page itself qualifies the CoWoS figure as of late 2025."
+  },
+  "dispersion": "Stated as a 52-78 week range; comparable ranges given for other nodes.",
+  "asOf": "2026-07",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "multi",
+  "observedAt": "2026-06-16",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

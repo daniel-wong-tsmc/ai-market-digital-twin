@@ -1,0 +1,42 @@
+{
+  "id": "nvidianews-nvidia-com-18175873-2026-07-2",
+  "statement": "NVIDIA's partnership with Safe Superintelligence includes an NVIDIA investment in SSI, with no dollar amount disclosed.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Vendor equity into a compute buyer means part of the buyer's purchasing power is supplied by the chip vendor itself rather than by independent capital.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed"
+    ],
+    "direction": "mixed",
+    "mechanism": "Vendor investment funds a customer's compute purchases, supporting near-term demand while making that demand partly circular."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom press release",
+      "url": "https://nvidianews.nvidia.com/news/ilya-sutskevers-safe-superintelligence-inc-and-nvidia-announce-long-term-strategic-partnership",
+      "date": "2026-07-27",
+      "excerpt": "SSI and NVIDIA announced a long-term strategic partnership that includes an NVIDIA investment in SSI.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary NVIDIA press release confirms the investment exists; the release states no dollar amount, so size is unknown."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-07-27",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "www-globenewswire-com-2fcad1b8-2026-07-1",
+  "statement": "AMD claims its Helios rack, combining 72 Instinct MI455X GPUs and 18 6th Gen EPYC CPUs, delivers up to 30% more inference tokens per dollar than the competition, and that MI455X delivers 34x higher token throughput than MI355X.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "If inference cost per token falls at the rack level, buyers can serve more tokens for the same spend, which improves the economics of deploying accelerators; the claims are vendor marketing with no workload, precision or configuration detail captured.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.reasoning-agentic",
+      "applications.agent-platforms",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Better tokens per dollar at rack scale lowers the cost of serving inference, expanding the volume of workloads that clear an economic threshold."
+  },
+  "evidence": [
+    {
+      "source": "AMD press release via GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/07/23/3332491/0/en/AAI-2026-AMD-Delivers-Full-Stack-Compute-for-the-Agentic-AI-Era.html",
+      "date": "2026-07-23",
+      "excerpt": "up to 30% more inference tokens per dollar than the competition",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Unqualified vendor performance marketing claim carried by a newswire, with the competitor unnamed and no workload or configuration detail; no independent benchmark in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "tokenEconomics",
+  "side": "demand",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

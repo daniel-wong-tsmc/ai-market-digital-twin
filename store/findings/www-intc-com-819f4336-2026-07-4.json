@@ -1,0 +1,47 @@
+{
+  "id": "www-intc-com-819f4336-2026-07-4",
+  "statement": "Intel Foundry reported Q2 2026 revenue of $5.8 billion, up 31% year over year, with the CEO citing advanced packaging and wafer foundry capacity.",
+  "kind": "measured",
+  "value": {
+    "number": 5.8,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A growing second-source foundry and advanced-packaging line is the main alternative to the dominant incumbent, and its revenue growth is the readable proxy for that capacity being taken up.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Growth in an alternative foundry and packaging supplier adds capacity outside the constrained incumbent line, easing the packaging bottleneck over time."
+  },
+  "evidence": [
+    {
+      "source": "Intel investor-relations press release",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Intel Foundry: $5.8 billion, up 31% year-over-year.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor results release with segment revenue stated directly; note the release's capex line item is flagged in the document as needing confirmation and is not relied on here."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

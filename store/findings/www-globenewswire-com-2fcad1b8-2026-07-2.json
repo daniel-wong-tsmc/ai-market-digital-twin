@@ -1,0 +1,44 @@
+{
+  "id": "www-globenewswire-com-2fcad1b8-2026-07-2",
+  "statement": "At its Advancing AI 2026 event AMD named Anthropic as deploying up to 2 gigawatts of Instinct MI455X GPUs in Helios racks, and OpenAI as expecting to bring Helios online beginning in the fourth quarter of 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Two named frontier labs taking AMD rack-scale systems, one with a stated start quarter, converts roadmap interest into scheduled deployments.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Named customer deployments with start dates book accelerator volume and pull through rack, power and datacenter capacity."
+  },
+  "evidence": [
+    {
+      "source": "AMD press release via GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/07/23/3332491/0/en/AAI-2026-AMD-Delivers-Full-Stack-Compute-for-the-Agentic-AI-Era.html",
+      "date": "2026-07-23",
+      "excerpt": "bring Helios online beginning in the fourth quarter of 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor release carried by a newswire rather than fetched from the vendor's own investor site; no dollar value or delivery schedule was captured in the excerpt."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: AMD investor-relations press release, AMD press release via GlobeNewswire",
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

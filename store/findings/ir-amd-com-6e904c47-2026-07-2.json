@@ -1,0 +1,42 @@
+{
+  "id": "ir-amd-com-6e904c47-2026-07-2",
+  "statement": "AMD has committed to a strategic equity investment of up to $5 billion in Anthropic alongside the GPU deployment agreement.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Vendor equity flowing to a large accelerator buyer is a form of supplier-funded demand, so part of the announced purchase capacity rests on the vendor's own balance sheet rather than independent buyer financing.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed"
+    ],
+    "direction": "mixed",
+    "mechanism": "Vendor investment improves the buyer's ability to fund compute, supporting near-term demand while making that demand partly dependent on continued vendor financing."
+  },
+  "evidence": [
+    {
+      "source": "AMD investor-relations press release",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1292/amd-and-anthropic-announce-strategic-partnership-to-deploy-up-to-2-gigawatts-of-amd-instinct-mi450-series-gpus",
+      "date": "2026-07-22",
+      "excerpt": "AMD has committed to make a strategic equity investment of up to $5 billion in Anthropic.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor press release stating the commitment; the release surfaced no revenue or purchase-commitment dollar figure."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

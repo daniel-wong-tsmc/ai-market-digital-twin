@@ -1,0 +1,44 @@
+{
+  "id": "siliconanalysts-com-528fac70-2026-07-4",
+  "statement": "The top three customers are estimated to hold more than 85% of TSMC CoWoS capacity, with NVIDIA at roughly 60% (about 595,000 wafers) and booking more than half of the 2026-2027 CoWoS expansion.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "If three buyers hold the great majority of advanced-packaging capacity and one of them has pre-booked most of the expansion, everyone else competes for a small residual, regardless of how much capacity is added.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "Concentrated pre-booking of packaging capacity crowds out smaller accelerator designers, limiting effective supply available to the rest of the market."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts analysis article",
+      "url": "https://siliconanalysts.com/analysis/foundry-allocation-status-q1-2026",
+      "date": "2026-06-16",
+      "excerpt": "Top three customers combined share \">85%\" of CoWoS capacity.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analysis site estimate; the document labels the NVIDIA share as estimated and no primary foundry disclosure corroborates it."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-06-16",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

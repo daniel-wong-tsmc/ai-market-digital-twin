@@ -1,0 +1,43 @@
+{
+  "id": "siliconanalysts-com-528fac70-2026-07-3",
+  "statement": "HBM3E supply for 2026 is described as effectively sold out, with SK Hynix holding about 62% HBM4 share and roughly two-thirds of NVIDIA's HBM4.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "If high-bandwidth memory for the year is already committed, incremental accelerator output cannot be memory-fed without new capacity, and the concentration in one supplier narrows the fallback.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "Sold-out memory supply plus a single dominant supplier makes memory a binding constraint on accelerator build volumes."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts analysis article",
+      "url": "https://siliconanalysts.com/analysis/foundry-allocation-status-q1-2026",
+      "date": "2026-06-16",
+      "excerpt": "HBM3E status for 2026: \"effectively sold out\".",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analysis site; the share figures are described as estimates rather than supplier disclosures."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-06-16",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "www-morganlewis-com-cf41b1ac-2026-07-1",
+  "statement": "A BIS final rule effective January 15, 2026 shifted the export licensing approach for certain advanced AI chips destined for China and Macau from a presumption of denial to case-by-case licensing with strict conditions, naming NVIDIA's H200 GPU and AMD's MI325X accelerator as eligible examples, subject to thresholds of total processing performance under 21,000 and total DRAM bandwidth below 6,500 GB/s and a cap of no more than 50% of US-shipped quantities.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Moving from near-automatic denial to conditional approval reopens a large end market for specific mid-tier accelerators, but the volume cap, testing requirement and performance ceilings keep the opening narrow.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Case-by-case licensing lets qualifying accelerators ship to a previously closed market, adding addressable demand while the shipment cap and performance thresholds limit how much volume can follow."
+  },
+  "evidence": [
+    {
+      "source": "Morgan Lewis client alert",
+      "url": "https://www.morganlewis.com/pubs/2026/01/bis-revises-export-review-policy-for-advanced-ai-chips-destined-for-china-and-macau",
+      "date": "2026-01-16",
+      "excerpt": "case-by-case licensing with strict conditions",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Law-firm summary of the rule; the underlying Federal Register page could not be fetched, and the document is roughly 194 days old, so it is a standing-policy baseline rather than current news."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> rising); sources: Morgan Lewis client alert",
+  "asOf": "2026-07",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-01-16",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

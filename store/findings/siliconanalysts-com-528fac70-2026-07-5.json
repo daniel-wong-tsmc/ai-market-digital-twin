@@ -1,0 +1,43 @@
+{
+  "id": "siliconanalysts-com-528fac70-2026-07-5",
+  "statement": "Alternative advanced-packaging routes at Samsung (I-Cube/X-Cube) and Amkor OSAT are quoted at 26-39 week lead times, materially shorter than TSMC CoWoS at 52-78 weeks.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Shorter lead times at non-TSMC packaging houses give designers a faster, if less preferred, path to capacity, which is the main pressure valve on the packaging bottleneck.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "positive",
+    "mechanism": "Qualified alternative packaging capacity with shorter queues adds effective accelerator supply outside the constrained incumbent line."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts analysis article",
+      "url": "https://siliconanalysts.com/analysis/foundry-allocation-status-q1-2026",
+      "date": "2026-06-16",
+      "excerpt": "Samsung I-Cube/X-Cube and Amkor OSAT advanced packaging: \"26-39 week lead times\".",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analysis site estimate with no primary supplier confirmation and no volume figures."
+  },
+  "dispersion": "Stated as a 26-39 week range.",
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-06-16",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

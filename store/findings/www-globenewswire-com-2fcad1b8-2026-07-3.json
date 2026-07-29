@@ -1,0 +1,43 @@
+{
+  "id": "www-globenewswire-com-2fcad1b8-2026-07-3",
+  "statement": "AMD laid out a multi-year accelerator and CPU roadmap: MI500 Series GPUs in 2027, MI600 Series in 2028, Zen 7 CPUs in 2028 and Zen 8 in 2030.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A published annual accelerator cadence tells buyers a credible second source will keep shipping new parts, which is what makes designing around a non-incumbent supplier viable.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "A committed multi-generation roadmap from a second merchant supplier adds credible alternative accelerator supply against the incumbent."
+  },
+  "evidence": [
+    {
+      "source": "AMD press release via GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/07/23/3332491/0/en/AAI-2026-AMD-Delivers-Full-Stack-Compute-for-the-Agentic-AI-Era.html",
+      "date": "2026-07-23",
+      "excerpt": "Roadmap stated: MI500 Series GPUs in 2027; MI600 Series GPUs in 2028",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor roadmap statement carried by a newswire; roadmaps are intentions, not shipped supply."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: AMD investor-relations press release, AMD press release via GlobeNewswire",
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
