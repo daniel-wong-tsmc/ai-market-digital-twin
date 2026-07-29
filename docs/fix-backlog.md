@@ -1428,3 +1428,26 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   environment; (b) a HuggingNews-referred lead lands as a chased primary-source doc on a news day that
   provides one; (c) any fallback ingest appears in a `huggingnewsFallback[]` list and corroboration counts
   it as exactly one publisher, never one-per-fallback-doc. Full detail: `.superpowers/handoffs/f106-huggingnews-DONE.md`.
+  **UPDATE 2026-07-29 — final whole-branch check-through wave, commit `f96811d`.** A full read of the
+  finished branch (an independent double-check of the whole thing, not just the pieces) came back
+  "ready to merge, but fix four things first." All four were fixed the same day and a follow-up
+  check confirmed the fixes hold with no new problems. Final commit list: `5fd18ae`, `008c649`,
+  `be74a7e`, `3623df6`, `666b434`, `3fd55f3`, `fe19717`, `d56d9c0`, `f96811d` (9 total). Full test
+  suite: **2009 passed / 7 skipped** (was 2005/7 right before this fix wave; 1987/7 before this
+  branch started). The two guardrail tests that must never silently break stayed green throughout.
+  The four things fixed: (1) the gather instructions told the robot to run HuggingNews through a
+  generic search step that this feature isn't supposed to use yet — one sentence now carves out
+  HuggingNews so it only uses its intended leads-first path; (2) a record of "we had to fall back to
+  a HuggingNews summary because every source link was dead" had nowhere to be saved — fixed by
+  adding it to the coordinator's existing after-the-fact note-taking step, the same way an existing
+  similar record already works, rather than touching the core program logic (kept out of this lane's
+  assigned files on purpose); (3) the "this tool has a working API key" vs. "no key, running in
+  limited mode" flag only showed up in a human-readable log line, never in the machine-readable
+  status file that every automated preflight check actually reads — fixed so that flag now appears
+  in both places; (4) one of the safety-check files had accidentally started depending on a heavier
+  code library, which would make it crash on a bare-bones computer that only has plain Python — fixed
+  by moving the small piece of logic it needed into the safety-check file itself, so it works
+  standalone again. None of these fixes touched the frozen scoring/eval files this branch was never
+  allowed to touch. Full detail, including known small loose ends left on purpose (harmless,
+  documented) and the things nobody has proven yet against the real live service (also documented,
+  not assumed true): `.superpowers/handoffs/f106-huggingnews-DONE.md`.
