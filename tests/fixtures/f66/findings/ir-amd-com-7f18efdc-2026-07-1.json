@@ -1,0 +1,60 @@
+{
+  "id": "ir-amd-com-7f18efdc-2026-07-1",
+  "statement": "AMD put its Helios rack-scale system into production and named anchor deployments including Anthropic taking up to 2 gigawatts of MI455X GPUs in Helios racks and OpenAI bringing Helios online from Q4 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Named gigawatt-scale commitments from frontier labs are the clearest sign yet that a credible second merchant source of AI accelerators is reaching production, which changes buyers' options.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud",
+      "chips.hbm-memory",
+      "energy.power-generation"
+    ],
+    "direction": "mixed",
+    "mechanism": "Production Helios racks with named frontier-lab commitments add non-Nvidia accelerator supply and design wins, easing buyer dependence on one vendor while adding to the same upstream memory, packaging and power draw."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era",
+      "date": "2026-07-23",
+      "excerpt": "deploying up to 2 gigawatts of MI455X GPUs in Helios racks",
+      "tier": "primary"
+    },
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era",
+      "date": "2026-07-23",
+      "excerpt": "bringing Helios online beginning Q4 2026",
+      "tier": "primary"
+    },
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era",
+      "date": "2026-07-23",
+      "excerpt": "up to 30% more tokens per dollar than the competition",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor press release naming specific partners and deployment timing; the performance and gigawatt claims are vendor-stated and capped by 'up to' language."
+  },
+  "dispersion": "Anthropic's commitment is phrased as 'up to' 2 gigawatts and Meta is only validating and testing, so committed volume is not firm.",
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 1,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-27T10:49:29Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

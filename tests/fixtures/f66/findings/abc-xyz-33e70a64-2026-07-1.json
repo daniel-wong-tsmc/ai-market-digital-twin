@@ -1,0 +1,50 @@
+{
+  "id": "abc-xyz-33e70a64-2026-07-1",
+  "statement": "Alphabet raised its full-year 2026 capital expenditure forecast to $195-205 billion, up from $180-190 billion, citing accelerated capacity delivery to meet demand.",
+  "kind": "measured",
+  "value": {
+    "number": 200.0,
+    "unit": "revision_direction"
+  },
+  "trend": "rising",
+  "why": "A raised hyperscaler capex range is the most direct forward signal of AI accelerator and data-center order volume, and Alphabet is one of the largest single buyers.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo",
+      "infrastructure.networking-fabric",
+      "chips.hbm-memory",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "A higher capex budget converts into incremental server, accelerator, data-center and networking orders across the AI build chain, lifting demand for merchant GPUs, custom silicon, memory, fabric and power capacity."
+  },
+  "evidence": [
+    {
+      "source": "Alphabet Investor Relations (press release dated 2026-07-22) via CNBC / MLQ News reporting",
+      "url": "https://abc.xyz/investor/news/news-details/2026/Alphabet-Announces-Second-Quarter-2026-Results-2026-Y3uQ6H4ZJa/default.aspx",
+      "date": "2026-07-22",
+      "excerpt": "Alphabet raised its full-year 2026 capital expenditure forecast to $195 billion-$205 billion, up from $180 billion-$190 billion. Management said the increase reflects an acceleration in capacity delivery to meet demand.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Figures are corroborated open-web reporting (CNBC, MLQ News) on an official release whose exhibit could not be text-extracted; single fetched secondary document, so capped at medium."
+  },
+  "dispersion": "conflicting same-key reports: value 60.0 -> 200.0 (tol 1%); sources: Alphabet Investor Relations (press release dated 2026-07-22) via CNBC / MLQ News reporting",
+  "asOf": "2026-07",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "hyperscalers",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

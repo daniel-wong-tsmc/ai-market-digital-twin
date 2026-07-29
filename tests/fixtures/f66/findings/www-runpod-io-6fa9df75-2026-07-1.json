@@ -1,0 +1,59 @@
+{
+  "id": "www-runpod-io-6fa9df75-2026-07-1",
+  "statement": "RunPod's rate card dated July 17, 2026 lists dedicated Nvidia GPU instances from $0.44/hr for an A40 up to $7.39/hr for a B300, with H100 SXM at $2.99/hr, H200 at $4.39/hr and B200 at $5.89/hr.",
+  "kind": "measured",
+  "value": {
+    "number": 2.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A dated specialist-cloud rate card shows the going hourly price for each Nvidia generation, which is the reference level buyers compare against when deciding to rent versus buy.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Published per-GPU hourly rates across generations define the current rental level for Nvidia silicon; with no stated prior level or baseline this is a display overlay rather than a demand or supply move."
+  },
+  "evidence": [
+    {
+      "source": "RunPod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-07-17",
+      "excerpt": "H100 SXM at $2.99/hr, listed with '80 GB VRAM' and '20 vCPUs'",
+      "tier": "secondary"
+    },
+    {
+      "source": "RunPod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-07-17",
+      "excerpt": "B300 at $7.39/hr, listed with '288 GB HBM3e' and '32 vCPUs'",
+      "tier": "secondary"
+    },
+    {
+      "source": "RunPod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-07-17",
+      "excerpt": "H200 at $4.39/hr, listed with '141 GB VRAM' and '24 vCPUs'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Provider's own dated rate card at secondary tier; single provider, no baseline or change stated, so it fixes a level only."
+  },
+  "dispersion": "Serverless inference configurations on the same page span $0.58/hr to $9.98/hr, and most cluster pricing is quote-only.",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-07-17",
+  "capturedAt": "2026-07-27T10:49:29Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

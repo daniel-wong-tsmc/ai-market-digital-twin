@@ -2,6 +2,7 @@ from __future__ import annotations
 import re
 from pydantic import BaseModel, ConfigDict, Field
 from gpu_agent.entities import default_resolver
+from gpu_agent.numeric_tokens import numeric_tokens, value_renderings
 from gpu_agent.schema.finding import Finding
 from gpu_agent.wiki.store import WikiStore, PageNotFound
 from gpu_agent.wiki.salience import computed_salience
@@ -87,22 +88,10 @@ class EnrichmentGateError(ValueError):
 
 
 _CITATION_RE = re.compile(r"\[([A-Za-z0-9][A-Za-z0-9._-]*)\]")
-_NUMERIC_RE = re.compile(r"\d[\d,]*(?:\.\d+)?")
 
 
 def _cited_finding_ids(body: str) -> set[str]:
     return set(_CITATION_RE.findall(body))
-
-
-def _numeric_tokens(text: str) -> set[str]:
-    """Numeric tokens (>= 2 digits after stripping thousands commas) mentioned in `text`.
-    Single-digit tokens (list markers like '1.') are not material and are dropped."""
-    out: set[str] = set()
-    for m in _NUMERIC_RE.findall(text):
-        norm = m.replace(",", "")
-        if sum(ch.isdigit() for ch in norm) >= 2:
-            out.add(norm)
-    return out
 
 
 def _allowed_numeric_tokens(store: WikiStore, cited_ids: set[str], pe: PageEnrichment) -> set[str]:
@@ -120,19 +109,15 @@ def _allowed_numeric_tokens(store: WikiStore, cited_ids: set[str], pe: PageEnric
         parts.append(f.statement)
         parts.append(f.why)
         if f.value is not None:
-            v = f.value.number
-            # Multiple renderings so the body can cite the value however it was written:
-            # f"{v:g}" degrades to scientific notation for large floats ("7.52e+10"), so the
-            # integral form str(int(v)) is included whenever v is a whole number.
-            parts.extend([str(v), repr(v), f"{v:g}"])
-            if v.is_integer():
-                parts.append(str(int(v)))
+            # Multiple renderings so the body can cite the value however it was written
+            # (see gpu_agent/numeric_tokens.value_renderings).
+            parts.extend(value_renderings(f.value.number))
         for e in f.evidence:
             parts.append(e.excerpt)
             parts.append(e.date)
     allowed: set[str] = set()
     for p in parts:
-        allowed |= _numeric_tokens(p)
+        allowed |= numeric_tokens(p)
     return allowed
 
 
@@ -146,7 +131,7 @@ def _validate_enrichment_gate(store: WikiStore, pe: PageEnrichment) -> list[str]
         if not store.findings.exists(token):
             violations.append(f"{pe.pageId}: cites unknown finding {token}")
     allowed = _allowed_numeric_tokens(store, cited, pe)
-    for token in sorted(_numeric_tokens(pe.bodyMarkdown)):
+    for token in sorted(numeric_tokens(pe.bodyMarkdown)):
         if token not in allowed:
             violations.append(f"{pe.pageId}: uncited number {token}")
     return violations

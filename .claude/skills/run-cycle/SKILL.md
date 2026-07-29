@@ -49,7 +49,7 @@ report the rest `skipped-no-assignment` (surfaced, never dropped).
 
 ## Procedure
 
-<!-- run-cycle-step-fingerprint: sha256=c0de43da89b49f1c8dc3d2c4a9b3e75f3312b3558aa9a089c957075596e5c9d2 — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
+<!-- run-cycle-step-fingerprint: sha256=d7359d33e1b452d4af5ce95f1fecea7b17019f26414ee032e04096f796784e1d — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
 
 ### 1. Resolve the scope to a cycle plan (deterministic — no LLM)
 ```
@@ -288,6 +288,35 @@ it must be passed on every fallback call.) Mark **`narrator: fellBack`** in the 
 or **`narrator: done`** on a clean gate pass. **This step never blocks the cycle** (price-sync
 precedent, Step 7) — the site build then renders the day's story artifact-first automatically, and
 falls back to the Phase A assembler page when there is no valid artifact for the day.
+
+**(e4) Citation audit — post-hoc, deterministic (no LLM).** Every write-time gate checks that a cited
+finding *id resolves*; none checks that the finding *says what the prose claims*. This step re-verifies
+every number in the finished story scenes and implication lines against the findings those claims
+actually cite (F66 Phase 1):
+```
+.venv/Scripts/python -m gpu_agent.cli audit-citations --store store \
+  --category <id> --date <today>
+```
+It always writes `store/<id>/audit/<today>.json` — on both the clean and the flagged path, because the
+audit record is evidence and a cycle that flagged something must leave a trace of what and why.
+
+On a non-zero exit (`CITATION AUDIT FAILED`), **re-dispatch the narrator ONCE** with the flagged-token
+lines appended to the prompt — the same shape as the `(e3)` gate-rejection path — then re-run the audit.
+If it fails a **second** time, record the narrator honest-gap fallback:
+```
+.venv/Scripts/python -m gpu_agent.cli narrator --record-fallback --reasons <file> \
+  --store store --category <id> --date <today> --retries 2
+```
+and mark **`citation-audit: failed`** in the cycle log. **This step never blocks the cycle** — it blocks
+only the artifact under audit, on the same ladder `(e2)` and `(e3)` already use, and it never strands a
+scorecard. Mark **`citation-audit: clean`** on a zero exit.
+
+Flagged **implication** lines are logged, not re-dispatched: the implication step is already
+two-attempt-then-`failed`, so there is no third attempt to spend.
+
+Numbers the agent computed itself (the charted price-series values) are supplied to the audit from
+`store/series/` automatically — a flag means the number traces to no cited finding *and* to no series
+reading, which is the case worth a human's attention.
 
 **(f) Render the executive report (deterministic — no LLM).** Only after the scorecard, the thesis stage,
 **and** the implication stage have run for this category, render and surface the board-ready report:

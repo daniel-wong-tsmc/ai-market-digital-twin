@@ -1,0 +1,67 @@
+{
+  "id": "www-ad-hoc-news-de-94ca546c-2026-07-1",
+  "statement": "SK Hynix's board approved a 7.0931 trillion won ($4.83 billion) investment in the P&T7 advanced-packaging facility in Cheongju to accelerate cleanroom openings and expand HBM capacity.",
+  "kind": "measured",
+  "value": {
+    "number": 4.83,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Advanced packaging is the physical chokepoint on HBM output, so committed capital that pulls cleanroom openings forward is the clearest sign of future memory bit supply.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Capital committed to advanced-packaging cleanrooms raises future HBM assembly capacity, which relieves the packaging constraint that limits accelerator shipments."
+  },
+  "evidence": [
+    {
+      "source": "ad-hoc-news.de",
+      "url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/sk-hynix-rides-alphabet-s-capex-bombshell-to-a-4-86-percent-surge-but/69854646",
+      "date": "2026-07-23",
+      "excerpt": "a 7.0931 trillion won ($4.83 billion) investment in its P&T7 advanced-packaging facility in Cheongju",
+      "tier": "secondary"
+    },
+    {
+      "source": "ad-hoc-news.de",
+      "url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/sk-hynix-rides-alphabet-s-capex-bombshell-to-a-4-86-percent-surge-but/69854646",
+      "date": "2026-07-23",
+      "excerpt": "accelerating the opening of new clean rooms and expanding capacity for High-Bandwidth Memory (HBM) chips",
+      "tier": "secondary"
+    },
+    {
+      "source": "StockTitan (SEC/6-K filing aggregator)",
+      "url": "https://www.stocktitan.net/sec-filings/SKHY/6-k-sk-hynix-inc-current-report-foreign-issuer-c5d395b69375.html",
+      "date": "2026-07-22",
+      "excerpt": "secure a production base in Cheongju, Korea in response to global demand for AI memory semiconductors.",
+      "tier": "secondary"
+    },
+    {
+      "source": "StockTitan (SEC/6-K filing aggregator)",
+      "url": "https://www.stocktitan.net/sec-filings/SKHY/6-k-sk-hynix-inc-current-report-foreign-issuer-c5d395b69375.html",
+      "date": "2026-07-22",
+      "excerpt": "Key timeline: Start Date November 26, 2025; Projected End Date December 31, 2032.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single open-web outlet reporting a board decision; capacity added and timing are not quantified, and the dollar conversion varies across sources."
+  },
+  "dispersion": "conflicting same-key reports: value 5.88 -> 4.83 (tol 1%); sources: StockTitan (SEC/6-K filing aggregator), ad-hoc-news.de",
+  "asOf": "2026-07",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

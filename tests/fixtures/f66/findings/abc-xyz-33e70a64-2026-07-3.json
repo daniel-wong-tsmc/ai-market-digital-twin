@@ -1,0 +1,47 @@
+{
+  "id": "abc-xyz-33e70a64-2026-07-3",
+  "statement": "Google Cloud revenue accelerated 82% year over year to $24.8 billion in Q2 2026, with consolidated Alphabet revenue up 24% to $119.8 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 24.8,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Cloud revenue acceleration at a top-three hyperscaler is the revenue-side confirmation that the capex being committed is being absorbed by paying AI workloads rather than speculative build.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "applications.enterprise-copilots"
+    ],
+    "direction": "positive",
+    "mechanism": "Accelerating cloud revenue funds and justifies continued accelerator purchases, tightening the link between AI service demand and data-center compute orders."
+  },
+  "evidence": [
+    {
+      "source": "Alphabet Investor Relations (press release dated 2026-07-22) via CNBC / MLQ News reporting",
+      "url": "https://abc.xyz/investor/news/news-details/2026/Alphabet-Announces-Second-Quarter-2026-Results-2026-Y3uQ6H4ZJa/default.aspx",
+      "date": "2026-07-22",
+      "excerpt": "Google Cloud saw a meaningful acceleration in growth as revenues increased 82% to $24.8 billion.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Quarterly figures reported through secondary outlets covering the official release; only one fetched document, so capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "hyperscalers",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

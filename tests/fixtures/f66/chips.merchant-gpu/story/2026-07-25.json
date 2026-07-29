@@ -1,0 +1,161 @@
+{
+  "headline": "The chips are ready. The parts to finish them are not.",
+  "deck": "Buyers keep ordering. The holdup is the packaging and memory that go inside each GPU, and that logjam is only now starting to loosen.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Why the wait is so long",
+      "paragraphs": [
+        "Rentals stay high for one plain reason: not enough finished chips reach the market. The choke point is not the chip design. It is the advanced packaging that binds the parts together and the memory stacked next to each chip.",
+        "That packaging is spoken for. One report has it fully booked through 2026, another says it is sold out into 2027, with waits stretching past a year. Memory is the second wall. A major maker says its shipment growth is capped by supply, which in turn caps how many GPUs can be built. Memory delivery times have stretched to well over half a year, with prices up sharply."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending, year over year"
+      },
+      "claimFindingIds": [
+        "www-forbes-com-7c91863a-2026-07-1",
+        "www-tradingkey-com-855cb780-2026-07-1",
+        "finance-yahoo-com-ea29a8bf-2026-07-1",
+        "www-techtimes-com-669598b1-2026-07-1"
+      ],
+      "sourceLine": "Forbes, TradingKey, Yahoo Finance, TechTimes",
+      "relatedDocs": [
+        {
+          "url": "https://gpuaas.com/blog/b200-gpu-availability-report-q2-2026",
+          "title": "B200 GPU Availability Report Q2 2026",
+          "outlet": "GPUaaS.com",
+          "date": "2026-05-01"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Demand is not slowing down",
+      "paragraphs": [
+        "While the parts stay scarce, orders keep growing. The four largest buyers are set to spend roughly $725 billion this year, up about 77 percent. NVIDIA just posted a record $75.2 billion quarter in its data-center business, up 92 percent from a year ago.",
+        "New product only adds to the pull. NVIDIA's next system is ramping now, with the biggest cloud names already putting it into service. When buyers this size all want more at once, any shortage of parts shows up fast in the rent you pay."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped, year over year"
+      },
+      "claimFindingIds": [
+        "thetechcapital-com-796ec195-2026-07-1",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-1",
+        "blogs-nvidia-com-ffef75ff-2026-07-1"
+      ],
+      "sourceLine": "The Tech Capital, NVIDIA Newsroom, NVIDIA Blog",
+      "relatedDocs": [
+        {
+          "url": "https://blogs.nvidia.com/blog/vera-rubin/",
+          "title": "Vera Rubin NVL72 Enters Production",
+          "outlet": "NVIDIA Blog",
+          "date": "2026-07-21"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The line is starting to move",
+      "paragraphs": [
+        "Here is the first good news in a while. The wait for one popular chip has dropped to 8 to 16 weeks, down from 12 to 24 late last year. That is supply finally catching up a little.",
+        "It is not luck. The packaging maker is raising output from about 80,000 units a month toward 125,000 to 130,000 by year end. The gap between what buyers want and what can be made is forecast to shrink from 20 percent to 10 percent by the end of 2026. Other suppliers are adding capacity too, and a new plant in Fort Worth has opened to build these systems."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "gpuaas-com-3469b91e-2026-07-1",
+        "finance-biggo-com-ae5dcd41-2026-07-2",
+        "www-trendforce-com-368d8402-2026-07-1",
+        "www-digitimes-com-240df012-2026-07-1",
+        "nvidianews-nvidia-com-6d94ef96-2026-07-1"
+      ],
+      "sourceLine": "GPUaaS, BigGo, TrendForce, DigiTimes, NVIDIA Newsroom",
+      "relatedDocs": [
+        {
+          "url": "https://nvidianews.nvidia.com/news/built-in-fort-worth-wistron-opens-advanced-manufacturing-plant-to-produce-nvidia-ai-systems",
+          "title": "Wistron Opens Fort Worth Plant to Build NVIDIA AI Systems",
+          "outlet": "NVIDIA Newsroom",
+          "date": "2026-07-21"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "The thing that decides where rents go from here is memory. Contract prices are set to rise about 25 percent next quarter and could roughly double into 2027. If memory stays this scarce, it will keep a lid on how many finished chips reach the market, no matter how fast packaging grows.",
+        "So watch two numbers together: whether the packaging gap really shrinks to 10 percent by year end, and whether memory prices ease or keep climbing. The first would let supply catch up. The second could hold it back."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "en-sedaily-com-c7890a6b-2026-07-1",
+        "www-trendforce-com-368d8402-2026-07-1"
+      ],
+      "sourceLine": "BigGo, Seoul Economic Daily, TrendForce",
+      "relatedDocs": [
+        {
+          "url": "https://www.sahmcapital.com/news/content/nvidia-starts-h200-ai-chip-shipments-to-china-as-us-approves-limited-exports-2026-07-15",
+          "title": "NVIDIA Starts H200 Shipments to China as US Approves Limited Exports",
+          "outlet": "Sahm Capital",
+          "date": "2026-07-15"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Spending on new memory factories is the clearest sign of whether the tightest part will loosen.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How many servers actually ship shows demand turning into real deliveries.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "The street price per chip moves first when supply starts to catch up.",
+      "scene": 3
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Which way big buyers revise their spending tells you if demand will keep pressing on supply.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-07",
+      "text": "Street price per chip sits near $32,500, still close to its recent highs as parts stay scarce.",
+      "scene": 3
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "Buyers' spending plans nudged upward again this month, a small sign demand is not easing.",
+      "scene": 4
+    }
+  ],
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-07-25",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "e3a63185f23270becf38af5dcc9fecd27c53908fbd778ae416298ed8bf5b15b0",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-07-25T01:48:18.900520+00:00"
+  }
+}

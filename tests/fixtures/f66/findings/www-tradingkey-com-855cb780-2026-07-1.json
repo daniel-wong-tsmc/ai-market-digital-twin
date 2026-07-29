@@ -1,0 +1,43 @@
+{
+  "id": "www-tradingkey-com-855cb780-2026-07-1",
+  "statement": "TSMC's advanced-packaging (CoWoS) is sold out through 2027 with lead times of 52-78 weeks and bookings extending into 2027, even as CoWoS capacity ramps from ~75,000 wafers/month at end-2025 toward ~125,000-130,000 by end-2026; TSMC raised 2026 capex to $60-64 billion (from $52-56 billion), partly for CoWoS expansion.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "AI-GPU demand for CoWoS packaging is outrunning even TSMC's aggressive capacity ramp; the CEO says it will struggle to meet US customer demand for years, keeping advanced packaging, the key AI-GPU bottleneck, sold out.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "CoWoS being sold out through 2027 with 52-78-week lead times caps how many AI GPUs can be packaged and shipped, a hard supply bottleneck for merchant GPUs even as capacity expands."
+  },
+  "evidence": [
+    {
+      "source": "TradingKey",
+      "url": "https://www.tradingkey.com/analysis/stocks/more/262034508-tsmc-q2-earnings-beat-expectations-raises-full-year-outlook-tradingkey",
+      "date": "2026-07-16",
+      "excerpt": "CoWoS advanced-packaging lead times cited at 52-78 weeks with bookings extending into 2027 and TSMC's advanced-packaging backend sold out through 2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting of TSMC's Q2 2026 earnings; packaging lead-time and capacity figures from same-week trade coverage."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "market",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-16T13:19:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

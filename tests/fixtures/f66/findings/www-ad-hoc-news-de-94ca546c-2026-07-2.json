@@ -1,0 +1,44 @@
+{
+  "id": "www-ad-hoc-news-de-94ca546c-2026-07-2",
+  "statement": "SK Hynix's CEO indicated supply constraints for AI memory chips could persist through 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "If the largest HBM supplier expects tightness to last another year and a half, memory stays a binding limit on how many accelerators can actually ship.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "negative",
+    "mechanism": "Persistent AI memory shortage caps accelerator build rates and keeps memory pricing elevated, squeezing everyone who needs HBM to ship silicon."
+  },
+  "evidence": [
+    {
+      "source": "ad-hoc-news.de",
+      "url": "https://www.ad-hoc-news.de/boerse/news/ueberblick/sk-hynix-rides-alphabet-s-capex-bombshell-to-a-4-86-percent-surge-but/69854646",
+      "date": "2026-07-23",
+      "excerpt": "supply constraints for AI memory chips could persist through 2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "CEO statement relayed as a quote or paraphrase by a single secondary outlet; forward-looking and hedged ('could persist')."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> flat); sources: StockTitan (SEC/6-K filing aggregator), ad-hoc-news.de",
+  "asOf": "2026-07",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

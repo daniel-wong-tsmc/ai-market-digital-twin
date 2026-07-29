@@ -1,0 +1,50 @@
+{
+  "id": "finance-biggo-com-6dfe92b3-2026-07-3",
+  "statement": "Morgan Stanley finds no sign the memory supply shortage is easing and flags the possibility that shortages intensify in 2027 and 2028.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "If the memory squeeze runs years rather than quarters, it becomes a structural ceiling on how many AI accelerators and servers can be built, not a passing price spike.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "A shortage expected to persist or intensify through 2027-2028 keeps memory allocation the binding constraint on accelerator and AI-server output."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance — \"DRAM Spot Prices Hit Record Highs; 'Q3 Contract Prices to Surge Another 25%+'\"",
+      "url": "https://finance.biggo.com/news/bba3a886-3c51-48e4-b42b-6f8aa36fa008",
+      "date": "2026-07-22",
+      "excerpt": "no signs that the memory supply shortage is easing",
+      "tier": "secondary"
+    },
+    {
+      "source": "BigGo Finance — \"DRAM Spot Prices Hit Record Highs; 'Q3 Contract Prices to Surge Another 25%+'\"",
+      "url": "https://finance.biggo.com/news/bba3a886-3c51-48e4-b42b-6f8aa36fa008",
+      "date": "2026-07-22",
+      "excerpt": "possibility that supply shortages could intensify in 2027 and 2028",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Qualitative forward-looking analyst view relayed by one secondary outlet; capped at medium under the secondary-evidence rule."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: BigGo Finance — \"DRAM Spot Prices Hit Record Highs; 'Q3 Contract Prices to Surge Another 25%+'\", DIGITIMES — \"Memory shortage to worsen in 2027 as AI inference strains supply\"",
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-23T01:05:51Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

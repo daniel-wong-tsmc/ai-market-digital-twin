@@ -1,0 +1,45 @@
+{
+  "id": "www-coreweave-com-dffa6e69-2026-07-1",
+  "statement": "CoreWeave North America lists on-demand HGX H100 8-GPU nodes at $49.24 per hour and HGX H200 8-GPU nodes at $50.44 per hour.",
+  "kind": "measured",
+  "value": {
+    "number": 49.24,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Published on-demand node rates at a large GPU cloud show where rented Hopper-class compute is currently priced, though the page gives no prior level to compare against.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Node-hour list prices define the observable cost of rented accelerator capacity; with no stated baseline this is a level reading only."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave (coreweave.com)",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-07-26",
+      "excerpt": "NVIDIA HGX H100 (8 GPUs): $49.24/hr on-demand. NVIDIA HGX H200 (8 GPUs): $50.44/hr on-demand.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own public pricing page with no publication or last-updated date; quoted figures are per full 8-GPU node, not per GPU."
+  },
+  "dispersion": "conflicting same-key reports: value 68.8 -> 49.24 (tol 1%); sources: CoreWeave (coreweave.com)",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-07-26",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

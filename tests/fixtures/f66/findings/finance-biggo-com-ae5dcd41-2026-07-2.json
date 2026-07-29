@@ -1,0 +1,42 @@
+{
+  "id": "finance-biggo-com-ae5dcd41-2026-07-2",
+  "statement": "TSMC lifted 2026 capex ~$10B to $60-64B and is ramping CoWoS capacity from ~80,000 to ~125,000-130,000 wafers/month by end-2026, expanding future advanced-packaging supply.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Higher capex and a large wafer-per-month ramp signal expanding packaging capacity that will ease the accelerator supply bottleneck over time.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "A ~60% CoWoS WPM increase plus raised capex adds packaging throughput, loosening the merchant-GPU supply constraint into 2027."
+  },
+  "evidence": [
+    {
+      "source": "TSMC Q2 2026 earnings (via BigGo Finance, Investing.com, Tech Times)",
+      "url": "https://finance.biggo.com/news/US_TSM_2026-07-16",
+      "date": "2026-07-16",
+      "excerpt": "capacity ~80,000 WPM targeting ~125,000-130,000 WPM by end-2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary earnings summary; single document."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "tsmc",
+  "observedAt": "2026-07-16",
+  "capturedAt": "2026-07-20T13:42:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
