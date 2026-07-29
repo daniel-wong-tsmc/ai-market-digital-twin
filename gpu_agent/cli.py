@@ -1378,6 +1378,72 @@ def _price_sync(args):
     return 0
 
 
+def _series_refresh(args) -> int:
+    import datetime as _dt
+    from gpu_agent.series_refresh import find_gaps, ingest_candidates, load_calendar
+    from gpu_agent.series_registry import SeriesRegistry
+    if bool(args.check) == bool(args.ingest):
+        print("[series-refresh] exactly one of --check / --ingest required",
+              file=sys.stderr)
+        return 2
+    try:
+        today = _dt.date.fromisoformat(args.as_of)
+    except ValueError:
+        print(f"[series-refresh] malformed --as-of {args.as_of!r} "
+              "(need YYYY-MM-DD)", file=sys.stderr)
+        return 2
+    # every way a hand-edited config file can be structurally wrong, listed explicitly:
+    # a bare `except Exception` here would swallow genuine bugs.
+    cfg_errors = (OSError, json.JSONDecodeError, UnicodeDecodeError, ValidationError,
+                  KeyError, TypeError, AttributeError)
+    try:
+        registry = SeriesRegistry.load(args.series_registry)
+    except cfg_errors as e:
+        print(f"[series-refresh] unreadable --series-registry "
+              f"{args.series_registry!r}: {e}", file=sys.stderr)
+        return 2
+    try:
+        calendar = load_calendar(args.calendar)
+    except cfg_errors as e:
+        print(f"[series-refresh] unreadable --calendar {args.calendar!r}: {e}",
+              file=sys.stderr)
+        return 2
+    if args.check:
+        try:
+            gaps = find_gaps(registry, calendar, args.series_root, today)
+        except ValueError as e:
+            print(f"[series-refresh] calendar/registry mismatch: {e}", file=sys.stderr)
+            return 2
+        payload = json.dumps(
+            {"gaps": [g.model_dump() for g in gaps]}, indent=2)
+        if args.out:
+            out_path = pathlib.Path(args.out)
+            try:
+                out_path.parent.mkdir(parents=True, exist_ok=True)
+                out_path.write_text(payload, "utf-8")
+            except OSError as e:
+                print(f"[series-refresh] cannot write --out {args.out!r}: {e}",
+                      file=sys.stderr)
+                return 2
+        print(payload)
+        return 0
+    cand_path = pathlib.Path(args.ingest)
+    if not cand_path.is_file():
+        print(f"[series-refresh] candidates file not found: {cand_path}",
+              file=sys.stderr)
+        return 2
+    try:
+        envelope_text = cand_path.read_text("utf-8")
+    except (OSError, UnicodeDecodeError) as e:
+        print(f"[series-refresh] unreadable --ingest {cand_path}: {e}",
+              file=sys.stderr)
+        return 2
+    result = ingest_candidates(envelope_text, registry, args.series_root,
+                               today=today, calendar=calendar)
+    print(result.model_dump_json(indent=2))
+    return 0
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="gpu-agent")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -1584,6 +1650,16 @@ def main(argv=None) -> int:
     ps.add_argument("--data", default=None)
     ps.add_argument("--series", default="store/series")
     ps.add_argument("--as-of", dest="as_of", default=None)
+    srf = sub.add_parser("series-refresh",
+                         help="F79 G4: calendar gap-check the scoring series / "
+                              "ingest validated candidate points (never blocks a cycle)")
+    srf.add_argument("--check", action="store_true")
+    srf.add_argument("--ingest", help="path to a {'candidates':[...]} envelope JSON")
+    srf.add_argument("--as-of", required=True, help="YYYY-MM-DD (the cycle day)")
+    srf.add_argument("--series-root", default="store/series")
+    srf.add_argument("--calendar", default="registry/series-calendar.json")
+    srf.add_argument("--series-registry", default="registry/series-indicators.json")
+    srf.add_argument("--out", help="also write the --check gap report here")
     wre = sub.add_parser("web-reach-ensure",
                          help="idempotently ensure web-reach tools are installed")
     wre.add_argument("--check-only", action="store_true")
@@ -1702,6 +1778,8 @@ def main(argv=None) -> int:
         return _site(args)
     if args.cmd == "price-sync":
         return _price_sync(args)
+    if args.cmd == "series-refresh":
+        return _series_refresh(args)
     try:
         sc = _build(args)
     except GateError as e:

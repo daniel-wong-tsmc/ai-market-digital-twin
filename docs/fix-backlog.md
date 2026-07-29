@@ -1157,6 +1157,26 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   isolation both airtight). **REMAINING: shadow soak ≥5 live cycles (needs manual `v2-shadow`
   CLI invocation per cycle — the auto-hook is deferred to G4) → G4 CUTOVER (user-signed; flips
   v1→v2 rendering).** Absorbs F60's deferred scoring half. Original scope below.
+  **UPDATE 2026-07-28 — G4 stage (series refresh + soak automation) BUILT on branch
+  `f79-g4-refresh`; NOT merged, soak not yet started.** Spec:
+  `docs/superpowers/specs/2026-07-28-f79-g4-series-refresh-soak-design.md`. This closes the
+  "needs manual `v2-shadow` CLI invocation" gap noted above: a curated publication calendar
+  (`registry/series-calendar.json`) plus a new `series-refresh` command now check each scoring
+  series for missing prints and can pull in new candidate readings on a schedule, and the daily
+  run-cycle now runs that check and the v2 shadow-scoring step automatically as steps 7b/7c. The
+  soak clock (the ≥5-live-cycle count from G3, with the "needs a human to run it each time" gap
+  now closed) **starts counting on the next scheduled cycle after this lane is merged** — it has
+  not started yet. The pass/fail terms for finishing the soak were already agreed and written
+  down in the G4 spec before this build started, so no new sign-off is needed to grade it later.
+  **Correction: that "next cycle after merge" start applies to the ≥5-cycle count only.** The
+  spec's second term — ≥2 cycles after the first 2026-07 series points land — cannot start that
+  early: the gap check reports nothing today (no monthly print is due yet on the calendar) and the
+  first real gap appears **2026-08-12**, so that term cannot be met before roughly **2026-08-14**.
+  Both terms must hold, so the earliest possible G4 package is mid-August regardless of merge date.
+  **Flag for the record: the publication-calendar numbers (expected release day, allowed lag,
+  tolerance) seeded in `registry/series-calendar.json` are the assistant's proposed starting
+  defaults, not numbers the user has reviewed and approved — they are plain JSON and can be
+  edited at any time.** Full build record: `.superpowers/handoffs/f79-g4-refresh-DONE.md`.
 - [x] **F96 — Monthly-grain write-back collision: same-period price re-gather mints a stable id
   **✓ DONE 2026-07-26** — content-vintage ids merged `439fa6e`; live criterion PASSED (v18: 11 same-month updates, zero collisions).
   over changed content (F52-class residual).** Found in the live 2026-07-15 v8 daily cycle

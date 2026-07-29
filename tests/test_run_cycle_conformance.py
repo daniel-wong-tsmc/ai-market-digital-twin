@@ -175,6 +175,8 @@ EXPECTED_STEPS: tuple[tuple[str, str], ...] = (
     ("5", "main stage"),
     ("6", "finalize the cycle log"),
     ("7", "price-sync"),
+    ("7b", "series-refresh"),
+    ("7c", "v2 shadow stamp"),
     ("8", "report"),
 )
 
