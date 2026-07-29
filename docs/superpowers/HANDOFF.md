@@ -1073,7 +1073,21 @@ User gave **"go"** 2026-07-06. Actioned:
   answered Q3 puts its audit sub-step in run-cycle SKILL.md with an F83 re-record; F79-G4 has
   ALREADY re-recorded F83 on its branch (`040333d`). Two concurrent F83 re-records = guaranteed
   fingerprint conflict. Serialize: merge F79-G4 first, then rebase/dispatch the F66 build.
-- **F79-G4 lane BUILT + PARKED AWAITING THE USER'S MERGE (2026-07-28).** Branch `f79-g4-refresh`
+- **F79-G4 lane CLOSED — MERGED `42594e2` (`--no-ff`) + PUSHED 2026-07-29 on the user's authorization
+  (`main == origin/main == 42594e2`).** Merged-main gate green: **2091 passed / 6 skipped**; all four
+  pins green (F6 / scoring-v1 replay / narrator / F83 at its new fingerprint `c0de43da…6e5c9d2`);
+  forbidden-diff EMPTY. Merged main → branch FIRST (F105 precedent) — zero conflicts, including the
+  anticipated `docs/fix-backlog.md` one. Live smoke test on merged main: `series-refresh --check
+  --as-of 2026-07-29` → `{"gaps": []}`, exit 0 (correct — the first calendar gap is due 2026-08-12).
+  Sentinel copied to root `.superpowers/handoffs/f79-g4-refresh-DONE.md`. **THIS UNBLOCKS THE F66
+  BUILD** (the F83 re-record serialization flag is now cleared). **Post-merge watch items:** the
+  first scheduled cycle should log `seriesRefresh: no-gap` at step 7b and `v2Shadow: stamped` (NOT
+  `no-op`) at 7c, and its committed scorecard should carry the `v2.*` provenance keys. **Soak
+  arithmetic unchanged:** the ≥5-cycle count starts on the first post-merge cycle, but the second
+  pass term (≥2 cycles after the first 2026-07 points land) cannot be met before ~**2026-08-14**, so
+  the earliest possible G4 package is mid-August. Housekeeping now open: retire the
+  `f79-g4-refresh` branch + worktree. Original build entry below.
+- **F79-G4 lane BUILT (2026-07-28) — now MERGED, see above.** Branch `f79-g4-refresh`
   parked at **`bf684fb`** (8 commits off `4f3ae7b`), worktree `.worktrees/f79-g4-refresh` retained
   (holds the gitignored DONE sentinel + SDD ledger). Built subagent-driven: 5 TDD tasks, fresh
   implementer + per-task spec+quality review each, 3 fix rounds, whole-branch Opus review +
