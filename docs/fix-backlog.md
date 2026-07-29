@@ -1438,9 +1438,14 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   criteria are comparatively stable. This tripped the `DISPERSION_LIMIT = 1.0` guard in
   `rebaseline_v2` and blocked F105's rebaseline (see `.superpowers/handoffs/f105-extract-strict-QUESTIONS.md`).
   Investigate: is this grader disagreement on the same material (rubric anchor ambiguity in
-  `steelman`), or genuine brain-answer variance? Evidence: the three thesis grade files and reports
-  under `.worktrees/f105-extract-strict/work/eval-2026-07-28/{r1,r2,r3}/` (gitignored `work/` — read
-  in place). Likely outcome is a sharpened `steelman` anchor in `gpu_agent/evals/rubric.py`, which is
+  `steelman`), or genuine brain-answer variance? The 2026-07-28 diagnostic already answered part of
+  this: it was ANSWER variance, not grader noise (r2's answers argue against themselves, r1/r3's
+  don't; every phrase r2's grader quoted exists only in r2's answer).
+  **Evidence: `.superpowers/handoffs/f105-extract-strict-QUESTIONS.md` (diagnostic preserved
+  verbatim — per-criterion tables, quote probes, grader extracts, historical comparison). ⚠ The RAW
+  per-case answer/grade files under the f105 worktree's `work/eval-2026-07-28/{r1,r2,r3}/` were
+  DESTROYED 2026-07-29 by an erroneous `git worktree remove --force` during lane retirement
+  (orchestrator error, disclosed); any deeper investigation needs fresh draws.** Likely outcome is a sharpened `steelman` anchor in `gpu_agent/evals/rubric.py`, which is
   a rubric change, not a prompt change (the F6 pin covers brain prompts only) — but confirm before
   assuming. F108 (seam-scoped rebaseline) unblocks F105 without needing this answered first; this
   item is the real fix for the underlying noise.
