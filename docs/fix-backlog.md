@@ -1112,6 +1112,13 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   user decision pair: **(a)** visibility — private now vs stay public (lean: flip private now;
   zero cost, reversible, and it collapses most of (b)'s urgency); **(b)** a written
   quoted-content posture for whatever stays visible. One decision + a short doc; no code.
+  **(a) DECIDED 2026-07-29 (user, interactive, after reviewing the F91/F92 decision memo
+  `.superpowers/handoffs/f91-f92-decision-MEMO.md`): the old public repo STAYS PUBLIC — the
+  memo's flip-private recommendation was declined.** The memo's findings stand on record: the
+  old `random_for_fun` repo is live/public/un-archived (112 TSMC-mentioning files) and the
+  `ai-market-digital-twin.pages.dev` site is public (TSMC mentions on 10 pages, kept
+  advice-free only by convention). **(b) remains OPEN:** the written posture doc for what may
+  appear publicly is now the more important half, since everything stays visible.
 
 - [ ] **F92 — Store retention & archival policy (append-only forever meets git forever).**
   Doctrine keeps the store append-only, sacred, and git-committed — correct for trust, unbounded
