@@ -390,13 +390,32 @@
   **UPDATE 2026-07-11: both residuals fold into F79** (SDEWS-style scoring v2.0 — the v1.5
   side-semantics slot is superseded by v2.0, and leading supply arrives as backfilled series
   S1/S2 per the extraction doc). F60 stays open until F79 lands them.
-- [ ] **F61 — Staleness & coverage banner; honest confidence label.** The brief renders
-  "confidence: high (self-consistency over 3 samples)" — vote agreement, not evidence currency
-  — atop evidence with a ~6-week median age, while the gather-log quietly records
-  TrendForce / SemiAnalysis / channel-checks as not-covered. Render an evidence-vintage line
-  (median + oldest evidence date vs `asOf`, share older than N weeks) and the coverage gaps in
-  the brief header, and relabel the confidence basis. `report.py` only — pure projection,
-  replayable for $0.
+- [x] **F61 — Staleness banner; honest confidence label. DONE — story-page half built on branch
+  `f61-honesty-banner` (2026-07-28, awaiting user merge); `report.py` half done-by-F67
+  (`b0e8061`, 2026-07-04).** Original entry: the brief renders "confidence: high
+  (self-consistency over 3 samples)" — vote agreement, not evidence currency — atop evidence
+  with a ~6-week median age, while the gather-log quietly records TrendForce / SemiAnalysis /
+  channel-checks as not-covered. Render an evidence-vintage line (median + oldest evidence date
+  vs `asOf`, share older than N weeks) and the coverage gaps in the brief header, and relabel
+  the confidence basis. `report.py` only — pure projection, replayable for $0.
+  **Resolution (2026-07-28, all forks answered interactively by the user — zero AFK):**
+  (1) The `report.py` half shipped inside F67 four months' worth of lanes ago —
+  `report.evidence_vintage()` + the `render_header` vintage and vote-agreement lines are
+  F61's original text verbatim. It was never ticked. (2) F103 did NOT overlap: F103 is per-row
+  (dating, weight-sorting, publisher cap, aging dim) and computes no aggregate. (3) The
+  **surface moved** — since F101 the live category page is the story page, which carried none
+  of it; the two other renderers that still compute an aggregate vintage
+  (`site_model._why`'s trust entry, the F97 `brief_render` footer) feed pages `site_build` no
+  longer emits. So the repo computed the number three times and showed the reader zero times.
+  **Built:** one quiet plain-English line under the story-page dateline —
+  `story_model.evidence_honesty()` (reusing `report.evidence_vintage` via a duck-typed adapter,
+  `report.py` untouched) + `story_render._honesty_line()`; humanised dates at day/month/year
+  grain; each half renders alone and nothing renders when neither is available; malformed data
+  degrades with a warning instead of crashing the page. Renderer-only; all four pins untouched.
+  Spec `docs/superpowers/specs/2026-07-28-f61-honesty-banner-design.md`, plan
+  `docs/superpowers/plans/2026-07-28-f61-honesty-banner.md`.
+  **Coverage gaps are OUT of F61 by user decision** — they are not obtainable from committed
+  data today; filed as F109 below.
 
 ### Features (per repo convention: brainstorming → spec → plan, own sub-project — not lane work)
 
@@ -1381,7 +1400,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   health snapshot 2026-07-26: web/rss/bilibili/v2ex ok; twitter/github/xueqiu warn; rest off.
   *(Concurrent-mint caveat: F104 chosen against a backlog max of F103 on 2026-07-26; renumber if collided.)*
 
-- [ ] **F105 — `extract --recorded` silently reports "0 findings" on a malformed answer envelope (v19 sighting 2026-07-27).**
+- [x] **F105 — `extract --recorded` silently reports "0 findings" on a malformed answer envelope (v19 sighting 2026-07-27).**
   `ExtractionResult` (`gpu_agent/extraction/extractor.py`) is the ONLY brain-answer model without
   `extra="forbid"`, and its `drafts` field defaults to `[]`. A recorded answer that is a bare
   `FindingDraft` object (or any wrong-shaped JSON object) validates as an EMPTY ExtractionResult —
@@ -1393,3 +1412,99 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   sibling answer model (judge/thesis/implication/narrator). Schema-only; no prompt text changes — the
   F6 pin must stay green.
   *(Concurrent-mint caveat: F105 chosen against a backlog max of F104 on 2026-07-27; renumber if collided.)*
+  **DONE 2026-07-29** (lane `f105-extract-strict`). `ExtractionResult` now sets `extra="forbid"` and
+  makes `drafts` required; a malformed envelope fails validation loudly and enters the standard retry
+  path, while an explicit `{"drafts": []}` stays valid. New `tests/test_extractor_envelope.py` (4
+  tests) covers the exact v19 shape. Also corrected five test files that used a stand-in extract
+  answer of `{"findings": []}` — a key the prompt has never asked for, which the loose schema
+  silently swallowed as "nothing found", so those tests were exercising the bug rather than the
+  behaviour they named.
+  The premise "schema-only, no prompt text changes" turned out to be wrong: the emitted extract
+  prompt embeds `ExtractionResult.model_json_schema()`, so tightening the model moved the extract
+  bundle hash and reddened the F6 pin. Cleared properly, not bypassed — full F6 eval, 3 replicates,
+  **PASS on merit** (decision run r1: extract 6.500 vs bar 5.599, no craters; extract 6.500 / 6.750
+  / 7.125 across r1/r2/r3, range 0.625). No `--force`, no hand-edited answers, calibration negatives
+  held ≤4 in all three runs.
+  A whole-baseline rebuild was refused by the dispersion guard on the **thesis** seam (range 2.500 >
+  1.0) — a seam this lane never touched; that refusal is F107. Landed instead via the F108
+  seam-scoped path: `eval rebaseline --seams extract`, which rebuilt only extract and carried
+  implication/judge/thesis forward byte-identical. **New extract bar 5.599 → 6.163** (mean 6.500 →
+  6.792, epsilon 0.901 → 0.629) — stricter, and the only bar that moved. Suite 2052 passed / 7
+  skipped; all four pins green.
+
+- [ ] **F106 — HuggingNews as a desk-wide news source (all categories, not just GPU).**
+  User-provided keyed API access to huggingnews.com — an AI-news wire whose stories are AI-written
+  from primary source material (X posts, announcements, filings, papers) with per-story source links
+  and topic tags (`ai-compute-chips`, `ai-model-releases`, `ai-fundraising`, …). Read-only JSON API:
+  `api.huggingnews.com/api/stories` (latest/search/detail; skill contract published at
+  `huggingnews.com/SKILL.md`; env `HUGGINGNEWS_API_KEY`). Verified live 2026-07-28: anonymous covers
+  3 ET days; the key unlocks feed pagination + 21-day search; detail returns `summary` +
+  `selectedTweets` with source URLs. **Key handling: machine-local gitignored
+  `.superpowers/secrets/HUGGINGNEWS_API_KEY` — the key never enters git, briefs, prompts, or logs.**
+  Design direction to brainstorm (interactive, standing rule): role (discovery/leads channel chased
+  to primary sources per the last30days precedent vs direct secondary-tier ingest — its articles are
+  aggregator-written), per-category tag mapping in manifests, registry entry on the web-reach path
+  (relates to F104's social-ingestion design space), cost/budget per cycle, and whether the desk's
+  D6 licensed-source discipline applies. *(Feature — own brainstorm/spec/plan when it starts.)*
+  *(Concurrent-mint caveat: F106 chosen against a backlog max of F105 on 2026-07-28; renumber if collided.)*
+
+- [ ] **F107 — thesis seam replicate instability: range 2.5 on an UNCHANGED prompt (2026-07-28).**
+  The F105 3-replicate eval run showed the thesis seam scoring 5.000 / 7.500 / 5.500 across three
+  independent draws — a 2.5-point spread on a prompt whose hash (`4a9d9817951c`) did not move and is
+  identical to the incumbent baseline. Three-run mean is 6.000, exactly the incumbent baseline mean,
+  so the seam is not drifting — it is *noisy*. Historical thesis dispersion has been <= 0.5 (the
+  stored baseline replicates are 6.0 / 6.0 / 6.0). The swing traces to the `steelman` criterion,
+  which moves 0 <-> 2 on whether the answer is judged to argue against itself; the other three
+  criteria are comparatively stable. This tripped the `DISPERSION_LIMIT = 1.0` guard in
+  `rebaseline_v2` and blocked F105's rebaseline (see `.superpowers/handoffs/f105-extract-strict-QUESTIONS.md`).
+  Investigate: is this grader disagreement on the same material (rubric anchor ambiguity in
+  `steelman`), or genuine brain-answer variance? The 2026-07-28 diagnostic already answered part of
+  this: it was ANSWER variance, not grader noise (r2's answers argue against themselves, r1/r3's
+  don't; every phrase r2's grader quoted exists only in r2's answer).
+  **Evidence: `.superpowers/handoffs/f105-extract-strict-QUESTIONS.md` (diagnostic preserved
+  verbatim — per-criterion tables, quote probes, grader extracts, historical comparison). ⚠ The RAW
+  per-case answer/grade files under the f105 worktree's `work/eval-2026-07-28/{r1,r2,r3}/` were
+  DESTROYED 2026-07-29 by an erroneous `git worktree remove --force` during lane retirement
+  (orchestrator error, disclosed); any deeper investigation needs fresh draws.** Likely outcome is a sharpened `steelman` anchor in `gpu_agent/evals/rubric.py`, which is
+  a rubric change, not a prompt change (the F6 pin covers brain prompts only) — but confirm before
+  assuming. F108 (seam-scoped rebaseline) unblocks F105 without needing this answered first; this
+  item is the real fix for the underlying noise.
+  *(Concurrent-mint caveat: F107 chosen against a backlog max of F106 on 2026-07-28; renumber if collided.)*
+
+- [x] **F108 — seam-scoped rebaseline (`eval rebaseline --seams <seam> ...`).**
+  `rebaseline_v2` today rebuilds the entire baseline from all four seams at once: every seam's mean,
+  epsilon, quantum, history and case medians are recomputed, and the dispersion guard is applied to
+  every seam. That makes a single-seam prompt change hostage to unrelated noise in seams the change
+  never touched — the F105 case exactly (extract passed cleanly at 6.50 / 6.75 / 7.125, range 0.625,
+  but thesis's unrelated 2.5 range refused the whole rebaseline; see F107). The only escape hatches
+  today are a whole-baseline `--force`, which would have collapsed the thesis bar 5.50 -> 3.35 and
+  loosened judge and implication too, or parking the fix. Build a seam-scoped mode: named seams get
+  new mean/epsilon/quantum/history/case-medians from the replicate reports, every unnamed seam's
+  baseline entry carries forward BYTE-IDENTICAL from the incumbent, the dispersion guard applies only
+  to the seams being rebuilt, and the baseline records which seams were rebuilt when. No seams named
+  = today's whole-baseline behaviour, unchanged and byte-identical on the default path. Harness code
+  only — no prompt text, no hand-edited baseline content; all four pins must stay green.
+  *(Concurrent-mint caveat: F108 chosen against a backlog max of F107 on 2026-07-28; renumber if collided.)*
+  **BUILT 2026-07-28** in `.worktrees/f108-seam-rebaseline` — spec
+  `docs/superpowers/specs/2026-07-28-f108-seam-scoped-rebaseline-design.md`, plan
+  `docs/superpowers/plans/2026-07-28-f108-seam-scoped-rebaseline.md`. Awaiting user merge; the F105
+  lane then runs `eval rebaseline --seams extract` to land its change.
+
+- [ ] **F109 — Coverage gaps are computed but never recorded durably (found while building F61, 2026-07-28).**
+  Nothing downstream can render or audit what the gather run failed to cover.
+  `manifest.compute_coverage_gaps()` has **no production caller in the package** — it runs only
+  from the gather skill's inline snippet, and its output is written to
+  `work/<cycle>/docs/gather-log.json` under `coverageGaps`, in the **gitignored** `work/` tree.
+  Scorecards carry no coverage field at all, so a rebuild on any other machine — or any rebuild
+  after the work dir is swept — has no coverage data whatsoever.
+  **Worse, it is currently not being written even there:** the 2026-07-27 (v19) cycle's
+  `gather-log.json` has **no `coverageGaps` key**, and `corpus-report.json`'s `notCovered` is
+  `[]`, while that same cycle's log prose claims "Coverage gaps this cycle: 21 (13 source,
+  8 indicator)" — the only surviving record of those 21 gaps is a free-text sentence in
+  `store/cycle-log.json`. So the number is unverifiable and un-renderable.
+  Fix: persist the structured gap list into committed store data at cycle end (alongside the
+  scorecard), so the renderer and any audit can read it, and so "what we did NOT look at" stops
+  being a claim only the run itself can make. Blocks the coverage half of F61 (deliberately
+  descoped there, 2026-07-28) and is a prerequisite for any honest coverage disclosure on the
+  page.
+  *(Concurrent-mint caveat: renumbered F106→F109 at merge time 2026-07-29 — F106 (HuggingNews), F107, F108 were minted concurrently on main.)*

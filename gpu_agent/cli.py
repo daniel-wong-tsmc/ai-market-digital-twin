@@ -818,14 +818,22 @@ def _eval(args) -> int:
         if args.verdict_path:
             verdict = json.loads(pathlib.Path(args.verdict_path).read_text("utf-8"))
         try:
-            rebaseline_v2([pathlib.Path(d) for d in args.runs], args.baseline, hashes,
-                          cases, verdict=verdict,
-                          force_reason=args.reason if args.force else None,
-                          human_review=args.human_review)
+            baseline = rebaseline_v2(
+                [pathlib.Path(d) for d in args.runs], args.baseline, hashes,
+                cases, verdict=verdict,
+                force_reason=args.reason if args.force else None,
+                human_review=args.human_review, seams=args.seams)
         except ValueError as e:
             print(f"gpu-agent eval: {e}", file=sys.stderr)
             return 1
         print(f"baseline written -> {args.baseline}")
+        if args.seams:
+            # F108: show the scope actually applied, so a scoped rebaseline is never
+            # mistaken for a whole-baseline one.
+            rebuilt = sorted(dict.fromkeys(args.seams))
+            carried = sorted(s for s in baseline["seamMeans"] if s not in set(rebuilt))
+            print(f"  rebuilt: {', '.join(rebuilt)}")
+            print(f"  carried forward unchanged: {', '.join(carried) or '(none)'}")
         return 0
 
     if not args.out:
@@ -1570,6 +1578,9 @@ def main(argv=None) -> int:
     ev.add_argument("--baseline", default="fixtures/evals/baseline.json")
     ev.add_argument("--runs", nargs="+", default=None,
                     help="run dirs: 1-2 for verdict, exactly 3 for rebaseline")
+    ev.add_argument("--seams", nargs="+", default=None,
+                    help="rebaseline ONLY these seams (F108); every other seam's baseline "
+                         "entry carries forward unchanged. Omit for a whole-baseline rebuild")
     ev.add_argument("--verdict", dest="verdict_path", default="",
                     help="verdict.json proving the gate PASS (rebaseline governance)")
     ev.add_argument("--force", action="store_true")

@@ -321,6 +321,79 @@ def _series_evidence(ind: str, rows: list[dict], gl: dict, today: dt.date,
     return _cap_by_publisher(candidates, 3)
 
 
+class _VintageAdapter:
+    """Hands `report.evidence_vintage` the two things it actually reads off a
+    scorecard -- `.asOf` and `.findings[].evidence[].date` -- straight from the
+    raw scorecard dict this module already holds.
+
+    Why an adapter and not `Scorecard.model_validate(raw)`: `Finding` demands
+    ~20 required fields, so any partially-shaped or legacy scorecard would fail
+    validation and silently drop the honesty line for a reason that has nothing
+    to do with evidence dates. Duck-typing the two attribute paths keeps ONE
+    implementation of the date math (in report.py, untouched by this lane) while
+    staying tolerant of scorecard shape. Non-dict findings/evidence entries are
+    skipped rather than raising.
+    """
+
+    class _Ev:
+        __slots__ = ("date",)
+
+        def __init__(self, date):
+            self.date = date
+
+    class _Finding:
+        __slots__ = ("evidence",)
+
+        def __init__(self, evidence):
+            self.evidence = evidence
+
+    def __init__(self, raw: dict):
+        self.asOf = raw.get("asOf") or ""
+        self.findings = [
+            self._Finding([
+                self._Ev(e.get("date"))
+                for e in (f.get("evidence") or []) if isinstance(e, dict)
+            ])
+            for f in (raw.get("findings") or []) if isinstance(f, dict)
+        ]
+
+
+def evidence_honesty(latest: dict) -> dict | None:
+    """F61: how current the evidence is, and what the confidence label really
+    measures -- the two numbers the front page owes an exec reader who would
+    otherwise read "high confidence" as "freshly checked".
+
+    Returns `{"median", "oldest", "stale_pct", "level", "votes"}`, or None when
+    there is nothing honest to say (no dated evidence AND no confidence label).
+    Either half may be absent on its own; the renderer drops just that clause.
+
+    Staleness is measured against the scorecard's own `asOf`, never the wall
+    clock -- inherited from `report.evidence_vintage`, so equal inputs give a
+    byte-identical page. Any failure (unparseable date, odd scorecard shape)
+    warns to stderr and returns None: the live page never crashes on data shape.
+    """
+    if not isinstance(latest, dict):
+        return None
+    try:
+        from gpu_agent.report import evidence_vintage
+
+        median, oldest, share = evidence_vintage(_VintageAdapter(latest))
+        conf = latest.get("confidence")
+        conf = conf if isinstance(conf, dict) else {}
+        level = conf.get("level") or None
+        m = re.search(r"\d+", str(conf.get("basis") or ""))
+        votes = int(m.group(0)) if m else None
+        if median is None and level is None:
+            return None
+        return {"median": median, "oldest": oldest,
+                "stale_pct": None if median is None else round(share * 100),
+                "level": level, "votes": votes}
+    except Exception as exc:  # noqa: BLE001 -- degrade, never crash the page
+        print(f"gpu-agent story: warning: could not read evidence vintage "
+              f"for the honesty line: {exc}", file=sys.stderr)
+        return None
+
+
 def resolve_store_root(category_id: str, store_dir: str | Path) -> Path:
     """Store-layout detection: `store_dir` either IS the store root (holding
     a <category_id>/ subdir alongside series/, findings/, wiki/) or IS the
@@ -349,7 +422,7 @@ def _base_model(category_id: str, store_root: Path, today: dt.date,
 
     Returns `(model, ctx)`: `model` already carries the exact keys the final
     dict needs from the shared tail (category_id, as_of, revision, dateline,
-    gap, kpis, evidence, archive, explore); `ctx` carries the raw
+    honesty, gap, kpis, evidence, archive, explore); `ctx` carries the raw
     ingredients (`latest`, `gl`, `series`, `cat_dir`) that the two callers
     still need to build their own headline/deck/scenes/callouts. (Both
     callers already have `store_root` as their own function parameter, so
@@ -412,7 +485,8 @@ def _base_model(category_id: str, store_root: Path, today: dt.date,
         "history": len(list(cat_dir.glob("*.json")))}
 
     model = {"category_id": category_id, "as_of": as_of, "revision": rev,
-             "dateline": dateline, "gap": gap,
+             "dateline": dateline, "honesty": evidence_honesty(latest),
+             "gap": gap,
              "kpis": {"anchored": anchored, "picks": picks},
              "evidence": evidence, "archive": arch, "explore": explore}
     ctx = {"latest": latest, "gl": gl, "series": series, "cat_dir": cat_dir}

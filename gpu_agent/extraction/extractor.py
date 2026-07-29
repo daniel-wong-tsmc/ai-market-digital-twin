@@ -32,7 +32,10 @@ class FindingDraft(BaseModel):
     observedAt: str
 
 class ExtractionResult(BaseModel):
-    drafts: list[FindingDraft] = []
+    # F105: forbid extras + require drafts, so a wrong-shaped answer (e.g. a bare FindingDraft
+    # missing the {"drafts":[...]} envelope) fails validation loud instead of reading as empty
+    model_config = ConfigDict(extra="forbid")
+    drafts: list[FindingDraft]
 
 def _normalize_timestamp(value: str) -> str:
     """F41a: re-emit a full timestamp as UTC 'YYYY-MM-DDTHH:MM:SSZ' so the frozen scoring's

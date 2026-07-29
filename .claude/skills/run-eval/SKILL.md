@@ -42,6 +42,17 @@ All commands from repo root; python is `.venv/Scripts/python -m gpu_agent.cli`.
 - **HARD-FAIL** → stop immediately; the regression is real. Fix the prompt (restart at 1)
   or record BLOCKED-on-user.
 - A `--force` rebaseline is a user-only call; its reason is stored permanently.
+- **Dispersion refusal on a seam you did NOT touch (F108).** If `rebaseline` refuses with
+  `dispersion guard: seam '<other>' replicate range … > 1.0` for a seam whose prompt is
+  hash-identical to the baseline, do NOT `--force` the whole baseline — that would rebuild and
+  loosen every seam's bar. Add `--seams <the seam whose prompt actually moved>`: only the named
+  seams are rebuilt and guarded, every other seam's baseline entry carries forward unchanged, and
+  `provenance.seamRebaselines` records what was rebuilt from which runs. The verdict must still
+  show the named seam gated and clearing its bar. Naming a seam whose prompt did NOT move (e.g. to
+  re-measure a noisy bar) still needs `--force` plus a reason. A seam that drifted but is not named
+  is refused outright — name every drifted seam or rebaseline the whole bundle.
+  TODO: the machine-local `eval-driver` skill (`~/.claude/skills/`, not editable from a worktree)
+  should carry the same `--seams` line.
 
 ## Invariants
 

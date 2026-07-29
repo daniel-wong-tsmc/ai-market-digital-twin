@@ -336,3 +336,112 @@ def test_lint_survives_script_containing_literal_closing_tag_text():
     html = ("<script>var x='</script>'; var leverage=1;</script>"
             "<p>ok copy.</p>")
     assert lint_story_copy(html) == []
+
+
+# ── F61: the honesty line under the dateline ────────────────────────────────
+
+from gpu_agent.dashboard.story_render import _honesty_line, _human_date
+from gpu_agent.dashboard.story_render import lint_story_copy as _lint
+
+
+def _h(**kw):
+    base = {"median": "2026-06-24", "oldest": "2026-05-28", "stale_pct": 31,
+            "level": "high", "votes": 3}
+    base.update(kw)
+    return {"honesty": base}
+
+
+def test_human_date_handles_every_grain():
+    assert _human_date("2026-05-12") == "May 12, 2026"
+    assert _human_date("2026-06") == "June 2026"
+    assert _human_date("2026") == "2026"
+    # Never raises, never invents: anything unparseable comes back untouched.
+    assert _human_date("last spring") == "last spring"
+    assert _human_date("2026-13-40") == "2026-13-40"
+    assert _human_date("") == ""
+
+
+def test_honesty_line_full_form():
+    out = _honesty_line(_h())
+    assert "How current this is" in out
+    assert "typically dated June 24, 2026" in out
+    assert "oldest piece is from May 28, 2026" in out
+    assert "about 31 percent of it is more than six weeks old" in out
+    assert "Confidence in today's reading is high" in out
+    assert "how much 3 separate reads of the same evidence agreed" in out
+    assert "not how fresh the evidence is" in out
+    assert 'class="st-honest"' in out
+
+
+def test_honesty_line_says_none_at_zero_stale_share():
+    out = _honesty_line(_h(stale_pct=0))
+    assert "none of it is more than six weeks old" in out
+    assert "0 percent" not in out
+
+
+def test_honesty_line_drops_vote_count_when_unknown():
+    out = _honesty_line(_h(votes=None))
+    assert "how much separate reads of the same evidence agreed" in out
+    assert " 3 " not in out
+
+
+def test_honesty_line_does_not_claim_the_reads_agreed():
+    """The label is medium and low as often as high -- the sentence must say
+    how much the reads agreed, never that they agreed."""
+    for level in ("high", "medium", "low"):
+        out = _honesty_line(_h(level=level))
+        assert f"reading is {level} " in out
+        assert "that agreed" not in out
+        assert "reads agreeing" not in out
+
+
+def test_honesty_line_each_half_stands_alone():
+    vintage_only = _honesty_line(_h(level=None, votes=None))
+    assert "How current this is" in vintage_only
+    assert "Confidence" not in vintage_only
+    conf_only = _honesty_line(_h(median=None, oldest=None, stale_pct=None))
+    assert "Confidence in today's reading is high" in conf_only
+    assert "six weeks" not in conf_only
+
+
+def test_honesty_line_absent_renders_nothing():
+    assert _honesty_line({"honesty": None}) == ""
+    assert _honesty_line({}) == ""
+
+
+def test_honesty_line_escapes_stored_values():
+    out = _honesty_line(_h(level="<b>high</b>"))
+    assert "<b>high</b>" not in out and "&lt;b&gt;high&lt;/b&gt;" in out
+
+
+def test_honesty_line_passes_the_story_copy_lint():
+    # The page's one "index/indexed" token is already spent by the gap chart's
+    # axis label, so this line must not add another -- nor any banned word.
+    assert _lint(_honesty_line(_h())) == []
+    assert "index" not in _honesty_line(_h()).lower()
+
+
+def test_headline_block_carries_the_honesty_line_under_the_dateline(tmp_path):
+    m = _model(tmp_path)
+    m["honesty"] = _h()["honesty"]
+    h = _headline_block(m)
+    assert 'class="st-honest"' in h
+    assert h.index("st-date") < h.index("st-honest")
+    assert h.rstrip().endswith("</header>")
+
+
+def test_headline_block_unchanged_when_no_honesty(tmp_path):
+    m = _model(tmp_path)
+    with_key = _headline_block({**m, "honesty": None})
+    m.pop("honesty", None)
+    assert with_key == _headline_block(m)
+    assert "st-honest" not in with_key
+
+
+def test_story_page_with_honesty_line_still_passes_lint(tmp_path):
+    m = _model(tmp_path)
+    m["honesty"] = _h()["honesty"]
+    html = render_story_page(m)
+    assert lint_story_copy(html) == []
+    assert "How current this is" in html
+    assert ".st-honest" in STORY_CSS
