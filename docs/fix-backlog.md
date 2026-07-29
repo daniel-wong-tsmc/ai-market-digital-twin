@@ -476,7 +476,7 @@
   7.50; 3-run rebaseline gave an honest judge ε 0.50.** The charter's north star is a prioritized
   recommendation; this is the implication (never a recommendation — Layer/Main altitude), now
   a Main-tier roll-up input later.
-- [ ] **F66 — Post-hoc citation audit pass (low priority).** Adopted from the research report
+- [x] **F66 — Post-hoc citation audit pass (low priority).** Adopted from the research report
   §1: citation integrity is enforced at write time (the gate checks findingIds/excerpts), but
   nothing re-verifies the *finished* brief's claims against the findings they cite — the
   production pattern (Anthropic's Research system) runs a dedicated citation-verification
@@ -484,6 +484,32 @@
   the claim is numeric) over the rendered brief that flags claims whose cited finding does not
   actually support them. Pairs naturally with F61's render surface. Do after the higher items —
   our write-time gating already covers the worst failure mode.
+  **DONE — Phase 1 (deterministic half) MERGED `f19d830` (`--no-ff`) + PUSHED 2026-07-29, user
+  authorized.** Built on `f66-citation-audit` (branch + worktree now retired); spec
+  `docs/superpowers/specs/2026-07-28-f66-post-hoc-citation-audit-design.md`, plan
+  `docs/superpowers/plans/2026-07-28-f66-citation-audit.md`, sentinel
+  `.superpowers/handoffs/f66-citation-audit-DONE.md`. Every number in the day's story scenes and
+  implication lines is re-checked after the prose is written against the findings that claim cites,
+  with rounding tolerance so honest rounding ("7.09" for 7.0931) is not a false alarm. New run-cycle
+  sub-step `(e4)` after the narrator; failures re-dispatch the narrator once, then fall back to the
+  honest-gap story and mark `citation-audit: failed` — **never blocks the cycle, never strands a
+  scorecard**. Artifact at `store/<cat>/audit/<date>.json`, written on both the clean and the flagged
+  path (the audit record is evidence). New modules `gpu_agent/numeric_tokens.py` +
+  `gpu_agent/citation_audit.py`, new `audit-citations` CLI verb, +32 tests. F83 conformance was
+  legitimately re-recorded in-lane per the approved design (`EXPECTED_STEPS` gains `(e4)`;
+  fingerprint regenerated from `EXPECTED_STEPS`, never hand-computed). Suite on merged main:
+  **2146 passed / 6 skipped**; all four pins green (F6 eval, scoring-v1 replay, narrator, F83);
+  forbidden diff EMPTY over `fixtures/`, `registry/`, `gpu_agent/evals`, `gpu_agent/judgment`,
+  `gpu_agent/extraction`, `gpu_agent/narrator/prompt.py`, `gpu_agent/scoring.py`, `gpu_agent/report.py`.
+  **⚠ Phase 2 — the reading pass that judges whether a sentence is *semantically* supported, not just
+  numerically — remains DEFERRED to ride F81, and that is where the residual risk lives** (user
+  accepted this caveat; `ClaimResult.verdict` already carries the field Phase 2 will annotate, so no
+  schema migration is needed). Provenance caveat from the sentinel: D1-D4 and D5b's sourcing
+  mechanism are user-approved; **D5a** (rounding tolerance) and **D5c** (do not widen what the
+  narrator brain sees) remain agent-recommended / orchestrator-relayed, not individually
+  user-approved. **Live criterion not yet met (record, do not force):** the next live cycle should run
+  `(e4)` and write an audit artifact with `summary.flagged == 0`; the in-lane substitute was a
+  read-only smoke over a scratch copy (exit 0, 4 claims, 0 flagged, real `store/` never written).
 - [x] **F67 — The output contract: renderer structure + analyst voice. DONE (merged to main
   `b0e8061`, 2026-07-04; suite 828→873/3).** Executed via subagent-driven development from plan
   `docs/superpowers/plans/2026-07-03-f67-output-contract.md` (9 tasks, all task-reviewed; final
