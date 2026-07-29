@@ -1432,7 +1432,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   6.792, epsilon 0.901 → 0.629) — stricter, and the only bar that moved. Suite 2052 passed / 7
   skipped; all four pins green.
 
-- [ ] **F106 — HuggingNews as a desk-wide news source (all categories, not just GPU).**
+- [x] **F106 — HuggingNews as a desk-wide news source (all categories, not just GPU).** *(BUILT + merged 2026-07-29 — see the "F106 BUILT" entry below for what shipped.)*
   User-provided keyed API access to huggingnews.com — an AI-news wire whose stories are AI-written
   from primary source material (X posts, announcements, filings, papers) with per-story source links
   and topic tags (`ai-compute-chips`, `ai-model-releases`, `ai-fundraising`, …). Read-only JSON API:
@@ -1508,3 +1508,64 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   descoped there, 2026-07-28) and is a prerequisite for any honest coverage disclosure on the
   page.
   *(Concurrent-mint caveat: renumbered F106→F109 at merge time 2026-07-29 — F106 (HuggingNews), F107, F108 were minted concurrently on main.)*
+- [x] **F106 BUILT 2026-07-29 — HuggingNews desk-wide source, first slice shipped.** Branch
+  `f106-huggingnews`, commits `5fd18ae`..`fe19717` (7 commits). What shipped: (1) `gpu_agent/gathering/webreach.py`
+  gained `resolve_secret` (env var first, else the gitignored `.superpowers/secrets/<NAME>` file, else
+  `None` — a missing key degrades silently to anonymous, never errors) plus per-verb `auth` argv appended
+  only when a secret resolves, and scrubbing of any resolved secret value out of every recorded error
+  string; (2) `registry/web-reach-tools.json` gained the `huggingnews` tool (verbs `latest` / `search` /
+  `detail`, tool-level `secretName`) and `gpu_agent/web_reach_ensure.py` preflight reporting now appends
+  `(keyed)` / `(anonymous-only)` per tool; (3) `gpu_agent/manifest.py` validates an optional
+  `huggingnewsTags: list[str]` field against a `HUGGINGNEWS_TAG_SLUGS` allowlist (unknown slug fails to
+  load, loud not silent), and `manifests/chips.merchant-gpu.json` seeds `["ai-compute-chips"]`; (4)
+  `.claude/skills/gather-category/SKILL.md` gained a tiered discovery sub-step — leads from a HuggingNews
+  story are chased to their primary sources first; the story itself is only ingested as a documented
+  fallback when it had leads and every one proved unreachable (a story with zero leads is dropped, never
+  a fallback); fallback docs are logged in `huggingnewsFallback[]` and count as ONE publisher for
+  corroboration, regardless of how many fallback docs land.
+  **Decision provenance (both user-approved, interactive — not AFK-defaults):**
+  (a) *Task 2:* the plan's `huggingnews` registry entry leaves `install` empty for all three OSes (it's a
+  pure read-only API, nothing to install), which collided with the pre-existing invariant
+  `tests/test_web_reach_registry.py::test_enabled_tools_have_per_os_install_recipes` (every enabled tool
+  must carry non-empty per-OS install recipes). The lane stopped and asked rather than picking; the user
+  chose an explicit `"installNotNeeded": true` flag on the entry, with that invariant test amended to
+  honour it — when the flag is set, all three install lists must be exactly empty; every tool without the
+  flag keeps the strict non-empty rule. (b) *Task 5 close-out:* the plan's guard test in
+  `tests/test_webreach_huggingnews_entry.py` spelled the literal key prefix while asserting no key
+  material is present, which made the branch-wide leak scan (`git log -p main..HEAD | grep -c "<prefix>"`)
+  return a nonzero hit that was the guard string itself, not a real leak. The user chose to rebuild the
+  guard from a locally-constructed value instead of spelling the prefix (commit `fe19717`); see the
+  close-out sentinel below for the full key-hygiene attestation, including why the raw `git log -p`
+  history count still cannot reach exactly 0 without rewriting a prior, already-completed commit — which
+  was explicitly ruled out.
+  **Deferred, not built in this slice:** the weekly 21-day keyed `search` sweep (spec item D3) is parked
+  pending about a week of real hit-rate data before it's worth scheduling; an ad-hoc/one-off HuggingNews
+  lookup skill is also deferred (no lane opened for it yet).
+  **Live criteria (checked post-merge, not forced in this branch):** (a) the next scheduled cycle's
+  web-reach preflight reports `huggingnews … (keyed)`, confirming the key resolves in the real
+  environment; (b) a HuggingNews-referred lead lands as a chased primary-source doc on a news day that
+  provides one; (c) any fallback ingest appears in a `huggingnewsFallback[]` list and corroboration counts
+  it as exactly one publisher, never one-per-fallback-doc. Full detail: `.superpowers/handoffs/f106-huggingnews-DONE.md`.
+  **UPDATE 2026-07-29 — final whole-branch check-through wave, commit `f96811d`.** A full read of the
+  finished branch (an independent double-check of the whole thing, not just the pieces) came back
+  "ready to merge, but fix four things first." All four were fixed the same day and a follow-up
+  check confirmed the fixes hold with no new problems. Final commit list: `5fd18ae`, `008c649`,
+  `be74a7e`, `3623df6`, `666b434`, `3fd55f3`, `fe19717`, `d56d9c0`, `f96811d` (9 total). Full test
+  suite: **2009 passed / 7 skipped** (was 2005/7 right before this fix wave; 1987/7 before this
+  branch started). The two guardrail tests that must never silently break stayed green throughout.
+  The four things fixed: (1) the gather instructions told the robot to run HuggingNews through a
+  generic search step that this feature isn't supposed to use yet — one sentence now carves out
+  HuggingNews so it only uses its intended leads-first path; (2) a record of "we had to fall back to
+  a HuggingNews summary because every source link was dead" had nowhere to be saved — fixed by
+  adding it to the coordinator's existing after-the-fact note-taking step, the same way an existing
+  similar record already works, rather than touching the core program logic (kept out of this lane's
+  assigned files on purpose); (3) the "this tool has a working API key" vs. "no key, running in
+  limited mode" flag only showed up in a human-readable log line, never in the machine-readable
+  status file that every automated preflight check actually reads — fixed so that flag now appears
+  in both places; (4) one of the safety-check files had accidentally started depending on a heavier
+  code library, which would make it crash on a bare-bones computer that only has plain Python — fixed
+  by moving the small piece of logic it needed into the safety-check file itself, so it works
+  standalone again. None of these fixes touched the frozen scoring/eval files this branch was never
+  allowed to touch. Full detail, including known small loose ends left on purpose (harmless,
+  documented) and the things nobody has proven yet against the real live service (also documented,
+  not assumed true): `.superpowers/handoffs/f106-huggingnews-DONE.md`.

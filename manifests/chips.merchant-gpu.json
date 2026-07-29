@@ -17,6 +17,7 @@
     "nvidia": "2026-08-26",
     "amd": "2026-08-04"
   },
+  "huggingnewsTags": ["ai-compute-chips"],
   "expectedIndicators": [
     {
       "indicatorId": "D2",

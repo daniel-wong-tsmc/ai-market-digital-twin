@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Literal, Optional
 from urllib.parse import urlparse
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 # ── Source entry (also used in per-indicator sourceInventory in indicators.json) ──
@@ -57,6 +57,19 @@ class ExpectedIndicator(BaseModel):
     sourceIds: list[str] = Field(default_factory=list)
 
 
+# F106: the topic-slug tree published in huggingnews.com/SKILL.md v0.0.2. A manifest
+# declaring a slug outside this set fails loud at load (typo tripwire). Update this
+# copy when the published contract version moves.
+HUGGINGNEWS_TAG_SLUGS = frozenset({
+    "ai", "ai-fundraising",
+    "ai-modeling", "ai-model-releases", "ai-open-models", "ai-research-evals",
+    "ai-products", "ai-agents-coding", "ai-enterprise-tools", "ai-generative-media",
+    "ai-infrastructure", "ai-compute-chips", "ai-inference-platforms",
+    "ai-governance", "ai-policy-regulation", "ai-legal-safety",
+    "ai-sector-impact",
+})
+
+
 class CoverageManifest(BaseModel):
     version: str
     categoryId: str
@@ -66,6 +79,17 @@ class CoverageManifest(BaseModel):
     expectedSources: list[ExpectedSource] = Field(default_factory=list)
     earningsDates: dict[str, str] = Field(default_factory=dict)
     primaryDomains: list[str] = Field(default_factory=list)
+    huggingnewsTags: list[str] = Field(default_factory=list)
+
+    @field_validator("huggingnewsTags")
+    @classmethod
+    def _huggingnews_slugs_known(cls, v: list[str]) -> list[str]:
+        unknown = [s for s in v if s not in HUGGINGNEWS_TAG_SLUGS]
+        if unknown:
+            raise ValueError(
+                f"unknown huggingnews tag slug(s) {unknown} — valid slugs are the "
+                f"published huggingnews.com/SKILL.md tree (see HUGGINGNEWS_TAG_SLUGS)")
+        return v
 
     def source_by_id(self, source_id: str) -> ExpectedSource | None:
         return next((s for s in self.expectedSources if s.id == source_id), None)

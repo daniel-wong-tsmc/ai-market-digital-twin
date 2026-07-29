@@ -6,6 +6,48 @@ import pytest
 from gpu_agent import web_reach_ensure as wre
 
 
+def test_module_imports_and_runs_without_pydantic():
+    # F106 finding 4: gpu_agent/web_reach_ensure.py's own header says "STDLIB
+    # ONLY. Must run on a bare clone (no .venv, no pydantic)." Proving that by
+    # deleting pydantic from sys.modules in *this* process is unreliable (an
+    # already-imported submodule can leave partial state, and other tests in
+    # this session have already imported pydantic-dependent modules). Instead
+    # spawn a genuinely fresh interpreter, install an import hook that raises
+    # ImportError for "pydantic" (and anything under it) before gpu_agent is
+    # ever touched, then import gpu_agent.web_reach_ensure and exercise the
+    # exact call path that broke before the fix: ensure_tool() on a tool that
+    # declares `secretName` (which used to reach into
+    # gpu_agent.gathering.webreach -> pydantic). A bare clone with no
+    # third-party packages installed is exactly this scenario -- the POSIX
+    # launcher (scripts/web-reach-ensure) deliberately falls back to system
+    # python3 there.
+    script = (
+        "import builtins, sys\n"
+        "_real_import = builtins.__import__\n"
+        "def _blocking_import(name, *a, **k):\n"
+        "    if name == 'pydantic' or name.startswith('pydantic.'):\n"
+        "        raise ImportError('pydantic is not available on a bare clone')\n"
+        "    return _real_import(name, *a, **k)\n"
+        "builtins.__import__ = _blocking_import\n"
+        "from gpu_agent import web_reach_ensure as wre\n"
+        "assert 'pydantic' not in sys.modules\n"
+        "tool = {'id': 'huggingnews', 'secretName': 'HN_FAKE_TEST_KEY',\n"
+        "        'healthCmd': {'linux': 'nonexistent-cmd-xyz', 'windows': 'nonexistent-cmd-xyz',\n"
+        "                      'macos': 'nonexistent-cmd-xyz'}}\n"
+        "result = wre.ensure_tool(tool, wre.detect_os(), check_only=True, log=lambda m: None)\n"
+        "assert result['tool'] == 'huggingnews'\n"
+        "assert result['keyed'] is False\n"
+        "assert 'pydantic' not in sys.modules\n"
+        "print('OK')\n"
+    )
+    import pathlib
+    repo_root = pathlib.Path(__file__).resolve().parents[1]
+    r = subprocess.run([sys.executable, "-c", script], capture_output=True, text=True,
+                        cwd=repo_root, timeout=60)
+    assert r.returncode == 0, f"stdout={r.stdout!r} stderr={r.stderr!r}"
+    assert "OK" in r.stdout
+
+
 def test_run_survives_non_ascii_output():
     # Real (un-mocked) _run: a command whose output carries bytes that are
     # undecodable under Windows' cp1252 default (0x81/0x8f) must NOT crash the

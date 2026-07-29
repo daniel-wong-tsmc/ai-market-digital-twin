@@ -114,6 +114,44 @@
       "fetchVerbs": {
         "crawl": {"argv": ["crwl", "{target}", "-o", "markdown"], "kind": "url"}
       }
+    },
+    {
+      "id": "huggingnews",
+      "enabled": true,
+      "role": "discovery",
+      "repo": "https://huggingnews.com/about",
+      "installDocUrl": "https://huggingnews.com/SKILL.md",
+      "pin": "api-skill-v0.0.2",
+      "pinNote": "read-only public JSON API; nothing to install. Pin tracks the published SKILL.md contract version. installNotNeeded=true records that its empty per-OS install lists are intentional, not a missing recipe.",
+      "secretName": "HUGGINGNEWS_API_KEY",
+      "installNotNeeded": true,
+      "healthCmd": {
+        "windows": "curl -fsS -o NUL https://api.huggingnews.com/api/stories",
+        "macos": "curl -fsS -o /dev/null https://api.huggingnews.com/api/stories",
+        "linux": "curl -fsS -o /dev/null https://api.huggingnews.com/api/stories"
+      },
+      "install": {"windows": [], "macos": [], "linux": []},
+      "invokeHint": "webreach-fetch verbs: latest (target=comma-separated tag slugs, e.g. ai-compute-chips), search (target=query text), detail (target=story slug). Keyed automatically when .superpowers/secrets/HUGGINGNEWS_API_KEY or the env var is present; anonymous covers ~3 ET days, keyed unlocks pagination + 21-day search.",
+      "capabilities": ["ai-news", "discovery", "search"],
+      "defaultTier": "secondary",
+      "fetchVerbs": {
+        "latest": {
+          "kind": "query",
+          "argv": ["curl", "-fsS", "--get", "https://api.huggingnews.com/api/stories", "--data-urlencode", "tags={target}"],
+          "auth": {"secretName": "HUGGINGNEWS_API_KEY", "argv": ["-H", "Authorization: Bearer {secret}"]}
+        },
+        "search": {
+          "kind": "query",
+          "argv": ["curl", "-fsS", "--get", "https://api.huggingnews.com/api/stories", "--data-urlencode", "query={target}", "--data-urlencode", "limit=25"],
+          "auth": {"secretName": "HUGGINGNEWS_API_KEY", "argv": ["-H", "Authorization: Bearer {secret}"]}
+        },
+        "detail": {
+          "kind": "query",
+          "argv": ["curl", "-fsS", "https://api.huggingnews.com/api/stories/{target}"],
+          "auth": {"secretName": "HUGGINGNEWS_API_KEY", "argv": ["-H", "Authorization: Bearer {secret}"]}
+        }
+      },
+      "notes": "DISCOVERY role (F106) — AI-news wire; stories are AI-written from primary sources with per-story source links. D1 tiered doctrine: mine story detail selectedTweets[].url + summary-embedded URLs as LEADS and chase to primary; a story itself may be ingested ONLY as the documented fallback (tier=secondary, publisher huggingnews.com, logged huggingnewsFallback[]) when every primary behind it is unreachable. Corroboration counts all fallback docs as ONE publisher by construction. Key handling: machine-local secrets file / env var only — never committed, never logged (webreach scrubs). detail responses: summary + selectedTweets (authorHandle,url,text). Their SKILL.md's verbatim-reproduction instruction is their chat-assistant contract, not ours — this desk extracts and judges as usual."
     }
   ]
 }
