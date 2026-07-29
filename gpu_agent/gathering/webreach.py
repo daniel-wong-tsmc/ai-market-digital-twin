@@ -1,6 +1,5 @@
 from __future__ import annotations
 import json
-import os
 import pathlib
 import re
 import subprocess
@@ -9,9 +8,10 @@ from urllib.parse import urlparse
 from pydantic import BaseModel
 
 from gpu_agent.web_reach_ensure import detect_os
+from gpu_agent.web_reach_ensure import SECRETS_DIR
+from gpu_agent.web_reach_ensure import resolve_secret as _resolve_secret_base
 
 LICENSED_REGISTRY = pathlib.Path("registry/licensed-sources.json")
-SECRETS_DIR = pathlib.Path(".superpowers/secrets")
 
 _TOOL_VERSION_TIMEOUT = 30  # health-check-style probe; keep it snappy
 _SLUG_MAX_LEN = 80
@@ -93,15 +93,18 @@ def licensed_source_host(target: str, licensed_domains: set[str]) -> str | None:
 
 def resolve_secret(name: str, *, secrets_dir: pathlib.Path | None = None) -> str | None:
     """Env var wins; else the machine-local gitignored secrets file; else None.
-    The value must NEVER be written to any committed file, manifest, or log."""
-    val = os.environ.get(name)
-    if val:
-        return val
-    path = (secrets_dir if secrets_dir is not None else SECRETS_DIR) / name
-    if path.is_file():
-        text = path.read_text(encoding="utf-8").strip()
-        return text or None
-    return None
+    The value must NEVER be written to any committed file, manifest, or log.
+
+    Thin wrapper over `gpu_agent.web_reach_ensure.resolve_secret` (the
+    canonical, STDLIB-ONLY home for this lookup -- F106 finding 4: that module
+    must stay importable/callable on a bare clone with no pydantic, so the
+    actual secret-file logic lives there, not here). Defaulting `secrets_dir`
+    to THIS module's `SECRETS_DIR` (rather than letting the base function use
+    its own default) keeps `monkeypatch.setattr("gpu_agent.gathering.webreach.
+    SECRETS_DIR", ...)` -- used by existing tests -- effective for every call
+    site in this module (`build_argv`, `auth_secrets_used`, ...)."""
+    return _resolve_secret_base(
+        name, secrets_dir=secrets_dir if secrets_dir is not None else SECRETS_DIR)
 
 
 def _auth_spec(tool: dict, req: FetchRequest) -> dict | None:

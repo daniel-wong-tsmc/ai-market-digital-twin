@@ -186,7 +186,9 @@ closes the v4 gap where a 320-day page entered the corpus with zero recency reco
 If no manifest: build only the standard entity×metric slices (original behavior).
 
 **2b. Discovery-role leads (`role: discovery` tools, e.g. `last30days`).** For each `enabled`
-registry tool whose `role == "discovery"`, the COORDINATOR runs it on the assignment's entities/
+registry tool whose `role == "discovery"` **except `huggingnews`** — its leads path is step 2c
+below, not this generic search-shaped pass, so do not run its `invokeHint`'s `search` verb here —
+the COORDINATOR runs it on the assignment's entities/
 topics (e.g. `/last30days "<entity or category topic>"`, or the CLI in its `invokeHint`) to surface
 **leads only**: read the returned brief's cited sources and hottest threads, and add those URLs to
 the round-1 lead queue (the on-topic filter still applies). **Never add the synthesized brief
@@ -326,6 +328,12 @@ print(json.dumps([g.model_dump() for g in gaps], indent=2))
 
 Append the resulting gap list to `gather-log.json` under the key `coverageGaps`. If no manifest was
 loaded, `coverageGaps` is an empty list `[]`.
+
+At the same point, append the run's `huggingnewsFallback[]` list (the fallback docs accrued during
+step 2c, each `{"ref","publisher":"huggingnews.com","unreachablePrimaries":[...]}`) to
+`gather-log.json` under the key `huggingnewsFallback` — same file, same "append after ingest"
+timing as `coverageGaps` above, since `ingest` does not carry this key through on its own. An empty
+list `[]` is the norm when no fallback doc was needed this run.
 
 **5. Assemble the snapshot envelope — never by hand.** Once the trail goes dry, run
 `gpu-agent gather-assemble --blob-dir work/<run-dir>/blobs --out work/<run-dir>/blobs.json` — there

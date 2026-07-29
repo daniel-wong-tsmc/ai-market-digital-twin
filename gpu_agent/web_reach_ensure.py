@@ -6,12 +6,21 @@ gpu_agent.cli or any third-party package here.
 from __future__ import annotations
 import argparse
 import json
+import os
 import pathlib
 import platform
 import re
 import subprocess
 
 REGISTRY_PATH = pathlib.Path("registry/web-reach-tools.json")
+
+# Machine-local, gitignored secrets directory (env var wins over this; see
+# resolve_secret). Lives here — not in gpu_agent/gathering/webreach.py — because
+# this module is STDLIB ONLY and must be importable/callable on a bare clone
+# with no .venv/pydantic (see module docstring). webreach.py imports this
+# module at load time already, so resolve_secret/SECRETS_DIR flow from here
+# outward, never the reverse (F106 finding 4).
+SECRETS_DIR = pathlib.Path(".superpowers/secrets")
 
 _HEALTH_TIMEOUT = 60  # health checks are cheap; cap them low
 
@@ -97,49 +106,88 @@ def version_of(tool: dict, os_key: str, timeout: int = _HEALTH_TIMEOUT) -> str:
     return "unknown"
 
 
+def resolve_secret(name: str, *, secrets_dir: pathlib.Path | None = None) -> str | None:
+    """Env var wins; else the machine-local gitignored secrets file; else None.
+    The value must NEVER be written to any committed file, manifest, or log.
+
+    Canonical (stdlib-only) home for this lookup -- see module docstring and
+    F106 finding 4. `gpu_agent.gathering.webreach` re-exports `SECRETS_DIR` and
+    wraps this function so `from gpu_agent.gathering.webreach import
+    resolve_secret` keeps working, and its own `SECRETS_DIR` stays the name
+    existing tests monkeypatch."""
+    val = os.environ.get(name)
+    if val:
+        return val
+    path = (secrets_dir if secrets_dir is not None else SECRETS_DIR) / name
+    if path.is_file():
+        text = path.read_text(encoding="utf-8").strip()
+        return text or None
+    return None
+
+
+def _keyed_state(tool: dict) -> bool | None:
+    """True/False if `tool` declares a `secretName` (whether or not it resolves
+    locally right now); None if the tool has no key concept at all -- callers
+    use None to mean "omit the field", never a misleading False."""
+    secret_name = tool.get("secretName")
+    if not secret_name:
+        return None
+    return bool(resolve_secret(secret_name))
+
+
 def _keyed_suffix(tool: dict) -> str:
     """For a tool with a `secretName`, report whether that secret resolves
     locally (env var or the gitignored secrets file) -- a LOCAL check only,
-    never a network call. Deferred import: webreach.py imports this module
-    at module level, so a top-level back-import here would cycle (mirrors
-    the publisher.py/F96 idiom)."""
-    secret_name = tool.get("secretName")
-    if not secret_name:
+    never a network call."""
+    state = _keyed_state(tool)
+    if state is None:
         return ""
-    from gpu_agent.gathering.webreach import resolve_secret
-    return " (keyed)" if resolve_secret(secret_name) else " (anonymous-only)"
+    return " (keyed)" if state else " (anonymous-only)"
 
 
 def ensure_tool(tool: dict, os_key: str, *, check_only: bool = False,
                 timeout: int = 600, log=print) -> dict:
     tid = tool["id"]
     suffix = _keyed_suffix(tool)
+    keyed = _keyed_state(tool)
+
+    def _result(status: str, **extra) -> dict:
+        # Machine-readable twin of the `suffix` log-line text above: any tool
+        # declaring a `secretName` carries a `keyed` bool in the RETURNED dict
+        # too, so `--json` mode (the only path the daily/live cycle actually
+        # reads -- see F106 finding 3) surfaces keyed-vs-anonymous, not just
+        # the human log line. Tools with no key concept get no field at all
+        # (never a misleading False).
+        d = {"tool": tid, "status": status, **extra}
+        if keyed is not None:
+            d["keyed"] = keyed
+        return d
+
     if health_ok(tool, os_key):
         log(f"web-reach: {tid} ok{suffix}")
-        return {"tool": tid, "status": "ok"}
+        return _result("ok")
     if check_only:
         log(f"web-reach: {tid} missing (check-only; not installing){suffix}")
-        return {"tool": tid, "status": "missing"}
+        return _result("missing")
     cmds = (tool.get("install") or {}).get(os_key) or []
     if not cmds:
         log(f"web-reach: {tid} missing and no install recipe for {os_key}")
-        return {"tool": tid, "status": "failed", "detail": f"no install recipe for {os_key}"}
+        return _result("failed", detail=f"no install recipe for {os_key}")
     for c in cmds:
         log(f"web-reach: {tid} installing -> {c}")
         try:
             r = _run(c, timeout)
         except subprocess.TimeoutExpired:
-            return {"tool": tid, "status": "failed", "detail": f"timeout: {c}"}
+            return _result("failed", detail=f"timeout: {c}")
         except OSError as e:
-            return {"tool": tid, "status": "failed", "detail": f"{c}: {e}"}
+            return _result("failed", detail=f"{c}: {e}")
         if r.returncode != 0:
             tail = (r.stderr or "")[-500:]
-            return {"tool": tid, "status": "failed",
-                    "detail": f"install cmd failed ({r.returncode}): {c}\n{tail}"}
+            return _result("failed", detail=f"install cmd failed ({r.returncode}): {c}\n{tail}")
     if health_ok(tool, os_key):
         log(f"web-reach: {tid} installed-ok{suffix}")
-        return {"tool": tid, "status": "installed-ok"}
-    return {"tool": tid, "status": "failed", "detail": "healthCmd still failing after install"}
+        return _result("installed-ok")
+    return _result("failed", detail="healthCmd still failing after install")
 
 
 def ensure_all(registry: dict, os_key: str | None = None, *, check_only: bool = False,

@@ -58,3 +58,36 @@ def test_ensure_reports_keyed_status(monkeypatch, capsys):
     ensure_all(load_registry(), detect_os(), check_only=True)
     out = capsys.readouterr().out
     assert "(keyed)" in out and "sk-test-fake" not in out
+
+
+def _huggingnews_result(monkeypatch, *, keyed: bool) -> dict:
+    """Run ensure_tool for the real huggingnews registry entry and return its
+    result dict, as `--json` mode would emit it (F106 finding 3: the keyed
+    state must reach the machine-readable result, not just the log line)."""
+    from gpu_agent.web_reach_ensure import load_registry, ensure_tool, detect_os
+    if keyed:
+        monkeypatch.setenv("HUGGINGNEWS_API_KEY", "sk-test-fake-not-a-real-key")
+    else:
+        monkeypatch.delenv("HUGGINGNEWS_API_KEY", raising=False)
+        monkeypatch.setattr("gpu_agent.web_reach_ensure.SECRETS_DIR", pathlib.Path("no-such-dir"))
+    monkeypatch.setattr("gpu_agent.web_reach_ensure.health_ok", lambda tool, os_key, **k: True)
+    tool = _tool()
+    return ensure_tool(tool, detect_os(), check_only=True, log=lambda m: None)
+
+
+def test_json_result_carries_keyed_true_when_secret_present(monkeypatch):
+    result = _huggingnews_result(monkeypatch, keyed=True)
+    assert result["keyed"] is True
+
+
+def test_json_result_carries_keyed_false_when_secret_absent(monkeypatch):
+    result = _huggingnews_result(monkeypatch, keyed=False)
+    assert result["keyed"] is False
+
+
+def test_json_result_omits_keyed_for_tool_without_secret_name(monkeypatch):
+    from gpu_agent.web_reach_ensure import ensure_tool
+    monkeypatch.setattr("gpu_agent.web_reach_ensure.health_ok", lambda tool, os_key, **k: True)
+    tool = {"id": "no-key-tool", "healthCmd": {"linux": "true"}}
+    result = ensure_tool(tool, "linux", check_only=True, log=lambda m: None)
+    assert "keyed" not in result
