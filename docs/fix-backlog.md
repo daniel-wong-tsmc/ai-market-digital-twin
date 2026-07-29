@@ -1380,7 +1380,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   health snapshot 2026-07-26: web/rss/bilibili/v2ex ok; twitter/github/xueqiu warn; rest off.
   *(Concurrent-mint caveat: F104 chosen against a backlog max of F103 on 2026-07-26; renumber if collided.)*
 
-- [ ] **F105 — `extract --recorded` silently reports "0 findings" on a malformed answer envelope (v19 sighting 2026-07-27).**
+- [x] **F105 — `extract --recorded` silently reports "0 findings" on a malformed answer envelope (v19 sighting 2026-07-27).**
   `ExtractionResult` (`gpu_agent/extraction/extractor.py`) is the ONLY brain-answer model without
   `extra="forbid"`, and its `drafts` field defaults to `[]`. A recorded answer that is a bare
   `FindingDraft` object (or any wrong-shaped JSON object) validates as an EMPTY ExtractionResult —
@@ -1392,6 +1392,25 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   sibling answer model (judge/thesis/implication/narrator). Schema-only; no prompt text changes — the
   F6 pin must stay green.
   *(Concurrent-mint caveat: F105 chosen against a backlog max of F104 on 2026-07-27; renumber if collided.)*
+  **DONE 2026-07-29** (lane `f105-extract-strict`). `ExtractionResult` now sets `extra="forbid"` and
+  makes `drafts` required; a malformed envelope fails validation loudly and enters the standard retry
+  path, while an explicit `{"drafts": []}` stays valid. New `tests/test_extractor_envelope.py` (4
+  tests) covers the exact v19 shape. Also corrected five test files that used a stand-in extract
+  answer of `{"findings": []}` — a key the prompt has never asked for, which the loose schema
+  silently swallowed as "nothing found", so those tests were exercising the bug rather than the
+  behaviour they named.
+  The premise "schema-only, no prompt text changes" turned out to be wrong: the emitted extract
+  prompt embeds `ExtractionResult.model_json_schema()`, so tightening the model moved the extract
+  bundle hash and reddened the F6 pin. Cleared properly, not bypassed — full F6 eval, 3 replicates,
+  **PASS on merit** (decision run r1: extract 6.500 vs bar 5.599, no craters; extract 6.500 / 6.750
+  / 7.125 across r1/r2/r3, range 0.625). No `--force`, no hand-edited answers, calibration negatives
+  held ≤4 in all three runs.
+  A whole-baseline rebuild was refused by the dispersion guard on the **thesis** seam (range 2.500 >
+  1.0) — a seam this lane never touched; that refusal is F107. Landed instead via the F108
+  seam-scoped path: `eval rebaseline --seams extract`, which rebuilt only extract and carried
+  implication/judge/thesis forward byte-identical. **New extract bar 5.599 → 6.163** (mean 6.500 →
+  6.792, epsilon 0.901 → 0.629) — stricter, and the only bar that moved. Suite 2052 passed / 7
+  skipped; all four pins green.
 
 - [ ] **F106 — HuggingNews as a desk-wide news source (all categories, not just GPU).**
   User-provided keyed API access to huggingnews.com — an AI-news wire whose stories are AI-written
