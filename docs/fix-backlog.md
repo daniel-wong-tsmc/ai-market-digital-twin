@@ -1389,3 +1389,42 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   (relates to F104's social-ingestion design space), cost/budget per cycle, and whether the desk's
   D6 licensed-source discipline applies. *(Feature — own brainstorm/spec/plan when it starts.)*
   *(Concurrent-mint caveat: F106 chosen against a backlog max of F105 on 2026-07-28; renumber if collided.)*
+
+- [x] **F106 BUILT 2026-07-29 — HuggingNews desk-wide source, first slice shipped.** Branch
+  `f106-huggingnews`, commits `5fd18ae`..`fe19717` (7 commits). What shipped: (1) `gpu_agent/gathering/webreach.py`
+  gained `resolve_secret` (env var first, else the gitignored `.superpowers/secrets/<NAME>` file, else
+  `None` — a missing key degrades silently to anonymous, never errors) plus per-verb `auth` argv appended
+  only when a secret resolves, and scrubbing of any resolved secret value out of every recorded error
+  string; (2) `registry/web-reach-tools.json` gained the `huggingnews` tool (verbs `latest` / `search` /
+  `detail`, tool-level `secretName`) and `gpu_agent/web_reach_ensure.py` preflight reporting now appends
+  `(keyed)` / `(anonymous-only)` per tool; (3) `gpu_agent/manifest.py` validates an optional
+  `huggingnewsTags: list[str]` field against a `HUGGINGNEWS_TAG_SLUGS` allowlist (unknown slug fails to
+  load, loud not silent), and `manifests/chips.merchant-gpu.json` seeds `["ai-compute-chips"]`; (4)
+  `.claude/skills/gather-category/SKILL.md` gained a tiered discovery sub-step — leads from a HuggingNews
+  story are chased to their primary sources first; the story itself is only ingested as a documented
+  fallback when it had leads and every one proved unreachable (a story with zero leads is dropped, never
+  a fallback); fallback docs are logged in `huggingnewsFallback[]` and count as ONE publisher for
+  corroboration, regardless of how many fallback docs land.
+  **Decision provenance (both user-approved, interactive — not AFK-defaults):**
+  (a) *Task 2:* the plan's `huggingnews` registry entry leaves `install` empty for all three OSes (it's a
+  pure read-only API, nothing to install), which collided with the pre-existing invariant
+  `tests/test_web_reach_registry.py::test_enabled_tools_have_per_os_install_recipes` (every enabled tool
+  must carry non-empty per-OS install recipes). The lane stopped and asked rather than picking; the user
+  chose an explicit `"installNotNeeded": true` flag on the entry, with that invariant test amended to
+  honour it — when the flag is set, all three install lists must be exactly empty; every tool without the
+  flag keeps the strict non-empty rule. (b) *Task 5 close-out:* the plan's guard test in
+  `tests/test_webreach_huggingnews_entry.py` spelled the literal key prefix while asserting no key
+  material is present, which made the branch-wide leak scan (`git log -p main..HEAD | grep -c "<prefix>"`)
+  return a nonzero hit that was the guard string itself, not a real leak. The user chose to rebuild the
+  guard from a locally-constructed value instead of spelling the prefix (commit `fe19717`); see the
+  close-out sentinel below for the full key-hygiene attestation, including why the raw `git log -p`
+  history count still cannot reach exactly 0 without rewriting a prior, already-completed commit — which
+  was explicitly ruled out.
+  **Deferred, not built in this slice:** the weekly 21-day keyed `search` sweep (spec item D3) is parked
+  pending about a week of real hit-rate data before it's worth scheduling; an ad-hoc/one-off HuggingNews
+  lookup skill is also deferred (no lane opened for it yet).
+  **Live criteria (checked post-merge, not forced in this branch):** (a) the next scheduled cycle's
+  web-reach preflight reports `huggingnews … (keyed)`, confirming the key resolves in the real
+  environment; (b) a HuggingNews-referred lead lands as a chased primary-source doc on a news day that
+  provides one; (c) any fallback ingest appears in a `huggingnewsFallback[]` list and corroboration counts
+  it as exactly one publisher, never one-per-fallback-doc. Full detail: `.superpowers/handoffs/f106-huggingnews-DONE.md`.
