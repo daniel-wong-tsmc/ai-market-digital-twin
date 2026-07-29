@@ -1,0 +1,43 @@
+{
+  "id": "tech-yahoo-com-7b64d281-2026-07-2",
+  "statement": "Enterprise AI contracts are reported to receive prioritized NAND allocation over retail, squeezing consumer SSD availability as Rubin CMX servers scale.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Allocation shifting toward AI buyers is an early sign the memory chain is tightening rather than carrying slack inventory.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "infrastructure.ai-storage",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Prioritized allocation to AI server contracts drains available memory inventory across the chain, raising the risk of component shortages for other builds."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Tech (syndicated PC Gamer)",
+      "url": "https://tech.yahoo.com/ai/articles/analyst-claims-nvidia-rubin-soak-113035335.html",
+      "date": "2026-07-22",
+      "excerpt": "surge favors memory manufacturers but likely disadvantages consumer SSD markets near term, as enterprise AI contracts receive prioritized allocation over retail",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; the related Samsung 60% V-NAND allocation claim is flagged in the same document as an unverified lead and is not used."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-28T12:30:28Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

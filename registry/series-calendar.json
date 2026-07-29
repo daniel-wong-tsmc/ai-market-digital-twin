@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "note": "F79 G4 publication calendar for the six scoring series. Drives the daily gap check (gpu_agent/series_refresh.py). Curated trust boundary (price-benchmarks precedent): tune by JSON edit. availableDay = day of the FOLLOWING month a monthly print is expected; availableLagDays = days after quarter end; toleranceMonths relaxes the expectation for irregular series. NON-prompt-affecting: never read by any brain prompt or the F6 pin.",
+  "seriesCalendar": {
+    "odmMonthlyAiRevenue":      {"cadence": "monthly",   "availableDay": 12, "sourceHint": "TWSE monthly revenue releases (~10th): Hon Hai, Quanta, Wistron/Wiwynn AI-server revenue"},
+    "tokenEconomics":           {"cadence": "monthly",   "availableDay": 15, "sourceHint": "public API price sheets + token-volume trackers (OpenRouter, Anthropic/OpenAI pricing pages); estimate-grade"},
+    "pkgCapacityOrderSpread":   {"cadence": "monthly",   "availableDay": 15, "toleranceMonths": 2, "sourceHint": "CoWoS/packaging ramp-vs-order coverage (TrendForce summaries, supply-chain press); irregular"},
+    "hbmSupplyCapex":           {"cadence": "quarterly", "availableLagDays": 45, "sourceHint": "Samsung / SK hynix / Micron quarterly results + capex commentary"},
+    "hyperscalerCapexRevision": {"cadence": "quarterly", "availableLagDays": 45, "sourceHint": "MSFT/GOOG/AMZN/META quarterly results: capex guidance revisions"},
+    "marginalBuyerFinancing":   {"cadence": "quarterly", "availableLagDays": 45, "sourceHint": "neocloud financing terms: CoreWeave/Lambda filings, debt-facility press"}
+  }
+}

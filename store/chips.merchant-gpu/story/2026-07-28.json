@@ -1,0 +1,181 @@
+{
+  "headline": "The chip seller is now helping pay for its own order book",
+  "deck": "The fresh news today is financial, not physical. NVIDIA is negotiating more than $750 billion of deals, some of which involve backing its customers' purchases. The two things holding supply back, memory and advanced packaging, have not moved.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The money news, not the chip news",
+      "paragraphs": [
+        "The one genuinely new item today concerns money. NVIDIA is negotiating more than $750 billion of AI infrastructure agreements. That includes an arrangement worth over $500 billion with Korea's SK Group for more than two gigawatts of data centres, and up to $250 billion of backing for OpenAI's computing leases. Separate reporting on the same day says a growing share of NVIDIA's demand now rests on NVIDIA guaranteeing or financing what its customers buy, including a discussed $350 billion facility for OpenAI chip purchases.",
+        "Alongside that, NVIDIA said yesterday that Ilya Sutskever's Safe Superintelligence has committed to its next-generation Vera Rubin systems for a tenfold rise in its computing power, with NVIDIA putting an undisclosed sum into the company.",
+        "Put plainly: part of the queue is made up of orders the seller helped fund. The shortage is still real, and the parts are still scarce. But the order book and the seller's own balance sheet now move together, which is a different kind of risk from simply running out of factory capacity."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "finance-yahoo-com-2185ba22-2026-07-1",
+        "finance-yahoo-com-2185ba22-2026-07-2",
+        "nvidianews-nvidia-com-87ea0942-2026-07-1",
+        "nvidianews-nvidia-com-5c5b4b41-2026-07-1"
+      ],
+      "sourceLine": "Yahoo Finance, NVIDIA Newsroom",
+      "relatedDocs": [
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-750-billion-deals-revive-102003935.html",
+          "title": "NVIDIA in talks on more than $750 billion of AI infrastructure deals",
+          "outlet": "Yahoo Finance (syndicated Bloomberg)",
+          "date": "2026-07-27"
+        },
+        {
+          "url": "https://nvidianews.nvidia.com/news/ilya-sutskevers-safe-superintelligence-inc-and-nvidia-announce-long-term-strategic-partnership",
+          "title": "Safe Superintelligence and NVIDIA announce a long-term partnership",
+          "outlet": "NVIDIA Newsroom (nvidianews.nvidia.com)",
+          "date": "2026-07-27"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The two walls have not moved",
+      "paragraphs": [
+        "Nothing new landed today on the physical side, and that is the point. Advanced packaging, the step that binds each chip to its memory, is fully booked through this year with waits of 52 to 78 weeks, described on 13 July by the head of the company that does most of it as exceptionally limited.",
+        "Memory is the worse of the two. Morgan Stanley expects server memory contract prices to rise more than 25 percent in the coming quarter and sees no sign of relief, warning conditions could get worse in 2027 and 2028. A large server maker reported on 16 July that memory now takes 32 to more than 40 weeks to arrive, at prices about 90 percent above late 2025. At its late-June earnings call, Micron said its shipments are capped by supply rather than by demand, and that it cannot yet say when the industry catches up.",
+        "The people closest to the problem are spending against it. SK hynix's board approved a 7.09 trillion won investment, about $4.83 billion, in a new packaging plant, and its chief executive said on 23 July the squeeze could run through 2027. NVIDIA, for its part, has signed a long-term deal with SK hynix to lock in future memory. Money is moving, but new plants take years, not weeks."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending, year over year"
+      },
+      "claimFindingIds": [
+        "www-forbes-com-7c91863a-2026-07-1",
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "finance-biggo-com-6dfe92b3-2026-07-3",
+        "www-techtimes-com-669598b1-2026-07-1",
+        "finance-yahoo-com-ea29a8bf-2026-07-1",
+        "www-ad-hoc-news-de-94ca546c-2026-07-1",
+        "www-ad-hoc-news-de-94ca546c-2026-07-2",
+        "nvidianews-nvidia-com-5c5b4b41-2026-07-3"
+      ],
+      "sourceLine": "Forbes, BigGo Finance, TechTimes, Yahoo Finance, ad-hoc-news.de, NVIDIA Newsroom",
+      "relatedDocs": []
+    },
+    {
+      "n": 3,
+      "title": "Cheap at the back of the shelf, no price at the front",
+      "paragraphs": [
+        "Today's price pages show a split market. A reference page updated today puts the middle rental price for an older H100 chip at $2.97 an hour. Three days ago a wider page covering 48 sellers put the same chip at $3.58, and a week ago another tracker had it at $3.85 on the smaller cloud providers. These pages count different sellers, so treat this as a soft drift rather than a measurement: the older chips are getting easier to rent, not harder.",
+        "The newest gear tells the opposite story. Lambda's page today lists a single current-generation B200 at $6.99 an hour, more than twice the older part. And CoreWeave's price list, dated yesterday, still shows no public rate at all for its newest racks; you have to call a salesperson.",
+        "That is the clearest everyday sign of where the shortage sits. Last year's chips are a commodity you can price-shop. This year's are rationed by conversation."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per chip"
+      },
+      "claimFindingIds": [
+        "getdeploying-com-66413625-2026-07-1",
+        "getdeploying-com-dca96aab-2026-07-1",
+        "getdeploying-com-6f11aead-2026-07-1",
+        "lambda-ai-782c15e0-2026-07-1",
+        "www-coreweave-com-d16f3599-2026-07-1"
+      ],
+      "sourceLine": "GetDeploying, Lambda, CoreWeave",
+      "relatedDocs": [
+        {
+          "url": "https://getdeploying.com/reference/cloud-gpu",
+          "title": "Cloud GPU rental prices by provider",
+          "outlet": "GetDeploying cloud GPU price reference",
+          "date": "2026-07-28"
+        },
+        {
+          "url": "https://lambda.ai/service/gpu-cloud",
+          "title": "Lambda GPU Cloud pricing",
+          "outlet": "Lambda (lambda.ai) GPU Cloud pricing",
+          "date": "2026-07-28"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Four markers, in the order they will show up. First, the memory contract price for the coming quarter. More than 25 percent is what the market expects; anything above that means every finished chip costs more and the queue stays long.",
+        "Second, packaging output. Capacity is meant to climb toward roughly 125,000 to 130,000 units a month by the end of this year, and a mid-June forecast had the gap between what buyers want and what packaging can deliver closing from about 20 percent to about 10 percent by year end. Whether that pace holds is the only near-term way the pipe widens.",
+        "Third, whether the second source becomes a real source. AMD's Helios racks reached full production on 23 July, with shipments starting this quarter and named users including OpenAI, Meta, Anthropic, Microsoft and Oracle. But one analysis dated 15 July puts the high-volume ramp out at the second quarter of 2027. Announcements are not deliveries. Meta's own chips, reported earlier this month as entering production in September, are the same test.",
+        "Fourth, and the one that would change today's story rather than continue it: whether NVIDIA's financing deals keep growing faster than its shipments. If the seller is funding an ever-larger share of the buying, the order book stops being an independent read on demand."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "finance-biggo-com-ae5dcd41-2026-07-2",
+        "www-trendforce-com-368d8402-2026-07-1",
+        "www-servethehome-com-b11b71a3-2026-07-2",
+        "www-storagereview-com-e4725124-2026-07-1",
+        "newsletter-semianalysis-com-5136a06c-2026-07-1",
+        "techcrunch-com-bed0b1c2-2026-07-1",
+        "finance-yahoo-com-2185ba22-2026-07-1"
+      ],
+      "sourceLine": "BigGo Finance, TrendForce, ServeTheHome, StorageReview, SemiAnalysis, TechCrunch, Yahoo Finance",
+      "relatedDocs": [
+        {
+          "url": "https://www.storagereview.com/news/amd-mi455x-and-helios-432gb-hbm4-72-gpu-racks-and-a-real-answer-to-vera-rubin",
+          "title": "AMD MI455X and Helios: 72-chip racks and a real answer to Vera Rubin",
+          "outlet": "StorageReview",
+          "date": "2026-07-23"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Which way the biggest buyers revise their budgets shows whether demand keeps pressing on supply.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Spending on new memory plants is the earliest sign the tightest link will eventually loosen.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "The street price per chip is where scarcity shows up before anyone announces it.",
+      "scene": 3
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Servers actually shipped tells you how much of all that ordering gets past the holdup.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-07",
+      "text": "Street price per chip is back near $32,500 after dipping to about $30,000.",
+      "scene": 3
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "Servers shipped are running about 69 percent above a year ago, down from more than 100 percent earlier this year.",
+      "scene": 4
+    }
+  ],
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-07-28",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "0dc547970a3e22999d8b565a914d4670fff5bc8a0c37b34f348c4d754e22ab61",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-07-28T13:03:10.361228+00:00"
+  }
+}

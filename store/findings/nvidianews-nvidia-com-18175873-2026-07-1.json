@@ -1,0 +1,43 @@
+{
+  "id": "nvidianews-nvidia-com-18175873-2026-07-1",
+  "statement": "Safe Superintelligence Inc. and NVIDIA announced a long-term strategic partnership giving SSI access to NVIDIA's next-generation Vera Rubin platform, described as enabling a compute increase by an order of magnitude.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named frontier lab committing to the next NVIDIA platform is forward demand for that generation, though the release discloses no dollar amount, gigawatt figure, chip count, or delivery timeline.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "A frontier lab standardising on the next-generation NVIDIA platform books future accelerator volume and signals continued scaling of training compute."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom press release",
+      "url": "https://nvidianews.nvidia.com/news/ilya-sutskevers-safe-superintelligence-inc-and-nvidia-announce-long-term-strategic-partnership",
+      "date": "2026-07-27",
+      "excerpt": "SSI gains access to NVIDIA's next-generation Vera Rubin platform, described as enabling a compute increase by an order of magnitude.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary NVIDIA press release; note the release itself states no figures, so the finding is qualitative only."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-27",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

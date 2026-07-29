@@ -1,0 +1,46 @@
+{
+  "id": "www-intc-com-819f4336-2026-07-1",
+  "statement": "Intel reported Q2 2026 Data Center and AI segment revenue of $6.3 billion, up 59% year over year, within total revenue of $16.1 billion, up 25% year over year.",
+  "kind": "measured",
+  "value": {
+    "number": 6.3,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "The data-center segment grew more than twice as fast as the company overall, which is a direct read on AI-driven compute demand landing on a third supplier, not just the two accelerator leaders.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Fast growth in a broad-line vendor's data-center segment confirms AI buildout demand is spread across CPU and accelerator suppliers."
+  },
+  "evidence": [
+    {
+      "source": "Intel investor-relations press release",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Data Center and AI: $6.3 billion, up 59% year-over-year.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor results release with segment figures stated directly."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

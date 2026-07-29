@@ -1,0 +1,45 @@
+{
+  "id": "ir-amd-com-57b2e265-2026-07-1",
+  "statement": "AMD guided Q2 2026 revenue to approximately $11.2 billion (+/- $300 million), above the $10.3 billion reported for Q1 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 11.2,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Guidance above the just-reported quarter signals AMD expects continued sequential growth; management attributes the strength to AI infrastructure demand. Note this is total company revenue, not a data-center-GPU-only line.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher vendor revenue guidance implies more accelerator and server CPU shipments into AI datacenter buildouts."
+  },
+  "evidence": [
+    {
+      "source": "AMD investor-relations press release",
+      "url": "https://ir.amd.com/news-events/press-releases",
+      "date": "2026-05-05",
+      "excerpt": "Q2 2026 Revenue Outlook: approximately $11.2 billion (+/- $300 million)",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Content served from AMD's own investor-relations site, but the document states the exact detail-page URL is not confirmed and should be re-resolved before citing."
+  },
+  "dispersion": "Guidance stated with a +/- $300 million range.",
+  "asOf": "2026-07",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-05-05",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

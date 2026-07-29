@@ -1,0 +1,43 @@
+{
+  "id": "ir-amd-com-6e904c47-2026-07-3",
+  "statement": "AMD's announced gigawatt-scale accelerator commitments are concentrated in a handful of buyers: OpenAI at 6 gigawatts, Meta at 6 gigawatts, Anthropic at up to 2 gigawatts, plus a July 20, 2026 Microsoft expansion.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A small set of named customers accounts for essentially all of AMD's disclosed forward accelerator capacity, so the demand line depends on those buyers continuing to fund and take delivery.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Concentration of forward commitments in a few buyers supports near-term volume but makes the demand track sensitive to any single customer deferring or cancelling."
+  },
+  "evidence": [
+    {
+      "source": "AMD investor-relations press release",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1292/amd-and-anthropic-announce-strategic-partnership-to-deploy-up-to-2-gigawatts-of-amd-instinct-mi450-series-gpus",
+      "date": "2026-07-22",
+      "excerpt": "AMD-OpenAI partnership to deploy 6 gigawatts of AMD GPUs",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "The comparison figures come from a context note in the document that is drawn from AMD's prior releases seen on the IR index, not from this release body."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-22",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "www-intc-com-819f4336-2026-07-3",
+  "statement": "Intel reported Q2 2026 GAAP gross margin of 40.4%, versus 27.5% in the prior-year quarter, with non-GAAP gross margin of 41.8% versus 29.7%.",
+  "kind": "measured",
+  "value": {
+    "number": 40.4,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "A near-13-point year-over-year margin gain says Intel is getting paid better for what it ships, consistent with tight supply and stronger mix rather than discounting for volume.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising gross margin alongside rising revenue indicates pricing power, a demand-side strength signal across the compute supply chain."
+  },
+  "evidence": [
+    {
+      "source": "Intel investor-relations press release",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "GAAP gross margin: 40.4% for Q2 2026, vs 27.5% in the prior-year quarter.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor results release stating both current and prior-year margin."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

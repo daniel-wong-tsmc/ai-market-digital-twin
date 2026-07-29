@@ -70,9 +70,11 @@ STORY_CSS = """
  border-bottom:1px solid #eee;z-index:20}
 .st-head h1{font-size:38px;line-height:1.08;margin:0 0 8px;font-weight:800}
 .st-head.condensed h1{font-size:19px;margin:0}
-.st-head.condensed .st-deck,.st-head.condensed .st-date{display:none}
+.st-head.condensed .st-deck,.st-head.condensed .st-date,
+.st-head.condensed .st-honest{display:none}
 .st-deck{font-size:17px;color:#444;margin:0 0 4px}
 .st-date{font-size:12px;color:#888;text-transform:uppercase;letter-spacing:.04em}
+.st-honest{font-size:12px;line-height:1.5;color:#777;margin:6px 0 0;max-width:60ch}
 svg.gapchart{width:100%;height:auto;overflow:visible}
 .gc-tick{font-size:11px;fill:#666;font-family:system-ui,sans-serif}
 .gc-axis{font-size:11px;fill:#888;font-style:italic}
@@ -135,10 +137,68 @@ a.ev{cursor:pointer;text-decoration:underline dotted}
 """
 
 
+_MONTHS = ["January", "February", "March", "April", "May", "June", "July",
+           "August", "September", "October", "November", "December"]
+
+
+def _human_date(s: str) -> str:
+    """Stored evidence dates come at day, month or year grain -- all three occur
+    in the store. Render them the way a reader writes them ("May 12, 2026",
+    "June 2026", "2026"). Anything else comes back untouched: this formatter
+    never raises and never invents a precision the data does not have."""
+    s = (s or "").strip()
+    try:
+        if _re.fullmatch(r"\d{4}-\d{2}-\d{2}", s):
+            y, m, d = int(s[:4]), int(s[5:7]), int(s[8:10])
+            return f"{_MONTHS[m - 1]} {d}, {y}"
+        if _re.fullmatch(r"\d{4}-\d{2}", s):
+            return f"{_MONTHS[int(s[5:7]) - 1]} {int(s[:4])}"
+    except (IndexError, ValueError):
+        return s
+    return s
+
+
+def _honesty_line(model: dict) -> str:
+    """F61: one quiet line under the dateline saying how current the evidence is
+    and what the confidence label actually measures.
+
+    The label on its own invites the reader to hear "high confidence" as
+    "freshly checked", when it only ever meant that separate reads of the same
+    evidence agreed with each other. Either half renders alone; with neither,
+    nothing renders at all -- an empty caveat strip would be its own small lie.
+    """
+    h = model.get("honesty")
+    if not h:
+        return ""
+    parts = []
+    if h.get("median"):
+        pct = h.get("stale_pct") or 0
+        share = (f"about {pct} percent of it is more than six weeks old"
+                 if pct else "none of it is more than six weeks old")
+        parts.append(
+            f"How current this is — the evidence behind this story is "
+            f"typically dated {esc(_human_date(h['median']))}; the oldest piece "
+            f"is from {esc(_human_date(h.get('oldest') or ''))}, and {share}.")
+    if h.get("level"):
+        # Deliberately says "how much they agreed", not "they agreed": the
+        # label is medium and low as often as high, and a sentence that only
+        # reads true at "high" would be its own overclaim.
+        votes = h.get("votes")
+        reads = f"{votes} separate reads" if votes else "separate reads"
+        parts.append(
+            f"Confidence in today's reading is {esc(h['level'])} — that "
+            f"measures how much {reads} of the same evidence agreed with each "
+            f"other, not how fresh the evidence is.")
+    if not parts:
+        return ""
+    return f'<p class="st-honest">{" ".join(parts)}</p>'
+
+
 def _headline_block(model: dict) -> str:
     return (f'<header class="st-head"><h1>{esc(model["headline"])}</h1>'
             f'<p class="st-deck">{esc(model["deck"])}</p>'
-            f'<p class="st-date">{esc(model["dateline"])}</p></header>')
+            f'<p class="st-date">{esc(model["dateline"])}</p>'
+            f'{_honesty_line(model)}</header>')
 
 
 def _chart_block(model: dict) -> str:

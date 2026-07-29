@@ -1,0 +1,42 @@
+{
+  "id": "www-globenewswire-com-2fcad1b8-2026-07-4",
+  "statement": "AMD claims a total addressable market of about $2 trillion in 2030, with the segment definition not captured in the fetched excerpt.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A vendor market-sizing claim shows how large the supplier expects the opportunity to be, but without a segment definition it cannot be tied to a specific revenue pool.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "A large vendor TAM claim frames expected long-run demand for accelerated compute, informing capacity and roadmap commitments."
+  },
+  "evidence": [
+    {
+      "source": "AMD press release via GlobeNewswire",
+      "url": "https://www.globenewswire.com/news-release/2026/07/23/3332491/0/en/AAI-2026-AMD-Delivers-Full-Stack-Compute-for-the-Agentic-AI-Era.html",
+      "date": "2026-07-23",
+      "excerpt": "~$2 trillion in 2030",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Self-reported vendor market sizing with no segment definition captured; carried by a newswire rather than an audited filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

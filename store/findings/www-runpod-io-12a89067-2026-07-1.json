@@ -1,0 +1,45 @@
+{
+  "id": "www-runpod-io-12a89067-2026-07-1",
+  "statement": "RunPod listed B300 288 GB on-demand cloud capacity at $6.94 per hour on Community Cloud and $7.39 per hour on Secure Cloud as observed on 2026-07-29.",
+  "kind": "measured",
+  "value": {
+    "number": 6.94,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A published vendor on-demand rental rate for the newest listed accelerator, stated as a level with no baseline or change given on the page.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rental rates set the cost of renting rather than buying newest-generation accelerators; recorded as a display-only price level with no stated direction of change."
+  },
+  "evidence": [
+    {
+      "source": "RunPod pricing page",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-07-29",
+      "excerpt": "B300 288 GB - Community \"$6.94/hr\", Secure \"$7.39/hr\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own published list price read directly from the live pricing page, but an open-web secondary source with no prior baseline for comparison."
+  },
+  "dispersion": "conflicting same-key reports: value 2.69 -> 6.94 (tol 1%); sources: RunPod pricing page",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-07-29",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

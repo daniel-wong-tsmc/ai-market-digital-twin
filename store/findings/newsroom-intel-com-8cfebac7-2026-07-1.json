@@ -1,0 +1,47 @@
+{
+  "id": "newsroom-intel-com-8cfebac7-2026-07-1",
+  "statement": "Intel Data Center and AI Group revenue reached $6.3 billion in Q2 2026, up 59% year over year from $3.9 billion, with operating income of $2.5 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 6.3,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A 59% jump in data-center revenue at a second-tier accelerator and server-CPU vendor shows data-center spending is broad rather than confined to the leading GPU supplier.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Strong data-center revenue growth confirms end-customer buying of AI and server infrastructure is expanding, supporting the overall demand track."
+  },
+  "evidence": [
+    {
+      "source": "Intel Newsroom / Intel Q2 2026 earnings release",
+      "url": "https://newsroom.intel.com/corporate/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Data Center and AI Group revenue $6.3 billion, +59% YoY from $3.9B, with operating margin 39.5% (vs 16.1% prior year) and operating income $2.5 billion",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Numbers come from the earnings release but were reached through a secondary coverage page; the primary SEC filing could not be fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-28T12:30:28Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "siliconanalysts-com-528fac70-2026-07-2",
+  "statement": "TSMC monthly CoWoS output is reported at 75-80k wafers per month, ramping toward a 120-130k wafers-per-month target by end-2026, against 2026 CoWoS demand of roughly 1.0 million wafers versus about 370k in 2024 and 670k in 2025.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Packaging capacity is expanding fast, but the reported demand figure runs ahead of the annualised current ramp, so the gap between orders and available capacity persists through the ramp.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rising packaging capacity adds accelerator supply over time, but demand quoted above the current ramp rate keeps allocation tight in the interim."
+  },
+  "evidence": [
+    {
+      "source": "Silicon Analysts analysis article",
+      "url": "https://siliconanalysts.com/analysis/foundry-allocation-status-q1-2026",
+      "date": "2026-06-16",
+      "excerpt": "TSMC monthly CoWoS ramp currently \"75-80k\" wafers per month toward a \"120-130k WPM target by end-2026\".",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analysis site estimate, not a primary TSMC disclosure."
+  },
+  "dispersion": "Current ramp quoted as a 75-80k range; target quoted as a 120-130k range.",
+  "asOf": "2026-07",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-06-16",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "nvidianews-nvidia-com-af565dca-2026-07-4",
+  "statement": "NVIDIA states it is not assuming any Data Center compute revenue from China in its outlook.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "The vendor has removed China data-center compute from its forward plan entirely, so export-control exposure is being carried as zero contribution rather than as a risk-adjusted amount.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Excluding a whole geography from the demand plan removes that end market from the addressable revenue base while leaving upside if policy changes."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA investor relations / newsroom press release",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027",
+      "date": "2026-05-20",
+      "excerpt": "NVIDIA is not assuming any Data Center compute revenue from China in its outlook.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor statement quoted verbatim from the results release."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-05-20",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

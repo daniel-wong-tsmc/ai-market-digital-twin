@@ -1,0 +1,140 @@
+{
+  "headline": "A quiet day, and a price tag appears on this year's chips",
+  "deck": "Nothing new landed on the supply side today. The only fresh numbers are two rental price lists, and they show this year's newest parts now carry an open hourly rate. Memory and the packaging step still set the pace.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Today's only new numbers are price lists",
+      "paragraphs": [
+        "Two sellers refreshed their rental pages today, and that is the whole of today's fresh news. Lambda lists a B200 at $6.69 an hour per chip when you rent eight of them. RunPod lists the larger B300, the one with 288 gigabytes of memory, at $6.94 an hour on its shared service and $7.39 on its private one.",
+        "That is worth a moment. Yesterday Lambda's page put a single B200 at $6.99 an hour, and CoreWeave's list, dated two days ago, still showed no public rate at all for its newest racks; you had to call a salesperson. Now at least one seller is quoting a very new part openly, and quoting it barely above the part before it.",
+        "Read it carefully. These are list prices from two sellers, not a market average, and one day of pages does not make a trend. But an open price on the newest gear is a small sign that the very front of the queue is a little less rationed than it was."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per chip"
+      },
+      "claimFindingIds": [
+        "lambda-ai-8e564ee8-2026-07-1",
+        "www-runpod-io-12a89067-2026-07-1",
+        "lambda-ai-782c15e0-2026-07-1",
+        "www-coreweave-com-d16f3599-2026-07-1"
+      ],
+      "sourceLine": "Lambda, RunPod, CoreWeave",
+      "relatedDocs": [
+        {
+          "url": "https://lambda.ai/pricing",
+          "title": "Lambda cloud rental prices",
+          "outlet": "Lambda (Lambda Labs) - official GPU Cloud pricing page",
+          "date": "2026-07-29"
+        },
+        {
+          "url": "https://www.runpod.io/pricing",
+          "title": "RunPod rental prices",
+          "outlet": "RunPod - official pricing page",
+          "date": "2026-07-29"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The two walls did not move",
+      "paragraphs": [
+        "Nothing arrived today on the physical side, and that is the point. What limits how many chips can ship is still the same two things it was yesterday: memory, and the step that binds each chip to its memory.",
+        "Memory is the harder of the two. A week ago Morgan Stanley said server memory contract prices should rise more than 25 percent in the coming quarter, saw no sign of relief, and warned conditions could get worse in 2027 and 2028. A large server maker reported on 16 July that memory now takes 32 to more than 40 weeks to arrive, at prices about 90 percent above late 2025. At its late-June earnings call, Micron said its own shipments are capped by what it can make rather than by what customers want, and that it cannot yet say when the industry catches up.",
+        "The packaging step is slowly getting better. It is still fully booked with waits of 52 to 78 weeks, but output is climbing toward roughly 125,000 to 130,000 units a month by the end of this year, and a mid-June forecast had the shortfall between what buyers want and what can be delivered closing from about 20 percent to about 10 percent. A mid-June review also put rival packaging houses at 26 to 39 weeks, far shorter waits for anyone willing to move.",
+        "So the picture is unchanged from yesterday: one limit easing, the other not."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending, year over year"
+      },
+      "claimFindingIds": [
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "finance-biggo-com-6dfe92b3-2026-07-3",
+        "www-techtimes-com-669598b1-2026-07-1",
+        "finance-yahoo-com-ea29a8bf-2026-07-1",
+        "www-forbes-com-7c91863a-2026-07-1",
+        "finance-biggo-com-ae5dcd41-2026-07-2",
+        "www-trendforce-com-368d8402-2026-07-1",
+        "siliconanalysts-com-528fac70-2026-07-5"
+      ],
+      "sourceLine": "BigGo Finance, TechTimes, Yahoo Finance, Forbes, TrendForce, Silicon Analysts",
+      "relatedDocs": []
+    },
+    {
+      "n": 3,
+      "title": "What to watch next",
+      "paragraphs": [
+        "First, the memory contract price for the quarter now under way. More than 25 percent is what the market expects. Anything above that and every finished chip costs more, and the queue stays long.",
+        "Second, packaging output. The climb toward roughly 125,000 to 130,000 units a month by the end of this year is the only near-term way the pipe widens.",
+        "Third, whether the second supplier becomes a real one. AMD's Helios racks reached full production on 23 July with shipments starting this quarter, and Anthropic and OpenAI are named among the takers. But an analysis dated 15 July puts the high-volume build-up out at the second quarter of 2027. Announcements are not deliveries.",
+        "Fourth, keep an eye on the price pages themselves. If more sellers start posting open rates for this year's parts, as two did today, that is the shortage loosening in the one place a buyer can actually see it."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "finance-biggo-com-ae5dcd41-2026-07-2",
+        "www-servethehome-com-b11b71a3-2026-07-2",
+        "www-globenewswire-com-2fcad1b8-2026-07-2",
+        "newsletter-semianalysis-com-5136a06c-2026-07-1",
+        "lambda-ai-8e564ee8-2026-07-1",
+        "www-runpod-io-12a89067-2026-07-1"
+      ],
+      "sourceLine": "BigGo Finance, ServeTheHome, GlobeNewswire, SemiAnalysis, Lambda, RunPod",
+      "relatedDocs": [
+        {
+          "url": "https://www.globenewswire.com/news-release/2026/07/23/3332491/0/en/AAI-2026-AMD-Delivers-Full-Stack-Compute-for-the-Agentic-AI-Era.html",
+          "title": "AMD names Anthropic and OpenAI as takers of its Helios racks",
+          "outlet": "AMD (press release via GlobeNewswire)",
+          "date": "2026-07-23"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "The street price per chip is where scarcity shows up before anyone announces it.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Spending on new memory plants is the earliest sign the harder limit will one day ease.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Servers actually shipped shows how much of all that ordering gets past the holdup.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-07",
+      "text": "Street price per chip sits near $32,500, back up from about $30,000.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "Servers shipped are running about 69 percent above a year ago, down from more than 100 percent earlier this year.",
+      "scene": 3
+    }
+  ],
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-07-29",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "b8b893078f114f5dd71ca0ef89514d9e06e18dea4878e9428db3d263294d4faa",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-07-29T01:44:29.038798+00:00"
+  }
+}

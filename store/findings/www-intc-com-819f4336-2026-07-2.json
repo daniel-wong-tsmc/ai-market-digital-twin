@@ -1,0 +1,43 @@
+{
+  "id": "www-intc-com-819f4336-2026-07-2",
+  "statement": "Intel guided Q3 2026 revenue to a range of $15.8 billion to $16.8 billion, with GAAP gross margin of approximately 41.0%.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "The guidance midpoint sits above the $16.1 billion just reported, so the vendor expects demand to hold or improve; a range rather than a point figure is given, so no single number is asserted.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Vendor guidance sets the expected shipment run rate for data-center and client silicon and the foundry loading behind it."
+  },
+  "evidence": [
+    {
+      "source": "Intel investor-relations press release",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Intel is forecasting third-quarter 2026 revenue of $15.8 billion to $16.8 billion",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor guidance quoted verbatim from the results release."
+  },
+  "dispersion": "Guidance given as a $15.8B to $16.8B range rather than a point estimate.",
+  "asOf": "2026-07",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-29T01:08:42Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

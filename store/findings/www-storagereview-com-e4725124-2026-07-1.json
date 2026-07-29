@@ -1,0 +1,45 @@
+{
+  "id": "www-storagereview-com-e4725124-2026-07-1",
+  "statement": "AMD launched the Instinct MI455X accelerator and 72-GPU Helios rack, stating the racks are in production today with OpenAI, Meta, Anthropic, Microsoft and Oracle named as adopters.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A rack-scale competitor in production with the largest AI buyers named is the clearest evidence yet of credible non-Nvidia accelerator capacity reaching the market.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.networking-fabric",
+      "infrastructure.hyperscale-cloud",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "A shipping rack-scale alternative adds accelerator supply outside the incumbent, easing allocation pressure and increasing buyer choice."
+  },
+  "evidence": [
+    {
+      "source": "StorageReview",
+      "url": "https://www.storagereview.com/news/amd-mi455x-and-helios-432gb-hbm4-72-gpu-racks-and-a-real-answer-to-vera-rubin",
+      "date": "2026-07-23",
+      "excerpt": "Production status: racks 'are in production today'; named adopters: 'OpenAI, Meta, Anthropic, Microsoft, Oracle'.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary trade outlet covering a vendor launch event; adopter and production claims are vendor-stated and volumes are not disclosed."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-28T12:30:28Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "www-storagereview-com-e4725124-2026-07-2",
+  "statement": "AMD claims the MI455X delivers 10 to 15% more tokens per second per GPU and up to 30% more tokens per dollar than NVIDIA's Vera Rubin generation.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "If the cost-per-token gap holds in real deployments, buyers gain a pricing lever against the incumbent for the first time in this generation.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "models.reasoning-agentic",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "A cheaper cost per token from a second supplier increases effective compute supply per dollar and pressures incumbent pricing."
+  },
+  "evidence": [
+    {
+      "source": "StorageReview",
+      "url": "https://www.storagereview.com/news/amd-mi455x-and-helios-432gb-hbm4-72-gpu-racks-and-a-real-answer-to-vera-rubin",
+      "date": "2026-07-23",
+      "excerpt": "AMD claims '10 to 15% more tokens per second per GPU' and 'up to 30% more tokens per dollar'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor performance claim relayed by one secondary outlet with no independent benchmark; recorded qualitatively with no value."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "flopsPerDollar",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-28T12:30:28Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
