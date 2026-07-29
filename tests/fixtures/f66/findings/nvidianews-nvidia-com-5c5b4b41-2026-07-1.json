@@ -1,0 +1,49 @@
+{
+  "id": "nvidianews-nvidia-com-5c5b4b41-2026-07-1",
+  "statement": "SK Group and NVIDIA announced a '$500-billion-plus' partnership on July 24, 2026, formalized through letters of intent covering AI factory construction and next-generation memory supply.",
+  "kind": "measured",
+  "value": {
+    "number": 500.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A commitment of this size from a single industrial group is one of the largest customer commitments on record for NVIDIA's platform and signals multi-year forward demand rather than a spot order.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "energy.power-generation",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "A headline partnership spanning AI factories and memory supply locks a very large buyer to NVIDIA's platform while committing memory capacity to it, pulling through GPUs, HBM, data-center build and power."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/sk-group-and-nvidia-expand-strategic-partnership-across-ai-factories-and-next-generation-memory",
+      "date": "2026-07-24",
+      "excerpt": "SK Group and NVIDIA announced plans for a '$500-billion-plus' comprehensive partnership to build AI infrastructure, formalized via letters of intent spanning AI factory construction and next-generation memory supply.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor newsroom announcement (filing-grade primary tier), with the figure and structure quoted directly; note the commitment is at letter-of-intent stage, not a binding purchase order."
+  },
+  "dispersion": "conflicting same-key reports: value 2.0 -> 500.0 (tol 1%); sources: NVIDIA Newsroom",
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-07-24",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

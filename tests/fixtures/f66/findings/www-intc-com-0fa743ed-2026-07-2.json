@@ -1,0 +1,54 @@
+{
+  "id": "www-intc-com-0fa743ed-2026-07-2",
+  "statement": "Intel Foundry revenue reached $5.8 billion in Q2 2026, up 31% YoY, attributed to improved factory yields and faster cycle times.",
+  "kind": "measured",
+  "value": {
+    "number": 5.8,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A second viable leading-edge foundry with improving yields is the main structural relief valve for a supply chain currently bottlenecked at one manufacturer.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising foundry revenue on better yields and cycle times signals added leading-edge wafer and packaging capacity available to accelerator designers."
+  },
+  "evidence": [
+    {
+      "source": "Intel Corporation Investor Relations (intc.com)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Intel Foundry: \"$5.8 billion, up 31% YoY,\" attributed to improved factory yields and faster cycle times.",
+      "tier": "primary"
+    },
+    {
+      "source": "Intel Corporation Investor Relations (intc.com)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "We delivered a strong second quarter, exceeding our financial guidance on robust demand and improved execution, including volume upside driven by higher factory yields and improved cycle times.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: Intel's own earnings press release with attributed CFO commentary on the yield and cycle-time drivers."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-24T00:59:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

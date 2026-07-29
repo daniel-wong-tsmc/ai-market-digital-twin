@@ -1,0 +1,41 @@
+{
+  "id": "newsroom-amd-com-cf6c6318-2026-07-3",
+  "statement": "The MI400 launch disclosed no deployment commitments, order quantities, or revenue guidance; Meta appeared only in a related announcement without specifics.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Without named customers or volumes, a launch tells you a part exists but not that anyone has bought it, which is the difference between a product event and a design win.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Absence of disclosed customer commitments means the launch does not yet convert into evidence of accelerator share shifting away from the incumbent."
+  },
+  "evidence": [
+    {
+      "source": "AMD Newsroom",
+      "url": "https://newsroom.amd.com/news/aai-2026-mi400-instinct-update/",
+      "date": "2026-07-23",
+      "excerpt": "the MI400 launch article itself did not disclose specific new deployment commitments, order quantities, or revenue/guidance figures beyond the product specs above.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Explicit statement in the source that commitments were not disclosed; absence of disclosure in one article is not proof that no commitments exist."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-07-26T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

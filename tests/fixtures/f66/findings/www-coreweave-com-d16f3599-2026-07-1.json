@@ -1,0 +1,59 @@
+{
+  "id": "www-coreweave-com-d16f3599-2026-07-1",
+  "statement": "CoreWeave's live pricing page lists on-demand rates including $49.24/hour for an 8-GPU HGX H100 node and $68.80/hour for an 8-GPU HGX B200 node, while its newest GB300 NVL72 and HGX B300 systems show no public rate and are quoted only via sales.",
+  "kind": "measured",
+  "value": {
+    "number": 6.16,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A named neocloud's published rate card is the cleanest read on what current-generation capacity actually costs, and the newest parts being sales-quoted only suggests they are not freely available on demand.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Published node rates set the observable rental level for deployed accelerators; withheld pricing on the newest systems is a display-level observation about availability rather than a scored demand signal."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-07-27",
+      "excerpt": "NVIDIA HGX H100, '8 GPU Count, 80 VRAM (GB)' at $49.24/hour on-demand",
+      "tier": "secondary"
+    },
+    {
+      "source": "CoreWeave",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-07-27",
+      "excerpt": "NVIDIA HGX B200, '8 GPU Count, 180 VRAM (GB)' at $68.80/hour on-demand",
+      "tier": "secondary"
+    },
+    {
+      "source": "CoreWeave",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-07-27",
+      "excerpt": "NVIDIA GB300 NVL72, '4 GPUs, 279GB VRAM', pricing 'Contact sales' (no on-demand rate shown)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own live rate card but carried at secondary tier with no last-updated date on the page, and no stated prior level to compare against."
+  },
+  "dispersion": "A third-party normalization published 2026-07-01 cites $21.60/hr for an 8-GPU H100 node against the $49.24/hour shown live, indicating stale outside figures circulate alongside the current page.",
+  "asOf": "2026-07",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "coreweave",
+  "observedAt": "2026-07-27",
+  "capturedAt": "2026-07-27T10:49:29Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

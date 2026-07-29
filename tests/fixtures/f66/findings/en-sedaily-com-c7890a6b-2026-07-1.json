@@ -1,0 +1,42 @@
+{
+  "id": "en-sedaily-com-c7890a6b-2026-07-1",
+  "statement": "HBM memory remains supply-constrained with suppliers keeping pricing power: HBM4 contract prices are forecast to roughly double into 2027 (from ~$2 to $4-5 per gigabit), while HBM consumes ~3x the wafer capacity of DDR5, carries 4-6 month production cycles and low initial yields, and is projected to reach ~30% of total DRAM production capacity.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Long-term contracts tying up 20-30% of general DRAM capacity, longer HBM4 cycles and low yields keep memory tight while demand from Nvidia's HBM4-based Vera Rubin (H2 2027) builds, so suppliers retain pricing power.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Tight HBM capacity and doubling prices lift memory-maker revenue and margins (positive for HBM) but raise the bill-of-materials cost and constrain the memory supply feeding merchant AI GPUs."
+  },
+  "evidence": [
+    {
+      "source": "Seoul Economic Daily (en.sedaily.com)",
+      "url": "https://en.sedaily.com/finance/2026/07/12/hbm4-prices-to-double-next-year-as-samsung-sk-hynix-keep",
+      "date": "2026-07-12",
+      "excerpt": "memory suppliers retain pricing power; HBM tightness intensifies through 2026 into 2027 with prices set to roughly double",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary trade-press source relaying analyst forecasts; no primary filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-07",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-07-12",
+  "capturedAt": "2026-07-16T13:19:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

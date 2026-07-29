@@ -1,0 +1,168 @@
+{
+  "headline": "The newest racks still come without a price tag",
+  "deck": "Little changed today. The one fresh thing worth noticing: rental rates are published for last year's chips but not for this year's biggest systems. That is what scarcity looks like from the outside.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "A quiet day, with one tell",
+      "paragraphs": [
+        "Nothing new landed today on the supply side. The only page that moved is a price list. CoreWeave's rates, dated today, show $49.24 an hour for an eight-chip H100 node and $68.80 an hour for an eight-chip B200 node. Its newest systems, the GB300 rack and the B300, carry no public rate at all. You have to call a salesperson.",
+        "Other sellers tell the same story. RunPod publishes a full ladder of single-chip rates, from $2.99 an hour for an H100 to $7.39 for a B300. Lambda lists only older NVIDIA parts and prices its longer contracts on request. Where a seller has plenty, it posts a number. Where it does not, it takes your call.",
+        "The one place with a published number for the newest rack-scale gear shows it is the dearest end of the market: a median of $18.77 per chip-hour for a GB200, about 42 percent more than a year ago, while older parts moved about 11 percent."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per chip"
+      },
+      "claimFindingIds": [
+        "www-coreweave-com-d16f3599-2026-07-1",
+        "www-runpod-io-6fa9df75-2026-07-1",
+        "lambda-ai-c205c6dc-2026-07-3",
+        "lambda-ai-751f0165-2026-07-3",
+        "intuitionlabs-ai-322b5fbd-2026-07-1"
+      ],
+      "sourceLine": "CoreWeave, RunPod, Lambda, IntuitionLabs",
+      "relatedDocs": [
+        {
+          "url": "https://www.coreweave.com/pricing",
+          "title": "CoreWeave Cloud Pricing",
+          "outlet": "CoreWeave",
+          "date": "2026-07-27"
+        },
+        {
+          "url": "https://intuitionlabs.ai/articles/data-center-gpu-pricing-2026",
+          "title": "Data Center GPU Pricing 2026",
+          "outlet": "IntuitionLabs",
+          "date": "2026-07-20"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The two walls have not moved",
+      "paragraphs": [
+        "The reason is unchanged from last week. Two parts hold everything up. One is the advanced packaging that binds each chip together: it is fully booked through this year, with waits of 52 to 78 weeks, and the head of the company that does most of it calls the capacity exceptionally limited.",
+        "The other is memory, and it is the worse of the two. Morgan Stanley expects server memory contract prices to rise more than 25 percent in the coming quarter and sees no sign the shortage is easing, warning it could get worse in 2027 and 2028. A major server maker says memory now takes 32 to more than 40 weeks to arrive, at prices roughly 90 percent above late 2025. The head of the largest memory supplier said on 23 July the squeeze could last through 2027.",
+        "None of that is new today. It is simply still true, and it is why a chip maker can announce a product without being able to sell many of them."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending, year over year"
+      },
+      "claimFindingIds": [
+        "www-forbes-com-7c91863a-2026-07-1",
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "finance-biggo-com-6dfe92b3-2026-07-3",
+        "www-techtimes-com-669598b1-2026-07-1",
+        "www-ad-hoc-news-de-94ca546c-2026-07-2"
+      ],
+      "sourceLine": "Forbes, BigGo Finance, TechTimes, ad-hoc-news.de",
+      "relatedDocs": []
+    },
+    {
+      "n": 3,
+      "title": "More sellers, the same factories",
+      "paragraphs": [
+        "The buyer has more choice than a year ago. AMD put its Helios rack system into production on 23 July, with Anthropic signed up for as much as two gigawatts and OpenAI starting in the final quarter of this year. Intel's contract manufacturing arm reported $5.8 billion of revenue, up 31 percent. NVIDIA's share of AI chips is expected to fall from 87 percent in 2024 to about 75 percent this year, with the big cloud firms' own in-house chips passing $25 billion.",
+        "More choice does not mean more chips. Everyone queues at the same packaging lines and the same memory plants. AMD holds only about 11 percent of that packaging capacity, and has to split it between its server processors and its AI chips, so every slot spent on one is a slot not spent on the other.",
+        "That is the shape of the whole market right now: plenty of orders, plenty of names selling, and a finish line that only widens as fast as two sets of factories can widen it."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "ir-amd-com-7f18efdc-2026-07-1",
+        "www-servethehome-com-b11b71a3-2026-07-2",
+        "www-intc-com-0fa743ed-2026-07-2",
+        "siliconanalysts-com-47ffeeeb-2026-07-1",
+        "siliconanalysts-com-47ffeeeb-2026-07-3",
+        "www-forbes-com-7c91863a-2026-07-3"
+      ],
+      "sourceLine": "AMD Investor Relations, ServeTheHome, Intel Investor Relations, Silicon Analysts, Forbes",
+      "relatedDocs": [
+        {
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era",
+          "title": "AMD Delivers Full-Stack Compute for the Agentic AI Era",
+          "outlet": "AMD Investor Relations (ir.amd.com press release)",
+          "date": "2026-07-23"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Three things, in order of how soon they matter. First, the memory price rise expected in the coming quarter. If it lands above 25 percent, every finished chip costs more and the shortage keeps its grip. Second, packaging output: the climb toward roughly 125,000 to 130,000 units a month by the end of this year is the only near-term way to widen the pipe. A mid-June forecast had the gap between what buyers want and what packaging can deliver closing from about 20 percent to about 10 percent by year end, so watch whether that pace holds.",
+        "Third, and easiest to check yourself: the price lists. The day CoreWeave posts a public hourly rate for its newest racks instead of a sales phone number, supply has caught up enough to sell on a shelf. Until then, take announcements as intentions, not deliveries."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "finance-biggo-com-ae5dcd41-2026-07-2",
+        "www-trendforce-com-368d8402-2026-07-1",
+        "www-coreweave-com-d16f3599-2026-07-1"
+      ],
+      "sourceLine": "BigGo Finance, TrendForce, CoreWeave",
+      "relatedDocs": [
+        {
+          "url": "https://www.trendforce.com/news/2026/06/15/news-tsmc-cowos-supply-demand-gap-reportedly-seen-narrowing-from-20-to-10-by-end-2026-as-capacity-expands/",
+          "title": "TSMC Packaging Supply-Demand Gap Seen Narrowing from 20% to 10% by End-2026 as Capacity Expands",
+          "outlet": "TrendForce",
+          "date": "2026-06-15"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "The street price per chip is where scarcity shows up before anyone announces it.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Spending on new memory plants is the clearest early sign the tightest link will loosen.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Servers actually shipped shows how much of all that ordering gets past the holdup.",
+      "scene": 3
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Which way the biggest buyers revise their budgets tells you if demand keeps pressing on supply.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-07",
+      "text": "Street price per chip sits near $32,500, back up after a dip, with parts still scarce.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "Servers shipped are running about 69 percent above a year ago, down from more than 100 percent earlier this year.",
+      "scene": 3
+    }
+  ],
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-07-27",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "9ca0b24857900d42317295b908c9501aad1fc6f51cb43618e26caa4482b82199",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-07-27T11:17:48.174090+00:00"
+  }
+}

@@ -38,6 +38,8 @@ from gpu_agent.implication import (
 from gpu_agent.narrator.schema import NarratorAnswer, NarratorMeta, StoryArtifact
 from gpu_agent.narrator.store import StoryStore
 from gpu_agent.narrator.inputs import build_narrator_inputs
+from gpu_agent.citation_audit import AuditStore, run_audit
+from gpu_agent.numeric_tokens import value_renderings
 from gpu_agent.narrator.prompt import emit_narrator_bundle
 from gpu_agent.narrator.gate import gate_narrator
 from gpu_agent.memory import build_memory_bundle, render_memory_text
@@ -760,6 +762,62 @@ def _narrator(args) -> int:
     print("gpu-agent narrator: error: exactly one of --emit-prompt, --recorded, or "
           "--record-fallback is required", file=sys.stderr)
     return 2
+
+def _series_extra_texts(store_root) -> list[str]:
+    """F66 D5b, sourcing option (a) (user-approved 2026-07-29): the story quotes
+    numbers we computed ourselves from the price series, which live in no finding.
+    The CLI reads them and hands them to the audit, so `gpu_agent/citation_audit.py`
+    stays a leaf with no gpu_agent.dashboard import.
+
+    Scope mirrors what the narrator brain actually saw (narrator/inputs.py:68-81):
+    the last 8 points of each charted series, not the full history -- the writer
+    cannot legitimately quote a number it was never shown, and a wider pool would
+    only weaken the audit.
+    """
+    from gpu_agent.dashboard.agenda import read_series
+    from gpu_agent.dashboard.story_model import _SERIES_IDS
+    out: list[str] = []
+    series = read_series(pathlib.Path(store_root) / "series", _SERIES_IDS)
+    for ind in _SERIES_IDS:
+        for row in (series.get(ind) or [])[-8:]:
+            try:
+                out.extend(value_renderings(float(row["value"])))
+            except (KeyError, TypeError, ValueError):
+                continue
+    return out
+
+def _audit_citations(args) -> int:
+    """Handler for `gpu-agent audit-citations` (F66 Task 3): re-verify every number
+    in the finished story scenes and implication lines against the findings those
+    claims actually cite.
+
+    Exit 0 clean, exit 1 with a violation block on stderr. The artifact is written
+    on BOTH paths, which deliberately differs from the gates that write nothing on
+    rejection: the audit record is evidence, and a cycle that flagged something must
+    leave a trace of what and why.
+    """
+    root = pathlib.Path(args.store)
+    artifact = run_audit(root, args.category, args.date,
+                         extra_texts=_series_extra_texts(root))
+    if args.out:
+        path = pathlib.Path(args.out)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(artifact.model_dump_json(indent=2), encoding="utf-8")
+    else:
+        path = AuditStore(root).write(artifact)
+
+    violations: list[str] = []
+    for c in artifact.claims:
+        # wording deliberately echoes the F14 wiki gate so the two read the same
+        violations.extend(f"{c.claimKey}: uncited number {t}" for t in c.flaggedTokens)
+        violations.extend(f"{c.claimKey}: unresolved finding {i}" for i in c.unresolvedIds)
+    s = artifact.summary
+    if violations:
+        print("CITATION AUDIT FAILED:", *violations, sep="\n  ", file=sys.stderr)
+        print(f"audit record: {path}", file=sys.stderr)
+        return 1
+    print(f"wrote {path}  claims={s['claimsAudited']} flagged=0 skipped={s['skipped']}")
+    return 0
 
 def _eval(args) -> int:
     """F6 eval harness driver. Emit/record cycle mirrors extract/judge/thesis; run-dir files
@@ -1568,6 +1626,15 @@ def main(argv=None) -> int:
                     help="JSON file of violation sentences (required with --record-fallback)")
     nr.add_argument("--model", default="opus", help="narratorMeta.model (default: opus)")
     nr.add_argument("--retries", type=int, default=0, help="narratorMeta.retries (default: 0)")
+    ac = sub.add_parser("audit-citations",
+                        help="F66: re-verify every number in the finished story scenes and "
+                             "implication lines against the findings they cite")
+    ac.add_argument("--store", default="store",
+                    help="store root (holds <category>/story/, implications/, findings/, series/)")
+    ac.add_argument("--category", required=True, help="indicator category id (e.g. chips.merchant-gpu)")
+    ac.add_argument("--date", required=True, type=_narrator_date, help="story date, YYYY-MM-DD")
+    ac.add_argument("--out", default=None,
+                    help="write the audit artifact here instead of <store>/<category>/audit/<date>.json")
     ev = sub.add_parser("eval", help="F6 eval harness: golden-set emit/record + rebaseline")
     ev.add_argument("action", choices=["emit-brain", "record-brain", "emit-grade",
                                        "record-grade", "verdict", "rebaseline"])
@@ -1748,6 +1815,8 @@ def main(argv=None) -> int:
             return 1
     if args.cmd == "narrator":
         return _narrator(args)
+    if args.cmd == "audit-citations":
+        return _audit_citations(args)
     if args.cmd == "eval":
         try:
             return _eval(args)
