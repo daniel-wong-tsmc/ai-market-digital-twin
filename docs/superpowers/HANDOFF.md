@@ -1058,7 +1058,30 @@ User gave **"go"** 2026-07-06. Actioned:
 
 ## ⚠ CONCURRENT-INSTANCE COORDINATION (still live)
 
-- **F106 lane OPEN — CLAIMED 2026-07-28 (this instance):** branch `f106-huggingnews`, worktree
+- **F106 lane BUILT + REVIEWED — AWAITING USER MERGE (2026-07-29).** Branch `f106-huggingnews` (9
+  commits `5fd18ae`→`da2d717`, off merge-base `534f98c`), worktree `.worktrees/f106-huggingnews`
+  retained. Built subagent-driven: fresh implementer per task, per-task spec+quality review, whole-
+  branch Opus review = READY TO MERGE WITH FIXES (4 Important, ALL fixed in `f96811d` + scoped Opus
+  re-review = all addressed, no new breakage). Suite on the branch **2009 passed / 7 skipped**
+  (pre-branch baseline 1987/7); F6 / scoring-v1 replay / narrator / F83 pins green; forbidden-diff
+  vs merge-base EMPTY; run-cycle SKILL.md untouched. Shipped: webreach secret resolution + per-verb
+  auth argv + error scrubbing; the keyed `huggingnews` web-reach channel (anonymous degrade) with a
+  `keyed` flag in preflight's JSON; a validated `huggingnewsTags` manifest field (GPU seeds
+  `ai-compute-chips`); the gather-category tiered discovery sub-step (leads chased to primaries,
+  story ingest only as a logged fallback). **Key hygiene VERIFIED:** the real key appears zero times
+  in the branch's net diff, full history, and working tree; it lives only in gitignored
+  `.superpowers/secrets/`. **THREE user-approved interactive decisions (NOT AFK-defaults):** the
+  `installNotNeeded: true` registry flag + amended install-recipe invariant; the key-prefix guard
+  built without spelling the prefix; and the close-out key scan taken as net-diff + real-key scans
+  (the plan's bare `grep "ak_"` over `git log -p` cannot reach 0 — it matches the guard's own line
+  and ordinary words like `peak_`). ⚠ `main` advanced past this branch's base (F105 `4692c7c`,
+  F79-G4 `42594e2`) — checks were taken against merge-base `534f98c`, NOT current main; re-verify
+  after rebase/merge. NOT proven live: the real API's response shape and auth header (preflight's
+  keyed check is a local file-exists check, not a probe), and `SECRETS_DIR` is relative so a cycle
+  driven from a worktree would silently go anonymous. Details + live criteria:
+  `.superpowers/handoffs/f106-huggingnews-DONE.md` (gitignored, in the worktree) and the
+  `docs/fix-backlog.md` F106 entry. **Only the user merges.**
+- **F106 lane (original claim, 2026-07-28):** branch `f106-huggingnews`, worktree
   `.worktrees/f106-huggingnews`. Deliverable: the 5-task plan
   `docs/superpowers/plans/2026-07-28-f106-huggingnews-source.md` (spec `52c41fb`). Files claimed:
   `gpu_agent/gathering/webreach.py`, `gpu_agent/web_reach_ensure.py`,
