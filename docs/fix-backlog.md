@@ -1455,7 +1455,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   D6 licensed-source discipline applies. *(Feature — own brainstorm/spec/plan when it starts.)*
   *(Concurrent-mint caveat: F106 chosen against a backlog max of F105 on 2026-07-28; renumber if collided.)*
 
-- [ ] **F107 — thesis seam replicate instability: range 2.5 on an UNCHANGED prompt (2026-07-28).**
+- [x] **F107 — thesis seam replicate instability: range 2.5 on an UNCHANGED prompt (2026-07-28).**
   The F105 3-replicate eval run showed the thesis seam scoring 5.000 / 7.500 / 5.500 across three
   independent draws — a 2.5-point spread on a prompt whose hash (`4a9d9817951c`) did not move and is
   identical to the incumbent baseline. Three-run mean is 6.000, exactly the incumbent baseline mean,
@@ -1477,6 +1477,28 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   assuming. F108 (seam-scoped rebaseline) unblocks F105 without needing this answered first; this
   item is the real fix for the underlying noise.
   *(Concurrent-mint caveat: F107 chosen against a backlog max of F106 on 2026-07-28; renumber if collided.)*
+  **CLOSED 2026-07-29 — user decision (a), interactive (NOT AFK): close as a single-run outlier.**
+  Diagnosed by running option B of the decision package: 3 fresh replicates over the **thesis seam
+  only**, prompt untouched, ~23 Opus dispatches, pre-committed disposition written before any
+  dispatch. Seam means **5.50 / 5.00 / 5.00**; `steelman` = **1 in all six fresh draws**; negatives
+  0-2 throughout (calibration held). The 2026-07-28 swing did not reproduce and the escalation branch
+  did not fire — dispersion (range 0.5) supports the historical ~0.28 wobble, **not** the 1.32
+  scenario. Zero hand-edits, zero `--force`, zero bypass flags; two disclosed deviations (a
+  coordinator transcription slip on r1, restored byte-verbatim; r2/r3 dispatch wording expanded after
+  r1's gate round-trips). Baseline untouched — these filtered thesis-only runs **must NEVER be fed to
+  `eval rebaseline`** (pre-committed, standing).
+  **Durable record: `docs/superpowers/eval-notes/2026-07-29-f107-thesis-replicates-note.md`.**
+  **CAVEAT carried forward:** the closure branch required the seam in 5.5-6.5 and it did not land
+  there — the **level** sat at or below the 5.5 bar in 2 of 3 draws, so a healthy unchanged prompt
+  would marginal-fail a real gate today. That is a LEVEL question (grader severity drift vs a true
+  level shift), not the DISPERSION question F107 asked, and it is latent: the thesis bar only binds
+  when the thesis prompt changes. **Revisit grader-severity-vs-bar ONLY when the thesis prompt next
+  changes.**
+  **Side findings that remain OPEN (named here deliberately, NOT minted as new F-items):** (1) the
+  rubric is not pin-covered — `tests/test_evals_baseline_pin.py` hashes the four brain prompts but not
+  the rubric text, so a `steelman` wording edit would change all future grading with no test turning
+  red; (2) `append_run_to_history` — the function that widens epsilon as real noise accumulates — has
+  **no production caller** anywhere in the package and is exercised only by its own tests.
 
 - [x] **F108 — seam-scoped rebaseline (`eval rebaseline --seams <seam> ...`).**
   `rebaseline_v2` today rebuilds the entire baseline from all four seams at once: every seam's mean,
