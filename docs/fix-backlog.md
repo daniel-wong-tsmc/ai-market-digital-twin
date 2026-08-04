@@ -556,14 +556,22 @@
   `docs/superpowers/specs/2026-08-04-f68-followups-audit.md`): (b)–(f) were ALREADY BUILT
   and merged on `fix/lane-polish` (`e173ebc`, 2026-07-04) — all five survived the F78
   rewrite, are live in the current render path, and are test-pinned in
-  `tests/test_lane_polish.py`; the entry was just never ticked.** Only **(a)** has residual
-  work: `lint_thesis_prose` exists (`gpu_agent/thesis.py:503`) with its thresholds already
-  chosen, but has ZERO callers — the lane-polish plan deferred the wire-up. Wiring it is
-  behaviour-shaping (6 of the 52 live book entries violate it today), so it is
-  question-stopped, not picked: see
-  `.superpowers/handoffs/f68-output-followups-QUESTIONS.md`. Tick F68 once (a) is answered
-  and wired. Audit side-finding: `ASE` is the newest off-allowlist prose token — the same
-  recurrence the durable fix below (line ~1050) owns, not F68's.
+  `tests/test_lane_polish.py`; the entry was just never ticked.** Only **(a)** had residual
+  work: `lint_thesis_prose` existed (`gpu_agent/thesis.py`) with its thresholds already
+  chosen, but had ZERO callers — the lane-polish plan deferred the wire-up. Wiring it was
+  behaviour-shaping, so it was question-stopped, and the user answered interactively
+  2026-08-04: **switch it ON, BLOCK on violation** (judge-path semantics — one targeted
+  rewrite re-dispatch, then fail loud), **and allowlist `ASE` now**. Shipped:
+  `lint_answer_prose` + the shared `_adjusted_statement` parse in `gpu_agent/thesis.py`,
+  the block in `cli.py` `_thesis` (before `gate_answer`, shared `voice-lint: ` prefix,
+  book byte-unchanged on failure), `ASE` added to `registry/acronyms.json`, 11 tests in
+  `tests/test_thesis_prose_lint.py`. Baseline pin GREEN (no emitted prompt bytes changed).
+  5 of 52 standing entries still carry two-sentence statements; per the user they are NOT
+  to be rewritten by hand — they clean up as those theses are next re-judged, and are inert
+  until then (only an `adjusted` verdict rewrites a statement). The recurring off-allowlist
+  token problem itself stays with the durable fix below (line ~1050).
+  **All six sub-items are now closed — tick this box on merge of branch
+  `f68-output-followups` (per repo convention the tick carries the merge commit).**
 - [x] **F69 — The web-reach layer: pluggable external fetchers for the gather swarm. DONE (merged `e167c6b`, suite 923/3).** Spec
   `docs/superpowers/specs/2026-07-04-web-reach-layer-design.md`, plan
   `docs/superpowers/plans/2026-07-04-web-reach-layer.md`. Data-driven registry

@@ -15,11 +15,16 @@ F78 intact — each is still live in the current render path, each still has a p
 The backlog entry was simply never ticked. **Only sub-item (a) has residual work**, and
 that residual work is a design fork, not a mechanical item — see below.
 
-Net code change from this lane: **none**. This is an audit-only outcome.
+Net code change from this lane: the F68(a) wire-up only (after the user answered the
+question-stop). Sub-items (b)–(f) needed no code.
 
 ## Per-sub-item verdicts
 
-### (a) Thesis-prose deterministic lint — PARTLY REAL → question-stopped
+### (a) Thesis-prose deterministic lint — WAS question-stopped, now ANSWERED and BUILT
+
+**Resolved 2026-08-04 (user-approved, interactive). See "Decision provenance" for the
+three answers and "F68(a) wire-up as built" for what shipped.** The audit finding that
+prompted the question-stop is preserved below.
 
 - **Built:** `lint_thesis_prose(statement, mechanism)` exists at
   `gpu_agent/thesis.py:503` (commit `0547aea`). It reuses `reader.lint_prose` with
@@ -90,12 +95,63 @@ No sub-item required a change to emitted brain-prompt bytes.
 run-cycle skill, gpu_agent/narrator/prompt.py, gpu_agent/gathering, gpu_agent/manifest)
 were read-modified by this lane.
 
+## F68(a) wire-up as built
+
+- **`_adjusted_statement(verdict, rationale)`** (`gpu_agent/thesis.py`) — the
+  `"ADJUSTED:"`-prefix parse, lifted verbatim out of `_apply_judgment_record` so the lint
+  and the apply path can never check different text. Returns `None` for "no replacement
+  statement" and `""` for the bare-`ADJUSTED:` empty replacement, preserving the old
+  inline behaviour exactly; pinned by
+  `test_adjusted_statement_distinguishes_no_replacement_from_an_empty_one`.
+- **`lint_answer_prose(answer)`** (`gpu_agent/thesis.py`) — lifts `lint_thesis_prose` to a
+  whole `ThesisAnswer`. Lints proposals' `statement` + `mechanism`, judgments' `mechanism`,
+  and an `adjusted` verdict's replacement statement. Labels each violation with the same
+  key `gate_answer` uses (thesis id / routed slug) so a blocked cycle names what to
+  re-dispatch.
+- **`gpu_agent/cli.py` `_thesis`** — runs the lint BEFORE `gate_answer`, returning through
+  the existing `_report_voice_violations` so it shares the judge path's `voice-lint: `
+  stderr prefix that the run-cycle skill already greps. `store.write` is never reached, so
+  a blocked answer leaves the book byte-unchanged.
+- **`registry/acronyms.json`** — `"ASE"` added to the `allowed` data list.
+- Tests: `tests/test_thesis_prose_lint.py` (11), TDD — RED on the missing import first.
+
+**Live blast radius, re-measured after the ASE addition:** 5 of 52 standing entries would
+violate (down from 6; all five are two-sentence `statement`s). In practice the bite is
+smaller still: the lint only sees prose written in a *recorded answer*, and a statement is
+only rewritten by an `adjusted` verdict — so these five are inert until someone adjusts
+those specific theses. Per the user's instruction they were **not** rewritten by this lane;
+they clean up as they are re-judged in live cycles.
+
 ## Decision provenance
 
 - Verdicts (b)–(f) = **verified facts about current code**, not choices. Each cites the
   file:line and the commit that produced it.
-- (a) = **question-stopped**, per the question-stop rule. No AFK-default was taken; no
-  code was written for it.
-- Recording the `ASE` recurrence under docs/fix-backlog.md:1050 rather than fixing it here
-  = mechanical scope call (allowlist edits shape live-cycle behaviour and belong with the
-  durable fix, not with a closed follow-up bundle).
+- **(a) Q1 — switch the checker on (vs. delete it): USER-APPROVED (interactive,
+  2026-08-04)** — wire the existing tested function into the thesis path.
+- **(a) Q2 — BLOCK on violation: USER-APPROVED (interactive, 2026-08-04)** — match the
+  judgment-prose check's semantics (one targeted rewrite re-dispatch, then fail loud);
+  mirror the existing pattern exactly.
+- **(a) Q3 — add `ASE` to `registry/acronyms.json`'s `allowed` list now: USER-APPROVED
+  (interactive, 2026-08-04)** — the sanctioned data-extension path per eval-driver
+  discipline, taken because blocking was chosen. This supersedes the audit's earlier
+  "leave it to the durable fix" recommendation. The recurring-token problem itself still
+  belongs to the durable fix at docs/fix-backlog.md:1050.
+- None of the three was an AFK-default; all were answered interactively by the user and
+  relayed by the orchestrator.
+- Mechanical choices made under the trivial-choice clause, recorded here as required:
+  (1) **no `--no-voice-lint`-style bypass flag on `thesis`** — F75 removed the whole-run
+  `--no-sufficiency` escape hatch on exactly this reasoning, so adding a new one would cut
+  against it; (2) **non-adjusted judgments' `rationale` is not statement-linted** — it is a
+  history field, never exec-facing book prose, and no statement is written; (3) lint runs
+  **before** `gate_answer`, mirroring the judge path's lint-before-gate order.
+
+## Verification
+
+- Full suite: **2157 passed / 6 skipped** (was 2146/6 before this lane; +11 new tests).
+- `tests/test_evals_baseline_pin.py` **GREEN** — no emitted brain-prompt bytes changed.
+  Verified structurally too: `registry/acronyms.json` is read only by
+  `gpu_agent/reader.py`'s allowlist loader (lint side), by no prompt builder; the CLI and
+  thesis edits touch no prompt string and `_THESIS_SYSTEM_TEMPLATE` is untouched.
+- Untouched per brief: fixtures/evals, fixtures/narrator, registry/indicators.json,
+  gpu_agent/scoring.py, the run-cycle skill, gpu_agent/narrator/prompt.py,
+  gpu_agent/gathering, gpu_agent/manifest.

@@ -221,6 +221,35 @@ def _apply_lifecycle_record(book: ThesisBook, record: dict) -> ThesisBook:
     raise ThesisStoreError(f"unknown lifecycle event: {event!r}")
 
 
+_ADJUSTED_PREFIX = "ADJUSTED:"
+
+
+def _adjusted_statement(verdict: str, rationale: str | None) -> str | None:
+    """The NEW book statement an `adjusted` verdict carries, or None when it carries none.
+
+    Only an `adjusted` verdict may rewrite a thesis's statement, and it does so through an
+    `"ADJUSTED:"`-prefixed rationale (the schema gives ThesisJudgment no `statement` field).
+    Any other verdict — or an `adjusted` one whose rationale lacks the prefix — leaves the
+    standing statement alone: that is None, "no replacement written".
+
+    None and "" are deliberately distinct. A bare `"ADJUSTED:"` with nothing after it is a
+    replacement that happens to be EMPTY, and the pre-existing apply behaviour is to write
+    that empty statement through; collapsing it into the None case would silently change
+    what the book stores. Returning None only for "no replacement" keeps this refactor
+    behaviour-identical to the inline code it replaced.
+
+    Shared by `_apply_judgment_record` (which writes it) and `lint_answer_prose` (which
+    lints it) on purpose: a single definition is the only way the F68(a) lint is guaranteed
+    to check exactly the text the apply path will store.
+    """
+    if verdict != "adjusted":
+        return None
+    rationale = rationale or ""
+    if not rationale.startswith(_ADJUSTED_PREFIX):
+        return None
+    return rationale[len(_ADJUSTED_PREFIX):].strip()
+
+
 def _apply_judgment_record(book: ThesisBook, record: dict) -> ThesisBook:
     # `publisherDomains` (Task 4 / rule 5 promotion): a judgment record may carry the
     # cited findings' publisher domains, written by apply_answer purely as provenance so
@@ -231,12 +260,8 @@ def _apply_judgment_record(book: ThesisBook, record: dict) -> ThesisBook:
         updates: dict = {"lastJudgedAsOf": record["asOf"]}
         if record.get("applied"):
             verdict = record["verdict"]
-            statement = entry.statement
-            if verdict == "adjusted":
-                rationale = record.get("rationale") or ""
-                prefix = "ADJUSTED:"
-                if rationale.startswith(prefix):
-                    statement = rationale[len(prefix):].strip()
+            replacement = _adjusted_statement(verdict, record.get("rationale"))
+            statement = entry.statement if replacement is None else replacement
             direction = DIRECTION[verdict]
             conviction_changed = record["conviction"] != entry.conviction
             reversal = direction != 0 and entry.lastDirection != 0 and direction != entry.lastDirection
@@ -494,10 +519,14 @@ def gate_answer(answer: ThesisAnswer, book: ThesisBook,
 # enforced only as prompt text in _THESIS_SYSTEM_TEMPLATE below -- unlike the judgment
 # path, which backs its equivalent voice rules with a deterministic reader.lint_prose
 # check. lint_thesis_prose closes that gap. It is POST-HOC validation only: it reuses
-# reader.lint_prose rather than reimplementing its checks, and it is not called from
-# gate_answer or anywhere in the emitted prompt -- it does not change gate math, and no
-# caller wires it in yet (see the caller's own notes on why: wiring would touch the
-# thesis `--recorded` CLI path, out of this module's scope).
+# reader.lint_prose rather than reimplementing its checks, and it is NOT called from
+# gate_answer or anywhere in the emitted prompt -- it does not change gate math and it
+# changes no emitted prompt bytes.
+#
+# F68(a) wire-up (user-approved interactively 2026-08-04): lint_answer_prose lifts the
+# per-field lint to a whole ThesisAnswer, and `thesis --recorded` (gpu_agent/cli.py)
+# BLOCKS on violations before the gate/apply -- the same semantics as the judgment path's
+# voice lint. Until that decision the function sat here with zero callers.
 
 
 def lint_thesis_prose(statement: str, mechanism: str) -> list[str]:
@@ -510,6 +539,38 @@ def lint_thesis_prose(statement: str, mechanism: str) -> list[str]:
     errors: list[str] = []
     errors.extend(reader.lint_prose(statement, "statement", max_sentences=1))
     errors.extend(reader.lint_prose(mechanism, "mechanism", max_sentences=1))
+    return errors
+
+
+def lint_answer_prose(answer: ThesisAnswer) -> list[str]:
+    """Every Sec 2b VOICE violation in one recorded thesis answer (empty = clean).
+
+    Each violation is prefixed with the SAME label gate_answer uses -- the thesis id for a
+    judgment, the routed slug for a proposal -- so a blocked cycle names which thesis to
+    re-dispatch, mirroring the judge path's `sample N: ` prefixing.
+
+    Only brain-written prose that BECOMES book state is linted:
+      - proposals: `statement` and `mechanism`, both brand new.
+      - judgments: `mechanism`, plus the replacement statement an `adjusted` verdict
+        carries in its ADJUSTED:-prefixed rationale (via the shared `_adjusted_statement`).
+        A non-adjusted verdict writes no statement, so it has none to lint -- its
+        `rationale` is a history field, never exec-facing book prose.
+    An unroutable proposal title falls back to the raw title for the label rather than
+    raising: gate_answer reports that as its own error, and this lint must not pre-empt it
+    with a traceback.
+    """
+    errors: list[str] = []
+    for judgment in answer.judgments:
+        statement = _adjusted_statement(judgment.verdict, judgment.rationale) or ""
+        errors.extend(f"{judgment.thesisId}: {v}"
+                      for v in lint_thesis_prose(statement, judgment.mechanism))
+    for proposal in answer.proposed:
+        try:
+            label = thesis_slug(proposal.title)
+        except ValueError:
+            label = proposal.title
+        errors.extend(f"{label}: {v}"
+                      for v in lint_thesis_prose(proposal.statement, proposal.mechanism))
     return errors
 
 

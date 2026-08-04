@@ -30,8 +30,8 @@ from gpu_agent.judgment.prompt import (
     build_user_prompt as build_judge_user_prompt)
 from gpu_agent.judgment.briefing import build_briefing
 from gpu_agent.thesis import (
-    ThesisAnswer, ThesisBook, ThesisStore, apply_answer, gate_answer, seed_book,
-    THESIS_SYSTEM, build_thesis_system, build_thesis_user_prompt)
+    ThesisAnswer, ThesisBook, ThesisStore, apply_answer, gate_answer, lint_answer_prose,
+    seed_book, THESIS_SYSTEM, build_thesis_system, build_thesis_user_prompt)
 from gpu_agent.implication import (
     ImplicationAnswer, ImplicationArtifact, ImplicationRegistry, ImplicationStore,
     ImplicationError, build_implication_system, build_implication_user_prompt, gate_implication)
@@ -590,6 +590,15 @@ def _thesis(args) -> int:
         except ValidationError as e:
             print(f"gpu-agent thesis: error: invalid recorded answer: {e}", file=sys.stderr)
             return 1
+        # F68(a): lint the brain-written thesis prose BEFORE the gate/apply, exactly as
+        # `judge --recorded` lints judgment prose above -- a violating answer fails loud
+        # (shared `voice-lint: ` prefix, so the run-cycle skill's existing re-dispatch loop
+        # catches it unchanged) and store.write is never reached, so the book stays
+        # byte-unchanged. No bypass flag: F75 removed the whole-run --no-sufficiency
+        # escape hatch on the same reasoning, so adding a new one here would cut against it.
+        violations = lint_answer_prose(answer)
+        if violations:
+            return _report_voice_violations(violations)
         violations = gate_answer(answer, book, findings_by_id, registry)
         if violations:
             print("THESIS GATE FAILED:", *violations, sep="\n  ", file=sys.stderr)
