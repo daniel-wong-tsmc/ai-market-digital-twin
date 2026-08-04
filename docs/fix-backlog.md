@@ -552,6 +552,18 @@
   collision today — add a registry lint or single-pass substitution); **(f)** pre-existing live
   thesis-store prose carries off-allowlist tokens (`MI`, `GB300`) — cleans up as entries are
   re-judged under the new prompts, or allowlist them if they persist.
+  **AUDIT 2026-08-04 (lane `f68-output-followups`, spec
+  `docs/superpowers/specs/2026-08-04-f68-followups-audit.md`): (b)–(f) were ALREADY BUILT
+  and merged on `fix/lane-polish` (`e173ebc`, 2026-07-04) — all five survived the F78
+  rewrite, are live in the current render path, and are test-pinned in
+  `tests/test_lane_polish.py`; the entry was just never ticked.** Only **(a)** has residual
+  work: `lint_thesis_prose` exists (`gpu_agent/thesis.py:503`) with its thresholds already
+  chosen, but has ZERO callers — the lane-polish plan deferred the wire-up. Wiring it is
+  behaviour-shaping (6 of the 52 live book entries violate it today), so it is
+  question-stopped, not picked: see
+  `.superpowers/handoffs/f68-output-followups-QUESTIONS.md`. Tick F68 once (a) is answered
+  and wired. Audit side-finding: `ASE` is the newest off-allowlist prose token — the same
+  recurrence the durable fix below (line ~1050) owns, not F68's.
 - [x] **F69 — The web-reach layer: pluggable external fetchers for the gather swarm. DONE (merged `e167c6b`, suite 923/3).** Spec
   `docs/superpowers/specs/2026-07-04-web-reach-layer-design.md`, plan
   `docs/superpowers/plans/2026-07-04-web-reach-layer.md`. Data-driven registry
