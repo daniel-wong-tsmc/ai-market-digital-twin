@@ -307,3 +307,26 @@
 {"seq":306,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-18175873-2026-07-1","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":307,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-af565dca-2026-07-4","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":308,"asOf":"2026-07","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-18175873-2026-07-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":309,"asOf":"2026-08","kind":"append-observation","pageId":"entity:amd","findingId":"ir-amd-com-2369b33d-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":310,"asOf":"2026-08","kind":"append-observation","pageId":"entity:amd","findingId":"ir-amd-com-2369b33d-2026-08-3","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":311,"asOf":"2026-08","kind":"append-observation","pageId":"entity:amd","findingId":"ir-amd-com-2369b33d-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":312,"asOf":"2026-08","kind":"append-observation","pageId":"entity:coreweave","findingId":"www-coreweave-com-04887501-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":313,"asOf":"2026-08","kind":"append-observation","pageId":"entity:coreweave","findingId":"www-coreweave-com-04887501-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":314,"asOf":"2026-08","kind":"append-observation","pageId":"entity:intel","findingId":"www-intc-com-2becba13-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":315,"asOf":"2026-08","kind":"append-observation","pageId":"entity:intel","findingId":"cryptobriefing-com-c3c1a1c3-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":316,"asOf":"2026-08","kind":"append-observation","pageId":"entity:intel","findingId":"www-intc-com-2becba13-2026-08-4","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":317,"asOf":"2026-08","kind":"append-observation","pageId":"entity:market","findingId":"supplyics-com-c83015c2-2026-08-3","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":318,"asOf":"2026-08","kind":"append-observation","pageId":"entity:market","findingId":"supplyics-com-c83015c2-2026-08-4","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":319,"asOf":"2026-08","kind":"append-observation","pageId":"entity:market","findingId":"supplyics-com-c83015c2-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":320,"asOf":"2026-08","kind":"append-observation","pageId":"entity:market","findingId":"supplyics-com-c83015c2-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":321,"asOf":"2026-08","kind":"append-observation","pageId":"entity:memory","findingId":"www-prnewswire-com-55cd06fc-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":322,"asOf":"2026-08","kind":"append-observation","pageId":"entity:memory","findingId":"www-prnewswire-com-55cd06fc-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":323,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-69f787c5-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":324,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"investor-nvidia-com-6947ac46-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":325,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-kucoin-com-8fc72edf-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":326,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"investor-nvidia-com-6947ac46-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":327,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-kucoin-com-8fc72edf-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":328,"asOf":"2026-08","kind":"append-observation","pageId":"entity:tsmc","findingId":"cryptobriefing-com-c3c1a1c3-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":329,"asOf":"2026-08","kind":"create-page","pageId":"entity:vast-ai","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":330,"asOf":"2026-08","kind":"append-observation","pageId":"entity:vast-ai","findingId":"www-spheron-network-0913387c-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":331,"asOf":"2026-08","kind":"lint","pageId":null,"findingId":null,"state":null,"trajectory":null,"salience":null,"detail":"material 5; dropped 3; stale 16; orphans 22; contradictions 0"}

@@ -1,0 +1,45 @@
+{
+  "id": "investor-nvidia-com-6947ac46-2026-08-2",
+  "statement": "SK Telecom will build a 2-gigawatt-scale AI Cloud in Korea on the NVIDIA DSX platform with Vera Rubin accelerators and SK hynix HBM4 memory.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named platform win at gigawatt scale locks a large future deployment onto NVIDIA silicon rather than a competing accelerator or in-house ASIC.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud",
+      "energy.power-generation",
+      "energy.cooling"
+    ],
+    "direction": "positive",
+    "mechanism": "Committing a 2-gigawatt cloud to NVIDIA DSX and Vera Rubin creates pull-through demand for merchant GPUs, HBM4, power and cooling."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Investor Relations",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/SK-Group-and-NVIDIA-Expand-Strategic-Partnership-Across-AI-Factories-and-Next-Generation-Memory/default.aspx",
+      "date": "2026-07-24",
+      "excerpt": "SK Telecom will build a 2-gigawatt-scale AI Cloud in Korea using the NVIDIA DSX platform and Vera Rubin accelerators powered by SK hynix HBM4 memory.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: NVIDIA investor relations press release naming the platform and the customer."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-24",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

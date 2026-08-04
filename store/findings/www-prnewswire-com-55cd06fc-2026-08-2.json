@@ -1,0 +1,43 @@
+{
+  "id": "www-prnewswire-com-55cd06fc-2026-08-2",
+  "statement": "SK hynix states its V10 375-layer 4D NAND improves performance per watt by 2.5 times compared with the previous generation.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Storage efficiency gains matter because power, not floor space, is the limiting input in AI data centres, so every watt saved on storage is a watt available for accelerators.",
+  "impact": {
+    "targets": [
+      "infrastructure.ai-storage",
+      "energy.efficiency",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Better performance per watt in NAND lowers the power drawn by the storage tier of an AI cluster, freeing power budget for compute."
+  },
+  "evidence": [
+    {
+      "source": "PR Newswire (SK hynix press release)",
+      "url": "http://www.prnewswire.com/news-releases/sk-hynix-unveils-first-hbf-standard-specifications-with-sandisk-presenting-ai-memory-solutions-at-fms-2026-302841792.html",
+      "date": "2026-08-03",
+      "excerpt": "V10 375-layer 4D NAND improves performance per watt by 2.5 times compared to the previous generation",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor claim in a company press release distributed by newswire, captured at secondary tier; no independent measurement."
+  },
+  "dispersion": "The figure is a ratio against an undisclosed prior generation baseline, not an absolute performance-per-watt level, so no value is recorded.",
+  "asOf": "2026-08",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "memory",
+  "observedAt": "2026-08-03",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

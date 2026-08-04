@@ -1,0 +1,43 @@
+{
+  "id": "www-prnewswire-com-55cd06fc-2026-08-1",
+  "statement": "SK hynix and Sandisk released the first High Bandwidth Flash technical specification through the Open Compute Project, covering capacities up to 512GB in 8-high and 16-high NAND stacks, three performance grades from about 0.4TB/s to 3.0TB/s, and a UCIe chiplet interface, with Google and Tenstorrent joining the consortium.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A standardised flash-based memory tier at hundreds of gigabytes and terabyte-per-second bandwidth is a candidate relief valve for the HBM shortage, though a published specification is years away from shipping capacity.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "infrastructure.ai-storage",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "positive",
+    "mechanism": "An open standard for high-bandwidth flash creates a possible alternative memory tier alongside HBM, which over time could ease the memory constraint on AI accelerators."
+  },
+  "evidence": [
+    {
+      "source": "PR Newswire (SK hynix press release)",
+      "url": "http://www.prnewswire.com/news-releases/sk-hynix-unveils-first-hbf-standard-specifications-with-sandisk-presenting-ai-memory-solutions-at-fms-2026-302841792.html",
+      "date": "2026-08-03",
+      "excerpt": "capacity 'up to 512GB based on two stack configurations (8-high and 16-high NAND dies)'; three performance grades delivering 'approximately 0.4TB/s to 3.0TB/s'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company press release distributed through a newswire and captured at secondary tier; a specification announcement is not evidence of shipping supply."
+  },
+  "dispersion": "Figures are specification ceilings and performance grade ranges, not shipped product volumes, so no value is recorded.",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "memory",
+  "observedAt": "2026-08-03",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

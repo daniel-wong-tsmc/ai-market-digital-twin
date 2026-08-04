@@ -1,0 +1,50 @@
+{
+  "id": "www-kucoin-com-8fc72edf-2026-08-1",
+  "statement": "NVIDIA is reported to have cut the mainline Rubin Ultra HBM specification to 192GB in an 8-high stack from 288GB in a 12-high stack, described as driven primarily by HBM supply constraints and data center power limits.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "A vendor cutting memory content on its flagship part is a direct admission that HBM supply, not demand, is setting what it can ship, and it comes with an expectation of further HBM price increases.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "energy.power-generation"
+    ],
+    "direction": "negative",
+    "mechanism": "Reducing HBM per accelerator is a response to memory scarcity and power limits; it signals the memory constraint is binding even as it lets more units ship per gigabyte of HBM."
+  },
+  "evidence": [
+    {
+      "source": "KuCoin News Flash",
+      "url": "https://www.kucoin.com/news/flash/nvidia-rubin-ultra-hbm-cut-to-192gb-amid-supply-and-power-constraints",
+      "date": "2026-08-03",
+      "excerpt": "NVIDIA's adjustment of Rubin Ultra's specifications is primarily driven by HBM supply constraints and data center power limitations.",
+      "tier": "secondary"
+    },
+    {
+      "source": "KuCoin News Flash",
+      "url": "https://www.kucoin.com/news/flash/nvidia-rubin-ultra-hbm-cut-to-192gb-amid-supply-and-power-constraints",
+      "date": "2026-08-03",
+      "excerpt": "HBM capacity reduced to '192GB (8-Hi)' from '288GB (12-Hi)'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator republishing another outlet and citing SemiAnalysis; the companion write-up cites the same SemiAnalysis origin, so this is one story rather than independent corroboration. Not confirmed by NVIDIA."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> falling); sources: KuCoin News Flash, NVIDIA Investor Relations",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-03",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

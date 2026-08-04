@@ -1,0 +1,51 @@
+{
+  "id": "ir-amd-com-2369b33d-2026-08-3",
+  "statement": "AMD non-GAAP gross margin was 55 percent in Q1 2026 (GAAP 53 percent) and the company guided Q2 2026 non-GAAP gross margin to approximately 56 percent.",
+  "kind": "measured",
+  "value": {
+    "number": 55.0,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "Gross margin holding up while data center revenue grows fast suggests AMD is not buying share with price, which is a sign that accelerator demand still exceeds available supply.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Margin guided higher alongside revenue growth indicates pricing power rather than discounting, consistent with demand running ahead of supply."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
+      "date": "2026-05-05",
+      "excerpt": "GAAP gross margin was 53%; non-GAAP gross margin was 55%.",
+      "tier": "primary"
+    },
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
+      "date": "2026-05-05",
+      "excerpt": "Non-GAAP gross margin is expected to be approximately 56%.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: AMD official earnings release for both the actual and the guided margin."
+  },
+  "dispersion": "Value recorded is the non-GAAP figure; GAAP gross margin was 53 percent.",
+  "asOf": "2026-08",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-05-05",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

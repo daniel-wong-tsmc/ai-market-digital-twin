@@ -1,0 +1,43 @@
+{
+  "id": "supplyics-com-c83015c2-2026-08-4",
+  "statement": "HBM3E is described as effectively sold out for 2026 with prices up double digits year-over-year, and SK Hynix is said to hold about 62 percent of HBM4 supply and to provide roughly two-thirds of NVIDIA HBM4.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Memory sold out a year ahead with rising prices means HBM, not logic, sets how many accelerators can actually be built, and the dependence on one supplier makes that constraint fragile.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "Sold-out HBM with rising prices caps accelerator build volumes and raises bill-of-materials cost, while single-supplier dependence adds concentration risk."
+  },
+  "evidence": [
+    {
+      "source": "SupplyICs Market Intelligence",
+      "url": "https://supplyics.com/insights/market-intelligence/advanced-packaging-cowos-bottlenecks-ai-logic-chips-2026/",
+      "date": "2026-07-04",
+      "excerpt": "HBM3E 'effectively sold out for 2026' with prices 'up double digits year-over-year'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analyst brief relaying a second analyst source quoted inside the same document; publishers quoted within one document do not count toward corroboration."
+  },
+  "dispersion": "Price move is stated only as double digits year-over-year, so no percentage is recorded.",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-07-04",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

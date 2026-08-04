@@ -1,0 +1,160 @@
+{
+  "headline": "The packaging queue clears a little. The memory queue does not.",
+  "deck": "Advanced packaging is the first of the two physical limits to give ground. Stacked memory is not, and NVIDIA has cut the memory on its top coming part to fit what suppliers can ship.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The memory runs out first",
+      "paragraphs": [
+        "NVIDIA has trimmed its own flagship. Reporting dated 3 August says the mainline Rubin Ultra now carries 192GB of stacked memory in an eight-high stack, down from 288GB in a twelve-high stack, and puts the reason on memory supply and on how much power a data centre can feed a rack. When the buyer with the most pull cuts its own top part to fit, that tells you which piece is scarce.",
+        "Nothing in the fresh evidence says that lifts soon. Morgan Stanley, writing on 22 July, saw no sign of the memory shortage easing and flagged the chance it gets worse in 2027 and 2028. SK Hynix's chief executive said the next day that the squeeze on AI memory chips could last through 2027. In mid-July a large server builder reported memory lead times of 32 to 40 weeks and more, with prices up about 90 percent since late 2025."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "www-kucoin-com-8fc72edf-2026-08-1",
+        "finance-biggo-com-6dfe92b3-2026-07-3",
+        "www-ad-hoc-news-de-94ca546c-2026-07-2",
+        "www-techtimes-com-669598b1-2026-07-1"
+      ],
+      "sourceLine": "KuCoin News Flash (republishing Huoxing Finance, citing SemiAnalysis), plus mid- and late-July memory reporting.",
+      "relatedDocs": [
+        {
+          "url": "https://www.kucoin.com/news/flash/nvidia-rubin-ultra-hbm-cut-to-192gb-amid-supply-and-power-constraints",
+          "title": "NVIDIA cuts Rubin Ultra memory to 192GB",
+          "outlet": "KuCoin News Flash (republishing Huoxing Finance, citing SemiAnalysis)",
+          "date": "2026-08-03"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The packaging queue is shorter than it was",
+      "paragraphs": [
+        "The other physical limit is advanced packaging, the step that binds the chip and its memory into one finished part. An early-July industry brief put the shortfall at about 10 percent in the middle of this year, down from about 20 percent in late 2025. That is the first of the two limits to show real give.",
+        "It is not fixed. The same brief has order-to-delivery running 52 to 78 weeks, and reporting on 31 July says TSMC's packaging lines are booked through 2027. Some of the work is going elsewhere. Google has ordered more than three million units of Intel's EMIB-T packaging for a next-generation part due in 2028, and TSMC answered in late July by starting a rival design with Kinsus. Intel's foundry sales were 5.8 billion dollars in the June quarter, up 31 percent on a year earlier."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "supplyics-com-c83015c2-2026-08-2",
+        "supplyics-com-c83015c2-2026-08-1",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "www-intc-com-0fa743ed-2026-07-2"
+      ],
+      "sourceLine": "SupplyICs Market Intelligence (industry analyst brief), CryptoBriefing (Reuters/TrendForce/company-statement based reporting), Intel Investor Relations (intc.com).",
+      "relatedDocs": [
+        {
+          "url": "https://cryptobriefing.com/intel-emib-tsmc-packaging-constraints/",
+          "title": "Google orders Intel EMIB-T packaging as TSMC lines stay booked",
+          "outlet": "CryptoBriefing (Reuters/TrendForce/company-statement based reporting)",
+          "date": "2026-07-31"
+        },
+        {
+          "url": "https://supplyics.com/insights/market-intelligence/advanced-packaging-cowos-bottlenecks-ai-logic-chips-2026/",
+          "title": "Advanced packaging lead times and the shrinking shortfall",
+          "outlet": "SupplyICs Market Intelligence (industry analyst brief)",
+          "date": "2026-07-04"
+        },
+        {
+          "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+          "title": "Intel reports second quarter 2026 results",
+          "outlet": "Intel Investor Relations (intc.com)",
+          "date": "2026-07-23"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The buyers have not blinked",
+      "paragraphs": [
+        "Demand keeps pressing on the same narrow chain. Reporting on 22 July has the four largest US cloud buyers planning about 725 billion dollars of capital spending this year, up 77 percent on last year. Google's cloud order book grew by more than 50 billion dollars in one quarter, to 514 billion.",
+        "The scarce parts are already showing up in the bill. In early July, suppliers put the cost of the components in an AI server rack rising roughly 2 to 3 percent a week, driven by shortages of memory and storage."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "finance-yahoo-com-2f05647b-2026-07-1",
+        "finance-yahoo-com-baa362f5-2026-07-2",
+        "finance-biggo-com-c310c4ca-2026-07-06-1"
+      ],
+      "sourceLine": "Cloud company results and trade reporting, 4 to 22 July 2026.",
+      "relatedDocs": []
+    },
+    {
+      "n": 4,
+      "title": "What to watch from here",
+      "paragraphs": [
+        "Three things would change the picture. First, new memory plants: a mid-July report said fresh memory factory capacity does not come online until late 2026, so nothing before then. Second, the money behind it: SK Hynix's board approved 7.0931 trillion won, about 4.83 billion dollars, for a new packaging plant in Cheongju on 23 July.",
+        "Third, a new shape for memory. On 3 August SK hynix and Sandisk published the first High Bandwidth Flash specification through the Open Compute Project, covering stacks up to 512GB, with Google and Tenstorrent joining the group. That is a standard, not shipped parts, so read it as a marker for later rather than help this year.",
+        "One figure to check against. AMD's most recent published quarter is the March quarter, reported in early May, with data centre sales of 5.8 billion dollars, up 57 percent on a year earlier, and a guide of about 11.2 billion dollars of total revenue for the quarter after. Whether that guide was met is the next thing worth reading."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-techtimes-com-669598b1-2026-07-2",
+        "www-ad-hoc-news-de-94ca546c-2026-07-1",
+        "www-prnewswire-com-55cd06fc-2026-08-1",
+        "ir-amd-com-2369b33d-2026-08-1",
+        "ir-amd-com-2369b33d-2026-08-2"
+      ],
+      "sourceLine": "SK hynix and Sandisk standards announcement, SK Hynix board filing, AMD Investor Relations (ir.amd.com).",
+      "relatedDocs": [
+        {
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
+          "title": "AMD reports first quarter 2026 financial results",
+          "outlet": "AMD Investor Relations (ir.amd.com)",
+          "date": "2026-05-05"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Money going into memory plants is the only thing that lifts the harder of the two limits, and it takes years to arrive.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Finished servers leaving the factories is the honest test of whether easier packaging turns into deliveries.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Whether the big buyers keep raising their budgets, or start trimming them.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "NVIDIA trims the memory on its top coming part to fit what suppliers can deliver.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "The packaging shortfall narrows to about 10 percent, while memory shows no give.",
+      "scene": 2
+    }
+  ],
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-04",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "d88aea7834e4dcc0d85a725a729fcec6d5b735492191645552d28c55d6fd5e8d",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-04T15:18:14.156080+00:00"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "supplyics-com-c83015c2-2026-08-3",
+  "statement": "Advanced packaging capacity is pre-booked at more than 85 percent for 2026 and 2027, with NVIDIA holding roughly 60 percent of 2026 capacity and the top three customers accounting for more than 85 percent of total capacity.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "When three buyers hold almost all the packaging slots, everyone else is effectively locked out regardless of how much capacity is added, so headline capacity growth overstates the supply available to the broader market.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "Extreme customer concentration in booked packaging capacity denies smaller accelerator designers access, concentrating effective supply in a few hands."
+  },
+  "evidence": [
+    {
+      "source": "SupplyICs Market Intelligence",
+      "url": "https://supplyics.com/insights/market-intelligence/advanced-packaging-cowos-bottlenecks-ai-logic-chips-2026/",
+      "date": "2026-07-04",
+      "excerpt": "capacity pre-booked '85%+' for 2026-2027; NVIDIA allocation share '~60%' of 2026 capacity",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analyst brief with approximate allocation shares; not disclosed by TSMC or its OSAT partners."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-07-04",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

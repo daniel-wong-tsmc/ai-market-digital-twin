@@ -1,0 +1,46 @@
+{
+  "id": "supplyics-com-c83015c2-2026-08-2",
+  "statement": "The advanced packaging supply-demand gap is put at about a 10 percent shortfall in mid-2026, narrowed from about 20 percent in late 2025, against TSMC CoWoS capacity of roughly 120,000 to 140,000 wafers per month and total industry capacity of roughly 170,000 to 200,000 wafers per month.",
+  "kind": "measured",
+  "value": {
+    "number": 10.0,
+    "unit": "ramp_minus_order_rate_pct"
+  },
+  "trend": "rising",
+  "why": "The packaging shortfall halving in about half a year is the single best sign that the hardest physical constraint on AI accelerator output is loosening, even though it has not closed.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Capacity ramping faster than order growth narrows the packaging shortfall, allowing more accelerators to be assembled and shipped per quarter."
+  },
+  "evidence": [
+    {
+      "source": "SupplyICs Market Intelligence",
+      "url": "https://supplyics.com/insights/market-intelligence/advanced-packaging-cowos-bottlenecks-ai-logic-chips-2026/",
+      "date": "2026-07-04",
+      "excerpt": "supply-demand gap '~10% shortfall', said to have narrowed from '~20% in late 2025'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analyst estimate with approximate figures; no primary TSMC or OSAT disclosure supports it."
+  },
+  "dispersion": "All figures are stated as approximations; the document is dated 2026-07-04, outside the preferred recency window.",
+  "asOf": "2026-08",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-07-04",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

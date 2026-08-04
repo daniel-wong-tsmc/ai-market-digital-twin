@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-08-04",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-kucoin-com-8fc72edf-2026-08-1",
+        "finance-biggo-com-6dfe92b3-2026-07-3",
+        "www-ad-hoc-news-de-94ca546c-2026-07-2",
+        "www-techtimes-com-669598b1-2026-07-1"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "supplyics-com-c83015c2-2026-08-2",
+        "supplyics-com-c83015c2-2026-08-1",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "www-intc-com-0fa743ed-2026-07-2"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-2f05647b-2026-07-1",
+        "finance-yahoo-com-baa362f5-2026-07-2",
+        "finance-biggo-com-c310c4ca-2026-07-06-1"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-techtimes-com-669598b1-2026-07-2",
+        "www-ad-hoc-news-de-94ca546c-2026-07-1",
+        "www-prnewswire-com-55cd06fc-2026-08-1",
+        "ir-amd-com-2369b33d-2026-08-1",
+        "ir-amd-com-2369b33d-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-2f05647b-2026-07-1",
+        "finance-yahoo-com-baa362f5-2026-07-2",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-1",
+        "thetechcapital-com-796ec195-2026-07-1"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-biggo-com-ae5dcd41-2026-07-1",
+        "supplyics-com-c83015c2-2026-08-1",
+        "www-fool-com-f229964a-2026-07-1",
+        "supplyics-com-c83015c2-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-forbes-com-7c91863a-2026-07-2",
+        "supplyics-com-c83015c2-2026-08-3",
+        "siliconanalysts-com-528fac70-2026-07-4"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "siliconanalysts-com-47ffeeeb-2026-07-3",
+        "siliconanalysts-com-47ffeeeb-2026-07-1",
+        "www-tomshardware-com-f77e9757-2026-07-1",
+        "www-faf-ae-6bcac1ba-2026-07-2"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-techtimes-com-669598b1-2026-07-1",
+        "finance-biggo-com-c310c4ca-2026-07-06-1",
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "siliconanalysts-com-216b07a8-2026-07-2"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "siliconanalysts-com-528fac70-2026-07-5",
+        "economy-ac-24d4d647-2026-07-1",
+        "www-intc-com-0fa743ed-2026-07-2"
+      ]
+    },
+    {
+      "claimKey": "impl:6",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "siliconanalysts-com-79e017b3-2026-07-2",
+        "www-investing-com-09606ac9-2026-07-1",
+        "www-kucoin-com-8fc72edf-2026-08-1",
+        "www-ad-hoc-news-de-94ca546c-2026-07-2"
+      ]
+    },
+    {
+      "claimKey": "impl:7",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-datacenterdynamics-com-45864e2a-2026-07-06-1",
+        "www-datacenterdynamics-com-45864e2a-2026-07-06-2",
+        "finance-yahoo-com-2185ba22-2026-07-2",
+        "www-sec-gov-125b52f2-2026-07-1",
+        "www-forbes-com-9a1166d5-2026-07-1"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 12,
+    "flagged": 0,
+    "skipped": 0
+  }
+}

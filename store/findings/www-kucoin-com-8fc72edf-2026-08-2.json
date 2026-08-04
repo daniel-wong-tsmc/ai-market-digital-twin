@@ -1,0 +1,45 @@
+{
+  "id": "www-kucoin-com-8fc72edf-2026-08-2",
+  "statement": "Rubin Ultra chip-level power is reported at approximately 1800W for the mainstream Max-Q variant, with a possible Max-P variant at 2600W to 2800W and a lower-power 1200W variant for token decoding, within an NVL576 scale-up of eight racks of 72 GPUs each.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Per-chip power climbing toward and past 2 kilowatts means data center electrical and cooling capacity, not chip availability, increasingly decides how many accelerators can be switched on.",
+  "impact": {
+    "targets": [
+      "energy.power-generation",
+      "energy.cooling",
+      "energy.efficiency",
+      "energy.electrical-equipment",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Higher power per accelerator raises the electrical and cooling load per rack, so existing data center shells and grid connections support fewer chips, throttling deployable supply."
+  },
+  "evidence": [
+    {
+      "source": "KuCoin News Flash",
+      "url": "https://www.kucoin.com/news/flash/nvidia-rubin-ultra-hbm-cut-to-192gb-amid-supply-and-power-constraints",
+      "date": "2026-08-03",
+      "excerpt": "Chip-level power consumption is 'approximately 1800W' for the mainstream Max-Q variant; a possible Max-P variant at '2600W-2800W'; and a lower-power variant at '1200W' for workloads like token decoding.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator citing SemiAnalysis; not confirmed by NVIDIA and the Max-P variant is described as only possible."
+  },
+  "dispersion": "The document gives watts per chip, not performance per watt, so no efficiency value is recorded; the Max-P figure is a 2600W to 2800W range.",
+  "asOf": "2026-08",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-03",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

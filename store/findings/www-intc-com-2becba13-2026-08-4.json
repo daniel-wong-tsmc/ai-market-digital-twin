@@ -1,0 +1,45 @@
+{
+  "id": "www-intc-com-2becba13-2026-08-4",
+  "statement": "Intel guided Q3 2026 revenue to a range of 15.8 to 16.8 billion dollars, with non-GAAP gross margin of 42.0 percent and non-GAAP EPS of 0.38 dollars.",
+  "kind": "measured",
+  "value": {
+    "number": 15.8,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Guidance whose low end sits near the quarter just reported, with margin guided up again, says Intel expects the AI-driven demand it just booked to hold.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Forward revenue and margin guidance reflects the order book the vendor can already see, supporting the demand track."
+  },
+  "evidence": [
+    {
+      "source": "Intel Investor Relations",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Q3 2026 outlook given in the release: revenue guidance $15.8-$16.8 billion; non-GAAP EPS $0.38; GAAP EPS $0.31; non-GAAP gross margin 42.0%.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: guidance stated in Intel official earnings release."
+  },
+  "dispersion": "Guidance is a range of 15.8 to 16.8 billion dollars; the recorded value is the stated low end, not a computed midpoint. This is total company revenue, not a DC-GPU-only figure.",
+  "asOf": "2026-08",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

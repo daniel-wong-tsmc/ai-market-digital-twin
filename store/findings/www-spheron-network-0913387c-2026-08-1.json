@@ -1,0 +1,48 @@
+{
+  "id": "www-spheron-network-0913387c-2026-08-1",
+  "statement": "A third-party blog reports Vast.ai marketplace rental ranges for July 2026 of roughly 1.50 to 2.27 dollars per hour for datacenter-verified H100 PCIe, roughly 0.90 to 1.60 for unverified community hosts, roughly 1.80 to 2.50 for H100 SXM, roughly 3.50 to 5.50 for H200 SXM and roughly 6 to 12 for B200.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Marketplace rental ranges give a rough floor for what spare GPU capacity clears at, but these come from an aggregator rather than the marketplace itself and are quoted as approximate bands, so no single price can be recorded.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Marketplace rental prices are a display overlay on GPU rental economics; with no stated baseline or change they carry no directional signal."
+  },
+  "evidence": [
+    {
+      "source": "Spheron Network blog",
+      "url": "https://www.spheron.network/blog/vastai-pricing-2026/",
+      "date": "2026-07-01",
+      "excerpt": "| H100 PCIe | ~$0.90-$1.60 | ~$1.50-$2.27 | On-demand |",
+      "tier": "secondary"
+    },
+    {
+      "source": "Spheron Network blog",
+      "url": "https://www.spheron.network/blog/vastai-pricing-2026/",
+      "date": "2026-07-01",
+      "excerpt": "this blog is a third-party secondary source quoting/estimating Vast.ai marketplace prices, not the primary vast.ai page itself.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Third-party aggregator quoting another marketplace prices; the aggregator states it is not the primary vast.ai page, and all figures are approximate ranges. Further figures in the document are unverified search snippets and are excluded."
+  },
+  "dispersion": "All prices are approximate ranges that vary by host tier (unverified community versus datacenter-verified); no point price is stated.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "vast.ai",
+  "observedAt": "2026-07-01",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

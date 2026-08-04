@@ -1,0 +1,43 @@
+{
+  "id": "cryptobriefing-com-c3c1a1c3-2026-08-2",
+  "statement": "TSMC advanced packaging lines are reported as booked through 2027, and TSMC has responded competitively by announcing development of an EMIB-like packaging technology with Kinsus in late July 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "Packaging capacity sold out roughly two years forward is the clearest statement that advanced packaging, not wafer starts, caps AI accelerator supply.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "Fully booked CoWoS lines mean incremental accelerator demand cannot be served until new capacity or an alternative packaging path comes online."
+  },
+  "evidence": [
+    {
+      "source": "CryptoBriefing",
+      "url": "https://cryptobriefing.com/intel-emib-tsmc-packaging-constraints/",
+      "date": "2026-07-31",
+      "excerpt": "TSMC's advanced packaging lines are described as 'booked through 2027.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade reporting only; no primary TSMC disclosure in this document."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "tsmc",
+  "observedAt": "2026-07-31",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

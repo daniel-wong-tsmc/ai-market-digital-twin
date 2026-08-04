@@ -1,0 +1,210 @@
+{
+  "asOf": "2026-08",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "www-coreweave-com-04887501-2026-08-2",
+      "entity": "coreweave",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "supplyics-com-c83015c2-2026-08-3",
+      "entity": "market",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "supplyics-com-c83015c2-2026-08-1",
+      "entity": "market",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-prnewswire-com-55cd06fc-2026-08-2",
+      "entity": "memory",
+      "indicatorId": "perfPerWatt",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-kucoin-com-8fc72edf-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "investor-nvidia-com-6947ac46-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-spheron-network-0913387c-2026-08-1",
+      "entity": "vast.ai",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "ir-amd-com-2369b33d-2026-08-1",
+      "entity": "amd",
+      "indicatorId": "D2",
+      "verdict": "update",
+      "priorFindingId": "www-globenewswire-com-2fcad1b8-2026-07-4",
+      "detail": "magnitude 1 -> 3"
+    },
+    {
+      "findingId": "ir-amd-com-2369b33d-2026-08-3",
+      "entity": "amd",
+      "indicatorId": "grossMargin",
+      "verdict": "update",
+      "priorFindingId": "ir-amd-com-f416295d-2026-07-2",
+      "detail": "value 53.0 -> 55.0 (tol 1%)"
+    },
+    {
+      "findingId": "ir-amd-com-2369b33d-2026-08-2",
+      "entity": "amd",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "update",
+      "priorFindingId": "ir-amd-com-57b2e265-2026-07-1",
+      "detail": "value 11.2 -> 11.2 (tol 1%)"
+    },
+    {
+      "findingId": "www-coreweave-com-04887501-2026-08-1",
+      "entity": "coreweave",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "www-coreweave-com-d16f3599-2026-07-1",
+      "detail": "value 6.16 -> 6.5 (tol 1%)"
+    },
+    {
+      "findingId": "www-intc-com-2becba13-2026-08-1",
+      "entity": "intel",
+      "indicatorId": "D2",
+      "verdict": "update",
+      "priorFindingId": "www-intc-com-819f4336-2026-07-1",
+      "detail": "value 6.3 -> 6.3 (tol 1%)"
+    },
+    {
+      "findingId": "cryptobriefing-com-c3c1a1c3-2026-08-1",
+      "entity": "intel",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "www-intc-com-819f4336-2026-07-4",
+      "detail": "value 5.8 -> 3000000.0 (tol 1%)"
+    },
+    {
+      "findingId": "www-intc-com-2becba13-2026-08-4",
+      "entity": "intel",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "update",
+      "priorFindingId": "www-intc-com-819f4336-2026-07-2",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "supplyics-com-c83015c2-2026-08-4",
+      "entity": "market",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "en-sedaily-com-c7890a6b-2026-07-1",
+      "detail": "statement/trend changed (trend rising -> falling)"
+    },
+    {
+      "findingId": "supplyics-com-c83015c2-2026-08-2",
+      "entity": "market",
+      "indicatorId": "pkgCapacityOrderSpread",
+      "verdict": "update",
+      "priorFindingId": "www-digitimes-com-fd99903d-2026-07-1",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "www-prnewswire-com-55cd06fc-2026-08-1",
+      "entity": "memory",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "finance-biggo-com-6dfe92b3-2026-07-3",
+      "detail": "magnitude 2 -> 1"
+    },
+    {
+      "findingId": "nvidianews-nvidia-com-69f787c5-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "nvidianews-nvidia-com-5c5b4b41-2026-07-3",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "investor-nvidia-com-6947ac46-2026-08-2",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "nvidianews-nvidia-com-18175873-2026-07-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "www-kucoin-com-8fc72edf-2026-08-2",
+      "entity": "nvidia",
+      "indicatorId": "perfPerWatt",
+      "verdict": "update",
+      "priorFindingId": "blogs-nvidia-com-ffef75ff-2026-07-2",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "cryptobriefing-com-c3c1a1c3-2026-08-2",
+      "entity": "tsmc",
+      "indicatorId": "pkgCapacityOrderSpread",
+      "verdict": "update",
+      "priorFindingId": "economy-ac-24d4d647-2026-07-1",
+      "detail": "statement/trend changed (trend unknown -> flat)"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "cryptobriefing-com-c3c1a1c3-2026-08-3",
+      "entity": "intel",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-intc-com-2becba13-2026-08-2",
+      "entity": "intel",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-intc-com-2becba13-2026-08-3",
+      "entity": "intel",
+      "indicatorId": "grossMargin",
+      "verdict": "duplicate",
+      "priorFindingId": "www-intc-com-819f4336-2026-07-3",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "investor-nvidia-com-6947ac46-2026-08-3",
+      "entity": "nvidia",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

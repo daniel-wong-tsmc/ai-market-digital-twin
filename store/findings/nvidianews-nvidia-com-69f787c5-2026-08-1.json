@@ -1,0 +1,43 @@
+{
+  "id": "nvidianews-nvidia-com-69f787c5-2026-08-1",
+  "statement": "NVIDIA and Corning announced a long-term partnership to expand US optical connectivity manufacturing, citing a 10x increase in US-based optical connectivity capacity, a 50-percent-plus expansion in US fiber production capacity, three new plants in North Carolina and Texas and more than 3,000 new jobs.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Optical fiber and connectivity are long-lead inputs to AI cluster networking, so a large committed capacity expansion reduces a chokepoint that sits between GPU supply and working AI factories.",
+  "impact": {
+    "targets": [
+      "infrastructure.networking-fabric",
+      "chips.networking-silicon",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "More domestic optical connectivity and fiber capacity increases the supply of interconnect needed to wire large GPU clusters, easing a non-chip constraint on deployment."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-and-corning-announce-long-term-partnership-to-strengthen-us-manufacturing-for-ai-infrastructure",
+      "date": "2026-05-06",
+      "excerpt": "a 10x increase in U.S.-based optical connectivity manufacturing capacity; 50%+ expansion in U.S. fiber production capacity; 3,000+ new high-paying American jobs; three new advanced manufacturing facilities in North Carolina and Texas",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: official NVIDIA newsroom release with named figures and executive quotes."
+  },
+  "dispersion": "Figures are stated as multiples and floors against an undisclosed base, so no absolute capacity value is recorded. The release is dated 2026-05-06, older than this cycle recency window.",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-05-06",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

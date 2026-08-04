@@ -1,0 +1,45 @@
+{
+  "id": "www-coreweave-com-04887501-2026-08-1",
+  "statement": "CoreWeave lists the single-GPU NVIDIA GH200 instance at 6.50 dollars per GPU-hour on demand in its North America region.",
+  "kind": "measured",
+  "value": {
+    "number": 6.5,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "This is the one row on the page where the listed instance contains exactly one GPU, so the posted hourly rate is genuinely a per-GPU-hour rental price rather than a node price.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Published rental rates are a display overlay on cloud GPU pricing; with no prior level or stated change on the page, this is a static level only."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-08-04",
+      "excerpt": "| NVIDIA GH200 | 1 | $6.50 | N/A |",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor list price read off the public pricing page; captured as a secondary-tier web page with no displayed last-updated date."
+  },
+  "dispersion": "No spot price is listed for this instance and no baseline or prior level is shown, so this is a static level.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "coreweave",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

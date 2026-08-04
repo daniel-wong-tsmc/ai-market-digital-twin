@@ -1,0 +1,45 @@
+{
+  "id": "ir-amd-com-2369b33d-2026-08-2",
+  "statement": "AMD guided Q2 2026 revenue to approximately 11.2 billion dollars plus or minus 300 million, about 46 percent year-over-year growth and about 9 percent sequential growth.",
+  "kind": "measured",
+  "value": {
+    "number": 11.2,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Company guidance is the vendor own forward view of order flow, and a guided 46 percent year-over-year increase implies AMD expects accelerator and server demand to keep accelerating.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Guidance for higher revenue signals AMD sees continued order intake for Instinct and EPYC, supporting the demand track."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
+      "date": "2026-05-05",
+      "excerpt": "For the second quarter of 2026, AMD expects revenue to be approximately $11.2 billion, plus or minus $300 million.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: guidance stated in AMD official earnings release."
+  },
+  "dispersion": "Stated guidance band is plus or minus 300 million dollars. This is total company revenue, not a data-center-only or GPU-only figure.",
+  "asOf": "2026-08",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-05-05",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

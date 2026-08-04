@@ -1,0 +1,45 @@
+{
+  "id": "investor-nvidia-com-6947ac46-2026-08-1",
+  "statement": "SK Group and NVIDIA expanded their partnership into what NVIDIA describes as a 500-billion-plus-dollar initiative covering AI factory construction, next-generation memory supply and AI cloud deployment across Asia-Pacific, with the first AI factory targeted for 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A committed buildout program of this size, announced by NVIDIA itself, points to sustained multi-year purchasing of accelerators, memory and data center power outside the US hyperscalers.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "A large sovereign-scale AI factory program converts into orders for GPUs, HBM, data center capacity and electrical supply over several years."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Investor Relations",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/SK-Group-and-NVIDIA-Expand-Strategic-Partnership-Across-AI-Factories-and-Next-Generation-Memory/default.aspx",
+      "date": "2026-07-24",
+      "excerpt": "$500-billion-plus initiative",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: NVIDIA investor relations press release."
+  },
+  "dispersion": "The document gives a program headline size, not a booked purchase commitment or a spend schedule, so no dollar value is recorded.",
+  "asOf": "2026-08",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-07-24",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

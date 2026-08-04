@@ -1,0 +1,47 @@
+{
+  "id": "supplyics-com-c83015c2-2026-08-1",
+  "statement": "CoWoS-S and CoWoS-L advanced packaging lead times run 52 to 78 weeks as of mid-2026, with a minimum of 52 weeks order-to-delivery and 78 weeks or more for customers outside the top-tier hyperscalers.",
+  "kind": "measured",
+  "value": {
+    "number": 52.0,
+    "unit": "weeks"
+  },
+  "trend": "unknown",
+  "why": "Order-to-delivery times over a year on the packaging step mean any new accelerator demand today cannot be filled until well into next year, which is the practical ceiling on AI chip supply.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "negative",
+    "mechanism": "Long advanced-packaging lead times delay accelerator deliveries and push smaller buyers to the back of the queue, constraining effective supply."
+  },
+  "evidence": [
+    {
+      "source": "SupplyICs Market Intelligence",
+      "url": "https://supplyics.com/insights/market-intelligence/advanced-packaging-cowos-bottlenecks-ai-logic-chips-2026/",
+      "date": "2026-07-04",
+      "excerpt": "minimum 52 weeks order-to-delivery; 78+ weeks for non-Tier-1 hyperscaler customers; add 4-6 weeks for peripheral component consolidation in full systems",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analyst brief; the range is corroborated by one further independently fetched source named inside this document, which is fewer than three distinct publishers across separately fetched documents."
+  },
+  "dispersion": "Range is 52 to 78 weeks; the recorded value is the stated minimum. Add 4 to 6 weeks for peripheral component consolidation in full systems.",
+  "asOf": "2026-08",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "market",
+  "observedAt": "2026-07-04",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "cryptobriefing-com-c3c1a1c3-2026-08-1",
+  "statement": "Google has committed to order more than 3 million units of Intel EMIB-T advanced packaging for its next-generation TPU, with expected delivery in 2028.",
+  "kind": "measured",
+  "value": {
+    "number": 3000000.0,
+    "unit": "units"
+  },
+  "trend": "rising",
+  "why": "A multi-million-unit hyperscaler commitment establishes Intel EMIB-T as a second source of advanced packaging outside TSMC CoWoS, which is the binding constraint on AI accelerator output.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Qualifying a non-TSMC advanced-packaging path adds capacity on which AI logic chips can be assembled, easing the CoWoS bottleneck for accelerator supply from 2028."
+  },
+  "evidence": [
+    {
+      "source": "CryptoBriefing",
+      "url": "https://cryptobriefing.com/intel-emib-tsmc-packaging-constraints/",
+      "date": "2026-07-31",
+      "excerpt": "more than 3 million units of Intel's EMIB-T packaging",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying company statements and TrendForce/Reuters-based reporting; no filing confirms the order."
+  },
+  "dispersion": "conflicting same-key reports: value 5.8 -> 3000000.0 (tol 1%); sources: CryptoBriefing, Intel Investor Relations",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-31",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

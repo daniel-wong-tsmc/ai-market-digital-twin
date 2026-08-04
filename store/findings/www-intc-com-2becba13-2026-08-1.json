@@ -1,0 +1,46 @@
+{
+  "id": "www-intc-com-2becba13-2026-08-1",
+  "statement": "Intel Data Center and AI segment revenue was 6.3 billion dollars in Q2 2026, up 59 percent year-over-year.",
+  "kind": "measured",
+  "value": {
+    "number": 6.3,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A 59 percent year-over-year jump in Intel data center revenue shows AI-driven compute spending is now lifting the third merchant supplier, not just the two GPU leaders.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Strong data center and AI segment growth confirms broad end demand for AI compute and widens the pool of available supply beyond the leading GPU vendors."
+  },
+  "evidence": [
+    {
+      "source": "Intel Investor Relations",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "The Data Center and AI (DCAI) segment posted revenue of $6.3 billion, up 59% year-over-year",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: Intel official quarterly earnings release."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

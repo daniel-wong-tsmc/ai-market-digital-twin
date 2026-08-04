@@ -1,0 +1,45 @@
+{
+  "id": "ir-amd-com-2369b33d-2026-08-1",
+  "statement": "AMD Data Center segment revenue was 5.8 billion dollars in Q1 2026, up 57 percent year-over-year on EPYC demand and the continued ramp of Instinct GPU shipments.",
+  "kind": "measured",
+  "value": {
+    "number": 5.8,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "AMD data center revenue is the clearest read on whether accelerator demand is broadening beyond NVIDIA, and a 57 percent year-over-year gain says the second merchant source is being bought in volume.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising Instinct and EPYC shipments show data center buyers absorbing a second merchant accelerator line, which both confirms end demand and widens available accelerator supply."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results",
+      "date": "2026-05-05",
+      "excerpt": "Data Center segment revenue was $5.8 billion, up 57% year-over-year, driven by strong demand for AMD EPYC processors and the continued ramp of AMD Instinct GPU shipments.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: AMD official quarterly earnings release."
+  },
+  "dispersion": "These are Q1 2026 actuals; AMD Q2 2026 results were not yet published when this document was captured.",
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-05-05",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

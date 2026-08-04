@@ -1,0 +1,42 @@
+{
+  "id": "www-coreweave-com-04887501-2026-08-2",
+  "statement": "CoreWeave publishes its multi-GPU rental rates per instance rather than per GPU: an 8-GPU HGX H100 node is listed at 49.24 dollars per hour on demand and 19.71 dollars per hour spot, with HGX H200 at 50.44 on demand, HGX B200 at 68.80 on demand and GB200 NVL72 at 42.00 on demand, and reserved capacity offered at up to 60 percent below on-demand.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "These headline rates describe whole nodes, not single GPUs, and the page does not break out a per-GPU-hour figure, so the numbers cannot be compared directly against per-GPU rental benchmarks without misstating them.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Posted node-level rental prices are a display overlay on cloud GPU economics; with no stated baseline or change they carry no directional signal."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-08-04",
+      "excerpt": "an 8-GPU HGX H100 node is $49.24/hr on-demand, $19.71/hr spot",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor list price page; the page itself states these are not confirmed per-single-GPU rates, so no per-GPU value is recorded."
+  },
+  "dispersion": "Prices are per instance or node, not per GPU. No last-updated date is displayed on the page; the date used is the capture date.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "coreweave",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-04T14:45:40Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
