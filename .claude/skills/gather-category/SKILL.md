@@ -309,31 +309,33 @@ ONLY — never Bash** (Invariants above). Give each subagent ONE slice and this 
 - **Stop** when a full round yields nothing new (dry) OR a cap trips. If a cap truncates, append a
   note to `skipped[]` (e.g. `"lead 'amd-rumor-blog' not chased: maxDocuments reached"`).
 
-### Post-gather: coverage-gap check
+### Post-gather: coverage gaps are NOT computed here (F109)
 
-After the gather loop finishes, run the coverage check:
+**Do not compute or transcribe the coverage-gap list in this skill.** Until F109 this section
+carried an inline `python -c` snippet whose printed JSON you were told to hand-append to
+`gather-log.json` under `coverageGaps`. That step was skipped in the v19 (2026-07-27) cycle and the
+21 gaps it found survive only as a free-text sentence — unverifiable and un-renderable. The manual
+step is gone. There is now exactly one code path.
+
+Coverage gaps are computed and **written to tracked store data** by the `coverage-record` verb,
+which the coordinator runs at run-cycle step **(d3)** — after write-back, when this cycle's gated
+findings exist:
 
 ```
-.venv/Scripts/python -c "
-import json
-from gpu_agent.manifest import load_manifest, compute_coverage_gaps
-
-manifest = load_manifest('<manifestRef>')
-blob_urls = [r['url'] for r in receipts]   # receipts = all gathered receipts (never blob content)
-found = set(<found_indicator_ids>)
-gaps = compute_coverage_gaps(manifest, blob_urls, found)
-print(json.dumps([g.model_dump() for g in gaps], indent=2))
-"
+.venv/Scripts/python -m gpu_agent.cli coverage-record --manifest <manifestRef> \
+  --blobs work/<run-dir>/blobs.json --findings <work>/corpus-findings.json \
+  --store store --category <id> --as-of <asOf>
 ```
 
-Append the resulting gap list to `gather-log.json` under the key `coverageGaps`. If no manifest was
-loaded, `coverageGaps` is an empty list `[]`.
+It writes `store/<id>/coverage-<asOf>.json` (tracked, committed with the cycle), carrying the gap
+list, the counts, and the fetched-URL set and manifest reference it judged over — so the verdict
+stays checkable after `work/` is swept. Your job here is only to gather; leave the verdict to the
+verb.
 
-At the same point, append the run's `huggingnewsFallback[]` list (the fallback docs accrued during
+After ingest, append the run's `huggingnewsFallback[]` list (the fallback docs accrued during
 step 2c, each `{"ref","publisher":"huggingnews.com","unreachablePrimaries":[...]}`) to
-`gather-log.json` under the key `huggingnewsFallback` — same file, same "append after ingest"
-timing as `coverageGaps` above, since `ingest` does not carry this key through on its own. An empty
-list `[]` is the norm when no fallback doc was needed this run.
+`gather-log.json` under the key `huggingnewsFallback`, since `ingest` does not carry this key
+through on its own. An empty list `[]` is the norm when no fallback doc was needed this run.
 
 **5. Assemble the snapshot envelope — never by hand.** Once the trail goes dry, run
 `gpu-agent gather-assemble --blob-dir work/<run-dir>/blobs --out work/<run-dir>/blobs.json` — there
