@@ -1,0 +1,281 @@
+{
+  "asOf": "2026-08-04",
+  "calibration": {
+    "extract-2026-07-90": {
+      "max": 4,
+      "ok": true,
+      "score": 1
+    },
+    "implication-2026-07-90": {
+      "max": 4,
+      "ok": true,
+      "score": 1
+    },
+    "judge-2026-07-90": {
+      "max": 4,
+      "ok": true,
+      "score": 1
+    },
+    "thesis-2026-07-90": {
+      "max": 4,
+      "ok": true,
+      "score": 0
+    },
+    "thesis-2026-07-91": {
+      "max": 4,
+      "ok": true,
+      "score": 2
+    }
+  },
+  "promptHashes": {
+    "extract": "5e22b9b1b049a0f2d70f14eace3f3bc0972779a295d3048057de03296838cd62",
+    "implication": "576cbe871837e453ee027a4416d1dd083fe543aac379a5f0936a1b0ea8276162",
+    "judge": "31cd7bd9e80a00702fec838bcc63f28dcb6ce5ff2dcafd159b9daed39771ec28",
+    "thesis": "4a9d9817951ca31684bd7f139911df04b5fc677d6c144906199153a6d132d0c7"
+  },
+  "scores": {
+    "extract-2026-07-01": {
+      "grades": {
+        "completeness": 0,
+        "fidelity": 1,
+        "provenance-honesty": 1,
+        "signal-selection": 2
+      },
+      "total": 4
+    },
+    "extract-2026-07-02": {
+      "grades": {
+        "completeness": 0,
+        "fidelity": 2,
+        "provenance-honesty": 1,
+        "signal-selection": 2
+      },
+      "total": 5
+    },
+    "extract-2026-07-03": {
+      "grades": {
+        "completeness": 0,
+        "fidelity": 2,
+        "provenance-honesty": 1,
+        "signal-selection": 2
+      },
+      "total": 5
+    },
+    "extract-2026-07-03-01": {
+      "grades": {
+        "completeness": 1,
+        "fidelity": 2,
+        "provenance-honesty": 1,
+        "signal-selection": 2
+      },
+      "total": 6
+    },
+    "extract-2026-07-03-02": {
+      "grades": {
+        "completeness": 1,
+        "fidelity": 2,
+        "provenance-honesty": 2,
+        "signal-selection": 2
+      },
+      "total": 7
+    },
+    "extract-2026-07-04": {
+      "grades": {
+        "completeness": 0,
+        "fidelity": 2,
+        "provenance-honesty": 2,
+        "signal-selection": 2
+      },
+      "total": 6
+    },
+    "extract-2026-07-05": {
+      "grades": {
+        "completeness": 0,
+        "fidelity": 1,
+        "provenance-honesty": 1,
+        "signal-selection": 2
+      },
+      "total": 4
+    },
+    "extract-2026-07-06": {
+      "grades": {
+        "completeness": 1,
+        "fidelity": 2,
+        "provenance-honesty": 1,
+        "signal-selection": 2
+      },
+      "total": 6
+    },
+    "extract-2026-07-90": {
+      "grades": {
+        "completeness": 0,
+        "fidelity": 0,
+        "provenance-honesty": 0,
+        "signal-selection": 1
+      },
+      "total": 1
+    },
+    "implication-2026-07-01": {
+      "grades": {
+        "citation-discipline": 1,
+        "customer-relevance": 2,
+        "decision-usefulness": 2,
+        "exposure-not-recommendation": 2
+      },
+      "total": 7
+    },
+    "implication-2026-07-90": {
+      "grades": {
+        "citation-discipline": 0,
+        "customer-relevance": 1,
+        "decision-usefulness": 0,
+        "exposure-not-recommendation": 0
+      },
+      "total": 1
+    },
+    "judge-2026-07-01": {
+      "grades": {
+        "crux": 2,
+        "evidence-discipline": 2,
+        "mechanism": 2,
+        "sensitivity-differentiation": 2
+      },
+      "total": 8
+    },
+    "judge-2026-07-02": {
+      "grades": {
+        "crux": 2,
+        "evidence-discipline": 2,
+        "mechanism": 2,
+        "sensitivity-differentiation": 2
+      },
+      "total": 8
+    },
+    "judge-2026-07-03-01": {
+      "grades": {
+        "crux": 2,
+        "evidence-discipline": 1,
+        "mechanism": 1,
+        "sensitivity-differentiation": 1
+      },
+      "total": 5
+    },
+    "judge-2026-07-03-02": {
+      "grades": {
+        "crux": 2,
+        "evidence-discipline": 2,
+        "mechanism": 2,
+        "sensitivity-differentiation": 2
+      },
+      "total": 8
+    },
+    "judge-2026-07-90": {
+      "grades": {
+        "crux": 0,
+        "evidence-discipline": 1,
+        "mechanism": 0,
+        "sensitivity-differentiation": 0
+      },
+      "total": 1
+    },
+    "thesis-2026-07-01": {
+      "grades": {
+        "delta-discipline": 1,
+        "mechanism": 1,
+        "steelman": 0,
+        "trigger-quality": 1
+      },
+      "total": 3
+    },
+    "thesis-2026-07-03-01": {
+      "grades": {
+        "delta-discipline": 1,
+        "mechanism": 1,
+        "steelman": 1,
+        "trigger-quality": 2
+      },
+      "total": 5
+    },
+    "thesis-2026-07-90": {
+      "grades": {
+        "delta-discipline": 0,
+        "mechanism": 0,
+        "steelman": 0,
+        "trigger-quality": 0
+      },
+      "total": 0
+    },
+    "thesis-2026-07-91": {
+      "grades": {
+        "delta-discipline": 0,
+        "mechanism": 0,
+        "steelman": 0,
+        "trigger-quality": 2
+      },
+      "total": 2
+    }
+  },
+  "seamMeans": {
+    "extract": 5.375,
+    "implication": 7.0,
+    "judge": 7.25,
+    "thesis": 4.0
+  },
+  "verdict": {
+    "craters": [
+      {
+        "caseId": "extract-2026-07-03",
+        "median": 8,
+        "value": 5
+      },
+      {
+        "caseId": "judge-2026-07-03-01",
+        "informational": true,
+        "median": 8,
+        "value": 5
+      },
+      {
+        "caseId": "thesis-2026-07-01",
+        "informational": true,
+        "median": 6,
+        "value": 3
+      }
+    ],
+    "decision": "hard-fail",
+    "pass": false,
+    "reasons": [
+      "regression on 'extract': 5.375 < bar 6.163 (replicate mean 6.792 - eps 0.629)",
+      "crater: case 'extract-2026-07-03' at 5.0 <= baseline median 8 - 3"
+    ],
+    "seams": {
+      "extract": {
+        "bar": 6.162513797060771,
+        "gated": true,
+        "hardBar": 5.533360927454876,
+        "ok": false,
+        "value": 5.375
+      },
+      "implication": {
+        "bar": 7.0,
+        "gated": false,
+        "hardBar": 6.0,
+        "ok": true,
+        "value": 7.0
+      },
+      "judge": {
+        "bar": 7.75,
+        "gated": false,
+        "hardBar": 7.5,
+        "ok": false,
+        "value": 7.25
+      },
+      "thesis": {
+        "bar": 5.5,
+        "gated": false,
+        "hardBar": 5.0,
+        "ok": false,
+        "value": 4.0
+      }
+    }
+  }
+}

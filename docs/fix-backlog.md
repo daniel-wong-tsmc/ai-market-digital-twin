@@ -1351,8 +1351,20 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   F6 eval gate (run-eval → rebaseline), per the standing rule. *(Concurrent-mint caveat: F98
   chosen against a backlog max of F97 on 2026-07-17; renumber if collided.)*
 
-- [ ] **F99 — Re-capture the F79 seeded-regression canary with more-severe extract damage
-  (restore gate teeth).** Surfaced by F98 Part B (2026-07-18). The F98b `upstreamLeadTimes` governance
+- [x] **F99 — Re-capture the F79 seeded-regression canary with more-severe extract damage
+  (restore gate teeth).** Surfaced by F98 Part B (2026-07-18).
+  **✓ DONE 2026-08-04 — CATCH on the first attempt, user-granted interactive capture.** D1 damage
+  (extract prompt template: single-claim cap + anti-invention rule deleted + name-every-category
+  nudge deleted) applied in a throwaway worktree only; ONE live run (~44 Opus dispatches incl. 9
+  F38 re-dispatches, zero hand-edits, zero bypasses); damaged extract seamMean **5.375** vs hard
+  bar 5.533 → **HARD-FAIL naming extract**, all 5 calibration negatives ≤ 2. New fixture
+  `fixtures/evals/canary/extract-rules-stripped/report.json` (old `extract-series-vocab-stripped/`
+  kept as history), canary test un-skipped + repointed (suite skips 6 → 5), baseline byte-untouched,
+  no rebaseline, live prompt verified untouched (empty diff, F6 pin green). Raw run preserved at
+  root `work/eval-f99-canary/`. Note:
+  `docs/superpowers/eval-notes/2026-08-04-f99-canary-recapture-note.md` (headroom now ~0.8 pts
+  below the soft bar; side observation: thesis informational seam 4.00 vs bar 5.50 — F107 LEVEL
+  caveat still stands). Original entry: The F98b `upstreamLeadTimes` governance
   rebaseline widened the extract seam's noise band (epsilon 0.382 → 0.901, bar 6.285 → 5.599 — an
   n=3 replicate spread within the dispersion guard, but wide) below the F79 canary's damaged-run extract
   score (6.25), so `tests/test_evals_canary_f79.py::test_f79_series_vocab_stripped_is_rejected` no longer
