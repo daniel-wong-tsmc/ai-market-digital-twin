@@ -1557,7 +1557,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   `docs/superpowers/plans/2026-07-28-f108-seam-scoped-rebaseline.md`. Awaiting user merge; the F105
   lane then runs `eval rebaseline --seams extract` to land its change.
 
-- [ ] **F109 — Coverage gaps are computed but never recorded durably (found while building F61, 2026-07-28).**
+- [x] **F109 — Coverage gaps are computed but never recorded durably (found while building F61, 2026-07-28).**
   Nothing downstream can render or audit what the gather run failed to cover.
   `manifest.compute_coverage_gaps()` has **no production caller in the package** — it runs only
   from the gather skill's inline snippet, and its output is written to
@@ -1575,6 +1575,24 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   descoped there, 2026-07-28) and is a prerequisite for any honest coverage disclosure on the
   page.
   *(Concurrent-mint caveat: renumbered F106→F109 at merge time 2026-07-29 — F106 (HuggingNews), F107, F108 were minted concurrently on main.)*
+  **BUILT 2026-08-04** on branch `f109-coverage-gaps` (awaiting user merge) — spec
+  `docs/superpowers/specs/2026-08-04-f109-coverage-gaps-design.md`. All four design forks were
+  question-stopped and answered interactively by the user (zero AFK-defaults). **Root cause was not
+  the file format:** the only route from `compute_coverage_gaps()` to any record ran through a human
+  pasting JSON into `gather-log.json`, and that step got skipped. **Built:** a `CoverageRecord`
+  model + pure `build_coverage_record()` (clock-free, so reruns are byte-identical) in
+  `gpu_agent/manifest.py`, and a `coverage-record` CLI verb that computes AND persists in one call,
+  writing the tracked `store/<categoryId>/coverage-<asOf>.json` — the same sidecar shape as the L2
+  dedup report. The record is self-auditing: it carries the fetched-URL set, the covered indicator
+  ids, and the manifest reference it judged over, so the verdict survives a `work/` sweep. Covered
+  indicators come from the **gated findings**, not the URLs (fetching a source proves nothing about
+  learning the indicator), which is why it runs at new run-cycle step **(d3)**, after write-back;
+  the F83 fingerprint was re-recorded `d7359d33`→`5b25bf8f`, regenerated from `EXPECTED_STEPS`. The
+  gather skill's inline snippet is deleted and a test guards against its return. An empty gap list
+  is still written — a missing file means the check never ran, never "full coverage". No backfill by
+  user decision: `store/` gains no data here; history starts honest at the next cycle. 14 new tests;
+  suite 2160 passed / 6 skipped; all four pins green. **Unblocks the coverage half of F61** (still
+  unrendered — F109 records, it does not display).
 - [x] **F106 BUILT 2026-07-29 — HuggingNews desk-wide source, first slice shipped.** Branch
   `f106-huggingnews`, commits `5fd18ae`..`fe19717` (7 commits). What shipped: (1) `gpu_agent/gathering/webreach.py`
   gained `resolve_secret` (env var first, else the gitignored `.superpowers/secrets/<NAME>` file, else

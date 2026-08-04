@@ -48,6 +48,8 @@ from gpu_agent.gathering.ingest import normalize_documents
 from gpu_agent.gathering.assemble import assemble as assemble_blobs
 from gpu_agent.gathering.dedup import (
     SeenDocIndex, filter_seen_documents, record_documents, classify_findings, DedupReport)
+from gpu_agent.manifest import (
+    CoverageOverride, ManifestLoadError, build_coverage_record, load_manifest)
 from gpu_agent.registry.indicators import IndicatorRegistry, RegistryError
 from gpu_agent.registry.horizon import IndicatorHorizons
 from gpu_agent.registry.structure import Taxonomy
@@ -190,6 +192,56 @@ def _wiki_dedup(args) -> int:
     else:
         print(payload)
     return 0
+
+def _coverage_record(args) -> int:
+    """Handler for `gpu-agent coverage-record` (F109): compute this cycle's coverage
+    gaps and WRITE them, in one deterministic call.
+
+    F109's failure was never the arithmetic — `compute_coverage_gaps()` was correct and
+    tested. It was that the only route from the computation to a record ran through a
+    human pasting JSON into a file in the gitignored `work/` tree. That step got skipped
+    in the v19 cycle and the gaps were lost. So this verb computes AND persists; there is
+    no intermediate anyone can forget to copy.
+
+    Covered indicators come from the GATED FINDINGS, not from the fetched URLs: fetching
+    a source proves nothing about whether the cycle actually learned the indicator (see
+    compute_coverage_gaps' docstring). Fetched URLs are used for source coverage only.
+    """
+    try:
+        manifest = load_manifest(args.manifest)
+    except ManifestLoadError as e:
+        print(f"gpu-agent coverage-record: error: {e}", file=sys.stderr)
+        return 1
+
+    payload = json.loads(pathlib.Path(args.blobs).read_text("utf-8"))
+    blobs = payload if isinstance(payload, list) else payload.get("blobs", [])
+    fetched_urls = [b["url"] for b in blobs if b.get("url")]
+
+    findings = [Finding.model_validate(d)
+                for d in json.loads(pathlib.Path(args.findings).read_text("utf-8"))]
+    found_indicator_ids = {f.indicatorId for f in findings if f.indicatorId}
+
+    overrides = None
+    if args.overrides:
+        overrides = [CoverageOverride.model_validate(d)
+                     for d in json.loads(pathlib.Path(args.overrides).read_text("utf-8"))]
+
+    captured_at = args.captured_at or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    record = build_coverage_record(
+        manifest=manifest, category_id=args.category, as_of=args.as_of,
+        manifest_ref=args.manifest, fetched_urls=fetched_urls,
+        found_indicator_ids=found_indicator_ids, captured_at=captured_at,
+        overrides=overrides)
+
+    out = (pathlib.Path(args.out) if args.out
+           else pathlib.Path(args.store) / args.category / f"coverage-{args.as_of}.json")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(record.model_dump_json(indent=2), "utf-8")
+    c = record.gapCounts
+    print(f"wrote {out}  ({c['total']} gap(s): {c['source']} source, "
+          f"{c['indicator']} indicator, {c['required']} required, {c['waived']} waived)")
+    return 0
+
 
 def _corpus(args) -> int:
     """Handler for `gpu-agent corpus` (F62). Store-only mode (no --fresh) prints the
@@ -1549,6 +1601,25 @@ def main(argv=None) -> int:
     wd.add_argument("--out-findings", default=None,
                     help="write the deduped NEW+UPDATE findings JSON here (for wiki-ingest)")
     wd.add_argument("--report", default=None, help="write the DedupReport JSON here (else stdout)")
+    cvr = sub.add_parser("coverage-record",
+                         help="F109: compute this cycle's coverage gaps and write the "
+                              "tracked store/<category>/coverage-<asOf>.json record")
+    cvr.add_argument("--manifest", required=True, help="coverage manifest path")
+    cvr.add_argument("--blobs", required=True,
+                     help="JSON: bare blob array or {rounds,skipped,blobs} — the URLs "
+                          "this cycle actually fetched")
+    cvr.add_argument("--findings", required=True,
+                     help="JSON array of this cycle's GATED Findings (covered indicators "
+                          "are taken from these, not from the fetched URLs)")
+    cvr.add_argument("--store", default="store", help="store root")
+    cvr.add_argument("--category", required=True, help="categoryId (the store subdirectory)")
+    cvr.add_argument("--as-of", required=True, type=_as_of)
+    cvr.add_argument("--overrides", default=None,
+                     help="JSON array of CoverageOverride waivers (waived gaps stay visible)")
+    cvr.add_argument("--captured-at", default=None,
+                     help="ISO-8601 stamp (default: now, UTC). Pin it for byte-identical reruns")
+    cvr.add_argument("--out", default=None,
+                     help="write here instead of store/<category>/coverage-<asOf>.json")
     wl = sub.add_parser("wiki-lint")
     wl.add_argument("--store", default="store", help="store root (holds wiki/ and findings/)")
     wl.add_argument("--as-of", required=True, type=_as_of)
@@ -1786,6 +1857,8 @@ def main(argv=None) -> int:
         except RegistryError as e:
             print("REGISTRY GATE FAILED:", *e.violations, sep="\n  ", file=sys.stderr)
             return 1
+    if args.cmd == "coverage-record":
+        return _coverage_record(args)
     if args.cmd == "wiki-lint":
         return _wiki_lint(args)
     if args.cmd == "wiki-lifecycle":

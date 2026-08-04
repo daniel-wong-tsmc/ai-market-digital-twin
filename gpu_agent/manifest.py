@@ -5,6 +5,8 @@ Defines:
   CoverageGap       — a not-covered expected item (source or indicator)
   load_manifest()   — typed loader with clear error messages
   compute_coverage_gaps() — pure gap checker (no I/O)
+  CoverageRecord    — the durable, self-auditing coverage artifact (F109)
+  build_coverage_record() — pure builder for that artifact (no I/O)
 """
 from __future__ import annotations
 
@@ -280,3 +282,96 @@ def compute_coverage_gaps(
             })
 
     return gaps
+
+
+# ── Durable coverage record (F109) ───────────────────────────────────────────
+
+class CoverageRecord(BaseModel):
+    """One cycle's coverage verdict, in a form that survives the machine.
+
+    Before F109 the gap list existed only inside a run: `compute_coverage_gaps()`
+    had no production caller, and its output was hand-copied into a file under the
+    gitignored `work/` tree. This model is what gets committed instead, as
+    `store/<categoryId>/coverage-<asOf>.json` — the same shape of tracked sidecar
+    the L2 dedup report already uses.
+
+    It is deliberately SELF-AUDITING: `judgedUrls`, `judgedIndicatorIds` and
+    `manifestRef` record the exact inputs the verdict was computed over, so the gap
+    list can still be checked long after the run's work dir is swept. A gap list you
+    cannot re-derive is a claim, not a record.
+    """
+    schemaVersion: str = "1.0"
+    categoryId: str
+    asOf: str
+    capturedAt: str
+    manifestRef: str
+    manifestVersion: str
+    manifestAsOf: str
+    gaps: list[CoverageGap] = Field(default_factory=list)
+    gapCounts: dict[str, int] = Field(default_factory=dict)
+    judgedUrls: list[str] = Field(default_factory=list)
+    judgedIndicatorIds: list[str] = Field(default_factory=list)
+
+
+def _count_gaps(gaps: list[CoverageGap]) -> dict[str, int]:
+    """Precomputed tallies, so a reader never has to re-derive them (and so two
+    readers can never disagree about how many gaps a cycle had).
+
+    A waived gap is counted in `total` and in its priority bucket as well as in
+    `waived`: waiving records a reason, it never erases the gap.
+    """
+    return {
+        "total": len(gaps),
+        "source": sum(1 for g in gaps if g.type == "source"),
+        "indicator": sum(1 for g in gaps if g.type == "indicator"),
+        "required": sum(1 for g in gaps if g.priority == "required"),
+        "preferred": sum(1 for g in gaps if g.priority == "preferred"),
+        "optional": sum(1 for g in gaps if g.priority == "optional"),
+        "waived": sum(1 for g in gaps if g.acquisitionStatus == "waived"),
+        "paywalled": sum(1 for g in gaps if g.acquisitionStatus == "paywalled"),
+    }
+
+
+def build_coverage_record(
+    manifest: CoverageManifest,
+    category_id: str,
+    as_of: str,
+    manifest_ref: str,
+    fetched_urls: list[str],
+    found_indicator_ids: set[str],
+    captured_at: str,
+    overrides: list[CoverageOverride] | None = None,
+) -> CoverageRecord:
+    """Build the durable coverage record. Pure — no I/O, no clock.
+
+    `captured_at` is passed in rather than read from the clock so the same inputs
+    always produce the same bytes (re-running a cycle's coverage check must not
+    show up as a diff).
+
+    Args:
+        manifest: the loaded CoverageManifest for this category.
+        category_id: the category this record belongs to (the store directory name).
+        as_of: the cycle's asOf — also the filename key.
+        manifest_ref: the path the manifest was loaded from, recorded verbatim so a
+            later reader can find the declaration the verdict was judged against.
+        fetched_urls: every URL the gather actually fetched this cycle.
+        found_indicator_ids: indicatorIds this cycle actually produced a gated
+            finding for. Fetching a source is NOT the same as covering its
+            indicator — see compute_coverage_gaps().
+        captured_at: ISO-8601 timestamp string for when this record was made.
+        overrides: optional structured waivers; waived gaps stay in the list.
+    """
+    gaps = compute_coverage_gaps(
+        manifest, list(fetched_urls), set(found_indicator_ids), overrides=overrides)
+    return CoverageRecord(
+        categoryId=category_id,
+        asOf=as_of,
+        capturedAt=captured_at,
+        manifestRef=manifest_ref,
+        manifestVersion=manifest.version,
+        manifestAsOf=manifest.asOf,
+        gaps=gaps,
+        gapCounts=_count_gaps(gaps),
+        judgedUrls=sorted(set(fetched_urls)),
+        judgedIndicatorIds=sorted(set(found_indicator_ids)),
+    )

@@ -49,7 +49,7 @@ report the rest `skipped-no-assignment` (surfaced, never dropped).
 
 ## Procedure
 
-<!-- run-cycle-step-fingerprint: sha256=d7359d33e1b452d4af5ce95f1fecea7b17019f26414ee032e04096f796784e1d — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
+<!-- run-cycle-step-fingerprint: sha256=5b25bf8fb03f922b798ee8b1d5fe027041bdef4b909829882fd85ad09edbc97a — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
 
 ### 1. Resolve the scope to a cycle plan (deterministic — no LLM)
 ```
@@ -198,6 +198,21 @@ fresh stream into the wiki so the store accumulates from this cycle too:
 ```
 If the scorecard step failed, SKIP write-back and log `write-back: skipped (scorecard failed)` in
 the cycle log — never half-commit a failed cycle.
+
+**(d3) Coverage record (F109; deterministic, no LLM).** Record what this cycle did NOT cover, into
+tracked store data — never by hand, and never only into `work/`:
+```
+.venv/Scripts/python -m gpu_agent.cli coverage-record --manifest <manifestRef> \
+  --blobs work/<run-dir>/blobs.json --findings <work>/corpus-findings.json \
+  --store store --category <id> --as-of <asOf>
+```
+Expected: `wrote store/<id>/coverage-<asOf>.json  (<n> gap(s): ...)`. This writes the structured gap
+list plus the fetched-URL set and manifest reference it judged over, so the verdict stays checkable
+after `work/` is swept. **An empty gap list is still written** — absence of the file must never be
+confused with "full coverage", which is exactly the ambiguity F109 existed to remove. If the
+assignment carries no manifest, log `coverage: skipped (no manifest)` in the cycle log and move on;
+if the scorecard step failed, SKIP this exactly as write-back is skipped. Commit the artifact with
+the cycle (CLAUDE.md: a cycle that isn't committed didn't happen).
 
 **(e) Thesis — Claude Code is the brain.** After the scorecard is written, emit the canonical thesis-book
 prompt from this cycle's gated findings (this seeds the store with the category's standing theses on its
