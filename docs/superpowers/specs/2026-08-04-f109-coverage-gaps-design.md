@@ -2,7 +2,8 @@
 
 **Lane:** `f109-coverage-gaps` · worktree `.worktrees/f109-coverage-gaps` · branch `f109-coverage-gaps`
 **Date:** 2026-08-04
-**Status:** PARKED at a question-stop — the central design fork is unanswered. See
+**Status:** BUILT. The design fork was question-stopped and answered by the user interactively on
+2026-08-04 (see §5 — all four answers are user-approved, zero AFK-defaults). Questions as put:
 `.superpowers/handoffs/f109-coverage-gaps-QUESTIONS.md`.
 
 ---
@@ -129,12 +130,37 @@ the truth at the next cycle than a set of plausible-looking reconstructed artifa
 
 | Decision | Status |
 |---|---|
-| Which durable artifact (A / B / C) | **OPEN — question-stop, Q1** |
-| Where the verb's inputs come from (i / ii / iii) | **OPEN — question-stop, Q2** |
-| Whether to backfill past cycles | **OPEN — question-stop, Q3** |
-| Whether the gather skill's inline snippet is replaced by the verb | **OPEN — question-stop, Q4** |
-| Verb name `coverage-record`, artifact name `coverage-<asOf>.json` | Mechanical; follows the `wiki-dedup` / `dedup-<asOf>.json` precedent. Proceeds unless the user says otherwise. |
-| Fingerprint regenerated from `EXPECTED_STEPS`, never hand-computed | Fixed by the lane brief. |
-| No backfill implies no change to any committed scorecard | Follows from Q3 if answered "no backfill". |
+| Q1 — which durable artifact | **Option A, USER-APPROVED (interactive, 2026-08-04)**: the tracked sidecar `store/<categoryId>/coverage-<asOf>.json`, written by a new deterministic CLI verb, mirroring the dedup-report precedent. |
+| Q2 — where the verb's inputs come from | **Option (iii), USER-APPROVED (interactive, 2026-08-04)**: live inputs from the run, with the fetched-URL set and manifest reference written into the artifact so it stays auditable after the work dir is swept. |
+| Q3 — backfill past cycles | **No, USER-APPROVED (interactive, 2026-08-04)**: history starts honest at the next cycle; old cycles are not reconstructed. |
+| Q4 — the gather skill's inline snippet | **Replaced, USER-APPROVED (interactive, 2026-08-04)**: one code path; the manual transcription step is deleted. |
+| Verb name `coverage-record`, artifact name `coverage-<asOf>.json` | Mechanical; follows the `wiki-dedup` / `dedup-<asOf>.json` precedent. |
+| Covered indicators read from the **gated findings**, not the fetched URLs | Mechanical: it is `compute_coverage_gaps()`'s own documented semantics ("if the gather fetched the source but the coordinator never produced a finding for this indicator, that is still a gap"). This is also why (d3) sits after write-back rather than at gather time — the findings do not exist earlier. |
+| `capturedAt` passed in, not read from the clock | Mechanical: without it, re-running a cycle's coverage check shows up as a spurious diff. |
+| Step placed at (d3), after write-back | Follows from the line above; skipped alongside write-back when the scorecard failed. |
+| Fingerprint regenerated from `EXPECTED_STEPS`, never hand-computed | Fixed by the lane brief; done via the test module's own `_expected_fingerprint()`. |
+| No backfill implies no committed scorecard or store artifact was altered | Follows from Q3. Confirmed: this branch adds no `store/` data. |
 
-Nothing has been implemented. No code file in this worktree has been modified.
+## 6. What was built
+
+- `gpu_agent/manifest.py` — `CoverageRecord` model, `build_coverage_record()` (pure, clock-free),
+  `_count_gaps()`. `compute_coverage_gaps()` itself is unchanged; F109 was never a maths bug.
+- `gpu_agent/cli.py` — the `coverage-record` verb: computes and persists in one call.
+- `tests/test_coverage_record.py` — 14 tests, including a guard that fails if the hand-copy snippet
+  ever returns to the gather skill.
+- `.claude/skills/run-cycle/SKILL.md` — new step (d3); F83 fingerprint re-recorded
+  `d7359d33` → `5b25bf8f`, regenerated from `EXPECTED_STEPS`.
+- `.claude/skills/gather-category/SKILL.md` — snippet deleted, replaced by a pointer to the verb.
+- Store landing map + CLI verb reference document the new artifact; the landing map's stale claim
+  that the cycle log carries `coverageGaps` / `coverageGapCounts` is corrected.
+
+Suite: **2160 passed / 6 skipped** (2146 / 6 before this lane's 14 tests). All four pins green.
+
+## 7. What F109 does NOT do (deliberate)
+
+- **No rendering.** Nothing shows coverage to a reader yet. That is F61's descoped coverage half,
+  which was blocked on this artifact existing and is now unblocked.
+- **No backfill**, per Q3 — `store/` gains no data on this branch. The first real record appears at
+  the next live cycle.
+- **No scorecard schema change.** If the coverage line later wants to travel with the scorecard,
+  Option C in §3 is the upgrade path; the sidecar stays the record either way.
