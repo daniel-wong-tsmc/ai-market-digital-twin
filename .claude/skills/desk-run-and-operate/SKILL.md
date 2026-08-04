@@ -154,6 +154,7 @@ those.
 | **Findings** | `store/findings/<id>.json` | One immutable file per gated finding id; identical re-append is a no-op, differing content for an existing id raises loud |
 | **L1 seen-doc index** | `store/seen_docs.jsonl` | Append-only, keyed by normalized URL **and** content hash; `contains()` checks the **hash first** (a stable URL with changed content is a new document — don't "fix" this) |
 | **L2 dedup report** | `store/<categoryId>/dedup-<asOf>.json` | Daily-mode NEW/UPDATE/DUPLICATE classification vs the store's latest vintage |
+| **Coverage record** | `store/<categoryId>/coverage-<asOf>.json` | F109: what this cycle did NOT cover. Written by `coverage-record` at run-cycle step (d3); carries the gap list, the counts, and the fetched-URL set + manifest ref it judged over, so the verdict is checkable after `work/` is swept. An empty gap list is still written — a missing file means the check never ran, never "full coverage" |
 | **Wiki** | `store/wiki/<entity\|theme>/<slug>.md` + `store/wiki/log.jsonl` | Front-matter pages; the substance (observations) lives only in the append-only `log.jsonl`, not the `.md` body |
 | **Thesis book** | `store/theses/<categoryId>/{book.json,history.jsonl}` | `history.jsonl` is canonical; `book.json` load fails loud if it drifts from the history replay — never hand-edit `book.json` |
 | **Cycle journal** | `store/cycle-log.json` | The *previous* cycle's finalized journal until this run's Step 6 (finalize) overwrites it — see §5 |

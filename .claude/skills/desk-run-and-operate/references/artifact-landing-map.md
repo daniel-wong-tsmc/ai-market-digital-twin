@@ -76,7 +76,7 @@ example, field names verified against the committed 2026-07-05 daily entry:
    dmi, smi, sdgi,                         # the three headline numbers, for quick scanning
    gather: {mode, recencyDays, caps, rounds, docsIngested, primaryVsSecondary,
             blobsByClass, webReach, webReachNote, discoveryLeads, blobs, gatherLog,
-            coverageGaps, coverageGapCounts, notableSkips, paywalledSkipped},
+            notableSkips, paywalledSkipped},   # NOT coverage gaps — see F109 below
    dedup: {L1: {ingested, dup, dropped, droppedKnown, note},
            L2: {new, update, duplicate, report}},
    answers: {extract, judge, thesis},      # work/ paths to the saved subagent answers
@@ -105,7 +105,15 @@ about it (F75 open finding).
 2026-07-05-v1.json                          # day-grain daily scorecard (d9cfb3f)
 2026-07-v1.json / -v2.json / -v3.json       # month-grain monthly flagship (v3 = current, 99ca522)
 dedup-2026-07-02.json / -03.json / -05.json # L2 DedupReport per daily run
+coverage-<asOf>.json                        # F109 CoverageRecord per cycle (from 2026-08)
 ```
+
+**Coverage gaps live in `coverage-<asOf>.json`, not in the cycle log.** This map used to document
+`gather.coverageGaps` / `gather.coverageGapCounts` as cycle-log entry fields. They were never
+written: the committed 2026-07-29 log carries neither key, and the v19 cycle's 21 gaps survive only
+as a free-text sentence. F109 moved the record to its own tracked artifact, written by the
+`coverage-record` verb at run-cycle step (d3) — one deterministic command, no hand-transcription.
+The cycle log is also single-cycle and overwritten each run, so it was never a per-cycle history.
 
 `2026-07` sorts lexically *before* `2026-07-02` — the monthly flagship is not the max-sorting
 filename in its own directory. `find_prior`/version-resolution logic in `report.py` is

@@ -64,6 +64,24 @@ Not the live path. They compute + gate a scorecard from a fixtures dir; `score` 
 | `--out-findings` | | None | Deduped NEW+UPDATE stream (feeds wiki-ingest) |
 | `--report` | | None | DedupReport JSON path (else stdout). Daily runs write `store/<id>/dedup-<asOf>.json` (tracked) |
 
+## coverage-record
+
+F109. Computes this cycle's coverage gaps **and writes them** in one call — the manual
+"print the JSON, paste it into `gather-log.json`" step it replaced was skipped in the v19 cycle and
+the gaps were lost. Run at run-cycle step (d3), after write-back.
+
+| Flag | Req | Default | Notes |
+|---|---|---|---|
+| `--manifest` | req | — | Coverage manifest path; recorded verbatim in the artifact |
+| `--blobs` | req | — | Bare blob array or `{rounds,skipped,blobs}` — the URLs actually fetched |
+| `--findings` | req | — | This cycle's **gated** Findings; covered indicators come from these, not from the URLs |
+| `--store` | | `store` | |
+| `--category` | req | — | categoryId (the store subdirectory) |
+| `--as-of` | req | — | vintage-checked; also the filename key |
+| `--overrides` | | None | CoverageOverride waivers; waived gaps stay in the list, never dropped |
+| `--captured-at` | | now (UTC) | Pin it for byte-identical reruns |
+| `--out` | | None | Write here instead of `store/<category>/coverage-<asOf>.json` |
+
 ## wiki-lint
 
 | Flag | Req | Default | Notes |

@@ -167,6 +167,7 @@ EXPECTED_STEPS: tuple[tuple[str, str], ...] = (
     ("c", "judgment"),
     ("d", "score + store"),
     ("d2", "write-back"),
+    ("d3", "coverage record"),
     ("e", "thesis"),
     ("e2", "implication"),
     ("e3", "narrator"),
