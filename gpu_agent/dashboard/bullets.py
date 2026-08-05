@@ -6,19 +6,20 @@ honestly -- whether each bullet may carry a small supporting chart.
 
 The rule that matters more than any other: a small chart reads as an
 established fact to an executive reader, so it may only appear when there
-is real, defensible, non-estimate data behind it (>= the density
-thresholds below). When nothing qualifies, the bullet gets a plain-English
-``noChartReason`` explaining what's missing -- never a decorative or
-forced chart.
+is real, defensible, non-estimate data behind it, drawn from a real
+measured quantity we can name in plain English, and honestly attributed.
+When nothing qualifies, the bullet gets a plain-English ``noChartReason``
+explaining what's missing -- never a decorative or forced chart.
 """
 from __future__ import annotations
 
 import json
 import re
 from pathlib import Path
+from urllib.parse import urlparse
 
 from gpu_agent.chartdata.registry import ChartSeries
-from gpu_agent.dashboard.source_refs import findings_index, refs_for_finding_ids
+from gpu_agent.dashboard.source_refs import assessment_ref, findings_index, refs_for_finding_ids
 
 _SKIP_SCENE_TITLE = "What to watch from here"
 _MAX_BULLETS = 3
@@ -32,38 +33,75 @@ _MIN_SERIES_POINTS = 4
 _MIN_FALLBACK_POINTS = 6
 _MIN_FALLBACK_MONTHS = 3
 
-_SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
-_WORD_BOUNDARY = re.compile(r"(?<!^)(?=[A-Z])")
+# Controller ruling (review of this task, applying the design spec's
+# honesty principle -- not a new design decision): the rule-3 fallback may
+# only chart a raw store/series unit when that unit names a real,
+# plain-English measurable quantity -- never an internal composite score
+# or index. 'revision_direction' (a net count of buyers revising spend up
+# vs. down), 'credit_condition_index', 'ramp_minus_order_rate_pct' and
+# 'price_vs_volume_rate' are all internal analytical constructs, not
+# things a reader can point to in the world, so none of them may ever
+# reach a chart's axis. Only units in this map may be charted, and the
+# chart always shows the plain value, never the raw code.
+_PLAIN_UNITS = {
+    "USD_B": "US$ billions",
+    "USD": "US$",
+    "USD_per_hr": "US$ per hour",
+    "pct_yoy": "%, year over year",
+}
+
+_SENTENCE_BOUNDARY = re.compile(r"[.!?]+(?=\s|$)")
+_ABBREVIATIONS = {
+    "u.s", "u.s.a", "u.k", "e.g", "i.e", "dr", "mr", "mrs", "ms", "prof",
+    "sr", "jr", "st", "vs", "etc", "no", "inc", "corp", "co", "ltd",
+    "gen", "col", "sgt", "rep", "sen", "gov", "approx",
+}
+
+
+def _looks_like_abbreviation(token: str) -> bool:
+    """True for a token whose trailing '.' is NOT a real sentence end --
+    a known abbreviation ('Dr.', 'e.g.', 'U.S.') or a bare initial ('J.').
+    """
+    token = token.rstrip(".!?")
+    if not token:
+        return False
+    if token.lower() in _ABBREVIATIONS:
+        return True
+    # Initials like "U.S" (parts ["U", "S"]) or a lone capital letter "J".
+    parts = [p for p in token.split(".") if p]
+    return bool(parts) and all(len(p) <= 1 for p in parts)
 
 
 def _first_sentence(text: str) -> str:
-    """First sentence of `text` (up to and including its terminal
-    punctuation); the whole (stripped) string if none is found.
+    """First real sentence of `text` (up to and including its terminal
+    punctuation); the whole (stripped) string if no real boundary is found.
 
-    Splits only at a terminator immediately followed by whitespace, so a
-    mid-number decimal point (e.g. "1.4 gigawatts") is never mistaken for
-    a sentence end -- a naive "first '.' found" scan would cut "SpaceX
-    ended the June quarter with 1.4 gigawatts..." off after "1."."""
+    Two failure modes a naive "stop at the first terminator" scan hits on
+    real story text, both guarded against here:
+    - a mid-number decimal point ("1.4 gigawatts") is never a boundary,
+      because a terminator only counts when it's followed by whitespace
+      (or end of string) -- "1.4" has no space after the '.'.
+    - an abbreviation ("U.S.", "Dr.", "e.g.") IS followed by whitespace,
+      so that alone isn't enough; `_looks_like_abbreviation` on the token
+      immediately before the candidate boundary skips those too.
+    """
     text = text.strip()
     if not text:
         return text
-    return _SENTENCE_SPLIT.split(text, maxsplit=1)[0].strip()
+    for match in _SENTENCE_BOUNDARY.finditer(text):
+        candidate = text[:match.end()]
+        last_token = candidate.split()[-1] if candidate.split() else ""
+        if _looks_like_abbreviation(last_token):
+            continue
+        return candidate.strip()
+    return text
 
 
 def _bullet_text(scene: dict) -> str:
-    title = (scene.get("title") or "").strip().rstrip(".")
+    title = (scene.get("title") or "").strip().rstrip(".!?")
     paragraphs = scene.get("paragraphs") or [""]
     sentence = _first_sentence(paragraphs[0] if paragraphs else "")
     return f"{title}. {sentence}".strip()
-
-
-def _readable_indicator_name(indicator_id: str) -> str:
-    """A generic, non-jargon fallback label for an indicator id with no
-    registry entry backing it, e.g. 'hyperscalerCapexRevision' ->
-    'Hyperscaler Capex Revision'. Never used for a registered ChartSeries
-    (those carry their own reader-facing `name`)."""
-    words = _WORD_BOUNDARY.sub(" ", indicator_id)
-    return (words[:1].upper() + words[1:]) if words else indicator_id
 
 
 def _read_jsonl(path: Path) -> list[dict]:
@@ -117,7 +155,23 @@ def _point_from_row(row: dict) -> dict:
     }
 
 
+def _outlet_from_url(url: str | None) -> str:
+    """The publication a URL belongs to, derived from its own hostname --
+    never the article headline. 'www.' is stripped so 'www.cnbc.com' and
+    'cnbc.com' read as the same outlet."""
+    if not url:
+        return ""
+    try:
+        host = urlparse(url).netloc
+    except ValueError:
+        return ""
+    return host[4:] if host.startswith("www.") else host
+
+
 def _chart_from_series(cs: ChartSeries, rows: list[dict]) -> dict:
+    """Rule 2: a single registered, curated ChartSeries genuinely is one
+    real source (e.g. AMD's own investor-relations page), so a single
+    plain 'Source: <name>' attribution is honest here."""
     last = rows[-1]
     points = [_point_from_row(r) for r in rows[-_MAX_CHART_POINTS:]]
     source_ref = {
@@ -137,29 +191,42 @@ def _chart_from_series(cs: ChartSeries, rows: list[dict]) -> dict:
     }
 
 
-def _chart_from_fallback(scene: dict, indicator_id: str, rows: list[dict]) -> dict:
-    visual = scene.get("visual") or {}
-    if visual.get("seriesId") == indicator_id and visual.get("label"):
-        title = visual["label"]
-    else:
-        title = _readable_indicator_name(indicator_id)
-    last = rows[-1]
-    source_title = (last.get("source") or {}).get("title") or title
-    points = [_point_from_row(r) for r in rows[-_MAX_CHART_POINTS:]]
-    source_ref = {
-        "title": source_title,
-        "outlet": source_title,
-        "url": (last.get("source") or {}).get("url"),
-        "date": last.get("publishedAt"),
-        "tier": "secondary",
-    }
+def _chart_from_fallback(title: str, plain_unit: str, rows: list[dict]) -> dict:
+    """Rule 3: this history is stitched together across many separately
+    reported events (different companies, different articles), so it is a
+    synthesis, not one source -- the schema's assessment ref form is used
+    instead of pretending one row's article is "the" source of the whole
+    series (Critical 1 from review: drawing 10 points from 5 companies and
+    then captioning the chart with whichever article happened to be the
+    most recent row was misleading -- CNBC did not publish the series)."""
+    chart_rows = rows[-_MAX_CHART_POINTS:]
+    points = [_point_from_row(r) for r in chart_rows]
+
+    based_on: list[dict] = []
+    seen_urls: set[str] = set()
+    for r in chart_rows:
+        src = r.get("source") or {}
+        url = src.get("url")
+        if url is not None and url in seen_urls:
+            continue
+        if url is not None:
+            seen_urls.add(url)
+        headline = src.get("title") or ""
+        based_on.append({
+            "title": headline,
+            "outlet": _outlet_from_url(url) or headline,
+            "url": url,
+            "date": r.get("publishedAt"),
+            "tier": "secondary",
+        })
+
     return {
         "form": "line",
         "title": title,
-        "caption": f"{title}. Source: {source_title}.",
-        "unit": last.get("unit", ""),
+        "caption": f"{title}. Our assessment, based on the sources cited below.",
+        "unit": plain_unit,
         "points": points,
-        "source": source_ref,
+        "source": assessment_ref(based_on),
     }
 
 
@@ -167,8 +234,15 @@ def _match_registered_series(tags: set[str], series_reg: dict[str, ChartSeries],
                               store_dir: str) -> dict | None:
     """Rule 2: a registered chart series matches if any of its topicTags
     is among the scene's tags, it's chartable (hard-fact, never estimate),
-    and its jsonl has enough points. Registry walked in id order so ties
-    resolve deterministically."""
+    and it has enough real (non-estimate) rows. Registry walked in id
+    order so ties resolve deterministically.
+
+    Row-level estimateGrade is filtered here too, not just the registry's
+    quality flag: store/series/ has several other writers besides the
+    chartdata fetch framework, and a series registered as hard-fact could
+    still have an all-estimate file on disk today (review finding --
+    `quality` is a claim about the series; `estimateGrade` is the ground
+    truth about each row actually on disk, and the ground truth wins)."""
     for series_id in sorted(series_reg):
         cs = series_reg[series_id]
         if not cs.chartable:
@@ -176,14 +250,16 @@ def _match_registered_series(tags: set[str], series_reg: dict[str, ChartSeries],
         if not any(tag in cs.topicTags for tag in tags):
             continue
         rows = _read_jsonl(Path(store_dir) / f"{cs.id}.jsonl")
-        if len(rows) < _MIN_SERIES_POINTS:
+        real_rows = [r for r in rows if r.get("estimateGrade") is False]
+        if len(real_rows) < _MIN_SERIES_POINTS:
             continue
-        rows = sorted(rows, key=lambda r: r.get("period", ""))
-        return _chart_from_series(cs, rows)
+        real_rows = sorted(real_rows, key=lambda r: r.get("period", ""))
+        return _chart_from_series(cs, real_rows)
     return None
 
 
-def _fallback_reason(indicator_ids: list[str], store_dir: str) -> str:
+def _fallback_reason(indicator_ids: list[str], store_dir: str,
+                      dense_but_not_plain: bool) -> str:
     """An honest, reader-facing explanation of exactly what's missing --
     never a technical/internal phrase like 'insufficient series density'."""
     if not indicator_ids:
@@ -199,6 +275,11 @@ def _fallback_reason(indicator_ids: list[str], store_dir: str) -> str:
         return ("No chart. The only numbers here are our own estimates, not "
                 "published facts, so we don't chart them.")
 
+    if dense_but_not_plain:
+        return ("No chart. What we track here is an internal analytical "
+                "score, not a plain measured number readers can trust on a "
+                "chart, so we don't draw it.")
+
     return ("No chart. There isn't yet enough of a track record -- too few "
             "confirmed data points, or too narrow a span of time, to show a "
             "trend without being misleading.")
@@ -208,16 +289,43 @@ def _match_fallback_history(scene: dict, indicator_ids: list[str],
                              store_dir: str) -> tuple[dict | None, str | None]:
     """Rule 3: the scene's own findings' numeric history. Dense enough
     only if >= _MIN_FALLBACK_POINTS non-estimate points span
-    >= _MIN_FALLBACK_MONTHS distinct months; else an honest noChartReason."""
+    >= _MIN_FALLBACK_MONTHS distinct months. On top of that density gate,
+    two more honesty conditions both have to hold before anything is
+    drawn (controller ruling from review, applying the design spec's
+    honesty principle -- not a new design decision):
+
+    - the row's raw unit must name a real, plain-English measurable
+      quantity (see `_PLAIN_UNITS`) -- an internal composite score never
+      qualifies, no matter how dense its history is;
+    - the chart's title must come from the scene's own narrator copy
+      (`visual.label`, when `visual.seriesId` names this indicator) --
+      never a mechanically-derived label from a bare indicator id like
+      "S9", which is meaningless to a reader.
+
+    Either failing means this indicator can't be charted; the loop moves
+    on to the scene's next cited indicator id, and only if none qualify
+    do we fall to an honest `noChartReason`.
+    """
+    dense_but_not_plain = False
     for indicator_id in indicator_ids:
         rows = _read_jsonl(Path(store_dir) / f"{indicator_id}.jsonl")
         real_rows = [r for r in rows if r.get("estimateGrade") is False]
         months = {r.get("period", "")[:7] for r in real_rows}
-        if len(real_rows) >= _MIN_FALLBACK_POINTS and len(months) >= _MIN_FALLBACK_MONTHS:
-            real_rows = sorted(real_rows, key=lambda r: r.get("period", ""))
-            return _chart_from_fallback(scene, indicator_id, real_rows), None
+        if len(real_rows) < _MIN_FALLBACK_POINTS or len(months) < _MIN_FALLBACK_MONTHS:
+            continue
 
-    return None, _fallback_reason(indicator_ids, store_dir)
+        raw_unit = real_rows[-1].get("unit", "")
+        plain_unit = _PLAIN_UNITS.get(raw_unit)
+        visual = scene.get("visual") or {}
+        plain_title = visual.get("label") if visual.get("seriesId") == indicator_id else None
+        if plain_unit is None or not plain_title:
+            dense_but_not_plain = True
+            continue
+
+        real_rows = sorted(real_rows, key=lambda r: r.get("period", ""))
+        return _chart_from_fallback(plain_title, plain_unit, real_rows), None
+
+    return None, _fallback_reason(indicator_ids, store_dir, dense_but_not_plain)
 
 
 def build_bullets(story: dict, scorecard: dict, series_reg: dict[str, ChartSeries],
@@ -228,13 +336,24 @@ def build_bullets(story: dict, scorecard: dict, series_reg: dict[str, ChartSerie
     first 3 scenes whose title isn't "What to watch from here". Each
     bullet gets exactly one of `chart` (rule 2, else rule 3 fallback) or
     `noChartReason` -- never both, never neither.
+
+    Raises ValueError if the story doesn't have at least 3 such scenes --
+    the schema requires exactly 3 bullets, so a short story day must fail
+    here, clearly, rather than silently ship a 1- or 2-bullet payload that
+    only fails validation later with a confusing error.
     """
     findings_by_id = findings_index(scorecard)
     date = story.get("storyDate", "")
     story_href = f"story/{date}.html" if date else "story/"
 
-    scenes = [s for s in story.get("scenes", [])
-              if (s.get("title") or "").strip() != _SKIP_SCENE_TITLE][:_MAX_BULLETS]
+    all_scenes = [s for s in story.get("scenes", [])
+                  if (s.get("title") or "").strip() != _SKIP_SCENE_TITLE]
+    if len(all_scenes) < _MAX_BULLETS:
+        raise ValueError(
+            f"build_bullets needs at least {_MAX_BULLETS} story scenes "
+            f"(excluding {_SKIP_SCENE_TITLE!r}), found {len(all_scenes)}"
+        )
+    scenes = all_scenes[:_MAX_BULLETS]
 
     bullets = []
     for scene in scenes:
