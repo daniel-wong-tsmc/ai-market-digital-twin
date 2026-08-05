@@ -67,6 +67,7 @@ from gpu_agent.corpus import (
 from gpu_agent.chartdata.registry import DEFAULT_REGISTRY_PATH as CHART_SERIES_REGISTRY_PATH
 from gpu_agent.chartdata.registry import load_chart_series
 from gpu_agent.chartdata.fetch import run_fetch
+from gpu_agent.dashboard.export_json import write_dashboard_json
 
 # F56-core: --as-of is embedded verbatim in doc/finding ids (F52), which become
 # snapshot + FindingStore filenames -- a fat-fingered "2026/07/03" would mint a
@@ -270,6 +271,26 @@ def _chart_fetch(args) -> int:
     series_dir = str(pathlib.Path(args.store) / "series")
     result = run_fetch(series, args.as_of, earnings_dates, series_dir)
     print(json.dumps(result, indent=2))
+    return 0
+
+
+def _dashboard_json(args) -> int:
+    """Handler for `gpu-agent dashboard-json` (F110 Task 6): build + validate
+    this cycle's dashboard.json payload and write it to
+    <site>/<category>/data/dashboard.json.
+
+    Never raises past this handler: a broken export must not block the daily
+    cycle (spec §8 -- the live page just keeps yesterday's data). Any failure
+    prints to stderr and exits 1; nothing is ever written on failure, since
+    `write_dashboard_json` validates the payload against the schema before
+    touching disk.
+    """
+    try:
+        out = write_dashboard_json(args.category, args.store, args.site)
+    except Exception as e:  # noqa: BLE001 -- see docstring: never block the cycle
+        print(f"gpu-agent dashboard-json: error: {e}", file=sys.stderr)
+        return 1
+    print(f"wrote {out}")
     return 0
 
 
@@ -1669,6 +1690,14 @@ def main(argv=None) -> int:
                     help="coverage manifest path (default: manifests/<category>.json)")
     cf.add_argument("--registry", default=CHART_SERIES_REGISTRY_PATH,
                     help="chart-series registry path")
+    djp = sub.add_parser("dashboard-json",
+                         help="F110: export this cycle's dashboard.json to "
+                              "<site>/<category>/data/dashboard.json")
+    djp.add_argument("--category", required=True, help="categoryId (locates store + site subdirs)")
+    djp.add_argument("--store", default="store",
+                     help="store root (scorecards+story under <store>/<category>/, series under <store>/series)")
+    djp.add_argument("--site", default="site",
+                     help="site root (writes <site>/<category>/data/dashboard.json)")
     wl = sub.add_parser("wiki-lint")
     wl.add_argument("--store", default="store", help="store root (holds wiki/ and findings/)")
     wl.add_argument("--as-of", required=True, type=_as_of)
@@ -1910,6 +1939,8 @@ def main(argv=None) -> int:
         return _coverage_record(args)
     if args.cmd == "chart-fetch":
         return _chart_fetch(args)
+    if args.cmd == "dashboard-json":
+        return _dashboard_json(args)
     if args.cmd == "wiki-lint":
         return _wiki_lint(args)
     if args.cmd == "wiki-lifecycle":
