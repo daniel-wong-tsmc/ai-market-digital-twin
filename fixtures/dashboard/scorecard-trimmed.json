@@ -459,6 +459,921 @@
       "capturedAt": "2026-07-27T10:49:29Z",
       "extractionModel": "claude-opus-4-8",
       "schemaVersion": "1.2"
+    },
+    {
+      "id": "finance-yahoo-com-171fe64e-2026-08-1",
+      "statement": "AMD reported Q2 2026 revenue of $11.5 billion and non-GAAP EPS of $1.66, ahead of expectations of $11.3 billion and $1.62.",
+      "kind": "measured",
+      "value": {
+        "number": 11.5,
+        "unit": "USD_B"
+      },
+      "trend": "rising",
+      "why": "A revenue and earnings beat confirms that AI compute demand is showing up in reported results, not just guidance.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu"
+        ],
+        "direction": "positive",
+        "mechanism": "Revenue above consensus indicates accelerator and server demand is running ahead of what the market had modeled."
+      },
+      "evidence": [
+        {
+          "source": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
+          "date": "2026-08-05",
+          "excerpt": "earnings per share (EPS) of $1.66 on revenue of $11.5 billion",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Secondary press coverage of AMD's release rather than the filing itself."
+      },
+      "dispersion": "conflicting same-key reports: value 13.0 -> 11.5 (tol 1%); sources: AMD Investor Relations (Advanced Micro Devices, Inc.), Yahoo Finance",
+      "asOf": "2026-08",
+      "indicatorId": "vendorRevenueGuidance",
+      "side": "demand",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 2,
+      "entity": "amd",
+      "observedAt": "2026-08-05",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "finance-yahoo-com-171fe64e-2026-08-2",
+      "statement": "AMD spent $808 million on capital expenditures in Q2 2026, well ahead of earlier estimates of $298 million, and this overshoot is cited as the reason shares fell more than 8%.",
+      "kind": "measured",
+      "value": {
+        "number": 0.808,
+        "unit": "USD_B"
+      },
+      "trend": "rising",
+      "why": "Capex running at nearly triple the expected level signals AMD is spending hard to secure capacity for the AI ramp, and shows investors are now punishing the cost side of that ramp.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "chips.foundry-packaging",
+          "chips.hbm-memory"
+        ],
+        "direction": "mixed",
+        "mechanism": "Unexpectedly high capex points to prepayments and capacity commitments supporting future accelerator supply, while signalling margin and cash-flow pressure that markets read negatively."
+      },
+      "evidence": [
+        {
+          "source": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
+          "date": "2026-08-05",
+          "excerpt": "$808 million on capital expenditures during the quarter, well ahead of earlier estimates of $298 million",
+          "tier": "secondary"
+        },
+        {
+          "source": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
+          "date": "2026-08-05",
+          "excerpt": "wasn't enough to impress investors, as shares fell more than 8%",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Secondary coverage; the article itself flags that the share-move figure differs by source (a wire headline said 10%)."
+      },
+      "dispersion": "Reported after-hours decline varies by source: this article says more than 8%, the wire headline that led to it said 10%.",
+      "asOf": "2026-08",
+      "indicatorId": "hbmSupplyCapex",
+      "side": "supply",
+      "polarityDemand": 0,
+      "polaritySupply": 1,
+      "magnitude": 2,
+      "entity": "amd",
+      "observedAt": "2026-08-05",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "finance-yahoo-com-171fe64e-2026-08-4",
+      "statement": "Nvidia is described as accounting for as much as 90% of AI chip market share in any given quarter, leaving AMD as a small share challenger.",
+      "kind": "measured",
+      "value": {
+        "number": 90.0,
+        "unit": "pct_segment_rev"
+      },
+      "trend": "flat",
+      "why": "It sets the baseline the entire AMD story is measured against: even a doubling of AMD's data center revenue moves share only modestly from this starting point.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu"
+        ],
+        "direction": "mixed",
+        "mechanism": "Extreme incumbent concentration means accelerator supply and pricing remain set by one vendor until a challenger's ramp is large enough to shift share."
+      },
+      "evidence": [
+        {
+          "source": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
+          "date": "2026-08-05",
+          "excerpt": "dominates the AI chip space, accounting for as much as 90% of market share in any given quarter",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "low",
+        "basis": "Loosely worded journalistic characterization ('as much as') in one secondary article, with no methodology or period stated."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "market-share-pct",
+      "side": "demand",
+      "polarityDemand": 0,
+      "polaritySupply": -1,
+      "magnitude": 2,
+      "entity": "amd",
+      "observedAt": "2026-08-05",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "ca-investing-com-2fecbf46-2026-08-4",
+      "statement": "Anthropic committed to deploy up to 2 gigawatts of MI450-series GPUs in Helios, with the first gigawatt beginning deployment in the first half of 2027, and Microsoft will deploy Helios at scale on Azure for frontier model inferencing.",
+      "kind": "measured",
+      "value": {
+        "number": 2.0,
+        "unit": "GW"
+      },
+      "trend": "rising",
+      "why": "Named, sized commitments from a frontier lab and a hyperscaler are the hardest evidence that non-NVIDIA accelerators are being designed into large production fleets.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "models.frontier-closed",
+          "infrastructure.hyperscale-cloud",
+          "energy.power-generation"
+        ],
+        "direction": "positive",
+        "mechanism": "Gigawatt-scale named deployments convert AMD's roadmap into committed demand and pull forward matching power and datacenter capacity."
+      },
+      "evidence": [
+        {
+          "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+          "date": "2026-08-04",
+          "excerpt": "Anthropic will deploy up to 2 gigawatts of MI450 series GPUs in Helios, with deployment of the first gigawatt beginning in the first half of 2027.",
+          "tier": "secondary"
+        },
+        {
+          "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+          "date": "2026-08-04",
+          "excerpt": "Microsoft will deploy Helios at scale on Azure for frontier model inferencing.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Secondary transcript of management's own remarks; figure is an 'up to' ceiling and no single-customer revenue-concentration percentage was disclosed."
+      },
+      "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: AMD Investor Relations (Advanced Micro Devices, Inc.), Investing.com (AMD Q2 2026 earnings call transcript)",
+      "asOf": "2026-08",
+      "indicatorId": "customerConcentration",
+      "side": "structural",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 3,
+      "entity": "amd",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "ca-investing-com-2fecbf46-2026-08-5",
+      "statement": "AMD's AI accelerator revenue carries a gross margin slightly below the corporate average while server CPU revenue is accretive; non-GAAP gross margin was 56% in Q2 2026 with roughly 56% guided for Q3 2026.",
+      "kind": "measured",
+      "value": {
+        "number": 56.0,
+        "unit": "pct"
+      },
+      "trend": "flat",
+      "why": "It shows the AI ramp is margin-dilutive at the percentage level even as it adds gross profit dollars — the trade-off that decides whether volume growth is worth it.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu"
+        ],
+        "direction": "mixed",
+        "mechanism": "A larger AI accelerator mix dilutes percentage gross margin while adding absolute gross profit, so a steeper Helios ramp pressures reported margin."
+      },
+      "evidence": [
+        {
+          "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+          "date": "2026-08-04",
+          "excerpt": "Server business... is accretive to our overall gross margin. Data center AI ramp... adds revenue but also gross profit, even though the gross margin is slightly below corporate average.",
+          "tier": "secondary"
+        },
+        {
+          "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+          "date": "2026-08-04",
+          "excerpt": "non-GAAP gross margin of approximately 56% for Q3 2026. Reported Q2 2026 non-GAAP gross margin was 56% (GAAP 54%).",
+          "tier": "secondary"
+        },
+        {
+          "source": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "date": "2026-08-04",
+          "excerpt": "Non-GAAP: gross margin 56%; operating income $3.094 billion; net income $2.760 billion; diluted EPS $1.66.",
+          "tier": "primary"
+        },
+        {
+          "source": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "date": "2026-08-04",
+          "excerpt": "\"Non-GAAP gross margin is expected to be approximately 56%.\"",
+          "tier": "primary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Secondary transcript; the 56% figures trace to AMD's own press release but are relayed here rather than filed."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "grossMargin",
+      "side": "demand",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 2,
+      "entity": "amd",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "ca-investing-com-2fecbf46-2026-08-6",
+      "statement": "AMD reports strong customer pull for Helios tracking ahead of its initial forecasts and strong visibility, but disclosed no dollar backlog and no remaining-performance-obligation figure.",
+      "kind": "observed",
+      "value": null,
+      "trend": "rising",
+      "why": "Committed demand is the cleanest forward indicator, and its absence in dollar terms means AMD's 2027 doubling guide rests on qualitative visibility plus one named gigawatt commitment.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu"
+        ],
+        "direction": "positive",
+        "mechanism": "Order pull ahead of forecast implies committed demand building, but without an RPO disclosure the size of that commitment cannot be verified."
+      },
+      "evidence": [
+        {
+          "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+          "date": "2026-08-04",
+          "excerpt": "Customer pull for Helios is very strong and tracking ahead of our initial forecasts.",
+          "tier": "secondary"
+        },
+        {
+          "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+          "date": "2026-08-04",
+          "excerpt": "No dollar backlog figure and no remaining-performance-obligation (RPO) number was disclosed.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "low",
+        "basis": "Qualitative management assertion in a secondary transcript with no quantified backlog to check it against."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "rpoBacklog",
+      "side": "demand",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 1,
+      "entity": "amd",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "ca-investing-com-e6319e42-2026-08-1",
+      "statement": "SpaceX said it has decided to build exclusively on NVIDIA, citing the Vera Rubin architecture as the best available AI computer.",
+      "kind": "observed",
+      "value": null,
+      "trend": "rising",
+      "why": "A large AI compute buyer publicly committing to a single vendor is a design win that locks out competing accelerators for that buyer's entire buildout.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "infrastructure.neocloud",
+          "chips.hyperscaler-asic"
+        ],
+        "direction": "positive",
+        "mechanism": "Vendor exclusivity by a multi-gigawatt buyer converts a share contest into locked demand for NVIDIA and forecloses AMD and in-house silicon at that account."
+      },
+      "evidence": [
+        {
+          "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+          "date": "2026-08-04",
+          "excerpt": "Going forward, we've decided to build exclusively on Nvidia, because we think the Vera Rubin architecture is the best architecture.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Secondary transcript of the customer's own earnings call; no NVIDIA release confirms it, per the document's own chase note."
+      },
+      "dispersion": "conflicting same-key reports: magnitude 1 -> 3; sources: Investing.com (SpaceX Q2 2026 earnings call transcript)",
+      "asOf": "2026-08",
+      "indicatorId": "designWins",
+      "side": "structural",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 3,
+      "entity": "nvidia",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "ca-investing-com-e6319e42-2026-08-2",
+      "statement": "SpaceX says its understanding with NVIDIA is that it will receive a very significant percentage of NVIDIA's GPUs in calendar 2027.",
+      "kind": "observed",
+      "value": null,
+      "trend": "rising",
+      "why": "If one customer absorbs a large share of next year's output, NVIDIA's revenue base narrows and other buyers face tighter allocation.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "infrastructure.neocloud",
+          "infrastructure.hyperscale-cloud"
+        ],
+        "direction": "mixed",
+        "mechanism": "Concentrated allocation to one buyer secures NVIDIA volume but raises customer-concentration risk and reduces GPUs available to everyone else."
+      },
+      "evidence": [
+        {
+          "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+          "date": "2026-08-04",
+          "excerpt": "Our understanding with NVIDIA is that we will receive a very significant percentage of their GPUs next year.",
+          "tier": "secondary"
+        },
+        {
+          "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+          "date": "2026-08-04",
+          "excerpt": "We expect to have a very large share of Nvidia's GPUs next year.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Buyer-side claim in a secondary transcript, unquantified and not confirmed by NVIDIA."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "customerConcentration",
+      "side": "structural",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 2,
+      "entity": "nvidia",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "ca-investing-com-e6319e42-2026-08-3",
+      "statement": "SpaceX ended Q2 2026 with 1.4 gigawatts of nameplate compute, up from 1.0 GW in Q1 2026 and 400 MW a year earlier, and guides to over 2 GW by year-end 2026.",
+      "kind": "measured",
+      "value": {
+        "number": 1.4,
+        "unit": "GW"
+      },
+      "trend": "rising",
+      "why": "Installed compute more than tripled year over year at a single buyer, which is direct evidence of the demand pulling GPU shipments through.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "infrastructure.datacenter-colo",
+          "energy.power-generation",
+          "energy.cooling"
+        ],
+        "direction": "positive",
+        "mechanism": "Nameplate compute growth from 400 MW to 1.4 GW in a year requires proportional accelerator, power, and cooling procurement."
+      },
+      "evidence": [
+        {
+          "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+          "date": "2026-08-04",
+          "excerpt": "We ended the second quarter with 1.4 gigawatts of nameplate compute up from one gigawatt in Q1 and 400 megawatts a year earlier. We expect to end this year at over two gigawatts of compute capacity.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "CFO figures relayed in a secondary transcript rather than a filing."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "D2",
+      "side": "demand",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 3,
+      "entity": "nvidia",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "ca-investing-com-e6319e42-2026-08-4",
+      "statement": "SpaceX spent approximately $18.4 billion of capex in Q2 2026, of which roughly $15.8 billion supported AI compute infrastructure.",
+      "kind": "measured",
+      "value": {
+        "number": 15.8,
+        "unit": "USD_B"
+      },
+      "trend": "rising",
+      "why": "It sizes in dollars how much one non-hyperscaler buyer is putting into AI infrastructure in a single quarter, most of which flows to accelerators and the racks around them.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "infrastructure.datacenter-colo",
+          "infrastructure.networking-fabric",
+          "energy.electrical-equipment"
+        ],
+        "direction": "positive",
+        "mechanism": "Quarterly AI capex of this size converts directly into accelerator, network, and electrical equipment orders."
+      },
+      "evidence": [
+        {
+          "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+          "date": "2026-08-04",
+          "excerpt": "Total company capital expenditures in the second quarter were approximately $18.4 billion, of which roughly $15.8 billion supported AI compute infrastructure.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "CFO-stated figure in a secondary transcript, not a filed financial statement."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "hyperscalerCapexRevision",
+      "side": "demand",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 3,
+      "entity": "nvidia",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "ca-investing-com-e6319e42-2026-08-6",
+      "statement": "SpaceX expects roughly 90% of its compute to serve inference or be rented to others, with only about 10% used for Grok training, and it holds multibillion-dollar AI capacity leases with Google and Anthropic.",
+      "kind": "observed",
+      "value": null,
+      "trend": "rising",
+      "why": "An overwhelmingly inference- and rental-weighted fleet means GPU demand here is tied to paid token serving and third-party leases, not just internal research budgets.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "infrastructure.neocloud",
+          "models.reasoning-agentic",
+          "models.frontier-closed"
+        ],
+        "direction": "positive",
+        "mechanism": "Inference and rental utilization ties accelerator demand to revenue-generating workloads and external leases, making the buildout self-funding rather than speculative."
+      },
+      "evidence": [
+        {
+          "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+          "date": "2026-08-04",
+          "excerpt": "I would expect maybe 10% of our compute to be used for Grok training",
+          "tier": "secondary"
+        },
+        {
+          "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+          "date": "2026-08-04",
+          "excerpt": "SpaceX has multibillion-dollar leasing agreements with Google and Anthropic for AI capacity rental at the Colossus data center.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Hedged CEO estimate plus corroborating coverage, both relayed in secondary sources."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "tokenEconomics",
+      "side": "demand",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 2,
+      "entity": "nvidia",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "cryptobriefing-com-c3c1a1c3-2026-08-1",
+      "statement": "Google has committed to order more than 3 million units of Intel EMIB-T advanced packaging for its next-generation TPU, with expected delivery in 2028.",
+      "kind": "measured",
+      "value": {
+        "number": 3000000.0,
+        "unit": "units"
+      },
+      "trend": "rising",
+      "why": "A multi-million-unit hyperscaler commitment establishes Intel EMIB-T as a second source of advanced packaging outside TSMC CoWoS, which is the binding constraint on AI accelerator output.",
+      "impact": {
+        "targets": [
+          "chips.foundry-packaging",
+          "chips.hyperscaler-asic",
+          "chips.merchant-gpu"
+        ],
+        "direction": "positive",
+        "mechanism": "Qualifying a non-TSMC advanced-packaging path adds capacity on which AI logic chips can be assembled, easing the CoWoS bottleneck for accelerator supply from 2028."
+      },
+      "evidence": [
+        {
+          "source": "CryptoBriefing",
+          "url": "https://cryptobriefing.com/intel-emib-tsmc-packaging-constraints/",
+          "date": "2026-07-31",
+          "excerpt": "more than 3 million units of Intel's EMIB-T packaging",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Single secondary outlet relaying company statements and TrendForce/Reuters-based reporting; no filing confirms the order."
+      },
+      "dispersion": "conflicting same-key reports: value 5.8 -> 3000000.0 (tol 1%); sources: CryptoBriefing, Intel Investor Relations",
+      "asOf": "2026-08",
+      "indicatorId": "S9",
+      "side": "supply",
+      "polarityDemand": 0,
+      "polaritySupply": 1,
+      "magnitude": 2,
+      "entity": "intel",
+      "observedAt": "2026-07-31",
+      "capturedAt": "2026-08-04T14:45:40Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "cryptobriefing-com-c3c1a1c3-2026-08-2",
+      "statement": "TSMC advanced packaging lines are reported as booked through 2027, and TSMC has responded competitively by announcing development of an EMIB-like packaging technology with Kinsus in late July 2026.",
+      "kind": "observed",
+      "value": null,
+      "trend": "flat",
+      "why": "Packaging capacity sold out roughly two years forward is the clearest statement that advanced packaging, not wafer starts, caps AI accelerator supply.",
+      "impact": {
+        "targets": [
+          "chips.foundry-packaging",
+          "chips.merchant-gpu",
+          "chips.hyperscaler-asic"
+        ],
+        "direction": "negative",
+        "mechanism": "Fully booked CoWoS lines mean incremental accelerator demand cannot be served until new capacity or an alternative packaging path comes online."
+      },
+      "evidence": [
+        {
+          "source": "CryptoBriefing",
+          "url": "https://cryptobriefing.com/intel-emib-tsmc-packaging-constraints/",
+          "date": "2026-07-31",
+          "excerpt": "TSMC's advanced packaging lines are described as 'booked through 2027.'",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Secondary trade reporting only; no primary TSMC disclosure in this document."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "pkgCapacityOrderSpread",
+      "side": "supply",
+      "polarityDemand": 0,
+      "polaritySupply": -1,
+      "magnitude": 3,
+      "entity": "tsmc",
+      "observedAt": "2026-07-31",
+      "capturedAt": "2026-08-04T14:45:40Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "techsoda-substack-com-3b7a4ff5-2026-08-1",
+      "statement": "Intel's EMIB-T advanced packaging yield has reportedly climbed above 90%, targeting mass production in 2027 at roughly half the cost of TSMC's CoWoS, with no primary announcement from Intel or MediaTek confirming it.",
+      "kind": "observed",
+      "value": null,
+      "trend": "rising",
+      "why": "Advanced packaging is the binding constraint on AI accelerator output, so a credible second high-yield packaging path at materially lower cost would loosen the tightest link in the chain — but every order-specific claim here is trade-press attribution.",
+      "impact": {
+        "targets": [
+          "chips.foundry-packaging",
+          "chips.hyperscaler-asic",
+          "chips.merchant-gpu"
+        ],
+        "direction": "positive",
+        "mechanism": "A second qualified 2.5D packaging route at high yield adds capacity outside TSMC CoWoS, easing the packaging bottleneck that currently gates accelerator shipments."
+      },
+      "evidence": [
+        {
+          "source": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+          "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+          "date": "2026-08-04",
+          "excerpt": "'Intel's EMIB-T advanced packaging yield has reportedly climbed above 90%, targeting mass production in 2027 at roughly half the cost of TSMC's CoWoS.'",
+          "tier": "secondary"
+        },
+        {
+          "source": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+          "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+          "date": "2026-08-04",
+          "excerpt": "PRIMARY-SOURCE STATUS: NO primary announcement exists.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "low",
+        "basis": "Secondary trade-press only, hedged with 'reportedly', no primary announcement, and the originating lead itself contains a contradicting claim that a 50% substrate yield remains the bottleneck."
+      },
+      "dispersion": "The same originating lead says yields 'exceed 90%' while 'another report says a 50% substrate yield remains the bottleneck'.",
+      "asOf": "2026-08",
+      "indicatorId": "pkgCapacityOrderSpread",
+      "side": "supply",
+      "polarityDemand": 0,
+      "polaritySupply": 1,
+      "magnitude": 2,
+      "entity": "intel",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "techsoda-substack-com-3b7a4ff5-2026-08-3",
+      "statement": "Intel holds roughly 13.7% of global 2.5D packaging capacity versus TSMC's around 70%, per figures cited in secondary coverage.",
+      "kind": "measured",
+      "value": {
+        "number": 13.7,
+        "unit": "pct"
+      },
+      "trend": "unknown",
+      "why": "Even a fully working alternative packaging technology can only relieve the bottleneck in proportion to the capacity behind it, and Intel's share is a fraction of TSMC's.",
+      "impact": {
+        "targets": [
+          "chips.foundry-packaging",
+          "chips.merchant-gpu",
+          "chips.hyperscaler-asic"
+        ],
+        "direction": "mixed",
+        "mechanism": "With TSMC holding around 70% of 2.5D capacity, an Intel packaging win shifts a modest share of output and leaves overall accelerator supply gated by the incumbent."
+      },
+      "evidence": [
+        {
+          "source": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+          "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+          "date": "2026-08-04",
+          "excerpt": "Capacity share cited: Intel 'roughly 13.7% of global 2.5D packaging capacity', TSMC 'around 70%'.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Secondary source (CryptoBriefing figures relayed inside a Substack post); no primary capacity disclosure."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "market-share-pct",
+      "side": "demand",
+      "polarityDemand": 0,
+      "polaritySupply": -1,
+      "magnitude": 2,
+      "entity": "intel",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "techsoda-substack-com-3b7a4ff5-2026-08-4",
+      "statement": "PSMC is described as Intel's sole silicon capacitor supplier for EMIB-T with capacity already fully booked, and UMC as the foundry partner for the silicon bridge.",
+      "kind": "observed",
+      "value": null,
+      "trend": "unknown",
+      "why": "A single sole-source component that is already fully booked is a hard ceiling on how fast the alternative packaging route can scale, regardless of yield claims.",
+      "impact": {
+        "targets": [
+          "chips.foundry-packaging",
+          "chips.hyperscaler-asic"
+        ],
+        "direction": "negative",
+        "mechanism": "Sole-sourced, fully booked silicon capacitor supply caps EMIB-T output, so the promised packaging relief arrives slower than the yield and cost headlines imply."
+      },
+      "evidence": [
+        {
+          "source": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+          "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+          "date": "2026-08-04",
+          "excerpt": "'PSMC (6770.TW) is Intel's sole silicon capacitor supplier for EMIB-T, with capacity already fully booked. UMC (2303.TW) is the foundry partner for EMIB-T's silicon bridge component.'",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "low",
+        "basis": "Unsourced claim in a single secondary blog post that names no sources and hedges throughout."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "customerConcentration",
+      "side": "structural",
+      "polarityDemand": 0,
+      "polaritySupply": -1,
+      "magnitude": 1,
+      "entity": "intel",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "techsoda-substack-com-3b7a4ff5-2026-08-5",
+      "statement": "EMIB is characterised as better suited to ASICs than to high-bandwidth GPUs because of limited bridge area and routing density, even as its scaling is projected to improve.",
+      "kind": "observed",
+      "value": null,
+      "trend": "unknown",
+      "why": "If the alternative packaging route cannot serve the highest-bandwidth accelerators, relief from the packaging bottleneck reaches custom ASIC programs but not merchant GPUs.",
+      "impact": {
+        "targets": [
+          "chips.foundry-packaging",
+          "chips.hyperscaler-asic",
+          "chips.merchant-gpu"
+        ],
+        "direction": "mixed",
+        "mechanism": "Technical limits confine EMIB relief to ASIC workloads, so merchant-GPU packaging remains dependent on TSMC CoWoS while hyperscaler ASICs gain a second path."
+      },
+      "evidence": [
+        {
+          "source": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+          "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+          "date": "2026-08-04",
+          "excerpt": "but EMIB has 'limited bridge area and routing density' making it 'more suitable for ASICs than high-bandwidth, ultra-low-latency GPUs'",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Attributed to TrendForce analysis relayed in a secondary post; consistent with the stated technical description but not a primary engineering disclosure."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "S9",
+      "side": "supply",
+      "polarityDemand": 0,
+      "polaritySupply": 1,
+      "magnitude": 1,
+      "entity": "intel",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "404kresearch-substack-com-3985c52f-2026-08-1",
+      "statement": "NVIDIA's Rubin Ultra mainstream SKU is reported by supply-chain sources to cut HBM capacity to 192GB (HBM4 8-Hi), down from the 1TB HBM4E 16-Hi, 4-die design previewed at GTC 2025 and below Rubin's own 288GB 12-Hi.",
+      "kind": "observed",
+      "value": null,
+      "trend": "falling",
+      "why": "A downgrade of memory per accelerator on the flagship next-generation part is a direct read on how tight HBM supply is: the vendor is trading per-chip capability for aggregate unit output.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "chips.hbm-memory",
+          "chips.foundry-packaging"
+        ],
+        "direction": "mixed",
+        "mechanism": "Less HBM per accelerator relieves the memory bottleneck and lets NVIDIA ship more units from the same HBM pool, but it signals that HBM, not logic, is the binding constraint and it reduces HBM content per GPU sold."
+      },
+      "evidence": [
+        {
+          "source": "404K Semi-Ai Research (Substack)",
+          "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+          "date": "2026-08-04",
+          "excerpt": "memory will be reduced to 8-Hi and 192GB",
+          "tier": "secondary"
+        },
+        {
+          "source": "404K Semi-Ai Research (Substack)",
+          "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+          "date": "2026-08-04",
+          "excerpt": "4 dies and featured 1TB HBM4E 16-Hi",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Single secondary aggregator relaying unnamed supply-chain sources; the document itself states no official NVIDIA confirmation exists."
+      },
+      "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> falling); sources: 404K Semi-Ai Research (Substack)",
+      "asOf": "2026-08",
+      "indicatorId": "S10",
+      "side": "supply",
+      "polarityDemand": 0,
+      "polaritySupply": -1,
+      "magnitude": 2,
+      "entity": "nvidia",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "404kresearch-substack-com-3985c52f-2026-08-2",
+      "statement": "Constrained HBM supply is the stated driver of the Rubin Ultra downgrade: limiting memory per accelerator is described as a way to raise aggregate output under a fixed HBM pool.",
+      "kind": "observed",
+      "value": null,
+      "trend": "falling",
+      "why": "It identifies HBM, not TSMC front-end wafer capacity, as the binding supply constraint for next-generation accelerators — the key question for how many GPUs can actually ship.",
+      "impact": {
+        "targets": [
+          "chips.hbm-memory",
+          "chips.merchant-gpu"
+        ],
+        "direction": "negative",
+        "mechanism": "Tight HBM bit supply caps accelerator output, forcing spec reductions to stretch available memory across more units."
+      },
+      "evidence": [
+        {
+          "source": "404K Semi-Ai Research (Substack)",
+          "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+          "date": "2026-08-04",
+          "excerpt": "limiting memory usage per accelerator enables higher aggregate output under constrained HBM supply",
+          "tier": "secondary"
+        },
+        {
+          "source": "404K Semi-Ai Research (Substack)",
+          "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+          "date": "2026-08-04",
+          "excerpt": "The framing is that relatively less-constrained TSMC front-end capacity is being balanced against tighter HBM supply.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Secondary aggregation of one research note; no primary vendor or supplier filing."
+      },
+      "dispersion": null,
+      "asOf": "2026-08",
+      "indicatorId": "hbmSupplyCapex",
+      "side": "supply",
+      "polarityDemand": 0,
+      "polaritySupply": -1,
+      "magnitude": 2,
+      "entity": "nvidia",
+      "observedAt": "2026-08-04",
+      "capturedAt": "2026-08-05T01:16:13Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
     }
   ],
   "dimensionRatings": {
