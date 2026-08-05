@@ -1,0 +1,43 @@
+{
+  "id": "techsoda-substack-com-3b7a4ff5-2026-08-5",
+  "statement": "EMIB is characterised as better suited to ASICs than to high-bandwidth GPUs because of limited bridge area and routing density, even as its scaling is projected to improve.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "If the alternative packaging route cannot serve the highest-bandwidth accelerators, relief from the packaging bottleneck reaches custom ASIC programs but not merchant GPUs.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Technical limits confine EMIB relief to ASIC workloads, so merchant-GPU packaging remains dependent on TSMC CoWoS while hyperscaler ASICs gain a second path."
+  },
+  "evidence": [
+    {
+      "source": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+      "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+      "date": "2026-08-04",
+      "excerpt": "but EMIB has 'limited bridge area and routing density' making it 'more suitable for ASICs than high-bandwidth, ultra-low-latency GPUs'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Attributed to TrendForce analysis relayed in a secondary post; consistent with the stated technical description but not a primary engineering disclosure."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

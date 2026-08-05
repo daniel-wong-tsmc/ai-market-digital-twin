@@ -1,0 +1,50 @@
+{
+  "id": "hashrateindex-com-10fa275f-2026-08-5",
+  "statement": "A new Blackwell B300 server is priced at approximately $500,000 against roughly $150,000-$180,000 for a used 8-GPU H100 server, a gap that keeps prior-generation hardware viable as an alternative supply source.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "The roughly three-fold price gap between new and prior-generation systems sets how attractive the used market is as a substitute when new accelerators are allocated or delayed.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "A large new-versus-used price gap sustains secondary-market demand, letting buyers shut out of new allocation add capacity from refurbished systems."
+  },
+  "evidence": [
+    {
+      "source": "Hashrate Index",
+      "url": "https://hashrateindex.com/blog/used-gpu-market-pricing-deprecation-secondary-ai/",
+      "date": "2026-04-08",
+      "excerpt": "A new B300 server at approximately $500,000",
+      "tier": "secondary"
+    },
+    {
+      "source": "Hashrate Index",
+      "url": "https://hashrateindex.com/blog/used-gpu-market-pricing-deprecation-secondary-ai/",
+      "date": "2026-04-08",
+      "excerpt": "A used H100 server (8-GPU) trades at roughly $150,000-$180,000",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Both figures come from one secondary listing survey; the comparison is the analyst's framing of quoted prices."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: Hashrate Index",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-04-08",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

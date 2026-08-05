@@ -1,0 +1,44 @@
+{
+  "id": "ir-amd-com-a123cd3c-2026-08-6",
+  "statement": "AMD held $8.468 billion of inventories as of June 27, 2026, with no comparative prior-period balance given in the release.",
+  "kind": "measured",
+  "value": {
+    "number": 8.468,
+    "unit": "USD_B"
+  },
+  "trend": "unknown",
+  "why": "Inventory carried at a vendor is part of the whole-chain stock of accelerators; a large balance alongside accelerating guidance is more likely a build-ahead for shipment than unsold product, but the release gives no baseline to tell.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Finished and work-in-process accelerator inventory at the vendor is supply staged ahead of a guided second-half ramp, which eases near-term availability."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "Inventories: $8,468 million.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Balance-sheet line stated in the issuer's own press release; direction of change is unstated so trend is left unknown."
+  },
+  "dispersion": "No prior-period inventory balance disclosed in this release, so the change cannot be sized.",
+  "asOf": "2026-08",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

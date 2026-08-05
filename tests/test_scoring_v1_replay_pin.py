@@ -75,6 +75,7 @@ PINNED = {
     "2026-07-v20.json": W_CURRENT,  # 2026-07-28 daily cycle; post-F60 -> CURRENT
     "2026-07-v21.json": W_CURRENT,  # 2026-07-29 daily cycle; post-F60 -> CURRENT
     "2026-08-v1.json": W_CURRENT,   # 2026-08-04 daily cycle, first of the month; post-F60 -> CURRENT
+    "2026-08-v2.json": W_CURRENT,   # 2026-08-05 daily cycle; post-F60 -> CURRENT
 }
 # Pre-v1.2 originals: superseded by replays, pinned structurally (original -> replay).
 SUPERSEDED = {

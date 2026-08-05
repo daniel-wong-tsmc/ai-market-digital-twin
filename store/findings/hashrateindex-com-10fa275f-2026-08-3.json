@@ -1,0 +1,53 @@
+{
+  "id": "hashrateindex-com-10fa275f-2026-08-3",
+  "statement": "H100 cloud rental rates dropped from roughly $7-$10 per GPU-hour at 2023 launch to about $2-$4 per GPU-hour by late 2025, with A100 rates at roughly $1.29-$3.43 per hour.",
+  "kind": "measured",
+  "value": {
+    "number": 3.0,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "falling",
+  "why": "Rental prices are the clearest read on whether rented GPU capacity is scarce or abundant, and a roughly two-thirds decline points to supply catching up on prior-generation parts.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Falling rental rates for prior-generation accelerators indicate ample rentable capacity at that tier and compress returns for operators who bought at peak."
+  },
+  "evidence": [
+    {
+      "source": "Hashrate Index",
+      "url": "https://hashrateindex.com/blog/used-gpu-market-pricing-deprecation-secondary-ai/",
+      "date": "2026-04-08",
+      "excerpt": "from roughly $7-$10/hr at launch in 2023 to about $2-$4/hr by late 2025",
+      "tier": "secondary"
+    },
+    {
+      "source": "Hashrate Index",
+      "url": "https://hashrateindex.com/blog/used-gpu-market-pricing-deprecation-secondary-ai/",
+      "date": "2026-04-08",
+      "excerpt": "A100 rates range from roughly $1.29-$3.43/hr depending on provider",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregation of provider rate cards without stated methodology; April 2026 vintage."
+  },
+  "dispersion": "Rates vary materially by provider; A100 spans $1.29-$3.43/hr and H100 $2-$4/hr.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-04-08",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

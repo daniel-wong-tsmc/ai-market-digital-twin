@@ -1,0 +1,65 @@
+{
+  "id": "ca-investing-com-2fecbf46-2026-08-5",
+  "statement": "AMD's AI accelerator revenue carries a gross margin slightly below the corporate average while server CPU revenue is accretive; non-GAAP gross margin was 56% in Q2 2026 with roughly 56% guided for Q3 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 56.0,
+    "unit": "pct"
+  },
+  "trend": "flat",
+  "why": "It shows the AI ramp is margin-dilutive at the percentage level even as it adds gross profit dollars — the trade-off that decides whether volume growth is worth it.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "A larger AI accelerator mix dilutes percentage gross margin while adding absolute gross profit, so a steeper Helios ramp pressures reported margin."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+      "date": "2026-08-04",
+      "excerpt": "Server business... is accretive to our overall gross margin. Data center AI ramp... adds revenue but also gross profit, even though the gross margin is slightly below corporate average.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+      "date": "2026-08-04",
+      "excerpt": "non-GAAP gross margin of approximately 56% for Q3 2026. Reported Q2 2026 non-GAAP gross margin was 56% (GAAP 54%).",
+      "tier": "secondary"
+    },
+    {
+      "source": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "Non-GAAP: gross margin 56%; operating income $3.094 billion; net income $2.760 billion; diluted EPS $1.66.",
+      "tier": "primary"
+    },
+    {
+      "source": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "\"Non-GAAP gross margin is expected to be approximately 56%.\"",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary transcript; the 56% figures trace to AMD's own press release but are relayed here rather than filed."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

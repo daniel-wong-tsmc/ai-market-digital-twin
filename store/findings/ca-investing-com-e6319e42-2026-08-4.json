@@ -1,0 +1,47 @@
+{
+  "id": "ca-investing-com-e6319e42-2026-08-4",
+  "statement": "SpaceX spent approximately $18.4 billion of capex in Q2 2026, of which roughly $15.8 billion supported AI compute infrastructure.",
+  "kind": "measured",
+  "value": {
+    "number": 15.8,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "It sizes in dollars how much one non-hyperscaler buyer is putting into AI infrastructure in a single quarter, most of which flows to accelerators and the racks around them.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.networking-fabric",
+      "energy.electrical-equipment"
+    ],
+    "direction": "positive",
+    "mechanism": "Quarterly AI capex of this size converts directly into accelerator, network, and electrical equipment orders."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+      "date": "2026-08-04",
+      "excerpt": "Total company capital expenditures in the second quarter were approximately $18.4 billion, of which roughly $15.8 billion supported AI compute infrastructure.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "CFO-stated figure in a secondary transcript, not a filed financial statement."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

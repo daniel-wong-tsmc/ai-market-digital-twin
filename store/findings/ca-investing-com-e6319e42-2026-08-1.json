@@ -1,0 +1,43 @@
+{
+  "id": "ca-investing-com-e6319e42-2026-08-1",
+  "statement": "SpaceX said it has decided to build exclusively on NVIDIA, citing the Vera Rubin architecture as the best available AI computer.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A large AI compute buyer publicly committing to a single vendor is a design win that locks out competing accelerators for that buyer's entire buildout.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Vendor exclusivity by a multi-gigawatt buyer converts a share contest into locked demand for NVIDIA and forecloses AMD and in-house silicon at that account."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+      "date": "2026-08-04",
+      "excerpt": "Going forward, we've decided to build exclusively on Nvidia, because we think the Vera Rubin architecture is the best architecture.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary transcript of the customer's own earnings call; no NVIDIA release confirms it, per the document's own chase note."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 3; sources: Investing.com (SpaceX Q2 2026 earnings call transcript)",
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

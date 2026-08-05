@@ -1,0 +1,200 @@
+{
+  "headline": "The challenger had a good quarter. The racks that matter still ship next year.",
+  "deck": "AMD beat its own numbers and put its rack-sized system into production, but the big volume starts in 2027 - and a single new buyer has already spoken for a large slice of next year's chips.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "AMD delivered, and it does not add chips this year",
+      "paragraphs": [
+        "AMD reported the quarter the market was waiting for. Revenue was $11.5 billion and adjusted earnings $1.66 a share, both ahead of the $11.3 billion and $1.62 expected. Its rack-sized Helios system is in production, and on the call the company said customer pull is running ahead of its own forecasts. It gave no order-book figure to put behind that.",
+        "None of it becomes extra supply in 2026. The biggest named deployment, up to 2 gigawatts for Anthropic, begins with its first gigawatt in the first half of 2027, and Microsoft will run Helios at scale on its own cloud. NVIDIA is still described as taking as much as 90 percent of the AI chip market in any given quarter.",
+        "Investors were not impressed. AMD spent $808 million on plant and equipment in the quarter against an expected $298 million, and the shares fell more than 8 percent. Its adjusted gross margin was 56 percent, with roughly the same guided for the current quarter, and the company said its AI accelerators earn slightly less than its average product."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "finance-yahoo-com-171fe64e-2026-08-1",
+        "finance-yahoo-com-171fe64e-2026-08-2",
+        "finance-yahoo-com-171fe64e-2026-08-4",
+        "ca-investing-com-2fecbf46-2026-08-4",
+        "ca-investing-com-2fecbf46-2026-08-5",
+        "ca-investing-com-2fecbf46-2026-08-6"
+      ],
+      "sourceLine": "AMD Investor Relations, the AMD earnings call transcript via Investing.com, and Yahoo Finance, 4 and 5 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "title": "AMD reports second quarter 2026 financial results",
+          "outlet": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+          "date": "2026-08-04"
+        },
+        {
+          "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
+          "title": "AMD beats second-quarter estimates but the shares fall",
+          "outlet": "Yahoo Finance",
+          "date": "2026-08-05"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "One new buyer has already claimed a slice of 2027",
+      "paragraphs": [
+        "SpaceX ended the June quarter with 1.4 gigawatts of computing capacity, up from 1.0 gigawatt three months earlier and 400 megawatts a year before, and expects to pass 2 gigawatts by the end of this year. It spent about $18.4 billion in the quarter, roughly $15.8 billion of that on AI computing.",
+        "It has decided to build only on NVIDIA, calling the Vera Rubin design the best AI computer available, and says its understanding with NVIDIA is that it will receive a very significant percentage of NVIDIA's chips in calendar 2027. About 90 percent of that capacity is meant for serving models or renting to others, with roughly a tenth kept for training its own; it already holds multibillion-dollar capacity leases with Google and Anthropic.",
+        "That is the shape of the problem. Chips that do not exist yet are already promised, so a second vendor arriving in volume in 2027 meets a queue that has grown to meet it."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "ca-investing-com-e6319e42-2026-08-1",
+        "ca-investing-com-e6319e42-2026-08-2",
+        "ca-investing-com-e6319e42-2026-08-3",
+        "ca-investing-com-e6319e42-2026-08-4",
+        "ca-investing-com-e6319e42-2026-08-6"
+      ],
+      "sourceLine": "SpaceX second-quarter 2026 earnings call transcript via Investing.com, 4 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+          "title": "SpaceX second-quarter 2026 earnings call transcript",
+          "outlet": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "date": "2026-08-04"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The way around the packaging queue mostly helps other people's chips",
+      "paragraphs": [
+        "Advanced packaging is the step that binds a chip to its memory, and it is still booked out. Reporting dated 31 July says TSMC's lines are full through 2027, and that Google has ordered more than 3 million units of Intel's bridge packaging for a chip due in 2028.",
+        "Fresh reporting on 4 August puts Intel's yield on that method above 90 percent, aiming at volume in 2027 at roughly half TSMC's cost. Two things limit the relief. Intel holds about 13.7 percent of this kind of packaging capacity against TSMC's roughly 70 percent, and its only supplier of a key component is already fully booked. And the method suits custom chips better than high-bandwidth graphics parts, because the bridge area and wiring density are limited.",
+        "Memory remains the harder limit, and NVIDIA is designing around it. The mainstream Rubin Ultra now carries 192GB of stacked memory, below the 288GB of Rubin itself and far below the 1TB design previewed in 2025. The stated reason is scarce memory: less memory in each chip means more finished chips out of the same pool."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-3",
+        "techsoda-substack-com-3b7a4ff5-2026-08-4",
+        "techsoda-substack-com-3b7a4ff5-2026-08-5",
+        "404kresearch-substack-com-3985c52f-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-2"
+      ],
+      "sourceLine": "TechSoda advanced-packaging market watch and 404K Semi-Ai Research, 4 August 2026, with CryptoBriefing reporting dated 31 July 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+          "title": "Global market watch: advanced packaging takes the stage",
+          "outlet": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack), corroborated by DIGITIMES (2026-08-03) and TrendForce (2026-05-12)",
+          "date": "2026-08-04"
+        },
+        {
+          "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+          "title": "Rubin Ultra memory capacity cut to 192GB",
+          "outlet": "404K Semi-Ai Research (Substack)",
+          "date": "2026-08-04"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch from here",
+      "paragraphs": [
+        "Rental prices are the simplest test of whether any of this reaches an ordinary customer. Today an H100 rents for $3.99 per chip-hour at Lambda and $2.99 at RunPod, while CoreWeave lists an eight-chip H100 machine at $49.24 an hour to rent on demand and $19.71 an hour on its cheaper spot market.",
+        "The newer parts are still not on the shelf. Lambda's published price tables today show no H200, GB200, GB300 or B300 at all; its newest rentable part is the B200. Until a new-generation part appears with a public hourly price, the fresh supply is going to buyers who booked it long ago.",
+        "Three dates decide the next turn. Anthropic's first gigawatt of AMD racks in the first half of 2027. SpaceX passing 2 gigawatts by the end of this year. Intel's bridge packaging reaching volume production in 2027. If any of them slips, the queue stays roughly where it is."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "lambda-ai-71b45f28-2026-08-1",
+        "lambda-ai-71b45f28-2026-08-3",
+        "www-runpod-io-a7fd31f9-2026-08-1",
+        "www-coreweave-com-76f05563-2026-08-1",
+        "ca-investing-com-2fecbf46-2026-08-4",
+        "ca-investing-com-e6319e42-2026-08-3",
+        "techsoda-substack-com-3b7a4ff5-2026-08-1"
+      ],
+      "sourceLine": "Published rental price pages at Lambda, RunPod and CoreWeave read on 5 August 2026, plus the AMD and SpaceX calls and TechSoda packaging coverage.",
+      "relatedDocs": [
+        {
+          "url": "https://lambda.ai/service/gpu-cloud",
+          "title": "Lambda GPU cloud pricing",
+          "outlet": "Lambda (Lambda Labs) — official GPU Cloud pricing page",
+          "date": "2026-08-05"
+        },
+        {
+          "url": "https://www.runpod.io/pricing",
+          "title": "RunPod GPU pricing",
+          "outlet": "RunPod — official GPU pricing page",
+          "date": "2026-08-05"
+        },
+        {
+          "url": "https://www.coreweave.com/pricing",
+          "title": "CoreWeave pricing",
+          "outlet": "CoreWeave — official pricing page",
+          "date": "2026-08-05"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Finished servers leaving the factories is the honest test of whether a second vendor adds real deliveries.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Whether the biggest buyers keep raising their budgets, or finally start trimming them.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Money going into memory plants is the only thing that lifts the harder of the two physical limits.",
+      "scene": 3
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a chip costs on the open market shows whether new supply is reaching buyers outside the big contracts.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "AMD beat its own quarter, but its volume racks start shipping in 2027.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "Google places a three-million-unit order for a rival packaging route, aimed at 2028.",
+      "scene": 3
+    }
+  ],
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-05",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "f3abe0f5ec9354fdaa67dd4e4fdacbc0ae1df920d26037c2192ec416e36d6022",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-05T02:05:05.439589+00:00"
+  }
+}

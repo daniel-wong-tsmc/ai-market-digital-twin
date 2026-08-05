@@ -1,0 +1,45 @@
+{
+  "id": "lambda-ai-71b45f28-2026-08-1",
+  "statement": "Lambda's on-demand list price for NVIDIA H100 SXM (8x instance) is $3.99 per GPU-hour on 2026-08-05.",
+  "kind": "measured",
+  "value": {
+    "number": 3.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "H100 SXM on-demand pricing is the most widely quoted reference rate for rented accelerator capacity, so a vendor's public list price anchors what the market pays today.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "A published on-demand rate sets the reference cost that renters compare against, shaping neocloud revenue per GPU-hour and the economics of buying versus renting merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (Lambda Labs) — official GPU Cloud pricing page",
+      "url": "https://lambda.ai/service/gpu-cloud",
+      "date": "2026-08-05",
+      "excerpt": "NVIDIA H100 SXM: $3.99/GPU/hr",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Verbatim list price from the vendor's own pricing page, but this is secondary-tier open-web evidence from a single publisher (Lambda) with no corroborating documents, so confidence is capped at medium."
+  },
+  "dispersion": "conflicting same-key reports: value 6.69 -> 3.99 (tol 1%); sources: Lambda (Lambda Labs) — official GPU Cloud pricing page",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

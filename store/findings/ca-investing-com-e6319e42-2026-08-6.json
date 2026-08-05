@@ -1,0 +1,51 @@
+{
+  "id": "ca-investing-com-e6319e42-2026-08-6",
+  "statement": "SpaceX expects roughly 90% of its compute to serve inference or be rented to others, with only about 10% used for Grok training, and it holds multibillion-dollar AI capacity leases with Google and Anthropic.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "An overwhelmingly inference- and rental-weighted fleet means GPU demand here is tied to paid token serving and third-party leases, not just internal research budgets.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "models.reasoning-agentic",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "Inference and rental utilization ties accelerator demand to revenue-generating workloads and external leases, making the buildout self-funding rather than speculative."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+      "date": "2026-08-04",
+      "excerpt": "I would expect maybe 10% of our compute to be used for Grok training",
+      "tier": "secondary"
+    },
+    {
+      "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+      "date": "2026-08-04",
+      "excerpt": "SpaceX has multibillion-dollar leasing agreements with Google and Anthropic for AI capacity rental at the Colossus data center.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Hedged CEO estimate plus corroborating coverage, both relayed in secondary sources."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "tokenEconomics",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "finance-yahoo-com-171fe64e-2026-08-5",
+  "statement": "AMD's CEO says AI is driving a significant expansion in demand for compute across all markets.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A broad-based demand statement from the number-two accelerator vendor suggests the pull is not confined to a few frontier labs.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "applications.enterprise-copilots"
+    ],
+    "direction": "positive",
+    "mechanism": "Demand expanding across all end markets broadens the accelerator buyer base beyond hyperscalers and frontier labs."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
+      "date": "2026-08-05",
+      "excerpt": "AI is driving a significant expansion in demand for compute across all markets.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Qualitative CEO soundbite relayed by one secondary outlet, with no supporting figures in this article."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 1; sources: Investing.com (AMD Q2 2026 earnings call transcript), Yahoo Finance",
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

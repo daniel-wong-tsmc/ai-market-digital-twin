@@ -1,0 +1,45 @@
+{
+  "id": "www-runpod-io-a7fd31f9-2026-08-1",
+  "statement": "RunPod's Secure Cloud on-demand price for NVIDIA H100 SXM is $2.99 per GPU-hour on 2026-08-05.",
+  "kind": "measured",
+  "value": {
+    "number": 2.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "H100 SXM is the common reference part across GPU rental vendors, so a published per-GPU-hour rate marks where the going rate for mainstream accelerator capacity sits.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "A published per-GPU-hour rate sets the cost renters compare against and determines the revenue an operator earns per hour on merchant-GPU capacity."
+  },
+  "evidence": [
+    {
+      "source": "RunPod — official GPU pricing page",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-08-05",
+      "excerpt": "H100 SXM: $2.99/hr",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Verbatim vendor list price, but secondary-tier open-web evidence from a single publisher (RunPod) with no separately fetched corroborating document, so confidence cannot exceed medium."
+  },
+  "dispersion": "Same-family H100 variants span $2.89 (PCIe) to $3.19 (NVL) per GPU-hour on the same page.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

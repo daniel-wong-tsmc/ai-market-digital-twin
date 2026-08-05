@@ -1,0 +1,53 @@
+{
+  "id": "finance-yahoo-com-171fe64e-2026-08-2",
+  "statement": "AMD spent $808 million on capital expenditures in Q2 2026, well ahead of earlier estimates of $298 million, and this overshoot is cited as the reason shares fell more than 8%.",
+  "kind": "measured",
+  "value": {
+    "number": 0.808,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Capex running at nearly triple the expected level signals AMD is spending hard to secure capacity for the AI ramp, and shows investors are now punishing the cost side of that ramp.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "Unexpectedly high capex points to prepayments and capacity commitments supporting future accelerator supply, while signalling margin and cash-flow pressure that markets read negatively."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
+      "date": "2026-08-05",
+      "excerpt": "$808 million on capital expenditures during the quarter, well ahead of earlier estimates of $298 million",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
+      "date": "2026-08-05",
+      "excerpt": "wasn't enough to impress investors, as shares fell more than 8%",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary coverage; the article itself flags that the share-move figure differs by source (a wire headline said 10%)."
+  },
+  "dispersion": "Reported after-hours decline varies by source: this article says more than 8%, the wire headline that led to it said 10%.",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

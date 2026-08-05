@@ -1,0 +1,54 @@
+{
+  "id": "ca-investing-com-2fecbf46-2026-08-4",
+  "statement": "Anthropic committed to deploy up to 2 gigawatts of MI450-series GPUs in Helios, with the first gigawatt beginning deployment in the first half of 2027, and Microsoft will deploy Helios at scale on Azure for frontier model inferencing.",
+  "kind": "measured",
+  "value": {
+    "number": 2.0,
+    "unit": "GW"
+  },
+  "trend": "rising",
+  "why": "Named, sized commitments from a frontier lab and a hyperscaler are the hardest evidence that non-NVIDIA accelerators are being designed into large production fleets.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.hyperscale-cloud",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Gigawatt-scale named deployments convert AMD's roadmap into committed demand and pull forward matching power and datacenter capacity."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+      "date": "2026-08-04",
+      "excerpt": "Anthropic will deploy up to 2 gigawatts of MI450 series GPUs in Helios, with deployment of the first gigawatt beginning in the first half of 2027.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+      "date": "2026-08-04",
+      "excerpt": "Microsoft will deploy Helios at scale on Azure for frontier model inferencing.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary transcript of management's own remarks; figure is an 'up to' ceiling and no single-customer revenue-concentration percentage was disclosed."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: AMD Investor Relations (Advanced Micro Devices, Inc.), Investing.com (AMD Q2 2026 earnings call transcript)",
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

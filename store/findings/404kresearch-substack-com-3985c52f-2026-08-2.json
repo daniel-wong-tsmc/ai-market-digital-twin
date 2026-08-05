@@ -1,0 +1,49 @@
+{
+  "id": "404kresearch-substack-com-3985c52f-2026-08-2",
+  "statement": "Constrained HBM supply is the stated driver of the Rubin Ultra downgrade: limiting memory per accelerator is described as a way to raise aggregate output under a fixed HBM pool.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "It identifies HBM, not TSMC front-end wafer capacity, as the binding supply constraint for next-generation accelerators — the key question for how many GPUs can actually ship.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Tight HBM bit supply caps accelerator output, forcing spec reductions to stretch available memory across more units."
+  },
+  "evidence": [
+    {
+      "source": "404K Semi-Ai Research (Substack)",
+      "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+      "date": "2026-08-04",
+      "excerpt": "limiting memory usage per accelerator enables higher aggregate output under constrained HBM supply",
+      "tier": "secondary"
+    },
+    {
+      "source": "404K Semi-Ai Research (Substack)",
+      "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+      "date": "2026-08-04",
+      "excerpt": "The framing is that relatively less-constrained TSMC front-end capacity is being balanced against tighter HBM supply.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregation of one research note; no primary vendor or supplier filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

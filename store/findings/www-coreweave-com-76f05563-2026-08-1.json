@@ -1,0 +1,45 @@
+{
+  "id": "www-coreweave-com-76f05563-2026-08-1",
+  "statement": "CoreWeave lists NVIDIA HGX H100 (8 GPUs) at $49.24 per instance-hour on-demand and $19.71 per instance-hour spot in North America on 2026-08-05.",
+  "kind": "measured",
+  "value": {
+    "number": 49.24,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "The gap between the on-demand and interruptible spot rate for the same node is the clearest public read on how tight rentable H100 capacity is at one of the largest neoclouds.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Published on-demand and spot rates for the same node set the reference cost of rented H100 capacity and reveal how much headroom the operator has to discount idle machines."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave — official pricing page",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-08-05",
+      "excerpt": "NVIDIA HGX H100 (8 GPUs) — On-Demand: '$49.24' per hour; Spot: '$19.71' per hour; Inference: '$6.16' per hour",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Verbatim vendor-published rates, but secondary-tier open-web evidence from a single publisher (CoreWeave) with no separately fetched corroboration, so confidence is capped at medium; the figure is also per 8-GPU instance, not per GPU."
+  },
+  "dispersion": "Spot ($19.71) is about 40% of on-demand ($49.24) and the inference tier ($6.16) is lower still, for the same 8-GPU node.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

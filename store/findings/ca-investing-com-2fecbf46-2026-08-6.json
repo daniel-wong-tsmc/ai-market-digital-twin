@@ -1,0 +1,48 @@
+{
+  "id": "ca-investing-com-2fecbf46-2026-08-6",
+  "statement": "AMD reports strong customer pull for Helios tracking ahead of its initial forecasts and strong visibility, but disclosed no dollar backlog and no remaining-performance-obligation figure.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Committed demand is the cleanest forward indicator, and its absence in dollar terms means AMD's 2027 doubling guide rests on qualitative visibility plus one named gigawatt commitment.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Order pull ahead of forecast implies committed demand building, but without an RPO disclosure the size of that commitment cannot be verified."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+      "date": "2026-08-04",
+      "excerpt": "Customer pull for Helios is very strong and tracking ahead of our initial forecasts.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Investing.com (AMD Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+      "date": "2026-08-04",
+      "excerpt": "No dollar backlog figure and no remaining-performance-obligation (RPO) number was disclosed.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Qualitative management assertion in a secondary transcript with no quantified backlog to check it against."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "404kresearch-substack-com-3985c52f-2026-08-4",
+  "statement": "Persistent power shortages are cited as prompting NVIDIA to lower product power specifications, with the mainstream Rubin Ultra SKU at 1,800W Max-Q.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "If power availability, not silicon, is what limits deployment, then accelerator design is being pulled toward efficiency and the ceiling on installed compute is set outside the chip supply chain.",
+  "impact": {
+    "targets": [
+      "energy.power-generation",
+      "energy.efficiency",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Scarce datacenter power forces lower per-accelerator power envelopes, constraining how much compute can be installed and shifting product design toward performance per watt."
+  },
+  "evidence": [
+    {
+      "source": "404K Semi-Ai Research (Substack)",
+      "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+      "date": "2026-08-04",
+      "excerpt": "power shortages will persist, prompting NVIDIA to lower product power specifications",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary supply-chain reporting with no official confirmation; qualitative claim only."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "techsoda-substack-com-3b7a4ff5-2026-08-3",
+  "statement": "Intel holds roughly 13.7% of global 2.5D packaging capacity versus TSMC's around 70%, per figures cited in secondary coverage.",
+  "kind": "measured",
+  "value": {
+    "number": 13.7,
+    "unit": "pct"
+  },
+  "trend": "unknown",
+  "why": "Even a fully working alternative packaging technology can only relieve the bottleneck in proportion to the capacity behind it, and Intel's share is a fraction of TSMC's.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "mixed",
+    "mechanism": "With TSMC holding around 70% of 2.5D capacity, an Intel packaging win shifts a modest share of output and leaves overall accelerator supply gated by the incumbent."
+  },
+  "evidence": [
+    {
+      "source": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+      "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+      "date": "2026-08-04",
+      "excerpt": "Capacity share cited: Intel 'roughly 13.7% of global 2.5D packaging capacity', TSMC 'around 70%'.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary source (CryptoBriefing figures relayed inside a Substack post); no primary capacity disclosure."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

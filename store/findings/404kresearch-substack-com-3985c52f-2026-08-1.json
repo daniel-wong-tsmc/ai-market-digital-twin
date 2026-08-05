@@ -1,0 +1,50 @@
+{
+  "id": "404kresearch-substack-com-3985c52f-2026-08-1",
+  "statement": "NVIDIA's Rubin Ultra mainstream SKU is reported by supply-chain sources to cut HBM capacity to 192GB (HBM4 8-Hi), down from the 1TB HBM4E 16-Hi, 4-die design previewed at GTC 2025 and below Rubin's own 288GB 12-Hi.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "A downgrade of memory per accelerator on the flagship next-generation part is a direct read on how tight HBM supply is: the vendor is trading per-chip capability for aggregate unit output.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging"
+    ],
+    "direction": "mixed",
+    "mechanism": "Less HBM per accelerator relieves the memory bottleneck and lets NVIDIA ship more units from the same HBM pool, but it signals that HBM, not logic, is the binding constraint and it reduces HBM content per GPU sold."
+  },
+  "evidence": [
+    {
+      "source": "404K Semi-Ai Research (Substack)",
+      "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+      "date": "2026-08-04",
+      "excerpt": "memory will be reduced to 8-Hi and 192GB",
+      "tier": "secondary"
+    },
+    {
+      "source": "404K Semi-Ai Research (Substack)",
+      "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+      "date": "2026-08-04",
+      "excerpt": "4 dies and featured 1TB HBM4E 16-Hi",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary aggregator relaying unnamed supply-chain sources; the document itself states no official NVIDIA confirmation exists."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> falling); sources: 404K Semi-Ai Research (Substack)",
+  "asOf": "2026-08",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

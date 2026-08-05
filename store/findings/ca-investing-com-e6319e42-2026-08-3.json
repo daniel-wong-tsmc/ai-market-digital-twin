@@ -1,0 +1,47 @@
+{
+  "id": "ca-investing-com-e6319e42-2026-08-3",
+  "statement": "SpaceX ended Q2 2026 with 1.4 gigawatts of nameplate compute, up from 1.0 GW in Q1 2026 and 400 MW a year earlier, and guides to over 2 GW by year-end 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 1.4,
+    "unit": "GW"
+  },
+  "trend": "rising",
+  "why": "Installed compute more than tripled year over year at a single buyer, which is direct evidence of the demand pulling GPU shipments through.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "energy.cooling"
+    ],
+    "direction": "positive",
+    "mechanism": "Nameplate compute growth from 400 MW to 1.4 GW in a year requires proportional accelerator, power, and cooling procurement."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+      "date": "2026-08-04",
+      "excerpt": "We ended the second quarter with 1.4 gigawatts of nameplate compute up from one gigawatt in Q1 and 400 megawatts a year earlier. We expect to end this year at over two gigawatts of compute capacity.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "CFO figures relayed in a secondary transcript rather than a filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

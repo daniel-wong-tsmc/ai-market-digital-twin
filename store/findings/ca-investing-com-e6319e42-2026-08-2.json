@@ -1,0 +1,50 @@
+{
+  "id": "ca-investing-com-e6319e42-2026-08-2",
+  "statement": "SpaceX says its understanding with NVIDIA is that it will receive a very significant percentage of NVIDIA's GPUs in calendar 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "If one customer absorbs a large share of next year's output, NVIDIA's revenue base narrows and other buyers face tighter allocation.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Concentrated allocation to one buyer secures NVIDIA volume but raises customer-concentration risk and reduces GPUs available to everyone else."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+      "date": "2026-08-04",
+      "excerpt": "Our understanding with NVIDIA is that we will receive a very significant percentage of their GPUs next year.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+      "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+      "date": "2026-08-04",
+      "excerpt": "We expect to have a very large share of Nvidia's GPUs next year.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Buyer-side claim in a secondary transcript, unquantified and not confirmed by NVIDIA."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "lambda-ai-71b45f28-2026-08-3",
+  "statement": "Lambda's rendered on-demand pricing tables showed no H200, GB200, GB300 or B300 line items on 2026-08-05, so its newest publicly rentable part is B200.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Which parts a large GPU cloud will publicly rent by the hour is a read on where the newest accelerators actually sit — absent SKUs suggest that capacity is either not deployed or committed elsewhere rather than sold on demand.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Missing newest-generation SKUs on a major renter's public price list indicates limited on-demand availability of those parts, tightening the effective supply of rentable frontier capacity."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (Lambda Labs) — official GPU Cloud pricing page",
+      "url": "https://lambda.ai/service/gpu-cloud",
+      "date": "2026-08-05",
+      "excerpt": "no NVIDIA H200, GB200, GB300 or B300 line items appeared in the rendered on-demand pricing tables on this page on 2026-08-05",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "The absence is stated plainly in the snapshot, but it rests on secondary-tier open-web evidence from a single publisher (Lambda) and an absence can also reflect page rendering, so confidence is held at medium."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> unknown); sources: Lambda (Lambda Labs) — official GPU Cloud pricing page, RunPod — official GPU pricing page",
+  "asOf": "2026-08",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

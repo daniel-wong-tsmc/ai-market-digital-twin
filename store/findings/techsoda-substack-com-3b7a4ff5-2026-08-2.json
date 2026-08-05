@@ -1,0 +1,49 @@
+{
+  "id": "techsoda-substack-com-3b7a4ff5-2026-08-2",
+  "statement": "MediaTek said at its earnings call that its second-generation data-center ASIC remains on schedule for 2028 mass production using Intel's EMIB packaging, but MediaTek separately denied a reported EMIB adoption timeline in June 2026 and describes a dual-vendor strategy with TSMC.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "The strongest attribution puts EMIB in MediaTek's own words on a 2028 timeline, but the same publisher recorded MediaTek denying an exclusivity timeline — so the win is real in direction and unreliable in size and date.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "mixed",
+    "mechanism": "A named ASIC customer qualifying Intel packaging validates the alternative route, but a 2028 ramp and an explicit denial of exclusivity mean near-term packaging supply is unchanged."
+  },
+  "evidence": [
+    {
+      "source": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+      "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+      "date": "2026-08-04",
+      "excerpt": "'MediaTek said at its latest earnings call that its second-generation data-center ASIC product remains on schedule for mass production in 2028, and that the Intel embedded multi-die interconnect bridge (EMIB) advanced packaging process it uses has already...'",
+      "tier": "secondary"
+    },
+    {
+      "source": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+      "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+      "date": "2026-08-04",
+      "excerpt": "'MediaTek denied a foreign report about a timeline for adopting Intel Corp.'s embedded multi-die interconnect bridge packaging at a recent investor event and said its supply-chain strategy remains focused on TSMC...'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Paywalled trade-press excerpts from one publisher (DIGITIMES) quoted inside a secondary blog, with an on-the-record denial from the same publisher pulling the other way."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> unknown); sources: TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

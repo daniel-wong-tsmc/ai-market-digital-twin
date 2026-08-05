@@ -1,0 +1,50 @@
+{
+  "id": "ir-amd-com-a123cd3c-2026-08-5",
+  "statement": "AMD announced the MI400 Series GPU family (MI455X, MI430X), the MI350P enterprise PCIe variant, 6th Gen EPYC server CPUs and the ROCm.ai software platform, alongside Helios integrations with Microsoft Azure and Cerebras.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A broadening product line plus named platform integrations is how a second merchant-GPU vendor converts interest into sockets, which is the mechanism by which design wins accumulate.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.cluster-software",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "New accelerator SKUs plus a maintained software stack lower the switching cost for buyers, letting AMD capture sockets that would otherwise default to the incumbent."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "MI400 Series GPU family announced, including MI455X and MI430X.",
+      "tier": "primary"
+    },
+    {
+      "source": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "Microsoft Azure: collaboration on AMD Helios rack deployment; two new EPYC CPU VM series; expanded Pensando DPU deployment.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Product and partnership items listed in the issuer's own press release highlights."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,52 @@
+{
+  "id": "hashrateindex-com-10fa275f-2026-08-2",
+  "statement": "Used and refurbished H100 prices fell from as high as $50,000 per GPU in mid-2024 to a $25,000-$40,000 range holding steady from mid-2024 into early 2026, with used 8-GPU H100 servers at roughly $150,000-$180,000.",
+  "kind": "measured",
+  "value": {
+    "number": 40000.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "falling",
+  "why": "The retreat from peak resale prices and the subsequent flat range show the acute scarcity premium of 2024 has drained out of the secondary market.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Falling resale value for the prior flagship indicates secondary supply has loosened relative to the 2024 shortage, easing the cost of used capacity."
+  },
+  "evidence": [
+    {
+      "source": "Hashrate Index",
+      "url": "https://hashrateindex.com/blog/used-gpu-market-pricing-deprecation-secondary-ai/",
+      "date": "2026-04-08",
+      "excerpt": "traded as high as $50,000 per GPU during mid-2024",
+      "tier": "secondary"
+    },
+    {
+      "source": "Hashrate Index",
+      "url": "https://hashrateindex.com/blog/used-gpu-market-pricing-deprecation-secondary-ai/",
+      "date": "2026-04-08",
+      "excerpt": "The NVIDIA H100's retail price held remarkably steady at $25,000-$40,000 from mid-2024 into early 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "One secondary listing survey with no disclosed methodology; the document warns to treat it as an April 2026 mark."
+  },
+  "dispersion": "conflicting same-key reports: value 18900.0 -> 40000.0 (tol 1%); sources: Hashrate Index",
+  "asOf": "2026-08",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-04-08",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

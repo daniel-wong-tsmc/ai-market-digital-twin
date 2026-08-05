@@ -1,0 +1,44 @@
+{
+  "id": "finance-yahoo-com-171fe64e-2026-08-1",
+  "statement": "AMD reported Q2 2026 revenue of $11.5 billion and non-GAAP EPS of $1.66, ahead of expectations of $11.3 billion and $1.62.",
+  "kind": "measured",
+  "value": {
+    "number": 11.5,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A revenue and earnings beat confirms that AI compute demand is showing up in reported results, not just guidance.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Revenue above consensus indicates accelerator and server demand is running ahead of what the market had modeled."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
+      "date": "2026-08-05",
+      "excerpt": "earnings per share (EPS) of $1.66 on revenue of $11.5 billion",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary press coverage of AMD's release rather than the filing itself."
+  },
+  "dispersion": "conflicting same-key reports: value 13.0 -> 11.5 (tol 1%); sources: AMD Investor Relations (Advanced Micro Devices, Inc.), Yahoo Finance",
+  "asOf": "2026-08",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

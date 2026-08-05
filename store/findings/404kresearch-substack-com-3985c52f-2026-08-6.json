@@ -1,0 +1,43 @@
+{
+  "id": "404kresearch-substack-com-3985c52f-2026-08-6",
+  "statement": "Successive downgrades to the Rubin Ultra roadmap — 16-Hi to 12-Hi HBM4E, cancellation of the 4-die MCM, retention of Rubin's 2-die package — suggest the advanced-packaging and memory chain cannot support the originally previewed configuration.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "falling",
+  "why": "A step-by-step retreat from a previewed design, rather than one adjustment, points to a structural rather than temporary constraint in packaging and memory stacking.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "If multi-die packaging and tall HBM stacks cannot be produced at volume, roadmap compute density is capped and packaging capacity becomes the gating factor on shipments."
+  },
+  "evidence": [
+    {
+      "source": "404K Semi-Ai Research (Substack)",
+      "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+      "date": "2026-08-04",
+      "excerpt": "it was first reduced to HBM4E 12-Hi, then the 4-die MCM was cancelled, and it ultimately retained Rubin's 2-die package while further reducing mainstream memory capacity to 192GB",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The document reports a sequence of reductions but does not state a packaging-yield cause; supply and power are the stated reasons. Inferring a packaging constraint from the cancelled 4-die MCM is an interpretation, not a reported fact, so it is a hypothesis and the source is unconfirmed secondary reporting.",
+  "confidence": {
+    "level": "low",
+    "basis": "Inference from unconfirmed supply-chain reporting; no packaging-capacity data in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-05T01:16:13Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
