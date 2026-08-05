@@ -11,12 +11,14 @@ import re
 from pathlib import Path
 
 from gpu_agent.dashboard.render import esc
+from gpu_agent.dashboard.scorecards import load_scorecards
 
 _MONTHLY = re.compile(r"^(\d{4}-\d{2})-v(\d+)\.json$")
 _MONTH_LABEL = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 _DEAD_BAND = 0.5
 _SCALE = 10.0
+_READING_DEAD_BAND_PCT = 0.05
 
 
 def _monthly_records(cat_dir: Path) -> list[dict]:
@@ -47,6 +49,66 @@ def _monthly_records(cat_dir: Path) -> list[dict]:
             continue
         out.append({"key": key, "dmi": float(dmi), "smi": float(smi)})
     return out
+
+
+def monthly_best_files(cat_dir: Path) -> dict[str, Path]:
+    """<month key> -> the winning (highest-revision) scorecard file for that
+    month -- the SAME "highest revision wins" tie-break `_monthly_records`
+    uses, exposed publicly so any caller that needs the REST of that
+    month's snapshot (categoryStatus, dimensionRatings, confidence...) reads
+    the exact same file rather than re-deriving which one is "the latest".
+    Previously duplicated privately in both explore_model.py and
+    export_json.py; extracted here (F110 Task 6 review) so the one rule
+    lives in one place."""
+    best: dict[str, tuple[int, Path]] = {}
+    for p in Path(cat_dir).glob("*.json"):
+        m = _MONTHLY.match(p.name)
+        if not m:
+            continue
+        key, rev = m.group(1), int(m.group(2))
+        if key not in best or rev > best[key][0]:
+            best[key] = (rev, p)
+    return {k: v[1] for k, v in best.items()}
+
+
+def build_reading_series(category_id: str, cat_dir: Path | str) -> list[dict]:
+    """Real per-reading demand/supply history: one point per genuine
+    scorecard reading actually on disk, at whatever real dates the store
+    honestly has -- day-grain readings from when the category ran daily,
+    month-grain once it moved to the current monthly cadence. Reuses
+    `gpu_agent.dashboard.scorecards.load_scorecards`'s own cadence rule
+    verbatim (day-grain files are dropped once a monthly deep-read exists
+    for that category, so a period already covered by a monthly reading is
+    never double-counted against its own legacy daily snapshots) rather
+    than re-deriving that selection here.
+
+    Values are `demandSupply.dmiContribution`/`smiContribution` AS
+    REPORTED for that reading -- never cumulative-summed or re-indexed to
+    100, unlike `build_gap_data` below (which is unchanged, and still feeds
+    the older Python-rendered widget that depends on its indexed-level
+    shape). This is the ONE series every gap-related dashboard.json
+    element -- the verdict chip, the chart itself, and its caption -- reads
+    from, via `gap_trend_word`, so none of them can ever disagree about the
+    same day's real data (F110 Task 6 review, Critical 1)."""
+    recs = load_scorecards(category_id, str(cat_dir))
+    return [{"date": r["as_of"], "demand": r["dmi"], "supply": r["smi"]} for r in recs]
+
+
+def gap_trend_word(readings: list[dict]) -> str:
+    """"narrowing" / "widening" / "flat" from the LAST TWO points of
+    `readings` (as returned by `build_reading_series`), a 5% relative
+    dead-band on the demand-minus-supply gap. The one shared computation
+    every gap-related payload element keys off of."""
+    if len(readings) < 2:
+        return "flat"
+    cur = readings[-1]["demand"] - readings[-1]["supply"]
+    prev = readings[-2]["demand"] - readings[-2]["supply"]
+    if prev == 0:
+        return "flat"
+    change = cur - prev
+    if abs(change) / abs(prev) <= _READING_DEAD_BAND_PCT:
+        return "flat"
+    return "widening" if change > 0 else "narrowing"
 
 
 def build_gap_data(cat_dir: Path, limit: int = 7) -> dict | None:

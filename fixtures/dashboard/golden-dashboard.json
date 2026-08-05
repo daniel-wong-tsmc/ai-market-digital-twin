@@ -81,7 +81,7 @@
   "categoryId": "chips.merchant-gpu",
   "dimensions": [
     {
-      "confidence": "medium",
+      "confidence": "Medium — majority of 3/3 samples; capped by finding confidence (medium).",
       "direction": "flat",
       "evidence": [
         {
@@ -102,12 +102,12 @@
       "id": "bottleneck",
       "plainName": "What is holding shipments back",
       "ratingWord": "Weak",
-      "reasoning": "NVIDIA cut the stacked memory on its mainstream Rubin Ultra part to 192GB, and the reported reason is scarce memory: shrinking memory per chip raises how many chips a fixed memory pool can fill. Packaging is loosening at the same time, with the supply gap narrowing from about 20 percent to about 10 percent as TSMC output climbs toward 125,000-130,000 wafers a month, so the ceiling has moved rather than lifted.",
-      "summary": "NVIDIA cut the stacked memory on its mainstream Rubin Ultra part to 192GB, and the reported reason is scarce memory: shrinking memory per chip raises how many chips a fixed memory pool can fill.",
+      "reasoning": "shrinking memory per chip raises how many chips a fixed memory pool can fill. Packaging is loosening at the same time, with the supply gap narrowing from about 20 percent to about 10 percent as TSMC output climbs toward 125,000-130,000 wafers a month, so the ceiling has moved rather than lifted.",
+      "summary": "NVIDIA cut the stacked memory on its mainstream Rubin Ultra part to 192GB, and the reported reason is scarce memory:",
       "tone": "bad"
     },
     {
-      "confidence": "high",
+      "confidence": "High — majority of 3/3 samples.",
       "direction": "improving",
       "evidence": [
         {
@@ -121,12 +121,12 @@
       "id": "momentum",
       "plainName": "How hard buyers are buying",
       "ratingWord": "Very strong",
-      "reasoning": "The four largest US cloud buyers plan about $725 billion of 2026 capital spending, up 77 percent, and Google Cloud's booked backlog jumped more than $50 billion in one quarter to $514 billion. New buyers reinforce it: SpaceX spent roughly $15.8 billion on AI compute in a single quarter and a Korean industrial group signed a $500-billion-plus build-out with NVIDIA.",
-      "summary": "The four largest US cloud buyers plan about $725 billion of 2026 capital spending, up 77 percent, and Google Cloud's booked backlog jumped more than $50 billion in one quarter to $514 billion.",
+      "reasoning": "and Google Cloud's booked backlog jumped more than $50 billion in one quarter to $514 billion. New buyers reinforce it: SpaceX spent roughly $15.8 billion on AI compute in a single quarter and a Korean industrial group signed a $500-billion-plus build-out with NVIDIA.",
+      "summary": "The four largest US cloud buyers plan about $725 billion of 2026 capital spending, up 77 percent,",
       "tone": "good"
     },
     {
-      "confidence": "high",
+      "confidence": "High — majority of 3/3 samples.",
       "direction": "worsening",
       "evidence": [
         {
@@ -147,12 +147,12 @@
       "id": "competitiveStructure",
       "plainName": "Whether buyers have a second choice",
       "ratingWord": "Mixed",
-      "reasoning": "AMD put its Helios rack into production with named gigawatt customers, and rival accelerators from Amazon and Google reach mass production in the same window, so buyers now have real second sources. Volume still lags: AMD's rack-scale part only reaches production tokens by mid-2027, and SpaceX chose to build exclusively on NVIDIA.",
-      "summary": "AMD put its Helios rack into production with named gigawatt customers, and rival accelerators from Amazon and Google reach mass production in the same window, so buyers now have real second sources.",
+      "reasoning": "and rival accelerators from Amazon and Google reach mass production in the same window, so buyers now have real second sources. Volume still lags: AMD's rack-scale part only reaches production tokens by mid-2027, and SpaceX chose to build exclusively on NVIDIA.",
+      "summary": "AMD put its Helios rack into production with named gigawatt customers,",
       "tone": "mixed"
     },
     {
-      "confidence": "medium",
+      "confidence": "Medium — majority of 3/3 samples; capped by finding confidence (medium).",
       "direction": "worsening",
       "evidence": [
         {
@@ -166,12 +166,12 @@
       "id": "moat",
       "plainName": "How safe NVIDIA's lead looks",
       "ratingWord": "Weak",
-      "reasoning": "NVIDIA's accelerator share is projected to slide from 87 percent in 2024 to 75 percent in 2026 as custom chips grow 44.6 percent against 16.1 percent for merchant parts, and in-house silicon already absorbs about two-thirds of AI compute. The networking bundle is the one defence that gained ground, with NVIDIA taking the revenue lead in data-center Ethernet switches.",
-      "summary": "NVIDIA's accelerator share is projected to slide from 87 percent in 2024 to 75 percent in 2026 as custom chips grow 44.6 percent against 16.1 percent for merchant parts, and in-house silicon already absorbs about two-thirds of AI compute.",
+      "reasoning": "grow 44.6 percent against 16.1 percent for merchant parts, and in-house silicon already absorbs about two-thirds of AI compute. The networking bundle is the one defence that gained ground, with NVIDIA taking the revenue lead in data-center Ethernet switches.",
+      "summary": "NVIDIA's accelerator share is projected to slide from 87 percent in 2024 to 75 percent in 2026 as custom chips.",
       "tone": "bad"
     },
     {
-      "confidence": "high",
+      "confidence": "High — majority of 3/3 samples.",
       "direction": "flat",
       "evidence": [
         {
@@ -192,12 +192,12 @@
       "id": "unitEconomics",
       "plainName": "How profitable the sellers are",
       "ratingWord": "Strong",
-      "reasoning": "NVIDIA held a 75.0 percent gross margin and guided the next quarter to the same level, and TSMC posted 67.7 percent while raising full-year growth guidance. AMD sits far lower at 56 percent with accelerator sales below its own average, so the margin strength concentrates at the leaders.",
-      "summary": "NVIDIA held a 75.0 percent gross margin and guided the next quarter to the same level, and TSMC posted 67.7 percent while raising full-year growth guidance.",
+      "reasoning": "and TSMC posted 67.7 percent while raising full-year growth guidance. AMD sits far lower at 56 percent with accelerator sales below its own average, so the margin strength concentrates at the leaders.",
+      "summary": "NVIDIA held a 75.0 percent gross margin and guided the next quarter to the same level,",
       "tone": "good"
     },
     {
-      "confidence": "high",
+      "confidence": "High — majority of 3/3 samples.",
       "direction": "worsening",
       "evidence": [
         {
@@ -211,8 +211,8 @@
       "id": "strategicRisk",
       "plainName": "What could go wrong",
       "ratingWord": "Mixed",
-      "reasoning": "Three NVIDIA customers alone make up 21, 17 and 16 percent of revenue, China data-center sales have collapsed to $4.55 billion from $9.66 billion, and one buyer expects a very significant share of 2027 output. The vendor now finances a growing slice of its own demand, including a discussed $350 billion facility for OpenAI purchases, which ties revenue to buyers it also funds.",
-      "summary": "Three NVIDIA customers alone make up 21, 17 and 16 percent of revenue, China data-center sales have collapsed to $4.55 billion from $9.66 billion, and one buyer expects a very significant share of 2027 output.",
+      "reasoning": "China data-center sales have collapsed to $4.55 billion from $9.66 billion, and one buyer expects a very significant share of 2027 output. The vendor now finances a growing slice of its own demand, including a discussed $350 billion facility for OpenAI purchases, which ties revenue to buyers it also funds.",
+      "summary": "Three NVIDIA customers alone make up 21, 17 and 16 percent of revenue,",
       "tone": "mixed"
     }
   ],
@@ -232,36 +232,67 @@
     {
       "href": "story/",
       "label": "Story archive"
+    },
+    {
+      "href": "entities/",
+      "label": "Companies"
     }
   ],
   "gapChart": {
     "annotation": {
-      "date": "2026-08",
+      "date": "2026-07",
       "label": "Widest gap so far"
     },
-    "caption": "The gap widened in the latest reading. Demand and supply are shown as an indexed score built from each month's reported momentum, not a raw unit.",
+    "caption": "The gap narrowed in the latest reading. Demand and supply are each reading's own reported momentum score, not a raw shipment count.",
     "points": [
       {
         "date": "2026-07",
-        "demand": 110.0,
-        "supply": 105.0
+        "demand": 2.0,
+        "supply": -1.0
       },
       {
         "date": "2026-08",
-        "demand": 130.0,
-        "supply": 100.0
+        "demand": 2.0,
+        "supply": -0.6
       }
     ],
-    "sources": []
+    "sources": [
+      {
+        "assessment": true,
+        "basedOn": [
+          {
+            "date": "2026-07-23",
+            "outlet": "AMD Investor Relations",
+            "tier": "primary",
+            "title": "AMD Investor Relations",
+            "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era"
+          },
+          {
+            "date": "2026-08-04",
+            "outlet": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+            "tier": "primary",
+            "title": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+            "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
+          },
+          {
+            "date": "2026-08-04",
+            "outlet": "404K Semi-Ai Research (Substack)",
+            "tier": "secondary",
+            "title": "404K Semi-Ai Research (Substack)",
+            "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb"
+          }
+        ]
+      }
+    ]
   },
   "schemaVersion": "1.0",
   "verdict": {
-    "answer": "The challenger had a good quarter. The racks that matter still ship next year. AMD beat its own numbers and put its rack-sized system into production, but the big volume starts in 2027 - and a single new buyer has already spoken for a large slice of next year's chips.",
+    "answer": "Getting closer. The challenger had a good quarter.",
     "chip": {
       "direction": "narrowing",
       "label": "Gap narrowing"
     },
-    "confidence": "We are confident in this read.",
+    "confidence": "We are confident in this read",
     "question": "Is supply catching up to demand?",
     "soWhat": "AMD beat its own numbers and put its rack-sized system into production, but the big volume starts in 2027 - and a single new buyer has already spoken for a large slice of next year's chips.",
     "sources": [

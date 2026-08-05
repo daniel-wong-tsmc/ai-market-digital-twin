@@ -14,6 +14,13 @@ Two properties matter more than any other line of code here:
 2. Validate before write -- a payload that fails web/schema/dashboard.schema.json
    must never reach disk. The live page renders whatever is on disk, so
    writing an invalid file is worse than writing nothing.
+
+A THIRD property, added after the first review round: internal consistency.
+The chip, the gap chart, its caption, and the verdict's opening phrase must
+never disagree with each other -- they are all derived from the ONE real
+per-reading demand/supply series (`gap_chart.build_reading_series` +
+`gap_chart.gap_trend_word`), never from two different quantities computed
+two different ways.
 """
 from __future__ import annotations
 
@@ -25,15 +32,20 @@ import jsonschema
 
 from gpu_agent.chartdata.registry import load_chart_series
 from gpu_agent.dashboard.bullets import _first_sentence, build_bullets
-from gpu_agent.dashboard.gap_chart import _MONTHLY, build_gap_data
+from gpu_agent.dashboard.gap_chart import (build_reading_series, gap_trend_word,
+                                            monthly_best_files)
 from gpu_agent.dashboard.plain_language import dimension_plain_name
 from gpu_agent.dashboard.source_refs import assessment_ref, findings_index, refs_for_finding_ids
 
-SCHEMA_PATH = "web/schema/dashboard.schema.json"
+# Resolved relative to this package (not the process CWD) -- MINOR fix (review
+# round 1): a relative path here only worked when the `dashboard-json` CLI
+# verb happened to be invoked from the repo root. This is the CLI's only
+# consumer, but the run-cycle and integration tasks may not share that
+# assumption.
+SCHEMA_PATH = Path(__file__).resolve().parents[2] / "web" / "schema" / "dashboard.schema.json"
 
 VERDICT_QUESTION = "Is supply catching up to demand?"
 _SKIP_SCENE_TITLE = "What to watch from here"
-_DEAD_BAND_PCT = 0.05
 
 _DIM_ORDER = ["bottleneck", "momentum", "competitiveStructure", "moat",
               "unitEconomics", "strategicRisk"]
@@ -49,40 +61,257 @@ _CHIP_LABEL = {
     "widening": "Gap widening",
     "flat": "Gap holding steady",
 }
-_CONFIDENCE_SENTENCE = {
-    "high": "We are confident in this read.",
-    "medium": "We are reasonably confident in this read.",
-    "low": "This is a lower-confidence, more tentative read.",
+# CONTROLLER RULING (review round 1, Critical 3): the answer must LEAD with a
+# short, direct, data-derived answer to the verdict question, keyed off the
+# SAME gap_trend_word() direction that drives the chip and the chart caption
+# -- never a headline recast, and never contradicting the chip beside it.
+_ANSWER_OPENING = {
+    "widening": "Not yet.",
+    "narrowing": "Getting closer.",
+    "flat": "Not yet.",
 }
+# MINOR fix (review round 1): the mock's verdict-meta text carries no
+# trailing period (it sits in a `<span>` next to a "·" separator, not a
+# standalone sentence) -- matched verbatim here.
+_CONFIDENCE_SENTENCE = {
+    "high": "We are confident in this read",
+    "medium": "We are reasonably confident in this read",
+    "low": "This is a lower-confidence, more tentative read",
+}
+# CONTROLLER RULING (review round 1, Critical 1 + Important 5): the caption's
+# direction word now comes from the exact same `gap_trend_word()` call that
+# produces the chip's direction -- both index this one dict, so they can
+# never name two different directions for the same day's data.
 _GAP_WORD_CAPTION = {
-    "widened": "The gap widened in the latest reading.",
-    "narrowed": "The gap narrowed in the latest reading.",
-    "held": "The gap held roughly steady in the latest reading.",
+    "widening": "The gap widened in the latest reading.",
+    "narrowing": "The gap narrowed in the latest reading.",
+    "flat": "The gap held roughly steady in the latest reading.",
 }
 _STORY_DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})\.json$")
 
+# Length-capped, clause-bounded dimension-summary extraction (review round 1,
+# Important 7): a hard word budget close to the mock's own 12-19 word rows,
+# cut at the last clause boundary (comma/semicolon/sentence end) at or before
+# that budget so the truncation reads as a clean phrase, not a chopped word.
+_CLAUSE_BOUNDARY = re.compile(r"[,;:.!?]")
+_SUMMARY_WORD_CAP = 20
 
-# ── file selection (reuses gap_chart's own regex/tie-break rule; never
-#    reimplements it -- see gpu_agent/dashboard/explore_model.py's
-#    `_monthly_best_files`, which documents this exact same reuse) ──────────
 
-def _monthly_best_files(cat_dir: Path) -> dict[str, Path]:
-    """<asOf month key> -> the winning (highest-revision) scorecard file for
-    that month, using gap_chart's own `_MONTHLY` pattern and "highest
-    revision wins" tie-break -- the SAME selection rule
-    `gap_chart._monthly_records` uses for the chart, so a caller that needs
-    the rest of that month's snapshot (confidence, dimensionRatings,
-    indices...) reads the exact same file rather than re-deriving which one
-    is "the latest"."""
-    best: dict[str, tuple[int, Path]] = {}
-    for p in Path(cat_dir).glob("*.json"):
-        m = _MONTHLY.match(p.name)
-        if not m:
+# ── verdict ──────────────────────────────────────────────────────────────
+
+def _confidence_sentence(scorecard: dict) -> str:
+    level = ((scorecard.get("confidence") or {}).get("level") or "").lower()
+    return _CONFIDENCE_SENTENCE.get(
+        level, "How sure we are in this read is not yet established")
+
+
+def _build_chip(direction: str) -> dict:
+    return {"label": _CHIP_LABEL[direction], "direction": direction}
+
+
+def _verdict_support_sentence(story: dict) -> str:
+    """The ONE supporting sentence for the verdict answer -- the story's own
+    headline (its first sentence), falling back to the deck's first
+    sentence only when there is no headline at all."""
+    return _first_sentence(story.get("headline") or "") or _first_sentence(story.get("deck") or "")
+
+
+def _verdict_answer(direction: str, support_sentence: str) -> str:
+    """A short, direct answer keyed off `direction` (so it can never
+    contradict the chip built from the same value), plus exactly one
+    supporting sentence -- roughly a dozen words, not the 51-word,
+    self-quoting paragraph review round 1 flagged."""
+    opening = _ANSWER_OPENING[direction]
+    return f"{opening} {support_sentence}".strip()
+
+
+def _verdict_so_what(story: dict, scorecard: dict, support_sentence: str) -> str:
+    """The story's `deck`, unless its first sentence is the exact sentence
+    already used inside `answer` -- in which case fall back to the
+    scorecard narrative's first sentence, so `soWhat` never repeats a
+    sentence the reader just read forty pixels above (review round 1,
+    Critical 3)."""
+    deck = (story.get("deck") or "").strip()
+    if deck and _first_sentence(deck) != support_sentence:
+        return deck
+    narrative_first = _first_sentence(scorecard.get("narrative") or "")
+    if narrative_first and narrative_first != support_sentence:
+        return narrative_first
+    return ""
+
+
+def _headline_scene(story: dict) -> dict:
+    for scene in story.get("scenes", []):
+        if (scene.get("title") or "").strip() != _SKIP_SCENE_TITLE:
+            return scene
+    return {}
+
+
+def _verdict_sources(story: dict, findings_by_id: dict) -> list[dict]:
+    """assessment_ref over the headline scene's top-3 refs -- or an honest
+    empty list (never an "our assessment, based on:" with nothing behind
+    it) when none of its finding ids resolve to a real reference (MINOR fix,
+    review round 1)."""
+    scene = _headline_scene(story)
+    refs = refs_for_finding_ids(scene.get("claimFindingIds", []), findings_by_id, max_refs=3)
+    return [assessment_ref(refs)] if refs else []
+
+
+def _build_verdict(story: dict, latest_raw: dict, direction: str, findings_by_id: dict) -> dict:
+    support_sentence = _verdict_support_sentence(story)
+    return {
+        "question": VERDICT_QUESTION,
+        "answer": _verdict_answer(direction, support_sentence),
+        "chip": _build_chip(direction),
+        "confidence": _confidence_sentence(latest_raw),
+        "soWhat": _verdict_so_what(story, latest_raw, support_sentence),
+        "sources": _verdict_sources(story, findings_by_id),
+    }
+
+
+# ── gap chart ────────────────────────────────────────────────────────────
+#
+# Reuses gap_chart.build_reading_series (real per-reading dates, raw
+# demand/supply values, cadence-aware -- CONTROLLER RULING, review round 1,
+# Important 5: the spec's "real per-reading dates; backfilled runs excluded"
+# and the mock govern) and gap_chart.gap_trend_word (the ONE direction
+# computation shared with the verdict chip -- Critical 1). Neither is
+# reimplemented here.
+
+def _gap_annotation(readings: list[dict]) -> dict:
+    idx = max(range(len(readings)), key=lambda i: abs(readings[i]["demand"] - readings[i]["supply"]))
+    return {"date": readings[idx]["date"], "label": "Widest gap so far"}
+
+
+def _gap_chart_sources(latest_raw: dict, findings_by_id: dict) -> list[dict]:
+    """IMPORTANT fix (review round 1): the chart is our own reading of the
+    dimension ratings' own findings -- an assessment over the top refs
+    across every dimension's `findingIds` on the latest reading, per spec
+    §6's synthesis form. An honest empty list only when nothing resolves."""
+    ratings = latest_raw.get("dimensionRatings") or {}
+    seen: set[str] = set()
+    all_ids: list[str] = []
+    for name in _DIM_ORDER:
+        for fid in (ratings.get(name) or {}).get("findingIds") or []:
+            if fid not in seen:
+                seen.add(fid)
+                all_ids.append(fid)
+    refs = refs_for_finding_ids(all_ids, findings_by_id, max_refs=3)
+    return [assessment_ref(refs)] if refs else []
+
+
+def _build_gap_chart(readings: list[dict], direction: str, latest_raw: dict,
+                      findings_by_id: dict) -> dict:
+    points = [{"date": r["date"], "demand": r["demand"], "supply": r["supply"]} for r in readings]
+    caption = (_GAP_WORD_CAPTION[direction] +
+               " Demand and supply are each reading's own reported momentum "
+               "score, not a raw shipment count.")
+    return {
+        "points": points,
+        "annotation": _gap_annotation(readings),
+        "caption": caption,
+        "sources": _gap_chart_sources(latest_raw, findings_by_id),
+    }
+
+
+# ── six dimensions ───────────────────────────────────────────────────────
+
+def _clause_capped_window(text: str, cap: int = _SUMMARY_WORD_CAP) -> str:
+    """The UNDECORATED cut of `text` at a clause boundary (comma/semicolon/
+    sentence end) at or before `cap` words -- the full text unchanged if it
+    is already <= cap words. Never a mid-word hard cut, never a fabricated
+    rewrite (deterministic Python only, no AI: every word is `text`'s own),
+    and never any punctuation ADDED here -- that is cosmetic and belongs to
+    the caller, so the exact cut length stays known for slicing the
+    reasoning remainder (see `_dimension_summary_and_reasoning`).
+
+    A "." immediately between two digits (a decimal point, e.g. "67.7") is
+    never treated as a boundary -- the same failure mode
+    `bullets._first_sentence` already guards against for sentence-splitting
+    ("1.4 gigawatts" must not truncate to "1."), reproduced here because
+    rationale text carries the same kind of numbers."""
+    text = (text or "").strip()
+    if not text:
+        return text
+    words = text.split(" ")
+    if len(words) <= cap:
+        return text
+    window = " ".join(words[:cap])
+    best_end = None
+    for m in _CLAUSE_BOUNDARY.finditer(window):
+        pos = m.start()
+        if (m.group() == "." and 0 < pos < len(window) - 1
+                and window[pos - 1].isdigit() and window[pos + 1].isdigit()):
             continue
-        key, rev = m.group(1), int(m.group(2))
-        if key not in best or rev > best[key][0]:
-            best[key] = (rev, p)
-    return {k: v[1] for k, v in best.items()}
+        best_end = m.end()
+    return window[:best_end].rstrip() if best_end else window
+
+
+def _dimension_summary_and_reasoning(rationale: str) -> tuple[str, str]:
+    """Row summary: `_clause_capped_window` of the rationale, punctuated for
+    display. Panel reasoning: whatever of the rationale is NOT already the
+    summary -- sliced by the UNDECORATED cut length, so this holds even
+    when no clause boundary existed and the window was a hard word-cut --
+    so opening the click-to-explain panel adds new sentences instead of
+    repeating the row word for word (Important 7, review round 1). Falls
+    back to the full rationale only when the summary consumed all of it."""
+    cut_text = _clause_capped_window(rationale)
+    remainder = rationale[len(cut_text):].strip()
+    summary = cut_text if cut_text[-1:] in ".,;:!?" else cut_text + "."
+    return summary, (remainder or rationale)
+
+
+def _dimension_confidence_sentence(rating: dict) -> str:
+    """A full plain-English sentence (mock precedent: "High — drawn from
+    company filings and calls."), not the raw "medium"/"high" level string
+    (MINOR fix, review round 1)."""
+    conf = rating.get("confidence") or {}
+    level = (conf.get("level") or "").strip()
+    if not level:
+        return ""
+    label = level[:1].upper() + level[1:]
+    basis = (conf.get("basis") or "").strip()
+    return f"{label} — {basis}." if basis else f"{label}."
+
+
+def _build_dimensions(latest_raw: dict, findings_by_id: dict) -> list[dict]:
+    ratings = latest_raw.get("dimensionRatings") or {}
+    dims = []
+    for name in _DIM_ORDER:
+        r = ratings.get(name) or {}
+        rating_word = r.get("rating") or ""
+        # MINOR fix (review round 1): an unrecognized/missing rating word
+        # used to silently fall back to tone "mixed" -- exactly the
+        # silent-failure pattern this lane keeps catching. A dimension row
+        # we cannot honestly color must fail loudly, not quietly mislabel.
+        if rating_word not in _TONE_FOR_RATING:
+            raise ValueError(
+                f"dimension {name!r}: unrecognized rating word {rating_word!r} "
+                "-- refusing to guess a bad/mixed/good tone")
+        rationale = r.get("rationale") or ""
+        summary, reasoning = _dimension_summary_and_reasoning(rationale)
+        dims.append({
+            "id": name,
+            "plainName": dimension_plain_name(name),
+            "ratingWord": rating_word,
+            "tone": _TONE_FOR_RATING[rating_word],
+            "direction": _DIRECTION_FOR_SCORECARD.get(r.get("direction"), "flat"),
+            "confidence": _dimension_confidence_sentence(r),
+            "summary": summary,
+            "reasoning": reasoning,
+            "evidence": refs_for_finding_ids(r.get("findingIds") or [], findings_by_id, max_refs=3),
+        })
+    return dims
+
+
+def _footer_links() -> list[dict]:
+    return [
+        {"label": "Evidence", "href": "findings/"},
+        {"label": "Numbers we track", "href": "series/"},
+        {"label": "Past readings", "href": "history.html"},
+        {"label": "Story archive", "href": "story/"},
+        {"label": "Companies", "href": "entities/"},
+    ]
 
 
 def _load_json(path: Path) -> dict:
@@ -102,138 +331,6 @@ def _latest_story(story_dir: Path) -> dict:
     return _load_json(best_path)
 
 
-# ── verdict ──────────────────────────────────────────────────────────────
-
-def _confidence_sentence(scorecard: dict) -> str:
-    level = ((scorecard.get("confidence") or {}).get("level") or "").lower()
-    return _CONFIDENCE_SENTENCE.get(
-        level, "How sure we are in this read is not yet established.")
-
-
-def _gap_direction(cur: float | None, prev: float | None) -> str:
-    """narrowing/widening/flat on the CURRENT scorecard's own
-    `indices.divergence.sdgiGap` vs. the PREVIOUS scorecard's, with a 5%
-    relative dead-band (never an absolute one -- that is gap_chart.py's own,
-    unrelated, chart-level word, computed on a different quantity)."""
-    if cur is None or prev is None or prev == 0:
-        return "flat"
-    change = cur - prev
-    if abs(change) / abs(prev) <= _DEAD_BAND_PCT:
-        return "flat"
-    return "widening" if change > 0 else "narrowing"
-
-
-def _sdgi_gap(raw: dict | None) -> float | None:
-    if not raw:
-        return None
-    return ((raw.get("indices") or {}).get("divergence") or {}).get("sdgiGap")
-
-
-def _build_chip(latest_raw: dict, prev_raw: dict | None) -> dict:
-    direction = _gap_direction(_sdgi_gap(latest_raw), _sdgi_gap(prev_raw))
-    return {"label": _CHIP_LABEL[direction], "direction": direction}
-
-
-def _verdict_answer(story: dict) -> str:
-    """headline recast by rule: the headline stands as the first sentence
-    (narrator headlines are written to already answer the verdict question),
-    with the first sentence of `deck` appended as the second."""
-    headline = (story.get("headline") or "").strip()
-    deck_first = _first_sentence(story.get("deck") or "")
-    if not headline:
-        return deck_first
-    sep = "" if headline.endswith((".", "!", "?")) else "."
-    return f"{headline}{sep} {deck_first}".strip()
-
-
-def _verdict_so_what(story: dict, scorecard: dict) -> str:
-    deck = story.get("deck")
-    if deck:
-        return deck
-    return _first_sentence(scorecard.get("narrative") or "")
-
-
-def _headline_scene(story: dict) -> dict:
-    for scene in story.get("scenes", []):
-        if (scene.get("title") or "").strip() != _SKIP_SCENE_TITLE:
-            return scene
-    return {}
-
-
-def _verdict_sources(story: dict, findings_by_id: dict) -> list[dict]:
-    scene = _headline_scene(story)
-    refs = refs_for_finding_ids(scene.get("claimFindingIds", []), findings_by_id, max_refs=3)
-    return [assessment_ref(refs)]
-
-
-def _build_verdict(story: dict, latest_raw: dict, prev_raw: dict | None,
-                    findings_by_id: dict) -> dict:
-    return {
-        "question": VERDICT_QUESTION,
-        "answer": _verdict_answer(story),
-        "chip": _build_chip(latest_raw, prev_raw),
-        "confidence": _confidence_sentence(latest_raw),
-        "soWhat": _verdict_so_what(story, latest_raw),
-        "sources": _verdict_sources(story, findings_by_id),
-    }
-
-
-# ── gap chart (reuses gap_chart.build_gap_data verbatim for the dated
-#    demand/supply points -- its own date/version selection is never
-#    reimplemented here) ─────────────────────────────────────────────────
-
-def _gap_annotation(gap_data: dict) -> dict:
-    demand, supply, months = gap_data["demand"], gap_data["supply"], gap_data["months"]
-    idx = max(range(len(months)), key=lambda i: abs(demand[i] - supply[i]))
-    return {"date": months[idx]["key"], "label": "Widest gap so far"}
-
-
-def _build_gap_chart(gap_data: dict) -> dict:
-    points = [{"date": m["key"], "demand": d, "supply": s}
-              for m, d, s in zip(gap_data["months"], gap_data["demand"], gap_data["supply"])]
-    caption = (_GAP_WORD_CAPTION[gap_data["gap_word"]] +
-               " Demand and supply are shown as an indexed score built from "
-               "each month's reported momentum, not a raw unit.")
-    return {
-        "points": points,
-        "annotation": _gap_annotation(gap_data),
-        "caption": caption,
-        "sources": [],
-    }
-
-
-# ── six dimensions ───────────────────────────────────────────────────────
-
-def _build_dimensions(latest_raw: dict, findings_by_id: dict) -> list[dict]:
-    ratings = latest_raw.get("dimensionRatings") or {}
-    dims = []
-    for name in _DIM_ORDER:
-        r = ratings.get(name) or {}
-        rating_word = r.get("rating") or ""
-        rationale = r.get("rationale") or ""
-        dims.append({
-            "id": name,
-            "plainName": dimension_plain_name(name),
-            "ratingWord": rating_word,
-            "tone": _TONE_FOR_RATING.get(rating_word, "mixed"),
-            "direction": _DIRECTION_FOR_SCORECARD.get(r.get("direction"), "flat"),
-            "confidence": (r.get("confidence") or {}).get("level") or "",
-            "summary": _first_sentence(rationale),
-            "reasoning": rationale,
-            "evidence": refs_for_finding_ids(r.get("findingIds") or [], findings_by_id, max_refs=3),
-        })
-    return dims
-
-
-def _footer_links() -> list[dict]:
-    return [
-        {"label": "Evidence", "href": "findings/"},
-        {"label": "Numbers we track", "href": "series/"},
-        {"label": "Past readings", "href": "history.html"},
-        {"label": "Story archive", "href": "story/"},
-    ]
-
-
 # ── top-level assembly ───────────────────────────────────────────────────
 
 def build_dashboard_payload(category_id: str, store_dir: str) -> dict:
@@ -246,19 +343,17 @@ def build_dashboard_payload(category_id: str, store_dir: str) -> dict:
 
     Raises ValueError (never writes anything) when the inputs cannot honestly
     support a payload -- no scorecard history, no story, or fewer than two
-    months of demand/supply history for the gap chart -- rather than
-    fabricating a partial or misleading page.
+    real readings for the gap chart -- rather than fabricating a partial or
+    misleading page.
     """
     store_root = Path(store_dir)
     cat_dir = store_root / category_id
     series_dir = store_root / "series"
 
-    files = _monthly_best_files(cat_dir)
+    files = monthly_best_files(cat_dir)
     if not files:
         raise ValueError(f"no monthly scorecard history found for {category_id!r} under {cat_dir}")
-    keys = sorted(files)
-    latest_raw = _load_json(files[keys[-1]])
-    prev_raw = _load_json(files[keys[-2]]) if len(keys) > 1 else None
+    latest_raw = _load_json(files[max(files)])
 
     story = _latest_story(cat_dir / "story")
     findings_by_id = findings_index(latest_raw)
@@ -266,24 +361,25 @@ def build_dashboard_payload(category_id: str, store_dir: str) -> dict:
     series_reg = load_chart_series()
     bullets = build_bullets(story, latest_raw, series_reg, str(series_dir))
 
-    gap_data = build_gap_data(cat_dir)
-    if gap_data is None:
+    readings = build_reading_series(category_id, cat_dir)
+    if len(readings) < 2:
         raise ValueError(
-            f"fewer than two months of demand/supply history under {cat_dir} "
+            f"fewer than two real readings under {cat_dir} "
             "-- cannot honestly draw the gap chart")
+    direction = gap_trend_word(readings)
 
     payload = {
         "schemaVersion": "1.0",
         "categoryId": category_id,
         "asOf": story.get("storyDate", ""),
-        "verdict": _build_verdict(story, latest_raw, prev_raw, findings_by_id),
-        "gapChart": _build_gap_chart(gap_data),
+        "verdict": _build_verdict(story, latest_raw, direction, findings_by_id),
+        "gapChart": _build_gap_chart(readings, direction, latest_raw, findings_by_id),
         "bullets": bullets,
         "dimensions": _build_dimensions(latest_raw, findings_by_id),
         "footerLinks": _footer_links(),
     }
 
-    schema = json.loads(Path(SCHEMA_PATH).read_text(encoding="utf-8"))
+    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
     jsonschema.validate(payload, schema)
     return payload
 
@@ -292,7 +388,13 @@ def write_dashboard_json(category_id: str, store_dir: str, site_dir: str) -> Pat
     """Build + validate the payload, then write it to
     `<site_dir>/<category_id>/data/dashboard.json` -- UTF-8, LF line endings,
     sorted keys, so an unchanged input produces a byte-identical file (a
-    quiet daily commit, not a noisy full-file diff)."""
+    quiet daily commit, not a noisy full-file diff).
+
+    Validation happens INSIDE `build_dashboard_payload`, before this function
+    ever opens the output path -- an invalid payload raises here and no file
+    is created or overwritten (see tests/test_export_json.py's
+    `test_corrupt_input_leaves_no_file_on_disk`, which proves this ordering
+    by reversing it and watching the test go red)."""
     payload = build_dashboard_payload(category_id, store_dir)
     out_path = Path(site_dir) / category_id / "data" / "dashboard.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
