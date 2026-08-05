@@ -84,13 +84,16 @@ def due_series(
 
 
 def _read_jsonl(path: Path) -> list[dict]:
+    """Read an existing series file. Deliberately does NOT swallow a corrupt
+    line: an unparseable row must surface as an exception so the caller's
+    try/except turns it into a 'failed' entry and leaves the file untouched
+    (review finding #1) -- silently returning [] here would make one
+    truncated line look like "no history yet", and the next successful
+    append would then overwrite the file, destroying every prior period."""
     if not path.exists():
         return []
-    try:
-        return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()
-                if line.strip()]
-    except (OSError, ValueError):
-        return []
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()
+            if line.strip()]
 
 
 def _write_jsonl(path: Path, rows: list[dict]) -> None:
@@ -156,40 +159,51 @@ def run_fetch(
     fetch_html: Callable[[str], str] | None = None,
 ) -> dict:
     """Fetch + append every due series. NEVER raises -- any failure (network,
-    missing fetcher, unparseable markup, a bad point shape) is caught and
-    reported under 'failed'; the series' file is left exactly as it was.
+    missing fetcher, unparseable markup, a bad point shape, or even a bad
+    argument from the caller) is caught and reported under 'failed'; a
+    per-series failure leaves that series' file exactly as it was.
 
     Returns {'fetched': [{'id', 'newPoints'}], 'failed': [{'id', 'error'}],
     'skipped': [id, ...]} -- 'skipped' lists every registry series that
     wasn't due this call (wrong cadence, no fetcher, or outside the earnings
-    window with an existing file).
-    """
-    # Local import: fetchers/amd_dc_revenue.py imports ParseFailed from this
-    # module, so importing FETCHERS at module scope here would be circular.
-    from gpu_agent.chartdata.fetchers import FETCHERS
+    window with an existing file). On a failure so broad it couldn't even
+    get as far as computing which series are due (e.g. `series=None`,
+    `earnings_dates=None`, a non-ChartSeries value in `series`) the whole
+    call reports one synthetic {'id': '*', ...} failure with empty
+    fetched/skipped, rather than letting the exception escape (review
+    finding #2 -- everything inside the per-series loop was already
+    bulletproof; the prologue/epilogue around it was not)."""
+    try:
+        # Local import: fetchers/amd_dc_revenue.py imports ParseFailed from
+        # this module, so importing FETCHERS at module scope would be circular.
+        from gpu_agent.chartdata.fetchers import FETCHERS
 
-    due = due_series(series, as_of_date, earnings_dates, store_dir=store_dir)
-    due_ids = {cs.id for cs in due}
-    fetched: list[dict] = []
-    failed: list[dict] = []
+        due = due_series(series, as_of_date, earnings_dates, store_dir=store_dir)
+        due_ids = {cs.id for cs in due}
+        fetched: list[dict] = []
+        failed: list[dict] = []
 
-    for cs in due:
-        try:
-            fetcher = FETCHERS.get(cs.fetcher)
-            if fetcher is None:
-                failed.append({"id": cs.id,
-                                "error": f"no fetcher registered for {cs.fetcher!r}"})
-                continue
-            html_text = (fetch_html or _default_fetch_html)(cs.sourceUrl)
-            points = fetcher(html_text)
-            n_new = _append_points(store_dir, cs, points, as_of_date)
-            fetched.append({"id": cs.id, "newPoints": n_new})
-        except Exception as e:  # noqa: BLE001 -- deliberate: never let a
-            # fetch failure escape into the unattended daily pipeline.
-            failed.append({"id": cs.id, "error": f"{type(e).__name__}: {e}"})
+        for cs in due:
+            try:
+                fetcher = FETCHERS.get(cs.fetcher)
+                if fetcher is None:
+                    failed.append({"id": cs.id,
+                                    "error": f"no fetcher registered for {cs.fetcher!r}"})
+                    continue
+                html_text = (fetch_html or _default_fetch_html)(cs.sourceUrl)
+                points = fetcher(html_text)
+                n_new = _append_points(store_dir, cs, points, as_of_date)
+                fetched.append({"id": cs.id, "newPoints": n_new})
+            except Exception as e:  # noqa: BLE001 -- deliberate: never let a
+                # fetch failure escape into the unattended daily pipeline.
+                failed.append({"id": cs.id, "error": f"{type(e).__name__}: {e}"})
 
-    skipped = sorted(sid for sid in series if sid not in due_ids)
-    return {"fetched": fetched, "failed": failed, "skipped": skipped}
+        skipped = sorted(sid for sid in series if sid not in due_ids)
+        return {"fetched": fetched, "failed": failed, "skipped": skipped}
+    except Exception as e:  # noqa: BLE001 -- deliberate, see docstring above.
+        return {"fetched": [],
+                "failed": [{"id": "*", "error": f"{type(e).__name__}: {e}"}],
+                "skipped": []}
 
 
 def _default_fetch_html(url: str) -> str:  # pragma: no cover -- network path,

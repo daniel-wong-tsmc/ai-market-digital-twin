@@ -159,6 +159,11 @@ def test_run_fetch_append_is_idempotent_across_two_runs(tmp_path):
     assert len(second_rows) == len(first_rows)
     periods = [json.loads(l)["period"] for l in second_rows]
     assert len(periods) == len(set(periods))  # no period duplicated
+    # Review finding #4: line-count + period-uniqueness alone would still
+    # pass if a rerun silently rewrote an existing period's VALUE in place.
+    # Assert every pre-existing row is byte-identical after the second run,
+    # not just present under the same period label.
+    assert second_rows == first_rows
     # a rerun on the same earnings day finds nothing NEW to add
     fetched2 = {f["id"]: f for f in result2["fetched"]}
     assert fetched2["amdDataCenterRevenue"]["newPoints"] == 0
@@ -173,3 +178,66 @@ def test_run_fetch_skips_non_due_series(tmp_path):
     assert result["fetched"] == []
     assert result["failed"] == []
     assert set(result["skipped"]) == set(series)
+
+
+# ── review finding #1: a corrupt line must never silently wipe history ────
+
+def test_run_fetch_with_a_corrupt_existing_line_fails_and_leaves_file_untouched(tmp_path):
+    series = _series_fixture()
+    path = tmp_path / "amdDataCenterRevenue.jsonl"
+    good_rows = (
+        '{"indicatorId":"amdDataCenterRevenue","period":"2025-Q3","value":1.0}\n'
+        '{"indicatorId":"amdDataCenterRevenue","period":"2025-Q4","value":1.1}\n'
+        '{"indicatorId":"amdDataCenterRevenue","period":"2026-Q1","value":5.775}\n'
+    )
+    corrupt_line = '{"indicatorId":"amdDataCenterRevenue","period":"2026-Q2 TRUNCATED\n'
+    original_content = good_rows + corrupt_line
+    path.write_text(original_content, encoding="utf-8")
+
+    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+                        fetch_html=lambda url: _amd_html())
+
+    # The three genuine historical quarters must NOT have vanished -- the
+    # file on disk must be byte-for-byte exactly what it was before the call.
+    assert path.read_text(encoding="utf-8") == original_content
+    failed_ids = [f["id"] for f in result["failed"]]
+    assert "amdDataCenterRevenue" in failed_ids
+    assert result["fetched"] == []
+
+
+# ── review finding #2: run_fetch must never raise, even on a bad argument ─
+
+def test_run_fetch_never_raises_when_series_argument_is_none():
+    result = run_fetch(None, "2026-08-04", ["2026-08-04"], "store/series",
+                        fetch_html=lambda url: "")
+    assert result["fetched"] == []
+    assert result["skipped"] == []
+    assert result["failed"] and result["failed"][0]["id"] == "*"
+
+
+def test_run_fetch_never_raises_when_earnings_dates_argument_is_none():
+    series = _series_fixture()
+    result = run_fetch(series, "2026-08-04", None, "store/series",
+                        fetch_html=lambda url: "")
+    assert result["fetched"] == []
+    assert result["skipped"] == []
+    assert result["failed"] and result["failed"][0]["id"] == "*"
+
+
+def test_run_fetch_never_raises_when_store_dir_argument_is_none():
+    series = _series_fixture()
+    result = run_fetch(series, "2026-08-04", ["2026-08-04"], None,
+                        fetch_html=lambda url: "")
+    assert result["fetched"] == []
+    assert result["skipped"] == []
+    assert result["failed"] and result["failed"][0]["id"] == "*"
+
+
+def test_run_fetch_never_raises_when_series_values_are_plain_dicts(tmp_path):
+    series = {"amdDataCenterRevenue": {"id": "amdDataCenterRevenue",
+                                        "cadence": "quarterly", "fetcher": "amd_dc_revenue"}}
+    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+                        fetch_html=lambda url: "")
+    assert result["fetched"] == []
+    assert result["skipped"] == []
+    assert result["failed"] and result["failed"][0]["id"] == "*"
