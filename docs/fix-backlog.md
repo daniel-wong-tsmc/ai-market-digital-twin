@@ -507,9 +507,13 @@
   schema migration is needed). Provenance caveat from the sentinel: D1-D4 and D5b's sourcing
   mechanism are user-approved; **D5a** (rounding tolerance) and **D5c** (do not widen what the
   narrator brain sees) remain agent-recommended / orchestrator-relayed, not individually
-  user-approved. **Live criterion not yet met (record, do not force):** the next live cycle should run
-  `(e4)` and write an audit artifact with `summary.flagged == 0`; the in-lane substitute was a
-  read-only smoke over a scratch copy (exit 0, 4 claims, 0 flagged, real `store/` never written).
+  user-approved. **Live criterion MET 2026-08-04:** the scheduled cycle (`ce593cc`) ran `(e4)` and
+  wrote `store/chips.merchant-gpu/audit/2026-08-04.json` with `summary.flagged == 0` (12 claims
+  audited, 0 flagged, 0 skipped). The 2026-08-05 audit then flagged one implication line (`impl:7`,
+  two China-revenue figures tracing to no cited finding — logged not re-dispatched per the
+  implication rule, narrator scenes all clean; the audit catching an unsourced number is the
+  feature working, and that line is awaiting a human look). The in-lane
+  substitute had been a read-only smoke over a scratch copy (exit 0, 4 claims, 0 flagged).
 - [x] **F67 — The output contract: renderer structure + analyst voice. DONE (merged to main
   `b0e8061`, 2026-07-04; suite 828→873/3).** Executed via subagent-driven development from plan
   `docs/superpowers/plans/2026-07-03-f67-output-contract.md` (9 tasks, all task-reviewed; final
@@ -540,7 +544,9 @@
   map for tier/status jargon; index acronyms words-first), an industry-standard acronym
   allowlist is lint-enforced, brain prompts embed the stop-slop pattern rules (tool-less
   brains can't invoke skills), and the session runs stop-slop on its final message.
-- [ ] **F68 — F67 follow-ups (born from the F67 final review, 2026-07-04) — partly ABSORBED by F78's brief rewrite.** Bundle of small
+- [x] **F68 — F67 follow-ups (born from the F67 final review, 2026-07-04) — partly ABSORBED by F78's brief rewrite.**
+  **✓ DONE — merged `a723dac` (`--no-ff`) 2026-08-05, user-authorized; merged-main suite 2173
+  passed / 5 skipped, all four pins green.** Bundle of small
   deferred items, none merge-blocking: **(a)** thesis-prose deterministic lint (spec §2b thesis
   slice ships as prompt rules only; add a lint symmetrical to the judgment one — statement ≤1
   sentence, mechanism ≤1, ids only in `falsifiableTrigger`); **(b)** citation map renders only
@@ -570,8 +576,7 @@
   to be rewritten by hand — they clean up as those theses are next re-judged, and are inert
   until then (only an `adjusted` verdict rewrites a statement). The recurring off-allowlist
   token problem itself stays with the durable fix below (line ~1050).
-  **All six sub-items are now closed — tick this box on merge of branch
-  `f68-output-followups` (per repo convention the tick carries the merge commit).**
+  All six sub-items are closed; the tick above carries the merge commit `a723dac`.
 - [x] **F69 — The web-reach layer: pluggable external fetchers for the gather swarm. DONE (merged `e167c6b`, suite 923/3).** Spec
   `docs/superpowers/specs/2026-07-04-web-reach-layer-design.md`, plan
   `docs/superpowers/plans/2026-07-04-web-reach-layer.md`. Data-driven registry
@@ -1138,7 +1143,19 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   go/no-go math; **(d)** the go/no-go template names its denominator and its instrument.
   Sequencing: the instrument must exist before Phase 4 opens; (a) is opportunistic any time.
 
-- [ ] **F90 — Operator-machine continuity: the machine-local layer has no rebuild story.** The
+- [x] **F90 — Operator-machine continuity: the machine-local layer has no rebuild story.**
+  **✓ DONE — `docs/operator-rebuild.md` merged `44d2507` 2026-08-05** (lane `f90-operator-rebuild`;
+  filename deviates from the lean's `docs/operator-machine.md` — the dispatch brief named it, noted
+  in the doc). Everything inventoried BY INSPECTION: scheduled task (settings exported; **6 missed
+  runs since 2026-07-29** — laptop off/on battery at 08:57, silent), job script content mirrored
+  into the doc (live copy stays machine-local per F83), all 6 coordination skills + edit-guard hook
+  confirmed (**exist ONLY on this laptop, no backup — repo-copy recommendation OPEN for the user**),
+  .venv (py 3.13.7, 13 pkgs), web-reach installs verified live (`agent-reach doctor` run read-only).
+  **One lean assumption CORRECTED:** no stored "bypass-permissions acceptance state" exists — the
+  bypass is a per-run flag in the job script. 9 open questions (mostly credentials + "which
+  web-reach channels are SUPPOSED to work") listed in the doc's final section — those are the open
+  half for the user; the runbook itself is shipped. Sentinel
+  `.superpowers/handoffs/f90-operator-rebuild-DONE.md`. The
   repo survives the laptop; the operational layer does not, and no doc inventories it: the Task
   Scheduler registration + `~/.claude/jobs/gpu-daily-cycle.ps1` (explicitly NOT in the repo),
   the `~/.claude/skills` launcher/coordination skills (run-gpu-market, resume-desk, eval-driver,
@@ -1165,6 +1182,16 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   `ai-market-digital-twin.pages.dev` site is public (TSMC mentions on 10 pages, kept
   advice-free only by convention). **(b) remains OPEN:** the written posture doc for what may
   appear publicly is now the more important half, since everything stays visible.
+  **(b) STATUS 2026-08-05: DRAFT SHIPPED, approvals pending — `docs/publishing-posture.md` merged
+  `30b64ba`** (lane `f91b-posture-doc`; sentinel `.superpowers/handoffs/f91b-posture-doc-DONE.md`).
+  Grounded in measurement: all 334 stored excerpts ≤ 40 words (median 14), always attributed +
+  linked; whole articles never stored; the site renders ≤ 60-char fragments. **Biggest gap found:
+  the live site has NO disclaimer of any kind.** Every undecided clause is tagged
+  `[DRAFT — user to approve]` — **8 approval points open** (framing; 50-word excerpt cap +
+  whether to code-enforce it, which would be a gated lane; quote-stacking rule; takedown procedure
+  vs the append-only store — needs a small design; do-not-fetch list; the employer-material
+  firewall = the memo's unanswered Option A; disclaimer wording + footer build; never-commit list +
+  secret-scan). **F91 stays open until the user approves the draft; nothing in it is in force.**
 
 - [ ] **F92 — Store retention & archival policy (append-only forever meets git forever).**
   Doctrine keeps the store append-only, sacred, and git-committed — correct for trust, unbounded
@@ -1175,6 +1202,20 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   partitions / git-lfs for blobs), add a store-size line to the cycle log (Part 29-style
   monitor), act only when the recorded threshold trips. Decision-sized today; migration-sized
   if ignored until Phase 6.
+  **STATUS 2026-08-05: DECISION MEMO SHIPPED, decision pending —
+  `docs/superpowers/specs/2026-08-04-f92-retention-decision-memo.md` merged `306a510`** (lane
+  `f92-retention-memo`; sentinel `.superpowers/handoffs/f92-retention-memo-DONE.md`). Measured:
+  store 8.5 MB (scorecards 69%), growing **~18× faster than the 2026-07-29 memo assumed**
+  (~2.6 GB/desk/yr; 570–790 GB @ 34 desks × 5 yr; the old 250 MB alarm trips ~10 weeks out).
+  **Root cause found: every scorecard embeds a full ~2,100-byte copy of each finding it scored**,
+  while git already packs the whole scorecard HISTORY to 353 KB — so the pre-listed cold-archive
+  and git-lfs hatches solve an already-solved problem. **Memo recommends: forward-only
+  reference-based scorecards** (measured 501 KB → ~22 KB; no existing file moves, all 37+
+  replay-pinned scorecards keep reproducing exactly) — a DESIGN-WEIGHT build requiring its own
+  interactive brainstorm before any lane; year-partitioning reserved behind written trip points
+  (500 MB store / 5 MB scorecard / 2-min clone / 5 live desks). **4 decision boxes open at the
+  memo's end — decide this month; nearest hard limit ~9 months out. F92 stays open until the
+  user decides.**
 
 - [ ] **F93 — Eval-gate economics: the gate itself needs a budget.** The golden set grows per
   archetype and per tier (Part 24), eval-v2 made every gate run 3 replicates, and a
@@ -1613,6 +1654,9 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   user decision: `store/` gains no data here; history starts honest at the next cycle. 14 new tests;
   suite 2160 passed / 6 skipped; all four pins green. **Unblocks the coverage half of F61** (still
   unrendered — F109 records, it does not display).
+  **✓ MERGED `dea3bff` (`--no-ff`) 2026-08-05, user-authorized; merged-main suite 2173 passed /
+  5 skipped. LIVE CRITERION MET the same day:** the 2026-08-05 scheduled cycle (`febaad4`) wrote
+  the first committed artifact `store/chips.merchant-gpu/coverage-2026-08.json` with no human step.
 - [x] **F106 BUILT 2026-07-29 — HuggingNews desk-wide source, first slice shipped.** Branch
   `f106-huggingnews`, commits `5fd18ae`..`fe19717` (7 commits). What shipped: (1) `gpu_agent/gathering/webreach.py`
   gained `resolve_secret` (env var first, else the gitignored `.superpowers/secrets/<NAME>` file, else
