@@ -1618,6 +1618,20 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   `docs/superpowers/plans/2026-07-28-f108-seam-scoped-rebaseline.md`. Awaiting user merge; the F105
   lane then runs `eval rebaseline --seams extract` to land its change.
 
+- [ ] **F110 — Dashboard revamp: executive React/Astryx rebuild of the main category page (user-directed, 2026-08-05).**
+  The live story page "tells a lot and nothing at the same time" for an executive reader.
+  DESIGNED interactively 2026-08-05 (all decisions user-approved, zero AFK-defaults): verdict-led
+  five-zone page, full React 19 + Astryx rebuild of the main category page ONLY (F95 no-script
+  rule user-overridden for this page), build-once/data-daily (daily cycle stays pure Python,
+  writes `dashboard.json`), per-bullet mini-charts from a new curated series library
+  (`registry/chart-series.json` + `gpu_agent/chartdata/` fetchers) with findings-history fallback
+  and an honest no-chart panel, and universal click-through source references (exporter must
+  resolve evidence IDs → original URLs). Approved visual contract:
+  `docs/superpowers/specs/assets/2026-08-05-dashboard-mock.html` (hallmark + dataviz, real data).
+  Spec: `docs/superpowers/specs/2026-08-05-dashboard-revamp-design.md`. No brain/prompt changes;
+  F6/narrator/scoring pins must not move; F83 re-records in-lane (new fetch + export steps).
+  Design-weight item: brainstorm was run interactively per the standing rule. Next: writing-plans.
+
 - [x] **F109 — Coverage gaps are computed but never recorded durably (found while building F61, 2026-07-28).**
   Nothing downstream can render or audit what the gather run failed to cover.
   `manifest.compute_coverage_gaps()` has **no production caller in the package** — it runs only

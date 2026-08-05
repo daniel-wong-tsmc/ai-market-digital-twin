@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Merchant GPUs — is supply catching up?</title>
+<style>
+/* Hallmark · macrostructure: five-zone verdict dashboard (client-specified; nearest catalog match: Stat-Led)
+ * genre: modern-minimal · theme: Astryx-neutral (light paper · system grotesk · cool-blue accent)
+ * nav: N9 edge-aligned masthead · footer: Ft1 single-rule link row · enrichment: none (data only)
+ * chart palette validated: light #B4530F/#1F6FD0 · dark #CE7638/#4F90E6 — all six checks PASS
+ * supporting mini-charts reuse the same two series colours (demand rust / supply blue);
+ * bullet 2 renders the honest no-data state rather than a chart
+ * pre-emit critique: P5 H5 E5 S5 R5 V4
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* --- surfaces & ink (Astryx neutral) --- */
+  --color-bg:            #FCFCFB;
+  --color-surface:       #FFFFFF;
+  --color-surface-sunk:  #F5F5F3;
+  --color-border:        #E3E3DF;
+  --color-border-strong: #CFCFC9;
+  --color-text:          #16161A;
+  --color-text-secondary:#55555C;
+  --color-text-muted:    #85858C;
+  --color-accent:        #1F5FD0;
+  --color-accent-quiet:  #EAF0FC;
+  --color-focus:         #1F5FD0;
+
+  /* --- status (reserved; always paired with a word) --- */
+  --color-good:    #1B7A4B;
+  --color-warning: #A16207;
+  --color-serious: #B3421C;
+
+  /* --- chart series --- */
+  --color-demand: #B4530F;
+  --color-supply: #1F6FD0;
+  --color-gapfill: rgba(180, 83, 15, 0.09);
+  --color-grid:   #EBEBE7;
+
+  /* --- type --- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --text-verdict: 2.25rem;    /* 36 */
+  --text-h2:      0.9375rem;  /* 15 */
+  --text-lead:    1.0625rem;  /* 17 */
+  --text-body:    0.9375rem;  /* 15 */
+  --text-small:   0.8125rem;  /* 13 */
+  --text-micro:   0.75rem;    /* 12 */
+
+  /* --- space (4pt) --- */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --space-12: 48px; --space-16: 64px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:            #131314;
+    --color-surface:       #1A1A1B;
+    --color-surface-sunk:  #202022;
+    --color-border:        #2E2E31;
+    --color-border-strong: #3D3D41;
+    --color-text:          #F2F2F0;
+    --color-text-secondary:#B4B4B0;
+    --color-text-muted:    #8A8A88;
+    --color-accent:        #6FA0F2;
+    --color-accent-quiet:  #1C2740;
+    --color-focus:         #6FA0F2;
+    --color-good:    #4BAE7C;
+    --color-warning: #D2A03C;
+    --color-serious: #E08A5E;
+    --color-demand: #CE7638;
+    --color-supply: #4F90E6;
+    --color-gapfill: rgba(206, 118, 56, 0.12);
+    --color-grid:   #262628;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+a { color: var(--color-accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+h1, h2, h3 { font-style: normal; margin: 0; letter-spacing: -0.011em; }
+
+.shell { max-width: 68rem; margin: 0 auto; padding: 0 var(--space-6) var(--space-16); }
+
+/* ---------- masthead ---------- */
+.mast {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--space-4); flex-wrap: wrap;
+  padding: var(--space-5) 0 var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+.mast .who { font-weight: 600; font-size: var(--text-body); }
+.mast .who span { color: var(--color-text-muted); font-weight: 400; }
+.mast .when { color: var(--color-text-muted); font-size: var(--text-small); }
+
+/* ---------- zone 1: the verdict ---------- */
+.verdict { padding: var(--space-8) 0 var(--space-4); }
+.verdict .q {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+.verdict h1 {
+  font-size: var(--text-verdict);
+  line-height: 1.16;
+  font-weight: 640;
+  letter-spacing: -0.024em;
+  max-width: 33ch;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.verdict h1 .no { color: var(--color-serious); }
+.vmeta {
+  display: flex; align-items: center; gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-4);
+}
+.chip {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 5px 12px 5px 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-small);
+  font-weight: 550;
+  background: var(--color-surface);
+}
+.chip svg { display: block; }
+.chip.improving { color: var(--color-good); border-color: color-mix(in oklab, var(--color-good) 35%, var(--color-border)); }
+.vmeta .sep { color: var(--color-border-strong); }
+.vmeta .m { color: var(--color-text-muted); font-size: var(--text-small); }
+.sowhat {
+  margin-top: var(--space-5);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-border-strong);
+  font-size: var(--text-lead);
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+  max-width: 82ch;
+}
+.sowhat b { color: var(--color-text); font-weight: 600; }
+
+/* ---------- section heads ---------- */
+.zone { padding-top: var(--space-6); }
+.zone-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--space-4); flex-wrap: wrap;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+.zone-head h2 { font-size: var(--text-h2); font-weight: 600; }
+.zone-head .note { font-size: var(--text-small); color: var(--color-text-muted); }
+
+/* ---------- zone 2: the gap chart ---------- */
+figure.chart { margin: var(--space-4) 0 0; }
+.chart-legend {
+  display: flex; gap: var(--space-5); flex-wrap: wrap;
+  font-size: var(--text-small); color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+.chart-legend span { display: inline-flex; align-items: center; gap: var(--space-2); }
+.key { width: 12px; height: 3px; border-radius: 2px; display: inline-block; }
+.key.dem { background: var(--color-demand); }
+.key.sup { background: var(--color-supply); }
+.key.gap { background: var(--color-gapfill); border: 1px solid var(--color-border-strong); height: 10px; }
+.plot-frame {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  padding: var(--space-3) var(--space-2) var(--space-1);
+  overflow-x: auto;
+}
+.plot-frame svg { display: block; width: 100%; min-width: 560px; height: auto; }
+figcaption {
+  margin-top: var(--space-4);
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  max-width: 74ch;
+}
+.numbers { margin-top: var(--space-4); }
+.numbers summary {
+  cursor: pointer; font-size: var(--text-small); color: var(--color-text-secondary);
+  width: fit-content;
+}
+.numbers table { border-collapse: collapse; margin-top: var(--space-3); font-size: var(--text-small); }
+.numbers th, .numbers td { text-align: right; padding: 5px 14px 5px 0; border-bottom: 1px solid var(--color-border); }
+.numbers th:first-child, .numbers td:first-child { text-align: left; }
+.numbers th { color: var(--color-text-muted); font-weight: 500; }
+
+/* svg internals */
+.grid { stroke: var(--color-grid); stroke-width: 1; }
+.zero { stroke: var(--color-border-strong); stroke-width: 1; }
+.ytick, .xtick { fill: var(--color-text-muted); font-size: 11px; font-family: var(--font-sans); }
+.ytick { text-anchor: end; }
+.xtick { text-anchor: middle; }
+.gapband { fill: var(--color-gapfill); }
+.line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.line.dem { stroke: var(--color-demand); }
+.line.sup { stroke: var(--color-supply); }
+.dot.dem { fill: var(--color-demand); stroke: var(--color-surface); stroke-width: 2; }
+.dot.sup { fill: var(--color-supply); stroke: var(--color-surface); stroke-width: 2; }
+.swatch.dem { fill: var(--color-demand); }
+.swatch.sup { fill: var(--color-supply); }
+.endlab { fill: var(--color-text-secondary); font-size: 11.5px; font-family: var(--font-sans); }
+.endval { fill: var(--color-text); font-size: 14px; font-weight: 600; font-family: var(--font-sans); }
+.ann-rule { stroke: var(--color-border-strong); stroke-width: 1; stroke-dasharray: 3 3; }
+.ann { fill: var(--color-text-muted); font-size: 11px; font-family: var(--font-sans); }
+.hov rect { fill: transparent; }
+.hov .read { opacity: 0; transition: opacity var(--dur-fast) var(--ease-out); pointer-events: none; }
+.tipbg { fill: var(--color-surface); stroke: var(--color-border); stroke-width: 1; }
+svg:has(.hov:hover) .ann, svg:has(.hov:hover) .ann-rule { opacity: 0; transition: opacity var(--dur-fast) var(--ease-out); }
+.hov:hover .read { opacity: 1; }
+.cross { stroke: var(--color-border-strong); stroke-width: 1; }
+.tip { fill: var(--color-text-secondary); font-size: 11px; font-family: var(--font-sans); }
+.tip.head { fill: var(--color-text); font-weight: 600; font-size: 12px; }
+.tip.strong { fill: var(--color-text); font-weight: 600; font-size: 12px; }
+
+/* ---------- zone 3: what changed ---------- */
+.changed { margin-top: var(--space-6); }
+.change {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr) 20rem;
+  gap: var(--space-5) var(--space-6);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-border);
+  align-items: start;
+}
+
+/* supporting mini charts */
+figure.mini { margin: 0; }
+.mini-plot svg { display: block; width: 100%; height: auto; }
+.mini-plot.empty {
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  min-height: 92px;
+  display: flex; flex-direction: column; justify-content: center; gap: var(--space-1);
+}
+.mini-plot.empty p { margin: 0; font-size: var(--text-small); color: var(--color-text-secondary); font-weight: 600; }
+.mini-plot.empty p.why-none { font-weight: 400; color: var(--color-text-muted); font-size: var(--text-micro); line-height: 1.45; }
+figure.mini figcaption {
+  margin-top: var(--space-2);
+  font-size: var(--text-micro);
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+.mini-base { stroke: var(--color-border-strong); stroke-width: 1; }
+.mini-bar.dem { fill: var(--color-demand); }
+.mini-bar.sup { fill: var(--color-supply); }
+.mini-bar.ghost { fill: var(--color-surface-sunk); stroke: var(--color-border-strong); stroke-width: 1; }
+.mini-tick { fill: var(--color-text-muted); font-size: 10.5px; font-family: var(--font-sans); }
+.mini-val { fill: var(--color-text-secondary); font-size: 11px; font-family: var(--font-sans); }
+.mini-val.strong { fill: var(--color-text); font-weight: 600; font-size: 12px; }
+.mini-hit { fill: transparent; }
+.mini-tip { fill: var(--color-text); font-size: 11px; font-weight: 600; font-family: var(--font-sans); opacity: 0; }
+.mbar:hover .mini-tip { opacity: 1; }
+.mbar:hover .mini-bar { fill: var(--color-text); }
+svg:has(.mbar:hover) .mini-val { opacity: 0; }
+.change:first-child { padding-top: var(--space-2); }
+.change .date { font-size: var(--text-small); color: var(--color-text-muted); }
+.change p { margin: 0; max-width: 72ch; }
+.change p b { font-weight: 600; }
+.readmore {
+  display: inline-block;
+  margin-top: var(--space-5);
+  font-size: var(--text-body);
+  font-weight: 550;
+}
+
+/* ---------- zone 4: the six dimensions ---------- */
+.dims { margin-top: var(--space-2); }
+.dim { border-bottom: 1px solid var(--color-border); }
+.dim-head {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr) auto 20px;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-2);
+  background: none; border: 0; margin: 0;
+  font: inherit; color: inherit; text-align: left; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.dim-head:hover { background: var(--color-surface-sunk); }
+.dim-head:active { background: var(--color-surface-sunk); }
+.light { width: 10px; height: 10px; border-radius: 50%; display: block; }
+.light.good { background: var(--color-good); }
+.light.warning { background: var(--color-warning); }
+.light.serious { background: var(--color-serious); }
+.dim-main { display: block; min-width: 0; }
+.dim-label { display: block; font-weight: 600; }
+.dim-summary { display: block; color: var(--color-text-secondary); font-size: var(--text-small); margin-top: 2px; }
+.dim-rating { text-align: right; font-size: var(--text-small); font-weight: 600; white-space: nowrap; }
+.dim-dirn { display: block; font-weight: 400; color: var(--color-text-muted); }
+.chev { color: var(--color-text-muted); display: flex; transition: transform var(--dur-base) var(--ease-out); }
+.dim-head[aria-expanded="true"] .chev { transform: rotate(180deg); }
+
+.why-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur-base) var(--ease-out); }
+.why-wrap[data-open="true"] { grid-template-rows: 1fr; }
+.why { overflow: hidden; }
+.why > * { min-height: 0; }
+.why {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: var(--space-8);
+}
+.why-body, .why-side { padding: 0 var(--space-2) var(--space-6) 0; }
+.why-body { padding-left: 30px; }
+.why-body h3 {
+  font-size: var(--text-micro);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-2);
+}
+.why-body p { margin: 0 0 var(--space-3); color: var(--color-text-secondary); max-width: 66ch; }
+.why-side {
+  display: flex; flex-direction: column; gap: var(--space-4);
+  border-left: 1px solid var(--color-border);
+  padding-left: var(--space-6);
+}
+.why-block .k { display: block; font-size: var(--text-micro); color: var(--color-text-muted); }
+.why-block .v { display: block; font-size: var(--text-small); margin-top: 2px; }
+a.src {
+  display: block; font-size: var(--text-small); margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+}
+a.src:hover { color: var(--color-accent); }
+a.more { display: block; margin-top: var(--space-3); font-size: var(--text-small); }
+
+/* ---------- zone 5: footer ---------- */
+footer {
+  margin-top: var(--space-16);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  display: flex; flex-wrap: wrap; gap: var(--space-6) var(--space-8);
+  align-items: baseline; justify-content: space-between;
+}
+footer nav { display: flex; flex-wrap: wrap; gap: var(--space-6); }
+footer a { font-size: var(--text-body); }
+footer .fine { font-size: var(--text-small); color: var(--color-text-muted); max-width: 46ch; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .change { grid-template-columns: 4.5rem minmax(0, 1fr); }
+  .change figure.mini { grid-column: 2; max-width: 22rem; }
+  .why { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+  .why-side { border-left: 0; padding-left: 30px; border-top: 1px solid var(--color-border); padding-top: var(--space-4); }
+  .why-body { padding-bottom: var(--space-2); }
+}
+@media (max-width: 720px) {
+  :root { --text-verdict: 1.75rem; }
+  .shell { padding: 0 var(--space-4) var(--space-12); }
+  .verdict { padding: var(--space-8) 0 var(--space-4); }
+  .verdict h1 { max-width: none; }
+  .change { grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
+  figure.mini { max-width: 24rem; }
+  .dim-head { grid-template-columns: 12px minmax(0, 1fr) 18px; row-gap: var(--space-2); }
+  .dim-rating { grid-column: 2; text-align: left; }
+  .dim-dirn { display: inline; margin-left: 6px; }
+  .why-body, .why-side { padding-left: var(--space-2); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <header class="mast">
+    <div class="who">Merchant GPUs <span>&#183; chips</span></div>
+    <div class="when">Reading for Wednesday 5 August 2026</div>
+  </header>
+
+  <!-- ================= 1. THE VERDICT ================= -->
+  <section class="verdict">
+    <p class="q">Is supply catching up to demand?</p>
+    <h1><span class="no">Not yet.</span> Buyers are committing money faster than the chain can ship.</h1>
+
+    <div class="vmeta">
+      <span class="chip improving">
+        <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4.5 6 8.5 10 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Gap narrowing
+      </span>
+      <span class="sep">&#183;</span>
+      <span class="m">Narrowest in two weeks, still more than three times wider than in early July</span>
+      <span class="sep">&#183;</span>
+      <span class="m">We are confident in this read</span>
+    </div>
+
+    <p class="sowhat">So what: the hold-up has moved. Packaging is catching up, but <b>stacked memory is now the limit and it is sold out into 2027</b> &#8212; so a second chip supplier arriving next year meets a queue that has already grown to meet it.</p>
+  </section>
+
+  <!-- ================= 2. THE GAP CHART ================= -->
+  <section class="zone" id="gap">
+    <div class="zone-head">
+      <h2>The gap</h2>
+      <span class="note">Every reading since 3 July 2026</span>
+    </div>
+
+    <figure class="chart">
+      <div class="chart-legend">
+        <span><i class="key dem"></i> Demand — what buyers are committing</span>
+        <span><i class="key sup"></i> Supply — what is actually arriving</span>
+        <span><i class="key gap"></i> The gap between them</span>
+      </div>
+
+      <div class="plot-frame">
+        <svg viewBox="0 0 1000 300" role="img" aria-label="Two lines since 3 July 2026. The demand score rises from 0.63 to 3.65 while the supply score drifts from minus 0.45 to minus 0.16, so the shaded gap between them widens through July and narrows slightly in the last three readings.">
+      <line class="grid" x1="44.0" y1="248.6" x2="876.0" y2="248.6"/>
+      <text class="ytick" x="34.0" y="252.6">−1</text>
+      <line class="zero" x1="44.0" y1="204.6" x2="876.0" y2="204.6"/>
+      <text class="ytick" x="34.0" y="208.6">0</text>
+      <line class="grid" x1="44.0" y1="160.6" x2="876.0" y2="160.6"/>
+      <text class="ytick" x="34.0" y="164.6">1</text>
+      <line class="grid" x1="44.0" y1="116.6" x2="876.0" y2="116.6"/>
+      <text class="ytick" x="34.0" y="120.6">2</text>
+      <line class="grid" x1="44.0" y1="72.6" x2="876.0" y2="72.6"/>
+      <text class="ytick" x="34.0" y="76.6">3</text>
+      <line class="grid" x1="44.0" y1="28.6" x2="876.0" y2="28.6"/>
+      <text class="ytick" x="34.0" y="32.6">4</text>
+      <text class="xtick" x="44.0" y="288.0">3 Jul</text>
+      <text class="xtick" x="220.5" y="288.0">10 Jul</text>
+      <text class="xtick" x="397.0" y="288.0">17 Jul</text>
+      <text class="xtick" x="573.5" y="288.0">24 Jul</text>
+      <text class="xtick" x="749.9" y="288.0">31 Jul</text>
+      <text class="xtick" x="876.0" y="288.0">5 Aug</text>
+      <path class="gapband" d="M 44.0 176.7 L 94.4 173.8 L 170.1 179.4 L 245.7 181.1 L 296.1 155.0 L 321.3 148.0 L 346.5 135.7 L 371.8 138.3 L 397.0 115.7 L 422.2 121.6 L 472.6 109.9 L 497.8 109.9 L 523.0 101.1 L 548.2 75.5 L 573.5 57.6 L 598.7 54.7 L 623.9 48.8 L 649.1 54.1 L 674.3 52.9 L 699.5 55.3 L 850.8 38.3 L 876.0 43.9 L 876.0 211.6 L 850.8 218.7 L 699.5 236.0 L 674.3 247.1 L 649.1 238.9 L 623.9 235.4 L 598.7 226.0 L 573.5 231.3 L 548.2 252.1 L 523.0 243.6 L 497.8 221.3 L 472.6 213.1 L 422.2 200.2 L 397.0 204.3 L 371.8 205.5 L 346.5 192.0 L 321.3 192.0 L 296.1 186.1 L 245.7 186.7 L 170.1 192.0 L 94.4 202.0 L 44.0 224.5 Z"/>
+      <line class="ann-rule" x1="674.3" y1="36.0" x2="674.3" y2="239.1"/>
+      <text class="ann" x="666.3" y="34.0" text-anchor="end">Widest gap so far, 28 Jul</text>
+      <path class="line sup" d="M 44.0 224.5 L 94.4 202.0 L 170.1 192.0 L 245.7 186.7 L 296.1 186.1 L 321.3 192.0 L 346.5 192.0 L 371.8 205.5 L 397.0 204.3 L 422.2 200.2 L 472.6 213.1 L 497.8 221.3 L 523.0 243.6 L 548.2 252.1 L 573.5 231.3 L 598.7 226.0 L 623.9 235.4 L 649.1 238.9 L 674.3 247.1 L 699.5 236.0 L 850.8 218.7 L 876.0 211.6"/>
+      <path class="line dem" d="M 44.0 176.7 L 94.4 173.8 L 170.1 179.4 L 245.7 181.1 L 296.1 155.0 L 321.3 148.0 L 346.5 135.7 L 371.8 138.3 L 397.0 115.7 L 422.2 121.6 L 472.6 109.9 L 497.8 109.9 L 523.0 101.1 L 548.2 75.5 L 573.5 57.6 L 598.7 54.7 L 623.9 48.8 L 649.1 54.1 L 674.3 52.9 L 699.5 55.3 L 850.8 38.3 L 876.0 43.9"/>
+      <circle class="dot dem" cx="876.0" cy="43.9" r="4.5"/>
+      <circle class="dot sup" cx="876.0" cy="211.6" r="4.5"/>
+      <circle class="swatch dem" cx="892.0" cy="43.9" r="4"/>
+      <text class="endlab" x="902.0" y="40.9">Demand</text>
+      <text class="endval" x="902.0" y="56.9">3.65</text>
+      <circle class="swatch sup" cx="892.0" cy="211.6" r="4"/>
+      <text class="endlab" x="902.0" y="208.6">Supply</text>
+      <text class="endval" x="902.0" y="224.6">−0.16</text>
+      <g class="hov"><rect x="44.0" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="44.0" y1="22.0" x2="44.0" y2="264.0"/><circle class="dot dem" cx="44.0" cy="176.7" r="4"/><circle class="dot sup" cx="44.0" cy="224.5" r="4"/><rect class="tipbg" x="40.0" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="54.0" y="222.0" text-anchor="start">3 Jul 2026</text><text class="tip" x="54.0" y="238.0" text-anchor="start">Demand 0.63 &#183; Supply −0.45</text><text class="tip strong" x="54.0" y="254.0" text-anchor="start">Gap 1.09</text></g></g>
+      <g class="hov"><rect x="69.2" y="22.0" width="63.0" height="242.0"/><g class="read"><line class="cross" x1="94.4" y1="22.0" x2="94.4" y2="264.0"/><circle class="dot dem" cx="94.4" cy="173.8" r="4"/><circle class="dot sup" cx="94.4" cy="202.0" r="4"/><rect class="tipbg" x="90.4" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="104.4" y="222.0" text-anchor="start">5 Jul 2026</text><text class="tip" x="104.4" y="238.0" text-anchor="start">Demand 0.70 &#183; Supply 0.06</text><text class="tip strong" x="104.4" y="254.0" text-anchor="start">Gap 0.64</text></g></g>
+      <g class="hov"><rect x="132.2" y="22.0" width="75.6" height="242.0"/><g class="read"><line class="cross" x1="170.1" y1="22.0" x2="170.1" y2="264.0"/><circle class="dot dem" cx="170.1" cy="179.4" r="4"/><circle class="dot sup" cx="170.1" cy="192.0" r="4"/><rect class="tipbg" x="166.1" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="180.1" y="222.0" text-anchor="start">8 Jul 2026</text><text class="tip" x="180.1" y="238.0" text-anchor="start">Demand 0.57 &#183; Supply 0.29</text><text class="tip strong" x="180.1" y="254.0" text-anchor="start">Gap 0.29</text></g></g>
+      <g class="hov"><rect x="207.9" y="22.0" width="63.0" height="242.0"/><g class="read"><line class="cross" x1="245.7" y1="22.0" x2="245.7" y2="264.0"/><circle class="dot dem" cx="245.7" cy="181.1" r="4"/><circle class="dot sup" cx="245.7" cy="186.7" r="4"/><rect class="tipbg" x="241.7" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="255.7" y="222.0" text-anchor="start">11 Jul 2026</text><text class="tip" x="255.7" y="238.0" text-anchor="start">Demand 0.53 &#183; Supply 0.41</text><text class="tip strong" x="255.7" y="254.0" text-anchor="start">Gap 0.13</text></g></g>
+      <g class="hov"><rect x="270.9" y="22.0" width="37.8" height="242.0"/><g class="read"><line class="cross" x1="296.1" y1="22.0" x2="296.1" y2="264.0"/><circle class="dot dem" cx="296.1" cy="155.0" r="4"/><circle class="dot sup" cx="296.1" cy="186.1" r="4"/><rect class="tipbg" x="292.1" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="306.1" y="222.0" text-anchor="start">13 Jul 2026</text><text class="tip" x="306.1" y="238.0" text-anchor="start">Demand 1.13 &#183; Supply 0.42</text><text class="tip strong" x="306.1" y="254.0" text-anchor="start">Gap 0.71</text></g></g>
+      <g class="hov"><rect x="308.7" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="321.3" y1="22.0" x2="321.3" y2="264.0"/><circle class="dot dem" cx="321.3" cy="148.0" r="4"/><circle class="dot sup" cx="321.3" cy="192.0" r="4"/><rect class="tipbg" x="317.3" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="331.3" y="222.0" text-anchor="start">14 Jul 2026</text><text class="tip" x="331.3" y="238.0" text-anchor="start">Demand 1.29 &#183; Supply 0.29</text><text class="tip strong" x="331.3" y="254.0" text-anchor="start">Gap 1.00</text></g></g>
+      <g class="hov"><rect x="333.9" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="346.5" y1="22.0" x2="346.5" y2="264.0"/><circle class="dot dem" cx="346.5" cy="135.7" r="4"/><circle class="dot sup" cx="346.5" cy="192.0" r="4"/><rect class="tipbg" x="342.5" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="356.5" y="222.0" text-anchor="start">15 Jul 2026</text><text class="tip" x="356.5" y="238.0" text-anchor="start">Demand 1.57 &#183; Supply 0.29</text><text class="tip strong" x="356.5" y="254.0" text-anchor="start">Gap 1.28</text></g></g>
+      <g class="hov"><rect x="359.2" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="371.8" y1="22.0" x2="371.8" y2="264.0"/><circle class="dot dem" cx="371.8" cy="138.3" r="4"/><circle class="dot sup" cx="371.8" cy="205.5" r="4"/><rect class="tipbg" x="367.8" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="381.8" y="222.0" text-anchor="start">16 Jul 2026</text><text class="tip" x="381.8" y="238.0" text-anchor="start">Demand 1.51 &#183; Supply −0.02</text><text class="tip strong" x="381.8" y="254.0" text-anchor="start">Gap 1.53</text></g></g>
+      <g class="hov"><rect x="384.4" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="397.0" y1="22.0" x2="397.0" y2="264.0"/><circle class="dot dem" cx="397.0" cy="115.7" r="4"/><circle class="dot sup" cx="397.0" cy="204.3" r="4"/><rect class="tipbg" x="393.0" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="407.0" y="222.0" text-anchor="start">17 Jul 2026</text><text class="tip" x="407.0" y="238.0" text-anchor="start">Demand 2.02 &#183; Supply 0.01</text><text class="tip strong" x="407.0" y="254.0" text-anchor="start">Gap 2.01</text></g></g>
+      <g class="hov"><rect x="409.6" y="22.0" width="37.8" height="242.0"/><g class="read"><line class="cross" x1="422.2" y1="22.0" x2="422.2" y2="264.0"/><circle class="dot dem" cx="422.2" cy="121.6" r="4"/><circle class="dot sup" cx="422.2" cy="200.2" r="4"/><rect class="tipbg" x="418.2" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="432.2" y="222.0" text-anchor="start">18 Jul 2026</text><text class="tip" x="432.2" y="238.0" text-anchor="start">Demand 1.89 &#183; Supply 0.10</text><text class="tip strong" x="432.2" y="254.0" text-anchor="start">Gap 1.79</text></g></g>
+      <g class="hov"><rect x="447.4" y="22.0" width="37.8" height="242.0"/><g class="read"><line class="cross" x1="472.6" y1="22.0" x2="472.6" y2="264.0"/><circle class="dot dem" cx="472.6" cy="109.9" r="4"/><circle class="dot sup" cx="472.6" cy="213.1" r="4"/><rect class="tipbg" x="468.6" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="482.6" y="222.0" text-anchor="start">20 Jul 2026</text><text class="tip" x="482.6" y="238.0" text-anchor="start">Demand 2.15 &#183; Supply −0.19</text><text class="tip strong" x="482.6" y="254.0" text-anchor="start">Gap 2.35</text></g></g>
+      <g class="hov"><rect x="485.2" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="497.8" y1="22.0" x2="497.8" y2="264.0"/><circle class="dot dem" cx="497.8" cy="109.9" r="4"/><circle class="dot sup" cx="497.8" cy="221.3" r="4"/><rect class="tipbg" x="493.8" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="507.8" y="222.0" text-anchor="start">21 Jul 2026</text><text class="tip" x="507.8" y="238.0" text-anchor="start">Demand 2.15 &#183; Supply −0.38</text><text class="tip strong" x="507.8" y="254.0" text-anchor="start">Gap 2.53</text></g></g>
+      <g class="hov"><rect x="510.4" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="523.0" y1="22.0" x2="523.0" y2="264.0"/><circle class="dot dem" cx="523.0" cy="101.1" r="4"/><circle class="dot sup" cx="523.0" cy="243.6" r="4"/><rect class="tipbg" x="519.0" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="533.0" y="222.0" text-anchor="start">22 Jul 2026</text><text class="tip" x="533.0" y="238.0" text-anchor="start">Demand 2.35 &#183; Supply −0.89</text><text class="tip strong" x="533.0" y="254.0" text-anchor="start">Gap 3.24</text></g></g>
+      <g class="hov"><rect x="535.6" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="548.2" y1="22.0" x2="548.2" y2="264.0"/><circle class="dot dem" cx="548.2" cy="75.5" r="4"/><circle class="dot sup" cx="548.2" cy="252.1" r="4"/><rect class="tipbg" x="544.2" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="558.2" y="222.0" text-anchor="start">23 Jul 2026</text><text class="tip" x="558.2" y="238.0" text-anchor="start">Demand 2.93 &#183; Supply −1.08</text><text class="tip strong" x="558.2" y="254.0" text-anchor="start">Gap 4.01</text></g></g>
+      <g class="hov"><rect x="560.8" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="573.5" y1="22.0" x2="573.5" y2="264.0"/><circle class="dot dem" cx="573.5" cy="57.6" r="4"/><circle class="dot sup" cx="573.5" cy="231.3" r="4"/><rect class="tipbg" x="369.5" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="563.5" y="222.0" text-anchor="end">24 Jul 2026</text><text class="tip" x="563.5" y="238.0" text-anchor="end">Demand 3.34 &#183; Supply −0.61</text><text class="tip strong" x="563.5" y="254.0" text-anchor="end">Gap 3.95</text></g></g>
+      <g class="hov"><rect x="586.1" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="598.7" y1="22.0" x2="598.7" y2="264.0"/><circle class="dot dem" cx="598.7" cy="54.7" r="4"/><circle class="dot sup" cx="598.7" cy="226.0" r="4"/><rect class="tipbg" x="394.7" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="588.7" y="222.0" text-anchor="end">25 Jul 2026</text><text class="tip" x="588.7" y="238.0" text-anchor="end">Demand 3.41 &#183; Supply −0.49</text><text class="tip strong" x="588.7" y="254.0" text-anchor="end">Gap 3.89</text></g></g>
+      <g class="hov"><rect x="611.3" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="623.9" y1="22.0" x2="623.9" y2="264.0"/><circle class="dot dem" cx="623.9" cy="48.8" r="4"/><circle class="dot sup" cx="623.9" cy="235.4" r="4"/><rect class="tipbg" x="419.9" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="613.9" y="222.0" text-anchor="end">26 Jul 2026</text><text class="tip" x="613.9" y="238.0" text-anchor="end">Demand 3.54 &#183; Supply −0.70</text><text class="tip strong" x="613.9" y="254.0" text-anchor="end">Gap 4.24</text></g></g>
+      <g class="hov"><rect x="636.5" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="649.1" y1="22.0" x2="649.1" y2="264.0"/><circle class="dot dem" cx="649.1" cy="54.1" r="4"/><circle class="dot sup" cx="649.1" cy="238.9" r="4"/><rect class="tipbg" x="445.1" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="639.1" y="222.0" text-anchor="end">27 Jul 2026</text><text class="tip" x="639.1" y="238.0" text-anchor="end">Demand 3.42 &#183; Supply −0.78</text><text class="tip strong" x="639.1" y="254.0" text-anchor="end">Gap 4.20</text></g></g>
+      <g class="hov"><rect x="661.7" y="22.0" width="25.2" height="242.0"/><g class="read"><line class="cross" x1="674.3" y1="22.0" x2="674.3" y2="264.0"/><circle class="dot dem" cx="674.3" cy="52.9" r="4"/><circle class="dot sup" cx="674.3" cy="247.1" r="4"/><rect class="tipbg" x="470.3" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="664.3" y="222.0" text-anchor="end">28 Jul 2026</text><text class="tip" x="664.3" y="238.0" text-anchor="end">Demand 3.45 &#183; Supply −0.97</text><text class="tip strong" x="664.3" y="254.0" text-anchor="end">Gap 4.41</text></g></g>
+      <g class="hov"><rect x="686.9" y="22.0" width="88.2" height="242.0"/><g class="read"><line class="cross" x1="699.5" y1="22.0" x2="699.5" y2="264.0"/><circle class="dot dem" cx="699.5" cy="55.3" r="4"/><circle class="dot sup" cx="699.5" cy="236.0" r="4"/><rect class="tipbg" x="495.5" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="689.5" y="222.0" text-anchor="end">29 Jul 2026</text><text class="tip" x="689.5" y="238.0" text-anchor="end">Demand 3.39 &#183; Supply −0.71</text><text class="tip strong" x="689.5" y="254.0" text-anchor="end">Gap 4.11</text></g></g>
+      <g class="hov"><rect x="775.2" y="22.0" width="88.2" height="242.0"/><g class="read"><line class="cross" x1="850.8" y1="22.0" x2="850.8" y2="264.0"/><circle class="dot dem" cx="850.8" cy="38.3" r="4"/><circle class="dot sup" cx="850.8" cy="218.7" r="4"/><rect class="tipbg" x="646.8" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="840.8" y="222.0" text-anchor="end">4 Aug 2026</text><text class="tip" x="840.8" y="238.0" text-anchor="end">Demand 3.78 &#183; Supply −0.32</text><text class="tip strong" x="840.8" y="254.0" text-anchor="end">Gap 4.10</text></g></g>
+      <g class="hov"><rect x="863.4" y="22.0" width="12.6" height="242.0"/><g class="read"><line class="cross" x1="876.0" y1="22.0" x2="876.0" y2="264.0"/><circle class="dot dem" cx="876.0" cy="43.9" r="4"/><circle class="dot sup" cx="876.0" cy="211.6" r="4"/><rect class="tipbg" x="672.0" y="204.0" width="208" height="62" rx="6"/><text class="tip head" x="866.0" y="222.0" text-anchor="end">5 Aug 2026</text><text class="tip" x="866.0" y="238.0" text-anchor="end">Demand 3.65 &#183; Supply −0.16</text><text class="tip strong" x="866.0" y="254.0" text-anchor="end">Gap 3.81</text></g></g>
+        </svg>
+      </div>
+
+      <figcaption>Two running scores on the same scale, rebuilt from the evidence we collect each day. The demand score counts fresh buying commitments; the supply score counts capacity actually arriving. The wider the shaded band, the further ahead of supply the buyers are. Today the band measures 3.81, down from 4.41 on 28 July. Hover any point for that day's figures.</figcaption>
+
+      <details class="numbers">
+        <summary>Show the numbers</summary>
+        <table>
+          <thead><tr><th>Reading</th><th>Demand</th><th>Supply</th><th>Gap</th></tr></thead>
+          <tbody>
+<tr><td>3 Jul 2026</td><td>0.63</td><td>−0.45</td><td>1.09</td></tr>
+<tr><td>5 Jul 2026</td><td>0.70</td><td>0.06</td><td>0.64</td></tr>
+<tr><td>8 Jul 2026</td><td>0.57</td><td>0.29</td><td>0.29</td></tr>
+<tr><td>11 Jul 2026</td><td>0.53</td><td>0.41</td><td>0.13</td></tr>
+<tr><td>13 Jul 2026</td><td>1.13</td><td>0.42</td><td>0.71</td></tr>
+<tr><td>14 Jul 2026</td><td>1.29</td><td>0.29</td><td>1.00</td></tr>
+<tr><td>15 Jul 2026</td><td>1.57</td><td>0.29</td><td>1.28</td></tr>
+<tr><td>16 Jul 2026</td><td>1.51</td><td>−0.02</td><td>1.53</td></tr>
+<tr><td>17 Jul 2026</td><td>2.02</td><td>0.01</td><td>2.01</td></tr>
+<tr><td>18 Jul 2026</td><td>1.89</td><td>0.10</td><td>1.79</td></tr>
+<tr><td>20 Jul 2026</td><td>2.15</td><td>−0.19</td><td>2.35</td></tr>
+<tr><td>21 Jul 2026</td><td>2.15</td><td>−0.38</td><td>2.53</td></tr>
+<tr><td>22 Jul 2026</td><td>2.35</td><td>−0.89</td><td>3.24</td></tr>
+<tr><td>23 Jul 2026</td><td>2.93</td><td>−1.08</td><td>4.01</td></tr>
+<tr><td>24 Jul 2026</td><td>3.34</td><td>−0.61</td><td>3.95</td></tr>
+<tr><td>25 Jul 2026</td><td>3.41</td><td>−0.49</td><td>3.89</td></tr>
+<tr><td>26 Jul 2026</td><td>3.54</td><td>−0.70</td><td>4.24</td></tr>
+<tr><td>27 Jul 2026</td><td>3.42</td><td>−0.78</td><td>4.20</td></tr>
+<tr><td>28 Jul 2026</td><td>3.45</td><td>−0.97</td><td>4.41</td></tr>
+<tr><td>29 Jul 2026</td><td>3.39</td><td>−0.71</td><td>4.11</td></tr>
+<tr><td>4 Aug 2026</td><td>3.78</td><td>−0.32</td><td>4.10</td></tr>
+<tr><td>5 Aug 2026</td><td>3.65</td><td>−0.16</td><td>3.81</td></tr>
+          </tbody>
+        </table>
+      </details>
+    </figure>
+  </section>
+
+  <!-- ================= 3. WHAT CHANGED ================= -->
+  <section class="zone" id="changed">
+    <div class="zone-head">
+      <h2>What changed</h2>
+      <span class="note">Three things worth two minutes</span>
+    </div>
+
+    <div class="changed">
+      <div class="change">
+        <span class="date">4 Aug</span>
+        <p><b>AMD had the quarter the market wanted, and it adds nothing this year.</b> Revenue of $11.5 billion beat expectations and its rack-sized Helios system is in production. But the biggest named deployment starts in the first half of 2027, and the shares still fell more than 8 percent.</p>
+        <figure class="mini">
+          <div class="mini-plot"><svg viewBox="0 0 320 152" role="img" aria-label="AMD data-centre revenue by quarter, rising from 2.3 billion dollars in the first quarter of 2024 to 6.7 billion in the second quarter of 2026."><line class="mini-base" x1="4.0" y1="124.0" x2="316.0" y2="124.0"/><g class="mbar"><rect class="mini-bar dem" x="9.9" y="91.8" width="19.3" height="32.2" rx="3"/><rect class="mini-hit" x="4.0" y="8.0" width="31.2" height="116.0"/><text class="mini-tip" x="2.0" y="12" text-anchor="start">Q1 2024 &#183; $2.3bn</text></g><g class="mbar"><rect class="mini-bar dem" x="41.1" y="84.8" width="19.3" height="39.2" rx="3"/><rect class="mini-hit" x="35.2" y="8.0" width="31.2" height="116.0"/><text class="mini-tip" x="2.0" y="12" text-anchor="start">Q2 2024 &#183; $2.8bn</text></g><g class="mbar"><rect class="mini-bar dem" x="72.3" y="75.0" width="19.3" height="49.0" rx="3"/><rect class="mini-hit" x="66.4" y="8.0" width="31.2" height="116.0"/><text class="mini-tip" x="2.0" y="12" text-anchor="start">Q3 2024 &#183; $3.5bn</text></g><g class="mbar"><rect class="mini-bar dem" x="103.5" y="69.4" width="19.3" height="54.6" rx="3"/><rect class="mini-hit" x="97.6" y="8.0" width="31.2" height="116.0"/><text class="mini-tip" x="2.0" y="12" text-anchor="start">Q4 2024 &#183; $3.9bn</text></g><g class="mbar"><rect class="mini-bar dem" x="134.7" y="72.2" width="19.3" height="51.8" rx="3"/><rect class="mini-hit" x="128.8" y="8.0" width="31.2" height="116.0"/><text class="mini-tip" x="2.0" y="12" text-anchor="start">Q1 2025 &#183; $3.7bn</text></g><g class="mbar"><rect class="mini-bar dem" x="165.9" y="79.2" width="19.3" height="44.8" rx="3"/><rect class="mini-hit" x="160.0" y="8.0" width="31.2" height="116.0"/><text class="mini-tip" x="318.0" y="12" text-anchor="end">Q2 2025 &#183; $3.2bn</text></g><g class="mbar"><rect class="mini-bar dem" x="197.1" y="63.8" width="19.3" height="60.2" rx="3"/><rect class="mini-hit" x="191.2" y="8.0" width="31.2" height="116.0"/><text class="mini-tip" x="318.0" y="12" text-anchor="end">Q3 2025 &#183; $4.3bn</text></g><g class="mbar"><rect class="mini-bar dem" x="228.3" y="48.4" width="19.3" height="75.6" rx="3"/><rect class="mini-hit" x="222.4" y="8.0" width="31.2" height="116.0"/><text class="mini-tip" x="318.0" y="12" text-anchor="end">Q4 2025 &#183; $5.4bn</text></g><g class="mbar"><rect class="mini-bar dem" x="259.5" y="42.8" width="19.3" height="81.2" rx="3"/><rect class="mini-hit" x="253.6" y="8.0" width="31.2" height="116.0"/><text class="mini-tip" x="318.0" y="12" text-anchor="end">Q1 2026 &#183; $5.8bn</text></g><g class="mbar"><rect class="mini-bar dem" x="290.7" y="30.2" width="19.3" height="93.8" rx="3"/><rect class="mini-hit" x="284.8" y="8.0" width="31.2" height="116.0"/><text class="mini-tip" x="318.0" y="12" text-anchor="end">Q2 2026 &#183; $6.7bn</text></g><text class="mini-val" x="19.6" y="85.8" text-anchor="middle">$2.3bn</text><text class="mini-val strong" x="300.4" y="24.2" text-anchor="middle">$6.7bn</text><text class="mini-tick" x="4.0" y="138.0" text-anchor="start">Q1 2024</text><text class="mini-tick" x="316.0" y="138.0" text-anchor="end">Q2 2026</text></svg></div>
+          <figcaption>AMD’s data-centre sales have nearly tripled in two years. Source: AMD investor relations, quarterly results.</figcaption>
+        </figure>
+      </div>
+      <div class="change">
+        <span class="date">4 Aug</span>
+        <p><b>A new buyer has already claimed a slice of 2027.</b> SpaceX reached 1.4 gigawatts of computing capacity, up from 0.4 a year ago, and says it will receive a very significant share of NVIDIA’s 2027 chips. Chips that do not exist yet are already promised.</p>
+        <figure class="mini">
+          <div class="mini-plot empty">
+            <p>No chart.</p>
+            <p class="why-none">The claim on 2027 chips is a spoken understanding. Nobody has published a number, so there is nothing honest to draw.</p>
+          </div>
+        </figure>
+      </div>
+      <div class="change">
+        <span class="date">4 Aug</span>
+        <p><b>NVIDIA is designing around the memory shortage.</b> The mainstream Rubin Ultra now carries 192GB of stacked memory instead of 288GB. Less memory in each chip means more finished chips out of the same scarce pool &#8212; which tells you where the real limit sits.</p>
+        <figure class="mini">
+          <div class="mini-plot"><svg viewBox="0 0 320 152" role="img" aria-label="Stacked memory planned per chip: 1,024 gigabytes in the 2025 preview, 288 gigabytes on today’s Rubin, 192 gigabytes on the new Rubin Ultra plan."><text class="mini-tick" x="0" y="14.0">Rubin Ultra, as previewed in 2025</text><rect class="mini-bar sup ghost" x="0" y="22.0" width="196.0" height="14" rx="3"/><text class="mini-val" x="204.0" y="33.0">1,024GB</text><text class="mini-tick" x="0" y="60.0">Rubin, today’s top part</text><rect class="mini-bar sup" x="0" y="68.0" width="55.1" height="14" rx="3"/><text class="mini-val" x="63.1" y="79.0">288GB</text><text class="mini-tick" x="0" y="106.0">Rubin Ultra, the new plan</text><rect class="mini-bar sup" x="0" y="114.0" width="36.8" height="14" rx="3"/><text class="mini-val strong" x="44.8" y="125.0">192GB</text></svg></div>
+          <figcaption>Stacked memory planned per chip. The pale bar is the design shown in 2025 and never built. Source: 404K Semi-Ai Research, 4 August 2026.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <a class="readmore" href="story/">Read the full story &#8594;</a>
+  </section>
+
+  <!-- ================= 4. THE SIX DIMENSIONS ================= -->
+  <section class="zone" id="dimensions">
+    <div class="zone-head">
+      <h2>The six things we track</h2>
+      <span class="note">Green healthy &#183; amber mixed &#183; red strained. Open a row to see why.</span>
+    </div>
+
+    <div class="dims">
+        <div class="dim">
+          <button class="dim-head" type="button" aria-expanded="true" aria-controls="why-limit" id="btn-limit">
+            <span class="light serious" aria-hidden="true"></span>
+            <span class="dim-main">
+              <span class="dim-label">What is holding shipments back</span>
+              <span class="dim-summary">Stacked memory is now the choke point, and it is sold out into 2027.</span>
+            </span>
+            <span class="dim-rating">Weak<span class="dim-dirn">No better, no worse</span></span>
+            <span class="chev" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="16" height="16"><path d="M4 6.5 8 10.5 12 6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <div class="why-wrap" id="why-limit" role="region" aria-labelledby="btn-limit" data-open="true">
+            <div class="why">
+              <div class="why-body">
+                <h3>Why we say that</h3>
+                <p>NVIDIA cut the memory on its mainstream Rubin Ultra chip to 192GB. The stated reason is that memory is scarce: less memory in each chip means more finished chips out of the same pool.</p><p>Packaging — the step that binds a chip to its memory — is easing at the same time. The shortfall there narrowed from about 20 percent to about 10 percent as TSMC output climbs toward 125,000–130,000 wafers a month. So the ceiling has moved rather than lifted.</p>
+              </div>
+              <div class="why-side">
+                <div class="why-block">
+                  <span class="k">Direction</span>
+                  <span class="v">No better, no worse</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">How sure we are</span>
+                  <span class="v">Medium — the underlying reports are single-source in places.</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">Top evidence</span>
+                  <a class="src" href="findings/">404kresearch.substack.com</a><a class="src" href="findings/">forbes.com</a><a class="src" href="findings/">supplyics.com</a>
+                  <a class="more" href="findings/">All 7 pieces of evidence &#8594;</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dim">
+          <button class="dim-head" type="button" aria-expanded="false" aria-controls="why-buying" id="btn-buying">
+            <span class="light good" aria-hidden="true"></span>
+            <span class="dim-main">
+              <span class="dim-label">How hard buyers are buying</span>
+              <span class="dim-summary">The four biggest cloud buyers plan about $725 billion of spending this year, up 77 percent.</span>
+            </span>
+            <span class="dim-rating">Very strong<span class="dim-dirn">Getting stronger</span></span>
+            <span class="chev" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="16" height="16"><path d="M4 6.5 8 10.5 12 6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <div class="why-wrap" id="why-buying" role="region" aria-labelledby="btn-buying">
+            <div class="why">
+              <div class="why-body">
+                <h3>Why we say that</h3>
+                <p>Google Cloud's booked-but-not-yet-delivered orders jumped more than $50 billion in a single quarter, to $514 billion.</p><p>New buyers keep arriving. SpaceX spent roughly $15.8 billion on AI computing in one quarter, and a Korean industrial group signed a build-out with NVIDIA worth more than $500 billion.</p>
+              </div>
+              <div class="why-side">
+                <div class="why-block">
+                  <span class="k">Direction</span>
+                  <span class="v">Getting stronger</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">How sure we are</span>
+                  <span class="v">High — drawn from company filings and calls.</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">Top evidence</span>
+                  <a class="src" href="findings/">investor.nvidia.com</a><a class="src" href="findings/">finance.yahoo.com</a><a class="src" href="findings/">ca.investing.com</a>
+                  <a class="more" href="findings/">All 6 pieces of evidence &#8594;</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dim">
+          <button class="dim-head" type="button" aria-expanded="false" aria-controls="why-competition" id="btn-competition">
+            <span class="light warning" aria-hidden="true"></span>
+            <span class="dim-main">
+              <span class="dim-label">Whether buyers have a second choice</span>
+              <span class="dim-summary">AMD's rack-sized system is in production, but the volume does not arrive until 2027.</span>
+            </span>
+            <span class="dim-rating">Mixed<span class="dim-dirn">Moving the wrong way</span></span>
+            <span class="chev" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="16" height="16"><path d="M4 6.5 8 10.5 12 6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <div class="why-wrap" id="why-competition" role="region" aria-labelledby="btn-competition">
+            <div class="why">
+              <div class="why-body">
+                <h3>Why we say that</h3>
+                <p>AMD put its Helios rack into production with named customers, and rival chips from Amazon and Google reach mass production in the same window. On paper, buyers now have real alternatives.</p><p>In practice the volume lags. AMD's rack-scale part only reaches full production by the middle of 2027, and SpaceX has chosen to build on NVIDIA alone.</p>
+              </div>
+              <div class="why-side">
+                <div class="why-block">
+                  <span class="k">Direction</span>
+                  <span class="v">Moving the wrong way</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">How sure we are</span>
+                  <span class="v">High.</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">Top evidence</span>
+                  <a class="src" href="findings/">ir.amd.com</a><a class="src" href="findings/">servethehome.com</a><a class="src" href="findings/">digitimes.com</a>
+                  <a class="more" href="findings/">All 6 pieces of evidence &#8594;</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dim">
+          <button class="dim-head" type="button" aria-expanded="false" aria-controls="why-lead" id="btn-lead">
+            <span class="light serious" aria-hidden="true"></span>
+            <span class="dim-main">
+              <span class="dim-label">How safe NVIDIA's lead looks</span>
+              <span class="dim-summary">Its share of AI chips is projected to fall from 87 percent in 2024 to 75 percent this year.</span>
+            </span>
+            <span class="dim-rating">Weak<span class="dim-dirn">Moving the wrong way</span></span>
+            <span class="chev" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="16" height="16"><path d="M4 6.5 8 10.5 12 6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <div class="why-wrap" id="why-lead" role="region" aria-labelledby="btn-lead">
+            <div class="why">
+              <div class="why-body">
+                <h3>Why we say that</h3>
+                <p>Chips designed in-house by the big buyers are growing 44.6 percent a year against 16.1 percent for chips bought off the shelf, and already absorb about two-thirds of AI computing.</p><p>One defence gained ground: NVIDIA took the revenue lead in data-centre Ethernet switches, the networking gear sold alongside the chips.</p>
+              </div>
+              <div class="why-side">
+                <div class="why-block">
+                  <span class="k">Direction</span>
+                  <span class="v">Moving the wrong way</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">How sure we are</span>
+                  <span class="v">Medium — the share figures are projections, not reported results.</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">Top evidence</span>
+                  <a class="src" href="findings/">siliconanalysts.com</a><a class="src" href="findings/">tomshardware.com</a><a class="src" href="findings/">digitimes.com</a>
+                  <a class="more" href="findings/">All 5 pieces of evidence &#8594;</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dim">
+          <button class="dim-head" type="button" aria-expanded="false" aria-controls="why-profit" id="btn-profit">
+            <span class="light good" aria-hidden="true"></span>
+            <span class="dim-main">
+              <span class="dim-label">How profitable the sellers are</span>
+              <span class="dim-summary">NVIDIA held a 75 percent gross margin and guided the next quarter to the same level.</span>
+            </span>
+            <span class="dim-rating">Strong<span class="dim-dirn">No better, no worse</span></span>
+            <span class="chev" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="16" height="16"><path d="M4 6.5 8 10.5 12 6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <div class="why-wrap" id="why-profit" role="region" aria-labelledby="btn-profit">
+            <div class="why">
+              <div class="why-body">
+                <h3>Why we say that</h3>
+                <p>TSMC posted 67.7 percent and raised its full-year growth guidance.</p><p>AMD sits far lower at 56 percent, and says its AI chips earn slightly less than its average product. The profit strength is concentrated at the leaders.</p>
+              </div>
+              <div class="why-side">
+                <div class="why-block">
+                  <span class="k">Direction</span>
+                  <span class="v">No better, no worse</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">How sure we are</span>
+                  <span class="v">High.</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">Top evidence</span>
+                  <a class="src" href="findings/">investor.nvidia.com</a><a class="src" href="findings/">ir.amd.com</a><a class="src" href="findings/">intc.com</a>
+                  <a class="more" href="findings/">All 6 pieces of evidence &#8594;</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dim">
+          <button class="dim-head" type="button" aria-expanded="false" aria-controls="why-risk" id="btn-risk">
+            <span class="light warning" aria-hidden="true"></span>
+            <span class="dim-main">
+              <span class="dim-label">What could go wrong</span>
+              <span class="dim-summary">Three customers make up 21, 17 and 16 percent of NVIDIA's revenue, and it now helps finance its own buyers.</span>
+            </span>
+            <span class="dim-rating">Mixed<span class="dim-dirn">Moving the wrong way</span></span>
+            <span class="chev" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="16" height="16"><path d="M4 6.5 8 10.5 12 6.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </button>
+          <div class="why-wrap" id="why-risk" role="region" aria-labelledby="btn-risk">
+            <div class="why">
+              <div class="why-body">
+                <h3>Why we say that</h3>
+                <p>China data-centre sales have collapsed to $4.55 billion from $9.66 billion, and one buyer expects a very significant share of 2027 output.</p><p>A discussed $350 billion facility to fund OpenAI's purchases would tie revenue to customers the seller also bankrolls.</p>
+              </div>
+              <div class="why-side">
+                <div class="why-block">
+                  <span class="k">Direction</span>
+                  <span class="v">Moving the wrong way</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">How sure we are</span>
+                  <span class="v">High.</span>
+                </div>
+                <div class="why-block">
+                  <span class="k">Top evidence</span>
+                  <a class="src" href="findings/">sec.gov</a><a class="src" href="findings/">datacenterdynamics.com</a><a class="src" href="findings/">siliconanalysts.com</a>
+                  <a class="more" href="findings/">All 6 pieces of evidence &#8594;</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- ================= 5. FOOTER ================= -->
+  <footer>
+    <nav aria-label="Deeper pages">
+      <a href="findings/">Evidence</a>
+      <a href="series/">Numbers we track</a>
+      <a href="history.html">Past readings</a>
+      <a href="story/">Story archive</a>
+      <a href="entities/">Companies</a>
+    </nav>
+    <p class="fine">Design mock. Figures are the real 5 August 2026 reading; links are placeholders.</p>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  document.querySelectorAll('.dim-head').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      if (open) { panel.removeAttribute('data-open'); }
+      else { panel.setAttribute('data-open', 'true'); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
