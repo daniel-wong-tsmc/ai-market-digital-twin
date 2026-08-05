@@ -278,6 +278,187 @@
       "capturedAt": "2026-07-20T12:03:52Z",
       "extractionModel": "claude-opus-4-8",
       "schemaVersion": "1.2"
+    },
+    {
+      "id": "ir-amd-com-7f18efdc-2026-07-1",
+      "statement": "AMD put its Helios rack-scale system into production and named anchor deployments including Anthropic taking up to 2 gigawatts of MI455X GPUs in Helios racks and OpenAI bringing Helios online from Q4 2026.",
+      "kind": "observed",
+      "value": null,
+      "trend": "rising",
+      "why": "Named gigawatt-scale commitments from frontier labs are the clearest sign yet that a credible second merchant source of AI accelerators is reaching production, which changes buyers' options.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "models.frontier-closed",
+          "infrastructure.hyperscale-cloud",
+          "infrastructure.neocloud",
+          "chips.hbm-memory",
+          "energy.power-generation"
+        ],
+        "direction": "mixed",
+        "mechanism": "Production Helios racks with named frontier-lab commitments add non-Nvidia accelerator supply and design wins, easing buyer dependence on one vendor while adding to the same upstream memory, packaging and power draw."
+      },
+      "evidence": [
+        {
+          "source": "AMD Investor Relations",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era",
+          "date": "2026-07-23",
+          "excerpt": "deploying up to 2 gigawatts of MI455X GPUs in Helios racks",
+          "tier": "primary"
+        },
+        {
+          "source": "AMD Investor Relations",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era",
+          "date": "2026-07-23",
+          "excerpt": "bringing Helios online beginning Q4 2026",
+          "tier": "primary"
+        },
+        {
+          "source": "AMD Investor Relations",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era",
+          "date": "2026-07-23",
+          "excerpt": "up to 30% more tokens per dollar than the competition",
+          "tier": "primary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "high",
+        "basis": "Primary vendor press release naming specific partners and deployment timing; the performance and gigawatt claims are vendor-stated and capped by 'up to' language."
+      },
+      "dispersion": "Anthropic's commitment is phrased as 'up to' 2 gigawatts and Meta is only validating and testing, so committed volume is not firm.",
+      "asOf": "2026-07",
+      "indicatorId": "designWins",
+      "side": "structural",
+      "polarityDemand": 1,
+      "polaritySupply": 1,
+      "magnitude": 3,
+      "entity": "amd",
+      "observedAt": "2026-07-23",
+      "capturedAt": "2026-07-27T10:49:29Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "www-techtimes-com-669598b1-2026-07-1",
+      "statement": "Inventec, a key supplier to US hyperscalers, warns DRAM/memory-component lead times have stretched to 32 to 40-plus weeks with prices up about 90% since late 2025 - an allocation-only memory-supply crunch reaching AI servers.",
+      "kind": "measured",
+      "value": {
+        "number": 40.0,
+        "unit": "weeks"
+      },
+      "trend": "rising",
+      "why": "Memory lead times beyond 40 weeks and sharply higher prices tighten the supply of memory that AI servers and GPU platforms depend on.",
+      "impact": {
+        "targets": [
+          "chips.hbm-memory",
+          "chips.merchant-gpu",
+          "infrastructure.ai-storage",
+          "infrastructure.datacenter-colo"
+        ],
+        "direction": "mixed",
+        "mechanism": "40-plus-week memory lead times and 90% price rises constrain AI-server build-out (bearish downstream availability) while giving memory makers pricing power (bullish for HBM/DRAM suppliers)."
+      },
+      "evidence": [
+        {
+          "source": "TechTimes (reporting Inventec warning)",
+          "url": "https://www.techtimes.com/articles/320681/20260716/inventec-warns-ai-memory-crunch-has-reached-servers-lead-times-hit-40-plus-weeks.htm",
+          "date": "2026-07-16",
+          "excerpt": "DRAM lead times have stretched beyond 40 weeks, with prices climbing 90% since late 2025.",
+          "tier": "secondary"
+        },
+        {
+          "source": "TechTimes (reporting Inventec warning)",
+          "url": "https://www.techtimes.com/articles/320681/20260716/inventec-warns-ai-memory-crunch-has-reached-servers-lead-times-hit-40-plus-weeks.htm",
+          "date": "2026-07-16",
+          "excerpt": "Typical lead times for memory components are now 32 to 40+ weeks.",
+          "tier": "secondary"
+        },
+        {
+          "source": "ComparetheCloud (corroboration, reproduced in document)",
+          "url": "https://www.techtimes.com/articles/320681/20260716/inventec-warns-ai-memory-crunch-has-reached-servers-lead-times-hit-40-plus-weeks.htm",
+          "date": "2026-07-16",
+          "excerpt": "Large DRAM orders now regularly exceed forty weeks",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Secondary: TechTimes (Inventec warning; direct fetch 403) via web-search index, headline figures corroborated verbatim by an independently fetched source (ComparetheCloud); two publishers, capped at medium."
+      },
+      "dispersion": "Range reported as 32 to 40+ weeks.",
+      "asOf": "2026-07",
+      "indicatorId": "leadTimes",
+      "side": "supply",
+      "polarityDemand": 0,
+      "polaritySupply": -1,
+      "magnitude": 3,
+      "entity": "memory / AI-server supply chain",
+      "observedAt": "2026-07-16",
+      "capturedAt": "2026-07-17T01:01:02Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "www-scmp-com-1f0c67f4-2026-07-1",
+      "statement": "Chinese Nvidia alternatives are scaling fast under export controls: Moore Threads guided first-half revenue up 135.1% to 149.4% year on year to 1.65-1.75 billion yuan, and Hygon guided first-half growth of 55.6% to 70.2% to 8.5-9.3 billion yuan.",
+      "kind": "measured",
+      "value": {
+        "number": 0.2435,
+        "unit": "USD_B"
+      },
+      "trend": "rising",
+      "why": "Domestic Chinese accelerator vendors tripling revenue shows the demand Nvidia is barred from serving is being captured by local rivals, which permanently shrinks Nvidia's addressable China market.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "chips.ai-silicon-startups",
+          "infrastructure.hyperscale-cloud"
+        ],
+        "direction": "negative",
+        "mechanism": "Export curbs plus Beijing's push to buy domestic redirect Chinese AI compute spending to local GPU makers, eroding Nvidia's share of that demand while adding non-Nvidia accelerator supply inside China."
+      },
+      "evidence": [
+        {
+          "source": "South China Morning Post",
+          "url": "https://www.scmp.com/tech/tech-trends/article/3360908/chinese-nvidia-alternatives-project-massive-sales-ai-chip-demand-surges",
+          "date": "2026-07-17",
+          "excerpt": "expected revenue for the first half to jump 135.1 to 149.4 percent year on year, reaching between 1.65 billion yuan and 1.75 billion yuan (about US$243.5 million)",
+          "tier": "secondary"
+        },
+        {
+          "source": "South China Morning Post",
+          "url": "https://www.scmp.com/tech/tech-trends/article/3360908/chinese-nvidia-alternatives-project-massive-sales-ai-chip-demand-surges",
+          "date": "2026-07-17",
+          "excerpt": "projected first-half revenue growth of 55.6 to 70.2 percent, reaching between 8.5 billion yuan and 9.3 billion yuan",
+          "tier": "secondary"
+        },
+        {
+          "source": "South China Morning Post",
+          "url": "https://www.scmp.com/tech/tech-trends/article/3360908/chinese-nvidia-alternatives-project-massive-sales-ai-chip-demand-surges",
+          "date": "2026-07-17",
+          "excerpt": "U.S. export curbs on Nvidia's chips to China have prompted Beijing to encourage local firms to buy domestic alternatives, with companies like Huawei stepping in to fill the void.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Single secondary outlet reporting company-guided preliminary half-year ranges; performance-parity claims are vendor assertions and revenue base is small in absolute terms."
+      },
+      "dispersion": "Both figures are guidance ranges, not reported results, and the two companies' growth rates differ widely (135-149% vs 56-70%).",
+      "asOf": "2026-07",
+      "indicatorId": "exportControlExposure",
+      "side": "structural",
+      "polarityDemand": -1,
+      "polaritySupply": 1,
+      "magnitude": 2,
+      "entity": "nvidia",
+      "observedAt": "2026-07-17",
+      "capturedAt": "2026-07-27T10:49:29Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
     }
   ],
   "dimensionRatings": {

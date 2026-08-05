@@ -46,9 +46,12 @@ def refs_for_finding_ids(finding_ids: list[str], findings_by_id: dict[str, dict]
             continue
         for evidence in finding.get("evidence", []):
             url = evidence.get("url")
-            if url in seen_urls:
+            # A missing url never dedupes against another missing url —
+            # only real, matching urls collapse into one ref.
+            if url is not None and url in seen_urls:
                 continue
-            seen_urls.add(url)
+            if url is not None:
+                seen_urls.add(url)
             refs.append(_ref_from_evidence(evidence))
 
     refs.sort(key=lambda r: 0 if r["tier"] == "primary" else 1)
