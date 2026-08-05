@@ -61,7 +61,13 @@ def _load_plain_units(path: str = _PLAIN_UNITS_PATH) -> dict[str, str]:
     try:
         raw = json.loads(Path(path).read_text(encoding="utf-8"))
         units = raw.get("units")
-        if isinstance(units, dict) and all(isinstance(v, str) for v in units.values()):
+        # Round-3 review (silent-failure class): `units` must be a
+        # non-empty dict of strings. Without the `units` truthiness check,
+        # {"units": {}} is a dict (isinstance passes) and `all(...)` over
+        # an empty mapping is vacuously True, so a well-formed-but-empty
+        # file would silently disable every chart with no signal at all --
+        # the one malformed shape that used to slip past this fallback.
+        if isinstance(units, dict) and units and all(isinstance(v, str) for v in units.values()):
             return units
     except (OSError, json.JSONDecodeError, AttributeError):
         pass

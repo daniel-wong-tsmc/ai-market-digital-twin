@@ -509,6 +509,20 @@ def test_plain_units_falls_back_safely_when_file_missing(tmp_path):
     assert units and units.get("USD") == "US$"
 
 
+def test_plain_units_falls_back_when_units_mapping_is_empty(tmp_path):
+    # Round-3 review (silent-failure class): {"units": {}} passes the old
+    # `isinstance(units, dict) and all(...)` check -- an empty dict IS a
+    # dict, and `all()` over an empty iterable is vacuously True -- so a
+    # well-formed-but-empty file silently disabled every chart with no
+    # signal at all. An empty mapping must be treated as invalid, exactly
+    # like the other malformed shapes, and fall back to the built-in
+    # default instead.
+    bad_path = tmp_path / "empty-units.json"
+    bad_path.write_text(json.dumps({"units": {}}), encoding="utf-8")
+    units = _load_plain_units(str(bad_path))
+    assert units and units.get("USD") == "US$"
+
+
 # ---------------------------------------------------------------------------
 # CRITICAL 3: exactly 3 bullets, always -- fails loudly and early on a
 # short story day instead of silently shipping 1 or 2 bullets.
