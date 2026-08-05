@@ -1,0 +1,424 @@
+{
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-08",
+  "findings": [
+    {
+      "id": "abc-xyz-33e70a64-2026-07-1",
+      "statement": "Alphabet raised its full-year 2026 capital expenditure forecast to $195-205 billion, up from $180-190 billion, citing accelerated capacity delivery to meet demand.",
+      "kind": "measured",
+      "value": {
+        "number": 200.0,
+        "unit": "revision_direction"
+      },
+      "trend": "rising",
+      "why": "A raised hyperscaler capex range is the most direct forward signal of AI accelerator and data-center order volume, and Alphabet is one of the largest single buyers.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "chips.hyperscaler-asic",
+          "infrastructure.hyperscale-cloud",
+          "infrastructure.datacenter-colo",
+          "infrastructure.networking-fabric",
+          "chips.hbm-memory",
+          "energy.power-generation"
+        ],
+        "direction": "positive",
+        "mechanism": "A higher capex budget converts into incremental server, accelerator, data-center and networking orders across the AI build chain, lifting demand for merchant GPUs, custom silicon, memory, fabric and power capacity."
+      },
+      "evidence": [
+        {
+          "source": "Alphabet Investor Relations (press release dated 2026-07-22) via CNBC / MLQ News reporting",
+          "url": "https://abc.xyz/investor/news/news-details/2026/Alphabet-Announces-Second-Quarter-2026-Results-2026-Y3uQ6H4ZJa/default.aspx",
+          "date": "2026-07-22",
+          "excerpt": "Alphabet raised its full-year 2026 capital expenditure forecast to $195 billion-$205 billion, up from $180 billion-$190 billion. Management said the increase reflects an acceleration in capacity delivery to meet demand.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Figures are corroborated open-web reporting (CNBC, MLQ News) on an official release whose exhibit could not be text-extracted; single fetched secondary document, so capped at medium."
+      },
+      "dispersion": "conflicting same-key reports: value 60.0 -> 200.0 (tol 1%); sources: Alphabet Investor Relations (press release dated 2026-07-22) via CNBC / MLQ News reporting",
+      "asOf": "2026-07",
+      "indicatorId": "hyperscalerCapexRevision",
+      "side": "demand",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 3,
+      "entity": "hyperscalers",
+      "observedAt": "2026-07-22",
+      "capturedAt": "2026-07-26T12:00:00Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "abc-xyz-33e70a64-2026-07-3",
+      "statement": "Google Cloud revenue accelerated 82% year over year to $24.8 billion in Q2 2026, with consolidated Alphabet revenue up 24% to $119.8 billion.",
+      "kind": "measured",
+      "value": {
+        "number": 24.8,
+        "unit": "USD_B"
+      },
+      "trend": "rising",
+      "why": "Cloud revenue acceleration at a top-three hyperscaler is the revenue-side confirmation that the capex being committed is being absorbed by paying AI workloads rather than speculative build.",
+      "impact": {
+        "targets": [
+          "infrastructure.hyperscale-cloud",
+          "chips.merchant-gpu",
+          "chips.hyperscaler-asic",
+          "applications.enterprise-copilots"
+        ],
+        "direction": "positive",
+        "mechanism": "Accelerating cloud revenue funds and justifies continued accelerator purchases, tightening the link between AI service demand and data-center compute orders."
+      },
+      "evidence": [
+        {
+          "source": "Alphabet Investor Relations (press release dated 2026-07-22) via CNBC / MLQ News reporting",
+          "url": "https://abc.xyz/investor/news/news-details/2026/Alphabet-Announces-Second-Quarter-2026-Results-2026-Y3uQ6H4ZJa/default.aspx",
+          "date": "2026-07-22",
+          "excerpt": "Google Cloud saw a meaningful acceleration in growth as revenues increased 82% to $24.8 billion.",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Quarterly figures reported through secondary outlets covering the official release; only one fetched document, so capped at medium."
+      },
+      "dispersion": null,
+      "asOf": "2026-07",
+      "indicatorId": "D2",
+      "side": "demand",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 2,
+      "entity": "hyperscalers",
+      "observedAt": "2026-07-22",
+      "capturedAt": "2026-07-26T12:00:00Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "abc-xyz-33e70a64-2026-07-4",
+      "statement": "Alphabet shares fell roughly 6% on the earnings day and other AI-infrastructure-adjacent names (Amazon, Oracle, Meta, Microsoft) also declined, suggesting investors treated the larger capex budget as a cost rather than a growth signal.",
+      "kind": "observed",
+      "value": null,
+      "trend": "unknown",
+      "why": "If equity markets start penalising rather than rewarding AI capex, the financing conditions facing the marginal buyer of compute tighten, which eventually feeds back into order books.",
+      "impact": {
+        "targets": [
+          "infrastructure.hyperscale-cloud",
+          "infrastructure.neocloud",
+          "chips.merchant-gpu"
+        ],
+        "direction": "negative",
+        "mechanism": "A negative share-price reaction to raised capex raises the cost of capital and board-level scrutiny for further AI build, which can slow the pace of incremental compute commitments even while current budgets rise."
+      },
+      "evidence": [
+        {
+          "source": "Alphabet Investor Relations (press release dated 2026-07-22) via CNBC / MLQ News reporting",
+          "url": "https://abc.xyz/investor/news/news-details/2026/Alphabet-Announces-Second-Quarter-2026-Results-2026-Y3uQ6H4ZJa/default.aspx",
+          "date": "2026-07-22",
+          "excerpt": "Alphabet shares dropped roughly 6% after the earnings announcement",
+          "tier": "secondary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "low",
+        "basis": "Single-day market reaction reported by one secondary outlet; a one-session move is weak evidence of a durable financing-condition change."
+      },
+      "dispersion": null,
+      "asOf": "2026-07",
+      "indicatorId": "marginalBuyerFinancing",
+      "side": "demand",
+      "polarityDemand": -1,
+      "polaritySupply": 0,
+      "magnitude": 1,
+      "entity": "hyperscalers",
+      "observedAt": "2026-07-22",
+      "capturedAt": "2026-07-26T12:00:00Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "blogs-nvidia-com-6f3401ce-2026-07-2",
+      "statement": "CoreWeave, Microsoft, Nebius, SpaceXAI and Tesla are named among the first customers deploying NVIDIA Spectrum-6 in their AI factories.",
+      "kind": "observed",
+      "value": null,
+      "trend": "rising",
+      "why": "A named roster of hyperscale and neocloud early adopters for a new NVIDIA platform component is direct evidence of committed demand for the Vera Rubin generation.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "infrastructure.neocloud",
+          "infrastructure.hyperscale-cloud",
+          "infrastructure.networking-fabric"
+        ],
+        "direction": "positive",
+        "mechanism": "Early-adopter commitments from large buyers signal ordering intent for the full NVIDIA rack platform, of which the switch is one bundled element."
+      },
+      "evidence": [
+        {
+          "source": "NVIDIA Blog",
+          "url": "https://blogs.nvidia.com/blog/nvidia-spectrum-six-arrives-in-gigascale-ai-factories/",
+          "date": "2026-07-21",
+          "excerpt": "Early adopter partners named as among the first to bring in Spectrum-6: CoreWeave, Microsoft, Nebius, SpaceXAI, and Tesla.",
+          "tier": "primary"
+        },
+        {
+          "source": "NVIDIA Blog",
+          "url": "https://blogs.nvidia.com/blog/nvidia-spectrum-six-arrives-in-gigascale-ai-factories/",
+          "date": "2026-07-21",
+          "excerpt": "Bringing NVIDIA Spectrum-6 and liquid-cooled Spectrum-X Ethernet infrastructure into our AI factories will help us deliver the bandwidth, resilience and efficiency customers need to train frontier models and deploy inference faster.",
+          "tier": "primary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "high",
+        "basis": "Primary NVIDIA announcement naming specific customers, with a direct attributed customer quote."
+      },
+      "dispersion": null,
+      "asOf": "2026-07",
+      "indicatorId": "designWins",
+      "side": "structural",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 2,
+      "entity": "nvidia",
+      "observedAt": "2026-07-21",
+      "capturedAt": "2026-07-24T00:59:02Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "blogs-nvidia-com-6f3401ce-2026-07-3",
+      "statement": "NVIDIA claims Spectrum-X Ethernet Photonics delivers 5x higher power efficiency and up to 95% network efficiency across deployments exceeding 100,000 GPUs.",
+      "kind": "observed",
+      "value": null,
+      "trend": "rising",
+      "why": "Power efficiency at the fabric layer determines how many GPUs fit inside a fixed power envelope, so gains here effectively expand deployable compute per megawatt.",
+      "impact": {
+        "targets": [
+          "infrastructure.networking-fabric",
+          "energy.efficiency",
+          "chips.merchant-gpu"
+        ],
+        "direction": "positive",
+        "mechanism": "Lower networking power draw per unit of bandwidth frees power budget for accelerators, raising usable GPU density in power-constrained sites."
+      },
+      "evidence": [
+        {
+          "source": "NVIDIA Blog",
+          "url": "https://blogs.nvidia.com/blog/nvidia-spectrum-six-arrives-in-gigascale-ai-factories/",
+          "date": "2026-07-21",
+          "excerpt": "up to 95% network efficiency across deployments exceeding 100,000 GPUs; a 1.7x reduction in switches needed for data centers; 5x higher power efficiency for Spectrum-X Ethernet Photonics",
+          "tier": "primary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "medium",
+        "basis": "Primary source but vendor-marketing performance claims without an independent benchmark or stated baseline configuration."
+      },
+      "dispersion": null,
+      "asOf": "2026-07",
+      "indicatorId": "perfPerWatt",
+      "side": "structural",
+      "polarityDemand": 0,
+      "polaritySupply": 1,
+      "magnitude": 1,
+      "entity": "nvidia",
+      "observedAt": "2026-07-21",
+      "capturedAt": "2026-07-24T00:59:02Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    },
+    {
+      "id": "blogs-nvidia-com-b4ddc904-2026-07-1",
+      "statement": "Bristol Myers Squibb is deploying eight DGX Vera Rubin NVL72 systems as a second SuperPOD, a Rubin-generation enterprise design win in life sciences.",
+      "kind": "observed",
+      "value": null,
+      "trend": "rising",
+      "why": "A named enterprise commits to Rubin-generation DGX infrastructure, signaling forward demand for next-gen NVIDIA GPUs.",
+      "impact": {
+        "targets": [
+          "chips.merchant-gpu",
+          "infrastructure.datacenter-colo",
+          "applications.vertical-saas"
+        ],
+        "direction": "positive",
+        "mechanism": "Enterprise adoption of DGX Vera Rubin drives demand for Rubin GPUs and AI-factory buildout."
+      },
+      "evidence": [
+        {
+          "source": "NVIDIA Blog",
+          "url": "https://blogs.nvidia.com/blog/bristol-myers-squibb-building-life-science-industrys-most-advanced-ai-factory-on-nvidia-vera-rubin/",
+          "date": "2026-07-20",
+          "excerpt": "eight DGX Vera Rubin NVL72 systems",
+          "tier": "primary"
+        }
+      ],
+      "reasoning": null,
+      "confidence": {
+        "level": "high",
+        "basis": "Primary NVIDIA announcement of a named customer deployment."
+      },
+      "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: NVIDIA Blog, NVIDIA Newsroom",
+      "asOf": "2026-07",
+      "indicatorId": "designWins",
+      "side": "structural",
+      "polarityDemand": 1,
+      "polaritySupply": 0,
+      "magnitude": 2,
+      "entity": "nvidia",
+      "observedAt": "2026-07-20",
+      "capturedAt": "2026-07-20T12:03:52Z",
+      "extractionModel": "claude-opus-4-8",
+      "schemaVersion": "1.2"
+    }
+  ],
+  "dimensionRatings": {
+    "bottleneck": {
+      "rating": "Weak",
+      "direction": "steady",
+      "confidence": {
+        "level": "medium",
+        "basis": "majority of 3/3 samples; capped by finding confidence (medium)"
+      },
+      "findingIds": [
+        "404kresearch-substack-com-3985c52f-2026-08-2",
+        "www-kucoin-com-8fc72edf-2026-08-1",
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "www-techtimes-com-669598b1-2026-07-1",
+        "supplyics-com-c83015c2-2026-08-2",
+        "www-forbes-com-335e62f0-2026-07-1",
+        "www-tradingkey-com-855cb780-2026-07-1"
+      ],
+      "rationale": "NVIDIA cut the stacked memory on its mainstream Rubin Ultra part to 192GB, and the reported reason is scarce memory: shrinking memory per chip raises how many chips a fixed memory pool can fill. Packaging is loosening at the same time, with the supply gap narrowing from about 20 percent to about 10 percent as TSMC output climbs toward 125,000-130,000 wafers a month, so the ceiling has moved rather than lifted.",
+      "voteSpread": "3/3 Weak"
+    },
+    "competitiveStructure": {
+      "rating": "Mixed",
+      "direction": "worsening",
+      "confidence": {
+        "level": "high",
+        "basis": "majority of 3/3 samples"
+      },
+      "findingIds": [
+        "ir-amd-com-7f18efdc-2026-07-1",
+        "www-servethehome-com-b11b71a3-2026-07-2",
+        "newsletter-semianalysis-com-5136a06c-2026-07-1",
+        "ca-investing-com-e6319e42-2026-08-1",
+        "www-faf-ae-6bcac1ba-2026-07-2",
+        "www-digitimes-com-f88ca4e6-2"
+      ],
+      "rationale": "AMD put its Helios rack into production with named gigawatt customers, and rival accelerators from Amazon and Google reach mass production in the same window, so buyers now have real second sources. Volume still lags: AMD's rack-scale part only reaches production tokens by mid-2027, and SpaceX chose to build exclusively on NVIDIA.",
+      "voteSpread": "3/3 Mixed"
+    },
+    "moat": {
+      "rating": "Weak",
+      "direction": "worsening",
+      "confidence": {
+        "level": "medium",
+        "basis": "majority of 3/3 samples; capped by finding confidence (medium)"
+      },
+      "findingIds": [
+        "siliconanalysts-com-47ffeeeb-2026-07-1",
+        "www-tomshardware-com-f77e9757-2026-07-1",
+        "www-techtimes-com-b90d06bb-2026-07-2",
+        "www-digitimes-com-8764779e-1",
+        "finance-yahoo-com-171fe64e-2026-08-4"
+      ],
+      "rationale": "NVIDIA's accelerator share is projected to slide from 87 percent in 2024 to 75 percent in 2026 as custom chips grow 44.6 percent against 16.1 percent for merchant parts, and in-house silicon already absorbs about two-thirds of AI compute. The networking bundle is the one defence that gained ground, with NVIDIA taking the revenue lead in data-center Ethernet switches.",
+      "voteSpread": "3/3 Weak"
+    },
+    "momentum": {
+      "rating": "Very strong",
+      "direction": "improving",
+      "confidence": {
+        "level": "high",
+        "basis": "majority of 3/3 samples"
+      },
+      "findingIds": [
+        "finance-yahoo-com-2f05647b-2026-07-1",
+        "finance-yahoo-com-baa362f5-2026-07-2",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-2",
+        "investor-nvidia-com-6947ac46-2026-08-1",
+        "ca-investing-com-e6319e42-2026-08-4",
+        "ir-amd-com-2369b33d-2026-08-2"
+      ],
+      "rationale": "The four largest US cloud buyers plan about $725 billion of 2026 capital spending, up 77 percent, and Google Cloud's booked backlog jumped more than $50 billion in one quarter to $514 billion. New buyers reinforce it: SpaceX spent roughly $15.8 billion on AI compute in a single quarter and a Korean industrial group signed a $500-billion-plus build-out with NVIDIA.",
+      "voteSpread": "3/3 Very strong"
+    },
+    "strategicRisk": {
+      "rating": "Mixed",
+      "direction": "worsening",
+      "confidence": {
+        "level": "high",
+        "basis": "majority of 3/3 samples"
+      },
+      "findingIds": [
+        "www-sec-gov-125b52f2-2026-07-1",
+        "www-sec-gov-125b52f2-2026-07-2",
+        "finance-yahoo-com-2185ba22-2026-07-2",
+        "www-datacenterdynamics-com-45864e2a-2026-07-06-2",
+        "ca-investing-com-e6319e42-2026-08-2",
+        "siliconanalysts-com-216b07a8-2026-07-1"
+      ],
+      "rationale": "Three NVIDIA customers alone make up 21, 17 and 16 percent of revenue, China data-center sales have collapsed to $4.55 billion from $9.66 billion, and one buyer expects a very significant share of 2027 output. The vendor now finances a growing slice of its own demand, including a discussed $350 billion facility for OpenAI purchases, which ties revenue to buyers it also funds.",
+      "voteSpread": "3/3 Mixed"
+    },
+    "unitEconomics": {
+      "rating": "Strong",
+      "direction": "steady",
+      "confidence": {
+        "level": "high",
+        "basis": "majority of 3/3 samples"
+      },
+      "findingIds": [
+        "investor-nvidia-com-c649ac13-2026-07-3",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-3",
+        "ca-investing-com-2fecbf46-2026-08-5",
+        "ir-amd-com-2369b33d-2026-08-3",
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "www-intc-com-819f4336-2026-07-3"
+      ],
+      "rationale": "NVIDIA held a 75.0 percent gross margin and guided the next quarter to the same level, and TSMC posted 67.7 percent while raising full-year growth guidance. AMD sits far lower at 56 percent with accelerator sales below its own average, so the margin strength concentrates at the leaders.",
+      "voteSpread": "3/3 Strong"
+    }
+  },
+  "narrative": "Buyers are committing money faster than the chain can ship, and the squeeze has moved from packaging to stacked memory, with NVIDIA trimming the memory on its top Rubin Ultra part so a fixed memory pool fills more chips. The question that decides the next rating change is whether memory makers add capacity through 2027 quickly enough to keep pace, and this read departs from the common view that packaging still sets the ceiling, because packaging supply is closing its gap while memory is being rationed. Watch memory contract prices and the memory specification of the next accelerator generation, since a second round of shrinking memory per chip would show the ceiling falling further.",
+  "categoryStatus": {
+    "rating": "Strong",
+    "direction": "improving",
+    "bottleneck": "bottleneck",
+    "reason": "Orders and vendor margins stay very strong, so what limits shipments is physical: stacked-memory supply is sold out into 2027 and vendors are already trimming memory per chip to stretch it, even as packaging capacity catches up.",
+    "constraintLabel": "HBM stacked-memory supply"
+  },
+  "indices": {
+    "momentum": {
+      "dmiContribution": 1.1733333333333333,
+      "smiContribution": 0.05333333333333336,
+      "anchors": {},
+      "sdgi": 1.1199999999999999,
+      "sdgiDirection": "demand-led"
+    },
+    "outlook": {
+      "dmiContribution": 2.48,
+      "smiContribution": -0.21333333333333354,
+      "anchors": {},
+      "sdgi": 2.6933333333333334,
+      "sdgiDirection": "demand-led"
+    },
+    "divergence": {
+      "state": "aligned",
+      "sdgiGap": 1.5733333333333335,
+      "outlookFindingCount": 76,
+      "momentumFindingCount": 105,
+      "note": ""
+    }
+  }
+}
