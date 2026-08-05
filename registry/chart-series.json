@@ -1,0 +1,40 @@
+{
+  "series": [
+    {
+      "id": "amdDataCenterRevenue",
+      "name": "AMD data center revenue",
+      "sourceName": "AMD investor relations",
+      "sourceUrl": "https://ir.amd.com/financial-information/quarterly-results",
+      "cadence": "quarterly",
+      "quality": "hard-fact",
+      "topicTags": ["amdDataCenter", "amd"],
+      "form": "columns",
+      "unit": "USD bn",
+      "fetcher": "amd_dc_revenue"
+    },
+    {
+      "id": "nvdaDataCenterRevenue",
+      "name": "Nvidia data center revenue",
+      "sourceName": "Nvidia investor relations",
+      "sourceUrl": "https://investor.nvidia.com/financial-info/quarterly-results/",
+      "cadence": "quarterly",
+      "quality": "hard-fact",
+      "topicTags": ["nvidia", "nvidiaDataCenter"],
+      "form": "columns",
+      "unit": "USD bn",
+      "fetcher": null
+    },
+    {
+      "id": "gpuSpotPrice",
+      "name": "GPU rental spot price",
+      "sourceName": "GPU Category Agent price tracker (blended marketplace estimate)",
+      "sourceUrl": "internal:gpu_agent/price_local.py",
+      "cadence": "monthly",
+      "quality": "estimate",
+      "topicTags": ["gpuSpotPrice"],
+      "form": "line",
+      "unit": "USD",
+      "fetcher": null
+    }
+  ]
+}
