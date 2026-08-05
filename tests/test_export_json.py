@@ -530,10 +530,39 @@ def test_unrecognized_rating_word_raises_instead_of_defaulting(tmp_path):
         build_dashboard_payload("chips.merchant-gpu", str(store_dir))
 
 
-def test_dimension_summary_is_length_capped_and_clause_bounded(tmp_path):
+# Words a grammatically complete English sentence must never end on --
+# review round 3's exact complaint: a mid-clause cut plus a fabricated
+# period manufactures a false "finished" statement, and a dangling comma or
+# colon is never a complete sentence either.
+_DANGLING_CONNECTORS = {
+    "and", "or", "but", "nor", "so", "yet", "for",
+    "the", "a", "an", "of", "in", "on", "at", "by", "to", "as", "with",
+    "from", "into", "onto", "over", "under", "about", "against", "between",
+}
+
+
+def _assert_grammatically_complete(summary: str) -> None:
+    assert summary, "empty summary"
+    assert summary[-1] in ".!?", f"summary does not end in terminal punctuation: {summary!r}"
+    assert summary[-1] not in ",;:", f"summary ends on a dangling connector: {summary!r}"
+    last_word = summary.rstrip(".!?").split()[-1].lower()
+    assert last_word not in _DANGLING_CONNECTORS, (
+        f"summary ends on a dangling connector/preposition {last_word!r}: {summary!r}")
+
+
+def test_dimension_summary_is_grammatically_complete_on_all_six_real_dimensions(tmp_path):
+    # IMPORTANT 7 (review round 3): on the real store, round 1's
+    # clause-capped truncation left five of six summaries ending on a
+    # dangling comma, one on a colon, and manufactured a false complete
+    # sentence for `moat` ("...as custom chips." -- a fabricated period on
+    # a mid-clause cut). Every real dimension's summary must now be a
+    # genuine, complete statement -- ending in real terminal punctuation the
+    # SOURCE wrote, never a comma/colon/semicolon/conjunction/preposition,
+    # and never a period this code invented.
     payload = _build(tmp_path)
+    assert len(payload["dimensions"]) == 6
     for d in payload["dimensions"]:
-        assert len(d["summary"].split()) <= 21, d["summary"]
+        _assert_grammatically_complete(d["summary"])
 
 
 def test_dimension_panel_reasoning_does_not_simply_restate_the_summary(tmp_path):
@@ -543,6 +572,28 @@ def test_dimension_panel_reasoning_does_not_simply_restate_the_summary(tmp_path)
     for d in payload["dimensions"]:
         assert not d["reasoning"].startswith(d["summary"])
         assert d["reasoning"] != d["summary"]
+        # All six real rationales are genuinely multi-sentence, so the
+        # panel should have real additional content, not an empty string.
+        assert d["reasoning"]
+
+
+def test_dimension_reasoning_is_honestly_empty_for_a_short_single_sentence_rationale(tmp_path):
+    # IMPORTANT 7 (review round 3): round 1's fix fell back to the FULL
+    # rationale whenever the (old, capped) summary had consumed it -- which
+    # for any one-sentence rationale of 20 words or fewer meant reasoning
+    # was a verbatim repeat of summary. Every real rationale happens to be
+    # longer than that, so the old guard test passed for the wrong reason.
+    # This constructs a deliberately short, single-sentence rationale and
+    # proves reasoning is an honest empty string, never the summary again.
+    store_dir = _make_store(tmp_path)
+    current_path = Path(store_dir) / "chips.merchant-gpu" / "2026-08-v1.json"
+    current = json.loads(current_path.read_text(encoding="utf-8"))
+    current["dimensionRatings"]["bottleneck"]["rationale"] = "Demand held steady this quarter."
+    current_path.write_text(json.dumps(current), encoding="utf-8")
+    payload = build_dashboard_payload("chips.merchant-gpu", str(store_dir))
+    by_id = {d["id"]: d for d in payload["dimensions"]}
+    assert by_id["bottleneck"]["summary"] == "Demand held steady this quarter."
+    assert by_id["bottleneck"]["reasoning"] == ""
 
 
 def test_dimension_confidence_is_a_full_sentence(tmp_path):

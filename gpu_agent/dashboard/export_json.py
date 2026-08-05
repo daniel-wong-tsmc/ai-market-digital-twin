@@ -89,12 +89,6 @@ _GAP_WORD_CAPTION = {
 }
 _STORY_DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})\.json$")
 
-# Length-capped, clause-bounded dimension-summary extraction (review round 1,
-# Important 7): a hard word budget close to the mock's own 12-19 word rows,
-# cut at the last clause boundary (comma/semicolon/sentence end) at or before
-# that budget so the truncation reads as a clean phrase, not a chopped word.
-_CLAUSE_BOUNDARY = re.compile(r"[,;:.!?]")
-_SUMMARY_WORD_CAP = 20
 
 
 # ── verdict ──────────────────────────────────────────────────────────────
@@ -234,49 +228,42 @@ def _build_gap_chart(readings: list[dict], direction: str, latest_raw: dict,
 
 # ── six dimensions ───────────────────────────────────────────────────────
 
-def _clause_capped_window(text: str, cap: int = _SUMMARY_WORD_CAP) -> str:
-    """The UNDECORATED cut of `text` at a clause boundary (comma/semicolon/
-    sentence end) at or before `cap` words -- the full text unchanged if it
-    is already <= cap words. Never a mid-word hard cut, never a fabricated
-    rewrite (deterministic Python only, no AI: every word is `text`'s own),
-    and never any punctuation ADDED here -- that is cosmetic and belongs to
-    the caller, so the exact cut length stays known for slicing the
-    reasoning remainder (see `_dimension_summary_and_reasoning`).
-
-    A "." immediately between two digits (a decimal point, e.g. "67.7") is
-    never treated as a boundary -- the same failure mode
-    `bullets._first_sentence` already guards against for sentence-splitting
-    ("1.4 gigawatts" must not truncate to "1."), reproduced here because
-    rationale text carries the same kind of numbers."""
-    text = (text or "").strip()
-    if not text:
-        return text
-    words = text.split(" ")
-    if len(words) <= cap:
-        return text
-    window = " ".join(words[:cap])
-    best_end = None
-    for m in _CLAUSE_BOUNDARY.finditer(window):
-        pos = m.start()
-        if (m.group() == "." and 0 < pos < len(window) - 1
-                and window[pos - 1].isdigit() and window[pos + 1].isdigit()):
-            continue
-        best_end = m.end()
-    return window[:best_end].rstrip() if best_end else window
-
-
 def _dimension_summary_and_reasoning(rationale: str) -> tuple[str, str]:
-    """Row summary: `_clause_capped_window` of the rationale, punctuated for
-    display. Panel reasoning: whatever of the rationale is NOT already the
-    summary -- sliced by the UNDECORATED cut length, so this holds even
-    when no clause boundary existed and the window was a hard word-cut --
+    """Row summary: the rationale's own first REAL sentence
+    (`bullets._first_sentence` -- already battle-tested against decimal
+    points ("67.7") and abbreviations, so it is reused verbatim here rather
+    than re-derived).
+
+    IMPORTANT 7 fix, review round 3: a length-capped clause-boundary cut
+    (round 1's fix) produced grammatically broken summaries on real data --
+    five of six real dimensions ended on a dangling comma, one on a colon,
+    and one ("...as custom chips.") was a hard mid-clause cut with a
+    FABRICATED period, manufacturing a confident-sounding statement the
+    source never made. On an honesty-first page, a truncation that changes
+    the meaning is worse than a long sentence, so this function no longer
+    tries to cut short: a summary must always be the rationale's own
+    complete first sentence, ending in real terminal punctuation the source
+    itself wrote -- never a comma, colon, semicolon, conjunction, or
+    preposition, and never a period this code invented. If that sentence
+    happens to be short, the row reads short (as most real ones do); if it
+    is long, the row reads long -- length is the lesser problem next to a
+    fabricated-sounding fragment.
+
+    Panel reasoning: whatever of the rationale is NOT already the summary,
     so opening the click-to-explain panel adds new sentences instead of
-    repeating the row word for word (Important 7, review round 1). Falls
-    back to the full rationale only when the summary consumed all of it."""
-    cut_text = _clause_capped_window(rationale)
-    remainder = rationale[len(cut_text):].strip()
-    summary = cut_text if cut_text[-1:] in ".,;:!?" else cut_text + "."
-    return summary, (remainder or rationale)
+    repeating the row word for word. When the rationale is short enough
+    that its first (and only) sentence IS the whole rationale, there is
+    honestly nothing left to add -- reasoning is then an explicit empty
+    string, never the summary repeated back (round 3 fix: the round-1
+    fallback-to-full-rationale here was exactly that repeat, just masked on
+    real data because every real rationale happens to have more than one
+    sentence)."""
+    rationale = (rationale or "").strip()
+    if not rationale:
+        return "", ""
+    summary = _first_sentence(rationale)
+    remainder = rationale[len(summary):].strip() if rationale.startswith(summary) else ""
+    return summary, remainder
 
 
 def _dimension_confidence_sentence(rating: dict) -> str:
