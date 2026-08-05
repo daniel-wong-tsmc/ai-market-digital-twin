@@ -64,6 +64,9 @@ from gpu_agent.evals.prompt_hash import compute_prompt_hashes
 from gpu_agent.asof import AsOfError
 from gpu_agent.corpus import (
     SALIENCE_FLOOR_DEFAULT, CorpusError, assemble as corpus_assemble, render_coverage_text)
+from gpu_agent.chartdata.registry import DEFAULT_REGISTRY_PATH as CHART_SERIES_REGISTRY_PATH
+from gpu_agent.chartdata.registry import load_chart_series
+from gpu_agent.chartdata.fetch import run_fetch
 
 # F56-core: --as-of is embedded verbatim in doc/finding ids (F52), which become
 # snapshot + FindingStore filenames -- a fat-fingered "2026/07/03" would mint a
@@ -240,6 +243,33 @@ def _coverage_record(args) -> int:
     c = record.gapCounts
     print(f"wrote {out}  ({c['total']} gap(s): {c['source']} source, "
           f"{c['indicator']} indicator, {c['required']} required, {c['waived']} waived)")
+    return 0
+
+
+def _chart_fetch(args) -> int:
+    """Handler for `gpu-agent chart-fetch` (F110 Task 4): fetch every chart-data
+    series that is due for a refresh (currently just AMD's quarterly data-center
+    revenue -- registry/chart-series.json is the only source of truth for which
+    series have a fetcher wired up) and append new points to
+    store/<store>/series/<id>.jsonl.
+
+    Exit code is always 0, even when a fetch failed for one or more series --
+    a broken source page must never fail the unattended daily run. The full
+    {'fetched', 'failed', 'skipped'} summary is printed as JSON either way, so
+    a failure is still visible to whoever (or whatever) reads the run's log.
+    """
+    manifest_path = args.manifest or f"manifests/{args.category}.json"
+    try:
+        manifest = load_manifest(manifest_path)
+    except ManifestLoadError as e:
+        print(f"gpu-agent chart-fetch: error: {e}", file=sys.stderr)
+        return 1
+
+    series = load_chart_series(args.registry)
+    earnings_dates = list(manifest.earningsDates.values())
+    series_dir = str(pathlib.Path(args.store) / "series")
+    result = run_fetch(series, args.as_of, earnings_dates, series_dir)
+    print(json.dumps(result, indent=2))
     return 0
 
 
@@ -1629,6 +1659,16 @@ def main(argv=None) -> int:
                      help="ISO-8601 stamp (default: now, UTC). Pin it for byte-identical reruns")
     cvr.add_argument("--out", default=None,
                      help="write here instead of store/<category>/coverage-<asOf>.json")
+    cf = sub.add_parser("chart-fetch",
+                        help="F110: fetch due chart-data series (e.g. AMD data-center "
+                             "revenue) and append new points to store/<store>/series/")
+    cf.add_argument("--category", required=True, help="categoryId (locates the manifest)")
+    cf.add_argument("--as-of", required=True, type=_as_of)
+    cf.add_argument("--store", default="store", help="store root (series live under <store>/series)")
+    cf.add_argument("--manifest", default=None,
+                    help="coverage manifest path (default: manifests/<category>.json)")
+    cf.add_argument("--registry", default=CHART_SERIES_REGISTRY_PATH,
+                    help="chart-series registry path")
     wl = sub.add_parser("wiki-lint")
     wl.add_argument("--store", default="store", help="store root (holds wiki/ and findings/)")
     wl.add_argument("--as-of", required=True, type=_as_of)
@@ -1868,6 +1908,8 @@ def main(argv=None) -> int:
             return 1
     if args.cmd == "coverage-record":
         return _coverage_record(args)
+    if args.cmd == "chart-fetch":
+        return _chart_fetch(args)
     if args.cmd == "wiki-lint":
         return _wiki_lint(args)
     if args.cmd == "wiki-lifecycle":
