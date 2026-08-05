@@ -1,22 +1,46 @@
 """F110 Task 4: AMD quarterly Data Center segment revenue fetcher.
 
 Parses AMD's own quarterly-results press release (saved copy at
-fixtures/chartdata/amd-ir-q2-2026.html for tests; the live page at
-https://ir.amd.com/financial-information/quarterly-results links to it each
-quarter). AMD publishes a "SELECTED CORPORATE DATA" table with a
-"Segment and Disaggregated Revenue Information" section; the "Data Center
-Segment" row under "Net Revenue:" gives three-months-ended figures (in USD
-millions) for the just-reported quarter, the prior quarter, and the
-year-ago quarter, each under a "Month DD, YYYY" column header.
+fixtures/chartdata/amd-ir-q2-2026.html for tests). registry/chart-series.json
+deliberately keeps `sourceUrl` pointed at AMD's durable, quarter-independent
+landing page (https://ir.amd.com/financial-information/quarterly-results,
+saved copy at fixtures/chartdata/amd-ir-quarterly-results-landing.html) --
+that is the address shown to readers as "the source" and it never changes.
+The landing page itself does NOT carry the revenue figures; it links to a
+new detail page every quarter (a new URL each time, e.g. .../detail/1295/
+amd-reports-second-quarter-2026-financial-results). `discover()` finds that
+quarter's detail-page link on the landing page (user decision, fix round 2:
+"follow the link automatically ... keeps working every quarter with nobody
+touching it"); `parse()` still only reads the detail page.
 
-This file only reads a string and returns data -- it must never touch the
-network itself, so tests can feed it a fixture with no I/O of any kind.
+AMD publishes a "SELECTED CORPORATE DATA" table with a "Segment and
+Disaggregated Revenue Information" section; the "Data Center Segment" row
+under "Net Revenue:" gives three-months-ended figures (in USD millions) for
+the just-reported quarter, the prior quarter, and the year-ago quarter, each
+under a "Month DD, YYYY" column header.
+
+This file only reads strings and returns data -- it must never touch the
+network itself, so tests can feed it fixtures with no I/O of any kind.
 """
 from __future__ import annotations
 
+import html
 import re
+from urllib.parse import urljoin
 
 from gpu_agent.chartdata.fetch import ParseFailed
+
+# AMD's landing page lists each quarter's results in document order, newest
+# first, inside a `<div class="box quarterly-results" id="...">` block; the
+# actual id values (e.g. "2026-9232-results") are internal event ids that do
+# NOT reliably encode which quarter is newest, so this anchors on document
+# ORDER (first block = newest) rather than parsing the id. Within that first
+# block, the earnings-release press release link is the one whose
+# `aria-label` starts with "Earnings Release" (as opposed to the Slide
+# Presentation / Financial Tables / 10-Q links in the same block).
+_QUARTERLY_BLOCK_MARKER = 'class="box quarterly-results"'
+_EARNINGS_RELEASE_LINK_RE = re.compile(
+    r'<a\s+href="([^"]+)"[^>]*aria-label="Earnings Release[^"]*"', re.IGNORECASE)
 
 _MONTH_TO_QUARTER = {
     "January": 1, "February": 1, "March": 1,
@@ -44,6 +68,39 @@ def _quarter_label(month_name: str, year: str) -> str:
     if q is None:
         raise ParseFailed(f"unrecognized month name in header date: {month_name!r}")
     return f"{year}-Q{q}"
+
+
+def discover(landing_html: str, landing_url: str) -> str:
+    """AMD's quarterly-results LANDING page HTML -> the absolute URL of the
+    most recent quarter's earnings-release detail page.
+
+    Anchors on structure that survives every quarter (the first
+    quarterly-results block in document order, and the "Earnings Release"
+    aria-label inside it), not on this-quarter's specific title or a byte
+    offset. Raises ParseFailed if no quarterly-results block or no matching
+    link is found -- never guesses at a URL.
+    """
+    first_idx = landing_html.find(_QUARTERLY_BLOCK_MARKER)
+    if first_idx == -1:
+        raise ParseFailed(
+            f"could not find a {_QUARTERLY_BLOCK_MARKER!r} block on the landing "
+            "page -- AMD's landing-page markup may have changed")
+
+    # Scope the search to just the FIRST (newest) quarter's block, so an
+    # older quarter's earnings-release link is never picked up instead.
+    next_idx = landing_html.find(_QUARTERLY_BLOCK_MARKER, first_idx + 1)
+    block_end = next_idx if next_idx != -1 else len(landing_html)
+    block = landing_html[first_idx:block_end]
+
+    match = _EARNINGS_RELEASE_LINK_RE.search(block)
+    if not match:
+        raise ParseFailed(
+            "found a quarterly-results block on the landing page but no "
+            "'Earnings Release ... HTML' link inside it -- AMD's "
+            "landing-page markup may have changed")
+
+    href = html.unescape(match.group(1))
+    return urljoin(landing_url, href)
 
 
 def parse(html_text: str) -> list[dict]:

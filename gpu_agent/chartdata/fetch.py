@@ -3,9 +3,10 @@
 This module decides which chart series are due for a refresh and drives the
 actual fetch + append. It runs inside the unattended daily pipeline, so the
 single rule that matters more than any other: ``run_fetch`` NEVER raises. A
-broken web page, a network error, an unparseable table -- all of it degrades
-to "no new data for this series" (reported under ``failed``), never to a
-crashed daily run.
+broken web page, a network error, an unparseable table, a link-discovery
+step (fix round 2) that can't find the page it's looking for -- all of it
+degrades to "no new data for this series" (reported under ``failed``),
+never to a crashed daily run.
 
 No wall-clock reads: ``as_of_date`` is always a parameter, exactly like
 price_local.sync_series.
@@ -176,12 +177,13 @@ def run_fetch(
     try:
         # Local import: fetchers/amd_dc_revenue.py imports ParseFailed from
         # this module, so importing FETCHERS at module scope would be circular.
-        from gpu_agent.chartdata.fetchers import FETCHERS
+        from gpu_agent.chartdata.fetchers import DISCOVERERS, FETCHERS
 
         due = due_series(series, as_of_date, earnings_dates, store_dir=store_dir)
         due_ids = {cs.id for cs in due}
         fetched: list[dict] = []
         failed: list[dict] = []
+        html_fetcher = fetch_html or _default_fetch_html
 
         for cs in due:
             try:
@@ -190,7 +192,21 @@ def run_fetch(
                     failed.append({"id": cs.id,
                                     "error": f"no fetcher registered for {cs.fetcher!r}"})
                     continue
-                html_text = (fetch_html or _default_fetch_html)(cs.sourceUrl)
+                discoverer = DISCOVERERS.get(cs.fetcher)
+                if discoverer is not None:
+                    # cs.sourceUrl is a durable LANDING page (fix round 2,
+                    # user decision): fetch it, find this quarter's detail
+                    # page on it, then fetch+parse THAT -- any of the three
+                    # steps failing (landing page unreachable, no matching
+                    # link found, a relative href that won't resolve, or the
+                    # discovered URL itself failing to fetch/parse) is caught
+                    # by the same per-series except below, same as a
+                    # one-step fetcher's failure always was.
+                    landing_html = html_fetcher(cs.sourceUrl)
+                    detail_url = discoverer(landing_html, cs.sourceUrl)
+                    html_text = html_fetcher(detail_url)
+                else:
+                    html_text = html_fetcher(cs.sourceUrl)
                 points = fetcher(html_text)
                 n_new = _append_points(store_dir, cs, points, as_of_date)
                 fetched.append({"id": cs.id, "newPoints": n_new})
