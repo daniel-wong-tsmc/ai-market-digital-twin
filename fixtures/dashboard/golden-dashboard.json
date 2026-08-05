@@ -240,18 +240,18 @@
   ],
   "gapChart": {
     "annotation": {
-      "date": "2026-07",
+      "date": "2026-07-01",
       "label": "Widest gap so far"
     },
     "caption": "The gap narrowed in the latest reading. Demand and supply are each reading's own reported momentum score, not a raw shipment count.",
     "points": [
       {
-        "date": "2026-07",
+        "date": "2026-07-01",
         "demand": 2.0,
         "supply": -1.0
       },
       {
-        "date": "2026-08",
+        "date": "2026-08-01",
         "demand": 2.0,
         "supply": -0.6
       }

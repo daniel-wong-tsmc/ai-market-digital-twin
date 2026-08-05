@@ -63,6 +63,117 @@ def _build(tmp_path, **kw):
     return build_dashboard_payload("chips.merchant-gpu", str(store_dir))
 
 
+def _write_scorecard(path: Path, dmi: float, smi: float) -> None:
+    path.write_text(json.dumps({
+        "categoryId": "chips.merchant-gpu", "asOf": path.stem.rsplit("-v", 1)[0],
+        "findings": [], "dimensionRatings": {},
+        "demandSupply": {"dmiContribution": dmi, "smiContribution": smi,
+                          "anchors": {}, "sdgi": dmi - smi, "sdgiDirection": "demand-led"},
+        "narrative": "Nothing to report.",
+        "confidence": {"level": "medium", "basis": "reading"},
+        "categoryStatus": {"rating": "Strong", "direction": "improving",
+                            "bottleneck": "bottleneck", "reason": "r"},
+    }), encoding="utf-8")
+
+
+def _make_mixed_store(tmp_path: Path) -> Path:
+    """USER DECISION (round 3): a store with BOTH genuine daily-grain
+    readings (four days, real gaps of 1/1/2/1 days between them, exactly
+    like the real legacy 2026-07-0{2,3,5,6} files) AND monthly deep-reads,
+    including one month (July) that has BOTH its own daily readings and a
+    later monthly aggregate -- the exact "cluster of four days next to
+    month-wide jumps" shape the review warned would mislead if plotted by
+    index instead of real date."""
+    cat_dir = tmp_path / "store" / "chips.merchant-gpu"
+    cat_dir.mkdir(parents=True)
+    (cat_dir / "story").mkdir()
+    (tmp_path / "store" / "series").mkdir(parents=True)
+
+    _write_scorecard(cat_dir / "2026-06-v1.json", dmi=1.0, smi=0.5)          # gap 0.5
+    _write_scorecard(cat_dir / "2026-07-v1.json", dmi=1.2, smi=0.3)          # gap 0.9 (month aggregate)
+    _write_scorecard(cat_dir / "2026-07-02-v1.json", dmi=1.0, smi=0.4)       # gap 0.6
+    _write_scorecard(cat_dir / "2026-07-03-v1.json", dmi=1.1, smi=0.3)       # gap 0.8
+    _write_scorecard(cat_dir / "2026-07-05-v1.json", dmi=1.3, smi=0.2)       # gap 1.1
+    _write_scorecard(cat_dir / "2026-07-06-v1.json", dmi=1.4, smi=0.1)       # gap 1.3
+
+    current = copy.deepcopy(SCORECARD)
+    current["demandSupply"] = {"dmiContribution": 2.0, "smiContribution": -0.6,
+                                "anchors": {}, "sdgi": 2.6, "sdgiDirection": "demand-led"}
+    current["confidence"] = {"level": "high", "basis": "self-consistency over 3 samples"}
+    (cat_dir / "2026-08-v1.json").write_text(json.dumps(current), encoding="utf-8")  # gap 2.6
+
+    (cat_dir / "story" / "2026-08-05.json").write_text(json.dumps(STORY), encoding="utf-8")
+    return tmp_path / "store"
+
+
+# ---------------------------------------------------------------------------
+# USER DECISION (round 3): mix genuinely-dated readings (day-grain AND
+# month-grain) on the gap chart, plotted on a TRUE calendar -- never by
+# index -- with the mix stated in the caption, and the chip/answer/caption
+# still all agreeing over the resulting mixed series.
+# ---------------------------------------------------------------------------
+
+def test_gap_chart_points_are_positioned_by_real_date_not_index(tmp_path):
+    # The whole point of a true time axis: real day-gaps between points
+    # must vary with the actual calendar, never look like uniform index
+    # spacing. If points were spaced by list position instead of date, every
+    # gap below would read "1" -- they must not.
+    import datetime as dt
+    store_dir = _make_mixed_store(tmp_path)
+    payload = build_dashboard_payload("chips.merchant-gpu", str(store_dir))
+    points = payload["gapChart"]["points"]
+    dates = [dt.date.fromisoformat(p["date"]) for p in points]
+    assert dates == sorted(dates)  # strictly chronological
+    gaps_in_days = [(b - a).days for a, b in zip(dates, dates[1:])]
+    # Real gaps: June-anchor -> July-anchor (30), then 1,1,2,1 days across
+    # the four genuine daily readings, then July -> August-anchor (26).
+    assert gaps_in_days == [30, 1, 1, 2, 1, 26]
+    assert len(set(gaps_in_days)) > 1, "evenly-spaced points would misrepresent the real calendar"
+
+
+def test_dated_readings_appear_with_their_real_dates(tmp_path):
+    store_dir = _make_mixed_store(tmp_path)
+    payload = build_dashboard_payload("chips.merchant-gpu", str(store_dir))
+    dates = {p["date"] for p in payload["gapChart"]["points"]}
+    # The four genuine daily readings keep their own real dates verbatim.
+    assert {"2026-07-02", "2026-07-03", "2026-07-05", "2026-07-06"} <= dates
+    # Monthly readings are anchored at the first day of their month (stated
+    # explicitly in gap_chart._month_anchor's docstring, not left implicit).
+    assert {"2026-06-01", "2026-07-01", "2026-08-01"} <= dates
+    assert len(payload["gapChart"]["points"]) == 7
+
+
+def test_gap_chart_caption_states_the_mix_when_grains_are_mixed(tmp_path):
+    store_dir = _make_mixed_store(tmp_path)
+    payload = build_dashboard_payload("chips.merchant-gpu", str(store_dir))
+    caption = payload["gapChart"]["caption"]
+    assert "single day" in caption
+    assert "month" in caption
+
+
+def test_gap_chart_caption_omits_mix_disclosure_when_all_one_grain(tmp_path):
+    # No fabricated disclosure on a series that happens to be all one grain
+    # (the default two-monthly-reading fixture below).
+    payload = _build(tmp_path)
+    assert "single day" not in payload["gapChart"]["caption"]
+
+
+def test_chip_answer_and_caption_agree_on_a_mixed_series(tmp_path):
+    # CRITICAL 1 (round 1) must still hold after round 3's change to what
+    # the series contains: the last two points of the MIXED series are
+    # 2026-07-06 (gap 1.3) and 2026-08-01 (gap 2.6) -- a clear widen.
+    store_dir = _make_mixed_store(tmp_path)
+    payload = build_dashboard_payload("chips.merchant-gpu", str(store_dir))
+    direction = payload["verdict"]["chip"]["direction"]
+    assert direction == "widening"
+    assert payload["verdict"]["chip"]["label"] == "Gap widening"
+    assert payload["verdict"]["answer"].startswith(_ANSWER_OPENING["widening"])
+    assert _CAPTION_WORD["widening"] in payload["gapChart"]["caption"]
+    for other, word in _CAPTION_WORD.items():
+        if other != "widening":
+            assert word not in payload["gapChart"]["caption"]
+
+
 # ---------------------------------------------------------------------------
 # CRITICAL 1: the chip and the chart caption must agree -- always, because
 # they are now the SAME computation over the SAME plotted series.
@@ -110,9 +221,11 @@ def test_gap_chart_points_are_raw_readings_not_cumulative_index(tmp_path):
     # small numbers below.
     payload = _build(tmp_path, prev_dmi=2.0, prev_smi=-1.0, cur_dmi=2.0, cur_smi=-0.6)
     points = payload["gapChart"]["points"]
+    # Month-grain readings are anchored at the first day of their month
+    # (round 3 user decision) -- a real calendar date, never a bare "YYYY-MM".
     assert points == [
-        {"date": "2026-07", "demand": 2.0, "supply": -1.0},
-        {"date": "2026-08", "demand": 2.0, "supply": -0.6},
+        {"date": "2026-07-01", "demand": 2.0, "supply": -1.0},
+        {"date": "2026-08-01", "demand": 2.0, "supply": -0.6},
     ]
 
 

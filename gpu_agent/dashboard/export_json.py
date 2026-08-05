@@ -171,12 +171,12 @@ def _build_verdict(story: dict, latest_raw: dict, direction: str, findings_by_id
 
 # ── gap chart ────────────────────────────────────────────────────────────
 #
-# Reuses gap_chart.build_reading_series (real per-reading dates, raw
-# demand/supply values, cadence-aware -- CONTROLLER RULING, review round 1,
-# Important 5: the spec's "real per-reading dates; backfilled runs excluded"
-# and the mock govern) and gap_chart.gap_trend_word (the ONE direction
-# computation shared with the verdict chip -- Critical 1). Neither is
-# reimplemented here.
+# Reuses gap_chart.build_reading_series (real calendar dates -- USER DECISION,
+# round 3: a MIX of genuine single-day readings and monthly deep-reads,
+# anchored and sorted on a true calendar, never index-spaced -- see that
+# function's own docstring) and gap_chart.gap_trend_word (the ONE direction
+# computation shared with the verdict chip -- Critical 1, round 1). Neither
+# is reimplemented here.
 
 def _gap_annotation(readings: list[dict]) -> dict:
     idx = max(range(len(readings)), key=lambda i: abs(readings[i]["demand"] - readings[i]["supply"]))
@@ -200,16 +200,34 @@ def _gap_chart_sources(latest_raw: dict, findings_by_id: dict) -> list[dict]:
     return [assessment_ref(refs)] if refs else []
 
 
+# USER DECISION (round 3): the reader must be told, in plain English, that
+# some points are single-day readings and others are a whole month's figure
+# -- said once here, only when the series genuinely mixes both, never a
+# fabricated disclosure on a series that happens to be all one grain.
+_MIX_DISCLOSURE = (
+    " Some points are a single day's reading; others are a whole month's "
+    "figure, placed at the start of that month."
+)
+
+
+def _gap_chart_caption(readings: list[dict], direction: str) -> str:
+    grains = {r["grain"] for r in readings}
+    mix_clause = _MIX_DISCLOSURE if len(grains) > 1 else ""
+    return (_GAP_WORD_CAPTION[direction] +
+            " Demand and supply are each reading's own reported momentum "
+            "score, not a raw shipment count." + mix_clause)
+
+
 def _build_gap_chart(readings: list[dict], direction: str, latest_raw: dict,
                       findings_by_id: dict) -> dict:
+    # "grain" (reading/month) drives the caption's mix disclosure above but
+    # is never part of the schema-facing point shape -- gapPoint is exactly
+    # {date, demand, supply}, additionalProperties: false.
     points = [{"date": r["date"], "demand": r["demand"], "supply": r["supply"]} for r in readings]
-    caption = (_GAP_WORD_CAPTION[direction] +
-               " Demand and supply are each reading's own reported momentum "
-               "score, not a raw shipment count.")
     return {
         "points": points,
         "annotation": _gap_annotation(readings),
-        "caption": caption,
+        "caption": _gap_chart_caption(readings, direction),
         "sources": _gap_chart_sources(latest_raw, findings_by_id),
     }
 
@@ -361,7 +379,7 @@ def build_dashboard_payload(category_id: str, store_dir: str) -> dict:
     series_reg = load_chart_series()
     bullets = build_bullets(story, latest_raw, series_reg, str(series_dir))
 
-    readings = build_reading_series(category_id, cat_dir)
+    readings = build_reading_series(cat_dir)
     if len(readings) < 2:
         raise ValueError(
             f"fewer than two real readings under {cat_dir} "

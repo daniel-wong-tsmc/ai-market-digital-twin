@@ -6,12 +6,13 @@ distance between the two lines is the gap the page talks about.
 """
 from __future__ import annotations
 
+import datetime as dt
 import json
 import re
 from pathlib import Path
 
 from gpu_agent.dashboard.render import esc
-from gpu_agent.dashboard.scorecards import load_scorecards
+from gpu_agent.dashboard.scorecards import _DATE_RE as _READING_DATE_RE
 
 _MONTHLY = re.compile(r"^(\d{4}-\d{2})-v(\d+)\.json$")
 _MONTH_LABEL = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -71,16 +72,39 @@ def monthly_best_files(cat_dir: Path) -> dict[str, Path]:
     return {k: v[1] for k, v in best.items()}
 
 
-def build_reading_series(category_id: str, cat_dir: Path | str) -> list[dict]:
-    """Real per-reading demand/supply history: one point per genuine
-    scorecard reading actually on disk, at whatever real dates the store
-    honestly has -- day-grain readings from when the category ran daily,
-    month-grain once it moved to the current monthly cadence. Reuses
-    `gpu_agent.dashboard.scorecards.load_scorecards`'s own cadence rule
-    verbatim (day-grain files are dropped once a monthly deep-read exists
-    for that category, so a period already covered by a monthly reading is
-    never double-counted against its own legacy daily snapshots) rather
-    than re-deriving that selection here.
+def _month_anchor(key: str) -> str:
+    """The one stated anchor date for a month-grain reading: the first
+    calendar day of the month it covers. Chosen (not the 15th, not month
+    end) because it can never fall in the future relative to when the
+    reading was actually taken -- a monthly deep-read for the CURRENT,
+    still-in-progress month anchored at month-END would render as a point
+    dated after today, which is a worse honesty failure than the (stated,
+    accepted) imprecision of not knowing the reading's exact capture day."""
+    return key if len(key) == 10 else f"{key}-01"
+
+
+def build_reading_series(cat_dir: Path | str) -> list[dict]:
+    """USER DECISION (F110 Task 6, round 3): every genuinely-dated scorecard
+    reading actually on disk, MIXED across grains -- day-grain readings from
+    when the category ran daily (e.g. the four legacy 2026-07-0{2,3,5,6}
+    snapshots that predate the move to monthly cadence) AND month-grain
+    deep-reads, side by side on the same real calendar. Reuses
+    `gpu_agent.dashboard.scorecards._DATE_RE` (the existing pattern already
+    matching BOTH grains) and the "highest revision wins" tie-break -- but,
+    unlike `scorecards.load_scorecards`, does NOT drop a month's day-grain
+    files just because a month-grain deep-read also exists for that month:
+    both genuinely happened, and the user chose to plot everything real
+    rather than pick one cadence over the other.
+
+    Every point carries a REAL calendar date: day-grain readings use their
+    own date; month-grain readings are anchored at the first calendar day
+    of the month they cover (see `_month_anchor` -- stated explicitly, not
+    left implicit). This is the raw material for a TRUE time axis: any
+    caller (a future chart renderer, or `gap_trend_word` below) must
+    position/compare points by this date, never by list index -- four days
+    two calendar days apart must never render as evenly spaced next to a
+    month-wide gap, which is the exact honesty risk the user was warned
+    about when choosing to mix grains.
 
     Values are `demandSupply.dmiContribution`/`smiContribution` AS
     REPORTED for that reading -- never cumulative-summed or re-indexed to
@@ -89,9 +113,38 @@ def build_reading_series(category_id: str, cat_dir: Path | str) -> list[dict]:
     shape). This is the ONE series every gap-related dashboard.json
     element -- the verdict chip, the chart itself, and its caption -- reads
     from, via `gap_trend_word`, so none of them can ever disagree about the
-    same day's real data (F110 Task 6 review, Critical 1)."""
-    recs = load_scorecards(category_id, str(cat_dir))
-    return [{"date": r["as_of"], "demand": r["dmi"], "supply": r["smi"]} for r in recs]
+    same real data (F110 Task 6 review round 1, Critical 1 -- still holds
+    after this round's change to what the series contains)."""
+    best: dict[str, tuple[int, Path]] = {}
+    for p in Path(cat_dir).glob("*.json"):
+        m = _READING_DATE_RE.search(p.name)
+        if not m:
+            continue
+        key, rev = m.group(1), int(m.group(2))
+        if key not in best or rev > best[key][0]:
+            best[key] = (rev, p)
+
+    points = []
+    for key, (_, path) in best.items():
+        anchor = _month_anchor(key)
+        try:
+            dt.date.fromisoformat(anchor)
+        except ValueError:
+            continue  # an impossible date (e.g. "2026-13") -- skip, don't crash
+        try:
+            d = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        ds = d.get("demandSupply") or {}
+        dmi, smi = ds.get("dmiContribution"), ds.get("smiContribution")
+        if dmi is None or smi is None:
+            continue
+        is_reading = len(key) == 10
+        points.append({"date": anchor, "demand": float(dmi), "supply": float(smi),
+                        "grain": "reading" if is_reading else "month"})
+
+    points.sort(key=lambda p: p["date"])
+    return points
 
 
 def gap_trend_word(readings: list[dict]) -> str:
