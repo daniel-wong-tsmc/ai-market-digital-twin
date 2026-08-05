@@ -5,7 +5,7 @@ import jsonschema
 import pytest
 
 from gpu_agent.chartdata.registry import ChartSeries
-from gpu_agent.dashboard.bullets import build_bullets
+from gpu_agent.dashboard.bullets import _load_plain_units, build_bullets
 
 STORY = json.loads(Path("fixtures/dashboard/story-trimmed.json").read_text(encoding="utf-8"))
 SCORECARD = json.loads(Path("fixtures/dashboard/scorecard-trimmed.json").read_text(encoding="utf-8"))
@@ -140,11 +140,18 @@ def test_real_story_scene_two_has_no_chart_after_the_measurable_quantity_gate():
     # executive reading a line chart with a y-axis would wrongly conclude
     # something physical rose or fell. This is the documented, honest
     # consequence of the fix -- not a bug.
+    #
+    # Round-2 review: scene 2's own visual.label DOES name this indicator,
+    # so this must be the "not a plain measurable quantity" reason, not
+    # the (also real, but different, and here inapplicable) "no
+    # plain-English name yet" reason -- the unit check fires before the
+    # title check ever gets a chance to matter.
     bullets = build_bullets(STORY, SCORECARD, {}, REAL_SERIES_DIR)
     scene_two = bullets[1]
     assert scene_two["chart"] is None
     assert scene_two["noChartReason"] is not None
-    assert "internal analytical score" in scene_two["noChartReason"]
+    assert "describe what this number measures" in scene_two["noChartReason"]
+    assert "no plain-English name" not in scene_two["noChartReason"]
 
 
 # ---------------------------------------------------------------------------
@@ -315,6 +322,12 @@ def test_fallback_non_measurable_unit_never_charted_even_when_dense(tmp_path):
     # hyperscalerCapexRevision series) must never be drawn as a chart. If
     # the plain-unit gate were removed, this would flip to a populated
     # chart.
+    #
+    # Round-2 review (IMPORTANT): a narrator visual.label IS present here
+    # (_PLAIN_VISUAL), so a wrong implementation could still fall into the
+    # "no plain-English name yet" reason instead of the true "not a
+    # measurable quantity" one -- assert the RIGHT reason, not just *a*
+    # reason, and assert the wrong one's distinguishing phrase is absent.
     story = _synthetic_story("Index-only fallback scene", ["f1"], visual=_PLAIN_VISUAL)
     scorecard = _synthetic_scorecard("f1", "someTrackedIndicator", "market")
     rows = [_row("someTrackedIndicator", f"2025-{m:02d}", float(m % 3 - 1),
@@ -325,7 +338,8 @@ def test_fallback_non_measurable_unit_never_charted_even_when_dense(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
-    assert "internal analytical score" in b0["noChartReason"]
+    assert "describe what this number measures" in b0["noChartReason"]
+    assert "no plain-English name" not in b0["noChartReason"]
 
 
 def test_fallback_without_narrator_supplied_plain_title_never_charted(tmp_path):
@@ -336,6 +350,13 @@ def test_fallback_without_narrator_supplied_plain_title_never_charted(tmp_path):
     # copy). If the title-source requirement were dropped in favor of a
     # mechanical camelCase-derived title, this would flip to a populated
     # chart.
+    #
+    # Round-2 review (IMPORTANT, this is the exact defect the round-1 fix
+    # introduced): the number here is a perfectly real, plain, measurable
+    # quantity (US$) -- it would be FALSE to tell the reader "this is an
+    # internal analytical score, not a plain measured number". The reason
+    # given must be the true one: we have the number, we just don't have
+    # a plain name for it yet.
     story = _synthetic_story("No-visual fallback scene", ["f1"])  # no visual field
     scorecard = _synthetic_scorecard("f1", "someTrackedIndicator", "market")
     rows = [_row("someTrackedIndicator", f"2025-{m:02d}", float(m), unit="USD")
@@ -346,6 +367,8 @@ def test_fallback_without_narrator_supplied_plain_title_never_charted(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
+    assert "no plain-English name for what they measure yet" in b0["noChartReason"]
+    assert "describe what this number measures" not in b0["noChartReason"]
 
 
 def test_fallback_chart_never_titled_a_bare_indicator_code(tmp_path):
@@ -448,6 +471,44 @@ def test_fallback_ref_outlet_is_domain_not_headline(tmp_path):
     assert "$20 billion" not in ref["outlet"]
 
 
+def test_fallback_ref_outlet_with_no_url_is_honest_not_the_headline(tmp_path):
+    # MINOR from round-2 review: when a row has no source.url at all,
+    # `_outlet_from_url` can't derive a domain -- the old fallback quietly
+    # reused the headline as "outlet" again, exactly the bug Important 4
+    # fixed on the normal (has-a-url) path. The fallback must be an
+    # honest "we don't know", never the headline wearing an outlet's hat.
+    story = _synthetic_story("No-url outlet scene", ["f1"], visual=_PLAIN_VISUAL)
+    scorecard = _synthetic_scorecard("f1", "someTrackedIndicator", "market")
+    rows = [_row("someTrackedIndicator", p, float(i), unit="USD", url=None,
+                 title="A Headline That Is Not An Outlet")
+            for i, p in enumerate(["2025-01", "2025-02", "2025-03",
+                                    "2025-04", "2025-05", "2025-06"])]
+    _write_jsonl(tmp_path / "someTrackedIndicator.jsonl", rows)
+
+    bullets = build_bullets(story, scorecard, {}, str(tmp_path))
+    ref = bullets[0]["chart"]["source"]["basedOn"][0]
+    assert ref["outlet"] != "A Headline That Is Not An Outlet"
+    assert ref["outlet"] != ref["title"]
+    assert ref["outlet"] == "Unknown outlet"
+
+
+# ---------------------------------------------------------------------------
+# MINOR: the plain-unit whitelist is loaded from data, not hardcoded, so a
+# new legitimate unit can be added without a code change.
+# ---------------------------------------------------------------------------
+
+def test_plain_units_loaded_from_registry_file_include_real_units():
+    units = _load_plain_units()
+    assert units["USD"] == "US$"
+    assert units["pct_yoy"] == "%, year over year"
+
+
+def test_plain_units_falls_back_safely_when_file_missing(tmp_path):
+    units = _load_plain_units(str(tmp_path / "does-not-exist.json"))
+    # Never crashes, and still returns a usable, non-empty mapping.
+    assert units and units.get("USD") == "US$"
+
+
 # ---------------------------------------------------------------------------
 # CRITICAL 3: exactly 3 bullets, always -- fails loudly and early on a
 # short story day instead of silently shipping 1 or 2 bullets.
@@ -494,6 +555,9 @@ def test_bullet_title_ending_in_question_mark_not_double_punctuated(tmp_path):
     ("Dr. Smith said demand is strong. Everyone agreed.", "Dr. Smith said demand is strong."),
     ("This is a footnote, e.g. the market moved. Then it moved again.",
      "This is a footnote, e.g. the market moved."),
+    # MINOR from round-2 review: "no" is a common word, not an
+    # abbreviation -- it must not swallow the next sentence.
+    ("The answer is no. It kept growing.", "The answer is no."),
 ])
 def test_first_sentence_not_truncated_by_abbreviations(tmp_path, paragraph, expected_start):
     story = {
@@ -508,3 +572,38 @@ def test_first_sentence_not_truncated_by_abbreviations(tmp_path, paragraph, expe
     }
     bullets = build_bullets(story, {"findings": []}, {}, str(tmp_path))
     assert bullets[0]["text"] == f"Abbreviation scene. {expected_start}"
+
+
+# ---------------------------------------------------------------------------
+# Test-coverage gap closed (round-2 review): round 1's fix correctly took
+# away the real fixture's only chart (hyperscalerCapexRevision failed the
+# measurable-quantity gate), which left NO test proving a chart can ever
+# be produced from genuine on-disk data -- only synthetic fixtures covered
+# the success path. store/series/odmMonthlyAiRevenue.jsonl is real,
+# on-disk, 42 rows, all estimateGrade=false, spanning 42 distinct months,
+# unit pct_yoy (a real plain-English measurable quantity) -- it passes
+# both the density gate and the plain-quantity gate outright, today.
+# ---------------------------------------------------------------------------
+
+def test_fallback_chart_produced_from_real_on_disk_odm_series():
+    real_rows = [json.loads(line) for line in
+                 Path("store/series/odmMonthlyAiRevenue.jsonl").read_text(encoding="utf-8").splitlines()
+                 if line.strip()]
+    assert len(real_rows) >= 6  # sanity: the fixture claim this test relies on
+    assert all(r["estimateGrade"] is False for r in real_rows)
+    assert len({r["period"][:7] for r in real_rows}) >= 3
+    assert real_rows[0]["unit"] == "pct_yoy"
+
+    visual = {"seriesId": "odmMonthlyAiRevenue", "label": "Servers actually shipped"}
+    story = _synthetic_story("ODM real-series scene", ["f1"], visual=visual)
+    scorecard = _synthetic_scorecard("f1", "odmMonthlyAiRevenue", "odm")
+
+    bullets = build_bullets(story, scorecard, {}, REAL_SERIES_DIR)
+    b0 = bullets[0]
+    assert b0["chart"] is not None
+    assert b0["noChartReason"] is None
+    assert b0["chart"]["title"] == "Servers actually shipped"
+    assert b0["chart"]["unit"] == "%, year over year"
+    assert len(b0["chart"]["points"]) == 10  # capped at _MAX_CHART_POINTS
+    _assert_bullet_plain_english(b0)
+    _validate_bullet_schema(b0)

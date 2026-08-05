@@ -43,17 +43,40 @@ _MIN_FALLBACK_MONTHS = 3
 # things a reader can point to in the world, so none of them may ever
 # reach a chart's axis. Only units in this map may be charted, and the
 # chart always shows the plain value, never the raw code.
-_PLAIN_UNITS = {
+#
+# Loaded from a small JSON file (round-2 review, MINOR): a new legitimate
+# unit (e.g. "GW" for gigawatts, "USD_M") can be whitelisted by editing
+# data, not code. Falls back to this same built-in default if the file is
+# missing or unreadable -- never crashes the pipeline over a missing file.
+_DEFAULT_PLAIN_UNITS = {
     "USD_B": "US$ billions",
     "USD": "US$",
     "USD_per_hr": "US$ per hour",
     "pct_yoy": "%, year over year",
 }
+_PLAIN_UNITS_PATH = "registry/plain-units.json"
+
+
+def _load_plain_units(path: str = _PLAIN_UNITS_PATH) -> dict[str, str]:
+    try:
+        raw = json.loads(Path(path).read_text(encoding="utf-8"))
+        units = raw.get("units")
+        if isinstance(units, dict) and all(isinstance(v, str) for v in units.values()):
+            return units
+    except (OSError, json.JSONDecodeError, AttributeError):
+        pass
+    return dict(_DEFAULT_PLAIN_UNITS)
+
+
+_PLAIN_UNITS = _load_plain_units()
 
 _SENTENCE_BOUNDARY = re.compile(r"[.!?]+(?=\s|$)")
+# Round-2 review (MINOR): "no" removed -- it made "The answer is no. It
+# kept growing." get merged into one sentence, which is a far more common
+# real-text pattern than "No. 5" ever needing that abbreviation guard.
 _ABBREVIATIONS = {
     "u.s", "u.s.a", "u.k", "e.g", "i.e", "dr", "mr", "mrs", "ms", "prof",
-    "sr", "jr", "st", "vs", "etc", "no", "inc", "corp", "co", "ltd",
+    "sr", "jr", "st", "vs", "etc", "inc", "corp", "co", "ltd",
     "gen", "col", "sgt", "rep", "sen", "gov", "approx",
 }
 
@@ -212,9 +235,13 @@ def _chart_from_fallback(title: str, plain_unit: str, rows: list[dict]) -> dict:
         if url is not None:
             seen_urls.add(url)
         headline = src.get("title") or ""
+        # Round-2 review (MINOR): a headline is never an honest stand-in
+        # for "outlet" -- that was the exact bug Important 4 fixed on the
+        # normal path. When there's no url to derive a domain from, say so
+        # plainly instead of quietly falling back to the headline again.
         based_on.append({
             "title": headline,
-            "outlet": _outlet_from_url(url) or headline,
+            "outlet": _outlet_from_url(url) or "Unknown outlet",
             "url": url,
             "date": r.get("publishedAt"),
             "tier": "secondary",
@@ -258,10 +285,24 @@ def _match_registered_series(tags: set[str], series_reg: dict[str, ChartSeries],
     return None
 
 
-def _fallback_reason(indicator_ids: list[str], store_dir: str,
-                      dense_but_not_plain: bool) -> str:
+def _fallback_reason(indicator_ids: list[str], store_dir: str, *,
+                      saw_non_measurable_unit: bool,
+                      saw_missing_title: bool) -> str:
     """An honest, reader-facing explanation of exactly what's missing --
-    never a technical/internal phrase like 'insufficient series density'."""
+    never a technical/internal phrase like 'insufficient series density',
+    and never a reason that's simply untrue of the case it's describing.
+
+    Round-2 review (IMPORTANT, introduced by the round-1 fix): the two
+    distinct honesty-gate failures inside `_match_fallback_history` used
+    to share one message ("an internal analytical score"), which was a
+    FALSE statement about a series that's a perfectly real, plain,
+    measurable quantity (e.g. real USD revenue) that simply has no
+    narrator-supplied title yet. They now get their own, separately true
+    reasons -- `saw_non_measurable_unit` (the number itself isn't one we
+    can name in plain English) is a different, and differently true,
+    situation from `saw_missing_title` (we have a real measured number,
+    just no plain-English name for it in the story yet).
+    """
     if not indicator_ids:
         return ("No chart. This story isn't tied to a tracked number yet -- "
                 "what's here is reported facts, not a running data series.")
@@ -275,10 +316,14 @@ def _fallback_reason(indicator_ids: list[str], store_dir: str,
         return ("No chart. The only numbers here are our own estimates, not "
                 "published facts, so we don't chart them.")
 
-    if dense_but_not_plain:
-        return ("No chart. What we track here is an internal analytical "
-                "score, not a plain measured number readers can trust on a "
-                "chart, so we don't draw it.")
+    if saw_non_measurable_unit:
+        return ("No chart. We don't yet have a plain-English way to "
+                "describe what this number measures, so we don't draw it.")
+
+    if saw_missing_title:
+        return ("No chart. We have real, tracked numbers behind this, but "
+                "no plain-English name for what they measure yet, so we "
+                "don't chart them.")
 
     return ("No chart. There isn't yet enough of a track record -- too few "
             "confirmed data points, or too narrow a span of time, to show a "
@@ -304,9 +349,12 @@ def _match_fallback_history(scene: dict, indicator_ids: list[str],
 
     Either failing means this indicator can't be charted; the loop moves
     on to the scene's next cited indicator id, and only if none qualify
-    do we fall to an honest `noChartReason`.
+    do we fall to an honest `noChartReason` -- and (round-2 review) the
+    two failure causes are tracked separately so the reason given is
+    always true of the case it describes.
     """
-    dense_but_not_plain = False
+    saw_non_measurable_unit = False
+    saw_missing_title = False
     for indicator_id in indicator_ids:
         rows = _read_jsonl(Path(store_dir) / f"{indicator_id}.jsonl")
         real_rows = [r for r in rows if r.get("estimateGrade") is False]
@@ -316,16 +364,22 @@ def _match_fallback_history(scene: dict, indicator_ids: list[str],
 
         raw_unit = real_rows[-1].get("unit", "")
         plain_unit = _PLAIN_UNITS.get(raw_unit)
+        if plain_unit is None:
+            saw_non_measurable_unit = True
+            continue
+
         visual = scene.get("visual") or {}
         plain_title = visual.get("label") if visual.get("seriesId") == indicator_id else None
-        if plain_unit is None or not plain_title:
-            dense_but_not_plain = True
+        if not plain_title:
+            saw_missing_title = True
             continue
 
         real_rows = sorted(real_rows, key=lambda r: r.get("period", ""))
         return _chart_from_fallback(plain_title, plain_unit, real_rows), None
 
-    return None, _fallback_reason(indicator_ids, store_dir, dense_but_not_plain)
+    return None, _fallback_reason(indicator_ids, store_dir,
+                                   saw_non_measurable_unit=saw_non_measurable_unit,
+                                   saw_missing_title=saw_missing_title)
 
 
 def build_bullets(story: dict, scorecard: dict, series_reg: dict[str, ChartSeries],

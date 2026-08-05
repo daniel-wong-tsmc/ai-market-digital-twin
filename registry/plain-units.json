@@ -1,0 +1,9 @@
+{
+  "_comment": "Raw store/series unit code -> real, plain-English measurable quantity a small chart may show. A raw unit NOT in this list is refused by the dashboard bullet builder (gpu_agent/dashboard/bullets.py), never silently mislabeled as a real quantity or as a synthetic internal score -- add a new legitimate unit here (e.g. GW, USD_M) to whitelist it; no code change needed.",
+  "units": {
+    "USD_B": "US$ billions",
+    "USD": "US$",
+    "USD_per_hr": "US$ per hour",
+    "pct_yoy": "%, year over year"
+  }
+}
