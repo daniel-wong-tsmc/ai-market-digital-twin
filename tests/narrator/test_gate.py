@@ -45,7 +45,23 @@ def _ok(tmp_path):
         kpiPicks=[{"indicatorId": "hbmSupplyCapex", "whyCaption": "relief lever",
                     "scene": 1}],
         calloutMonths=[{"monthKey": "2026-07", "text": "Jul: memory cut",
-                         "scene": 1}]))
+                         "scene": 1}],
+        # F114 Task 2: gate check 1 now requires exactly 3 bullets, each with
+        # a digit, at most 28 words, no banned opener word, and
+        # claimFindingIds resolving in the fixture's findings (f-1, f-2).
+        bullets=[
+            {"text": "SK Hynix shifted HBM output on June 24, 2026, "
+                     "citing a one-year lag before new capacity comes "
+                     "online.",
+             "claimFindingIds": ["f-1"]},
+            {"text": "Oracle raised capital spending 162% versus last "
+                     "year, per its June 10 filing.",
+             "claimFindingIds": ["f-2"]},
+            {"text": "Buyers now face both a memory squeeze and a capex "
+                     "surge, with SK Hynix and Oracle both moving in June "
+                     "2026.",
+             "claimFindingIds": ["f-1", "f-2"]},
+        ]))
 
 
 def test_clean_answer_passes(tmp_path):

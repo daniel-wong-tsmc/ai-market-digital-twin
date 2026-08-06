@@ -27,6 +27,11 @@ from gpu_agent.narrator.schema import NarratorAnswer
 _NO_SOURCE = NO_SOURCE_LINE
 _FORWARD_MARKERS = ("close", "watch", "ahead", "next")
 
+# F114 Task 2's Check 8: the prompt bans these five words (case-sensitive on
+# the capitalized forms) as a bullet's opening word -- a self-contained
+# takeaway can't lean on a pronoun the reader has no antecedent for.
+_BANNED_BULLET_OPENERS = {"They", "It", "These", "Those", "That"}
+
 # Mirrors story_render.py's own pattern for the "index/indexed appears at
 # most once" rule exactly (case-insensitive, same word boundaries), so the
 # gate's count and the build-time page-level lint's count can never disagree
@@ -245,5 +250,45 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict, cfg=None) -> list[str]:
                     violations.append(
                         f"scene {scene.n} leans only on aged evidence and "
                         f"must date its claims in prose")
+
+    # Check 8: narrator bullets (F114 Task 2). `bullets` stays legal as None
+    # at the schema layer (pre-F114 v1 artifacts must keep validating), but
+    # the narrator prompt now demands them, so an answer without them still
+    # fails the gate. Detection for the banned-word/outlet-string sweep is
+    # NOT reimplemented here -- it reuses the same lint_story_copy() helper
+    # Check 4 already runs over scene prose, and finding-id resolution reuses
+    # the same `finding_ids` set Check 2 already built.
+    if answer.bullets is None:
+        violations.append("narrator answer has no bullets")
+    else:
+        n_bullets = len(answer.bullets)
+        if n_bullets != 3:
+            violations.append(
+                f"bullets: exactly 3 are required; got {n_bullets}")
+        for i, bullet in enumerate(answer.bullets, start=1):
+            words = bullet.text.split()
+            if len(words) > 28:
+                violations.append(
+                    f"bullet {i}: at most 28 words allowed; got {len(words)} "
+                    f"('{bullet.text}')")
+            if not any(ch.isdigit() for ch in bullet.text):
+                violations.append(
+                    f"bullet {i}: must contain at least one digit "
+                    f"('{bullet.text}')")
+            if words and words[0] in _BANNED_BULLET_OPENERS:
+                violations.append(
+                    f"bullet {i}: must not open with '{words[0]}' "
+                    f"('{bullet.text}')")
+            escaped_bullet = html.escape(bullet.text)
+            for hit in lint_story_copy("<p>" + escaped_bullet + "</p>"):
+                violations.append(f"bullet {i}: {hit}")
+            if not bullet.claimFindingIds:
+                violations.append(
+                    f"bullet {i}: claimFindingIds must not be empty")
+            for fid in bullet.claimFindingIds:
+                if fid not in finding_ids:
+                    violations.append(
+                        f"bullet {i}: unknown finding id '{fid}' is not in "
+                        f"inputs.findings")
 
     return violations
