@@ -251,12 +251,83 @@ svg:has(.hov:hover) .ann, svg:has(.hov:hover) .ann-rule { opacity: 0; transition
 }
 .loadfail { color: var(--color-serious); }
 
-/* ---------- responsive (mock lines 377-388) ---------- */
+/* ---------- zone 3: what changed (mock lines 245-296, 536-566) ---------- */
+.changed { margin-top: var(--space-6); }
+.change {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr) 20rem;
+  gap: var(--space-5) var(--space-6);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-border);
+  align-items: start;
+}
+.change:first-child { padding-top: var(--space-2); }
+.change .date { font-size: var(--text-small); color: var(--color-text-muted); }
+.change p { margin: 0; max-width: 72ch; }
+.change p b { font-weight: 600; }
+.bullet-more {
+  display: inline-block;
+  margin-left: var(--space-2);
+  font-size: var(--text-small);
+  font-weight: 550;
+  white-space: nowrap;
+}
+.readmore {
+  display: inline-block;
+  margin-top: var(--space-5);
+  font-size: var(--text-body);
+  font-weight: 550;
+}
+
+/* supporting mini charts */
+figure.mini { margin: 0; }
+.mini-plot svg { display: block; width: 100%; height: auto; }
+.mini-plot.empty {
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4);
+  min-height: 92px;
+  display: flex; flex-direction: column; justify-content: center; gap: var(--space-1);
+}
+.mini-plot.empty p { margin: 0; font-size: var(--text-small); color: var(--color-text-secondary); font-weight: 600; }
+.mini-plot.empty p.why-none { font-weight: 400; color: var(--color-text-muted); font-size: var(--text-micro); line-height: 1.45; }
+figure.mini figcaption {
+  margin-top: var(--space-2);
+  font-size: var(--text-micro);
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+.mini-base { stroke: var(--color-border-strong); stroke-width: 1; }
+.mini-bar.dem { fill: var(--color-demand); }
+.mini-bar.sup { fill: var(--color-supply); }
+.mini-bar.ghost { fill: var(--color-surface-sunk); stroke: var(--color-border-strong); stroke-width: 1; }
+.mini-tick { fill: var(--color-text-muted); font-size: 10.5px; font-family: var(--font-sans); }
+.mini-val { fill: var(--color-text-secondary); font-size: 11px; font-family: var(--font-sans); }
+.mini-val.strong { fill: var(--color-text); font-weight: 600; font-size: 12px; }
+.mini-hit { fill: transparent; }
+.mini-tip { fill: var(--color-text); font-size: 11px; font-weight: 600; font-family: var(--font-sans); opacity: 0; }
+.mbar:hover .mini-tip { opacity: 1; }
+.mbar:hover .mini-bar { fill: var(--color-text); }
+.mbar:hover .mini-dot { fill: var(--color-text); }
+svg:has(.mbar:hover) .mini-val { opacity: 0; }
+/* the line form -- no worked example in the mock; same tokens and the same
+   hover-tooltip / "ghost" hollow-point language as columns and bars. */
+.mini-line { fill: none; stroke: var(--color-accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.mini-dot { fill: var(--color-accent); stroke: var(--color-surface); stroke-width: 2; }
+.mini-dot.ghost { fill: var(--color-surface-sunk); stroke: var(--color-border-strong); stroke-width: 1.5; }
+
+/* ---------- responsive (mock lines 370-388) ---------- */
+@media (max-width: 900px) {
+  .change { grid-template-columns: 4.5rem minmax(0, 1fr); }
+  .change figure.mini { grid-column: 2; max-width: 22rem; }
+}
 @media (max-width: 720px) {
   :root { --text-verdict: 1.75rem; }
   .shell { padding: 0 var(--space-4) var(--space-12); }
   .verdict { padding: var(--space-8) 0 var(--space-4); }
   .verdict h1 { max-width: none; }
+  .change { grid-template-columns: minmax(0, 1fr); gap: var(--space-3); }
+  figure.mini { max-width: 24rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -7,6 +7,7 @@
 import {useEffect, useState} from 'react';
 import {Verdict} from './components/Verdict';
 import {GapChart} from './components/GapChart';
+import {Bullets} from './components/Bullets';
 import {loadDashboard, plainDate, plainDateWithWeekday} from './load';
 import type {Dashboard} from './load';
 
@@ -98,6 +99,19 @@ export function App() {
           </span>
         </div>
         <GapChart data={data.gapChart} />
+      </section>
+
+      <section className="zone" id="changed">
+        <div className="zone-head">
+          <h2>What changed</h2>
+          <span className="note">Three things worth two minutes</span>
+        </div>
+        <Bullets bullets={data.bullets} />
+        {data.bullets[0] ? (
+          <a className="readmore" href={data.bullets[0].storyHref}>
+            Read the full story &rarr;
+          </a>
+        ) : null}
       </section>
     </div>
   );
