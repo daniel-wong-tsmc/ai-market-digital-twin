@@ -30,7 +30,18 @@ def _write(path: Path, text: str):
 
 
 def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
-               price_fn=None, today=None):
+               price_fn=None, today=None, require_category_page=False):
+    """Emit the static site for `category_id` into `out_dir`.
+
+    `require_category_page`: when true, the committed category page
+    (`<out_dir>/<category_id>/index.html`, the compiled dashboard app) must
+    already be on disk or the build fails. Every deep page links back to it, and
+    the link gate can only resolve those links against a registered key -- so
+    without this check a deleted category page would sail through the gate with
+    every "back to today's story" link dead. The `site` CLI verb, the only
+    caller that builds the real site, turns it on; builds into a scratch
+    directory (tests) leave it off, since the committed page is an input they
+    have no reason to stage."""
     model = build_site_model(category_id, store_dir, work_dir, plain_path,
                              price_fn=price_fn)
     today = today or datetime.date.today()
@@ -101,6 +112,11 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
     # -- an empty value means "this exists", without pretending to scan a file
     # this builder did not produce. Every deep page links back to it.
     page_map.setdefault(f"{category_id}/index.html", "")
+    if require_category_page and not (cat / "index.html").exists():
+        raise ValueError(
+            f"the committed category page {cat / 'index.html'} is missing -- "
+            "every deep page's link back to today's reading would be dead. "
+            "Rebuild it with `npm run build` in web/.")
     _emit(f"{category_id}/appendix.html", render_appendix(model)); pages += 1
     _emit(f"{category_id}/how/alert.html", render_how_alert(model)); pages += 1
     for side in ("demand", "supply", "gap"):

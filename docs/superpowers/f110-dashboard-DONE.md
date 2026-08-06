@@ -1,7 +1,12 @@
 # F110 dashboard revamp — DONE (branch `f110-dashboard`, NOT merged)
 
 **State:** built, committed, green, and waiting. Only the user merges this branch.
-Last commit: `f33bb7c feat(f110): the category page is the compiled dashboard`.
+The last commit is whichever commit added this file — check `git log --oneline -1`
+rather than trusting a hash written inside the record it describes.
+
+**Before merging:** `main` has moved on since this branch was cut. It carries two
+unrelated commits from the 2026-08-06 daily cycle, `0d6036c` and `be543d8`, and
+the merge base is `bc08b61`. This branch is behind main by those two commits.
 
 ## What shipped
 
@@ -26,9 +31,15 @@ The daily Python run feeds it one file, `site/chips.merchant-gpu/data/dashboard.
 written by the `dashboard-json` step. No Node runs in the daily cycle: the compiled
 page and its bundles are committed.
 
+With scripting turned off, the page states no verdict at all. It gives the question
+and points at the story archive for the current answer — because this file only
+changes when someone rebuilds the app by hand, so any answer written into it would
+go stale and end up contradicting the page's own data.
+
 **The site builder** no longer writes the category page — that file is a committed
-input now. It still emits every deep page exactly as before, and it makes sure the
-data file is present (failing softly, so a bad export can never stop the cycle).
+input now. It still emits every deep page exactly as before, it fails the build if
+the committed page is missing (every deep page links back to it), and it makes sure
+the data file is present (failing softly, so a bad export can never stop the cycle).
 The compiled app and the deep pages share one folder, so the build is pinned to
 `emptyOutDir: false` with a check that fails if anyone ever flips it; a narrow
 plugin clears only the bundle folder so old bundles don't pile up.
@@ -37,10 +48,10 @@ plugin clears only the bundle folder so old bundles don't pile up.
 
 | Gate | Result |
 | --- | --- |
-| `../../.venv/Scripts/python -m pytest -q` | 2301 passed, 6 skipped |
+| `../../.venv/Scripts/python -m pytest -q` | 2304 passed, 6 skipped |
 | Four pinned baselines (eval baseline, narrator prompt, scoring-v1 replay, run-cycle conformance) | 130 passed |
-| `npm test` (web) | 8 files, 92 tests passed |
-| `npm run build` (web) | built in 661ms |
+| `npm test` (web) | 9 files, 95 tests passed |
+| `npm run build` (web) | built in 693ms |
 | Forbidden-diff check vs `main` | empty (no output) |
 | Deletions under `site/chips.merchant-gpu/{findings,series,story,entities}` | none |
 

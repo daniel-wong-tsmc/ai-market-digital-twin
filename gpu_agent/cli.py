@@ -1527,7 +1527,10 @@ def _site(args):
         if recs:
             cand = Path(args.store) / "plain-language" / f'{recs[-1]["as_of"]}.json'
             plain = str(cand) if cand.exists() else None
-    summary = build_site(args.category, args.store, args.work, plain, args.out)
+    # require_category_page: this is the one caller that builds the real site,
+    # so the committed dashboard page must actually be there (see build_site).
+    summary = build_site(args.category, args.store, args.work, plain, args.out,
+                         require_category_page=True)
     print(f'[site] pages={summary["pages"]} featured={summary["featured"]} '
           f'-> {summary["out"]}')
     return 0

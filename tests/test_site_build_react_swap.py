@@ -13,6 +13,7 @@ import re
 from pathlib import Path
 
 import jsonschema
+import pytest
 
 from gpu_agent.dashboard.site_build import build_site
 from tests.test_export_json import _make_store
@@ -29,7 +30,7 @@ REACT_SHELL = ('<!DOCTYPE html><html><head><title>t</title></head>'
                '</body></html>')
 
 
-def _build(tmp_path, *, place_shell=True):
+def _build(tmp_path, *, place_shell=True, require_category_page=False):
     store = _make_store(tmp_path)
     out = tmp_path / "site"
     if place_shell:
@@ -38,7 +39,8 @@ def _build(tmp_path, *, place_shell=True):
     # build_site's own convention: the category's flat scorecard dir (it
     # resolves the store root itself, exactly as build_story_model does).
     build_site(CAT, str(store / CAT), "work-nonexistent", None, str(out),
-               price_fn=lambda d: {}, today=dt.date(2026, 8, 5))
+               price_fn=lambda d: {}, today=dt.date(2026, 8, 5),
+               require_category_page=require_category_page)
     return out
 
 
@@ -98,6 +100,29 @@ def test_a_broken_export_does_not_stop_the_site_build(tmp_path, monkeypatch):
     out = _build(tmp_path)
     assert not (out / CAT / "data" / "dashboard.json").exists()
     assert (out / CAT / "findings" / "index.html").exists()
+
+
+def test_a_missing_category_page_fails_the_build(tmp_path):
+    """Every deep page carries a "back to today's story" link to the category
+    page. The link gate resolves those against a registered key, not a file --
+    so if the committed page were ever deleted, the gate alone would still pass
+    with every one of those links dead. Building the real site checks the file
+    is actually on disk."""
+    with pytest.raises(ValueError, match="index.html"):
+        _build(tmp_path, place_shell=False, require_category_page=True)
+
+
+def test_the_build_is_happy_when_the_committed_page_is_there(tmp_path):
+    out = _build(tmp_path, place_shell=True, require_category_page=True)
+    assert (out / CAT / "index.html").read_text(encoding="utf-8") == REACT_SHELL
+
+
+def test_the_real_site_build_requires_the_category_page(tmp_path):
+    """The check is only worth having if the production path turns it on."""
+    source = Path("gpu_agent/cli.py").read_text(encoding="utf-8")
+    assert "require_category_page=True" in source, (
+        "gpu_agent/cli.py's `site` verb must build with the category-page "
+        "check on -- it is the only caller that builds the real site")
 
 
 def test_vite_never_empties_the_shared_output_directory(tmp_path):

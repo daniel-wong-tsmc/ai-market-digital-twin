@@ -33,12 +33,19 @@
           <strong>This page needs scripting turned on to show today's reading.</strong>
         </p>
         <p>
-          The reading built into this page: <em>Is supply catching up to demand?</em>
-          Getting closer. The challenger had a good quarter.
+          The question this page answers:
+          <em>Is supply catching up to demand?</em>
         </p>
+        <!--
+          No verdict goes in here. This file only changes when someone rebuilds
+          the app by hand; the answer changes every day, in data/dashboard.json.
+          A sentence baked in here would go stale and then state the opposite of
+          the page's own reading. See src/__tests__/noscript.test.ts.
+        -->
         <p>
-          That line only changes when the page itself is rebuilt, so it may be
-          behind. <a href="story/">The story archive</a> always has the latest.
+          Today's answer is not written into this file, so it cannot be shown
+          here. <a href="story/">The story archive</a> has the latest reading in
+          full.
         </p>
       </div>
     </noscript>
