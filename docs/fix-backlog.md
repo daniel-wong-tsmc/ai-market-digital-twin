@@ -1698,6 +1698,30 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   (f) The verdict's supporting sentence inherits the narrator headline verbatim, so when that
   headline carries no terminal punctuation the answer reads without a full stop — visible on the
   2026-08-06 reading ("Not yet. Memory now decides how many chips get built").
+
+- [ ] **F113 — Same-day chart researcher + dashboard render fixes (user-directed, 2026-08-06 screenshot review).**
+  The F110 matcher is passive; on 2026-08-06 all three bullets rendered "No chart" panels. User
+  decisions (interactive, zero AFK): add a tool-using research step that digs external sources for
+  a published series relevant to each chartless bullet; **quarantine + verify** trust model —
+  researched series live in `store/<cat>/research-series/`, render only after a deterministic
+  verifier re-finds every number in its cited source page (F66 tolerance rules), are labeled
+  "found today — single source", and NEVER auto-enter the human-curated `registry/chart-series.json`
+  (promotion stays a human edit). Render fixes ride along: chartless bullets go full-width with one
+  quiet line, no-chart copy varies by cause, source badges inline at sentence end. F83 re-record
+  in-lane (new step). Spec: `docs/superpowers/specs/2026-08-06-f113-chart-researcher-design.md`.
+  **Sequencing: dispatch only after F114 merges** (shared files). Design-weight; brainstormed
+  interactively 2026-08-06. Next: writing-plans.
+
+- [ ] **F114 — Narrator-authored "What changed" bullets (user-directed, 2026-08-06 screenshot review). GATED LANE (narrator prompt + pin).**
+  Mechanical scene-title+first-sentence bullets proved hollow ("They are dated 2027 and 2028" —
+  no antecedent). User decision (interactive, zero AFK): the narrator writes the 3 bullets in its
+  artifact — each ≤ 28 words, self-contained, ≥ 1 concrete anchor, `claimFindingIds` attached;
+  gate additions all mechanical (count/word cap/digit/pronoun-start/banned words/ids resolve);
+  citation audit extends to bullet numbers; exporter prefers artifact bullets, mechanical
+  condenser kept as fallback. Narrator prompt pin re-recorded in the same commit (F101b/F103
+  lockstep); F6 byte-untouched; no scored eval bar (F101b decision carries).
+  Spec: `docs/superpowers/specs/2026-08-06-f114-narrator-bullets-design.md`.
+  **Sequencing: build FIRST, before F113; exclusive prompt lane.** Next: writing-plans.
   (g) The Nvidia investor-relations URL in `registry/chart-series.json` was never verified live;
   that series has no fetcher so it renders nothing today, but check it before giving it one.
   (h) `npm run build` rewrites the committed `index.html` with different line endings, so a rebuild
