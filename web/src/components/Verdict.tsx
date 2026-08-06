@@ -36,15 +36,26 @@ function DirectionIcon({direction}: {direction: Chip['direction']}) {
   );
 }
 
+/** A lead is a short phrase like "Not yet." — four words at the outside. */
+const LONGEST_LEAD_WORDS = 4;
+
 /**
- * The mock sets the opening phrase of the answer apart. Split on the first
- * full stop so the lead carries the weight, and colour it by the direction the
- * gap is actually moving — never colour on its own, the words say it too.
+ * The mock sets the opening phrase of the answer apart. Split on the first full
+ * stop so the lead carries the weight, and colour it by the direction the gap is
+ * actually moving — never colour on its own, the words say it too.
+ *
+ * Only a genuine short lead followed by a supporting sentence gets set apart. A
+ * one-sentence answer, or one that opens with a long sentence, is left alone:
+ * colouring the whole headline would turn emphasis into decoration.
  */
-function splitAnswer(answer: string): [string, string] {
+function splitAnswer(answer: string): [lead: string, rest: string] {
   const stop = answer.indexOf('. ');
-  if (stop === -1) return [answer, ''];
-  return [answer.slice(0, stop + 1), answer.slice(stop + 1)];
+  if (stop === -1) return ['', answer];
+  const lead = answer.slice(0, stop + 1);
+  const rest = answer.slice(stop + 1);
+  if (rest.trim() === '') return ['', answer];
+  if (lead.trim().split(/\s+/).length > LONGEST_LEAD_WORDS) return ['', answer];
+  return [lead, rest];
 }
 
 export interface VerdictProps {
@@ -69,7 +80,7 @@ export function Verdict({verdict, asOf, stale}: VerdictProps) {
       <p className="q">{verdict.question}</p>
 
       <h1>
-        <span className={`lead ${tone}`}>{lead}</span>
+        {lead ? <span className={`lead ${tone}`}>{lead}</span> : null}
         {rest}
         <SourceMark refs={verdict.sources} about="the verdict" />
       </h1>

@@ -4,12 +4,33 @@
  * The mock is the visual contract: if a colour, size or spacing question comes
  * up, the answer is here, not in a fresh choice.
  *
- * These sit outside Astryx's CSS layers on purpose. Unlayered rules beat
- * layered ones in the cascade, so the mock's look wins over the design
- * system's defaults wherever the two overlap.
+ * The VALUES below are the mock's, unchanged. The one thing that is not
+ * verbatim is the selector, and it has to be.
+ *
+ * Astryx does not declare its tokens on the document root. It declares them on
+ * the element the <Theme> provider renders, scoped like this:
+ *
+ *   @layer astryx-theme {
+ *     @scope ([data-astryx-theme="neutral"]) to ([data-astryx-theme]) {
+ *       :scope { --color-accent: …; }
+ *     }
+ *   }
+ *
+ * A custom property is inherited from the nearest ancestor that declares it,
+ * and the whole app sits inside that element. So tokens declared only on :root
+ * would be shadowed for every element on the page, and cascade layers would
+ * never get a say — the two declarations sit on different elements, so they
+ * never compete at all.
+ *
+ * Declaring on `[data-astryx-theme]` as well puts our values on the same
+ * element as Astryx's. Now they do compete, and ours are unlayered, which beats
+ * anything inside a layer. Four tokens overlap: --color-accent, --color-border,
+ * --color-text-secondary and --color-warning. src/__tests__/tokens.test.ts
+ * holds this in place.
  */
 
-:root {
+:root,
+[data-astryx-theme] {
   color-scheme: light dark;
 
   /* --- surfaces & ink (Astryx neutral) --- */
@@ -60,7 +81,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root,
+  [data-astryx-theme] {
     --color-bg:            #131314;
     --color-surface:       #1A1A1B;
     --color-surface-sunk:  #202022;

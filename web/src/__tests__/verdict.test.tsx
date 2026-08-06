@@ -197,3 +197,92 @@ describe('the verdict carries its own sources', () => {
     expect(link).toHaveAttribute('target', '_blank');
   });
 });
+
+describe('colouring the answer s opening phrase', () => {
+  function answerWith(answer: string, direction = 'widening') {
+    const data = golden();
+    data.verdict.answer = answer;
+    data.verdict.chip.direction = direction as 'narrowing' | 'widening' | 'flat';
+    draw(<Verdict verdict={data.verdict} asOf={data.asOf} stale={false} />);
+    return screen.getByRole('heading', {level: 1});
+  }
+
+  it('sets a genuine short lead apart', () => {
+    const h1 = answerWith('Not yet. Buyers are committing faster than the chain can ship.');
+    const lead = h1.querySelector('.lead');
+    expect(lead).not.toBeNull();
+    expect(lead).toHaveTextContent('Not yet.');
+    expect(h1).toHaveTextContent(
+      'Not yet. Buyers are committing faster than the chain can ship.',
+    );
+  });
+
+  it('never colours the whole headline when the answer is one sentence', () => {
+    const h1 = answerWith('Not yet.');
+    expect(h1.querySelector('.lead')).toBeNull();
+    expect(h1).toHaveTextContent('Not yet.');
+  });
+
+  it('leaves a long opening sentence uncoloured — it is not a lead phrase', () => {
+    const long =
+      'Supply is still a long way behind what buyers have committed to. The gap is closing.';
+    const h1 = answerWith(long);
+    expect(h1.querySelector('.lead')).toBeNull();
+    expect(h1).toHaveTextContent(long);
+  });
+
+  it('copes with an empty answer without colouring anything', () => {
+    const h1 = answerWith('');
+    expect(h1.querySelector('.lead')).toBeNull();
+  });
+
+  it('never lets the lead phrase and the chip disagree', () => {
+    // Task 6 makes the opening phrase, the chip and the chart caption come from
+    // one computation, so they are guaranteed to agree. This holds the render
+    // side to it: the lead's tone is read from the chip's direction and from
+    // nowhere else, so the two can never drift apart.
+    for (const direction of ['narrowing', 'widening', 'flat'] as const) {
+      const data = golden();
+      data.verdict.answer = 'Not yet. The gap is still wide.';
+      data.verdict.chip.direction = direction;
+      const {unmount} = draw(
+        <Verdict verdict={data.verdict} asOf={data.asOf} stale={false} />,
+      );
+      const lead = document.querySelector('h1 .lead')!;
+      const chip = document.querySelector('.chip')!;
+      const tone = ['good', 'serious', 'flat'].find((t) =>
+        lead.classList.contains(t),
+      );
+      expect(tone, `no tone class for ${direction}`).toBeDefined();
+      expect(chip.classList.contains(tone!)).toBe(true);
+      unmount();
+    }
+  });
+});
+
+describe('what the source mark says out loud', () => {
+  const one: Ref[] = [
+    {title: 'A filing', outlet: 'Company', url: null, date: null, tier: null},
+  ];
+
+  it('says "1 source", not "1 sources"', () => {
+    draw(<SourceMark refs={one} about="the verdict" />);
+    expect(screen.getByRole('button')).toHaveAccessibleName(
+      'Show the 1 source behind the verdict',
+    );
+  });
+
+  it('says "sources" when there is more than one', () => {
+    draw(<SourceMark refs={[...one, ...one]} about="the verdict" />);
+    expect(screen.getByRole('button')).toHaveAccessibleName(
+      'Show the 2 sources behind the verdict',
+    );
+  });
+
+  it('still reads properly with nothing to name it after', () => {
+    draw(<SourceMark refs={one} />);
+    expect(screen.getByRole('button')).toHaveAccessibleName(
+      'Show the 1 source behind this',
+    );
+  });
+});

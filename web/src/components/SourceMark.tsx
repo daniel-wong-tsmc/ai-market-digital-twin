@@ -63,9 +63,8 @@ export interface SourceMarkProps {
 export function SourceMark({refs, about}: SourceMarkProps) {
   if (refs.length === 0) return null;
   const count = countSources(refs);
-  const label = about
-    ? `Show the ${count} sources behind ${about}`
-    : `Show the ${count} sources behind this`;
+  const thing = count === 1 ? 'source' : 'sources';
+  const label = `Show the ${count} ${thing} behind ${about ?? 'this'}`;
 
   return (
     <Popover
