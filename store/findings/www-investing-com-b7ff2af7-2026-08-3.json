@@ -1,0 +1,53 @@
+{
+  "id": "www-investing-com-b7ff2af7-2026-08-3",
+  "statement": "MediaTek's board approved a $5 billion U.S. financing budget for strategic expansion and supply chain support, alongside a first AI accelerator ASIC entering production in Q4 2026 and a second in high-volume production in 2028.",
+  "kind": "measured",
+  "value": {
+    "number": 5.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Committed financing behind a two-generation accelerator roadmap turns the Intel packaging design win from an intention into funded capacity that will draw on advanced-packaging supply.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.hyperscaler-asic",
+      "chips.hbm-memory"
+    ],
+    "direction": "positive",
+    "mechanism": "A funded multi-generation ASIC roadmap adds committed order flow into advanced packaging and memory, expanding non-GPU accelerator supply from 2026 into 2028."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (MediaTek Q2 2026 earnings call transcript)",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-mediatek-q2-2026-revenue-beats-guidance-as-ai-push-grows-93CH-4826949",
+      "date": "2026-07-31",
+      "excerpt": "$5 billion U.S. financing budget",
+      "tier": "secondary"
+    },
+    {
+      "source": "Investing.com (MediaTek Q2 2026 earnings call transcript)",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-mediatek-q2-2026-revenue-beats-guidance-as-ai-push-grows-93CH-4826949",
+      "date": "2026-07-31",
+      "excerpt": "first AI accelerator ASIC is on track for production",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary earnings-call transcript; board approval of a financing budget is not the same as deployed capital."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-31",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "finance-yahoo-com-5febc23d-2026-08-3",
+  "statement": "SpaceX has secured multibillion-dollar data center capacity leasing arrangements with Google and Anthropic, per reporting on its Q2 2026 results.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Pre-let capacity to large model developers is contracted demand that pulls GPU deployments forward rather than leaving them speculative.",
+  "impact": {
+    "targets": [
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed multibillion-dollar leases from frontier model developers give the operator revenue visibility to order accelerators and build capacity."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/technology/article/elon-musk-says-spacex-will-build-exclusively-with-nvidia-touts-space-based-ai-servers-211803293.html",
+      "date": "2026-08-06",
+      "excerpt": "the company has secured multibillion-dollar capacity leasing arrangements with Google and Anthropic for its data center infrastructure",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet, qualitative characterization with no contract terms disclosed."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

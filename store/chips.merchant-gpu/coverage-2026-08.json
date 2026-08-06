@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-08",
-  "capturedAt": "2026-08-05T01:44:18Z",
+  "capturedAt": "2026-08-06T01:22:11Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
@@ -17,10 +17,26 @@
     },
     {
       "type": "source",
+      "id": "amd-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
       "id": "intc-earnings",
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Intel earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['intc.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "coreweave-pricing",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'CoreWeave GPU pricing page' was not fetched. URL patterns: ['coreweave.com']",
       "paywalledNote": null
     },
     {
@@ -73,6 +89,14 @@
     },
     {
       "type": "source",
+      "id": "vendor-pr-trade-press",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Vendor press releases + trade press on merchant-GPU design wins' was not fetched. URL patterns: ['nvidianews.nvidia.com', 'ir.amd.com/news-events', 'tomshardware.com', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
       "id": "semianalysis",
       "priority": "required",
       "acquisitionStatus": "paywalled",
@@ -113,26 +137,26 @@
     }
   ],
   "gapCounts": {
-    "total": 13,
-    "source": 13,
+    "total": 16,
+    "source": 16,
     "indicator": 0,
-    "required": 13,
+    "required": 16,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
-    "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
-    "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
-    "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
-    "https://hashrateindex.com/blog/used-gpu-market-pricing-deprecation-secondary-ai/",
-    "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+    "https://finance.yahoo.com/technology/article/elon-musk-says-spacex-will-build-exclusively-with-nvidia-touts-space-based-ai-servers-211803293.html",
+    "https://interestingengineering.com/ai-robotics/spacex-nvidia-starmind-ai1-compute-payload",
     "https://lambda.ai/service/gpu-cloud",
-    "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
-    "https://www.coreweave.com/pricing",
-    "https://www.runpod.io/pricing"
+    "https://m.lookonchain.com/feeds/66600",
+    "https://www.investing.com/news/transcripts/earnings-call-transcript-mediatek-q2-2026-revenue-beats-guidance-as-ai-push-grows-93CH-4826949",
+    "https://www.runpod.io/pricing",
+    "https://www.theregister.com/ai-and-ml/2026/08/03/mediatek-lines-up-5b-war-chest-for-ai-datacenter-push/5282304",
+    "https://www.thundercompute.com/blog/nvidia-rtx-pro-6000-pricing",
+    "https://www.trendforce.com/news/2026/07/31/news-tsmc-reportedly-develops-emib-like-packaging-with-kinsus-to-prevent-potential-customer-shift-to-intel/",
+    "https://www.trendforce.com/presscenter/news/20260804-13166.html"
   ],
   "judgedIndicatorIds": [
     "D2",

@@ -1,0 +1,50 @@
+{
+  "id": "www-trendforce-com-b8196a71-2026-08-1",
+  "statement": "Intel's CEO said on the company's earnings call that demand for EMIB-T packaging remains very high with a growing backlog, and that Intel is targeting high-volume production and supporting customer ramps in 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A growing packaging backlog at a second supplier signals real capacity being added outside the incumbent CoWoS route, which is the tightest link in the accelerator supply chain.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising bookings and a 2027 high-volume ramp at an alternative advanced-packaging supplier add capacity that competes with CoWoS and relieves the packaging bottleneck on accelerator output."
+  },
+  "evidence": [
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/07/31/news-tsmc-reportedly-develops-emib-like-packaging-with-kinsus-to-prevent-potential-customer-shift-to-intel/",
+      "date": "2026-07-31",
+      "excerpt": "very high",
+      "tier": "secondary"
+    },
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/07/31/news-tsmc-reportedly-develops-emib-like-packaging-with-kinsus-to-prevent-potential-customer-shift-to-intel/",
+      "date": "2026-07-31",
+      "excerpt": "high-volume production and supporting customer ramps in 2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Management commentary from an Intel earnings call reaching us through a secondary aggregator quoting a transcript service; qualitative, with no backlog figure disclosed."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: TrendForce",
+  "asOf": "2026-08",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-31",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "www-trendforce-com-17fa2dc8-2026-08-1",
+  "statement": "TrendForce reports DRAM supply will remain tight through 2027, limiting the wafer capacity memory suppliers can allocate to HBM production, which together with 12-Hi HBM4e validation uncertainty has prompted NVIDIA to assess four alternative HBM specifications for Rubin Ultra since Q3 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "When the lead accelerator vendor evaluates downgraded memory options because wafer capacity for HBM is short, memory has become the binding constraint on how many full-specification accelerators can ship.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Tight DRAM wafer capacity caps HBM output, forcing the GPU vendor toward lower stack heights and slower interfaces, which limits shippable high-end accelerator supply."
+  },
+  "evidence": [
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/presscenter/news/20260804-13166.html",
+      "date": "2026-08-04",
+      "excerpt": "DRAM supply will remain tight through 2027",
+      "tier": "secondary"
+    },
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/presscenter/news/20260804-13166.html",
+      "date": "2026-08-04",
+      "excerpt": "limit the wafer capacity that memory suppliers can allocate to HBM production",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Research-house supply-chain checks, not an NVIDIA statement; the document notes NVIDIA has not confirmed a spec change. Corroborated by the SemiAnalysis relay but that is two publishers, short of three."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: Lookonchain (summarizing SemiAnalysis), TrendForce",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

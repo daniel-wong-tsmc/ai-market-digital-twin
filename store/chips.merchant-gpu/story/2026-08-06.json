@@ -1,0 +1,213 @@
+{
+  "headline": "Memory now decides how many chips get built",
+  "deck": "The step that binds a chip to its memory is less of a jam than it was. The memory itself is not, and NVIDIA has cut the memory in its next flagship part so a fixed pool stretches further. Meanwhile a buyer that will take only NVIDIA says it wants about ten gigawatts of computing by the end of next year.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "A buyer who will take only one brand, and wants far more of it",
+      "paragraphs": [
+        "SpaceX said on its second-quarter call that it is building exclusively on NVIDIA, naming the Vera Rubin design, and that it will run those rack-sized systems both on the ground and in orbit. Its AI revenue was $2.6 billion in the quarter, up 213 percent on the previous three months and 247 percent on a year earlier. It is aiming at more than 2 gigawatts of computing by the end of this year and about 10 gigawatts by the end of 2027.",
+        "The base it is building from is already large. It ended June with 1.4 gigawatts of capacity, up from 1.0 gigawatt three months earlier and 400 megawatts a year before. On the 4 August call it said its understanding with NVIDIA is that it will receive a very significant percentage of NVIDIA's chips in calendar 2027, and it holds multibillion-dollar capacity leases with Google and Anthropic.",
+        "This is the pattern behind the whole shortage. Chips that have not been built yet are spoken for years ahead, and the queue keeps gaining new names. Coverage on 4 August notes NVIDIA's Space-1 version of the Vera Rubin part, claimed at up to 25 times the work of an H100, with commercial shipments expected later this year."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "finance-yahoo-com-5febc23d-2026-08-1",
+        "finance-yahoo-com-5febc23d-2026-08-2",
+        "finance-yahoo-com-5febc23d-2026-08-3",
+        "ca-investing-com-e6319e42-2026-08-2",
+        "ca-investing-com-e6319e42-2026-08-3",
+        "interestingengineering-com-0cdea07c-2026-08-2"
+      ],
+      "sourceLine": "SpaceX second-quarter results reported by Yahoo Finance on 6 August 2026, the SpaceX earnings call transcript of 4 August 2026, and Interesting Engineering, 4 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://finance.yahoo.com/technology/article/elon-musk-says-spacex-will-build-exclusively-with-nvidia-touts-space-based-ai-servers-211803293.html",
+          "title": "SpaceX says it will build only with NVIDIA and points to computers in space",
+          "outlet": "Yahoo Finance",
+          "date": "2026-08-06"
+        },
+        {
+          "url": "https://interestingengineering.com/ai-robotics/spacex-nvidia-starmind-ai1-compute-payload",
+          "title": "SpaceX and NVIDIA put a computing payload in orbit",
+          "outlet": "Interesting Engineering",
+          "date": "2026-08-04"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The hold-up moved from packaging to memory",
+      "paragraphs": [
+        "For most of the past year the tightest point was packaging, the step that binds a chip to its memory. That gap has narrowed. A supply-chain review published in early July put the shortfall at about 10 percent by mid-2026, down from about 20 percent in late 2025, against packaging capacity of roughly 120,000 to 140,000 wafers a month. The lines are still full, though: reporting dated 31 July says they are booked through 2027.",
+        "Memory has not eased at all. TrendForce reported on 4 August that memory supply stays short through 2027, which limits how much factory capacity the memory makers can put toward the stacked memory that sits beside each chip. Since the third quarter, it says, NVIDIA has been weighing four different memory options for its Rubin Ultra part.",
+        "The product itself has already given way. The mainstream Rubin Ultra now carries 192 gigabytes of stacked memory, down from the 288 gigabytes of Rubin itself and far below the 1 terabyte design shown in 2025. The stated reason is scarce memory: less memory in each chip means more finished chips out of the same pool. Reporting on 3 August adds data-centre power limits as a second reason, with the mainstream part set at about 1,800 watts.",
+        "This is not a queue that clears quickly. Micron said in late June that its stacked memory is effectively sold out through 2027, with order books running into 2028. A supplier warning in mid-July put waits for memory components at 32 to more than 40 weeks."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "supplyics-com-c83015c2-2026-08-2",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-2",
+        "www-kucoin-com-8fc72edf-2026-08-1",
+        "www-kucoin-com-8fc72edf-2026-08-2",
+        "www-investing-com-09606ac9-2026-07-1",
+        "www-techtimes-com-669598b1-2026-07-1"
+      ],
+      "sourceLine": "TrendForce, 4 August 2026, and 404K Semi-Ai Research, 4 August 2026, with KuCoin's news flash of 3 August, CryptoBriefing dated 31 July, a SupplyICs market review from early July, Micron's late-June results slides, and a mid-July supplier warning reported by TechTimes.",
+      "relatedDocs": [
+        {
+          "url": "https://www.trendforce.com/presscenter/news/20260804-13166.html",
+          "title": "Memory supply stays short through 2027, and NVIDIA weighs four memory options",
+          "outlet": "TrendForce",
+          "date": "2026-08-04"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The alternatives are real. They are dated 2027 and 2028.",
+      "paragraphs": [
+        "MediaTek is the newest name trying to widen the supply. It expects more than $2 billion of revenue this year from chips it designs for cloud companies, with its first such chip entering production in the last quarter of 2026 and a second in high-volume production in 2028. Its board has approved $5 billion of financing to fund the push, and it has raised its share goal for these chips to 15 to 20 percent from 10 to 15 percent. Its own quarter was thinner: revenue of NT$152.18 billion, about $4.68 billion, up 1.2 percent on the year, with operating profit down 22 percent.",
+        "Not everyone believes the target. A Gartner analyst pointed out that MediaTek's share in 2024 was under 1 percent and called the goal very high.",
+        "The second packaging route is on a similar clock. Intel's chief executive said on the company's call, reported 31 July, that demand for its bridge packaging is very high with a growing backlog and that it is targeting high-volume production and customer ramps in 2027. The parts that go under it are expected to reach mass production in 2027 with first yields aimed at 50 percent, and skipping one costly layer could open a cost gap of 40 to 50 percent against TSMC's method. Scale is the catch: Intel holds roughly 13.7 percent of this kind of packaging capacity against TSMC's roughly 70 percent."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "www-theregister-com-9b9edf29-2026-08-1",
+        "www-theregister-com-9b9edf29-2026-08-2",
+        "www-theregister-com-9b9edf29-2026-08-3",
+        "www-investing-com-b7ff2af7-2026-08-2",
+        "www-investing-com-b7ff2af7-2026-08-3",
+        "www-trendforce-com-b8196a71-2026-08-1",
+        "www-trendforce-com-b8196a71-2026-08-4",
+        "techsoda-substack-com-3b7a4ff5-2026-08-3"
+      ],
+      "sourceLine": "The Register, 3 August 2026, the MediaTek earnings call transcript via Investing.com dated 31 July 2026, and TrendForce reporting of 31 July 2026, with packaging share figures from TechSoda, 4 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://www.theregister.com/ai-and-ml/2026/08/03/mediatek-lines-up-5b-war-chest-for-ai-datacenter-push/5282304",
+          "title": "MediaTek lines up $5 billion for its data-centre chip push",
+          "outlet": "The Register",
+          "date": "2026-08-03"
+        },
+        {
+          "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-mediatek-q2-2026-revenue-beats-guidance-as-ai-push-grows-93CH-4826949",
+          "title": "MediaTek second-quarter 2026 earnings call transcript",
+          "outlet": "Investing.com (MediaTek Q2 2026 earnings call transcript)",
+          "date": "2026-07-31"
+        },
+        {
+          "url": "https://www.trendforce.com/news/2026/07/31/news-tsmc-reportedly-develops-emib-like-packaging-with-kinsus-to-prevent-potential-customer-shift-to-intel/",
+          "title": "TSMC develops a rival bridge packaging method as Intel presses its case",
+          "outlet": "TrendForce",
+          "date": "2026-07-31"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch from here",
+      "paragraphs": [
+        "Published rental prices remain the simplest check on whether any of this reaches an ordinary customer. Lambda's list today shows an H100 at $3.99 per chip-hour on its eight-chip machines, a B200 at $6.69 and an A100 at $2.79. Its tables as of yesterday still carried no H200, GB200, GB300 or B300, so the newest part it rents in public is the B200. RunPod's price page, dated 27 July, listed an H100 at $2.99.",
+        "Outside the big contracts, prices are high and uneven. NVIDIA's own marketplace listed the RTX PRO 6000 at $13,250 in August, 55 percent above the $8,565 it launched at about 16 months earlier. Renting that same part ranged from $1.42 an hour at Vast.ai to $3.36 on Amazon's cloud and $4.50 on Google's.",
+        "Three things would tell you the picture is changing. Which of the four memory options NVIDIA settles on for Rubin Ultra, because that choice sets how many chips one pool of memory can fill. Whether MediaTek's first cloud-designed chip really enters production in the last quarter of this year. And whether Intel's bridge packaging reaches volume in 2027 near the yields it is aiming at. Until one of those lands, the shortage stays where it is, and the newest chips keep going to buyers who booked them long ago."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "lambda-ai-e88b0904-2026-08-1",
+        "lambda-ai-71b45f28-2026-08-3",
+        "www-runpod-io-29896770-2026-08-1",
+        "www-thundercompute-com-69d2d064-2026-08-1",
+        "www-thundercompute-com-69d2d064-2026-08-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-theregister-com-9b9edf29-2026-08-1",
+        "www-trendforce-com-b8196a71-2026-08-1",
+        "www-trendforce-com-b8196a71-2026-08-4"
+      ],
+      "sourceLine": "Lambda's published pricing page read on 6 August 2026, RunPod's pricing page dated 27 July 2026, a Thunder Compute price survey of 1 August 2026, and the TrendForce, Register and Intel call reporting cited above.",
+      "relatedDocs": [
+        {
+          "url": "https://lambda.ai/service/gpu-cloud",
+          "title": "Lambda cloud rental prices",
+          "outlet": "Lambda (Lambda Labs)",
+          "date": "2026-08-06"
+        },
+        {
+          "url": "https://www.thundercompute.com/blog/nvidia-rtx-pro-6000-pricing",
+          "title": "What the RTX PRO 6000 costs to buy and to rent",
+          "outlet": "Thunder Compute (blog)",
+          "date": "2026-08-01"
+        },
+        {
+          "url": "https://www.runpod.io/pricing",
+          "title": "RunPod rental prices",
+          "outlet": "Runpod",
+          "date": "2026-07-27"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Whether the biggest buyers keep raising their budgets is the clearest sign of how long the queue stays full.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Money going into memory plants is the only thing that lifts the limit that now sets the number of chips.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Finished servers leaving the factories is the honest test of whether new suppliers add real deliveries.",
+      "scene": 3
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a chip costs on the open market shows whether supply is reaching buyers outside the long-standing contracts.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "Memory, not packaging, now sets how many chips get finished, and NVIDIA is weighing four memory options for its next part.",
+      "scene": 2
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "MediaTek raises its share goal for cloud-designed chips and lines up $5 billion to fund it.",
+      "scene": 3
+    }
+  ],
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-06",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "2519841601d779b759056733e7e32284b74119c58bda5b6916d1d9647d4f4199",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-06T01:41:07.768555+00:00"
+  }
+}

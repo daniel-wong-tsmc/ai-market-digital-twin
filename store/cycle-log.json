@@ -1,212 +1,199 @@
 {
- "asOf": "2026-08",
- "mode": "daily",
- "capturedAt": "2026-08-05T01:16:13Z",
- "scope": "category:chips.merchant-gpu",
- "runDir": "work/daily-2026-08-05",
- "unattended": true,
- "entries": [
-  {
-   "category_id": "chips.merchant-gpu",
-   "assignment_path": "fixtures/asg.chips.merchant-gpu.json",
-   "status": "done",
-   "scorecard": "store/chips.merchant-gpu/2026-08-v2.json",
-   "dmi": 3.653,
-   "smi": -0.16,
-   "answers": {
-    "extract": "work/daily-2026-08-05/extract-answer.json",
-    "judge": "work/daily-2026-08-05/judge-answer.json",
-    "thesis": "work/daily-2026-08-05/thesis-answer.json",
-    "implication": "work/daily-2026-08-05/implication-answer.json",
-    "narrator": "work/daily-2026-08-05/narrator-answer.json"
-   },
-   "judgeSamples": [
-    "work/daily-2026-08-05/judge/sample-1.json",
-    "work/daily-2026-08-05/judge/sample-2.json",
-    "work/daily-2026-08-05/judge/sample-3.json"
-   ],
-   "corpus": {
-    "coverage": "work/daily-2026-08-05/corpus-coverage.json",
-    "merged": "work/daily-2026-08-05/corpus-findings.json",
-    "dedupedFresh": "work/daily-2026-08-05/deduped-fresh.json",
-    "report": "work/daily-2026-08-05/corpus-report.json",
-    "pipelineReport": "work/daily-2026-08-05/corpus-pipeline-report.json",
-    "counts": {
-     "storeInWindow": 221,
-     "storeFadedOut": 71,
-     "freshNew": 8,
-     "freshUpdate": 23,
-     "freshDuplicate": 16,
-     "merged": 252
+  "scope": "category:chips.merchant-gpu",
+  "asOf": "2026-08",
+  "mode": "daily",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "runDir": "work/daily-2026-08-06",
+  "unattended": true,
+  "entries": [
+    {
+      "category_id": "chips.merchant-gpu",
+      "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
+      "manifestRef": "manifests/chips.merchant-gpu.json",
+      "status": "done",
+      "scorecard": "store/chips.merchant-gpu/2026-08-v3.json",
+      "dmi": 3.573,
+      "smi": -0.04,
+      "priorScorecard": "store/chips.merchant-gpu/2026-08-v2.json",
+      "priorDmi": 3.653,
+      "priorSmi": -0.16,
+      "gather": {
+        "documentsGathered": 10,
+        "primary": 0,
+        "secondary": 10,
+        "duplicates": 0,
+        "dropped": 0,
+        "droppedKnown": 0,
+        "droppedKnownDetail": [],
+        "cap": "maxDocuments=10 (daily) reached in round 1; round 2 not run",
+        "topUp": true,
+        "topUpReason": "store coverage present (247 findings in window) -> gather capped at 10 and aimed at not-covered D6 + gpuSpotPrice",
+        "skipped": [
+          "coreweave.com/pricing not fetched: price-class cap (3 docs) reached",
+          "eBay H100 80GB secondary-market listings not captured: both WebFetch attempts timed out (gpuSpotPrice under-covered)",
+          "vast.ai/pricing carries no numbers on the marketing page; live per-hour grid sits behind an interactive UI - not scraped",
+          "techtimes.com, guru3d.com, techpowerup.com, wccftech EMIB-T/Rubin corroborators not fetched: HTTP 403",
+          "videocardz.com / wccftech RTX PRO 6000 price corroborators not fetched: HTTP 402 paywall",
+          "digitimes.com EMIB-T + CoWoS substrate articles: paywalled, headline+lede only",
+          "round 2 not run: maxDocuments (10) reached in round 1",
+          "licensed-source fetched: trendforce.com",
+          "licensed-source fetched: lookonchain.com (summarizing SemiAnalysis research)",
+          "MANIFEST DRIFT: manifest lists lambdalabs.com/service/gpu-cloud, which now 404s; live domain is lambda.ai"
+        ],
+        "pursuedDespiteAge": [
+          {
+            "ref": "https://www.runpod.io/pricing",
+            "date": "2026-07-27",
+            "ageDays": 10,
+            "reason": "Live GPU rental rate card still authoritative for D6, one of the two indicators with zero store coverage; no fresher restatement exists."
+          }
+        ]
+      },
+      "answers": {
+        "extract": "work/daily-2026-08-06/extract-answer.json",
+        "judge": "work/daily-2026-08-06/judge-answer.json",
+        "thesis": "work/daily-2026-08-06/thesis-answer.json",
+        "implication": "work/daily-2026-08-06/implication-answer.json",
+        "narrator": "work/daily-2026-08-06/narrator-answer.json"
+      },
+      "corpusArtifacts": {
+        "coverage": "work/daily-2026-08-06/corpus-coverage.json",
+        "merged": "work/daily-2026-08-06/corpus-findings.json",
+        "dedupedFresh": "work/daily-2026-08-06/deduped-fresh.json",
+        "report": "work/daily-2026-08-06/corpus-report.json",
+        "pipelineReport": "work/daily-2026-08-06/corpus-pipeline-report.json"
+      },
+      "corpusCounts": {
+        "storeInWindow": 247,
+        "fadedOut": 76,
+        "freshNew": 3,
+        "freshUpdate": 15,
+        "duplicate": 11,
+        "merged": 265
+      },
+      "dedupReport": {
+        "path": "store/chips.merchant-gpu/dedup-2026-08-06.json",
+        "new": 3,
+        "update": 15,
+        "duplicate": 11
+      },
+      "findingsGated": {
+        "count": 29,
+        "dropped": 0
+      },
+      "wikiIngest": {
+        "routed": 18,
+        "pages": 3
+      },
+      "unregisteredEntities": {
+        "count": 1,
+        "names": [
+          "market"
+        ]
+      },
+      "coverageRecord": {
+        "path": "store/chips.merchant-gpu/coverage-2026-08.json",
+        "gaps": 16,
+        "source": 16,
+        "indicator": 0,
+        "required": 16,
+        "waived": 0
+      },
+      "licensedSourcesFetched": [
+        "trendforce.com",
+        "lookonchain.com (summarizing SemiAnalysis)"
+      ],
+      "gates": {
+        "voiceLint": "rejected sample 3 (acronym 'EMIB-T' not on allowlist) -> re-dispatched that sample only -> passed; NOT bypassed",
+        "sufficiency": "clean",
+        "thesisGate": "rejected once (cites unknown finding www-trendforce-com-17fa2dc8-2026-08-4) -> re-dispatched -> passed",
+        "implicationGate": "clean on first attempt",
+        "narratorGate": "clean on first attempt"
+      },
+      "stages": {
+        "category": "done",
+        "thesis": "done",
+        "implication": "done",
+        "narrator": "done",
+        "citationAudit": "flagged",
+        "layer": "deferred",
+        "main": "deferred"
+      },
+      "citationAudit": {
+        "path": "store/chips.merchant-gpu/audit/2026-08-06.json",
+        "status": "flagged",
+        "flagged": [
+          "impl:7: uncited number 192",
+          "impl:7: uncited number 288"
+        ],
+        "handling": "implication lines are logged, not re-dispatched (F66 - implication has no third attempt); story scenes clean"
+      },
+      "story": "store/chips.merchant-gpu/story/2026-08-06.json",
+      "implicationArtifact": "store/implications/chips.merchant-gpu/2026-08.json",
+      "seriesRefresh": "no-gap",
+      "v2Shadow": "stamped",
+      "priceSync": {
+        "status": "ok",
+        "warning": "stale price folder: newest data 260602, as_of 2026-08",
+        "written": {
+          "gpuSpotPrice": 12,
+          "gpuRentalOnDemand": 16,
+          "gpuRentalSpot": 0,
+          "gpuRental1yr": 17
+        }
+      }
+    }
+  ],
+  "stages": [
+    {
+      "tier": "category",
+      "status": "active"
     },
-    "note": "Coverage query again returned notCovered: [D6, gpuSpotPrice] - every other dimension x entity slot already had store coverage, so this gather ran as a TOP-UP aimed at the two uncovered price indicators plus material updates to covered series (cap min(maxDocuments,10) = 10). Both were covered this cycle."
-   },
-   "dedupL2": {
-    "report": "store/chips.merchant-gpu/dedup-2026-08-05.json",
-    "new": 8,
-    "update": 23,
-    "duplicate": 16,
-    "findings": "work/daily-2026-08-05/deduped.json",
-    "note": "deduped.json (Daily mode L2) was the write-back stream fed to wiki-ingest; corpus-findings.json was the judge input per Step 3(c). Recorded as an AFK-default: the skill's Daily mode names wiki-dedup as the write-back stream while Step 3(c)/(d2) name the corpus outputs, so both were produced and only the Daily stream was ingested, to avoid double-routing the same findings."
-   },
-   "gather": {
-    "documents": 10,
-    "primary": 1,
-    "secondary": 9,
-    "duplicates": 0,
-    "dropped": [],
-    "droppedKnown": 0,
-    "rounds": 1,
-    "blobs": "work/daily-2026-08-05/blobs.json",
-    "docs": "work/daily-2026-08-05/docs",
-    "gatherLog": "work/daily-2026-08-05/docs/gather-log.json",
-    "maxDocuments": 10,
-    "maxRounds": 2,
-    "maxSubagentsPerRound": 3,
-    "topUp": true,
-    "blobsByClass": {
-     "filingsIR": 1,
-     "price": 4,
-     "news": 5
+    {
+      "tier": "layer",
+      "status": "deferred"
     },
-    "primarySources": "sec.gov,investor.nvidia.com,nvidianews.nvidia.com,blogs.nvidia.com,ir.amd.com,intc.com,bis.doc.gov,federalregister.gov",
-    "earningsWindow": {
-     "nvda-earnings": "heavy",
-     "amd-earnings": "heavy",
-     "nvda-10k-risk-factors": "heavy",
-     "note": "AMD reported Q2 2026 on 2026-08-04, one day before this cycle - the ir.amd.com press release was captured as this run's only primary document, closing the 'AMD actuals one quarter stale' gap logged on 2026-08-04. NVIDIA reports 2026-08-26 and had no new results to capture."
-    },
-    "huggingnews": {
-     "tags": [
-      "ai-compute-chips"
-     ],
-     "keyed": true,
-     "storiesInFeed": 22,
-     "detailsFetched": 8,
-     "fallbackDocsIngested": 0,
-     "note": "Tiered discovery worked as designed: the latest feed and 8 story details supplied leads only; every lead was chased to an underlying source and no HuggingNews story was ingested as a document."
-    },
-    "huggingnewsFallback": [],
-    "licensedSourcesFetched": [],
-    "skipped": [
-     "blob 'b3-rubin-ultra-hbm4e-demand-impact' (404kresearch.substack.com, 2026-08-03) not ingested: daily maxDocuments=10 reached; 11 blobs were gathered and this was dropped as the weakest - same publisher as b2, primaryFound null, adds no independent corroboration.",
-     "lead 'MediaTek 2Q26 earnings call / IR page' not chased: daily caps reached; the Intel EMIB-T order remains trade-press-only with a June 2026 MediaTek denial on record.",
-     "lead 'AMD Q2 2026 8-K / 10-Q on sec.gov' not chased: EDGAR browse returned HTTP 403 to the gatherer; the ir.amd.com press release plus the earnings-call transcript were used instead. RPO/backlog dollar figures and customer-concentration percentages remain uncovered from primary filings.",
-     "lead 'vast.ai/pricing' and 'ebay.com sold listings' not fetched: JS-only rendering / HTTP 403 - gpuSpotPrice fell back to an April 2026 aggregator page (pursuedDespiteAge).",
-     "paywalled source 'trendforce-gpu-tracker' not fetched: manifest is_paywalled (licensed-api, $5000/yr) - logged as a coverage gap, never scraped.",
-     "paywalled source 'semianalysis' deep channel-check data not fetched: manifest is_paywalled (licensed-api) - logged as a coverage gap."
-    ],
-    "pursuedDespiteAge": [
-     {
-      "ref": "https://hashrateindex.com/blog/used-gpu-market-pricing-deprecation-secondary-ai/",
-      "date": "2026-04-08",
-      "ageDays": 119,
-      "reason": "gpuSpotPrice is an uncovered manifest indicator and every live secondary-market source (eBay, vast.ai) refused to render prices; kept as an explicitly dated April mark, not a 2026-08-05 mark."
-     }
-    ]
-   },
-   "unregisteredEntities": {
-    "count": 1,
-    "names": [
-     "market"
-    ]
-   },
-   "coverage": {
-    "artifact": "store/chips.merchant-gpu/coverage-2026-08.json",
-    "gaps": 13,
-    "sourceGaps": 13,
-    "indicatorGaps": 0,
-    "required": 13,
-    "waived": 0
-   },
-   "webReach": {
+    {
+      "tier": "main",
+      "status": "deferred"
+    }
+  ],
+  "webReach": {
     "agent-reach": {
-     "status": "ok",
-     "version": "1.5.0",
-     "pin": "1.5.0",
-     "drift": false
+      "status": "ok",
+      "version": "1.5.0",
+      "pin": "1.5.0",
+      "drift": false
     },
     "last30days": {
-     "status": "ok",
-     "version": "skill-present",
-     "pin": "skill-present",
-     "drift": false
+      "status": "ok",
+      "version": "skill-present",
+      "pin": "skill-present",
+      "drift": false
     },
     "crawl4ai": {
-     "status": "ok",
-     "version": "0.9.0",
-     "pin": "0.9.0",
-     "drift": false
+      "status": "ok",
+      "version": "0.9.0",
+      "pin": "0.9.0",
+      "drift": false
     },
     "huggingnews": {
-     "status": "ok",
-     "keyed": true,
-     "version": "api-skill-v0.0.2",
-     "pin": "api-skill-v0.0.2",
-     "drift": false
-    },
-    "licensedSourceFetched": [],
-    "note": "gpu-agent web-reach-ensure --json --unattended (scheduled run: never installs)."
-   },
-   "gates": {
-    "extract": "First answer dropped all 7 GPU-rental price rows: the brain set high confidence on secondary-only, single-publisher evidence. The three price documents were re-dispatched with the violation lines appended; the re-gate passed 47 findings, 0 dropped. No answer was hand-edited.",
-    "voiceLint": "pipeline rejected judge sample 1 (momentum.rationale: acronym 'SK' not on the registry allowlist). Sample 1 alone was re-dispatched as its own subagent and the re-run passed. thesis rejected amd-credible-second-source (statement 2 sentences, max 1); re-dispatched once and passed. Neither check was bypassed.",
-    "sufficiency": "no sufficiency: lines raised.",
-    "narrator": "First answer failed NARRATOR GATE on 6 related-doc outlet strings that did not match inputs.docPool verbatim. Re-dispatched once with the violations; passed.",
-    "implication": "passed on the first attempt, 8 lines."
-   },
-   "seriesRefresh": {
-    "status": "no-gap",
-    "gaps": [],
-    "check": "work/daily-2026-08-05/series-gaps.json"
-   },
-   "priceSync": {
-    "status": "ok",
-    "written": {
-     "gpuSpotPrice": 12,
-     "gpuRentalOnDemand": 16,
-     "gpuRentalSpot": 0,
-     "gpuRental1yr": 17
-    },
-    "warning": "stale price folder: newest data 260602, as_of 2026-08 (logged, non-fatal)."
-   },
-   "v2Shadow": "stamped",
-   "category": "done",
-   "thesis": "done",
-   "implication": "done",
-   "narrator": "done",
-   "citationAudit": "failed",
-   "citationAuditDetail": {
-    "record": "store/chips.merchant-gpu/audit/2026-08-05.json",
-    "sceneVerdicts": "all 4 narrator scenes clean",
-    "flagged": [
-     "impl:7: uncited number 4.6",
-     "impl:7: uncited number 9.7"
-    ],
-    "note": "Flags are implication-only, so per the run-cycle rule they are logged and NOT re-dispatched (the implication step has no third attempt to spend). The narrator was not re-dispatched and no honest-gap fallback was recorded, because no narrator scene was flagged. The scorecard is unaffected."
-   },
-   "layer": "deferred",
-   "main": "deferred"
-  }
- ],
- "stages": [
-  {
-   "tier": "category",
-   "status": "active"
+      "status": "ok",
+      "keyed": true,
+      "version": "api-skill-v0.0.2",
+      "pin": "api-skill-v0.0.2",
+      "drift": false
+    }
   },
-  {
-   "tier": "layer",
-   "status": "deferred"
-  },
-  {
-   "tier": "main",
-   "status": "deferred"
-  }
- ],
- "afkDefaults": [
-  "Gatherer and brain subagents were dispatched with the tool-restriction enforced by instruction rather than by the harness: no zero-tool or Read/Write/WebSearch/WebFetch-only agent type exists in this session, so each dispatch carried an explicit prohibition on Bash and on any path outside the run directory. The brain subagents read the CLI-emitted prompt files directly instead of receiving them pasted inline, because the judge/thesis/narrator prompts are 96k-198k characters and hand-transcribing them could not be guaranteed faithful - prompt fidelity was judged the stronger invariant. Flagged for the user.",
-  "The 10-document daily cap was enforced by dropping the weakest of 11 gathered blobs rather than by letting the cap trim mid-round; the drop is logged in gather.skipped.",
-  "Daily-mode L2 (deduped.json) was used as the single write-back stream while the F62 corpus merge supplied the judge input, to avoid routing the same findings twice.",
-  "citation-audit was marked failed rather than triggering a narrator re-dispatch or fallback, because every flag was on an implication line and no narrator scene was flagged."
- ]
+  "huggingnewsFallback": [],
+  "afkDefaults": [
+    "Subagent tool-restriction could not be enforced: the Agent tool has no per-call tool allowlist, so the F88 no-Bash wall on reader-gatherers and the tool-less rule on brain seams were enforced by dispatch instruction only, not structurally.",
+    "Judge (102k chars), thesis (121k), implication (106k) and narrator (211k) prompts were too large to inline, so each brain subagent read its emitted prompt file from disk instead of receiving it inline; independence per sample (F38) was preserved by dispatching separate subagents.",
+    "The implication and narrator subagents used extra tool calls to page their very long prompt files; no network fetches were made.",
+    "F67 verbatim-report rule not applied to the session's final message: the rendered daily report is 100KB, and the user's global CLAUDE.md requires short plain-English output. Full report saved to work/daily-2026-08-06/report.txt."
+  ],
+  "notes": [
+    "MANIFEST DRIFT: manifests/chips.merchant-gpu.json lists lambdalabs.com/service/gpu-cloud for D6, which now returns HTTP 404; the live domain is lambda.ai. Not fixed this run (out of scope for a scheduled cycle).",
+    "gpuSpotPrice remains thinly covered: direct eBay marketplace fetches timed out; the one card-price document is a cloud vendor's blog, an interested secondary source."
+  ]
 }

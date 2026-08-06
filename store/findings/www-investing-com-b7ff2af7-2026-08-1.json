@@ -1,0 +1,50 @@
+{
+  "id": "www-investing-com-b7ff2af7-2026-08-1",
+  "statement": "MediaTek's second-generation AI accelerator program uses Intel EMIB-T packaging, with yield and reliability described on the Q2 2026 earnings call as on track and the CFO saying EMIB is making good progress.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named external customer committing a high-volume accelerator program to Intel's packaging is a concrete design win that adds advanced-packaging capacity outside the incumbent TSMC route.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "An external ASIC program qualifying on Intel EMIB-T validates a second advanced-packaging source, expanding total packaging supply available to accelerator makers and easing the CoWoS bottleneck that constrains merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (MediaTek Q2 2026 earnings call transcript)",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-mediatek-q2-2026-revenue-beats-guidance-as-ai-push-grows-93CH-4826949",
+      "date": "2026-07-31",
+      "excerpt": "the second-generation program uses Intel EMIB-T",
+      "tier": "secondary"
+    },
+    {
+      "source": "Investing.com (MediaTek Q2 2026 earnings call transcript)",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-mediatek-q2-2026-revenue-beats-guidance-as-ai-push-grows-93CH-4826949",
+      "date": "2026-07-31",
+      "excerpt": "making good progress",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary transcript of a customer's earnings call rather than an Intel filing; qualitative status only, no yield figures disclosed."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: Investing.com (MediaTek Q2 2026 earnings call transcript), TrendForce",
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-31",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-08-06",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-5febc23d-2026-08-1",
+        "finance-yahoo-com-5febc23d-2026-08-2",
+        "finance-yahoo-com-5febc23d-2026-08-3",
+        "ca-investing-com-e6319e42-2026-08-2",
+        "ca-investing-com-e6319e42-2026-08-3",
+        "interestingengineering-com-0cdea07c-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "supplyics-com-c83015c2-2026-08-2",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-2",
+        "www-kucoin-com-8fc72edf-2026-08-1",
+        "www-kucoin-com-8fc72edf-2026-08-2",
+        "www-investing-com-09606ac9-2026-07-1",
+        "www-techtimes-com-669598b1-2026-07-1"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-theregister-com-9b9edf29-2026-08-1",
+        "www-theregister-com-9b9edf29-2026-08-2",
+        "www-theregister-com-9b9edf29-2026-08-3",
+        "www-investing-com-b7ff2af7-2026-08-2",
+        "www-investing-com-b7ff2af7-2026-08-3",
+        "www-trendforce-com-b8196a71-2026-08-1",
+        "www-trendforce-com-b8196a71-2026-08-4",
+        "techsoda-substack-com-3b7a4ff5-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "lambda-ai-e88b0904-2026-08-1",
+        "lambda-ai-71b45f28-2026-08-3",
+        "www-runpod-io-29896770-2026-08-1",
+        "www-thundercompute-com-69d2d064-2026-08-1",
+        "www-thundercompute-com-69d2d064-2026-08-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-theregister-com-9b9edf29-2026-08-1",
+        "www-trendforce-com-b8196a71-2026-08-1",
+        "www-trendforce-com-b8196a71-2026-08-4"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-2f05647b-2026-07-1",
+        "finance-yahoo-com-baa362f5-2026-07-2",
+        "thetechcapital-com-796ec195-2026-07-1",
+        "www-fool-com-12d961c0-2026-07-2"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-biggo-com-ae5dcd41-2026-07-1",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "supplyics-com-c83015c2-2026-08-2",
+        "economy-ac-24d4d647-2026-07-1"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "siliconanalysts-com-528fac70-2026-07-4",
+        "www-forbes-com-7c91863a-2026-07-2",
+        "supplyics-com-c83015c2-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "finance-biggo-com-6dfe92b3-2026-07-1",
+        "finance-biggo-com-c310c4ca-2026-07-06-1",
+        "www-techtimes-com-669598b1-2026-07-1"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-faf-ae-6bcac1ba-2026-07-2",
+        "siliconanalysts-com-47ffeeeb-2026-07-3",
+        "www-investing-com-b7ff2af7-2026-08-2",
+        "techcrunch-com-6b79ddb7-1"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-servethehome-com-b11b71a3-2026-07-2",
+        "newsletter-semianalysis-com-5136a06c-2026-07-1",
+        "www-amd-com-49475e6c-2026-07-2",
+        "ir-amd-com-6e904c47-2026-07-3"
+      ]
+    },
+    {
+      "claimKey": "impl:6",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-3",
+        "techsoda-substack-com-3b7a4ff5-2026-08-4",
+        "www-trendforce-com-b8196a71-2026-08-4"
+      ]
+    },
+    {
+      "claimKey": "impl:7",
+      "verdict": "flagged",
+      "flaggedTokens": [
+        "192",
+        "288"
+      ],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "siliconanalysts-com-79e017b3-2026-07-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-2",
+        "www-investing-com-09606ac9-2026-07-1"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 12,
+    "flagged": 1,
+    "skipped": 0
+  }
+}

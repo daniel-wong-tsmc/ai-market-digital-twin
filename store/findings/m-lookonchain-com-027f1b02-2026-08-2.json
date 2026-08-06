@@ -1,0 +1,52 @@
+{
+  "id": "m-lookonchain-com-027f1b02-2026-08-2",
+  "statement": "Reported Rubin Ultra power variants span roughly 1800W for Max-Q, 2600W to 2800W for Max-P, and a 1200W version for lower compute loads such as token decoding, in an NVL576-scale system of 8 racks with 72 GPUs each.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Per-GPU power in the 1.8kW to 2.8kW range at NVL576 scale pushes the electrical and cooling requirement per rack sharply higher, which gates how fast sites can absorb the parts.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.cooling",
+      "energy.electrical-equipment",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "mixed",
+    "mechanism": "Higher per-accelerator wattage at larger rackscale domains raises demand for cooling and electrical equipment while making datacenter power availability the limiting factor on deployment pace."
+  },
+  "evidence": [
+    {
+      "source": "Lookonchain (summarizing SemiAnalysis)",
+      "url": "https://m.lookonchain.com/feeds/66600",
+      "date": "2026-08-03",
+      "excerpt": "ranging from 2600W to 2800W",
+      "tier": "secondary"
+    },
+    {
+      "source": "Lookonchain (summarizing SemiAnalysis)",
+      "url": "https://m.lookonchain.com/feeds/66600",
+      "date": "2026-08-03",
+      "excerpt": "8 racks each with 72 GPUs interconnected",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Unconfirmed product specifications relayed by a secondary aggregator from one research house; NVIDIA has not confirmed them."
+  },
+  "dispersion": "Three stated power variants: ~1800W Max-Q, 2600-2800W Max-P, 1200W decode-oriented.",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-03",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

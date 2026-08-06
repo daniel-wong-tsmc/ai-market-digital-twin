@@ -1,0 +1,45 @@
+{
+  "id": "www-runpod-io-29896770-2026-08-1",
+  "statement": "Runpod's published on-demand list price for an NVIDIA H100 SXM pod is $2.99 per GPU-hour, with B200 at $5.89, B300 at $7.39 and H200 at $4.39 as of the page's July 27, 2026 date.",
+  "kind": "measured",
+  "value": {
+    "number": 2.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A published list rate with no stated baseline or prior comparison is a static price level for the rental overlay, not a directional demand or supply signal.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "On-demand rental list rates anchor the cost of renting accelerator time versus buying hardware, but absent a baseline the level alone implies no direction."
+  },
+  "evidence": [
+    {
+      "source": "Runpod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-07-27",
+      "excerpt": "H100 SXM: $2.99/hr",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own published pricing page read directly; single secondary source with no reserved or spot tier shown for comparison."
+  },
+  "dispersion": "conflicting same-key reports: value 4.55 -> 2.99 (tol 1%); sources: Runpod",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-07-27",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

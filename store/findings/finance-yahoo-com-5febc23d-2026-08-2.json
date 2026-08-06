@@ -1,0 +1,47 @@
+{
+  "id": "finance-yahoo-com-5febc23d-2026-08-2",
+  "statement": "SpaceX reported AI revenues of $2.6 billion in Q2 2026, up 213% quarter-over-quarter and 247% year-over-year, funding compute targets of more than 2 gigawatts by end-2026 and about 10 gigawatts by end-2027.",
+  "kind": "measured",
+  "value": {
+    "number": 2.6,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Revenue growth of this rate at a self-declared NVIDIA-exclusive buyer, paired with an explicit gigawatt build path, is a direct read on downstream funding available for merchant-GPU purchases.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "energy.power-generation",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Fast-growing AI service revenue underwrites the capital for a 2GW-to-10GW compute buildout, which converts into GPU, datacenter and power-generation demand."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/technology/article/elon-musk-says-spacex-will-build-exclusively-with-nvidia-touts-space-based-ai-servers-211803293.html",
+      "date": "2026-08-06",
+      "excerpt": "SpaceX AI revenues: $2.6 billion, 213% quarter-over-quarter growth, 247% year-over-year growth.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet reporting a customer's earnings figures; no filing-tier source in hand, so capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

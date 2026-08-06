@@ -1,0 +1,242 @@
+{
+  "asOf": "2026-08",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "www-trendforce-com-b8196a71-2026-08-4",
+      "entity": "intel",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-thundercompute-com-69d2d064-2026-08-2",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-thundercompute-com-69d2d064-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "gpuSpotPrice",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "www-investing-com-b7ff2af7-2026-08-3",
+      "entity": "intel",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "techsoda-substack-com-3b7a4ff5-2026-08-5",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "www-investing-com-b7ff2af7-2026-08-1",
+      "entity": "intel",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "techsoda-substack-com-3b7a4ff5-2026-08-2",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "www-investing-com-b7ff2af7-2026-08-2",
+      "entity": "intel",
+      "indicatorId": "market-share-pct",
+      "verdict": "update",
+      "priorFindingId": "techsoda-substack-com-3b7a4ff5-2026-08-3",
+      "detail": "value 13.7 -> 80.0 (tol 1%)"
+    },
+    {
+      "findingId": "www-trendforce-com-b8196a71-2026-08-1",
+      "entity": "intel",
+      "indicatorId": "pkgCapacityOrderSpread",
+      "verdict": "update",
+      "priorFindingId": "techsoda-substack-com-3b7a4ff5-2026-08-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "lambda-ai-e88b0904-2026-08-1",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "lambda-ai-71b45f28-2026-08-1",
+      "detail": "value 3.99 -> 3.99 (tol 1%)"
+    },
+    {
+      "findingId": "www-runpod-io-29896770-2026-08-1",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "www-runpod-io-a7fd31f9-2026-08-1",
+      "detail": "value 2.99 -> 2.99 (tol 1%)"
+    },
+    {
+      "findingId": "www-theregister-com-9b9edf29-2026-08-1",
+      "entity": "market",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "hashrateindex-com-10fa275f-2026-08-5",
+      "detail": "statement/trend changed (trend unknown -> rising)"
+    },
+    {
+      "findingId": "www-theregister-com-9b9edf29-2026-08-3",
+      "entity": "market",
+      "indicatorId": "grossMargin",
+      "verdict": "update",
+      "priorFindingId": "www-tradingkey-com-855cb780-2026-07-2",
+      "detail": "value 67.7 -> 4.68 (tol 1%)"
+    },
+    {
+      "findingId": "www-theregister-com-9b9edf29-2026-08-2",
+      "entity": "market",
+      "indicatorId": "market-share-pct",
+      "verdict": "update",
+      "priorFindingId": "siliconanalysts-com-47ffeeeb-2026-07-1",
+      "detail": "magnitude 2 -> 1"
+    },
+    {
+      "findingId": "finance-yahoo-com-5febc23d-2026-08-2",
+      "entity": "nvidia",
+      "indicatorId": "D2",
+      "verdict": "update",
+      "priorFindingId": "ca-investing-com-e6319e42-2026-08-3",
+      "detail": "value 1.4 -> 2.6 (tol 1%)"
+    },
+    {
+      "findingId": "m-lookonchain-com-027f1b02-2026-08-2",
+      "entity": "nvidia",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "nvidianews-nvidia-com-69f787c5-2026-08-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "finance-yahoo-com-5febc23d-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "ca-investing-com-e6319e42-2026-08-1",
+      "detail": "magnitude 3 -> 2"
+    },
+    {
+      "findingId": "www-trendforce-com-17fa2dc8-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "404kresearch-substack-com-3985c52f-2026-08-2",
+      "detail": "magnitude 2 -> 3"
+    },
+    {
+      "findingId": "interestingengineering-com-0cdea07c-2026-08-2",
+      "entity": "nvidia",
+      "indicatorId": "perfPerWatt",
+      "verdict": "update",
+      "priorFindingId": "404kresearch-substack-com-3985c52f-2026-08-4",
+      "detail": "magnitude 2 -> 1"
+    },
+    {
+      "findingId": "finance-yahoo-com-5febc23d-2026-08-3",
+      "entity": "nvidia",
+      "indicatorId": "rpoBacklog",
+      "verdict": "update",
+      "priorFindingId": "finance-yahoo-com-2185ba22-2026-07-1",
+      "detail": "magnitude 3 -> 2"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "www-trendforce-com-b8196a71-2026-08-3",
+      "entity": "intel",
+      "indicatorId": "designWins",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-trendforce-com-b8196a71-2026-08-2",
+      "entity": "intel",
+      "indicatorId": "pkgCapacityOrderSpread",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "lambda-ai-e88b0904-2026-08-2",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-runpod-io-29896770-2026-08-2",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-theregister-com-9b9edf29-2026-08-4",
+      "entity": "market",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-runpod-io-29896770-2026-08-3",
+      "entity": "market",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "interestingengineering-com-0cdea07c-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "interestingengineering-com-0cdea07c-2026-08-3",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-trendforce-com-17fa2dc8-2026-08-2",
+      "entity": "nvidia",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "m-lookonchain-com-027f1b02-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-trendforce-com-17fa2dc8-2026-08-3",
+      "entity": "nvidia",
+      "indicatorId": "perfPerWatt",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

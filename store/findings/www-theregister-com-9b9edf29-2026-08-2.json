@@ -1,0 +1,42 @@
+{
+  "id": "www-theregister-com-9b9edf29-2026-08-2",
+  "statement": "A Gartner analyst pushed back on MediaTek's 15-20% AI accelerator share goal, noting its 2024 share was under 1 percent and calling the target very high.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Independent analyst pushback tempers how much near-term merchant-GPU share loss the challenger's target should be taken to imply.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "If the challenger's share ambition is unrealistic, the substitution threat to merchant GPUs from this supplier is smaller than the stated target suggests."
+  },
+  "evidence": [
+    {
+      "source": "The Register",
+      "url": "https://www.theregister.com/ai-and-ml/2026/08/03/mediatek-lines-up-5b-war-chest-for-ai-datacenter-push/5282304",
+      "date": "2026-08-03",
+      "excerpt": "MediaTek's 2024 market share for AI accelerators was < 1 percent...aiming for 15-20 percent seems very high.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Named analyst opinion quoted in one secondary outlet; a judgment rather than a measured outcome."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-03",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

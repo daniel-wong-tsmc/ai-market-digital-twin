@@ -1,0 +1,46 @@
+{
+  "id": "www-theregister-com-9b9edf29-2026-08-3",
+  "statement": "MediaTek's Q2 2026 revenue was NT$152.18 billion ($4.68 billion), up 1.2% year over year, while operating income fell 22% year over year to NT$22.87 billion ($705 million) as it funds an AI datacenter push with a $5 billion board-approved financing.",
+  "kind": "measured",
+  "value": {
+    "number": 4.68,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Flat revenue with a sharp margin drop shows the challenger is spending ahead of accelerator revenue, which bears on how durably it can fund the capacity build.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.eda-ip",
+      "chips.foundry-packaging"
+    ],
+    "direction": "mixed",
+    "mechanism": "Heavy investment ahead of revenue compresses current profitability while building future non-GPU accelerator supply, so the alternative-supply expansion depends on continued financing."
+  },
+  "evidence": [
+    {
+      "source": "The Register",
+      "url": "https://www.theregister.com/ai-and-ml/2026/08/03/mediatek-lines-up-5b-war-chest-for-ai-datacenter-push/5282304",
+      "date": "2026-08-03",
+      "excerpt": "revenue NT$152.18 billion ($4.68 billion), up 1.2% year over year. Operating income NT$22.87 billion ($705 million), down 22% year over year.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Reported results relayed by a single secondary outlet rather than the company filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-03",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

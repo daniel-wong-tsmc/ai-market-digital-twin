@@ -1,0 +1,52 @@
+{
+  "id": "www-thundercompute-com-69d2d064-2026-08-2",
+  "statement": "Cloud rental rates for the RTX PRO 6000 vary more than threefold across providers in August 2026, from $1.42 per GPU-hour on Vast.ai to $3.36 on AWS and $4.50 on Google Cloud.",
+  "kind": "measured",
+  "value": {
+    "number": 4.5,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "These are quoted rental levels with no stated prior period or change, so they set a reference level without indicating direction.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "A wide spread between marketplace and hyperscaler rental rates for the same card describes market segmentation, but with no baseline it carries no directional signal."
+  },
+  "evidence": [
+    {
+      "source": "Thunder Compute (blog)",
+      "url": "https://www.thundercompute.com/blog/nvidia-rtx-pro-6000-pricing",
+      "date": "2026-08-01",
+      "excerpt": "Google Cloud: \"$4.50/hr\"",
+      "tier": "secondary"
+    },
+    {
+      "source": "Thunder Compute (blog)",
+      "url": "https://www.thundercompute.com/blog/nvidia-rtx-pro-6000-pricing",
+      "date": "2026-08-01",
+      "excerpt": "Vast.ai: \"$1.42/GPU-hr\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Rates compiled by an interested cloud-GPU vendor's blog rather than read from each provider's own page."
+  },
+  "dispersion": "Vast.ai $1.42, AWS $3.36, Google Cloud $4.50 per GPU-hour for the same card.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-01",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

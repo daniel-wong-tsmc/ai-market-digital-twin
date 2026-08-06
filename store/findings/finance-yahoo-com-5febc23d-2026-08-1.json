@@ -1,0 +1,43 @@
+{
+  "id": "finance-yahoo-com-5febc23d-2026-08-1",
+  "statement": "SpaceX management stated on its Q2 2026 earnings call that the company is exclusive to NVIDIA for AI compute, citing the Vera Rubin architecture, and plans to deploy Vera Rubin NVL72 rackscale systems terrestrially and in orbit.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A large, fast-growing AI compute buyer publicly committing to a single merchant-GPU vendor removes a share-loss path for NVIDIA and signals sustained rackscale demand for the next architecture generation.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "An exclusive vendor commitment from a multi-gigawatt buyer converts into rackscale NVL72 order flow for NVIDIA and the colo/neocloud capacity that houses it, while foreclosing custom-ASIC or rival-GPU substitution at this account."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/technology/article/elon-musk-says-spacex-will-build-exclusively-with-nvidia-touts-space-based-ai-servers-211803293.html",
+      "date": "2026-08-06",
+      "excerpt": "We think the Vera Rubin architecture is the best architecture. We think it's the best AI computer, and we greatly value our close cooperation and partnership on many levels with Nvidia. So we're exclusive to Nvidia.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying management commentary from a customer's earnings call; the document states no NVIDIA press release confirms it, so confidence is capped at medium."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: Interesting Engineering, Yahoo Finance",
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

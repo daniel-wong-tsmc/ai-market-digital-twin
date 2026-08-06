@@ -1,0 +1,54 @@
+{
+  "id": "www-theregister-com-9b9edf29-2026-08-1",
+  "statement": "MediaTek expects AI datacenter ASIC revenue to exceed $2 billion in 2026, with its first ASIC entering production in Q4 2026 developed with major US cloud service provider customers.",
+  "kind": "measured",
+  "value": {
+    "number": 2.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Revenue at this scale from a new custom-ASIC entrant, tied to named hyperscaler customers, measures how much accelerator spend is moving to non-GPU silicon.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "A challenger's first-generation ASIC reaching production for US cloud providers adds alternative accelerator supply and diverts part of the hyperscaler accelerator budget away from merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "The Register",
+      "url": "https://www.theregister.com/ai-and-ml/2026/08/03/mediatek-lines-up-5b-war-chest-for-ai-datacenter-push/5282304",
+      "date": "2026-08-03",
+      "excerpt": "AI datacenter ASIC revenue expected to exceed $2 billion in 2026",
+      "tier": "secondary"
+    },
+    {
+      "source": "The Register",
+      "url": "https://www.theregister.com/ai-and-ml/2026/08/03/mediatek-lines-up-5b-war-chest-for-ai-datacenter-push/5282304",
+      "date": "2026-08-03",
+      "excerpt": "major US cloud service provider customers",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade coverage of an earnings call; corroborated by the Investing.com transcript of the same call, which is one event and not three independent publishers."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: Runpod, The Register",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-08-03",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

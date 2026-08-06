@@ -1,0 +1,54 @@
+{
+  "id": "www-investing-com-b7ff2af7-2026-08-2",
+  "statement": "MediaTek raised its AI accelerator market-share target to 15%-20% from 10%-15% and sizes the 2027 accelerator-chip market (excluding HBM) at $80 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 80.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A challenger raising its share ambition against an $80 billion accelerator pool is a direct read on how much custom-ASIC substitution the market expects to take from merchant GPUs.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "chips.eda-ip"
+    ],
+    "direction": "mixed",
+    "mechanism": "A larger share target from a custom-ASIC supplier implies more accelerator volume routed to non-GPU silicon and to the Intel packaging that supports it, at the expense of merchant-GPU share of the same budget."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (MediaTek Q2 2026 earnings call transcript)",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-mediatek-q2-2026-revenue-beats-guidance-as-ai-push-grows-93CH-4826949",
+      "date": "2026-07-31",
+      "excerpt": "raising our share target to 15%-20%",
+      "tier": "secondary"
+    },
+    {
+      "source": "Investing.com (MediaTek Q2 2026 earnings call transcript)",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-mediatek-q2-2026-revenue-beats-guidance-as-ai-push-grows-93CH-4826949",
+      "date": "2026-07-31",
+      "excerpt": "2027 SAM to be $80 billion",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company aspiration relayed in a secondary transcript; the target is a stated goal, not an achieved share."
+  },
+  "dispersion": "Share target stated as a range, 15%-20%, raised from 10%-15%.",
+  "asOf": "2026-08",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-31",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

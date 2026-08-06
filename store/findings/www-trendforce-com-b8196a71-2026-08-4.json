@@ -1,0 +1,50 @@
+{
+  "id": "www-trendforce-com-b8196a71-2026-08-4",
+  "statement": "EMIB-T substrate mass production is expected in 2027 with initial yields targeted at 50%, while Unimicron says full-scale mass production is unlikely before 2027 and that avoiding the interposer could create a cost gap of as much as 40-50% versus CoWoS.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A 50% starting yield and a 2027 timeline mean the new packaging capacity arrives slowly, while a 40-50% cost advantage is the pull that would make customers switch once it does.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "mixed",
+    "mechanism": "Low initial substrate yields delay meaningful capacity relief into 2027, while a large cost gap versus interposer-based packaging pulls accelerator programs toward the alternative platform over multiple generations."
+  },
+  "evidence": [
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/07/31/news-tsmc-reportedly-develops-emib-like-packaging-with-kinsus-to-prevent-potential-customer-shift-to-intel/",
+      "date": "2026-07-31",
+      "excerpt": "substrate mass production expected \"next year\" (2027), with initial yields targeted at 50%",
+      "tier": "secondary"
+    },
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/07/31/news-tsmc-reportedly-develops-emib-like-packaging-with-kinsus-to-prevent-potential-customer-shift-to-intel/",
+      "date": "2026-07-31",
+      "excerpt": "as much as 40-50%",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Supply-chain figures attributed to named substrate makers via trade press; targets and expectations rather than achieved results."
+  },
+  "dispersion": "Timeline and cost stated as ranges: 2027 mass production with 50% initial yield; cost gap of 40-50%.",
+  "asOf": "2026-08",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-31",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

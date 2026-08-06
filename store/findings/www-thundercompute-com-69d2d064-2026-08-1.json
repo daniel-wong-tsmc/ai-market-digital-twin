@@ -1,0 +1,53 @@
+{
+  "id": "www-thundercompute-com-69d2d064-2026-08-1",
+  "statement": "NVIDIA's official marketplace lists the RTX PRO 6000 Blackwell at $13,250 in August 2026, a 55% increase in roughly 16 months from its March 2025 launch MSRP of $8,565.",
+  "kind": "measured",
+  "value": {
+    "number": 13250.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "rising",
+  "why": "This is a hardware price level with a stated baseline and a quantified change, so it functions as a confirmation overlay on how tight professional-class GPU hardware supply is.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "applications.creative-media"
+    ],
+    "direction": "mixed",
+    "mechanism": "A large official-list price rise on a high-memory professional card points to constrained memory and card supply feeding through to buyer cost; as a price row it is a display overlay only."
+  },
+  "evidence": [
+    {
+      "source": "Thunder Compute (blog)",
+      "url": "https://www.thundercompute.com/blog/nvidia-rtx-pro-6000-pricing",
+      "date": "2026-08-01",
+      "excerpt": "NVIDIA's official marketplace lists the card at $13,250",
+      "tier": "secondary"
+    },
+    {
+      "source": "Thunder Compute (blog)",
+      "url": "https://www.thundercompute.com/blog/nvidia-rtx-pro-6000-pricing",
+      "date": "2026-08-01",
+      "excerpt": "55% increase in roughly 16 months",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "A cloud-GPU vendor's own blog, an interested secondary source, not the retailer listing; corroborating headlines were seen but not fetched, so they do not count as separate documents."
+  },
+  "dispersion": "Retail quotes range from PNY ~$11,360 and Newegg ~$12,099 to B&H $13,349+, with refurbished at $9,500-$11,000.",
+  "asOf": "2026-08",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-01",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

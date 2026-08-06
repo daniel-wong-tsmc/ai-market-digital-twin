@@ -1,0 +1,42 @@
+{
+  "id": "interestingengineering-com-0cdea07c-2026-08-2",
+  "statement": "NVIDIA's Space-1 Vera Rubin module is claimed to deliver up to 25 times the AI processing performance of an H100 GPU, with commercial shipments expected later in 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A large stated per-module performance step changes the compute delivered per unit shipped, which bears on how much work a buyer gets per dollar and per watt of installed hardware.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.efficiency"
+    ],
+    "direction": "positive",
+    "mechanism": "A far higher performance-per-module raises effective compute per unit shipped, supporting vendor pricing power while lowering the hardware count needed per unit of AI work."
+  },
+  "evidence": [
+    {
+      "source": "Interesting Engineering",
+      "url": "https://interestingengineering.com/ai-robotics/spacex-nvidia-starmind-ai1-compute-payload",
+      "date": "2026-08-04",
+      "excerpt": "up to 25 times the AI processing performance of an H100 GPU",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor performance claim relayed by a single secondary outlet; no independent benchmark or filing evidence, and the document notes power figures are unconfirmed."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend falling -> rising); sources: Interesting Engineering, TrendForce",
+  "asOf": "2026-08",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-06T01:06:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
