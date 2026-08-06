@@ -1796,6 +1796,47 @@ F57/F58/F59 → F60 → F64 → F65 → F66. Eval-v2, if approved, slots in as i
 F63's re-gate. F56 remains a safe tiny side item.
 
 ## Newest state (newest first)
+  - **2026-08-06 daily cycle (scheduled headless): chips.merchant-gpu v3 shipped + pushed
+    `0d6036c` (`main == origin/main`).** Scorecard `store/chips.merchant-gpu/2026-08-v3.json` —
+    **DMI 3.573 / SMI -0.040** (Strong, steady; prior v2 3.653 / -0.160 — supply index improved
+    0.12). TOP-UP gather (store held 247 in-window findings): 10 docs, all secondary, L1 dropped 0
+    known; 29 findings gated / 0 dropped; corpus fresh new 3 / update 15 / duplicate 11 -> merged
+    265; wiki-ingest routed 18 to 3 pages. **Substantive call: the binding constraint moved from
+    advanced packaging to stacked memory supply** — all three judge samples reached it
+    independently (packaging shortfall narrowed to ~10%; memory sold out into 2027; NVIDIA
+    reportedly cut Rubin Ultra 288GB -> 192GB). Thesis 57 judgments applied + 2 new provisional
+    theses; implication + narrator `done` (story `store/chips.merchant-gpu/story/2026-08-06.json`);
+    coverage record 16 required source gaps; seriesRefresh no-gap; v2 shadow stamped; site rebuilt
+    (8 pages). Suite **2175 passed / 5 skipped** with `2026-08-v3` registered in the scoring v1
+    replay pin (W_CURRENT, v1/v2 precedent). Full report `work/daily-2026-08-06/report.txt`;
+    journal `store/cycle-log.json`.
+    Gates: voice lint rejected judgment sample 3 once (acronym `EMIB-T` not on the allowlist) ->
+    that sample alone re-dispatched -> passed, **NOT bypassed**; thesis gate rejected once (cited
+    nonexistent finding `www-trendforce-com-17fa2dc8-2026-08-4`) -> re-dispatched -> passed;
+    implication + narrator clean first attempt.
+    ⚠ **`impl:7` flagged by the citation audit AGAIN** (uncited numbers 192 / 288) — logged, not
+    re-dispatched, per the implication no-third-attempt rule; audit record
+    `store/chips.merchant-gpu/audit/2026-08-06.json`. This is the **second consecutive cycle** to
+    flag `impl:7` (the v2 cycle flagged it for two China-revenue figures). The recurrence, not just
+    the single flag, is what wants a human look.
+    **AFK-DEFAULTS (this run — NOT user-approved, re-surfacing for a ruling):**
+    (1) **Step 3(b) tool-less-brain deviation, now the THIRD consecutive cycle** (08-04, 08-05,
+    08-06) — the Agent tool has no per-call tool allowlist, so the F88 no-Bash wall on reader
+    gatherers and the tool-less rule on brain seams were enforced by dispatch instruction only,
+    never structurally. Standing ruling still owed by the user.
+    (2) Judge (102k chars), thesis (121k), implication (106k) and narrator (211k) prompts were too
+    large to inline, so each brain subagent READ its emitted prompt file from disk instead of
+    receiving it inline; F38 sample independence preserved by dispatching separate subagents.
+    (3) The implication + narrator subagents spent extra tool calls paging their long prompt files;
+    no network fetches were made.
+    (4) F67's verbatim-report rule was NOT applied to the session's final message (report is 100KB;
+    the user's global CLAUDE.md requires short plain-English output) — full text saved to
+    `work/daily-2026-08-06/report.txt` instead.
+    **MANIFEST DRIFT (not fixed — out of scope for a scheduled cycle):**
+    `manifests/chips.merchant-gpu.json` lists `lambdalabs.com/service/gpu-cloud` for D6, which now
+    returns HTTP 404; the live domain is `lambda.ai`. Also `gpuSpotPrice` stays thinly covered —
+    direct eBay marketplace fetches timed out, so the one card-price document is a cloud vendor's
+    own blog (an interested secondary source).
   - **2026-07-26 daily cycle (scheduled headless): chips.merchant-gpu v18 shipped + pushed
     `428a390`.** Scorecard `store/chips.merchant-gpu/2026-07-v18.json` — **DMI 3.540 / SMI -0.700**
     (Strong, improving; prior v17 3.407 / -0.487); 10 docs (1 primary, 9 secondary), L1 dropped 0
