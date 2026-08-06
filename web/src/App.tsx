@@ -97,7 +97,12 @@ export function App() {
             Every reading since {plainDate(data.gapChart.points[0]?.date ?? null)}
           </span>
         </div>
-        <GapChart data={data.gapChart} />
+        {/*
+          The chart's spoken description takes its direction word from the
+          same payload field the badge and the caption use, rather than
+          working one out for itself — see GapChart's own note.
+        */}
+        <GapChart data={data.gapChart} direction={data.verdict.chip.direction} />
       </section>
 
       <section className="zone" id="changed">
@@ -116,8 +121,15 @@ export function App() {
       <section className="zone" id="dimensions">
         <div className="zone-head">
           <h2>The six things we track</h2>
+          {/*
+            FINAL REVIEW, Minor 10: the mock's legend read "Green healthy ·
+            amber mixed · red strained", but no row ever says healthy or
+            strained — the ratings are Very weak / Weak / Mixed / Strong /
+            Very strong. The legend now names the colours by the words the
+            rows beneath it actually use.
+          */}
           <span className="note">
-            Green healthy &middot; amber mixed &middot; red strained. Open a row to see why.
+            Green strong &middot; amber mixed &middot; red weak. Open a row to see why.
           </span>
         </div>
         <Dimensions dimensions={data.dimensions} />

@@ -8,7 +8,7 @@
 import Ajv2020 from 'ajv/dist/2020.js';
 import {describe, expect, it} from 'vitest';
 import {parseDashboard, isAssessment} from '../load';
-import {readGolden, readSchema} from './fixtures';
+import {readChartGolden, readGolden, readSchema} from './fixtures';
 
 const schema = readSchema();
 
@@ -18,6 +18,7 @@ function makeValidator() {
 }
 
 const golden = readGolden;
+const chartGolden = readChartGolden;
 
 describe('dashboard.json contract', () => {
   it('the golden payload validates against the shared schema', () => {
@@ -72,6 +73,45 @@ describe('dashboard.json contract', () => {
 });
 
 /**
+ * The chart-bearing payload. The golden fixture's three bullets are all
+ * chart-less, so everything above walks past `bullets[].chart` without ever
+ * entering it — the chart shape the exporter builds had no committed
+ * cross-check against the schema at all. One drifted key there would reject
+ * a whole day's payload, and the page would silently keep serving yesterday's.
+ */
+describe('a payload whose bullet carries a chart', () => {
+  it('validates against the shared schema', () => {
+    const validate = makeValidator();
+    const ok = validate(chartGolden());
+    expect(validate.errors ?? []).toEqual([]);
+    expect(ok).toBe(true);
+  });
+
+  it('parses into the loader types, chart and all', () => {
+    const data = parseDashboard(chartGolden());
+    const charted = data.bullets.filter((b) => b.chart !== null);
+    expect(charted).toHaveLength(1);
+    const chart = charted[0].chart!;
+    expect(chart.form).toBe('columns');
+    expect(chart.title).toBeTruthy();
+    expect(chart.unit).toBe('US$ billions');
+    expect(chart.points.length).toBeGreaterThan(0);
+    expect(chart.points[0].sourceUrl).toMatch(/^https:/);
+    // Every charted bullet must still carry no reason for having no chart.
+    expect(charted[0].noChartReason).toBeNull();
+  });
+
+  it('rejects a chart with a form the schema has never heard of', () => {
+    const broken = chartGolden();
+    const bullets = broken.bullets as Array<Record<string, unknown>>;
+    const chart = bullets.find((b) => b.chart !== null)!.chart as Record<string, unknown>;
+    chart.form = 'pie';
+    expect(makeValidator()(broken)).toBe(false);
+    expect(() => parseDashboard(broken)).toThrow(/form/);
+  });
+});
+
+/**
  * Shape drift, as opposed to value drift. The checks above would still pass if
  * someone added a field to the TypeScript types that the schema has never heard
  * of, or dropped one the schema requires. This walks what the loader actually
@@ -94,10 +134,17 @@ describe('the loader and the schema describe the same shape', () => {
     if (Array.isArray(node.oneOf)) {
       const inner = (node.oneOf as Node[]).flatMap(branches);
       if (!node.properties) return inner;
+      // The parent's own property schemas win over the branch's. A branch
+      // exists to NARROW a key the parent already declares — the bullet's
+      // either-a-chart-or-a-reason rule restates `chart` as bare
+      // `{type: "object"}`, which has no properties of its own. Letting that
+      // win meant the walk stopped at the chart and never looked inside it,
+      // so nothing here ever checked the chart's own shape (found by the
+      // final review, together with the fixture that now exercises it).
       return inner.map((b) => ({
         ...node,
         oneOf: undefined,
-        properties: {...(node.properties as Node), ...((b.properties as Node) ?? {})},
+        properties: {...((b.properties as Node) ?? {}), ...(node.properties as Node)},
         required: [
           ...((node.required as string[] | undefined) ?? []),
           ...((b.required as string[] | undefined) ?? []),
@@ -163,4 +210,23 @@ describe('the loader and the schema describe the same shape', () => {
     walk(data, schema as Node, 'dashboard');
     expect(problems.join('\n')).toMatch(/hunch/);
   });
+
+  it('walks a chart object too, not only chart-less bullets', () => {
+    problems.length = 0;
+    const data = parseDashboard(chartGolden());
+    expect(data.bullets.some((b) => b.chart !== null)).toBe(true);
+    walk(data, schema as Node, 'dashboard');
+    expect(problems).toEqual([]);
+  });
+
+  it('would notice a chart field the schema has never heard of', () => {
+    problems.length = 0;
+    const data = parseDashboard(chartGolden()) as unknown as Record<string, unknown>;
+    const bullets = data.bullets as Array<Record<string, unknown>>;
+    const chart = bullets.find((b) => b.chart !== null)!.chart as Record<string, unknown>;
+    chart.flourish = 'invented';
+    walk(data, schema as Node, 'dashboard');
+    expect(problems.join('\n')).toMatch(/flourish/);
+  });
+
 });

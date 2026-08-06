@@ -79,8 +79,26 @@ def _month_anchor(key: str) -> str:
     reading was actually taken -- a monthly deep-read for the CURRENT,
     still-in-progress month anchored at month-END would render as a point
     dated after today, which is a worse honesty failure than the (stated,
-    accepted) imprecision of not knowing the reading's exact capture day."""
+    accepted) imprecision of not knowing the reading's exact capture day.
+
+    A day-grain reading taken ON the 1st therefore lands on the same
+    calendar date as that month's anchor. See `_GRAIN_ORDER` and
+    `build_reading_series` for how that collision is resolved -- it is
+    ordered deterministically, never left to file-glob order."""
     return key if len(key) == 10 else f"{key}-01"
+
+
+# FINAL REVIEW, Minor 6: a month-grain reading is anchored at the FIRST day
+# of the month it covers, so a day-grain reading taken on the 1st shares its
+# date exactly. Sorting on the date alone left the tie to be broken by
+# Python's stable sort over dict-insertion order, which is `Path.glob` order
+# -- i.e. by filesystem, not by anything meaningful. That decided which point
+# counts as "last", and "last" is what `gap_trend_word` reads to produce the
+# direction word driving the chip, the verdict's opening phrase and the
+# caption. The month anchor names the START of the month, so it sorts BEFORE
+# any same-day reading taken within that month. Deterministic, glob-proof,
+# and it drops nothing: both readings genuinely happened and both are plotted.
+_GRAIN_ORDER = {"month": 0, "reading": 1}
 
 
 def build_reading_series(cat_dir: Path | str) -> list[dict]:
@@ -143,7 +161,7 @@ def build_reading_series(cat_dir: Path | str) -> list[dict]:
         points.append({"date": anchor, "demand": float(dmi), "supply": float(smi),
                         "grain": "reading" if is_reading else "month"})
 
-    points.sort(key=lambda p: p["date"])
+    points.sort(key=lambda p: (p["date"], _GRAIN_ORDER[p["grain"]]))
     return points
 
 

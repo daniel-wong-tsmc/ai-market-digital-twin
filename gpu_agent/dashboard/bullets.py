@@ -310,17 +310,24 @@ def _fallback_reason(indicator_ids: list[str], store_dir: str, *,
     just no plain-English name for it in the story yet).
     """
     if not indicator_ids:
-        return ("No chart. This story isn't tied to a tracked number yet -- "
+        return ("No chart. This story isn't tied to a tracked number yet — "
                 "what's here is reported facts, not a running data series.")
 
     all_rows = [r for i in indicator_ids for r in _read_jsonl(Path(store_dir) / f"{i}.jsonl")]
     if not all_rows:
-        return ("No chart. Nobody is tracking a number for this yet -- the "
+        return ("No chart. Nobody is tracking a number for this yet — the "
                 "reporting behind it is one-off, not a running series.")
 
     if all(r.get("estimateGrade") is not False for r in all_rows):
-        return ("No chart. The only numbers here are our own estimates, not "
-                "published facts, so we don't chart them.")
+        # FINAL REVIEW, Important 4: this used to say "The only numbers HERE
+        # are our own estimates, not published facts" -- true of the series
+        # we track, but plainly false about the bullet beside it, which can
+        # (and on the live page does) cite a company's own published figures
+        # as a primary source. The sentence now says what it actually means:
+        # the number WE TRACK for this is an estimate of ours. Wording only;
+        # the gate itself is unchanged.
+        return ("No chart. The number we track for this is our own estimate, "
+                "not a published figure, so we don't draw it.")
 
     if saw_non_measurable_unit:
         return ("No chart. We don't yet have a plain-English way to "
@@ -331,7 +338,7 @@ def _fallback_reason(indicator_ids: list[str], store_dir: str, *,
                 "no plain-English name for what they measure yet, so we "
                 "don't chart them.")
 
-    return ("No chart. There isn't yet enough of a track record -- too few "
+    return ("No chart. There isn't yet enough of a track record — too few "
             "confirmed data points, or too narrow a span of time, to show a "
             "trend without being misleading.")
 

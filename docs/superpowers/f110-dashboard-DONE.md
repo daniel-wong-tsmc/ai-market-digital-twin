@@ -8,6 +8,30 @@ rather than trusting a hash written inside the record it describes.
 unrelated commits from the 2026-08-06 daily cycle, `0d6036c` and `be543d8`, and
 the merge base is `bc08b61`. This branch is behind main by those two commits.
 
+### There will be one merge conflict, and it is the important one
+
+`git merge-tree main HEAD` reports a content conflict in
+**`site/chips.merchant-gpu/index.html`** — the single file this whole feature
+lives in. Main's 2026-08-06 cycle regenerated it as the old story-style page;
+this branch replaced it with the compiled dashboard.
+
+**Resolve it by taking THIS BRANCH's version of that file.** Nothing will tell
+you if you get it wrong: if the merge resolves toward main, the category page
+quietly reverts to the old page, the compiled bundle sits in the folder with
+nothing pointing at it, and no check fails — the link gate only asks whether the
+file exists, not what is in it.
+
+### Run one command straight after merging
+
+```
+.venv/Scripts/python -m gpu_agent.cli dashboard-json --category chips.merchant-gpu
+```
+
+Main's store now holds the 6 August reading while the data file committed on this
+branch holds 5 August. Until the next scheduled cycle runs, the dashboard header
+and the story archive it links to would disagree by a day. This one command lines
+them back up.
+
 ## What shipped
 
 The merchant-GPU category page is now a compiled single-page app instead of the
@@ -48,10 +72,10 @@ plugin clears only the bundle folder so old bundles don't pile up.
 
 | Gate | Result |
 | --- | --- |
-| `../../.venv/Scripts/python -m pytest -q` | 2304 passed, 6 skipped |
-| Four pinned baselines (eval baseline, narrator prompt, scoring-v1 replay, run-cycle conformance) | 130 passed |
-| `npm test` (web) | 9 files, 95 tests passed |
-| `npm run build` (web) | built in 693ms |
+| `../../.venv/Scripts/python -m pytest -q` | 2316 passed, 6 skipped |
+| Four pinned baselines (eval baseline, narrator prompt, scoring-v1 replay, run-cycle conformance) | 56 passed |
+| `npm test` (web) | 9 files, 116 tests passed |
+| `npm run build` (web) | built in 696ms |
 | Forbidden-diff check vs `main` | empty (no output) |
 | Deletions under `site/chips.merchant-gpu/{findings,series,story,entities}` | none |
 
@@ -75,6 +99,55 @@ whose back-link returns to the dashboard. No errors in the browser console.
 One real defect was found and fixed here: five readings landed in the same week,
 and their date labels printed on top of each other. The axis now labels only
 readings far enough apart, always keeping the first and last.
+
+## The final fix wave (after the whole-branch review)
+
+The branch was reviewed end to end and came back "ready, with fixes". They were
+all made in one pass before this record was finalised. The five that changed what
+a reader sees:
+
+1. **The "how sure we are" line on the six dimension rows was printing our
+   internal scoring notes.** Under that heading an executive was reading
+   *"Medium — majority of 3/3 samples; capped by finding confidence (medium)."*
+   The verdict at the top of the page had always translated the same field into
+   plain words; the rows never did. They now say what the mock says, for example
+   *"Medium — the underlying reports are single-source in places."* An earlier
+   claim in this record that the reader-facing copy was clean was sincere but
+   wrong until this was fixed. It is true of what ships.
+2. **The "this reading may be old" warning was watching the wrong file.** It
+   compared against the page's own timestamp — a file that only changes when
+   someone rebuilds by hand — instead of the data file the daily run rewrites.
+   A failed export would have left yesterday's verdict on the page with no
+   warning at all. It now uses the timestamp the server sends with the data.
+3. **The chart's spoken description could contradict the caption printed under
+   it.** Two different calculations of "is the gap widening or narrowing" — one
+   in Python, one in the page — could disagree on the same data. There is now
+   one answer, and the page reads it from the data rather than working out its
+   own.
+4. **A "no chart" panel said something untrue about the bullet beside it.** It
+   read *"The only numbers here are our own estimates, not published facts"*
+   next to a bullet citing a company's own published results. It now says
+   *"No chart. The number we track for this is our own estimate, not a published
+   figure, so we don't draw it."*
+5. **"Why we say that" could show a heading with nothing under it.** The panel
+   now leaves out any block — reasoning, how sure we are, evidence — that has
+   nothing in it.
+
+Smaller reader-facing tidies in the same pass: two readings that fall on the same
+calendar date are now ordered the same way every time (a whole-month reading is
+dated the 1st, so a reading taken on the 1st used to collide with it and the file
+order decided which counted as "last" — which decides the direction word); three
+panels printed a literal double hyphen where the design uses a dash; a failure
+message that showed the reader a file path and a status code now reads as plain
+English; the two spellings of one unit ("USD bn" and "US$ billions") are now one;
+and the colour key under the six rows names the colours by the words the rows
+actually use (green strong, amber mixed, red weak) rather than words that appear
+nowhere else on the page. That last one is a deliberate, recorded departure from
+the mock, which says "green healthy · amber mixed · red strained".
+
+The review also found that no committed test ever walked a bullet's chart, so a
+second payload fixture that carries a real chart now runs through the same
+contract check.
 
 ## Known limitations — recorded deliberately, not bugs to fix
 

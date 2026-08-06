@@ -33,7 +33,7 @@ def test_amd_entry_fields_match_brief():
     assert amd.quality == "hard-fact"
     assert amd.topicTags == ("amdDataCenter", "amd")
     assert amd.form == "columns"
-    assert amd.unit == "USD bn"
+    assert amd.unit == "US$ billions"
     assert amd.fetcher == "amd_dc_revenue"
     assert amd.sourceName == "AMD investor relations"
     assert amd.sourceUrl == "https://ir.amd.com/financial-information/quarterly-results"
@@ -46,7 +46,7 @@ def test_nvda_entry_has_no_fetcher_yet():
     assert nvda.quality == "hard-fact"
     assert nvda.topicTags == ("nvidia", "nvidiaDataCenter")
     assert nvda.form == "columns"
-    assert nvda.unit == "USD bn"
+    assert nvda.unit == "US$ billions"
     assert nvda.fetcher is None
 
 
@@ -57,7 +57,7 @@ def test_gpu_spot_price_is_estimate_and_never_chartable():
     assert spot.quality == "estimate"
     assert spot.topicTags == ("gpuSpotPrice",)
     assert spot.form == "line"
-    assert spot.unit == "USD"
+    assert spot.unit == "US$"
     assert spot.fetcher is None
     # This is the whole point of this series: an estimate must never be
     # drawn as a small chart, because a small chart reads as fact.

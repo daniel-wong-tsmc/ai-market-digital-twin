@@ -628,3 +628,189 @@ def test_only_one_month_of_history_raises_for_gap_chart(tmp_path):
     (cat_dir / "story" / "2026-08-05.json").write_text(json.dumps(STORY), encoding="utf-8")
     with pytest.raises(ValueError, match="gap chart"):
         build_dashboard_payload("chips.merchant-gpu", str(tmp_path / "store"))
+
+
+# ---------------------------------------------------------------------------
+# FINAL REVIEW, Important 1: no internal scoring language in the dimension
+# rows' reader-facing "How sure we are" line.
+# ---------------------------------------------------------------------------
+
+# Phrases straight out of the scorecard's internal `confidence.basis` field.
+# None of them is something an executive reading the page should ever see.
+_INTERNAL_METHOD_LANGUAGE = [
+    "samples", "sample", "majority", "capped by", "finding confidence",
+    "self-consistency", "3/3", "basis", "replicate", "quorum",
+]
+
+
+def test_dimension_confidence_never_leaks_internal_method_language(tmp_path):
+    # The bug: `confidence.basis` was pasted verbatim into the row, so under
+    # "How sure we are" a reader got "Medium - majority of 3/3 samples;
+    # capped by finding confidence (medium)." The verdict zone has always
+    # translated the same field; the rows never did.
+    payload = _build(tmp_path)
+    for d in payload["dimensions"]:
+        lowered = d["confidence"].lower()
+        for phrase in _INTERNAL_METHOD_LANGUAGE:
+            assert phrase not in lowered, (
+                f"dimension {d['id']} confidence leaks internal method "
+                f"language {phrase!r}: {d['confidence']!r}")
+
+
+def test_dimension_confidence_uses_the_mocks_reader_facing_sentences(tmp_path):
+    # The approved mock (lines 601 and 637) writes these two verbatim.
+    payload = _build(tmp_path)
+    allowed = {
+        "High — drawn from company filings and calls.",
+        "Medium — the underlying reports are single-source in places.",
+        "Low — the reporting behind this is thin and not yet corroborated.",
+    }
+    for d in payload["dimensions"]:
+        assert d["confidence"] in allowed, d["confidence"]
+
+
+def test_dimension_confidence_leak_check_also_covers_the_real_store():
+    # The committed store is what the live page is actually built from.
+    payload = build_dashboard_payload("chips.merchant-gpu", "store")
+    for d in payload["dimensions"]:
+        lowered = d["confidence"].lower()
+        for phrase in _INTERNAL_METHOD_LANGUAGE:
+            assert phrase not in lowered, (d["id"], d["confidence"])
+
+
+def test_an_unrecognised_confidence_level_says_nothing_rather_than_guessing(tmp_path):
+    store_dir = _make_store(tmp_path)
+    path = Path(store_dir) / "chips.merchant-gpu" / "2026-08-v1.json"
+    current = json.loads(path.read_text(encoding="utf-8"))
+    current["dimensionRatings"]["bottleneck"]["confidence"] = {
+        "level": "moderately-ish", "basis": "majority of 3/3 samples"}
+    path.write_text(json.dumps(current), encoding="utf-8")
+    payload = build_dashboard_payload("chips.merchant-gpu", str(store_dir))
+    by_id = {d["id"]: d for d in payload["dimensions"]}
+    assert by_id["bottleneck"]["confidence"] == ""
+
+
+# ---------------------------------------------------------------------------
+# FINAL REVIEW, Minor 6: a month reading is anchored at the 1st, so a daily
+# reading taken on the 1st shares its date. Which of the two counts as "last"
+# decides the direction word driving the chip, the verdict opening AND the
+# caption -- it must never depend on file-glob order.
+# ---------------------------------------------------------------------------
+
+def test_a_reading_on_the_first_of_the_month_orders_after_that_months_anchor(tmp_path):
+    from gpu_agent.dashboard.gap_chart import build_reading_series, gap_trend_word
+
+    cat_dir = tmp_path / "store" / "chips.merchant-gpu"
+    cat_dir.mkdir(parents=True)
+    _write_scorecard(cat_dir / "2026-08-v1.json", dmi=2.0, smi=0.0)     # gap 2.0
+    _write_scorecard(cat_dir / "2026-08-01-v1.json", dmi=1.0, smi=0.0)  # gap 1.0
+    _write_scorecard(cat_dir / "2026-07-v1.json", dmi=1.5, smi=0.0)     # gap 1.5
+
+    points = build_reading_series(cat_dir)
+    assert [(p["date"], p["grain"]) for p in points] == [
+        ("2026-07-01", "month"),
+        ("2026-08-01", "month"),
+        ("2026-08-01", "reading"),
+    ]
+    # The month anchor names the START of August; a reading taken on 1 August
+    # happened within it, so it is the later of the two and it is "last".
+    assert points[-1]["demand"] == 1.0
+    # Gap 2.0 -> 1.0 is a halving: narrowing, deterministically.
+    assert gap_trend_word(points) == "narrowing"
+
+
+def test_same_date_readings_stay_in_the_same_order_however_the_files_are_read(tmp_path):
+    from gpu_agent.dashboard import gap_chart
+
+    cat_dir = tmp_path / "store" / "chips.merchant-gpu"
+    cat_dir.mkdir(parents=True)
+    _write_scorecard(cat_dir / "2026-08-v1.json", dmi=2.0, smi=0.0)
+    _write_scorecard(cat_dir / "2026-08-01-v1.json", dmi=1.0, smi=0.0)
+    _write_scorecard(cat_dir / "2026-07-v1.json", dmi=1.5, smi=0.0)
+
+    expected = gap_chart.build_reading_series(cat_dir)
+    real_glob = Path.glob
+
+    def reversed_glob(self, pattern):
+        return reversed(list(real_glob(self, pattern)))
+
+    with mock.patch.object(Path, "glob", reversed_glob):
+        assert gap_chart.build_reading_series(cat_dir) == expected
+
+
+# ---------------------------------------------------------------------------
+# COVERAGE GAP found by the final review: the golden fixture's three bullets
+# are all chart-less, so the contract test never walks a `chart` object. This
+# second fixture carries one, and is pinned the same way.
+# ---------------------------------------------------------------------------
+
+CHART_GOLDEN_PATH = Path("fixtures/dashboard/golden-dashboard-with-chart.json")
+
+# Four real, non-estimate quarterly rows -- exactly what the registered
+# `amdDataCenterRevenue` series needs to clear its density gate. Scene 1 of
+# the trimmed story cites findings tagged `amd`, which is one of that
+# series' own topicTags, so the first bullet gets the chart.
+_AMD_ROWS = [
+    {"period": "2025-Q3", "value": 3.5, "unit": "US$ billions", "estimateGrade": False,
+     "publishedAt": "2025-11-04",
+     "source": {"title": "AMD third quarter 2025 results",
+                "url": "https://ir.amd.com/news-events/press-releases/detail/1280/"}},
+    {"period": "2025-Q4", "value": 4.2, "unit": "US$ billions", "estimateGrade": False,
+     "publishedAt": "2026-02-03",
+     "source": {"title": "AMD fourth quarter 2025 results",
+                "url": "https://ir.amd.com/news-events/press-releases/detail/1286/"}},
+    {"period": "2026-Q1", "value": 5.775, "unit": "US$ billions", "estimateGrade": False,
+     "publishedAt": "2026-05-05",
+     "source": {"title": "AMD first quarter 2026 results",
+                "url": "https://ir.amd.com/news-events/press-releases/detail/1291/"}},
+    {"period": "2026-Q2", "value": 6.718, "unit": "US$ billions", "estimateGrade": False,
+     "publishedAt": "2026-08-04",
+     "source": {"title": "AMD second quarter 2026 results",
+                "url": "https://ir.amd.com/news-events/press-releases/detail/1295/"}},
+]
+
+
+def _make_store_with_chart(tmp_path: Path) -> Path:
+    store_dir = _make_store(tmp_path)
+    series_file = store_dir / "series" / "amdDataCenterRevenue.jsonl"
+    with open(series_file, "w", encoding="utf-8", newline="\n") as fh:
+        for row in _AMD_ROWS:
+            fh.write(json.dumps(row, sort_keys=True) + "\n")
+    return store_dir
+
+
+def _build_with_chart(tmp_path):
+    return build_dashboard_payload("chips.merchant-gpu", str(_make_store_with_chart(tmp_path)))
+
+
+def test_chart_bearing_payload_matches_its_golden_fixture(tmp_path):
+    payload = _build_with_chart(tmp_path)
+    golden = json.loads(CHART_GOLDEN_PATH.read_text(encoding="utf-8"))
+    assert payload == golden
+
+
+def test_the_chart_golden_fixture_really_carries_a_chart():
+    # Guards the fixture's whole reason for existing: if a future change made
+    # every bullet chart-less again, the contract test would silently stop
+    # walking the chart shape and this pin would go quiet. It must not.
+    golden = json.loads(CHART_GOLDEN_PATH.read_text(encoding="utf-8"))
+    charted = [b for b in golden["bullets"] if b["chart"] is not None]
+    assert len(charted) == 1
+    chart = charted[0]["chart"]
+    assert set(chart) == {"form", "title", "caption", "unit", "points", "source"}
+    assert chart["points"]
+    assert set(chart["points"][0]) == {"label", "value", "hollow", "sourceUrl"}
+    jsonschema.validate(golden, SCHEMA)
+
+
+def test_the_chart_unit_is_spelled_the_way_the_plain_units_file_spells_it():
+    # FINAL REVIEW, Minor 9: the series registry said "USD bn" while
+    # registry/plain-units.json said "US$ billions" -- the same page could
+    # show two spellings of one unit.
+    plain = json.loads(Path("registry/plain-units.json").read_text(encoding="utf-8"))["units"]
+    series = json.loads(Path("registry/chart-series.json").read_text(encoding="utf-8"))["series"]
+    spellings = set(plain.values())
+    for entry in series:
+        assert entry["unit"] in spellings, (
+            f"{entry['id']} is labelled {entry['unit']!r}, which is not one of "
+            f"the plain-English unit names: {sorted(spellings)}")

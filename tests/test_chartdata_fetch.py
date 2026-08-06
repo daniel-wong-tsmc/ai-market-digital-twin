@@ -150,7 +150,7 @@ def test_parse_extracts_at_least_two_quarters_incl_q2_2026():
     assert "2026-Q2" in by_period
     q2 = by_period["2026-Q2"]
     assert q2["value"] == pytest.approx(6.718)
-    assert q2["unit"] == "USD bn"
+    assert q2["unit"] == "US$ billions"
     assert q2["publishedAt"] == "2026-08-04"
     assert q2["sourceUrl"].startswith("https://ir.amd.com/")
     assert q2["title"]
@@ -275,7 +275,7 @@ def test_run_fetch_appends_points_in_the_existing_series_row_format(tmp_path):
     row = by_period["2026-Q2"]
     assert row["indicatorId"] == "amdDataCenterRevenue"
     assert row["value"] == pytest.approx(6.718)
-    assert row["unit"] == "USD bn"
+    assert row["unit"] == "US$ billions"
     assert row["publishedAt"] == "2026-08-04"
     assert row["capturedAt"] == "2026-08-04"
     assert row["source"]["url"].startswith("https://ir.amd.com/")

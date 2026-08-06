@@ -369,15 +369,25 @@ function asOfDay(asOf: string): number | null {
 }
 
 /**
- * Is this reading older than the page it is being shown on?
+ * Is this reading older than the file it came out of?
  *
  * The page has no clock of its own it can trust, so it compares the reading's
- * date against when the page file itself was last written.
+ * own date against when the DATA FILE was last written — the `Last-Modified`
+ * stamp the server sends back with it.
+ *
+ * FINAL REVIEW, Important 2: this used to compare against
+ * `document.lastModified`, the HTML page's own timestamp. That file is a
+ * committed input that only changes when someone runs `npm run build` by
+ * hand, while the data file is rewritten by every daily run. So if an export
+ * ever failed (it is deliberately swallowed so a bad export cannot stop the
+ * cycle), yesterday's data file stayed put and the page served an old verdict
+ * as today's reading with this warning never firing. The data file's own
+ * timestamp is the only one that moves when the reading does.
  */
-export function isStale(asOf: string, pageLastModified: string): boolean {
+export function isStale(asOf: string, dataLastModified: string): boolean {
   const readingDay = asOfDay(asOf);
   if (readingDay === null) return false;
-  const built = new Date(pageLastModified);
+  const built = new Date(dataLastModified);
   if (Number.isNaN(built.getTime())) return false;
   const builtDay = dayNumber(built.getFullYear(), built.getMonth(), built.getDate());
   return builtDay - readingDay > STALE_AFTER_DAYS;
@@ -392,12 +402,17 @@ export async function loadDashboard(
 ): Promise<{data: Dashboard; stale: boolean}> {
   const response = await fetch(url, {cache: 'no-cache'});
   if (!response.ok) {
+    // FINAL REVIEW, Minor 8: a reader was being shown the file path and the
+    // status code. Neither means anything to them, and neither is something
+    // they can act on. Say plainly what happened and what to do.
     throw new Error(
-      `Could not read the day's reading from ${url} (${response.status}).`,
+      'The file it comes from could not be read just now. Please try again in a few minutes.',
     );
   }
   const data = parseDashboard(await response.json());
-  return {data, stale: isStale(data.asOf, document.lastModified)};
+  // The stamp on the DATA file, not on the page — see `isStale`.
+  const dataLastModified = response.headers?.get('Last-Modified') ?? '';
+  return {data, stale: isStale(data.asOf, dataLastModified)};
 }
 
 /** "2026-08-04" as "4 August 2026". Returns null for a missing date. */

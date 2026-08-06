@@ -22,11 +22,33 @@ import {
   ticks,
 } from './gapMath';
 import {plainDate} from '../load';
-import type {GapChart as GapChartData, GapPoint} from '../load';
+import type {Chip, GapChart as GapChartData, GapPoint} from '../load';
 
 export interface GapChartProps {
   data: GapChartData;
+  /**
+   * Which way the gap moved, straight from the payload. THE SAME value the
+   * badge, the verdict's opening phrase and this chart's own caption are all
+   * built from on the Python side, so the spoken description can never say
+   * something different from the words printed beside it.
+   */
+  direction: Chip['direction'];
 }
+
+/**
+ * FINAL REVIEW, Important 3: this file used to work the direction out for
+ * itself — first point against last point, with a 0.05 absolute threshold —
+ * while the caption above it came from a Python calculation using the LAST
+ * TWO points and a 5% relative one. On a series of 5.0 → 0.5 → 0.6 the two
+ * disagreed outright: the caption said the gap widened and the spoken
+ * description said it narrowed, in the same section, about the page's
+ * central claim. There is now one direction, and it comes from the payload.
+ */
+const GAP_VERB: Record<Chip['direction'], string> = {
+  widening: 'widens',
+  narrowing: 'narrows',
+  flat: 'holds roughly steady',
+};
 
 // The plot's own pixel geometry -- a fixed viewBox, ported from the mock's
 // SVG so the chart's proportions match the approved visual contract exactly.
@@ -45,19 +67,15 @@ const END_LABEL_X = 886;
 // and its neighbour never touch. Below this, a point goes unlabelled.
 const MIN_TICK_GAP = 70;
 
-function ariaDescription(points: GapPoint[]): string {
+export function ariaDescription(
+  points: GapPoint[],
+  direction: Chip['direction'],
+): string {
   const first = points[0];
   const last = points[points.length - 1];
   const demandWord = last.demand >= first.demand ? 'rises' : 'falls';
   const supplyWord = last.supply >= first.supply ? 'rises' : 'falls';
-  const firstGap = first.demand - first.supply;
-  const lastGap = last.demand - last.supply;
-  const gapWord =
-    Math.abs(lastGap - firstGap) < 0.05
-      ? 'holds roughly steady'
-      : lastGap > firstGap
-        ? 'widens'
-        : 'narrows';
+  const gapWord = GAP_VERB[direction];
   return (
     `Two lines since ${plainDate(first.date)}. The demand score ${demandWord} from ` +
     `${formatSigned(first.demand)} to ${formatSigned(last.demand)} while the supply score ` +
@@ -66,7 +84,7 @@ function ariaDescription(points: GapPoint[]): string {
   );
 }
 
-export function GapChart({data}: GapChartProps) {
+export function GapChart({data, direction}: GapChartProps) {
   // Defensive sort by real date -- geometry must be correct even if a future
   // producer ever hands points out of order. This reorders, it never drops,
   // rescales or otherwise touches the reported demand/supply figures.
@@ -120,7 +138,11 @@ export function GapChart({data}: GapChartProps) {
       </div>
 
       <div className="plot-frame">
-        <svg viewBox={`0 0 ${VIEW_W} ${VIEW_H}`} role="img" aria-label={ariaDescription(points)}>
+        <svg
+          viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+          role="img"
+          aria-label={ariaDescription(points, direction)}
+        >
           {yTicks.map((v, i) => (
             <g key={`ytick-${i}`}>
               <line
@@ -140,7 +162,7 @@ export function GapChart({data}: GapChartProps) {
           ) : null}
 
           {spacedTickIndices(xs, MIN_TICK_GAP).map((i) => (
-            <text key={`xtick-${points[i].date}`} className="xtick" x={xs[i]} y={XTICK_Y}>
+            <text key={`xtick-${i}`} className="xtick" x={xs[i]} y={XTICK_Y}>
               {shortDate(points[i].date)}
             </text>
           ))}
@@ -193,7 +215,11 @@ export function GapChart({data}: GapChartProps) {
             const tipLeft = xs[i] > (PLOT_X0 + PLOT_X1) / 2 ? xs[i] - 212 : xs[i] + 10;
             const gap = p.demand - p.supply;
             return (
-              <g className="hov" key={p.date}>
+              // A whole-month reading is dated the 1st of its month, so a
+              // reading taken on the 1st shares that date exactly. Two points
+              // may therefore carry the same date; the position in the sorted
+              // list is what is unique about each of them.
+              <g className="hov" key={`${p.date}-${i}`}>
                 <rect x={left} y={HOV_TOP} width={Math.max(right - left, 1)} height={HOV_BOTTOM - HOV_TOP} />
                 <g className="read">
                   <line className="cross" x1={xs[i]} y1={HOV_TOP} x2={xs[i]} y2={HOV_BOTTOM} />

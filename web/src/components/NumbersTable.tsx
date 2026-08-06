@@ -25,8 +25,13 @@ export function NumbersTable({points}: NumbersTableProps) {
           </tr>
         </thead>
         <tbody>
-          {points.map((p) => (
-            <tr key={p.date}>
+          {/*
+            A whole-month reading is dated the 1st of its month, so a reading
+            taken on the 1st shares that date. The row's position is what is
+            unique about it, not the date it shows.
+          */}
+          {points.map((p, i) => (
+            <tr key={`${p.date}-${i}`}>
               <td>{plainDate(p.date)}</td>
               <td>{formatSigned(p.demand)}</td>
               <td>{formatSigned(p.supply)}</td>

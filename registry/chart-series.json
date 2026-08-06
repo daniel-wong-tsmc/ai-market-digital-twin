@@ -9,7 +9,7 @@
       "quality": "hard-fact",
       "topicTags": ["amdDataCenter", "amd"],
       "form": "columns",
-      "unit": "USD bn",
+      "unit": "US$ billions",
       "fetcher": "amd_dc_revenue"
     },
     {
@@ -21,7 +21,7 @@
       "quality": "hard-fact",
       "topicTags": ["nvidia", "nvidiaDataCenter"],
       "form": "columns",
-      "unit": "USD bn",
+      "unit": "US$ billions",
       "fetcher": null
     },
     {
@@ -33,7 +33,7 @@
       "quality": "estimate",
       "topicTags": ["gpuSpotPrice"],
       "form": "line",
-      "unit": "USD",
+      "unit": "US$",
       "fetcher": null
     }
   ]

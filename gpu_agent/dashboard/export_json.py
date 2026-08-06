@@ -87,6 +87,21 @@ _GAP_WORD_CAPTION = {
     "narrowing": "The gap narrowed in the latest reading.",
     "flat": "The gap held roughly steady in the latest reading.",
 }
+# FINAL REVIEW, Important 1: the six dimension rows sit under the heading
+# "How sure we are" and were pasting the scorecard's INTERNAL
+# `confidence.basis` straight into reader copy -- an executive was reading
+# "Medium — majority of 3/3 samples; capped by finding confidence (medium)."
+# The approved mock (lines 601, 637) writes reader-facing sentences about
+# the EVIDENCE, not about our sampling method. The verdict zone already
+# translates the same contract field via `_CONFIDENCE_SENTENCE`; the
+# dimension rows now get their own mapping, so the raw basis string never
+# reaches a reader. The "high" and "medium" sentences below are the mock's
+# own words, verbatim.
+_DIMENSION_CONFIDENCE_SENTENCE = {
+    "high": "High — drawn from company filings and calls.",
+    "medium": "Medium — the underlying reports are single-source in places.",
+    "low": "Low — the reporting behind this is thin and not yet corroborated.",
+}
 _STORY_DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})\.json$")
 
 
@@ -267,16 +282,24 @@ def _dimension_summary_and_reasoning(rationale: str) -> tuple[str, str]:
 
 
 def _dimension_confidence_sentence(rating: dict) -> str:
-    """A full plain-English sentence (mock precedent: "High — drawn from
-    company filings and calls."), not the raw "medium"/"high" level string
-    (MINOR fix, review round 1)."""
+    """A full plain-English sentence about the EVIDENCE (mock lines 601 and
+    637), not the raw "medium"/"high" level string and NEVER the scorecard's
+    internal `confidence.basis`.
+
+    FINAL REVIEW, Important 1: this used to paste `basis` verbatim, so the
+    row's "How sure we are" block read "Medium — majority of 3/3 samples;
+    capped by finding confidence (medium)." -- internal scoring method
+    language in front of an executive. The verdict zone has translated the
+    same contract field through `_CONFIDENCE_SENTENCE` since round 1; this
+    is the matching translation for the dimension rows, so one contract
+    field now has two reader-facing consumers and no raw one.
+
+    A level we do not recognise (or none at all) returns an empty string --
+    the panel then omits the block entirely rather than showing a heading
+    over nothing, or guessing at a confidence we cannot honestly name."""
     conf = rating.get("confidence") or {}
-    level = (conf.get("level") or "").strip()
-    if not level:
-        return ""
-    label = level[:1].upper() + level[1:]
-    basis = (conf.get("basis") or "").strip()
-    return f"{label} — {basis}." if basis else f"{label}."
+    level = (conf.get("level") or "").strip().lower()
+    return _DIMENSION_CONFIDENCE_SENTENCE.get(level, "")
 
 
 def _build_dimensions(latest_raw: dict, findings_by_id: dict) -> list[dict]:

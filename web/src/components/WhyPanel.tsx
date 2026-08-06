@@ -21,6 +21,14 @@
  * screen -- a keyboard or screen-reader user tabbing through a closed row
  * would land on invisible links. `inert` + `aria-hidden` closes that gap
  * without giving up the mounted-content animation.
+ *
+ * FINAL REVIEW, Important 5: each of the three blocks is omitted entirely --
+ * heading and all -- when it has nothing in it. The exporter deliberately
+ * sends an empty reasoning when a dimension's whole rationale is a single
+ * sentence (there is honestly nothing to add beyond the row itself), and
+ * that used to render as the heading "Why we say that" over blank space,
+ * which reads as a broken page rather than an honest silence. Same for an
+ * empty confidence line and an empty evidence list.
  */
 import {SourceMark} from './SourceMark';
 import type {Dimension} from '../load';
@@ -55,23 +63,29 @@ export function WhyPanel({dimension, id, btnId, open}: WhyPanelProps) {
       aria-hidden={open ? undefined : true}
     >
       <div className="why">
-        <div className="why-body">
-          <h3>Why we say that</h3>
-          <p>{dimension.reasoning}</p>
-        </div>
+        {dimension.reasoning ? (
+          <div className="why-body">
+            <h3>Why we say that</h3>
+            <p>{dimension.reasoning}</p>
+          </div>
+        ) : null}
         <div className="why-side">
           <div className="why-block">
             <span className="k">Direction</span>
             <span className="v">{DIRECTION_PHRASE[dimension.direction]}</span>
           </div>
-          <div className="why-block">
-            <span className="k">How sure we are</span>
-            <span className="v">{dimension.confidence}</span>
-          </div>
-          <div className="why-block">
-            <span className="k">Top evidence</span>
-            <SourceMark refs={dimension.evidence} about={dimension.plainName} />
-          </div>
+          {dimension.confidence ? (
+            <div className="why-block">
+              <span className="k">How sure we are</span>
+              <span className="v">{dimension.confidence}</span>
+            </div>
+          ) : null}
+          {dimension.evidence.length > 0 ? (
+            <div className="why-block">
+              <span className="k">Top evidence</span>
+              <SourceMark refs={dimension.evidence} about={dimension.plainName} />
+            </div>
+          ) : null}
         </div>
       </div>
     </div>

@@ -621,3 +621,64 @@ def test_fallback_chart_produced_from_real_on_disk_odm_series():
     assert len(b0["chart"]["points"]) == 10  # capped at _MAX_CHART_POINTS
     _assert_bullet_plain_english(b0)
     _validate_bullet_schema(b0)
+
+
+# ---------------------------------------------------------------------------
+# FINAL REVIEW, Important 4 + Minor 7: the no-chart panels' wording.
+# ---------------------------------------------------------------------------
+
+def _all_no_chart_reasons() -> list[str]:
+    """Every reason string the builder can produce, gathered by calling it
+    directly rather than by re-typing the sentences here."""
+    from gpu_agent.dashboard import bullets as bullets_mod
+    return [
+        bullets_mod._fallback_reason([], "store/series",
+                                     saw_non_measurable_unit=False,
+                                     saw_missing_title=False),
+        bullets_mod._fallback_reason(["nothingTrackedHere"], "store/series",
+                                     saw_non_measurable_unit=False,
+                                     saw_missing_title=False),
+        bullets_mod._fallback_reason(["gpuSpotPrice"], "store/series",
+                                     saw_non_measurable_unit=False,
+                                     saw_missing_title=False),
+        bullets_mod._fallback_reason(["odmMonthlyAiRevenue"], "store/series",
+                                     saw_non_measurable_unit=True,
+                                     saw_missing_title=False),
+        bullets_mod._fallback_reason(["odmMonthlyAiRevenue"], "store/series",
+                                     saw_non_measurable_unit=False,
+                                     saw_missing_title=True),
+        bullets_mod._fallback_reason(["odmMonthlyAiRevenue"], "store/series",
+                                     saw_non_measurable_unit=False,
+                                     saw_missing_title=False),
+    ]
+
+
+def test_the_estimates_only_reason_talks_about_the_series_we_track_not_the_bullet():
+    # The defect: the panel beside a bullet that cited AMD's own press release
+    # said "The only numbers HERE are our own estimates, not published facts."
+    # True of the series we track; plainly false about the item the reader is
+    # looking at. The sentence must be about what WE track, and must not claim
+    # anything about the material sitting next to it.
+    from gpu_agent.dashboard.bullets import _fallback_reason
+
+    reason = _fallback_reason(["gpuSpotPrice"], "store/series",
+                              saw_non_measurable_unit=False,
+                              saw_missing_title=False)
+    assert reason == ("No chart. The number we track for this is our own estimate, "
+                      "not a published figure, so we don't draw it.")
+    assert "here" not in reason.lower()
+    assert "track" in reason
+
+
+def test_no_chart_reason_never_prints_a_double_hyphen():
+    # The mock uses an em dash; three of the six reasons were rendering a
+    # literal "--" to the reader.
+    for reason in _all_no_chart_reasons():
+        assert "--" not in reason, reason
+
+
+def test_every_no_chart_reason_is_a_plain_english_sentence():
+    for reason in _all_no_chart_reasons():
+        assert reason.startswith("No chart.")
+        assert reason.endswith(".")
+        assert "DMI" not in reason and "SMI" not in reason

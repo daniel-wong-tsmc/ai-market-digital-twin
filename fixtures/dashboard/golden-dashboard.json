@@ -4,7 +4,7 @@
     {
       "chart": null,
       "date": "2026-08-05",
-      "noChartReason": "No chart. Nobody is tracking a number for this yet -- the reporting behind it is one-off, not a running series.",
+      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
       "sources": [
         {
           "date": "2026-08-04",
@@ -34,7 +34,7 @@
     {
       "chart": null,
       "date": "2026-08-05",
-      "noChartReason": "No chart. Nobody is tracking a number for this yet -- the reporting behind it is one-off, not a running series.",
+      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
       "sources": [
         {
           "date": "2026-08-04",
@@ -50,7 +50,7 @@
     {
       "chart": null,
       "date": "2026-08-05",
-      "noChartReason": "No chart. Nobody is tracking a number for this yet -- the reporting behind it is one-off, not a running series.",
+      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
       "sources": [
         {
           "date": "2026-07-31",
@@ -81,7 +81,7 @@
   "categoryId": "chips.merchant-gpu",
   "dimensions": [
     {
-      "confidence": "Medium — majority of 3/3 samples; capped by finding confidence (medium).",
+      "confidence": "Medium — the underlying reports are single-source in places.",
       "direction": "flat",
       "evidence": [
         {
@@ -107,7 +107,7 @@
       "tone": "bad"
     },
     {
-      "confidence": "High — majority of 3/3 samples.",
+      "confidence": "High — drawn from company filings and calls.",
       "direction": "improving",
       "evidence": [
         {
@@ -126,7 +126,7 @@
       "tone": "good"
     },
     {
-      "confidence": "High — majority of 3/3 samples.",
+      "confidence": "High — drawn from company filings and calls.",
       "direction": "worsening",
       "evidence": [
         {
@@ -152,7 +152,7 @@
       "tone": "mixed"
     },
     {
-      "confidence": "Medium — majority of 3/3 samples; capped by finding confidence (medium).",
+      "confidence": "Medium — the underlying reports are single-source in places.",
       "direction": "worsening",
       "evidence": [
         {
@@ -171,7 +171,7 @@
       "tone": "bad"
     },
     {
-      "confidence": "High — majority of 3/3 samples.",
+      "confidence": "High — drawn from company filings and calls.",
       "direction": "flat",
       "evidence": [
         {
@@ -197,7 +197,7 @@
       "tone": "good"
     },
     {
-      "confidence": "High — majority of 3/3 samples.",
+      "confidence": "High — drawn from company filings and calls.",
       "direction": "worsening",
       "evidence": [
         {

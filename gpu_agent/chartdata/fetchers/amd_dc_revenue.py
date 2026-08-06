@@ -162,7 +162,7 @@ def parse(html_text: str) -> list[dict]:
         points.append({
             "period": period,
             "value": value_bn,
-            "unit": "USD bn",
+            "unit": "US$ billions",
             "publishedAt": published_at,
             "sourceUrl": source_url,
             "title": title,

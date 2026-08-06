@@ -13,7 +13,7 @@
 import {render, screen} from '@testing-library/react';
 import {Theme} from '@astryxdesign/core/theme';
 import {neutralTheme} from '@astryxdesign/theme-neutral/built';
-import {describe, expect, it} from 'vitest';
+import {describe, expect, it, vi} from 'vitest';
 import {GapChart} from '../components/GapChart';
 import {parseDashboard} from '../load';
 import type {GapChart as GapChartData, GapPoint} from '../load';
@@ -24,6 +24,7 @@ function draw(ui: React.ReactElement) {
 }
 
 const golden = () => parseDashboard(readGolden()).gapChart;
+const goldenDirection = () => parseDashboard(readGolden()).verdict.chip.direction;
 
 /** Mirrors _make_mixed_store in tests/test_export_json.py: real dates, real
  * non-uniform gaps -- June/July/August month anchors plus four genuine daily
@@ -53,7 +54,7 @@ function mixedChart(): GapChartData {
 
 describe('the gap chart renders the required forms', () => {
   it('draws an svg with two line paths and one shaded gap path', () => {
-    draw(<GapChart data={golden()} />);
+    draw(<GapChart data={golden()} direction={goldenDirection()} />);
     const svg = document.querySelector('svg')!;
     expect(svg).toBeInTheDocument();
     expect(svg.querySelector('path.line.dem')).not.toBeNull();
@@ -62,7 +63,7 @@ describe('the gap chart renders the required forms', () => {
   });
 
   it('labels the end of each line in plain English, never the internal names', () => {
-    draw(<GapChart data={golden()} />);
+    draw(<GapChart data={golden()} direction={goldenDirection()} />);
     const svg = document.querySelector('svg')!;
     expect(svg.textContent).toContain('Demand');
     expect(svg.textContent).toContain('Supply');
@@ -71,7 +72,7 @@ describe('the gap chart renders the required forms', () => {
   });
 
   it('gives the chart a plain-English aria-label naming both series', () => {
-    draw(<GapChart data={golden()} />);
+    draw(<GapChart data={golden()} direction={goldenDirection()} />);
     const svg = document.querySelector('svg')!;
     const label = svg.getAttribute('aria-label') ?? '';
     expect(label.toLowerCase()).toMatch(/demand/);
@@ -81,7 +82,7 @@ describe('the gap chart renders the required forms', () => {
   });
 
   it('never uses colour alone to tell the two lines apart', () => {
-    draw(<GapChart data={golden()} />);
+    draw(<GapChart data={golden()} direction={goldenDirection()} />);
     // Each series carries a text label as well as its colour class, in the
     // chart itself, not only in the numbers table underneath.
     const svg = document.querySelector('svg')!;
@@ -93,20 +94,20 @@ describe('the gap chart renders the required forms', () => {
   });
 
   it('renders the caption disclosed by the data, not invented copy', () => {
-    draw(<GapChart data={golden()} />);
+    draw(<GapChart data={golden()} direction={goldenDirection()} />);
     expect(screen.getByText(golden().caption)).toBeInTheDocument();
   });
 });
 
 describe('the gap chart positions points by real calendar date, not array index', () => {
   it('renders one horizontal marker per point', () => {
-    draw(<GapChart data={mixedChart()} />);
+    draw(<GapChart data={mixedChart()} direction="widening" />);
     const crosses = document.querySelectorAll('.hov .cross');
     expect(crosses).toHaveLength(7);
   });
 
   it('spaces points proportionally to the real number of days between readings', () => {
-    draw(<GapChart data={mixedChart()} />);
+    draw(<GapChart data={mixedChart()} direction="widening" />);
     const crosses = Array.from(document.querySelectorAll('.hov .cross'));
     const xs = crosses.map((el) => Number(el.getAttribute('x1')));
     expect(xs).toHaveLength(7);
@@ -142,7 +143,7 @@ describe('the gap chart positions points by real calendar date, not array index'
 
 describe('the numbers table is the accessible alternative', () => {
   it('renders one row per point with real formatted values', () => {
-    draw(<GapChart data={mixedChart()} />);
+    draw(<GapChart data={mixedChart()} direction="widening" />);
     const details = document.querySelector('details.numbers')!;
     expect(details).not.toBeNull();
     expect(screen.getByText('Show the numbers')).toBeInTheDocument();
@@ -156,7 +157,7 @@ describe('the numbers table is the accessible alternative', () => {
   });
 
   it('never mentions the internal index names', () => {
-    draw(<GapChart data={mixedChart()} />);
+    draw(<GapChart data={mixedChart()} direction="widening" />);
     const details = document.querySelector('details.numbers')!;
     expect(details.textContent).not.toMatch(/DMI/);
     expect(details.textContent).not.toMatch(/SMI/);
@@ -167,7 +168,7 @@ describe('the numbers table is the accessible alternative', () => {
 
 describe('the annotation marker', () => {
   it('marks the annotated reading with its label', () => {
-    draw(<GapChart data={mixedChart()} />);
+    draw(<GapChart data={mixedChart()} direction="widening" />);
     expect(screen.getByText(/Widest gap so far/)).toBeInTheDocument();
   });
 });
@@ -177,7 +178,7 @@ describe('the date labels under the chart never collide', () => {
     // The real reading history bunches five days inside one week. Labelling
     // every one of them printed them over each other and the axis read as
     // gibberish -- caught by looking at the built page (Task 12 step 5).
-    draw(<GapChart data={mixedChart()} />);
+    draw(<GapChart data={mixedChart()} direction="widening" />);
     const labels = Array.from(document.querySelectorAll('text.xtick'));
     const positions = labels.map((el) => Number(el.getAttribute('x')));
     for (let i = 1; i < positions.length; i += 1) {
@@ -190,8 +191,108 @@ describe('the date labels under the chart never collide', () => {
   });
 
   it('labels every reading when they are already far enough apart', () => {
-    draw(<GapChart data={golden()} />);
+    draw(<GapChart data={golden()} direction={goldenDirection()} />);
     const labels = document.querySelectorAll('text.xtick');
     expect(labels.length).toBeGreaterThan(1);
+  });
+});
+
+describe('the spoken description takes its direction from the payload', () => {
+  /**
+   * FINAL REVIEW, Important 3. The component used to work the direction out
+   * for itself — first point against last, with a 0.05 absolute threshold —
+   * while the caption printed beside it came from Python's last-two-points,
+   * 5%-relative calculation. On this series the two contradict each other:
+   * Python reads 0.5 → 0.6 and says the gap widened; first-against-last reads
+   * 5.0 → 0.6 and says it narrowed. A screen-reader user heard both, in the
+   * same section, about the page's central claim.
+   */
+  const DRIFTING: GapPoint[] = [
+    {date: '2026-06-01', demand: 5.0, supply: 0.0},
+    {date: '2026-07-01', demand: 0.5, supply: 0.0},
+    {date: '2026-08-01', demand: 0.6, supply: 0.0},
+  ];
+
+  function driftingChart(caption: string): GapChartData {
+    return {
+      points: DRIFTING,
+      annotation: {date: '2026-06-01', label: 'Widest gap so far'},
+      caption,
+      sources: [],
+    };
+  }
+
+  function labelOf(): string {
+    return document.querySelector('svg')!.getAttribute('aria-label') ?? '';
+  }
+
+  it.each([
+    ['widening' as const, 'The gap widened in the latest reading.', 'widens'],
+    ['narrowing' as const, 'The gap narrowed in the latest reading.', 'narrows'],
+    ['flat' as const, 'The gap held roughly steady in the latest reading.', 'holds roughly steady'],
+  ])(
+    'says the gap %s exactly as the payload does, never its own recount',
+    (direction, caption, spokenVerb) => {
+      draw(<GapChart data={driftingChart(caption)} direction={direction} />);
+      const label = labelOf();
+      expect(label).toContain(spokenVerb);
+      // And it says none of the other two.
+      for (const other of ['widens', 'narrows', 'holds roughly steady']) {
+        if (other !== spokenVerb) expect(label).not.toContain(other);
+      }
+    },
+  );
+
+  it('agrees with the caption printed beside it on the very series that used to split them', () => {
+    // The bite: on 5.0 -> 0.5 -> 0.6 the old code said "narrows" here while
+    // the caption said "widened" ten pixels below.
+    draw(
+      <GapChart
+        data={driftingChart('The gap widened in the latest reading.')}
+        direction="widening"
+      />,
+    );
+    expect(labelOf()).toContain('widens');
+    expect(labelOf()).not.toContain('narrows');
+    expect(screen.getByText(/The gap widened in the latest reading\./)).toBeInTheDocument();
+  });
+});
+
+describe('two readings can share one date without breaking the page', () => {
+  /**
+   * FINAL REVIEW, Minor 6: a whole-month reading is dated the 1st of its
+   * month, so a reading taken on the 1st carries the same date. Keying the
+   * rendered points on the date alone gave React two children with one key.
+   */
+  const COLLIDING: GapPoint[] = [
+    {date: '2026-07-01', demand: 1.5, supply: 0.0},
+    {date: '2026-08-01', demand: 2.0, supply: 0.0},
+    {date: '2026-08-01', demand: 1.0, supply: 0.0},
+  ];
+
+  function collidingChart(): GapChartData {
+    return {
+      points: COLLIDING,
+      annotation: {date: '2026-08-01', label: 'Widest gap so far'},
+      caption: 'The gap narrowed in the latest reading.',
+      sources: [],
+    };
+  }
+
+  it('renders every reading and warns about nothing', () => {
+    const errors: unknown[] = [];
+    const spy = vi.spyOn(console, 'error').mockImplementation((...args) => {
+      errors.push(args[0]);
+    });
+    try {
+      draw(<GapChart data={collidingChart()} direction="narrowing" />);
+    } finally {
+      spy.mockRestore();
+    }
+    expect(document.querySelectorAll('.hov .cross')).toHaveLength(3);
+    expect(document.querySelectorAll('details.numbers tbody tr')).toHaveLength(3);
+    const joined = errors.map(String).join('\n');
+    expect(joined).not.toMatch(/same key/i);
+    expect(joined).not.toMatch(/duplicate/i);
   });
 });

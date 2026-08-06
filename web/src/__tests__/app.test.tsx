@@ -64,3 +64,39 @@ describe('the page', () => {
     expect(screen.queryByRole('heading', {level: 1})).toBeNull();
   });
 });
+
+describe('the dimension zone s colour legend', () => {
+  it('names the colours using the same words the rows underneath use', async () => {
+    // FINAL REVIEW, Minor 10: the legend said "Green healthy · amber mixed ·
+    // red strained" while no row ever says healthy or strained — the ratings
+    // are Very weak / Weak / Mixed / Strong / Very strong.
+    serve(readGolden());
+    render(
+      <Theme theme={neutralTheme}>
+        <App />
+      </Theme>,
+    );
+    const legend = await screen.findByText(/Open a row to see why/);
+    const text = legend.textContent ?? '';
+    expect(text).not.toMatch(/healthy/i);
+    expect(text).not.toMatch(/strained/i);
+
+    // Every word the legend uses for a colour must be a word the rows use.
+    const ratingWords = new Set(
+      (readGolden().dimensions as Array<{ratingWord: string}>).map((d) =>
+        d.ratingWord.toLowerCase().replace('very ', ''),
+      ),
+    );
+    for (const word of ['strong', 'mixed', 'weak']) {
+      expect(text.toLowerCase()).toContain(word);
+    }
+    for (const word of text.toLowerCase().match(/strong|mixed|weak|healthy|strained/g) ?? []) {
+      expect(['strong', 'mixed', 'weak']).toContain(word);
+    }
+    // And the words it uses really are on the page's own scale.
+    expect(ratingWords.size).toBeGreaterThan(0);
+    for (const word of ratingWords) {
+      expect(['very weak', 'weak', 'mixed', 'strong', 'very strong']).toContain(word);
+    }
+  });
+});

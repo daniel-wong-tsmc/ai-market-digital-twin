@@ -35,7 +35,7 @@ import {describe, expect, it} from 'vitest';
 import {Dimensions} from '../components/Dimensions';
 import {Footer} from '../components/Footer';
 import {isAssessment, parseDashboard} from '../load';
-import type {Source} from '../load';
+import type {Dimension, Source} from '../load';
 import {readGolden} from './fixtures';
 
 function draw(ui: React.ReactElement) {
@@ -236,5 +236,71 @@ describe('the footer', () => {
       expect(a).toHaveTextContent(links[i].label);
       expect(a).toHaveAttribute('href', links[i].href);
     });
+  });
+});
+
+describe('the why-panel never prints a heading over nothing', () => {
+  /**
+   * FINAL REVIEW, Important 5. The exporter deliberately sends an empty
+   * `reasoning` when a dimension's whole rationale is a single sentence —
+   * there is honestly nothing to add beyond the row itself. Rendered, that
+   * was the heading "Why we say that" with blank space under it, which reads
+   * as a broken page rather than as an honest silence. Same for an empty
+   * confidence line and an empty evidence list.
+   */
+  function withEmpty(overrides: Partial<Dimension>): Dimension[] {
+    const dims = golden().dimensions;
+    return [{...dims[0], ...overrides}, ...dims.slice(1)];
+  }
+
+  it('omits the reasoning heading entirely when there is no reasoning', () => {
+    const dims = withEmpty({reasoning: ''});
+    draw(<Dimensions dimensions={dims} />);
+    const panel = rowPanel(dims[0].id);
+    expect(within(panel).queryByText('Why we say that')).toBeNull();
+    expect(panel.querySelector('.why-body')).toBeNull();
+  });
+
+  it('keeps the reasoning heading when there is reasoning to show', () => {
+    const dims = golden().dimensions;
+    expect(dims[0].reasoning).toBeTruthy();
+    draw(<Dimensions dimensions={dims} />);
+    const panel = rowPanel(dims[0].id);
+    expect(within(panel).getByText('Why we say that')).toBeInTheDocument();
+  });
+
+  it('omits the how-sure-we-are block entirely when there is no confidence line', () => {
+    const dims = withEmpty({confidence: ''});
+    draw(<Dimensions dimensions={dims} />);
+    const panel = rowPanel(dims[0].id);
+    expect(within(panel).queryByText('How sure we are')).toBeNull();
+  });
+
+  it('omits the evidence block entirely when there is no evidence', () => {
+    const dims = withEmpty({evidence: []});
+    draw(<Dimensions dimensions={dims} />);
+    const panel = rowPanel(dims[0].id);
+    expect(within(panel).queryByText('Top evidence')).toBeNull();
+  });
+
+  it('still shows the direction, which every row always has', () => {
+    const dims = withEmpty({reasoning: '', confidence: '', evidence: []});
+    draw(<Dimensions dimensions={dims} />);
+    const panel = rowPanel(dims[0].id);
+    expect(within(panel).getByText('Direction')).toBeInTheDocument();
+  });
+});
+
+describe('the how-sure-we-are line is written for a reader', () => {
+  it('never shows the internal scoring method behind it', () => {
+    // FINAL REVIEW, Important 1: the row used to print the scorecard's own
+    // `confidence.basis`, so an executive read "Medium - majority of 3/3
+    // samples; capped by finding confidence (medium)."
+    for (const dim of golden().dimensions) {
+      const lowered = dim.confidence.toLowerCase();
+      for (const phrase of ['sample', 'majority', 'capped by', 'finding confidence', '3/3']) {
+        expect(lowered).not.toContain(phrase);
+      }
+    }
   });
 });
