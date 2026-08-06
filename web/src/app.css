@@ -1,0 +1,168 @@
+/**
+ * Page styles. The base, masthead and verdict rules are ported from the
+ * approved mock (docs/superpowers/specs/assets/2026-08-05-dashboard-mock.html).
+ * Rules the mock does not cover — the as-of banner, the direction chip in its
+ * other two states, and the source marker — are built from the same tokens and
+ * the same shapes, so they read as part of the set.
+ *
+ * Tasks 9-11 add the gap chart, what changed, the six dimensions and the
+ * footer. Their mock rules are not copied here yet.
+ */
+
+/* ---------- base (mock lines 90-109) ---------- */
+* { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+a { color: var(--color-accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+h1, h2, h3 { font-style: normal; margin: 0; letter-spacing: -0.011em; }
+
+.shell { max-width: 68rem; margin: 0 auto; padding: 0 var(--space-6) var(--space-16); }
+
+/* ---------- masthead (mock lines 114-122) ---------- */
+.mast {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--space-4); flex-wrap: wrap;
+  padding: var(--space-5) 0 var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+.mast .who { font-weight: 600; font-size: var(--text-body); }
+.mast .who span { color: var(--color-text-muted); font-weight: 400; }
+.mast .when { color: var(--color-text-muted); font-size: var(--text-small); }
+
+/* ---------- zone 1: the verdict (mock lines 125-168) ---------- */
+.verdict { padding: var(--space-8) 0 var(--space-4); }
+.verdict .q {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+.verdict h1 {
+  font-size: var(--text-verdict);
+  line-height: 1.16;
+  font-weight: 640;
+  letter-spacing: -0.024em;
+  max-width: 33ch;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.verdict h1 .lead.serious { color: var(--color-serious); }
+.verdict h1 .lead.good { color: var(--color-good); }
+.vmeta {
+  display: flex; align-items: center; gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-4);
+}
+.chip {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 5px 12px 5px 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-small);
+  font-weight: 550;
+  background: var(--color-surface);
+}
+.chip svg { display: block; }
+.chip.good { color: var(--color-good); border-color: color-mix(in oklab, var(--color-good) 35%, var(--color-border)); }
+.chip.serious { color: var(--color-serious); border-color: color-mix(in oklab, var(--color-serious) 35%, var(--color-border)); }
+.chip.flat { color: var(--color-text-secondary); }
+.vmeta .sep { color: var(--color-border-strong); }
+.vmeta .m { color: var(--color-text-muted); font-size: var(--text-small); }
+.sowhat {
+  margin-top: var(--space-5);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-border-strong);
+  font-size: var(--text-lead);
+  line-height: 1.45;
+  color: var(--color-text-secondary);
+  max-width: 82ch;
+}
+.sowhat b { color: var(--color-text); font-weight: 600; }
+
+/* ---------- the as-of banner (shown only when the reading has aged) ---------- */
+.staleban {
+  margin: 0 0 var(--space-5);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid color-mix(in oklab, var(--color-warning) 40%, var(--color-border));
+  border-left-width: 3px;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-sunk);
+  color: var(--color-text-secondary);
+  font-size: var(--text-small);
+  max-width: 74ch;
+}
+
+/* ---------- the source marker and its popover ---------- */
+.srcmark-wrap { line-height: 0; margin-left: 3px; }
+.srcmark {
+  font: inherit;
+  font-size: var(--text-micro);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--color-accent);
+  background: var(--color-accent-quiet);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  min-width: 18px;
+  padding: 2px 6px;
+  cursor: pointer;
+  vertical-align: super;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.srcmark:hover { background: color-mix(in oklab, var(--color-accent) 18%, var(--color-accent-quiet)); }
+.srcmark[aria-expanded="true"] { border-color: var(--color-accent); }
+
+.srcpop-body { padding: var(--space-1) 0; }
+.srcpop-head {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-micro);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+.srclist { list-style: none; margin: 0; padding: 0; }
+.srcline { margin-bottom: var(--space-3); font-size: var(--text-small); line-height: 1.4; }
+.srcline:last-child { margin-bottom: 0; }
+.srclink { display: block; }
+.srcmeta { display: block; color: var(--color-text-muted); font-size: var(--text-micro); margin-top: 2px; }
+.srcjudgement { margin-bottom: var(--space-3); }
+.srcjudgement-head {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+}
+.srcjudgement .srclist { padding-left: var(--space-4); border-left: 2px solid var(--color-border); }
+
+/* ---------- while the file is arriving, or if it will not ---------- */
+.loading, .loadfail {
+  padding: var(--space-10) 0;
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+}
+.loadfail { color: var(--color-serious); }
+
+/* ---------- responsive (mock lines 377-388) ---------- */
+@media (max-width: 720px) {
+  :root { --text-verdict: 1.75rem; }
+  .shell { padding: 0 var(--space-4) var(--space-12); }
+  .verdict { padding: var(--space-8) 0 var(--space-4); }
+  .verdict h1 { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}

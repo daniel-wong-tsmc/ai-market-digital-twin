@@ -1,0 +1,83 @@
+/**
+ * Design tokens, ported verbatim from the approved visual mock at
+ * docs/superpowers/specs/assets/2026-08-05-dashboard-mock.html (lines 17-88).
+ * The mock is the visual contract: if a colour, size or spacing question comes
+ * up, the answer is here, not in a fresh choice.
+ *
+ * These sit outside Astryx's CSS layers on purpose. Unlayered rules beat
+ * layered ones in the cascade, so the mock's look wins over the design
+ * system's defaults wherever the two overlap.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* --- surfaces & ink (Astryx neutral) --- */
+  --color-bg:            #FCFCFB;
+  --color-surface:       #FFFFFF;
+  --color-surface-sunk:  #F5F5F3;
+  --color-border:        #E3E3DF;
+  --color-border-strong: #CFCFC9;
+  --color-text:          #16161A;
+  --color-text-secondary:#55555C;
+  --color-text-muted:    #85858C;
+  --color-accent:        #1F5FD0;
+  --color-accent-quiet:  #EAF0FC;
+  --color-focus:         #1F5FD0;
+
+  /* --- status (reserved; always paired with a word) --- */
+  --color-good:    #1B7A4B;
+  --color-warning: #A16207;
+  --color-serious: #B3421C;
+
+  /* --- chart series --- */
+  --color-demand: #B4530F;
+  --color-supply: #1F6FD0;
+  --color-gapfill: rgba(180, 83, 15, 0.09);
+  --color-grid:   #EBEBE7;
+
+  /* --- type --- */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --text-verdict: 2.25rem;    /* 36 */
+  --text-h2:      0.9375rem;  /* 15 */
+  --text-lead:    1.0625rem;  /* 17 */
+  --text-body:    0.9375rem;  /* 15 */
+  --text-small:   0.8125rem;  /* 13 */
+  --text-micro:   0.75rem;    /* 12 */
+
+  /* --- space (4pt) --- */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --space-12: 48px; --space-16: 64px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:            #131314;
+    --color-surface:       #1A1A1B;
+    --color-surface-sunk:  #202022;
+    --color-border:        #2E2E31;
+    --color-border-strong: #3D3D41;
+    --color-text:          #F2F2F0;
+    --color-text-secondary:#B4B4B0;
+    --color-text-muted:    #8A8A88;
+    --color-accent:        #6FA0F2;
+    --color-accent-quiet:  #1C2740;
+    --color-focus:         #6FA0F2;
+    --color-good:    #4BAE7C;
+    --color-warning: #D2A03C;
+    --color-serious: #E08A5E;
+    --color-demand: #CE7638;
+    --color-supply: #4F90E6;
+    --color-gapfill: rgba(206, 118, 56, 0.12);
+    --color-grid:   #262628;
+  }
+}

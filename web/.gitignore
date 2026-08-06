@@ -1,0 +1,5 @@
+# Installed packages and local build output. The compiled page that gets served
+# is written into site/chips.merchant-gpu/ and committed there instead (Task 12).
+node_modules/
+dist/
+tsconfig.tsbuildinfo
