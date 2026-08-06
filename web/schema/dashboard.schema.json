@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gpu-category-agent.local/schema/dashboard.schema.json",
+  "title": "F110 dashboard.json contract",
+  "description": "Single daily JSON payload exported by export_json.py and rendered by the React dashboard.",
+  "type": "object",
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "categoryId": { "type": "string" },
+    "asOf": { "type": "string" },
+    "verdict": { "$ref": "#/$defs/verdict" },
+    "gapChart": { "$ref": "#/$defs/gapChart" },
+    "bullets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/bullet" },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "dimensions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/dimension" },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "footerLinks": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/footerLink" }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "categoryId",
+    "asOf",
+    "verdict",
+    "gapChart",
+    "bullets",
+    "dimensions",
+    "footerLinks"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "ref": {
+      "oneOf": [
+        { "$ref": "#/$defs/plainRef" },
+        { "$ref": "#/$defs/assessmentRef" }
+      ]
+    },
+    "plainRef": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "outlet": { "type": "string" },
+        "url": { "oneOf": [{ "type": "null" }, { "type": "string" }] },
+        "date": { "oneOf": [{ "type": "null" }, { "type": "string" }] },
+        "tier": {
+          "oneOf": [{ "type": "null" }, { "enum": ["primary", "secondary"] }]
+        }
+      },
+      "required": ["title", "outlet", "url", "date", "tier"],
+      "additionalProperties": false
+    },
+    "assessmentRef": {
+      "type": "object",
+      "properties": {
+        "assessment": { "const": true },
+        "basedOn": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ref" }
+        }
+      },
+      "required": ["assessment", "basedOn"],
+      "additionalProperties": false
+    },
+    "chip": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "direction": { "enum": ["narrowing", "widening", "flat"] }
+      },
+      "required": ["label", "direction"],
+      "additionalProperties": false
+    },
+    "verdict": {
+      "type": "object",
+      "properties": {
+        "question": { "type": "string" },
+        "answer": { "type": "string" },
+        "chip": { "$ref": "#/$defs/chip" },
+        "confidence": { "type": "string" },
+        "soWhat": { "type": "string" },
+        "sources": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ref" }
+        }
+      },
+      "required": ["question", "answer", "chip", "confidence", "soWhat", "sources"],
+      "additionalProperties": false
+    },
+    "gapPoint": {
+      "type": "object",
+      "properties": {
+        "date": { "type": "string" },
+        "demand": { "type": "number" },
+        "supply": { "type": "number" }
+      },
+      "required": ["date", "demand", "supply"],
+      "additionalProperties": false
+    },
+    "annotation": {
+      "type": "object",
+      "properties": {
+        "date": { "type": "string" },
+        "label": { "type": "string" }
+      },
+      "required": ["date", "label"],
+      "additionalProperties": false
+    },
+    "gapChart": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/gapPoint" }
+        },
+        "annotation": { "$ref": "#/$defs/annotation" },
+        "caption": { "type": "string" },
+        "sources": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ref" }
+        }
+      },
+      "required": ["points", "annotation", "caption", "sources"],
+      "additionalProperties": false
+    },
+    "chartPoint": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "type": "number" },
+        "hollow": { "type": "boolean" },
+        "sourceUrl": { "oneOf": [{ "type": "null" }, { "type": "string" }] }
+      },
+      "required": ["label", "value", "hollow", "sourceUrl"],
+      "additionalProperties": false
+    },
+    "chart": {
+      "type": "object",
+      "properties": {
+        "form": { "enum": ["columns", "bars", "line"] },
+        "title": { "type": "string" },
+        "caption": { "type": "string" },
+        "unit": { "type": "string" },
+        "points": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/chartPoint" }
+        },
+        "source": { "$ref": "#/$defs/ref" }
+      },
+      "required": ["form", "title", "caption", "unit", "points", "source"],
+      "additionalProperties": false
+    },
+    "bullet": {
+      "type": "object",
+      "properties": {
+        "date": { "type": "string" },
+        "text": { "type": "string" },
+        "storyHref": { "type": "string" },
+        "chart": {
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/chart" }]
+        },
+        "noChartReason": {
+          "oneOf": [{ "type": "null" }, { "type": "string" }]
+        },
+        "sources": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ref" }
+        }
+      },
+      "required": ["date", "text", "storyHref", "chart", "noChartReason", "sources"],
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "chart": { "type": "null" },
+            "noChartReason": { "type": "string" }
+          }
+        },
+        {
+          "properties": {
+            "chart": { "type": "object" },
+            "noChartReason": { "type": "null" }
+          }
+        }
+      ]
+    },
+    "dimension": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "plainName": { "type": "string" },
+        "ratingWord": { "type": "string" },
+        "tone": { "enum": ["bad", "mixed", "good"] },
+        "direction": { "enum": ["improving", "worsening", "flat"] },
+        "confidence": { "type": "string" },
+        "summary": { "type": "string" },
+        "reasoning": { "type": "string" },
+        "evidence": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ref" }
+        }
+      },
+      "required": [
+        "id",
+        "plainName",
+        "ratingWord",
+        "tone",
+        "direction",
+        "confidence",
+        "summary",
+        "reasoning",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "footerLink": {
+      "type": "object",
+      "properties": {
+        "label": { "type": "string" },
+        "href": { "type": "string" }
+      },
+      "required": ["label", "href"],
+      "additionalProperties": false
+    }
+  }
+}

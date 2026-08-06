@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import datetime
+import sys
 from pathlib import Path
 
 from .brief_render import BRIEF_CSS, DASHBOARD_CSS
@@ -9,6 +10,7 @@ from .agenda import read_series
 from .explore_model import (ENTITY_SERIES, entity_roles, load_entities,
                             load_findings, series_groups, split_by_side,
                             story_index, verdict_timeline)
+from .export_json import write_dashboard_json
 from .explore_render import (EXPLORE_CSS, check_links, render_entities_index,
                              render_entity_page, render_findings_page,
                              render_history_page, render_series_page,
@@ -28,7 +30,18 @@ def _write(path: Path, text: str):
 
 
 def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
-               price_fn=None, today=None):
+               price_fn=None, today=None, require_category_page=False):
+    """Emit the static site for `category_id` into `out_dir`.
+
+    `require_category_page`: when true, the committed category page
+    (`<out_dir>/<category_id>/index.html`, the compiled dashboard app) must
+    already be on disk or the build fails. Every deep page links back to it, and
+    the link gate can only resolve those links against a registered key -- so
+    without this check a deleted category page would sail through the gate with
+    every "back to today's story" link dead. The `site` CLI verb, the only
+    caller that builds the real site, turns it on; builds into a scratch
+    directory (tests) leave it off, since the committed page is an input they
+    have no reason to stage."""
     model = build_site_model(category_id, store_dir, work_dir, plain_path,
                              price_fn=price_fn)
     today = today or datetime.date.today()
@@ -58,9 +71,16 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
     # story_model.build_story_model does its own store-layout detection now
     # (resolve_store_root, reused from there rather than re-implemented
     # here) -- see its docstring. Pass store_dir straight through.
+    #
+    # F110 Task 12: the category page is no longer this story page -- it is the
+    # compiled React dashboard, a COMMITTED file at site/<category_id>/index.html
+    # that this builder must never write over. The story copy itself still ships,
+    # on the story permalinks below (render_story_day reuses story_render's own
+    # scene renderer verbatim), so the copy-register gate stays exactly where it
+    # was: it lints the assembled story page and aborts the whole build on a
+    # violation, before a single file is written.
     story_model = build_story_model(category_id, store_dir, today)
-    index_html = render_story_page(story_model, entity_links)
-    story_lint = lint_story_copy(index_html)
+    story_lint = lint_story_copy(render_story_page(story_model, entity_links))
     if story_lint:
         # F101 Phase A: the story-copy register gate — a lint failure must never
         # reach the deployed site (mirrors the retired brief-lint abort).
@@ -87,7 +107,16 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
           render_index_redirect(f"{category_id}/index.html", label))
     _emit("style.css", stylesheet)
     _emit(f"{category_id}/style.css", stylesheet)
-    _emit(f"{category_id}/index.html", index_html); pages += 1
+    # The category page is a committed build input (the compiled React app), so
+    # it is NOT written here. Register the path as a link-resolution target only
+    # -- an empty value means "this exists", without pretending to scan a file
+    # this builder did not produce. Every deep page links back to it.
+    page_map.setdefault(f"{category_id}/index.html", "")
+    if require_category_page and not (cat / "index.html").exists():
+        raise ValueError(
+            f"the committed category page {cat / 'index.html'} is missing -- "
+            "every deep page's link back to today's reading would be dead. "
+            "Rebuild it with `npm run build` in web/.")
     _emit(f"{category_id}/appendix.html", render_appendix(model)); pages += 1
     _emit(f"{category_id}/how/alert.html", render_how_alert(model)); pages += 1
     for side in ("demand", "supply", "gap"):
@@ -133,6 +162,18 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
     for d in ("story", "findings", "series", "entities"):
         page_map.setdefault(f"{category_id}/{d}", "")
 
+    # --- F110 the one data file the category page reads ------------------
+    # Belt and braces: the daily cycle already runs `dashboard-json` as its own
+    # step, but a site build should never leave the page with no data to read.
+    # A failure here must not stop the build (spec section 8) -- the live page
+    # simply keeps yesterday's file, and the deep pages still ship.
+    dashboard_json = None
+    try:
+        dashboard_json = str(write_dashboard_json(category_id, str(store_root),
+                                                  str(out)))
+    except Exception as e:  # noqa: BLE001 -- see comment above
+        print(f"site build: dashboard data not written: {e}", file=sys.stderr)
+
     # --- Link-integrity gate over the whole emitted set ------------------
     violations = check_links(page_map)
     if violations:
@@ -141,6 +182,7 @@ def build_site(category_id, store_dir, work_dir, plain_path, out_dir,
 
     return {"pages": pages + 1,   # +1 for the root redirect
             "explore_pages": explore_pages,
+            "dashboard_json": dashboard_json,
             "out": str(out),
             "featured": featured["metric_id"] if featured else None,
             "story_lint": story_lint}

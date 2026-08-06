@@ -6,17 +6,20 @@ distance between the two lines is the gap the page talks about.
 """
 from __future__ import annotations
 
+import datetime as dt
 import json
 import re
 from pathlib import Path
 
 from gpu_agent.dashboard.render import esc
+from gpu_agent.dashboard.scorecards import _DATE_RE as _READING_DATE_RE
 
 _MONTHLY = re.compile(r"^(\d{4}-\d{2})-v(\d+)\.json$")
 _MONTH_LABEL = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 _DEAD_BAND = 0.5
 _SCALE = 10.0
+_READING_DEAD_BAND_PCT = 0.05
 
 
 def _monthly_records(cat_dir: Path) -> list[dict]:
@@ -47,6 +50,136 @@ def _monthly_records(cat_dir: Path) -> list[dict]:
             continue
         out.append({"key": key, "dmi": float(dmi), "smi": float(smi)})
     return out
+
+
+def monthly_best_files(cat_dir: Path) -> dict[str, Path]:
+    """<month key> -> the winning (highest-revision) scorecard file for that
+    month -- the SAME "highest revision wins" tie-break `_monthly_records`
+    uses, exposed publicly so any caller that needs the REST of that
+    month's snapshot (categoryStatus, dimensionRatings, confidence...) reads
+    the exact same file rather than re-deriving which one is "the latest".
+    Previously duplicated privately in both explore_model.py and
+    export_json.py; extracted here (F110 Task 6 review) so the one rule
+    lives in one place."""
+    best: dict[str, tuple[int, Path]] = {}
+    for p in Path(cat_dir).glob("*.json"):
+        m = _MONTHLY.match(p.name)
+        if not m:
+            continue
+        key, rev = m.group(1), int(m.group(2))
+        if key not in best or rev > best[key][0]:
+            best[key] = (rev, p)
+    return {k: v[1] for k, v in best.items()}
+
+
+def _month_anchor(key: str) -> str:
+    """The one stated anchor date for a month-grain reading: the first
+    calendar day of the month it covers. Chosen (not the 15th, not month
+    end) because it can never fall in the future relative to when the
+    reading was actually taken -- a monthly deep-read for the CURRENT,
+    still-in-progress month anchored at month-END would render as a point
+    dated after today, which is a worse honesty failure than the (stated,
+    accepted) imprecision of not knowing the reading's exact capture day.
+
+    A day-grain reading taken ON the 1st therefore lands on the same
+    calendar date as that month's anchor. See `_GRAIN_ORDER` and
+    `build_reading_series` for how that collision is resolved -- it is
+    ordered deterministically, never left to file-glob order."""
+    return key if len(key) == 10 else f"{key}-01"
+
+
+# FINAL REVIEW, Minor 6: a month-grain reading is anchored at the FIRST day
+# of the month it covers, so a day-grain reading taken on the 1st shares its
+# date exactly. Sorting on the date alone left the tie to be broken by
+# Python's stable sort over dict-insertion order, which is `Path.glob` order
+# -- i.e. by filesystem, not by anything meaningful. That decided which point
+# counts as "last", and "last" is what `gap_trend_word` reads to produce the
+# direction word driving the chip, the verdict's opening phrase and the
+# caption. The month anchor names the START of the month, so it sorts BEFORE
+# any same-day reading taken within that month. Deterministic, glob-proof,
+# and it drops nothing: both readings genuinely happened and both are plotted.
+_GRAIN_ORDER = {"month": 0, "reading": 1}
+
+
+def build_reading_series(cat_dir: Path | str) -> list[dict]:
+    """USER DECISION (F110 Task 6, round 3): every genuinely-dated scorecard
+    reading actually on disk, MIXED across grains -- day-grain readings from
+    when the category ran daily (e.g. the four legacy 2026-07-0{2,3,5,6}
+    snapshots that predate the move to monthly cadence) AND month-grain
+    deep-reads, side by side on the same real calendar. Reuses
+    `gpu_agent.dashboard.scorecards._DATE_RE` (the existing pattern already
+    matching BOTH grains) and the "highest revision wins" tie-break -- but,
+    unlike `scorecards.load_scorecards`, does NOT drop a month's day-grain
+    files just because a month-grain deep-read also exists for that month:
+    both genuinely happened, and the user chose to plot everything real
+    rather than pick one cadence over the other.
+
+    Every point carries a REAL calendar date: day-grain readings use their
+    own date; month-grain readings are anchored at the first calendar day
+    of the month they cover (see `_month_anchor` -- stated explicitly, not
+    left implicit). This is the raw material for a TRUE time axis: any
+    caller (a future chart renderer, or `gap_trend_word` below) must
+    position/compare points by this date, never by list index -- four days
+    two calendar days apart must never render as evenly spaced next to a
+    month-wide gap, which is the exact honesty risk the user was warned
+    about when choosing to mix grains.
+
+    Values are `demandSupply.dmiContribution`/`smiContribution` AS
+    REPORTED for that reading -- never cumulative-summed or re-indexed to
+    100, unlike `build_gap_data` below (which is unchanged, and still feeds
+    the older Python-rendered widget that depends on its indexed-level
+    shape). This is the ONE series every gap-related dashboard.json
+    element -- the verdict chip, the chart itself, and its caption -- reads
+    from, via `gap_trend_word`, so none of them can ever disagree about the
+    same real data (F110 Task 6 review round 1, Critical 1 -- still holds
+    after this round's change to what the series contains)."""
+    best: dict[str, tuple[int, Path]] = {}
+    for p in Path(cat_dir).glob("*.json"):
+        m = _READING_DATE_RE.search(p.name)
+        if not m:
+            continue
+        key, rev = m.group(1), int(m.group(2))
+        if key not in best or rev > best[key][0]:
+            best[key] = (rev, p)
+
+    points = []
+    for key, (_, path) in best.items():
+        anchor = _month_anchor(key)
+        try:
+            dt.date.fromisoformat(anchor)
+        except ValueError:
+            continue  # an impossible date (e.g. "2026-13") -- skip, don't crash
+        try:
+            d = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        ds = d.get("demandSupply") or {}
+        dmi, smi = ds.get("dmiContribution"), ds.get("smiContribution")
+        if dmi is None or smi is None:
+            continue
+        is_reading = len(key) == 10
+        points.append({"date": anchor, "demand": float(dmi), "supply": float(smi),
+                        "grain": "reading" if is_reading else "month"})
+
+    points.sort(key=lambda p: (p["date"], _GRAIN_ORDER[p["grain"]]))
+    return points
+
+
+def gap_trend_word(readings: list[dict]) -> str:
+    """"narrowing" / "widening" / "flat" from the LAST TWO points of
+    `readings` (as returned by `build_reading_series`), a 5% relative
+    dead-band on the demand-minus-supply gap. The one shared computation
+    every gap-related payload element keys off of."""
+    if len(readings) < 2:
+        return "flat"
+    cur = readings[-1]["demand"] - readings[-1]["supply"]
+    prev = readings[-2]["demand"] - readings[-2]["supply"]
+    if prev == 0:
+        return "flat"
+    change = cur - prev
+    if abs(change) / abs(prev) <= _READING_DEAD_BAND_PCT:
+        return "flat"
+    return "widening" if change > 0 else "narrowing"
 
 
 def build_gap_data(cat_dir: Path, limit: int = 7) -> dict | None:

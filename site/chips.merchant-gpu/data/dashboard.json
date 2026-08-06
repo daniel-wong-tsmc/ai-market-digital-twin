@@ -1,0 +1,415 @@
+{
+  "asOf": "2026-08-05",
+  "bullets": [
+    {
+      "chart": null,
+      "date": "2026-08-05",
+      "noChartReason": "No chart. The number we track for this is our own estimate, not a published figure, so we don't draw it.",
+      "sources": [
+        {
+          "date": "2026-08-04",
+          "outlet": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+          "tier": "primary",
+          "title": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
+        },
+        {
+          "date": "2026-08-05",
+          "outlet": "Yahoo Finance",
+          "tier": "secondary",
+          "title": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html"
+        },
+        {
+          "date": "2026-08-04",
+          "outlet": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "tier": "secondary",
+          "title": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912"
+        }
+      ],
+      "storyHref": "story/2026-08-05.html",
+      "text": "AMD delivered, and it does not add chips this year. AMD reported the quarter the market was waiting for."
+    },
+    {
+      "chart": null,
+      "date": "2026-08-05",
+      "noChartReason": "No chart. We don't yet have a plain-English way to describe what this number measures, so we don't draw it.",
+      "sources": [
+        {
+          "date": "2026-08-04",
+          "outlet": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "tier": "secondary",
+          "title": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805"
+        }
+      ],
+      "storyHref": "story/2026-08-05.html",
+      "text": "One new buyer has already claimed a slice of 2027. SpaceX ended the June quarter with 1.4 gigawatts of computing capacity, up from 1.0 gigawatt three months earlier and 400 megawatts a year before, and expects to pass 2 gigawatts by the end of this year."
+    },
+    {
+      "chart": null,
+      "date": "2026-08-05",
+      "noChartReason": "No chart. The number we track for this is our own estimate, not a published figure, so we don't draw it.",
+      "sources": [
+        {
+          "date": "2026-07-31",
+          "outlet": "CryptoBriefing",
+          "tier": "secondary",
+          "title": "CryptoBriefing",
+          "url": "https://cryptobriefing.com/intel-emib-tsmc-packaging-constraints/"
+        },
+        {
+          "date": "2026-08-04",
+          "outlet": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+          "tier": "secondary",
+          "title": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+          "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging"
+        },
+        {
+          "date": "2026-08-04",
+          "outlet": "404K Semi-Ai Research (Substack)",
+          "tier": "secondary",
+          "title": "404K Semi-Ai Research (Substack)",
+          "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb"
+        }
+      ],
+      "storyHref": "story/2026-08-05.html",
+      "text": "The way around the packaging queue mostly helps other people's chips. Advanced packaging is the step that binds a chip to its memory, and it is still booked out."
+    }
+  ],
+  "categoryId": "chips.merchant-gpu",
+  "dimensions": [
+    {
+      "confidence": "Medium — the underlying reports are single-source in places.",
+      "direction": "flat",
+      "evidence": [
+        {
+          "date": "2026-08-04",
+          "outlet": "404K Semi-Ai Research (Substack)",
+          "tier": "secondary",
+          "title": "404K Semi-Ai Research (Substack)",
+          "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb"
+        },
+        {
+          "date": "2026-08-03",
+          "outlet": "KuCoin News Flash",
+          "tier": "secondary",
+          "title": "KuCoin News Flash",
+          "url": "https://www.kucoin.com/news/flash/nvidia-rubin-ultra-hbm-cut-to-192gb-amid-supply-and-power-constraints"
+        },
+        {
+          "date": "2026-07-22",
+          "outlet": "BigGo Finance — \"DRAM Spot Prices Hit Record Highs; 'Q3 Contract Prices to Surge Another 25%+'\"",
+          "tier": "secondary",
+          "title": "BigGo Finance — \"DRAM Spot Prices Hit Record Highs; 'Q3 Contract Prices to Surge Another 25%+'\"",
+          "url": "https://finance.biggo.com/news/bba3a886-3c51-48e4-b42b-6f8aa36fa008"
+        }
+      ],
+      "id": "bottleneck",
+      "plainName": "What is holding shipments back",
+      "ratingWord": "Weak",
+      "reasoning": "Packaging is loosening at the same time, with the supply gap narrowing from about 20 percent to about 10 percent as TSMC output climbs toward 125,000-130,000 wafers a month, so the ceiling has moved rather than lifted.",
+      "summary": "NVIDIA cut the stacked memory on its mainstream Rubin Ultra part to 192GB, and the reported reason is scarce memory: shrinking memory per chip raises how many chips a fixed memory pool can fill.",
+      "tone": "bad"
+    },
+    {
+      "confidence": "High — drawn from company filings and calls.",
+      "direction": "improving",
+      "evidence": [
+        {
+          "date": "2026-05-20",
+          "outlet": "NVIDIA Q1 FY2027 financial results press release (Form 8-K / NVIDIA IR)",
+          "tier": "primary",
+          "title": "NVIDIA Q1 FY2027 financial results press release (Form 8-K / NVIDIA IR)",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
+        },
+        {
+          "date": "2026-07-24",
+          "outlet": "NVIDIA Investor Relations",
+          "tier": "primary",
+          "title": "NVIDIA Investor Relations",
+          "url": "https://investor.nvidia.com/news/press-release-details/2026/SK-Group-and-NVIDIA-Expand-Strategic-Partnership-Across-AI-Factories-and-Next-Generation-Memory/default.aspx"
+        },
+        {
+          "date": "2026-05-05",
+          "outlet": "AMD Investor Relations",
+          "tier": "primary",
+          "title": "AMD Investor Relations",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results"
+        }
+      ],
+      "id": "momentum",
+      "plainName": "How hard buyers are buying",
+      "ratingWord": "Very strong",
+      "reasoning": "New buyers reinforce it: SpaceX spent roughly $15.8 billion on AI compute in a single quarter and a Korean industrial group signed a $500-billion-plus build-out with NVIDIA.",
+      "summary": "The four largest US cloud buyers plan about $725 billion of 2026 capital spending, up 77 percent, and Google Cloud's booked backlog jumped more than $50 billion in one quarter to $514 billion.",
+      "tone": "good"
+    },
+    {
+      "confidence": "High — drawn from company filings and calls.",
+      "direction": "worsening",
+      "evidence": [
+        {
+          "date": "2026-07-23",
+          "outlet": "AMD Investor Relations",
+          "tier": "primary",
+          "title": "AMD Investor Relations",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era"
+        },
+        {
+          "date": "2026-07-23",
+          "outlet": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+          "tier": "secondary",
+          "title": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-keynote-live-coverage/"
+        },
+        {
+          "date": "2026-07-15",
+          "outlet": "SemiAnalysis",
+          "tier": "secondary",
+          "title": "SemiAnalysis",
+          "url": "https://newsletter.semianalysis.com/p/amd-advancing-ai-mi350x-and-mi400-ualoe72-mi500-ual256"
+        }
+      ],
+      "id": "competitiveStructure",
+      "plainName": "Whether buyers have a second choice",
+      "ratingWord": "Mixed",
+      "reasoning": "Volume still lags: AMD's rack-scale part only reaches production tokens by mid-2027, and SpaceX chose to build exclusively on NVIDIA.",
+      "summary": "AMD put its Helios rack into production with named gigawatt customers, and rival accelerators from Amazon and Google reach mass production in the same window, so buyers now have real second sources.",
+      "tone": "mixed"
+    },
+    {
+      "confidence": "Medium — the underlying reports are single-source in places.",
+      "direction": "worsening",
+      "evidence": [
+        {
+          "date": "2026-07-24",
+          "outlet": "Silicon Analysts",
+          "tier": "secondary",
+          "title": "Silicon Analysts",
+          "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026"
+        },
+        {
+          "date": "2026-05-21",
+          "outlet": "Tom's Hardware custom AI ASIC state of play",
+          "tier": "secondary",
+          "title": "Tom's Hardware custom AI ASIC state of play",
+          "url": "https://www.tomshardware.com/tech-industry/semiconductors/custom-ai-asics-examined-from-broadcom-to-mtia"
+        },
+        {
+          "date": "2026-06-29",
+          "outlet": "TechTimes / Network World",
+          "tier": "secondary",
+          "title": "TechTimes / Network World",
+          "url": "https://www.techtimes.com/articles/319338/20260629/amd-helios-faces-nvidia-vera-rubin-july-23-keynote-memory-leads-training-trails.htm"
+        }
+      ],
+      "id": "moat",
+      "plainName": "How safe NVIDIA's lead looks",
+      "ratingWord": "Weak",
+      "reasoning": "The networking bundle is the one defence that gained ground, with NVIDIA taking the revenue lead in data-center Ethernet switches.",
+      "summary": "NVIDIA's accelerator share is projected to slide from 87 percent in 2024 to 75 percent in 2026 as custom chips grow 44.6 percent against 16.1 percent for merchant parts, and in-house silicon already absorbs about two-thirds of AI compute.",
+      "tone": "bad"
+    },
+    {
+      "confidence": "High — drawn from company filings and calls.",
+      "direction": "flat",
+      "evidence": [
+        {
+          "date": "2026-05-20",
+          "outlet": "NVIDIA Investor Relations press release",
+          "tier": "primary",
+          "title": "NVIDIA Investor Relations press release",
+          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx"
+        },
+        {
+          "date": "2026-05-20",
+          "outlet": "NVIDIA Q1 FY2027 financial results press release (Form 8-K / NVIDIA IR)",
+          "tier": "primary",
+          "title": "NVIDIA Q1 FY2027 financial results press release (Form 8-K / NVIDIA IR)",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
+        },
+        {
+          "date": "2026-08-04",
+          "outlet": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+          "tier": "primary",
+          "title": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
+        }
+      ],
+      "id": "unitEconomics",
+      "plainName": "How profitable the sellers are",
+      "ratingWord": "Strong",
+      "reasoning": "AMD sits far lower at 56 percent with accelerator sales below its own average, so the margin strength concentrates at the leaders.",
+      "summary": "NVIDIA held a 75.0 percent gross margin and guided the next quarter to the same level, and TSMC posted 67.7 percent while raising full-year growth guidance.",
+      "tone": "good"
+    },
+    {
+      "confidence": "High — drawn from company filings and calls.",
+      "direction": "worsening",
+      "evidence": [
+        {
+          "date": "2026-05-21",
+          "outlet": "NVIDIA Form 10-Q Q1 FY2027",
+          "tier": "primary",
+          "title": "NVIDIA Form 10-Q Q1 FY2027",
+          "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000052/nvda-20260426.htm"
+        },
+        {
+          "date": "2026-07-27",
+          "outlet": "Yahoo Finance (syndicated Bloomberg)",
+          "tier": "secondary",
+          "title": "Yahoo Finance (syndicated Bloomberg)",
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-750-billion-deals-revive-102003935.html"
+        },
+        {
+          "date": "2026-07-02",
+          "outlet": "Data Center Dynamics",
+          "tier": "secondary",
+          "title": "Data Center Dynamics",
+          "url": "https://www.datacenterdynamics.com/en/news/nvidia-acts-as-backstop-for-customer-gpus-in-return-for-cut-of-cloud-revenue/"
+        }
+      ],
+      "id": "strategicRisk",
+      "plainName": "What could go wrong",
+      "ratingWord": "Mixed",
+      "reasoning": "The vendor now finances a growing slice of its own demand, including a discussed $350 billion facility for OpenAI purchases, which ties revenue to buyers it also funds.",
+      "summary": "Three NVIDIA customers alone make up 21, 17 and 16 percent of revenue, China data-center sales have collapsed to $4.55 billion from $9.66 billion, and one buyer expects a very significant share of 2027 output.",
+      "tone": "mixed"
+    }
+  ],
+  "footerLinks": [
+    {
+      "href": "findings/",
+      "label": "Evidence"
+    },
+    {
+      "href": "series/",
+      "label": "Numbers we track"
+    },
+    {
+      "href": "history.html",
+      "label": "Past readings"
+    },
+    {
+      "href": "story/",
+      "label": "Story archive"
+    },
+    {
+      "href": "entities/",
+      "label": "Companies"
+    }
+  ],
+  "gapChart": {
+    "annotation": {
+      "date": "2026-07-01",
+      "label": "Widest gap so far"
+    },
+    "caption": "The gap widened in the latest reading. Demand and supply are each reading's own reported momentum score, not a raw shipment count. Some points are a single day's reading; others are a whole month's figure, placed at the start of that month.",
+    "points": [
+      {
+        "date": "2026-06-01",
+        "demand": 0.5066666666666667,
+        "supply": -0.07333333333333333
+      },
+      {
+        "date": "2026-07-01",
+        "demand": 3.393333333333335,
+        "supply": -0.7133333333333338
+      },
+      {
+        "date": "2026-07-02",
+        "demand": 0.22666666666666668,
+        "supply": 0.05333333333333334
+      },
+      {
+        "date": "2026-07-03",
+        "demand": 0.13333333333333336,
+        "supply": 0.14666666666666667
+      },
+      {
+        "date": "2026-07-05",
+        "demand": 0.039999999999999994,
+        "supply": -0.02666666666666667
+      },
+      {
+        "date": "2026-07-06",
+        "demand": 0.039999999999999994,
+        "supply": -0.02666666666666667
+      },
+      {
+        "date": "2026-08-01",
+        "demand": 3.6533333333333355,
+        "supply": -0.1600000000000002
+      }
+    ],
+    "sources": [
+      {
+        "assessment": true,
+        "basedOn": [
+          {
+            "date": "2026-05-20",
+            "outlet": "NVIDIA Q1 FY2027 financial results press release (Form 8-K / NVIDIA IR)",
+            "tier": "primary",
+            "title": "NVIDIA Q1 FY2027 financial results press release (Form 8-K / NVIDIA IR)",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
+          },
+          {
+            "date": "2026-07-24",
+            "outlet": "NVIDIA Investor Relations",
+            "tier": "primary",
+            "title": "NVIDIA Investor Relations",
+            "url": "https://investor.nvidia.com/news/press-release-details/2026/SK-Group-and-NVIDIA-Expand-Strategic-Partnership-Across-AI-Factories-and-Next-Generation-Memory/default.aspx"
+          },
+          {
+            "date": "2026-05-05",
+            "outlet": "AMD Investor Relations",
+            "tier": "primary",
+            "title": "AMD Investor Relations",
+            "url": "https://ir.amd.com/news-events/press-releases/detail/1284/amd-reports-first-quarter-2026-financial-results"
+          }
+        ]
+      }
+    ]
+  },
+  "schemaVersion": "1.0",
+  "verdict": {
+    "answer": "Not yet. The challenger had a good quarter.",
+    "chip": {
+      "direction": "widening",
+      "label": "Gap widening"
+    },
+    "confidence": "We are confident in this read",
+    "question": "Is supply catching up to demand?",
+    "soWhat": "AMD beat its own numbers and put its rack-sized system into production, but the big volume starts in 2027 - and a single new buyer has already spoken for a large slice of next year's chips.",
+    "sources": [
+      {
+        "assessment": true,
+        "basedOn": [
+          {
+            "date": "2026-08-04",
+            "outlet": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+            "tier": "primary",
+            "title": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+            "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
+          },
+          {
+            "date": "2026-08-05",
+            "outlet": "Yahoo Finance",
+            "tier": "secondary",
+            "title": "Yahoo Finance",
+            "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html"
+          },
+          {
+            "date": "2026-08-04",
+            "outlet": "Investing.com (AMD Q2 2026 earnings call transcript)",
+            "tier": "secondary",
+            "title": "Investing.com (AMD Q2 2026 earnings call transcript)",
+            "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912"
+          }
+        ]
+      }
+    ]
+  }
+}

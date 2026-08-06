@@ -82,6 +82,44 @@ the gaps were lost. Run at run-cycle step (d3), after write-back.
 | `--captured-at` | | now (UTC) | Pin it for byte-identical reruns |
 | `--out` | | None | Write here instead of `store/<category>/coverage-<asOf>.json` |
 
+## chart-fetch
+
+F110. Fetches every curated chart-data series that is due (per `registry/chart-series.json`,
+e.g. AMD's quarterly data-center revenue) and appends new points to
+`store/<store>/series/<id>.jsonl`. **Exits 0 even when a fetch failed** — a broken source
+page must never stop the daily cycle. The only non-zero exit is 1, and only when the
+manifest itself can't be loaded — an operator/config problem, not a per-series fetch
+failure. Run at run-cycle step (7d), after the v2 shadow stamp and before the dashboard
+export.
+
+| Flag | Req | Default | Notes |
+|---|---|---|---|
+| `--category` | req | — | categoryId; locates the manifest |
+| `--as-of` | req | — | |
+| `--store` | | `store` | series live under `<store>/series` |
+| `--manifest` | | `manifests/<category>.json` | coverage manifest (its `earningsDates` gate the earnings-window fetchers) |
+| `--registry` | | `registry/chart-series.json` | chart-series registry path |
+
+Prints a `{'fetched', 'failed', 'skipped'}` summary as JSON; log it verbatim, then log
+`chartFetch: done` regardless of whether anything in `failed` was non-empty.
+
+## dashboard-json
+
+F110. Builds and writes this cycle's `<site>/<category>/data/dashboard.json` — the one file
+the public dashboard page reads. Validates against the dashboard schema before writing, so a
+bad payload is never partially written. Run at run-cycle step (7e), right after `chart-fetch`
+and before Step 8's report/site rebuild.
+
+| Flag | Req | Default | Notes |
+|---|---|---|---|
+| `--category` | req | — | categoryId; locates the store + site subdirs |
+| `--store` | | `store` | scorecards + story under `<store>/<category>/`, series under `<store>/series` |
+| `--site` | | `site` | writes `<site>/<category>/data/dashboard.json` |
+
+Prints `wrote <path>` on success, exit 0. On failure it prints `gpu-agent dashboard-json:
+error: ...` to stderr and exits 1 — **log it and continue, never stop the cycle**; the live
+page simply keeps yesterday's `dashboard.json` until the next cycle succeeds.
+
 ## wiki-lint
 
 | Flag | Req | Default | Notes |

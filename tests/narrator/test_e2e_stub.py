@@ -20,6 +20,7 @@ from gpu_agent.dashboard.site_build import build_site
 from gpu_agent.dashboard.story_render import lint_story_copy
 from tests.narrator.test_gate import _ok
 from tests.narrator.test_inputs import CAT
+from tests.dashboard.test_site_build import story_front_html
 from tests.dashboard.test_story_model import _store
 
 DATE = "2026-07-23"
@@ -100,7 +101,11 @@ def test_stub_brain_happy_path_renders_narrated_page(tmp_path, capsys):
                           today=DATE_OBJ)
     assert summary["story_lint"] == []
 
-    html = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    # F110 Task 12: the category index.html is the compiled dashboard app now,
+    # a committed build input. The story page this test is about is still
+    # assembled on every build (it feeds the copy lint, and its scene renderer
+    # is the one the story permalinks use) -- assert against that.
+    html = story_front_html(store / CAT, DATE_OBJ)
     assert answer.headline in html
     assert lint_story_copy(html) == []
     # The dynamic KPI pick caption (from the hand-written answer's kpiPicks,
@@ -154,7 +159,11 @@ def test_two_invalid_answers_fall_back_to_assembler_page(tmp_path, capsys):
                           today=DATE_OBJ)
     assert summary["story_lint"] == []
 
-    html = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    # F110 Task 12: the category index.html is the compiled dashboard app now,
+    # a committed build input. The story page this test is about is still
+    # assembled on every build (it feeds the copy lint, and its scene renderer
+    # is the one the story permalinks use) -- assert against that.
+    html = story_front_html(store / CAT, DATE_OBJ)
     # The Phase A assembler headline renders -- not the narrated one, which
     # never made it past the gate.
     assert "The GPU shortage got worse this month." in html

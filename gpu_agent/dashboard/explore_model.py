@@ -12,8 +12,8 @@ import json
 import re
 from pathlib import Path
 
-from gpu_agent.dashboard.gap_chart import (_MONTHLY, _monthly_records,
-                                            build_gap_data)
+from gpu_agent.dashboard.gap_chart import (_monthly_records, build_gap_data,
+                                            monthly_best_files)
 from gpu_agent.dashboard.render import esc
 from gpu_agent.dashboard.story_model import _gap_word, _HEADLINES
 from gpu_agent.narrator.store import StoryStore
@@ -145,23 +145,6 @@ SERIES_MEANING = {
 ENTITY_SERIES = {"tsmc": ["pkgCapacityOrderSpread"]}
 
 
-def _monthly_best_files(cat_dir: Path) -> dict[str, Path]:
-    """The same "highest revision wins" file selection `_monthly_records`
-    uses, but returning the winning path per month key instead of its
-    parsed demand/supply contribution -- so callers that need the rest of
-    that month's snapshot (categoryStatus, dimensionRatings, ...) can read
-    the exact same file without re-implementing the selection rule."""
-    best: dict[str, tuple[int, Path]] = {}
-    for p in Path(cat_dir).glob("*.json"):
-        m = _MONTHLY.match(p.name)
-        if not m:
-            continue
-        key, rev = m.group(1), int(m.group(2))
-        if key not in best or rev > best[key][0]:
-            best[key] = (rev, p)
-    return {k: v[1] for k, v in best.items()}
-
-
 def verdict_timeline(cat_dir: Path) -> dict:
     """The full demand/supply gap chart (over ALL months) plus a per-month
     verdict: headline (via the Phase A `_HEADLINES` gap-word logic, computed
@@ -170,7 +153,7 @@ def verdict_timeline(cat_dir: Path) -> dict:
     cat_dir = Path(cat_dir)
     gap = build_gap_data(cat_dir, limit=120)
     recs = _monthly_records(cat_dir)
-    files = _monthly_best_files(cat_dir)
+    files = monthly_best_files(cat_dir)
 
     months = []
     for r in recs:
