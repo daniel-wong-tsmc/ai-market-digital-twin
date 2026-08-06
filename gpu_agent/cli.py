@@ -254,10 +254,13 @@ def _chart_fetch(args) -> int:
     series have a fetcher wired up) and append new points to
     store/<store>/series/<id>.jsonl.
 
-    Exit code is always 0, even when a fetch failed for one or more series --
-    a broken source page must never fail the unattended daily run. The full
+    Exit code is 0 even when a fetch failed for one or more series -- a broken
+    source page must never fail the unattended daily run. The full
     {'fetched', 'failed', 'skipped'} summary is printed as JSON either way, so
     a failure is still visible to whoever (or whatever) reads the run's log.
+    The only non-zero exit is 1, and only when the manifest itself can't be
+    loaded (ManifestLoadError) -- that is an operator/config problem, not a
+    per-series fetch failure, and there is nothing to fetch without it.
     """
     manifest_path = args.manifest or f"manifests/{args.category}.json"
     try:

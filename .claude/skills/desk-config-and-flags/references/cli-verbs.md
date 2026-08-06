@@ -86,9 +86,11 @@ the gaps were lost. Run at run-cycle step (d3), after write-back.
 
 F110. Fetches every curated chart-data series that is due (per `registry/chart-series.json`,
 e.g. AMD's quarterly data-center revenue) and appends new points to
-`store/<store>/series/<id>.jsonl`. **Always exits 0**, even when a fetch failed — a broken
-source page must never stop the daily cycle. Run at run-cycle step (7d), after the v2 shadow
-stamp and before the dashboard export.
+`store/<store>/series/<id>.jsonl`. **Exits 0 even when a fetch failed** — a broken source
+page must never stop the daily cycle. The only non-zero exit is 1, and only when the
+manifest itself can't be loaded — an operator/config problem, not a per-series fetch
+failure. Run at run-cycle step (7d), after the v2 shadow stamp and before the dashboard
+export.
 
 | Flag | Req | Default | Notes |
 |---|---|---|---|

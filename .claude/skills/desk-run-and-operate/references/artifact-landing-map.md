@@ -119,6 +119,26 @@ The cycle log is also single-cycle and overwritten each run, so it was never a p
 filename in its own directory. `find_prior`/version-resolution logic in `report.py` is
 grain-aware; don't hand-roll a "highest filename wins" heuristic.
 
+## `store/series/` and `site/<categoryId>/data/` (F110)
+
+```
+store/series/<indicatorId>.jsonl                  # curated chart-data points, one file per
+                                                    # series (e.g. gpuSpotPrice.jsonl,
+                                                    # odmMonthlyAiRevenue.jsonl); appended to
+                                                    # by `chart-fetch` at run-cycle step (7d) —
+                                                    # already tracked (`!store/series/` in
+                                                    # .gitignore, see above)
+site/<categoryId>/data/dashboard.json              # the public dashboard page's one data file;
+                                                    # written by `dashboard-json` at run-cycle
+                                                    # step (7e), from that cycle's scorecard +
+                                                    # story + `store/series/`. `site/` is not
+                                                    # gitignored, so this lands tracked like the
+                                                    # rest of the site build. On a failed export
+                                                    # nothing is written (schema-validated before
+                                                    # touching disk) — the live page just keeps
+                                                    # showing the last committed dashboard.json.
+```
+
 `store/findings/` held 52 files at last count (one immutable JSON per gated finding id).
 `store/theses/chips.merchant-gpu/` holds `book.json` + `history.jsonl` (do not hand-edit
 `book.json` — it is rebuilt from `history.jsonl` and load fails loud on drift).
