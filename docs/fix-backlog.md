@@ -1618,7 +1618,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   `docs/superpowers/plans/2026-07-28-f108-seam-scoped-rebaseline.md`. Awaiting user merge; the F105
   lane then runs `eval rebaseline --seams extract` to land its change.
 
-- [ ] **F110 — Dashboard revamp: executive React/Astryx rebuild of the main category page (user-directed, 2026-08-05).**
+- [x] **F110 — Dashboard revamp: executive React/Astryx rebuild of the main category page (user-directed, 2026-08-05). BUILT + MERGED `d62e800` + PUSHED 2026-08-06.**
   The live story page "tells a lot and nothing at the same time" for an executive reader.
   DESIGNED interactively 2026-08-05 (all decisions user-approved, zero AFK-defaults): verdict-led
   five-zone page, full React 19 + Astryx rebuild of the main category page ONLY (F95 no-script
@@ -1630,7 +1630,78 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   `docs/superpowers/specs/assets/2026-08-05-dashboard-mock.html` (hallmark + dataviz, real data).
   Spec: `docs/superpowers/specs/2026-08-05-dashboard-revamp-design.md`. No brain/prompt changes;
   F6/narrator/scoring pins must not move; F83 re-records in-lane (new fetch + export steps).
-  Design-weight item: brainstorm was run interactively per the standing rule. Next: writing-plans.
+  Design-weight item: brainstorm was run interactively per the standing rule.
+  **✓ BUILT subagent-driven 2026-08-05/06 (12 TDD tasks, fresh implementer + per-task spec+quality
+  review each, whole-branch review, one final fix wave). MERGED `d62e800` (`--no-ff`) + data
+  refresh `d29291d`, PUSHED; `main == origin/main`.** Merged-main suite **2318 passed / 5 skipped**;
+  all four pins green (57) — only the F83 run-cycle fingerprint moved, in Task 7, per the F109
+  precedent; forbidden diff empty; zero deletions under `site/chips.merchant-gpu/`. Worktree +
+  branch `f110-dashboard` retired post-merge.
+  **Shipped:** shared contract `web/schema/dashboard.schema.json`; `gpu_agent/dashboard/`
+  `source_refs.py` / `bullets.py` / `export_json.py`; `gpu_agent/chartdata/` (registry + fetch
+  framework + AMD data-centre revenue fetcher with landing-page link discovery); new registries
+  `chart-series.json` + `plain-units.json`; CLI verbs `chart-fetch` + `dashboard-json`; run-cycle
+  steps 7d/7e (both non-blocking); and a Vite + React 19 + `@astryxdesign/core` app in `web/`
+  (pinned exactly at 0.3.0) whose compiled output is committed and served statically. Node never
+  enters the scheduled run.
+  **Interactive user decisions during the build (five; ZERO AFK-defaults):** (1) `jsonschema` added
+  as a real dependency so the exporter validates during the daily run, not just in tests;
+  (2) the gap chart mixes dated and monthly readings; (3) that choice REAFFIRMED after being shown
+  it compares unlike scales; (4) the dimension legend uses the rating words the rows actually
+  render ("Green strong · amber mixed · red weak") rather than the mock's wording — a deliberate,
+  user-approved departure from the visual contract; (5) the AMD source follows the landing page's
+  link to each quarter's release automatically.
+  **KNOWN, USER-ACCEPTED LIMITATION:** the gap chart's daily readings hold one day of findings
+  (~0.04–0.23) while monthly readings accumulate all of them (~3.4–3.7), so the line appears to
+  collapse and recover across the grain seam, and the direction badge can flip depending on which
+  grain is most recent. The caption discloses the mix but not that the two are non-comparable
+  magnitudes. Filed as **F111**.
+  **Other limitations recorded:** no mini-chart renders until a curated series accumulates enough
+  history (AMD needs one more quarterly release); the mock's numeric context note beside the
+  confidence line and its bolded so-what clause cannot render (contract carries plain strings only).
+  Full record: `docs/superpowers/f110-dashboard-DONE.md`.
+  **Live criteria (post-merge, not yet confirmed):** (1) the next scheduled cycle writes
+  `dashboard.json` with zero manual steps and the live page renders it; (2) at least one bullet
+  renders a curated-series mini-chart with a working source link while another shows the honest
+  no-chart panel; (3) every visible statement resolves to a working source reference.
+
+- [ ] **F111 — Gap chart mixes non-comparable scales (from the F110 whole-branch review, 2026-08-06).**
+  The demand/supply series draws from two kinds of reading: dated files hold a single day's findings
+  (~0.04–0.23) while month-versioned files accumulate a month of them (~3.4–3.7). Plotted together
+  the line appears to collapse and rebound inside five weeks — an artifact of file grain, not the
+  market — and `gap_trend_word` compares the last two points across that seam, so the verdict's
+  opening phrase, the direction badge and the chart caption can all flip on it. The caption
+  discloses that the grains differ in time coverage but not that their magnitudes are
+  non-comparable. **The user was shown this consequence twice and chose to keep the mix**, so this
+  is a filed follow-up, not a defect to fix unasked.
+  Options when picked up: (a) plot monthly readings only and let the line densify once readings
+  carry a date; (b) show the dailies as a separate, separately-labelled element with the direction
+  computed from the monthly series alone; (c) stamp a real date on every reading so the series
+  becomes uniformly daily — that last one touches the frozen scorecard write path, so it needs its
+  own lane. Related: only four readings on disk carry a day in their filename; the rest record
+  `asOf` at month granularity.
+
+- [ ] **F112 — Small F110 follow-ups deferred at merge (2026-08-06).**
+  Each was found in review, judged non-blocking, and recorded rather than fixed.
+  (a) The AMD link discovery has **no staleness check** — if AMD ever listed quarters oldest-first
+  inside a year block, the run would fetch and parse an older release and look successful; assert
+  the discovered quarter is newer than the newest stored period. This is the one silent-wrong-data
+  path left in the lane.
+  (b) `amd_dc_revenue.py` assumes three quarterly columns (`all_dates[:3]`); deriving the count from
+  the "Three Months Ended" header colspan would be safer.
+  (c) `gpu_agent/dashboard/render.py:140` still holds reader-style copy containing the internal
+  index acronyms — unreachable today, but it would leak the moment anyone re-wires it.
+  (d) Nothing validates that a chart series' `sourceUrl` is a real URL rather than an `internal:`
+  label, so a future hard-fact entry could ship a non-clickable source.
+  (e) The annotation marker resolves its point by date, so with two same-date readings it attaches
+  to the month anchor; deterministic now, but still not a deliberate choice.
+  (f) The verdict's supporting sentence inherits the narrator headline verbatim, so when that
+  headline carries no terminal punctuation the answer reads without a full stop — visible on the
+  2026-08-06 reading ("Not yet. Memory now decides how many chips get built").
+  (g) The Nvidia investor-relations URL in `registry/chart-series.json` was never verified live;
+  that series has no fetcher so it renders nothing today, but check it before giving it one.
+  (h) `npm run build` rewrites the committed `index.html` with different line endings, so a rebuild
+  always dirties the tree even when nothing changed.
 
 - [x] **F109 — Coverage gaps are computed but never recorded durably (found while building F61, 2026-07-28).**
   Nothing downstream can render or audit what the gather run failed to cover.
