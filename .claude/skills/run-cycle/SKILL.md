@@ -49,7 +49,7 @@ report the rest `skipped-no-assignment` (surfaced, never dropped).
 
 ## Procedure
 
-<!-- run-cycle-step-fingerprint: sha256=5b25bf8fb03f922b798ee8b1d5fe027041bdef4b909829882fd85ad09edbc97a — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
+<!-- run-cycle-step-fingerprint: sha256=fde88206f42433a861856d75566de2d0c95d3b641a2c8785e4dfc552ff935476 — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
 
 ### 1. Resolve the scope to a cycle plan (deterministic — no LLM)
 ```
@@ -477,6 +477,28 @@ Failure is logged non-fatal; this step never blocks the cycle.
 
 Reminder: **v2 renders NOWHERE** — no report, no site — until the user signs off on G4. A render
 tripwire pins that; do not surface v2 numbers in any output prose.
+
+**(7d) Chart-fetch — top up the dashboard's small charts (F110; deterministic, no LLM).**
+Refresh the curated data series that feed the dashboard's little charts (today, just AMD's
+quarterly data-center revenue), so each one carries a fresh point when a new one is due:
+```
+.venv/Scripts/python -m gpu_agent.cli chart-fetch --category <id> --as-of <asOf>
+```
+It prints a plain summary of what it fetched, what wasn't due yet, and what failed. **A failed
+fetch here is only written to the log — it never stops the cycle.** Log the printed summary,
+then log `chartFetch: done` either way; a chart that couldn't be refreshed just keeps showing
+its last known point until a later cycle succeeds.
+
+**(7e) Dashboard-json — write today's dashboard file (F110; deterministic, no LLM).** Build and
+save the one data file the public dashboard page reads, from this cycle's scorecard, story, and
+chart data:
+```
+.venv/Scripts/python -m gpu_agent.cli dashboard-json --category <id> --store store --site site
+```
+On success it prints `wrote <path>` — log `dashboardJson: done`. **If this step fails, log
+`dashboardJson: failed` and move on — it must never stop the cycle.** The public page is not
+touched directly by this step; on a failure it simply keeps showing yesterday's dashboard file
+until a later cycle writes a new one.
 
 ### 8. Report
 The scope, categories run (with scorecard paths + DMI/SMI), the thesis and implication stages' status per
