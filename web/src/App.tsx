@@ -1,13 +1,12 @@
 /**
  * The page. It reads one file, checks it, and renders the zones in order.
- *
- * Zones 1-2 (the verdict, the gap chart) are built. Zones 3-5 — what changed,
- * the six things we track, and the footer — arrive in the tasks that follow.
  */
 import {useEffect, useState} from 'react';
 import {Verdict} from './components/Verdict';
 import {GapChart} from './components/GapChart';
 import {Bullets} from './components/Bullets';
+import {Dimensions} from './components/Dimensions';
+import {Footer} from './components/Footer';
 import {loadDashboard, plainDate, plainDateWithWeekday} from './load';
 import type {Dashboard} from './load';
 
@@ -113,6 +112,18 @@ export function App() {
           </a>
         ) : null}
       </section>
+
+      <section className="zone" id="dimensions">
+        <div className="zone-head">
+          <h2>The six things we track</h2>
+          <span className="note">
+            Green healthy &middot; amber mixed &middot; red strained. Open a row to see why.
+          </span>
+        </div>
+        <Dimensions dimensions={data.dimensions} />
+      </section>
+
+      <Footer links={data.footerLinks} />
     </div>
   );
 }
