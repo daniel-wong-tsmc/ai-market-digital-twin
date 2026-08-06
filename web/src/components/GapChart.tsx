@@ -12,7 +12,15 @@
  */
 import {SourceMark} from './SourceMark';
 import {NumbersTable} from './NumbersTable';
-import {dayNumber, formatSigned, makeDateScale, makeValueScale, shortDate, ticks} from './gapMath';
+import {
+  dayNumber,
+  formatSigned,
+  makeDateScale,
+  makeValueScale,
+  shortDate,
+  spacedTickIndices,
+  ticks,
+} from './gapMath';
 import {plainDate} from '../load';
 import type {GapChart as GapChartData, GapPoint} from '../load';
 
@@ -33,6 +41,9 @@ const HOV_TOP = 12;
 const HOV_BOTTOM = 258;
 const END_SWATCH_X = 876;
 const END_LABEL_X = 886;
+// Roughly two label widths at the axis type size: enough room that "1 Jun"
+// and its neighbour never touch. Below this, a point goes unlabelled.
+const MIN_TICK_GAP = 70;
 
 function ariaDescription(points: GapPoint[]): string {
   const first = points[0];
@@ -128,9 +139,9 @@ export function GapChart({data}: GapChartProps) {
             <line className="zero" x1={PLOT_X0} y1={yScale(0)} x2={PLOT_X1} y2={yScale(0)} />
           ) : null}
 
-          {points.map((p, i) => (
-            <text key={`xtick-${p.date}`} className="xtick" x={xs[i]} y={XTICK_Y}>
-              {shortDate(p.date)}
+          {spacedTickIndices(xs, MIN_TICK_GAP).map((i) => (
+            <text key={`xtick-${points[i].date}`} className="xtick" x={xs[i]} y={XTICK_Y}>
+              {shortDate(points[i].date)}
             </text>
           ))}
 

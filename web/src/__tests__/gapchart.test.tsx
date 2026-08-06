@@ -171,3 +171,27 @@ describe('the annotation marker', () => {
     expect(screen.getByText(/Widest gap so far/)).toBeInTheDocument();
   });
 });
+
+describe('the date labels under the chart never collide', () => {
+  it('drops labels that would print on top of each other, keeping both ends', () => {
+    // The real reading history bunches five days inside one week. Labelling
+    // every one of them printed them over each other and the axis read as
+    // gibberish -- caught by looking at the built page (Task 12 step 5).
+    draw(<GapChart data={mixedChart()} />);
+    const labels = Array.from(document.querySelectorAll('text.xtick'));
+    const positions = labels.map((el) => Number(el.getAttribute('x')));
+    for (let i = 1; i < positions.length; i += 1) {
+      expect(positions[i] - positions[i - 1]).toBeGreaterThanOrEqual(70);
+    }
+    // The first and last readings are the two the eye looks for: both stay.
+    expect(labels[0].textContent).toBe('1 Jun');
+    expect(labels[labels.length - 1].textContent).toBe('1 Aug');
+    expect(labels.length).toBeLessThan(MIXED_POINTS.length);
+  });
+
+  it('labels every reading when they are already far enough apart', () => {
+    draw(<GapChart data={golden()} />);
+    const labels = document.querySelectorAll('text.xtick');
+    expect(labels.length).toBeGreaterThan(1);
+  });
+});

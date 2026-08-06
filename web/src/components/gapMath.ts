@@ -81,3 +81,28 @@ export function shortDate(isoDate: string): string {
     timeZone: 'UTC',
   }).format(new Date(`${match[0]}T00:00:00Z`));
 }
+
+/**
+ * Which points get a date label under the chart.
+ *
+ * The real reading history bunches up: five single-day readings inside one
+ * week, then a month-long jump. Labelling every point printed those five on
+ * top of each other and the axis read as gibberish. This keeps the first and
+ * last readings -- the two the eye actually looks for -- and then only those
+ * in between that sit at least `minGap` apart, so a label always has room.
+ *
+ * `xs` are the points' horizontal positions, in the order they are drawn.
+ */
+export function spacedTickIndices(xs: number[], minGap: number): number[] {
+  if (xs.length <= 1) return xs.map((_, i) => i);
+  const kept = [0];
+  for (let i = 1; i < xs.length - 1; i += 1) {
+    if (xs[i] - xs[kept[kept.length - 1]] >= minGap) kept.push(i);
+  }
+  const last = xs.length - 1;
+  // The final reading always gets its label, so anything it would collide
+  // with gives way -- except the first, which is kept on principle.
+  while (kept.length > 1 && xs[last] - xs[kept[kept.length - 1]] < minGap) kept.pop();
+  kept.push(last);
+  return kept;
+}

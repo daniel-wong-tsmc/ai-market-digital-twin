@@ -67,10 +67,18 @@ def test_e2e_index_has_panel_and_no_folded_headers(tmp_path):
     # its "ev-data" JSON blob) and does not carry the folded headers it was
     # written to forbid ("Standing calls" was the brief's folded section; the
     # story page must not regress into showing it either).
+    # F110 Task 12 retarget: the category index.html is now the compiled
+    # dashboard app -- a committed build input the Python builder leaves alone.
+    # The evidence panel this test guards still ships on the story page
+    # build_site assembles (and, through the same renderer, on every story
+    # permalink), so assert against that page rather than a file build_site no
+    # longer writes. See tests/dashboard/test_site_build.py::story_front_html.
+    from tests.dashboard.test_site_build import story_front_html
+
     build_site("chips.merchant-gpu", FIX, work_dir="work-nonexistent",
                plain_path=f"{FIX}/plain-2026-07-06.json",
                out_dir=str(tmp_path / "site"), price_fn=lambda d: {"H100": 2.31})
-    html = (tmp_path / "site" / "chips.merchant-gpu" / "index.html").read_text(encoding="utf-8")
+    html = story_front_html(FIX)
     assert 'id="ev-data"' in html
     assert "window.openEV" in html and "ev-panel" in html
     assert "<h2>Standing calls</h2>" not in html

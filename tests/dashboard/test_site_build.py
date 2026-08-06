@@ -16,14 +16,42 @@ def _build(tmp_path, price_fn=lambda d: {"H100": 2.31}):
                       out_dir=str(tmp_path / "site"), price_fn=price_fn)
 
 
+def story_front_html(store_dir, today=None):
+    """The assembled story page for a build, rendered exactly as `build_site`
+    renders it.
+
+    F110 Task 12: the category's `index.html` is now the compiled dashboard
+    app, a committed file the Python builder must not write over, so this page
+    is no longer read off disk. It is still built on every run -- it feeds the
+    copy-register lint that aborts a bad build, and its scene renderer is the
+    same one every story permalink uses (`explore_render.render_story_day`
+    reuses `story_render._scene_html` verbatim). These tests keep asserting
+    against it because that renderer still ships.
+    """
+    from gpu_agent.dashboard.explore_model import load_entities
+    from gpu_agent.dashboard.story_model import build_story_model, resolve_store_root
+    from gpu_agent.dashboard.story_render import render_story_page
+
+    store_root = resolve_store_root(CAT, str(store_dir))
+    entity_links = {e["title"]: f"entities/{e['slug']}.html"
+                    for e in load_entities(store_root)}
+    return render_story_page(
+        build_story_model(CAT, str(store_dir), today or dt.date.today()),
+        entity_links)
+
+
 def test_emits_the_full_page_set(tmp_path):
     summary = _build(tmp_path)
     root = tmp_path / "site"
-    for rel in ("index.html", "style.css", f"{CAT}/index.html", f"{CAT}/style.css",
+    # F110 Task 12: <cat>/index.html is deliberately NOT in this list -- the
+    # category page is the committed compiled app, not something this builder
+    # writes (see tests/test_site_build_react_swap.py).
+    for rel in ("index.html", "style.css", f"{CAT}/style.css",
                 f"{CAT}/appendix.html", f"{CAT}/how/alert.html", f"{CAT}/how/demand.html",
                 f"{CAT}/how/supply.html", f"{CAT}/how/gap.html", f"{CAT}/how/featured.html"):
         assert (root / rel).exists(), rel
-    assert summary["pages"] >= 8 and summary["featured"] is not None
+    assert summary["pages"] >= 7 and summary["featured"] is not None
+    assert not (root / CAT / "index.html").exists()
 
 
 def test_root_redirect_uses_the_model_category_label(tmp_path):
@@ -46,6 +74,10 @@ def test_no_price_data_drops_only_the_featured_page(tmp_path):
 def test_every_local_href_resolves(tmp_path):
     _build(tmp_path)
     root = tmp_path / "site"
+    # Stand-in for the committed compiled page: every deep page links back to
+    # the category page, which ships as a build INPUT and so is never written
+    # into a temporary output dir. Without it, real links would read as dead.
+    (root / CAT / "index.html").write_text("<p>compiled app</p>", encoding="utf-8")
     for html_path in root.rglob("*.html"):
         html = html_path.read_text(encoding="utf-8")
         # F100: the category page now carries the deep-dive panel's self-contained
@@ -77,7 +109,10 @@ def test_two_builds_are_byte_identical(tmp_path):
         assert (a / rel).read_bytes() == (b / rel).read_bytes(), rel
 
 
-def test_build_site_index_is_story(tmp_path):
+def test_assembled_story_page_carries_scenes_and_chips(tmp_path):
+    # Renamed in F110 Task 12 (was test_build_site_index_is_story): the
+    # category index is the compiled dashboard now, so this asserts against
+    # the story page build_site still assembles -- see story_front_html.
     # F101a final review (item f): the shared _build()/FIX fixture set has
     # only daily-grain scorecards and no series/ dir, so it degrades to zero
     # scenes/chips (see test_story_page_degrades_gracefully_with_only_daily_
@@ -133,7 +168,7 @@ def test_build_site_index_is_story(tmp_path):
     summary = build_site(CAT, str(cat), "work-nonexistent", None,
                          str(tmp_path / "site"), price_fn=lambda d: {"H100": 2.31},
                          today=dt.date(2026, 7, 16))
-    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    idx = story_front_html(cat, dt.date(2026, 7, 16))
     # "The story, step by step" is a hard-coded literal that renders
     # unconditionally whenever the story section exists at all -- pin it
     # together with real scene markup (which only renders when there's
@@ -220,7 +255,7 @@ def test_story_page_degrades_gracefully_with_only_daily_scorecards_and_no_series
                          str(tmp_path / "site"), price_fn=lambda d: {},
                          today=dt.date(2026, 7, 16))
     assert summary["story_lint"] == []
-    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    idx = story_front_html(cat, dt.date(2026, 7, 16))
     # Narrowed per final review: "<svg" not in idx is over-broad and would
     # break the first time any decorative graphic (e.g. a sparkline) is
     # added to the degraded page. What this test actually cares about is
@@ -328,7 +363,7 @@ def test_brief_evidence_anchors_resolve_in_appendix(tmp_path):
     build_site(CAT, str(cat), "work-nonexistent", None, str(tmp_path / "site"),
                today=dt.date(2026, 7, 16))
     site = tmp_path / "site" / CAT
-    index = (site / "index.html").read_text(encoding="utf-8")
+    index = story_front_html(cat, dt.date(2026, 7, 16))
     appendix = (site / "appendix.html").read_text(encoding="utf-8")
 
     # story_model.py's own "latest scorecard" selector (brief_model.latest_monthly,
@@ -421,13 +456,23 @@ def test_emits_the_explore_page_families(tmp_path):
     assert summary["explore_pages"] >= 8
 
 
-def test_front_index_links_findings_page(tmp_path):
+def test_category_page_footer_links_all_resolve(tmp_path):
+    # Was test_front_index_links_findings_page. The category page is the
+    # compiled dashboard now, and its footer links come from the data file
+    # (export_json._footer_links), not from rendered markup -- so the thing
+    # worth checking is that every one of those links lands on a page this
+    # builder really emits.
+    from gpu_agent.dashboard.export_json import _footer_links
+
     root = _full_explore_store(tmp_path)
     build_site(CAT, str(root / CAT), "work-nonexistent", None,
                str(tmp_path / "site"), price_fn=lambda d: {},
                today=dt.date(2026, 7, 22))
-    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
-    assert 'href="findings/"' in idx
+    site = tmp_path / "site" / CAT
+    for link in _footer_links():
+        href = link["href"]
+        target = site / (href + "index.html" if href.endswith("/") else href)
+        assert target.exists(), f"footer link goes nowhere: {link['label']} -> {href}"
 
 
 def _wired_store(tmp_path):
@@ -468,7 +513,7 @@ def test_scene_prose_carries_entity_link(tmp_path):
     build_site(CAT, str(root / CAT), "work-nonexistent", None,
                str(tmp_path / "site"), price_fn=lambda d: {},
                today=dt.date(2026, 7, 16))
-    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    idx = story_front_html(root / CAT, dt.date(2026, 7, 16))
     assert '<a href="entities/nvidia.html">Nvidia</a>' in idx
 
 
@@ -477,7 +522,7 @@ def test_front_index_panel_explore_carries_dim(tmp_path):
     build_site(CAT, str(root / CAT), "work-nonexistent", None,
                str(tmp_path / "site"), price_fn=lambda d: {},
                today=dt.date(2026, 7, 16))
-    idx = (tmp_path / "site" / CAT / "index.html").read_text(encoding="utf-8")
+    idx = story_front_html(root / CAT, dt.date(2026, 7, 16))
     assert "#dim=" in idx
 
 
@@ -516,7 +561,7 @@ def test_evidence_explore_targets_resolve_on_both_surfaces(tmp_path):
                today=dt.date(2026, 7, 22))
     site = tmp_path / "site" / CAT
 
-    idx = (site / "index.html").read_text(encoding="utf-8")
+    idx = story_front_html(root / CAT, dt.date(2026, 7, 22))
     front = _explore_targets(idx)
     assert any("#dim=" in t for t in front), "no pre-filtered findings CTA on front page"
     for t in front:
