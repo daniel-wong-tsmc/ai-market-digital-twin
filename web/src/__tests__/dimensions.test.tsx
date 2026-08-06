@@ -13,6 +13,19 @@
  * accessible-name regexes, which collide with the evidence `SourceMark`
  * button nested inside an open panel (its label is "Show the N sources
  * behind <plainName>", which also contains the row's plain name).
+ *
+ * The panel's content stays mounted in the DOM at all times (open AND
+ * closed) so the mock's `grid-template-rows` transition can animate on both
+ * directions. A closed panel is instead made unreachable via `inert` +
+ * `aria-hidden="true"` on its wrapper. jsdom reflects the `inert` IDL
+ * property/attribute but does NOT enforce its actual behaviour (blocking
+ * `.focus()`, removing it from `userEvent.tab()`'s tab order) -- confirmed
+ * by hand: a probe with a plain `inert` div let both `.focus()` and
+ * `userEvent.tab()` land inside it. So "genuinely unreachable" is proven the
+ * way this lane already proves platform behaviour jsdom can't execute (see
+ * the `@scope`/`@layer` note in the CSS-token tests): by asserting the
+ * wrapper carries the exact `inert` + `aria-hidden="true"` markers a real
+ * browser acts on, not by simulating focus/tab and hoping jsdom obeys them.
  */
 import {render, screen, within} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -39,6 +52,19 @@ function rowPanel(dimId: string): HTMLElement {
   return document.getElementById(`why-${dimId}`)!;
 }
 
+/** True when the wrapper is unreachable by keyboard/assistive technology:
+ *  carries the `inert` attribute AND `aria-hidden="true"`. Neither alone is
+ *  the contract -- `inert` is the modern removal-from-tab-order-and-
+ *  accessibility-tree mechanism, `aria-hidden` is the fallback for older
+ *  assistive technology that predates `inert` support. */
+function isUnreachable(panel: HTMLElement): boolean {
+  return panel.hasAttribute('inert') && panel.getAttribute('aria-hidden') === 'true';
+}
+
+function isReachable(panel: HTMLElement): boolean {
+  return !panel.hasAttribute('inert') && panel.getAttribute('aria-hidden') !== 'true';
+}
+
 describe('the six dimensions, on the real committed payload', () => {
   it('renders exactly six rows, one per dimension', () => {
     const dims = golden().dimensions;
@@ -55,44 +81,77 @@ describe('the six dimensions, on the real committed payload', () => {
     draw(<Dimensions dimensions={dims} />);
 
     expect(rowButton(dims[0].id)).toHaveAttribute('aria-expanded', 'true');
-    // The first row's reasoning is already in the document -- the panel
-    // content, not just the collapsed summary line.
+    expect(isReachable(rowPanel(dims[0].id))).toBe(true);
+    // The first row's reasoning is in the document AND reachable.
     expect(within(rowPanel(dims[0].id)).getByText(dims[0].reasoning)).toBeInTheDocument();
 
-    // Every other row starts closed: its button says so, and its reasoning
-    // text is nowhere in the document (proves the panel content, not just
-    // its visibility, tracks aria-expanded).
+    // Every other row starts closed: its button says so, and its panel is
+    // marked unreachable (inert + aria-hidden), even though the content is
+    // still mounted underneath (proved by the animation test below).
     for (const dim of dims.slice(1)) {
       expect(rowButton(dim.id)).toHaveAttribute('aria-expanded', 'false');
-      expect(screen.queryByText(dim.reasoning)).not.toBeInTheDocument();
+      expect(isUnreachable(rowPanel(dim.id))).toBe(true);
     }
   });
 
-  it('clicking a closed row opens it: aria-expanded flips and the reasoning becomes available', async () => {
+  it('clicking a closed row opens it: aria-expanded flips and the panel becomes reachable', async () => {
     const dims = golden().dimensions;
     draw(<Dimensions dimensions={dims} />);
     const secondDim = dims[1];
     const btn = rowButton(secondDim.id);
+    const panel = rowPanel(secondDim.id);
     expect(btn).toHaveAttribute('aria-expanded', 'false');
-    expect(screen.queryByText(secondDim.reasoning)).not.toBeInTheDocument();
+    expect(isUnreachable(panel)).toBe(true);
 
     await userEvent.click(btn);
 
     expect(btn).toHaveAttribute('aria-expanded', 'true');
-    expect(within(rowPanel(secondDim.id)).getByText(secondDim.reasoning)).toBeInTheDocument();
+    expect(isReachable(panel)).toBe(true);
+    expect(within(panel).getByText(secondDim.reasoning)).toBeInTheDocument();
   });
 
-  it('clicking an open row closes it: aria-expanded flips back and the reasoning is removed', async () => {
+  it('clicking an open row closes it: aria-expanded flips back and the panel becomes unreachable again', async () => {
     const dims = golden().dimensions;
     draw(<Dimensions dimensions={dims} />);
     const firstDim = dims[0];
     const btn = rowButton(firstDim.id);
+    const panel = rowPanel(firstDim.id);
     expect(btn).toHaveAttribute('aria-expanded', 'true');
+    expect(isReachable(panel)).toBe(true);
 
     await userEvent.click(btn);
 
     expect(btn).toHaveAttribute('aria-expanded', 'false');
-    expect(screen.queryByText(firstDim.reasoning)).not.toBeInTheDocument();
+    expect(isUnreachable(panel)).toBe(true);
+    // The content is still there -- only its reachability changed, so the
+    // mock's slide-closed transition has something to animate.
+    expect(within(panel).getByText(firstDim.reasoning, {selector: 'p'})).toBeInTheDocument();
+  });
+
+  it('the panel stays mounted across open/close, so the mock’s transition can animate both ways', async () => {
+    const dims = golden().dimensions;
+    draw(<Dimensions dimensions={dims} />);
+    const dim = dims[1]; // starts closed
+    const btn = rowButton(dim.id);
+    const panel = rowPanel(dim.id);
+
+    // Closed on mount: the reasoning paragraph already exists in the DOM
+    // (only unreachable, per isUnreachable above) -- this is what a
+    // conditionally-*rendered* panel could never do.
+    const beforeOpen = within(panel).getByText(dim.reasoning, {selector: 'p'});
+    expect(panel).not.toHaveAttribute('data-open');
+
+    await userEvent.click(btn); // open
+    expect(panel).toHaveAttribute('data-open', 'true');
+    const afterOpen = within(panel).getByText(dim.reasoning, {selector: 'p'});
+    // Same DOM node, not a fresh one from a remount -- the CSS transition
+    // has continuous content to animate across, in both directions.
+    expect(afterOpen).toBe(beforeOpen);
+
+    await userEvent.click(btn); // close again
+    expect(panel).not.toHaveAttribute('data-open');
+    const afterClose = within(panel).getByText(dim.reasoning, {selector: 'p'});
+    expect(afterClose).toBe(beforeOpen);
   });
 
   it('the keyboard alone opens a row: Tab to it, then Enter -- and Space closes it', async () => {
@@ -100,16 +159,18 @@ describe('the six dimensions, on the real committed payload', () => {
     draw(<Dimensions dimensions={dims} />);
     const thirdDim = dims[2];
     const btn = rowButton(thirdDim.id);
+    const panel = rowPanel(thirdDim.id);
     btn.focus();
     expect(btn).toHaveFocus();
 
     await userEvent.keyboard('{Enter}');
     expect(btn).toHaveAttribute('aria-expanded', 'true');
-    expect(within(rowPanel(thirdDim.id)).getByText(thirdDim.reasoning)).toBeInTheDocument();
+    expect(isReachable(panel)).toBe(true);
 
     // And Space closes it again -- both keys operate a real button.
     await userEvent.keyboard(' ');
     expect(btn).toHaveAttribute('aria-expanded', 'false');
+    expect(isUnreachable(panel)).toBe(true);
   });
 
   it('never signals the rating by colour alone: the rating word is spelled out beside the dot on every row', () => {
