@@ -1,12 +1,13 @@
 /**
  * The page. It reads one file, checks it, and renders the zones in order.
  *
- * Zone 1 (the verdict) is built. Zones 2-5 — the gap chart, what changed, the
- * six things we track, and the footer — arrive in the tasks that follow.
+ * Zones 1-2 (the verdict, the gap chart) are built. Zones 3-5 — what changed,
+ * the six things we track, and the footer — arrive in the tasks that follow.
  */
 import {useEffect, useState} from 'react';
 import {Verdict} from './components/Verdict';
-import {loadDashboard, plainDateWithWeekday} from './load';
+import {GapChart} from './components/GapChart';
+import {loadDashboard, plainDate, plainDateWithWeekday} from './load';
 import type {Dashboard} from './load';
 
 /** Words that are said letter by letter, so they stay in capitals. */
@@ -88,6 +89,16 @@ export function App() {
       </header>
 
       <Verdict verdict={data.verdict} asOf={data.asOf} stale={stale} />
+
+      <section className="zone" id="gap">
+        <div className="zone-head">
+          <h2>The gap</h2>
+          <span className="note">
+            Every reading since {plainDate(data.gapChart.points[0]?.date ?? null)}
+          </span>
+        </div>
+        <GapChart data={data.gapChart} />
+      </section>
     </div>
   );
 }

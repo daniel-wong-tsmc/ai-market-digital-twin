@@ -5,8 +5,9 @@
  * other two states, and the source marker — are built from the same tokens and
  * the same shapes, so they read as part of the set.
  *
- * Tasks 9-11 add the gap chart, what changed, the six dimensions and the
- * footer. Their mock rules are not copied here yet.
+ * Task 9 adds the gap chart (mock lines 170-244). Tasks 10-11 add what
+ * changed, the six dimensions and the footer; their mock rules are not
+ * copied here yet.
  */
 
 /* ---------- base (mock lines 90-109) ---------- */
@@ -166,6 +167,81 @@ h1, h2, h3 { font-style: normal; margin: 0; letter-spacing: -0.011em; }
   color: var(--color-text-secondary);
 }
 .srcjudgement .srclist { padding-left: var(--space-4); border-left: 2px solid var(--color-border); }
+
+/* ---------- section heads (mock lines 170-179) ---------- */
+.zone { padding-top: var(--space-6); }
+.zone-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--space-4); flex-wrap: wrap;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border);
+}
+.zone-head h2 { font-size: var(--text-h2); font-weight: 600; }
+.zone-head .note { font-size: var(--text-small); color: var(--color-text-muted); }
+
+/* ---------- zone 2: the gap chart (mock lines 181-243) ---------- */
+figure.chart { margin: var(--space-4) 0 0; }
+.chart-legend {
+  display: flex; gap: var(--space-5); flex-wrap: wrap;
+  font-size: var(--text-small); color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+.chart-legend span { display: inline-flex; align-items: center; gap: var(--space-2); }
+.key { width: 12px; height: 3px; border-radius: 2px; display: inline-block; }
+.key.dem { background: var(--color-demand); }
+.key.sup { background: var(--color-supply); }
+.key.gap { background: var(--color-gapfill); border: 1px solid var(--color-border-strong); height: 10px; }
+.plot-frame {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  padding: var(--space-3) var(--space-2) var(--space-1);
+  overflow-x: auto;
+}
+.plot-frame svg { display: block; width: 100%; min-width: 560px; height: auto; }
+figcaption {
+  margin-top: var(--space-4);
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+  max-width: 74ch;
+}
+.numbers { margin-top: var(--space-4); }
+.numbers summary {
+  cursor: pointer; font-size: var(--text-small); color: var(--color-text-secondary);
+  width: fit-content;
+}
+.numbers table { border-collapse: collapse; margin-top: var(--space-3); font-size: var(--text-small); }
+.numbers th, .numbers td { text-align: right; padding: 5px 14px 5px 0; border-bottom: 1px solid var(--color-border); }
+.numbers th:first-child, .numbers td:first-child { text-align: left; }
+.numbers th { color: var(--color-text-muted); font-weight: 500; }
+
+/* svg internals */
+.grid { stroke: var(--color-grid); stroke-width: 1; }
+.zero { stroke: var(--color-border-strong); stroke-width: 1; }
+.ytick, .xtick { fill: var(--color-text-muted); font-size: 11px; font-family: var(--font-sans); }
+.ytick { text-anchor: end; }
+.xtick { text-anchor: middle; }
+.gapband { fill: var(--color-gapfill); }
+.line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.line.dem { stroke: var(--color-demand); }
+.line.sup { stroke: var(--color-supply); }
+.dot.dem { fill: var(--color-demand); stroke: var(--color-surface); stroke-width: 2; }
+.dot.sup { fill: var(--color-supply); stroke: var(--color-surface); stroke-width: 2; }
+.swatch.dem { fill: var(--color-demand); }
+.swatch.sup { fill: var(--color-supply); }
+.endlab { fill: var(--color-text-secondary); font-size: 11.5px; font-family: var(--font-sans); }
+.endval { fill: var(--color-text); font-size: 14px; font-weight: 600; font-family: var(--font-sans); }
+.ann-rule { stroke: var(--color-border-strong); stroke-width: 1; stroke-dasharray: 3 3; }
+.ann { fill: var(--color-text-muted); font-size: 11px; font-family: var(--font-sans); }
+.hov rect { fill: transparent; }
+.hov .read { opacity: 0; transition: opacity var(--dur-fast) var(--ease-out); pointer-events: none; }
+.tipbg { fill: var(--color-surface); stroke: var(--color-border); stroke-width: 1; }
+svg:has(.hov:hover) .ann, svg:has(.hov:hover) .ann-rule { opacity: 0; transition: opacity var(--dur-fast) var(--ease-out); }
+.hov:hover .read { opacity: 1; }
+.cross { stroke: var(--color-border-strong); stroke-width: 1; }
+.tip { fill: var(--color-text-secondary); font-size: 11px; font-family: var(--font-sans); }
+.tip.head { fill: var(--color-text); font-weight: 600; font-size: 12px; }
+.tip.strong { fill: var(--color-text); font-weight: 600; font-size: 12px; }
 
 /* ---------- while the file is arriving, or if it will not ---------- */
 .loading, .loadfail {
