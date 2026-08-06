@@ -19,17 +19,18 @@
  *        lines 541-543) and the real registry series
  *        (registry/chart-series.json: amdDataCenterRevenue, form "columns",
  *        unit "USD bn") — values are real, wrapped in a constructed Bullet.
- *      - BARS_CHART and its hollow point are modelled on the mock's NVIDIA
- *        memory-per-chip illustration (same mock, lines 559-561) — the shape
- *        (a "ghost"/projected bar alongside real ones) is real, the exact
- *        numbers are constructed for coverage since no such series is
- *        registered yet.
+ *      - BARS_CHART restates the exact stacked-memory figures from the same
+ *        mock's NVIDIA memory-per-chip illustration (lines 559-561): 1,024GB
+ *        (hollow/"ghost" — the 2025 preview, never built), 288GB, 192GB —
+ *        values are real, wrapped in a constructed Chart/Bullet since no such
+ *        series is registered in registry/chart-series.json yet.
  *      - LINE_CHART is modelled on the real registered `gpuSpotPrice` series
  *        (registry/chart-series.json: form "line", unit "USD") — the id and
  *        unit are real, the monthly price points are constructed since that
  *        series has no fetcher yet (`fetcher: null`) and so no real rows.
  */
 import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import {Theme} from '@astryxdesign/core/theme';
 import {neutralTheme} from '@astryxdesign/theme-neutral/built';
 import {describe, expect, it} from 'vitest';
@@ -161,13 +162,6 @@ describe('the what-changed zone on real committed data', () => {
     });
   });
 
-  it('each bullet carries a real link to its full story', () => {
-    draw(<Bullets bullets={golden()} />);
-    const links = screen.getAllByRole('link', {name: /read the (full )?story/i});
-    expect(links.length).toBeGreaterThan(0);
-    links.forEach((link) => expect(link).toHaveAttribute('href', 'story/2026-08-05.html'));
-  });
-
   it('gives each bullet a source mark for its own sources', () => {
     draw(<Bullets bullets={golden()} />);
     // 3 bullets from the golden fixture, each with sources -> 3 source buttons
@@ -187,12 +181,7 @@ describe('NoChart — the honest-omission panel', () => {
     expect(panel.textContent).toContain('our own estimates');
   });
 
-  it('would go red if the panel rendered an empty chart frame instead of the dashed panel (mutation proof)', () => {
-    // A component that swallowed the reason and rendered an empty <svg> shell
-    // instead would still show *something*, but this test's "no svg" and
-    // "contains the reason text" assertions would both fail. Prove that by
-    // rendering the real MiniChart-shaped empty case is impossible: NoChart
-    // never accepts a chart at all, so there is no path to a placeholder svg.
+  it('never renders an svg regardless of how the reason text is worded', () => {
     draw(<NoChart reason="No chart. We don't yet have a plain-English way to describe what this number measures, so we don't draw it." />);
     expect(document.querySelectorAll('svg')).toHaveLength(0);
   });
@@ -221,12 +210,23 @@ describe('MiniChart — the three chart forms', () => {
     expect(svg.querySelectorAll('.mini-dot')).toHaveLength(LINE_CHART.points.length);
   });
 
-  it('a bullet with a chart renders an svg, a caption, and a source link', () => {
+  it('a bullet with a chart renders an svg, a caption, and its own source link', async () => {
     const bullet = bulletWith(COLUMNS_CHART, null);
     draw(<Bullets bullets={[bullet, bulletWith(null, 'No chart. Reason one.'), bulletWith(null, 'No chart. Reason two.')]} />);
     expect(document.querySelector('figure.mini svg')).not.toBeNull();
     expect(screen.getByText(COLUMNS_CHART.caption)).toBeInTheDocument();
-    // The source mark opens to reveal the chart's own source link.
+
+    // Open the chart's OWN source mark (inside figure.mini, not the bullet's
+    // prose SourceMark) and assert the link carries chart.source.url --
+    // proving MiniChart really passes the chart's source through, not the
+    // bullet's own sources and not a dropped url. This is the pattern used
+    // for the verdict's source mark (verdict.test.tsx:188-198).
+    const chartSource = COLUMNS_CHART.source as {title: string; url: string};
+    const figure = document.querySelector('figure.mini')!;
+    const chartSourceButton = figure.querySelector('button.srcmark')!;
+    await userEvent.click(chartSourceButton);
+    const link = await screen.findByRole('link', {name: new RegExp(chartSource.title)});
+    expect(link).toHaveAttribute('href', chartSource.url);
   });
 
   it('marks a hollow point as outlined, not filled, with a real CSS class', () => {
@@ -239,15 +239,6 @@ describe('MiniChart — the three chart forms', () => {
     bars.forEach((bar, i) => {
       if (i !== hollowIndex) expect(bar).not.toHaveClass('ghost');
     });
-  });
-
-  it('would fail the hollow-point test if the outline class were dropped (mutation proof, run by eye)', () => {
-    // If MiniChart stopped reading `point.hollow` and always rendered a plain
-    // filled bar, the 'toHaveClass(\'ghost\')' assertion above on the hollow
-    // index would go red immediately -- there would be no element carrying
-    // that class anywhere in the svg. See task-10-report.md for a recorded
-    // run with `hollow` support removed.
-    expect(true).toBe(true);
   });
 
   it('never renders the internal index names in a chart title, caption or unit', () => {

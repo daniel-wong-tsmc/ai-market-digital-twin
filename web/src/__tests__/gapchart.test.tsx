@@ -138,15 +138,6 @@ describe('the gap chart positions points by real calendar date, not array index'
     expect(distinctGaps.size).toBeGreaterThan(1);
   });
 
-  it('would fail this test if positions were spaced by array index (mutation proof, run by eye)', () => {
-    // This test intentionally documents the shape of the bug it guards
-    // against: if xScale used `i / (points.length - 1)` instead of the real
-    // date, every gap in the ratio test above would come out equal
-    // (1/6 each), and the strict-inequality assertions on distinctGaps.size
-    // and dailyCluster would go red. See task-9-report.md for a recorded run
-    // with that mutation applied.
-    expect(true).toBe(true);
-  });
 });
 
 describe('the numbers table is the accessible alternative', () => {

@@ -25,10 +25,7 @@ function BulletRow({bullet}: {bullet: Bullet}) {
       <span className="date">{shortDate(bullet.date)}</span>
       <p>
         {bullet.text}
-        <SourceMark refs={bullet.sources} about={bullet.text} />{' '}
-        <a className="bullet-more" href={bullet.storyHref}>
-          Read the story &rarr;
-        </a>
+        <SourceMark refs={bullet.sources} about={bullet.text} />
       </p>
       {bullet.chart ? <MiniChart chart={bullet.chart} /> : <NoChart reason={bullet.noChartReason!} />}
     </div>

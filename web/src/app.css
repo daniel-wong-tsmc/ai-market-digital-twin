@@ -265,13 +265,6 @@ svg:has(.hov:hover) .ann, svg:has(.hov:hover) .ann-rule { opacity: 0; transition
 .change .date { font-size: var(--text-small); color: var(--color-text-muted); }
 .change p { margin: 0; max-width: 72ch; }
 .change p b { font-weight: 600; }
-.bullet-more {
-  display: inline-block;
-  margin-left: var(--space-2);
-  font-size: var(--text-small);
-  font-weight: 550;
-  white-space: nowrap;
-}
 .readmore {
   display: inline-block;
   margin-top: var(--space-5);
