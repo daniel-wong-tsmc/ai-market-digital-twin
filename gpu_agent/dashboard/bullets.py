@@ -404,13 +404,26 @@ def _match_research(research_dir: str | None, story_date: str,
       another day is ignored entirely -- yesterday's freshly-researched
       series is not today's news, and the story date is the only date these
       records carry.
-    - `bulletIndex` must equal this bullet's own 1-based position, the same
-      numbering `emit_research` uses for its `bullet-<n>` prompts and
-      `accept_research` stamps onto every record it writes. A record with no
-      index did not come through the trust gate, so it is not trusted here.
+    - `bulletIndex` must be a whole number equal to this bullet's own 1-based
+      position, the same numbering `emit_research` uses for its `bullet-<n>`
+      prompts and `accept_research` stamps onto every record it writes. A
+      record with no index did not come through the trust gate, so it is not
+      trusted here -- and neither is one whose index isn't a real integer
+      (review finding: `True == 1` in Python, so a record carrying
+      `bulletIndex: true` would otherwise have matched bullet 1 on a plain
+      equality check, and a chart on the page is far too strong a claim to
+      hang on an accident of how Python compares types).
 
     Files are walked in sorted order, so a day that somehow produced two
     records for one bullet resolves the same way every run.
+
+    NOTHING here raises. A quarantine file that is unreadable, not valid
+    UTF-8, not valid JSON, or not the shape this expects is skipped and the
+    bullet simply gets no researched chart. `OSError` covers the file, and
+    `ValueError` covers both the decode failure and the JSON parse failure
+    (`UnicodeDecodeError` and `JSONDecodeError` are both `ValueError`s) --
+    review finding: catching `JSONDecodeError` alone let corrupt BYTES
+    escape and take the whole day's dashboard export down with them.
     """
     if not research_dir or not story_date:
         return None
@@ -420,9 +433,12 @@ def _match_research(research_dir: str | None, story_date: str,
     for path in sorted(directory.glob(f"{story_date}-*.json")):
         try:
             record = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, json.JSONDecodeError):
+        except (OSError, ValueError):
             continue
-        if not isinstance(record, dict) or record.get("bulletIndex") != bullet_index:
+        if not isinstance(record, dict):
+            continue
+        index = record.get("bulletIndex")
+        if isinstance(index, bool) or not isinstance(index, int) or index != bullet_index:
             continue
         chart = _chart_from_research(record)
         if chart is not None:

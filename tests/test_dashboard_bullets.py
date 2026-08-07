@@ -1160,6 +1160,7 @@ def test_a_quarantine_record_with_an_undrawable_form_is_ignored(tmp_path):
 
 
 def test_an_unreadable_quarantine_file_is_ignored(tmp_path):
+    """Text that isn't valid JSON."""
     story = _research_story()
     research_dir = tmp_path / "research-series"
     research_dir.mkdir(parents=True)
@@ -1168,6 +1169,56 @@ def test_an_unreadable_quarantine_file_is_ignored(tmp_path):
     bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
                             research_dir=str(research_dir))
     assert bullets[0]["chart"] is None
+
+
+def test_a_quarantine_file_of_corrupt_bytes_is_ignored(tmp_path):
+    """Bytes that are not valid UTF-8 at all -- a truncated write, a disk
+    fault, a file that arrived through something other than the verifier.
+
+    Distinct from the bad-JSON case above: decoding fails BEFORE the JSON
+    parser is ever reached, so a handler that only catches JSON errors lets
+    the failure escape and takes the whole day's dashboard export down with
+    it. A quarantine record is never worth a blank page.
+    """
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    research_dir.mkdir(parents=True)
+    # 0xFF is not a legal UTF-8 byte in any position.
+    (research_dir / "2026-08-05-corrupt.json").write_bytes(b'{"seriesName": "\xff\xfe\x00bad"}')
+    # ...and a good record for another bullet still comes through, so this
+    # proves the bad file is SKIPPED, not that the whole step gave up.
+    _write_quarantine(research_dir, bullet_index=2)
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    assert bullets[0]["chart"] is None
+    assert bullets[1]["chart"] is not None
+    assert bullets[1]["chart"]["researched"] is True
+
+
+def test_a_true_bullet_index_does_not_pass_for_bullet_one(tmp_path):
+    """In Python `True == 1`, so a record carrying `bulletIndex: true` would
+    quietly match bullet 1 on a plain equality check. The verifier always
+    writes a real integer taken from the answer filename, so a boolean means
+    the record came from somewhere else -- and a chart on the page is too
+    strong a claim to hang on an accident of how Python compares types."""
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, extra={"bulletIndex": True})
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    assert all(b["chart"] is None for b in bullets)
+
+
+def test_a_floating_point_bullet_index_does_not_pass_either(tmp_path):
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, extra={"bulletIndex": 1.0})
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    assert all(b["chart"] is None for b in bullets)
 
 
 def test_a_quarantine_record_with_no_bullet_index_is_ignored(tmp_path):
