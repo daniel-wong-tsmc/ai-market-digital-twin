@@ -49,7 +49,7 @@ report the rest `skipped-no-assignment` (surfaced, never dropped).
 
 ## Procedure
 
-<!-- run-cycle-step-fingerprint: sha256=fde88206f42433a861856d75566de2d0c95d3b641a2c8785e4dfc552ff935476 — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
+<!-- run-cycle-step-fingerprint: sha256=930fbbe286df56d85efac42c70cb22dac1e64d1f5e742d687e5b3bdf13a6489f — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
 
 ### 1. Resolve the scope to a cycle plan (deterministic — no LLM)
 ```
@@ -489,6 +489,40 @@ It prints a plain summary of what it fetched, what wasn't due yet, and what fail
 fetch here is only written to the log — it never stops the cycle.** Log the printed summary,
 then log `chartFetch: done` either way; a chart that couldn't be refreshed just keeps showing
 its last known point until a later cycle succeeds.
+
+**(7d2) Chart-research — dig for a published series when no curated chart fits (F113).** After the
+narrator and citation audit have run, some dashboard bullets still have no chart: the curated series
+library (`registry/chart-series.json`) just doesn't cover that day's story. This step tries to find
+one, honestly, before `dashboard-json` renders the page. Emit one research prompt per chartless
+bullet:
+```
+.venv/Scripts/python -m gpu_agent.cli chart-research emit --category <id> --store store --work work/<run-dir>
+```
+It prints the written prompt paths as JSON — one per chartless bullet, **at most 3** (the dashboard
+never shows more than 3 bullets a day). For each prompt, **dispatch one TOOL-USING research agent**
+(WebSearch/WebFetch/agent-reach — the same live-dispatch pattern `(a) Gather` uses, NOT the tool-less
+brain pattern the narrator/judge/thesis steps use: this agent must be free to search and fetch real
+pages, not reason over text already in front of it). Give it the prompt file's contents verbatim and
+save its returned JSON answer to `work/<run-dir>/chart-research/bullet-<n>.json`, matching the prompt
+file's own `<n>`. An honest "found nothing" answer is a correct outcome, not a failure — a **failed
+dispatch (agent error, no tools available) is just skipped**; leave no answer file for that bullet
+and move on.
+
+Once every dispatched prompt has an answer file (or was skipped), verify and quarantine:
+```
+.venv/Scripts/python -m gpu_agent.cli chart-research accept --category <id> --store store --work work/<run-dir>
+```
+This re-fetches every claimed point's own cited source page and confirms the number is really there
+(the same number-matching the citation audit uses) — **any failing point fails the whole candidate,
+no partial charts**. It prints an accept/reject/missing summary as JSON; log it under a
+`chartResearch` key in the cycle log. Verified survivors are written to
+`store/<id>/research-series/` (append-only, quarantined — this is NEVER the curated
+`registry/chart-series.json`, and this step adds no writer to that registry). **Neither the emit nor
+the accept call can block the cycle**: `emit` failing (no story artifact, no bullets to research)
+just means no research happens this cycle — log `chartResearch: skipped-no-bullets` and move on;
+`accept` never raises and always exits 0, so a rejected or missing candidate is only ever a logged
+line, never a stopped run. A bullet with no verified researched series simply renders the quiet
+no-chart line on the dashboard.
 
 **(7e) Dashboard-json — write today's dashboard file (F110; deterministic, no LLM).** Build and
 save the one data file the public dashboard page reads, from this cycle's scorecard, story, and
