@@ -1883,6 +1883,50 @@ F57/F58/F59 → F60 → F64 → F65 → F66. Eval-v2, if approved, slots in as i
 F63's re-gate. F56 remains a safe tiny side item.
 
 ## Newest state (newest first)
+  - **2026-08-07 daily cycle (scheduled headless): chips.merchant-gpu v4 shipped + pushed
+    `442ab38` (`main == origin/main`).** Scorecard `store/chips.merchant-gpu/2026-08-v4.json` —
+    **DMI 3.440 / SMI -0.200** (Strong, improving; prior v3 3.573 / -0.040). TOP-UP gather (store
+    held 261 in-window findings): 9 docs over 2 rounds (2 primary, 7 secondary), L1 dropped 0
+    known; 22 findings gated / 0 dropped; dedup fresh new 1 / update 15 / duplicate 6 -> merged
+    277; wiki-ingest routed 16 to 5 pages. Day's substance: AMD Q2 (data-centre $6.7B, +107% YoY;
+    Q3 guide ~$13.0B), the AMD/Taalas inference-silicon acquisition, Foxconn's first month above
+    NT$900B, and GlobalWafers warning that 300mm wafer lines are full — the story leads on the
+    shortage moving one step further upstream, to bare wafers. Thesis 59 judgments applied + 2 new
+    provisional theses; implication 6 lines; narrator `done` (story
+    `store/chips.merchant-gpu/story/2026-08-07.json`); citation audit **clean** (10 claims, 0
+    flagged); coverage record 12 gaps (11 source, 1 indicator, 2 paywalled); priceSync done (stale
+    price folder warning, non-fatal); seriesRefresh no-gap; v2 shadow stamped; chart-fetch all 3
+    series not yet due; dashboard.json written; site rebuilt (7 pages). Suite **2319 passed / 5
+    skipped** with `2026-08-v4` registered in the scoring v1 replay pin (W_CURRENT, per-cycle
+    precedent). Full report `work/daily-2026-08-07/report.txt`; journal `store/cycle-log.json`.
+    Gates: voice lint rejected judgment samples 1 and 2 (acronyms `NT`, `SK`, `EMIB-T` not on the
+    allowlist) -> each re-dispatched as its own subagent -> passed; implication gate failed once
+    (finding ids truncated of their host prefix, plus banned word `leverage`) -> re-dispatched ->
+    passed; narrator gate failed once (2 `relatedDocs` outlet strings did not match the doc pool)
+    -> re-dispatched -> passed. **Nothing bypassed.**
+    **THREE AFK-DEFAULTS — need user review (recorded in `store/cycle-log.json` under
+    `afkDefaults`):** (1) gatherer subagents got a prompt-level shell ban rather than a structural
+    Read/Write/WebSearch/WebFetch allowlist, because this harness's Agent tool exposes no
+    per-dispatch tool allowlist and the repo has no tool-restricted gatherer agent definition — the
+    F88 injection wall was therefore advisory this run (all 4 gatherers complied); (2) the judge,
+    thesis, implication and narrator brains READ their emitted prompt from disk instead of running
+    fully tool-less with it inlined (prompts run 106KB–220KB) — extraction WAS fully tool-less,
+    0 tool uses; (3) the narrator prompt was re-emitted as split raw-text files via
+    `work/daily-2026-08-07/split_prompt.py` because the CLI's 220KB single-line JSON cannot be
+    paged by a line-oriented reader and the first narrator dispatch failed outright — content
+    passed through byte-for-byte. **Worth a fix decision: a committed tool-restricted gatherer/brain
+    agent definition would make (1) and (2) structural again, and a `--emit-prompt --pretty` (or
+    split-file) option would remove (3).**
+    **DATA-QUALITY OBSERVATION for review:** L2 dedup keys on (entity, indicatorId) and `market` is
+    a catch-all bucket, so Akamai's $99M cloud revenue was recorded as an UPDATE to NVIDIA's $75.2B
+    data-centre revenue (market/D2), and Akamai's $2.8B contract value as an UPDATE to Google
+    Cloud's $514B backlog (market/rpoBacklog). Deterministic and in-tolerance under the current
+    rule, but it merges unlike companies — candidate F-item.
+    Also noted: D6 (GPU rental price) is still reported as a required indicator gap even though two
+    rental-price pages were gathered — both D6 rows deduped as unchanged-within-tolerance, so no D6
+    finding reached the merged corpus. HuggingNews discovery ran (30 stories, 5 details); every
+    extracted lead was an x.com post and the twitter channel has no backend, so leads were chased to
+    primary reporting instead. No fallback ingest.
   - **2026-08-06 daily cycle (scheduled headless): chips.merchant-gpu v3 shipped + pushed
     `0d6036c` (`main == origin/main`).** Scorecard `store/chips.merchant-gpu/2026-08-v3.json` —
     **DMI 3.573 / SMI -0.040** (Strong, steady; prior v2 3.653 / -0.160 — supply index improved
