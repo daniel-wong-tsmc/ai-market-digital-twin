@@ -57,8 +57,22 @@ _ANSWER_RE = re.compile(r"^bullet-(\d+)\.json$")
 # ad tags and build metadata are full of numbers that would otherwise be
 # usable as fake backing for a claimed point. Dropped body-and-all, before
 # tags are stripped.
-_SCRIPT_STYLE_RE = re.compile(r"<(script|style)\b.*?</\1\s*>", re.S | re.I)
+#
+# The closing tag is OPTIONAL (`|$`): an UNCLOSED `<script>` used to defeat
+# the exclusion entirely and leak its numbers back into the pool (review
+# finding). An unclosed script runs to the end of the document, so that is
+# exactly what is dropped. The alternation is ordered close-tag-first and the
+# body is lazy, so a properly closed block still ends at its own `</script>`
+# and later page text survives untouched.
+_SCRIPT_STYLE_RE = re.compile(r"<(script|style)\b.*?(?:</\1\s*>|$)", re.S | re.I)
 _TAG_RE = re.compile(r"<[^>]*>", re.S)
+
+# `sourceUrl` is written by an LLM, not by the human-curated registry F110's
+# fetcher was fed from, and the default fetcher is a bare `urlopen`. Anything
+# that is not plain http(s) -- `file://`, `ftp://`, a bare `example.test/x`
+# with no scheme at all -- would let a candidate be "verified" against content
+# the research agent effectively chose. Checked BEFORE any fetch.
+_ALLOWED_SCHEMES = ("http", "https")
 
 
 def page_text(raw_html: str) -> str:
@@ -100,12 +114,31 @@ def verify_candidate(cand: CandidateSeries,
 
     A `fetch_html` that raises is not an error here -- that point is reported
     unreachable and the candidate is rejected. Nothing escapes this function.
+
+    A candidate with NO points is rejected outright, and `pair=True` requires
+    at least two (review finding, Critical): `CandidateSeries` only enforces
+    its 3-point floor when `pair` is False, so `{"pair": true, "points": []}`
+    validates -- and looping over nothing used to return "pass", making
+    all-or-nothing hold only vacuously and letting a record that survived ZERO
+    checks reach the trust store. Two is what spec section 3's "clearly-labelled
+    comparison pair" means; one number is not a comparison.
     """
     failures: list[str] = []
     cache: dict[str, object] = {}
 
+    if not cand.points:
+        return False, ["candidate has no points: nothing to verify"]
+    if cand.pair and len(cand.points) < 2:
+        return False, [f"pair candidate needs 2 points to compare, "
+                       f"got {len(cand.points)}"]
+
     for i, point in enumerate(cand.points, start=1):
         url = point.sourceUrl
+        scheme = url.split(":", 1)[0].lower() if ":" in url else ""
+        if scheme not in _ALLOWED_SCHEMES:
+            failures.append(f"point {i}: source must be an http/https URL, "
+                            f"got {url!r}")
+            continue
         if url not in cache:
             try:
                 cache[url] = numeric_tokens(page_text(fetch_html(url)))

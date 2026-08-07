@@ -121,6 +121,124 @@ def test_a_number_only_present_inside_a_script_tag_does_not_count():
     assert "point 1" in failures[0]
 
 
+def test_a_candidate_with_zero_points_is_rejected_not_vacuously_passed():
+    # Review finding (Critical): CandidateSeries only enforces the 3-point
+    # floor when pair is False, so `pair=True, points=[]` validates. Looping
+    # over nothing used to return "pass" -- all-or-nothing held only
+    # vacuously, and a record that survived ZERO checks reached the trust
+    # store. An empty candidate is a rejection.
+    cand = CandidateSeries(
+        seriesName="Nothing at all", unit="million units", form="bars",
+        sourceName="Example Outlet", points=[], pair=True,
+    )
+    ok, failures = verify_candidate(cand, _fetch_fixture)
+    assert ok is False
+    assert failures
+    assert "no points" in failures[0]
+
+
+def test_a_pair_with_only_one_point_is_rejected():
+    # Spec section 3's `pair` is a "clearly-labelled comparison" between TWO
+    # things; one number is not a comparison.
+    cand = CandidateSeries(
+        seriesName="Half a pair", unit="million units", form="bars",
+        sourceName="Example Outlet", pair=True,
+        points=[{"label": "Supply", "value": 7.2, "sourceUrl": _ALL_URL,
+                 "publishedAt": "2026-08-01"}],
+    )
+    ok, failures = verify_candidate(cand, _fetch_fixture)
+    assert ok is False
+    assert failures
+    assert "pair" in failures[0]
+
+
+def test_an_empty_candidate_never_reaches_the_quarantine_store(tmp_path):
+    store_root = _make_store(tmp_path)
+    work_dir = tmp_path / "work" / "daily-2026-08-06"
+    d = work_dir / "chart-research"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "bullet-1.json").write_text(json.dumps({
+        "seriesName": "Nothing at all", "unit": "million units", "form": "bars",
+        "sourceName": "Example Outlet", "points": [], "pair": True,
+    }), encoding="utf-8")
+
+    result = accept_research(CATEGORY, str(store_root), str(work_dir),
+                              fetch_html=_fetch_fixture)
+
+    assert result["accepted"] == []
+    assert len(result["rejected"]) == 1
+    assert not _research_dir(store_root).exists()
+
+
+def test_a_non_http_source_url_is_rejected_without_being_fetched():
+    # Review finding: sourceUrl comes from an LLM, not the curated registry,
+    # and the default fetcher is a bare urlopen -- a candidate citing
+    # file:///... or another local scheme must never be "verified" against
+    # content the agent effectively chose.
+    fetched: list[str] = []
+
+    def _recording_fetch(url: str) -> str:
+        fetched.append(url)
+        return "6.7 7.2 12,500"
+
+    cand = CandidateSeries(
+        seriesName="Local file", unit="million units", form="line",
+        sourceName="Example Outlet",
+        points=[{"label": "Q1", "value": 6.7,
+                 "sourceUrl": "file:///C:/Users/danie/secrets.html",
+                 "publishedAt": "2026-08-01"},
+                {"label": "Q2", "value": 7.2, "sourceUrl": _ALL_URL,
+                 "publishedAt": "2026-08-01"},
+                {"label": "Q3", "value": 12500.0, "sourceUrl": _ALL_URL,
+                 "publishedAt": "2026-08-01"}],
+    )
+    ok, failures = verify_candidate(cand, _recording_fetch)
+    assert ok is False
+    assert "point 1" in failures[0]
+    assert "http" in failures[0]
+    # never fetched: the scheme is rejected BEFORE any fetch is attempted
+    assert "file:///C:/Users/danie/secrets.html" not in fetched
+
+
+def test_a_scheme_relative_or_bare_source_url_is_rejected():
+    fetched: list[str] = []
+
+    def _recording_fetch(url: str) -> str:
+        fetched.append(url)
+        return _fetch_fixture(url)
+
+    cand = CandidateSeries(
+        seriesName="No scheme", unit="million units", form="line",
+        sourceName="Example Outlet",
+        points=[{"label": "Q1", "value": 6.7, "sourceUrl": "example.test/widgets",
+                 "publishedAt": "2026-08-01"},
+                {"label": "Q2", "value": 7.2, "sourceUrl": _ALL_URL,
+                 "publishedAt": "2026-08-01"},
+                {"label": "Q3", "value": 12500.0, "sourceUrl": _ALL_URL,
+                 "publishedAt": "2026-08-01"}],
+    )
+    ok, failures = verify_candidate(cand, _recording_fetch)
+    assert ok is False
+    assert "point 1" in failures[0]
+    assert "example.test/widgets" not in fetched
+
+
+def test_an_unclosed_script_tag_still_excludes_its_body():
+    # Review finding: the exclusion regex needed a closing tag, so an
+    # unclosed <script> leaked its numbers back into the pool.
+    from gpu_agent.chartdata.verify import page_text
+    text = page_text("<script>var x=41.5;<p>7.2</p>")
+    assert "41.5" not in text
+    assert "7.2" not in text  # everything after an unclosed <script> is script
+
+
+def test_a_closed_script_still_leaves_later_page_text_intact():
+    from gpu_agent.chartdata.verify import page_text
+    text = page_text("<script>var x=41.5;</script><p>7.2</p>")
+    assert "41.5" not in text
+    assert "7.2" in text
+
+
 def test_a_fetch_that_raises_is_an_unreachable_rejection_not_a_crash():
     ok, failures = verify_candidate(_candidate("candidate-good"), _boom)
     assert ok is False
