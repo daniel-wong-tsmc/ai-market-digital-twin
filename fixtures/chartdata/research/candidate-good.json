@@ -1,0 +1,28 @@
+{
+  "seriesName": "Widget shipments by quarter",
+  "unit": "million units",
+  "form": "columns",
+  "sourceName": "Example Outlet",
+  "points": [
+    {
+      "label": "Q1 2026",
+      "value": 6.7,
+      "sourceUrl": "https://example.test/widgets-all",
+      "publishedAt": "2026-08-01"
+    },
+    {
+      "label": "Q2 2026",
+      "value": 7.2,
+      "sourceUrl": "https://example.test/widgets-all",
+      "publishedAt": "2026-08-01"
+    },
+    {
+      "label": "Q3 2026 backlog",
+      "value": 12500.0,
+      "sourceUrl": "https://example.test/widgets-all",
+      "publishedAt": "2026-08-01"
+    }
+  ],
+  "pair": false,
+  "notes": "Single source; quarterly figures as published."
+}

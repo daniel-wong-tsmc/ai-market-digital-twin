@@ -298,15 +298,27 @@ def _dashboard_json(args) -> int:
 
 
 def _chart_research(args) -> int:
-    """Handler for `gpu-agent chart-research emit` (F113 Task 3): write one
-    research prompt per chartless dashboard bullet and print the written
-    paths as JSON, so the run-cycle skill can dispatch one tool-USING
-    research agent per prompt.
+    """Handler for `gpu-agent chart-research emit|accept` (F113 Tasks 3-4).
 
-    Never raises past this handler: like `dashboard-json`, a broken
-    researcher step must not block the daily cycle -- any failure prints
-    to stderr and exits 1, with no prompt files left half-written.
+    `emit` writes one research prompt per chartless dashboard bullet and
+    prints the written paths as JSON, so the run-cycle skill can dispatch
+    one tool-USING research agent per prompt. Never raises past this
+    handler: like `dashboard-json`, a broken researcher step must not block
+    the daily cycle -- any failure prints to stderr and exits 1, with no
+    prompt files left half-written.
+
+    `accept` verifies each returned candidate against its own cited source
+    pages and quarantines the survivors, printing the accept/reject/missing
+    summary as JSON. It ALWAYS exits 0: the verifier is a trust gate, and a
+    trust gate that can strand a cycle is worse than none. Rejections are
+    data in the printed summary (and thence the cycle journal), never an
+    exit code.
     """
+    if args.action == "accept":
+        from gpu_agent.chartdata.verify import accept_research
+        result = accept_research(args.category, args.store, args.work)
+        print(json.dumps(result, indent=2))
+        return 0
     from gpu_agent.chartdata.research import emit_research
     try:
         paths = emit_research(args.category, args.store, args.work)
@@ -1730,12 +1742,15 @@ def main(argv=None) -> int:
                      help="site root (writes <site>/<category>/data/dashboard.json)")
     crp = sub.add_parser("chart-research",
                          help="F113: research prompts for chartless dashboard bullets")
-    crp.add_argument("action", choices=["emit"])
+    crp.add_argument("action", choices=["emit", "accept"])
     crp.add_argument("--category", required=True, help="categoryId (locates store)")
     crp.add_argument("--store", default="store",
-                     help="store root (scorecards+story under <store>/<category>/)")
+                     help="store root (scorecards+story under <store>/<category>/; "
+                          "accept quarantines under <store>/<category>/research-series/)")
     crp.add_argument("--work", required=True,
-                     help="this cycle's work dir (writes <work>/chart-research/bullet-<n>-prompt.txt)")
+                     help="this cycle's work dir (emit writes "
+                          "<work>/chart-research/bullet-<n>-prompt.txt; accept reads "
+                          "<work>/chart-research/bullet-<n>.json)")
     wl = sub.add_parser("wiki-lint")
     wl.add_argument("--store", default="store", help="store root (holds wiki/ and findings/)")
     wl.add_argument("--as-of", required=True, type=_as_of)
