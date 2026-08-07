@@ -844,7 +844,9 @@ def _narrator(args) -> int:
         meta = NarratorMeta(model=args.model, promptHash=_narrator_prompt_hash(inputs),
                             retries=args.retries, fellBack=False,
                             wroteAt=datetime.now(timezone.utc).isoformat())
-        artifact = StoryArtifact(schemaVersion=1, categoryId=args.category,
+        # F114 Task 5b: gate_narrator's Check 8 requires every accepted answer to
+        # carry bullets, so every artifact written here is genuinely v2-shaped.
+        artifact = StoryArtifact(schemaVersion=2, categoryId=args.category,
                                  storyDate=args.date, narratorMeta=meta,
                                  **answer.model_dump())
         path = store.write(artifact)
@@ -865,6 +867,8 @@ def _narrator(args) -> int:
         meta = NarratorMeta(model=args.model, promptHash=_narrator_prompt_hash(inputs),
                             retries=args.retries, fellBack=True,
                             wroteAt=datetime.now(timezone.utc).isoformat())
+        # F114 Task 5b: a fellBack artifact carries no bullets, so it stays
+        # genuinely v1-shaped -- schemaVersion is NOT bumped on this path.
         artifact = StoryArtifact(schemaVersion=1, categoryId=args.category,
                                  storyDate=args.date, headline="", deck="", scenes=[],
                                  kpiPicks=[], calloutMonths=[], narratorMeta=meta)
