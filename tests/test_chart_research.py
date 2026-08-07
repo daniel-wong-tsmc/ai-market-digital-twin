@@ -129,9 +129,11 @@ def _write_story(store_root: Path, category_id: str, story: dict) -> None:
         json.dumps(story), encoding="utf-8")
 
 
-def _finding(fid, indicator_id=None, entity=None, url="https://example.test/e"):
-    f = {"id": fid, "evidence": [{"source": "Example outlet", "url": url,
-                                   "date": "2026-08-01", "tier": "primary"}]}
+def _finding(fid, indicator_id=None, entity=None, url="https://example.test/e",
+             statement="Example outlet reported a specific number here."):
+    f = {"id": fid, "statement": statement,
+         "evidence": [{"source": "Example outlet", "url": url,
+                       "date": "2026-08-01", "tier": "primary"}]}
     if indicator_id:
         f["indicatorId"] = indicator_id
     if entity:
@@ -184,6 +186,43 @@ def test_emit_writes_one_prompt_per_chartless_bullet(tmp_path):
         text = path.read_text(encoding="utf-8")
         assert f"topic {chr(ord('A') + i - 1)}" in text
         assert "NO-SERIES-FOUND" in text
+
+
+def test_emit_prompt_carries_the_finding_s_own_statement_not_just_attribution(tmp_path):
+    # Round-2 review fix: the earlier version built prompt context from the
+    # bullet's already-resolved `sources` refs, whose "title" is only an
+    # ATTRIBUTION string (an outlet name), never the concrete numeric claim.
+    # This asserts the real claim text -- something only the scorecard
+    # finding's own `statement` field carries -- actually reaches the
+    # prompt; a check that only looked for the URL or the outlet name would
+    # have passed under the old, wrong behaviour too.
+    store_root = tmp_path / "store"
+    category_id = "chips.test-category"
+    distinctive_statement = ("Intel Data Center and AI revenue was $5.1 billion in "
+                              "Q1 2026, up 22% year over year.")
+    findings = [
+        _finding("f1", url="https://example.test/f1", statement=distinctive_statement),
+        _finding("f2", url="https://example.test/f2"),
+        _finding("f3", url="https://example.test/f3"),
+    ]
+    _write_scorecard(store_root, category_id, findings)
+    story = {
+        "storyDate": "2026-08-06",
+        "scenes": [],
+        "bullets": [
+            {"text": "Bullet one about topic A.", "claimFindingIds": ["f1"]},
+            {"text": "Bullet two about topic B.", "claimFindingIds": ["f2"]},
+            {"text": "Bullet three about topic C.", "claimFindingIds": ["f3"]},
+        ],
+    }
+    _write_story(store_root, category_id, story)
+
+    work_dir = tmp_path / "work" / "daily-2026-08-06"
+    paths = emit_research(category_id, str(store_root), str(work_dir))
+
+    bullet_one_prompt = (work_dir / "chart-research" / "bullet-1-prompt.txt").read_text(encoding="utf-8")
+    assert distinctive_statement in bullet_one_prompt
+    assert "https://example.test/f1" in bullet_one_prompt
 
 
 def test_emit_skips_bullet_that_already_has_a_chart(tmp_path):
