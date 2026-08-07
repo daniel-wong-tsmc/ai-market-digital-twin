@@ -111,6 +111,53 @@ def test_prompt_states_rules_even_with_no_findings():
     assert "published" in prompt.lower()
 
 
+def test_prompt_states_the_same_site_rule_the_verifier_enforces():
+    """The verifier rejects a candidate whose points span more than one site,
+    because the chart is captioned as resting on one source. The researcher
+    has to be TOLD that: a gate enforcing a rule its own prompt never stated
+    just burns dispatches on candidates that get thrown away. This test is
+    what stops the instruction and the enforcement drifting apart again."""
+    from gpu_agent.chartdata.verify import verify_candidate
+
+    prompt = build_research_prompt({"text": "Any bullet."}, []).lower()
+    assert "same site" in prompt
+    assert "rejected" in prompt
+
+    # ...and the rule really is enforced, so the prompt is not promising
+    # something the gate does not do.
+    cand = CandidateSeries(
+        seriesName="Two publishers", unit="units", form="line",
+        sourceName="Example Outlet",
+        points=[_point(url="https://example.test/a"),
+                _point(url="https://other.test/b"),
+                _point(url="https://example.test/c")],
+    )
+    ok, failures = verify_candidate(cand, lambda url: "1.0")
+    assert ok is False
+    assert "ONE source" in failures[0]
+
+
+def test_prompt_states_the_publicly_reachable_source_rule():
+    """Same pairing for the other new gate: the verifier refuses local,
+    private and internal addresses, so the prompt says not to cite one."""
+    from gpu_agent.chartdata.verify import verify_candidate
+
+    prompt = build_research_prompt({"text": "Any bullet."}, []).lower()
+    assert "public web" in prompt
+    assert "local address" in prompt
+
+    cand = CandidateSeries(
+        seriesName="Local page", unit="units", form="line",
+        sourceName="Example Outlet",
+        points=[_point(url="http://localhost:8080/series"),
+                _point(url="http://localhost:8080/series"),
+                _point(url="http://localhost:8080/series")],
+    )
+    ok, failures = verify_candidate(cand, lambda url: "1.0")
+    assert ok is False
+    assert "point 1" in failures[0]
+
+
 # ---------------------------------------------------------------------------
 # emit_research -- fixture store/story trees
 # ---------------------------------------------------------------------------

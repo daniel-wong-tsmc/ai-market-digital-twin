@@ -32,7 +32,16 @@ Rules for the series you hand back (all of them, no exceptions):
 4. Never present an estimate, a forecast, a rumor, or your own guess as
    if it were a published fact. If a source hedges ("expected to",
    "could reach"), that is not a published number.
-5. If you cannot find a real published series that honestly supports or
+5. Every point must come from the SAME site. The chart is captioned as
+   resting on one source, so a series stitched together from several
+   sites would make that caption untrue and will be rejected whole. If
+   the numbers you want live on two different sites, follow one of them
+   and drop the other.
+6. The source must be a page anyone can open on the public web. Never a
+   local address, an internal or company-private host, or anything only
+   reachable from inside a network -- the reader is handed this URL as a
+   link and has to be able to read it.
+7. If you cannot find a real published series that honestly supports or
    contextualizes this story, say so. Give up honestly: reply with
    exactly the single line {_NO_SERIES_TOKEN} and nothing else. That is
    a correct, complete answer -- a chart that overstates what we know is
@@ -65,6 +74,13 @@ def build_research_prompt(bullet: dict, findings: list[dict]) -> str:
     numbers only, a URL per point, a real density floor or a labelled
     comparison pair, no estimates presented as fact, and an honest give-up
     token when nothing qualifies).
+
+    Two of the rules exist because the verifier enforces them: every point
+    must come from one site, and that site must be publicly reachable. A
+    gate that rejects something its own prompt never asked for just burns
+    dispatches producing candidates that are thrown away, so the
+    instruction and the enforcement are stated together and tested
+    together (`tests/test_chart_research.py`).
     """
     bullet_text = (bullet.get("text") or "").strip()
     findings_block = _findings_block(findings)
