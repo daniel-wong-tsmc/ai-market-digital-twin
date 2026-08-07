@@ -354,7 +354,7 @@ describe('rule 1 — when every bullet is chartless', () => {
   });
 });
 
-describe('rule 3 — the same sentence never appears twice on one page', () => {
+describe('rule 3 — in the all-chartless layouts, no sentence appears twice', () => {
   it('a REPEATED cause falls back to that bullet own payload sentence', () => {
     // Two bullets share `estimate-only`; a third differs, so this is NOT the
     // all-one-cause grouped case. The second of the pair must not echo the
@@ -377,23 +377,62 @@ describe('rule 3 — the same sentence never appears twice on one page', () => {
     expect(new Set(said).size).toBe(3);
   });
 
-  it('holds across the mixed state too, panels included', () => {
+});
+
+describe('the mixed state DOES repeat a shared reason — permitted by decision, not oversight', () => {
+  /**
+   * READ THIS BEFORE "FIXING" THE TEST BELOW.
+   *
+   * The realistic case: the exporter builds every reason from a fixed list of
+   * canned sentences (gpu_agent/dashboard/bullets.py::_fallback_reason), so two
+   * chartless bullets that share a cause normally carry the SAME payload
+   * sentence too, word for word. In the mixed state that sentence really does
+   * appear twice on the page — once as the first panel's detail line, once as
+   * the second panel's lead.
+   *
+   * That is ALLOWED, by an interactive USER DECISION on 2026-08-07 (not an
+   * AFK-default, not an oversight): each dashed panel sits beside a real chart
+   * and has to explain itself where it stands, and a repeat separated by real
+   * charted content reads nothing like three identical boxes stacked in a row.
+   * The all-chartless layouts are the ones that must never repeat, and they
+   * don't (see the describe above, and the grouped single line).
+   *
+   * An earlier version of this test used two hand-written, deliberately
+   * DIFFERENT payload sentences, which quietly stepped around the real case and
+   * implied the mixed state avoids repetition. It does not. This test now uses
+   * the same sentence for both and asserts what actually happens.
+   */
+  const SAME = 'There isn’t yet enough of a track record to show a trend without being misleading.';
+
+  it('prints the shared payload sentence twice, once per panel, when two bullets share a cause', () => {
     draw(
       <Bullets
         bullets={[
-          chartless('First sparse bullet.', 'Only two readings for this one.', 'too-sparse'),
+          chartless('First sparse bullet.', SAME, 'too-sparse'),
           bulletWith(COLUMNS_CHART, null),
-          chartless('Second sparse bullet.', 'Only one reading for that one.', 'too-sparse'),
+          chartless('Second sparse bullet.', SAME, 'too-sparse'),
         ]}
       />,
     );
-    const leads = [...document.querySelectorAll('.nochart-lead')].map((n) => n.textContent!);
-    expect(leads).toEqual([CAUSE_LEAD['too-sparse'], 'Only one reading for that one.']);
-    expect(new Set(leads).size).toBe(2);
-    // The repeated bullet already said its payload sentence as the lead; it
-    // must not then repeat it again as the detail line underneath.
     const panels = document.querySelectorAll('.nochart-panel');
-    expect(panels[1].querySelectorAll('.why-none')).toHaveLength(0);
+    expect(panels).toHaveLength(2);
+
+    // First panel: the cause's lead line, with the payload sentence as detail.
+    expect(panels[0].querySelector('.nochart-lead')!.textContent).toBe(CAUSE_LEAD['too-sparse']);
+    expect(panels[0].querySelector('.why-none')!.textContent).toBe(SAME);
+
+    // Second panel: the lead line is NOT echoed -- rule 3's de-duplication
+    // still does its job, so the panel leads with the payload sentence and
+    // does not then print that same sentence again underneath itself.
+    expect(panels[1].querySelector('.nochart-lead')!.textContent).toBe(SAME);
+    expect(panels[1].querySelector('.why-none')).toBeNull();
+    expect([...panels].filter((p) => p.textContent!.includes(CAUSE_LEAD['too-sparse']))).toHaveLength(1);
+
+    // ...and the ACCEPTED consequence: that shared sentence is on the page
+    // twice. Asserted deliberately, so nobody can read this suite as a promise
+    // that the mixed state never repeats.
+    const shown = [...document.querySelectorAll('.nochart-lead, .why-none')].map((n) => n.textContent!);
+    expect(shown.filter((s) => s === SAME)).toHaveLength(2);
   });
 });
 
@@ -450,6 +489,30 @@ describe('rule 4 — the source badge sits at the end of the sentence', () => {
     const rule = css.match(/\.nowrap-end\s*\{[^}]*\}/);
     expect(rule).not.toBeNull();
     expect(rule![0]).toMatch(/white-space:\s*nowrap/);
+  });
+
+  it('switches nowrap back OFF inside the popover, so source titles still wrap', () => {
+    // The popover panel is a SIBLING of the badge's wrapper, so it lives inside
+    // the nowrap span and inherits from it. Without this reset, opening a
+    // source badge would run the titles off the side of a 340px box. jsdom
+    // does not do layout, so the rule is proven by reading the stylesheet --
+    // and the selector is proven to hit something real by the DOM check below.
+    const css = readFileSync(resolve(process.cwd(), 'src', 'app.css'), 'utf8');
+    const rule = css.match(/\.nowrap-end\s*>\s*\[popover\]\s*\{[^}]*\}/);
+    expect(rule).not.toBeNull();
+    expect(rule![0]).toMatch(/white-space:\s*normal/);
+  });
+
+  it('the popover panel really is a direct child of the nowrap span, as that reset assumes', () => {
+    draw(<Bullets bullets={[chartless('A bullet.', 'Nobody publishes this yet.', 'no-published-number')]} />);
+    const span = document.querySelector('span.nowrap-end')!;
+    const panel = span.querySelector(':scope > [popover]');
+    expect(panel).not.toBeNull();
+    // The badge lives in the OTHER child -- the anchor wrapper -- so the
+    // display:inline rule and the white-space:normal rule hit different
+    // elements and cannot collide.
+    expect(panel!.querySelector('button.srcmark')).toBeNull();
+    expect(span.querySelector('div:has(.srcmark-wrap)')).not.toBe(panel);
   });
 
   it('copes with a one-word bullet without losing the badge', () => {

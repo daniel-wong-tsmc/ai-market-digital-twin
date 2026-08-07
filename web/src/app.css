@@ -277,6 +277,12 @@ svg:has(.hov:hover) .ann, svg:has(.hov:hover) .ann-rule { opacity: 0; transition
    it would show while closed). */
 .nowrap-end { white-space: nowrap; }
 .nowrap-end > div:has(.srcmark-wrap) { display: inline; }
+/* The popover PANEL is a sibling of that trigger wrapper, so it sits inside
+   the nowrap span too and would inherit it -- which would run the source
+   titles off the side of a 340px box the moment a reader opened one. The
+   nowrap is only ever meant to hold the marker against the last word, so the
+   panel gets it switched straight back off. */
+.nowrap-end > [popover] { white-space: normal; }
 
 /* F113 §6.1: the quiet no-chart line. One per bullet when the reasons differ,
    or one for the whole zone when every bullet is chartless for the same

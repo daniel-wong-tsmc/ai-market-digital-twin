@@ -31,8 +31,15 @@
  *     chart column and chartless ones keep the dashed panel, because next to a
  *     real chart the empty slot is meaningful (§6.1).
  *
- * Across all of them, rule §6.2 holds: the same sentence never appears twice
- * on one page. See `pickLines`.
+ * Rule §6.2 — vary the copy so the page does not repeat itself — is enforced by
+ * `pickLines` in all three. In layouts 1 and 2 no sentence appears twice at all.
+ * In layout 3 one CAN: two panels sharing a cause normally share the payload
+ * sentence too, so it shows as the first panel's detail line and the second
+ * panel's lead. That repeat is ALLOWED by user decision (interactive,
+ * 2026-08-07) — each panel sits beside a real chart and has to explain itself
+ * where it stands, and a repeat separated by charted content reads nothing like
+ * three identical boxes in a row. See the mixed-state test in
+ * `web/src/__tests__/bullets.test.tsx` before "fixing" it.
  */
 import {MiniChart} from './MiniChart';
 import {CAUSE_LEAD, NoChart} from './NoChart';
