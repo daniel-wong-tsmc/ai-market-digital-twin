@@ -29,6 +29,8 @@
  *        unit are real, the monthly price points are constructed since that
  *        series has no fetcher yet (`fetcher: null`) and so no real rows.
  */
+import {readFileSync} from 'node:fs';
+import {resolve} from 'node:path';
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {Theme} from '@astryxdesign/core/theme';
@@ -36,9 +38,9 @@ import {neutralTheme} from '@astryxdesign/theme-neutral/built';
 import {describe, expect, it} from 'vitest';
 import {Bullets} from '../components/Bullets';
 import {MiniChart} from '../components/MiniChart';
-import {NoChart} from '../components/NoChart';
+import {CAUSE_LEAD, NoChart} from '../components/NoChart';
 import {parseDashboard} from '../load';
-import type {Bullet, Chart, NoChartReason} from '../load';
+import type {Bullet, Cause, Chart, NoChartReason} from '../load';
 import {readGolden} from './fixtures';
 
 function draw(ui: React.ReactElement) {
@@ -137,6 +139,12 @@ function bulletWith(chart: Chart | null, reason: NoChartReason | null): Bullet {
   };
 }
 
+/** A chartless bullet with its own text, payload reason and cause -- the shape
+ * the layout and copy rules are actually about. */
+function chartless(text: string, reason: string, cause: Cause): Bullet {
+  return {...bulletWith(null, {reason, cause}), text};
+}
+
 describe('the what-changed zone on real committed data', () => {
   it('renders exactly three bullets, dated and worded from the payload', () => {
     draw(<Bullets bullets={golden()} />);
@@ -147,28 +155,48 @@ describe('the what-changed zone on real committed data', () => {
     expect(screen.getByText(/The way around the packaging queue/)).toBeInTheDocument();
   });
 
-  it('THE HONESTY POINT: all three real bullets render the dashed no-chart panel, never an empty chart frame', () => {
+  it('THE HONESTY POINT: no bullet fakes a chart -- and with every bullet chartless, no dashed box appears at all', () => {
     draw(<Bullets bullets={golden()} />);
-    const panels = document.querySelectorAll('.mini-plot.empty');
-    expect(panels).toHaveLength(3);
     // No bullet renders a chart svg today -- the honest, expected case.
     expect(document.querySelectorAll('.mini-plot svg')).toHaveLength(0);
     for (const bullet of golden()) {
       expect(bullet.noChartReason).not.toBeNull();
     }
-    // "No chart." opens every one of the three real panels.
-    expect(screen.getAllByText('No chart.')).toHaveLength(3);
+    // Rule 1: EVERY bullet chartless -> the dashed panel is gone from the page.
+    // Three identical dashed boxes in a row is the exact "this product is
+    // broken" look F113 exists to remove.
+    expect(document.querySelectorAll('.nochart-panel')).toHaveLength(0);
+    expect(document.querySelectorAll('.mini-plot.empty')).toHaveLength(0);
+    expect(document.querySelectorAll('figure.mini')).toHaveLength(0);
   });
 
-  it('the no-chart reason text is real assistive-technology-readable text, not styling', () => {
+  it('says the shared reason ONCE, quietly, for the whole group -- never the same sentence three times', () => {
     draw(<Bullets bullets={golden()} />);
-    const panels = document.querySelectorAll('.mini-plot.empty');
-    panels.forEach((panel, i) => {
-      const reason = golden()[i].noChartReason!;
-      expect(panel.textContent).toContain('No chart.');
-      expect(panel.textContent).toContain(reason.reason);
-      expect(panel.getAttribute('data-cause')).toBe(reason.cause);
-    });
+    // Today's committed payload: all three bullets chartless, all three the
+    // SAME cause, all three carrying the byte-identical reason sentence. The
+    // user's decision (interactive, 2026-08-07): print that cause's approved
+    // sentence once, under the group, with no per-bullet line.
+    const causes = new Set(golden().map((b) => b.noChartReason!.cause));
+    expect(causes.size).toBe(1);
+    const quiet = document.querySelectorAll('.nochart-quiet');
+    expect(quiet).toHaveLength(1);
+    expect(quiet[0].textContent).toBe(CAUSE_LEAD['no-published-number']);
+    expect(quiet[0].textContent).toBe('No published number behind this yet.');
+    // The grouped line belongs to the zone, not to any one bullet's row.
+    expect(document.querySelector('.change .nochart-quiet')).toBeNull();
+  });
+
+  it('never prints the old bare "No chart." label anywhere', () => {
+    draw(<Bullets bullets={golden()} />);
+    expect(document.body.textContent).not.toContain('No chart.');
+  });
+
+  it('the quiet reason line is real assistive-technology-readable text carrying its cause code', () => {
+    draw(<Bullets bullets={golden()} />);
+    const quiet = document.querySelector('.nochart-quiet')!;
+    expect(quiet).not.toBeNull();
+    expect(quiet.textContent!.trim().length).toBeGreaterThan(10);
+    expect(quiet.getAttribute('data-cause')).toBe('no-published-number');
   });
 
   it('gives each bullet a source mark for its own sources', () => {
@@ -180,30 +208,256 @@ describe('the what-changed zone on real committed data', () => {
   });
 });
 
-describe('NoChart — the honest-omission panel', () => {
-  it('renders the dashed panel with the reason, and NO svg', () => {
+describe('NoChart — the honest-omission panel (mixed state only)', () => {
+  it('renders the dashed panel led by the cause sentence, with the detail under it, and NO svg', () => {
     draw(
       <NoChart
-        reason="The only numbers we track for this are our own estimates, not published facts, so we don't chart them."
+        lead={CAUSE_LEAD['estimate-only']}
+        detail="The number we track for this is our own estimate, not a published figure, so we don't draw it."
         cause="estimate-only"
       />,
     );
-    const panel = document.querySelector('.mini-plot.empty')!;
+    const panel = document.querySelector('.nochart-panel')!;
     expect(panel).not.toBeNull();
+    // Keeps the mock's own class names -- the mock is the token authority.
+    expect(panel).toHaveClass('mini-plot');
+    expect(panel).toHaveClass('empty');
     expect(panel.querySelector('svg')).toBeNull();
-    expect(panel.textContent).toContain('No chart.');
-    expect(panel.textContent).toContain('our own estimates');
+    expect(panel.textContent).not.toContain('No chart.');
+    expect(panel.querySelector('.nochart-lead')!.textContent).toBe(
+      "The only number we hold is our own estimate, so we don't draw it.",
+    );
+    expect(panel.querySelector('.why-none')!.textContent).toContain('our own estimate');
     expect(panel.getAttribute('data-cause')).toBe('estimate-only');
   });
 
-  it('never renders an svg regardless of how the reason text is worded', () => {
+  it('renders only the lead line when there is no extra detail to add', () => {
+    draw(<NoChart lead={CAUSE_LEAD['too-sparse']} detail={null} cause="too-sparse" />);
+    const panel = document.querySelector('.nochart-panel')!;
+    expect(panel.querySelector('.nochart-lead')!.textContent).toBe(
+      'Too few published readings yet to draw honestly.',
+    );
+    expect(panel.querySelector('.why-none')).toBeNull();
+  });
+
+  it('never renders an svg regardless of how the text is worded', () => {
     draw(
       <NoChart
-        reason="We don't yet have a plain-English way to describe what this number measures, so we don't draw it."
-        cause="too-sparse"
+        lead={CAUSE_LEAD['no-plain-name']}
+        detail="We have real, tracked numbers behind this, but no plain-English name for what they measure yet."
+        cause="no-plain-name"
       />,
     );
     expect(document.querySelectorAll('svg')).toHaveLength(0);
+  });
+});
+
+describe('the four cause codes each get their own approved sentence', () => {
+  const EXPECTED: Record<Cause, string> = {
+    'no-published-number': 'No published number behind this yet.',
+    'estimate-only': "The only number we hold is our own estimate, so we don't draw it.",
+    'too-sparse': 'Too few published readings yet to draw honestly.',
+    'no-plain-name':
+      'We have the numbers, but no plain-English name for what they measure yet.',
+  };
+
+  it('maps every cause to its exact approved wording, with no cause left out', () => {
+    expect(CAUSE_LEAD).toEqual(EXPECTED);
+  });
+
+  it('renders the fourth cause (no-plain-name) end to end, in its own words', () => {
+    // The fourth code was added by a user decision after the spec was written,
+    // because "too-sparse" was a false label for two branches that have plenty
+    // of data and simply no plain-English name for it.
+    draw(
+      <Bullets
+        bullets={[
+          bulletWith(COLUMNS_CHART, null),
+          bulletWith(
+            null,
+            noChartReason(
+              'We have real, tracked numbers behind this, but no plain-English name for what they measure yet, so we don’t chart them.',
+              'no-plain-name',
+            ),
+          ),
+        ]}
+      />,
+    );
+    const panel = document.querySelector('.nochart-panel')!;
+    expect(panel.getAttribute('data-cause')).toBe('no-plain-name');
+    expect(panel.querySelector('.nochart-lead')!.textContent).toBe(
+      'We have the numbers, but no plain-English name for what they measure yet.',
+    );
+  });
+});
+
+describe('rule 1 — when every bullet is chartless', () => {
+  it('with DIFFERING causes, each bullet keeps its own quiet line, and all three differ', () => {
+    draw(
+      <Bullets
+        bullets={[
+          chartless('Bullet about a rumour.', 'Nobody publishes this yet.', 'no-published-number'),
+          chartless('Bullet about our own estimate.', 'Our own estimate only.', 'estimate-only'),
+          chartless('Bullet about two readings.', 'Only two readings so far.', 'too-sparse'),
+        ]}
+      />,
+    );
+    expect(document.querySelectorAll('.nochart-panel')).toHaveLength(0);
+    const quiet = document.querySelectorAll('.nochart-quiet');
+    expect(quiet).toHaveLength(3);
+    const said = [...quiet].map((n) => n.textContent!);
+    expect(new Set(said).size).toBe(3);
+    expect(said).toEqual([
+      CAUSE_LEAD['no-published-number'],
+      CAUSE_LEAD['estimate-only'],
+      CAUSE_LEAD['too-sparse'],
+    ]);
+    // Each line sits inside its own bullet row, under that bullet's text.
+    expect(document.querySelectorAll('.change .nochart-quiet')).toHaveLength(3);
+    expect(document.body.textContent).not.toContain('No chart.');
+  });
+
+  it('gives every chartless row the full-width layout, with no chart column', () => {
+    draw(
+      <Bullets
+        bullets={[
+          chartless('One.', 'Reason one.', 'no-published-number'),
+          chartless('Two.', 'Reason two.', 'estimate-only'),
+        ]}
+      />,
+    );
+    const rows = document.querySelectorAll('.change');
+    expect(rows).toHaveLength(2);
+    rows.forEach((row) => {
+      expect(row).toHaveClass('full');
+      expect(row.querySelector('figure.mini')).toBeNull();
+    });
+  });
+
+  it('with ALL causes the same, says it once for the group and gives no row its own line', () => {
+    draw(
+      <Bullets
+        bullets={[
+          chartless('One.', 'Reason one.', 'too-sparse'),
+          chartless('Two.', 'Reason two.', 'too-sparse'),
+          chartless('Three.', 'Reason three.', 'too-sparse'),
+        ]}
+      />,
+    );
+    const quiet = document.querySelectorAll('.nochart-quiet');
+    expect(quiet).toHaveLength(1);
+    expect(quiet[0].textContent).toBe(CAUSE_LEAD['too-sparse']);
+    expect(document.querySelectorAll('.change .nochart-quiet')).toHaveLength(0);
+    // Rows still go full width -- the group line replaces the panel, it does
+    // not bring the chart column back.
+    document.querySelectorAll('.change').forEach((row) => expect(row).toHaveClass('full'));
+  });
+});
+
+describe('rule 3 — the same sentence never appears twice on one page', () => {
+  it('a REPEATED cause falls back to that bullet own payload sentence', () => {
+    // Two bullets share `estimate-only`; a third differs, so this is NOT the
+    // all-one-cause grouped case. The second of the pair must not echo the
+    // lead line verbatim.
+    draw(
+      <Bullets
+        bullets={[
+          chartless('First estimate bullet.', 'The memory figure is our own estimate.', 'estimate-only'),
+          chartless('Second estimate bullet.', 'The packaging figure is our own estimate too.', 'estimate-only'),
+          chartless('A sparse bullet.', 'Only two readings so far.', 'too-sparse'),
+        ]}
+      />,
+    );
+    const said = [...document.querySelectorAll('.nochart-quiet')].map((n) => n.textContent!);
+    expect(said).toEqual([
+      CAUSE_LEAD['estimate-only'],
+      'The packaging figure is our own estimate too.',
+      CAUSE_LEAD['too-sparse'],
+    ]);
+    expect(new Set(said).size).toBe(3);
+  });
+
+  it('holds across the mixed state too, panels included', () => {
+    draw(
+      <Bullets
+        bullets={[
+          chartless('First sparse bullet.', 'Only two readings for this one.', 'too-sparse'),
+          bulletWith(COLUMNS_CHART, null),
+          chartless('Second sparse bullet.', 'Only one reading for that one.', 'too-sparse'),
+        ]}
+      />,
+    );
+    const leads = [...document.querySelectorAll('.nochart-lead')].map((n) => n.textContent!);
+    expect(leads).toEqual([CAUSE_LEAD['too-sparse'], 'Only one reading for that one.']);
+    expect(new Set(leads).size).toBe(2);
+    // The repeated bullet already said its payload sentence as the lead; it
+    // must not then repeat it again as the detail line underneath.
+    const panels = document.querySelectorAll('.nochart-panel');
+    expect(panels[1].querySelectorAll('.why-none')).toHaveLength(0);
+  });
+});
+
+describe('rule 2 — the mixed state keeps the dashed panel', () => {
+  it('puts the dashed panel on the chartless bullet ONLY, beside real charts', () => {
+    draw(
+      <Bullets
+        bullets={[
+          bulletWith(COLUMNS_CHART, null),
+          chartless('The chartless one.', 'Nobody publishes this yet.', 'no-published-number'),
+          bulletWith(BARS_CHART, null),
+        ]}
+      />,
+    );
+    const rows = document.querySelectorAll('.change');
+    expect(document.querySelectorAll('.nochart-panel')).toHaveLength(1);
+    expect(rows[0].querySelector('.nochart-panel')).toBeNull();
+    expect(rows[1].querySelector('.nochart-panel')).not.toBeNull();
+    expect(rows[2].querySelector('.nochart-panel')).toBeNull();
+    // No quiet grouped line in the mixed state -- the panel carries it.
+    expect(document.querySelectorAll('.nochart-quiet')).toHaveLength(0);
+    // And the charted rows keep their chart column, so no row goes full width.
+    rows.forEach((row) => expect(row).not.toHaveClass('full'));
+    expect(document.body.textContent).not.toContain('No chart.');
+  });
+});
+
+describe('rule 4 — the source badge sits at the end of the sentence', () => {
+  it('renders the badge inside the sentence-end span, glued to the last word', () => {
+    const bullet = chartless(
+      'AMD delivered, and it does not add chips this year.',
+      'Nobody publishes this yet.',
+      'no-published-number',
+    );
+    draw(<Bullets bullets={[bullet]} />);
+    const p = document.querySelector('.change p')!;
+    // No line break of any kind can push the badge onto its own line.
+    expect(p.querySelector('br')).toBeNull();
+    const end = p.lastElementChild as HTMLElement;
+    expect(end).not.toBeNull();
+    expect(end.tagName).toBe('SPAN');
+    expect(end).toHaveClass('nowrap-end');
+    // The badge is a SIBLING of the last word inside that one span.
+    expect(end.textContent!.startsWith('year.')).toBe(true);
+    expect(end.querySelector('button.srcmark')).not.toBeNull();
+    // ...and nothing else in the paragraph carries the badge.
+    expect(p.querySelectorAll('button.srcmark')).toHaveLength(1);
+    // The whole sentence still reads as one continuous string.
+    expect(p.textContent!.startsWith('AMD delivered, and it does not add chips this year.')).toBe(true);
+  });
+
+  it('the nowrap class is a real style rule, not just a name in the markup', () => {
+    const css = readFileSync(resolve(process.cwd(), 'src', 'app.css'), 'utf8');
+    const rule = css.match(/\.nowrap-end\s*\{[^}]*\}/);
+    expect(rule).not.toBeNull();
+    expect(rule![0]).toMatch(/white-space:\s*nowrap/);
+  });
+
+  it('copes with a one-word bullet without losing the badge', () => {
+    draw(<Bullets bullets={[chartless('Delayed.', 'Nobody publishes this yet.', 'no-published-number')]} />);
+    const end = document.querySelector('.change p')!.lastElementChild as HTMLElement;
+    expect(end).toHaveClass('nowrap-end');
+    expect(end.textContent!.startsWith('Delayed.')).toBe(true);
+    expect(end.querySelector('button.srcmark')).not.toBeNull();
   });
 });
 
