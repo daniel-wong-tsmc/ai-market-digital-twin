@@ -328,24 +328,39 @@ def _match_registered_series(tags: set[str], series_reg: dict[str, ChartSeries],
     return None
 
 
-#: The three cause codes the dashboard schema (v1.1) enumerates for a
-#: chartless bullet -- fixed by the F113 Task 1 brief, verbatim. Every
-#: `_fallback_reason` branch below maps onto exactly one of these three:
+#: The four cause codes the dashboard schema (v1.1) enumerates for a
+#: chartless bullet. Every `_fallback_reason` branch below maps onto exactly
+#: one of these four:
 #:   - "no-published-number": nothing is tracked for this at all (no cited
 #:     indicator, or a cited indicator with no rows on disk yet).
 #:   - "estimate-only": we do track a number, but it's our own estimate,
 #:     never a published figure.
-#:   - "too-sparse": we hold real, published, non-estimate numbers, but they
-#:     can't honestly be drawn yet -- either there isn't enough of a track
-#:     record (too few points / too narrow a span), or the honesty gates in
-#:     `_match_fallback_history` (a nameable plain-English unit, a
-#:     narrator-supplied title) haven't been cleared. All three of those are
-#:     the same reader-facing situation: "not enough to draw on, yet" -- so
-#:     they share this one cause per the design doc's three named buckets
-#:     (spec §6.2: "no published number / our-own-estimate / nothing dense
-#:     enough").
+#:   - "no-plain-name": we hold real, published, non-estimate numbers, but
+#:     can't honestly draw them yet because we can't yet SAY what they are
+#:     in plain English -- either the raw unit itself isn't a nameable
+#:     plain-English quantity, or it is, but no narrator-supplied title
+#:     exists for it yet. This is a genuinely different, and differently
+#:     true, situation from density: the numbers are there; only the name
+#:     is missing.
+#:   - "too-sparse": we hold real, published, non-estimate, plainly-named
+#:     numbers, but there simply isn't enough of a track record yet (too
+#:     few confirmed points, or too narrow a span of time) to draw a trend
+#:     without being misleading.
+#:
+#: USER DECISION (interactive, 2026-08-07, follow-up to Task 1 review): the
+#: original three-cause mapping folded `saw_non_measurable_unit` and
+#: `saw_missing_title` into `too-sparse` alongside the genuine density
+#: branch. That was wrong, not just imprecise -- Task 2 renders the cause
+#: as the reader-facing LEAD line, and neither of those two branches is
+#: about sparse data (the `saw_missing_title` branch's own reason sentence
+#: says "We have real, tracked numbers behind this"). Squeezing six
+#: branches into three codes reached the reader with a false lead, so a
+#: fourth code was added instead of reusing `too-sparse` for a case it
+#: doesn't describe. `too-sparse` now names ONLY the genuine density
+#: branch; every label is true of the case it's attached to.
 _CAUSE_NO_PUBLISHED_NUMBER = "no-published-number"
 _CAUSE_ESTIMATE_ONLY = "estimate-only"
+_CAUSE_NO_PLAIN_NAME = "no-plain-name"
 _CAUSE_TOO_SPARSE = "too-sparse"
 
 
@@ -357,7 +372,7 @@ def _fallback_reason(indicator_ids: list[str], store_dir: str, *,
     and never a reason that's simply untrue of the case it's describing.
 
     Returns the schema's structured `noChartReason` shape directly:
-    ``{"reason": <plain-English sentence>, "cause": <one of the three
+    ``{"reason": <plain-English sentence>, "cause": <one of the four
     cause codes>}`` (see `_CAUSE_*` above for the mapping).
 
     Round-2 review (IMPORTANT, introduced by the round-1 fix): the two
@@ -404,7 +419,7 @@ def _fallback_reason(indicator_ids: list[str], store_dir: str, *,
         return {
             "reason": ("We don't yet have a plain-English way to "
                        "describe what this number measures, so we don't draw it."),
-            "cause": _CAUSE_TOO_SPARSE,
+            "cause": _CAUSE_NO_PLAIN_NAME,
         }
 
     if saw_missing_title:
@@ -412,7 +427,7 @@ def _fallback_reason(indicator_ids: list[str], store_dir: str, *,
             "reason": ("We have real, tracked numbers behind this, but "
                        "no plain-English name for what they measure yet, so we "
                        "don't chart them."),
-            "cause": _CAUSE_TOO_SPARSE,
+            "cause": _CAUSE_NO_PLAIN_NAME,
         }
 
     return {

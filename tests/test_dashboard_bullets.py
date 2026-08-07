@@ -113,7 +113,7 @@ def test_real_story_yields_exactly_three_bullets_with_valid_xor():
         if b["noChartReason"] is not None:
             assert set(b["noChartReason"].keys()) == {"reason", "cause"}
             assert b["noChartReason"]["cause"] in (
-                "no-published-number", "estimate-only", "too-sparse")
+                "no-published-number", "estimate-only", "no-plain-name", "too-sparse")
 
 
 def test_real_story_bullet_text_uses_scene_title_and_first_sentence():
@@ -154,7 +154,7 @@ def test_real_story_scene_two_has_no_chart_after_the_measurable_quantity_gate():
     assert scene_two["noChartReason"] is not None
     assert "describe what this number measures" in scene_two["noChartReason"]["reason"]
     assert "no plain-English name" not in scene_two["noChartReason"]["reason"]
-    assert scene_two["noChartReason"]["cause"] == "too-sparse"
+    assert scene_two["noChartReason"]["cause"] == "no-plain-name"
 
 
 # ---------------------------------------------------------------------------
@@ -350,7 +350,7 @@ def test_fallback_non_measurable_unit_never_charted_even_when_dense(tmp_path):
     assert b0["noChartReason"] is not None
     assert "describe what this number measures" in b0["noChartReason"]["reason"]
     assert "no plain-English name" not in b0["noChartReason"]["reason"]
-    assert b0["noChartReason"]["cause"] == "too-sparse"
+    assert b0["noChartReason"]["cause"] == "no-plain-name"
 
 
 def test_fallback_without_narrator_supplied_plain_title_never_charted(tmp_path):
@@ -380,7 +380,7 @@ def test_fallback_without_narrator_supplied_plain_title_never_charted(tmp_path):
     assert b0["noChartReason"] is not None
     assert "no plain-English name for what they measure yet" in b0["noChartReason"]["reason"]
     assert "describe what this number measures" not in b0["noChartReason"]["reason"]
-    assert b0["noChartReason"]["cause"] == "too-sparse"
+    assert b0["noChartReason"]["cause"] == "no-plain-name"
 
 
 def test_fallback_chart_never_titled_a_bare_indicator_code(tmp_path):
@@ -695,9 +695,69 @@ def test_no_chart_reason_never_prints_a_double_hyphen():
 
 def test_every_no_chart_reason_is_a_plain_english_sentence():
     for reason in _all_no_chart_reasons():
-        assert reason["cause"] in ("no-published-number", "estimate-only", "too-sparse")
+        assert reason["cause"] in (
+            "no-published-number", "estimate-only", "no-plain-name", "too-sparse")
         assert reason["reason"].endswith(".")
         assert "DMI" not in reason["reason"] and "SMI" not in reason["reason"]
+
+
+# ---------------------------------------------------------------------------
+# USER DECISION (interactive, 2026-08-07, follow-up to Task 1 review): a
+# fourth cause code, "no-plain-name", was added because the original
+# three-code mapping put the two "we have the number but can't yet name it"
+# branches under "too-sparse" -- false of both, since neither is a density
+# problem (the missing-title branch's own reason sentence says "We have
+# real, tracked numbers behind this"). Task 2 renders the cause as the
+# reader-facing LEAD line, so a mislabelled cause would print a false
+# headline. These two tests pin the fix and guard the regression it exists
+# to prevent.
+# ---------------------------------------------------------------------------
+
+def test_each_of_the_six_fallback_branches_yields_its_own_true_cause():
+    # Every branch `_fallback_reason` can take, and the ONE cause code that
+    # is true of it -- across all four codes, not just "a valid code".
+    reasons = _all_no_chart_reasons()
+    expected_causes = [
+        "no-published-number",  # no indicator cited at all
+        "no-published-number",  # indicator cited, but no rows on disk
+        "estimate-only",        # real rows, but all of them our own estimate
+        "no-plain-name",        # real published rows, non-measurable raw unit
+        "no-plain-name",        # real published rows, no narrator title yet
+        "too-sparse",           # real, named, published rows -- just too few
+    ]
+    assert [r["cause"] for r in reasons] == expected_causes
+
+
+def test_too_sparse_is_never_returned_except_by_the_genuine_density_branch():
+    # THE REGRESSION THIS FIX EXISTS TO PREVENT: `saw_non_measurable_unit`
+    # and `saw_missing_title` must never again be labelled "too-sparse" --
+    # neither describes a shortage of data points. "too-sparse" may only
+    # come from the one branch where neither flag is set and there ARE real,
+    # non-estimate, cited rows (the density catch-all).
+    from gpu_agent.dashboard.bullets import _fallback_reason
+
+    too_sparse_cases = [
+        # (indicator_ids, saw_non_measurable_unit, saw_missing_title)
+        ([], False, False),
+        (["nothingTrackedHere"], False, False),
+        (["gpuSpotPrice"], False, False),
+        (["odmMonthlyAiRevenue"], True, False),
+        (["odmMonthlyAiRevenue"], False, True),
+        (["odmMonthlyAiRevenue"], True, True),
+    ]
+    for indicator_ids, non_measurable, missing_title in too_sparse_cases:
+        result = _fallback_reason(indicator_ids, "store/series",
+                                  saw_non_measurable_unit=non_measurable,
+                                  saw_missing_title=missing_title)
+        if result["cause"] == "too-sparse":
+            assert indicator_ids == ["odmMonthlyAiRevenue"]
+            assert non_measurable is False and missing_title is False
+
+    # And the genuine density branch really does still produce it.
+    density_only = _fallback_reason(["odmMonthlyAiRevenue"], "store/series",
+                                    saw_non_measurable_unit=False,
+                                    saw_missing_title=False)
+    assert density_only["cause"] == "too-sparse"
 
 
 # ---------------------------------------------------------------------------
@@ -856,6 +916,7 @@ def test_artifact_bullet_with_no_matching_series_id_anywhere_gets_an_honest_no_c
     b1 = bullets[1]
     assert b1["chart"] is None
     assert "no plain-English name for what they measure yet" in b1["noChartReason"]["reason"]
+    assert b1["noChartReason"]["cause"] == "no-plain-name"
 
 
 def test_mechanical_scene_never_borrows_a_label_from_another_scene(tmp_path):
@@ -883,6 +944,7 @@ def test_mechanical_scene_never_borrows_a_label_from_another_scene(tmp_path):
     bullets = build_bullets(story, scorecard, {}, str(tmp_path))
     assert bullets[0]["chart"] is None
     assert "no plain-English name for what they measure yet" in bullets[0]["noChartReason"]["reason"]
+    assert bullets[0]["noChartReason"]["cause"] == "no-plain-name"
 
 
 def test_story_with_bullets_none_takes_the_mechanical_path(tmp_path):

@@ -75,16 +75,22 @@ export interface Chart {
 }
 
 /**
- * Why a bullet has no chart, machine-readable. Fixed by the F113 Task 1
- * brief, verbatim -- these three cover every honesty-gate branch in
- * `gpu_agent/dashboard/bullets.py`'s `_fallback_reason`:
+ * Why a bullet has no chart, machine-readable. These four cover every
+ * honesty-gate branch in `gpu_agent/dashboard/bullets.py`'s
+ * `_fallback_reason`:
  *  - 'no-published-number': nothing is tracked for this at all.
  *  - 'estimate-only': the number we track is our own estimate, never a
  *    published figure.
- *  - 'too-sparse': we hold real, published numbers, but not enough of them
- *    (or not yet honestly nameable/titled) to draw without misleading.
+ *  - 'no-plain-name': we hold real, published numbers, but can't yet say
+ *    what they measure in plain English (an unnameable raw unit, or a
+ *    nameable one with no narrator-supplied title yet).
+ *  - 'too-sparse': we hold real, published, plainly-named numbers, but not
+ *    enough of a track record yet to draw without misleading.
+ * A fourth code (2026-08-07, follow-up to Task 1 review) was added because
+ * the original three-code mapping put `no-plain-name`'s two branches under
+ * `too-sparse`, which is false of them -- neither is a density problem.
  */
-export type Cause = 'no-published-number' | 'estimate-only' | 'too-sparse';
+export type Cause = 'no-published-number' | 'estimate-only' | 'no-plain-name' | 'too-sparse';
 
 export interface NoChartReason {
   reason: string;
@@ -285,7 +291,7 @@ function parseChart(raw: unknown, where: string): Chart {
   };
 }
 
-const CAUSES = ['no-published-number', 'estimate-only', 'too-sparse'] as const;
+const CAUSES = ['no-published-number', 'estimate-only', 'no-plain-name', 'too-sparse'] as const;
 
 function parseNoChartReason(raw: unknown, where: string): NoChartReason {
   const r = obj(raw, where);

@@ -165,7 +165,7 @@
       "properties": {
         "reason": { "type": "string" },
         "cause": {
-          "enum": ["no-published-number", "estimate-only", "too-sparse"]
+          "enum": ["no-published-number", "estimate-only", "no-plain-name", "too-sparse"]
         }
       },
       "required": ["reason", "cause"],
