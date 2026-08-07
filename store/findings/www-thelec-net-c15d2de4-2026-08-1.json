@@ -1,0 +1,52 @@
+{
+  "id": "www-thelec-net-c15d2de4-2026-08-1",
+  "statement": "GlobalWafers said its 300mm, 200mm and 150mm lines are effectively at full utilization and that supply constraints have already appeared for certain advanced 12-inch products, citing AI chips, HBM, silicon photonics and advanced packaging as the demand drivers.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Wafers are the raw input for every AI chip, so a shortage at the substrate level puts a hard ceiling on how many accelerators and memory stacks can be built.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "chips.networking-silicon",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "Full utilization and emerging constraints on advanced 300mm wafers cap upstream substrate availability, tightening supply for HBM, accelerators and advanced packaging alike."
+  },
+  "evidence": [
+    {
+      "source": "The Elec",
+      "url": "https://www.thelec.net/news/articleView.html?idxno=12856",
+      "date": "2026-08-06",
+      "excerpt": "Our 12-inch (300mm), 8-inch (200mm) and 6-inch (150mm) production lines are effectively operating at full utilization",
+      "tier": "secondary"
+    },
+    {
+      "source": "The Elec",
+      "url": "https://www.thelec.net/news/articleView.html?idxno=12856",
+      "date": "2026-08-06",
+      "excerpt": "supply constraints have already appeared for certain advanced 12-inch products.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet reporting direct quotes from an earnings call; no independent second publisher fetched, so confidence capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "memory",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

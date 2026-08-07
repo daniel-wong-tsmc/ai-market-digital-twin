@@ -1,0 +1,49 @@
+{
+  "id": "ir-amd-com-d9abb1c2-2026-08-3",
+  "statement": "AMD continues to flag U.S. export restrictions as a risk factor, and its prior-year results carried inventory charges tied to the export control on Instinct MI308 data center GPUs.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Export rules have already cost AMD real money once, so China policy remains a live switch that can remove a chunk of accelerator demand overnight.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "negative",
+    "mechanism": "Export restrictions close off a market segment and can force inventory write-downs, cutting realizable accelerator demand regardless of underlying appetite."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (SEC Form 10-Q)",
+      "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm",
+      "date": "2026-08-05",
+      "excerpt": "the extent of impact of export restrictions imposed by the U.S. on our business",
+      "tier": "primary"
+    },
+    {
+      "source": "AMD Investor Relations (SEC Form 10-Q)",
+      "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm",
+      "date": "2026-08-05",
+      "excerpt": "the absence of inventory and related charges associated with the U.S. government export control on AMD Instinct MI308 Data Center GPU products",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Verbatim risk-factor and MD&A language from AMD's Form 10-Q, a primary filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

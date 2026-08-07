@@ -1,0 +1,53 @@
+{
+  "id": "ir-amd-com-cfa508a5-2026-08-1",
+  "statement": "AMD Q2 2026 Data Center segment revenue reached $6.7 billion, up 107% year-over-year from $3.2 billion, driven by EPYC processors and Instinct MI350 Series GPUs.",
+  "kind": "measured",
+  "value": {
+    "number": 6.7,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Data Center revenue more than doubling year-over-year at the number-two merchant GPU vendor shows AI accelerator demand is broadening beyond a single supplier rather than concentrating.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "chips.hbm-memory"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising Instinct and EPYC shipments pull through accelerator, HBM and datacenter build orders, confirming buyers are placing volume with a second merchant source."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "Data Center: $6.7 billion, up 107% year-over-year.",
+      "tier": "primary"
+    },
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "The increase in net revenue was driven by an increase in Data Center segment revenue primarily driven by strong demand for our AMD EPYC processors and AMD Instinct MI350 Series GPUs.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Reported segment revenue in AMD's own quarterly results release and Form 10-Q language, a primary filing source."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

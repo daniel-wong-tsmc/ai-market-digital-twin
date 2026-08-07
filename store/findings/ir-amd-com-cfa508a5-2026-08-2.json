@@ -1,0 +1,45 @@
+{
+  "id": "ir-amd-com-cfa508a5-2026-08-2",
+  "statement": "AMD guided Q3 2026 revenue to approximately $13.0 billion plus or minus $300 million, about 41% year-over-year growth, with non-GAAP gross margin around 56%.",
+  "kind": "measured",
+  "value": {
+    "number": 13.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Forward guidance above the just-reported quarter tells the desk the vendor expects order flow to keep building rather than plateau.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Sequential revenue guidance implies committed customer orders and secured supply for the coming quarter, a leading read on accelerator demand."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "Q3 2026 guidance: revenue of approximately $13.0 billion, plus or minus $300 million, representing about 41% YoY growth; non-GAAP gross margin guided at approximately 56%.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Company's own guidance stated in its quarterly results press release, a primary source."
+  },
+  "dispersion": "Guidance band of plus or minus $300 million around $13.0 billion.",
+  "asOf": "2026-08",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

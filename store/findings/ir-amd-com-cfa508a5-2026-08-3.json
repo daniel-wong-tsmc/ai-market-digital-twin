@@ -1,0 +1,44 @@
+{
+  "id": "ir-amd-com-cfa508a5-2026-08-3",
+  "statement": "AMD GAAP gross margin was 54% in Q2 2026 versus 40% a year earlier, mainly because the prior year carried export-control inventory charges on MI308 and because product mix shifted toward Data Center.",
+  "kind": "measured",
+  "value": {
+    "number": 54.0,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "A 14-point margin jump says AMD is getting paid well for accelerators and is no longer eating China-related write-downs, a sign of pricing power in a tight market.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Richer Data Center mix and the absence of export-control inventory charges lift blended margin, which is consistent with demand outrunning available accelerator supply."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "Gross margin for the three months ended June 27, 2026 was 54% compared to gross margin of 40% for the prior year period, a 14% increase primarily driven by the absence of inventory and related charges associated with the U.S. government export control on AMD Instinct MI308 Data Center GPU products that was recorded in the prior year period and a favorable product mix, including higher Data Center segment revenue.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Verbatim gross-margin discussion from AMD's Form 10-Q MD&A, a primary filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

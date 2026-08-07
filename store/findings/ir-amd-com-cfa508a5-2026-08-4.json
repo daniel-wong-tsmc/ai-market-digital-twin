@@ -1,0 +1,44 @@
+{
+  "id": "ir-amd-com-cfa508a5-2026-08-4",
+  "statement": "AMD reported only $222 million of remaining performance obligations on contracts longer than one year as of June 27, 2026, of which $144 million is expected within 12 months.",
+  "kind": "measured",
+  "value": {
+    "number": 0.222,
+    "unit": "USD_B"
+  },
+  "trend": "unknown",
+  "why": "AMD's disclosed backlog is tiny next to its quarterly revenue, so the desk cannot use RPO as a forward-demand gauge for this vendor the way it can for cloud providers.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "AMD books accelerator sales largely on short-cycle purchase orders rather than multi-year contracts, so reported RPO understates the multi-gigawatt commitments described elsewhere and gives a weak forward signal."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "As of June 27, 2026, the aggregate transaction price allocated to remaining performance obligations under contracts with an original expected duration of more than one year was $222 million, of which $144 million is expected to be recognized in the next 12 months.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Exact RPO disclosure quoted from AMD's Form 10-Q, a primary filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

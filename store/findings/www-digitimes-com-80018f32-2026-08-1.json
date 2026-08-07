@@ -1,0 +1,54 @@
+{
+  "id": "www-digitimes-com-80018f32-2026-08-1",
+  "statement": "Foxconn's July 2026 consolidated revenue reached NT$946.51 billion, up 54.19% year-over-year and 15.18% month-over-month, the first month above NT$900 billion, driven by cloud and networking and computing products.",
+  "kind": "measured",
+  "value": {
+    "number": 54.19,
+    "unit": "pct_yoy"
+  },
+  "trend": "rising",
+  "why": "The largest AI-server builder posting record monthly revenue on server-related demand is a near-real-time confirmation that accelerator systems are still shipping in volume.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.networking-fabric",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "ODM monthly revenue tracks AI-server shipments about one step downstream of GPU sell-in, so record cloud and networking revenue implies accelerators are moving through the build chain rather than sitting in inventory."
+  },
+  "evidence": [
+    {
+      "source": "Digitimes",
+      "url": "https://www.digitimes.com/news/a20260805PD244/revenue-foxconn-growth-2026-electronics.html",
+      "date": "2026-08-05",
+      "excerpt": "Hon Hai Precision Industry (Foxconn) posted consolidated revenue of NT$946.51 billion (approx. US$29.37 billion) for July 2026, up 15.18% from the previous month (June 2026) and up 54.19% year-over-year.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Digitimes",
+      "url": "https://www.digitimes.com/news/a20260805PD244/revenue-foxconn-growth-2026-electronics.html",
+      "date": "2026-08-05",
+      "excerpt": "growth attributed to 'cloud and networking products' (includes AI servers) and 'computing products' segments, with strong demand for server-related products cited as the primary driver.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Digitimes report with the article body paywalled; corroborating outlets are named inside this one document rather than fetched separately, so no multi-publisher credit and confidence stays at medium."
+  },
+  "dispersion": "conflicting same-key reports: value 37.89 -> 54.19 (tol 1%); sources: Digitimes",
+  "asOf": "2026-08",
+  "indicatorId": "odmMonthlyAiRevenue",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "odm",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

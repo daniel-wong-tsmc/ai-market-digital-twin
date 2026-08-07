@@ -1,0 +1,51 @@
+{
+  "id": "www-newegg-com-2121fd9f-2026-08-1",
+  "statement": "Newegg listed NVIDIA H100 80GB PCIe cards at $32,879.00 in stock, with alternative offers from $29,500.00, an H100 NVL at $30,999.00 out of stock, and an H200 NVL at $35,998.00 with in-stock options.",
+  "kind": "measured",
+  "value": {
+    "number": 32879.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "unknown",
+  "why": "Retail listing prices for accelerator cards are a daily sanity check on the secondary hardware market, but with no earlier price stated they show only a level.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Retail card prices are a display overlay on secondary-market hardware value; without a stated baseline or change they carry no demand or supply direction."
+  },
+  "evidence": [
+    {
+      "source": "Newegg",
+      "url": "https://www.newegg.com/p/pl?d=nvidia+h100+gpu",
+      "date": "2026-08-07",
+      "excerpt": "'NVIDIA H100 80GB HBM2e PCIE Express GPU Graphics Card New' priced $32,879.00, free shipping.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Newegg",
+      "url": "https://www.newegg.com/p/pl?d=nvidia+h100+gpu",
+      "date": "2026-08-07",
+      "excerpt": "'NVIDIA H200 NVL AI Accelerator Card 141GB HBM3E' priced $35,998.00 with 'More options from $33,999.00 - $35,998.00', in-stock option available.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single retail marketplace listing page at secondary tier; prices are seller-set and unverified elsewhere."
+  },
+  "dispersion": "H100 PCIe offers range $29,500.00 to $32,879.00; H200 NVL offers range $33,999.00 to $35,998.00.",
+  "asOf": "2026-08",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-07",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "www-globenewswire-com-1efbc0a3-2026-08-1",
+  "statement": "Akamai reported Cloud Infrastructure Services revenue of $99 million in Q2 2026, up 39% year-over-year, including GPU cloud services.",
+  "kind": "measured",
+  "value": {
+    "number": 0.099,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A non-hyperscaler growing GPU-inclusive cloud revenue near 40% shows demand for rented accelerator capacity is spreading beyond the big three clouds.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Growing revenue at a second-tier GPU cloud provider implies continued accelerator purchases to serve customer workloads."
+  },
+  "evidence": [
+    {
+      "source": "Akamai Technologies (official press release via GlobeNewswire)",
+      "url": "https://www.globenewswire.com/news-release/2026/08/06/3340672/0/en/Akamai-Reports-Second-Quarter-2026-Financial-Results.html",
+      "date": "2026-08-06",
+      "excerpt": "Cloud Infrastructure Services revenue reached $99 million in Q2 2026, representing 39% year-over-year growth.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company earnings release distributed via a newswire and captured at secondary tier; single fetched document, so confidence capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

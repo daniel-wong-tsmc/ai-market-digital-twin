@@ -1,0 +1,46 @@
+{
+  "id": "www-globenewswire-com-1efbc0a3-2026-08-3",
+  "statement": "Akamai spent $346.5 million on capital expenditure in Q2 2026, equal to 32% of total company revenue, with $552.9 million for the first half, and gave no forward capex guidance in the retrievable text.",
+  "kind": "measured",
+  "value": {
+    "number": 0.3465,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Spending a third of revenue on capital equipment shows how heavily a provider must invest up front to sell GPU capacity, which is money flowing toward accelerators and datacenters.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Elevated capital spending funds accelerator and facility purchases, feeding near-term demand for GPUs and datacenter capacity."
+  },
+  "evidence": [
+    {
+      "source": "Akamai Technologies (official press release via GlobeNewswire)",
+      "url": "https://www.globenewswire.com/news-release/2026/08/06/3340672/0/en/Akamai-Reports-Second-Quarter-2026-Financial-Results.html",
+      "date": "2026-08-06",
+      "excerpt": "Capex: $346.5 million in Q2 2026 (32% of total company revenue) and $552.9 million for H1 2026 (25% of revenue) -- no forward capex guidance figure given in the retrievable text.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary-tier newswire release with capex level but no forward guidance; single source, so confidence capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
