@@ -803,6 +803,52 @@ def test_the_chart_golden_fixture_really_carries_a_chart():
     jsonschema.validate(golden, SCHEMA)
 
 
+def test_a_verified_researched_series_reaches_the_exported_payload(tmp_path):
+    """F113 Task 5, end to end: the exporter must look in THIS category's own
+    quarantine directory (`store/<cat>/research-series/`), and what it finds
+    there must survive schema validation and reach the page labelled as
+    found-today, single-source."""
+    store_dir = _make_store(tmp_path)
+    research_dir = store_dir / "chips.merchant-gpu" / "research-series"
+    research_dir.mkdir(parents=True)
+    (research_dir / "2026-08-05-mediatek-edge-ai-shipments.json").write_text(
+        json.dumps({
+            "seriesName": "MediaTek edge AI shipments",
+            "unit": "million units",
+            "form": "line",
+            "sourceName": "TrendForce",
+            "points": [
+                {"label": "Q1 2026", "value": 12.0,
+                 "sourceUrl": "https://example.test/mtk-q1", "publishedAt": "2026-04-30"},
+                {"label": "Q2 2026", "value": 14.5,
+                 "sourceUrl": "https://example.test/mtk-q2", "publishedAt": "2026-07-31"},
+                {"label": "Q3 2026", "value": 15.2,
+                 "sourceUrl": "https://example.test/mtk-q3", "publishedAt": "2026-08-04"},
+            ],
+            "pair": False, "notes": "", "bulletIndex": 2,
+        }, indent=2), encoding="utf-8")
+
+    payload = build_dashboard_payload("chips.merchant-gpu", str(store_dir))
+    jsonschema.validate(payload, SCHEMA)
+    chart = payload["bullets"][1]["chart"]
+    assert chart is not None
+    assert chart["researched"] is True
+    assert chart["caption"] == "Found today — single source: TrendForce."
+    assert payload["bullets"][1]["noChartReason"] is None
+    # ...and only that bullet. The other two are untouched by the researcher.
+    assert payload["bullets"][0]["chart"] is None
+    assert payload["bullets"][2]["chart"] is None
+
+
+def test_an_empty_quarantine_directory_changes_nothing_in_the_payload(tmp_path):
+    """The regression guard: on a day the researcher found nothing, the
+    exported payload is exactly what it was before this step existed."""
+    baseline = build_dashboard_payload("chips.merchant-gpu", str(_make_store(tmp_path / "a")))
+    store_dir = _make_store(tmp_path / "b")
+    (store_dir / "chips.merchant-gpu" / "research-series").mkdir(parents=True)
+    assert build_dashboard_payload("chips.merchant-gpu", str(store_dir)) == baseline
+
+
 def test_the_chart_unit_is_spelled_the_way_the_plain_units_file_spells_it():
     # FINAL REVIEW, Minor 9: the series registry said "USD bn" while
     # registry/plain-units.json said "US$ billions" -- the same page could

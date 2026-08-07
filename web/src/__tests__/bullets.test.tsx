@@ -114,6 +114,33 @@ const LINE_CHART: Chart = {
   researched: false,
 };
 
+/**
+ * A chart the exporter built from a series today's researcher found and the
+ * deterministic verifier re-checked (F113 Task 5). Everything here is server
+ * copy: the "Found today — single source: …" caption is written by
+ * gpu_agent/dashboard/bullets.py and arrives in the payload. The web side
+ * adds no wording of its own — the tests below hold that line.
+ */
+const RESEARCHED_CHART: Chart = {
+  form: 'line',
+  title: 'MediaTek edge AI shipments',
+  caption: 'Found today — single source: TrendForce.',
+  unit: 'million units',
+  points: [
+    {label: 'Q1 2026', value: 12, hollow: false, sourceUrl: 'https://example.test/mtk-q1'},
+    {label: 'Q2 2026', value: 14.5, hollow: false, sourceUrl: 'https://example.test/mtk-q2'},
+    {label: 'Q3 2026', value: 15.2, hollow: false, sourceUrl: 'https://example.test/mtk-q3'},
+  ],
+  source: {
+    title: 'MediaTek edge AI shipments',
+    outlet: 'TrendForce',
+    url: 'https://example.test/mtk-q1',
+    date: '2026-08-04',
+    tier: 'secondary',
+  },
+  researched: true,
+};
+
 /** Builds a {reason, cause} pair from a plain sentence, for tests that only
  * care about the reason text and don't exercise cause-specific behaviour. */
 function noChartReason(reason: string, cause: NoChartReason['cause'] = 'no-published-number'): NoChartReason {
@@ -606,6 +633,55 @@ describe('MiniChart — the three chart forms', () => {
     // SourceMark renders a real button; the figure caption carries it.
     const figure = document.querySelector('figure.mini')!;
     expect(figure.querySelector('button.srcmark')).not.toBeNull();
+  });
+});
+
+describe('a chart found by today’s research says so, in the payload’s own words', () => {
+  it('prints the found-today caption exactly as the payload wrote it', () => {
+    draw(<MiniChart chart={RESEARCHED_CHART} />);
+    const caption = document.querySelector('figure.mini figcaption')!;
+    expect(caption.textContent).toContain('Found today — single source: TrendForce.');
+    // The chart itself still draws normally -- the label is the only difference.
+    expect(document.querySelector('figure.mini svg')).not.toBeNull();
+  });
+
+  it('gives it a working link to the single source it rests on', async () => {
+    draw(<Bullets bullets={[bulletWith(RESEARCHED_CHART, null)]} />);
+    const figure = document.querySelector('figure.mini')!;
+    await userEvent.click(figure.querySelector('button.srcmark')!);
+    const link = await screen.findByRole('link', {name: /MediaTek edge AI shipments/});
+    expect(link).toHaveAttribute('href', 'https://example.test/mtk-q1');
+    expect(link).toHaveAttribute('target', '_blank');
+  });
+
+  it('THE LINE THAT MATTERS: the found-today wording lives on the server, not in the component', () => {
+    // If this ever fails, someone has hard-coded reader-facing copy into the
+    // web app. The exporter is the single place that decides what a chart
+    // claims about itself; a second copy here could drift from it and start
+    // saying something the data does not support.
+    const tsx = readFileSync(resolve(process.cwd(), 'src', 'components', 'MiniChart.tsx'), 'utf8');
+    expect(tsx).not.toContain('Found today');
+    expect(tsx).not.toContain('single source');
+  });
+
+  it('leaves a non-researched chart exactly as it was -- no label, no extra words', () => {
+    draw(<MiniChart chart={COLUMNS_CHART} />);
+    const caption = document.querySelector('figure.mini figcaption')!;
+    expect(caption.textContent).toContain(COLUMNS_CHART.caption);
+    expect(caption.textContent).not.toContain('Found today');
+    expect(COLUMNS_CHART.researched).toBe(false);
+  });
+
+  it('carries every point’s own source page through to the payload the chart renders', () => {
+    // The per-point URLs are what make a researched chart checkable: each
+    // number was re-found on that exact page before it was allowed here.
+    expect(RESEARCHED_CHART.points.map((p) => p.sourceUrl)).toEqual([
+      'https://example.test/mtk-q1',
+      'https://example.test/mtk-q2',
+      'https://example.test/mtk-q3',
+    ]);
+    draw(<MiniChart chart={RESEARCHED_CHART} />);
+    expect(document.querySelectorAll('.mini-dot')).toHaveLength(RESEARCHED_CHART.points.length);
   });
 });
 

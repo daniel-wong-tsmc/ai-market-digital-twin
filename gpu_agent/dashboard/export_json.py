@@ -387,7 +387,13 @@ def build_dashboard_payload(category_id: str, store_dir: str) -> dict:
     findings_by_id = findings_index(latest_raw)
 
     series_reg = load_chart_series()
-    bullets = build_bullets(story, latest_raw, series_reg, str(series_dir))
+    # F113: the quarantine store of series this cycle's researcher found and
+    # the deterministic verifier re-checked, sitting between the curated
+    # match and the findings fallback (design spec §4). It is deliberately
+    # NOT `registry/chart-series.json` -- that registry stays human-curated
+    # and gains no writer here.
+    bullets = build_bullets(story, latest_raw, series_reg, str(series_dir),
+                            research_dir=str(cat_dir / "research-series"))
 
     readings = build_reading_series(cat_dir)
     if len(readings) < 2:

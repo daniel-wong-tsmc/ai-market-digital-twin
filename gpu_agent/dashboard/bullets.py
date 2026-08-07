@@ -300,6 +300,136 @@ def _chart_from_fallback(title: str, plain_unit: str, rows: list[dict]) -> dict:
     }
 
 
+# ── F113 Task 5: the verified-research step ──────────────────────────────
+#
+# Sits BETWEEN the curated match and the findings fallback (design spec §4).
+# Its input is the quarantine store `store/<cat>/research-series/`, written
+# ONLY by `gpu_agent.chartdata.verify.accept_research` after every claimed
+# number has been re-found in the page it was cited from. Nothing is
+# re-verified here -- that already happened, deterministically, before the
+# record was allowed on disk.
+#
+# The quarantine store is deliberately NOT `registry/chart-series.json`.
+# Nothing in this module writes to that registry; promotion of a researched
+# series into the curated one is a human edit, always (spec §5).
+
+# The three forms the page knows how to draw (web/schema's chart.form enum,
+# rendered by web/src/components/MiniChart.tsx). A record naming anything
+# else is skipped rather than passed through to fail schema validation and
+# take the whole day's dashboard down with it.
+_CHART_FORMS = ("columns", "bars", "line")
+
+
+def _research_point(raw: object) -> dict | None:
+    """One quarantined candidate point in the schema's chartPoint shape, or
+    None if it isn't usable. `sourceUrl` is carried straight through: it is
+    the page the number was re-found on, and losing it would strip the one
+    thing that makes a researched chart checkable."""
+    if not isinstance(raw, dict):
+        return None
+    try:
+        value = float(raw["value"])
+    except (KeyError, TypeError, ValueError):
+        return None
+    url = raw.get("sourceUrl")
+    return {
+        "label": str(raw.get("label", "")),
+        "value": value,
+        "hollow": False,
+        "sourceUrl": str(url) if url else None,
+    }
+
+
+def _chart_from_research(record: dict) -> dict | None:
+    """A verified researched candidate in the existing chart shape.
+
+    Two things make this chart different from every other chart on the page,
+    and both are said out loud rather than left for the reader to infer:
+
+    - `researched: True`, so the page can tell the two apart at all;
+    - the caption names, in the spec's own approved words (§6.4), that this
+      was found today and rests on ONE source -- never the plain
+      "Source: <name>." a curated series gets, which would read as the same
+      settled, long-tracked fact.
+
+    Returns None -- never a partial or a guessed-at chart -- for any record
+    this module cannot honestly draw.
+    """
+    form = record.get("form")
+    series_name = str(record.get("seriesName") or "").strip()
+    source_name = str(record.get("sourceName") or "").strip()
+    raw_points = record.get("points")
+    if form not in _CHART_FORMS or not series_name or not source_name:
+        return None
+    if not isinstance(raw_points, list) or not raw_points:
+        return None
+
+    chart_rows = raw_points[-_MAX_CHART_POINTS:]
+    points: list[dict] = []
+    for raw in chart_rows:
+        point = _research_point(raw)
+        if point is None:
+            return None
+        points.append(point)
+
+    last = chart_rows[-1]
+    published_at = last.get("publishedAt") if isinstance(last, dict) else None
+    return {
+        "form": form,
+        "title": series_name,
+        "caption": f"Found today — single source: {source_name}.",
+        "unit": str(record.get("unit") or ""),
+        "points": points,
+        "source": {
+            "title": series_name,
+            "outlet": source_name,
+            "url": points[0]["sourceUrl"],
+            "date": str(published_at) if published_at else None,
+            # A page found by today's research is not a filing we curated and
+            # stand behind, so it is never claimed as primary.
+            "tier": "secondary",
+        },
+        "researched": True,
+    }
+
+
+def _match_research(research_dir: str | None, story_date: str,
+                     bullet_index: int) -> dict | None:
+    """The verified researched series for THIS bullet on THIS day, if there
+    is one.
+
+    Two conditions, both hard:
+
+    - the file's name must start with today's `story_date`. A record from
+      another day is ignored entirely -- yesterday's freshly-researched
+      series is not today's news, and the story date is the only date these
+      records carry.
+    - `bulletIndex` must equal this bullet's own 1-based position, the same
+      numbering `emit_research` uses for its `bullet-<n>` prompts and
+      `accept_research` stamps onto every record it writes. A record with no
+      index did not come through the trust gate, so it is not trusted here.
+
+    Files are walked in sorted order, so a day that somehow produced two
+    records for one bullet resolves the same way every run.
+    """
+    if not research_dir or not story_date:
+        return None
+    directory = Path(research_dir)
+    if not directory.is_dir():
+        return None
+    for path in sorted(directory.glob(f"{story_date}-*.json")):
+        try:
+            record = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if not isinstance(record, dict) or record.get("bulletIndex") != bullet_index:
+            continue
+        chart = _chart_from_research(record)
+        if chart is not None:
+            return chart
+    return None
+
+
 def _match_registered_series(tags: set[str], series_reg: dict[str, ChartSeries],
                               store_dir: str) -> dict | None:
     """Rule 2: a registered chart series matches if any of its topicTags
@@ -491,7 +621,7 @@ def _match_fallback_history(visual_labels: dict[str, str], indicator_ids: list[s
 
 
 def build_bullets(story: dict, scorecard: dict, series_reg: dict[str, ChartSeries],
-                   store_dir: str) -> list[dict]:
+                   store_dir: str, research_dir: str | None = None) -> list[dict]:
     """Exactly 3 bullets shaped for the dashboard schema's `bullets` array.
 
     The narrator writes the day's three takeaways itself (F114), so when the
@@ -510,8 +640,18 @@ def build_bullets(story: dict, scorecard: dict, series_reg: dict[str, ChartSerie
     non-blocking run-cycle step, so on a fellBack day the cycle logs this
     failure and the live page keeps serving yesterday's data.
 
-    Either way each bullet gets exactly one of `chart` (rule 2, else rule 3
-    fallback) or `noChartReason` -- never both, never neither.
+    Either way each bullet gets exactly one of `chart` or `noChartReason` --
+    never both, never neither -- chosen in this order of preference (design
+    spec §4): a curated registry match, then today's VERIFIED researched
+    series, then the cited findings' own history, then an honest no-chart
+    reason.
+
+    `research_dir` is that researched step's input: the quarantine directory
+    `store/<cat>/research-series/`, passed by `export_json`. Left out (as
+    `emit_research` leaves it out, since it is asking which bullets still
+    need research), the researched step is skipped entirely and the output is
+    byte-for-byte what it was before F113 -- which is also what happens on
+    every day the researcher finds nothing.
 
     Raises ValueError only on the mechanical path, if the story doesn't have
     at least 3 usable scenes -- the schema requires exactly 3 bullets, so a
@@ -544,13 +684,17 @@ def build_bullets(story: dict, scorecard: dict, series_reg: dict[str, ChartSerie
                   for s in usable[:_MAX_BULLETS]]
 
     bullets = []
-    for text, claim_finding_ids, visual_labels in drafts:
+    # 1-based to match `emit_research`'s `bullet-<n>` prompt numbering and the
+    # `bulletIndex` `accept_research` stamps onto every quarantine record.
+    for index, (text, claim_finding_ids, visual_labels) in enumerate(drafts, start=1):
         cited = {"claimFindingIds": claim_finding_ids}
         tags = _scene_tags(cited, findings_by_id)
         indicator_ids = _scene_indicator_ids(cited, findings_by_id)
 
         chart = _match_registered_series(tags, series_reg, store_dir)
         no_chart_reason = None
+        if chart is None:
+            chart = _match_research(research_dir, date, index)
         if chart is None:
             chart, no_chart_reason = _match_fallback_history(
                 visual_labels, indicator_ids, store_dir)
