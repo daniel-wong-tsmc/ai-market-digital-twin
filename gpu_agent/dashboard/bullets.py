@@ -433,10 +433,15 @@ def build_bullets(story: dict, scorecard: dict, series_reg: dict[str, ChartSerie
 
     The older mechanical condenser -- scene title + first sentence of
     paragraphs[0], for the first 3 scenes whose title isn't "What to watch
-    from here" -- remains as the fallback, unchanged, for the two days it
-    still has to cover: an artifact written before this schema existed (no
-    `bullets` key at all), and a day the narrator fell back (the assembler
-    writes the story with no bullets).
+    from here" -- remains as the fallback, unchanged, for an artifact written
+    before this schema existed (no `bullets` key at all).
+
+    It does NOT cover a fellBack day. A real fellBack artifact (as written by
+    `gpu_agent.cli`) has `scenes=[]`, and running this condenser against it
+    raises `ValueError` because there are 0 usable scenes, not 3. That is
+    unchanged F110 behaviour, left as-is here: `dashboard-json` is a
+    non-blocking run-cycle step, so on a fellBack day the cycle logs this
+    failure and the live page keeps serving yesterday's data.
 
     Either way each bullet gets exactly one of `chart` (rule 2, else rule 3
     fallback) or `noChartReason` -- never both, never neither.

@@ -16,6 +16,7 @@ language model to fix itself from.
 from __future__ import annotations
 
 import html
+import itertools
 import re
 
 from gpu_agent.dashboard.story_model import (ANCHORED_INDICATOR_ID,
@@ -275,10 +276,13 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict, cfg=None) -> list[str]:
                 violations.append(
                     f"bullet {i}: must contain at least one digit "
                     f"('{bullet.text}')")
-            if words and words[0] in _BANNED_BULLET_OPENERS:
-                violations.append(
-                    f"bullet {i}: must not open with '{words[0]}' "
-                    f"('{bullet.text}')")
+            if words:
+                leading_letters = "".join(
+                    itertools.takewhile(str.isalpha, words[0]))
+                if leading_letters in _BANNED_BULLET_OPENERS:
+                    violations.append(
+                        f"bullet {i}: must not open with '{words[0]}' "
+                        f"('{bullet.text}')")
             escaped_bullet = html.escape(bullet.text)
             for hit in lint_story_copy("<p>" + escaped_bullet + "</p>"):
                 violations.append(f"bullet {i}: {hit}")

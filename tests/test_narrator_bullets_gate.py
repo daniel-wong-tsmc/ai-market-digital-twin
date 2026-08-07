@@ -81,6 +81,15 @@ def test_bullet_banned_opener_rejected(tmp_path, opener):
     assert any(opener in v for v in violations)
 
 
+@pytest.mark.parametrize("opener", ["It's", "They've", "That's", "They,"])
+def test_bullet_banned_opener_contraction_rejected(tmp_path, opener):
+    a = _with_bullets(tmp_path, {
+        0: {"text": f"{opener} shifted HBM output on June 24, 2026, citing "
+                    f"a one-year capacity lag."}})
+    violations = gate_narrator(a, _inp(tmp_path))
+    assert any("must not open with" in v for v in violations)
+
+
 def test_bullet_lowercase_opener_not_rejected(tmp_path):
     # Case-sensitive: a lowercase "they" mid-sentence-style opener (e.g. the
     # bullet legitimately starts with a lowercase word) must not trip the
