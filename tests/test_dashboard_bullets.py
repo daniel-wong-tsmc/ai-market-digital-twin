@@ -1243,8 +1243,14 @@ def test_the_researched_chart_names_its_single_source_and_links_to_it(tmp_path):
     source = bullets[0]["chart"]["source"]
     assert source["outlet"] == "TrendForce"
     assert source["title"] == "MediaTek edge AI shipments"
-    assert source["url"] == "https://example.test/mtk-q1"
+    # The link and the date must describe the same page. Review finding: the
+    # url came from the FIRST point and the date from the LAST, so the popover
+    # dated a page by a different page's publication date.
+    assert source["url"] == "https://example.test/mtk-q3"
     assert source["date"] == "2026-08-04"
+    last_point = RESEARCH_POINTS[-1]
+    assert source["url"] == last_point["sourceUrl"]
+    assert source["date"] == last_point["publishedAt"]
 
 
 def test_a_researched_series_longer_than_the_chart_cap_keeps_its_latest_points(tmp_path):

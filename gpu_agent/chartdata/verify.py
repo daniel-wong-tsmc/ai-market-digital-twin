@@ -36,10 +36,12 @@ from __future__ import annotations
 
 import decimal
 import html as _html
+import ipaddress
 import json
 import re
 from pathlib import Path
 from typing import Callable, Optional
+from urllib.parse import urlparse
 
 from gpu_agent.chartdata.fetch import _default_fetch_html
 from gpu_agent.chartdata.research import CandidateSeries
@@ -73,6 +75,68 @@ _TAG_RE = re.compile(r"<[^>]*>", re.S)
 # with no scheme at all -- would let a candidate be "verified" against content
 # the research agent effectively chose. Checked BEFORE any fetch.
 _ALLOWED_SCHEMES = ("http", "https")
+
+# Hostnames that resolve to somewhere only THIS machine can reach. The reader
+# is handed the source URL as a link, so a "verified" chart citing one of
+# these would send them to a page nobody but the machine that built the page
+# can open -- and the fetch that "proved" the number would have been answered
+# by local infrastructure (a dev server, a cloud instance's metadata service)
+# rather than by a publisher. Review finding: the scheme was filtered, the
+# host was not.
+_DENIED_HOST_NAMES = ("localhost",)
+
+
+def _host(url: str | None) -> str:
+    """The hostname a URL points at, lower-cased, port and 'www.' removed.
+
+    Mirrors `gpu_agent.dashboard.bullets._outlet_from_url` -- same idea, same
+    'www.' stripping, so 'www.trendforce.com' and 'trendforce.com' count as
+    one publisher on both sides of the fence. It reads `.hostname` rather
+    than `.netloc` on purpose: `.hostname` drops the port and any
+    `user@` prefix and lower-cases the result, and this copy is used to make
+    a SECURITY decision, where 'http://user@LOCALHOST:8080/' must not slip
+    past a check for the literal text 'localhost'.
+
+    Returns "" for anything without a host, which is itself a rejection.
+    """
+    if not url:
+        return ""
+    try:
+        host = urlparse(url).hostname or ""
+    except ValueError:
+        return ""
+    host = host.strip().strip("[]").lower()
+    return host[4:] if host.startswith("www.") else host
+
+
+def _unreachable_host_reason(host: str) -> str | None:
+    """Why this host must never be handed to a reader as a source link, or
+    None if it is an ordinary public hostname.
+
+    Covers `localhost`, loopback (`127.*`, `::1`), link-local -- including the
+    cloud metadata address `169.254.169.254` -- and the private ranges
+    (`10.*`, `192.168.*`, `172.16-31.*`, IPv6 `fc00::/7`, `fe80::/10`).
+    Numeric literals are classified by the standard library's `ipaddress`
+    rather than by pattern-matching text, so the IPv6 spellings and the
+    IPv4-mapped forms are covered by the same three lines.
+    """
+    if not host:
+        return "source URL has no hostname"
+    if host in _DENIED_HOST_NAMES or host.endswith(".localhost"):
+        return f"{host} is this machine, not a publisher"
+    try:
+        ip = ipaddress.ip_address(host)
+    except ValueError:
+        # Not a numeric address. A real registrable hostname can never be all
+        # digits (no TLD is numeric), so an all-digit host is an integer-form
+        # IP address dressed up to dodge the check above -- refuse it.
+        if host.isdigit():
+            return f"{host} is not a real hostname"
+        return None
+    if (ip.is_loopback or ip.is_private or ip.is_link_local
+            or ip.is_reserved or ip.is_unspecified):
+        return f"{host} is not a publicly reachable address"
+    return None
 
 
 def page_text(raw_html: str) -> str:
@@ -122,6 +186,24 @@ def verify_candidate(cand: CandidateSeries,
     all-or-nothing hold only vacuously and letting a record that survived ZERO
     checks reach the trust store. Two is what spec section 3's "clearly-labelled
     comparison pair" means; one number is not a comparison.
+
+    The URLs are checked BEFORE anything is fetched, and a candidate that
+    fails there is rejected without a single request going out:
+
+    - the scheme must be http/https (above);
+    - the host must be one the reader could actually open -- never
+      `localhost`, a loopback, link-local or private address (review
+      finding: the scheme was filtered but the host was not, so a
+      "verified" chart could link readers at a page only the build machine
+      can reach);
+    - every point must share ONE host. This is what makes the page's
+      "Found today -- single source: <name>." caption true. Nothing else
+      enforced it: a candidate whose points came from two different
+      publishers was captioned as one source, counted as one source, and
+      linked to just one of them. The numbers were all genuinely re-found,
+      so nothing false was ever charted -- but the ATTRIBUTION overstated,
+      and this lane's one new reader-facing claim has to hold. This is not
+      a new rule, it is the label the spec already mandates made true.
     """
     failures: list[str] = []
     cache: dict[str, object] = {}
@@ -132,6 +214,7 @@ def verify_candidate(cand: CandidateSeries,
         return False, [f"pair candidate needs 2 points to compare, "
                        f"got {len(cand.points)}"]
 
+    hosts: list[str] = []
     for i, point in enumerate(cand.points, start=1):
         url = point.sourceUrl
         scheme = url.split(":", 1)[0].lower() if ":" in url else ""
@@ -139,6 +222,23 @@ def verify_candidate(cand: CandidateSeries,
             failures.append(f"point {i}: source must be an http/https URL, "
                             f"got {url!r}")
             continue
+        host = _host(url)
+        reason = _unreachable_host_reason(host)
+        if reason is not None:
+            failures.append(f"point {i}: {reason} ({url})")
+            continue
+        hosts.append(host)
+    if failures:
+        return False, failures
+
+    distinct = sorted(set(hosts))
+    if len(distinct) > 1:
+        return False, [f"a researched series must come from ONE source, but "
+                       f"its points span {len(distinct)} sites: "
+                       f"{', '.join(distinct)}"]
+
+    for i, point in enumerate(cand.points, start=1):
+        url = point.sourceUrl
         if url not in cache:
             try:
                 cache[url] = numeric_tokens(page_text(fetch_html(url)))

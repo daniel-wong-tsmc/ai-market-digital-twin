@@ -223,6 +223,179 @@ def test_a_scheme_relative_or_bare_source_url_is_rejected():
     assert "example.test/widgets" not in fetched
 
 
+def test_points_from_two_different_sites_are_rejected():
+    """The page captions a researched chart "Found today -- single source:
+    <name>." and links ONE page. Nothing used to make that true: a candidate
+    could take its numbers from two publishers, every number verify fine, and
+    the reader still be told it all came from one place. No false number ever
+    reached the page -- but the attribution did, and it is the one new claim
+    this lane puts in front of a reader."""
+    fetched: list[str] = []
+
+    def _recording_fetch(url: str) -> str:
+        fetched.append(url)
+        return "6.7 7.2 12,500"
+
+    cand = CandidateSeries(
+        seriesName="Two publishers", unit="million units", form="line",
+        sourceName="Example Outlet",
+        points=[{"label": "Q1", "value": 6.7, "sourceUrl": "https://example.test/a",
+                 "publishedAt": "2026-08-01"},
+                {"label": "Q2", "value": 7.2, "sourceUrl": "https://other.test/b",
+                 "publishedAt": "2026-08-02"},
+                {"label": "Q3", "value": 12500.0, "sourceUrl": "https://example.test/c",
+                 "publishedAt": "2026-08-03"}],
+    )
+    ok, failures = verify_candidate(cand, _recording_fetch)
+    assert ok is False
+    assert failures
+    assert "ONE source" in failures[0]
+    assert "example.test" in failures[0] and "other.test" in failures[0]
+    # rejected on the URLs alone -- not one request went out
+    assert fetched == []
+
+
+def test_www_and_bare_host_count_as_the_same_single_source():
+    """Same publisher, two spellings of its domain. Rejecting this would be
+    stricter than the claim requires and would throw away honest series."""
+    cand = CandidateSeries(
+        seriesName="One publisher", unit="million units", form="line",
+        sourceName="Example Outlet",
+        points=[{"label": "Q1", "value": 6.7,
+                 "sourceUrl": "https://www.example.test/a", "publishedAt": "2026-08-01"},
+                {"label": "Q2", "value": 7.2,
+                 "sourceUrl": "https://example.test/b", "publishedAt": "2026-08-02"},
+                {"label": "Q3", "value": 12500.0,
+                 "sourceUrl": "https://EXAMPLE.test/c", "publishedAt": "2026-08-03"}],
+    )
+    ok, failures = verify_candidate(cand, lambda url: "6.7 7.2 12,500")
+    assert ok is True, failures
+
+
+def test_a_subdomain_is_a_different_site():
+    cand = CandidateSeries(
+        seriesName="Subdomains", unit="million units", form="line",
+        sourceName="Example Outlet",
+        points=[{"label": "Q1", "value": 6.7,
+                 "sourceUrl": "https://ir.example.test/a", "publishedAt": "2026-08-01"},
+                {"label": "Q2", "value": 7.2,
+                 "sourceUrl": "https://news.example.test/b", "publishedAt": "2026-08-02"},
+                {"label": "Q3", "value": 12500.0,
+                 "sourceUrl": "https://ir.example.test/c", "publishedAt": "2026-08-03"}],
+    )
+    ok, failures = verify_candidate(cand, lambda url: "6.7 7.2 12,500")
+    assert ok is False
+    assert "ONE source" in failures[0]
+
+
+def test_a_source_only_this_machine_can_reach_is_rejected_without_being_fetched():
+    """Review finding: the scheme was filtered, the host was not. `localhost`,
+    a loopback, a private address and the cloud metadata address are all
+    perfectly fetchable from the build machine -- and every one of them would
+    become a link in front of a reader who cannot open it."""
+    for host in ("localhost", "dev.localhost", "127.0.0.1", "127.1.2.3",
+                 "169.254.169.254", "10.0.0.5", "192.168.1.10", "172.16.0.1",
+                 "172.31.255.254", "0.0.0.0", "[::1]", "[fe80::1]",
+                 "[fc00::1]", "2130706433"):
+        fetched: list[str] = []
+
+        def _recording_fetch(url: str) -> str:
+            fetched.append(url)
+            return "6.7 7.2 12,500"
+
+        url = f"http://{host}/series"
+        cand = CandidateSeries(
+            seriesName="Local page", unit="million units", form="line",
+            sourceName="Example Outlet",
+            points=[{"label": "Q1", "value": 6.7, "sourceUrl": url,
+                     "publishedAt": "2026-08-01"},
+                    {"label": "Q2", "value": 7.2, "sourceUrl": url,
+                     "publishedAt": "2026-08-01"},
+                    {"label": "Q3", "value": 12500.0, "sourceUrl": url,
+                     "publishedAt": "2026-08-01"}],
+        )
+        ok, failures = verify_candidate(cand, _recording_fetch)
+        assert ok is False, f"{host} was accepted"
+        assert "point 1" in failures[0]
+        assert fetched == [], f"{host} was fetched"
+
+
+def test_a_credentialled_localhost_url_cannot_dodge_the_host_check():
+    """`user@LOCALHOST:8080` is still this machine. A check on the raw netloc
+    text would miss all three of the userinfo, the port and the casing."""
+    fetched: list[str] = []
+
+    def _recording_fetch(url: str) -> str:
+        fetched.append(url)
+        return "6.7 7.2 12,500"
+
+    url = "http://user:pw@LOCALHOST:8080/series"
+    cand = CandidateSeries(
+        seriesName="Disguised local page", unit="million units", form="line",
+        sourceName="Example Outlet",
+        points=[{"label": "Q1", "value": 6.7, "sourceUrl": url,
+                 "publishedAt": "2026-08-01"},
+                {"label": "Q2", "value": 7.2, "sourceUrl": url,
+                 "publishedAt": "2026-08-01"},
+                {"label": "Q3", "value": 12500.0, "sourceUrl": url,
+                 "publishedAt": "2026-08-01"}],
+    )
+    ok, failures = verify_candidate(cand, _recording_fetch)
+    assert ok is False
+    assert "point 1" in failures[0]
+    assert fetched == []
+
+
+def test_a_bad_host_is_a_rejection_line_never_an_exception():
+    """Nothing in this module may strand a cycle: a garbage URL is a failure
+    line, the same as any other rejection."""
+    cand = CandidateSeries(
+        seriesName="Nonsense host", unit="million units", form="line",
+        sourceName="Example Outlet",
+        points=[{"label": "Q1", "value": 6.7, "sourceUrl": "http:///no-host",
+                 "publishedAt": "2026-08-01"},
+                {"label": "Q2", "value": 7.2, "sourceUrl": _ALL_URL,
+                 "publishedAt": "2026-08-01"},
+                {"label": "Q3", "value": 12500.0, "sourceUrl": _ALL_URL,
+                 "publishedAt": "2026-08-01"}],
+    )
+    ok, failures = verify_candidate(cand, _boom)
+    assert ok is False
+    assert "point 1" in failures[0]
+
+
+def test_an_ordinary_public_host_still_verifies():
+    """The guard must not have quietly made every real candidate fail."""
+    ok, failures = verify_candidate(_candidate("candidate-good"), _fetch_fixture)
+    assert ok is True, failures
+
+
+def test_a_multi_site_candidate_never_reaches_the_quarantine_store(tmp_path):
+    store_root = _make_store(tmp_path)
+    work_dir = tmp_path / "work" / "daily-2026-08-06"
+    d = work_dir / "chart-research"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "bullet-1.json").write_text(json.dumps({
+        "seriesName": "Two publishers", "unit": "million units", "form": "line",
+        "sourceName": "Example Outlet", "pair": False, "notes": "",
+        "points": [
+            {"label": "Q1", "value": 6.7, "sourceUrl": _ALL_URL,
+             "publishedAt": "2026-08-01"},
+            {"label": "Q2", "value": 7.2, "sourceUrl": "https://other.test/b",
+             "publishedAt": "2026-08-01"},
+            {"label": "Q3", "value": 12500.0, "sourceUrl": _ALL_URL,
+             "publishedAt": "2026-08-01"}],
+    }), encoding="utf-8")
+
+    result = accept_research(CATEGORY, str(store_root), str(work_dir),
+                              fetch_html=_fetch_fixture)
+
+    assert result["accepted"] == []
+    assert len(result["rejected"]) == 1
+    assert "ONE source" in result["rejected"][0]["failures"][0]
+    assert not _research_dir(store_root).exists()
+
+
 def test_an_unclosed_script_tag_still_excludes_its_body():
     # Review finding: the exclusion regex needed a closing tag, so an
     # unclosed <script> leaked its numbers back into the pool.

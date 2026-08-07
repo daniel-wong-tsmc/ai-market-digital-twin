@@ -372,6 +372,13 @@ def _chart_from_research(record: dict) -> dict | None:
             return None
         points.append(point)
 
+    # The link and the date must describe the SAME page. Both are taken from
+    # the last point (review finding): the URL used to come from the first
+    # point while the date came from the last, so a popover could read
+    # "MediaTek Investor Relations - 5 Aug 2026" while linking to a page
+    # published in June. A curated series gets away with that pairing because
+    # its URL is a series landing page; here it is one specific point's page,
+    # so a mismatched pair is simply a false statement about that page.
     last = chart_rows[-1]
     published_at = last.get("publishedAt") if isinstance(last, dict) else None
     return {
@@ -383,7 +390,7 @@ def _chart_from_research(record: dict) -> dict | None:
         "source": {
             "title": series_name,
             "outlet": source_name,
-            "url": points[0]["sourceUrl"],
+            "url": points[-1]["sourceUrl"],
             "date": str(published_at) if published_at else None,
             # A page found by today's research is not a filing we curated and
             # stand behind, so it is never claimed as primary.

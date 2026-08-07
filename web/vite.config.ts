@@ -49,5 +49,8 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/__tests__/setup.ts'],
     include: ['src/**/*.test.{ts,tsx}'],
+    // app.test.tsx renders the whole app and has flaked at ~5.2s against
+    // vitest's 5s default. The test is fine; the limit was too tight.
+    testTimeout: 15000,
   },
 });
