@@ -48,7 +48,7 @@ def _assert_no_jargon(s: str) -> None:
 def _assert_bullet_plain_english(bullet: dict) -> None:
     _assert_no_jargon(bullet["text"])
     if bullet["noChartReason"] is not None:
-        _assert_no_jargon(bullet["noChartReason"])
+        _assert_no_jargon(bullet["noChartReason"]["reason"])
     chart = bullet["chart"]
     if chart is not None:
         for field in ("title", "unit", "caption"):
@@ -111,7 +111,9 @@ def test_real_story_yields_exactly_three_bullets_with_valid_xor():
         _assert_bullet_plain_english(b)
         _validate_bullet_schema(b)
         if b["noChartReason"] is not None:
-            assert b["noChartReason"].startswith("No chart.")
+            assert set(b["noChartReason"].keys()) == {"reason", "cause"}
+            assert b["noChartReason"]["cause"] in (
+                "no-published-number", "estimate-only", "too-sparse")
 
 
 def test_real_story_bullet_text_uses_scene_title_and_first_sentence():
@@ -150,8 +152,9 @@ def test_real_story_scene_two_has_no_chart_after_the_measurable_quantity_gate():
     scene_two = bullets[1]
     assert scene_two["chart"] is None
     assert scene_two["noChartReason"] is not None
-    assert "describe what this number measures" in scene_two["noChartReason"]
-    assert "no plain-English name" not in scene_two["noChartReason"]
+    assert "describe what this number measures" in scene_two["noChartReason"]["reason"]
+    assert "no plain-English name" not in scene_two["noChartReason"]["reason"]
+    assert scene_two["noChartReason"]["cause"] == "too-sparse"
 
 
 # ---------------------------------------------------------------------------
@@ -190,6 +193,11 @@ def test_registry_match_below_point_threshold_falls_through(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
+    # The finding's own indicatorId ("vendorRevenueGuidance") has no series
+    # file of its own on disk here -- distinct from the curated series id
+    # that fell short of rule 2's point threshold -- so the fallback's own
+    # "nobody tracks a number for THIS indicator" branch fires.
+    assert b0["noChartReason"]["cause"] == "no-published-number"
 
 
 def test_estimate_grade_series_never_charted_even_with_plenty_of_points(tmp_path):
@@ -209,8 +217,9 @@ def test_estimate_grade_series_never_charted_even_with_plenty_of_points(tmp_path
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
-    assert "estimate" in b0["noChartReason"].lower()
-    _assert_no_jargon(b0["noChartReason"])
+    assert "estimate" in b0["noChartReason"]["reason"].lower()
+    assert b0["noChartReason"]["cause"] == "estimate-only"
+    _assert_no_jargon(b0["noChartReason"]["reason"])
 
 
 def test_registered_hard_fact_series_with_all_estimate_rows_on_disk_not_charted(tmp_path):
@@ -311,7 +320,8 @@ def test_fallback_estimate_grade_rows_excluded_from_density_count(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
-    assert "estimate" in b0["noChartReason"].lower()
+    assert "estimate" in b0["noChartReason"]["reason"].lower()
+    assert b0["noChartReason"]["cause"] == "estimate-only"
 
 
 def test_fallback_non_measurable_unit_never_charted_even_when_dense(tmp_path):
@@ -338,8 +348,9 @@ def test_fallback_non_measurable_unit_never_charted_even_when_dense(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
-    assert "describe what this number measures" in b0["noChartReason"]
-    assert "no plain-English name" not in b0["noChartReason"]
+    assert "describe what this number measures" in b0["noChartReason"]["reason"]
+    assert "no plain-English name" not in b0["noChartReason"]["reason"]
+    assert b0["noChartReason"]["cause"] == "too-sparse"
 
 
 def test_fallback_without_narrator_supplied_plain_title_never_charted(tmp_path):
@@ -367,8 +378,9 @@ def test_fallback_without_narrator_supplied_plain_title_never_charted(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
-    assert "no plain-English name for what they measure yet" in b0["noChartReason"]
-    assert "describe what this number measures" not in b0["noChartReason"]
+    assert "no plain-English name for what they measure yet" in b0["noChartReason"]["reason"]
+    assert "describe what this number measures" not in b0["noChartReason"]["reason"]
+    assert b0["noChartReason"]["cause"] == "too-sparse"
 
 
 def test_fallback_chart_never_titled_a_bare_indicator_code(tmp_path):
@@ -395,7 +407,8 @@ def test_no_matching_indicator_at_all_yields_honest_no_chart_reason(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
-    assert b0["noChartReason"].startswith("No chart.")
+    assert b0["noChartReason"]["cause"] == "no-published-number"
+    assert b0["noChartReason"]["reason"].endswith(".")
 
 
 def test_sources_come_from_refs_for_finding_ids(tmp_path):
@@ -627,9 +640,9 @@ def test_fallback_chart_produced_from_real_on_disk_odm_series():
 # FINAL REVIEW, Important 4 + Minor 7: the no-chart panels' wording.
 # ---------------------------------------------------------------------------
 
-def _all_no_chart_reasons() -> list[str]:
-    """Every reason string the builder can produce, gathered by calling it
-    directly rather than by re-typing the sentences here."""
+def _all_no_chart_reasons() -> list[dict]:
+    """Every {reason, cause} dict the builder can produce, gathered by
+    calling it directly rather than by re-typing the sentences here."""
     from gpu_agent.dashboard import bullets as bullets_mod
     return [
         bullets_mod._fallback_reason([], "store/series",
@@ -664,24 +677,27 @@ def test_the_estimates_only_reason_talks_about_the_series_we_track_not_the_bulle
     reason = _fallback_reason(["gpuSpotPrice"], "store/series",
                               saw_non_measurable_unit=False,
                               saw_missing_title=False)
-    assert reason == ("No chart. The number we track for this is our own estimate, "
-                      "not a published figure, so we don't draw it.")
-    assert "here" not in reason.lower()
-    assert "track" in reason
+    assert reason == {
+        "reason": ("The number we track for this is our own estimate, "
+                   "not a published figure, so we don't draw it."),
+        "cause": "estimate-only",
+    }
+    assert "here" not in reason["reason"].lower()
+    assert "track" in reason["reason"]
 
 
 def test_no_chart_reason_never_prints_a_double_hyphen():
     # The mock uses an em dash; three of the six reasons were rendering a
     # literal "--" to the reader.
     for reason in _all_no_chart_reasons():
-        assert "--" not in reason, reason
+        assert "--" not in reason["reason"], reason
 
 
 def test_every_no_chart_reason_is_a_plain_english_sentence():
     for reason in _all_no_chart_reasons():
-        assert reason.startswith("No chart.")
-        assert reason.endswith(".")
-        assert "DMI" not in reason and "SMI" not in reason
+        assert reason["cause"] in ("no-published-number", "estimate-only", "too-sparse")
+        assert reason["reason"].endswith(".")
+        assert "DMI" not in reason["reason"] and "SMI" not in reason["reason"]
 
 
 # ---------------------------------------------------------------------------
@@ -839,7 +855,7 @@ def test_artifact_bullet_with_no_matching_series_id_anywhere_gets_an_honest_no_c
     bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path))
     b1 = bullets[1]
     assert b1["chart"] is None
-    assert "no plain-English name for what they measure yet" in b1["noChartReason"]
+    assert "no plain-English name for what they measure yet" in b1["noChartReason"]["reason"]
 
 
 def test_mechanical_scene_never_borrows_a_label_from_another_scene(tmp_path):
@@ -866,7 +882,7 @@ def test_mechanical_scene_never_borrows_a_label_from_another_scene(tmp_path):
 
     bullets = build_bullets(story, scorecard, {}, str(tmp_path))
     assert bullets[0]["chart"] is None
-    assert "no plain-English name for what they measure yet" in bullets[0]["noChartReason"]
+    assert "no plain-English name for what they measure yet" in bullets[0]["noChartReason"]["reason"]
 
 
 def test_story_with_bullets_none_takes_the_mechanical_path(tmp_path):

@@ -38,7 +38,7 @@ import {Bullets} from '../components/Bullets';
 import {MiniChart} from '../components/MiniChart';
 import {NoChart} from '../components/NoChart';
 import {parseDashboard} from '../load';
-import type {Bullet, Chart} from '../load';
+import type {Bullet, Chart, NoChartReason} from '../load';
 import {readGolden} from './fixtures';
 
 function draw(ui: React.ReactElement) {
@@ -67,6 +67,7 @@ const COLUMNS_CHART: Chart = {
     date: '2026-08-04',
     tier: 'primary',
   },
+  researched: false,
 };
 
 const BARS_CHART: Chart = {
@@ -86,6 +87,7 @@ const BARS_CHART: Chart = {
     date: '2026-08-04',
     tier: 'secondary',
   },
+  researched: false,
 };
 
 const LINE_CHART: Chart = {
@@ -107,15 +109,22 @@ const LINE_CHART: Chart = {
     date: '2026-08-01',
     tier: 'secondary',
   },
+  researched: false,
 };
 
-function bulletWith(chart: Chart | null, noChartReason: string | null): Bullet {
+/** Builds a {reason, cause} pair from a plain sentence, for tests that only
+ * care about the reason text and don't exercise cause-specific behaviour. */
+function noChartReason(reason: string, cause: NoChartReason['cause'] = 'no-published-number'): NoChartReason {
+  return {reason, cause};
+}
+
+function bulletWith(chart: Chart | null, reason: NoChartReason | null): Bullet {
   return {
     date: '2026-08-04',
     text: 'A constructed bullet for coverage.',
     storyHref: 'story/2026-08-05.html',
     chart,
-    noChartReason,
+    noChartReason: reason,
     sources: [
       {
         title: 'A filing',
@@ -156,9 +165,9 @@ describe('the what-changed zone on real committed data', () => {
     const panels = document.querySelectorAll('.mini-plot.empty');
     panels.forEach((panel, i) => {
       const reason = golden()[i].noChartReason!;
-      const [headline, rest] = reason.split(/\.\s+/, 2);
-      expect(panel.textContent).toContain(headline);
-      expect(panel.textContent).toContain(rest);
+      expect(panel.textContent).toContain('No chart.');
+      expect(panel.textContent).toContain(reason.reason);
+      expect(panel.getAttribute('data-cause')).toBe(reason.cause);
     });
   });
 
@@ -173,16 +182,27 @@ describe('the what-changed zone on real committed data', () => {
 
 describe('NoChart — the honest-omission panel', () => {
   it('renders the dashed panel with the reason, and NO svg', () => {
-    draw(<NoChart reason="No chart. The only numbers here are our own estimates, not published facts, so we don't chart them." />);
+    draw(
+      <NoChart
+        reason="The only numbers we track for this are our own estimates, not published facts, so we don't chart them."
+        cause="estimate-only"
+      />,
+    );
     const panel = document.querySelector('.mini-plot.empty')!;
     expect(panel).not.toBeNull();
     expect(panel.querySelector('svg')).toBeNull();
     expect(panel.textContent).toContain('No chart.');
     expect(panel.textContent).toContain('our own estimates');
+    expect(panel.getAttribute('data-cause')).toBe('estimate-only');
   });
 
   it('never renders an svg regardless of how the reason text is worded', () => {
-    draw(<NoChart reason="No chart. We don't yet have a plain-English way to describe what this number measures, so we don't draw it." />);
+    draw(
+      <NoChart
+        reason="We don't yet have a plain-English way to describe what this number measures, so we don't draw it."
+        cause="too-sparse"
+      />,
+    );
     expect(document.querySelectorAll('svg')).toHaveLength(0);
   });
 });
@@ -212,7 +232,15 @@ describe('MiniChart — the three chart forms', () => {
 
   it('a bullet with a chart renders an svg, a caption, and its own source link', async () => {
     const bullet = bulletWith(COLUMNS_CHART, null);
-    draw(<Bullets bullets={[bullet, bulletWith(null, 'No chart. Reason one.'), bulletWith(null, 'No chart. Reason two.')]} />);
+    draw(
+      <Bullets
+        bullets={[
+          bullet,
+          bulletWith(null, noChartReason('Reason one.')),
+          bulletWith(null, noChartReason('Reason two.')),
+        ]}
+      />,
+    );
     expect(document.querySelector('figure.mini svg')).not.toBeNull();
     expect(screen.getByText(COLUMNS_CHART.caption)).toBeInTheDocument();
 
@@ -268,7 +296,10 @@ describe('Bullets — the whole zone', () => {
   it('mixes a charted bullet and a no-chart bullet without crashing, keeping row order', () => {
     const bullets = [
       bulletWith(COLUMNS_CHART, null),
-      bulletWith(null, 'No chart. The only numbers here are our own estimates, not published facts, so we don’t chart them.'),
+      bulletWith(null, noChartReason(
+        'The only numbers we track for this are our own estimates, not published facts, so we don’t chart them.',
+        'estimate-only',
+      )),
       bulletWith(BARS_CHART, null),
     ];
     draw(<Bullets bullets={bullets} />);

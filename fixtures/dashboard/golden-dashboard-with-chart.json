@@ -31,6 +31,7 @@
             "value": 6.718
           }
         ],
+        "researched": false,
         "source": {
           "date": "2026-08-04",
           "outlet": "AMD investor relations",
@@ -72,7 +73,10 @@
     {
       "chart": null,
       "date": "2026-08-05",
-      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+      "noChartReason": {
+        "cause": "no-published-number",
+        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
+      },
       "sources": [
         {
           "date": "2026-08-04",
@@ -88,7 +92,10 @@
     {
       "chart": null,
       "date": "2026-08-05",
-      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+      "noChartReason": {
+        "cause": "no-published-number",
+        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
+      },
       "sources": [
         {
           "date": "2026-07-31",
@@ -323,7 +330,7 @@
       }
     ]
   },
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "verdict": {
     "answer": "Getting closer. The challenger had a good quarter.",
     "chip": {

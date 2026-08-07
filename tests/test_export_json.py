@@ -797,7 +797,7 @@ def test_the_chart_golden_fixture_really_carries_a_chart():
     charted = [b for b in golden["bullets"] if b["chart"] is not None]
     assert len(charted) == 1
     chart = charted[0]["chart"]
-    assert set(chart) == {"form", "title", "caption", "unit", "points", "source"}
+    assert set(chart) == {"form", "title", "caption", "unit", "points", "source", "researched"}
     assert chart["points"]
     assert set(chart["points"][0]) == {"label", "value", "hollow", "sourceUrl"}
     jsonschema.validate(golden, SCHEMA)

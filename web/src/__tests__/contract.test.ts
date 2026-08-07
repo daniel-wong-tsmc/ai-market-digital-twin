@@ -30,7 +30,7 @@ describe('dashboard.json contract', () => {
 
   it('the golden payload parses into the loader types', () => {
     const data = parseDashboard(golden());
-    expect(data.schemaVersion).toBe('1.0');
+    expect(data.schemaVersion).toBe('1.1');
     expect(data.categoryId).toBe('chips.merchant-gpu');
     expect(data.asOf).toBe('2026-08-05');
     expect(data.verdict.question).toBe('Is supply catching up to demand?');
@@ -69,6 +69,21 @@ describe('dashboard.json contract', () => {
     (broken.verdict as {sources: unknown[]}).sources = [{note: 'trust me'}];
     expect(makeValidator()(broken)).toBe(false);
     expect(() => parseDashboard(broken)).toThrow(/source/i);
+  });
+
+  it('rejects the old 1.0 bare-string noChartReason shape (STRICT, no compat branch)', () => {
+    const broken = golden();
+    (broken.bullets as Array<Record<string, unknown>>)[0].noChartReason = 'No published number.';
+    expect(makeValidator()(broken)).toBe(false);
+    expect(() => parseDashboard(broken)).toThrow();
+  });
+
+  it('rejects an unknown noChartReason cause', () => {
+    const broken = golden();
+    const bullet = (broken.bullets as Array<Record<string, unknown>>)[0];
+    (bullet.noChartReason as Record<string, unknown>).cause = 'something-else';
+    expect(makeValidator()(broken)).toBe(false);
+    expect(() => parseDashboard(broken)).toThrow();
   });
 });
 

@@ -5,7 +5,7 @@
   "description": "Single daily JSON payload exported by export_json.py and rendered by the React dashboard.",
   "type": "object",
   "properties": {
-    "schemaVersion": { "const": "1.0" },
+    "schemaVersion": { "const": "1.1" },
     "categoryId": { "type": "string" },
     "asOf": { "type": "string" },
     "verdict": { "$ref": "#/$defs/verdict" },
@@ -154,9 +154,21 @@
           "type": "array",
           "items": { "$ref": "#/$defs/chartPoint" }
         },
-        "source": { "$ref": "#/$defs/ref" }
+        "source": { "$ref": "#/$defs/ref" },
+        "researched": { "type": "boolean" }
       },
       "required": ["form", "title", "caption", "unit", "points", "source"],
+      "additionalProperties": false
+    },
+    "noChartReason": {
+      "type": "object",
+      "properties": {
+        "reason": { "type": "string" },
+        "cause": {
+          "enum": ["no-published-number", "estimate-only", "too-sparse"]
+        }
+      },
+      "required": ["reason", "cause"],
       "additionalProperties": false
     },
     "bullet": {
@@ -169,7 +181,7 @@
           "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/chart" }]
         },
         "noChartReason": {
-          "oneOf": [{ "type": "null" }, { "type": "string" }]
+          "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/noChartReason" }]
         },
         "sources": {
           "type": "array",
@@ -182,7 +194,7 @@
         {
           "properties": {
             "chart": { "type": "null" },
-            "noChartReason": { "type": "string" }
+            "noChartReason": { "type": "object" }
           }
         },
         {

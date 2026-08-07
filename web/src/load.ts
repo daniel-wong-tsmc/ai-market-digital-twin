@@ -68,6 +68,27 @@ export interface Chart {
   unit: string;
   points: ChartPoint[];
   source: Ref;
+  /** True only for a chart drawn from today's same-day chart research
+   * (quarantined, single-source, verified) -- never for a curated or
+   * findings-fallback chart. */
+  researched: boolean;
+}
+
+/**
+ * Why a bullet has no chart, machine-readable. Fixed by the F113 Task 1
+ * brief, verbatim -- these three cover every honesty-gate branch in
+ * `gpu_agent/dashboard/bullets.py`'s `_fallback_reason`:
+ *  - 'no-published-number': nothing is tracked for this at all.
+ *  - 'estimate-only': the number we track is our own estimate, never a
+ *    published figure.
+ *  - 'too-sparse': we hold real, published numbers, but not enough of them
+ *    (or not yet honestly nameable/titled) to draw without misleading.
+ */
+export type Cause = 'no-published-number' | 'estimate-only' | 'too-sparse';
+
+export interface NoChartReason {
+  reason: string;
+  cause: Cause;
 }
 
 export interface Bullet {
@@ -75,7 +96,7 @@ export interface Bullet {
   text: string;
   storyHref: string;
   chart: Chart | null;
-  noChartReason: string | null;
+  noChartReason: NoChartReason | null;
   sources: Ref[];
 }
 
@@ -97,7 +118,7 @@ export interface FooterLink {
 }
 
 export interface Dashboard {
-  schemaVersion: '1.0';
+  schemaVersion: '1.1';
   categoryId: string;
   asOf: string;
   verdict: VerdictData;
@@ -257,13 +278,30 @@ function parseChart(raw: unknown, where: string): Chart {
       };
     }),
     source: parseRef(c.source, `${where}.source`),
+    // Optional at the schema level ("researched defaults allowed") -- every
+    // chart this cycle's Python side emits sets it explicitly, but an
+    // absent key still means "not researched", never a parse failure.
+    researched: c.researched === undefined ? false : bool(c, 'researched', where),
+  };
+}
+
+const CAUSES = ['no-published-number', 'estimate-only', 'too-sparse'] as const;
+
+function parseNoChartReason(raw: unknown, where: string): NoChartReason {
+  const r = obj(raw, where);
+  return {
+    reason: str(r, 'reason', where),
+    cause: oneOf(r, 'cause', CAUSES, where),
   };
 }
 
 function parseBullet(raw: unknown, where: string): Bullet {
   const b = obj(raw, where);
   const chart = b.chart === null ? null : parseChart(b.chart, `${where}.chart`);
-  const noChartReason = nullableStr(b, 'noChartReason', where);
+  const noChartReason =
+    b.noChartReason === null
+      ? null
+      : parseNoChartReason(b.noChartReason, `${where}.noChartReason`);
   if (chart === null && noChartReason === null) {
     fail(`${where}`, 'has no chart and no reason why not');
   }
@@ -322,8 +360,8 @@ function parseGapChart(raw: unknown): GapChart {
  */
 export function parseDashboard(raw: unknown): Dashboard {
   const d = obj(raw, 'payload');
-  if (d.schemaVersion !== '1.0') {
-    fail('schemaVersion', `is "${String(d.schemaVersion)}", not the expected "1.0"`);
+  if (d.schemaVersion !== '1.1') {
+    fail('schemaVersion', `is "${String(d.schemaVersion)}", not the expected "1.1"`);
   }
   const bullets = list(d, 'bullets', 'payload');
   if (bullets.length !== 3) {
@@ -334,7 +372,7 @@ export function parseDashboard(raw: unknown): Dashboard {
     fail('dimensions', `has ${dimensions.length} entries, not the expected 6`);
   }
   return {
-    schemaVersion: '1.0',
+    schemaVersion: '1.1',
     categoryId: str(d, 'categoryId', 'payload'),
     asOf: str(d, 'asOf', 'payload'),
     verdict: parseVerdict(d.verdict),

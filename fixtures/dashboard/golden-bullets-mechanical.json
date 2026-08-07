@@ -5,7 +5,10 @@
       "text": "AMD delivered, and it does not add chips this year. AMD reported the quarter the market was waiting for.",
       "storyHref": "story/2026-08-05.html",
       "chart": null,
-      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+      "noChartReason": {
+        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+        "cause": "no-published-number"
+      },
       "sources": [
         {
           "title": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
@@ -35,7 +38,10 @@
       "text": "One new buyer has already claimed a slice of 2027. SpaceX ended the June quarter with 1.4 gigawatts of computing capacity, up from 1.0 gigawatt three months earlier and 400 megawatts a year before, and expects to pass 2 gigawatts by the end of this year.",
       "storyHref": "story/2026-08-05.html",
       "chart": null,
-      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+      "noChartReason": {
+        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+        "cause": "no-published-number"
+      },
       "sources": [
         {
           "title": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
@@ -51,7 +57,10 @@
       "text": "The way around the packaging queue mostly helps other people's chips. Advanced packaging is the step that binds a chip to its memory, and it is still booked out.",
       "storyHref": "story/2026-08-05.html",
       "chart": null,
-      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+      "noChartReason": {
+        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+        "cause": "no-published-number"
+      },
       "sources": [
         {
           "title": "CryptoBriefing",
@@ -143,7 +152,8 @@
           "url": "https://ir.amd.com/",
           "date": "2025-08-15",
           "tier": "primary"
-        }
+        },
+        "researched": false
       },
       "noChartReason": null,
       "sources": [
@@ -240,7 +250,8 @@
               "tier": "secondary"
             }
           ]
-        }
+        },
+        "researched": false
       },
       "noChartReason": null,
       "sources": [
@@ -258,7 +269,10 @@
       "text": "The way around the packaging queue mostly helps other people's chips. Advanced packaging is the step that binds a chip to its memory, and it is still booked out.",
       "storyHref": "story/2026-08-05.html",
       "chart": null,
-      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+      "noChartReason": {
+        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+        "cause": "no-published-number"
+      },
       "sources": [
         {
           "title": "CryptoBriefing",

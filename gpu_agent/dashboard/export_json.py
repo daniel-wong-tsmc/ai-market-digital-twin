@@ -397,7 +397,7 @@ def build_dashboard_payload(category_id: str, store_dir: str) -> dict:
     direction = gap_trend_word(readings)
 
     payload = {
-        "schemaVersion": "1.0",
+        "schemaVersion": "1.1",
         "categoryId": category_id,
         "asOf": story.get("storyDate", ""),
         "verdict": _build_verdict(story, latest_raw, direction, findings_by_id),

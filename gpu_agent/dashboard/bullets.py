@@ -245,6 +245,11 @@ def _chart_from_series(cs: ChartSeries, rows: list[dict]) -> dict:
         "unit": cs.unit,
         "points": points,
         "source": source_ref,
+        # Schema 1.1 (F113 Task 1): every chart now says whether it came from
+        # today's same-day research or not. A curated registry match is
+        # never a researched chart -- only Task 5's quarantine-store match
+        # sets this true.
+        "researched": False,
     }
 
 
@@ -288,6 +293,10 @@ def _chart_from_fallback(title: str, plain_unit: str, rows: list[dict]) -> dict:
         "unit": plain_unit,
         "points": points,
         "source": assessment_ref(based_on),
+        # Schema 1.1 (F113 Task 1): the rule-3 fallback stitches together the
+        # cited findings' own tracked history -- never today's same-day
+        # research -- so this is always false here too.
+        "researched": False,
     }
 
 
@@ -319,12 +328,37 @@ def _match_registered_series(tags: set[str], series_reg: dict[str, ChartSeries],
     return None
 
 
+#: The three cause codes the dashboard schema (v1.1) enumerates for a
+#: chartless bullet -- fixed by the F113 Task 1 brief, verbatim. Every
+#: `_fallback_reason` branch below maps onto exactly one of these three:
+#:   - "no-published-number": nothing is tracked for this at all (no cited
+#:     indicator, or a cited indicator with no rows on disk yet).
+#:   - "estimate-only": we do track a number, but it's our own estimate,
+#:     never a published figure.
+#:   - "too-sparse": we hold real, published, non-estimate numbers, but they
+#:     can't honestly be drawn yet -- either there isn't enough of a track
+#:     record (too few points / too narrow a span), or the honesty gates in
+#:     `_match_fallback_history` (a nameable plain-English unit, a
+#:     narrator-supplied title) haven't been cleared. All three of those are
+#:     the same reader-facing situation: "not enough to draw on, yet" -- so
+#:     they share this one cause per the design doc's three named buckets
+#:     (spec §6.2: "no published number / our-own-estimate / nothing dense
+#:     enough").
+_CAUSE_NO_PUBLISHED_NUMBER = "no-published-number"
+_CAUSE_ESTIMATE_ONLY = "estimate-only"
+_CAUSE_TOO_SPARSE = "too-sparse"
+
+
 def _fallback_reason(indicator_ids: list[str], store_dir: str, *,
                       saw_non_measurable_unit: bool,
-                      saw_missing_title: bool) -> str:
+                      saw_missing_title: bool) -> dict:
     """An honest, reader-facing explanation of exactly what's missing --
     never a technical/internal phrase like 'insufficient series density',
     and never a reason that's simply untrue of the case it's describing.
+
+    Returns the schema's structured `noChartReason` shape directly:
+    ``{"reason": <plain-English sentence>, "cause": <one of the three
+    cause codes>}`` (see `_CAUSE_*` above for the mapping).
 
     Round-2 review (IMPORTANT, introduced by the round-1 fix): the two
     distinct honesty-gate failures inside `_match_fallback_history` used
@@ -338,13 +372,19 @@ def _fallback_reason(indicator_ids: list[str], store_dir: str, *,
     just no plain-English name for it in the story yet).
     """
     if not indicator_ids:
-        return ("No chart. This story isn't tied to a tracked number yet — "
-                "what's here is reported facts, not a running data series.")
+        return {
+            "reason": ("This story isn't tied to a tracked number yet — "
+                       "what's here is reported facts, not a running data series."),
+            "cause": _CAUSE_NO_PUBLISHED_NUMBER,
+        }
 
     all_rows = [r for i in indicator_ids for r in _read_jsonl(Path(store_dir) / f"{i}.jsonl")]
     if not all_rows:
-        return ("No chart. Nobody is tracking a number for this yet — the "
-                "reporting behind it is one-off, not a running series.")
+        return {
+            "reason": ("Nobody is tracking a number for this yet — the "
+                       "reporting behind it is one-off, not a running series."),
+            "cause": _CAUSE_NO_PUBLISHED_NUMBER,
+        }
 
     if all(r.get("estimateGrade") is not False for r in all_rows):
         # FINAL REVIEW, Important 4: this used to say "The only numbers HERE
@@ -354,25 +394,37 @@ def _fallback_reason(indicator_ids: list[str], store_dir: str, *,
         # as a primary source. The sentence now says what it actually means:
         # the number WE TRACK for this is an estimate of ours. Wording only;
         # the gate itself is unchanged.
-        return ("No chart. The number we track for this is our own estimate, "
-                "not a published figure, so we don't draw it.")
+        return {
+            "reason": ("The number we track for this is our own estimate, "
+                       "not a published figure, so we don't draw it."),
+            "cause": _CAUSE_ESTIMATE_ONLY,
+        }
 
     if saw_non_measurable_unit:
-        return ("No chart. We don't yet have a plain-English way to "
-                "describe what this number measures, so we don't draw it.")
+        return {
+            "reason": ("We don't yet have a plain-English way to "
+                       "describe what this number measures, so we don't draw it."),
+            "cause": _CAUSE_TOO_SPARSE,
+        }
 
     if saw_missing_title:
-        return ("No chart. We have real, tracked numbers behind this, but "
-                "no plain-English name for what they measure yet, so we "
-                "don't chart them.")
+        return {
+            "reason": ("We have real, tracked numbers behind this, but "
+                       "no plain-English name for what they measure yet, so we "
+                       "don't chart them."),
+            "cause": _CAUSE_TOO_SPARSE,
+        }
 
-    return ("No chart. There isn't yet enough of a track record — too few "
-            "confirmed data points, or too narrow a span of time, to show a "
-            "trend without being misleading.")
+    return {
+        "reason": ("There isn't yet enough of a track record — too few "
+                   "confirmed data points, or too narrow a span of time, to show a "
+                   "trend without being misleading."),
+        "cause": _CAUSE_TOO_SPARSE,
+    }
 
 
 def _match_fallback_history(visual_labels: dict[str, str], indicator_ids: list[str],
-                             store_dir: str) -> tuple[dict | None, str | None]:
+                             store_dir: str) -> tuple[dict | None, dict | None]:
     """Rule 3: the cited findings' own numeric history. Dense enough
     only if >= _MIN_FALLBACK_POINTS non-estimate points span
     >= _MIN_FALLBACK_MONTHS distinct months. On top of that density gate,

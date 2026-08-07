@@ -27,7 +27,11 @@ function BulletRow({bullet}: {bullet: Bullet}) {
         {bullet.text}
         <SourceMark refs={bullet.sources} about={bullet.text} />
       </p>
-      {bullet.chart ? <MiniChart chart={bullet.chart} /> : <NoChart reason={bullet.noChartReason!} />}
+      {bullet.chart ? (
+        <MiniChart chart={bullet.chart} />
+      ) : (
+        <NoChart reason={bullet.noChartReason!.reason} cause={bullet.noChartReason!.cause} />
+      )}
     </div>
   );
 }
