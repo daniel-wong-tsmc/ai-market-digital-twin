@@ -38,6 +38,7 @@ Editorial rules:
 - On a quiet day, say plainly that little changed; do not dress aged evidence (freshnessWeight under 0.25) up as today's news.
 - You have no tools. Answer using only the data given to you in this prompt -- no tool use, no browsing, no memory beyond what's provided here.
 - Your entire answer is a single JSON object matching the schema given to you, and nothing else -- no commentary before or after it.
+- Also write bullets: the day's three takeaways, for an executive who reads nothing else. Each is one sentence of at most 28 words, understandable entirely on its own -- name the actor, the number or date that matters, and why it matters. Never open with "They", "It", "These", "Those" or "That". Every number must come from the findings you cite in that bullet's claimFindingIds. Plain English only.
 """
 
 

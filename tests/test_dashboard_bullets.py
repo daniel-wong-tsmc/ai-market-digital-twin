@@ -682,3 +682,214 @@ def test_every_no_chart_reason_is_a_plain_english_sentence():
         assert reason.startswith("No chart.")
         assert reason.endswith(".")
         assert "DMI" not in reason and "SMI" not in reason
+
+
+# ---------------------------------------------------------------------------
+# F114 Task 5: the dashboard PREFERS the narrator's own bullets. The
+# mechanical condenser above stays on only as the fallback -- for artifacts
+# written before this schema existed, and for days the narrator fell back.
+# ---------------------------------------------------------------------------
+
+def _artifact_story(bullets, scenes=None):
+    """A story artifact carrying narrator-written bullets. Scenes are still
+    present (the narrator always writes them) and still carry the visuals
+    that name each tracked series in plain English."""
+    story = _synthetic_story("Scene one title", [])
+    if scenes is not None:
+        story["scenes"] = scenes
+    story["bullets"] = bullets
+    return story
+
+
+def _three_artifact_bullets():
+    return [
+        {"text": "AMD's data centre revenue reached US$4.9 billion in the June quarter.",
+         "claimFindingIds": ["f1"]},
+        {"text": "SpaceX passed 1.4 gigawatts of computing capacity by the end of June.",
+         "claimFindingIds": ["f2"]},
+        {"text": "Advanced packaging stays booked out through 2027, holding back 3 rivals.",
+         "claimFindingIds": ["f3"]},
+    ]
+
+
+def _three_finding_scorecard():
+    return {
+        "findings": [
+            {"id": "f1", "indicatorId": "vendorRevenueGuidance", "entity": "amd",
+             "evidence": [{"source": "AMD Investor Relations", "url": "https://ir.amd.com/q2",
+                            "date": "2026-08-04", "tier": "primary"}]},
+            {"id": "f2", "indicatorId": "someTrackedIndicator", "entity": "spacex",
+             "evidence": [{"source": "Investing.com", "url": "https://example.test/spacex",
+                            "date": "2026-08-04", "tier": "secondary"}]},
+            {"id": "f3", "indicatorId": "pkgCapacityOrderSpread", "entity": "tsmc",
+             "evidence": [{"source": "TechSoda via Substack", "url": "https://example.test/pkg",
+                            "date": "2026-07-31", "tier": "secondary"}]},
+        ]
+    }
+
+
+def test_artifact_bullets_are_used_verbatim(tmp_path):
+    # The whole point of F114: the narrator's own sentence reaches the page
+    # untouched -- no title prefix, no first-sentence chopping.
+    story = _artifact_story(_three_artifact_bullets())
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path))
+
+    assert [b["text"] for b in bullets] == [b["text"] for b in _three_artifact_bullets()]
+    # Not a trace of the mechanical condenser's "<scene title>. <sentence>" shape.
+    assert not any(b["text"].startswith("Scene one title.") for b in bullets)
+
+
+def test_artifact_bullet_sources_come_from_the_bullets_own_finding_ids(tmp_path):
+    story = _artifact_story(_three_artifact_bullets())
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path))
+
+    assert bullets[0]["sources"] == [
+        {"title": "AMD Investor Relations", "outlet": "AMD Investor Relations",
+         "url": "https://ir.amd.com/q2", "date": "2026-08-04", "tier": "primary"}]
+    assert bullets[2]["sources"] == [
+        {"title": "TechSoda", "outlet": "Substack",
+         "url": "https://example.test/pkg", "date": "2026-07-31", "tier": "secondary"}]
+
+
+def test_artifact_bullets_keep_the_dashboard_payload_shape(tmp_path):
+    story = _artifact_story(_three_artifact_bullets())
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path))
+
+    assert len(bullets) == 3
+    for b in bullets:
+        assert set(b.keys()) == {"date", "text", "storyHref", "chart", "noChartReason", "sources"}
+        assert (b["chart"] is None) != (b["noChartReason"] is None)
+        assert b["date"] == "2026-08-05"
+        assert b["storyHref"] == "story/2026-08-05.html"
+        _assert_bullet_plain_english(b)
+        _validate_bullet_schema(b)
+
+
+def test_artifact_bullet_hitting_a_curated_series_still_gets_that_chart(tmp_path):
+    # Chart matching now keys off the BULLET's own cited findings. Bullet 1
+    # cites f1 (entity "amd"), so the curated AMD series must still match.
+    story = _artifact_story(_three_artifact_bullets())
+    series_reg = {"amdDataCenterRevenue": _series(
+        "amdDataCenterRevenue", ["amdDataCenter", "amd"], quality="hard-fact")}
+    rows = [_row("amdDataCenterRevenue", f"2025-{m:02d}", 1.0 + m) for m in range(1, 9)]
+    _write_jsonl(tmp_path / "amdDataCenterRevenue.jsonl", rows)
+
+    bullets = build_bullets(story, _three_finding_scorecard(), series_reg, str(tmp_path))
+    b0 = bullets[0]
+    assert b0["chart"] is not None
+    assert b0["noChartReason"] is None
+    assert b0["chart"]["title"] == "amdDataCenterRevenue"
+    assert len(b0["chart"]["points"]) == 8
+    # The other two bullets don't cite an "amd" finding, so they must NOT
+    # inherit bullet 1's chart -- proof the match is made per bullet.
+    assert bullets[1]["chart"] is None and bullets[2]["chart"] is None
+
+
+def test_artifact_bullet_chart_label_is_found_on_a_different_scene(tmp_path):
+    # The Option C decision (user, 2026-08-06): a narrator bullet has no
+    # `visual` of its own, so the chart's plain-English title is looked up
+    # across the WHOLE story by seriesId equality -- never by pairing bullet
+    # i with scene i.
+    #
+    # Here bullet 2 cites the indicator whose label lives on scene THREE. A
+    # positional pairing (bullet 2 <-> scene 2) would find no label at all
+    # and fall to an honest no-chart reason. Matching on seriesId finds
+    # "Memory factory spending" and charts it.
+    scenes = [
+        {"n": 1, "title": "Scene one", "paragraphs": ["One. Two."], "claimFindingIds": [],
+         "visual": {"kind": "spark", "seriesId": "someOtherIndicator",
+                     "label": "A completely different number"}},
+        {"n": 2, "title": "Scene two", "paragraphs": ["One. Two."], "claimFindingIds": []},
+        {"n": 3, "title": "Scene three", "paragraphs": ["One. Two."], "claimFindingIds": [],
+         "visual": {"kind": "spark", "seriesId": "someTrackedIndicator",
+                     "label": "Memory factory spending"}},
+    ]
+    story = _artifact_story(_three_artifact_bullets(), scenes=scenes)
+    # Bullet 2 cites f2 -> someTrackedIndicator, labelled only on scene 3.
+    rows = [_row("someTrackedIndicator", f"2025-{m:02d}", float(m), unit="USD")
+            for m in range(1, 9)]
+    _write_jsonl(tmp_path / "someTrackedIndicator.jsonl", rows)
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path))
+    b1 = bullets[1]
+    assert b1["chart"] is not None, "cross-scene seriesId lookup did not find the label"
+    assert b1["chart"]["title"] == "Memory factory spending"
+    assert b1["chart"]["title"] != "A completely different number"
+    _assert_bullet_plain_english(b1)
+    _validate_bullet_schema(b1)
+
+
+def test_artifact_bullet_with_no_matching_series_id_anywhere_gets_an_honest_no_chart(tmp_path):
+    # Same dense, plain-unit history as the test above, but NO scene names
+    # this series, so there is no honest plain-English title for it. The
+    # bullet must get the honest reason -- never a chart wearing some other
+    # series' label, and never a bare indicator code as its title.
+    scenes = [
+        {"n": 1, "title": "Scene one", "paragraphs": ["One. Two."], "claimFindingIds": [],
+         "visual": {"kind": "spark", "seriesId": "someOtherIndicator",
+                     "label": "A completely different number"}},
+        {"n": 2, "title": "Scene two", "paragraphs": ["One. Two."], "claimFindingIds": []},
+        {"n": 3, "title": "Scene three", "paragraphs": ["One. Two."], "claimFindingIds": []},
+    ]
+    story = _artifact_story(_three_artifact_bullets(), scenes=scenes)
+    rows = [_row("someTrackedIndicator", f"2025-{m:02d}", float(m), unit="USD")
+            for m in range(1, 9)]
+    _write_jsonl(tmp_path / "someTrackedIndicator.jsonl", rows)
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path))
+    b1 = bullets[1]
+    assert b1["chart"] is None
+    assert "no plain-English name for what they measure yet" in b1["noChartReason"]
+
+
+def test_mechanical_scene_never_borrows_a_label_from_another_scene(tmp_path):
+    # The other half of Option C: generalising the lookup must NOT loosen the
+    # MECHANICAL path. A scene's chart title still has to come from that
+    # scene's own visual. Here scene 1 cites the indicator, but only scene 3
+    # names it -- on the mechanical path (no artifact bullets) that must stay
+    # an honest no-chart, exactly as it is today.
+    story = {
+        "storyDate": "2026-08-05",
+        "scenes": [
+            {"n": 1, "title": "Scene one", "paragraphs": ["One. Two."],
+             "claimFindingIds": ["f1"]},
+            {"n": 2, "title": "Scene two", "paragraphs": ["One. Two."], "claimFindingIds": []},
+            {"n": 3, "title": "Scene three", "paragraphs": ["One. Two."], "claimFindingIds": [],
+             "visual": {"kind": "spark", "seriesId": "someTrackedIndicator",
+                         "label": "Memory factory spending"}},
+        ],
+    }
+    scorecard = _synthetic_scorecard("f1", "someTrackedIndicator", "market")
+    rows = [_row("someTrackedIndicator", f"2025-{m:02d}", float(m), unit="USD")
+            for m in range(1, 9)]
+    _write_jsonl(tmp_path / "someTrackedIndicator.jsonl", rows)
+
+    bullets = build_bullets(story, scorecard, {}, str(tmp_path))
+    assert bullets[0]["chart"] is None
+    assert "no plain-English name for what they measure yet" in bullets[0]["noChartReason"]
+
+
+def test_story_with_bullets_none_takes_the_mechanical_path(tmp_path):
+    # A day the narrator fell back writes the assembler story with no
+    # bullets. That must land on the mechanical condenser, unchanged.
+    story = _artifact_story(None)
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path))
+    assert bullets[0]["text"] == "Scene one title. First sentence here."
+
+
+def test_pre_f114_story_without_a_bullets_key_takes_the_mechanical_path(tmp_path):
+    # An artifact written before this schema existed has no `bullets` key at
+    # all -- not even None. It must still render.
+    story = _synthetic_story("Scene one title", [])
+    assert "bullets" not in story
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path))
+    assert bullets[0]["text"] == "Scene one title. First sentence here."
+
+
+def test_story_with_the_wrong_number_of_bullets_takes_the_mechanical_path(tmp_path):
+    # The schema requires exactly 3. A malformed artifact carrying 2 must
+    # fall back rather than ship a short payload the dashboard can't validate.
+    story = _artifact_story(_three_artifact_bullets()[:2])
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path))
+    assert len(bullets) == 3
+    assert bullets[0]["text"] == "Scene one title. First sentence here."

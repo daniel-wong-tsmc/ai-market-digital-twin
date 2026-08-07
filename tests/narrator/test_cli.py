@@ -59,6 +59,25 @@ def test_recorded_clean_writes_artifact(tmp_path, capsys):
     assert art.narratorMeta.promptHash == expected_hash
 
 
+def test_recorded_clean_writes_schema_version_2_with_bullets(tmp_path, capsys):
+    # F114 Task 5b: the gate (Check 8) now requires every accepted answer to carry
+    # bullets, so every artifact the accept path writes from here on is genuinely
+    # v2-shaped -- it must be labelled schemaVersion 2, not the old hardcoded 1.
+    store = _store(tmp_path)
+    answer = _ok(tmp_path)
+    ap = tmp_path / "answer.json"
+    ap.write_text(answer.model_dump_json(), encoding="utf-8")
+    rc = main(["narrator", "--recorded", str(ap), "--store", str(store),
+               "--category", CAT, "--date", DATE, "--model", "opus",
+               "--retries", "1"])
+    assert rc == 0
+    art = StoryStore(store).read(CAT, DATE)
+    assert art is not None
+    assert art.schemaVersion == 2
+    assert art.bullets is not None
+    assert len(art.bullets) == 3
+
+
 def test_recorded_gate_fail_writes_nothing(tmp_path, capsys):
     store = _store(tmp_path)
     answer = _ok(tmp_path)
@@ -128,6 +147,10 @@ def test_record_fallback_writes_fellback(tmp_path):
     assert art.scenes == [] and art.kpiPicks == [] and art.calloutMonths == []
     assert art.narratorMeta.fellBack is True
     assert art.narratorMeta.promptHash        # still filled: computed from real inputs
+    # F114 Task 5b: a fellBack artifact has no bullets, so it stays genuinely
+    # v1-shaped -- schemaVersion must NOT be bumped to 2 on this path.
+    assert art.schemaVersion == 1
+    assert art.bullets is None
     fallback_log = store / CAT / "story" / f"{DATE}.fallback.json"
     assert fallback_log.exists()
     assert "momentum" in fallback_log.read_text(encoding="utf-8")

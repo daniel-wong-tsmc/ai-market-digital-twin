@@ -60,6 +60,12 @@ class NarratorMeta(BaseModel):
     wroteAt: str
 
 
+class StoryBullet(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    text: str
+    claimFindingIds: list[str]
+
+
 class NarratorAnswer(BaseModel):
     """What the tool-less brain returns; the CLI wraps it into a StoryArtifact."""
     model_config = ConfigDict(extra="forbid")
@@ -68,11 +74,12 @@ class NarratorAnswer(BaseModel):
     scenes: list[StoryScene]
     kpiPicks: list[KpiPick]
     calloutMonths: list[CalloutMonth]
+    bullets: Optional[list[StoryBullet]] = None  # None = pre-F114 answer (v1)
 
 
 class StoryArtifact(NarratorAnswer):
     model_config = ConfigDict(extra="forbid")
-    schemaVersion: Literal[1]
+    schemaVersion: Literal[1, 2]  # was Literal[1]
     categoryId: str
     storyDate: str
     narratorMeta: NarratorMeta
