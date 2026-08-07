@@ -299,3 +299,128 @@ def test_cli_chart_research_emit_exits_nonzero_on_missing_store(tmp_path, capsys
 
     assert rc == 1
     assert "error" in capsys.readouterr().err
+
+
+# ---------------------------------------------------------------------------
+# F113 Task 7 Step 2: registry trust proof
+# ---------------------------------------------------------------------------
+#
+# The whole F113 trust model rests on ONE property: a researched series never
+# enters the human-curated `registry/chart-series.json`. Promotion is a human
+# edit, always. This test is the belt-and-suspenders mechanical guard: it scans
+# every .py file shipped in the package for `chart-series.json` appearing
+# anywhere near a write operation, and fails loudly if one ever shows up.
+
+_REGISTRY_FILENAME = "chart-series.json"
+
+# Any of these on a line means "this line can put bytes on disk".
+_WRITE_MARKERS = (
+    'open(',          # paired with a mode check below
+    '.write_text(',
+    '.write_bytes(',
+    'json.dump(',
+    '.write(',
+    '.writelines(',
+    'shutil.copy',
+    'shutil.move',
+    'os.replace(',
+    'os.rename(',
+    '.rename(',
+    '.replace(',
+    '.touch(',
+    '.unlink(',
+    'os.remove(',
+)
+
+# How far from the registry filename a write op still counts as "near".
+_PROXIMITY_LINES = 6
+
+
+def _package_python_files():
+    pkg_root = Path(__file__).resolve().parents[1] / "gpu_agent"
+    return sorted(p for p in pkg_root.rglob("*.py") if "__pycache__" not in p.parts)
+
+
+def _is_write_line(line: str) -> bool:
+    """True if `line` looks like it writes/mutates a file on disk.
+
+    `open(...)` only counts when it carries a write-ish mode, so the many
+    legitimate read-only `open(path)` loaders don't trip the guard.
+    """
+    stripped = line.strip()
+    # Ignore pure comment lines -- F113 deliberately documents the rule in
+    # prose right next to the code, and prose is not a writer.
+    if stripped.startswith("#"):
+        return False
+    for marker in _WRITE_MARKERS:
+        if marker not in line:
+            continue
+        if marker == 'open(':
+            # only a write mode counts
+            tail = line.split('open(', 1)[1]
+            if any(m in tail for m in ('"w', "'w", '"a', "'a", '"x', "'x", '"r+', "'r+")):
+                return True
+            continue
+        return True
+    return False
+
+
+def test_no_registry_writers():
+    """No module in gpu_agent/ may write to registry/chart-series.json.
+
+    Researched series live in the quarantine store; promotion into the curated
+    registry is a human edit. If this test goes red, something in the package
+    grew the ability to edit the registry -- that is a trust-model break, not a
+    test to be relaxed.
+    """
+    offenders = []
+    for path in _package_python_files():
+        lines = path.read_text(encoding="utf-8").splitlines()
+        registry_lines = [
+            i for i, line in enumerate(lines) if _REGISTRY_FILENAME in line
+        ]
+        if not registry_lines:
+            continue
+        for i in registry_lines:
+            lo = max(0, i - _PROXIMITY_LINES)
+            hi = min(len(lines), i + _PROXIMITY_LINES + 1)
+            for j in range(lo, hi):
+                if _is_write_line(lines[j]):
+                    offenders.append(
+                        f"{path.name}:{j + 1}: {lines[j].strip()!r} "
+                        f"(near {_REGISTRY_FILENAME} on line {i + 1})"
+                    )
+
+    assert not offenders, (
+        "A writer to the human-curated chart registry appeared. Researched "
+        "series must NEVER enter registry/chart-series.json -- promotion is a "
+        "human edit. Offending lines:\n  " + "\n  ".join(offenders)
+    )
+
+
+def test_no_registry_writers_guard_is_not_decorative():
+    """The guard above must actually detect a writer, not just always pass.
+
+    Proves `_is_write_line` fires on the write shapes we care about and stays
+    quiet on the read-only and comment shapes that legitimately appear in the
+    package today.
+    """
+    should_fire = [
+        'with open(path, "w", encoding="utf-8") as fh:',
+        'Path("registry/chart-series.json").write_text(payload)',
+        'json.dump(entries, fh)',
+        "fh.write(json.dumps(entries))",
+        'p.write_bytes(b"{}")',
+        "os.replace(tmp, dest)",
+    ]
+    for line in should_fire:
+        assert _is_write_line(line), f"guard failed to flag a writer: {line!r}"
+
+    should_not_fire = [
+        'with open(Path(path), encoding="utf-8") as fh:',
+        'DEFAULT_REGISTRY_PATH = "registry/chart-series.json"',
+        "# NOT `registry/chart-series.json` -- that registry stays human-curated",
+        "entries = json.load(fh)",
+    ]
+    for line in should_not_fire:
+        assert not _is_write_line(line), f"guard false-positived on: {line!r}"
