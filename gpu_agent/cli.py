@@ -297,6 +297,26 @@ def _dashboard_json(args) -> int:
     return 0
 
 
+def _chart_research(args) -> int:
+    """Handler for `gpu-agent chart-research emit` (F113 Task 3): write one
+    research prompt per chartless dashboard bullet and print the written
+    paths as JSON, so the run-cycle skill can dispatch one tool-USING
+    research agent per prompt.
+
+    Never raises past this handler: like `dashboard-json`, a broken
+    researcher step must not block the daily cycle -- any failure prints
+    to stderr and exits 1, with no prompt files left half-written.
+    """
+    from gpu_agent.chartdata.research import emit_research
+    try:
+        paths = emit_research(args.category, args.store, args.work)
+    except Exception as e:  # noqa: BLE001 -- see docstring: never block the cycle
+        print(f"gpu-agent chart-research: error: {e}", file=sys.stderr)
+        return 1
+    print(json.dumps([str(p) for p in paths], indent=2))
+    return 0
+
+
 def _corpus(args) -> int:
     """Handler for `gpu-agent corpus` (F62). Store-only mode (no --fresh) prints the
     coverage block for the gather top-up dispatch; assemble mode (--fresh) writes the
@@ -1708,6 +1728,14 @@ def main(argv=None) -> int:
                      help="store root (scorecards+story under <store>/<category>/, series under <store>/series)")
     djp.add_argument("--site", default="site",
                      help="site root (writes <site>/<category>/data/dashboard.json)")
+    crp = sub.add_parser("chart-research",
+                         help="F113: research prompts for chartless dashboard bullets")
+    crp.add_argument("action", choices=["emit"])
+    crp.add_argument("--category", required=True, help="categoryId (locates store)")
+    crp.add_argument("--store", default="store",
+                     help="store root (scorecards+story under <store>/<category>/)")
+    crp.add_argument("--work", required=True,
+                     help="this cycle's work dir (writes <work>/chart-research/bullet-<n>-prompt.txt)")
     wl = sub.add_parser("wiki-lint")
     wl.add_argument("--store", default="store", help="store root (holds wiki/ and findings/)")
     wl.add_argument("--as-of", required=True, type=_as_of)
@@ -1951,6 +1979,8 @@ def main(argv=None) -> int:
         return _chart_fetch(args)
     if args.cmd == "dashboard-json":
         return _dashboard_json(args)
+    if args.cmd == "chart-research":
+        return _chart_research(args)
     if args.cmd == "wiki-lint":
         return _wiki_lint(args)
     if args.cmd == "wiki-lifecycle":
