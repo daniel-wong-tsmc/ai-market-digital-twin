@@ -1,0 +1,54 @@
+{
+  "id": "www-globenewswire-com-1efbc0a3-2026-08-2",
+  "statement": "Akamai said year-to-date multi-year Cloud Infrastructure Services contracts are collectively worth over $2.8 billion, including one new U.S. technology customer worth more than $600 million over four years.",
+  "kind": "measured",
+  "value": {
+    "number": 2.8,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Multi-year contract value many times current quarterly revenue is committed future demand for GPU cloud capacity that has to be built and equipped.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Signed multi-year cloud contracts force forward purchases of accelerators, datacenter space and power to deliver the committed capacity."
+  },
+  "evidence": [
+    {
+      "source": "Akamai Technologies (official press release via GlobeNewswire)",
+      "url": "https://www.globenewswire.com/news-release/2026/08/06/3340672/0/en/Akamai-Reports-Second-Quarter-2026-Financial-Results.html",
+      "date": "2026-08-06",
+      "excerpt": "Year-to-date, we have signed numerous customers to multi-year CIS contracts, collectively worth over $2.8 billion.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Akamai Technologies (official press release via GlobeNewswire)",
+      "url": "https://www.globenewswire.com/news-release/2026/08/06/3340672/0/en/Akamai-Reports-Second-Quarter-2026-Financial-Results.html",
+      "date": "2026-08-06",
+      "excerpt": "This includes a contract with a U.S.-based technology company, which is also a new customer, worth more than $600 million over four years",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary-tier newswire release; the $2.8 billion is a stated contract-value figure used as a backlog proxy rather than a reported RPO, and there is no independent corroboration."
+  },
+  "dispersion": "Contract value is a disclosed proxy: the release contained no explicit remaining-performance-obligation figure.",
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

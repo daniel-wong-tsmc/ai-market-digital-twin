@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-08-07",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-thelec-net-c15d2de4-2026-08-1",
+        "www-thelec-net-c15d2de4-2026-08-2",
+        "www-thelec-net-c15d2de4-2026-08-3",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-2",
+        "www-kucoin-com-8fc72edf-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-digitimes-com-80018f32-2026-08-1",
+        "ir-amd-com-cfa508a5-2026-08-1",
+        "ir-amd-com-cfa508a5-2026-08-2",
+        "www-globenewswire-com-1efbc0a3-2026-08-1",
+        "www-globenewswire-com-1efbc0a3-2026-08-2",
+        "www-globenewswire-com-1efbc0a3-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "newsroom-amd-com-4824d28b-2026-08-1",
+        "newsroom-amd-com-4824d28b-2026-08-2",
+        "finance-yahoo-com-171fe64e-2026-08-4",
+        "ir-amd-com-d9abb1c2-2026-08-1",
+        "ir-amd-com-cfa508a5-2026-08-4"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-newegg-com-2121fd9f-2026-08-1",
+        "lambda-ai-71b45f28-2026-08-3",
+        "www-thelec-net-c15d2de4-2026-08-3",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "ir-amd-com-cfa508a5-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-2f05647b-2026-07-1",
+        "ca-investing-com-e6319e42-2026-08-4"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-tradingkey-com-855cb780-2026-07-1",
+        "404kresearch-substack-com-3985c52f-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-b7ff2af7-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-3",
+        "en-sedaily-com-c7890a6b-2026-07-1"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "www-intc-com-0fa743ed-2026-07-2"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-2185ba22-2026-07-2",
+        "finance-yahoo-com-baa362f5-2026-07-4"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 10,
+    "flagged": 0,
+    "skipped": 0
+  }
+}

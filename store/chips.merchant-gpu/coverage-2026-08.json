@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-08",
-  "capturedAt": "2026-08-06T01:22:11Z",
+  "capturedAt": "2026-08-07T01:23:41Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
@@ -13,14 +13,6 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "amd-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
       "paywalledNote": null
     },
     {
@@ -65,14 +57,6 @@
     },
     {
       "type": "source",
-      "id": "channel-checks",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Open-web channel checks: lead times, inventory notes from distributors' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "bis-export-controls",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -89,27 +73,11 @@
     },
     {
       "type": "source",
-      "id": "vendor-pr-trade-press",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Vendor press releases + trade press on merchant-GPU design wins' was not fetched. URL patterns: ['nvidianews.nvidia.com', 'ir.amd.com/news-events', 'tomshardware.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "semianalysis",
       "priority": "required",
       "acquisitionStatus": "paywalled",
       "reason": "Source 'SemiAnalysis channel-check lead-time data (deep tier)' requires a paid license (costUsd=0.0).",
       "paywalledNote": "SemiAnalysis publishes free headlines; deep channel-check lead-time data is behind a subscription. Paywalled portions are inventoried + labeled estimate, never scraped (Part 22)."
-    },
-    {
-      "type": "source",
-      "id": "gpu-marketplaces",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'GPU marketplaces / resale listings (secondary-market spot price)' was not fetched. URL patterns: ['ebay.com', 'amazon.com', 'newegg.com']",
-      "paywalledNote": null
     },
     {
       "type": "source",
@@ -128,39 +96,37 @@
       "paywalledNote": null
     },
     {
-      "type": "source",
-      "id": "upstream-component-leadtimes",
+      "type": "indicator",
+      "id": "D6",
       "priority": "required",
       "acquisitionStatus": "not-covered",
-      "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
+      "reason": "Indicator 'D6' (dimension: momentum) was not covered. Expected sources: ['lambda-gpu-pricing', 'coreweave-pricing'].",
       "paywalledNote": null
     }
   ],
   "gapCounts": {
-    "total": 16,
-    "source": 16,
-    "indicator": 0,
-    "required": 16,
+    "total": 12,
+    "source": 11,
+    "indicator": 1,
+    "required": 12,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://finance.yahoo.com/technology/article/elon-musk-says-spacex-will-build-exclusively-with-nvidia-touts-space-based-ai-servers-211803293.html",
-    "https://interestingengineering.com/ai-robotics/spacex-nvidia-starmind-ai1-compute-payload",
+    "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm",
+    "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
     "https://lambda.ai/service/gpu-cloud",
-    "https://m.lookonchain.com/feeds/66600",
-    "https://www.investing.com/news/transcripts/earnings-call-transcript-mediatek-q2-2026-revenue-beats-guidance-as-ai-push-grows-93CH-4826949",
+    "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/",
+    "https://www.digitimes.com/news/a20260805PD244/revenue-foxconn-growth-2026-electronics.html",
+    "https://www.globenewswire.com/news-release/2026/08/06/3340672/0/en/Akamai-Reports-Second-Quarter-2026-Financial-Results.html",
+    "https://www.newegg.com/p/pl?d=nvidia+h100+gpu",
     "https://www.runpod.io/pricing",
-    "https://www.theregister.com/ai-and-ml/2026/08/03/mediatek-lines-up-5b-war-chest-for-ai-datacenter-push/5282304",
-    "https://www.thundercompute.com/blog/nvidia-rtx-pro-6000-pricing",
-    "https://www.trendforce.com/news/2026/07/31/news-tsmc-reportedly-develops-emib-like-packaging-with-kinsus-to-prevent-potential-customer-shift-to-intel/",
-    "https://www.trendforce.com/presscenter/news/20260804-13166.html"
+    "https://www.thelec.net/news/articleView.html?idxno=12856"
   ],
   "judgedIndicatorIds": [
     "D2",
-    "D6",
     "S10",
     "S9",
     "apiArr",

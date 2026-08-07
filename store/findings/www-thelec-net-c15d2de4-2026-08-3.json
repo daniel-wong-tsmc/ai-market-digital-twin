@@ -1,0 +1,44 @@
+{
+  "id": "www-thelec-net-c15d2de4-2026-08-3",
+  "statement": "Spot-market prices for 300mm wafers have begun rising with further increases expected in the second half of 2026, and GlobalWafers expects supply pressure to intensify through H2 2027 as new Samsung, SK hynix and Micron fabs compete for the same wafer supply.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Rising substrate prices plus a stated multi-year squeeze mean the cost and scarcity of the base input for AI chips gets worse before it gets better.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "New memory fabs coming online draw on a fixed 300mm wafer pool, so rising spot prices and intensifying competition constrain how fast HBM and accelerator output can scale."
+  },
+  "evidence": [
+    {
+      "source": "The Elec",
+      "url": "https://www.thelec.net/news/articleView.html?idxno=12856",
+      "date": "2026-08-06",
+      "excerpt": "spot-market prices for 300mm wafers have begun rising with further increases expected in H2 2026; GlobalWafers expects supply pressure to intensify through H2 2027 as new Samsung, SK hynix, and Micron fabs come online and compete for the same wafer supply.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet paraphrasing earnings-call market commentary; qualitative direction only, no verified price figures, so no number claimed."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

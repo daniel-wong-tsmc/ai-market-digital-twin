@@ -1,0 +1,198 @@
+{
+  "headline": "The shortage moves one step further back: the bare wafers",
+  "deck": "A supplier of the blank silicon everything is built on says its lines are full and prices are rising, with pressure it expects to last into late 2027. Memory was already short. Demand kept climbing this week, with AMD's data-centre sales doubling and Foxconn posting its biggest month ever.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Now even the blank silicon is running out",
+      "paragraphs": [
+        "GlobalWafers, which makes the plain silicon discs that every chip and every memory stack starts life on, said on 6 August that its 300-millimetre, 200-millimetre and 150-millimetre lines are effectively running flat out. It said shortages have already appeared for some of the advanced 12-inch products, and named AI chips, stacked memory, silicon photonics and advanced packaging as what is pulling on them.",
+        "Prices are moving with it. The company said spot prices for 300-millimetre wafers have started to rise, with more increases expected in the second half of this year, and that it expects the squeeze to get worse through the second half of 2027 as new Samsung, SK hynix and Micron plants all compete for the same wafers. It also signed a ten-year supply deal with Micron starting in 2027, with money paid up front by Micron — one of the longest agreements the wafer business has seen.",
+        "That matters because it sits underneath the limit everyone was already watching. TrendForce said on 4 August that memory supply stays short through 2027, which caps how much plant capacity the memory makers can put toward the stacked memory beside each accelerator. NVIDIA has already trimmed the design: the mainstream Rubin Ultra now carries 192 gigabytes of stacked memory instead of 288, reported as a way to get more finished chips out of a fixed pool of memory.",
+        "So the queue has not moved. It has simply gained another step at the back of it."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "www-thelec-net-c15d2de4-2026-08-1",
+        "www-thelec-net-c15d2de4-2026-08-2",
+        "www-thelec-net-c15d2de4-2026-08-3",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-2",
+        "www-kucoin-com-8fc72edf-2026-08-1"
+      ],
+      "sourceLine": "The Elec, 6 August 2026, with TrendForce of 4 August 2026, 404K Semi-Ai Research of 4 August 2026 and a KuCoin news flash of 3 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://www.thelec.net/news/articleView.html?idxno=12856",
+          "title": "Wafer maker says its lines are full and prices are rising",
+          "outlet": "The Elec",
+          "date": "2026-08-06"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Demand did not pause while supply caught its breath",
+      "paragraphs": [
+        "Foxconn, which assembles a large share of the world's AI servers, reported July sales of NT$946.51 billion on 5 August. That is 54.19 percent more than a year earlier and 15.18 percent more than June, and the first month it has ever cleared NT$900 billion. It credited cloud, networking and computing products.",
+        "AMD's second quarter, reported 4 August, tells the same story from the chip side. Its data-centre sales reached $6.7 billion, more than double the $3.2 billion of a year earlier, on server processors and Instinct accelerators. It guided the current quarter to about $13.0 billion, give or take $300 million, roughly 41 percent above last year.",
+        "The pull now reaches smaller providers too. Akamai said on 6 August that its cloud infrastructure business, which includes renting out GPUs, brought in $99 million in the quarter, 39 percent more than a year earlier. It has signed more than $2.8 billion of multi-year contracts so far this year, including one new US technology customer worth over $600 million across four years. It spent $346.5 million on plant and equipment in the quarter, equal to 32 percent of everything the whole company sold."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "www-digitimes-com-80018f32-2026-08-1",
+        "ir-amd-com-cfa508a5-2026-08-1",
+        "ir-amd-com-cfa508a5-2026-08-2",
+        "www-globenewswire-com-1efbc0a3-2026-08-1",
+        "www-globenewswire-com-1efbc0a3-2026-08-2",
+        "www-globenewswire-com-1efbc0a3-2026-08-3"
+      ],
+      "sourceLine": "Digitimes, 5 August 2026, AMD's second-quarter results of 4 August 2026, and Akamai's second-quarter results of 6 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://www.digitimes.com/news/a20260805PD244/revenue-foxconn-growth-2026-electronics.html",
+          "title": "Foxconn posts its first month above NT$900 billion",
+          "outlet": "Digitimes",
+          "date": "2026-08-05"
+        },
+        {
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "title": "AMD second-quarter 2026 results",
+          "outlet": "AMD Investor Relations",
+          "date": "2026-08-04"
+        },
+        {
+          "url": "https://www.globenewswire.com/news-release/2026/08/06/3340672/0/en/Akamai-Reports-Second-Quarter-2026-Financial-Results.html",
+          "title": "Akamai second-quarter 2026 results",
+          "outlet": "Akamai Technologies (official press release via GlobeNewswire)",
+          "date": "2026-08-06"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The challenger buys a shortcut, and leans on two customers",
+      "paragraphs": [
+        "AMD said on 6 August it has agreed to buy Taalas, a Toronto company that designs silicon for running finished AI models rather than training them. No price was given and the deal still needs regulatory clearance. AMD calls this kind of work one of the fastest-growing parts of the AI market and plans to combine the Taalas technology with its own accelerators inside complete systems.",
+        "That is a sensible move, because AMD is still small here. One report on its results, dated 5 August, describes NVIDIA as taking as much as 90 percent of AI chip sales in a given quarter.",
+        "It is also concentrated. AMD's quarterly filing of 5 August names two customers, OpenAI and Meta, each planning to take up to 6 gigawatts of its data-centre chips under multi-year agreements. Against that, the same results show only $222 million of firmly committed revenue on contracts running longer than a year, $144 million of it due within twelve months. The gigawatt numbers are intentions. The signed, countable backlog is small."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "newsroom-amd-com-4824d28b-2026-08-1",
+        "newsroom-amd-com-4824d28b-2026-08-2",
+        "finance-yahoo-com-171fe64e-2026-08-4",
+        "ir-amd-com-d9abb1c2-2026-08-1",
+        "ir-amd-com-cfa508a5-2026-08-4"
+      ],
+      "sourceLine": "AMD Newsroom, 6 August 2026, AMD's quarterly filing of 5 August 2026, AMD's second-quarter results of 4 August 2026, and Yahoo Finance, 5 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://newsroom.amd.com/news/amd-acquires-taalas-ai-inference/",
+          "title": "AMD agrees to buy Taalas",
+          "outlet": "AMD Newsroom",
+          "date": "2026-08-06"
+        },
+        {
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm",
+          "title": "AMD quarterly filing for the period ended 27 June 2026",
+          "outlet": "AMD Investor Relations (SEC Form 10-Q)",
+          "date": "2026-08-05"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch from here",
+      "paragraphs": [
+        "The retail counter is the plainest test of whether any of this reaches an ordinary buyer. Newegg's listings today show an NVIDIA H100 80GB card at $32,879.00 in stock, with other offers from $29,500.00, an H100 NVL at $30,999.00 that is out of stock, and an H200 NVL at $35,998.00 with stock available. A three-year-old part is still selling for more than thirty thousand dollars.",
+        "Renting tells the same story. Lambda's published price tables on 5 August still carried no H200, GB200, GB300 or B300, so the newest chip it rents in public remains the B200.",
+        "Three things would change the picture. Whether wafer prices keep climbing and the squeeze really runs into late 2027, as the wafer maker expects. Which memory choice NVIDIA settles on for Rubin Ultra, because that decides how many chips one pool of memory can fill. And whether AMD's own guide of roughly $13.0 billion this quarter lands, which is the honest measure of whether a second supplier is adding real deliveries rather than announcements. Until then, the newest parts keep going to buyers who booked them long ago."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "www-newegg-com-2121fd9f-2026-08-1",
+        "lambda-ai-71b45f28-2026-08-3",
+        "www-thelec-net-c15d2de4-2026-08-3",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "ir-amd-com-cfa508a5-2026-08-2"
+      ],
+      "sourceLine": "Newegg listings read on 7 August 2026, Lambda's published pricing page of 5 August 2026, The Elec of 6 August 2026, TrendForce of 4 August 2026 and AMD's results of 4 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://www.newegg.com/p/pl?d=nvidia+h100+gpu",
+          "title": "What an H100 card costs at the counter today",
+          "outlet": "Newegg",
+          "date": "2026-08-07"
+        },
+        {
+          "url": "https://lambda.ai/service/gpu-cloud",
+          "title": "Lambda cloud rental prices",
+          "outlet": "Lambda Labs",
+          "date": "2026-08-07"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Money going into memory plants is what eventually lifts the limit on how many chips get finished.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Finished servers leaving the factories is the honest count of what buyers actually received.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Whether the biggest buyers keep raising their budgets sets how long the queue stays full.",
+      "scene": 3
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a chip costs on the open market shows whether supply is reaching anyone outside the long-standing contracts.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "A wafer maker says its lines are full and 300-millimetre prices are rising, with the squeeze expected to run into the second half of 2027.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "Foxconn's July sales reached NT$946.51 billion, up 54.19 percent on the year and its first month ever above NT$900 billion.",
+      "scene": 2
+    }
+  ],
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-07",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "2304309036f728179b7e5ed3292c08c57abfbfb443c00ed34dfbd696531c3ec4",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-07T01:49:44.906453+00:00"
+  }
+}

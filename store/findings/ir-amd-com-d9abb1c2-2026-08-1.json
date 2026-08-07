@@ -1,0 +1,44 @@
+{
+  "id": "ir-amd-com-d9abb1c2-2026-08-1",
+  "statement": "AMD's 10-Q says two named customers, OpenAI and Meta, each intend to deploy up to 6 gigawatts of AMD data center GPUs under multi-year agreements signed in October 2025 and February 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Two buyers carrying multi-gigawatt intentions means a large slice of AMD's future accelerator volume rides on a very small number of decision makers.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.hyperscale-cloud",
+      "energy.power-generation"
+    ],
+    "direction": "mixed",
+    "mechanism": "Multi-gigawatt intent from two customers underwrites accelerator demand and downstream power and datacenter needs, while concentrating the risk that one customer's schedule change moves the whole line."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (SEC Form 10-Q)",
+      "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm",
+      "date": "2026-08-05",
+      "excerpt": "In October 2025 and February 2026, we entered into multi-year agreements with OpenAI OpCo, LLC (OpenAI) and Meta Platforms, Inc. (Meta), respectively, under which each customer intends to deploy up to 6 gigawatts of AMD data center GPUs.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Verbatim overview text from AMD's Form 10-Q, a primary filing."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 3; sources: AMD Investor Relations, AMD Investor Relations (SEC Form 10-Q)",
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

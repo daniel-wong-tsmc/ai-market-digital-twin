@@ -1,0 +1,50 @@
+{
+  "id": "www-thelec-net-c15d2de4-2026-08-2",
+  "statement": "GlobalWafers signed a 10-year long-term supply agreement with Micron starting in 2027 that includes upfront strategic financial support from Micron, described as among the wafer industry's longest-duration agreements.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A memory maker paying up front to lock in a decade of wafers is behaving like a buyer that expects scarcity, which is itself a tightness signal.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Long-term prepaid capacity reservations secure substrate for one buyer while removing it from the open market, tightening what remains available to everyone else."
+  },
+  "evidence": [
+    {
+      "source": "The Elec",
+      "url": "https://www.thelec.net/news/articleView.html?idxno=12856",
+      "date": "2026-08-06",
+      "excerpt": "GlobalWafers signed a 10-year long-term agreement (LTA) with Micron, beginning next year (2027), including upfront strategic financial support from Micron -- described as one of the wafer industry's longest-duration agreements historically.",
+      "tier": "secondary"
+    },
+    {
+      "source": "The Elec",
+      "url": "https://www.thelec.net/news/articleView.html?idxno=12856",
+      "date": "2026-08-06",
+      "excerpt": "both memory and logic manufacturers are locking in long-term 300mm capacity",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; the underlying agreement was announced separately in July 2026 and this is follow-up earnings-call commentary."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-07T01:08:26Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
