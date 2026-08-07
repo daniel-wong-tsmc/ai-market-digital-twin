@@ -174,6 +174,34 @@ def _scene_indicator_ids(scene: dict, findings_by_id: dict) -> list[str]:
     return seen
 
 
+def _visual_labels(scenes: list[dict]) -> dict[str, str]:
+    """The narrator's own plain-English names for tracked series, keyed by
+    the series id they name, collected from the `visual` of each scene given.
+
+    Matching is on `seriesId` equality and nothing else -- never on a scene's
+    position in the story. That keeps this one lookup honest for both callers
+    (F114 Task 5, user decision "Option C", 2026-08-06):
+
+    - the mechanical path passes ONE scene, so the map holds at most that
+      scene's own label -- identical to the per-scene check it replaces, and
+      a scene can never borrow another scene's label;
+    - the artifact path passes every scene, because a narrator-written bullet
+      has no `visual` of its own, yet the story it belongs to does name its
+      series in plain English. Keying on `seriesId` means a label can only
+      ever land on the series it was written for.
+
+    First-seen wins, so a story that names one series twice is deterministic.
+    A blank id or a blank label is no name at all and is skipped.
+    """
+    labels: dict[str, str] = {}
+    for scene in scenes:
+        visual = scene.get("visual") or {}
+        series_id, label = visual.get("seriesId"), visual.get("label")
+        if series_id and label and series_id not in labels:
+            labels[series_id] = label
+    return labels
+
+
 def _point_from_row(row: dict) -> dict:
     label = row.get("label") or row.get("period", "")
     return {
@@ -343,9 +371,9 @@ def _fallback_reason(indicator_ids: list[str], store_dir: str, *,
             "trend without being misleading.")
 
 
-def _match_fallback_history(scene: dict, indicator_ids: list[str],
+def _match_fallback_history(visual_labels: dict[str, str], indicator_ids: list[str],
                              store_dir: str) -> tuple[dict | None, str | None]:
-    """Rule 3: the scene's own findings' numeric history. Dense enough
+    """Rule 3: the cited findings' own numeric history. Dense enough
     only if >= _MIN_FALLBACK_POINTS non-estimate points span
     >= _MIN_FALLBACK_MONTHS distinct months. On top of that density gate,
     two more honesty conditions both have to hold before anything is
@@ -355,13 +383,14 @@ def _match_fallback_history(scene: dict, indicator_ids: list[str],
     - the row's raw unit must name a real, plain-English measurable
       quantity (see `_PLAIN_UNITS`) -- an internal composite score never
       qualifies, no matter how dense its history is;
-    - the chart's title must come from the scene's own narrator copy
-      (`visual.label`, when `visual.seriesId` names this indicator) --
-      never a mechanically-derived label from a bare indicator id like
-      "S9", which is meaningless to a reader.
+    - the chart's title must come from the narrator's own copy --
+      `visual_labels[indicator_id]`, i.e. a `visual.label` written for
+      exactly this series (see `_visual_labels` for whose visuals each
+      caller supplies) -- never a mechanically-derived label from a bare
+      indicator id like "S9", which is meaningless to a reader.
 
     Either failing means this indicator can't be charted; the loop moves
-    on to the scene's next cited indicator id, and only if none qualify
+    on to the next cited indicator id, and only if none qualify
     do we fall to an honest `noChartReason` -- and (round-2 review) the
     two failure causes are tracked separately so the reason given is
     always true of the case it describes.
@@ -381,8 +410,7 @@ def _match_fallback_history(scene: dict, indicator_ids: list[str],
             saw_non_measurable_unit = True
             continue
 
-        visual = scene.get("visual") or {}
-        plain_title = visual.get("label") if visual.get("seriesId") == indicator_id else None
+        plain_title = visual_labels.get(indicator_id)
         if not plain_title:
             saw_missing_title = True
             continue
@@ -399,45 +427,68 @@ def build_bullets(story: dict, scorecard: dict, series_reg: dict[str, ChartSerie
                    store_dir: str) -> list[dict]:
     """Exactly 3 bullets shaped for the dashboard schema's `bullets` array.
 
-    Bullet text = scene title + first sentence of paragraphs[0], for the
-    first 3 scenes whose title isn't "What to watch from here". Each
-    bullet gets exactly one of `chart` (rule 2, else rule 3 fallback) or
-    `noChartReason` -- never both, never neither.
+    The narrator writes the day's three takeaways itself (F114), so when the
+    story artifact carries exactly 3 `bullets` those are used verbatim, and
+    each bullet's own `claimFindingIds` decide its sources and its chart.
 
-    Raises ValueError if the story doesn't have at least 3 such scenes --
-    the schema requires exactly 3 bullets, so a short story day must fail
-    here, clearly, rather than silently ship a 1- or 2-bullet payload that
-    only fails validation later with a confusing error.
+    The older mechanical condenser -- scene title + first sentence of
+    paragraphs[0], for the first 3 scenes whose title isn't "What to watch
+    from here" -- remains as the fallback, unchanged, for the two days it
+    still has to cover: an artifact written before this schema existed (no
+    `bullets` key at all), and a day the narrator fell back (the assembler
+    writes the story with no bullets).
+
+    Either way each bullet gets exactly one of `chart` (rule 2, else rule 3
+    fallback) or `noChartReason` -- never both, never neither.
+
+    Raises ValueError only on the mechanical path, if the story doesn't have
+    at least 3 usable scenes -- the schema requires exactly 3 bullets, so a
+    short story day must fail here, clearly, rather than silently ship a 1-
+    or 2-bullet payload that only fails validation later with a confusing
+    error.
     """
     findings_by_id = findings_index(scorecard)
     date = story.get("storyDate", "")
     story_href = f"story/{date}.html" if date else "story/"
+    scenes = story.get("scenes", [])
 
-    all_scenes = [s for s in story.get("scenes", [])
+    artifact_bullets = story.get("bullets") or []
+    if len(artifact_bullets) == _MAX_BULLETS:
+        # Narrator-written. A bullet has no `visual` of its own, so its
+        # chart title is looked up across the whole story by seriesId.
+        story_labels = _visual_labels(scenes)
+        drafts = [(b.get("text", ""), b.get("claimFindingIds") or [], story_labels)
+                  for b in artifact_bullets]
+    else:
+        usable = [s for s in scenes
                   if (s.get("title") or "").strip() != _SKIP_SCENE_TITLE]
-    if len(all_scenes) < _MAX_BULLETS:
-        raise ValueError(
-            f"build_bullets needs at least {_MAX_BULLETS} story scenes "
-            f"(excluding {_SKIP_SCENE_TITLE!r}), found {len(all_scenes)}"
-        )
-    scenes = all_scenes[:_MAX_BULLETS]
+        if len(usable) < _MAX_BULLETS:
+            raise ValueError(
+                f"build_bullets needs at least {_MAX_BULLETS} story scenes "
+                f"(excluding {_SKIP_SCENE_TITLE!r}), found {len(usable)}"
+            )
+        # One scene's labels only: a scene never borrows another's copy.
+        drafts = [(_bullet_text(s), s.get("claimFindingIds", []), _visual_labels([s]))
+                  for s in usable[:_MAX_BULLETS]]
 
     bullets = []
-    for scene in scenes:
-        tags = _scene_tags(scene, findings_by_id)
-        indicator_ids = _scene_indicator_ids(scene, findings_by_id)
+    for text, claim_finding_ids, visual_labels in drafts:
+        cited = {"claimFindingIds": claim_finding_ids}
+        tags = _scene_tags(cited, findings_by_id)
+        indicator_ids = _scene_indicator_ids(cited, findings_by_id)
 
         chart = _match_registered_series(tags, series_reg, store_dir)
         no_chart_reason = None
         if chart is None:
-            chart, no_chart_reason = _match_fallback_history(scene, indicator_ids, store_dir)
+            chart, no_chart_reason = _match_fallback_history(
+                visual_labels, indicator_ids, store_dir)
 
         bullets.append({
             "date": date,
-            "text": _bullet_text(scene),
+            "text": text,
             "storyHref": story_href,
             "chart": chart,
             "noChartReason": no_chart_reason,
-            "sources": refs_for_finding_ids(scene.get("claimFindingIds", []), findings_by_id),
+            "sources": refs_for_finding_ids(claim_finding_ids, findings_by_id),
         })
     return bullets

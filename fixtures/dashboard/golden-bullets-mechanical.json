@@ -1,0 +1,287 @@
+{
+  "noSeriesData": [
+    {
+      "date": "2026-08-05",
+      "text": "AMD delivered, and it does not add chips this year. AMD reported the quarter the market was waiting for.",
+      "storyHref": "story/2026-08-05.html",
+      "chart": null,
+      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+      "sources": [
+        {
+          "title": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+          "outlet": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "date": "2026-08-04",
+          "tier": "primary"
+        },
+        {
+          "title": "Yahoo Finance",
+          "outlet": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
+          "date": "2026-08-05",
+          "tier": "secondary"
+        },
+        {
+          "title": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "outlet": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+          "date": "2026-08-04",
+          "tier": "secondary"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "text": "One new buyer has already claimed a slice of 2027. SpaceX ended the June quarter with 1.4 gigawatts of computing capacity, up from 1.0 gigawatt three months earlier and 400 megawatts a year before, and expects to pass 2 gigawatts by the end of this year.",
+      "storyHref": "story/2026-08-05.html",
+      "chart": null,
+      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+      "sources": [
+        {
+          "title": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "outlet": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+          "date": "2026-08-04",
+          "tier": "secondary"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "text": "The way around the packaging queue mostly helps other people's chips. Advanced packaging is the step that binds a chip to its memory, and it is still booked out.",
+      "storyHref": "story/2026-08-05.html",
+      "chart": null,
+      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+      "sources": [
+        {
+          "title": "CryptoBriefing",
+          "outlet": "CryptoBriefing",
+          "url": "https://cryptobriefing.com/intel-emib-tsmc-packaging-constraints/",
+          "date": "2026-07-31",
+          "tier": "secondary"
+        },
+        {
+          "title": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+          "outlet": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+          "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+          "date": "2026-08-04",
+          "tier": "secondary"
+        },
+        {
+          "title": "404K Semi-Ai Research (Substack)",
+          "outlet": "404K Semi-Ai Research (Substack)",
+          "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+          "date": "2026-08-04",
+          "tier": "secondary"
+        }
+      ]
+    }
+  ],
+  "withSeriesData": [
+    {
+      "date": "2026-08-05",
+      "text": "AMD delivered, and it does not add chips this year. AMD reported the quarter the market was waiting for.",
+      "storyHref": "story/2026-08-05.html",
+      "chart": {
+        "form": "columns",
+        "title": "AMD data centre revenue",
+        "caption": "AMD data centre revenue. Source: AMD Investor Relations.",
+        "unit": "US$ billions",
+        "points": [
+          {
+            "label": "2025-01",
+            "value": 2.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-02",
+            "value": 3.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-03",
+            "value": 4.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-04",
+            "value": 5.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-05",
+            "value": 6.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-06",
+            "value": 7.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-07",
+            "value": 8.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-08",
+            "value": 9.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          }
+        ],
+        "source": {
+          "title": "AMD data centre revenue",
+          "outlet": "AMD Investor Relations",
+          "url": "https://ir.amd.com/",
+          "date": "2025-08-15",
+          "tier": "primary"
+        }
+      },
+      "noChartReason": null,
+      "sources": [
+        {
+          "title": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+          "outlet": "AMD Investor Relations (Advanced Micro Devices, Inc.)",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "date": "2026-08-04",
+          "tier": "primary"
+        },
+        {
+          "title": "Yahoo Finance",
+          "outlet": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html",
+          "date": "2026-08-05",
+          "tier": "secondary"
+        },
+        {
+          "title": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "outlet": "Investing.com (AMD Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-amd-beats-q2-2026-estimates-stock-reverses-after-hours-93CH-4775912",
+          "date": "2026-08-04",
+          "tier": "secondary"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "text": "One new buyer has already claimed a slice of 2027. SpaceX ended the June quarter with 1.4 gigawatts of computing capacity, up from 1.0 gigawatt three months earlier and 400 megawatts a year before, and expects to pass 2 gigawatts by the end of this year.",
+      "storyHref": "story/2026-08-05.html",
+      "chart": {
+        "form": "line",
+        "title": "Big buyers' spending plans",
+        "caption": "Big buyers' spending plans. Our assessment, based on the sources cited below.",
+        "unit": "US$",
+        "points": [
+          {
+            "label": "2025-01",
+            "value": 1.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-02",
+            "value": 2.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-03",
+            "value": 3.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-04",
+            "value": 4.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-05",
+            "value": 5.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-06",
+            "value": 6.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-07",
+            "value": 7.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          },
+          {
+            "label": "2025-08",
+            "value": 8.0,
+            "hollow": false,
+            "sourceUrl": "https://example.test/src"
+          }
+        ],
+        "source": {
+          "assessment": true,
+          "basedOn": [
+            {
+              "title": "Example source",
+              "outlet": "example.test",
+              "url": "https://example.test/src",
+              "date": "2025-01-15",
+              "tier": "secondary"
+            }
+          ]
+        }
+      },
+      "noChartReason": null,
+      "sources": [
+        {
+          "title": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "outlet": "Investing.com (SpaceX Q2 2026 earnings call transcript)",
+          "url": "https://ca.investing.com/news/transcripts/earnings-call-transcript-spacex-beats-revenue-estimates-in-q2-2026-shares-swing-93CH-4775805",
+          "date": "2026-08-04",
+          "tier": "secondary"
+        }
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "text": "The way around the packaging queue mostly helps other people's chips. Advanced packaging is the step that binds a chip to its memory, and it is still booked out.",
+      "storyHref": "story/2026-08-05.html",
+      "chart": null,
+      "noChartReason": "No chart. Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series.",
+      "sources": [
+        {
+          "title": "CryptoBriefing",
+          "outlet": "CryptoBriefing",
+          "url": "https://cryptobriefing.com/intel-emib-tsmc-packaging-constraints/",
+          "date": "2026-07-31",
+          "tier": "secondary"
+        },
+        {
+          "title": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+          "outlet": "TechSoda 'Global Market Watch: Advanced Packaging Takes the Stage' (Substack)",
+          "url": "https://techsoda.substack.com/p/global-market-watch-advanced-packaging",
+          "date": "2026-08-04",
+          "tier": "secondary"
+        },
+        {
+          "title": "404K Semi-Ai Research (Substack)",
+          "outlet": "404K Semi-Ai Research (Substack)",
+          "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb",
+          "date": "2026-08-04",
+          "tier": "secondary"
+        }
+      ]
+    }
+  ]
+}
