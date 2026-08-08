@@ -4,7 +4,10 @@
     {
       "chart": null,
       "date": "2026-08-08",
-      "noChartReason": "No chart. The number we track for this is our own estimate, not a published figure, so we don't draw it.",
+      "noChartReason": {
+        "cause": "estimate-only",
+        "reason": "The number we track for this is our own estimate, not a published figure, so we don't draw it."
+      },
       "sources": [
         {
           "date": "2026-08-07",
@@ -20,7 +23,10 @@
     {
       "chart": null,
       "date": "2026-08-08",
-      "noChartReason": "No chart. The number we track for this is our own estimate, not a published figure, so we don't draw it.",
+      "noChartReason": {
+        "cause": "estimate-only",
+        "reason": "The number we track for this is our own estimate, not a published figure, so we don't draw it."
+      },
       "sources": [
         {
           "date": "2026-08-08",
@@ -36,7 +42,10 @@
     {
       "chart": null,
       "date": "2026-08-08",
-      "noChartReason": "No chart. The number we track for this is our own estimate, not a published figure, so we don't draw it.",
+      "noChartReason": {
+        "cause": "estimate-only",
+        "reason": "The number we track for this is our own estimate, not a published figure, so we don't draw it."
+      },
       "sources": [
         {
           "date": "2026-08-07",
@@ -345,7 +354,7 @@
       }
     ]
   },
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "verdict": {
     "answer": "Not yet. Memory makers can fill only two-thirds of the order",
     "chip": {
