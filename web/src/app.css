@@ -261,9 +261,41 @@ svg:has(.hov:hover) .ann, svg:has(.hov:hover) .ann-rule { opacity: 0; transition
   align-items: start;
 }
 .change:first-child { padding-top: var(--space-2); }
+/* F113 §6.1: no chart column anywhere on the page -> the text spans the row
+   instead of leaving a 20rem hole where a chart never was. */
+.change.full { grid-template-columns: 4.5rem minmax(0, 1fr); }
 .change .date { font-size: var(--text-small); color: var(--color-text-muted); }
+.change-text { min-width: 0; }
 .change p { margin: 0; max-width: 72ch; }
 .change p b { font-weight: 600; }
+
+/* F113 §6.3: the source badge is a footnote marker, so it must stay welded to
+   the last word of the sentence. The popover library wraps its trigger in a
+   <div>, which inside a paragraph would break the line before the marker and
+   leave a stray number sitting alone; `:has` targets that one wrapper and not
+   the popover panel beside it (a [popover] must keep its own display rules or
+   it would show while closed). */
+.nowrap-end { white-space: nowrap; }
+.nowrap-end > div:has(.srcmark-wrap) { display: inline; }
+/* The popover PANEL is a sibling of that trigger wrapper, so it sits inside
+   the nowrap span too and would inherit it -- which would run the source
+   titles off the side of a 340px box the moment a reader opened one. The
+   nowrap is only ever meant to hold the marker against the last word, so the
+   panel gets it switched straight back off. */
+.nowrap-end > [popover] { white-space: normal; }
+
+/* F113 §6.1: the quiet no-chart line. One per bullet when the reasons differ,
+   or one for the whole zone when every bullet is chartless for the same
+   reason. Deliberately the lightest text on the page -- an aside, not an
+   error. */
+.nochart-quiet {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-micro);
+  line-height: 1.45;
+  color: var(--color-text-muted);
+  max-width: 72ch;
+}
+.changed > .nochart-quiet { margin-top: var(--space-4); }
 .readmore {
   display: inline-block;
   margin-top: var(--space-5);

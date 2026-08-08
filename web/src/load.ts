@@ -68,6 +68,33 @@ export interface Chart {
   unit: string;
   points: ChartPoint[];
   source: Ref;
+  /** True only for a chart drawn from today's same-day chart research
+   * (quarantined, single-source, verified) -- never for a curated or
+   * findings-fallback chart. */
+  researched: boolean;
+}
+
+/**
+ * Why a bullet has no chart, machine-readable. These four cover every
+ * honesty-gate branch in `gpu_agent/dashboard/bullets.py`'s
+ * `_fallback_reason`:
+ *  - 'no-published-number': nothing is tracked for this at all.
+ *  - 'estimate-only': the number we track is our own estimate, never a
+ *    published figure.
+ *  - 'no-plain-name': we hold real, published numbers, but can't yet say
+ *    what they measure in plain English (an unnameable raw unit, or a
+ *    nameable one with no narrator-supplied title yet).
+ *  - 'too-sparse': we hold real, published, plainly-named numbers, but not
+ *    enough of a track record yet to draw without misleading.
+ * A fourth code (2026-08-07, follow-up to Task 1 review) was added because
+ * the original three-code mapping put `no-plain-name`'s two branches under
+ * `too-sparse`, which is false of them -- neither is a density problem.
+ */
+export type Cause = 'no-published-number' | 'estimate-only' | 'no-plain-name' | 'too-sparse';
+
+export interface NoChartReason {
+  reason: string;
+  cause: Cause;
 }
 
 export interface Bullet {
@@ -75,7 +102,7 @@ export interface Bullet {
   text: string;
   storyHref: string;
   chart: Chart | null;
-  noChartReason: string | null;
+  noChartReason: NoChartReason | null;
   sources: Ref[];
 }
 
@@ -97,7 +124,7 @@ export interface FooterLink {
 }
 
 export interface Dashboard {
-  schemaVersion: '1.0';
+  schemaVersion: '1.1';
   categoryId: string;
   asOf: string;
   verdict: VerdictData;
@@ -257,13 +284,30 @@ function parseChart(raw: unknown, where: string): Chart {
       };
     }),
     source: parseRef(c.source, `${where}.source`),
+    // Optional at the schema level ("researched defaults allowed") -- every
+    // chart this cycle's Python side emits sets it explicitly, but an
+    // absent key still means "not researched", never a parse failure.
+    researched: c.researched === undefined ? false : bool(c, 'researched', where),
+  };
+}
+
+const CAUSES = ['no-published-number', 'estimate-only', 'no-plain-name', 'too-sparse'] as const;
+
+function parseNoChartReason(raw: unknown, where: string): NoChartReason {
+  const r = obj(raw, where);
+  return {
+    reason: str(r, 'reason', where),
+    cause: oneOf(r, 'cause', CAUSES, where),
   };
 }
 
 function parseBullet(raw: unknown, where: string): Bullet {
   const b = obj(raw, where);
   const chart = b.chart === null ? null : parseChart(b.chart, `${where}.chart`);
-  const noChartReason = nullableStr(b, 'noChartReason', where);
+  const noChartReason =
+    b.noChartReason === null
+      ? null
+      : parseNoChartReason(b.noChartReason, `${where}.noChartReason`);
   if (chart === null && noChartReason === null) {
     fail(`${where}`, 'has no chart and no reason why not');
   }
@@ -322,8 +366,8 @@ function parseGapChart(raw: unknown): GapChart {
  */
 export function parseDashboard(raw: unknown): Dashboard {
   const d = obj(raw, 'payload');
-  if (d.schemaVersion !== '1.0') {
-    fail('schemaVersion', `is "${String(d.schemaVersion)}", not the expected "1.0"`);
+  if (d.schemaVersion !== '1.1') {
+    fail('schemaVersion', `is "${String(d.schemaVersion)}", not the expected "1.1"`);
   }
   const bullets = list(d, 'bullets', 'payload');
   if (bullets.length !== 3) {
@@ -334,7 +378,7 @@ export function parseDashboard(raw: unknown): Dashboard {
     fail('dimensions', `has ${dimensions.length} entries, not the expected 6`);
   }
   return {
-    schemaVersion: '1.0',
+    schemaVersion: '1.1',
     categoryId: str(d, 'categoryId', 'payload'),
     asOf: str(d, 'asOf', 'payload'),
     verdict: parseVerdict(d.verdict),

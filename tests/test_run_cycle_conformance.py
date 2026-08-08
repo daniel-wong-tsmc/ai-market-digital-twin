@@ -180,6 +180,7 @@ EXPECTED_STEPS: tuple[tuple[str, str], ...] = (
     ("7b", "series-refresh"),
     ("7c", "v2 shadow stamp"),
     ("7d", "chart-fetch"),
+    ("7d2", "chart-research"),
     ("7e", "dashboard-json"),
     ("8", "report"),
 )

@@ -5,7 +5,7 @@ import jsonschema
 import pytest
 
 from gpu_agent.chartdata.registry import ChartSeries
-from gpu_agent.dashboard.bullets import _load_plain_units, build_bullets
+from gpu_agent.dashboard.bullets import _MAX_CHART_POINTS, _load_plain_units, build_bullets
 
 STORY = json.loads(Path("fixtures/dashboard/story-trimmed.json").read_text(encoding="utf-8"))
 SCORECARD = json.loads(Path("fixtures/dashboard/scorecard-trimmed.json").read_text(encoding="utf-8"))
@@ -48,7 +48,7 @@ def _assert_no_jargon(s: str) -> None:
 def _assert_bullet_plain_english(bullet: dict) -> None:
     _assert_no_jargon(bullet["text"])
     if bullet["noChartReason"] is not None:
-        _assert_no_jargon(bullet["noChartReason"])
+        _assert_no_jargon(bullet["noChartReason"]["reason"])
     chart = bullet["chart"]
     if chart is not None:
         for field in ("title", "unit", "caption"):
@@ -111,7 +111,9 @@ def test_real_story_yields_exactly_three_bullets_with_valid_xor():
         _assert_bullet_plain_english(b)
         _validate_bullet_schema(b)
         if b["noChartReason"] is not None:
-            assert b["noChartReason"].startswith("No chart.")
+            assert set(b["noChartReason"].keys()) == {"reason", "cause"}
+            assert b["noChartReason"]["cause"] in (
+                "no-published-number", "estimate-only", "no-plain-name", "too-sparse")
 
 
 def test_real_story_bullet_text_uses_scene_title_and_first_sentence():
@@ -150,8 +152,9 @@ def test_real_story_scene_two_has_no_chart_after_the_measurable_quantity_gate():
     scene_two = bullets[1]
     assert scene_two["chart"] is None
     assert scene_two["noChartReason"] is not None
-    assert "describe what this number measures" in scene_two["noChartReason"]
-    assert "no plain-English name" not in scene_two["noChartReason"]
+    assert "describe what this number measures" in scene_two["noChartReason"]["reason"]
+    assert "no plain-English name" not in scene_two["noChartReason"]["reason"]
+    assert scene_two["noChartReason"]["cause"] == "no-plain-name"
 
 
 # ---------------------------------------------------------------------------
@@ -190,6 +193,11 @@ def test_registry_match_below_point_threshold_falls_through(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
+    # The finding's own indicatorId ("vendorRevenueGuidance") has no series
+    # file of its own on disk here -- distinct from the curated series id
+    # that fell short of rule 2's point threshold -- so the fallback's own
+    # "nobody tracks a number for THIS indicator" branch fires.
+    assert b0["noChartReason"]["cause"] == "no-published-number"
 
 
 def test_estimate_grade_series_never_charted_even_with_plenty_of_points(tmp_path):
@@ -209,8 +217,9 @@ def test_estimate_grade_series_never_charted_even_with_plenty_of_points(tmp_path
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
-    assert "estimate" in b0["noChartReason"].lower()
-    _assert_no_jargon(b0["noChartReason"])
+    assert "estimate" in b0["noChartReason"]["reason"].lower()
+    assert b0["noChartReason"]["cause"] == "estimate-only"
+    _assert_no_jargon(b0["noChartReason"]["reason"])
 
 
 def test_registered_hard_fact_series_with_all_estimate_rows_on_disk_not_charted(tmp_path):
@@ -311,7 +320,8 @@ def test_fallback_estimate_grade_rows_excluded_from_density_count(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
-    assert "estimate" in b0["noChartReason"].lower()
+    assert "estimate" in b0["noChartReason"]["reason"].lower()
+    assert b0["noChartReason"]["cause"] == "estimate-only"
 
 
 def test_fallback_non_measurable_unit_never_charted_even_when_dense(tmp_path):
@@ -338,8 +348,9 @@ def test_fallback_non_measurable_unit_never_charted_even_when_dense(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
-    assert "describe what this number measures" in b0["noChartReason"]
-    assert "no plain-English name" not in b0["noChartReason"]
+    assert "describe what this number measures" in b0["noChartReason"]["reason"]
+    assert "no plain-English name" not in b0["noChartReason"]["reason"]
+    assert b0["noChartReason"]["cause"] == "no-plain-name"
 
 
 def test_fallback_without_narrator_supplied_plain_title_never_charted(tmp_path):
@@ -367,8 +378,9 @@ def test_fallback_without_narrator_supplied_plain_title_never_charted(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
-    assert "no plain-English name for what they measure yet" in b0["noChartReason"]
-    assert "describe what this number measures" not in b0["noChartReason"]
+    assert "no plain-English name for what they measure yet" in b0["noChartReason"]["reason"]
+    assert "describe what this number measures" not in b0["noChartReason"]["reason"]
+    assert b0["noChartReason"]["cause"] == "no-plain-name"
 
 
 def test_fallback_chart_never_titled_a_bare_indicator_code(tmp_path):
@@ -395,7 +407,8 @@ def test_no_matching_indicator_at_all_yields_honest_no_chart_reason(tmp_path):
     b0 = bullets[0]
     assert b0["chart"] is None
     assert b0["noChartReason"] is not None
-    assert b0["noChartReason"].startswith("No chart.")
+    assert b0["noChartReason"]["cause"] == "no-published-number"
+    assert b0["noChartReason"]["reason"].endswith(".")
 
 
 def test_sources_come_from_refs_for_finding_ids(tmp_path):
@@ -627,9 +640,9 @@ def test_fallback_chart_produced_from_real_on_disk_odm_series():
 # FINAL REVIEW, Important 4 + Minor 7: the no-chart panels' wording.
 # ---------------------------------------------------------------------------
 
-def _all_no_chart_reasons() -> list[str]:
-    """Every reason string the builder can produce, gathered by calling it
-    directly rather than by re-typing the sentences here."""
+def _all_no_chart_reasons() -> list[dict]:
+    """Every {reason, cause} dict the builder can produce, gathered by
+    calling it directly rather than by re-typing the sentences here."""
     from gpu_agent.dashboard import bullets as bullets_mod
     return [
         bullets_mod._fallback_reason([], "store/series",
@@ -664,24 +677,87 @@ def test_the_estimates_only_reason_talks_about_the_series_we_track_not_the_bulle
     reason = _fallback_reason(["gpuSpotPrice"], "store/series",
                               saw_non_measurable_unit=False,
                               saw_missing_title=False)
-    assert reason == ("No chart. The number we track for this is our own estimate, "
-                      "not a published figure, so we don't draw it.")
-    assert "here" not in reason.lower()
-    assert "track" in reason
+    assert reason == {
+        "reason": ("The number we track for this is our own estimate, "
+                   "not a published figure, so we don't draw it."),
+        "cause": "estimate-only",
+    }
+    assert "here" not in reason["reason"].lower()
+    assert "track" in reason["reason"]
 
 
 def test_no_chart_reason_never_prints_a_double_hyphen():
     # The mock uses an em dash; three of the six reasons were rendering a
     # literal "--" to the reader.
     for reason in _all_no_chart_reasons():
-        assert "--" not in reason, reason
+        assert "--" not in reason["reason"], reason
 
 
 def test_every_no_chart_reason_is_a_plain_english_sentence():
     for reason in _all_no_chart_reasons():
-        assert reason.startswith("No chart.")
-        assert reason.endswith(".")
-        assert "DMI" not in reason and "SMI" not in reason
+        assert reason["cause"] in (
+            "no-published-number", "estimate-only", "no-plain-name", "too-sparse")
+        assert reason["reason"].endswith(".")
+        assert "DMI" not in reason["reason"] and "SMI" not in reason["reason"]
+
+
+# ---------------------------------------------------------------------------
+# USER DECISION (interactive, 2026-08-07, follow-up to Task 1 review): a
+# fourth cause code, "no-plain-name", was added because the original
+# three-code mapping put the two "we have the number but can't yet name it"
+# branches under "too-sparse" -- false of both, since neither is a density
+# problem (the missing-title branch's own reason sentence says "We have
+# real, tracked numbers behind this"). Task 2 renders the cause as the
+# reader-facing LEAD line, so a mislabelled cause would print a false
+# headline. These two tests pin the fix and guard the regression it exists
+# to prevent.
+# ---------------------------------------------------------------------------
+
+def test_each_of_the_six_fallback_branches_yields_its_own_true_cause():
+    # Every branch `_fallback_reason` can take, and the ONE cause code that
+    # is true of it -- across all four codes, not just "a valid code".
+    reasons = _all_no_chart_reasons()
+    expected_causes = [
+        "no-published-number",  # no indicator cited at all
+        "no-published-number",  # indicator cited, but no rows on disk
+        "estimate-only",        # real rows, but all of them our own estimate
+        "no-plain-name",        # real published rows, non-measurable raw unit
+        "no-plain-name",        # real published rows, no narrator title yet
+        "too-sparse",           # real, named, published rows -- just too few
+    ]
+    assert [r["cause"] for r in reasons] == expected_causes
+
+
+def test_too_sparse_is_never_returned_except_by_the_genuine_density_branch():
+    # THE REGRESSION THIS FIX EXISTS TO PREVENT: `saw_non_measurable_unit`
+    # and `saw_missing_title` must never again be labelled "too-sparse" --
+    # neither describes a shortage of data points. "too-sparse" may only
+    # come from the one branch where neither flag is set and there ARE real,
+    # non-estimate, cited rows (the density catch-all).
+    from gpu_agent.dashboard.bullets import _fallback_reason
+
+    too_sparse_cases = [
+        # (indicator_ids, saw_non_measurable_unit, saw_missing_title)
+        ([], False, False),
+        (["nothingTrackedHere"], False, False),
+        (["gpuSpotPrice"], False, False),
+        (["odmMonthlyAiRevenue"], True, False),
+        (["odmMonthlyAiRevenue"], False, True),
+        (["odmMonthlyAiRevenue"], True, True),
+    ]
+    for indicator_ids, non_measurable, missing_title in too_sparse_cases:
+        result = _fallback_reason(indicator_ids, "store/series",
+                                  saw_non_measurable_unit=non_measurable,
+                                  saw_missing_title=missing_title)
+        if result["cause"] == "too-sparse":
+            assert indicator_ids == ["odmMonthlyAiRevenue"]
+            assert non_measurable is False and missing_title is False
+
+    # And the genuine density branch really does still produce it.
+    density_only = _fallback_reason(["odmMonthlyAiRevenue"], "store/series",
+                                    saw_non_measurable_unit=False,
+                                    saw_missing_title=False)
+    assert density_only["cause"] == "too-sparse"
 
 
 # ---------------------------------------------------------------------------
@@ -839,7 +915,8 @@ def test_artifact_bullet_with_no_matching_series_id_anywhere_gets_an_honest_no_c
     bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path))
     b1 = bullets[1]
     assert b1["chart"] is None
-    assert "no plain-English name for what they measure yet" in b1["noChartReason"]
+    assert "no plain-English name for what they measure yet" in b1["noChartReason"]["reason"]
+    assert b1["noChartReason"]["cause"] == "no-plain-name"
 
 
 def test_mechanical_scene_never_borrows_a_label_from_another_scene(tmp_path):
@@ -866,7 +943,8 @@ def test_mechanical_scene_never_borrows_a_label_from_another_scene(tmp_path):
 
     bullets = build_bullets(story, scorecard, {}, str(tmp_path))
     assert bullets[0]["chart"] is None
-    assert "no plain-English name for what they measure yet" in bullets[0]["noChartReason"]
+    assert "no plain-English name for what they measure yet" in bullets[0]["noChartReason"]["reason"]
+    assert bullets[0]["noChartReason"]["cause"] == "no-plain-name"
 
 
 def test_story_with_bullets_none_takes_the_mechanical_path(tmp_path):
@@ -893,3 +971,320 @@ def test_story_with_the_wrong_number_of_bullets_takes_the_mechanical_path(tmp_pa
     bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path))
     assert len(bullets) == 3
     assert bullets[0]["text"] == "Scene one title. First sentence here."
+
+
+# ---------------------------------------------------------------------------
+# F113 Task 5: the verified-research step, between the curated match and the
+# findings fallback.
+#
+# A quarantine record only ever reaches the page when it was written for
+# TODAY's story and stamped with THIS bullet's index. Everything else about
+# it -- a stale date, a chart form the page cannot draw, an index nobody
+# asked for -- must leave the day's output exactly as it was before this
+# step existed.
+# ---------------------------------------------------------------------------
+
+RESEARCH_POINTS = [
+    {"label": "Q1 2026", "value": 12.0, "sourceUrl": "https://example.test/mtk-q1",
+     "publishedAt": "2026-04-30"},
+    {"label": "Q2 2026", "value": 14.5, "sourceUrl": "https://example.test/mtk-q2",
+     "publishedAt": "2026-07-31"},
+    {"label": "Q3 2026", "value": 15.2, "sourceUrl": "https://example.test/mtk-q3",
+     "publishedAt": "2026-08-04"},
+]
+
+
+def _write_quarantine(research_dir: Path, *, date="2026-08-05", bullet_index=1,
+                      series_name="MediaTek edge AI shipments", slug_name=None,
+                      unit="million units", form="line",
+                      source_name="TrendForce", points=None, extra=None) -> Path:
+    """One accepted candidate exactly as `verify.accept_research` writes it:
+    the CandidateSeries fields verbatim plus the `bulletIndex` stamp."""
+    record = {
+        "seriesName": series_name,
+        "unit": unit,
+        "form": form,
+        "sourceName": source_name,
+        "points": RESEARCH_POINTS if points is None else points,
+        "pair": False,
+        "notes": "",
+        "bulletIndex": bullet_index,
+    }
+    record.update(extra or {})
+    research_dir.mkdir(parents=True, exist_ok=True)
+    path = research_dir / f"{date}-{slug_name or 'mediatek-edge-ai-shipments'}.json"
+    path.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
+    return path
+
+
+def _research_story():
+    """Three narrator bullets, each citing its own finding, so a quarantine
+    record can be aimed at one bullet index and proven not to leak onto the
+    other two."""
+    return _artifact_story(_three_artifact_bullets())
+
+
+def test_verified_research_charts_a_bullet_with_no_curated_match(tmp_path):
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, bullet_index=1)
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    chart = bullets[0]["chart"]
+    assert chart is not None
+    assert bullets[0]["noChartReason"] is None
+    assert chart["researched"] is True
+    assert chart["form"] == "line"
+    assert chart["title"] == "MediaTek edge AI shipments"
+    assert chart["unit"] == "million units"
+    assert chart["caption"] == "Found today — single source: TrendForce."
+    assert [p["value"] for p in chart["points"]] == [12.0, 14.5, 15.2]
+    assert [p["label"] for p in chart["points"]] == ["Q1 2026", "Q2 2026", "Q3 2026"]
+    # Every point keeps the exact page its number was re-found on.
+    assert [p["sourceUrl"] for p in chart["points"]] == [
+        "https://example.test/mtk-q1", "https://example.test/mtk-q2",
+        "https://example.test/mtk-q3"]
+    assert all(p["hollow"] is False for p in chart["points"])
+    _validate_bullet_schema(bullets[0])
+    _assert_bullet_plain_english(bullets[0])
+
+
+def test_verified_research_reaches_only_the_bullet_index_it_was_researched_for(tmp_path):
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, bullet_index=2)
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    assert bullets[0]["chart"] is None
+    assert bullets[1]["chart"] is not None
+    assert bullets[1]["chart"]["researched"] is True
+    assert bullets[2]["chart"] is None
+
+
+def test_verified_research_wins_over_the_findings_fallback(tmp_path):
+    """The findings fallback must not even be consulted: bullet 2's own cited
+    indicator here has a dense, plainly-named, non-estimate history that DOES
+    chart on its own (asserted first, without the research dir), yet the
+    researched series is what the reader gets."""
+    scenes = _synthetic_story("Scene one title", [])["scenes"]
+    scenes[1] = {"n": 2, "title": "Scene two", "paragraphs": ["One. Two."],
+                 "claimFindingIds": [],
+                 "visual": {"kind": "spark", "seriesId": "someTrackedIndicator",
+                             "label": "Memory factory spending"}}
+    story = _artifact_story(_three_artifact_bullets(), scenes=scenes)
+    series_dir = tmp_path / "series"
+    _write_jsonl(series_dir / "someTrackedIndicator.jsonl",
+                 [_row("someTrackedIndicator", f"2025-{m:02d}", float(m), unit="USD")
+                  for m in range(1, 9)])
+
+    without = build_bullets(story, _three_finding_scorecard(), {}, str(series_dir))
+    assert without[1]["chart"] is not None
+    assert without[1]["chart"]["title"] == "Memory factory spending"
+    assert without[1]["chart"]["researched"] is False
+
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, bullet_index=2)
+    with_research = build_bullets(story, _three_finding_scorecard(), {}, str(series_dir),
+                                  research_dir=str(research_dir))
+    assert with_research[1]["chart"]["researched"] is True
+    assert with_research[1]["chart"]["title"] == "MediaTek edge AI shipments"
+    # The fallback's own assessment-style source never appears.
+    assert with_research[1]["chart"]["source"].get("assessment") is None
+
+
+def test_a_curated_match_still_beats_a_researched_series(tmp_path):
+    story = _synthetic_story("AMD scene title", ["f1"])
+    scorecard = _synthetic_scorecard("f1", "vendorRevenueGuidance", "amd")
+    series_reg = {"amdDataCenterRevenue": _series(
+        "amdDataCenterRevenue", ["amdDataCenter", "amd"], quality="hard-fact")}
+    series_dir = tmp_path / "series"
+    _write_jsonl(series_dir / "amdDataCenterRevenue.jsonl",
+                 [_row("amdDataCenterRevenue", f"2025-{m:02d}", 1.0 + m) for m in range(1, 9)])
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, bullet_index=1)
+
+    bullets = build_bullets(story, scorecard, series_reg, str(series_dir),
+                            research_dir=str(research_dir))
+    assert bullets[0]["chart"]["researched"] is False
+    assert bullets[0]["chart"]["title"] == "amdDataCenterRevenue"
+
+
+def test_a_quarantine_file_from_another_story_date_is_ignored(tmp_path):
+    """Yesterday's researched series is not today's news. The story date is
+    the only date these records carry, so a stale file must never be drawn."""
+    story = _research_story()
+    assert story["storyDate"] == "2026-08-05"
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, date="2026-08-04", bullet_index=1)
+
+    with_stale = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                               research_dir=str(research_dir))
+    without = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"))
+    assert with_stale == without
+    assert with_stale[0]["chart"] is None
+
+
+def test_no_quarantine_file_leaves_the_days_bullets_byte_identical(tmp_path):
+    """The whole point of the guard: on a day the researcher found nothing,
+    the page must be exactly what it was before this step existed."""
+    story = _research_story()
+    series_dir = tmp_path / "series"
+    _write_jsonl(series_dir / "someTrackedIndicator.jsonl",
+                 [_row("someTrackedIndicator", f"2025-{m:02d}", float(m), unit="USD")
+                  for m in range(1, 9)])
+    empty_dir = tmp_path / "research-series"
+    empty_dir.mkdir()
+
+    baseline = build_bullets(story, _three_finding_scorecard(), {}, str(series_dir))
+    assert baseline == build_bullets(story, _three_finding_scorecard(), {}, str(series_dir),
+                                     research_dir=str(empty_dir))
+    # A research directory that was never created at all behaves the same.
+    assert baseline == build_bullets(story, _three_finding_scorecard(), {}, str(series_dir),
+                                     research_dir=str(tmp_path / "nope"))
+
+
+def test_a_quarantine_record_with_an_undrawable_form_is_ignored(tmp_path):
+    """The chart forms the page can draw are fixed. A record naming anything
+    else is skipped quietly -- never passed through to fail schema validation
+    and take the whole day's dashboard down with it."""
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, bullet_index=1, form="pie")
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    assert bullets[0]["chart"] is None
+    assert bullets[0]["noChartReason"] is not None
+
+
+def test_an_unreadable_quarantine_file_is_ignored(tmp_path):
+    """Text that isn't valid JSON."""
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    research_dir.mkdir(parents=True)
+    (research_dir / "2026-08-05-broken.json").write_text("{not json", encoding="utf-8")
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    assert bullets[0]["chart"] is None
+
+
+def test_a_quarantine_file_of_corrupt_bytes_is_ignored(tmp_path):
+    """Bytes that are not valid UTF-8 at all -- a truncated write, a disk
+    fault, a file that arrived through something other than the verifier.
+
+    Distinct from the bad-JSON case above: decoding fails BEFORE the JSON
+    parser is ever reached, so a handler that only catches JSON errors lets
+    the failure escape and takes the whole day's dashboard export down with
+    it. A quarantine record is never worth a blank page.
+    """
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    research_dir.mkdir(parents=True)
+    # 0xFF is not a legal UTF-8 byte in any position.
+    (research_dir / "2026-08-05-corrupt.json").write_bytes(b'{"seriesName": "\xff\xfe\x00bad"}')
+    # ...and a good record for another bullet still comes through, so this
+    # proves the bad file is SKIPPED, not that the whole step gave up.
+    _write_quarantine(research_dir, bullet_index=2)
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    assert bullets[0]["chart"] is None
+    assert bullets[1]["chart"] is not None
+    assert bullets[1]["chart"]["researched"] is True
+
+
+def test_a_true_bullet_index_does_not_pass_for_bullet_one(tmp_path):
+    """In Python `True == 1`, so a record carrying `bulletIndex: true` would
+    quietly match bullet 1 on a plain equality check. The verifier always
+    writes a real integer taken from the answer filename, so a boolean means
+    the record came from somewhere else -- and a chart on the page is too
+    strong a claim to hang on an accident of how Python compares types."""
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, extra={"bulletIndex": True})
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    assert all(b["chart"] is None for b in bullets)
+
+
+def test_a_floating_point_bullet_index_does_not_pass_either(tmp_path):
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, extra={"bulletIndex": 1.0})
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    assert all(b["chart"] is None for b in bullets)
+
+
+def test_a_quarantine_record_with_no_bullet_index_is_ignored(tmp_path):
+    """`accept_research` stamps every record it writes, so a record without
+    one did not come through the trust gate -- it is not trusted here."""
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, extra={"bulletIndex": None})
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    assert all(b["chart"] is None for b in bullets)
+
+
+def test_the_researched_chart_names_its_single_source_and_links_to_it(tmp_path):
+    story = _research_story()
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, bullet_index=1)
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    source = bullets[0]["chart"]["source"]
+    assert source["outlet"] == "TrendForce"
+    assert source["title"] == "MediaTek edge AI shipments"
+    # The link and the date must describe the same page. Review finding: the
+    # url came from the FIRST point and the date from the LAST, so the popover
+    # dated a page by a different page's publication date.
+    assert source["url"] == "https://example.test/mtk-q3"
+    assert source["date"] == "2026-08-04"
+    last_point = RESEARCH_POINTS[-1]
+    assert source["url"] == last_point["sourceUrl"]
+    assert source["date"] == last_point["publishedAt"]
+
+
+def test_a_researched_series_longer_than_the_chart_cap_keeps_its_latest_points(tmp_path):
+    story = _research_story()
+    points = [{"label": f"M{i}", "value": float(i),
+               "sourceUrl": "https://example.test/long", "publishedAt": "2026-08-01"}
+              for i in range(1, 15)]
+    research_dir = tmp_path / "research-series"
+    _write_quarantine(research_dir, bullet_index=1, points=points)
+
+    bullets = build_bullets(story, _three_finding_scorecard(), {}, str(tmp_path / "series"),
+                            research_dir=str(research_dir))
+    chart = bullets[0]["chart"]
+    assert len(chart["points"]) == _MAX_CHART_POINTS
+    assert chart["points"][-1]["label"] == "M14"
+
+
+def test_the_researched_chart_matches_what_accept_research_actually_writes(tmp_path):
+    """Cross-task contract: the file this step reads is produced by
+    `verify.accept_research`, so the shape under test is taken from that
+    writer rather than from a hand-written guess about it."""
+    from gpu_agent.chartdata.research import CandidateSeries
+
+    cand = CandidateSeries(
+        seriesName="MediaTek edge AI shipments", unit="million units", form="line",
+        sourceName="TrendForce", points=RESEARCH_POINTS,
+    ).model_copy(update={"bulletIndex": 1})
+    research_dir = tmp_path / "research-series"
+    research_dir.mkdir(parents=True)
+    (research_dir / "2026-08-05-mediatek-edge-ai-shipments.json").write_text(
+        cand.model_dump_json(indent=2) + "\n", encoding="utf-8", newline="\n")
+
+    bullets = build_bullets(_research_story(), _three_finding_scorecard(), {},
+                            str(tmp_path / "series"), research_dir=str(research_dir))
+    assert bullets[0]["chart"] is not None
+    assert bullets[0]["chart"]["researched"] is True
+    assert bullets[0]["chart"]["caption"] == "Found today — single source: TrendForce."
