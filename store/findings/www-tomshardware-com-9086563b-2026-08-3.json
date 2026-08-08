@@ -1,0 +1,50 @@
+{
+  "id": "www-tomshardware-com-9086563b-2026-08-3",
+  "statement": "Wafer buyers are rebuilding safety stock and lengthening contracts from about three years to five-to-eight years, with spot 300mm prices starting to rise",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Customers stockpiling and locking in years of supply is classic behaviour just before a shortage bites.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Safety-stock rebuild adds demand on top of production needs while long-term agreements absorb available volume, leaving less for spot buyers and pushing spot prices up."
+  },
+  "evidence": [
+    {
+      "source": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/tech-industry/semiconductors/micron-commits-500-million-to-globalwafers-texas-wafer-plant-as-it-raises-us-spending-to-250-billion",
+      "date": "2026-08-07",
+      "excerpt": "customers are rebuilding wafer safety stock and requesting new 300mm volumes",
+      "tier": "secondary"
+    },
+    {
+      "source": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/tech-industry/semiconductors/micron-commits-500-million-to-globalwafers-texas-wafer-plant-as-it-raises-us-spending-to-250-billion",
+      "date": "2026-08-07",
+      "excerpt": "Contract terms are lengthening from about three years to five-to-eight years",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "One outlet's summary citing several wafer makers' earnings releases; publishers quoted inside a single document do not count as independent corroboration."
+  },
+  "dispersion": "Siltronic supplies two-thirds of volume via long-term agreements; Shin-Etsu now supplies all 300mm wafers under such agreements; GlobalWafers' Micron deal runs 10 years.",
+  "asOf": "2026-08",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-08-07",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "intuitionlabs-ai-00c92455-2026-08-3",
+  "statement": "B300 cloud rental is quoted at a median of $8.13 per GPU-hour across 13 provider configurations, starting at $7.39",
+  "kind": "measured",
+  "value": {
+    "number": 8.13,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Shows the going rental rate for the newest accelerator, but with no earlier rate given it is a level, not a move.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rental rate is the operating cost reference for renters of current-generation capacity; no baseline stated so no direction can be read."
+  },
+  "evidence": [
+    {
+      "source": "aggregated web search (IntuitionLabs, GPU Battle, JarvisLabs, getdeploying.com)",
+      "url": "https://intuitionlabs.ai/articles/nvidia-ai-gpu-pricing-guide",
+      "date": "2026-08-08",
+      "excerpt": "B300 cloud rental quoted starting at $7.39/GPU-hr with median $8.13/hr across 13 provider configs",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator listing across providers; no as-of date on the underlying pages."
+  },
+  "dispersion": "Starting $7.39/hr vs median $8.13/hr across 13 provider configurations.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-08",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

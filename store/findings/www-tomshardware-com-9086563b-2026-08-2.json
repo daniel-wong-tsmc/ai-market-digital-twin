@@ -1,0 +1,42 @@
+{
+  "id": "www-tomshardware-com-9086563b-2026-08-2",
+  "statement": "Micron committed $500 million to GlobalWafers' Texas plant under a 10-year supply agreement, within a raised $250 billion U.S. spending plan targeting 40% U.S.-based DRAM output by 2035",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A prepayment and a decade-long lock-in are what buyers do when they expect the input to stay scarce.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Prepaid long-term wafer capacity secures memory makers' feedstock and funds new supply, but the relief arrives only as the new capacity comes online."
+  },
+  "evidence": [
+    {
+      "source": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/tech-industry/semiconductors/micron-commits-500-million-to-globalwafers-texas-wafer-plant-as-it-raises-us-spending-to-250-billion",
+      "date": "2026-08-07",
+      "excerpt": "GlobalWafers signed a 10-year supply agreement with Micron (the longest such contract in wafer-industry history) starting next year, including a $500 million prepayment",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet plus a wire summary of the same underlying story; no company filing consulted."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: Tom's Hardware",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-08-07",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

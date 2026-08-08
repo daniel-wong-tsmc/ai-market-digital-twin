@@ -1,0 +1,42 @@
+{
+  "id": "intuitionlabs-ai-00c92455-2026-08-4",
+  "statement": "GB300 cloud rental quotes conflict across aggregators, at $8.62 per GPU-hour on one and $4.31 on another",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Two aggregators disagree by roughly a factor of two on the same part, so no single rental level can be trusted yet.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Unresolved price dispersion on the newest rack-scale part means rental cost references for it are unreliable; static level only."
+  },
+  "evidence": [
+    {
+      "source": "aggregated web search (IntuitionLabs, GPU Battle, JarvisLabs, getdeploying.com)",
+      "url": "https://intuitionlabs.ai/articles/nvidia-ai-gpu-pricing-guide",
+      "date": "2026-08-08",
+      "excerpt": "sources disagree on GB300 rental figure ($8.62/hr vs $4.31/hr on computeprices.com) -- flagging the discrepancy rather than resolving it",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Secondary aggregators openly conflict; the document flags rather than resolves the discrepancy."
+  },
+  "dispersion": "$8.62/hr (getdeploying, 3 configs) vs $4.31/hr (computeprices.com).",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-08",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

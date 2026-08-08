@@ -1,0 +1,41 @@
+{
+  "id": "intuitionlabs-ai-00c92455-2026-08-1",
+  "statement": "NVIDIA H200 street purchase price is quoted at $30,000-$40,000 per unit across resellers, against a list price of $40,000-$55,000",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A static level with no stated baseline or change; it shows where street pricing sits, not which way it is moving.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Street purchase price sets the hardware cost basis for buyers, but with no prior period given it carries no directional signal."
+  },
+  "evidence": [
+    {
+      "source": "aggregated web search (IntuitionLabs, GPU Battle, JarvisLabs, getdeploying.com)",
+      "url": "https://intuitionlabs.ai/articles/nvidia-ai-gpu-pricing-guide",
+      "date": "2026-08-08",
+      "excerpt": "street/reseller purchase price reported as $30,000-$40,000 per unit",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Aggregated secondary price pages with no explicit as-of date; range varies by source and configuration."
+  },
+  "dispersion": "Range across sources $31,000-$44,000 depending on configuration; H200 NVL 141GB quoted $31,000-$32,000; list/MSRP $40,000-$55,000.",
+  "asOf": "2026-08",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-08",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

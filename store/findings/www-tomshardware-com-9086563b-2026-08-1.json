@@ -1,0 +1,51 @@
+{
+  "id": "www-tomshardware-com-9086563b-2026-08-1",
+  "statement": "GlobalWafers reports its 300mm, 200mm and 150mm lines have effectively reached maximum utilization, with supply constraints emerging on some advanced 300mm products",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "The raw silicon wafers that every AI chip and memory die starts from are now sold out, which caps how much AI silicon can be made regardless of fab capacity.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.networking-silicon"
+    ],
+    "direction": "negative",
+    "mechanism": "With wafer lines at full utilization, incremental demand from AI logic, HBM, silicon photonics and advanced packaging cannot be met without new capacity, pushing out upstream lead times."
+  },
+  "evidence": [
+    {
+      "source": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/tech-industry/semiconductors/micron-commits-500-million-to-globalwafers-texas-wafer-plant-as-it-raises-us-spending-to-250-billion",
+      "date": "2026-08-07",
+      "excerpt": "effectively reached maximum utilization",
+      "tier": "secondary"
+    },
+    {
+      "source": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/tech-industry/semiconductors/micron-commits-500-million-to-globalwafers-texas-wafer-plant-as-it-raises-us-spending-to-250-billion",
+      "date": "2026-08-07",
+      "excerpt": "orders have surged from AI semiconductors, HBM, silicon photonics and advanced packaging demand",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet relaying a wire summary of an earnings call; no primary transcript or filing fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "memory",
+  "observedAt": "2026-08-07",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

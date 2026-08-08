@@ -1,0 +1,306 @@
+{
+  "asOf": "2026-08",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "www-amd-com-7c004427-2026-08-3",
+      "entity": "amd",
+      "indicatorId": "leadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-intc-com-2b371042-2026-08-4",
+      "entity": "intel",
+      "indicatorId": "leadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "intuitionlabs-ai-00c92455-2026-08-4",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "intuitionlabs-ai-00c92455-2026-08-1",
+      "entity": "market",
+      "indicatorId": "gpuSpotPrice",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "intuitionlabs-ai-00c92455-2026-08-2",
+      "entity": "market",
+      "indicatorId": "gpuSpotPrice",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-yesmedia-com-tw-b16dcffc-2026-08-4",
+      "entity": "odm",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "ir-amd-com-a2b1e088-2026-08-1",
+      "entity": "amd",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "newsroom-amd-com-4824d28b-2026-08-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "ir-amd-com-7b910833-2026-08-6",
+      "entity": "amd",
+      "indicatorId": "customerConcentration",
+      "verdict": "update",
+      "priorFindingId": "ir-amd-com-d9abb1c2-2026-08-1",
+      "detail": "magnitude 3 -> 2"
+    },
+    {
+      "findingId": "ir-amd-com-7b910833-2026-08-4",
+      "entity": "amd",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "newsroom-amd-com-4824d28b-2026-08-2",
+      "detail": "magnitude 1 -> 3"
+    },
+    {
+      "findingId": "ir-amd-com-7b910833-2026-08-5",
+      "entity": "amd",
+      "indicatorId": "exportControlExposure",
+      "verdict": "update",
+      "priorFindingId": "ir-amd-com-d9abb1c2-2026-08-3",
+      "detail": "magnitude 2 -> 1"
+    },
+    {
+      "findingId": "ir-amd-com-a2b1e088-2026-08-2",
+      "entity": "amd",
+      "indicatorId": "flopsPerDollar",
+      "verdict": "update",
+      "priorFindingId": "www-storagereview-com-e4725124-2026-07-2",
+      "detail": "statement/trend changed (trend rising -> unknown)"
+    },
+    {
+      "findingId": "www-amd-com-7c004427-2026-08-2",
+      "entity": "amd",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "finance-yahoo-com-171fe64e-2026-08-2",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "www-intc-com-2b371042-2026-08-3",
+      "entity": "intel",
+      "indicatorId": "grossMargin",
+      "verdict": "update",
+      "priorFindingId": "www-intc-com-819f4336-2026-07-3",
+      "detail": "value 40.4 -> 40.4 (tol 1%)"
+    },
+    {
+      "findingId": "www-intc-com-2b371042-2026-08-2",
+      "entity": "intel",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "update",
+      "priorFindingId": "www-intc-com-2becba13-2026-08-4",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "intuitionlabs-ai-00c92455-2026-08-3",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "intuitionlabs-ai-322b5fbd-2026-07-1",
+      "detail": "value 18.77 -> 8.13 (tol 1%)"
+    },
+    {
+      "findingId": "lambda-ai-10658469-2026-08-1",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "lambda-ai-e88b0904-2026-08-1",
+      "detail": "value 3.99 -> 6.69 (tol 1%)"
+    },
+    {
+      "findingId": "www-runpod-io-c7df9a5a-2026-08-1",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "www-runpod-io-29896770-2026-08-1",
+      "detail": "value 2.99 -> 7.39 (tol 1%)"
+    },
+    {
+      "findingId": "www-tomshardware-com-9086563b-2026-08-3",
+      "entity": "memory",
+      "indicatorId": "S10",
+      "verdict": "update",
+      "priorFindingId": "tech-yahoo-com-7b64d281-2026-07-2",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "www-tomshardware-com-9086563b-2026-08-2",
+      "entity": "memory",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "www-thelec-net-c15d2de4-2026-08-3",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "www-tomshardware-com-9086563b-2026-08-1",
+      "entity": "memory",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "update",
+      "priorFindingId": "www-thelec-net-c15d2de4-2026-08-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "en-sedaily-com-b1c000ac-2026-08-2",
+      "entity": "nvidia",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "m-lookonchain-com-027f1b02-2026-08-2",
+      "detail": "statement/trend changed (trend rising -> falling)"
+    },
+    {
+      "findingId": "en-sedaily-com-b1c000ac-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "www-trendforce-com-17fa2dc8-2026-08-1",
+      "detail": "statement/trend changed (trend falling -> falling)"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "ir-amd-com-7b910833-2026-08-1",
+      "entity": "amd",
+      "indicatorId": "D2",
+      "verdict": "duplicate",
+      "priorFindingId": "ir-amd-com-cfa508a5-2026-08-1",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "www-amd-com-7c004427-2026-08-1",
+      "entity": "amd",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "ir-amd-com-7b910833-2026-08-3",
+      "entity": "amd",
+      "indicatorId": "grossMargin",
+      "verdict": "duplicate",
+      "priorFindingId": "ir-amd-com-cfa508a5-2026-08-3",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "ir-amd-com-7b910833-2026-08-2",
+      "entity": "amd",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "duplicate",
+      "priorFindingId": "ir-amd-com-cfa508a5-2026-08-2",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "www-intc-com-2b371042-2026-08-1",
+      "entity": "intel",
+      "indicatorId": "D2",
+      "verdict": "duplicate",
+      "priorFindingId": "www-intc-com-2becba13-2026-08-1",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "lambda-ai-10658469-2026-08-2",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "lambda-ai-10658469-2026-08-3",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-runpod-io-c7df9a5a-2026-08-2",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-runpod-io-c7df9a5a-2026-08-3",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-tomshardware-com-9086563b-2026-08-4",
+      "entity": "memory",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "en-sedaily-com-b1c000ac-2026-08-3",
+      "entity": "nvidia",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "en-sedaily-com-b1c000ac-2026-08-4",
+      "entity": "nvidia",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-yesmedia-com-tw-b16dcffc-2026-08-2",
+      "entity": "odm",
+      "indicatorId": "odmMonthlyAiRevenue",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-yesmedia-com-tw-b16dcffc-2026-08-3",
+      "entity": "odm",
+      "indicatorId": "odmMonthlyAiRevenue",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-yesmedia-com-tw-b16dcffc-2026-08-1",
+      "entity": "odm",
+      "indicatorId": "odmMonthlyAiRevenue",
+      "verdict": "duplicate",
+      "priorFindingId": "www-digitimes-com-80018f32-2026-08-1",
+      "detail": "unchanged within tolerance"
+    }
+  ]
+}

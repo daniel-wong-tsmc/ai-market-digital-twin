@@ -1,0 +1,197 @@
+{
+  "headline": "Memory makers can fill only two-thirds of the order",
+  "deck": "NVIDIA's memory suppliers can cover 60% to 70% of what it asked for its next generation, so it is cutting memory per chip instead. Today's price sweep shows what that scarcity costs: an H200 still fetches $30,000 to $40,000, a single B300 about $53,000.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The suppliers can meet two-thirds of what was asked",
+      "paragraphs": [
+        "Seoul Economic Daily reported on 7 August that NVIDIA's memory suppliers can meet only 60% to 70% of the stacked-memory volume it requested for the Rubin Ultra generation. That one number explains most of the gap between what buyers want and what actually arrives.",
+        "NVIDIA's answer is to put less memory on each chip. The same report says it is testing Rubin Ultra at 192 gigabytes and 256 gigabytes, down from a planned 1 terabyte, with some samples reverting to earlier-generation parts. A news flash on 3 August put the mainline part at 192 gigabytes in an eight-high stack, down from 288 gigabytes in a twelve-high stack, and named memory supply and data-centre power limits as the reasons.",
+        "TrendForce said on 4 August that memory supply stays short through 2027, which caps how much plant capacity the memory makers can turn over to stacked memory, and that NVIDIA has been weighing four different memory specifications for Rubin Ultra since this quarter. Less memory per chip means more finished chips out of the same pool. It does not mean more memory."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-2",
+        "www-kucoin-com-8fc72edf-2026-08-1",
+        "www-trendforce-com-17fa2dc8-2026-08-1"
+      ],
+      "sourceLine": "Seoul Economic Daily, 7 August 2026, a KuCoin news flash of 3 August 2026, and TrendForce of 4 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://en.sedaily.com/international/2026/08/07/nvidia-weighs-cutting-hbm-capacity-for-rubin-ultra",
+          "title": "NVIDIA weighs less memory per chip for Rubin Ultra",
+          "outlet": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
+          "date": "2026-08-07"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "What the shortage costs, in dollars",
+      "paragraphs": [
+        "Today's price sweep puts an NVIDIA H200 at $30,000 to $40,000 per unit across resellers, against a list price of $40,000 to $55,000. A single B300 is quoted at roughly $53,000.",
+        "Renting tells the same story. Across 13 provider setups the B300 comes in at a median of $8.13 per GPU-hour, starting at $7.39, and RunPod's own published price of 27 July was that same $7.39. Lambda lists the older B200 at $6.69 per GPU-hour on an eight-card machine.",
+        "The market is not settled. Two aggregators quote the GB300 at $8.62 and at $4.31 per GPU-hour for the same part. When one chip carries prices a factor of two apart, buyers are not shopping in a single market. They are taking whatever they can get."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "intuitionlabs-ai-00c92455-2026-08-1",
+        "intuitionlabs-ai-00c92455-2026-08-2",
+        "intuitionlabs-ai-00c92455-2026-08-3",
+        "intuitionlabs-ai-00c92455-2026-08-4",
+        "www-runpod-io-c7df9a5a-2026-08-1",
+        "lambda-ai-10658469-2026-08-1"
+      ],
+      "sourceLine": "Aggregated price listings read on 8 August 2026, Lambda's pricing page of 8 August 2026, and RunPod's price update of 27 July 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://intuitionlabs.ai/articles/nvidia-ai-gpu-pricing-guide",
+          "title": "What today's chips cost to buy and to rent",
+          "outlet": "aggregated web search (IntuitionLabs, GPU Battle, JarvisLabs, getdeploying.com)",
+          "date": "2026-08-08"
+        },
+        {
+          "url": "https://lambda.ai/service/gpu-cloud",
+          "title": "Lambda cloud rental prices",
+          "outlet": "Lambda Labs",
+          "date": "2026-08-08"
+        },
+        {
+          "url": "https://www.runpod.io/pricing",
+          "title": "RunPod published rental prices",
+          "outlet": "RunPod",
+          "date": "2026-07-27"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Buyers start booking the raw material years early",
+      "paragraphs": [
+        "Tom's Hardware reported on 7 August that GlobalWafers, which makes the blank silicon discs every chip and every memory stack starts on, has effectively reached maximum use of its 300mm, 200mm and 150mm lines, with shortages showing up on some advanced 300mm products.",
+        "Micron committed $500 million to GlobalWafers' Texas plant under a ten-year supply agreement. That sits inside a raised $250 billion US spending plan aimed at making 40% of its memory chips in the United States by 2035.",
+        "Buying habits are changing too. Wafer buyers are rebuilding safety stock and stretching contracts from about three years to five-to-eight years, and spot prices for 300mm wafers have started to rise. Locking up plain silicon that far ahead is what customers do when they do not expect the shortage to end soon."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-tomshardware-com-9086563b-2026-08-1",
+        "www-tomshardware-com-9086563b-2026-08-2",
+        "www-tomshardware-com-9086563b-2026-08-3"
+      ],
+      "sourceLine": "Tom's Hardware, 7 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://www.tomshardware.com/tech-industry/semiconductors/micron-commits-500-million-to-globalwafers-texas-wafer-plant-as-it-raises-us-spending-to-250-billion",
+          "title": "Micron puts $500 million into a Texas wafer plant",
+          "outlet": "Tom's Hardware",
+          "date": "2026-08-07"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch from here",
+      "paragraphs": [
+        "First, which memory setup NVIDIA settles on for Rubin Ultra. TrendForce says four specifications have been under review since this quarter, and that choice decides how many finished chips one pool of memory can fill.",
+        "Second, whether the bare-silicon squeeze widens. Spot 300mm wafer prices have begun rising and buyers are already stretching contracts out to five-to-eight years, so any further move there lands underneath everything else.",
+        "Third, whether the second supplier actually delivers. AMD guided the current quarter to about $13.0 billion, plus or minus $300 million, roughly 41% above last year, and that is the plainest test of whether a rival is shipping rather than announcing. Until one of those three moves, a $53,000 price on a single B300 says the queue has not cleared."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-tomshardware-com-9086563b-2026-08-3",
+        "ir-amd-com-cfa508a5-2026-08-2",
+        "intuitionlabs-ai-00c92455-2026-08-2"
+      ],
+      "sourceLine": "TrendForce of 4 August 2026, Tom's Hardware of 7 August 2026, AMD's second-quarter results of 4 August 2026, and aggregated price listings read on 8 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+          "title": "AMD second-quarter 2026 results",
+          "outlet": "AMD Investor Relations (ir.amd.com)",
+          "date": "2026-08-04"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Money going into memory plants is what eventually lifts the ceiling on how many chips get finished.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a chip costs on the open market shows whether supply reaches anyone outside the long-standing contracts.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Finished servers leaving the factories is the honest count of what buyers actually received.",
+      "scene": 3
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Whether the biggest buyers keep raising their budgets sets how long the queue stays full.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "NVIDIA's memory suppliers can meet only 60% to 70% of the stacked-memory volume requested for the Rubin Ultra generation.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "An NVIDIA H200 is quoted at $30,000 to $40,000 per unit on the street, against a $40,000 to $55,000 list price.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Memory suppliers can meet only 60% to 70% of the stacked memory NVIDIA requested for its next generation, so chip output stays capped.",
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1"
+      ]
+    },
+    {
+      "text": "Street quotes today put an NVIDIA H200 at $30,000 to $40,000 and a single B300 at roughly $53,000, so newest parts still command a premium.",
+      "claimFindingIds": [
+        "intuitionlabs-ai-00c92455-2026-08-1",
+        "intuitionlabs-ai-00c92455-2026-08-2"
+      ]
+    },
+    {
+      "text": "Micron committed $500 million to GlobalWafers' Texas plant on a 10-year deal, a sign buyers now lock up bare silicon years ahead.",
+      "claimFindingIds": [
+        "www-tomshardware-com-9086563b-2026-08-2",
+        "www-tomshardware-com-9086563b-2026-08-3"
+      ]
+    }
+  ],
+  "schemaVersion": 2,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-08",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "ff1cb9903d2ef11f184c5a79105792c97fa116f4a6390ad025c95a5847a6ff3a",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-08T01:54:42.702797+00:00"
+  }
+}

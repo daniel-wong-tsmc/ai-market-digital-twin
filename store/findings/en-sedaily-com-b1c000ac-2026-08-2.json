@@ -1,0 +1,43 @@
+{
+  "id": "en-sedaily-com-b1c000ac-2026-08-2",
+  "statement": "Nvidia is testing Rubin Ultra configurations at 192GB and 256GB of HBM, down from a planned 1TB, with some samples reverting to prior-generation HBM4",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Falling back to smaller and older memory stacks is a workaround that keeps GPUs shipping but signals real scarcity of the newest memory.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Substituting lower-capacity or previous-generation memory preserves unit output and may lower price, but reduces per-GPU capability for AI server deployments."
+  },
+  "evidence": [
+    {
+      "source": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
+      "url": "https://en.sedaily.com/international/2026/08/07/nvidia-weighs-cutting-hbm-capacity-for-rubin-ultra",
+      "date": "2026-08-07",
+      "excerpt": "the company is now testing configurations at 192GB and 256GB, with some samples reverting to HBM4 (the previous generation) instead of HBM4E",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary press relaying unnamed-source reporting; configurations described as under evaluation, not finalized."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend falling -> falling); sources: Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-07",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

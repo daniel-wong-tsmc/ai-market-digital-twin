@@ -1,0 +1,43 @@
+{
+  "id": "ir-amd-com-7b910833-2026-08-6",
+  "statement": "AMD's accelerator order book is concentrated in a few very large customers, including reported multi-gigawatt commitments from Meta and OpenAI",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Huge growth resting on two or three buyers is powerful while it lasts and fragile if one of them pauses.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "models.frontier-closed"
+    ],
+    "direction": "mixed",
+    "mechanism": "Multi-year gigawatt commitments underwrite AMD's ramp but tie its data-centre revenue to a small number of counterparties, so any single deferral moves the whole line."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (ir.amd.com)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "a Feb 2026 multi-year deal with Meta for up to 6 gigawatts of GPU capacity valued at $60-100 billion over five years",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "The customer-commitment detail is flagged in the document as corroborating market reporting, not part of the primary release."
+  },
+  "dispersion": "Meta deal valued at $60-100 billion over five years; OpenAI deal 6 gigawatts with the first gigawatt in 2H 2026.",
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
