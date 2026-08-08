@@ -1,0 +1,43 @@
+{
+  "id": "ir-amd-com-a2b1e088-2026-08-2",
+  "statement": "Purpose-built inference silicon that hardwires model weights could erode merchant GPU demand in cost-sensitive inference workloads",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "unknown",
+  "why": "If cheaper fixed-function chips take over routine inference, some of the volume now assumed for general-purpose GPUs never materialises.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "mixed",
+    "mechanism": "Fixed-function inference parts deliver more work per dollar on stable models, shifting a share of inference spend away from flexible GPUs even as total inference compute grows."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (press release)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1296/amd-acquires-taalas-to-advance-compute-solutions-for-rapidly-growing-ai-inference-market",
+      "date": "2026-08-06",
+      "excerpt": "Taalas hardwires AI model weights directly into silicon to reduce compute/memory bottlenecks versus general-purpose GPUs, aimed at the growing cost-sensitive AI inference market",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": "AMD is paying to own an approach whose whole point is doing inference more cheaply than a general-purpose GPU. If that works at scale, the cheapest place to run settled models stops being a GPU. The offsetting force is that models keep changing, and hardwired silicon cannot follow them, so the effect is bounded and slow; no shipping product, volume, or date is disclosed here.",
+  "confidence": {
+    "level": "medium",
+    "basis": "Directional inference from an announced acquisition with no disclosed products, volumes, or timeline."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "flopsPerDollar",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

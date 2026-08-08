@@ -1,0 +1,43 @@
+{
+  "id": "www-yesmedia-com-tw-b16dcffc-2026-08-4",
+  "statement": "Wistron says AI servers are now 95% of its server business and that high memory-chip prices have not slowed customer spending, while its volume has come mainly from one major enterprise client",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Buyers are absorbing higher memory costs without cutting orders, but the revenue rests on very few customers.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Demand holding through rising memory input costs signals price-insensitive buying, but concentration in one client means a single customer's pause would swing the whole line; new enterprise clients start shipping in H2 2026."
+  },
+  "evidence": [
+    {
+      "source": "YesMedia (Taiwan) / Chinese-language wire, corroborating Foxconn monthly sales disclosures",
+      "url": "https://www.yesmedia.com.tw/%E5%BF%AB%E8%A8%8A-%E9%B4%BB%E6%B5%B77%E6%9C%88%E7%87%9F%E6%94%B6%E8%A1%9D%E4%B8%8A9465%E5%84%84%E5%89%B5%E6%AD%B7%E5%8F%B2%E6%96%B0%E9%AB%98-%E4%B8%8B%E5%8D%8A%E5%B9%B4%E7%87%9F%E9%81%8B%E6%97%BA/",
+      "date": "2026-08-05",
+      "excerpt": "Wistron's business has been mainly from one major enterprise client, with new enterprise clients starting shipments in H2 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Executive commentary relayed by a secondary wire; no transcript or filing consulted."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "odm",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

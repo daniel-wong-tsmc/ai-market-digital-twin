@@ -1,0 +1,45 @@
+{
+  "id": "lambda-ai-10658469-2026-08-1",
+  "statement": "Lambda lists on-demand NVIDIA B200 SXM6 at $6.69 per GPU-hour for 8-GPU instances",
+  "kind": "measured",
+  "value": {
+    "number": 6.69,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A published rental level for current-generation capacity, with no prior price shown to compare against.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Sets a public reference rate for renting current-generation accelerators; static level with no stated baseline, so no direction can be read."
+  },
+  "evidence": [
+    {
+      "source": "Lambda Labs",
+      "url": "https://lambda.ai/service/gpu-cloud",
+      "date": "2026-08-08",
+      "excerpt": "8x GPU instances: NVIDIA B200 SXM6 $6.69/hr",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor pricing page but no as-of date shown; document date is the fetch date."
+  },
+  "dispersion": "conflicting same-key reports: value 2.79 -> 6.69 (tol 1%); sources: Lambda Labs",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-08",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

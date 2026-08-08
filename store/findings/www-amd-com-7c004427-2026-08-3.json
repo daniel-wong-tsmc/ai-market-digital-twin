@@ -1,0 +1,42 @@
+{
+  "id": "www-amd-com-7c004427-2026-08-3",
+  "statement": "The MI430X variant aimed at HPC and sovereign AI is reported to ship in early 2027",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "The alternative supply from this part is real but not immediate; it does not relieve anything this year.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "A stated early-2027 ship date pushes the added double-precision and sovereign-AI supply beyond the current tight window, so near-term availability is unchanged."
+  },
+  "evidence": [
+    {
+      "source": "Market/trade press aggregation (AMD MI400 series product launch; official amd.com product page fetch timed out)",
+      "url": "https://www.amd.com/en/products/accelerators/instinct/mi400.html",
+      "date": "2026-08-03",
+      "excerpt": "shipping 'in early 2027'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary trade outlet headline; no primary AMD confirmation in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-08-03",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

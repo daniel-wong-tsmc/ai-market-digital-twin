@@ -1,0 +1,43 @@
+{
+  "id": "ir-amd-com-a2b1e088-2026-08-1",
+  "statement": "AMD agreed to acquire Taalas, an AI inference silicon startup, with price and financial terms undisclosed",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "AMD is buying dedicated inference silicon rather than relying only on general-purpose GPUs, widening the range of chips that can serve AI workloads.",
+  "impact": {
+    "targets": [
+      "chips.ai-silicon-startups",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Folding purpose-built inference silicon into the Instinct and Helios roadmap adds a non-GPU path to serve inference demand, expanding total available compute supply over time."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (press release)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1296/amd-acquires-taalas-to-advance-compute-solutions-for-rapidly-growing-ai-inference-market",
+      "date": "2026-08-06",
+      "excerpt": "optimizes inference dataflows, significantly reducing compute and memory bottlenecks associated with general-purpose architectures",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "AMD's own press release announcing a definitive agreement; terms undisclosed and closing still subject to approvals."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: AMD Investor Relations (press release), Market/trade press aggregation (AMD MI400 series product launch; official amd.com product page fetch timed out)",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "intuitionlabs-ai-00c92455-2026-08-2",
+  "statement": "NVIDIA B300 single-GPU purchase price is quoted at roughly $53,000 per GPU",
+  "kind": "measured",
+  "value": {
+    "number": 53000.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "unknown",
+  "why": "A point-in-time hardware price level for the current top-end part, with no baseline given for comparison.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Sets the per-accelerator capital cost reference for current-generation buys; static level only, no change stated."
+  },
+  "evidence": [
+    {
+      "source": "aggregated web search (IntuitionLabs, GPU Battle, JarvisLabs, getdeploying.com)",
+      "url": "https://intuitionlabs.ai/articles/nvidia-ai-gpu-pricing-guide",
+      "date": "2026-08-08",
+      "excerpt": "single-GPU purchase price quoted as 'roughly $53,000 per GPU'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade/pricing-guide aggregation, no vendor confirmation and no stated as-of date."
+  },
+  "dispersion": "8-GPU DGX B300 quoted $400,000-$500,000; 72-GPU GB300 NVL72 rack quoted $3,000,000-$4,000,000, about $41,700-$55,600 per GPU implied.",
+  "asOf": "2026-08",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-08",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

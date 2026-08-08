@@ -1,0 +1,44 @@
+{
+  "id": "ir-amd-com-7b910833-2026-08-4",
+  "statement": "AMD announced a strategic partnership with Anthropic covering up to 2 gigawatts of MI450 Series GPUs",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A frontier model developer committing gigawatt-scale capacity to AMD silicon is a real crack in single-vendor accelerator supply.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "energy.power-generation",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "A named frontier-lab design win at gigawatt scale converts AMD from challenger to a second qualified source, and pulls forward power and data-centre buildout to host it."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (ir.amd.com)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "strategic partnership with Anthropic",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Announced by AMD in its own earnings release; capacity stated as an upper bound."
+  },
+  "dispersion": "Stated as up to 2 gigawatts, an upper bound rather than a firm commitment.",
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

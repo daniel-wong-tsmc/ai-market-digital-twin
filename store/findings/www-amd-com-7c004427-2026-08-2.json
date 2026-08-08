@@ -1,0 +1,43 @@
+{
+  "id": "www-amd-com-7c004427-2026-08-2",
+  "statement": "Each MI400 GPU carries 432 GB of HBM4, a 50% increase over the MI350's 288 GB of HBM3e",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Every new accelerator now eats noticeably more memory than the one it replaces, so memory becomes scarcer even if chip output stays flat.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Rising memory content per accelerator raises HBM bit demand faster than unit shipments grow, tightening an already constrained memory supply chain."
+  },
+  "evidence": [
+    {
+      "source": "Market/trade press aggregation (AMD MI400 series product launch; official amd.com product page fetch timed out)",
+      "url": "https://www.amd.com/en/products/accelerators/instinct/mi400.html",
+      "date": "2026-08-03",
+      "excerpt": "a 50% increase over the MI350's 288 GB of HBM3e",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade-press figures with an internal bandwidth discrepancy the document leaves unresolved."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-03",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "en-sedaily-com-b1c000ac-2026-08-1",
+  "statement": "Nvidia's HBM suppliers can meet only 60% to 70% of the requested HBM volume for the Rubin Ultra generation",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Memory allocation, not GPU logic capacity, is the binding constraint on Nvidia's next-generation accelerator ramp.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "negative",
+    "mechanism": "Suppliers filling only part of the requested HBM order forces Nvidia to cut per-GPU memory content or slip schedules, which caps deliverable accelerator performance and tightens HBM allocation for everyone else."
+  },
+  "evidence": [
+    {
+      "source": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
+      "url": "https://en.sedaily.com/international/2026/08/07/nvidia-weighs-cutting-hbm-capacity-for-rubin-ultra",
+      "date": "2026-08-07",
+      "excerpt": "suppliers said they could only provide 60% to 70% of the requested HBM volume for the new hardware",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying another publication's reporting; no vendor filing or primary confirmation."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-07",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

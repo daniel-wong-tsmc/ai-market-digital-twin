@@ -1,0 +1,43 @@
+{
+  "id": "www-intc-com-2b371042-2026-08-4",
+  "statement": "Unverified market reporting claims Intel's data centre operations cannot keep up with orders, a claim absent from the primary release",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "If true it would mean server silicon is order-constrained, but the company's own release does not say it.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Order backlog exceeding output would lengthen server platform lead times and gate accelerator deployments that ship with those hosts, but the claim is unconfirmed."
+  },
+  "evidence": [
+    {
+      "source": "Intel Corporation Investor Relations (intc.com)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "these figures are UNCONFIRMED against the primary source and should be treated as secondary/attributed-to-search-summary only",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Explicitly flagged in the document as unconfirmed search-summary material contradicted by the absence of such language in the primary release."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

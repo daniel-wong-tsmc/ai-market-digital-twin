@@ -1,0 +1,45 @@
+{
+  "id": "www-runpod-io-c7df9a5a-2026-08-1",
+  "statement": "RunPod lists on-demand B300 pods at $7.39 per GPU-hour as of its July 27, 2026 price update",
+  "kind": "measured",
+  "value": {
+    "number": 7.39,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A dated rental level for the newest part, with no earlier price on the page to compare against.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Published on-demand rate sets a cost reference for newest-generation rented capacity; static level with no baseline, so no direction."
+  },
+  "evidence": [
+    {
+      "source": "RunPod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-07-27",
+      "excerpt": "Pods (on-demand) USD/hr: B300 $7.39",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor pricing page with an on-page date stamp, but a single provider and secondary tier."
+  },
+  "dispersion": "conflicting same-key reports: value 2.99 -> 7.39 (tol 1%); sources: RunPod",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-07-27",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "www-intc-com-2b371042-2026-08-3",
+  "statement": "Intel reported Q2 2026 GAAP gross margin of 40.4% and non-GAAP gross margin of 41.8%",
+  "kind": "measured",
+  "value": {
+    "number": 40.4,
+    "unit": "pct"
+  },
+  "trend": "unknown",
+  "why": "It shows how much of Intel's growth is turning into profit, with no prior-period margin given here to judge the direction.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Margin at this level while revenue grows 25% indicates cost and capacity intensity in foundry and packaging is still weighing on profitability."
+  },
+  "evidence": [
+    {
+      "source": "Intel Corporation Investor Relations (intc.com)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Gross margin: '40.4%' GAAP; '41.8%' non-GAAP for Q2 2026",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Reported directly in Intel's primary results release."
+  },
+  "dispersion": "GAAP 40.4% vs non-GAAP 41.8%; GAAP loss per share of $(2.16) against non-GAAP EPS of $0.42.",
+  "asOf": "2026-08",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,41 @@
+{
+  "id": "ir-amd-com-7b910833-2026-08-5",
+  "statement": "AMD's prior-year quarter carried $800 million in inventory and related charges from U.S. export controls on MI308 products sold into China",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "It marks the size of the China exposure AMD already wrote off, and flatters this year's growth comparison.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Export controls removed a China revenue channel and forced inventory charges; the prior-year hit both caps addressable demand and inflates the year-over-year comparison."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (ir.amd.com)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "included $800 million in inventory and related charges due to the U.S. Government's export control",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Stated in AMD's own release as a prior-period comparison item."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-08T09:15:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
