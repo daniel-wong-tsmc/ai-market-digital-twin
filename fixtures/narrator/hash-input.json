@@ -75,5 +75,19 @@
     }
   ],
   "gapMonths": ["2026-06", "2026-07"],
+  "openIssues": [
+    {
+      "id": "constraint-advanced-packaging",
+      "title": "advanced packaging",
+      "trigger": {
+        "kind": "binding-constraint",
+        "label": "advanced packaging"
+      },
+      "recent": [
+        {"asOf": "2026-06", "status": "worsened"},
+        {"asOf": "2026-07", "status": "unchanged"}
+      ]
+    }
+  ],
   "storyDate": "2026-07-23"
 }

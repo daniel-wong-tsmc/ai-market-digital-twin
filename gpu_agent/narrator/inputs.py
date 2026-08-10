@@ -17,10 +17,14 @@ from gpu_agent.dashboard.brief_model import latest_monthly, read_implication_lin
 from gpu_agent.dashboard.gap_chart import build_gap_data
 from gpu_agent.dashboard.story_model import _CHIP_DEFS, _SERIES_IDS, resolve_store_root
 from gpu_agent.freshness import FreshnessConfig, classify, load_freshness, weight
+from gpu_agent.issues import read_history_tail, read_register
 from gpu_agent.narrator.store import StoryStore
 
 # Matches story_model's own sparkline window (_chip() there slices series[-8:]).
 _TAIL_LEN = 8
+
+# How many past assessments of an open issue the narrator gets to see.
+_ISSUE_HISTORY_TAIL = 8
 
 
 def _finding_trim(f: dict, today: dt.date, cfg: FreshnessConfig) -> dict:
@@ -109,6 +113,22 @@ def build_narrator_inputs(category_id: str, store_dir: str | Path,
     gap = build_gap_data(cat_dir)
     gap_months = [m["key"] for m in gap["months"]] if gap else []
 
+    # Open issues, in the order the register lists them. Clock-free: nothing
+    # here depends on `today`, so the same store always yields the same list.
+    open_issues = [
+        {
+            "id": issue.id,
+            "title": issue.title,
+            "trigger": {"kind": issue.trigger.kind, "label": issue.trigger.label},
+            "recent": [
+                {"asOf": h["asOf"], "status": h["status"]}
+                for h in read_history_tail(cat_dir, issue.id, _ISSUE_HISTORY_TAIL)
+            ],
+        }
+        for issue in read_register(cat_dir, category_id).issues
+        if issue.state == "open"
+    ]
+
     return {
         "scorecard": scorecard,
         "findings": findings,
@@ -117,5 +137,6 @@ def build_narrator_inputs(category_id: str, store_dir: str | Path,
         "memory": memory,
         "docPool": doc_pool,
         "gapMonths": gap_months,
+        "openIssues": open_issues,
         "storyDate": today.isoformat(),
     }
