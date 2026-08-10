@@ -8,6 +8,7 @@ from gpu_agent.issues import (
     IssueLatest,
     IssueRegister,
     IssueTrigger,
+    _title_from_dim_key,
     append_history,
     apply_assessments,
     issue_id,
@@ -58,6 +59,23 @@ SCORECARD = {
             "rating": "Mixed",
             "direction": "worsening",
             "voteSpread": "3/3 Mixed",
+        },
+    },
+}
+
+# Same shape as SCORECARD but with competitiveStructure flipped from Mixed+worsening to
+# Weak+worsening, so a real multi-word dimension key (2 of the 5 real dimensions —
+# competitiveStructure, strategicRisk — are multi-word) actually opens an issue and exercises
+# the camelCase title-splitting logic end to end, not just the single-word dims
+# (bottleneck, moat) that SCORECARD triggers.
+MULTIWORD_DIM_SCORECARD = {
+    "categoryStatus": SCORECARD["categoryStatus"],
+    "dimensionRatings": {
+        **SCORECARD["dimensionRatings"],
+        "competitiveStructure": {
+            "rating": "Weak",
+            "direction": "worsening",
+            "voteSpread": "3/3 Weak",
         },
     },
 }
@@ -152,6 +170,26 @@ def test_open_issues_new_entries_are_open_with_zeroed_counters():
         assert issue.checkCount == 0
         assert issue.reopenedAsOf == []
         assert issue.resolvedAsOf is None
+
+
+def test_title_from_dim_key_splits_multiword_camelcase_key():
+    # Direct assertion on the one piece of derived (non-pass-through) string logic in the
+    # module: real multi-word dimension keys, not the single-word ones (bottleneck, moat)
+    # that happen to be the only dims the fixture scorecard opens.
+    assert _title_from_dim_key("competitiveStructure") == "Competitive structure"
+    assert _title_from_dim_key("strategicRisk") == "Strategic risk"
+
+
+def test_open_issues_opens_multiword_dimension_with_correctly_derived_title():
+    # End-to-end path through open_issues: competitiveStructure (a real key from
+    # store/chips.merchant-gpu/2026-08-v5.json) Weak+worsening must open dim-competitiveStructure
+    # with the camelCase-split, capitalized title -- not just single-word dims.
+    register = _empty_register()
+    new_register, opened = open_issues(register, MULTIWORD_DIM_SCORECARD, AS_OF)
+    assert "dim-competitiveStructure" in opened
+    issue = next(i for i in new_register.issues if i.id == "dim-competitiveStructure")
+    assert issue.title == "Competitive structure"
+    assert issue.trigger == IssueTrigger(kind="dimension-weak", label="competitiveStructure")
 
 
 def test_open_issues_second_call_is_idempotent():
