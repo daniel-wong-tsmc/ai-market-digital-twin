@@ -49,7 +49,7 @@ report the rest `skipped-no-assignment` (surfaced, never dropped).
 
 ## Procedure
 
-<!-- run-cycle-step-fingerprint: sha256=930fbbe286df56d85efac42c70cb22dac1e64d1f5e742d687e5b3bdf13a6489f — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
+<!-- run-cycle-step-fingerprint: sha256=1060c828c59ee034200904fd010715193e28f64a48733fbd6487a97a2f7c54b9 — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
 
 ### 1. Resolve the scope to a cycle plan (deterministic — no LLM)
 ```
@@ -214,6 +214,16 @@ assignment carries no manifest, log `coverage: skipped (no manifest)` in the cyc
 if the scorecard step failed, SKIP this exactly as write-back is skipped. Commit the artifact with
 the cycle (CLAUDE.md: a cycle that isn't committed didn't happen).
 
+**(d4) Issues-open (F115; deterministic, no LLM).** After the coverage record, open any new known
+issues from this cycle's scorecard into the tracked register — never by hand:
+```
+.venv/Scripts/python -m gpu_agent.cli issues open --category <id> --store store
+```
+Expected: a JSON line `{"opened": <n>, "open": <n>}`. Mark **`issues-open: done`** in the cycle log
+on a zero exit, or **`issues-open: failed`** on a non-zero exit (no monthly scorecard found for this
+category). **This step never blocks the cycle** (write-back precedent) — a failed open leaves the
+register exactly as it was and the run proceeds.
+
 **(e) Thesis — Claude Code is the brain.** After the scorecard is written, emit the canonical thesis-book
 prompt from this cycle's gated findings (this seeds the store with the category's standing theses on its
 first run):
@@ -304,6 +314,20 @@ it must be passed on every fallback call.) Mark **`narrator: fellBack`** in the 
 or **`narrator: done`** on a clean gate pass. **This step never blocks the cycle** (price-sync
 precedent, Step 7) — the site build then renders the day's story artifact-first automatically, and
 falls back to the Phase A assembler page when there is no valid artifact for the day.
+
+**(e3b) Issues-update (F115; deterministic, no LLM).** After the narrator step, and before the
+citation audit so the register is current when the audit reads the claims, apply this cycle's issue
+assessments from the day's story artifact to the tracked register:
+```
+.venv/Scripts/python -m gpu_agent.cli issues update --category <id> --store store --story-date <today>
+```
+Expected: a JSON line `{"assessed": <n>, "notAssessed": <n>, "resolved": [<id>, ...]}`. A fellBack
+narrator day still runs this step — the artifact carries no issues block, so every open issue gets an
+honest `not-assessed` entry and its streak freezes instead of silently drifting. Mark
+**`issues-update: done`** in the cycle log on a zero exit, or **`issues-update: failed`** on a
+non-zero exit (no monthly scorecard, or no story artifact for `<today>`). **This step never blocks
+the cycle** — a failed update leaves the register exactly as it was and the run proceeds to the
+citation audit regardless.
 
 **(e4) Citation audit — post-hoc, deterministic (no LLM).** Every write-time gate checks that a cited
 finding *id resolves*; none checks that the finding *says what the prose claims*. This step re-verifies
