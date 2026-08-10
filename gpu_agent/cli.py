@@ -68,6 +68,11 @@ from gpu_agent.chartdata.registry import DEFAULT_REGISTRY_PATH as CHART_SERIES_R
 from gpu_agent.chartdata.registry import load_chart_series
 from gpu_agent.chartdata.fetch import run_fetch
 from gpu_agent.dashboard.export_json import write_dashboard_json
+from gpu_agent.dashboard.brief_model import latest_monthly
+from gpu_agent.dashboard.story_model import resolve_store_root
+from gpu_agent.issues import (
+    apply_assessments, append_history, open_issues, read_register, write_register,
+)
 
 # F56-core: --as-of is embedded verbatim in doc/finding ids (F52), which become
 # snapshot + FindingStore filenames -- a fat-fingered "2026/07/03" would mint a
@@ -878,7 +883,12 @@ def _narrator(args) -> int:
                             wroteAt=datetime.now(timezone.utc).isoformat())
         # F114 Task 5b: gate_narrator's Check 8 requires every accepted answer to
         # carry bullets, so every artifact written here is genuinely v2-shaped.
-        artifact = StoryArtifact(schemaVersion=2, categoryId=args.category,
+        # F115 Task 6 (user-decided 2026-08-10): bumped again, conditionally, to 3
+        # exactly when the answer carries an issues block -- schemaVersion keeps
+        # meaning "this artifact is genuinely shaped like it claims", the same
+        # precedent as the 1->2 bump above, not a blanket version bump.
+        artifact = StoryArtifact(schemaVersion=3 if answer.issues else 2,
+                                 categoryId=args.category,
                                  storyDate=args.date, narratorMeta=meta,
                                  **answer.model_dump())
         path = store.write(artifact)
@@ -913,6 +923,68 @@ def _narrator(args) -> int:
     print("gpu-agent narrator: error: exactly one of --emit-prompt, --recorded, or "
           "--record-fallback is required", file=sys.stderr)
     return 2
+
+def _issues_scorecard_dict(cat_dir) -> dict:
+    """The trimmed {asOf, revision, categoryStatus, dimensionRatings} shape both
+    open_issues and apply_assessments (gpu_agent/issues.py) expect, built from the
+    same latest-monthly-scorecard selection the narrator inputs use (F115 Task 4:
+    gpu_agent/narrator/inputs.py:56) rather than new selection logic."""
+    latest, _prior, as_of, rev = latest_monthly(cat_dir)
+    latest = latest or {}
+    return {
+        "asOf": as_of,
+        "revision": rev,
+        "categoryStatus": latest.get("categoryStatus") or {},
+        "dimensionRatings": latest.get("dimensionRatings") or {},
+    }, (latest != {})
+
+
+def _issues(args) -> int:
+    """Handler for `gpu-agent issues` (F115 Task 6): open new issues from the latest
+    monthly scorecard, or update assessments from a story artifact. Mirrors the
+    narrator verb's non-blocking failure shape -- a missing input (no monthly
+    scorecard for `open`; no story artifact for `update`) prints to stderr and exits
+    1 without touching the register, so the run-cycle step (Task 9) can treat this
+    step as failed-but-non-blocking and keep going.
+
+    Takes no wall-clock reading: `--as-of` defaults to the scorecard's own `asOf`
+    (open) or to `--story-date` (update), so reruns are deterministic.
+    """
+    store_root = resolve_store_root(args.category, args.store)
+    cat_dir = store_root / args.category
+    scorecard, has_scorecard = _issues_scorecard_dict(cat_dir)
+
+    if args.action == "open":
+        if not has_scorecard:
+            print(f"gpu-agent issues: error: no monthly scorecard found for "
+                  f"{args.category} under {cat_dir}", file=sys.stderr)
+            return 1
+        as_of = args.as_of or scorecard["asOf"]
+        register = read_register(cat_dir, args.category)
+        register, opened = open_issues(register, scorecard, as_of)
+        write_register(cat_dir, register)
+        open_count = sum(1 for i in register.issues if i.state == "open")
+        print(json.dumps({"opened": opened, "open": open_count}))
+        return 0
+
+    # action == "update"
+    story_store = StoryStore(store_root)
+    artifact = story_store.read(args.category, args.story_date)
+    if artifact is None:
+        print(f"gpu-agent issues: error: no story artifact found for "
+              f"{args.category} on {args.story_date}", file=sys.stderr)
+        return 1
+    assessments = [a.model_dump() for a in artifact.issues] if artifact.issues else []
+    as_of = args.as_of or args.story_date
+    register = read_register(cat_dir, args.category)
+    register, history_lines = apply_assessments(register, assessments, scorecard, as_of)
+    write_register(cat_dir, register)
+    append_history(cat_dir, history_lines)
+    assessed = sum(1 for l in history_lines if l["status"] != "not-assessed")
+    not_assessed = sum(1 for l in history_lines if l["status"] == "not-assessed")
+    resolved = [i.id for i in register.issues if i.resolvedAsOf == as_of]
+    print(json.dumps({"assessed": assessed, "notAssessed": not_assessed, "resolved": resolved}))
+    return 0
 
 def _series_extra_texts(store_root) -> list[str]:
     """F66 D5b, sourcing option (a) (user-approved 2026-07-29): the story quotes
@@ -1828,6 +1900,18 @@ def main(argv=None) -> int:
                     help="JSON file of violation sentences (required with --record-fallback)")
     nr.add_argument("--model", default="opus", help="narratorMeta.model (default: opus)")
     nr.add_argument("--retries", type=int, default=0, help="narratorMeta.retries (default: 0)")
+    iss = sub.add_parser("issues",
+                         help="F115: known-issues register -- open new issues from the "
+                              "latest monthly scorecard, or update assessments from a "
+                              "story artifact")
+    iss.add_argument("action", choices=["open", "update"])
+    iss.add_argument("--category", required=True, help="indicator category id (e.g. chips.merchant-gpu)")
+    iss.add_argument("--store", default="store", help="store root (holds <category>/issues/)")
+    iss.add_argument("--as-of", default=None, type=_as_of,
+                     help="register asOf stamp (default: scorecard's own asOf for open, "
+                          "--story-date for update)")
+    iss.add_argument("--story-date", default=None, type=_narrator_date,
+                     help="story date, YYYY-MM-DD (required for update)")
     ac = sub.add_parser("audit-citations",
                         help="F66: re-verify every number in the finished story scenes and "
                              "implication lines against the findings they cite")
@@ -2025,6 +2109,8 @@ def main(argv=None) -> int:
             return 1
     if args.cmd == "narrator":
         return _narrator(args)
+    if args.cmd == "issues":
+        return _issues(args)
     if args.cmd == "audit-citations":
         return _audit_citations(args)
     if args.cmd == "eval":
