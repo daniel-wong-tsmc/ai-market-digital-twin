@@ -4,6 +4,7 @@ import pytest
 
 from gpu_agent.issues import (
     RESOLVE_STREAK,
+    CorruptRegisterError,
     Issue,
     IssueLatest,
     IssueRegister,
@@ -239,6 +240,35 @@ def test_reopen_resolved_issue_when_trigger_fires_again():
     assert reopened.resolvedAsOf == "2026-07-01"
     # no duplicate entry for same id
     assert sum(1 for i in new_register.issues if i.id == "dim-bottleneck") == 1
+
+
+def test_reopen_also_resets_check_count_so_the_two_counters_share_one_window():
+    """C: checkCount and worsenedCount must describe the same window after a
+    reopen. Before the fix, checkCount survived a reopen while worsenedCount
+    was zeroed, so the page could read "worsened 0 of last 12 checks" right
+    after a reopen -- true in isolation, misleading together, and misleading
+    in the reassuring direction."""
+    trig = IssueTrigger(kind="dimension-weak", label="bottleneck")
+    resolved_issue = Issue(
+        id="dim-bottleneck",
+        title="Bottleneck",
+        state="resolved",
+        openedAsOf="2026-06-01",
+        resolvedAsOf="2026-07-01",
+        reopenedAsOf=[],
+        trigger=trig,
+        improvedStreak=5,
+        worsenedCount=3,
+        checkCount=12,
+    )
+    register = IssueRegister(
+        schemaVersion=1, categoryId=CATEGORY_ID, asOf="2026-07-01", issues=[resolved_issue]
+    )
+    new_register, _ = open_issues(register, SCORECARD, AS_OF)
+    reopened = next(i for i in new_register.issues if i.id == "dim-bottleneck")
+    assert reopened.checkCount == 0
+    assert reopened.worsenedCount == 0
+    assert reopened.improvedStreak == 0
 
 
 def test_reopen_grows_reopened_as_of_across_cycles():
@@ -499,3 +529,93 @@ def test_write_register_twice_is_byte_identical(tmp_path):
     p2 = write_register(cat_dir, register)
     bytes2 = p2.read_bytes()
     assert bytes1 == bytes2
+
+
+# --- E: append_history([]) is a no-op ------------------------------------------
+
+def test_append_history_empty_list_does_not_create_a_file(tmp_path):
+    cat_dir = tmp_path / "chips.merchant-gpu"
+    append_history(cat_dir, [])
+    p = cat_dir / "issues" / "history.jsonl"
+    assert not p.exists()
+
+
+def test_append_history_empty_list_leaves_existing_file_untouched(tmp_path):
+    cat_dir = tmp_path / "chips.merchant-gpu"
+    line = {"asOf": AS_OF, "issueId": "dim-bottleneck", "status": "improved",
+            "reasoning": "r", "claimFindingIds": [], "triggerStillFiring": True,
+            "streakAfter": 1}
+    append_history(cat_dir, [line])
+    p = cat_dir / "issues" / "history.jsonl"
+    before = p.read_bytes()
+    append_history(cat_dir, [])
+    assert p.read_bytes() == before
+
+
+# --- A: malformed history.jsonl lines are skipped, not fatal -------------------
+
+def test_read_history_tail_skips_truncated_final_line(tmp_path):
+    cat_dir = tmp_path / "chips.merchant-gpu"
+    good = {"asOf": "2026-08-10", "issueId": "dim-bottleneck", "status": "improved",
+            "reasoning": "r", "claimFindingIds": [], "triggerStillFiring": True,
+            "streakAfter": 1}
+    append_history(cat_dir, [good])
+    p = cat_dir / "issues" / "history.jsonl"
+    # Simulate a process killed mid-write: append a truncated JSON fragment
+    # with no trailing newline.
+    with p.open("a", encoding="utf-8", newline="\n") as f:
+        f.write('{"asOf": "2026-08-11", "issueId": "dim-bottl')
+    tail = read_history_tail(cat_dir, "dim-bottleneck", 5)
+    assert tail == [good]
+
+
+def test_read_history_tail_skips_garbage_line_in_the_middle(tmp_path):
+    cat_dir = tmp_path / "chips.merchant-gpu"
+    line1 = {"asOf": "2026-08-10", "issueId": "dim-bottleneck", "status": "improved",
+             "reasoning": "r", "claimFindingIds": [], "triggerStillFiring": True,
+             "streakAfter": 1}
+    line2 = {"asOf": "2026-08-12", "issueId": "dim-bottleneck", "status": "improved",
+             "reasoning": "r", "claimFindingIds": [], "triggerStillFiring": True,
+             "streakAfter": 2}
+    append_history(cat_dir, [line1])
+    p = cat_dir / "issues" / "history.jsonl"
+    with p.open("a", encoding="utf-8", newline="\n") as f:
+        f.write("not valid json at all\n")
+    append_history(cat_dir, [line2])
+    tail = read_history_tail(cat_dir, "dim-bottleneck", 5)
+    assert tail == [line1, line2]
+
+
+# --- A: a corrupt register.json is a loud, named error, never a silent empty ---
+
+def test_read_register_corrupt_json_raises_corrupt_register_error_not_empty(tmp_path):
+    cat_dir = tmp_path / "chips.merchant-gpu"
+    d = cat_dir / "issues"
+    d.mkdir(parents=True)
+    (d / "register.json").write_text('{"schemaVersion": 1, "categoryId": "x", "asOf": ', encoding="utf-8")
+    with pytest.raises(CorruptRegisterError):
+        read_register(cat_dir, CATEGORY_ID)
+
+
+def test_read_register_hand_edit_validation_failure_raises_corrupt_register_error(tmp_path):
+    cat_dir = tmp_path / "chips.merchant-gpu"
+    d = cat_dir / "issues"
+    d.mkdir(parents=True)
+    # Well-formed JSON, but a hand edit that fails the model's validation
+    # (e.g. a typo'd status), matching the spec's own advertised override --
+    # the user can rename/delete by editing the register.
+    body = json.dumps({
+        "schemaVersion": 1,
+        "categoryId": CATEGORY_ID,
+        "asOf": AS_OF,
+        "issues": [{
+            "id": "dim-bottleneck",
+            "title": "Bottleneck",
+            "state": "not-a-real-state",
+            "openedAsOf": AS_OF,
+            "trigger": {"kind": "dimension-weak", "label": "bottleneck"},
+        }],
+    })
+    (d / "register.json").write_text(body, encoding="utf-8")
+    with pytest.raises(CorruptRegisterError):
+        read_register(cat_dir, CATEGORY_ID)

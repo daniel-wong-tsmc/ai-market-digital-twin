@@ -50,7 +50,9 @@ const OPEN_ASSESSED: IssuesData['open'][number] = {
   title: 'HBM allocation still binds Q3 output',
   status: 'worsened',
   assessedAsOf: '2026-08-05',
-  trackedSince: '2026-05-01',
+  // Production shape: `trackedSince` carries the scorecard's own `asOf`,
+  // which is always month-only ("2026-08"), never a full date.
+  trackedSince: '2026-05',
   worsenedCount: 6,
   checkCount: 15,
   reasoning:
@@ -66,7 +68,7 @@ const OPEN_NOT_ASSESSED: IssuesData['open'][number] = {
   title: 'Advanced node yield below plan',
   status: 'not-assessed',
   assessedAsOf: '2026-08-05',
-  trackedSince: '2026-06-01',
+  trackedSince: '2026-06',
   worsenedCount: 2,
   checkCount: 9,
   reasoning: 'No fresh public data was published on this since the last cycle.',
@@ -123,13 +125,26 @@ describe('known issues: open rows', () => {
     expect(chip.className).not.toMatch(/\b(good|serious|flat)\b/);
   });
 
-  it('renders the exact tenure line', () => {
+  it('renders the exact tenure line from a production-shaped month-only trackedSince', () => {
     draw(<Issues issues={FULL} />);
     expect(
       screen.getByText('tracked since May 2026 · worsened 6 of last 15 checks'),
     ).toBeInTheDocument();
     expect(
       screen.getByText('tracked since Jun 2026 · worsened 2 of last 9 checks'),
+    ).toBeInTheDocument();
+  });
+
+  it('also accepts a full YYYY-MM-DD trackedSince (back-compat, not the production shape)', () => {
+    const fullDateIssue: IssuesData['open'][number] = {
+      ...OPEN_ASSESSED,
+      id: 'full-date-issue',
+      title: 'Full date tenure issue',
+      trackedSince: '2026-05-01',
+    };
+    draw(<Issues issues={{open: [fullDateIssue], resolved: []}} />);
+    expect(
+      screen.getByText('tracked since May 2026 · worsened 6 of last 15 checks'),
     ).toBeInTheDocument();
   });
 

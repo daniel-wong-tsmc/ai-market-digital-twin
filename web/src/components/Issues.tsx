@@ -40,15 +40,21 @@ const STATUS_LABEL: Record<IssueOpen['status'], string> = {
   'not-assessed': 'Not assessed this cycle',
 };
 
-/** "2026-08-05" as "Aug 2026" — the tenure line's "tracked since" month. */
+/** "2026-08-05" or "2026-08" as "Aug 2026" — the tenure line's "tracked
+ *  since" month. `trackedSince` carries `openedAsOf`, which `issues open`
+ *  stamps straight from the scorecard's own `asOf` -- and every real
+ *  scorecard's `asOf` is month-only ("2026-08"), never a full date. Both
+ *  shapes are accepted so production data never falls through to the raw
+ *  ISO string. */
 function monthYear(iso: string): string {
-  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
+  const match = /^(\d{4})-(\d{2})(?:-(\d{2}))?/.exec(iso);
   if (!match) return iso;
+  const [, year, month] = match;
   return new Intl.DateTimeFormat('en-GB', {
     month: 'short',
     year: 'numeric',
     timeZone: 'UTC',
-  }).format(new Date(`${match[0]}T00:00:00Z`));
+  }).format(new Date(`${year}-${month}-01T00:00:00Z`));
 }
 
 /**

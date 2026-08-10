@@ -15,12 +15,11 @@ No-silent-deletion invariant: every function that returns a register only append
 from __future__ import annotations
 
 import json
-import pathlib
 import re
 from pathlib import Path
 from typing import Literal, Optional
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 RESOLVE_STREAK = 5
 
@@ -64,6 +63,19 @@ class IssueRegister(BaseModel):
     categoryId: str
     asOf: str
     issues: list[Issue] = Field(default_factory=list)
+
+
+class CorruptRegisterError(Exception):
+    """register.json exists but cannot be parsed or validated (bad JSON, or a
+    hand-edited issue that fails validation — the spec invites hand-editing
+    the register, so a typo genuinely reaches this path).
+
+    Deliberately NOT swallowed into an empty register: an empty register
+    reads on the page as "no known issues", which would silently discard
+    real, unreadable state and present broken data as if it were good data.
+    This is a distinct, named error so the cycle log can show plainly which
+    step failed and why, instead of a generic JSONDecodeError/ValidationError
+    (or, worse, a quiet empty-looking register)."""
 
 
 # --- id + title derivation -----------------------------------------------------
@@ -157,6 +169,13 @@ def open_issues(register: IssueRegister, scorecard: dict, as_of: str
                 "reopenedAsOf": existing.reopenedAsOf + [as_of],
                 "improvedStreak": 0,
                 "worsenedCount": 0,
+                # checkCount shares one window with worsenedCount: leaving it
+                # at its pre-resolve value while worsenedCount resets to 0
+                # would render "worsened 0 of last N checks" using an N that
+                # counts checks from before the reopen -- flattering the
+                # issue in the reassuring direction. Reset it too so both
+                # counters describe only checks since this reopen.
+                "checkCount": 0,
             })
             touched.append(iid)
         else:
@@ -280,7 +299,12 @@ def read_register(cat_dir, category_id: str) -> IssueRegister:
     p = _issues_dir(cat_dir) / "register.json"
     if not p.exists():
         return IssueRegister(schemaVersion=1, categoryId=category_id, asOf="", issues=[])
-    return IssueRegister.model_validate_json(p.read_text(encoding="utf-8"))
+    try:
+        return IssueRegister.model_validate_json(p.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, ValidationError, UnicodeDecodeError) as exc:
+        raise CorruptRegisterError(
+            f"{p} exists but could not be parsed/validated: {exc}"
+        ) from exc
 
 
 def write_register(cat_dir, register: IssueRegister) -> Path:
@@ -294,14 +318,15 @@ def write_register(cat_dir, register: IssueRegister) -> Path:
 
 def append_history(cat_dir, lines: list[dict]) -> Path:
     d = _issues_dir(cat_dir)
-    d.mkdir(parents=True, exist_ok=True)
     p = d / "history.jsonl"
-    if lines:
-        with p.open("a", encoding="utf-8", newline="\n") as f:
-            for line in lines:
-                f.write(json.dumps(line, sort_keys=True) + "\n")
-    elif not p.exists():
-        p.write_text("", encoding="utf-8")
+    if not lines:
+        # No-op: an empty list must not create a spurious empty history.jsonl
+        # (or even the issues/ dir) when nothing has happened yet.
+        return p
+    d.mkdir(parents=True, exist_ok=True)
+    with p.open("a", encoding="utf-8", newline="\n") as f:
+        for line in lines:
+            f.write(json.dumps(line, sort_keys=True) + "\n")
     return p
 
 
@@ -315,7 +340,17 @@ def read_history_tail(cat_dir, issue_id: str, n: int) -> list[dict]:
             raw_line = raw_line.strip()
             if not raw_line:
                 continue
-            record = json.loads(raw_line)
+            # A malformed line -- a truncated final line from a killed
+            # process, or a bad hand-edit -- is skipped, not fatal: the rest
+            # of the (append-only, mostly-good) history still reads. This is
+            # different from a corrupt register.json (see CorruptRegisterError):
+            # history is a derived tail used for display/recency, not the
+            # single source of truth for open/resolved state, so dropping one
+            # bad line doesn't hide real state the way an empty register would.
+            try:
+                record = json.loads(raw_line)
+            except json.JSONDecodeError:
+                continue
             if record.get("issueId") == issue_id:
                 matches.append(record)
     return matches[-n:] if n > 0 else []
