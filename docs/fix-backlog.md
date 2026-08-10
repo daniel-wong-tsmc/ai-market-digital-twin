@@ -1727,6 +1727,20 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   (h) `npm run build` rewrites the committed `index.html` with different line endings, so a rebuild
   always dirties the tree even when nothing changed.
 
+- [ ] **F115 — Category-page issue tracker ("Known issues", user-directed, 2026-08-10). GATED LANE (narrator prompt + pin).**
+  Recurring structural problems (memory lacking, advanced packaging lacking) are re-discovered
+  each cycle but never tracked as named persistent issues. User decisions (interactive, zero
+  AFK): agent-minted issues via deterministic triggers (binding constraint; weak+worsening
+  dimension); the narrator assesses each open issue every cycle (improved/worsened/unchanged +
+  1–2 sentence reasoning + `claimFindingIds`); resolve after 5 consecutive good cycles (flap
+  resets, `not-assessed` freezes); storage Option A — `store/<cat>/issues/register.json` +
+  append-only `history.jsonl` (thesis-book pattern, no-silent-deletion invariant). New step-3
+  sub-steps (d4) issues-open / (e3b) issues-update; citation audit keys `issue:<id>`; dashboard
+  schema 1.1→1.2 with a required `issues` section; new React `Issues` component above the footer.
+  Narrator pin re-records once in lockstep; F83 re-stamped in-lane; F6 byte-untouched.
+  Spec: `docs/superpowers/specs/2026-08-10-f115-issue-tracker-design.md`.
+  **Exclusive narrator-prompt lane.** Next: writing-plans.
+
 - [x] **F109 — Coverage gaps are computed but never recorded durably (found while building F61, 2026-07-28).**
   Nothing downstream can render or audit what the gather run failed to cover.
   `manifest.compute_coverage_gaps()` has **no production caller in the package** — it runs only
