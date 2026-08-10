@@ -72,6 +72,19 @@ def claims_from_bullets(art: StoryArtifact) -> list[Claim]:
             for i, b in enumerate(art.bullets)]
 
 
+def claims_from_issues(art: StoryArtifact) -> list[Claim]:
+    """One claim per issue assessment, keyed by the issue's own id
+    (`issue:<issueId>`) -- unlike bullets, issues DO carry their own id, so
+    the claim key uses it instead of list order. `issues` is None on every
+    pre-F115 artifact (v1 and v2); that contributes zero claims, which is
+    what keeps those audits identical to their pre-F115 behaviour."""
+    if not art.issues:
+        return []
+    return [Claim(claimKey=f"issue:{a.issueId}", text=a.reasoning,
+                  findingIds=tuple(a.claimFindingIds))
+            for a in art.issues]
+
+
 def claims_from_implication(art: ImplicationArtifact) -> list[Claim]:
     """One claim per line, keyed by dispatch order (the lines carry no id)."""
     return [Claim(claimKey=f"impl:{i}",
@@ -211,6 +224,7 @@ def run_audit(store_root: str | pathlib.Path, category_id: str, date: str,
     if story is not None:
         claims.extend(claims_from_story(story))
         claims.extend(claims_from_bullets(story))
+        claims.extend(claims_from_issues(story))
     impl = _read_implication(root, category_id, date)
     if impl is not None:
         claims.extend(claims_from_implication(impl))
