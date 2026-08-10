@@ -330,7 +330,11 @@
       }
     ]
   },
-  "schemaVersion": "1.1",
+  "issues": {
+    "open": [],
+    "resolved": []
+  },
+  "schemaVersion": "1.2",
   "verdict": {
     "answer": "Getting closer. The challenger had a good quarter.",
     "chip": {

@@ -30,7 +30,7 @@ describe('dashboard.json contract', () => {
 
   it('the golden payload parses into the loader types', () => {
     const data = parseDashboard(golden());
-    expect(data.schemaVersion).toBe('1.1');
+    expect(data.schemaVersion).toBe('1.2');
     expect(data.categoryId).toBe('chips.merchant-gpu');
     expect(data.asOf).toBe('2026-08-05');
     expect(data.verdict.question).toBe('Is supply catching up to demand?');
