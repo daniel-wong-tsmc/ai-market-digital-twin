@@ -295,4 +295,65 @@ def gate_narrator(answer: NarratorAnswer, inputs: dict, cfg=None) -> list[str]:
                         f"bullet {i}: unknown finding id '{fid}' is not in "
                         f"inputs.findings")
 
+    # Check 9 (F115): narrator issue assessments. `inputs["openIssues"]` is a
+    # brand-new key (F115 Tasks 2/4); a MISSING key is treated as an empty
+    # list -- NOT added to the required-keys loop above -- so every pre-F115
+    # caller/test that builds an inputs dict by hand without it stays green.
+    open_issues = inputs.get("openIssues") or []
+    open_issue_ids = {oi["id"] for oi in open_issues}
+    issues = answer.issues or []
+
+    if open_issues:
+        # 9a: exactly one assessment per open issue id -- missing, unknown,
+        # and duplicate ids are each their own violation.
+        seen_counts: dict[str, int] = {}
+        for ia in issues:
+            seen_counts[ia.issueId] = seen_counts.get(ia.issueId, 0) + 1
+            if ia.issueId not in open_issue_ids:
+                violations.append(
+                    f"issues: unknown issue id '{ia.issueId}' is not in "
+                    f"inputs.openIssues")
+        for oid in open_issue_ids:
+            if seen_counts.get(oid, 0) == 0:
+                violations.append(
+                    f"issues: missing assessment for open issue id '{oid}'")
+        for oid, count in seen_counts.items():
+            if oid in open_issue_ids and count > 1:
+                violations.append(
+                    f"issues: duplicate assessment for open issue id "
+                    f"'{oid}' ({count} entries)")
+    elif issues:
+        # 9b: openIssues is empty/missing, so any issues at all are
+        # fabricated -- the narrator was never given anything to assess.
+        violations.append(
+            "narrator invented issue assessments: inputs.openIssues is "
+            "empty but answer.issues is non-empty")
+
+    # 9c/9d: every assessment's reasoning and claimFindingIds, regardless of
+    # whether its issueId matched an open issue above. Reasoning reuses the
+    # same lint_story_copy() banned-word/outlet-string sweep Check 4 already
+    # runs over scene prose; claimFindingIds reuses the same `finding_ids`
+    # set the scene checks (Check 2) already built.
+    for ia in issues:
+        words = ia.reasoning.split()
+        if not ia.reasoning.strip():
+            violations.append(
+                f"issue {ia.issueId}: reasoning must not be empty")
+        else:
+            if len(words) > 60:
+                violations.append(
+                    f"issue {ia.issueId}: reasoning must be at most 60 "
+                    f"words; got {len(words)}")
+            escaped_reasoning = html.escape(ia.reasoning)
+            for hit in lint_story_copy("<p>" + escaped_reasoning + "</p>"):
+                violations.append(f"issue {ia.issueId}: {hit}")
+        if not ia.claimFindingIds:
+            violations.append(
+                f"issue {ia.issueId}: claimFindingIds must not be empty")
+        for fid in ia.claimFindingIds:
+            if fid not in finding_ids:
+                violations.append(
+                    f"issue {ia.issueId}: unknown finding id '{fid}' is not "
+                    f"in inputs.findings")
+
     return violations
