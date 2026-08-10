@@ -6,6 +6,7 @@ import {Verdict} from './components/Verdict';
 import {GapChart} from './components/GapChart';
 import {Bullets} from './components/Bullets';
 import {Dimensions} from './components/Dimensions';
+import {Issues} from './components/Issues';
 import {Footer} from './components/Footer';
 import {loadDashboard, plainDate, plainDateWithWeekday} from './load';
 import type {Dashboard} from './load';
@@ -134,6 +135,8 @@ export function App() {
         </div>
         <Dimensions dimensions={data.dimensions} />
       </section>
+
+      <Issues issues={data.issues} />
 
       <Footer links={data.footerLinks} />
     </div>

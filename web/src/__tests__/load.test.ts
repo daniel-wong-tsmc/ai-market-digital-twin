@@ -91,6 +91,16 @@ describe('loading the day s reading', () => {
     );
     await expect(loadDashboard()).rejects.toThrow(/soWhat/);
   });
+
+  it('refuses a file missing the required 1.2 "issues" section', async () => {
+    const broken = readGolden();
+    delete (broken as Record<string, unknown>).issues;
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => ({ok: true, status: 200, json: async () => broken})),
+    );
+    await expect(loadDashboard()).rejects.toThrow(/issues/);
+  });
 });
 
 describe('the masthead name', () => {
