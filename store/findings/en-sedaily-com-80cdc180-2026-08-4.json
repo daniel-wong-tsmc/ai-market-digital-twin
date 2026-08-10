@@ -1,0 +1,45 @@
+{
+  "id": "en-sedaily-com-80cdc180-2026-08-4",
+  "statement": "Samsung aims to raise its HBM market share by year-end 2026 to roughly the level of its overall DRAM share, about 38%.",
+  "kind": "measured",
+  "value": {
+    "number": 38.0,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "A share shift toward a second large supplier changes the bargaining position of accelerator buyers on the scarcest input.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "If Samsung's HBM share converges on its ~38% DRAM share, HBM supply becomes less concentrated, improving availability and pricing leverage for accelerator makers."
+  },
+  "evidence": [
+    {
+      "source": "Seoul Economic Daily (en.sedaily.com)",
+      "url": "https://en.sedaily.com/finance/2026/08/10/samsung-hits-80-percent-yield-on-hbm4-speeds-up-hbm4e",
+      "date": "2026-08-10",
+      "excerpt": "raising its HBM market share by year-end to a level similar to its overall DRAM market share of about 38%",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade press reporting a company target, not an audited share figure; the 38% is the stated DRAM share used as the target level."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

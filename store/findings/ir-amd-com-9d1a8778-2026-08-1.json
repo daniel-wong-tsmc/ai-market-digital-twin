@@ -1,0 +1,44 @@
+{
+  "id": "ir-amd-com-9d1a8778-2026-08-1",
+  "statement": "AMD disclosed agreements with OpenAI and Meta to deploy up to 6 gigawatts of AMD data center GPUs each, with warrant incentives tied to purchase milestones and stock price targets.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Multi-gigawatt commitments from two of the largest AI buyers are the clearest forward signal of accelerator demand that is already contracted rather than hoped for.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "energy.power-generation",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Gigawatt-scale deployment agreements lock in future accelerator purchases and pull through matching data-center power and facility build-out."
+  },
+  "evidence": [
+    {
+      "source": "AMD SEC Filing (10-Q)",
+      "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm",
+      "date": "2026-08-05",
+      "excerpt": "AMD entered agreements with OpenAI and Meta for deploying up to 6 gigawatts of AMD data center GPUs each, with warrant incentives tied to purchase milestones and stock price targets",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary SEC filing (Form 10-Q) disclosure."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

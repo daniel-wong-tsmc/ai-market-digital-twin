@@ -1,0 +1,50 @@
+{
+  "id": "pr-tsmc-com-7f560c3b-2026-08-1",
+  "statement": "TSMC reported July 2026 revenue of about NT$467.58 billion, up 5.6% from June 2026 and up 44.7% from July 2025.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "TSMC's monthly revenue is the earliest hard read on whether accelerator wafers are actually shipping, weeks ahead of any chip vendor's results.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Accelerating foundry revenue indicates rising wafer output for AI accelerators, expanding upstream supply and confirming order flow from chip designers."
+  },
+  "evidence": [
+    {
+      "source": "TSMC Investor Relations (pr.tsmc.com)",
+      "url": "https://pr.tsmc.com/english/news/3329",
+      "date": "2026-08-10",
+      "excerpt": "July 2026 revenue was approximately NT$467.58 billion, an increase of 5.6 percent from June 2026, and an increase of 44.7 percent from July 2025.",
+      "tier": "secondary"
+    },
+    {
+      "source": "TSMC Investor Relations (pr.tsmc.com)",
+      "url": "https://pr.tsmc.com/english/news/3329",
+      "date": "2026-08-10",
+      "excerpt": "Cumulative revenue for January through July 2026 was NT$2,872.06 billion (approximately NT$2.87 trillion), representing an increase of 37.0 percent compared to the same period in 2025.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Fetched as a secondary-tier document; the figures are TSMC's official monthly disclosure but no primary filing was captured, and the record-month framing comes from press coverage."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "odmMonthlyAiRevenue",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "tsmc",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

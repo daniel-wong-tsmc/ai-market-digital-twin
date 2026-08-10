@@ -1,0 +1,50 @@
+{
+  "id": "en-sedaily-com-80cdc180-2026-08-1",
+  "statement": "Samsung's HBM4 yield has reached close to 80%, up from below 60% in early mass production in February 2026, about four months ahead of the industry's expected timeline.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Higher HBM4 yield converts existing wafer starts into more sellable stacks, which loosens the tightest bottleneck on advanced AI accelerator supply.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Better yield at a second qualified HBM4 supplier raises effective HBM bit supply per wafer, easing the memory constraint that gates merchant-GPU and accelerator module output."
+  },
+  "evidence": [
+    {
+      "source": "Seoul Economic Daily (en.sedaily.com)",
+      "url": "https://en.sedaily.com/finance/2026/08/10/samsung-hits-80-percent-yield-on-hbm4-speeds-up-hbm4e",
+      "date": "2026-08-10",
+      "excerpt": "Samsung Electronics' HBM4 yield recently came close to the 80% mark. In the early stages of mass production in February this year, its yield struggled below 60%, but the company has since staged a dramatic turnaround.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Seoul Economic Daily (en.sedaily.com)",
+      "url": "https://en.sedaily.com/finance/2026/08/10/samsung-hits-80-percent-yield-on-hbm4-speeds-up-hbm4e",
+      "date": "2026-08-10",
+      "excerpt": "the industry had initially expected Samsung to reach an 80% yield around the end of this year",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary trade-press report citing unnamed industry expectations; no filing or company disclosure corroborates the yield figure."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: Seoul Economic Daily (en.sedaily.com)",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

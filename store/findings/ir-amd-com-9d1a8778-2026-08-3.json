@@ -1,0 +1,42 @@
+{
+  "id": "ir-amd-com-9d1a8778-2026-08-3",
+  "statement": "AMD's 10-Q risk factors state that a small number of customers will continue to account for a substantial part of its revenue.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "When a handful of buyers carry most of the revenue, a single budget pause at one of them can swing the whole accelerator demand picture.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Concentrated buyer base means demand is fragile to individual customer decisions, raising downside risk to accelerator orders."
+  },
+  "evidence": [
+    {
+      "source": "AMD SEC Filing (10-Q)",
+      "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm",
+      "date": "2026-08-05",
+      "excerpt": "a small number of customers will continue to account for a substantial part of AMD's revenue",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary SEC filing risk-factor disclosure."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

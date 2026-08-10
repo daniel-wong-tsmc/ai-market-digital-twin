@@ -1,0 +1,53 @@
+{
+  "id": "www-intc-com-9e1300a4-2026-08-2",
+  "statement": "Intel Foundry revenue rose 31% year-over-year to $5.8 billion and gross margin improved to 40.4% GAAP from 27.5% a year earlier.",
+  "kind": "measured",
+  "value": {
+    "number": 5.8,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A second viable leading-edge foundry and packaging source would ease the single biggest chokepoint on accelerator manufacturing.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Growing foundry revenue and improving margin indicate additional wafer and advanced-packaging capacity coming online outside the dominant supplier."
+  },
+  "evidence": [
+    {
+      "source": "Intel Corporation (IR press release)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Intel Foundry revenue rose 31% to $5.8 billion.",
+      "tier": "primary"
+    },
+    {
+      "source": "Intel Corporation (IR press release)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Gross margin was 40.4% GAAP / 41.8% non-GAAP (versus 27.5% GAAP prior year).",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor earnings release."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

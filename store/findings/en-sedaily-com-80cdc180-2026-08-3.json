@@ -1,0 +1,42 @@
+{
+  "id": "en-sedaily-com-80cdc180-2026-08-3",
+  "statement": "SK Hynix's HBM4 yield has separately touched 80%, putting the two Korean HBM suppliers at similar production efficiency.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Two suppliers at comparable yield means buyers gain a credible second source for HBM4, which reduces single-supplier bottleneck risk on accelerator supply.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Parity in yield between the two largest HBM makers expands aggregate qualified HBM4 output and weakens any one supplier's ability to constrain accelerator builds."
+  },
+  "evidence": [
+    {
+      "source": "Seoul Economic Daily (en.sedaily.com)",
+      "url": "https://en.sedaily.com/finance/2026/08/10/samsung-hits-80-percent-yield-on-hbm4-speeds-up-hbm4e",
+      "date": "2026-08-10",
+      "excerpt": "SK Hynix's own HBM4 yield has separately touched the 80% mark, putting the two Korean suppliers at similar production efficiency as the AI memory race intensifies",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; no primary supplier disclosure of yield."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "www-runpod-io-c3f31c4a-2026-08-1",
+  "statement": "RunPod lists on-demand NVIDIA B300 at $6.94/hr Community and $7.39/hr Secure as of 2026-08-10, its current-generation SKU.",
+  "kind": "measured",
+  "value": {
+    "number": 6.94,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "The newest accelerator's hourly rate at a second rental provider gives a cross-check on what current-generation compute costs.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Published current-generation rental rates mark the level at which accelerator time clears; recorded with no baseline or change stated."
+  },
+  "evidence": [
+    {
+      "source": "RunPod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-08-10",
+      "excerpt": "B300 -- Community $6.94/hr, Secure $7.39/hr.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor public price page read live; secondary tier, static level."
+  },
+  "dispersion": "conflicting same-key reports: value 3.59 -> 6.94 (tol 1%); sources: RunPod",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

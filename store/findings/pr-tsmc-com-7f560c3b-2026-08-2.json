@@ -1,0 +1,44 @@
+{
+  "id": "pr-tsmc-com-7f560c3b-2026-08-2",
+  "statement": "TSMC raised its 2026 full-year revenue growth guidance to slightly above 40% in USD terms and raised its 2026 capex projection to $60-64 billion.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A capex raise at the foundry that makes nearly every leading accelerator is the strongest available commitment that more chip supply is coming.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher foundry capex funds additional leading-edge wafer and advanced-packaging capacity, relieving the main physical constraint on accelerator output."
+  },
+  "evidence": [
+    {
+      "source": "TSMC Investor Relations (pr.tsmc.com)",
+      "url": "https://pr.tsmc.com/english/news/3329",
+      "date": "2026-08-10",
+      "excerpt": "TSMC separately raised its 2026 full-year revenue growth guidance to slightly above 40% in USD terms and raised its 2026 capex projection to $60-64 billion.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary-tier document; the guidance and capex raise are relayed in this release summary rather than in a fetched primary filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": 1,
+  "magnitude": 3,
+  "entity": "tsmc",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

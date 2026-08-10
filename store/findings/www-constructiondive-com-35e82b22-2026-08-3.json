@@ -1,0 +1,52 @@
+{
+  "id": "www-constructiondive-com-35e82b22-2026-08-3",
+  "statement": "The ERCOT interconnection queue holds roughly 474 GW, with Abbott noting approximately 90 percent of new power requests are data centers, while BNEF forecasts only about 1.2 GW of ERCOT data-center additions between Q2 2026 and Q1 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A queue this lopsided toward data centers shows power access, not chips, is becoming the binding limit on AI build-out.",
+  "impact": {
+    "targets": [
+      "energy.grid-transmission",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "chips.merchant-gpu",
+      "energy.onsite-storage"
+    ],
+    "direction": "negative",
+    "mechanism": "An enormous data-center-dominated interconnection queue against a small near-term energization forecast means power availability throttles how fast accelerators can be deployed."
+  },
+  "evidence": [
+    {
+      "source": "Construction Dive",
+      "url": "https://www.constructiondive.com/news/texas-data-center-pause-puts-us-pipeline-risk-of-delay-bnef/827255/",
+      "date": "2026-08-07",
+      "excerpt": "The ERCOT interconnection queue contains approximately 474 GW total, with Abbott noting 'approximately 90 percent of the new power requests are data centers.'",
+      "tier": "secondary"
+    },
+    {
+      "source": "Construction Dive",
+      "url": "https://www.constructiondive.com/news/texas-data-center-pause-puts-us-pipeline-risk-of-delay-bnef/827255/",
+      "date": "2026-08-07",
+      "excerpt": "BNEF forecasts about 1.2 GW of total ERCOT data center additions between Q2 2026 and Q1 2027, making delays during this window particularly costly.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet combining a governor's statement with BNEF forecasts; queue figures are approximate."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-08-07",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

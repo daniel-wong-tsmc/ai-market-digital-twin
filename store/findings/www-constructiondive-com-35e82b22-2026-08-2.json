@@ -1,0 +1,54 @@
+{
+  "id": "www-constructiondive-com-35e82b22-2026-08-2",
+  "statement": "BNEF estimates data-center revenue losses from the Texas pause could reach $8 billion by Q1 2027, assuming 60% of the delayed capacity is AI-related, against an earning rate of about $1.76 billion per gigawatt per month.",
+  "kind": "measured",
+  "value": {
+    "number": 8.0,
+    "unit": "USD_B"
+  },
+  "trend": "falling",
+  "why": "Putting a dollar figure on the delay shows how much AI compute revenue is at stake if the freeze holds.",
+  "impact": {
+    "targets": [
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Lost compute revenue reduces operator cash flow available to fund further accelerator purchases and slows the deployment schedule."
+  },
+  "evidence": [
+    {
+      "source": "Construction Dive",
+      "url": "https://www.constructiondive.com/news/texas-data-center-pause-puts-us-pipeline-risk-of-delay-bnef/827255/",
+      "date": "2026-08-07",
+      "excerpt": "Data center revenue losses could reach $8 billion by the first quarter of 2027 assuming 60% of the delayed capacity is AI-related",
+      "tier": "secondary"
+    },
+    {
+      "source": "Construction Dive",
+      "url": "https://www.constructiondive.com/news/texas-data-center-pause-puts-us-pipeline-risk-of-delay-bnef/827255/",
+      "date": "2026-08-07",
+      "excerpt": "AI computing capacity can earn around $1.76 billion per gigawatt per month",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Third-party analyst estimate carried by one secondary outlet, resting on a stated assumption about AI share."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-08-07",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

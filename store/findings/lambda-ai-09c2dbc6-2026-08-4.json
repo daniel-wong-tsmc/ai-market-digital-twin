@@ -1,0 +1,49 @@
+{
+  "id": "lambda-ai-09c2dbc6-2026-08-4",
+  "statement": "Lambda's fetched pricing page showed no H200 and no AMD MI355X or MI400 SKU, and offers no spot instances.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Which accelerators a large rental provider does not list tells you where alternative silicon has yet to reach the rental channel.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Absence of AMD accelerator SKUs at a major GPU cloud indicates alternative merchant-GPU supply has not yet penetrated this rental channel, keeping demand concentrated on the incumbent."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (Lambda Labs)",
+      "url": "https://lambda.ai/pricing",
+      "date": "2026-08-10",
+      "excerpt": "No H200 or MI355X/MI400 SKU was visible in the fetched pricing content.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Lambda (Lambda Labs)",
+      "url": "https://lambda.ai/pricing",
+      "date": "2026-08-10",
+      "excerpt": "No spot instances offered -- Lambda states all GPU instances are fixed-rate on-demand, not subject to preemption.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Direct observation of one vendor's public catalog; absence in a fetched page is weaker than a stated catalog list."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> unknown); sources: BigGo Finance, Lambda (Lambda Labs)",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

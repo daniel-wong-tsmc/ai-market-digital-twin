@@ -1,0 +1,45 @@
+{
+  "id": "www-intc-com-9e1300a4-2026-08-3",
+  "statement": "Intel guided Q3 2026 revenue to $15.8-16.8 billion with non-GAAP EPS of $0.38.",
+  "kind": "measured",
+  "value": {
+    "number": 16.3,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Guidance shows whether the vendor expects the compute spending wave to keep going into the next quarter.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "A guided range above the just-reported quarter implies continued sequential growth in data-center and client compute demand."
+  },
+  "evidence": [
+    {
+      "source": "Intel Corporation (IR press release)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "For Q3 2026, Intel guided revenue of $15.8-16.8 billion, GAAP EPS of $0.31, non-GAAP EPS of $0.38.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor guidance in the official earnings release; the value is the stated range midpoint."
+  },
+  "dispersion": "Guided range $15.8-16.8 billion.",
+  "asOf": "2026-08",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

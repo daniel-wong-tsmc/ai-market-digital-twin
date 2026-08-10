@@ -1,0 +1,41 @@
+{
+  "id": "ir-amd-com-9d1a8778-2026-08-4",
+  "statement": "AMD attributes Q2 2026 data-center strength to strong demand for EPYC processors and Instinct MI350 Series GPUs.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Naming a specific shipping accelerator family as the demand driver shows the newest part is already in volume deployment, not just sampling.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Volume demand for the current-generation Instinct family signals accelerator design wins converting to revenue."
+  },
+  "evidence": [
+    {
+      "source": "AMD SEC Filing (10-Q)",
+      "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm",
+      "date": "2026-08-05",
+      "excerpt": "strong demand for our AMD EPYC processors and AMD Instinct MI350 Series GPUs",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary SEC filing management discussion."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

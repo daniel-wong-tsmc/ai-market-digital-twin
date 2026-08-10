@@ -1,0 +1,53 @@
+{
+  "id": "www-intc-com-9e1300a4-2026-08-1",
+  "statement": "Intel's Data Center and AI segment revenue grew 59% year-over-year to $6.3 billion in Q2 2026, within total revenue of $16.1 billion, up 25% year-over-year.",
+  "kind": "measured",
+  "value": {
+    "number": 6.3,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Strong growth at a third data-center silicon vendor shows the spending wave is lifting more than the two leading GPU makers.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Broad-based data-center silicon growth confirms buyers are expanding total compute budgets rather than only reallocating within accelerators."
+  },
+  "evidence": [
+    {
+      "source": "Intel Corporation (IR press release)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Data Center and AI (DCAI) segment revenue grew 59% year-over-year to $6.3 billion.",
+      "tier": "primary"
+    },
+    {
+      "source": "Intel Corporation (IR press release)",
+      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
+      "date": "2026-07-23",
+      "excerpt": "Total revenue was $16.1 billion, up 25% year-over-year, the fastest revenue growth in more than fifteen years.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor earnings release filed as an 8-K."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: Intel Corporation (IR press release)",
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-07-23",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

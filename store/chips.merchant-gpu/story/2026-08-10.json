@@ -1,0 +1,162 @@
+{
+  "headline": "Memory yields hit 80 percent — the first good news on supply in months",
+  "deck": "Both Korean memory makers now say they get about eight good stacks in ten, months earlier than expected. It is real progress, and it is not yet enough to fill the orders.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The memory makers get better at making memory",
+      "paragraphs": [
+        "Samsung says its yield on the newest stacked memory has reached close to 80 percent, up from under 60 percent when it started mass production in February. That is about four months ahead of the timeline the industry expected.",
+        "The other Korean supplier has separately touched 80 percent as well, so the two are now at similar production efficiency. Yield is simply how much of what comes off the line is good enough to sell. A jump from six in ten to eight in ten means more usable memory from the same factories and the same wafers.",
+        "Samsung is aiming to lift its share of the stacked-memory business by the end of this year to roughly the level of its share in ordinary memory, about 38 percent."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "en-sedaily-com-80cdc180-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-3",
+        "en-sedaily-com-80cdc180-2026-08-4"
+      ],
+      "sourceLine": "Seoul Economic Daily, 10 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://en.sedaily.com/finance/2026/08/10/samsung-hits-80-percent-yield-on-hbm4-speeds-up-hbm4e",
+          "title": "Samsung reaches 80 percent yield on its newest memory",
+          "outlet": "Seoul Economic Daily (en.sedaily.com)",
+          "date": "2026-08-10"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Better yields, still not enough parts",
+      "paragraphs": [
+        "Three days ago the same reporting said memory suppliers can meet only 60 to 70 percent of the volume Nvidia has asked for on its next chip generation. Nvidia is testing versions of that chip with 192 or 256 gigabytes of memory, down from a planned full terabyte, and some samples fall back to the older memory.",
+        "So the picture today is a supplier getting better at making the part, while the customer is still designing around not having enough of it.",
+        "And the squeeze has moved one step further back. The company that makes the bare silicon discs everything starts from says its lines are effectively at maximum use, with shortages showing up on some advanced 300-millimetre products. Buyers are reacting the way buyers do when they are worried: contracts that used to run about three years are being signed for five to eight."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-2",
+        "www-tomshardware-com-9086563b-2026-08-1",
+        "www-tomshardware-com-9086563b-2026-08-3"
+      ],
+      "sourceLine": "Seoul Economic Daily, 7 August 2026; Tom's Hardware, 7 August 2026.",
+      "relatedDocs": []
+    },
+    {
+      "n": 3,
+      "title": "Nothing about demand has cooled",
+      "paragraphs": [
+        "The world's main contract chipmaker reported July sales of about NT$467.58 billion, up 44.7 percent on the same month last year and 5.6 percent on June.",
+        "It has also raised what it expects for the full year, to growth slightly above 40 percent in dollar terms, and lifted its own building budget to $60 to $64 billion.",
+        "That is the simple reason the shortage keeps mattering. The buying side is not slowing down while the supply side catches its breath."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "pr-tsmc-com-7f560c3b-2026-08-1",
+        "pr-tsmc-com-7f560c3b-2026-08-2"
+      ],
+      "sourceLine": "TSMC investor relations, 10 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://pr.tsmc.com/english/news/3329",
+          "title": "TSMC reports July 2026 sales",
+          "outlet": "TSMC Investor Relations (pr.tsmc.com)",
+          "date": "2026-08-10"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "The question for the next few weeks is whether today's yield numbers turn into more memory actually delivered, or just into better margins for the people who make it. Watch whether Samsung gets near its roughly 38 percent share goal by year end, and whether the 60 to 70 percent fill rate on the next chip generation moves up.",
+        "Watch power too. Reporting on 7 August put the queue to connect to the Texas grid at roughly 474 gigawatts, with the state's governor saying about 90 percent of new power requests come from data centres, while forecasters expect only about 1.2 gigawatts of new data-centre capacity there between now and early next year. One estimate puts the revenue at risk from that delay at $8 billion by the first quarter of 2027.",
+        "If memory stops being the limit, power is the next thing standing between orders and running machines."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "en-sedaily-com-80cdc180-2026-08-4",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-constructiondive-com-35e82b22-2026-08-3",
+        "www-constructiondive-com-35e82b22-2026-08-2"
+      ],
+      "sourceLine": "Seoul Economic Daily, 10 August 2026; Construction Dive, 7 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://www.constructiondive.com/news/texas-data-center-pause-puts-us-pipeline-risk-of-delay-bnef/827255/",
+          "title": "Texas data-centre pause puts the US pipeline at risk of delay",
+          "outlet": "Construction Dive",
+          "date": "2026-08-07"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Money going into new memory plants is what turns better yields into more finished chips.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Server shipments show how much of the demand is actually getting built and delivered.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "Yield on the newest stacked memory reached close to 80 percent at both Korean suppliers.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "The main contract chipmaker's July sales rose 44.7 percent from a year earlier.",
+      "scene": 3
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Samsung's yield on the newest stacked memory reached close to 80 percent, up from under 60 percent in February, about four months ahead of expectations.",
+      "claimFindingIds": [
+        "en-sedaily-com-80cdc180-2026-08-1"
+      ]
+    },
+    {
+      "text": "Memory suppliers can still fill only 60 to 70 percent of the volume Nvidia asked for on its next chip generation, so the shortage continues.",
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1"
+      ]
+    },
+    {
+      "text": "TSMC's July sales rose 44.7 percent from a year earlier to about NT$467.58 billion, showing buyer demand for AI chips has not slowed.",
+      "claimFindingIds": [
+        "pr-tsmc-com-7f560c3b-2026-08-1"
+      ]
+    }
+  ],
+  "schemaVersion": 2,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-10",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "cc55ceee4feb7c62703619855d8f7eafc1ec8ae1ee08aeef6a8770c59cebed79",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-10T15:49:04.213899+00:00"
+  }
+}

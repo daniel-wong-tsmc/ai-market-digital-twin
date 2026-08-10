@@ -1,0 +1,52 @@
+{
+  "id": "finance-biggo-com-9d0fdd5e-2026-08-2",
+  "statement": "Moore Threads held gross margin at 56.95% with gross profit of 989 million yuan (about $146.8 million), up 103.78% year-on-year, and narrowed net loss by 95.73% to -11.56 million yuan.",
+  "kind": "measured",
+  "value": {
+    "number": 56.95,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "An alternative GPU supplier approaching breakeven at healthy margin can sustain and scale production rather than depending on subsidy, making it a durable second source.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "mixed",
+    "mechanism": "Sustainable margins and shrinking losses let a non-incumbent accelerator vendor fund capacity, adding alternative supply while eroding incumbent share in China."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/b8f71f7c-a0ca-4fd4-818d-b281253b0cb7",
+      "date": "2026-08-09",
+      "excerpt": "Total gross profit of 989 million yuan (approximately $146.8 million), up 103.78% year-on-year, with overall gross margin holding at a healthy 56.95%.",
+      "tier": "secondary"
+    },
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/b8f71f7c-a0ca-4fd4-818d-b281253b0cb7",
+      "date": "2026-08-09",
+      "excerpt": "Net profit attributable to shareholders of the listed company was -11.56 million yuan (approximately $1.7 million), a dramatic 95.73% narrowing of losses",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary financial-news summary of reported results; single publisher."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-09",
+  "capturedAt": "2026-08-10T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
