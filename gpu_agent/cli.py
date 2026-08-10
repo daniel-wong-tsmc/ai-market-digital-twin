@@ -924,11 +924,18 @@ def _narrator(args) -> int:
           "--record-fallback is required", file=sys.stderr)
     return 2
 
-def _issues_scorecard_dict(cat_dir) -> dict:
-    """The trimmed {asOf, revision, categoryStatus, dimensionRatings} shape both
-    open_issues and apply_assessments (gpu_agent/issues.py) expect, built from the
-    same latest-monthly-scorecard selection the narrator inputs use (F115 Task 4:
-    gpu_agent/narrator/inputs.py:56) rather than new selection logic."""
+def _issues_scorecard_dict(cat_dir) -> tuple[dict, bool]:
+    """Returns (scorecard, has_scorecard). scorecard is the trimmed
+    {asOf, revision, categoryStatus, dimensionRatings} shape both open_issues and
+    apply_assessments (gpu_agent/issues.py) expect, built from the same
+    latest-monthly-scorecard selection the narrator inputs use (F115 Task 4:
+    gpu_agent/narrator/inputs.py:56) rather than new selection logic. has_scorecard
+    is False when no monthly scorecard file exists on disk (latest_monthly found
+    nothing) -- callers must check it before trusting the dict, since an absent
+    scorecard is padded out to an all-empty one (asOf=None, categoryStatus={},
+    dimensionRatings={}) rather than raising, and an all-empty scorecard is not a
+    safe stand-in: trigger_still_firing(...) always reads it as "nothing is firing",
+    which would silently count every "unchanged" assessment as improvement."""
     latest, _prior, as_of, rev = latest_monthly(cat_dir)
     latest = latest or {}
     return {
@@ -943,9 +950,13 @@ def _issues(args) -> int:
     """Handler for `gpu-agent issues` (F115 Task 6): open new issues from the latest
     monthly scorecard, or update assessments from a story artifact. Mirrors the
     narrator verb's non-blocking failure shape -- a missing input (no monthly
-    scorecard for `open`; no story artifact for `update`) prints to stderr and exits
-    1 without touching the register, so the run-cycle step (Task 9) can treat this
-    step as failed-but-non-blocking and keep going.
+    scorecard for either action; no story artifact for `update`) prints to stderr and
+    exits 1 without touching the register, so the run-cycle step (Task 9) can treat
+    this step as failed-but-non-blocking and keep going. `update` requires the
+    scorecard too, not just the artifact: apply_assessments' trigger_still_firing
+    check silently reads an absent scorecard as "nothing is firing", which would
+    miscount every "unchanged" assessment as improvement -- a missing scorecard must
+    fail loudly, never be padded into a false "all clear" reading.
 
     Takes no wall-clock reading: `--as-of` defaults to the scorecard's own `asOf`
     (open) or to `--story-date` (update), so reruns are deterministic.
@@ -968,6 +979,10 @@ def _issues(args) -> int:
         return 0
 
     # action == "update"
+    if not has_scorecard:
+        print(f"gpu-agent issues: error: no monthly scorecard found for "
+              f"{args.category} under {cat_dir}", file=sys.stderr)
+        return 1
     story_store = StoryStore(store_root)
     artifact = story_store.read(args.category, args.story_date)
     if artifact is None:

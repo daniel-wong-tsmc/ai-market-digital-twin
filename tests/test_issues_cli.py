@@ -209,6 +209,41 @@ def test_update_missing_artifact_exits_1_and_register_untouched(tmp_path, capsys
     assert after == before
 
 
+def test_update_missing_scorecard_exits_1_and_touches_nothing(tmp_path, capsys):
+    # Code-review finding: apply_assessments' trigger_still_firing reads an absent
+    # scorecard as "nothing is firing", which would silently count every "unchanged"
+    # assessment as improvement -- a missing scorecard must fail loudly, exactly like
+    # `open` already does, never be padded into a false "all clear" reading. Seed the
+    # register directly (write_register) so this exercises "artifact present, register
+    # present, but no monthly scorecard file was ever written" -- not the missing-
+    # artifact case covered above.
+    from gpu_agent.issues import write_register as _write_register
+    register = IssueRegister(schemaVersion=1, categoryId=CAT, asOf="2026-08-01", issues=[
+        Issue(id="dim-bottleneck", title="Bottleneck", state="open", openedAsOf="2026-08-01",
+              trigger=IssueTrigger(kind="dimension-weak", label="bottleneck")),
+    ])
+    _write_register(tmp_path / CAT, register)
+    before = (tmp_path / CAT / "issues" / "register.json").read_bytes()
+    history_path = tmp_path / CAT / "issues" / "history.jsonl"
+    assert not history_path.exists()
+
+    story_date = "2026-08-11"
+    _write_story(tmp_path, story_date, issues=[
+        IssueAssessment(issueId="dim-bottleneck", status="unchanged",
+                        reasoning="No change observed.", claimFindingIds=[]),
+    ])
+    capsys.readouterr()
+    rc = main(["issues", "update", "--category", CAT, "--store", str(tmp_path),
+               "--story-date", story_date])
+    assert rc == 1
+    err = capsys.readouterr().err
+    assert "gpu-agent issues: error:" in err
+
+    after = (tmp_path / CAT / "issues" / "register.json").read_bytes()
+    assert after == before
+    assert not history_path.exists()
+
+
 # --- narrator writer schemaVersion conditional (F115 Task 6, user-decided 2026-08-10) ------
 #
 # gpu_agent/cli.py's `narrator --recorded` writer hard-coded schemaVersion=2 (F114 Task
