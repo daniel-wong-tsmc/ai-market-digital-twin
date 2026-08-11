@@ -1,0 +1,51 @@
+{
+  "id": "compute-exchange-b9ce73ff-2026-08-1",
+  "statement": "Secondary-market H100 80GB hardware prices as listed on Compute Exchange: $25,000-$40,000 new, $21,000-$34,000 refurbished, $15,000-$28,000 used; HGX H100 8-GPU systems above $350,000.",
+  "kind": "measured",
+  "value": {
+    "number": 25000.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "unknown",
+  "why": "Street/resale pricing for the prior-generation flagship accelerator is a display overlay on merchant-GPU hardware value; no baseline or change is stated on the page, so it is a static level only.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Secondary-market resale levels for H100 hardware indicate what installed prior-generation NVIDIA silicon fetches, but with no stated baseline the level alone does not signal direction of demand or supply."
+  },
+  "evidence": [
+    {
+      "source": "Compute Exchange",
+      "url": "https://compute.exchange/blogs/h100-gpu-price-2026",
+      "date": "2026-08-11",
+      "excerpt": "$25,000-$40,000 for new",
+      "tier": "secondary"
+    },
+    {
+      "source": "Compute Exchange",
+      "url": "https://compute.exchange/blogs/h100-gpu-price-2026",
+      "date": "2026-08-11",
+      "excerpt": "Full HGX H100 8-GPU systems routinely exceed $350,000.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary vendor pricing guide; cross-check figures mentioned in the article were explicitly not independently fetched or verified."
+  },
+  "dispersion": "New $25,000-$40,000; refurbished $21,000-$34,000 (80-85% of new); used $15,000-$28,000 (60-70% of new). Unverified leads in the same document cite far lower H100 SXM5 resale figures ($6,000-$15,000), so the true street range may be wider.",
+  "asOf": "2026-08",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-11",
+  "capturedAt": "2026-08-11T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

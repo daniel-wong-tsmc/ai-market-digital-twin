@@ -1,0 +1,65 @@
+{
+  "id": "www-investing-com-87498f82-2026-08-1",
+  "statement": "Micron says it can supply no more than about half of customer demand, calls DRAM the number one constraint hyperscale customers face today, and has no line of sight to when supply meets demand; HBM production displaces standard DRAM at a 3-to-1 ratio, worsening to 4-to-1 with HBM4E.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Memory, not power or logic wafers, is described as the binding constraint on AI system build-outs, and the worsening HBM-versus-DDR trade ratio means every additional unit of HBM output makes the wider DRAM shortage deeper rather than shallower.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "Insufficient DRAM and HBM bit supply caps how many accelerator modules can be assembled and shipped, so memory scarcity gates merchant-GPU and custom-ASIC output regardless of logic wafer availability."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
+      "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994",
+      "date": "2026-08-10",
+      "excerpt": "many customers cannot meet more than half of their demand needs from Micron supply",
+      "tier": "secondary"
+    },
+    {
+      "source": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
+      "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994",
+      "date": "2026-08-10",
+      "excerpt": "is not power or real estate or data center capacity or logic wafers. The number one constraint they have is DRAM",
+      "tier": "secondary"
+    },
+    {
+      "source": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
+      "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994",
+      "date": "2026-08-10",
+      "excerpt": "we still don't have line of sight as to when the supply is going to be able to meet demand",
+      "tier": "secondary"
+    },
+    {
+      "source": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
+      "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994",
+      "date": "2026-08-10",
+      "excerpt": "3-to-1 trade ratio",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Direct executive remarks, but read through a secondary transcript publisher rather than a company filing; the supply-shortfall claim is qualitative and self-reported by a supplier with an interest in tight-market framing."
+  },
+  "dispersion": "Sadana in August says 'no more than half'; the CEO's March framing was '50% to two-thirds' of requirements, so the stated shortfall varies between roughly a third and a half of demand.",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "memory",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-11T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,58 @@
+{
+  "id": "qz-com-36c37a60-2026-08-1",
+  "statement": "Microsoft is reported to be negotiating TSMC capacity for upward of 300,000 Maia 300 chips for 2027 delivery, with a long-term goal of over one million units, positioning its in-house accelerator to reduce reliance on purchased NVIDIA GPUs.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A hyperscaler moving inference volume onto its own silicon adds a competing source of AI compute and, at the reported scale, would substitute for a slice of merchant-GPU purchases — but the figures are leaked, unconfirmed, and Microsoft has publicly disputed them without giving its own numbers.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "In-house accelerators built at TSMC absorb foundry and packaging capacity while displacing part of Microsoft's externally purchased NVIDIA GPU volume for Azure inference workloads."
+  },
+  "evidence": [
+    {
+      "source": "Quartz (citing The Information / Reuters reporting)",
+      "url": "https://qz.com/microsoft-maia-300-ai-chip-unveil-fall-tsmc-081026",
+      "date": "2026-08-11",
+      "excerpt": "upward of 300,000 Maia 300 chips, targeting delivery sometime in 2027",
+      "tier": "secondary"
+    },
+    {
+      "source": "Quartz (citing The Information / Reuters reporting)",
+      "url": "https://qz.com/microsoft-maia-300-ai-chip-unveil-fall-tsmc-081026",
+      "date": "2026-08-11",
+      "excerpt": "may prove difficult to hit given parts availability and where talks with TSMC currently stand",
+      "tier": "secondary"
+    },
+    {
+      "source": "Quartz (citing The Information / Reuters reporting)",
+      "url": "https://qz.com/microsoft-maia-300-ai-chip-unveil-fall-tsmc-081026",
+      "date": "2026-08-11",
+      "excerpt": "don't reflect the scale of our program",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Aggregation of one paywalled originating report relayed through wires; no official Microsoft confirmation, and Microsoft's Azure Maia general manager pushed back on the reported figures on the record without supplying alternatives."
+  },
+  "dispersion": "Reported near-term figure ~300,000 units for 2027 versus a long-term aspiration of over one million; Reuters sourcing flags the larger figure as possibly unattainable, and Microsoft implies the real program is larger than reported.",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-11",
+  "capturedAt": "2026-08-11T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

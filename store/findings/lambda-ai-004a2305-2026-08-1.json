@@ -1,0 +1,45 @@
+{
+  "id": "lambda-ai-004a2305-2026-08-1",
+  "statement": "Lambda's published on-demand GPU cloud list prices as of 2026-08-11: B200 SXM6 $6.69-$6.99 per GPU-hour, H100 SXM $3.99-$4.29 per GPU-hour, A100 SXM 80GB $2.79 per GPU-hour.",
+  "kind": "measured",
+  "value": {
+    "number": 3.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Published rental rates for current and prior-generation NVIDIA accelerators are a level read on what compute costs a renter; the page states no prior price or change, so this is a static level rather than a directional signal.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "List rental rates set the cost of accessing NVIDIA accelerators without buying them, which links neocloud pricing power to merchant-GPU hardware value; with no baseline the level alone carries no direction."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (Lambda Labs GPU Cloud)",
+      "url": "https://lambda.ai/service/gpu-cloud",
+      "date": "2026-08-11",
+      "excerpt": "NVIDIA B200 SXM6 $6.69/GPU-hour; NVIDIA H100 SXM $3.99/GPU-hour; NVIDIA A100 SXM 80GB $2.79/GPU-hour",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own published list page (secondary tier), single publisher, no reserved or contract pricing shown."
+  },
+  "dispersion": "Per-GPU rate varies by instance size: H100 SXM $3.99/hr at 8x versus $4.29/hr at 1x; B200 SXM6 $6.69/hr at 8x versus $6.99/hr at 1x.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-11",
+  "capturedAt": "2026-08-11T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

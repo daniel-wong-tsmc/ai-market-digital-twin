@@ -433,3 +433,12 @@
 {"seq":432,"asOf":"2026-08","kind":"append-observation","pageId":"entity:memory","findingId":"en-sedaily-com-80cdc180-2026-08-4","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":433,"asOf":"2026-08","kind":"append-observation","pageId":"entity:tsmc","findingId":"pr-tsmc-com-7f560c3b-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":434,"asOf":"2026-08","kind":"append-observation","pageId":"entity:tsmc","findingId":"pr-tsmc-com-7f560c3b-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":435,"asOf":"2026-08","kind":"append-observation","pageId":"entity:amd","findingId":"www-thundercompute-com-b4c37b23-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":436,"asOf":"2026-08","kind":"append-observation","pageId":"entity:intel","findingId":"newsroom-intel-com-6cdf4bbc-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":437,"asOf":"2026-08","kind":"append-observation","pageId":"entity:market","findingId":"lambda-ai-004a2305-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":438,"asOf":"2026-08","kind":"append-observation","pageId":"entity:market","findingId":"www-runpod-io-6f4a4d09-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":439,"asOf":"2026-08","kind":"append-observation","pageId":"entity:memory","findingId":"www-investing-com-87498f82-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":440,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"qz-com-36c37a60-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":441,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-trendforce-com-836f33fa-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":442,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"compute-exchange-b9ce73ff-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":443,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-cfc51804-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}

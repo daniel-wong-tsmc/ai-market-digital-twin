@@ -1,0 +1,53 @@
+{
+  "id": "www-thundercompute-com-b4c37b23-2026-08-1",
+  "statement": "AMD Instinct MI300X on-demand rental prices in U.S. regions as of August 2026 range from $1.71 per GPU-hour at TensorWave to $6.00 per GPU-hour at Azure and Oracle Cloud, with RunPod at $2.39 and DigitalOcean at $2.59.",
+  "kind": "measured",
+  "value": {
+    "number": 1.71,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "These are list rental levels for AMD's high-memory accelerator with no stated baseline or change, so they serve as a price overlay showing what the main NVIDIA alternative costs to rent, not a directional signal.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rental rates for AMD's high-memory part set the competing price point renters compare against NVIDIA instances, linking merchant-GPU pricing power to neocloud and hyperscaler rate cards."
+  },
+  "evidence": [
+    {
+      "source": "Thunder Compute",
+      "url": "https://www.thundercompute.com/blog/amd-mi300x-pricing",
+      "date": "2026-08-07",
+      "excerpt": "TensorWave offers the lowest MI300X price at $1.71/hr",
+      "tier": "secondary"
+    },
+    {
+      "source": "Thunder Compute",
+      "url": "https://www.thundercompute.com/blog/amd-mi300x-pricing",
+      "date": "2026-08-07",
+      "excerpt": "Azure and Oracle Cloud charge materially more...Standard_ND96isr_MI300X_v5...Price per-GPU $6.00",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary vendor blog compiling third-party rate cards; no primary provider pricing pages fetched, and no MI325X or MI355X data on the page."
+  },
+  "dispersion": "Roughly 3.5x spread across providers for the same part: TensorWave $1.71/hr, RunPod $2.39, DigitalOcean $2.59, Crusoe $3.45, Vultr $3.99, Azure and Oracle $6.00.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-08-07",
+  "capturedAt": "2026-08-11T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

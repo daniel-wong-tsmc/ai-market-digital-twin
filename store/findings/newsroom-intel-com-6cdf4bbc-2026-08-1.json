@@ -1,0 +1,61 @@
+{
+  "id": "newsroom-intel-com-6cdf4bbc-2026-08-1",
+  "statement": "Intel launched an underwritten public offering of $15 billion of common stock (up to $17.25 billion with the underwriters' option), with proceeds earmarked for general corporate purposes including capital expenditures, citing 'unprecedented investment in AI compute' as the demand backdrop.",
+  "kind": "measured",
+  "value": {
+    "number": 15.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A raise of this size funds capacity — advanced packaging, external wafers and purpose-built silicon — which over time adds a non-NVIDIA source of AI compute supply and of packaging capacity that is currently the binding constraint.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Equity proceeds directed at capital expenditure expand Intel's foundry and advanced-packaging capacity, increasing alternative supply of AI silicon and of the packaging step that gates merchant-GPU output."
+  },
+  "evidence": [
+    {
+      "source": "Intel Newsroom (official)",
+      "url": "https://newsroom.intel.com/corporate/intel-announces-proposed-15-billion-common-stock-offering",
+      "date": "2026-08-10",
+      "excerpt": "Intel is launching an underwritten public offering of $15 billion of common stock",
+      "tier": "secondary"
+    },
+    {
+      "source": "Intel Newsroom (official)",
+      "url": "https://newsroom.intel.com/corporate/intel-announces-proposed-15-billion-common-stock-offering",
+      "date": "2026-08-10",
+      "excerpt": "Customers continue to signal a strong and sustainable demand environment, driven by unprecedented investment in AI compute.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Intel Newsroom (official)",
+      "url": "https://newsroom.intel.com/corporate/intel-announces-proposed-15-billion-common-stock-offering",
+      "date": "2026-08-10",
+      "excerpt": "physical AI, purpose-built silicon, advanced packaging and external wafers",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company newsroom release read at secondary tier; the offering was not yet priced and the corresponding SEC free-writing prospectus returned HTTP 403, so final terms could not be confirmed from a filing."
+  },
+  "dispersion": "Base deal $15B; up to $17.25B if underwriters exercise the 30-day option for an additional $2.25B. Capex context (2026 above $20B, 2027 'significantly above') comes from secondary reporting, not the release text.",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-11T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

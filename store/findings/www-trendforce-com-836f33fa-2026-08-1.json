@@ -1,0 +1,61 @@
+{
+  "id": "www-trendforce-com-836f33fa-2026-08-1",
+  "statement": "TSMC is reported to be outsourcing a key CoWoS front-end step to OSAT partners as NVIDIA reserves roughly 800,000-850,000 wafers of 2026 CoWoS capacity (over half the year's total), with the CoWoS supply-demand gap still estimated at about 20% in 2026 despite monthly capacity rising from ~70,000 wafers in 2025 to 130,000-140,000 by end-2026.",
+  "kind": "measured",
+  "value": {
+    "number": 20.0,
+    "unit": "ramp_minus_order_rate_pct"
+  },
+  "trend": "rising",
+  "why": "Advanced packaging is the physical bottleneck for AI accelerators: even after roughly doubling monthly capacity and pushing work out to outside assembly houses, orders still exceed what can be packaged, so shipments stay capacity-rationed and NVIDIA's booking of more than half the pool squeezes everyone else.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "CoWoS packaging capacity gates how many GPU and custom-ASIC modules with stacked memory can be built; a persistent gap between reserved demand and available capacity caps unit shipments even as capacity expands."
+  },
+  "evidence": [
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/08/05/news-tsmc-reportedly-expands-outsourcing-of-key-cowos-front-end-step-to-osats-amid-rising-nvidia-asic-demand/",
+      "date": "2026-08-05",
+      "excerpt": "the report estimates that the CoWoS supply-demand gap will remain at approximately 20% in 2026",
+      "tier": "secondary"
+    },
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/08/05/news-tsmc-reportedly-expands-outsourcing-of-key-cowos-front-end-step-to-osats-amid-rising-nvidia-asic-demand/",
+      "date": "2026-08-05",
+      "excerpt": "NVIDIA has reportedly reserved approximately 800,000 to 850,000 wafers of TSMC's CoWoS capacity for 2026",
+      "tier": "secondary"
+    },
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/08/05/news-tsmc-reportedly-expands-outsourcing-of-key-cowos-front-end-step-to-osats-amid-rising-nvidia-asic-demand/",
+      "date": "2026-08-05",
+      "excerpt": "TSMC's monthly CoWoS capacity is projected to increase from approximately 70,000 wafers in 2025 to 130,000-140,000 wafers by the end of 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade-research write-up citing other outlets (ETNews, Mydrivers, Mirror Daily) rather than separately fetched primary sources; figures are reported estimates, not TSMC disclosure."
+  },
+  "dispersion": "NVIDIA reservation quoted as a range of 800,000-850,000 wafers; end-2026 monthly capacity as 130,000-140,000 wafers.",
+  "asOf": "2026-08",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "multi",
+  "observedAt": "2026-08-05",
+  "capturedAt": "2026-08-11T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

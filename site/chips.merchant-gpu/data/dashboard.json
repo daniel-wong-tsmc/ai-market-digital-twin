@@ -1,9 +1,9 @@
 {
-  "asOf": "2026-08-10",
+  "asOf": "2026-08-11",
   "bullets": [
     {
       "chart": null,
-      "date": "2026-08-10",
+      "date": "2026-08-11",
       "noChartReason": {
         "cause": "estimate-only",
         "reason": "The number we track for this is our own estimate, not a published figure, so we don't draw it."
@@ -11,192 +11,52 @@
       "sources": [
         {
           "date": "2026-08-10",
-          "outlet": "Seoul Economic Daily (en.sedaily.com)",
+          "outlet": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
           "tier": "secondary",
-          "title": "Seoul Economic Daily (en.sedaily.com)",
-          "url": "https://en.sedaily.com/finance/2026/08/10/samsung-hits-80-percent-yield-on-hbm4-speeds-up-hbm4e"
+          "title": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
+          "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994"
         }
       ],
-      "storyHref": "story/2026-08-10.html",
-      "text": "Samsung's yield on the newest stacked memory reached close to 80 percent, up from under 60 percent in February, about four months ahead of expectations."
+      "storyHref": "story/2026-08-11.html",
+      "text": "Micron said on 10 August it can supply only about half of what customers ask for and has no line of sight to when supply meets demand."
     },
     {
       "chart": null,
-      "date": "2026-08-10",
+      "date": "2026-08-11",
       "noChartReason": {
         "cause": "estimate-only",
         "reason": "The number we track for this is our own estimate, not a published figure, so we don't draw it."
       },
       "sources": [
         {
-          "date": "2026-08-07",
-          "outlet": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
-          "tier": "secondary",
-          "title": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
-          "url": "https://en.sedaily.com/international/2026/08/07/nvidia-weighs-cutting-hbm-capacity-for-rubin-ultra"
+          "date": "2026-08-10",
+          "outlet": "NVIDIA Newsroom (official)",
+          "tier": "primary",
+          "title": "NVIDIA Newsroom (official)",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-partners-with-apollo-blackrock-blackstone-brookfield-goldman-sachs-and-kkr-to-establish-ai-compute-infrastructure-financing-platforms-to-mobilize-over-500-billion-of-third-party-capital"
         }
       ],
-      "storyHref": "story/2026-08-10.html",
-      "text": "Memory suppliers can still fill only 60 to 70 percent of the volume Nvidia asked for on its next chip generation, so the shortage continues."
+      "storyHref": "story/2026-08-11.html",
+      "text": "Nvidia signed preliminary agreements with six investment firms to raise more than $500 billion of outside capital for its customers, so funding is not the limit."
     },
     {
-      "chart": {
-        "caption": "Servers actually shipped. Our assessment, based on the sources cited below.",
-        "form": "line",
-        "points": [
-          {
-            "hollow": false,
-            "label": "2025-09",
-            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_9_0.html",
-            "value": 65.3866
-          },
-          {
-            "hollow": false,
-            "label": "2025-10",
-            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_10_0.html",
-            "value": 68.0081
-          },
-          {
-            "hollow": false,
-            "label": "2025-11",
-            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_11_0.html",
-            "value": 108.1493
-          },
-          {
-            "hollow": false,
-            "label": "2025-12",
-            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_12_0.html",
-            "value": 120.3485
-          },
-          {
-            "hollow": false,
-            "label": "2026-01",
-            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_1_0.html",
-            "value": 100.2661
-          },
-          {
-            "hollow": false,
-            "label": "2026-02",
-            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_2_0.html",
-            "value": 98.505
-          },
-          {
-            "hollow": false,
-            "label": "2026-03",
-            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_3_0.html",
-            "value": 83.8414
-          },
-          {
-            "hollow": false,
-            "label": "2026-04",
-            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_4_0.html",
-            "value": 100.8692
-          },
-          {
-            "hollow": false,
-            "label": "2026-05",
-            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_5_0.html",
-            "value": 55.9221
-          },
-          {
-            "hollow": false,
-            "label": "2026-06",
-            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_6_0.html",
-            "value": 68.788
-          }
-        ],
-        "researched": false,
-        "source": {
-          "assessment": true,
-          "basedOn": [
-            {
-              "date": "2025-10-10",
-              "outlet": "mopsov.twse.com.tw",
-              "tier": "secondary",
-              "title": "TWSE MOPS monthly revenue summary, listed companies, Sep 2025",
-              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_9_0.html"
-            },
-            {
-              "date": "2025-11-10",
-              "outlet": "mopsov.twse.com.tw",
-              "tier": "secondary",
-              "title": "TWSE MOPS monthly revenue summary, listed companies, Oct 2025",
-              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_10_0.html"
-            },
-            {
-              "date": "2025-12-10",
-              "outlet": "mopsov.twse.com.tw",
-              "tier": "secondary",
-              "title": "TWSE MOPS monthly revenue summary, listed companies, Nov 2025",
-              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_11_0.html"
-            },
-            {
-              "date": "2026-01-10",
-              "outlet": "mopsov.twse.com.tw",
-              "tier": "secondary",
-              "title": "TWSE MOPS monthly revenue summary, listed companies, Dec 2025",
-              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_12_0.html"
-            },
-            {
-              "date": "2026-02-10",
-              "outlet": "mopsov.twse.com.tw",
-              "tier": "secondary",
-              "title": "TWSE MOPS monthly revenue summary, listed companies, Jan 2026",
-              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_1_0.html"
-            },
-            {
-              "date": "2026-03-10",
-              "outlet": "mopsov.twse.com.tw",
-              "tier": "secondary",
-              "title": "TWSE MOPS monthly revenue summary, listed companies, Feb 2026",
-              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_2_0.html"
-            },
-            {
-              "date": "2026-04-10",
-              "outlet": "mopsov.twse.com.tw",
-              "tier": "secondary",
-              "title": "TWSE MOPS monthly revenue summary, listed companies, Mar 2026",
-              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_3_0.html"
-            },
-            {
-              "date": "2026-05-10",
-              "outlet": "mopsov.twse.com.tw",
-              "tier": "secondary",
-              "title": "TWSE MOPS monthly revenue summary, listed companies, Apr 2026",
-              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_4_0.html"
-            },
-            {
-              "date": "2026-06-10",
-              "outlet": "mopsov.twse.com.tw",
-              "tier": "secondary",
-              "title": "TWSE MOPS monthly revenue summary, listed companies, May 2026",
-              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_5_0.html"
-            },
-            {
-              "date": "2026-07-10",
-              "outlet": "mopsov.twse.com.tw",
-              "tier": "secondary",
-              "title": "TWSE MOPS monthly revenue summary, listed companies, Jun 2026",
-              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_6_0.html"
-            }
-          ]
-        },
-        "title": "Servers actually shipped",
-        "unit": "%, year over year"
+      "chart": null,
+      "date": "2026-08-11",
+      "noChartReason": {
+        "cause": "no-published-number",
+        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
       },
-      "date": "2026-08-10",
-      "noChartReason": null,
       "sources": [
         {
-          "date": "2026-08-10",
-          "outlet": "TSMC Investor Relations (pr.tsmc.com)",
+          "date": "2026-08-11",
+          "outlet": "Quartz (citing The Information / Reuters reporting)",
           "tier": "secondary",
-          "title": "TSMC Investor Relations (pr.tsmc.com)",
-          "url": "https://pr.tsmc.com/english/news/3329"
+          "title": "Quartz (citing The Information / Reuters reporting)",
+          "url": "https://qz.com/microsoft-maia-300-ai-chip-unveil-fall-tsmc-081026"
         }
       ],
-      "storyHref": "story/2026-08-10.html",
-      "text": "TSMC's July sales rose 44.7 percent from a year earlier to about NT$467.58 billion, showing buyer demand for AI chips has not slowed."
+      "storyHref": "story/2026-08-11.html",
+      "text": "Microsoft is negotiating factory space for upward of 300,000 of its own Maia 300 chips for 2027, chips it then need not buy from Nvidia."
     }
   ],
   "categoryId": "chips.merchant-gpu",
@@ -205,6 +65,13 @@
       "confidence": "Medium — the underlying reports are single-source in places.",
       "direction": "worsening",
       "evidence": [
+        {
+          "date": "2026-08-10",
+          "outlet": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
+          "tier": "secondary",
+          "title": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
+          "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994"
+        },
         {
           "date": "2026-08-07",
           "outlet": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
@@ -218,20 +85,13 @@
           "tier": "secondary",
           "title": "TrendForce",
           "url": "https://www.trendforce.com/presscenter/news/20260804-13166.html"
-        },
-        {
-          "date": "2026-08-04",
-          "outlet": "404K Semi-Ai Research (Substack)",
-          "tier": "secondary",
-          "title": "404K Semi-Ai Research (Substack)",
-          "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb"
         }
       ],
       "id": "bottleneck",
       "plainName": "What is holding shipments back",
       "ratingWord": "Weak",
-      "reasoning": "Packaging eased to about a 10 percent shortfall while wafer lines run at full utilization, so memory and raw wafers now set the shipping limit.",
-      "summary": "Memory suppliers can fill only 60 to 70 percent of the volume requested for NVIDIA's next generation, which forced a cut in memory per accelerator, and component lead times stretched to 32 to 40 weeks.",
+      "reasoning": "Packaging tightness eased to roughly a 10% shortfall as capacity ramps, and Samsung's yield near 80% helps, yet wafer lines are already at full use and memory now sets the shipping limit.",
+      "summary": "Micron says it can ship only about half of what customers ask for and calls memory the top constraint, while NVIDIA's memory partners can cover just 60-70% of the volume requested for the next accelerator generation.",
       "tone": "bad"
     },
     {
@@ -263,8 +123,8 @@
       "id": "momentum",
       "plainName": "How hard buyers are buying",
       "ratingWord": "Very strong",
-      "reasoning": "AMD data-center revenue doubled to $6.7 billion and NVIDIA data-center revenue reached $75.2 billion, so commitments are converting into shipments.",
-      "summary": "The four largest US cloud buyers plan about $725 billion of 2026 capital spending, up 77 percent, and Google Cloud booked backlog rose past $514 billion.",
+      "reasoning": "Vendor results confirm the orders land: AMD data-center sales reached $6.7 billion, more than double a year earlier, and NVIDIA guided the quarter to $91 billion.",
+      "summary": "The four largest US cloud buyers plan roughly $725 billion of 2026 spending and Google Cloud's booked backlog rose past $514 billion.",
       "tone": "good"
     },
     {
@@ -272,11 +132,18 @@
       "direction": "worsening",
       "evidence": [
         {
-          "date": "2026-07-23",
-          "outlet": "AMD Investor Relations",
+          "date": "2026-08-04",
+          "outlet": "AMD Investor Relations (ir.amd.com)",
           "tier": "primary",
-          "title": "AMD Investor Relations",
-          "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era"
+          "title": "AMD Investor Relations (ir.amd.com)",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
+        },
+        {
+          "date": "2026-07-23",
+          "outlet": "Intel Corporation (IR press release)",
+          "tier": "primary",
+          "title": "Intel Corporation (IR press release)",
+          "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
         },
         {
           "date": "2026-07-23",
@@ -284,20 +151,13 @@
           "tier": "secondary",
           "title": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
           "url": "https://www.servethehome.com/amd-advancing-ai-2026-keynote-live-coverage/"
-        },
-        {
-          "date": "2026-07-13",
-          "outlet": "Foreign Affairs Forum (faf.ae)",
-          "tier": "secondary",
-          "title": "Foreign Affairs Forum (faf.ae)",
-          "url": "https://www.faf.ae/home/2026/7/13/silicons-new-sovereignty-how-nvidias-asic-gambit-is-redrawing-the-map-of-global-ai-power"
         }
       ],
       "id": "competitiveStructure",
       "plainName": "Whether buyers have a second choice",
       "ratingWord": "Mixed",
-      "reasoning": "Volume for these rivals lands mostly in 2027, so pressure builds while today's shipments still favour the incumbent.",
-      "summary": "AMD put its Helios rack into production with named deployments at Anthropic, OpenAI and Microsoft, Meta starts its own inference chips in September, and MediaTek is funding a datacenter accelerator line.",
+      "reasoning": "Intel foundry sales grew 31% and MediaTek expects more than $2 billion of custom accelerator revenue this year, so more sellers are crowding the same buyers.",
+      "summary": "AMD put its rack-scale Helios system into production with Anthropic committing up to 2 gigawatts, giving buyers a second full-rack option for the first time.",
       "tone": "mixed"
     },
     {
@@ -329,8 +189,8 @@
       "id": "moat",
       "plainName": "How safe NVIDIA's lead looks",
       "ratingWord": "Weak",
-      "reasoning": "Custom silicon already absorbs roughly two-thirds of AI compute, so the position now rests on supply access more than on customer lock-in.",
-      "summary": "NVIDIA accelerator share is projected to slide from 87 percent in 2024 to 75 percent this year, and custom chips grow 44.6 percent against 16.1 percent for merchant parts.",
+      "reasoning": "Custom silicon is growing 44.6% against 16.1% for merchant parts, so the lead narrows even while sales climb.",
+      "summary": "NVIDIA's accelerator share is tracked down from an 87% peak toward 75% this year, and cloud buyers' own chips reportedly already run about two-thirds of AI compute.",
       "tone": "bad"
     },
     {
@@ -339,10 +199,10 @@
       "evidence": [
         {
           "date": "2026-05-20",
-          "outlet": "NVIDIA Q1 FY2027 financial results press release (Form 8-K / NVIDIA IR)",
+          "outlet": "NVIDIA Investor Relations press release",
           "tier": "primary",
-          "title": "NVIDIA Q1 FY2027 financial results press release (Form 8-K / NVIDIA IR)",
-          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
+          "title": "NVIDIA Investor Relations press release",
+          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx"
         },
         {
           "date": "2026-08-04",
@@ -353,17 +213,17 @@
         },
         {
           "date": "2026-07-23",
-          "outlet": "Intel Corporation Investor Relations (intc.com)",
+          "outlet": "Intel investor-relations press release",
           "tier": "primary",
-          "title": "Intel Corporation Investor Relations (intc.com)",
+          "title": "Intel investor-relations press release",
           "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
         }
       ],
       "id": "unitEconomics",
       "plainName": "How profitable the sellers are",
       "ratingWord": "Strong",
-      "reasoning": "AMD earns slightly below its corporate average on accelerators, which caps how far the group as a whole improves.",
-      "summary": "NVIDIA holds a 75 percent gross margin, TSMC reported 67.7 percent and Intel recovered to 41.8 percent, so vendors keep their pricing power as costs rise.",
+      "reasoning": "Intel and TSMC also widened margins, so rising component costs have not yet reached vendor profitability.",
+      "summary": "NVIDIA held a 75% adjusted gross margin while guiding to the same level, and AMD lifted its reported gross margin to 54% from 40%.",
       "tone": "good"
     },
     {
@@ -378,25 +238,25 @@
           "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000052/nvda-20260426.htm"
         },
         {
-          "date": "2026-08-05",
-          "outlet": "AMD Investor Relations (SEC Form 10-Q)",
+          "date": "2026-08-10",
+          "outlet": "NVIDIA Newsroom (official)",
           "tier": "primary",
-          "title": "AMD Investor Relations (SEC Form 10-Q)",
-          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm"
+          "title": "NVIDIA Newsroom (official)",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-partners-with-apollo-blackrock-blackstone-brookfield-goldman-sachs-and-kkr-to-establish-ai-compute-infrastructure-financing-platforms-to-mobilize-over-500-billion-of-third-party-capital"
         },
         {
-          "date": "2026-07-27",
-          "outlet": "Yahoo Finance (syndicated Bloomberg)",
-          "tier": "secondary",
-          "title": "Yahoo Finance (syndicated Bloomberg)",
-          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-750-billion-deals-revive-102003935.html"
+          "date": "2026-08-05",
+          "outlet": "AMD SEC Filing (10-Q)",
+          "tier": "primary",
+          "title": "AMD SEC Filing (10-Q)",
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm"
         }
       ],
       "id": "strategicRisk",
       "plainName": "What could go wrong",
       "ratingWord": "Mixed",
-      "reasoning": "Vendors increasingly finance or backstop those same buyers, which ties their revenue to customers whose own funding remains unproven, and China revenue has already fallen by half.",
-      "summary": "Three direct customers account for 54 percent of NVIDIA revenue, AMD's order book leans on two buyers at 6 gigawatts each, and SpaceX expects a very large share of 2027 output.",
+      "reasoning": "NVIDIA also signed agreements with six financial firms to raise more than $500 billion for its own customers, which ties future orders to outside funding rather than buyer cash.",
+      "summary": "Three direct customers made up 21%, 17% and 16% of NVIDIA revenue, AMD repeats the same warning, and one buyer expects a very large share of 2027 output.",
       "tone": "mixed"
     }
   ],
@@ -424,7 +284,7 @@
   ],
   "gapChart": {
     "annotation": {
-      "date": "2026-07-01",
+      "date": "2026-08-01",
       "label": "Widest gap so far"
     },
     "caption": "The gap widened in the latest reading. Demand and supply are each reading's own reported momentum score, not a raw shipment count. Some points are a single day's reading; others are a whole month's figure, placed at the start of that month.",
@@ -461,8 +321,8 @@
       },
       {
         "date": "2026-08-01",
-        "demand": 3.780000000000002,
-        "supply": 0.39999999999999997
+        "demand": 4.006666666666668,
+        "supply": -0.20000000000000007
       }
     ],
     "sources": [
@@ -485,10 +345,10 @@
           },
           {
             "date": "2026-07-23",
-            "outlet": "AMD Investor Relations",
+            "outlet": "Intel Corporation (IR press release)",
             "tier": "primary",
-            "title": "AMD Investor Relations",
-            "url": "https://ir.amd.com/news-events/press-releases/detail/1294/aai-2026-amd-delivers-full-stack-compute-for-the-agentic-ai-era"
+            "title": "Intel Corporation (IR press release)",
+            "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
           }
         ]
       }
@@ -496,24 +356,38 @@
   },
   "schemaVersion": "1.1",
   "verdict": {
-    "answer": "Not yet. Memory yields hit 80 percent — the first good news on supply in months",
+    "answer": "Not yet. The memory maker says it can fill half the orders, and has no idea when that changes",
     "chip": {
       "direction": "widening",
       "label": "Gap widening"
     },
     "confidence": "We are confident in this read",
     "question": "Is supply catching up to demand?",
-    "soWhat": "Both Korean memory makers now say they get about eight good stacks in ten, months earlier than expected. It is real progress, and it is not yet enough to fill the orders.",
+    "soWhat": "Micron told an investor forum yesterday that memory, not chip-making, is the number one thing holding customers back — and that it cannot yet see the point where supply catches demand. Money, meanwhile, keeps arriving.",
     "sources": [
       {
         "assessment": true,
         "basedOn": [
           {
             "date": "2026-08-10",
-            "outlet": "Seoul Economic Daily (en.sedaily.com)",
+            "outlet": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
             "tier": "secondary",
-            "title": "Seoul Economic Daily (en.sedaily.com)",
-            "url": "https://en.sedaily.com/finance/2026/08/10/samsung-hits-80-percent-yield-on-hbm4-speeds-up-hbm4e"
+            "title": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
+            "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994"
+          },
+          {
+            "date": "2026-08-07",
+            "outlet": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
+            "tier": "secondary",
+            "title": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
+            "url": "https://en.sedaily.com/international/2026/08/07/nvidia-weighs-cutting-hbm-capacity-for-rubin-ultra"
+          },
+          {
+            "date": "2026-08-04",
+            "outlet": "TrendForce",
+            "tier": "secondary",
+            "title": "TrendForce",
+            "url": "https://www.trendforce.com/presscenter/news/20260804-13166.html"
           }
         ]
       }

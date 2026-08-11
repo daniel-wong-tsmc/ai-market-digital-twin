@@ -1,0 +1,52 @@
+{
+  "id": "www-runpod-io-6f4a4d09-2026-08-1",
+  "statement": "RunPod's published on-demand Secure Cloud rates as of 2026-08-11: H100 SXM $2.99 per GPU-hour, B200 $5.89, H200 $4.39, B300 $7.39, A100 SXM $1.49 — materially below Lambda's same-day rates for the same GPU classes.",
+  "kind": "measured",
+  "value": {
+    "number": 2.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "These are list rental levels for data-center accelerators with no stated prior price or change on the page, so they read as a static price level and a same-day cross-provider spread rather than a directional move.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Published per-hour rates set what renters pay for NVIDIA accelerator time, tying neocloud pricing to the economics of owning merchant-GPU hardware; absent a baseline the level implies no direction."
+  },
+  "evidence": [
+    {
+      "source": "RunPod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-08-11",
+      "excerpt": "H100 NVL $3.19/hr (Secure Cloud); H100 PCIe $2.89/hr (Secure Cloud); H100 SXM $2.99/hr (Secure Cloud)",
+      "tier": "secondary"
+    },
+    {
+      "source": "RunPod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-08-11",
+      "excerpt": "B300 $7.39/hr (Secure Cloud); H200 $4.39/hr (Secure Cloud); B200 $5.89/hr (Secure Cloud)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own list page (secondary tier), one publisher; Community Cloud rates were not broken out in the fetched text."
+  },
+  "dispersion": "Wide same-day spread between providers for identical GPU classes: H100 SXM $2.99/hr at RunPod versus $3.99-$4.29/hr at Lambda; B200 $5.89/hr versus $6.69-$6.99/hr at Lambda.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-08-11",
+  "capturedAt": "2026-08-11T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

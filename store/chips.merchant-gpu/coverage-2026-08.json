@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-08",
-  "capturedAt": "2026-08-10T15:21:09Z",
+  "capturedAt": "2026-08-11T01:20:21Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
@@ -13,6 +13,22 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "amd-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "intc-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Intel earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['intc.com', 'sec.gov']",
       "paywalledNote": null
     },
     {
@@ -110,37 +126,29 @@
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
       "paywalledNote": null
-    },
-    {
-      "type": "indicator",
-      "id": "gpuSpotPrice",
-      "priority": "optional",
-      "acquisitionStatus": "not-covered",
-      "reason": "Indicator 'gpuSpotPrice' (dimension: momentum) was not covered. Expected sources: ['gpu-marketplaces'].",
-      "paywalledNote": null
     }
   ],
   "gapCounts": {
-    "total": 14,
-    "source": 13,
-    "indicator": 1,
-    "required": 13,
+    "total": 15,
+    "source": 15,
+    "indicator": 0,
+    "required": 15,
     "preferred": 0,
-    "optional": 1,
+    "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://en.sedaily.com/finance/2026/08/10/samsung-hits-80-percent-yield-on-hbm4-speeds-up-hbm4e",
-    "https://finance.biggo.com/news/b8f71f7c-a0ca-4fd4-818d-b281253b0cb7",
-    "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm",
-    "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
-    "https://lambda.ai/pricing",
-    "https://nvidianews.nvidia.com/news/nvidia-sets-conference-call-for-second-quarter-financial-results-6927195",
-    "https://pr.tsmc.com/english/news/3329",
-    "https://www.constructiondive.com/news/texas-data-center-pause-puts-us-pipeline-risk-of-delay-bnef/827255/",
-    "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
-    "https://www.runpod.io/pricing"
+    "https://compute.exchange/blogs/h100-gpu-price-2026",
+    "https://lambda.ai/service/gpu-cloud",
+    "https://newsroom.intel.com/corporate/intel-announces-proposed-15-billion-common-stock-offering",
+    "https://nvidianews.nvidia.com/news/nvidia-partners-with-apollo-blackrock-blackstone-brookfield-goldman-sachs-and-kkr-to-establish-ai-compute-infrastructure-financing-platforms-to-mobilize-over-500-billion-of-third-party-capital",
+    "https://qz.com/microsoft-maia-300-ai-chip-unveil-fall-tsmc-081026",
+    "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994",
+    "https://www.runpod.io/pricing",
+    "https://www.scmp.com/tech/tech-trends/article/3363448/moore-threads-plans-hong-kong-listing-after-posting-147-jump-first-half-revenue",
+    "https://www.thundercompute.com/blog/amd-mi300x-pricing",
+    "https://www.trendforce.com/news/2026/08/05/news-tsmc-reportedly-expands-outsourcing-of-key-cowos-front-end-step-to-osats-amid-rising-nvidia-asic-demand/"
   ],
   "judgedIndicatorIds": [
     "D2",
@@ -152,6 +160,7 @@
     "designWins",
     "exportControlExposure",
     "flopsPerDollar",
+    "gpuSpotPrice",
     "grossMargin",
     "hbmSupplyCapex",
     "hyperscalerCapexRevision",

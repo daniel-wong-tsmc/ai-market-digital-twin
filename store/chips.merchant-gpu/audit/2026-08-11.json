@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-08-11",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-trendforce-com-17fa2dc8-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-cfc51804-2026-08-1",
+        "newsroom-intel-com-6cdf4bbc-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "qz-com-36c37a60-2026-08-1",
+        "www-theregister-com-9b9edf29-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "lambda-ai-004a2305-2026-08-1",
+        "www-runpod-io-6f4a4d09-2026-08-1",
+        "compute-exchange-b9ce73ff-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1",
+        "www-trendforce-com-836f33fa-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-cfc51804-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "qz-com-36c37a60-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-2f05647b-2026-07-1",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-1",
+        "www-thelec-net-c15d2de4-2026-08-1",
+        "www-tomshardware-com-9086563b-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-tradingkey-com-855cb780-2026-07-1",
+        "supplyics-com-c83015c2-2026-08-2",
+        "www-trendforce-com-836f33fa-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-2",
+        "en-sedaily-com-80cdc180-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "supplyics-com-c83015c2-2026-08-3",
+        "www-forbes-com-7c91863a-2026-07-2",
+        "www-trendforce-com-836f33fa-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-faf-ae-6bcac1ba-2026-07-2",
+        "qz-com-36c37a60-2026-08-1",
+        "www-investing-com-b7ff2af7-2026-08-2",
+        "siliconanalysts-com-47ffeeeb-2026-07-3"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "ir-amd-com-cfa508a5-2026-08-1",
+        "ir-amd-com-cfa508a5-2026-08-4",
+        "www-forbes-com-7c91863a-2026-07-3",
+        "newsletter-semianalysis-com-5136a06c-2026-07-1"
+      ]
+    },
+    {
+      "claimKey": "impl:6",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "pr-tsmc-com-7f560c3b-2026-08-2",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-3",
+        "www-supplychainconnect-com-9dd9a92d-2026-07-3"
+      ]
+    },
+    {
+      "claimKey": "impl:7",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-intc-com-9e1300a4-2026-08-2",
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-4",
+        "economy-ac-24d4d647-2026-07-1"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 15,
+    "flagged": 0,
+    "skipped": 0
+  }
+}

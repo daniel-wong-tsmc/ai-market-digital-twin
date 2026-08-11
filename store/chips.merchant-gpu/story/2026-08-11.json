@@ -1,0 +1,180 @@
+{
+  "headline": "The memory maker says it can fill half the orders, and has no idea when that changes",
+  "deck": "Micron told an investor forum yesterday that memory, not chip-making, is the number one thing holding customers back — and that it cannot yet see the point where supply catches demand. Money, meanwhile, keeps arriving.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Half the orders, and no date for when that ends",
+      "paragraphs": [
+        "Micron said at an investor forum on 10 August that it can supply no more than about half of what its customers ask for. It called memory the number one constraint the biggest cloud buyers face today, and said it has no line of sight to when supply will meet demand.",
+        "There is a reason the shortage feeds on itself. Making the stacked memory that goes on an AI accelerator eats about three times the factory space of ordinary memory for the same output, and the next version pushes that to four times. Every stack built for an accelerator is ordinary memory not built.",
+        "Nothing in the rest of the week contradicts that. Suppliers can still cover only 60 to 70 percent of the volume Nvidia asked for on its next chip generation, and a market researcher said on 4 August that memory will stay short through 2027, which limits how much factory space can go to the stacked kind at all."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-trendforce-com-17fa2dc8-2026-08-1"
+      ],
+      "sourceLine": "Micron at the Technology Leadership Forum via Investing.com, 10 August 2026; Seoul Economic Daily, 7 August 2026; TrendForce, 4 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994",
+          "title": "Micron says AI has left the memory market short",
+          "outlet": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
+          "date": "2026-08-10"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Money is not what is missing",
+      "paragraphs": [
+        "On the same day, Nvidia said it had signed preliminary agreements with six large financial firms — Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR — to set up platforms meant to bring in more than $500 billion of outside capital for its customers to buy compute with.",
+        "Intel also announced a share sale of $15 billion, up to $17.25 billion if the banks take their option, with the proceeds going to general company purposes including new plant. It named the scale of AI compute investment as the reason.",
+        "So the funding side is wide open while the physical side is not. That gap is the whole story of this market right now: buyers can pay, lenders will lend, and the parts still are not there."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "nvidianews-nvidia-com-cfc51804-2026-08-1",
+        "newsroom-intel-com-6cdf4bbc-2026-08-1"
+      ],
+      "sourceLine": "NVIDIA newsroom, 10 August 2026; Intel newsroom, 10 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://nvidianews.nvidia.com/news/nvidia-partners-with-apollo-blackrock-blackstone-brookfield-goldman-sachs-and-kkr-to-establish-ai-compute-infrastructure-financing-platforms-to-mobilize-over-500-billion-of-third-party-capital",
+          "title": "Nvidia sets up compute financing platforms with six investment firms",
+          "outlet": "NVIDIA Newsroom (official)",
+          "date": "2026-08-10"
+        },
+        {
+          "url": "https://newsroom.intel.com/corporate/intel-announces-proposed-15-billion-common-stock-offering",
+          "title": "Intel announces a proposed $15 billion share offering",
+          "outlet": "Intel Newsroom (official)",
+          "date": "2026-08-10"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The biggest customers are quietly building their own way out",
+      "paragraphs": [
+        "Reporting today says Microsoft is negotiating factory space for upward of 300,000 of its own Maia 300 chips for delivery in 2027, with a longer-term goal of more than a million. Every one of those it gets is a part it does not have to buy from a merchant vendor.",
+        "MediaTek is chasing the same work from the other side. On 3 August it said it expects more than $2 billion of custom AI data-centre chip revenue this year, with its first such chip going into production in the final quarter of 2026 for large US cloud customers.",
+        "This does not free up any memory. It does change who is standing in the queue for the scarce parts, and it slowly loosens one vendor's grip on the buyers."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "qz-com-36c37a60-2026-08-1",
+        "www-theregister-com-9b9edf29-2026-08-1"
+      ],
+      "sourceLine": "Quartz, 11 August 2026; The Register, 3 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://qz.com/microsoft-maia-300-ai-chip-unveil-fall-tsmc-081026",
+          "title": "Microsoft lines up factory space for its own AI chip",
+          "outlet": "Quartz (citing The Information / Reuters reporting)",
+          "date": "2026-08-11"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "The cleanest early signal is what a chip costs to rent or to buy second-hand. Today's published rates show one provider asking $6.69 to $6.99 an hour for a top Blackwell part and $3.99 to $4.29 for the previous generation, while a rival lists the same classes lower, at $5.89 and $2.99. Older hardware still changes hands at $15,000 to $28,000 used and $25,000 to $40,000 new. If the shortage were easing, those numbers would start drifting down together.",
+        "Watch two supply numbers over the next few weeks. Whether Micron's roughly half-of-demand fill rate improves at all, and whether the packaging step gets faster: on 5 August a researcher reported the main chipmaker is handing part of that work to outside partners, with Nvidia holding 800,000 to 850,000 wafers of this year's capacity and the shortfall still around 20 percent.",
+        "The honest read is that today changed the funding picture, not the physical one. Until a memory supplier can name a date, more money mostly means more people waiting in the same line."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "lambda-ai-004a2305-2026-08-1",
+        "www-runpod-io-6f4a4d09-2026-08-1",
+        "compute-exchange-b9ce73ff-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1",
+        "www-trendforce-com-836f33fa-2026-08-1"
+      ],
+      "sourceLine": "Lambda and RunPod published pricing, 11 August 2026; Compute Exchange, 11 August 2026; TrendForce, 5 August 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://compute.exchange/blogs/h100-gpu-price-2026",
+          "title": "What used and new H100 hardware sells for in 2026",
+          "outlet": "Compute Exchange",
+          "date": "2026-08-11"
+        },
+        {
+          "url": "https://www.trendforce.com/news/2026/08/05/news-tsmc-reportedly-expands-outsourcing-of-key-cowos-front-end-step-to-osats-amid-rising-nvidia-asic-demand/",
+          "title": "TSMC reported to hand a key packaging step to outside partners",
+          "outlet": "TrendForce",
+          "date": "2026-08-05"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Shows whether the biggest buyers are still raising their spending plans while parts stay short.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "The street price per chip is the first place a real easing of the shortage would show up.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "Micron says it can supply only about half of what customers ask for, with no date for when that changes.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "Nvidia lined up six investment firms to raise more than $500 billion of outside money for its customers.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Micron said on 10 August it can supply only about half of what customers ask for and has no line of sight to when supply meets demand.",
+      "claimFindingIds": [
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "text": "Nvidia signed preliminary agreements with six investment firms to raise more than $500 billion of outside capital for its customers, so funding is not the limit.",
+      "claimFindingIds": [
+        "nvidianews-nvidia-com-cfc51804-2026-08-1"
+      ]
+    },
+    {
+      "text": "Microsoft is negotiating factory space for upward of 300,000 of its own Maia 300 chips for 2027, chips it then need not buy from Nvidia.",
+      "claimFindingIds": [
+        "qz-com-36c37a60-2026-08-1"
+      ]
+    }
+  ],
+  "schemaVersion": 2,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-11",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "0707bb7438768899a6ab9286f7c9426227c956148d332c57e860ee70cff48b24",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-11T01:45:47.855165+00:00"
+  }
+}

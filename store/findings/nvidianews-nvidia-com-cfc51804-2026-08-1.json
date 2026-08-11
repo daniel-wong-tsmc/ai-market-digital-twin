@@ -1,0 +1,58 @@
+{
+  "id": "nvidianews-nvidia-com-cfc51804-2026-08-1",
+  "statement": "NVIDIA signed non-binding memorandums of understanding with Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR to set up compute-financing platforms intended to mobilize over $500 billion of third-party capital for NVIDIA customers.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Purpose-built pools of outside capital at attractive rates ease the financing constraint on the marginal buyer of accelerators, letting neoclouds, enterprises and governments buy more than their own balance sheets would allow — but only MOUs are signed, so no money is committed yet.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Dedicated third-party capital at attractive rates lowers the cost of financing GPU infrastructure purchases, extending the buying capacity of customers who are not self-funding, which sustains orders for NVIDIA-based systems."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom (official)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-partners-with-apollo-blackrock-blackstone-brookfield-goldman-sachs-and-kkr-to-establish-ai-compute-infrastructure-financing-platforms-to-mobilize-over-500-billion-of-third-party-capital",
+      "date": "2026-08-10",
+      "excerpt": "over $500 billion of third-party capital",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA Newsroom (official)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-partners-with-apollo-blackrock-blackstone-brookfield-goldman-sachs-and-kkr-to-establish-ai-compute-infrastructure-financing-platforms-to-mobilize-over-500-billion-of-third-party-capital",
+      "date": "2026-08-10",
+      "excerpt": "These partnerships remain subject to execution of the final agreements",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA Newsroom (official)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-partners-with-apollo-blackrock-blackstone-brookfield-goldman-sachs-and-kkr-to-establish-ai-compute-infrastructure-financing-platforms-to-mobilize-over-500-billion-of-third-party-capital",
+      "date": "2026-08-10",
+      "excerpt": "dedicated pools of capital at significant scale at attractive rates for NVIDIA customers",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Primary company release, but the release itself states the arrangements are memorandums of understanding subject to final agreements, so the $500B figure is an intention rather than committed capital; the headline number is therefore not treated as a measured value."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-11T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

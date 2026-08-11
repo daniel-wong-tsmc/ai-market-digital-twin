@@ -1,0 +1,81 @@
+{
+  "asOf": "2026-08",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "www-thundercompute-com-b4c37b23-2026-08-1",
+      "entity": "amd",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "newsroom-intel-com-6cdf4bbc-2026-08-1",
+      "entity": "intel",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "www-intc-com-9e1300a4-2026-08-2",
+      "detail": "value 5.8 -> 15.0 (tol 1%)"
+    },
+    {
+      "findingId": "lambda-ai-004a2305-2026-08-1",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "lambda-ai-10658469-2026-08-1",
+      "detail": "value 6.69 -> 3.99 (tol 1%)"
+    },
+    {
+      "findingId": "www-runpod-io-6f4a4d09-2026-08-1",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "www-runpod-io-c3f31c4a-2026-08-1",
+      "detail": "value 6.94 -> 2.99 (tol 1%)"
+    },
+    {
+      "findingId": "www-investing-com-87498f82-2026-08-1",
+      "entity": "memory",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "en-sedaily-com-80cdc180-2026-08-1",
+      "detail": "magnitude 2 -> 3"
+    },
+    {
+      "findingId": "qz-com-36c37a60-2026-08-1",
+      "entity": "multi",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "siliconanalysts-com-528fac70-2026-07-5",
+      "detail": "statement/trend changed (trend unknown -> rising)"
+    },
+    {
+      "findingId": "www-trendforce-com-836f33fa-2026-08-1",
+      "entity": "multi",
+      "indicatorId": "pkgCapacityOrderSpread",
+      "verdict": "update",
+      "priorFindingId": "siliconanalysts-com-528fac70-2026-07-2",
+      "detail": "magnitude 2 -> 3"
+    },
+    {
+      "findingId": "compute-exchange-b9ce73ff-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "gpuSpotPrice",
+      "verdict": "update",
+      "priorFindingId": "compute-exchange-50e44183-2026-07-1",
+      "detail": "value 32500.0 -> 25000.0 (tol 1%)"
+    },
+    {
+      "findingId": "nvidianews-nvidia-com-cfc51804-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "update",
+      "priorFindingId": "nvidianews-nvidia-com-18175873-2026-07-2",
+      "detail": "magnitude 1 -> 2"
+    }
+  ],
+  "findingsDuplicate": []
+}

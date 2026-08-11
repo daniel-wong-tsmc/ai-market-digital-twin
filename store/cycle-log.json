@@ -2,8 +2,8 @@
  "scope": "category:chips.merchant-gpu",
  "asOf": "2026-08",
  "mode": "daily",
- "capturedAt": "2026-08-10T12:00:00Z",
- "runDir": "work/daily-2026-08-10",
+ "capturedAt": "2026-08-11T12:00:00Z",
+ "runDir": "work/daily-2026-08-11",
  "unattended": true,
  "entries": [
   {
@@ -11,49 +11,50 @@
    "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
    "status": "done",
    "manifestRef": "manifests/chips.merchant-gpu.json",
-   "scorecard": "store/chips.merchant-gpu/2026-08-v6.json",
-   "dmi": 3.78,
-   "smi": 0.4,
-   "priorScorecard": "store/chips.merchant-gpu/2026-08-v5.json",
-   "priorDmi": 3.46,
-   "priorSmi": -0.2,
+   "scorecard": "store/chips.merchant-gpu/2026-08-v7.json",
+   "dmi": 4.007,
+   "smi": -0.2,
+   "priorScorecard": "store/chips.merchant-gpu/2026-08-v6.json",
+   "priorDmi": 3.78,
+   "priorSmi": 0.4,
    "gather": {
     "documentsGathered": 10,
-    "primary": 4,
-    "secondary": 6,
+    "primary": 1,
+    "secondary": 9,
     "duplicates": 0,
     "dropped": [],
     "droppedKnown": 0,
     "droppedKnownDetail": [],
-    "rounds": 1,
-    "cap": "maxDocuments=10 (daily) reached in round 1; round 2 not run. maxRounds=2, maxSubagentsPerRound=3.",
+    "rounds": 2,
+    "cap": "maxDocuments=10 (daily) reached at end of round 2. maxRounds=2, maxSubagentsPerRound=3.",
     "topUp": true,
-    "topUpReason": "store coverage present (292 findings aged in window, 87 faded) -> gather capped at 10 and aimed at not-covered D6 + gpuSpotPrice",
+    "topUpReason": "store coverage present (307 findings aged in window, 88 faded) -> gather capped at 10 and aimed at not-covered D6 + gpuSpotPrice",
     "skipped": [
-     "price leads not chased (vast.ai/pricing, coreweave.com/pricing): maxDocuments=10 reached",
-     "forward-signal slices not gathered (HBM spot pricing, ODM monthly AI revenue, accelerator lead times, CoWoS packaging capacity, new design wins): maxDocuments=10 reached",
-     "lead 'NVIDIA $5B Lancium/Firmus infrastructure investment' not gathered: no primary/official source found (trade press only) as of 2026-08-10",
-     "round 2 not run: maxDocuments=10 reached after round 1",
+     "maxDocuments=10 (daily cap) reached at end of round 2; round 3 not run (maxRounds=2 anyway).",
      "paywalled source never fetched (manifest is_paywalled): trendforce-gpu-tracker",
      "paywalled source never fetched (manifest is_paywalled): semianalysis",
-     "no Samsung primary (newsroom/IR) reachable for the HBM4 yield claim; kept an independent named-reporter outlet instead",
-     "discovery tool 'last30days' (role: discovery) not run this cycle - the HuggingNews tiered-discovery pass plus the filing and price seeds already saturated the 10-document daily cap. Logged, not silent."
+     "licensed-source fetched: trendforce.com (open news page, fetched not blocked - D6 flag)",
+     "BIS / Federal Register export-control notice search returned nothing newer than 2026-01 in the 7-day window.",
+     "No NVIDIA 8-K located for the $500B financing announcement as of 2026-08-11; SEC EDGAR browse returned HTTP 403 to automated fetch. NVIDIA Newsroom release used as primary instead.",
+     "AMD: no material new SEC filing since the 2026-08-04 Q2 8-K already in the corpus.",
+     "Micron investors.micron.com prepared-remarks PDF: WebFetch timed out (60s); Investing.com transcript of the same forum used instead.",
+     "Microsoft has published no official Maia 300 post; ingested doc is trade press citing The Information/Reuters, chase.primaryFound = null.",
+     "Moore Threads: no company primary reachable; SCMP used with four independent corroborators.",
+     "DigiTimes in-window pieces not fetched (paywalled, no numbers extractable): AMD Helios hyperscaler deals 2026-08-05; NVIDIA Rubin Ultra HBM supply 2026-08-07.",
+     "videocardz 'NVIDIA cuts GPU supply to board partners by up to 20%': HTTP 402 paywall, not fetched.",
+     "TrendForce 'AI Server Shipments Forecast Raised to Nearly 31% YoY in 2026' (2026-08-03): 1 day outside the 7-day sweep, not gathered.",
+     "MI300X price corroborators (gpucost.org, gpufinder.dev, spheron.network) not fetched as own blobs: maxDocuments=10 reached.",
+     "discovery tool 'last30days' (role: discovery) not run this cycle - the HuggingNews tiered-discovery pass plus the filing and price seeds saturated the 10-document daily cap. Logged, not silent.",
+     "gatherer subagents dispatched as agentType 'general-purpose' with an explicit written no-Bash / no-nesting prohibition; no tool-restricted gatherer agent type exists in this checkout, so the F88 wall is instructional rather than structural this run. AFK-default, logged."
     ],
-    "pursuedDespiteAge": [
-     {
-      "ref": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results",
-      "date": "2026-07-23",
-      "ageDays": 18,
-      "reason": "Intel's freshest official data-center/AI revenue figures; Intel's earnings-window IR source has no newer release, and no fresher restatement exists."
-     }
-    ],
+    "pursuedDespiteAge": [],
     "huggingnewsFallback": [],
     "huggingnewsLeads": {
      "tags": [
       "ai-compute-chips"
      ],
-     "storiesDetailed": 4,
-     "chasedToPrimary": 4,
+     "storiesDetailed": 5,
+     "chasedToPrimary": 5,
      "note": "HuggingNews latest+detail run by the coordinator via webreach-fetch; every ingested doc is the underlying primary or original outlet, never a HuggingNews story page."
     },
     "earningsWindow": "gather_priority = heavy for nvda-earnings, amd-earnings, nvda-10k-risk-factors (AMD reported 2026-08-04; NVIDIA reports 2026-08-26)"
@@ -83,62 +84,65 @@
      "version": "api-skill-v0.0.2",
      "pin": "api-skill-v0.0.2",
      "drift": false
-    }
+    },
+    "mode": "gpu-agent web-reach-ensure --json --unattended (scheduled/headless: reports only, never installs)"
    },
-   "licensedSourcesFetched": [],
+   "licensedSourcesFetched": [
+    "trendforce.com"
+   ],
    "answers": {
-    "extract": "work/daily-2026-08-10/extract-answer.json",
-    "judge": "work/daily-2026-08-10/judge-answer.json",
-    "thesis": "work/daily-2026-08-10/thesis-answer.json",
-    "implication": "work/daily-2026-08-10/implication-answer.json",
-    "narrator": "work/daily-2026-08-10/narrator-answer.json"
+    "extract": "work/daily-2026-08-11/extract-answer.json",
+    "judge": "work/daily-2026-08-11/judge-answer.json",
+    "thesis": "work/daily-2026-08-11/thesis-answer.json",
+    "implication": "work/daily-2026-08-11/implication-answer.json",
+    "narrator": "work/daily-2026-08-11/narrator-answer.json"
    },
    "corpusArtifacts": {
-    "coverage": "work/daily-2026-08-10/corpus-coverage.json",
-    "merged": "work/daily-2026-08-10/corpus-findings.json",
-    "dedupedFresh": "work/daily-2026-08-10/deduped-fresh.json",
-    "report": "work/daily-2026-08-10/corpus-report.json",
-    "pipelineReport": "work/daily-2026-08-10/corpus-pipeline-report.json"
+    "coverage": "work/daily-2026-08-11/corpus-coverage.json",
+    "merged": "work/daily-2026-08-11/corpus-findings.json",
+    "dedupedFresh": "work/daily-2026-08-11/deduped-fresh.json",
+    "report": "work/daily-2026-08-11/corpus-report.json",
+    "pipelineReport": "work/daily-2026-08-11/corpus-pipeline-report.json"
    },
    "corpusCounts": {
-    "storeInWindow": 292,
-    "fadedOut": 87,
-    "freshNew": 2,
-    "freshUpdate": 14,
-    "duplicate": 14,
-    "merged": 308
+    "storeInWindow": 307,
+    "fadedOut": 88,
+    "freshNew": 1,
+    "freshUpdate": 8,
+    "duplicate": 0,
+    "merged": 316
    },
    "dedupReport": {
-    "path": "store/chips.merchant-gpu/dedup-2026-08-10.json",
-    "new": 2,
-    "update": 14,
-    "duplicate": 14
+    "path": "store/chips.merchant-gpu/dedup-2026-08-11.json",
+    "new": 1,
+    "update": 8,
+    "duplicate": 0
    },
    "findingsGated": {
-    "count": 30,
-    "dropped": 2,
+    "count": 9,
+    "dropped": 1,
     "droppedDetail": [
-     "nvidianews-nvidia-com-cb87ea95-2026-08-1: finding affects neither demand nor supply track",
-     "www-constructiondive-com-35e82b22-2026-08-1: unregistered indicator: S4"
+     "www-scmp-com-744b78b6-2026-08-1: excerpt not found in source document"
     ]
    },
    "wikiIngest": {
-    "routed": 16,
-    "pages": 5
+    "routed": 9,
+    "pages": 6
    },
    "unregisteredEntities": {
-    "count": 2,
+    "count": 3,
     "names": [
      "market",
-     "memory"
+     "memory",
+     "multi"
     ]
    },
    "coverageRecord": {
     "path": "store/chips.merchant-gpu/coverage-2026-08.json",
-    "gaps": 14,
-    "source": 13,
-    "indicator": 1,
-    "required": 13,
+    "gaps": 15,
+    "source": 15,
+    "indicator": 0,
+    "required": 15,
     "waived": 0
    },
    "gates": {
@@ -148,49 +152,47 @@
    },
    "stageStatuses": {
     "category": "done",
-    "thesis": "failed",
+    "thesis": "done",
     "implication": "done",
     "narrator": "done",
-    "citationAudit": "flagged",
     "layer": "deferred",
     "main": "deferred"
    },
-   "thesisGate": "FAILED after the full allowance (initial dispatch + 2 re-dispatches, run-cycle 3(e) cap). Attempt 1: schema - judgments[48] missing required 'sensitivity'. Attempt 2: schema - proposed[1] missing required 'sensitivity'. Attempt 3: schema valid (63 judgments + 2 proposals, all required fields present) but voice-lint rejected proposed thesis 'grid-equipment-lead-times-gate-new-ai-sites': a raw finding id in exec-facing prose, and a 2-sentence statement (max 1). The gate never wrote, so the standing thesis book is byte-unchanged from the prior cycle and THE CALLS in the report renders that prior book. No bypass used. The scorecard is unaffected.",
-   "implicationGate": "clean - accepted on the first dispatch, 8 lines, no rejection",
-   "citationAudit": {
-    "path": "store/chips.merchant-gpu/audit/2026-08-10.json",
-    "claims": 15,
-    "flagged": 1,
-    "skipped": 0,
-    "detail": "impl:7 flagged for 3 uncited numbers (210000, 4.55, 9.66 - the vendor GPU backstop and the China revenue pair). ALL narrator claims (scenes + bullets) clean. Per run-cycle 3(e4), flagged implication lines are logged, not re-dispatched, so the narrator was NOT re-dispatched and no fallback was recorded. This repeats the impl:7 flag from the 2026-08-05 v2 cycle (same China-revenue figures) and stays open for the user."
-   },
+   "thesisGate": "done on attempt 2 - attempt 1 rejected for 3 theses citing unknown finding ids (export-control-exposure, china-domestic-accelerators-displace-banned-nvidia-gpus, enforcement-closes-the-gray-route-into-china); re-dispatched with the violation text and passed. 63 theses judged, 2 new provisional theses proposed, 2 corroborated secondary reversals applied.",
+   "implicationGate": "done on attempt 2 - attempt 1 rejected (line 6 read as a recommendation via \"must\"; line 7 used banned word \"leverage\"); re-dispatched with the violation text and passed. 8 implication lines written.",
    "narratorArtifact": {
-    "path": "store/chips.merchant-gpu/story/2026-08-10.json",
-    "fellBack": false,
-    "retries": 1,
-    "note": "First gate attempt rejected for two relatedDocs outlet strings not matching inputs.docPool verbatim; one re-dispatch fixed only those strings and passed."
+    "path": "store/chips.merchant-gpu/story/2026-08-11.json",
+    "status": "done on attempt 2 - attempt 1 rejected for 4 relatedDocs outlet strings not matching their docPool source verbatim; re-dispatched with the violation text and passed."
    },
-   "priceSync": "done (warning: stale price folder, newest local data 260602 vs as-of 2026-08 - logged, non-fatal). written gpuSpotPrice=12, gpuRentalOnDemand=16, gpuRentalSpot=0, gpuRental1yr=17",
+   "citationAudit": {
+    "path": "store/chips.merchant-gpu/audit/2026-08-11.json",
+    "claims": 15,
+    "flagged": 0,
+    "skipped": 0,
+    "detail": "clean - every number in the story scenes and implication lines traces to a cited finding or a series reading. The impl:7 flag that stood open on 2026-08-05 and 2026-08-10 did not recur."
+   },
+   "priceSync": "written={'gpuSpotPrice': 12, 'gpuRentalOnDemand': 16, 'gpuRentalSpot': 0, 'gpuRental1yr': 17}; WARNING stale price folder (newest data 260602 vs as_of 2026-08) - logged, non-fatal",
    "seriesRefresh": "no-gap",
    "v2Shadow": "stamped",
    "chartFetch": "done - fetched none; not-yet-due: amdDataCenterRevenue, gpuSpotPrice, nvdaDataCenterRevenue; failed none",
    "chartResearch": {
-    "emitted": 2,
-    "answered": 1,
-    "noSeriesFound": 1,
+    "emitted": 3,
+    "answered": 3,
+    "noSeriesFound": 0,
     "accepted": 0,
-    "rejected": 1,
+    "rejected": 3,
     "missing": 0,
-    "note": "F113's FIRST LIVE EXERCISE. bullet-2 returned an honest NO-SERIES-FOUND (a correct outcome). bullet-1 returned a candidate the verifier rejected whole: the researcher supplied the source's hedged text ('below 60%', 'close to 80%', 'above 70%', '80% range') where the schema requires numbers. Quarantine held - nothing unverified reached store/. Real finding: the cited article publishes only ranges, so NO-SERIES-FOUND was the honest answer for bullet-1 too; the researcher brief could state outright that a hedged range is not a plottable number."
+    "note": "Quarantine held - nothing unverified reached store/. bullet-1 (TrendForce DRAM-maker 1Q26 revenue growth) failed re-fetch verification: every point returned HTTP 403 Forbidden, so the verifier could not confirm the numbers. bullet-2 and bullet-3 were rejected as unusable before verification: the researchers returned point values as prose strings (\"$35.6 billion\", \"over $1.3 trillion\") where CandidateSeries requires a bare number. REAL FINDING, same family as the 2026-08-10 hedged-text rejection: the chart-research brief describes points as {label, value, sourceUrl, publishedAt} without stating that value must be a bare number in the stated unit, and it does not warn that a source which blocks automated re-fetch (TrendForce) cannot pass verification. Both are brief-wording gaps, not model errors. Open for the user."
    },
    "dashboardJson": "done - wrote site/chips.merchant-gpu/data/dashboard.json",
-   "report": "work/daily-2026-08-10/report.txt (rendered with --daily)",
+   "report": "work/daily-2026-08-11/report.txt (1061 lines, rendered with --daily)",
    "deviations": [
-    "Step 3(b)/(c)/(e)/(e2)/(e3) TOOL-LESS-BRAIN DEVIATION (unchanged from the 2026-08-04 onward cycles, still awaiting the user's ruling): this harness exposes no tool-less subagent type, so each brain was dispatched on model opus with an explicit binding instruction to use ONLY Read on its own prompt files and no other tool. The extraction brain was again the exception - its whole prompt was pasted inline, so it ran genuinely tool-less (0 tool uses, verified).",
-    "Step 3(c)/(e)/(e2)/(e3) MECHANICAL WORKAROUND (unchanged): the judge/thesis/implication/narrator prompts are too large to paste inline, so each emitted prompt was split verbatim into system.txt / schema.json / user.txt (narrator: user-part1..4.txt) under work/daily-2026-08-10/{judge,thesis,impl,narr}/. Content is byte-identical to the CLI's emitted prompt (the narrator split was verified by exact round-trip reassembly), only re-laid-out across files.",
+    "Step 3(b)/(c)/(e)/(e2)/(e3) TOOL-LESS-BRAIN DEVIATION (unchanged from the 2026-08-04 onward cycles, still awaiting the user ruling): this harness exposes no tool-less subagent type, so each brain was dispatched on model opus with an explicit binding instruction to use ONLY Read on its own prompt files and no other tool. The extraction brain was again the exception - its whole prompt was pasted inline, so it ran genuinely tool-less (0 tool uses, verified).",
+    "Step 3(c)/(e)/(e2)/(e3) MECHANICAL WORKAROUND (unchanged): the judge/thesis/implication/narrator prompts are too large to paste inline, so each emitted prompt was split verbatim into system.txt / schema.json / user.txt (narrator: user-part1..4.txt) under work/daily-2026-08-11/. Content is byte-identical to the emitted prompt (the narrator split was verified by exact round-trip reassembly), only re-laid-out across files.",
+    "Step 3(c)/(e2)/(e3) GATE-RETRY MECHANICS: on each of the three gate rejections the brain was re-dispatched with the violation text as the procedure requires, and the coordinator then applied the returned correction to the answer file as a scripted string substitution rather than re-transcribing the whole answer by hand. The substituted text is exactly what the re-dispatched brain returned; no coordinator-authored wording entered any artifact. Recorded as an AFK-default.",
     "Step 2b DISCOVERY TOOL SKIPPED: last30days was not run - the HuggingNews tiered-discovery pass plus filing and price seeds saturated the 10-document daily cap. Logged in gather skipped[], never silent.",
-    "Step 3(a) GATHERER TOOL-WALL DEVIATION: the F88 injection wall requires gatherers to hold Read/Write/WebSearch/WebFetch and never Bash. No available subagent type restricts tools to exactly that set, so gatherers were dispatched as general-purpose agents with an explicit binding no-shell instruction. The wall was instructed, not structurally enforced - flagged for the user alongside the standing tool-less-brain ruling.",
-    "Step 3(f) SESSION-OUTPUT DEVIATION (F67): the rendered report is 1021 lines / 109KB, too large to paste verbatim into the session's final message. The final message carries the report's executive sections (WHAT MOVED, STATE OF THE MARKET, dimension ratings, indices, FOR TSMC) and references the full rendered report by path instead. Recorded as an AFK-default."
+    "Step 3(a) GATHERER TOOL-WALL DEVIATION (unchanged): the F88 injection wall requires gatherers to hold Read/Write/WebSearch/WebFetch and never Bash. No available subagent type restricts tools to exactly that set, so gatherers were dispatched as general-purpose agents with an explicit binding no-shell instruction. The wall was instructed, not structurally enforced - flagged for the user alongside the standing tool-less-brain ruling.",
+    "Step 3(f) SESSION-OUTPUT DEVIATION (F67): the rendered report is 1061 lines, too large to paste verbatim into the session final message. The final message carries the report executive sections (WHAT MOVED, STATE OF THE MARKET, dimension ratings, indices, FOR TSMC) and references the full rendered report by path instead. Recorded as an AFK-default."
    ]
   }
  ],
