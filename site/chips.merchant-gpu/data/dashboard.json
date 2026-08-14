@@ -354,7 +354,11 @@
       }
     ]
   },
-  "schemaVersion": "1.1",
+  "issues": {
+    "open": [],
+    "resolved": []
+  },
+  "schemaVersion": "1.2",
   "verdict": {
     "answer": "Not yet. The memory maker says it can fill half the orders, and has no idea when that changes",
     "chip": {
