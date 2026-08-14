@@ -71,7 +71,8 @@ from gpu_agent.dashboard.export_json import write_dashboard_json
 from gpu_agent.dashboard.brief_model import latest_monthly
 from gpu_agent.dashboard.story_model import resolve_store_root
 from gpu_agent.issues import (
-    apply_assessments, append_history, open_issues, read_register, write_register,
+    apply_assessments, append_history, history_has_as_of, open_issues, read_register,
+    write_register,
 )
 
 # F56-core: --as-of is embedded verbatim in doc/finding ids (F52), which become
@@ -992,6 +993,22 @@ def _issues(args) -> int:
     assessments = [a.model_dump() for a in artifact.issues] if artifact.issues else []
     as_of = args.as_of or args.story_date
     register = read_register(cat_dir, args.category)
+
+    # Idempotency per story date (F115, user-approved 2026-08-10 -- deliberately
+    # overrides the original Task 6 plan of "append-only, always"). A run-cycle
+    # rerun after a partial failure must not call apply_assessments a second time
+    # for the same as_of: that would advance checkCount/improvedStreak/
+    # worsenedCount again and append duplicate history lines, defeating the
+    # 5-consecutive-good-cycles resolve rule. Detected via history.jsonl rather
+    # than a new register field: history is already the append-only record of
+    # "a run happened for this asOf", and history_has_as_of is safe on a missing
+    # or malformed file (see gpu_agent/issues.py), so a first-ever run is
+    # unaffected. A NEW story date after a skip still runs normally -- the guard
+    # only matches on exact as_of, so it never wedges the verb.
+    if history_has_as_of(cat_dir, as_of):
+        print(json.dumps({"skipped": True, "reason": "already-recorded", "asOf": as_of}))
+        return 0
+
     register, history_lines = apply_assessments(register, assessments, scorecard, as_of)
     write_register(cat_dir, register)
     append_history(cat_dir, history_lines)

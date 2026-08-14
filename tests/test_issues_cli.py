@@ -131,7 +131,17 @@ def test_update_assessing_both_dim_issues_writes_register_and_history(tmp_path, 
     assert tail[0]["asOf"] == story_date
 
 
-def test_update_second_run_same_date_appends_again(tmp_path, capsys):
+def test_update_second_run_same_date_is_noop(tmp_path, capsys):
+    # Replaces the old test_update_second_run_same_date_appends_again, which pinned
+    # the ORIGINAL Task 6 plan ("append-only is the contract; second run for the
+    # same date appends again"). The user was shown that plan text alongside the
+    # final-review finding -- a rerun after a partial failure would advance
+    # checkCount/improvedStreak/worsenedCount again and let an issue "resolve" in a
+    # single day -- and interactively overrode it (2026-08-10): a second `update`
+    # for a story date already recorded in history.jsonl must be a no-op, not an
+    # error, and must say so on stdout so the cycle log records what happened. See
+    # .superpowers/handoffs/f115-issue-tracker-QUESTIONS.md, "THIRD + FOURTH
+    # QUESTIONS".
     _write_scorecard(tmp_path)
     _open(tmp_path)
     capsys.readouterr()
@@ -143,11 +153,65 @@ def test_update_second_run_same_date_appends_again(tmp_path, capsys):
     rc1 = main(["issues", "update", "--category", CAT, "--store", str(tmp_path),
                 "--story-date", story_date])
     assert rc1 == 0
+    capsys.readouterr()
+
+    register_before = (tmp_path / CAT / "issues" / "register.json").read_bytes()
+    history_before = (tmp_path / CAT / "issues" / "history.jsonl").read_bytes()
+
     rc2 = main(["issues", "update", "--category", CAT, "--store", str(tmp_path),
                 "--story-date", story_date])
     assert rc2 == 0
+    out = json.loads(capsys.readouterr().out)
+    assert out["skipped"] is True
+    assert out["asOf"] == story_date
+
+    register_after = (tmp_path / CAT / "issues" / "register.json").read_bytes()
+    history_after = (tmp_path / CAT / "issues" / "history.jsonl").read_bytes()
+    assert register_after == register_before   # byte-identical: nothing changed
+    assert history_after == history_before      # nothing appended
+
     tail = read_history_tail(tmp_path / CAT, "dim-bottleneck", 10)
-    assert len(tail) == 2   # append-only -- both runs are recorded, not deduped
+    assert len(tail) == 1   # still just the one real run, not deduped-away either
+
+
+def test_update_new_date_after_a_skip_still_runs_normally(tmp_path, capsys):
+    # The no-op guard must only block a REPEAT of the same story date -- it must
+    # not wedge the verb permanently. Rerun the same date (no-op), then move on to
+    # a new date and confirm it behaves exactly like any other first run.
+    _write_scorecard(tmp_path)
+    _open(tmp_path)
+    capsys.readouterr()
+    first_date, second_date = "2026-08-11", "2026-08-12"
+    _write_story(tmp_path, first_date, issues=[
+        IssueAssessment(issueId="dim-bottleneck", status="improved",
+                        reasoning="better", claimFindingIds=[]),
+    ])
+    main(["issues", "update", "--category", CAT, "--store", str(tmp_path),
+          "--story-date", first_date])
+    capsys.readouterr()
+    rc_skip = main(["issues", "update", "--category", CAT, "--store", str(tmp_path),
+                    "--story-date", first_date])
+    assert rc_skip == 0
+    capsys.readouterr()
+
+    _write_story(tmp_path, second_date, issues=[
+        IssueAssessment(issueId="dim-bottleneck", status="improved",
+                        reasoning="even better", claimFindingIds=[]),
+    ])
+    rc = main(["issues", "update", "--category", CAT, "--store", str(tmp_path),
+               "--story-date", second_date])
+    assert rc == 0
+    out = json.loads(capsys.readouterr().out)
+    assert "skipped" not in out
+    assert out["assessed"] == 1
+
+    register = read_register(tmp_path / CAT, CAT)
+    assert register.asOf == second_date
+    bottleneck = next(i for i in register.issues if i.id == "dim-bottleneck")
+    assert bottleneck.improvedStreak == 2   # both real runs counted
+
+    tail = read_history_tail(tmp_path / CAT, "dim-bottleneck", 10)
+    assert len(tail) == 2   # first_date once, second_date once -- no duplicate
 
 
 def test_update_no_issues_block_marks_all_open_not_assessed_and_freezes_streaks(tmp_path, capsys):

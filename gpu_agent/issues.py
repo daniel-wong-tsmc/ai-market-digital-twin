@@ -330,6 +330,34 @@ def append_history(cat_dir, lines: list[dict]) -> Path:
     return p
 
 
+def history_has_as_of(cat_dir, as_of: str) -> bool:
+    """True if history.jsonl already contains at least one line for this `asOf`
+    (i.e. a story date already had `apply_assessments` recorded for it). Used by
+    the `issues update` CLI verb to make reruns for the same story date a no-op
+    (F115, user-approved 2026-08-10 override of the original append-only-always
+    plan -- see final-review.md).
+
+    Same robustness contract as read_history_tail: a missing history.jsonl reads
+    as False (first-ever run must work normally, not crash), and a malformed
+    line is skipped rather than fatal, matching the safe-read behaviour added
+    for the corrupt-history case elsewhere in this module."""
+    p = _issues_dir(cat_dir) / "history.jsonl"
+    if not p.exists():
+        return False
+    with p.open("r", encoding="utf-8") as f:
+        for raw_line in f:
+            raw_line = raw_line.strip()
+            if not raw_line:
+                continue
+            try:
+                record = json.loads(raw_line)
+            except json.JSONDecodeError:
+                continue
+            if record.get("asOf") == as_of:
+                return True
+    return False
+
+
 def read_history_tail(cat_dir, issue_id: str, n: int) -> list[dict]:
     p = _issues_dir(cat_dir) / "history.jsonl"
     if not p.exists():
