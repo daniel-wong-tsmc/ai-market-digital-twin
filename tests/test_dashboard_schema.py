@@ -8,7 +8,7 @@ def _minimal_payload():
     ref = {"title": "AMD Q2 2026 results", "outlet": "AMD investor relations",
            "url": "https://ir.amd.com/x", "date": "2026-08-04", "tier": "primary"}
     return {
-        "schemaVersion": "1.1", "categoryId": "chips.merchant-gpu", "asOf": "2026-08-05",
+        "schemaVersion": "1.2", "categoryId": "chips.merchant-gpu", "asOf": "2026-08-05",
         "verdict": {"question": "q", "answer": "a", "chip": {"label": "Gap narrowing", "direction": "narrowing"},
                      "confidence": "c", "soWhat": "s", "sources": [ref]},
         "gapChart": {"points": [{"date": "2026-07-03", "demand": 0.6, "supply": -0.4}],
@@ -23,6 +23,31 @@ def _minimal_payload():
                          "direction": "flat", "confidence": "medium", "summary": "s",
                          "reasoning": "r", "evidence": [ref]} for i in range(6)],
         "footerLinks": [{"label": "Every finding", "href": "findings/"}],
+        "issues": {"open": [], "resolved": []},
+    }
+
+
+def _open_issue(ref):
+    return {
+        "id": "constraint-hbm4-stacked-memory-supply",
+        "title": "HBM4 stacked-memory supply",
+        "status": "worsened",
+        "assessedAsOf": "2026-08-10",
+        "trackedSince": "2026-08-01",
+        "worsenedCount": 3,
+        "checkCount": 5,
+        "reasoning": "Supply remains tight.",
+        "sources": [ref],
+        "history": [{"asOf": "2026-08-09", "status": "unchanged"}],
+    }
+
+
+def _resolved_issue():
+    return {
+        "id": "dim-competitiveStructure",
+        "title": "Competitive structure",
+        "resolvedAsOf": "2026-08-01",
+        "finalNote": "Improved for five straight checks.",
     }
 
 def _chart(ref):
@@ -101,11 +126,94 @@ def test_chart_researched_field_is_boolean_but_its_absence_is_allowed():
     with pytest.raises(jsonschema.ValidationError):
         jsonschema.validate(wrong_type, schema)
 
-def test_schema_version_is_1_1():
+def test_schema_version_is_1_2():
     schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
-    assert schema["properties"]["schemaVersion"]["const"] == "1.1"
+    assert schema["properties"]["schemaVersion"]["const"] == "1.2"
     bad = _minimal_payload()
-    bad["schemaVersion"] = "1.0"
+    bad["schemaVersion"] = "1.1"
+    import pytest
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(bad, schema)
+
+
+# ---------------------------------------------------------------------------
+# F115: the `issues` section is required, and its shapes are strict.
+# ---------------------------------------------------------------------------
+
+def test_payload_with_issues_section_validates():
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    ref = {"title": "AMD Q2 2026 results", "outlet": "AMD investor relations",
+           "url": "https://ir.amd.com/x", "date": "2026-08-04", "tier": "primary"}
+    good = _minimal_payload()
+    good["issues"] = {"open": [_open_issue(ref)], "resolved": [_resolved_issue()]}
+    jsonschema.validate(good, schema)
+
+
+def test_payload_without_issues_is_rejected():
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    bad = _minimal_payload()
+    del bad["issues"]
+    import pytest
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(bad, schema)
+
+
+def test_unknown_key_inside_an_open_issue_is_rejected():
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    ref = {"title": "AMD Q2 2026 results", "outlet": "AMD investor relations",
+           "url": "https://ir.amd.com/x", "date": "2026-08-04", "tier": "primary"}
+    bad = _minimal_payload()
+    issue = _open_issue(ref)
+    issue["extraField"] = "not allowed"
+    bad["issues"] = {"open": [issue], "resolved": []}
+    import pytest
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(bad, schema)
+
+
+def test_open_issue_status_enum_includes_not_assessed():
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    ref = {"title": "AMD Q2 2026 results", "outlet": "AMD investor relations",
+           "url": "https://ir.amd.com/x", "date": "2026-08-04", "tier": "primary"}
+    good = _minimal_payload()
+    issue = _open_issue(ref)
+    issue["status"] = "not-assessed"
+    good["issues"] = {"open": [issue], "resolved": []}
+    jsonschema.validate(good, schema)
+
+
+def test_open_issue_status_rejects_unknown_value():
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    ref = {"title": "AMD Q2 2026 results", "outlet": "AMD investor relations",
+           "url": "https://ir.amd.com/x", "date": "2026-08-04", "tier": "primary"}
+    bad = _minimal_payload()
+    issue = _open_issue(ref)
+    issue["status"] = "regressed"
+    bad["issues"] = {"open": [issue], "resolved": []}
+    import pytest
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(bad, schema)
+
+
+def test_issue_history_entries_are_strict_asof_status_objects():
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    ref = {"title": "AMD Q2 2026 results", "outlet": "AMD investor relations",
+           "url": "https://ir.amd.com/x", "date": "2026-08-04", "tier": "primary"}
+    bad = _minimal_payload()
+    issue = _open_issue(ref)
+    issue["history"] = [{"asOf": "2026-08-09", "status": "unchanged", "extra": "no"}]
+    bad["issues"] = {"open": [issue], "resolved": []}
+    import pytest
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(bad, schema)
+
+
+def test_resolved_issue_unknown_key_is_rejected():
+    schema = json.loads(SCHEMA.read_text(encoding="utf-8"))
+    bad = _minimal_payload()
+    resolved = _resolved_issue()
+    resolved["extra"] = "no"
+    bad["issues"] = {"open": [], "resolved": [resolved]}
     import pytest
     with pytest.raises(jsonschema.ValidationError):
         jsonschema.validate(bad, schema)

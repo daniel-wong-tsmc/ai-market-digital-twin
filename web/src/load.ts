@@ -123,8 +123,41 @@ export interface FooterLink {
   href: string;
 }
 
+/** F115: one entry of an open issue's short trend -- last <= 15, oldest first. */
+export interface IssueHistoryEntry {
+  asOf: string;
+  status: 'improved' | 'worsened' | 'unchanged' | 'not-assessed';
+}
+
+/** F115: a binding constraint or a weak-and-worsening dimension still open. */
+export interface IssueOpen {
+  id: string;
+  title: string;
+  status: 'improved' | 'worsened' | 'unchanged' | 'not-assessed';
+  assessedAsOf: string;
+  trackedSince: string;
+  worsenedCount: number;
+  checkCount: number;
+  reasoning: string;
+  sources: Ref[];
+  history: IssueHistoryEntry[];
+}
+
+/** F115: an issue that has since cleared (improved for enough straight checks). */
+export interface IssueResolved {
+  id: string;
+  title: string;
+  resolvedAsOf: string;
+  finalNote: string;
+}
+
+export interface Issues {
+  open: IssueOpen[];
+  resolved: IssueResolved[];
+}
+
 export interface Dashboard {
-  schemaVersion: '1.1';
+  schemaVersion: '1.2';
   categoryId: string;
   asOf: string;
   verdict: VerdictData;
@@ -132,6 +165,7 @@ export interface Dashboard {
   bullets: Bullet[];
   dimensions: Dimension[];
   footerLinks: FooterLink[];
+  issues: Issues;
 }
 
 /** True when this reference is our own judgement rather than a published fact. */
@@ -360,14 +394,62 @@ function parseGapChart(raw: unknown): GapChart {
   };
 }
 
+const ISSUE_STATUSES = ['improved', 'worsened', 'unchanged', 'not-assessed'] as const;
+
+function parseIssueHistoryEntry(raw: unknown, where: string): IssueHistoryEntry {
+  const h = obj(raw, where);
+  return {
+    asOf: str(h, 'asOf', where),
+    status: oneOf(h, 'status', ISSUE_STATUSES, where),
+  };
+}
+
+function parseIssueOpen(raw: unknown, where: string): IssueOpen {
+  const i = obj(raw, where);
+  return {
+    id: str(i, 'id', where),
+    title: str(i, 'title', where),
+    status: oneOf(i, 'status', ISSUE_STATUSES, where),
+    assessedAsOf: str(i, 'assessedAsOf', where),
+    trackedSince: str(i, 'trackedSince', where),
+    worsenedCount: num(i, 'worsenedCount', where),
+    checkCount: num(i, 'checkCount', where),
+    reasoning: str(i, 'reasoning', where),
+    sources: parseRefs(i, 'sources', where),
+    history: list(i, 'history', where).map((item, idx) =>
+      parseIssueHistoryEntry(item, `${where}.history[${idx}]`),
+    ),
+  };
+}
+
+function parseIssueResolved(raw: unknown, where: string): IssueResolved {
+  const i = obj(raw, where);
+  return {
+    id: str(i, 'id', where),
+    title: str(i, 'title', where),
+    resolvedAsOf: str(i, 'resolvedAsOf', where),
+    finalNote: str(i, 'finalNote', where),
+  };
+}
+
+function parseIssues(raw: unknown): Issues {
+  const i = obj(raw, 'issues');
+  return {
+    open: list(i, 'open', 'issues').map((item, idx) => parseIssueOpen(item, `issues.open[${idx}]`)),
+    resolved: list(i, 'resolved', 'issues').map((item, idx) =>
+      parseIssueResolved(item, `issues.resolved[${idx}]`),
+    ),
+  };
+}
+
 /**
  * Check a raw payload and hand back a typed dashboard, or throw saying exactly
  * which field is wrong. The page never renders anything it has not checked.
  */
 export function parseDashboard(raw: unknown): Dashboard {
   const d = obj(raw, 'payload');
-  if (d.schemaVersion !== '1.1') {
-    fail('schemaVersion', `is "${String(d.schemaVersion)}", not the expected "1.1"`);
+  if (d.schemaVersion !== '1.2') {
+    fail('schemaVersion', `is "${String(d.schemaVersion)}", not the expected "1.2"`);
   }
   const bullets = list(d, 'bullets', 'payload');
   if (bullets.length !== 3) {
@@ -378,7 +460,7 @@ export function parseDashboard(raw: unknown): Dashboard {
     fail('dimensions', `has ${dimensions.length} entries, not the expected 6`);
   }
   return {
-    schemaVersion: '1.1',
+    schemaVersion: '1.2',
     categoryId: str(d, 'categoryId', 'payload'),
     asOf: str(d, 'asOf', 'payload'),
     verdict: parseVerdict(d.verdict),
@@ -392,6 +474,7 @@ export function parseDashboard(raw: unknown): Dashboard {
         href: str(f, 'href', `footerLinks[${i}]`),
       };
     }),
+    issues: parseIssues(d.issues),
   };
 }
 

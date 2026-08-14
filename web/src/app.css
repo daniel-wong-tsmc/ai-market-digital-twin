@@ -394,6 +394,54 @@ svg:has(.mbar:hover) .mini-val { opacity: 0; }
 .why-block .k { display: block; font-size: var(--text-micro); color: var(--color-text-muted); }
 .why-block .v { display: block; font-size: var(--text-small); margin-top: 2px; }
 
+/* ---------- zone 6: known issues ----------
+   No mock reference (F115 is not in the approved 2026-08-05 mock) -- built
+   from the same tokens and shapes the rest of the page already uses: `.chip`
+   from the verdict's direction chip, `.zone`/`.zone-head` from every other
+   section, `.numbers summary`'s collapsed-details look for "Resolved". */
+.chip.muted {
+  color: var(--color-text-muted);
+  background: var(--color-surface-sunk);
+  border-color: var(--color-border);
+  font-weight: 500;
+}
+
+.issues-list { display: flex; flex-direction: column; margin-top: var(--space-2); }
+.issue { padding: var(--space-5) 0; border-bottom: 1px solid var(--color-border); }
+.issue:last-child { border-bottom: 0; }
+.issue-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--space-4); flex-wrap: wrap;
+}
+.issue-title { font-size: var(--text-body); font-weight: 600; }
+.issue-meta { display: flex; align-items: center; gap: var(--space-2); }
+.issue-meta .sep { color: var(--color-border-strong); }
+.issue-meta .m { color: var(--color-text-muted); font-size: var(--text-small); }
+.issue-tenure { margin-top: var(--space-2); font-size: var(--text-small); color: var(--color-text-muted); }
+.issue-reasoning { margin-top: var(--space-2); color: var(--color-text-secondary); max-width: 66ch; }
+
+.issue-history { display: flex; gap: 3px; margin-top: var(--space-3); }
+.tick { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+.tick-improved { background: var(--color-good); }
+.tick-worsened { background: var(--color-serious); }
+.tick-unchanged { background: var(--color-border-strong); }
+.tick-not-assessed { background: transparent; border: 1px solid var(--color-border-strong); }
+
+.issues-resolved { margin-top: var(--space-6); }
+.issues-resolved summary {
+  cursor: pointer; font-size: var(--text-small); color: var(--color-text-secondary);
+  width: fit-content;
+}
+.issues-resolved ul { list-style: none; margin: var(--space-3) 0 0; padding: 0; }
+.issue-resolved-row {
+  padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-2) var(--space-4);
+}
+.issue-resolved-row:last-child { border-bottom: 0; }
+.issue-resolved-row .issue-title { font-weight: 600; font-size: var(--text-body); }
+.issue-resolved-row .m { color: var(--color-text-muted); font-size: var(--text-small); }
+.issue-resolved-row p { grid-column: 1 / -1; margin: 0; color: var(--color-text-secondary); font-size: var(--text-small); }
+
 /* ---------- zone 5: footer (mock lines 357-367) ---------- */
 footer {
   margin-top: var(--space-16);

@@ -66,6 +66,19 @@ class StoryBullet(BaseModel):
     claimFindingIds: list[str]
 
 
+class IssueAssessment(BaseModel):
+    """The narrator's per-issue assessment (F115). Deliberately narrower than
+    IssueLatest.status in gpu_agent/issues.py: the narrator may only say
+    improved/worsened/unchanged. It may never say "resolved" (decided solely
+    by the streak rule) or "not-assessed" (a system-set default, not
+    something the narrator writes)."""
+    model_config = ConfigDict(extra="forbid")
+    issueId: str
+    status: Literal["improved", "worsened", "unchanged"]
+    reasoning: str
+    claimFindingIds: list[str]
+
+
 class NarratorAnswer(BaseModel):
     """What the tool-less brain returns; the CLI wraps it into a StoryArtifact."""
     model_config = ConfigDict(extra="forbid")
@@ -75,11 +88,12 @@ class NarratorAnswer(BaseModel):
     kpiPicks: list[KpiPick]
     calloutMonths: list[CalloutMonth]
     bullets: Optional[list[StoryBullet]] = None  # None = pre-F114 answer (v1)
+    issues: Optional[list[IssueAssessment]] = None  # None = pre-F115 answer (v1/v2)
 
 
 class StoryArtifact(NarratorAnswer):
     model_config = ConfigDict(extra="forbid")
-    schemaVersion: Literal[1, 2]  # was Literal[1]
+    schemaVersion: Literal[1, 2, 3]  # was Literal[1, 2]
     categoryId: str
     storyDate: str
     narratorMeta: NarratorMeta

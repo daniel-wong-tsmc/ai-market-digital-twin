@@ -5,7 +5,7 @@
   "description": "Single daily JSON payload exported by export_json.py and rendered by the React dashboard.",
   "type": "object",
   "properties": {
-    "schemaVersion": { "const": "1.1" },
+    "schemaVersion": { "const": "1.2" },
     "categoryId": { "type": "string" },
     "asOf": { "type": "string" },
     "verdict": { "$ref": "#/$defs/verdict" },
@@ -25,7 +25,8 @@
     "footerLinks": {
       "type": "array",
       "items": { "$ref": "#/$defs/footerLink" }
-    }
+    },
+    "issues": { "$ref": "#/$defs/issues" }
   },
   "required": [
     "schemaVersion",
@@ -35,7 +36,8 @@
     "gapChart",
     "bullets",
     "dimensions",
-    "footerLinks"
+    "footerLinks",
+    "issues"
   ],
   "additionalProperties": false,
   "$defs": {
@@ -241,6 +243,68 @@
         "href": { "type": "string" }
       },
       "required": ["label", "href"],
+      "additionalProperties": false
+    },
+    "issueHistoryEntry": {
+      "type": "object",
+      "properties": {
+        "asOf": { "type": "string" },
+        "status": { "enum": ["improved", "worsened", "unchanged", "not-assessed"] }
+      },
+      "required": ["asOf", "status"],
+      "additionalProperties": false
+    },
+    "issueOpen": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "status": { "enum": ["improved", "worsened", "unchanged", "not-assessed"] },
+        "assessedAsOf": { "type": "string" },
+        "trackedSince": { "type": "string" },
+        "worsenedCount": { "type": "integer" },
+        "checkCount": { "type": "integer" },
+        "reasoning": { "type": "string" },
+        "sources": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ref" }
+        },
+        "history": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/issueHistoryEntry" },
+          "maxItems": 15
+        }
+      },
+      "required": [
+        "id", "title", "status", "assessedAsOf", "trackedSince",
+        "worsenedCount", "checkCount", "reasoning", "sources", "history"
+      ],
+      "additionalProperties": false
+    },
+    "issueResolved": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "resolvedAsOf": { "type": "string" },
+        "finalNote": { "type": "string" }
+      },
+      "required": ["id", "title", "resolvedAsOf", "finalNote"],
+      "additionalProperties": false
+    },
+    "issues": {
+      "type": "object",
+      "properties": {
+        "open": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/issueOpen" }
+        },
+        "resolved": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/issueResolved" }
+        }
+      },
+      "required": ["open", "resolved"],
       "additionalProperties": false
     }
   }

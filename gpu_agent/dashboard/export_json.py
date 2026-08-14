@@ -30,12 +30,18 @@ from pathlib import Path
 
 import jsonschema
 
+from gpu_agent import issues as issues_mod
 from gpu_agent.chartdata.registry import load_chart_series
 from gpu_agent.dashboard.bullets import _first_sentence, build_bullets
 from gpu_agent.dashboard.gap_chart import (build_reading_series, gap_trend_word,
                                             monthly_best_files)
 from gpu_agent.dashboard.plain_language import dimension_plain_name
 from gpu_agent.dashboard.source_refs import assessment_ref, findings_index, refs_for_finding_ids
+
+#: F115 Task 7: an open issue's dashboard row carries at most its last 15
+#: history entries, oldest first -- enough to draw a short trend without
+#: the payload growing unbounded over an issue's lifetime.
+_ISSUE_HISTORY_CAP = 15
 
 # Resolved relative to this package (not the process CWD) -- MINOR fix (review
 # round 1): a relative path here only worked when the `dashboard-json` CLI
@@ -342,6 +348,63 @@ def _footer_links() -> list[dict]:
     ]
 
 
+# ── known issues (F115) ──────────────────────────────────────────────────
+#
+# Pure read of gpu_agent.issues' own register + history.jsonl (Task 6) --
+# never a fresh assessment, never a clock read. `sources` reuses the exact
+# same `refs_for_finding_ids` helper the bullets use (source_refs.py),
+# over `latest.claimFindingIds` -- never a second, parallel ref-building
+# path. A missing register directory is an honest empty section, not an
+# error: a category that has never run the `issues` verb must still export.
+
+def _issue_history_rows(cat_dir: Path, issue_id: str) -> list[dict]:
+    tail = issues_mod.read_history_tail(cat_dir, issue_id, _ISSUE_HISTORY_CAP)
+    return [{"asOf": row["asOf"], "status": row["status"]} for row in tail]
+
+
+def _open_issue_row(cat_dir: Path, issue, findings_by_id: dict) -> dict:
+    latest = issue.latest
+    if latest is not None:
+        status, assessed_as_of = latest.status, latest.assessedAsOf
+        reasoning, claim_finding_ids = latest.reasoning, latest.claimFindingIds
+    else:
+        # An issue that has just opened and never been assessed yet: honest
+        # not-assessed, never a fabricated status or date.
+        status, assessed_as_of = "not-assessed", issue.openedAsOf
+        reasoning, claim_finding_ids = "", []
+    return {
+        "id": issue.id,
+        "title": issue.title,
+        "status": status,
+        "assessedAsOf": assessed_as_of,
+        "trackedSince": issue.openedAsOf,
+        "worsenedCount": issue.worsenedCount,
+        "checkCount": issue.checkCount,
+        "reasoning": reasoning,
+        "sources": refs_for_finding_ids(claim_finding_ids, findings_by_id, max_refs=3),
+        "history": _issue_history_rows(cat_dir, issue.id),
+    }
+
+
+def _resolved_issue_row(issue) -> dict:
+    latest = issue.latest
+    return {
+        "id": issue.id,
+        "title": issue.title,
+        "resolvedAsOf": issue.resolvedAsOf or "",
+        "finalNote": latest.reasoning if latest is not None else "",
+    }
+
+
+def _build_issues_section(cat_dir: Path, category_id: str, findings_by_id: dict) -> dict:
+    register = issues_mod.read_register(cat_dir, category_id)
+    open_rows = [_open_issue_row(cat_dir, issue, findings_by_id)
+                 for issue in register.issues if issue.state == "open"]
+    resolved_rows = [_resolved_issue_row(issue)
+                      for issue in register.issues if issue.state == "resolved"]
+    return {"open": open_rows, "resolved": resolved_rows}
+
+
 def _load_json(path: Path) -> dict:
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
@@ -403,7 +466,7 @@ def build_dashboard_payload(category_id: str, store_dir: str) -> dict:
     direction = gap_trend_word(readings)
 
     payload = {
-        "schemaVersion": "1.1",
+        "schemaVersion": "1.2",
         "categoryId": category_id,
         "asOf": story.get("storyDate", ""),
         "verdict": _build_verdict(story, latest_raw, direction, findings_by_id),
@@ -411,6 +474,7 @@ def build_dashboard_payload(category_id: str, store_dir: str) -> dict:
         "bullets": bullets,
         "dimensions": _build_dimensions(latest_raw, findings_by_id),
         "footerLinks": _footer_links(),
+        "issues": _build_issues_section(cat_dir, category_id, findings_by_id),
     }
 
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))

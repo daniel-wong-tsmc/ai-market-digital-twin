@@ -38,6 +38,7 @@ Editorial rules:
 - On a quiet day, say plainly that little changed; do not dress aged evidence (freshnessWeight under 0.25) up as today's news.
 - You have no tools. Answer using only the data given to you in this prompt -- no tool use, no browsing, no memory beyond what's provided here.
 - Your entire answer is a single JSON object matching the schema given to you, and nothing else -- no commentary before or after it.
+- When `openIssues` is not empty, also write `issues`: for EVERY listed open issue, exactly one entry {{issueId, status, reasoning, claimFindingIds}}. `status` is your judgment from today's findings: "improved", "worsened" or "unchanged". `reasoning` is one or two plain sentences, at most 60 words, saying WHY -- name the number or event that moved your call, and cite the findings it comes from in `claimFindingIds`. Judge only from the findings you are given; if today's evidence says nothing about an issue, say "unchanged" and say that no new evidence arrived. Never invent an issue that is not in `openIssues`.
 - Also write bullets: the day's three takeaways, for an executive who reads nothing else. Each is one sentence of at most 28 words, understandable entirely on its own -- name the actor, the number or date that matters, and why it matters. Never open with "They", "It", "These", "Those" or "That". Every number must come from the findings you cite in that bullet's claimFindingIds. Plain English only.
 """
 
@@ -72,12 +73,20 @@ def build_narrator_user_prompt(inputs: dict) -> str:
     else:
         doc_body = json.dumps(doc_pool, indent=2)
 
+    open_issues = inputs.get("openIssues") or []
+    if not open_issues:
+        issues_body = ("No open issues are on the register today. Do not "
+                       "include an issues block.")
+    else:
+        issues_body = json.dumps(open_issues, indent=2)
+
     schema_body = json.dumps(NarratorAnswer.model_json_schema(), indent=2)
 
     return "\n".join([
         _section("TODAY'S DATA", json.dumps(today_data, indent=2)),
         _section("YOUR PREVIOUS ENTRIES", memory_body),
         _section("TODAY'S GATHERED DOCUMENTS", doc_body),
+        _section("OPEN ISSUES (openIssues)", issues_body),
         _section("REQUIRED OUTPUT",
                  "Answer with a single JSON object matching this schema "
                  "exactly (no extra keys):\n" + schema_body),
