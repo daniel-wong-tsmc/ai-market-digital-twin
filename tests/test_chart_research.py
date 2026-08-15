@@ -158,6 +158,57 @@ def test_prompt_states_the_publicly_reachable_source_rule():
     assert "point 1" in failures[0]
 
 
+# Three consecutive live cycles (2026-08-10, -11 twice) rejected every
+# researched series for reasons the brief never stated: values came back as
+# prose ("$35.6 billion", "over $1.3 trillion", "close to 80%") where the
+# schema wants a bare number, and one series cited a publisher that answers
+# automated readers with HTTP 403, which the re-fetch verifier can never pass.
+# Same doctrine as the two tests above: instruction and enforcement stated
+# together and tested together.
+
+def test_prompt_says_value_must_be_a_bare_number():
+    prompt = build_research_prompt({"text": "Any bullet."}, [])
+    assert "bare number" in prompt.lower()
+    # ...and the schema really does refuse prose, so the warning is earned.
+    with pytest.raises(ValidationError):
+        CandidatePoint(label="Q1", value="$35.6 billion",
+                       sourceUrl="https://example.test/q1", publishedAt="2026-01-01")
+
+
+def test_prompt_says_hedged_text_is_not_a_number():
+    """The 2026-08-10 candidate handed back 'below 60%' / 'close to 80%'
+    with an honest note that the source only gave ranges. The brief must
+    say what to do with that: skip the point (or give up), never turn the
+    hedge into a made-up figure and never send the words as the value."""
+    prompt = build_research_prompt({"text": "Any bullet."}, []).lower()
+    assert "close to" in prompt or "about" in prompt
+    assert "range" in prompt
+
+
+def test_prompt_warns_that_licensed_and_bot_blocking_sites_fail_verification():
+    """The verifier re-fetches every cited page with a plain automated
+    reader. A site that blocks such readers (TrendForce returned 403 to all
+    five points on 2026-08-11) can never verify, so the researcher is told
+    up front -- and told which registered licensed publishers to avoid,
+    read from `registry/licensed-sources.json`, not hard-coded."""
+    prompt = build_research_prompt({"text": "Any bullet."}, [])
+    assert "trendforce.com" in prompt
+    assert "semianalysis.com" in prompt
+    lowered = prompt.lower()
+    assert "verif" in lowered
+    assert "automated" in lowered or "robot" in lowered
+
+
+def test_prompt_survives_a_missing_licensed_registry(tmp_path, monkeypatch):
+    """The prompt builder is called from a worktree or an odd cwd too; no
+    registry file must mean a generic warning, never a crash."""
+    monkeypatch.chdir(tmp_path)
+    prompt = build_research_prompt({"text": "Any bullet."}, [])
+    assert "trendforce.com" not in prompt
+    assert "verif" in prompt.lower()
+    assert "NO-SERIES-FOUND" in prompt
+
+
 # ---------------------------------------------------------------------------
 # emit_research -- fixture store/story trees
 # ---------------------------------------------------------------------------
