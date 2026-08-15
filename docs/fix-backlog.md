@@ -1699,7 +1699,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   headline carries no terminal punctuation the answer reads without a full stop — visible on the
   2026-08-06 reading ("Not yet. Memory now decides how many chips get built").
 
-- [ ] **F113 — Same-day chart researcher + dashboard render fixes (user-directed, 2026-08-06 screenshot review).**
+- [x] **F113 — Same-day chart researcher + dashboard render fixes (user-directed, 2026-08-06 screenshot review).**
   The F110 matcher is passive; on 2026-08-06 all three bullets rendered "No chart" panels. User
   decisions (interactive, zero AFK): add a tool-using research step that digs external sources for
   a published series relevant to each chartless bullet; **quarantine + verify** trust model —
@@ -1711,8 +1711,9 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   in-lane (new step). Spec: `docs/superpowers/specs/2026-08-06-f113-chart-researcher-design.md`.
   **Sequencing: dispatch only after F114 merges** (shared files). Design-weight; brainstormed
   interactively 2026-08-06. Next: writing-plans.
+  **✓ BUILT + MERGED `705a5ee` 2026-08-08.** Live 08-10/08-11: quarantine held, 0 series accepted — brief gaps filed as F116.
 
-- [ ] **F114 — Narrator-authored "What changed" bullets (user-directed, 2026-08-06 screenshot review). GATED LANE (narrator prompt + pin).**
+- [x] **F114 — Narrator-authored "What changed" bullets (user-directed, 2026-08-06 screenshot review). GATED LANE (narrator prompt + pin).**
   Mechanical scene-title+first-sentence bullets proved hollow ("They are dated 2027 and 2028" —
   no antecedent). User decision (interactive, zero AFK): the narrator writes the 3 bullets in its
   artifact — each ≤ 28 words, self-contained, ≥ 1 concrete anchor, `claimFindingIds` attached;
@@ -1722,12 +1723,13 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   lockstep); F6 byte-untouched; no scored eval bar (F101b decision carries).
   Spec: `docs/superpowers/specs/2026-08-06-f114-narrator-bullets-design.md`.
   **Sequencing: build FIRST, before F113; exclusive prompt lane.** Next: writing-plans.
+  **✓ BUILT + MERGED `092ef0e` 2026-08-08.**
   (g) The Nvidia investor-relations URL in `registry/chart-series.json` was never verified live;
   that series has no fetcher so it renders nothing today, but check it before giving it one.
   (h) `npm run build` rewrites the committed `index.html` with different line endings, so a rebuild
   always dirties the tree even when nothing changed.
 
-- [ ] **F115 — Category-page issue tracker ("Known issues", user-directed, 2026-08-10). GATED LANE (narrator prompt + pin).**
+- [x] **F115 — Category-page issue tracker ("Known issues", user-directed, 2026-08-10). GATED LANE (narrator prompt + pin).**
   Recurring structural problems (memory lacking, advanced packaging lacking) are re-discovered
   each cycle but never tracked as named persistent issues. User decisions (interactive, zero
   AFK): agent-minted issues via deterministic triggers (binding constraint; weak+worsening
@@ -1740,6 +1742,27 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   Narrator pin re-records once in lockstep; F83 re-stamped in-lane; F6 byte-untouched.
   Spec: `docs/superpowers/specs/2026-08-10-f115-issue-tracker-design.md`.
   **Exclusive narrator-prompt lane.** Next: writing-plans.
+  **✓ BUILT + MERGED `a3aa2ae` 2026-08-14** (data refresh `bfe7b8c`); NOT yet exercised live — no register
+  exists until the next scheduled cycle runs sub-step 3(d4). See HANDOFF for the live watch-list.
+
+- [x] **F116 — Chart-researcher brief says what the gate enforces (bare numbers, hedges, bot-blocking
+  sources). Filed + FIXED 2026-08-15, branch `chart-brief-fix`.**
+  Three consecutive live cycles (2026-08-10, 2026-08-11 ×2) rejected EVERY researched series, and each
+  time the brief, not the researcher, was at fault: values came back as prose ("$35.6 billion",
+  "over $1.3 trillion") where `CandidatePoint.value` is a float; the 08-10 candidate honestly relayed
+  the source's hedges ("below 60%", "close to 80%") as values; and a TrendForce series failed re-fetch
+  verification with HTTP 403 on all five points. The brief said none of this. Fix, prompt-only
+  (`gpu_agent/chartdata/research_prompt.py`, deliberately UNPINNED per the F113 spec — no F6 / narrator /
+  F83 exposure): rule 8 explains that a plain automated reader re-opens every cited URL and names the
+  registered licensed publishers from `registry/licensed-sources.json` (read at build time, generic
+  warning if the file is absent); rule 9 says `value` is a bare number in the stated unit and that a
+  hedge or range is NOT a number to be converted — leave the point out or give up; the points-format
+  line repeats it. Tests pair each instruction with the enforcement it mirrors (F113 doctrine).
+  **Live criterion:** on the next cycle with chartless bullets, a researcher either returns a series
+  that passes the verifier or an honest `NO-SERIES-FOUND` — no more prose-value or 403 rejections.
+  Still open, separate: whether the verifier itself should classify a 403 as "blocked source" rather
+  than "number not found" (diagnostic clarity only; the quarantine already holds).
+  *(Concurrent-mint caveat: F116 chosen against a backlog max of F115 on 2026-08-15; renumber if collided.)*
 
 - [x] **F109 — Coverage gaps are computed but never recorded durably (found while building F61, 2026-07-28).**
   Nothing downstream can render or audit what the gather run failed to cover.
