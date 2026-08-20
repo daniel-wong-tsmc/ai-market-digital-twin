@@ -191,3 +191,41 @@ def test_f119_under_budget_page_never_folds():
     assert "full rows below the divider" not in out
     # and the appendix carries no duplicated QUICK GLANCE when nothing folded
     assert out.split(reader.APPENDIX_DIVIDER)[1].count("QUICK GLANCE") == 0
+
+
+# ── F120: assembled above-fold acronym lint blocks the render ────────────────
+
+def _book_with_title(title):
+    from gpu_agent.thesis import ThesisBook, ThesisEntry
+    return ThesisBook(categoryId="chips.merchant-gpu", entries=[ThesisEntry(
+        id="x1", title=title, statement="s", lens="demand", status="registered",
+        conviction="high", lastVerdict="strengthened", lastDirection=0, streak=2,
+        mechanism="m", falsifiableTrigger="trigger", sensitivity="s",
+        createdAsOf="2026-06", lastChangedAsOf="2026-07-08",
+        lastJudgedAsOf="2026-07-08")])
+
+
+def test_f120_novel_acronym_in_live_title_blocks_render_legacy_path():
+    import pytest
+    book = _book_with_title("ZORPX9 accelerators reset the market")
+    with pytest.raises(ValueError) as exc:
+        render_report(_sc(), None, _reg(), render_ts="fixed", thesis_book=book)
+    assert "ZORPX9" in str(exc.value)
+    assert "registry/acronyms.json" in str(exc.value)
+
+
+def test_f120_novel_acronym_blocks_change_first_path_too():
+    import pytest
+    book = _book_with_title("ZORPX9 accelerators reset the market")
+    st = build_state(_sc())
+    with pytest.raises(ValueError, match="ZORPX9"):
+        render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                      state=st, thesis_book=book)
+
+
+def test_f120_allowlisted_tokens_still_render():
+    # DAILY/monthly clean renders keep working — the whole existing suite is the
+    # broad green check; this is the targeted one.
+    book = _book_with_title("HBM supply stays tight into 2027")
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", thesis_book=book)
+    assert "HBM supply stays tight" in out

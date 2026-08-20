@@ -1127,6 +1127,19 @@ def render_report(
             top[3] = render_quick_glance(state, change, registry, fold_detail=True)
             appendix.insert(2, render_quick_glance(state, change, registry))
             body = "\n\n".join(s for s in top + appendix if s)
+
+    # F120 (user-approved 2026-08-20, BLOCK): one final acronym lint over the fully
+    # assembled above-fold text. Per-section lint runs at write time, but live thesis
+    # titles and finding statements substitute in afterwards — this is the last gate
+    # before the executive page ships. Recovery: add real terms to
+    # registry/acronyms.json ("allowed") and re-render from saved artifacts.
+    offenders = reader.lint_acronyms(body.split(reader.APPENDIX_DIVIDER)[0])
+    if offenders:
+        raise ValueError(
+            "brief blocked before render: unknown all-caps token(s) above the "
+            f"appendix divider: {', '.join(offenders)} — if these are real terms, "
+            "add them to registry/acronyms.json (\"allowed\") and re-render; the "
+            "saved run data is untouched.")
     return body
 
 
