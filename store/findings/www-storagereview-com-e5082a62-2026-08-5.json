@@ -1,0 +1,43 @@
+{
+  "id": "www-storagereview-com-e5082a62-2026-08-5",
+  "statement": "The Vera Rubin platform entered full-scale manufacturing in May 2026 with production shipments forecast for fall 2026, backed by fourteen named server vendors.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A broad server-vendor roster and a set shipment window show the next accelerator generation is moving into volume build, which is when supply actually expands.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Full-scale manufacturing with a wide OEM and ODM roster expands buildable accelerator system supply ahead of forecast fall 2026 production shipments."
+  },
+  "evidence": [
+    {
+      "source": "StorageReview",
+      "url": "https://www.storagereview.com/news/nvidia-spectrum-x-ethernet-photonics-enters-full-production-with-4x-fewer-lasers-and-a-five-vendor-cpo-supply-chain",
+      "date": "2026-08-15",
+      "excerpt": "Related platform Vera Rubin: entered full-scale manufacturing May 2026; production shipments forecast for fall 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Contextual detail in one trade article, not a vendor filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-15",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

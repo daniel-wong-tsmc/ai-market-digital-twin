@@ -1,0 +1,43 @@
+{
+  "id": "finance-yahoo-com-1e50b7f4-2026-08-2",
+  "statement": "Chinese regulators told the approved buyers to keep the licensed H200 hardware in Hong Kong, outside mainland China's customs border, to support domestic chipmakers.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A regulatory instruction to park the hardware offshore, at buyers that reportedly lack Hong Kong data centers, throttles how quickly approved volumes convert into deployed capacity and real orders.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Beijing steering licensed chips outside the mainland to favor domestic chipmakers limits deployable siting for merchant GPUs and slows the conversion of export approvals into repeat demand."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (syndicated on Yahoo Finance)",
+      "url": "https://finance.yahoo.com/technology/articles/nvidia-h200-chips-reach-china-021726633.html",
+      "date": "2026-08-19",
+      "excerpt": "'Beijing wants them to keep the hardware outside mainland China to support the growth of domestic chipmakers'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Anonymously sourced FT reporting relayed by Reuters, which says it could not immediately verify; syndicated copies are not independent corroboration."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: Reuters (syndicated on Yahoo Finance)",
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-19",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

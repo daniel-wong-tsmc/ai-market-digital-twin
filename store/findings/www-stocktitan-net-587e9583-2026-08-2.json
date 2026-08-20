@@ -1,0 +1,44 @@
+{
+  "id": "www-stocktitan-net-587e9583-2026-08-2",
+  "statement": "Cerebras claims the CS-4 delivers up to 30x more tokens-per-second-per-user versus GPU solutions on GPT-OSS-120B and up to 10x higher throughput per watt than CS-3.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "If inference throughput per watt improves this much on non-GPU silicon, power-constrained operators gain a way to serve tokens without adding GPU capacity.",
+  "impact": {
+    "targets": [
+      "chips.ai-silicon-startups",
+      "chips.merchant-gpu",
+      "energy.efficiency",
+      "models.open-weight"
+    ],
+    "direction": "mixed",
+    "mechanism": "Higher claimed tokens per second and throughput per watt on alternative silicon lets power-limited sites serve more inference per watt, substituting for incremental merchant-GPU deployment."
+  },
+  "evidence": [
+    {
+      "source": "Cerebras Systems (press release, GlobeNewswire)",
+      "url": "https://www.stocktitan.net/news/CBRS/cerebras-unveils-cs-4-up-to-30-times-faster-than-gpu-based-8ywkeo6c1jiy.html",
+      "date": "2026-08-18",
+      "excerpt": "up to 30x more tokens-per-second-per-user versus GPU solutions on GPT-OSS-120B; up to 10x higher throughput per watt compared to CS-3",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Marketing performance claims from the vendor's own release and blog with no independent benchmark; capped at medium."
+  },
+  "dispersion": "Claims are stated as upper bounds ('up to') on a specific model and workload, not a general average.",
+  "asOf": "2026-08",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "cerebras",
+  "observedAt": "2026-08-18",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

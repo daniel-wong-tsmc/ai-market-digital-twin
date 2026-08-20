@@ -1,0 +1,46 @@
+{
+  "id": "nvidianews-nvidia-com-b38ebbeb-2026-08-5",
+  "statement": "NVIDIA announced AI compute financing platforms with Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR to mobilize over $500 billion of third-party capital.",
+  "kind": "measured",
+  "value": {
+    "number": 500.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Third-party capital is what lets buyers who cannot self-fund keep ordering accelerators, so mobilizing it loosens the financing constraint on marginal demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Large third-party financing platforms supply the capital that marginal buyers need to fund AI compute purchases, easing credit conditions on accelerator demand."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+      "date": "2026-08-17",
+      "excerpt": "2026-08-10 AI compute financing platforms with Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR to mobilize over $500 billion of third-party capital.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Mentioned as an adjacent newsroom item summarized within this document rather than detailed in the filed release itself."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

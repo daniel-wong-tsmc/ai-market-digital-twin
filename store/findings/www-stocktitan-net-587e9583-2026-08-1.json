@@ -1,0 +1,46 @@
+{
+  "id": "www-stocktitan-net-587e9583-2026-08-1",
+  "statement": "Cerebras unveiled the CS-4, a rack-scale system of three WSE-3 Turbo wafers delivering 750 PFLOPS, with first shipments beginning this quarter.",
+  "kind": "measured",
+  "value": {
+    "number": 750.0,
+    "unit": "PFLOPS"
+  },
+  "trend": "rising",
+  "why": "A shipping non-GPU accelerator at rack scale is real alternative supply of AI compute that can absorb workloads otherwise queued for merchant GPUs.",
+  "impact": {
+    "targets": [
+      "chips.ai-silicon-startups",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "A new rack-scale accelerator entering shipment adds non-GPU compute capacity to the market, offering an alternative path for inference workloads."
+  },
+  "evidence": [
+    {
+      "source": "Cerebras Systems (press release, GlobeNewswire)",
+      "url": "https://www.stocktitan.net/news/CBRS/cerebras-unveils-cs-4-up-to-30-times-faster-than-gpu-based-8ywkeo6c1jiy.html",
+      "date": "2026-08-18",
+      "excerpt": "introduced the CS-4, described as 'the fastest AI accelerator in the industry', a rack-scale system comprising three WSE-3 Turbo wafers. Performance claims: 750 PFLOPS of AI compute",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor press release carried on a secondary aggregator; performance figures are unverified vendor claims."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "cerebras",
+  "observedAt": "2026-08-18",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

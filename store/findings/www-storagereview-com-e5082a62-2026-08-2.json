@@ -1,0 +1,44 @@
+{
+  "id": "www-storagereview-com-e5082a62-2026-08-2",
+  "statement": "The co-packaged optics switch platform claims 4x fewer lasers, 5x lower power consumption, 10x higher mean time between incidents and 1.3x faster time to deployment, at up to 409.6 Tb/s switching bandwidth.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Cutting switch power by a large factor frees megawatts inside power-capped sites, which is exactly the constraint that limits how many accelerators can be installed.",
+  "impact": {
+    "targets": [
+      "infrastructure.networking-fabric",
+      "energy.efficiency",
+      "infrastructure.datacenter-colo",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Lower switch power and fewer lasers reduce the fabric's share of a site's power and component budget, letting the same electrical envelope support more accelerators."
+  },
+  "evidence": [
+    {
+      "source": "StorageReview",
+      "url": "https://www.storagereview.com/news/nvidia-spectrum-x-ethernet-photonics-enters-full-production-with-4x-fewer-lasers-and-a-five-vendor-cpo-supply-chain",
+      "date": "2026-08-15",
+      "excerpt": "Performance claims: 4x fewer lasers than conventional switches; 5x lower power consumption; 10x higher mean time between incidents; 1.3x faster time to deployment.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor performance claims relayed by one trade outlet; no independent benchmark."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-15",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

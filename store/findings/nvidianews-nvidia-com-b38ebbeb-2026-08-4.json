@@ -1,0 +1,43 @@
+{
+  "id": "nvidianews-nvidia-com-b38ebbeb-2026-08-4",
+  "statement": "NVIDIA is the exclusive AI compute infrastructure provider for the campus, where OpenAI is the customer under a 20-year lease and the guarantee only pays out if OpenAI defaults or becomes insolvent.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Exclusivity locks a very large future compute site to one accelerator vendor, while tying the vendor's payout risk to a single customer's creditworthiness concentrates both the demand and the exposure.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "mixed",
+    "mechanism": "Exclusive-provider status forecloses competing accelerators at this site while making the vendor's realized demand and guarantee exposure dependent on one frontier lab customer."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+      "date": "2026-08-17",
+      "excerpt": "SB Energy will build, own and operate the data center; OpenAI is the customer under a 20-year lease; NVIDIA is the exclusive AI compute infrastructure provider and provides credit support on the land, power and shell buildout.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Structure described in NVIDIA's own press release filed as an exhibit to Form 8-K."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-17",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

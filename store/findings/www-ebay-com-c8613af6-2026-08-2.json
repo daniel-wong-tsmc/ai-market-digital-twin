@@ -1,0 +1,41 @@
+{
+  "id": "www-ebay-com-c8613af6-2026-08-2",
+  "statement": "Most surfaced eBay H100 80GB listings show sellers located in China offering free delivery, with some U.S.-based sellers.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A resale channel dominated by China-based sellers indicates prior-generation accelerators are circulating out of that market, which is an alternative-supply route around new vendor allocation.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "China-based resale supply of prior-generation accelerators adds a secondary channel of available compute hardware outside vendor allocation of new parts."
+  },
+  "evidence": [
+    {
+      "source": "eBay search results (via web search snippets)",
+      "url": "https://www.ebay.com/shop/h100-80gb?_nkw=h100+80gb",
+      "date": "2026-08-19",
+      "excerpt": "Most listings show sellers located in China offering free delivery, with some U.S.-based sellers.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Seller-location impression from search snippets rather than the fetched marketplace pages; no counts or totals available."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 1; sources: StorageReview, eBay search results (via web search snippets)",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-19",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

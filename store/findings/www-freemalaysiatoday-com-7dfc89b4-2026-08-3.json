@@ -1,0 +1,47 @@
+{
+  "id": "www-freemalaysiatoday-com-7dfc89b4-2026-08-3",
+  "statement": "Samsung expects AI and high-performance-computing applications to make up more than 30% of foundry revenue this year, up from 15% to 20% in late 2025, with advanced processes exceeding half of foundry revenue.",
+  "kind": "measured",
+  "value": {
+    "number": 30.0,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "A foundry's revenue mix shifting sharply toward AI and HPC is a clean read on where order volume is actually going.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "positive",
+    "mechanism": "A rising AI and HPC share of foundry revenue reflects growing customer orders for AI silicon, confirming accelerator demand is pulling through the manufacturing chain."
+  },
+  "evidence": [
+    {
+      "source": "Reuters via Free Malaysia Today",
+      "url": "https://www.freemalaysiatoday.com/category/business/2026/08/19/samsung-hikes-chipmaking-prices-by-up-to-15-on-demand-spike",
+      "date": "2026-08-19",
+      "excerpt": "Samsung expects advanced processes to account for more than half of foundry revenue this year, while AI and high-performance-computing applications would make up more than 30%, up from 15% to 20% in late 2025.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company expectation relayed through a single wire story; secondary-only evidence."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "samsung",
+  "observedAt": "2026-08-19",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

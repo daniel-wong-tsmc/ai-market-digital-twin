@@ -1,0 +1,44 @@
+{
+  "id": "www-stocktitan-net-587e9583-2026-08-3",
+  "statement": "Cerebras names OpenAI, G42, Mohamed bin Zayed University of Artificial Intelligence and AWS among CS-4 customers, and says the system natively supports disaggregated inference pairing with AMD Helios and AWS Trainium.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Named frontier-lab and hyperscaler customers, plus interoperation with non-NVIDIA accelerators, show alternative silicon is being adopted by the same buyers who drive GPU demand.",
+  "impact": {
+    "targets": [
+      "chips.ai-silicon-startups",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "Adoption by large AI buyers and interoperability with other non-NVIDIA accelerators establishes a credible alternative-supply lane for inference compute."
+  },
+  "evidence": [
+    {
+      "source": "Cerebras Systems (press release, GlobeNewswire)",
+      "url": "https://www.stocktitan.net/news/CBRS/cerebras-unveils-cs-4-up-to-30-times-faster-than-gpu-based-8ywkeo6c1jiy.html",
+      "date": "2026-08-18",
+      "excerpt": "Customers mentioned: OpenAI, Group 42 Holding Ltd (G42), Mohamed bin Zayed University of Artificial Intelligence, AWS.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor-stated customer list on a secondary aggregator; the blog includes no named customer deployments or pricing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "cerebras",
+  "observedAt": "2026-08-18",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

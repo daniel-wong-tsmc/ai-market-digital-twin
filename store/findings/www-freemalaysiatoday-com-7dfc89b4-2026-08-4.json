@@ -1,0 +1,45 @@
+{
+  "id": "www-freemalaysiatoday-com-7dfc89b4-2026-08-4",
+  "statement": "Samsung generated 7% of global chip foundry revenue in Q1 2026 versus more than 70% for TSMC.",
+  "kind": "measured",
+  "value": {
+    "number": 7.0,
+    "unit": "pct"
+  },
+  "trend": "unknown",
+  "why": "With one foundry holding over seventy percent of the market, the ability of accelerator makers to find alternative leading-edge capacity is narrow, so any second-source tightening matters more.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Extreme supplier concentration in leading-edge foundry means accelerator supply depends on a single dominant manufacturer, with limited second-source relief when capacity tightens."
+  },
+  "evidence": [
+    {
+      "source": "Reuters via Free Malaysia Today",
+      "url": "https://www.freemalaysiatoday.com/category/business/2026/08/19/samsung-hikes-chipmaking-prices-by-up-to-15-on-demand-spike",
+      "date": "2026-08-19",
+      "excerpt": "Samsung generated 7% of global chip foundry revenue in Q1 2026, compared with more than 70% for TSMC.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Market-share figures relayed in a single wire story without a named research provider; secondary-only."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "samsung",
+  "observedAt": "2026-08-19",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

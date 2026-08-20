@@ -1,0 +1,44 @@
+{
+  "id": "www-ebay-com-c8613af6-2026-08-1",
+  "statement": "Secondary-market listings for NVIDIA H100 80GB cards appear at $27,999.99 pre-owned PCIe, $27,000.00 brand new, $21,400 to $22,490 for SXM5-converted-to-PCIe units, and $20,877 for pre-owned HBM3 units.",
+  "kind": "measured",
+  "value": {
+    "number": 27000.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "unknown",
+  "why": "Resale asking prices show what buyers are willing to pay to bypass vendor lead times, but a snapshot without a stated baseline is only a level.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Secondary-market asking prices for prior-generation accelerators reflect residual scarcity value; with no baseline or stated change this is a static level."
+  },
+  "evidence": [
+    {
+      "source": "eBay search results (via web search snippets)",
+      "url": "https://www.ebay.com/shop/h100-80gb?_nkw=h100+80gb",
+      "date": "2026-08-19",
+      "excerpt": "Pre-owned H100 80GB PCIe cards listed at \"$27,999.99\"; brand new H100 80GB cards priced at \"$27,000.00\"; SXM5 converted to PCIe models ranging \"$21,400.00 to $22,490.00\"; pre-owned H100 80GB HBM3 units listed at \"$20,877.00\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Listing prices gathered from search snippets because the eBay pages timed out; asking prices are not transactions."
+  },
+  "dispersion": "Listed prices span roughly $20,877 to $27,999.99 across condition and form factor, with pre-owned PCIe above brand-new asking.",
+  "asOf": "2026-08",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-19",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

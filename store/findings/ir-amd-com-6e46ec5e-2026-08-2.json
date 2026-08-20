@@ -1,0 +1,44 @@
+{
+  "id": "ir-amd-com-6e46ec5e-2026-08-2",
+  "statement": "AMD reported Q2 2026 GAAP gross margin of 54% (non-GAAP 56%).",
+  "kind": "measured",
+  "value": {
+    "number": 54.0,
+    "unit": "pct"
+  },
+  "trend": "unknown",
+  "why": "Vendor gross margin shows how much pricing power the accelerator supplier holds, which is a read on whether demand outruns available supply.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Margin achieved alongside record revenue and profitability indicates the vendor is not discounting to move accelerator volume."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases",
+      "date": "2026-08-12",
+      "excerpt": "gross margin 54%, operating income $2.0 billion, net income $2.3 billion, diluted EPS $1.38; non-GAAP gross margin 56%",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Figures from AMD's own earnings release with companion 8-K, primary issuer disclosure."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "nvidianews-nvidia-com-b38ebbeb-2026-08-1",
+  "statement": "NVIDIA entered residual value guaranties with SB Energy covering leases for approximately 4.25 gigawatts of IT load at the Portsmouth site, with aggregate payment obligation cumulatively capped at $105 billion for its initial commitment.",
+  "kind": "measured",
+  "value": {
+    "number": 105.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A vendor putting its own balance sheet behind a customer's lease is a direct measure of how much demand support the chip supplier must supply to make the buildout happen.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "Vendor credit support de-risks the lessor and lets an 8 IT-GW AI factory campus proceed, locking in exclusive NVIDIA AI compute deployment and the power and shell capacity to house it."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+      "date": "2026-08-17",
+      "excerpt": "On August 17, 2026 NVIDIA entered into multiple residual value guaranties with SB Energy relating to leases for approximately 4.25 gigawatts of IT load in the aggregate at the Portsmouth Site",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "NVIDIA press release filed as an exhibit to Form 8-K (accession 0001045810-26-000069), primary issuer disclosure."
+  },
+  "dispersion": "conflicting same-key reports: value 8.0 -> 105.0 (tol 1%); sources: NVIDIA Newsroom",
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-17",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

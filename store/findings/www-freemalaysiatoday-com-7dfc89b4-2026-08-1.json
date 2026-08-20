@@ -1,0 +1,47 @@
+{
+  "id": "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+  "statement": "Samsung raised prices for advanced contract chipmaking by 10-15% for new orders in July 2026 as AI chip demand tightened foundry capacity.",
+  "kind": "measured",
+  "value": {
+    "number": 15.0,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "A second-source foundry able to raise prices double digits is direct evidence that leading-edge wafer capacity, the gate on accelerator supply, is scarce.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "Foundry price increases on advanced nodes raise the input cost of AI accelerators and signal that wafer capacity is fully subscribed, constraining supply expansion."
+  },
+  "evidence": [
+    {
+      "source": "Reuters via Free Malaysia Today",
+      "url": "https://www.freemalaysiatoday.com/category/business/2026/08/19/samsung-hikes-chipmaking-prices-by-up-to-15-on-demand-spike",
+      "date": "2026-08-19",
+      "excerpt": "Samsung raised chipmaking prices by 10-15% for new orders in July 2026. Process-specific increases: SF4 (4-nanometre) 10-15%; SF5 (5-nanometre) 10-15%; older 8-nanometre nearly 10%.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Reuters wire story carried by this outlet; other listed carriers are syndications of the same story, so no independent multi-publisher corroboration."
+  },
+  "dispersion": "Increases vary by node (nearly 10% on 8nm vs 10-15% on SF4/SF5) and by region (5-10% for Taiwan customers vs 10-15% for China and US customers).",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "samsung",
+  "observedAt": "2026-08-19",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

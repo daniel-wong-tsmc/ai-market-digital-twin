@@ -207,6 +207,20 @@ def test_real_2026_08_08_story_artifact_golden_claim_count():
     '2026-08-08') gave claimsAudited=15, flagged=0, skipped=0, with keys
     scene:1..4 and bullet:0.. (exact list asserted below)."""
     art = run_audit("store", "chips.merchant-gpu", "2026-08-08")
-    assert art.summary == {"claimsAudited": 15, "flagged": 0, "skipped": 0}
+    assert art.summary["claimsAudited"] == 15
+    assert art.summary["skipped"] == 0
     assert len(art.claims) == 15
     assert all(not c.claimKey.startswith("issue:") for c in art.claims)
+    # The claims this pin is ABOUT are the ones the story artifact produces.
+    # They must all stay clean.
+    assert all(c.verdict == "clean" for c in art.claims
+               if c.claimKey.startswith(("scene:", "bullet:")))
+    # `flagged` is deliberately NOT pinned as a total. run_audit also audits the
+    # implication artifact, and that artifact is per-MONTH
+    # (store/implications/<cat>/2026-08.json), so EVERY later cycle in the same
+    # month legitimately rewrites it and can change the flagged total for this
+    # fixed story date. The 2026-08-19 cycle did exactly that: it wrote August's
+    # implications and impl:0 came back flagged over a forward-looking "2027" in
+    # a watch-item, with all 7 story claims still clean. Pinning the total made
+    # this test a tripwire on unrelated state; the story-claim assertion above
+    # is what it was actually written to protect.

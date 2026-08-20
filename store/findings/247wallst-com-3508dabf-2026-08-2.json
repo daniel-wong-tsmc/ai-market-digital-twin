@@ -1,0 +1,42 @@
+{
+  "id": "247wallst-com-3508dabf-2026-08-2",
+  "statement": "Bank of America research cited in the article says GPU performance drops sharply below 500GB of memory, framing the Rubin Ultra despec as a temporary engineering compromise rather than demand destruction.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "If performance degrades steeply below 500GB, the lower configuration is unlikely to persist, which means the memory-content cut is a supply-side bottleneck rather than a downshift in accelerator demand.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "A performance cliff below 500GB caps how far memory content can be cut, so the despec reads as a temporary supply constraint during qualification while underlying accelerator memory demand stays intact."
+  },
+  "evidence": [
+    {
+      "source": "24/7 Wall St.",
+      "url": "https://247wallst.com/investing/2026/08/18/nvidia-is-cutting-rubin-ultras-memory-is-microns-hbm-boom-in-danger/",
+      "date": "2026-08-18",
+      "excerpt": "Bank of America research cited: 'GPU performance drops sharply below 500GB', suggesting lower configurations represent a temporary engineering compromise rather than permanent demand destruction; the analysis notes this reflects a supply bottleneck during qualification delays.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Sell-side note quoted inside a single secondary article; no primary filing, so capped at medium."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 1; sources: 24/7 Wall St., AMD Investor Relations",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-08-18",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

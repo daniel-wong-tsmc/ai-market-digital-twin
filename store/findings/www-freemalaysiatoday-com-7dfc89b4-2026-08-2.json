@@ -1,0 +1,43 @@
+{
+  "id": "www-freemalaysiatoday-com-7dfc89b4-2026-08-2",
+  "statement": "Samsung's SF4 production line in Pyeongtaek operates at full capacity producing logic chips for clients including Qualcomm and base dies for Samsung's own HBM, and Samsung cannot meet all orders.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A fully loaded leading-edge line that must ration between external customers and internal HBM base dies is a hard supply ceiling sitting directly under the memory that accelerators need.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Full utilization on the SF4 line forces allocation between external logic customers and internal HBM base-die production, capping incremental supply of both."
+  },
+  "evidence": [
+    {
+      "source": "Reuters via Free Malaysia Today",
+      "url": "https://www.freemalaysiatoday.com/category/business/2026/08/19/samsung-hikes-chipmaking-prices-by-up-to-15-on-demand-spike",
+      "date": "2026-08-19",
+      "excerpt": "Samsung's SF4 production line in Pyeongtaek, South Korea operates at full capacity, producing logic chips for clients including Qualcomm and base dies for Samsung's own HBM chips.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Reuters wire reporting relayed by a single outlet; secondary-only evidence."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "samsung",
+  "observedAt": "2026-08-19",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

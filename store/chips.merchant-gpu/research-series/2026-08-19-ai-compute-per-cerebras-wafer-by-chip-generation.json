@@ -1,0 +1,29 @@
+{
+  "seriesName": "AI compute per Cerebras wafer, by chip generation",
+  "unit": "PFLOPS (sparse FP16)",
+  "form": "columns",
+  "sourceName": "ServeTheHome",
+  "points": [
+    {
+      "label": "WSE-2",
+      "value": 75.0,
+      "sourceUrl": "https://www.servethehome.com/cerebras-intros-faster-wse-3-turbo-processor-and-first-rack-scale-cs-4-system/",
+      "publishedAt": "2026-08-19"
+    },
+    {
+      "label": "WSE-3",
+      "value": 125.0,
+      "sourceUrl": "https://www.servethehome.com/cerebras-intros-faster-wse-3-turbo-processor-and-first-rack-scale-cs-4-system/",
+      "publishedAt": "2026-08-19"
+    },
+    {
+      "label": "WSE-3 Turbo",
+      "value": 250.0,
+      "sourceUrl": "https://www.servethehome.com/cerebras-intros-faster-wse-3-turbo-processor-and-first-rack-scale-cs-4-system/",
+      "publishedAt": "2026-08-19"
+    }
+  ],
+  "pair": false,
+  "notes": "All three figures come from one published comparison table on a single ServeTheHome page covering the CS-4 launch, so the chart rests on one source. The numbers are the vendor's own sparse FP16 peak-compute claims as reported by ServeTheHome, not independently measured benchmarks, and sparse FP16 peak figures are not directly comparable to GPU vendors' headline numbers. The CS-4 system packs three WSE-3 Turbo wafers, so the system-level figure is 750 PFLOPS, three times the per-wafer value shown here.",
+  "bulletIndex": 3
+}

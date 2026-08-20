@@ -2,197 +2,299 @@
  "scope": "category:chips.merchant-gpu",
  "asOf": "2026-08",
  "mode": "daily",
- "capturedAt": "2026-08-11T12:00:00Z",
- "runDir": "work/daily-2026-08-11",
- "unattended": true,
+ "capturedAt": "2026-08-20T00:00:00Z",
+ "runDir": "work/daily-2026-08-19",
+ "unattended": false,
  "entries": [
   {
    "category_id": "chips.merchant-gpu",
    "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
    "status": "done",
    "manifestRef": "manifests/chips.merchant-gpu.json",
-   "scorecard": "store/chips.merchant-gpu/2026-08-v7.json",
-   "dmi": 4.007,
-   "smi": -0.2,
-   "priorScorecard": "store/chips.merchant-gpu/2026-08-v6.json",
-   "priorDmi": 3.78,
-   "priorSmi": 0.4,
+   "scorecard": "store/chips.merchant-gpu/2026-08-v8.json",
+   "dmi": 4.173,
+   "smi": -0.173,
+   "priorScorecard": "store/chips.merchant-gpu/2026-08-v7.json",
+   "priorDmi": 4.007,
+   "priorSmi": -0.2,
    "gather": {
     "documentsGathered": 10,
-    "primary": 1,
-    "secondary": 9,
+    "primary": 2,
+    "secondary": 8,
     "duplicates": 0,
     "dropped": [],
     "droppedKnown": 0,
     "droppedKnownDetail": [],
-    "rounds": 2,
-    "cap": "maxDocuments=10 (daily) reached at end of round 2. maxRounds=2, maxSubagentsPerRound=3.",
+    "rounds": 1,
+    "cap": "maxDocuments=10 (daily top-up cap) tripped after round 1; round 2 not spawned. maxRounds=2, maxSubagentsPerRound=3.",
     "topUp": true,
-    "topUpReason": "store coverage present (307 findings aged in window, 88 faded) -> gather capped at 10 and aimed at not-covered D6 + gpuSpotPrice",
+    "topUpReason": "store coverage present -> gather capped at 10 and aimed at the open source gaps",
     "skipped": [
-     "maxDocuments=10 (daily cap) reached at end of round 2; round 3 not run (maxRounds=2 anyway).",
-     "paywalled source never fetched (manifest is_paywalled): trendforce-gpu-tracker",
-     "paywalled source never fetched (manifest is_paywalled): semianalysis",
-     "licensed-source fetched: trendforce.com (open news page, fetched not blocked - D6 flag)",
-     "BIS / Federal Register export-control notice search returned nothing newer than 2026-01 in the 7-day window.",
-     "No NVIDIA 8-K located for the $500B financing announcement as of 2026-08-11; SEC EDGAR browse returned HTTP 403 to automated fetch. NVIDIA Newsroom release used as primary instead.",
-     "AMD: no material new SEC filing since the 2026-08-04 Q2 8-K already in the corpus.",
-     "Micron investors.micron.com prepared-remarks PDF: WebFetch timed out (60s); Investing.com transcript of the same forum used instead.",
-     "Microsoft has published no official Maia 300 post; ingested doc is trade press citing The Information/Reuters, chase.primaryFound = null.",
-     "Moore Threads: no company primary reachable; SCMP used with four independent corroborators.",
-     "DigiTimes in-window pieces not fetched (paywalled, no numbers extractable): AMD Helios hyperscaler deals 2026-08-05; NVIDIA Rubin Ultra HBM supply 2026-08-07.",
-     "videocardz 'NVIDIA cuts GPU supply to board partners by up to 20%': HTTP 402 paywall, not fetched.",
-     "TrendForce 'AI Server Shipments Forecast Raised to Nearly 31% YoY in 2026' (2026-08-03): 1 day outside the 7-day sweep, not gathered.",
-     "MI300X price corroborators (gpucost.org, gpufinder.dev, spheron.network) not fetched as own blobs: maxDocuments=10 reached.",
-     "discovery tool 'last30days' (role: discovery) not run this cycle - the HuggingNews tiered-discovery pass plus the filing and price seeds saturated the 10-document daily cap. Logged, not silent.",
-     "gatherer subagents dispatched as agentType 'general-purpose' with an explicit written no-Bash / no-nesting prohibition; no tool-restricted gatherer agent type exists in this checkout, so the F88 wall is instructional rather than structural this run. AFK-default, logged."
+     "blob a3 (24/7 Wall St readout of WSJ '$3 trillion AI obligations', 2026-08-17) not ingested: maxDocuments=10 (daily top-up cap) reached with 11 blobs written; dropped the second-hand aggregator, kept in work/daily-2026-08-19/blobs-overcap/",
+     "sec.gov 8-K + exhibit pages: HTTP 403 via WebFetch (figures via NVIDIA newsroom primary instead)",
+     "cnbc.com, axios.com, seekingalpha.com: HTTP 403",
+     "ft.com / wsj.com originals: paywalled, not fetched",
+     "vast.ai/pricing: price grid rendered dynamically, no figures in page text",
+     "eBay listing pages timed out; H100 secondary prices came from search snippets of listings (blob c3)",
+     "Micron 'under 50% of HBM demand' lead: no Reuters/Bloomberg/Micron primary located; 24/7 Wall St secondary kept",
+     "channel-checks: no DigiTimes/TrendForce/Tom's Hardware item dated 2026-08-12..19 on lead times/CoWoS/HBM4 surfaced; older items left as leads",
+     "last30days discovery pass not run: HuggingNews tiered discovery + filing + price seeds saturated the 10-document daily cap (AFK-default, same as 08-11)",
+     "round 2 not spawned: maxDocuments cap tripped after round 1 (maxRounds=2, maxSubagentsPerRound=3)"
     ],
     "pursuedDespiteAge": [],
     "huggingnewsFallback": [],
-    "huggingnewsLeads": {
-     "tags": [
-      "ai-compute-chips"
-     ],
-     "storiesDetailed": 5,
-     "chasedToPrimary": 5,
-     "note": "HuggingNews latest+detail run by the coordinator via webreach-fetch; every ingested doc is the underlying primary or original outlet, never a HuggingNews story page."
-    },
-    "earningsWindow": "gather_priority = heavy for nvda-earnings, amd-earnings, nvda-10k-risk-factors (AMD reported 2026-08-04; NVIDIA reports 2026-08-26)"
+    "note": "GATHER RAN 2026-08-19 IN THE SCHEDULED RUN THAT DIED AT THE THESIS SEAM. These counts are read back from that run's own artifacts (work/daily-2026-08-19/docs/gather-log.json, blobs.json, webreach/fetch-manifest.json); the resume session did NOT re-gather, by user direction."
    },
    "webReach": {
-    "agent-reach": {
-     "status": "ok",
-     "version": "1.5.0",
-     "pin": "1.5.0",
-     "drift": false
+    "toolVersions": {
+     "agent-reach": {
+      "version": "1.5.0",
+      "pin": "1.5.0",
+      "drift": false,
+      "status": "ok"
+     },
+     "last30days": {
+      "version": "skill-present",
+      "pin": "skill-present",
+      "drift": false,
+      "status": "ok"
+     },
+     "crawl4ai": {
+      "version": "0.9.0",
+      "pin": "0.9.0",
+      "drift": false,
+      "status": "ok"
+     },
+     "huggingnews": {
+      "version": "api-skill-v0.0.2",
+      "pin": "api-skill-v0.0.2",
+      "drift": false,
+      "status": "ok",
+      "keyed": true
+     }
     },
-    "last30days": {
-     "status": "ok",
-     "version": "skill-present",
-     "pin": "skill-present",
-     "drift": false
+    "driftAny": false,
+    "gatherRunStatuses": {
+     "agent-reach": "ok",
+     "last30days": "ok",
+     "crawl4ai": "ok",
+     "huggingnews": "ok"
     },
-    "crawl4ai": {
-     "status": "ok",
-     "version": "0.9.0",
-     "pin": "0.9.0",
-     "drift": false
-    },
-    "huggingnews": {
-     "status": "ok",
-     "keyed": true,
-     "version": "api-skill-v0.0.2",
-     "pin": "api-skill-v0.0.2",
-     "drift": false
-    },
-    "mode": "gpu-agent web-reach-ensure --json --unattended (scheduled/headless: reports only, never installs)"
+    "fetchManifestResults": 6,
+    "note": "Tool version/pin/drift block captured by `web-reach-ensure --json --unattended` in the RESUME session (2026-08-20), not at gather time; the gather run's own per-tool ok/fail statuses are carried alongside under gatherRunStatuses."
    },
-   "licensedSourcesFetched": [
-    "trendforce.com"
-   ],
+   "licensedSourcesFetched": [],
    "answers": {
-    "extract": "work/daily-2026-08-11/extract-answer.json",
-    "judge": "work/daily-2026-08-11/judge-answer.json",
-    "thesis": "work/daily-2026-08-11/thesis-answer.json",
-    "implication": "work/daily-2026-08-11/implication-answer.json",
-    "narrator": "work/daily-2026-08-11/narrator-answer.json"
+    "extract": "work/daily-2026-08-19/extract-answer.json",
+    "judge": "work/daily-2026-08-19/judge-answer.json",
+    "thesis": "work/daily-2026-08-19/thesis-answer.json",
+    "implication": "work/daily-2026-08-19/implication-answer.json",
+    "narrator": "work/daily-2026-08-19/narrator-answer.json"
    },
    "corpusArtifacts": {
-    "coverage": "work/daily-2026-08-11/corpus-coverage.json",
-    "merged": "work/daily-2026-08-11/corpus-findings.json",
-    "dedupedFresh": "work/daily-2026-08-11/deduped-fresh.json",
-    "report": "work/daily-2026-08-11/corpus-report.json",
-    "pipelineReport": "work/daily-2026-08-11/corpus-pipeline-report.json"
+    "coverage": "work/daily-2026-08-19/corpus-coverage.json",
+    "findings": "work/daily-2026-08-19/corpus-findings.json",
+    "dedupedFresh": "work/daily-2026-08-19/deduped-fresh.json",
+    "report": "work/daily-2026-08-19/corpus-report.json"
    },
    "corpusCounts": {
-    "storeInWindow": 307,
-    "fadedOut": 88,
-    "freshNew": 1,
-    "freshUpdate": 8,
-    "duplicate": 0,
-    "merged": 316
+    "storeInWindow": 312,
+    "corpusTotal": 335,
+    "freshNew": 10,
+    "freshUpdate": 13,
+    "freshDuplicate": 11,
+    "dedupedFreshIngested": 23
    },
-   "dedupReport": {
-    "path": "store/chips.merchant-gpu/dedup-2026-08-11.json",
-    "new": 1,
-    "update": 8,
-    "duplicate": 0
-   },
-   "findingsGated": {
-    "count": 9,
-    "dropped": 1,
-    "droppedDetail": [
-     "www-scmp-com-744b78b6-2026-08-1: excerpt not found in source document"
-    ]
-   },
+   "dedupReport": "store/chips.merchant-gpu/dedup-2026-08-19.json",
+   "findingsGated": 34,
    "wikiIngest": {
-    "routed": 9,
-    "pages": 6
+    "logSeq": 468,
+    "newEntityPages": [
+     "cerebras",
+     "samsung"
+    ]
    },
    "unregisteredEntities": {
-    "count": 3,
-    "names": [
-     "market",
-     "memory",
-     "multi"
-    ]
+    "count": 0,
+    "names": [],
+    "note": "Read back from the dead run's empty extract-prompt.err (no UNREGISTERED-ENTITY line); not observed live by the resume session."
    },
    "coverageRecord": {
     "path": "store/chips.merchant-gpu/coverage-2026-08.json",
-    "gaps": 15,
-    "source": 15,
-    "indicator": 0,
-    "required": 15,
-    "waived": 0
+    "gapCounts": {
+     "total": 13,
+     "source": 13,
+     "indicator": 0,
+     "required": 13,
+     "preferred": 0,
+     "optional": 0,
+     "waived": 0,
+     "paywalled": 2
+    }
    },
    "gates": {
-    "voiceLint": "clean - no sample rejected",
-    "sufficiency": "clean - no rating rejected",
-    "bypassesUsed": "none"
+    "voiceLint": "clean",
+    "sufficiency": "clean",
+    "bypasses": 0
    },
    "stageStatuses": {
     "category": "done",
     "thesis": "done",
     "implication": "done",
     "narrator": "done",
+    "issues-update": "done",
     "layer": "deferred",
     "main": "deferred"
    },
-   "thesisGate": "done on attempt 2 - attempt 1 rejected for 3 theses citing unknown finding ids (export-control-exposure, china-domestic-accelerators-displace-banned-nvidia-gpus, enforcement-closes-the-gray-route-into-china); re-dispatched with the violation text and passed. 63 theses judged, 2 new provisional theses proposed, 2 corroborated secondary reversals applied.",
-   "implicationGate": "done on attempt 2 - attempt 1 rejected (line 6 read as a recommendation via \"must\"; line 7 used banned word \"leverage\"); re-dispatched with the violation text and passed. 8 implication lines written.",
+   "issuesOpen": {
+    "register": "store/chips.merchant-gpu/issues/register.json",
+    "opened": [
+     "constraint-hbm-stacked-memory-supply",
+     "dim-bottleneck",
+     "dim-moat"
+    ],
+    "note": "F115 FIRST LIVE EXERCISE - ran in the 2026-08-19 scheduled run before it died."
+   },
+   "issuesUpdate": {
+    "assessed": 3,
+    "notAssessed": 0,
+    "resolved": [],
+    "history": "store/chips.merchant-gpu/issues/history.jsonl",
+    "statuses": {
+     "constraint-hbm-stacked-memory-supply": "worsened",
+     "dim-bottleneck": "worsened",
+     "dim-moat": "worsened"
+    },
+    "note": "F115 FIRST LIVE issues-update: history.jsonl created, 3 lines. The post-audit narrator re-dispatch re-wrote the story, and the idempotence guard correctly returned {'skipped': true, 'reason': 'already-recorded'} on the rerun - the assessments were unchanged by that fix, which touched only one number in scene 4."
+   },
+   "thesisGate": {
+    "attempts": 2,
+    "result": "passed",
+    "violations": [
+     "attempt 1: voice-lint: neocloud-gpu-buyers-carry-heavy-debt-loads: mechanism: banned word 'leverage'"
+    ],
+    "judged": 65,
+    "verdicts": {
+     "reaffirmed": 26,
+     "strengthened": 32,
+     "weakened": 5,
+     "adjusted": 2,
+     "broken": 0
+    },
+    "proposed": [
+     "the-second-largest-foundry-fills-up-and-raises-prices",
+     "wafer-scale-machines-join-the-rack-contest"
+    ],
+    "note": "All 65 judgments applied=True."
+   },
+   "implicationGate": {
+    "attempts": 1,
+    "result": "passed",
+    "lines": 8,
+    "artifact": "store/implications/chips.merchant-gpu/2026-08.json"
+   },
    "narratorArtifact": {
-    "path": "store/chips.merchant-gpu/story/2026-08-11.json",
-    "status": "done on attempt 2 - attempt 1 rejected for 4 relatedDocs outlet strings not matching their docPool source verbatim; re-dispatched with the violation text and passed."
+    "path": "store/chips.merchant-gpu/story/2026-08-19.json",
+    "attempts": 3,
+    "result": "done",
+    "violations": [
+     "gate attempt 1: calloutMonths: at most 2 callouts are allowed; got 3",
+     "post-audit attempt: scene:4 uncited number 27999 (prose truncated the cited finding's $27,999.99)"
+    ],
+    "headline": "NVIDIA is designing its next chip around memory it cannot buy",
+    "scenes": 4
    },
    "citationAudit": {
-    "path": "store/chips.merchant-gpu/audit/2026-08-11.json",
-    "claims": 15,
-    "flagged": 0,
-    "skipped": 0,
-    "detail": "clean - every number in the story scenes and implication lines traces to a cited finding or a series reading. The impl:7 flag that stood open on 2026-08-05 and 2026-08-10 did not recur."
+    "result": "flagged-implication-only",
+    "record": "store/chips.merchant-gpu/audit/2026-08-19.json",
+    "flags": [
+     "impl:0: uncited number 2027"
+    ],
+    "narratorFlagsCleared": [
+     "scene:4: uncited number 27999"
+    ],
+    "note": "The narrator flag was fixed on the single permitted re-dispatch and is GONE. The one remaining flag is on an implication line, and the procedure logs implication flags rather than re-dispatching them (the implication seam is already two-attempts-then-failed). '2027' there is a forward-looking year inside a watch-item, not a claimed measurement - the same benign shape as the impl:7 flag carried through the 2026-08-05 and 2026-08-10 cycles. The story artifact is NOT invalidated and no narrator fallback was recorded."
    },
-   "priceSync": "written={'gpuSpotPrice': 12, 'gpuRentalOnDemand': 16, 'gpuRentalSpot': 0, 'gpuRental1yr': 17}; WARNING stale price folder (newest data 260602 vs as_of 2026-08) - logged, non-fatal",
-   "seriesRefresh": "no-gap",
+   "priceSync": {
+    "result": "done",
+    "written": {
+     "gpuSpotPrice": 12,
+     "gpuRentalOnDemand": 16,
+     "gpuRentalSpot": 0,
+     "gpuRental1yr": 17
+    },
+    "warnings": [
+     "stale price folder: newest data 260602, as_of 2026-08"
+    ]
+   },
+   "seriesRefresh": {
+    "gaps": [
+     "odmMonthlyAiRevenue 2026-07",
+     "pkgCapacityOrderSpread 2026-05",
+     "tokenEconomics 2026-07"
+    ],
+    "written": [
+     "odmMonthlyAiRevenue 2026-07",
+     "pkgCapacityOrderSpread 2026-05"
+    ],
+    "rejected": [],
+    "alreadyPresent": [],
+    "empty": [
+     "tokenEconomics 2026-07"
+    ],
+    "notes": [
+     "odmMonthlyAiRevenue 2026-07 = +82.279 pct_yoy, rebuilt by the recorded construction (Quanta 366.274 vs 158.342, Wistron 308.219 vs 191.726, Wiwynn 117.686 vs 84.529, TWD bn).",
+     "pkgCapacityOrderSpread 2026-05 = -50.0, the same class as April; the reader's cited source is trendforce.com, a licensed publisher that refuses automated readers - series-refresh has NO re-fetch verification step, so this point was NOT machine-verified the way a chart-research point is. Flagged for a human.",
+     "tokenEconomics 2026-07: reader returned an EMPTY envelope on purpose - the stored note records the basket SIZES (6 volume rates, 14 price rates) but not the basket MEMBERSHIP, so the same construction cannot be reproduced from public sources. An honest no-candidate rather than a differently-built number. Fixing this needs the basket definition carried in the series metadata."
+    ]
+   },
    "v2Shadow": "stamped",
-   "chartFetch": "done - fetched none; not-yet-due: amdDataCenterRevenue, gpuSpotPrice, nvdaDataCenterRevenue; failed none",
+   "chartFetch": {
+    "result": "done",
+    "fetched": [],
+    "failed": [],
+    "skipped": [
+     "amdDataCenterRevenue",
+     "gpuSpotPrice",
+     "nvdaDataCenterRevenue"
+    ]
+   },
    "chartResearch": {
     "emitted": 3,
     "answered": 3,
-    "noSeriesFound": 0,
-    "accepted": 0,
-    "rejected": 3,
+    "accepted": 2,
+    "rejected": 1,
     "missing": 0,
-    "note": "Quarantine held - nothing unverified reached store/. bullet-1 (TrendForce DRAM-maker 1Q26 revenue growth) failed re-fetch verification: every point returned HTTP 403 Forbidden, so the verifier could not confirm the numbers. bullet-2 and bullet-3 were rejected as unusable before verification: the researchers returned point values as prose strings (\"$35.6 billion\", \"over $1.3 trillion\") where CandidateSeries requires a bare number. REAL FINDING, same family as the 2026-08-10 hedged-text rejection: the chart-research brief describes points as {label, value, sourceUrl, publishedAt} without stating that value must be a bare number in the stated unit, and it does not warn that a source which blocks automated re-fetch (TrendForce) cannot pass verification. Both are brief-wording gaps, not model errors. Open for the user."
+    "acceptedSeries": [
+     "store/chips.merchant-gpu/research-series/2026-08-19-high-bandwidth-memory-on-each-nvidia-data-center-gpu-by-generation.json",
+     "store/chips.merchant-gpu/research-series/2026-08-19-ai-compute-per-cerebras-wafer-by-chip-generation.json"
+    ],
+    "rejectedDetail": [
+     "bullet-1 (Samsung foundry share, Counterpoint Research): all 5 points unreachable - HTTP 403 Forbidden to the plain automated reader."
+    ],
+    "note": "F116'S LIVE CRITERION IS MET: the FIRST verifier-passing researched chart series in this run of cycles (0 accepted on 08-10 and on both 08-11 runs). store/chips.merchant-gpu/research-series/ now exists. Both surviving researchers explicitly routed around sites that block automated readers, which is exactly what F116's rule 8 was written to cause. FOLLOW-UP WORTH FILING: counterpointresearch.com 403s the plain reader but is NOT in registry/licensed-sources.json, so rule 8 never warned the researcher off it - and the researcher's own WebFetch opened the page fine three times, so it had no way to know. The registry needs that domain, and the deeper gap is that a research agent's fetcher and the verifier's fetcher are different readers."
    },
-   "dashboardJson": "done - wrote site/chips.merchant-gpu/data/dashboard.json",
-   "report": "work/daily-2026-08-11/report.txt (1061 lines, rendered with --daily)",
+   "dashboardJson": {
+    "result": "done",
+    "path": "site/chips.merchant-gpu/data/dashboard.json",
+    "schemaVersion": "1.2",
+    "bulletsWithCharts": 2,
+    "note": "F115 END-TO-END LIVE: the dashboard's issues section is populated for the first time (3 open, 0 resolved)."
+   },
+   "siteBuild": {
+    "result": "done",
+    "pages": 7,
+    "featured": "demand-momentum"
+   },
+   "report": "work/daily-2026-08-19/report.txt",
    "deviations": [
-    "Step 3(b)/(c)/(e)/(e2)/(e3) TOOL-LESS-BRAIN DEVIATION (unchanged from the 2026-08-04 onward cycles, still awaiting the user ruling): this harness exposes no tool-less subagent type, so each brain was dispatched on model opus with an explicit binding instruction to use ONLY Read on its own prompt files and no other tool. The extraction brain was again the exception - its whole prompt was pasted inline, so it ran genuinely tool-less (0 tool uses, verified).",
-    "Step 3(c)/(e)/(e2)/(e3) MECHANICAL WORKAROUND (unchanged): the judge/thesis/implication/narrator prompts are too large to paste inline, so each emitted prompt was split verbatim into system.txt / schema.json / user.txt (narrator: user-part1..4.txt) under work/daily-2026-08-11/. Content is byte-identical to the emitted prompt (the narrator split was verified by exact round-trip reassembly), only re-laid-out across files.",
-    "Step 3(c)/(e2)/(e3) GATE-RETRY MECHANICS: on each of the three gate rejections the brain was re-dispatched with the violation text as the procedure requires, and the coordinator then applied the returned correction to the answer file as a scripted string substitution rather than re-transcribing the whole answer by hand. The substituted text is exactly what the re-dispatched brain returned; no coordinator-authored wording entered any artifact. Recorded as an AFK-default.",
-    "Step 2b DISCOVERY TOOL SKIPPED: last30days was not run - the HuggingNews tiered-discovery pass plus filing and price seeds saturated the 10-document daily cap. Logged in gather skipped[], never silent.",
-    "Step 3(a) GATHERER TOOL-WALL DEVIATION (unchanged): the F88 injection wall requires gatherers to hold Read/Write/WebSearch/WebFetch and never Bash. No available subagent type restricts tools to exactly that set, so gatherers were dispatched as general-purpose agents with an explicit binding no-shell instruction. The wall was instructed, not structurally enforced - flagged for the user alongside the standing tool-less-brain ruling.",
-    "Step 3(f) SESSION-OUTPUT DEVIATION (F67): the rendered report is 1061 lines, too large to paste verbatim into the session final message. The final message carries the report executive sections (WHAT MOVED, STATE OF THE MARKET, dimension ratings, indices, FOR TSMC) and references the full rendered report by path instead. Recorded as an AFK-default."
+    "RESUMED RUN, NOT A FRESH ONE (user-directed, interactive 2026-08-20). The 2026-08-19 scheduled run died immediately after emitting the thesis prompt. This session picked the cycle up at that seam and ran everything from 3(e) onward. Steps 3(a) through 3(d4) were NOT re-run and their artifacts are the dead run's own, read back from disk. No re-gather, by explicit user direction.",
+    "Step 3(e)/(e2)/(e3) TOOL-LESS-BRAIN DEVIATION (unchanged from the 2026-08-04 onward cycles, still awaiting the user ruling): this harness exposes no tool-less subagent type, so each brain was dispatched on model opus with an explicit binding instruction to use ONLY Read on its own prompt files and no other tool.",
+    "Step 3(e)/(e2)/(e3) BRAIN-WRITES-ITS-OWN-ANSWER (NEW THIS CYCLE, AFK-default, flagged to the user in-session): prior cycles had the brain return its answer as text for the coordinator to transcribe. The thesis answer here is 65 judgments; hand-transcribing it would have risked a silent typo in a stored artifact. So each brain was granted Read on its own prompt files PLUS exactly one Write to its own answer path, and nothing else. The property the tool-less rule exists to protect is intact - no brain could fetch anything outside its prompt - but this IS a change from the recorded practice and is called out rather than left silent. It also replaces the 2026-08-11 scripted-string-substitution workaround: gate retries were fixed by re-dispatching the brain to rewrite its own file.",
+    "Step 3(e2) PROMPT SPLIT (unchanged): the implication prompt was split verbatim into system.txt / user.txt / schema.json, and the narrator prompt into system.txt / schema.json / user-part1..4.txt, under work/daily-2026-08-19/. Both splits were verified by exact round-trip reassembly against the emitted prompt before dispatch; content is byte-identical, only re-laid-out across files.",
+    "Step 7b SERIES-READER TOOL-WALL DEVIATION (unchanged): the F88 injection wall requires readers/gatherers to hold Read/Write/WebSearch/WebFetch and never Bash. No available subagent type restricts tools to exactly that set, so the three series readers and the three chart researchers were dispatched as general-purpose agents with an explicit binding no-shell instruction. The wall was instructed, not structurally enforced - flagged for the user alongside the standing tool-less-brain ruling.",
+    "Step 3(e4) CITATION AUDIT left with one open implication flag rather than escalating to a narrator fallback - see citationAudit.note. The procedure's second-failure fallback exists for narrator flags; discarding a clean story over an implication-side flag would be the wrong reading of it.",
+    "Step 3(f) SESSION-OUTPUT DEVIATION (F67): the rendered report is 1099 lines, too large to paste verbatim into the session final message. The final message carries the report's executive sections and references the full rendered report by path instead. Recorded as an AFK-default."
    ]
   }
  ],

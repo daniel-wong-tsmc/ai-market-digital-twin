@@ -1,0 +1,217 @@
+{
+  "headline": "NVIDIA is designing its next chip around memory it cannot buy",
+  "deck": "Samsung is charging more and still cannot fill every order, and NVIDIA is trimming the memory in its next flagship to keep unit output up.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The price of making chips goes up",
+      "paragraphs": [
+        "Samsung raised prices for advanced contract chipmaking by 10 to 15 percent on new orders in July 2026, and the reason is demand it cannot serve. Its SF4 line in Pyeongtaek runs at full capacity, making logic chips for customers such as Qualcomm and the base layers for Samsung's own stacked memory. The company says it cannot meet all the orders it has.",
+        "AI and high-performance work now makes up more than 30 percent of Samsung's foundry sales, up from 15 to 20 percent late in 2025. But Samsung is the small door. It took 7 percent of world foundry revenue in the first quarter of 2026, against more than 70 percent for TSMC. Moving work to the second supplier does not add much capacity."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-2",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-3",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-4"
+      ],
+      "sourceLine": "Reuters wire, August 19, 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://www.freemalaysiatoday.com/category/business/2026/08/19/samsung-hikes-chipmaking-prices-by-up-to-15-on-demand-spike",
+          "title": "Free Malaysia Today (Reuters wire)",
+          "outlet": "Free Malaysia Today (Reuters wire)",
+          "date": "2026-08-19"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Less memory per chip, so more chips get built",
+      "paragraphs": [
+        "Reporting on August 18 says NVIDIA is testing its Rubin Ultra part with as little as 192GB of stacked memory, against a planned 1TB, because that memory is scarce and the newest version has not finished qualification. Bank of America research quoted in the same piece says performance falls off sharply below 500GB, and reads the cut as a temporary engineering compromise rather than a sign that buyers want less.",
+        "The numbers behind that decision have not moved. Suppliers can fill only 60 to 70 percent of the volume NVIDIA asked for, per August 7 reporting. On August 10 Micron said it can serve no more than about half of customer demand, called memory the number one problem its largest customers face, and said it has no line of sight to when supply catches up. Every stack that goes into one chip is a stack that cannot go into another."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "247wallst-com-3508dabf-2026-08-1",
+        "247wallst-com-3508dabf-2026-08-2",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1"
+      ],
+      "sourceLine": "24/7 Wall St., August 18, 2026; Seoul Economic Daily, August 7; Micron forum transcript, August 10.",
+      "relatedDocs": [
+        {
+          "url": "https://247wallst.com/investing/2026/08/18/nvidia-is-cutting-rubin-ultras-memory-is-microns-hbm-boom-in-danger/",
+          "title": "24/7 Wall St.",
+          "outlet": "24/7 Wall St.",
+          "date": "2026-08-18"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Nothing on the buying side is backing off",
+      "paragraphs": [
+        "AMD reported second-quarter revenue of 11.5 billion dollars, with data-center sales more than double a year earlier and a gross margin of 54 percent. Buyers are not flinching at the cost.",
+        "NVIDIA is going further and standing behind the buildings. On August 17 it guaranteed the residual value of leases covering about 4.25 gigawatts of computing load at an Ohio campus, with its payment obligation capped at 105 billion dollars. It is the exclusive compute supplier there under a 20-year lease to OpenAI, and the guarantee pays out only if OpenAI defaults. It has also signed up six large investment firms to raise more than 500 billion dollars of outside money for customers. Demand that is underwritten does not slow down on its own."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "ir-amd-com-6e46ec5e-2026-08-1",
+        "ir-amd-com-6e46ec5e-2026-08-2",
+        "nvidianews-nvidia-com-b38ebbeb-2026-08-1",
+        "nvidianews-nvidia-com-b38ebbeb-2026-08-4",
+        "nvidianews-nvidia-com-b38ebbeb-2026-08-5"
+      ],
+      "sourceLine": "AMD investor relations, August 12, 2026; NVIDIA newsroom, August 17, 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+          "title": "NVIDIA Newsroom (press release; filed as exhibit to 8-K, SEC accession 0001045810-26-000069)",
+          "outlet": "NVIDIA Newsroom (press release; filed as exhibit to 8-K, SEC accession 0001045810-26-000069)",
+          "date": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Two things would change the arithmetic. The first is a working route around the memory. Cerebras unveiled its CS-4 on August 18, a rack built from three wafer-sized processors, and says first shipments begin this quarter, with OpenAI, G42 and AWS named as customers and a claim of up to 30 times more tokens per second per user than GPU-based systems. Watch whether those racks actually land at those customers.",
+        "The second is the rest of the chain. Reporting from August 15 says order books for the new optical switches are full through 2027 and supplies stay short into 2028, with packaging capacity named as the limit on expansion, while NVIDIA's Vera Rubin platform entered full manufacturing in May 2026 with production shipments due this fall. Meanwhile used H100 cards still ask 20,877 to 27,999.99 dollars on the open market. Buyers do not pay that for hardware they could simply order new."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-stocktitan-net-587e9583-2026-08-1",
+        "www-stocktitan-net-587e9583-2026-08-2",
+        "www-stocktitan-net-587e9583-2026-08-3",
+        "www-storagereview-com-e5082a62-2026-08-4",
+        "www-storagereview-com-e5082a62-2026-08-5",
+        "www-ebay-com-c8613af6-2026-08-1"
+      ],
+      "sourceLine": "Cerebras press release, August 18, 2026; StorageReview, August 15, 2026; secondary-market listings, August 19, 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://www.stocktitan.net/news/CBRS/cerebras-unveils-cs-4-up-to-30-times-faster-than-gpu-based-8ywkeo6c1jiy.html",
+          "title": "Cerebras Systems (press release, GlobeNewswire) + cerebras.ai blog",
+          "outlet": "Cerebras Systems (press release, GlobeNewswire) + cerebras.ai blog",
+          "date": "2026-08-18"
+        },
+        {
+          "url": "https://www.storagereview.com/news/nvidia-spectrum-x-ethernet-photonics-enters-full-production-with-4x-fewer-lasers-and-a-five-vendor-cpo-supply-chain",
+          "title": "StorageReview",
+          "outlet": "StorageReview",
+          "date": "2026-08-15"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What one chip costs to buy outright, the cleanest read on scarcity.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Money going into memory plants is the only thing that fixes the shortage.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Shows how many AI servers are really leaving factories, not just being ordered.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-07",
+      "text": "July's marker rests on Samsung's price rise for new orders rather than a fresh shipment count.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "August rests on memory reporting dated the 7th through the 18th.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Samsung raised advanced contract chipmaking prices by 10 to 15 percent in July 2026 and says its full Pyeongtaek line cannot meet all orders.",
+      "claimFindingIds": [
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-2"
+      ]
+    },
+    {
+      "text": "NVIDIA is testing Rubin Ultra parts with as little as 192GB of memory, against a planned 1TB, because stacked-memory supply and qualification fall short.",
+      "claimFindingIds": [
+        "247wallst-com-3508dabf-2026-08-1"
+      ]
+    },
+    {
+      "text": "Cerebras begins shipping its CS-4 system this quarter, naming OpenAI, G42 and AWS as customers, giving buyers a route around merchant GPU systems.",
+      "claimFindingIds": [
+        "www-stocktitan-net-587e9583-2026-08-1",
+        "www-stocktitan-net-587e9583-2026-08-3"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "constraint-hbm-stacked-memory-supply",
+      "status": "worsened",
+      "reasoning": "NVIDIA is now testing Rubin Ultra with as little as 192GB of memory against a planned 1TB, because supply is short and the newest version is unqualified, per August 18 reporting. Micron said on August 10 it can serve about half of customer demand and sees no date when that changes.",
+      "claimFindingIds": [
+        "247wallst-com-3508dabf-2026-08-1",
+        "247wallst-com-3508dabf-2026-08-2",
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "Samsung raised advanced chipmaking prices 10 to 15 percent on July orders and says its full SF4 line cannot meet all demand, while NVIDIA cut memory per chip to keep unit output up. Both point to a limit that binds harder than it did.",
+      "claimFindingIds": [
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-2",
+        "247wallst-com-3508dabf-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "Cerebras unveiled the CS-4 on August 18 with first shipments this quarter and OpenAI, G42 and AWS named as customers, claiming up to 30 times more tokens per second per user than GPU systems. A credible non-GPU option narrows NVIDIA's edge.",
+      "claimFindingIds": [
+        "www-stocktitan-net-587e9583-2026-08-1",
+        "www-stocktitan-net-587e9583-2026-08-2",
+        "www-stocktitan-net-587e9583-2026-08-3"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-19",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "533127ddbc72692a679dee88fc071d0f2430d562d3a97daf3406d88b5bec1354",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-20T05:49:40.079608+00:00"
+  }
+}

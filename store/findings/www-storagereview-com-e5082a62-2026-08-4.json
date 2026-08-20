@@ -1,0 +1,44 @@
+{
+  "id": "www-storagereview-com-e5082a62-2026-08-4",
+  "statement": "Trade reporting says CPO switch order books are full through 2027 and supplies tight into 2028, with optical engine yield and advanced packaging capacity cited as key expansion bottlenecks.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Order books full more than a year out mean the fabric side is sold out, so packaging and optical yield now gate how fast new clusters can be wired.",
+  "impact": {
+    "targets": [
+      "infrastructure.networking-fabric",
+      "chips.foundry-packaging",
+      "chips.networking-silicon",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Optical engine yield and advanced packaging capacity limit CPO switch output while order books are already full, constraining how quickly cluster fabric can scale alongside accelerators."
+  },
+  "evidence": [
+    {
+      "source": "StorageReview",
+      "url": "https://www.storagereview.com/news/nvidia-spectrum-x-ethernet-photonics-enters-full-production-with-4x-fewer-lasers-and-a-five-vendor-cpo-supply-chain",
+      "date": "2026-08-15",
+      "excerpt": "other trade press says order books are full through 2027 and supplies tight into 2028, with the CPO switch market volume ramp expected in 2027-2028",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Unnamed 'other trade press' relayed inside one secondary article; the TrendForce release cited alongside it predates the window and was not fetched here."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-15",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

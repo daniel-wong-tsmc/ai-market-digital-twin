@@ -1,0 +1,42 @@
+{
+  "id": "lambda-ai-591ae243-2026-08-3",
+  "statement": "Lambda's public pricing page lists no H200 or GB200 on-demand instances and no AMD MI300X or MI355X options.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A neocloud's catalogue showing only NVIDIA silicon, and missing the newest NVIDIA parts, indicates both continued single-vendor dependence and limited availability of the latest accelerators for rent.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Absence of any AMD accelerator in a major rental catalogue indicates alternative merchant-GPU supply has not reached this channel, leaving NVIDIA silicon as the only rentable option here."
+  },
+  "evidence": [
+    {
+      "source": "Lambda",
+      "url": "https://lambda.ai/pricing",
+      "date": "2026-08-19",
+      "excerpt": "The page does not list H200 or GB200 on-demand pricing, and lists no AMD MI300X/MI355X.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Directly observed absence on one vendor's undated page; absence from a catalogue is weaker evidence than a stated disclosure."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 1; sources: Lambda, StorageReview",
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-19",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

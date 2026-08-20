@@ -1,0 +1,41 @@
+{
+  "seriesName": "High-bandwidth memory on each NVIDIA data-center GPU, by generation",
+  "unit": "GB per GPU",
+  "form": "columns",
+  "sourceName": "NVIDIA Technical Blog",
+  "points": [
+    {
+      "label": "H100 (Hopper)",
+      "value": 80.0,
+      "sourceUrl": "https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/",
+      "publishedAt": "2025-08-22"
+    },
+    {
+      "label": "H200 (Hopper)",
+      "value": 141.0,
+      "sourceUrl": "https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/",
+      "publishedAt": "2025-08-22"
+    },
+    {
+      "label": "B200 (Blackwell)",
+      "value": 192.0,
+      "sourceUrl": "https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/",
+      "publishedAt": "2025-08-22"
+    },
+    {
+      "label": "Blackwell Ultra",
+      "value": 288.0,
+      "sourceUrl": "https://developer.nvidia.com/blog/inside-nvidia-blackwell-ultra-the-chip-powering-the-ai-factory-era/",
+      "publishedAt": "2025-08-22"
+    },
+    {
+      "label": "Rubin",
+      "value": 288.0,
+      "sourceUrl": "https://developer.nvidia.com/blog/inside-nvidia-rubin-gpu-architecture-powering-the-era-of-agentic-ai/",
+      "publishedAt": "2026-07-21"
+    }
+  ],
+  "pair": false,
+  "notes": "All five numbers are NVIDIA's own published maximum HBM capacity per GPU, taken from two NVIDIA Technical Blog posts. The first four (80, 141, 192, 288) are all stated on the single Blackwell Ultra post; the Rubin figure comes from NVIDIA's Rubin architecture post on the same site. This is context, not the bullet itself: it shows the actual shipped ladder of memory per chip, so a reader can see that the 1TB once sketched for Rubin Ultra would have been more than triple today's best part, while the 192GB now being tested would be a step back to 2024's B200 level. The disputed Rubin Ultra numbers (1TB planned, 192GB tested) are deliberately NOT plotted, because they are unconfirmed reports rather than published NVIDIA specifications.",
+  "bulletIndex": 2
+}

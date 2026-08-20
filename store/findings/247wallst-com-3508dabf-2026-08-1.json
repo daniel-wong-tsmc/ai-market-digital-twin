@@ -1,0 +1,42 @@
+{
+  "id": "247wallst-com-3508dabf-2026-08-1",
+  "statement": "NVIDIA is testing lower HBM memory configurations for Rubin Ultra accelerators, reportedly as low as 192GB versus a planned 1TB, because of HBM4e supply constraints and qualification delays.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Fewer memory bits per accelerator directly reduces HBM content sold per GPU, which is the key swing factor for HBM makers' revenue attach rate to the merchant-GPU ramp.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "HBM4e supply constraints and qualification delays force a lower memory configuration per accelerator, cutting memory bit volume per GPU shipped and signalling a binding upstream memory bottleneck on the merchant-GPU platform ramp."
+  },
+  "evidence": [
+    {
+      "source": "24/7 Wall St.",
+      "url": "https://247wallst.com/investing/2026/08/18/nvidia-is-cutting-rubin-ultras-memory-is-microns-hbm-boom-in-danger/",
+      "date": "2026-08-18",
+      "excerpt": "Nvidia is testing lower memory configurations for its Rubin Ultra accelerators - reportedly as low as 192GB, down from the planned 1TB - due to HBM4e supply constraints and qualification delays.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying reported test configurations; no vendor filing or confirmation, so capped at medium."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: 24/7 Wall St.",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-18",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

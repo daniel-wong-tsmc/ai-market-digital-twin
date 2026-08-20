@@ -1,0 +1,45 @@
+{
+  "id": "ir-amd-com-6e46ec5e-2026-08-1",
+  "statement": "AMD reported Q2 2026 revenue of $11.5 billion with Data Center revenue more than doubling year over year.",
+  "kind": "measured",
+  "value": {
+    "number": 11.5,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A doubling of data center revenue at the second merchant-GPU vendor shows AI accelerator demand is broadening beyond a single supplier rather than concentrating.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Record quarterly revenue driven by data center growth indicates rising AI accelerator shipments and sustained buyer spending on merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases",
+      "date": "2026-08-12",
+      "excerpt": "'AMD Reports Second Quarter 2026 Financial Results' - Q2 revenue $11.5 billion, gross margin 54%, operating income $2.0 billion, net income $2.3 billion, diluted EPS $1.38",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Company press release with a companion 8-K filing (amd-20260804.htm), primary issuer disclosure."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "multi",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

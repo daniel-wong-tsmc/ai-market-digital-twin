@@ -1,0 +1,45 @@
+{
+  "id": "www-ebay-com-c8613af6-2026-08-3",
+  "statement": "An older secondary-market analysis reports used H100 units traded as high as $50,000 per GPU during mid-2024 scarcity with a $25,000-$40,000 retail range from mid-2024 into early 2026, above the roughly $21,000-$28,000 asking prices seen now.",
+  "kind": "measured",
+  "value": {
+    "number": 50000.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "falling",
+  "why": "Prior-generation resale prices easing from the scarcity peak suggests the acute shortage of that generation has passed as newer parts ship, which relieves pressure on the older installed base.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Declining resale value for the prior accelerator generation indicates easing scarcity for that vintage as buyers rotate to newer silicon, loosening the used-hardware channel."
+  },
+  "evidence": [
+    {
+      "source": "Hashrate Index",
+      "url": "https://www.ebay.com/shop/h100-80gb?_nkw=h100+80gb",
+      "date": "2026-08-19",
+      "excerpt": "H100 used/refurbished traded \"as high as $50,000 per GPU during mid-2024 scarcity\", retail range \"$25,000-$40,000 from mid-2024 into early 2026\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Comparison mixes an April 2026 blog's historical ranges with today's listing snippets; different sources and methods, single secondary corroborator."
+  },
+  "dispersion": "Peak-to-present spread is wide: $50,000 at mid-2024 peak versus roughly $20,877-$27,999 asked in current listings.",
+  "asOf": "2026-08",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-19",
+  "capturedAt": "2026-08-19T12:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
