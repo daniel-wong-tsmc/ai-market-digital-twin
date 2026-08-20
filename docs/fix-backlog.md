@@ -1687,7 +1687,11 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   (a) The AMD link discovery has **no staleness check** — if AMD ever listed quarters oldest-first
   inside a year block, the run would fetch and parse an older release and look successful; assert
   the discovered quarter is newer than the newest stored period. This is the one silent-wrong-data
-  path left in the lane.
+  path left in the lane. — **DONE 2026-08-20 (lane f112a-amd-staleness):** generic staleness guard
+  in `gpu_agent/chartdata/fetch.py` `run_fetch`; a strictly-older newest parsed quarter raises
+  `StalenessViolation` → loud `failed` entry, store untouched, run continues (never-raises intact).
+  Same-or-newer and first-ever-fetch pass (user-approved decisions 2026-08-20; plan:
+  `docs/superpowers/plans/2026-08-20-f112a-amd-staleness.md`).
   (b) `amd_dc_revenue.py` assumes three quarterly columns (`all_dates[:3]`); deriving the count from
   the "Three Months Ended" header colspan would be safer.
   (c) `gpu_agent/dashboard/render.py:140` still holds reader-style copy containing the internal
