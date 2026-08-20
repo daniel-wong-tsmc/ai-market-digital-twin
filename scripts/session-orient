@@ -7,6 +7,16 @@ echo "=== random_for_fun orientation ==="
 echo "branch: $(git branch --show-current 2>/dev/null)"
 git log --oneline -1 2>/dev/null | sed 's/^/last commit: /'
 
+# F83 (user-approved 2026-08-20): cycle-gap banner — a silent scheduler gap must be
+# visible at session start. cycle_gap.py prints one line (WARNING when 2+ days stale)
+# and is silent on any error, so orientation never breaks.
+for py in .venv/Scripts/python .venv/bin/python ../../.venv/Scripts/python ../../.venv/bin/python; do
+  if [ -x "$py" ]; then
+    "$py" scripts/cycle_gap.py 2>/dev/null
+    break
+  fi
+done
+
 s=$(git status --short 2>/dev/null)
 if [ -n "$s" ]; then
   echo "UNCOMMITTED:"

@@ -47,11 +47,17 @@ once a day, whether or not anyone opens a terminal. It is the only thing that ma
 "daily" rather than "whenever the operator remembers".
 
 **Where it lives.** Windows Task Scheduler, task name `Claude GPU Daily Cycle`, at the root
-task path (`\`). Not a file in the repo. As inspected: enabled, state Ready, runs daily at
-08:57 local, started 2026-07-05, runs as user `Daniel` with an interactive token and normal
-(non-admin) privileges, three-hour time limit, will not start on battery and stops if the
-machine goes onto battery, `StartWhenAvailable` on so a missed day runs late rather than never,
-and `IgnoreNew` so a second copy never overlaps the first.
+task path (`\`). Not a file in the repo. As registered 2026-08-20 (F83 scheduler fix,
+user-approved): enabled, state Ready, daily trigger stored as the absolute moment
+2026-07-05T07:57:00+07:00 (displays as the local equivalent when the machine's time zone
+moves — user-decided 2026-08-20: leave it), **repeats every 2 hours for 12 hours** so a missed
+or failed morning retries until one run succeeds that day (the script's ALREADY-DONE check
+makes repeats free after success), runs as user `Daniel` with an interactive token and normal
+(non-admin) privileges, three-hour time limit, **starts on battery and keeps running on
+battery** (the pre-2026-08-20 "AC only" rules silently lost most unplugged days),
+`StartWhenAvailable` on so a missed day runs late rather than never, and `IgnoreNew` so a
+second copy never overlaps the first — which also stops a repetition fire from overlapping a
+run still in flight.
 
 **How to rebuild.** Recreate the task pointing at the script in §1b:
 
@@ -59,15 +65,19 @@ and `IgnoreNew` so a second copy never overlaps the first.
 $action  = New-ScheduledTaskAction -Execute 'powershell.exe' `
   -Argument '-NoProfile -File "C:\Users\danie\.claude\jobs\gpu-daily-cycle.ps1"'
 $trigger = New-ScheduledTaskTrigger -Daily -At 08:57
+$trigger.Repetition = (New-ScheduledTaskTrigger -Once -At 08:57 `
+  -RepetitionInterval (New-TimeSpan -Hours 2) `
+  -RepetitionDuration (New-TimeSpan -Hours 12)).Repetition
 $set     = New-ScheduledTaskSettingsSet -StartWhenAvailable `
+  -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries `
   -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 3)
 Register-ScheduledTask -TaskName 'Claude GPU Daily Cycle' -Action $action `
   -Trigger $trigger -Settings $set -RunLevel Limited `
-  -Description 'Headless Claude Code run of the merchant-gpu daily cycle (user-authorized 2026-07-05). Logs: ~\.claude\jobs\logs'
+  -Description 'Headless Claude Code run of the merchant-gpu daily cycle (user-authorized 2026-07-05). Logs: ~\.claude\jobs\logs. 2026-08-20 (user-approved, F83 fix): battery starts allowed, repeats every 2h until one run succeeds that day.'
 ```
 
-The battery rules are Windows defaults and match what is registered today; leave them unless
-the desk moves to a machine that is always plugged in.
+Do NOT re-add the battery restrictions and do NOT enable `WakeToRun` — the laptop must never
+wake itself (user-decided 2026-08-20).
 
 **What breaks silently.** Everything about "daily". No task means no cycles, no new findings,
 no scorecards — and no error anywhere, because nothing ran to produce one. The first symptom is
@@ -79,24 +89,48 @@ battery at 08:57 on those days. This is exactly the silent failure mode above, h
 now: the desk lost six days and nothing flagged it. Worth a periodic look at
 `Get-ScheduledTaskInfo -TaskName 'Claude GPU Daily Cycle'`.
 
+**Live health note (2026-08-20).** The pattern above repeated (7 no-run days since 08-09, two
+dead runs) and was diagnosed end to end — memo:
+`.superpowers/handoffs/f83-scheduler-diagnosis-QUESTIONS.md`. The task settings, script, and
+watchdog described in this section are the user-approved fixes, applied 2026-08-20; the
+pre-change task XML and script are preserved in
+`.superpowers/handoffs/f83-scheduler-fix-BACKUP/`.
+
 ### 1b. The job script — `~/.claude/jobs/gpu-daily-cycle.ps1`
 
-**What it is.** The 29-line PowerShell script the task runs. It opens a dated log, checks one
-safety interlock, moves to the repo, and launches Claude Code headlessly with a fixed
-instruction. Deliberately **not** in the repo (per F83, the live copy stays machine-local); its
-content is mirrored below so it can be rebuilt from the repo alone.
+**What it is.** The PowerShell script the task runs. Rewritten 2026-08-20 (F83 scheduler fix,
+user-approved). It opens a dated log, exits fast if today's cycle already completed (so the
+2-hour repeats are free), checks the safety interlock, launches Claude Code headlessly with a
+fixed instruction — and then **judges success itself**: the run only counts if the repo's
+`store/cycle-log.json` shows a completed cycle for today. Anything else exits 1 and fires a
+Windows toast, with a distinct toast for an expired login. Deliberately **not** in the repo
+(per F83, the live copy stays machine-local); its content is mirrored below so it can be
+rebuilt from the repo alone.
 
-**Where it lives.** `C:\Users\danie\.claude\jobs\gpu-daily-cycle.ps1` (present, 2128 bytes,
-last modified 2026-07-12). Logs go to `C:\Users\danie\.claude\jobs\logs\gpu-daily-<date>.log`;
-30-odd daily logs are there, newest 2026-07-29. A sibling `pins.json` exists and is an empty
-list `[]` — no pinning in effect.
+**Where it lives.** `C:\Users\danie\.claude\jobs\gpu-daily-cycle.ps1` (rewritten 2026-08-20).
+Logs go to `C:\Users\danie\.claude\jobs\logs\gpu-daily-<date>.log`. Two sibling helpers, both
+new 2026-08-20: `gpu-cycle-toast.ps1` (shows a toast, message as parameter) and
+`gpu-cycle-watchdog.ps1` (§1c). A sibling `pins.json` exists and is an empty list `[]` — no
+pinning in effect.
 
 **The safety interlock, in plain words.** Before launching, the script reads
 `~/.claude/settings.json` and looks for the text `git push`. If the git/venv permission
-allowlist has been removed, it writes "SKIPPED" to the log and exits cleanly, rather than
-launching a headless session that would freeze forever on a permission prompt nobody is there
-to answer. Note the coupling: **§5's allowlist is load-bearing for §1.** Remove it and the job
-stops running — quietly, but at least it says so in the log.
+allowlist has been removed, it writes "SKIPPED" to the log, fires a toast, and exits 1 rather
+than launching a headless session that would freeze forever on a permission prompt nobody is
+there to answer. Note the coupling: **§5's allowlist is load-bearing for §1.** Remove it and
+the job stops running — and since 2026-08-20 it says so out loud, not just in the log.
+
+**The four silent-death classes this script now catches (diagnosed 2026-08-20, memo
+`.superpowers/handoffs/f83-scheduler-diagnosis-QUESTIONS.md`).** (1) Machine asleep or on
+battery at trigger time — fixed by the task's battery settings + repetition (§1a). (2) The
+session hits a blocker and politely asks a question nobody is there to answer, exiting 0
+(08-12) — caught by the success judge: no cycle-log entry for today means FAILED, toast,
+exit 1. (3) Headless mode kills background work after 600 seconds (08-19, killed the thesis
+brain) — fixed by `CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS=0` in the script. (4) **Expired
+login (08-14): the run dies in ~30 seconds with "Failed to authenticate". The script detects
+that string and toasts "Claude login expired". The operator remedy is simply to open Claude
+Code interactively and sign in; the task then retries by itself at the next 2-hour mark. No
+credentials are stored or refreshed anywhere in this job — do not try.**
 
 **How to rebuild.** Write this file verbatim to
 `C:\Users\danie\.claude\jobs\gpu-daily-cycle.ps1`:
@@ -106,31 +140,103 @@ stops running — quietly, but at least it says so in the log.
 # User-authorized fully-autonomous run (2026-07-05): commits and pushes on success.
 # 2026-07-12 (user-approved, F83): runs with --dangerously-skip-permissions — ALL tools
 # granted to this scheduled session only (resolves the 07-09/07-11/07-12 blocked dailies).
+# 2026-08-20 (user-approved, F83 scheduler fix):
+#   - CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS=0 (headless mode killed the 08-19 thesis step
+#     after its 600s background-wait cap; the CLI's own log printed this fix).
+#   - The script, not the session, judges success: a run only counts if store/cycle-log.json
+#     shows a completed cycle for today. Anything else exits 1 and fires a toast
+#     (catches "polite stop" deaths like 08-12 and auth deaths like 08-14).
+#   - Distinct toast for auth failure (08-14 class): sign in, the task retries.
+#   - The task now repeats every 2h for 12h; ALREADY-DONE below makes repeats free
+#     once a cycle has completed, so a missed/failed morning retries until success.
 # Logs to ~\.claude\jobs\logs\gpu-daily-<date>.log
 $ErrorActionPreference = 'Continue'
 
+$repo = 'C:\Users\danie\random_for_fun'
 $logDir = Join-Path $env:USERPROFILE '.claude\jobs\logs'
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
-$log = Join-Path $logDir ("gpu-daily-" + (Get-Date -Format 'yyyy-MM-dd') + ".log")
+$today = Get-Date -Format 'yyyy-MM-dd'
+$log = Join-Path $logDir ("gpu-daily-" + $today + ".log")
+
+function Get-CycleState {
+  # Newest completed-cycle marker from the repo's cycle log:
+  # capturedAt date (completion day) + newest entry status.
+  try {
+    $cl = Get-Content (Join-Path $repo 'store\cycle-log.json') -Raw | ConvertFrom-Json
+    $cap = ''
+    if ($cl.capturedAt) { $cap = ([string]$cl.capturedAt).Substring(0, 10) }
+    $status = ''
+    if ($cl.entries -and $cl.entries.Count -gt 0) { $status = [string]$cl.entries[0].status }
+    return New-Object PSObject -Property @{ CapturedDate = $cap; Status = $status }
+  } catch {
+    return New-Object PSObject -Property @{ CapturedDate = ''; Status = '' }
+  }
+}
+
+function Send-CycleToast([string]$Message) {
+  try { & powershell.exe -NoProfile -File (Join-Path $env:USERPROFILE '.claude\jobs\gpu-cycle-toast.ps1') -Message $Message } catch {}
+}
 
 "=== gpu-daily-cycle start $(Get-Date -Format o) ===" | Out-File $log -Append -Encoding utf8
+
+# Fast exit for the repetition trigger: once today's cycle completed, later fires are no-ops.
+$pre = Get-CycleState
+if ($pre.CapturedDate -eq $today -and $pre.Status -eq 'done') {
+  "ALREADY-DONE: cycle log shows a completed cycle for $today; nothing to do." | Out-File $log -Append -Encoding utf8
+  exit 0
+}
 
 # Safety interlock: headless runs need the git/venv permission allowlist in ~\.claude\settings.json.
 # If it is ever removed, skip cleanly instead of stalling mid-run on permission prompts.
 $settings = Get-Content (Join-Path $env:USERPROFILE '.claude\settings.json') -Raw
 if ($settings -notmatch 'git push') {
   "SKIPPED: git/venv permission allowlist not present in settings.json; headless run would stall." | Out-File $log -Append -Encoding utf8
-  exit 0
+  Send-CycleToast "Daily cycle SKIPPED: the git/venv permission allowlist is missing from ~\.claude\settings.json."
+  exit 1
 }
 
-Set-Location 'C:\Users\danie\random_for_fun'
+Set-Location $repo
+
+# F83 fix (user-approved 2026-08-20): print mode terminates background tasks after 600s
+# by default — this killed the 08-19 thesis brain. 0 = wait indefinitely (the CLI's own
+# suggested fix, printed in gpu-daily-2026-08-19.log). The task's 3h limit stays the backstop.
+$env:CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS = '0'
 
 $prompt = @'
-Use the run-gpu-market skill to run the daily cycle for category:chips.merchant-gpu (mode: daily, live gather). Follow CLAUDE.md and the skill exactly. Orient first: if git status shows another instance mid-run (fresh uncommitted store/ artifacts appearing), or git pull --ff-only fails, STOP and append the blocker to docs/superpowers/HANDOFF.md instead of improvising. After a successful cycle: commit and push store/ artifacts and the cycle log, then append a one-line run summary (scorecard path, DMI/SMI) to the newest-state section of docs/superpowers/HANDOFF.md and push that too. This is a scheduled headless run: record any judgment calls as "AFK-default" in HANDOFF.md.
+Use the run-gpu-market skill to run the daily cycle for category:chips.merchant-gpu (mode: daily, live gather). Follow CLAUDE.md and the skill exactly. Orient first: if git status shows another instance mid-run (fresh uncommitted store/ artifacts appearing), or git pull --ff-only fails, STOP and append the blocker to docs/superpowers/HANDOFF.md instead of improvising. After a successful cycle: commit and push store/ artifacts and the cycle log, then append a one-line run summary (scorecard path, DMI/SMI) to the newest-state section of docs/superpowers/HANDOFF.md and push that too. This is a scheduled headless run: record any judgment calls as "AFK-default" in HANDOFF.md. Nobody is watching this session: if you hit a blocking condition or an unanswerable question, do NOT end your turn with a question — save all work, append the blocker and where you stopped to docs/superpowers/HANDOFF.md, and end your turn with the single line CYCLE FAILED so the wrapper script can alert.
 '@
 
 & "C:\Users\danie\.local\bin\claude.exe" -p $prompt --dangerously-skip-permissions *>> $log
-"=== gpu-daily-cycle end $(Get-Date -Format o) exit=$LASTEXITCODE ===" | Out-File $log -Append -Encoding utf8
+$claudeExit = $LASTEXITCODE
+"=== gpu-daily-cycle claude done $(Get-Date -Format o) exit=$claudeExit ===" | Out-File $log -Append -Encoding utf8
+
+# Success judge: the ONLY success signal is a completed cycle logged for today.
+# Exit 0 + friendly words is not success (the 08-12 lesson).
+$post = Get-CycleState
+if ($post.CapturedDate -eq $today -and $post.Status -eq 'done') {
+  "SUCCESS: cycle log shows a completed cycle for $today (claude exit=$claudeExit)." | Out-File $log -Append -Encoding utf8
+  "=== gpu-daily-cycle end $(Get-Date -Format o) exit=0 ===" | Out-File $log -Append -Encoding utf8
+  exit 0
+}
+
+# Failure: classify this attempt's log slice (from this invocation's start marker on).
+$content = ''
+try { $content = Get-Content $log -Raw } catch {}
+$idx = $content.LastIndexOf('=== gpu-daily-cycle start')
+$slice = if ($idx -ge 0) { $content.Substring($idx) } else { $content }
+# PS 5.1's *>> appends claude's output as UTF-16 while our markers are UTF-8; strip the
+# interleaved NUL bytes so string matching sees the CLI's words.
+$slice = $slice -replace [string][char]0, ''
+
+if ($slice -match 'Failed to authenticate|OAuth (session|token) expired') {
+  "FAILED-AUTH: Claude login expired; run died before doing anything (claude exit=$claudeExit)." | Out-File $log -Append -Encoding utf8
+  Send-CycleToast "Daily cycle FAILED: Claude login expired. Open Claude Code and sign in; the task retries every 2h until 19:57."
+} else {
+  "FAILED: no completed cycle recorded for $today (claude exit=$claudeExit). See this log." | Out-File $log -Append -Encoding utf8
+  Send-CycleToast "Daily cycle FAILED today: no completed cycle recorded. Log: ~\.claude\jobs\logs\gpu-daily-$today.log"
+}
+"=== gpu-daily-cycle end $(Get-Date -Format o) exit=1 ===" | Out-File $log -Append -Encoding utf8
+exit 1
 ```
 
 Three things in that script are machine-specific and must be checked on a rebuild: the repo
@@ -140,8 +246,44 @@ every tool with no prompts. That flag is user-approved for this job only (2026-0
 is documented in `docs/threat-model-unattended.md` as "Stage 0". Do not copy it onto anything
 else.
 
-**What breaks silently.** The task fires and dies instantly. The log directory gets a stub or
-nothing at all. Task Scheduler still reports the task as healthy.
+**What breaks silently.** Much less than before 2026-08-20: a failed or absent run now exits 1,
+toasts, and is caught again by the watchdog (§1c) and the session-start gap banner
+(`scripts/session-orient` → `scripts/cycle_gap.py`). Still silent: the machine being asleep or
+off all day (nothing can run, and the toast waits for the next logon), and a corrupted script
+that Task Scheduler cannot even start.
+
+### 1c. The missed-run watchdog — `~/.claude/jobs/gpu-cycle-watchdog.ps1` + toast helper
+
+**What it is.** Two small machine-local scripts plus a second scheduled task, added 2026-08-20
+(F83 fix, user-approved). `gpu-cycle-toast.ps1` shows a Windows toast, taking the message as a
+parameter (a standalone copy of the `~\.claude\hooks\claude-toast.ps1` logic). The scheduled
+task **`Claude GPU Cycle Watchdog`** (triggers: at logon of `Daniel`, and daily 20:30; battery
+allowed; StartWhenAvailable; 5-minute limit) runs `gpu-cycle-watchdog.ps1`, which reads
+`store/cycle-log.json` (read-only, never starts a cycle) and toasts when a scheduled day
+produced no run: "last completed cycle was N days ago" when 2+ days stale, or "no completed
+cycle today" when it is 20:00+ and today is still empty. Silent when healthy and silent on any
+read error.
+
+**How to rebuild.** Copy both scripts from the backup
+(`.superpowers/handoffs/f83-scheduler-fix-BACKUP/` holds the task XMLs; the scripts' logic is
+described above and the toast body matches `~\.claude\hooks\claude-toast.ps1`), then:
+
+```powershell
+$action = New-ScheduledTaskAction -Execute 'powershell.exe' `
+  -Argument '-NoProfile -WindowStyle Hidden -File "C:\Users\danie\.claude\jobs\gpu-cycle-watchdog.ps1"'
+$t1 = New-ScheduledTaskTrigger -AtLogOn -User "$env:USERDOMAIN\$env:USERNAME"
+$t2 = New-ScheduledTaskTrigger -Daily -At 20:30
+$set = New-ScheduledTaskSettingsSet -StartWhenAvailable -AllowStartIfOnBatteries `
+  -DontStopIfGoingOnBatteries -MultipleInstances IgnoreNew `
+  -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
+Register-ScheduledTask -TaskName 'Claude GPU Cycle Watchdog' -Action $action `
+  -Trigger $t1,$t2 -Settings $set -RunLevel Limited `
+  -Description 'Missed-run alert for the GPU daily cycle (F83 fix, user-approved 2026-08-20). Toasts when a scheduled day produced no run. Read-only.'
+```
+
+**What breaks silently.** The watchdog itself: if it is deleted, nothing alerts about missed
+days again and nothing alerts about the watchdog. The session-start gap banner in the repo
+(`scripts/cycle_gap.py`) is the independent backstop.
 
 ---
 
