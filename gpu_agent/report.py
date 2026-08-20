@@ -857,30 +857,32 @@ def render_quick_glance(state, change=None, registry=None, fold_detail=False) ->
         label = reader.DIM_LABEL.get(dim, dim)
         lines.append(f"    {label:<24} {cell.rating} {arrow}")
 
+    # One shared row inventory per tier (review fix, 2026-08-20): the fold summary's
+    # "N tracked, M moved" counts and the full rows below derive from these SAME lists,
+    # so a future change to a tier's row filter cannot drift the fold count.
+    scarcity_prices = list(state.prices)
+    scarcity_metrics = [(iid, c) for iid, c in state.metrics.items()
+                        if c.tier == "scarcity"]
+    money_metrics = [(iid, c) for iid, c in state.metrics.items() if c.tier == "money"]
+    scarcity_keys = ([f"price:{p.model}" for p in scarcity_prices]
+                     + [f"metric:{iid}" for iid, _ in scarcity_metrics])
+    money_keys = [f"metric:{iid}" for iid, _ in money_metrics]
+
     if fold_detail:
-        scarcity_keys = ([f"price:{p.model}" for p in state.prices]
-                         + [f"metric:{iid}" for iid, c in state.metrics.items()
-                            if c.tier == "scarcity"])
-        money_keys = [f"metric:{iid}" for iid, c in state.metrics.items()
-                      if c.tier == "money"]
         lines.append(_glance_fold_line("Tier 2 — Scarcity", scarcity_keys, change))
         lines.append(_glance_fold_line("Tier 3 — Money", money_keys, change))
         return "\n".join(lines)
 
     lines.append("  Tier 2 — Scarcity")
-    for p in state.prices:
+    for p in scarcity_prices:
         arrow = _glance_arrow(change, f"price:{p.model}")
         lines.append(f"    {p.model + ' rental':<24} ${p.usdPerGpuHour:g}/GPU-hr {arrow}")
-    for iid, cell in state.metrics.items():
-        if cell.tier != "scarcity":
-            continue
+    for iid, cell in scarcity_metrics:
         arrow = _glance_arrow(change, f"metric:{iid}")
         lines.append(f"    {reader.indicator_label(iid, registry):<24} {_metric_display(cell)} {arrow}")
 
     lines.append("  Tier 3 — Money")
-    for iid, cell in state.metrics.items():
-        if cell.tier != "money":
-            continue
+    for iid, cell in money_metrics:
         arrow = _glance_arrow(change, f"metric:{iid}")
         age = _age_tag(state.asOf, cell.observedAt)
         age_str = f"  ({age})" if age else ""
@@ -1136,7 +1138,7 @@ def render_report(
     offenders = reader.lint_acronyms(body.split(reader.APPENDIX_DIVIDER)[0])
     if offenders:
         raise ValueError(
-            "brief blocked before render: unknown all-caps token(s) above the "
+            "brief blocked before ship: unknown all-caps token(s) above the "
             f"appendix divider: {', '.join(offenders)} — if these are real terms, "
             "add them to registry/acronyms.json (\"allowed\") and re-render; the "
             "saved run data is untouched.")

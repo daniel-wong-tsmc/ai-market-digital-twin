@@ -108,16 +108,21 @@ def label_ids_in_text(text: str, registry) -> str:
 # not in today's registry, so label_ids_in_text cannot substitute them and they would
 # leak raw above the fold. Deliberately narrow: ONE capital letter + 1-2 digits inside
 # parentheses, nothing broader — "(no growth in 2027)" and "(CS-4)" must survive.
-_STALE_PAREN_ID_RE = re.compile(r"\s*\(\b[A-Z]\d{1,2}\b\)")
+_STALE_PAREN_ID_RE = re.compile(r"\s*\(\b([A-Z]\d{1,2})\b\)")
 
 
 def strip_stale_paren_ids(text: str) -> str:
     """Display-layer strip of leftover parenthesized old-scheme short-id tokens
     (e.g. "(D1)", "(X5)") from a "breaks if" line. The stored book text is never
-    touched (the GATE's observable-id requirement lives there, as designed)."""
+    touched (the GATE's observable-id requirement lives there, as designed).
+    Review fix (2026-08-20): a token on the acronym allowlist (e.g. "(Q3)") is
+    sanctioned exec-facing vocabulary, never a stale id — it survives untouched
+    (silent deletion of legitimate content would invert the fail-loud posture)."""
     if not text:
         return text
-    return _STALE_PAREN_ID_RE.sub("", text)
+    allowed = _allowed()
+    return _STALE_PAREN_ID_RE.sub(
+        lambda m: m.group(0) if m.group(1) in allowed else "", text)
 
 
 def split_sentences(text: str) -> list[str]:

@@ -177,6 +177,8 @@ def test_f119_fold_brings_overshooting_page_within_budget():
     assert "QUICK GLANCE" in appendix_part
     assert "B200 rental" in appendix_part
     assert "Tier 3 — Money" in appendix_part
+    # spec: the echoed full QUICK GLANCE sits right after the full THE CALLS block
+    assert appendix_part.index("THE CALLS") < appendix_part.index("QUICK GLANCE")
 
 
 def test_f119_fold_lines_pass_acronym_lint():
@@ -269,6 +271,28 @@ def test_f120_strip_stale_paren_ids_unit():
     assert (reader.strip_stale_paren_ids("keep (no growth in 2027) and (CS-4)")
             == "keep (no growth in 2027) and (CS-4)")
     assert reader.strip_stale_paren_ids("") == ""
+
+
+def test_f120_strip_never_eats_allowlisted_tokens():
+    # Review fix (2026-08-20): "(Q3)" matches the one-capital+digits shape but Q3 is
+    # a sanctioned allowlisted token — deleting it would be silent content loss, the
+    # opposite of the fail-loud posture. Allowlisted tokens must survive the strip.
+    assert (reader.strip_stale_paren_ids("misses guidance (Q3) badly")
+            == "misses guidance (Q3) badly")
+    assert (reader.strip_stale_paren_ids("both (Q4) and (D1) appear")
+            == "both (Q4) and appear")
+
+
+def test_f119_both_levers_bottomed_still_over_ships_over_budget():
+    # Spec-promised (user-accepted degradation mode): when even the QUICK GLANCE fold
+    # cannot reach the 88-line budget, the render ships over budget — no exception,
+    # no silent content loss beyond the two approved folds.
+    from gpu_agent.report import _ABOVE_FOLD_BUDGET
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                        state=_wide_state(), thesis_book=_big_book(120))
+    above = out.split(reader.APPENDIX_DIVIDER)[0]
+    assert len(above.splitlines()) > _ABOVE_FOLD_BUDGET   # honest: still over
+    assert "full rows below the divider" in above          # both levers did fire
 
 
 def test_f120_allowlisted_tokens_still_render():
