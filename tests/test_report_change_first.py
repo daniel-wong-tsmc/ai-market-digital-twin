@@ -124,3 +124,70 @@ def test_change_first_appendix_has_full_the_calls_block():
     for eid in ("a", "b", "c", "d", "e", "f"):
         assert f"call {eid}" in appendix_part
     assert appendix_part.count("breaks if:") == 6
+
+
+# ── F119: second shrink lever — QUICK GLANCE Tier 2/3 fold ──────────────────
+
+def _big_book(n=17):
+    from gpu_agent.thesis import ThesisBook, ThesisEntry
+    entries = [ThesisEntry(
+        id=f"t{i}", title=f"call t{i}", statement="s", lens="demand",
+        status="registered", conviction="medium",
+        lastVerdict=("strengthened" if i == 0 else "reaffirmed"),
+        lastDirection=0, streak=2, mechanism="m", falsifiableTrigger="trigger",
+        sensitivity="s", createdAsOf="2026-06", lastChangedAsOf="2026-07-08",
+        lastJudgedAsOf="2026-07-08") for i in range(n)]
+    return ThesisBook(categoryId="chips.merchant-gpu", entries=entries)
+
+
+def _wide_state():
+    # A state vector wide enough (prices + scarcity + money rows) that the top half
+    # still overshoots the 88-line budget after ranked calls bottom out at top_k == 1.
+    from gpu_agent.change import PriceCell, MetricCell
+    st = build_state(_sc())
+    st.prices = [PriceCell(model=m, usdPerGpuHour=2.5, asOfColumn="2026-07-08")
+                 for m in ("B200", "H100", "H200", "GB200")]
+    st.metrics = {
+        "leadTimes": MetricCell(indicatorId="leadTimes", statement="36 weeks",
+                                tier="scarcity"),
+        "S10": MetricCell(indicatorId="S10", statement="inventory lean",
+                          tier="scarcity"),
+        "vendorRevenueGuidance": MetricCell(indicatorId="vendorRevenueGuidance",
+                                            value=45.0, unit="USD_B", tier="money"),
+        "rpoBacklog": MetricCell(indicatorId="rpoBacklog", value=90.0, unit="USD_B",
+                                 tier="money"),
+        "grossMargin": MetricCell(indicatorId="grossMargin", value=71.0, unit="pct",
+                                  tier="money"),
+    }
+    return st
+
+
+def test_f119_fold_brings_overshooting_page_within_budget():
+    from gpu_agent.report import _ABOVE_FOLD_BUDGET
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                        state=_wide_state(), thesis_book=_big_book())
+    above, appendix_part = out.split(reader.APPENDIX_DIVIDER, 1)
+    assert len(above.splitlines()) <= _ABOVE_FOLD_BUDGET
+    # the fold marker sits above the fold; Tier 1 verdict rows never fold
+    assert "full rows below the divider" in above
+    assert "Momentum rating" in above
+    # Tier 2/3 detail rows are gone from the top half...
+    assert "B200 rental" not in above
+    # ...but the full QUICK GLANCE rows are guaranteed in the appendix
+    assert "QUICK GLANCE" in appendix_part
+    assert "B200 rental" in appendix_part
+    assert "Tier 3 — Money" in appendix_part
+
+
+def test_f119_fold_lines_pass_acronym_lint():
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                        state=_wide_state(), thesis_book=_big_book())
+    assert reader.lint_acronyms(out.split(reader.APPENDIX_DIVIDER)[0]) == []
+
+
+def test_f119_under_budget_page_never_folds():
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                        state=build_state(_sc()))
+    assert "full rows below the divider" not in out
+    # and the appendix carries no duplicated QUICK GLANCE when nothing folded
+    assert out.split(reader.APPENDIX_DIVIDER)[1].count("QUICK GLANCE") == 0

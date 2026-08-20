@@ -824,12 +824,27 @@ def _glance_arrow(change, key) -> str:
     return _CHANGE_ARROW["same"]
 
 
-def render_quick_glance(state, change=None, registry=None) -> str:
+def _glance_fold_line(label: str, keys: list[str], change) -> str:
+    """One honest summary line for a folded glance tier (F119): how many rows it
+    tracks, how many moved (nearest-horizon arrow != unchanged), and where the full
+    rows live. Exec-plain; passes reader.lint_acronyms."""
+    moved = sum(1 for k in keys
+                if _glance_arrow(change, k) != _CHANGE_ARROW["same"])
+    return (f"  {label}: {len(keys)} tracked, {moved} moved — "
+            f"full rows below the divider")
+
+
+def render_quick_glance(state, change=None, registry=None, fold_detail=False) -> str:
     """QUICK GLANCE (D8) — three tiers, each row its move arrow + (money) an age tag. Tier 1
     verdict: the six ratings + demand/supply momentum. Tier 2 scarcity: rental price (feed) +
     lead times + packaging/HBM. Tier 3 money: revenue guidance + backlog + gross margin,
     age-tagged (they move on earnings). Above the fold — passes reader.lint_acronyms. Share
-    price is excluded (spec §5.6)."""
+    price is excluded (spec §5.6).
+
+    F119 (user-approved 2026-08-20): ``fold_detail=True`` is the budget loop's second
+    shrink lever — Tier 2 and Tier 3 each collapse to one honest summary line (count
+    tracked, count moved, pointer to the appendix); Tier 1 never folds. The default is
+    byte-identical to before the flag existed."""
     lines = ["QUICK GLANCE"]
 
     lines.append("  Tier 1 — Verdict")
@@ -841,6 +856,16 @@ def render_quick_glance(state, change=None, registry=None) -> str:
         arrow = _glance_arrow(change, f"dim:{dim}")
         label = reader.DIM_LABEL.get(dim, dim)
         lines.append(f"    {label:<24} {cell.rating} {arrow}")
+
+    if fold_detail:
+        scarcity_keys = ([f"price:{p.model}" for p in state.prices]
+                         + [f"metric:{iid}" for iid, c in state.metrics.items()
+                            if c.tier == "scarcity"])
+        money_keys = [f"metric:{iid}" for iid, c in state.metrics.items()
+                      if c.tier == "money"]
+        lines.append(_glance_fold_line("Tier 2 — Scarcity", scarcity_keys, change))
+        lines.append(_glance_fold_line("Tier 3 — Money", money_keys, change))
+        return "\n".join(lines)
 
     lines.append("  Tier 2 — Scarcity")
     for p in state.prices:
@@ -1089,6 +1114,18 @@ def render_report(
             k -= 1
             top[4] = render_ranked_calls(thesis_book, sc, change, thesis_last_findings,
                                          registry=registry, top_k=k)
+            body = "\n\n".join(s for s in top + appendix if s)
+        # F119 second lever (user-approved 2026-08-20): ranked calls are at their
+        # floor — fold QUICK GLANCE Tier 2/3 to one summary line each and echo the
+        # full rows into the appendix (right after the full THE CALLS block) so the
+        # fold line's promise is true. If the page is STILL over budget after both
+        # levers bottom out, ship over budget (user-accepted 2026-07-13 stopgap,
+        # re-confirmed 2026-08-20).
+        if (state is not None
+                and len(body.split(reader.APPENDIX_DIVIDER)[0].splitlines())
+                > _ABOVE_FOLD_BUDGET):
+            top[3] = render_quick_glance(state, change, registry, fold_detail=True)
+            appendix.insert(2, render_quick_glance(state, change, registry))
             body = "\n\n".join(s for s in top + appendix if s)
     return body
 
