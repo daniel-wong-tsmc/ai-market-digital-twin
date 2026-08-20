@@ -223,6 +223,54 @@ def test_f120_novel_acronym_blocks_change_first_path_too():
                       state=st, thesis_book=book)
 
 
+def test_f120_stale_paren_id_stripped_from_breaks_if_legacy_path():
+    # Round-2 remediation (user-approved 2026-08-20, Option A): the live book's
+    # "breaks if" texts embed old-scheme ids as "Label (D1)" — not in today's
+    # registry, so label substitution can't remove them. The display layer strips
+    # the leftover parenthesized short-code; the stored book text is untouched.
+    book = _book_with_title("Hyperscaler spending stays on plan")
+    book.entries[0].falsifiableTrigger = (
+        "A Hyperscaler capex-revision direction (D1) cuts 2027 guidance "
+        "within 2 quarters.")
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", thesis_book=book)
+    above = out.split(reader.APPENDIX_DIVIDER)[0]
+    assert "(D1)" not in above
+    assert "capex-revision direction cuts 2027 guidance" in above
+
+
+def test_f120_stale_paren_id_stripped_from_ranked_calls_too():
+    book = _book_with_title("Hyperscaler spending stays on plan")
+    book.entries[0].falsifiableTrigger = (
+        "Financing conditions (X5) stop appearing for 2 consecutive quarters.")
+    st = build_state(_sc())
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                        state=st, thesis_book=book)
+    above = out.split(reader.APPENDIX_DIVIDER)[0]
+    assert "(X5)" not in above
+    assert "Financing conditions stop appearing" in above
+
+
+def test_f120_strip_is_narrow_legitimate_parens_survive():
+    # The strip must not eat real parenthesized prose or product names — only the
+    # old-scheme short-code pattern (one capital letter + 1-2 digits).
+    from gpu_agent import brief
+    book = _book_with_title("Wafer starts hold")
+    book.entries[0].falsifiableTrigger = (
+        "Cerebras stops reporting (CS-4) shipments (no growth in 2027) "
+        "for 2 quarters.")
+    calls = brief.render_the_calls(book, _sc(), None, registry=_reg())
+    assert "(CS-4)" in calls
+    assert "(no growth in 2027)" in calls
+
+
+def test_f120_strip_stale_paren_ids_unit():
+    assert (reader.strip_stale_paren_ids("Label (D1) moves (S10) fast")
+            == "Label moves fast")
+    assert (reader.strip_stale_paren_ids("keep (no growth in 2027) and (CS-4)")
+            == "keep (no growth in 2027) and (CS-4)")
+    assert reader.strip_stale_paren_ids("") == ""
+
+
 def test_f120_allowlisted_tokens_still_render():
     # DAILY/monthly clean renders keep working — the whole existing suite is the
     # broad green check; this is the targeted one.

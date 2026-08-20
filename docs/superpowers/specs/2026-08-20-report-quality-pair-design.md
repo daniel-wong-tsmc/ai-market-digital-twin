@@ -27,6 +27,22 @@ run-cycle SKILL.md, or pin changes.
   *named within one line per horizon* (the rest fold to "+N more moved" on the same
   line), so lowering it saves zero above-fold lines. Only the QUICK GLANCE fold can
   shorten the page.
+- **Round 2 (mid-build discovery, user-approved 2026-08-20 via the same relay):** the
+  F120 gate, exercised against the real committed store on the legacy path, blocked
+  with 12 tokens already shipping above the fold. Two remediations approved:
+  - **Q1: YES** — add the five real terms `ERCOT`, `NAND`, `ODM`, `SK`, `CS-4` to
+    `registry/acronyms.json` ("allowed"). Scope extension to that one registry file
+    granted for exactly this edit.
+  - **Q2: Option A** — display-layer strip (`reader.strip_stale_paren_ids`) of
+    leftover OLD-scheme parenthesized short-id tokens (one capital letter + 1–2
+    digits, e.g. "(D1)", "(X5)") applied only on the two "breaks if" render sites
+    (`brief.render_the_calls`, `report.render_ranked_calls`), after the existing
+    label substitution. Book/store data untouched. Pinned narrow by tests:
+    "(no growth in 2027)" and "(CS-4)" must survive.
+  - Fixture cleanups sanctioned by the plan (test-only): `RPO` removed from one
+    trigger string in `tests/fixtures/thesis-answer-clean.json` and the
+    `test_report_surgery.py` helper — no test asserted on those strings; no pin
+    consumes that fixture.
 - **Mechanical choices (lane-decided, trivial):**
   - The final F120 lint checks only text above `reader.APPENDIX_DIVIDER` (the appendix
     legitimately carries raw acronyms like DMI/SMI) and uses only the existing

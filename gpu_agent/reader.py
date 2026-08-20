@@ -102,6 +102,24 @@ def label_ids_in_text(text: str, registry) -> str:
     return pattern.sub(lambda m: indicator_label(m.group(0), registry), text)
 
 
+# F120 round-2 (user-approved 2026-08-20, Option A): the live thesis book's
+# falsifiableTrigger texts embed OLD-scheme indicator ids in parentheses right after
+# their plain-word labels ("Hyperscaler capex-revision direction (D1)"). Those ids are
+# not in today's registry, so label_ids_in_text cannot substitute them and they would
+# leak raw above the fold. Deliberately narrow: ONE capital letter + 1-2 digits inside
+# parentheses, nothing broader — "(no growth in 2027)" and "(CS-4)" must survive.
+_STALE_PAREN_ID_RE = re.compile(r"\s*\(\b[A-Z]\d{1,2}\b\)")
+
+
+def strip_stale_paren_ids(text: str) -> str:
+    """Display-layer strip of leftover parenthesized old-scheme short-id tokens
+    (e.g. "(D1)", "(X5)") from a "breaks if" line. The stored book text is never
+    touched (the GATE's observable-id requirement lives there, as designed)."""
+    if not text:
+        return text
+    return _STALE_PAREN_ID_RE.sub("", text)
+
+
 def split_sentences(text: str) -> list[str]:
     text = (text or "").strip()
     if not text:

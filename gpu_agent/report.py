@@ -1176,7 +1176,10 @@ def render_ranked_calls(book, sc, change=None, last_findings=None, registry=None
         finding_ids = (last_findings or {}).get(entry.id)
         lines.append(brief._calls_headline_line(entry))
         lines.append(brief._calls_evidence_line(entry, finding_ids, findings_by_id))
-        lines.append(f"      breaks if: {reader.label_ids_in_text(entry.falsifiableTrigger, registry)}")
+        # F120 round-2 (user-approved 2026-08-20): after label substitution, strip
+        # leftover OLD-scheme parenthesized short-ids ("(D1)") — see reader.strip_stale_paren_ids.
+        lines.append("      breaks if: " + reader.strip_stale_paren_ids(
+            reader.label_ids_in_text(entry.falsifiableTrigger, registry)))
     for entry in tail:
         lines.append(brief._calls_headline_line(entry))
     if tail:

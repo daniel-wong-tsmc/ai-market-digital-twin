@@ -440,7 +440,9 @@ def render_the_calls(book: Optional[ThesisBook], sc: Scorecard,
         # verbatim; this DISPLAY-layer substitution swaps it for its human label so the
         # rendered line reads like exec prose instead of leaking "D6" above the fold.
         trigger = reader.label_ids_in_text(entry.falsifiableTrigger, registry)
-        lines.append(f"      breaks if: {trigger}")
+        # F120 round-2 (user-approved 2026-08-20): strip leftover OLD-scheme
+        # parenthesized short-ids ("(D1)") the substitution above can't know about.
+        lines.append(f"      breaks if: {reader.strip_stale_paren_ids(trigger)}")
 
     for entry in retired_now:
         lines.append(f"  ✕ {entry.title}   BROKEN — retired")
