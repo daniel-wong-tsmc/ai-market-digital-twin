@@ -1744,6 +1744,11 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   **Exclusive narrator-prompt lane.** Next: writing-plans.
   **✓ BUILT + MERGED `a3aa2ae` 2026-08-14** (data refresh `bfe7b8c`); NOT yet exercised live — no register
   exists until the next scheduled cycle runs sub-step 3(d4). See HANDOFF for the live watch-list.
+  **✓ EXERCISED LIVE 2026-08-19 cycle (commit `70c8aab`) — spec §10's live criteria all MET except the 5-cycle one.** The register opened 3 issues (binding constraint + `dim-bottleneck` + `dim-moat`); the narrator assessed all 3 with reasoning and cited findings (all `worsened`);
+  `history.jsonl` was created with its first 3 lines; the story artifact stamped `schemaVersion 3`; the dashboard's `issues` section rendered populated at schema 1.2. The idempotence guard also fired for real and correctly — the post-audit narrator re-dispatch
+  re-wrote the story and `issues update` returned `{"skipped": true, "reason": "already-recorded"}` instead of double-counting. Still unseen: the resolved-`<details>` block (needs 5 consecutive improved cycles). ⚠ The WATCH ITEM is now REAL: v8's constraint
+  label is "HBM stacked memory supply" and the opened id is `constraint-hbm-stacked-memory-supply`, while v6/v7 used "stacked-memory supply for accelerators" — a relabel in a later cycle mints a NEW id and strands this one, which would
+  drift into the reader-facing "Resolved" list after ~5 cycles claiming a fix that never happened. Remedy is still a human edit to `register.json`.
 
 - [x] **F116 — Chart-researcher brief says what the gate enforces (bare numbers, hedges, bot-blocking
   sources). Filed + FIXED 2026-08-15, branch `chart-brief-fix`.**
@@ -1763,6 +1768,44 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   Still open, separate: whether the verifier itself should classify a 403 as "blocked source" rather
   than "number not found" (diagnostic clarity only; the quarantine already holds).
   *(Concurrent-mint caveat: F116 chosen against a backlog max of F115 on 2026-08-15; renumber if collided.)*
+  **✓ LIVE CRITERION MET 2026-08-19 cycle (commit `70c8aab`).** 3 bullets researched, 2 series ACCEPTED — the first verifier-passing researched series ever (`store/chips.merchant-gpu/research-series/` now exists): HBM per NVIDIA data-center GPU by
+  generation (developer.nvidia.com) and AI compute per Cerebras wafer (ServeTheHome). Zero prose-value and zero hedge rejections; both surviving researchers explicitly routed around sites that refuse automated readers, which is exactly what rule 8 was written to cause. The
+  one rejection (Counterpoint Research foundry share, 5/5 points HTTP 403) is the NEW gap filed as F117 below, not a recurrence of this one.
+
+- [ ] **F117 — Rule 8's bot-blocking list is a registry lookup, and the registry is missing the
+  domains that actually block (found live, 2026-08-19 cycle).**
+  F116's rule 8 names the bot-blocking publishers by reading `registry/licensed-sources.json`.
+  On the first cycle after that fix, the one rejected candidate cited
+  **counterpointresearch.com**, which returns HTTP 403 to the verifier's plain reader but is
+  **not in that registry** — so rule 8 never warned the researcher off it, and all 5 points died
+  at verification. Worse, the researcher had no way to know: its own WebFetch opened the page
+  cleanly three times. **Two distinct problems, and the second is the real one:**
+  (a) the registry needs the domains that empirically 403 the verifier (counterpointresearch.com
+  first), and a hand-maintained list will always lag; (b) **a research agent's fetcher and the
+  verifier's fetcher are different readers**, so "I checked and it opens" is not evidence the
+  point will verify. Candidate fixes, cheapest first: have the researcher's brief say plainly
+  that its own fetch proves nothing and name the verifier's reader; expose the verifier's own
+  fetch as a pre-flight the researcher can call before committing to a source; or record every
+  403 the verifier meets into a learned blocklist the brief then reads. Ties into the still-open
+  F116 tail (the verifier reports a 403 as "number not found" rather than "blocked source") —
+  fix them together, since a learned blocklist needs the verifier to distinguish the two.
+  *(Concurrent-mint caveat: F117 chosen against a backlog max of F116 on 2026-08-20; renumber if
+  collided. Number minted by the assistant, not the user.)*
+
+- [ ] **F118 — A curated series can go permanently un-refillable when its construction recipe is
+  not written down (found live, 2026-08-19 cycle).**
+  Step 7b hands each series reader a `latestNote` describing how the newest stored point was
+  built, because these series are constructions, not published figures, and a point built a
+  different way silently changes what the series means. For **`tokenEconomics`** that note
+  records the basket SIZES ("median of 6 vol rates ... + median of 14 price rates ... in trailing
+  9mo") but **not the basket MEMBERSHIP** — which 6, which 14. The reader correctly returned an
+  empty envelope rather than build a differently-composed number, and that gap will recur every
+  cycle: the series can never be refilled from public sources as specced. The honest empty answer
+  is the system working; the un-refillable series is the defect. Fix: carry the basket definition
+  (member ids and the window rule) in the series metadata so `latestNote` can reproduce it, and
+  audit the other constructed series for the same hole before their next gap comes due.
+  *(Concurrent-mint caveat: F118 chosen against a backlog max of F117 on 2026-08-20; renumber if
+  collided. Number minted by the assistant, not the user.)*
 
 - [x] **F109 — Coverage gaps are computed but never recorded durably (found while building F61, 2026-07-28).**
   Nothing downstream can render or audit what the gather run failed to cover.
