@@ -231,9 +231,15 @@ def run_fetch(
                 # stored, link discovery found an OLD release -- appending
                 # nothing new would otherwise look like a quiet success.
                 newest_stored = _newest_stored_period(store_dir, cs)
-                if newest_stored is not None and points:
-                    newest_parsed = max(str(p.get("period", "")) for p in points)
-                    if newest_parsed < newest_stored:
+                if newest_stored is not None:
+                    # Points without a 'period' are excluded from the max so a
+                    # malformed batch fails later with the truthful KeyError in
+                    # _row, not a misleading empty-label staleness message
+                    # (review finding, minor #1).
+                    newest_parsed = max(
+                        (str(p["period"]) for p in points if p.get("period")),
+                        default=None)
+                    if newest_parsed is not None and newest_parsed < newest_stored:
                         raise StalenessViolation(
                             f"discovered newest quarter {newest_parsed} is older "
                             f"than newest stored {newest_stored} -- refusing "
