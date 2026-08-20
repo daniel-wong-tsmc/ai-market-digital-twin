@@ -1051,8 +1051,9 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
 > instead of fixed, per the instruction not to chase the budget or patch the lint mechanism inside
 > this wave. Both are unnumbered — next free F-number to be assigned by the user.
 
-- [ ] **(unnumbered — next free F-number to be assigned by the user) — Change-first above-fold
-  budget overshoots on live data.** The CLI-real shadow-check (thesis book loaded from
+- [ ] **F119 — Change-first above-fold budget overshoots on live data.** *(Numbered 2026-08-20,
+  user-assigned; F117/F118 were concurrently minted by the v8-finish session, so the "next free"
+  numbers landed here.)* The CLI-real shadow-check (thesis book loaded from
   `store/theses/chips.merchant-gpu/book.json` — the actual daily-run path) measures **101 lines**
   above `reader.APPENDIX_DIVIDER` against the 88-line budget (`report.py::_ABOVE_FOLD_BUDGET`);
   Task 10's original `book=None` measurement (53/57 lines) never exercised the loaded-book render
@@ -1066,8 +1067,8 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   the fold together. USER-ACCEPTED for now (2026-07-13): ship over budget rather than chase it —
   101 still beats the legacy (pre-F78) monthly renderer's 112 above-fold lines. Renderer-only;
   no schema/scoring change; F79-adjacent only in that both touch report volume.
-- [ ] **(unnumbered — next free F-number to be assigned by the user) — Render-time acronym-lint
-  enforcement gap on the assembled brief.** `reader.lint_acronyms` is enforced per-section at
+- [ ] **F120 — Render-time acronym-lint enforcement gap on the assembled brief.** *(Numbered
+  2026-08-20, user-assigned; see F119's concurrent-mint note.)* `reader.lint_acronyms` is enforced per-section at
   write time (the F67 output contract), but nothing re-lints the fully assembled above-fold text
   after live thesis-book titles and finding statements are substituted in — true in both legacy
   and change-first render modes. The current stopgap is allowlisting real tokens as they surface
