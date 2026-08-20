@@ -124,3 +124,204 @@ def test_change_first_appendix_has_full_the_calls_block():
     for eid in ("a", "b", "c", "d", "e", "f"):
         assert f"call {eid}" in appendix_part
     assert appendix_part.count("breaks if:") == 6
+
+
+# ── F119: second shrink lever — QUICK GLANCE Tier 2/3 fold ──────────────────
+
+def _big_book(n=17):
+    from gpu_agent.thesis import ThesisBook, ThesisEntry
+    entries = [ThesisEntry(
+        id=f"t{i}", title=f"call t{i}", statement="s", lens="demand",
+        status="registered", conviction="medium",
+        lastVerdict=("strengthened" if i == 0 else "reaffirmed"),
+        lastDirection=0, streak=2, mechanism="m", falsifiableTrigger="trigger",
+        sensitivity="s", createdAsOf="2026-06", lastChangedAsOf="2026-07-08",
+        lastJudgedAsOf="2026-07-08") for i in range(n)]
+    return ThesisBook(categoryId="chips.merchant-gpu", entries=entries)
+
+
+def _wide_state():
+    # A state vector wide enough (prices + scarcity + money rows) that the top half
+    # still overshoots the 88-line budget after ranked calls bottom out at top_k == 1.
+    from gpu_agent.change import PriceCell, MetricCell
+    st = build_state(_sc())
+    st.prices = [PriceCell(model=m, usdPerGpuHour=2.5, asOfColumn="2026-07-08")
+                 for m in ("B200", "H100", "H200", "GB200")]
+    st.metrics = {
+        "leadTimes": MetricCell(indicatorId="leadTimes", statement="36 weeks",
+                                tier="scarcity"),
+        "S10": MetricCell(indicatorId="S10", statement="inventory lean",
+                          tier="scarcity"),
+        "vendorRevenueGuidance": MetricCell(indicatorId="vendorRevenueGuidance",
+                                            value=45.0, unit="USD_B", tier="money"),
+        "rpoBacklog": MetricCell(indicatorId="rpoBacklog", value=90.0, unit="USD_B",
+                                 tier="money"),
+        "grossMargin": MetricCell(indicatorId="grossMargin", value=71.0, unit="pct",
+                                  tier="money"),
+    }
+    return st
+
+
+def test_f119_fold_brings_overshooting_page_within_budget():
+    from gpu_agent.report import _ABOVE_FOLD_BUDGET
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                        state=_wide_state(), thesis_book=_big_book())
+    above, appendix_part = out.split(reader.APPENDIX_DIVIDER, 1)
+    assert len(above.splitlines()) <= _ABOVE_FOLD_BUDGET
+    # the fold marker sits above the fold; Tier 1 verdict rows never fold
+    assert "full rows below the divider" in above
+    assert "Momentum rating" in above
+    # Tier 2/3 detail rows are gone from the top half...
+    assert "B200 rental" not in above
+    # ...but the full QUICK GLANCE rows are guaranteed in the appendix
+    assert "QUICK GLANCE" in appendix_part
+    assert "B200 rental" in appendix_part
+    assert "Tier 3 — Money" in appendix_part
+    # spec: the echoed full QUICK GLANCE sits right after the full THE CALLS block
+    assert appendix_part.index("THE CALLS") < appendix_part.index("QUICK GLANCE")
+
+
+def test_f119_fold_lines_pass_acronym_lint():
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                        state=_wide_state(), thesis_book=_big_book())
+    assert reader.lint_acronyms(out.split(reader.APPENDIX_DIVIDER)[0]) == []
+
+
+def test_f119_under_budget_page_never_folds():
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                        state=build_state(_sc()))
+    assert "full rows below the divider" not in out
+    # and the appendix carries no duplicated QUICK GLANCE when nothing folded
+    assert out.split(reader.APPENDIX_DIVIDER)[1].count("QUICK GLANCE") == 0
+
+
+# ── F120: assembled above-fold acronym lint blocks the render ────────────────
+
+def _book_with_title(title):
+    from gpu_agent.thesis import ThesisBook, ThesisEntry
+    return ThesisBook(categoryId="chips.merchant-gpu", entries=[ThesisEntry(
+        id="x1", title=title, statement="s", lens="demand", status="registered",
+        conviction="high", lastVerdict="strengthened", lastDirection=0, streak=2,
+        mechanism="m", falsifiableTrigger="trigger", sensitivity="s",
+        createdAsOf="2026-06", lastChangedAsOf="2026-07-08",
+        lastJudgedAsOf="2026-07-08")])
+
+
+def test_f120_novel_acronym_in_live_title_blocks_render_legacy_path():
+    import pytest
+    book = _book_with_title("ZORPX9 accelerators reset the market")
+    with pytest.raises(ValueError) as exc:
+        render_report(_sc(), None, _reg(), render_ts="fixed", thesis_book=book)
+    assert "ZORPX9" in str(exc.value)
+    assert "registry/acronyms.json" in str(exc.value)
+
+
+def test_f120_novel_acronym_blocks_change_first_path_too():
+    import pytest
+    book = _book_with_title("ZORPX9 accelerators reset the market")
+    st = build_state(_sc())
+    with pytest.raises(ValueError, match="ZORPX9"):
+        render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                      state=st, thesis_book=book)
+
+
+def test_f120_stale_paren_id_stripped_from_breaks_if_legacy_path():
+    # Round-2 remediation (user-approved 2026-08-20, Option A): the live book's
+    # "breaks if" texts embed old-scheme ids as "Label (D1)" — not in today's
+    # registry, so label substitution can't remove them. The display layer strips
+    # the leftover parenthesized short-code; the stored book text is untouched.
+    book = _book_with_title("Hyperscaler spending stays on plan")
+    book.entries[0].falsifiableTrigger = (
+        "A Hyperscaler capex-revision direction (D1) cuts 2027 guidance "
+        "within 2 quarters.")
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", thesis_book=book)
+    above = out.split(reader.APPENDIX_DIVIDER)[0]
+    assert "(D1)" not in above
+    assert "capex-revision direction cuts 2027 guidance" in above
+
+
+def test_f120_stale_paren_id_stripped_from_ranked_calls_too():
+    book = _book_with_title("Hyperscaler spending stays on plan")
+    book.entries[0].falsifiableTrigger = (
+        "Financing conditions (X5) stop appearing for 2 consecutive quarters.")
+    st = build_state(_sc())
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                        state=st, thesis_book=book)
+    above = out.split(reader.APPENDIX_DIVIDER)[0]
+    assert "(X5)" not in above
+    assert "Financing conditions stop appearing" in above
+
+
+def test_f120_strip_is_narrow_legitimate_parens_survive():
+    # The strip must not eat real parenthesized prose or product names — only the
+    # old-scheme short-code pattern (one capital letter + 1-2 digits).
+    from gpu_agent import brief
+    book = _book_with_title("Wafer starts hold")
+    book.entries[0].falsifiableTrigger = (
+        "Cerebras stops reporting (CS-4) shipments (no growth in 2027) "
+        "for 2 quarters.")
+    calls = brief.render_the_calls(book, _sc(), None, registry=_reg())
+    assert "(CS-4)" in calls
+    assert "(no growth in 2027)" in calls
+
+
+def test_f120_strip_stale_paren_ids_unit():
+    assert (reader.strip_stale_paren_ids("Label (D1) moves (S10) fast")
+            == "Label moves fast")
+    assert (reader.strip_stale_paren_ids("keep (no growth in 2027) and (CS-4)")
+            == "keep (no growth in 2027) and (CS-4)")
+    assert reader.strip_stale_paren_ids("") == ""
+
+
+def test_f120_indicator_label_sheds_old_scheme_id_tail():
+    # Round-3 remediation (user-approved 2026-08-20, Option A): registry labels
+    # themselves carry old-scheme id tails ("Hyperscaler capex-revision direction
+    # (D1)"). indicator_label — the single display seam every label row goes
+    # through (board, quick glance, change lines) — strips the tail; the registry
+    # DATA stays byte-untouched (labels feed emitted brain prompts raw, so the F6
+    # pin never moves; the data cleanup itself is F121).
+    label = reader.indicator_label("hyperscalerCapexRevision", _reg())
+    assert label == "Hyperscaler capex-revision direction"
+    assert "(D1)" not in label
+    # the fallback path (unknown id, or no registry) is untouched
+    assert reader.indicator_label("noSuchId", _reg()) == "noSuchId"
+    assert reader.indicator_label("hyperscalerCapexRevision", None) == "hyperscalerCapexRevision"
+
+
+def test_f120_board_renders_clean_labels_above_fold():
+    # End-to-end: a finding on an old-scheme-tailed indicator renders a clean board
+    # row and the assembled above-fold lint passes (the real daily-path scenario).
+    from gpu_agent import brief
+    sc = _sc()
+    board = brief.render_demand_supply_board(sc, None, registry=_reg())
+    assert "(D1)" not in board and "(X5)" not in board
+
+
+def test_f120_strip_never_eats_allowlisted_tokens():
+    # Review fix (2026-08-20): "(Q3)" matches the one-capital+digits shape but Q3 is
+    # a sanctioned allowlisted token — deleting it would be silent content loss, the
+    # opposite of the fail-loud posture. Allowlisted tokens must survive the strip.
+    assert (reader.strip_stale_paren_ids("misses guidance (Q3) badly")
+            == "misses guidance (Q3) badly")
+    assert (reader.strip_stale_paren_ids("both (Q4) and (D1) appear")
+            == "both (Q4) and appear")
+
+
+def test_f119_both_levers_bottomed_still_over_ships_over_budget():
+    # Spec-promised (user-accepted degradation mode): when even the QUICK GLANCE fold
+    # cannot reach the 88-line budget, the render ships over budget — no exception,
+    # no silent content loss beyond the two approved folds.
+    from gpu_agent.report import _ABOVE_FOLD_BUDGET
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", change=_change(),
+                        state=_wide_state(), thesis_book=_big_book(120))
+    above = out.split(reader.APPENDIX_DIVIDER)[0]
+    assert len(above.splitlines()) > _ABOVE_FOLD_BUDGET   # honest: still over
+    assert "full rows below the divider" in above          # both levers did fire
+
+
+def test_f120_allowlisted_tokens_still_render():
+    # DAILY/monthly clean renders keep working — the whole existing suite is the
+    # broad green check; this is the targeted one.
+    book = _book_with_title("HBM supply stays tight into 2027")
+    out = render_report(_sc(), None, _reg(), render_ts="fixed", thesis_book=book)
+    assert "HBM supply stays tight" in out

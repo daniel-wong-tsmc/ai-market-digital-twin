@@ -824,12 +824,27 @@ def _glance_arrow(change, key) -> str:
     return _CHANGE_ARROW["same"]
 
 
-def render_quick_glance(state, change=None, registry=None) -> str:
+def _glance_fold_line(label: str, keys: list[str], change) -> str:
+    """One honest summary line for a folded glance tier (F119): how many rows it
+    tracks, how many moved (nearest-horizon arrow != unchanged), and where the full
+    rows live. Exec-plain; passes reader.lint_acronyms."""
+    moved = sum(1 for k in keys
+                if _glance_arrow(change, k) != _CHANGE_ARROW["same"])
+    return (f"  {label}: {len(keys)} tracked, {moved} moved — "
+            f"full rows below the divider")
+
+
+def render_quick_glance(state, change=None, registry=None, fold_detail=False) -> str:
     """QUICK GLANCE (D8) — three tiers, each row its move arrow + (money) an age tag. Tier 1
     verdict: the six ratings + demand/supply momentum. Tier 2 scarcity: rental price (feed) +
     lead times + packaging/HBM. Tier 3 money: revenue guidance + backlog + gross margin,
     age-tagged (they move on earnings). Above the fold — passes reader.lint_acronyms. Share
-    price is excluded (spec §5.6)."""
+    price is excluded (spec §5.6).
+
+    F119 (user-approved 2026-08-20): ``fold_detail=True`` is the budget loop's second
+    shrink lever — Tier 2 and Tier 3 each collapse to one honest summary line (count
+    tracked, count moved, pointer to the appendix); Tier 1 never folds. The default is
+    byte-identical to before the flag existed."""
     lines = ["QUICK GLANCE"]
 
     lines.append("  Tier 1 — Verdict")
@@ -842,20 +857,32 @@ def render_quick_glance(state, change=None, registry=None) -> str:
         label = reader.DIM_LABEL.get(dim, dim)
         lines.append(f"    {label:<24} {cell.rating} {arrow}")
 
+    # One shared row inventory per tier (review fix, 2026-08-20): the fold summary's
+    # "N tracked, M moved" counts and the full rows below derive from these SAME lists,
+    # so a future change to a tier's row filter cannot drift the fold count.
+    scarcity_prices = list(state.prices)
+    scarcity_metrics = [(iid, c) for iid, c in state.metrics.items()
+                        if c.tier == "scarcity"]
+    money_metrics = [(iid, c) for iid, c in state.metrics.items() if c.tier == "money"]
+    scarcity_keys = ([f"price:{p.model}" for p in scarcity_prices]
+                     + [f"metric:{iid}" for iid, _ in scarcity_metrics])
+    money_keys = [f"metric:{iid}" for iid, _ in money_metrics]
+
+    if fold_detail:
+        lines.append(_glance_fold_line("Tier 2 — Scarcity", scarcity_keys, change))
+        lines.append(_glance_fold_line("Tier 3 — Money", money_keys, change))
+        return "\n".join(lines)
+
     lines.append("  Tier 2 — Scarcity")
-    for p in state.prices:
+    for p in scarcity_prices:
         arrow = _glance_arrow(change, f"price:{p.model}")
         lines.append(f"    {p.model + ' rental':<24} ${p.usdPerGpuHour:g}/GPU-hr {arrow}")
-    for iid, cell in state.metrics.items():
-        if cell.tier != "scarcity":
-            continue
+    for iid, cell in scarcity_metrics:
         arrow = _glance_arrow(change, f"metric:{iid}")
         lines.append(f"    {reader.indicator_label(iid, registry):<24} {_metric_display(cell)} {arrow}")
 
     lines.append("  Tier 3 — Money")
-    for iid, cell in state.metrics.items():
-        if cell.tier != "money":
-            continue
+    for iid, cell in money_metrics:
         arrow = _glance_arrow(change, f"metric:{iid}")
         age = _age_tag(state.asOf, cell.observedAt)
         age_str = f"  ({age})" if age else ""
@@ -1090,6 +1117,31 @@ def render_report(
             top[4] = render_ranked_calls(thesis_book, sc, change, thesis_last_findings,
                                          registry=registry, top_k=k)
             body = "\n\n".join(s for s in top + appendix if s)
+        # F119 second lever (user-approved 2026-08-20): ranked calls are at their
+        # floor — fold QUICK GLANCE Tier 2/3 to one summary line each and echo the
+        # full rows into the appendix (right after the full THE CALLS block) so the
+        # fold line's promise is true. If the page is STILL over budget after both
+        # levers bottom out, ship over budget (user-accepted 2026-07-13 stopgap,
+        # re-confirmed 2026-08-20).
+        if (state is not None
+                and len(body.split(reader.APPENDIX_DIVIDER)[0].splitlines())
+                > _ABOVE_FOLD_BUDGET):
+            top[3] = render_quick_glance(state, change, registry, fold_detail=True)
+            appendix.insert(2, render_quick_glance(state, change, registry))
+            body = "\n\n".join(s for s in top + appendix if s)
+
+    # F120 (user-approved 2026-08-20, BLOCK): one final acronym lint over the fully
+    # assembled above-fold text. Per-section lint runs at write time, but live thesis
+    # titles and finding statements substitute in afterwards — this is the last gate
+    # before the executive page ships. Recovery: add real terms to
+    # registry/acronyms.json ("allowed") and re-render from saved artifacts.
+    offenders = reader.lint_acronyms(body.split(reader.APPENDIX_DIVIDER)[0])
+    if offenders:
+        raise ValueError(
+            "brief blocked before ship: unknown all-caps token(s) above the "
+            f"appendix divider: {', '.join(offenders)} — if these are real terms, "
+            "add them to registry/acronyms.json (\"allowed\") and re-render; the "
+            "saved run data is untouched.")
     return body
 
 
@@ -1126,7 +1178,10 @@ def render_ranked_calls(book, sc, change=None, last_findings=None, registry=None
         finding_ids = (last_findings or {}).get(entry.id)
         lines.append(brief._calls_headline_line(entry))
         lines.append(brief._calls_evidence_line(entry, finding_ids, findings_by_id))
-        lines.append(f"      breaks if: {reader.label_ids_in_text(entry.falsifiableTrigger, registry)}")
+        # F120 round-2 (user-approved 2026-08-20): after label substitution, strip
+        # leftover OLD-scheme parenthesized short-ids ("(D1)") — see reader.strip_stale_paren_ids.
+        lines.append("      breaks if: " + reader.strip_stale_paren_ids(
+            reader.label_ids_in_text(entry.falsifiableTrigger, registry)))
     for entry in tail:
         lines.append(brief._calls_headline_line(entry))
     if tail:

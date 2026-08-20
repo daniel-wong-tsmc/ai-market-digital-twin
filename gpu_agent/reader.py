@@ -70,10 +70,20 @@ def _indicator_ids() -> frozenset[str]:
 
 
 def indicator_label(indicator_id: str, registry) -> str:
-    """Human label for an indicator id; falls back to the id (never crashes)."""
+    """Human label for an indicator id; falls back to the id (never crashes).
+
+    F120 round-3 (user-approved 2026-08-20, Option A): registry labels carry
+    old-scheme id tails ("Hyperscaler capex-revision direction (D1)") that would
+    leak raw ids above the fold through every label row (board, quick glance,
+    change lines). This is the single display seam those rows go through, so the
+    narrow strip_stale_paren_ids strip applies here. The registry DATA stays
+    byte-untouched — labels feed emitted brain prompts raw (cli.py reads
+    spec.label directly), so the F6 baseline pin never moves. The data cleanup
+    itself is F121 (its own lane, with the pin re-record it entails)."""
     spec = registry.indicators.get(indicator_id) if registry is not None else None
     if isinstance(spec, dict):
-        return spec.get("label") or indicator_id
+        label = spec.get("label") or indicator_id
+        return strip_stale_paren_ids(label)
     return indicator_id
 
 
@@ -100,6 +110,29 @@ def label_ids_in_text(text: str, registry) -> str:
         return text
     pattern = re.compile("|".join(rf"\b{re.escape(ind_id)}\b" for ind_id in ids))
     return pattern.sub(lambda m: indicator_label(m.group(0), registry), text)
+
+
+# F120 round-2 (user-approved 2026-08-20, Option A): the live thesis book's
+# falsifiableTrigger texts embed OLD-scheme indicator ids in parentheses right after
+# their plain-word labels ("Hyperscaler capex-revision direction (D1)"). Those ids are
+# not in today's registry, so label_ids_in_text cannot substitute them and they would
+# leak raw above the fold. Deliberately narrow: ONE capital letter + 1-2 digits inside
+# parentheses, nothing broader — "(no growth in 2027)" and "(CS-4)" must survive.
+_STALE_PAREN_ID_RE = re.compile(r"\s*\(\b([A-Z]\d{1,2})\b\)")
+
+
+def strip_stale_paren_ids(text: str) -> str:
+    """Display-layer strip of leftover parenthesized old-scheme short-id tokens
+    (e.g. "(D1)", "(X5)") from a "breaks if" line. The stored book text is never
+    touched (the GATE's observable-id requirement lives there, as designed).
+    Review fix (2026-08-20): a token on the acronym allowlist (e.g. "(Q3)") is
+    sanctioned exec-facing vocabulary, never a stale id — it survives untouched
+    (silent deletion of legitimate content would invert the fail-loud posture)."""
+    if not text:
+        return text
+    allowed = _allowed()
+    return _STALE_PAREN_ID_RE.sub(
+        lambda m: m.group(0) if m.group(1) in allowed else "", text)
 
 
 def split_sentences(text: str) -> list[str]:

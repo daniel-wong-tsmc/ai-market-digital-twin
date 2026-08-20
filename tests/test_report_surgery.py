@@ -79,7 +79,9 @@ def _entry(entry_id="demand-durability", **overrides):
         statement="Demand keeps outrunning shipment capacity.", lens="demand",
         status="registered", conviction="high", lastVerdict="reaffirmed",
         lastDirection=0, streak=3, mechanism="Backlog grows faster than shipments.",
-        falsifiableTrigger="Backlog/RPO growth falls below shipment growth for 2 quarters.",
+        # F120: fixture prose must pass the assembled above-fold acronym lint like
+        # real book text does ("RPO" was off-allowlist and blocked the render).
+        falsifiableTrigger="Backlog growth falls below shipment growth for 2 quarters.",
         sensitivity="Hyperscaler capex guidance.",
         createdAsOf="2026-06", lastChangedAsOf="2026-06", lastJudgedAsOf="2026-06",
     )

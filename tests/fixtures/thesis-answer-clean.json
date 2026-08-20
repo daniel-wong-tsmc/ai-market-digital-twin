@@ -6,7 +6,7 @@
       "rationale": "DC revenue growth continues to outrun shipment capacity even as the slope flattens.",
       "findingIds": ["f-nvda-d2"],
       "mechanism": "Backlog and purchase commitments keep growing faster than shipment volumes, the signature of demand still pulling ahead of supply.",
-      "falsifiableTrigger": "Backlog/RPO growth falls below shipment growth for 2 consecutive quarters.",
+      "falsifiableTrigger": "Backlog growth falls below shipment growth for 2 consecutive quarters.",
       "sensitivity": "Sensitive to hyperscaler capex guidance over the next two quarters."
     },
     {
