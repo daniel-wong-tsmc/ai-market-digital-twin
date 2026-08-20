@@ -34,6 +34,15 @@ class ParseFailed(Exception):
     turned into a 'failed' entry -- never allowed to propagate."""
 
 
+class StalenessViolation(Exception):
+    """F112(a): raised inside run_fetch's per-series loop when the newest
+    period a fetcher parsed is strictly OLDER than the newest period already
+    stored for that series -- i.e. link discovery landed on an old release.
+    Caught by the same per-series except as every other failure and turned
+    into a loud 'failed' entry (user-approved 2026-08-20: log-and-skip);
+    same-or-newer passes, and an empty/missing store file passes vacuously."""
+
+
 def _parse_date(s: str) -> _dt.date | None:
     try:
         return _dt.date.fromisoformat(s)
@@ -95,6 +104,15 @@ def _read_jsonl(path: Path) -> list[dict]:
         return []
     return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()
             if line.strip()]
+
+
+def _newest_stored_period(store_dir: str, cs: ChartSeries) -> str | None:
+    """Newest 'period' already on disk for this series, or None when the
+    file is missing/empty (first-ever fetch -- staleness check is vacuous).
+    Period labels are 'YYYY-Qn' strings, so max()/< compare correctly."""
+    rows = _read_jsonl(Path(store_dir) / f"{cs.id}.jsonl")
+    periods = [str(r["period"]) for r in rows if r.get("period")]
+    return max(periods) if periods else None
 
 
 def _write_jsonl(path: Path, rows: list[dict]) -> None:
@@ -208,6 +226,19 @@ def run_fetch(
                 else:
                     html_text = html_fetcher(cs.sourceUrl)
                 points = fetcher(html_text)
+                # F112(a) staleness guard: if the newest quarter we just
+                # parsed is strictly older than the newest quarter already
+                # stored, link discovery found an OLD release -- appending
+                # nothing new would otherwise look like a quiet success.
+                newest_stored = _newest_stored_period(store_dir, cs)
+                if newest_stored is not None and points:
+                    newest_parsed = max(str(p.get("period", "")) for p in points)
+                    if newest_parsed < newest_stored:
+                        raise StalenessViolation(
+                            f"discovered newest quarter {newest_parsed} is older "
+                            f"than newest stored {newest_stored} -- refusing "
+                            "stale data (link discovery may have found an old "
+                            "release)")
                 n_new = _append_points(store_dir, cs, points, as_of_date)
                 fetched.append({"id": cs.id, "newPoints": n_new})
             except Exception as e:  # noqa: BLE001 -- deliberate: never let a

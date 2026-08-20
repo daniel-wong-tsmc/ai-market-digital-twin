@@ -422,3 +422,53 @@ def test_run_fetch_fails_when_detail_fetch_blows_up_after_successful_discovery(t
     assert "amdDataCenterRevenue" in failed_ids
     assert "detail page fetch timed out" in result["failed"][0]["error"]
     assert not (tmp_path / "amdDataCenterRevenue.jsonl").exists()
+
+# ── F112(a): staleness guard -- a strictly-older newest parsed quarter must
+#    become a loud 'failed' entry, never a quiet success (user-approved
+#    2026-08-20: log-and-skip; same-or-newer allowed; empty store vacuous). ──
+
+def _seed_store_row(tmp_path, period: str) -> Path:
+    """Write a single minimal series row for amdDataCenterRevenue so the
+    store's newest period is `period`. Shape mirrors _row()'s output."""
+    path = tmp_path / "amdDataCenterRevenue.jsonl"
+    row = {
+        "indicatorId": "amdDataCenterRevenue",
+        "period": period,
+        "value": 9.999,
+        "unit": "US$ billions",
+        "publishedAt": "2026-11-03",
+        "capturedAt": "2026-11-03",
+        "source": {"url": "https://example.test", "title": "seed"},
+        "estimateGrade": False,
+        "note": "seed row for staleness tests",
+    }
+    path.write_text(json.dumps(row) + "\n", encoding="utf-8")
+    return path
+
+
+def test_run_fetch_fails_loudly_when_parsed_quarter_is_older_than_stored(tmp_path):
+    series = _series_fixture()
+    _seed_store_row(tmp_path, "2026-Q3")
+
+    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+                       fetch_html=_stub_fetch_html())
+
+    assert result["fetched"] == []
+    assert len(result["failed"]) == 1
+    failure = result["failed"][0]
+    assert failure["id"] == "amdDataCenterRevenue"
+    assert "StalenessViolation" in failure["error"]
+    # the loud line must name both quarters so the cycle log is diagnosable
+    assert "2026-Q2" in failure["error"]
+    assert "2026-Q3" in failure["error"]
+
+
+def test_staleness_violation_leaves_the_store_file_byte_identical(tmp_path):
+    series = _series_fixture()
+    path = _seed_store_row(tmp_path, "2026-Q3")
+    before = path.read_text(encoding="utf-8")
+
+    run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+              fetch_html=_stub_fetch_html())
+
+    assert path.read_text(encoding="utf-8") == before
