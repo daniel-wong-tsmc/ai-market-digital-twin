@@ -472,3 +472,29 @@ def test_staleness_violation_leaves_the_store_file_byte_identical(tmp_path):
               fetch_html=_stub_fetch_html())
 
     assert path.read_text(encoding="utf-8") == before
+
+
+def test_equal_newest_quarter_is_allowed_and_backfills_older_periods(tmp_path):
+    """Store's newest == parse's newest (2026-Q2): NOT a violation
+    (user-approved 2026-08-20: same-or-newer allowed). The fetch succeeds
+    and the two older parsed periods backfill as new rows."""
+    series = _series_fixture()
+    _seed_store_row(tmp_path, "2026-Q2")
+
+    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+                       fetch_html=_stub_fetch_html())
+
+    assert result["failed"] == []
+    assert result["fetched"] == [{"id": "amdDataCenterRevenue", "newPoints": 2}]
+
+
+def test_first_ever_fetch_with_no_store_file_passes_the_staleness_check(tmp_path):
+    """Missing store file: staleness check is vacuous (user-approved
+    2026-08-20); the fetch appends all parsed periods normally."""
+    series = _series_fixture()
+
+    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+                       fetch_html=_stub_fetch_html())
+
+    assert result["failed"] == []
+    assert result["fetched"] == [{"id": "amdDataCenterRevenue", "newPoints": 3}]
