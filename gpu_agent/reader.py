@@ -70,10 +70,20 @@ def _indicator_ids() -> frozenset[str]:
 
 
 def indicator_label(indicator_id: str, registry) -> str:
-    """Human label for an indicator id; falls back to the id (never crashes)."""
+    """Human label for an indicator id; falls back to the id (never crashes).
+
+    F120 round-3 (user-approved 2026-08-20, Option A): registry labels carry
+    old-scheme id tails ("Hyperscaler capex-revision direction (D1)") that would
+    leak raw ids above the fold through every label row (board, quick glance,
+    change lines). This is the single display seam those rows go through, so the
+    narrow strip_stale_paren_ids strip applies here. The registry DATA stays
+    byte-untouched — labels feed emitted brain prompts raw (cli.py reads
+    spec.label directly), so the F6 baseline pin never moves. The data cleanup
+    itself is F121 (its own lane, with the pin re-record it entails)."""
     spec = registry.indicators.get(indicator_id) if registry is not None else None
     if isinstance(spec, dict):
-        return spec.get("label") or indicator_id
+        label = spec.get("label") or indicator_id
+        return strip_stale_paren_ids(label)
     return indicator_id
 
 

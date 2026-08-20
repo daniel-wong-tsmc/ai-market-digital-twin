@@ -273,6 +273,30 @@ def test_f120_strip_stale_paren_ids_unit():
     assert reader.strip_stale_paren_ids("") == ""
 
 
+def test_f120_indicator_label_sheds_old_scheme_id_tail():
+    # Round-3 remediation (user-approved 2026-08-20, Option A): registry labels
+    # themselves carry old-scheme id tails ("Hyperscaler capex-revision direction
+    # (D1)"). indicator_label — the single display seam every label row goes
+    # through (board, quick glance, change lines) — strips the tail; the registry
+    # DATA stays byte-untouched (labels feed emitted brain prompts raw, so the F6
+    # pin never moves; the data cleanup itself is F121).
+    label = reader.indicator_label("hyperscalerCapexRevision", _reg())
+    assert label == "Hyperscaler capex-revision direction"
+    assert "(D1)" not in label
+    # the fallback path (unknown id, or no registry) is untouched
+    assert reader.indicator_label("noSuchId", _reg()) == "noSuchId"
+    assert reader.indicator_label("hyperscalerCapexRevision", None) == "hyperscalerCapexRevision"
+
+
+def test_f120_board_renders_clean_labels_above_fold():
+    # End-to-end: a finding on an old-scheme-tailed indicator renders a clean board
+    # row and the assembled above-fold lint passes (the real daily-path scenario).
+    from gpu_agent import brief
+    sc = _sc()
+    board = brief.render_demand_supply_board(sc, None, registry=_reg())
+    assert "(D1)" not in board and "(X5)" not in board
+
+
 def test_f120_strip_never_eats_allowlisted_tokens():
     # Review fix (2026-08-20): "(Q3)" matches the one-capital+digits shape but Q3 is
     # a sanctioned allowlisted token — deleting it would be silent content loss, the

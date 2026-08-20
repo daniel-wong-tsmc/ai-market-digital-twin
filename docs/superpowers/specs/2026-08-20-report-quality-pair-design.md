@@ -43,6 +43,26 @@ run-cycle SKILL.md, or pin changes.
     trigger string in `tests/fixtures/thesis-answer-clean.json` and the
     `test_report_surgery.py` helper — no test asserted on those strings; no pin
     consumes that fixture.
+- **Round 3 (verification discovery, user-approved 2026-08-20 via the same relay):**
+  the real change-first daily path still blocked after round 2 — the registry LABELS
+  themselves carry old-scheme id tails ("Hyperscaler capex-revision direction (D1)" in
+  `registry/indicators.json`), rendered verbatim by every label row (DEMAND | SUPPLY
+  board and friends). **Approved: Option A** — apply the same narrow
+  `strip_stale_paren_ids` inside `reader.indicator_label` (the single display seam
+  label rows go through); registry data byte-untouched (labels feed emitted brain
+  prompts raw, so the F6 pin never moves — verified: prompt emission reads
+  `spec.label` directly in cli.py, never through `indicator_label`). **And F121
+  filed** (user-assigned number) in docs/fix-backlog.md: clean the label strings in
+  their own lane with the F6 pin re-record that entails; until then the display strip
+  covers it. Known residual recorded in F121: the dashboard brief reads labels via its
+  own `dashboard/brief_model._indicator_labels`, so the web brief shows the tails
+  until F121.
+- **Code-review round (2026-08-20, reviewer: subagent; fixes lane-applied):** the strip
+  never removes an allowlisted token (e.g. "(Q3)") — silent deletion of sanctioned
+  vocabulary would invert the fail-loud posture; the spec-promised
+  both-levers-bottomed-still-over-ships test was added; fold counts and full glance
+  rows derive from one shared per-tier row inventory; appendix-order assertion added;
+  gate message reworded "before ship".
 - **Mechanical choices (lane-decided, trivial):**
   - The final F120 lint checks only text above `reader.APPENDIX_DIVIDER` (the appendix
     legitimately carries raw acronyms like DMI/SMI) and uses only the existing

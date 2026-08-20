@@ -1077,6 +1077,21 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   direction: add one lint pass over the fully assembled above-fold string right before
   `render_report`/`render_daily` returns it, so a genuinely novel off-allowlist token BLOCKS the
   render instead of shipping silently until a shadow-check happens to catch it.
+- [ ] **F121 — registry/indicators.json labels carry old-scheme id tails.** *(Numbered
+  2026-08-20, user-assigned via the orchestrator during the report-quality-pair lane; same
+  concurrent-mint caveat as F119/F120 — if another session minted F121 first, take the next
+  free number.)* Seven labels embed retired-scheme ids in parentheses — e.g.
+  `hyperscalerCapexRevision` -> "Hyperscaler capex-revision direction (D1)" (also S1, S2,
+  S4, D4, D9, X5) — and any label row rendered above the fold (DEMAND | SUPPLY board, quick
+  glance, change lines) would leak them; the F120 assembled-brief acronym gate blocks on
+  them. Interim cover (F120 round-3, user-approved 2026-08-20): the display layer strips
+  the tails via `reader.strip_stale_paren_ids` inside `reader.indicator_label`, registry
+  data untouched. The REAL fix — cleaning the label strings themselves — must run in its
+  own lane because labels are baked verbatim into the emitted brain prompts (cli.py
+  scoring/price indicator vocab), so it entails a deliberate F6 baseline-pin re-record.
+  Until then the display-layer strip covers it. Note: the dashboard brief reads labels via
+  its own `dashboard/brief_model._indicator_labels`, not `reader.indicator_label`, so the
+  web brief still shows the tails until F121 lands.
 
 ## From the 2026-07-13 documentation gap review (F88–F94) — what the docs still don't cover
 
