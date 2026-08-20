@@ -978,6 +978,20 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   Windows machine; the owner/monitoring/restart story lands with Phase 6's unattended
   scheduling. The three skipped July days stay skipped per the 07-07 precedent unless the user
   says otherwise.
+  **✓ RELIABILITY HALF DONE 2026-08-20 (user-approved interactively; diagnosis memo
+  `.superpowers/handoffs/f83-scheduler-diagnosis-QUESTIONS.md`, fix record
+  `.superpowers/handoffs/f83-scheduler-fix-DONE.md`).** Machine-local: task now starts/continues
+  on battery and repeats every 2h for 12h until one run succeeds that day (never WakeToRun);
+  job script sets `CLAUDE_CODE_PRINT_BG_WAIT_CEILING_MS=0` (the 08-19 600s background-kill),
+  judges success by today's cycle-log entry (exit 1 + toast otherwise — catches the 08-12
+  "polite stop" and the 08-14 auth-expiry classes, auth gets its own toast), and fast-exits
+  ALREADY-DONE on repeat fires; new `Claude GPU Cycle Watchdog` task (logon + 20:30) toasts on
+  missed days. Repo: `scripts/cycle_gap.py` gap banner wired into `scripts/session-orient`;
+  operator-rebuild §1 re-mirrored. Pre-change task XML + script backed up in
+  `.superpowers/handoffs/f83-scheduler-fix-BACKUP/`. **Explicitly deferred by the user
+  2026-08-20:** event-triggered wake (this entry's second half), auto-resume of parked runs
+  (future brainstorm), trigger-hour re-registration after the timezone move, backfilling the
+  08-13..08-18 gap days.
 
 - [ ] **F84 — Recurring external scoreboard (how we know the desk beats a cheap alternative).**
   Assistant's proposed resolution (user requested 2026-07-12; mechanics to confirm at
