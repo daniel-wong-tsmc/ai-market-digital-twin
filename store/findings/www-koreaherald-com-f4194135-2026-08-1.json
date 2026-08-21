@@ -1,0 +1,47 @@
+{
+  "id": "www-koreaherald-com-f4194135-2026-08-1",
+  "statement": "South Korean semiconductor exports nearly tripled year over year to $26 billion in the first 20 days of August 2026, making up 47.2% of the country's $55.2 billion total exports.",
+  "kind": "measured",
+  "value": {
+    "number": 26.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Korean chip export customs data is a fast read on memory and AI-server component shipments feeding data-center build-outs.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.ai-storage",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "A near-tripling of chip export value signals accelerating memory shipments and pricing into AI server supply chains."
+  },
+  "evidence": [
+    {
+      "source": "The Korea Herald",
+      "url": "https://www.koreaherald.com/article/10847622",
+      "date": "2026-08-21",
+      "excerpt": "Chip (semiconductor) exports nearly tripled to $26 billion for the period, marking the highest amount for the period, and semiconductors represented 47.2% of total exports.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet reporting customs data; the customs release itself was not fetched."
+  },
+  "dispersion": "A companion article of the same date carries identical figures; per-kilogram DRAM price and the JPMorgan forecast in the original lead could not be confirmed.",
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-21",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "lambda-ai-3a9372dc-2026-08-1",
+  "statement": "Lambda lists NVIDIA H100 SXM on-demand cloud capacity at $4.29 per GPU-hour for a single GPU.",
+  "kind": "measured",
+  "value": {
+    "number": 4.29,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Published rental rates give a current reference level for the cost of renting prior-generation Nvidia capacity.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Listed rental rates are a display-only price level with no stated baseline or change, so they set context rather than direction."
+  },
+  "evidence": [
+    {
+      "source": "Lambda",
+      "url": "https://lambda.ai/service/gpu-cloud/pricing",
+      "date": "2026-08-21",
+      "excerpt": "NVIDIA H100 SXM: $4.29 per GPU-hour (1x)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own public price page, but a single provider and no baseline for comparison."
+  },
+  "dispersion": "conflicting same-key reports: value 6.69 -> 4.29 (tol 1%); sources: Lambda",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-21",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

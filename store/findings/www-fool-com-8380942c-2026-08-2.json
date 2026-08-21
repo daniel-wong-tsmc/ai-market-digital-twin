@@ -1,0 +1,46 @@
+{
+  "id": "www-fool-com-8380942c-2026-08-2",
+  "statement": "SK Hynix held a 58% share of the HBM market in Q1 2026, and says it has finalized long-term supply agreements with about 10 customers.",
+  "kind": "measured",
+  "value": {
+    "number": 58.0,
+    "unit": "pct_segment_rev"
+  },
+  "trend": "unknown",
+  "why": "More than half of the world's HBM coming from one supplier concentrates the accelerator supply chain on a single point of failure.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Supplier concentration means any disruption or allocation choice at one memory vendor propagates directly into accelerator output."
+  },
+  "evidence": [
+    {
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/investing/2026/08/06/sk-hynix-supplies-more-than-half-the-worlds-hbm-me/",
+      "date": "2026-08-06",
+      "excerpt": "SK Hynix carried a 58% share of the HBM market in the first quarter of 2026, according to Counterpoint Research.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary article citing Counterpoint Research; single outlet, no primary document."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

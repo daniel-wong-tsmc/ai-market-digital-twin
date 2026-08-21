@@ -1,0 +1,43 @@
+{
+  "id": "www-coreweave-com-ece65e78-2026-08-2",
+  "statement": "Quant trading firms are becoming a meaningful CoreWeave customer segment, with the HRT deal stacking on Jane Street's $6 billion capacity commitment and a separate IMC expansion.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Demand for large GPU clusters is broadening beyond AI labs and hyperscalers into financial services buyers.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "applications.vertical-saas"
+    ],
+    "direction": "positive",
+    "mechanism": "A widening buyer base reduces reliance on a few AI-lab customers and adds incremental cluster demand."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave, Inc. (company press release)",
+      "url": "https://www.coreweave.com/news/hudson-river-trading-to-build-next-gen-research-platform-powered-by-nvidia-vera-rubin-nvl72-on-coreweave-cloud",
+      "date": "2026-08-20",
+      "excerpt": "on top of the $6 billion Jane Street commitment within a few months",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company release plus press coverage summarized within the same document; single-source, secondary."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-08-20",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

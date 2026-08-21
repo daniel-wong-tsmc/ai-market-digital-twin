@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-08",
-  "capturedAt": "2026-08-19T12:48:23Z",
+  "capturedAt": "2026-08-21T15:44:20Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
@@ -13,6 +13,14 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "amd-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
       "paywalledNote": null
     },
     {
@@ -41,26 +49,10 @@
     },
     {
       "type": "source",
-      "id": "open-web-gpu-share",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Open-web analyst notes / trade press on GPU market share' was not fetched. URL patterns: ['tomshardware.com', 'anandtech.com', 'techpowerup.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "open-web-asic",
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Open-web reporting on hyperscaler custom ASICs (competitive alternatives)' was not fetched. URL patterns: ['blog.google', 'aws.amazon.com/machine-learning', 'techcrunch.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "channel-checks",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Open-web channel checks: lead times, inventory notes from distributors' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com']",
       "paywalledNote": null
     },
     {
@@ -89,6 +81,14 @@
     },
     {
       "type": "source",
+      "id": "gpu-marketplaces",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'GPU marketplaces / resale listings (secondary-market spot price)' was not fetched. URL patterns: ['ebay.com', 'amazon.com', 'newegg.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
       "id": "ai-app-revenue",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -102,37 +102,29 @@
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Frontier model release and funding trackers (company newsrooms + industry press)' was not fetched. URL patterns: ['openai.com', 'anthropic.com', 'blog.google', 'techcrunch.com', 'semianalysis.com']",
       "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "upstream-component-leadtimes",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
-      "paywalledNote": null
     }
   ],
   "gapCounts": {
-    "total": 13,
-    "source": 13,
+    "total": 12,
+    "source": 12,
     "indicator": 0,
-    "required": 13,
+    "required": 12,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://247wallst.com/investing/2026/08/18/nvidia-is-cutting-rubin-ultras-memory-is-microns-hbm-boom-in-danger/",
-    "https://finance.yahoo.com/technology/articles/nvidia-h200-chips-reach-china-021726633.html",
-    "https://ir.amd.com/news-events/press-releases",
-    "https://lambda.ai/pricing",
+    "https://finance.yahoo.com/technology/ai/articles/nvidia-advanced-talks-invest-hundreds-132327433.html",
+    "https://finance.yahoo.com/technology/ai/articles/nvidia-scales-back-250-billion-234356524.html",
+    "https://finance.yahoo.com/technology/ai/articles/nvidia-talks-chip-startup-rebellions-074543725.html",
+    "https://lambda.ai/service/gpu-cloud/pricing",
     "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
-    "https://www.coreweave.com/pricing",
-    "https://www.ebay.com/shop/h100-80gb?_nkw=h100+80gb",
-    "https://www.freemalaysiatoday.com/category/business/2026/08/19/samsung-hikes-chipmaking-prices-by-up-to-15-on-demand-spike",
-    "https://www.stocktitan.net/news/CBRS/cerebras-unveils-cs-4-up-to-30-times-faster-than-gpu-based-8ywkeo6c1jiy.html",
-    "https://www.storagereview.com/news/nvidia-spectrum-x-ethernet-photonics-enters-full-production-with-4x-fewer-lasers-and-a-five-vendor-cpo-supply-chain"
+    "https://www.coreweave.com/news/hudson-river-trading-to-build-next-gen-research-platform-powered-by-nvidia-vera-rubin-nvl72-on-coreweave-cloud",
+    "https://www.fool.com/investing/2026/08/06/sk-hynix-supplies-more-than-half-the-worlds-hbm-me/",
+    "https://www.investing.com/news/stock-market-news/nvidia-to-ship-ai-chip-for-china-by-yearend-the-information-reports-4870258",
+    "https://www.koreaherald.com/article/10847622",
+    "https://www.tomshardware.com/tech-industry/semiconductors/nvidia-denies-report-it-will-ship-groq-based-lpus-to-china-by-year-end"
   ],
   "judgedIndicatorIds": [
     "D2",

@@ -1,315 +1,890 @@
 {
- "scope": "category:chips.merchant-gpu",
- "asOf": "2026-08",
- "mode": "daily",
- "capturedAt": "2026-08-20T00:00:00Z",
- "runDir": "work/daily-2026-08-19",
- "unattended": false,
- "entries": [
-  {
-   "category_id": "chips.merchant-gpu",
-   "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
-   "status": "done",
-   "manifestRef": "manifests/chips.merchant-gpu.json",
-   "scorecard": "store/chips.merchant-gpu/2026-08-v8.json",
-   "dmi": 4.173,
-   "smi": -0.173,
-   "priorScorecard": "store/chips.merchant-gpu/2026-08-v7.json",
-   "priorDmi": 4.007,
-   "priorSmi": -0.2,
-   "gather": {
-    "documentsGathered": 10,
-    "primary": 2,
-    "secondary": 8,
-    "duplicates": 0,
-    "dropped": [],
-    "droppedKnown": 0,
-    "droppedKnownDetail": [],
-    "rounds": 1,
-    "cap": "maxDocuments=10 (daily top-up cap) tripped after round 1; round 2 not spawned. maxRounds=2, maxSubagentsPerRound=3.",
-    "topUp": true,
-    "topUpReason": "store coverage present -> gather capped at 10 and aimed at the open source gaps",
-    "skipped": [
-     "blob a3 (24/7 Wall St readout of WSJ '$3 trillion AI obligations', 2026-08-17) not ingested: maxDocuments=10 (daily top-up cap) reached with 11 blobs written; dropped the second-hand aggregator, kept in work/daily-2026-08-19/blobs-overcap/",
-     "sec.gov 8-K + exhibit pages: HTTP 403 via WebFetch (figures via NVIDIA newsroom primary instead)",
-     "cnbc.com, axios.com, seekingalpha.com: HTTP 403",
-     "ft.com / wsj.com originals: paywalled, not fetched",
-     "vast.ai/pricing: price grid rendered dynamically, no figures in page text",
-     "eBay listing pages timed out; H100 secondary prices came from search snippets of listings (blob c3)",
-     "Micron 'under 50% of HBM demand' lead: no Reuters/Bloomberg/Micron primary located; 24/7 Wall St secondary kept",
-     "channel-checks: no DigiTimes/TrendForce/Tom's Hardware item dated 2026-08-12..19 on lead times/CoWoS/HBM4 surfaced; older items left as leads",
-     "last30days discovery pass not run: HuggingNews tiered discovery + filing + price seeds saturated the 10-document daily cap (AFK-default, same as 08-11)",
-     "round 2 not spawned: maxDocuments cap tripped after round 1 (maxRounds=2, maxSubagentsPerRound=3)"
-    ],
-    "pursuedDespiteAge": [],
-    "huggingnewsFallback": [],
-    "note": "GATHER RAN 2026-08-19 IN THE SCHEDULED RUN THAT DIED AT THE THESIS SEAM. These counts are read back from that run's own artifacts (work/daily-2026-08-19/docs/gather-log.json, blobs.json, webreach/fetch-manifest.json); the resume session did NOT re-gather, by user direction."
-   },
-   "webReach": {
-    "toolVersions": {
-     "agent-reach": {
-      "version": "1.5.0",
-      "pin": "1.5.0",
-      "drift": false,
-      "status": "ok"
-     },
-     "last30days": {
-      "version": "skill-present",
-      "pin": "skill-present",
-      "drift": false,
-      "status": "ok"
-     },
-     "crawl4ai": {
-      "version": "0.9.0",
-      "pin": "0.9.0",
-      "drift": false,
-      "status": "ok"
-     },
-     "huggingnews": {
-      "version": "api-skill-v0.0.2",
-      "pin": "api-skill-v0.0.2",
-      "drift": false,
-      "status": "ok",
-      "keyed": true
-     }
-    },
-    "driftAny": false,
-    "gatherRunStatuses": {
-     "agent-reach": "ok",
-     "last30days": "ok",
-     "crawl4ai": "ok",
-     "huggingnews": "ok"
-    },
-    "fetchManifestResults": 6,
-    "note": "Tool version/pin/drift block captured by `web-reach-ensure --json --unattended` in the RESUME session (2026-08-20), not at gather time; the gather run's own per-tool ok/fail statuses are carried alongside under gatherRunStatuses."
-   },
-   "licensedSourcesFetched": [],
-   "answers": {
-    "extract": "work/daily-2026-08-19/extract-answer.json",
-    "judge": "work/daily-2026-08-19/judge-answer.json",
-    "thesis": "work/daily-2026-08-19/thesis-answer.json",
-    "implication": "work/daily-2026-08-19/implication-answer.json",
-    "narrator": "work/daily-2026-08-19/narrator-answer.json"
-   },
-   "corpusArtifacts": {
-    "coverage": "work/daily-2026-08-19/corpus-coverage.json",
-    "findings": "work/daily-2026-08-19/corpus-findings.json",
-    "dedupedFresh": "work/daily-2026-08-19/deduped-fresh.json",
-    "report": "work/daily-2026-08-19/corpus-report.json"
-   },
-   "corpusCounts": {
-    "storeInWindow": 312,
-    "corpusTotal": 335,
-    "freshNew": 10,
-    "freshUpdate": 13,
-    "freshDuplicate": 11,
-    "dedupedFreshIngested": 23
-   },
-   "dedupReport": "store/chips.merchant-gpu/dedup-2026-08-19.json",
-   "findingsGated": 34,
-   "wikiIngest": {
-    "logSeq": 468,
-    "newEntityPages": [
-     "cerebras",
-     "samsung"
-    ]
-   },
-   "unregisteredEntities": {
-    "count": 0,
-    "names": [],
-    "note": "Read back from the dead run's empty extract-prompt.err (no UNREGISTERED-ENTITY line); not observed live by the resume session."
-   },
-   "coverageRecord": {
-    "path": "store/chips.merchant-gpu/coverage-2026-08.json",
-    "gapCounts": {
-     "total": 13,
-     "source": 13,
-     "indicator": 0,
-     "required": 13,
-     "preferred": 0,
-     "optional": 0,
-     "waived": 0,
-     "paywalled": 2
+  "scope": "category:chips.merchant-gpu",
+  "asOf": "2026-08",
+  "mode": "daily",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "runDir": "work/daily-2026-08-21",
+  "unattended": true,
+  "entries": [
+    {
+      "category_id": "chips.merchant-gpu",
+      "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
+      "status": "done",
+      "manifestRef": "manifests/chips.merchant-gpu.json",
+      "scorecard": "store/chips.merchant-gpu/2026-08-v9.json",
+      "dmi": 4.0,
+      "smi": 0.133,
+      "priorScorecard": "store/chips.merchant-gpu/2026-08-v8.json",
+      "priorDmi": 4.173,
+      "priorSmi": -0.173,
+      "gather": {
+        "documentsGathered": 10,
+        "primary": 1,
+        "secondary": 9,
+        "duplicates": 0,
+        "dropped": [],
+        "droppedKnown": 0,
+        "droppedKnownDetail": [],
+        "rounds": 1,
+        "cap": "maxDocuments=10 (daily top-up cap) tripped at the end of round 1; round 2 not spawned. maxRounds=2, maxSubagentsPerRound=3.",
+        "topUp": true,
+        "topUpReason": "store coverage present (335 findings aged in) -> gather capped at 10 and aimed at material updates rather than re-deriving covered ground",
+        "skipped": [
+          "maxDocuments (10) reached at end of round 1: round 2 not run, remaining leads not chased.",
+          "lead 'DeepSeek v4 Flash token-volume halved after 5x price rise' not gathered: doc budget spent on better-corroborated demand items; the volume-drop figure was not corroborated to a primary source.",
+          "lead 'Korean DRAM export price $92/kg + JPMorgan $1.8T by 2028' not gathered as stated: no reachable source paired those two figures; the underlying Korea export-surge story was gathered instead.",
+          "lead 'Korea Customs Service raw trade statistics' not chased: maxDocuments reached.",
+          "lead 'CoreWeave public pricing page' not fetched: daily price-class cap of 1 pricing page already spent on Lambda.",
+          "paywalled/403 on fetch, syndication used instead: bloomberg.com, wsj.com, cnbc.com, tradingkey.com, datacenterdynamics.com.",
+          "AMD: no in-window (2026-08-14..2026-08-21) data-center GPU item found after targeted searches; nothing gathered for AMD this sweep.",
+          "manifest paywalled expectedSources not fetched (logged as coverage gaps): trendforce-gpu-tracker, semianalysis.",
+          "huggingnews detail fetch: 3 of 5 failed on first attempt (DNS 'could not resolve host'); all 3 succeeded on retry."
+        ],
+        "pursuedDespiteAge": [
+          {
+            "ref": "https://www.fool.com/investing/2026/08/06/sk-hynix-supplies-more-than-half-the-worlds-hbm-me/",
+            "date": "2026-08-06",
+            "ageDays": 15,
+            "reason": "Strongest reachable HBM-supply datapoint; no SK Hynix/Samsung HBM item published inside the 7-day sweep."
+          }
+        ],
+        "huggingnewsFallback": [],
+        "discovery": {
+          "huggingnews": "latest(ai-compute-chips) ok; 5 story details fetched (3 failed first attempt on DNS 'could not resolve host', all 3 succeeded on retry). Leads only - no story ingested as a blob.",
+          "last30days": "ran on 'Nvidia AMD data center GPU demand supply pricing'; leads only. Surfaced the WSJ/CNBC Nvidia-OpenAI financing thread that became blobs 11 and 12."
+        }
+      },
+      "webReach": {
+        "toolVersions": {
+          "agent-reach": {
+            "tool": "agent-reach",
+            "status": "ok",
+            "version": "1.5.0",
+            "pin": "1.5.0",
+            "drift": false
+          },
+          "last30days": {
+            "tool": "last30days",
+            "status": "ok",
+            "version": "skill-present",
+            "pin": "skill-present",
+            "drift": false
+          },
+          "crawl4ai": {
+            "tool": "crawl4ai",
+            "status": "ok",
+            "version": "0.9.0",
+            "pin": "0.9.0",
+            "drift": false
+          },
+          "huggingnews": {
+            "tool": "huggingnews",
+            "status": "ok",
+            "keyed": true,
+            "version": "api-skill-v0.0.2",
+            "pin": "api-skill-v0.0.2",
+            "drift": false
+          }
+        },
+        "driftAny": false,
+        "unattended": true,
+        "note": "Captured by `web-reach-ensure --json --unattended` at preflight, before the gather. No tool was installed or upgraded by this run. The interactive launcher (scripts\\web-reach-ensure.cmd --json) was ALSO run first, per CLAUDE.md's preflight line; it reported every tool already healthy with no drift, so it installed nothing. See deviations.",
+        "gatherRunStatuses": {
+          "agent-reach": "ok",
+          "last30days": "ok",
+          "crawl4ai": "not-invoked",
+          "huggingnews": "ok"
+        },
+        "doctorWarnOff": "agent-reach doctor: web (Jina Reader) and rss ok; github/twitter/xueqiu warn; youtube/reddit/facebook/instagram/xiaohongshu/linkedin/xiaoyuzhou/exa_search off. None of these gate a merchant-GPU gather - logged, not chased."
+      },
+      "licensedSourcesFetched": [],
+      "answers": {
+        "extract": "work/daily-2026-08-21/extract-answer.json",
+        "judge": "work/daily-2026-08-21/judge-answer.json",
+        "thesis": "work/daily-2026-08-21/thesis-answer.json",
+        "implication": "work/daily-2026-08-21/implication-answer.json",
+        "narrator": "work/daily-2026-08-21/narrator-answer.json"
+      },
+      "corpusArtifacts": {
+        "coverage": "work/daily-2026-08-21/corpus-coverage.json",
+        "findings": "work/daily-2026-08-21/corpus-findings.json",
+        "dedupedFresh": "work/daily-2026-08-21/deduped-fresh.json",
+        "report": "work/daily-2026-08-21/corpus-report.json",
+        "pipelineReport": "work/daily-2026-08-21/corpus-pipeline-report.json"
+      },
+      "corpusCounts": {
+        "storeInWindow": [
+          "abc-xyz-33e70a64-2026-07-1",
+          "abc-xyz-33e70a64-2026-07-3",
+          "abc-xyz-33e70a64-2026-07-4",
+          "blogs-nvidia-com-6f3401ce-2026-07-2",
+          "blogs-nvidia-com-6f3401ce-2026-07-3",
+          "blogs-nvidia-com-b4ddc904-2026-07-1",
+          "blogs-nvidia-com-b4ddc904-2026-07-2",
+          "blogs-nvidia-com-ffef75ff-2026-07-1",
+          "blogs-nvidia-com-ffef75ff-2026-07-2",
+          "blogs-nvidia-com-ffef75ff-2026-07-3",
+          "byteiota-com-066038aa-2026-07-1",
+          "economy-ac-24d4d647-2026-07-1",
+          "en-sedaily-com-c7890a6b-2026-07-1",
+          "featherless-ai-1a3abbab-2026-07-1",
+          "finance-biggo-com-6dfe92b3-2026-07-1",
+          "finance-biggo-com-6dfe92b3-2026-07-2",
+          "finance-biggo-com-6dfe92b3-2026-07-3",
+          "finance-biggo-com-ae5dcd41-2026-07-1",
+          "finance-biggo-com-ae5dcd41-2026-07-2",
+          "finance-yahoo-com-2185ba22-2026-07-1",
+          "finance-yahoo-com-2185ba22-2026-07-2",
+          "finance-yahoo-com-2f05647b-2026-07-1",
+          "finance-yahoo-com-4fa97194-2026-07-2",
+          "finance-yahoo-com-acf60faa-2026-07-1",
+          "finance-yahoo-com-baa362f5-2026-07-1",
+          "finance-yahoo-com-baa362f5-2026-07-2",
+          "finance-yahoo-com-baa362f5-2026-07-3",
+          "finance-yahoo-com-baa362f5-2026-07-4",
+          "finance-yahoo-com-bb3bbe3a-2026-07-1",
+          "finance-yahoo-com-bdd5c46e-2026-07-1",
+          "finance-yahoo-com-bdd5c46e-2026-07-2",
+          "finance-yahoo-com-c4ceeee1-2026-07-1",
+          "finance-yahoo-com-ea29a8bf-2026-07-2",
+          "gpuaas-com-3469b91e-2026-07-2",
+          "gpuaas-com-3469b91e-2026-07-3",
+          "intuitionlabs-ai-b83e7366-2026-07-1",
+          "investor-nvidia-com-c649ac13-2026-07-3",
+          "ir-amd-com-57b2e265-2026-07-1",
+          "ir-amd-com-6a5e41b9-2026-07-1",
+          "ir-amd-com-6a5e41b9-2026-07-2",
+          "ir-amd-com-6e904c47-2026-07-2",
+          "ir-amd-com-6e904c47-2026-07-3",
+          "ir-amd-com-7f18efdc-2026-07-1",
+          "ir-amd-com-80607c6d-2026-07-1",
+          "ir-amd-com-80607c6d-2026-07-2",
+          "ir-amd-com-80607c6d-2026-07-3",
+          "ir-amd-com-80607c6d-2026-07-5",
+          "ir-amd-com-c9dc9d6e-2026-07-1",
+          "ir-amd-com-c9dc9d6e-2026-07-2",
+          "ir-amd-com-f416295d-2026-07-2",
+          "lambda-ai-751f0165-2026-07-3",
+          "lambda-ai-c205c6dc-2026-07-3",
+          "mlq-ai-4e0c06bd-2026-07-1",
+          "moorinsightsstrategy-com-bf9134d1-2026-07-1",
+          "moorinsightsstrategy-com-bf9134d1-2026-07-2",
+          "newsletter-semianalysis-com-5136a06c-2026-07-1",
+          "newsletter-semianalysis-com-5136a06c-2026-07-2",
+          "newsroom-amd-com-cf6c6318-2026-07-1",
+          "newsroom-amd-com-cf6c6318-2026-07-3",
+          "newsroom-intel-com-0ca8d907-2026-07-1",
+          "newsroom-intel-com-28388342-2026-07-1",
+          "newsroom-intel-com-28388342-2026-07-2",
+          "newsroom-intel-com-297a8b5b-2026-07-1",
+          "newsroom-intel-com-4d6c0f3c-2026-07-2",
+          "newsroom-intel-com-8cfebac7-2026-07-1",
+          "newsroom-intel-com-8cfebac7-2026-07-2",
+          "newsroom-intel-com-8cfebac7-2026-07-3",
+          "nvidianews-nvidia-com-18175873-2026-07-1",
+          "nvidianews-nvidia-com-18175873-2026-07-2",
+          "nvidianews-nvidia-com-3f1f3a13-2026-07-1",
+          "nvidianews-nvidia-com-5c5b4b41-2026-07-1",
+          "nvidianews-nvidia-com-5c5b4b41-2026-07-3",
+          "nvidianews-nvidia-com-6d94ef96-2026-07-1",
+          "nvidianews-nvidia-com-7b7a02ff-2026-07-1",
+          "nvidianews-nvidia-com-7b7a02ff-2026-07-2",
+          "nvidianews-nvidia-com-7b7a02ff-2026-07-3",
+          "nvidianews-nvidia-com-7b7a02ff-2026-07-4",
+          "nvidianews-nvidia-com-87ea0942-2026-07-1",
+          "nvidianews-nvidia-com-898b9ab4-2026-07-1",
+          "nvidianews-nvidia-com-898b9ab4-2026-07-2",
+          "nvidianews-nvidia-com-af565dca-2026-07-4",
+          "rocm-blogs-amd-com-f017899d-2026-07-1",
+          "s201-q4cdn-com-f9f138ac-2026-07-2",
+          "siliconanalysts-com-216b07a8-2026-07-1",
+          "siliconanalysts-com-216b07a8-2026-07-2",
+          "siliconanalysts-com-216b07a8-2026-07-3",
+          "siliconanalysts-com-47ffeeeb-2026-07-1",
+          "siliconanalysts-com-47ffeeeb-2026-07-2",
+          "siliconanalysts-com-47ffeeeb-2026-07-3",
+          "siliconanalysts-com-528fac70-2026-07-2",
+          "siliconanalysts-com-528fac70-2026-07-3",
+          "siliconanalysts-com-528fac70-2026-07-4",
+          "siliconanalysts-com-528fac70-2026-07-5",
+          "siliconanalysts-com-79e017b3-2026-07-2",
+          "siliconanalysts-com-ce97213d-2026-07-1",
+          "siliconanalysts-com-ce97213d-2026-07-2",
+          "tech-yahoo-com-10bdc5b3-2026-07-1",
+          "tech-yahoo-com-7b64d281-2026-07-1",
+          "tech-yahoo-com-7b64d281-2026-07-2",
+          "techcrunch-com-bed0b1c2-2026-07-1",
+          "techcrunch-com-bed0b1c2-2026-07-2",
+          "thetechcapital-com-796ec195-2026-07-1",
+          "thetechcapital-com-796ec195-2026-07-2",
+          "www-ad-hoc-news-de-94ca546c-2026-07-1",
+          "www-ad-hoc-news-de-94ca546c-2026-07-2",
+          "www-ad-hoc-news-de-94ca546c-2026-07-4",
+          "www-amd-com-49475e6c-2026-07-2",
+          "www-amd-com-9fb86a52-2026-07-1",
+          "www-bis-gov-dbeede91-2026-07-1",
+          "www-cnbc-com-9d898f2b-2026-07-1",
+          "www-cnbc-com-9d898f2b-2026-07-2",
+          "www-cnbc-com-d1364ee3-2026-07-1",
+          "www-digitimes-com-240df012-2026-07-1",
+          "www-digitimes-com-8f3d0347-2026-07-1",
+          "www-digitimes-com-a374dff3-2026-07-1",
+          "www-digitimes-com-fd99903d-2026-07-1",
+          "www-faf-ae-6bcac1ba-2026-07-1",
+          "www-faf-ae-6bcac1ba-2026-07-2",
+          "www-faf-ae-6bcac1ba-2026-07-4",
+          "www-faf-ae-6bcac1ba-2026-07-5",
+          "www-federalregister-gov-4122c4b6-2026-07-1",
+          "www-fool-com-12d961c0-2026-07-1",
+          "www-fool-com-12d961c0-2026-07-2",
+          "www-fool-com-1f532293-2026-07-1",
+          "www-fool-com-1f532293-2026-07-2",
+          "www-fool-com-f229964a-2026-07-1",
+          "www-forbes-com-335e62f0-2026-07-1",
+          "www-forbes-com-7c91863a-2026-07-2",
+          "www-forbes-com-7c91863a-2026-07-3",
+          "www-forbes-com-9a1166d5-2026-07-1",
+          "www-globenewswire-com-2fcad1b8-2026-07-1",
+          "www-globenewswire-com-2fcad1b8-2026-07-2",
+          "www-globenewswire-com-2fcad1b8-2026-07-3",
+          "www-globenewswire-com-2fcad1b8-2026-07-4",
+          "www-globenewswire-com-78ee2d38-2026-07-1",
+          "www-intc-com-0fa743ed-2026-07-1",
+          "www-intc-com-0fa743ed-2026-07-2",
+          "www-intc-com-0fa743ed-2026-07-3",
+          "www-intc-com-0fa743ed-2026-07-4",
+          "www-intc-com-819f4336-2026-07-1",
+          "www-intc-com-819f4336-2026-07-2",
+          "www-intc-com-819f4336-2026-07-3",
+          "www-intc-com-819f4336-2026-07-4",
+          "www-interactivecrypto-com-b24bada9-2026-07-2",
+          "www-investing-com-09606ac9-2026-07-1",
+          "www-morganlewis-com-cf41b1ac-2026-07-1",
+          "www-originbrief-app-91d7b25f-2026-07-1",
+          "www-originbrief-app-91d7b25f-2026-07-5",
+          "www-originbrief-app-91d7b25f-2026-07-6",
+          "www-runpod-io-59ae0a2f-2026-07-1",
+          "www-sahmcapital-com-dbab27f1-2026-07-1",
+          "www-scmp-com-1f0c67f4-2026-07-1",
+          "www-sec-gov-125b52f2-2026-07-1",
+          "www-sec-gov-125b52f2-2026-07-2",
+          "www-sec-gov-8032823c-2026-07-2",
+          "www-sec-gov-bdd91a43-2026-07-1",
+          "www-servethehome-com-b11b71a3-2026-07-2",
+          "www-servethehome-com-b11b71a3-2026-07-3",
+          "www-servethehome-com-b11b71a3-2026-07-4",
+          "www-servethehome-com-b11b71a3-2026-07-5",
+          "www-spheron-network-6245e067-2026-07-1",
+          "www-spheron-network-e5a0032c-2026-07-1",
+          "www-spheron-network-e5a0032c-2026-07-2",
+          "www-spheron-network-f3e3c0bd-2026-07-1",
+          "www-spheron-network-f3e3c0bd-2026-07-2",
+          "www-stocktitan-net-fe36e810-2026-07-1",
+          "www-stocktitan-net-fe36e810-2026-07-2",
+          "www-stocktitan-net-fe36e810-2026-07-3",
+          "www-storagereview-com-e4725124-2026-07-1",
+          "www-storagereview-com-e4725124-2026-07-2",
+          "www-supplychainconnect-com-9dd9a92d-2026-07-3",
+          "www-techtimes-com-669598b1-2026-07-1",
+          "www-techtimes-com-669598b1-2026-07-2",
+          "www-techtimes-com-669598b1-2026-07-3",
+          "www-techtimes-com-669598b1-2026-07-4",
+          "www-techtimes-com-b90d06bb-2026-07-2",
+          "www-the-ai-corner-com-047581f6-2026-07-1",
+          "www-tomshardware-com-7b18c015-2026-07-1",
+          "www-tomshardware-com-f77e9757-2026-07-1",
+          "www-tomshardware-com-f77e9757-2026-07-2",
+          "www-tradingkey-com-855cb780-2026-07-1",
+          "www-tradingkey-com-855cb780-2026-07-2",
+          "www-trendforce-com-368d8402-2026-07-2",
+          "www-tweaktown-com-390fc475-2026-07-1",
+          "www-tweaktown-com-a0083106-2026-07-1",
+          "www-tweaktown-com-d2d515d6-2026-07-1",
+          "www-versalogic-com-4f660df1-2026-07-2",
+          "www-vitextech-com-893c21f5-2026-07-1",
+          "blogs-nvidia-com-817f7ea6-1",
+          "www-digitimes-com-8764779e-1",
+          "www-digitimes-com-f88ca4e6-1",
+          "www-digitimes-com-f88ca4e6-2",
+          "www-investing-com-f24cdca0-1",
+          "blogs-nvidia-com-c8158075-1",
+          "blogs-nvidia-com-c8158075-2",
+          "techcrunch-com-6b79ddb7-1",
+          "finance-yahoo-com-f1703d5e-2026-07-05-1",
+          "startupfortune-com-6857e872-2026-07-05-1",
+          "tech-yahoo-com-71aaa132-2026-07-05-1",
+          "finance-biggo-com-c310c4ca-2026-07-06-1",
+          "longcat-chat-e59c7f82-2026-07-06-1",
+          "www-datacenterdynamics-com-0c76f530-2026-07-06-1",
+          "www-datacenterdynamics-com-45864e2a-2026-07-06-1",
+          "www-datacenterdynamics-com-45864e2a-2026-07-06-2",
+          "247wallst-com-3508dabf-2026-08-1",
+          "247wallst-com-3508dabf-2026-08-2",
+          "404kresearch-substack-com-3985c52f-2026-08-1",
+          "404kresearch-substack-com-3985c52f-2026-08-2",
+          "404kresearch-substack-com-3985c52f-2026-08-4",
+          "404kresearch-substack-com-3985c52f-2026-08-6",
+          "ca-investing-com-2fecbf46-2026-08-4",
+          "ca-investing-com-2fecbf46-2026-08-5",
+          "ca-investing-com-2fecbf46-2026-08-6",
+          "ca-investing-com-e6319e42-2026-08-1",
+          "ca-investing-com-e6319e42-2026-08-2",
+          "ca-investing-com-e6319e42-2026-08-3",
+          "ca-investing-com-e6319e42-2026-08-4",
+          "ca-investing-com-e6319e42-2026-08-6",
+          "cryptobriefing-com-c3c1a1c3-2026-08-1",
+          "cryptobriefing-com-c3c1a1c3-2026-08-2",
+          "en-sedaily-com-80cdc180-2026-08-1",
+          "en-sedaily-com-80cdc180-2026-08-3",
+          "en-sedaily-com-80cdc180-2026-08-4",
+          "en-sedaily-com-b1c000ac-2026-08-1",
+          "en-sedaily-com-b1c000ac-2026-08-2",
+          "finance-biggo-com-9d0fdd5e-2026-08-2",
+          "finance-yahoo-com-171fe64e-2026-08-1",
+          "finance-yahoo-com-171fe64e-2026-08-2",
+          "finance-yahoo-com-171fe64e-2026-08-3",
+          "finance-yahoo-com-171fe64e-2026-08-4",
+          "finance-yahoo-com-171fe64e-2026-08-5",
+          "finance-yahoo-com-1e50b7f4-2026-08-2",
+          "finance-yahoo-com-5febc23d-2026-08-1",
+          "finance-yahoo-com-5febc23d-2026-08-2",
+          "finance-yahoo-com-5febc23d-2026-08-3",
+          "hashrateindex-com-10fa275f-2026-08-5",
+          "interestingengineering-com-0cdea07c-2026-08-2",
+          "investor-nvidia-com-6947ac46-2026-08-1",
+          "investor-nvidia-com-6947ac46-2026-08-2",
+          "ir-amd-com-2369b33d-2026-08-1",
+          "ir-amd-com-2369b33d-2026-08-2",
+          "ir-amd-com-2369b33d-2026-08-3",
+          "ir-amd-com-6e46ec5e-2026-08-1",
+          "ir-amd-com-6e46ec5e-2026-08-2",
+          "ir-amd-com-7b910833-2026-08-4",
+          "ir-amd-com-7b910833-2026-08-5",
+          "ir-amd-com-7b910833-2026-08-6",
+          "ir-amd-com-9d1a8778-2026-08-1",
+          "ir-amd-com-9d1a8778-2026-08-3",
+          "ir-amd-com-9d1a8778-2026-08-4",
+          "ir-amd-com-a123cd3c-2026-08-5",
+          "ir-amd-com-a123cd3c-2026-08-6",
+          "ir-amd-com-a2b1e088-2026-08-1",
+          "ir-amd-com-a2b1e088-2026-08-2",
+          "ir-amd-com-cfa508a5-2026-08-1",
+          "ir-amd-com-cfa508a5-2026-08-2",
+          "ir-amd-com-cfa508a5-2026-08-3",
+          "ir-amd-com-cfa508a5-2026-08-4",
+          "ir-amd-com-d9abb1c2-2026-08-1",
+          "ir-amd-com-d9abb1c2-2026-08-3",
+          "lambda-ai-09c2dbc6-2026-08-4",
+          "lambda-ai-591ae243-2026-08-1",
+          "lambda-ai-591ae243-2026-08-3",
+          "lambda-ai-71b45f28-2026-08-3",
+          "m-lookonchain-com-027f1b02-2026-08-2",
+          "newsroom-amd-com-4824d28b-2026-08-1",
+          "newsroom-amd-com-4824d28b-2026-08-2",
+          "newsroom-intel-com-6cdf4bbc-2026-08-1",
+          "nvidianews-nvidia-com-69f787c5-2026-08-1",
+          "nvidianews-nvidia-com-b38ebbeb-2026-08-1",
+          "nvidianews-nvidia-com-b38ebbeb-2026-08-4",
+          "nvidianews-nvidia-com-b38ebbeb-2026-08-5",
+          "nvidianews-nvidia-com-cfc51804-2026-08-1",
+          "pr-tsmc-com-7f560c3b-2026-08-1",
+          "pr-tsmc-com-7f560c3b-2026-08-2",
+          "qz-com-36c37a60-2026-08-1",
+          "supplyics-com-c83015c2-2026-08-2",
+          "supplyics-com-c83015c2-2026-08-3",
+          "supplyics-com-c83015c2-2026-08-4",
+          "techsoda-substack-com-3b7a4ff5-2026-08-1",
+          "techsoda-substack-com-3b7a4ff5-2026-08-2",
+          "techsoda-substack-com-3b7a4ff5-2026-08-3",
+          "techsoda-substack-com-3b7a4ff5-2026-08-4",
+          "techsoda-substack-com-3b7a4ff5-2026-08-5",
+          "www-amd-com-7c004427-2026-08-2",
+          "www-amd-com-7c004427-2026-08-3",
+          "www-constructiondive-com-35e82b22-2026-08-2",
+          "www-constructiondive-com-35e82b22-2026-08-3",
+          "www-digitimes-com-80018f32-2026-08-1",
+          "www-ebay-com-c8613af6-2026-08-1",
+          "www-ebay-com-c8613af6-2026-08-2",
+          "www-ebay-com-c8613af6-2026-08-3",
+          "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+          "www-freemalaysiatoday-com-7dfc89b4-2026-08-2",
+          "www-freemalaysiatoday-com-7dfc89b4-2026-08-3",
+          "www-freemalaysiatoday-com-7dfc89b4-2026-08-4",
+          "www-globenewswire-com-1efbc0a3-2026-08-1",
+          "www-globenewswire-com-1efbc0a3-2026-08-2",
+          "www-globenewswire-com-1efbc0a3-2026-08-3",
+          "www-intc-com-2b371042-2026-08-2",
+          "www-intc-com-2b371042-2026-08-3",
+          "www-intc-com-2b371042-2026-08-4",
+          "www-intc-com-2becba13-2026-08-1",
+          "www-intc-com-2becba13-2026-08-4",
+          "www-intc-com-9e1300a4-2026-08-1",
+          "www-intc-com-9e1300a4-2026-08-2",
+          "www-intc-com-9e1300a4-2026-08-3",
+          "www-investing-com-87498f82-2026-08-1",
+          "www-investing-com-b7ff2af7-2026-08-1",
+          "www-investing-com-b7ff2af7-2026-08-2",
+          "www-investing-com-b7ff2af7-2026-08-3",
+          "www-kucoin-com-8fc72edf-2026-08-1",
+          "www-kucoin-com-8fc72edf-2026-08-2",
+          "www-prnewswire-com-55cd06fc-2026-08-1",
+          "www-prnewswire-com-55cd06fc-2026-08-2",
+          "www-stocktitan-net-587e9583-2026-08-1",
+          "www-stocktitan-net-587e9583-2026-08-2",
+          "www-stocktitan-net-587e9583-2026-08-3",
+          "www-storagereview-com-e5082a62-2026-08-2",
+          "www-storagereview-com-e5082a62-2026-08-4",
+          "www-storagereview-com-e5082a62-2026-08-5",
+          "www-thelec-net-c15d2de4-2026-08-1",
+          "www-thelec-net-c15d2de4-2026-08-2",
+          "www-thelec-net-c15d2de4-2026-08-3",
+          "www-theregister-com-9b9edf29-2026-08-1",
+          "www-theregister-com-9b9edf29-2026-08-2",
+          "www-theregister-com-9b9edf29-2026-08-3",
+          "www-tomshardware-com-9086563b-2026-08-1",
+          "www-tomshardware-com-9086563b-2026-08-2",
+          "www-tomshardware-com-9086563b-2026-08-3",
+          "www-trendforce-com-17fa2dc8-2026-08-1",
+          "www-trendforce-com-836f33fa-2026-08-1",
+          "www-trendforce-com-b8196a71-2026-08-1",
+          "www-trendforce-com-b8196a71-2026-08-4",
+          "www-yesmedia-com-tw-b16dcffc-2026-08-4"
+        ],
+        "fadedOut": 92,
+        "corpusTotal": 346,
+        "freshNew": [],
+        "freshUpdate": [
+          {
+            "findingId": "www-koreaherald-com-f4194135-2026-08-1",
+            "entity": "multi",
+            "indicatorId": "D2",
+            "verdict": "update",
+            "priorFindingId": "ir-amd-com-6e46ec5e-2026-08-1",
+            "detail": "value 11.5 -> 26.0 (tol 1%)"
+          },
+          {
+            "findingId": "www-coreweave-com-ece65e78-2026-08-2",
+            "entity": "multi",
+            "indicatorId": "customerConcentration",
+            "verdict": "update",
+            "priorFindingId": "siliconanalysts-com-528fac70-2026-07-4",
+            "detail": "magnitude 2 -> 1"
+          },
+          {
+            "findingId": "www-fool-com-8380942c-2026-08-1",
+            "entity": "multi",
+            "indicatorId": "hbmSupplyCapex",
+            "verdict": "update",
+            "priorFindingId": "247wallst-com-3508dabf-2026-08-1",
+            "detail": "statement/trend changed (trend falling -> rising)"
+          },
+          {
+            "findingId": "www-fool-com-8380942c-2026-08-2",
+            "entity": "multi",
+            "indicatorId": "market-share-pct",
+            "verdict": "update",
+            "priorFindingId": "www-spheron-network-f3e3c0bd-2026-07-2",
+            "detail": "value 60.0 -> 58.0 (tol 1%)"
+          },
+          {
+            "findingId": "www-coreweave-com-ece65e78-2026-08-1",
+            "entity": "multi",
+            "indicatorId": "rpoBacklog",
+            "verdict": "update",
+            "priorFindingId": "thetechcapital-com-796ec195-2026-07-2",
+            "detail": "statement/trend changed (trend rising -> rising)"
+          },
+          {
+            "findingId": "lambda-ai-3a9372dc-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "D6",
+            "verdict": "update",
+            "priorFindingId": "lambda-ai-591ae243-2026-08-1",
+            "detail": "value 3.99 -> 4.29 (tol 1%)"
+          },
+          {
+            "findingId": "finance-yahoo-com-c272e9ae-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "S9",
+            "verdict": "update",
+            "priorFindingId": "www-ebay-com-c8613af6-2026-08-2",
+            "detail": "statement/trend changed (trend unknown -> rising)"
+          },
+          {
+            "findingId": "www-investing-com-5f3f098a-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "exportControlExposure",
+            "verdict": "update",
+            "priorFindingId": "finance-yahoo-com-1e50b7f4-2026-08-2",
+            "detail": "magnitude 2 -> 1"
+          },
+          {
+            "findingId": "finance-yahoo-com-54a88032-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "marginalBuyerFinancing",
+            "verdict": "update",
+            "priorFindingId": "nvidianews-nvidia-com-b38ebbeb-2026-08-5",
+            "detail": "statement/trend changed (trend rising -> falling)"
+          },
+          {
+            "findingId": "nvidianews-nvidia-com-65f0d00a-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "rpoBacklog",
+            "verdict": "update",
+            "priorFindingId": "nvidianews-nvidia-com-b38ebbeb-2026-08-1",
+            "detail": "statement/trend changed (trend rising -> rising)"
+          },
+          {
+            "findingId": "finance-yahoo-com-f400b412-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "upstreamLeadTimes",
+            "verdict": "update",
+            "priorFindingId": "www-storagereview-com-e5082a62-2026-08-4",
+            "detail": "statement/trend changed (trend rising -> rising)"
+          }
+        ],
+        "freshDuplicate": [
+          {
+            "findingId": "lambda-ai-3a9372dc-2026-08-2",
+            "entity": "nvidia",
+            "indicatorId": "D6",
+            "verdict": "duplicate",
+            "priorFindingId": null,
+            "detail": "superseded by intra-batch latest vintage"
+          },
+          {
+            "findingId": "www-tomshardware-com-6587effc-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "exportControlExposure",
+            "verdict": "duplicate",
+            "priorFindingId": null,
+            "detail": "superseded by intra-batch latest vintage"
+          },
+          {
+            "findingId": "finance-yahoo-com-54a88032-2026-08-2",
+            "entity": "nvidia",
+            "indicatorId": "marginalBuyerFinancing",
+            "verdict": "duplicate",
+            "priorFindingId": null,
+            "detail": "superseded by intra-batch latest vintage"
+          },
+          {
+            "findingId": "nvidianews-nvidia-com-65f0d00a-2026-08-2",
+            "entity": "nvidia",
+            "indicatorId": "marginalBuyerFinancing",
+            "verdict": "duplicate",
+            "priorFindingId": null,
+            "detail": "superseded by intra-batch latest vintage"
+          }
+        ],
+        "dedupedFreshIngested": 11
+      },
+      "dedupReport": "store/chips.merchant-gpu/dedup-2026-08-21.json",
+      "dedupCounts": {
+        "new": [],
+        "update": [
+          {
+            "findingId": "www-koreaherald-com-f4194135-2026-08-1",
+            "entity": "multi",
+            "indicatorId": "D2",
+            "verdict": "update",
+            "priorFindingId": "ir-amd-com-6e46ec5e-2026-08-1",
+            "detail": "value 11.5 -> 26.0 (tol 1%)"
+          },
+          {
+            "findingId": "www-coreweave-com-ece65e78-2026-08-2",
+            "entity": "multi",
+            "indicatorId": "customerConcentration",
+            "verdict": "update",
+            "priorFindingId": "siliconanalysts-com-528fac70-2026-07-4",
+            "detail": "magnitude 2 -> 1"
+          },
+          {
+            "findingId": "www-fool-com-8380942c-2026-08-1",
+            "entity": "multi",
+            "indicatorId": "hbmSupplyCapex",
+            "verdict": "update",
+            "priorFindingId": "247wallst-com-3508dabf-2026-08-1",
+            "detail": "statement/trend changed (trend falling -> rising)"
+          },
+          {
+            "findingId": "www-fool-com-8380942c-2026-08-2",
+            "entity": "multi",
+            "indicatorId": "market-share-pct",
+            "verdict": "update",
+            "priorFindingId": "www-spheron-network-f3e3c0bd-2026-07-2",
+            "detail": "value 60.0 -> 58.0 (tol 1%)"
+          },
+          {
+            "findingId": "www-coreweave-com-ece65e78-2026-08-1",
+            "entity": "multi",
+            "indicatorId": "rpoBacklog",
+            "verdict": "update",
+            "priorFindingId": "thetechcapital-com-796ec195-2026-07-2",
+            "detail": "statement/trend changed (trend rising -> rising)"
+          },
+          {
+            "findingId": "lambda-ai-3a9372dc-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "D6",
+            "verdict": "update",
+            "priorFindingId": "lambda-ai-591ae243-2026-08-1",
+            "detail": "value 3.99 -> 4.29 (tol 1%)"
+          },
+          {
+            "findingId": "finance-yahoo-com-c272e9ae-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "S9",
+            "verdict": "update",
+            "priorFindingId": "www-ebay-com-c8613af6-2026-08-2",
+            "detail": "statement/trend changed (trend unknown -> rising)"
+          },
+          {
+            "findingId": "www-investing-com-5f3f098a-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "exportControlExposure",
+            "verdict": "update",
+            "priorFindingId": "finance-yahoo-com-1e50b7f4-2026-08-2",
+            "detail": "magnitude 2 -> 1"
+          },
+          {
+            "findingId": "finance-yahoo-com-54a88032-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "marginalBuyerFinancing",
+            "verdict": "update",
+            "priorFindingId": "nvidianews-nvidia-com-b38ebbeb-2026-08-5",
+            "detail": "statement/trend changed (trend rising -> falling)"
+          },
+          {
+            "findingId": "nvidianews-nvidia-com-65f0d00a-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "rpoBacklog",
+            "verdict": "update",
+            "priorFindingId": "nvidianews-nvidia-com-b38ebbeb-2026-08-1",
+            "detail": "statement/trend changed (trend rising -> rising)"
+          },
+          {
+            "findingId": "finance-yahoo-com-f400b412-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "upstreamLeadTimes",
+            "verdict": "update",
+            "priorFindingId": "www-storagereview-com-e5082a62-2026-08-4",
+            "detail": "statement/trend changed (trend rising -> rising)"
+          }
+        ],
+        "duplicate": [
+          {
+            "findingId": "lambda-ai-3a9372dc-2026-08-2",
+            "entity": "nvidia",
+            "indicatorId": "D6",
+            "verdict": "duplicate",
+            "priorFindingId": null,
+            "detail": "superseded by intra-batch latest vintage"
+          },
+          {
+            "findingId": "www-tomshardware-com-6587effc-2026-08-1",
+            "entity": "nvidia",
+            "indicatorId": "exportControlExposure",
+            "verdict": "duplicate",
+            "priorFindingId": null,
+            "detail": "superseded by intra-batch latest vintage"
+          },
+          {
+            "findingId": "finance-yahoo-com-54a88032-2026-08-2",
+            "entity": "nvidia",
+            "indicatorId": "marginalBuyerFinancing",
+            "verdict": "duplicate",
+            "priorFindingId": null,
+            "detail": "superseded by intra-batch latest vintage"
+          },
+          {
+            "findingId": "nvidianews-nvidia-com-65f0d00a-2026-08-2",
+            "entity": "nvidia",
+            "indicatorId": "marginalBuyerFinancing",
+            "verdict": "duplicate",
+            "priorFindingId": null,
+            "detail": "superseded by intra-batch latest vintage"
+          }
+        ]
+      },
+      "findingsGated": 15,
+      "wikiIngest": {
+        "logSeq": 479,
+        "routed": 11,
+        "pages": 2,
+        "newEntityPages": []
+      },
+      "unregisteredEntities": {
+        "count": 1,
+        "names": [
+          "multi"
+        ],
+        "note": "'multi' is the extractor's cross-entity label for a finding that is not about one named company; it is not in docs/taxonomy.json seedEntities. Flagged, not rejected."
+      },
+      "coverageRecord": {
+        "path": "store/chips.merchant-gpu/coverage-2026-08.json",
+        "gapCounts": {
+          "total": 12,
+          "source": 12,
+          "indicator": 0,
+          "required": 12,
+          "preferred": 0,
+          "optional": 0,
+          "waived": 0,
+          "paywalled": 2
+        }
+      },
+      "gates": {
+        "voiceLint": "clean",
+        "sufficiency": "clean",
+        "bypasses": 0
+      },
+      "stageStatuses": {
+        "category": "done",
+        "thesis": "done",
+        "implication": "done",
+        "narrator": "done",
+        "issues-open": "done",
+        "issues-update": "done",
+        "citation-audit": "clean",
+        "layer": "deferred",
+        "main": "deferred"
+      },
+      "issuesOpen": {
+        "register": "store/chips.merchant-gpu/issues/register.json",
+        "opened": [
+          "constraint-stacked-memory-and-server-dram"
+        ],
+        "open": 4
+      },
+      "issuesUpdate": {
+        "assessed": 4,
+        "notAssessed": 0,
+        "resolved": [],
+        "history": "store/chips.merchant-gpu/issues/history.jsonl"
+      },
+      "thesisGate": {
+        "attempts": 1,
+        "result": "passed",
+        "violations": [],
+        "judged": 67,
+        "verdicts": {
+          "reaffirmed": 20,
+          "strengthened": 41,
+          "weakened": 4,
+          "adjusted": 2,
+          "broken": 0
+        },
+        "deferred": [
+          "the-rental-premium-moves-to-the-newest-hardware: secondary-only reversal (2 distinct publishers < 3)"
+        ],
+        "proposed": [
+          "chip-vendors-start-buying-the-land-and-power-behind-their-customers",
+          "investors-now-treat-bigger-ai-budgets-as-a-cost"
+        ]
+      },
+      "implicationGate": {
+        "attempts": 2,
+        "result": "passed",
+        "violations": [
+          "attempt 1: line 5: banned word 'leverage'"
+        ],
+        "lines": 8,
+        "artifact": "store/implications/chips.merchant-gpu/2026-08.json"
+      },
+      "narratorArtifact": {
+        "path": "store/chips.merchant-gpu/story/2026-08-21.json",
+        "attempts": 2,
+        "result": "done",
+        "violations": [
+          "gate attempt 1: 5x related-doc outlet strings did not match their inputs.docPool source verbatim",
+          "gate attempt 1: last scene title lacked a forward-looking marker (close/watch/ahead/next)"
+        ]
+      },
+      "citationAudit": {
+        "result": "clean",
+        "record": "store/chips.merchant-gpu/audit/2026-08-21.json",
+        "claims": 18,
+        "flagged": 0,
+        "skipped": 0
+      },
+      "priceSync": {
+        "result": "done",
+        "written": {
+          "gpuSpotPrice": 12,
+          "gpuRentalOnDemand": 16,
+          "gpuRentalSpot": 0,
+          "gpuRental1yr": 17
+        },
+        "warnings": [
+          "stale price folder: newest data 260602, as_of 2026-08"
+        ]
+      },
+      "seriesRefresh": {
+        "gaps": [
+          "tokenEconomics 2026-07"
+        ],
+        "written": [],
+        "rejected": [],
+        "alreadyPresent": [],
+        "empty": [
+          "tokenEconomics 2026-07"
+        ],
+        "notes": [
+          "The reader returned an empty envelope on purpose: the stored point is a construction (median of 6 volume rates and 14 price rates over a trailing 9 months) and the reader could not reproduce that same basket from public sources. Rebuilding it a different way would silently change what the series measures, so no candidate was written. Same outcome as the 2026-08-19 cycle."
+        ]
+      },
+      "v2Shadow": "stamped",
+      "chartFetch": {
+        "result": "done",
+        "fetched": [],
+        "failed": [],
+        "skipped": [
+          "amdDataCenterRevenue",
+          "gpuSpotPrice",
+          "nvdaDataCenterRevenue"
+        ]
+      },
+      "chartResearch": {
+        "emitted": 3,
+        "answered": 3,
+        "accepted": 1,
+        "rejected": 2,
+        "missing": 0,
+        "acceptedSeries": [
+          "store/chips.merchant-gpu/research-series/2026-08-21-south-korea-monthly-semiconductor-exports-2026.json"
+        ],
+        "rejectedDetail": [
+          "bullet-2 (Micron quarterly DRAM revenue, fool.com transcripts): all 3 points unreachable to the verifier - HTTP 403 Forbidden.",
+          "bullet-3 (Ohio campus gigawatts, nvidianews.nvidia.com): point 3 value 8.0 not found on the cited page."
+        ]
+      },
+      "dashboardJson": {
+        "result": "done",
+        "path": "site/chips.merchant-gpu/data/dashboard.json"
+      },
+      "report": "work/daily-2026-08-21/report.txt",
+      "deviations": [
+        "TOOL-LESS-BRAIN DEVIATION (standing, unchanged since the 2026-08-04 cycles, still awaiting a user ruling): this harness exposes no tool-less subagent type. The extraction brain was dispatched on model opus with the whole prompt inlined and an explicit binding instruction to use NO tools, and it used none (0 tool calls). The judge (3 samples), thesis, implication and narrator brains were dispatched on model opus with a binding instruction to use ONLY Read on their own prompt files and Write on their own answer file, and no other tool - their prompts are 130-260 KB and inlining them would not fit. AFK-default.",
+        "GATHERER TOOL-WALL DEVIATION (new this run, AFK-default): the F88 injection wall requires reader-gatherers to hold Read/Write/WebSearch/WebFetch and structurally NOT Bash. No registered subagent type in this session has that exact tool set (Explore has no Write; general-purpose and claude have Bash). The three gatherers, the series reader and the three chart researchers were therefore dispatched as general-purpose with an explicit, absolute prompt-level prohibition on Bash and any other shell tool - a prompt-level wall, not a structural one. To fix this for later runs, this cycle also added .claude/agents/web-gatherer.md, an agent definition with exactly Read/Write/WebSearch/WebFetch; agent definitions only load at session start, so it could not be used by this run itself. The next session should dispatch gatherers with subagent_type web-gatherer and this deviation goes away.",
+        "JUDGE/THESIS/IMPLICATION/NARRATOR PROMPT SPLIT (mechanical, no content change): each emitted prompt is a single physical line too long for the Read tool to page (the judge user prompt is ~62k tokens on one line, and Read errors over its 25k cap at every offset). Each prompt was split byte-exactly into ~30 KB pieces under work/daily-2026-08-21/<seam>-parts/ and the brain was told to concatenate them in order with nothing added. Rejoin was asserted equal to the original before dispatch. No prompt text was altered, so no emitted-prompt hash moved.",
+        "FINAL-MESSAGE LENGTH (F67): the rendered daily report is 123 KB / 1128 lines. The session's final message carries the above-the-fold sections verbatim and references work/daily-2026-08-21/report.txt for the full text rather than pasting all of it. AFK-default.",
+        "The 2026-08-21 leasing-price side-channel pull ran clean (873 rows: Azure 666, RunPod 88, AWS 53, Vast.ai 48, CoreWeave 18, Lambda 0 - skipped, needs a free LAMBDA_API_KEY; no provider FAILED), but pull_gpu_prices.py writes NO dated history copies - it only overwrites gpu_prices.csv/.json next to itself. There is no history/ folder and no archiving code in the script at all. Nothing was copied into this repo. Worth a backlog item if the dated snapshots are meant to exist."
+      ]
     }
-   },
-   "gates": {
-    "voiceLint": "clean",
-    "sufficiency": "clean",
-    "bypasses": 0
-   },
-   "stageStatuses": {
-    "category": "done",
-    "thesis": "done",
-    "implication": "done",
-    "narrator": "done",
-    "issues-update": "done",
-    "layer": "deferred",
-    "main": "deferred"
-   },
-   "issuesOpen": {
-    "register": "store/chips.merchant-gpu/issues/register.json",
-    "opened": [
-     "constraint-hbm-stacked-memory-supply",
-     "dim-bottleneck",
-     "dim-moat"
-    ],
-    "note": "F115 FIRST LIVE EXERCISE - ran in the 2026-08-19 scheduled run before it died."
-   },
-   "issuesUpdate": {
-    "assessed": 3,
-    "notAssessed": 0,
-    "resolved": [],
-    "history": "store/chips.merchant-gpu/issues/history.jsonl",
-    "statuses": {
-     "constraint-hbm-stacked-memory-supply": "worsened",
-     "dim-bottleneck": "worsened",
-     "dim-moat": "worsened"
+  ],
+  "stages": [
+    {
+      "tier": "category",
+      "status": "active"
     },
-    "note": "F115 FIRST LIVE issues-update: history.jsonl created, 3 lines. The post-audit narrator re-dispatch re-wrote the story, and the idempotence guard correctly returned {'skipped': true, 'reason': 'already-recorded'} on the rerun - the assessments were unchanged by that fix, which touched only one number in scene 4."
-   },
-   "thesisGate": {
-    "attempts": 2,
-    "result": "passed",
-    "violations": [
-     "attempt 1: voice-lint: neocloud-gpu-buyers-carry-heavy-debt-loads: mechanism: banned word 'leverage'"
-    ],
-    "judged": 65,
-    "verdicts": {
-     "reaffirmed": 26,
-     "strengthened": 32,
-     "weakened": 5,
-     "adjusted": 2,
-     "broken": 0
+    {
+      "tier": "layer",
+      "status": "deferred"
     },
-    "proposed": [
-     "the-second-largest-foundry-fills-up-and-raises-prices",
-     "wafer-scale-machines-join-the-rack-contest"
-    ],
-    "note": "All 65 judgments applied=True."
-   },
-   "implicationGate": {
-    "attempts": 1,
-    "result": "passed",
-    "lines": 8,
-    "artifact": "store/implications/chips.merchant-gpu/2026-08.json"
-   },
-   "narratorArtifact": {
-    "path": "store/chips.merchant-gpu/story/2026-08-19.json",
-    "attempts": 3,
-    "result": "done",
-    "violations": [
-     "gate attempt 1: calloutMonths: at most 2 callouts are allowed; got 3",
-     "post-audit attempt: scene:4 uncited number 27999 (prose truncated the cited finding's $27,999.99)"
-    ],
-    "headline": "NVIDIA is designing its next chip around memory it cannot buy",
-    "scenes": 4
-   },
-   "citationAudit": {
-    "result": "flagged-implication-only",
-    "record": "store/chips.merchant-gpu/audit/2026-08-19.json",
-    "flags": [
-     "impl:0: uncited number 2027"
-    ],
-    "narratorFlagsCleared": [
-     "scene:4: uncited number 27999"
-    ],
-    "note": "The narrator flag was fixed on the single permitted re-dispatch and is GONE. The one remaining flag is on an implication line, and the procedure logs implication flags rather than re-dispatching them (the implication seam is already two-attempts-then-failed). '2027' there is a forward-looking year inside a watch-item, not a claimed measurement - the same benign shape as the impl:7 flag carried through the 2026-08-05 and 2026-08-10 cycles. The story artifact is NOT invalidated and no narrator fallback was recorded."
-   },
-   "priceSync": {
-    "result": "done",
-    "written": {
-     "gpuSpotPrice": 12,
-     "gpuRentalOnDemand": 16,
-     "gpuRentalSpot": 0,
-     "gpuRental1yr": 17
-    },
-    "warnings": [
-     "stale price folder: newest data 260602, as_of 2026-08"
-    ]
-   },
-   "seriesRefresh": {
-    "gaps": [
-     "odmMonthlyAiRevenue 2026-07",
-     "pkgCapacityOrderSpread 2026-05",
-     "tokenEconomics 2026-07"
-    ],
-    "written": [
-     "odmMonthlyAiRevenue 2026-07",
-     "pkgCapacityOrderSpread 2026-05"
-    ],
-    "rejected": [],
-    "alreadyPresent": [],
-    "empty": [
-     "tokenEconomics 2026-07"
-    ],
-    "notes": [
-     "odmMonthlyAiRevenue 2026-07 = +82.279 pct_yoy, rebuilt by the recorded construction (Quanta 366.274 vs 158.342, Wistron 308.219 vs 191.726, Wiwynn 117.686 vs 84.529, TWD bn).",
-     "pkgCapacityOrderSpread 2026-05 = -50.0, the same class as April; the reader's cited source is trendforce.com, a licensed publisher that refuses automated readers - series-refresh has NO re-fetch verification step, so this point was NOT machine-verified the way a chart-research point is. Flagged for a human.",
-     "tokenEconomics 2026-07: reader returned an EMPTY envelope on purpose - the stored note records the basket SIZES (6 volume rates, 14 price rates) but not the basket MEMBERSHIP, so the same construction cannot be reproduced from public sources. An honest no-candidate rather than a differently-built number. Fixing this needs the basket definition carried in the series metadata."
-    ]
-   },
-   "v2Shadow": "stamped",
-   "chartFetch": {
-    "result": "done",
-    "fetched": [],
-    "failed": [],
-    "skipped": [
-     "amdDataCenterRevenue",
-     "gpuSpotPrice",
-     "nvdaDataCenterRevenue"
-    ]
-   },
-   "chartResearch": {
-    "emitted": 3,
-    "answered": 3,
-    "accepted": 2,
-    "rejected": 1,
-    "missing": 0,
-    "acceptedSeries": [
-     "store/chips.merchant-gpu/research-series/2026-08-19-high-bandwidth-memory-on-each-nvidia-data-center-gpu-by-generation.json",
-     "store/chips.merchant-gpu/research-series/2026-08-19-ai-compute-per-cerebras-wafer-by-chip-generation.json"
-    ],
-    "rejectedDetail": [
-     "bullet-1 (Samsung foundry share, Counterpoint Research): all 5 points unreachable - HTTP 403 Forbidden to the plain automated reader."
-    ],
-    "note": "F116'S LIVE CRITERION IS MET: the FIRST verifier-passing researched chart series in this run of cycles (0 accepted on 08-10 and on both 08-11 runs). store/chips.merchant-gpu/research-series/ now exists. Both surviving researchers explicitly routed around sites that block automated readers, which is exactly what F116's rule 8 was written to cause. FOLLOW-UP WORTH FILING: counterpointresearch.com 403s the plain reader but is NOT in registry/licensed-sources.json, so rule 8 never warned the researcher off it - and the researcher's own WebFetch opened the page fine three times, so it had no way to know. The registry needs that domain, and the deeper gap is that a research agent's fetcher and the verifier's fetcher are different readers."
-   },
-   "dashboardJson": {
-    "result": "done",
-    "path": "site/chips.merchant-gpu/data/dashboard.json",
-    "schemaVersion": "1.2",
-    "bulletsWithCharts": 2,
-    "note": "F115 END-TO-END LIVE: the dashboard's issues section is populated for the first time (3 open, 0 resolved)."
-   },
-   "siteBuild": {
-    "result": "done",
-    "pages": 7,
-    "featured": "demand-momentum"
-   },
-   "report": "work/daily-2026-08-19/report.txt",
-   "deviations": [
-    "RESUMED RUN, NOT A FRESH ONE (user-directed, interactive 2026-08-20). The 2026-08-19 scheduled run died immediately after emitting the thesis prompt. This session picked the cycle up at that seam and ran everything from 3(e) onward. Steps 3(a) through 3(d4) were NOT re-run and their artifacts are the dead run's own, read back from disk. No re-gather, by explicit user direction.",
-    "Step 3(e)/(e2)/(e3) TOOL-LESS-BRAIN DEVIATION (unchanged from the 2026-08-04 onward cycles, still awaiting the user ruling): this harness exposes no tool-less subagent type, so each brain was dispatched on model opus with an explicit binding instruction to use ONLY Read on its own prompt files and no other tool.",
-    "Step 3(e)/(e2)/(e3) BRAIN-WRITES-ITS-OWN-ANSWER (NEW THIS CYCLE, AFK-default, flagged to the user in-session): prior cycles had the brain return its answer as text for the coordinator to transcribe. The thesis answer here is 65 judgments; hand-transcribing it would have risked a silent typo in a stored artifact. So each brain was granted Read on its own prompt files PLUS exactly one Write to its own answer path, and nothing else. The property the tool-less rule exists to protect is intact - no brain could fetch anything outside its prompt - but this IS a change from the recorded practice and is called out rather than left silent. It also replaces the 2026-08-11 scripted-string-substitution workaround: gate retries were fixed by re-dispatching the brain to rewrite its own file.",
-    "Step 3(e2) PROMPT SPLIT (unchanged): the implication prompt was split verbatim into system.txt / user.txt / schema.json, and the narrator prompt into system.txt / schema.json / user-part1..4.txt, under work/daily-2026-08-19/. Both splits were verified by exact round-trip reassembly against the emitted prompt before dispatch; content is byte-identical, only re-laid-out across files.",
-    "Step 7b SERIES-READER TOOL-WALL DEVIATION (unchanged): the F88 injection wall requires readers/gatherers to hold Read/Write/WebSearch/WebFetch and never Bash. No available subagent type restricts tools to exactly that set, so the three series readers and the three chart researchers were dispatched as general-purpose agents with an explicit binding no-shell instruction. The wall was instructed, not structurally enforced - flagged for the user alongside the standing tool-less-brain ruling.",
-    "Step 3(e4) CITATION AUDIT left with one open implication flag rather than escalating to a narrator fallback - see citationAudit.note. The procedure's second-failure fallback exists for narrator flags; discarding a clean story over an implication-side flag would be the wrong reading of it.",
-    "Step 3(f) SESSION-OUTPUT DEVIATION (F67): the rendered report is 1099 lines, too large to paste verbatim into the session final message. The final message carries the report's executive sections and references the full rendered report by path instead. Recorded as an AFK-default."
-   ]
-  }
- ],
- "stages": [
-  {
-   "tier": "category",
-   "status": "active"
-  },
-  {
-   "tier": "layer",
-   "status": "deferred"
-  },
-  {
-   "tier": "main",
-   "status": "deferred"
-  }
- ]
+    {
+      "tier": "main",
+      "status": "deferred"
+    }
+  ]
 }

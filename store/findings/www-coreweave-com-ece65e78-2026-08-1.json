@@ -1,0 +1,45 @@
+{
+  "id": "www-coreweave-com-ece65e78-2026-08-1",
+  "statement": "CoreWeave signed a multiyear, multibillion-dollar expansion with Hudson River Trading that will deliver Nvidia Vera Rubin NVL72 and HGX B200 systems on Spectrum-X Ethernet.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A new multibillion-dollar committed contract adds to neocloud backlog and pulls through Nvidia's newest rack-scale systems and networking.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.networking-fabric",
+      "chips.networking-silicon",
+      "applications.vertical-saas"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed multiyear capacity spend by a non-AI-lab buyer converts into orders for next-generation Nvidia systems and fabric."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave, Inc. (company press release)",
+      "url": "https://www.coreweave.com/news/hudson-river-trading-to-build-next-gen-research-platform-powered-by-nvidia-vera-rubin-nvl72-on-coreweave-cloud",
+      "date": "2026-08-20",
+      "excerpt": "HRT will be among the first CoreWeave customers to receive wide-scale access to Nvidia's newest chips",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company press release with no disclosed dollar amount; not a filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-20",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

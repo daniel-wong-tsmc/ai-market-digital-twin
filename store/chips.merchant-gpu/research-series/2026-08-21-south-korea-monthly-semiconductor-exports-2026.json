@@ -1,0 +1,29 @@
+{
+  "seriesName": "South Korea monthly semiconductor exports, 2026",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "Ministry of Trade, Industry and Energy (MOTIE), Korea",
+  "points": [
+    {
+      "label": "May 2026",
+      "value": 37.2,
+      "sourceUrl": "https://english.motir.go.kr/eng/article/EATCLdfa319ada/2637/view",
+      "publishedAt": "2026-06-01"
+    },
+    {
+      "label": "June 2026",
+      "value": 44.82,
+      "sourceUrl": "https://english.motir.go.kr/eng/article/EATCLdfa319ada/2677/view",
+      "publishedAt": "2026-07-01"
+    },
+    {
+      "label": "July 2026",
+      "value": 41.01,
+      "sourceUrl": "https://english.motir.go.kr/eng/article/EATCLdfa319ada/2701/view",
+      "publishedAt": "2026-08-03"
+    }
+  ],
+  "pair": false,
+  "notes": "These are MOTIE's official full-month semiconductor export totals for May-July 2026 (each topping the prior monthly record), the run-up to the bullet's Aug 1-20 figure of $26B. The Aug 1-20 number itself (and the 47.2% export-share figure) comes from a different outlet (Korea Herald / Korea Customs Service data) and is not repeated here to keep the whole series on one site (english.motir.go.kr), per the single-source rule. June's full-month total ($44.82B) is higher than July's ($41.01B), so the series is not strictly increasing month over month, but each is a record for its respective period type as stated in the source releases.",
+  "bulletIndex": 1
+}

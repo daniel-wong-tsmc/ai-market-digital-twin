@@ -1,21 +1,20 @@
 {
- "asOf": "2026-08-19",
+ "asOf": "2026-08-21",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 1,
+   "checkCount": 2,
    "id": "constraint-hbm-stacked-memory-supply",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-08-19",
+    "assessedAsOf": "2026-08-21",
     "claimFindingIds": [
-     "247wallst-com-3508dabf-2026-08-1",
-     "247wallst-com-3508dabf-2026-08-2",
+     "en-sedaily-com-b1c000ac-2026-08-1",
      "www-investing-com-87498f82-2026-08-1",
-     "en-sedaily-com-b1c000ac-2026-08-1"
+     "en-sedaily-com-80cdc180-2026-08-1"
     ],
-    "reasoning": "NVIDIA is now testing Rubin Ultra with as little as 192GB of memory against a planned 1TB, because supply is short and the newest version is unqualified, per August 18 reporting. Micron said on August 10 it can serve about half of customer demand and sees no date when that changes.",
-    "status": "worsened"
+    "reasoning": "Suppliers can still meet only 60% to 70% of the stacked-memory volume asked for Rubin Ultra, and Micron still covers about half of customer demand. Samsung's HBM4 yield near 80% has not yet turned into more delivered supply.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -29,18 +28,17 @@
    "worsenedCount": 1
   },
   {
-   "checkCount": 1,
+   "checkCount": 2,
    "id": "dim-bottleneck",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-19",
+    "assessedAsOf": "2026-08-21",
     "claimFindingIds": [
-     "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
-     "www-freemalaysiatoday-com-7dfc89b4-2026-08-2",
-     "247wallst-com-3508dabf-2026-08-1"
+     "en-sedaily-com-b1c000ac-2026-08-1",
+     "www-thelec-net-c15d2de4-2026-08-1"
     ],
-    "reasoning": "Samsung raised advanced chipmaking prices 10 to 15 percent on July orders and says its full SF4 line cannot meet all demand, while NVIDIA cut memory per chip to keep unit output up. Both point to a limit that binds harder than it did.",
-    "status": "worsened"
+    "reasoning": "No new evidence arrived today on the physical cap. The most recent reads still show memory limited to 60% to 70% of requested volume and GlobalWafers running its wafer lines at effectively full use.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -54,18 +52,17 @@
    "worsenedCount": 1
   },
   {
-   "checkCount": 1,
+   "checkCount": 2,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-19",
+    "assessedAsOf": "2026-08-21",
     "claimFindingIds": [
-     "www-stocktitan-net-587e9583-2026-08-1",
-     "www-stocktitan-net-587e9583-2026-08-2",
-     "www-stocktitan-net-587e9583-2026-08-3"
+     "www-coreweave-com-ece65e78-2026-08-1",
+     "www-stocktitan-net-587e9583-2026-08-1"
     ],
-    "reasoning": "Cerebras unveiled the CS-4 on August 18 with first shipments this quarter and OpenAI, G42 and AWS named as customers, claiming up to 30 times more tokens per second per user than GPU systems. A credible non-GPU option narrows NVIDIA's edge.",
-    "status": "worsened"
+    "reasoning": "Today's evidence points both ways, so there is no net change. Hudson River Trading committed to NVIDIA racks on CoreWeave on August 20, while Cerebras began shipping its rival CS-4 rack this quarter.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -77,6 +74,30 @@
     "label": "moat"
    },
    "worsenedCount": 1
+  },
+  {
+   "checkCount": 1,
+   "id": "constraint-stacked-memory-and-server-dram",
+   "improvedStreak": 0,
+   "latest": {
+    "assessedAsOf": "2026-08-21",
+    "claimFindingIds": [
+     "www-trendforce-com-17fa2dc8-2026-08-1",
+     "www-investing-com-87498f82-2026-08-1"
+    ],
+    "reasoning": "No new evidence arrived today. DRAM supply is still reported tight through 2027, which limits the capacity available for stacked memory, and Micron calls DRAM the number one constraint its largest customers face.",
+    "status": "unchanged"
+   },
+   "openedAsOf": "2026-08",
+   "reopenedAsOf": [],
+   "resolvedAsOf": null,
+   "state": "open",
+   "title": "stacked memory and server DRAM",
+   "trigger": {
+    "kind": "binding-constraint",
+    "label": "stacked memory and server DRAM"
+   },
+   "worsenedCount": 0
   }
  ],
  "schemaVersion": 1
