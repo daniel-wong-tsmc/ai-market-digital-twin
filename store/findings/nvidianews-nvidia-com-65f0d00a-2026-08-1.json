@@ -1,0 +1,45 @@
+{
+  "id": "nvidianews-nvidia-com-65f0d00a-2026-08-1",
+  "statement": "Nvidia will guarantee SB Energy's PORTS-Pike campus in Ohio to exclusively host Nvidia AI compute, with an initial 4.25 IT-GW deployment and an optional 3.75 IT-GW expansion for 8 IT-GW total.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "An exclusivity guarantee over multi-gigawatt capacity locks a very large future compute site to Nvidia hardware.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "Exclusive hosting of Nvidia AI compute at an 8 IT-GW campus converts planned power and shell into a committed pipeline for Nvidia systems."
+  },
+  "evidence": [
+    {
+      "source": "Nvidia Newsroom (official)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+      "date": "2026-08-17",
+      "excerpt": "initial deployment of 4.25 IT-GW (information technology gigawatts), with an optional expansion of 3.75 IT-GW, for a total planned capacity of 8 IT-GW",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Nvidia's own newsroom announcement (primary company statement) with explicit capacity figures."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-17",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

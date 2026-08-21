@@ -1,0 +1,52 @@
+{
+  "id": "finance-yahoo-com-f400b412-2026-08-1",
+  "statement": "Nvidia is in advanced talks to invest several hundred million dollars in Cloverleaf Infrastructure, a developer of powered data-center land with more than 7 gigawatts sold and a pipeline above 10 gigawatts.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Power and grid interconnection are the binding constraint on new AI capacity, and Nvidia is buying into that upstream bottleneck to keep chip deployment moving.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.grid-transmission",
+      "energy.power-generation",
+      "infrastructure.datacenter-colo",
+      "energy.procurement"
+    ],
+    "direction": "positive",
+    "mechanism": "Securing powered land ahead of demand shortens the wait between chip availability and energized racks, easing an upstream long-lead constraint."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (citing Wall Street Journal reporting)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-advanced-talks-invest-hundreds-132327433.html",
+      "date": "2026-08-21",
+      "excerpt": "has sold projects representing more than 7 gigawatts of powered land to data-centre developers",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (citing Wall Street Journal reporting)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-advanced-talks-invest-hundreds-132327433.html",
+      "date": "2026-08-21",
+      "excerpt": "grid interconnection queues and utility permitting timelines remain a persistent bottleneck",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting of an unannounced deal; no filing or company confirmation."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-21",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

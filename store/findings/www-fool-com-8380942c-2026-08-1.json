@@ -1,0 +1,44 @@
+{
+  "id": "www-fool-com-8380942c-2026-08-1",
+  "statement": "SK Hynix began mass production of HBM4 in Q2 2026 and has started sample shipments of HBM4E, with capital spending planned in the high 40 trillion won range this year.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "HBM is the gating input for AI accelerators, so a next-generation ramp plus heavy memory capex expands the supply ceiling for GPU shipments.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Mass production of HBM4 plus large memory capex raises bit supply available to accelerator makers, loosening a key bottleneck."
+  },
+  "evidence": [
+    {
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/investing/2026/08/06/sk-hynix-supplies-more-than-half-the-worlds-hbm-me/",
+      "date": "2026-08-06",
+      "excerpt": "The company began mass production of HBM4 in Q2 2026 and has commenced sample shipments of the subsequent HBM4E generation.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet summarizing company results; no filing fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

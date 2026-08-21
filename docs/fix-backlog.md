@@ -1108,20 +1108,75 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   web brief still shows the tails until F121 lands.
 
 - [x] **F122 — Daily GPU leasing-price pull, in-repo, feeding the brief.** *(Numbered 2026-08-20,
-  assistant-minted after F121 was taken mid-session by the report-quality-pair lane — renumber if
-  collided again.)* The user's standalone `C:\Users\danie\gpu-price-tracker\pull_gpu_prices.py`
-  (Azure / AWS / RunPod / Vast.ai / CoreWeave, optional Lambda) is now `gpu_agent/pricepull.py` behind
-  `gpu-agent price-pull --as-of <day>`, run inside run-cycle step 7 ("Price-pull + price-sync") every
-  cycle. One LOCAL, gitignored snapshot per day in `gpu_agent/data/leasing_snapshots/` (user decision:
-  not committed). `pricefeed.load_points` prefers the newest snapshot at/before the label (on-demand,
-  US regions) and falls back to the legacy `scrape_data/` folders for earlier dates, which revives the
-  dashboard H100 tile, the brief's price lines and `gpuRental{OnDemand,Spot,1yr}`; `price_local` no
-  longer lets the stale hardware purchase-price folder suppress fresh rental rows (separate `stale
-  rental data` warning). Supersedes the launcher skill's 2026-08-20 "Step 4" subagent dispatch (now a
-  pointer). NOT covered, on purpose: hardware purchase prices (thinkmate/serversimply) — that `stale
-  price folder` warning persists honestly. Spec
-  `docs/superpowers/specs/2026-08-20-f122-price-pull-design.md`; plan
+  assistant-minted after F121 was taken mid-session by the report-quality-pair lane.)* The user's
+  standalone `C:\Users\danie\gpu-price-tracker\pull_gpu_prices.py` (Azure / AWS / RunPod / Vast.ai /
+  CoreWeave, optional Lambda) is now `gpu_agent/pricepull.py` behind `gpu-agent price-pull --as-of
+  <day>`, run inside run-cycle step 7 ("Price-pull + price-sync") every cycle. One LOCAL, gitignored
+  snapshot per day in `gpu_agent/data/leasing_snapshots/` (user decision: not committed). Once ANY
+  snapshot exists on a machine, `pricefeed.load_points` answers ONLY from snapshots (newest at/before
+  the label; on-demand, US regions) — dates before the first snapshot show no price and no
+  comparison, so a snapshot basket is never compared with the legacy `scrape_data/` basket (final
+  review caught that a cross-source "−26 % H100" would otherwise have shipped); the legacy folders
+  are read only on a machine with no snapshots at all. This revives the dashboard H100 tile, the
+  brief's price lines and `gpuRental{OnDemand,Spot,1yr}`; `price_local` no longer lets the stale
+  hardware purchase-price folder suppress fresh rental rows (separate `stale rental data` warning)
+  and fills rental months from snapshot files even when no cycle ran that month. Supersedes the
+  launcher skill's 2026-08-20 "Step 4" subagent dispatch (now a pointer). NOT covered, on purpose:
+  hardware purchase prices (thinkmate/serversimply) — that `stale price folder` warning persists
+  honestly. Spec `docs/superpowers/specs/2026-08-20-f122-price-pull-design.md`; plan
   `docs/superpowers/plans/2026-08-20-f122-price-pull.md`. Lane `f122-price-pull`.
+
+> Numbering note 2026-08-22: F123–F128 below were minted 2026-08-22 in the relayed decision
+> session (user-assigned via the orchestrator; usual concurrent-mint caveat — renumber if collided).
+
+- [ ] **F123 — Issue identity must survive a constraint relabel.** The register minted three
+  "different" issues for one real problem in three cycles because the id derives from the exact
+  binding-constraint label (`constraint-hbm-stacked-memory-supply` v8 →
+  `constraint-stacked-memory-and-server-dram` v9), and every stranded id drifts toward a false
+  reader-facing "Resolved" after 5 quiet cycles. The 2026-08-22 hand-consolidation (user-approved:
+  duplicates removed from `register.json`, history untouched) fixed the instance, not the class.
+  Fix direction (design fork for the lane): match new constraint labels against open
+  constraint-kind issues by token overlap or a stable indicator anchor before minting a new id;
+  a relabel then RENAMES the standing issue (title updates, id and history persist) instead of
+  opening a twin. Touches `gpu_agent/issues.py` open-trigger logic only; narrator prompt and pins
+  untouched.
+
+- [ ] **F124 — Footer disclaimer on every public page (approved wording).** Posture doc §4,
+  wording and placement DECIDED 2026-08-22: "Independent personal project. The analysis here is
+  one individual's own work, produced from public sources. It is not affiliated with, endorsed
+  by, or representative of any employer, and it is not investment advice." Small template change
+  in the site builder (`gpu_agent/dashboard/` + the React footer); no schema change; the live
+  site currently has NO disclaimer at all.
+
+- [ ] **F125 — Honest-removal mechanism for publisher objections.** Posture doc §3(3) DECIDED
+  2026-08-22: on a publisher request, the finding stays but its excerpt is replaced by a removal
+  note, the link stays, the cycle log records the action. Touches the append-only guarantee —
+  must be DESIGNED, not improvised: needs its own small brainstorm before build (how a
+  replacement writes without violating no-silent-deletion and the F66 verbatim-excerpt gate).
+
+- [ ] **F126 — Publisher do-not-fetch list wired into the fetch runner.** Posture doc §3(4)
+  DECIDED 2026-08-22. A refusal list already exists in the fetch runner for other reasons;
+  add a publisher-objection list beside it, with the source inventory recording why a domain
+  is refused. Small, mechanical.
+
+- [ ] **F127 — Enforce the 50-word/two-sentence excerpt cap in the extraction gate.** Posture
+  doc §2 DECIDED 2026-08-22. Today the cap is policy only (measured: all 334 stored excerpts
+  ≤ 40 words). Add a length check beside the existing verbatim check so an over-long excerpt is
+  rejected the way an invented one already is. Gated: extraction prompt/gate changes re-run the
+  eval gate; F6 expected byte-untouched (gate code, not prompt bytes — verify in-lane).
+
+- [ ] **F128 — Codify the unattended-run mechanics the user ruled on 2026-08-22 (GATED: F83
+  fingerprint re-record).** Four standing per-cycle deviations are now ACCEPTED PRACTICE by
+  interactive ruling and must move from "re-flagged every run" into the run-cycle skill's text:
+  (1) brains run with Read on their own split prompt files + exactly one Write to their own
+  answer file (replaces the literal "tool-less" wording; extraction stays genuinely tool-less
+  inline when it fits); (2) gatherers dispatch as the restricted `web-gatherer` agent type
+  (`.claude/agents/web-gatherer.md`, tools Read/Write/WebSearch/WebFetch) — the F88 wall becomes
+  structural; (3) oversized emitted prompts split byte-exactly with a rejoin-equals-original
+  assertion; (4) F67: a report too large for the final message ships above-fold sections inline
+  + full text by path. One lane, one deliberate F83 conformance-pin re-record via the recorded
+  recipe; F6 and the narrator pin byte-untouched. After it merges, cycle logs stop recording
+  these four as deviations.
 
 ## From the 2026-07-13 documentation gap review (F88–F94) — what the docs still don't cover
 
@@ -1213,7 +1268,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   quarterly-verify note — plus the job script's CONTENT mirrored into the repo as reference
   (the live copy stays machine-local per F83). Doc + inventory work; no code.
 
-- [ ] **F91 — Public-repo exposure decision (broader than the rename).** The repo is public
+- [x] **F91 — Public-repo exposure decision (broader than the rename).** The repo is public
   (recorded in the 2026-07-06 dashboard spec §privacy); the store commits findings quoting
   fetched articles (no written posture on republishing quoted text — Part 22 governs fetching,
   not re-publishing); the desk's daily market calls are world-readable; TSMC-branded analysis
@@ -1238,6 +1293,11 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   vs the append-only store — needs a small design; do-not-fetch list; the employer-material
   firewall = the memo's unanswered Option A; disclaimer wording + footer build; never-commit list +
   secret-scan). **F91 stays open until the user approves the draft; nothing in it is in force.**
+  **(b) DECIDED 2026-08-22 (user, interactive, relayed decision session): ALL 8 APPROVAL POINTS
+  APPROVED AS WRITTEN — the posture doc is IN FORCE.** `docs/publishing-posture.md` updated
+  DRAFT→DECIDED clause by clause. Build items minted at approval: **F124** (footer disclaimer),
+  **F125** (honest-removal mechanism), **F126** (publisher do-not-fetch wiring), **F127**
+  (excerpt-length gate check). F91 is CLOSED; the four build items carry the remaining work.
 
 - [ ] **F92 — Store retention & archival policy (append-only forever meets git forever).**
   Doctrine keeps the store append-only, sacred, and git-committed — correct for trust, unbounded
@@ -1262,6 +1322,14 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   (500 MB store / 5 MB scorecard / 2-min clone / 5 live desks). **4 decision boxes open at the
   memo's end — decide this month; nearest hard limit ~9 months out. F92 stays open until the
   user decides.**
+  **DECIDED 2026-08-22 (user, interactive, relayed decision session) — all 4 boxes answered:**
+  (1) YES to forward-only reference-based scorecards — green-lights the DESIGN-WEIGHT interactive
+  brainstorm, which must run with the user before any build lane; (2) cutover = first cycle after
+  that build merges, no back-dating, no migration of existing files; (3) trip points ACCEPTED as
+  written (500 MB store / 5 MB scorecard / 2-min clone / 5 live desks) with year-partitioning the
+  pre-chosen hatch; (4) git-lfs PERMANENTLY RULED OUT on the memo's §3C measurements — do not
+  re-litigate. Answers recorded in the memo's decision box. F92 CLOSES when the reference-scorecard
+  build ships; until then the decision stands recorded and the store-size monitor rides with it.
 
 - [ ] **F93 — Eval-gate economics: the gate itself needs a budget.** The golden set grows per
   archetype and per tier (Part 24), eval-v2 made every gate run 3 replicates, and a

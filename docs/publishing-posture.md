@@ -1,8 +1,11 @@
 # Publishing posture — what this project puts in front of the world
 
-**Status: DRAFT — every clause marked `[DRAFT — user to approve]` is a proposal, not a rule yet.**
-Clauses marked `[DECIDED …]` restate something the user already decided and cite where.
-Written for F91(b). Drafted 2026-08-04 against main @ `e588591`.
+**Status: IN FORCE — every clause below is DECIDED.** All eight approval points were approved by
+the user, interactive, 2026-08-22 (relayed decision session; zero AFK-defaults). Clauses marked
+`[DECIDED …]` cite their decision date. Follow-up build items minted at approval: F124 (footer
+disclaimer), F125 (honest-removal mechanism), F126 (publisher do-not-fetch wiring), F127
+(excerpt-length gate check).
+Written for F91(b). Drafted 2026-08-04 against main @ `e588591`; approved 2026-08-22.
 
 This is the missing half of F91. Part (a) — should the old public repo stay public — was answered.
 Part (b) — the written rule for what may appear in public, and on what terms — is this document.
@@ -42,7 +45,7 @@ assumed):
   `[DECIDED 2026-07-29 (F66 D5b, sourcing option (a)); implemented in gpu_agent/cli.py and
   gpu_agent/citation_audit.py]`.
 
-**The framing we stand behind** `[DRAFT — user to approve]`:
+**The framing we stand behind** `[DECIDED 2026-08-22, user, interactive]`:
 
 > This project reads publicly available reporting and filings, forms its own view, and publishes
 > that view. Where it leans on someone else's words, it quotes a short passage, names the outlet,
@@ -53,9 +56,9 @@ assumed):
 
 That is the ordinary short-quotation-with-attribution position, and it is the position we intend to
 keep. It is a statement of practice and etiquette, not a legal opinion; nobody here is a lawyer and
-this document does not pretend otherwise `[DRAFT — user to approve]`.
+this document does not pretend otherwise `[DECIDED 2026-08-22, user, interactive]`.
 
-**What we will not claim** `[DRAFT — user to approve]`: we will not describe the site as a news
+**What we will not claim** `[DECIDED 2026-08-22, user, interactive]`: we will not describe the site as a news
 service, a wire, or an aggregator, and we will not present a source's reporting as our own work.
 
 ---
@@ -78,7 +81,7 @@ service, a wire, or an aggregator, and we will not present a source's reporting 
 
 ### Proposed additions
 
-- **Length norm** `[DRAFT — user to approve]`: an excerpt should be **at most two sentences or about
+- **Length norm** `[DECIDED 2026-08-22, user, interactive]`: an excerpt should be **at most two sentences or about
   50 words**, and never more than is needed to support the one claim it backs. Today nothing in the
   code enforces a maximum length — the only limit is that the model is asked for a quote and the
   quote must be real. Measured on the committed store (2026-08-04, all 334 excerpts in
@@ -87,22 +90,22 @@ service, a wire, or an aggregator, and we will not present a source's reporting 
   - **Follow-up if approved** (not built in this lane): add a length check to the extraction gate so
     an over-long excerpt is rejected the way an invented one already is. This is a small code
     change, and it should be a separate backlog item so the eval gate can be re-run against it.
-- **No stacking** `[DRAFT — user to approve]`: several short excerpts from the same article, spread
+- **No stacking** `[DECIDED 2026-08-22, user, interactive]`: several short excerpts from the same article, spread
   across several findings, must not add up to a reproduction of that article. If a single article is
   the source of more than **three** findings in one cycle, that is a signal to link to it rather
   than quote it again. Not enforced in code today; proposed as a review norm.
-- **Attribution on every public surface** `[DRAFT — user to approve]`: any page that shows source
+- **Attribution on every public surface** `[DECIDED 2026-08-22, user, interactive]`: any page that shows source
   wording shows, next to it, the outlet's name and a working link to the original. This is what the
   site does today; the rule makes it a requirement rather than a happy accident.
-- **Never present a source's number as our own** `[DRAFT — user to approve]`: figures taken from
+- **Never present a source's number as our own** `[DECIDED 2026-08-22, user, interactive]`: figures taken from
   reporting keep their attribution wherever they appear.
 
 ---
 
 ## 3. If a publisher objects
 
-`[DRAFT — user to approve — no publisher has ever contacted this project; this is a plan, not a
-history.]`
+`[DECIDED 2026-08-22, user, interactive — no publisher has ever contacted this project; this is a
+plan, not a history.]`
 
 The stance is **cooperative, fast, and not argumentative**. Being right about fair quotation is not
 worth a fight with someone who would rather not be quoted.
@@ -114,13 +117,13 @@ worth a fight with someone who would rather not be quoted.
 3. **Removal is honest, not silent.** Because the saved work is append-only by design, we do not
    quietly edit history. The finding stays, its excerpt is replaced with a note saying the passage
    was removed at the publisher's request, and the link to the original stays. The cycle log records
-   the request and what was done. `[DRAFT — the mechanism for this does not exist in code today;
-   if approved it needs its own backlog item, because it touches the append-only guarantee and must
-   be designed rather than improvised.]`
+   the request and what was done. `[DECIDED 2026-08-22, user, interactive. The mechanism does not
+   exist in code today; filed as F125 because it touches the append-only guarantee and must be
+   designed rather than improvised.]`
 4. **A domain-level objection stops future fetching too.** If a publisher asks not to be used at
-   all, its domain goes on a do-not-fetch list and the source inventory records why. `[DRAFT — a
-   refusal list exists in the fetch runner for other reasons; wiring a publisher-objection list into
-   it is a small follow-up, not built here.]`
+   all, its domain goes on a do-not-fetch list and the source inventory records why. `[DECIDED
+   2026-08-22, user, interactive. A refusal list exists in the fetch runner for other reasons;
+   wiring a publisher-objection list into it is filed as F126.]`
 5. **Escalate anything legal to the user immediately** — no agent, session, or automation answers a
    legal letter. That is a human decision, always.
 6. **Write it down.** Every objection and its resolution is recorded in the repository so the next
@@ -137,8 +140,8 @@ A stranger who finds the site can reasonably guess who is behind it and where th
 real risk here: not the quoting, but a market view that could be read as coming from an employer who
 never approved it.
 
-**The line that must not be crossed** `[DRAFT — user to approve; this is Option A from the F91/F92
-memo, which the user has not yet accepted or rejected]`:
+**The line that must not be crossed** `[DECIDED 2026-08-22, user, interactive; this is Option A
+from the F91/F92 memo, now accepted]`:
 
 > The public site may carry market analysis about publicly traded companies, drawn from public
 > reporting, with short attributed quotes. It may **not** carry anything addressed to, prepared for,
@@ -150,8 +153,8 @@ This is currently true of the live site by accident, not by rule: the layout tha
 employer-directed implications text was replaced in a redesign. The rule is what keeps the next
 redesign from putting it back.
 
-**Proposed disclaimer, to appear in the footer of every public page** `[DRAFT — user to approve;
-wording and placement both]`:
+**Disclaimer, to appear in the footer of every public page** `[DECIDED 2026-08-22, user,
+interactive; wording and placement both approved — implementation filed as F124]`:
 
 > Independent personal project. The analysis here is one individual's own work, produced from public
 > sources. It is not affiliated with, endorsed by, or representative of any employer, and it is not
@@ -172,7 +175,7 @@ governs what we publish **from now on**; it does not retroactively clean the fro
 
 ## 5. What must never be committed or published
 
-`[DRAFT — user to approve. Items marked "already true" describe protections that exist today.]`
+`[DECIDED 2026-08-22, user, interactive. Items marked "already true" describe protections that exist today.]`
 
 1. **Credentials of any kind** — API keys, cookies, session tokens, passwords. Already true in
    practice: the automatic tool bootstrap never touches secrets, and per-machine secrets are set up
@@ -195,7 +198,7 @@ governs what we publish **from now on**; it does not retroactively clean the fro
 6. **Machine-local paths, hostnames, and account identifiers** beyond what is already unavoidable in
    the repository's own history.
 
-**How this is meant to be checked** `[DRAFT — user to approve]`: item 3 is covered by the ignore
+**How this is meant to be checked** `[DECIDED 2026-08-22, user, interactive]`: item 3 is covered by the ignore
 rules and by the shape of what the software writes. Item 1 rests on the fact that secrets live
 outside the repository by design — there is **no automatic secret scan** on commits today, and if
 the user wants one that is a separate decision. Items 2, 4, 5 and 6 are human judgement at review
@@ -214,7 +217,8 @@ kind of content would give false comfort. If the user wants one, that is a separ
 | Story quotes only figures the writer was shown | DECIDED 2026-07-29 | F66 D5b option (a); `gpu_agent/cli.py:767` |
 | No TSMC-branded publishing from a repo named `random_for_fun` | Standing rule | `.claude/skills/desk-external-positioning/SKILL.md` §5 |
 | Excerpts must be verbatim and carry the source address | Already enforced in code | `gpu_agent/extraction/extractor.py:138-140` |
-| Everything else in this document | **DRAFT — awaiting the user** | this file |
+| Everything else in this document | **DECIDED 2026-08-22 (user, interactive)** | this file; relayed decision session, all 8 approval points |
 
-No decision in this document has been taken. Nothing here was decided by an agent, and no clause is
-an AFK-default. Nothing in the code, the gates, or the site was changed by the lane that wrote it.
+Every decision in this document was taken by the user, interactively. No clause is an AFK-default.
+The approval session changed no code, gates, or site output; the four build items it minted
+(F124–F127) are in `docs/fix-backlog.md`.

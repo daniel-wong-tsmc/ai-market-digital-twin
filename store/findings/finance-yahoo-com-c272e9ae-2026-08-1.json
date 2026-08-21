@@ -1,0 +1,44 @@
+{
+  "id": "finance-yahoo-com-c272e9ae-2026-08-1",
+  "statement": "Nvidia's CEO held preliminary talks with Korean inference-chip startup Rebellions about a partnership, investment, or acquisition.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Nvidia moving on an NPU designer signals that non-GPU inference silicon is becoming a real alternative source of AI compute supply.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.hbm-memory",
+      "chips.foundry-packaging"
+    ],
+    "direction": "mixed",
+    "mechanism": "Absorbing or partnering with an inference NPU vendor adds alternative accelerator supply while blunting a competitive threat to merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "Bloomberg (via Yahoo Finance)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-talks-chip-startup-rebellions-074543725.html",
+      "date": "2026-08-21",
+      "excerpt": "Nvidia CEO Jensen Huang met with Rebellions co-founder and CEO Sunghyun Park at Nvidia's Santa Clara headquarters this week to explore possible arrangements with the South Korean AI chip designer, including a technical partnership, investment, or acquisition.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; talks described as preliminary and may not lead to a deal."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-21",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

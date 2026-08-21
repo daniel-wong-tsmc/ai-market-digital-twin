@@ -1,0 +1,225 @@
+{
+  "headline": "Korea's chip exports nearly tripled, and memory is still the ceiling",
+  "deck": "Buyers keep signing and parts keep moving out of Korea, but memory makers can still fill only part of the order, so NVIDIA is shrinking the chip instead of waiting.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The memory shortage still sets the ceiling",
+      "paragraphs": [
+        "The reason supply is not catching up has not changed. NVIDIA's memory suppliers can meet only 60% to 70% of the stacked-memory volume asked of them for the Rubin Ultra generation. Micron said on August 10 that it can supply no more than about half of customer demand, calls this memory the number one constraint its largest customers face today, and has no line of sight to when supply meets demand. TrendForce reported on August 4 that DRAM supply stays tight through 2027, which limits how much factory capacity can be turned over to stacked memory at all.",
+        "So NVIDIA is making the product smaller rather than waiting. Reporting on August 18 says it is testing Rubin Ultra with as little as 192GB of memory against a planned 1TB. Bank of America research cited in that report says performance drops sharply below 500GB, which frames the cut as a temporary engineering compromise to get more units out of a fixed pool of memory, not as demand going away.",
+        "The step before memory, the packaging that bonds these parts together, may have eased a little, but the sources do not agree. Reporting in early July put the shortfall narrowing from roughly 20% to about 10% by the end of 2026. An August 5 report still put the gap at about 20% for the year, even with monthly capacity climbing toward 130,000 to 140,000 wafers. Either way, packaging capacity only helps once there is memory to package."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "247wallst-com-3508dabf-2026-08-1",
+        "247wallst-com-3508dabf-2026-08-2",
+        "www-forbes-com-335e62f0-2026-07-1",
+        "www-trendforce-com-836f33fa-2026-08-1"
+      ],
+      "sourceLine": "Micron's August 10 forum remarks, Seoul Economic Daily on Rubin Ultra memory, 24/7 Wall St., TrendForce and Forbes on packaging capacity.",
+      "relatedDocs": [
+        {
+          "url": "https://www.fool.com/investing/2026/08/06/sk-hynix-supplies-more-than-half-the-worlds-hbm-me/",
+          "title": "SK Hynix supplies more than half the world's high-bandwidth memory",
+          "outlet": "The Motley Fool",
+          "date": "2026-08-06"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The money is not what is holding this back",
+      "paragraphs": [
+        "Demand keeps turning up in hard numbers. South Korean semiconductor exports nearly tripled from a year earlier to $26 billion in the first 20 days of August, making up 47.2% of the country's $55.2 billion of total exports. On August 20 CoreWeave signed a multiyear, multibillion-dollar expansion with the trading firm Hudson River Trading, delivering NVIDIA Vera Rubin NVL72 and HGX B200 systems.",
+        "Suppliers are pricing to match. Samsung raised prices for advanced contract chipmaking by 10% to 15% on new orders in July, and says its Pyeongtaek line runs at full capacity and cannot meet all the orders it has. At their late-July updates, the four largest US cloud buyers were planning about $725 billion of 2026 capital spending, up 77% from $410 billion last year.",
+        "The financing behind the buildout is getting more careful, though. On August 10 NVIDIA signed non-binding agreements with six asset managers to mobilize over $500 billion of outside capital for its customers. A week later it cut its guarantee on the Ohio campus from a proposed $250 billion to less than $120 billion. Today it is reported in advanced talks to put several hundred million dollars into Cloverleaf Infrastructure, a developer of powered data-center land with more than 7 gigawatts sold."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "www-koreaherald-com-f4194135-2026-08-1",
+        "www-coreweave-com-ece65e78-2026-08-1",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-2",
+        "finance-yahoo-com-2f05647b-2026-07-1",
+        "nvidianews-nvidia-com-cfc51804-2026-08-1",
+        "finance-yahoo-com-54a88032-2026-08-1",
+        "finance-yahoo-com-f400b412-2026-08-1"
+      ],
+      "sourceLine": "Korea Herald export figures, CoreWeave's Hudson River Trading release, Reuters on Samsung pricing, NVIDIA's own announcements and Wall Street Journal reporting.",
+      "relatedDocs": [
+        {
+          "url": "https://www.koreaherald.com/article/10847622",
+          "title": "Korean chip exports nearly triple in the first 20 days of August",
+          "outlet": "The Korea Herald",
+          "date": "2026-08-21"
+        },
+        {
+          "url": "https://www.coreweave.com/news/hudson-river-trading-to-build-next-gen-research-platform-powered-by-nvidia-vera-rubin-nvl72-on-coreweave-cloud",
+          "title": "Hudson River Trading to build next-generation research platform on CoreWeave cloud",
+          "outlet": "CoreWeave, Inc. (company press release)",
+          "date": "2026-08-20"
+        },
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-scales-back-250-billion-234356524.html",
+          "title": "Nvidia scales back its proposed $250 billion Ohio guarantee",
+          "outlet": "Yahoo Finance (citing Wall Street Journal reporting)",
+          "date": "2026-08-17"
+        },
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-advanced-talks-invest-hundreds-132327433.html",
+          "title": "Nvidia in advanced talks to invest in Cloverleaf Infrastructure",
+          "outlet": "Yahoo Finance (citing Wall Street Journal reporting)",
+          "date": "2026-08-21"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "What to watch next for a change here",
+      "paragraphs": [
+        "The one thing that would loosen supply is more good memory coming off the lines. Samsung's HBM4 yield has reached close to 80%, up from below 60% in early mass production in February 2026 and about four months ahead of the expected timeline, and SK Hynix's yield has separately touched 80%. Samsung aims to raise its share of that market to roughly 38% by the end of 2026. Watch whether those yields hold as volume climbs, because that is the first place relief would show.",
+        "Watch, too, which memory specification NVIDIA settles on for Rubin Ultra. TrendForce says the company has been weighing four alternatives since the third quarter of 2026, and that choice sets how much memory each shipped system consumes. Watch the step further back as well: GlobalWafers said on August 6 that its 300mm, 200mm and 150mm lines are effectively at full use, with constraints already appearing on certain advanced 12-inch products.",
+        "Two smaller signals are worth keeping in view. NVIDIA's chief executive has held preliminary talks with the Korean inference-chip startup Rebellions about a partnership, investment or acquisition. And on August 20 NVIDIA denied a report that it would ship a China-specific chip by year end, saying it has no such part on its roadmap, which means the China channel should not be counted on for relief."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "en-sedaily-com-80cdc180-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-3",
+        "en-sedaily-com-80cdc180-2026-08-4",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-thelec-net-c15d2de4-2026-08-1",
+        "finance-yahoo-com-c272e9ae-2026-08-1",
+        "www-investing-com-5f3f098a-2026-08-1"
+      ],
+      "sourceLine": "Seoul Economic Daily on Korean memory yields, TrendForce on Rubin Ultra options, The Elec on wafer lines, Bloomberg and Reuters on NVIDIA's latest moves.",
+      "relatedDocs": [
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-talks-chip-startup-rebellions-074543725.html",
+          "title": "Nvidia in early talks with chip startup Rebellions",
+          "outlet": "Bloomberg (via Yahoo Finance)",
+          "date": "2026-08-21"
+        },
+        {
+          "url": "https://www.investing.com/news/stock-market-news/nvidia-to-ship-ai-chip-for-china-by-yearend-the-information-reports-4870258",
+          "title": "Nvidia denies plan to ship a China-specific chip by year end",
+          "outlet": "Reuters (via Investing.com)",
+          "date": "2026-08-20"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "How fast memory makers are raising factory spending, the one thing that eventually lifts the cap.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How fast AI servers are actually shipping, which is what all the committed money turns into.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a chip costs to buy outright, the first place easier supply would show up.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "Memory suppliers can fill only 60% to 70% of the volume asked for NVIDIA's next flagship, so the chip is being shrunk rather than delayed.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "Reporting in early July put the packaging shortfall narrowing from roughly 20% to about 10% by end-2026; an August 5 report still put it near 20%.",
+      "scene": 1
+    }
+  ],
+  "bullets": [
+    {
+      "text": "South Korean semiconductor exports nearly tripled from a year earlier to $26 billion in the first 20 days of August, 47.2% of the country's total exports.",
+      "claimFindingIds": [
+        "www-koreaherald-com-f4194135-2026-08-1"
+      ]
+    },
+    {
+      "text": "Micron said on August 10 it can supply no more than about half of customer demand and has no line of sight to when that changes.",
+      "claimFindingIds": [
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "text": "NVIDIA cut its guarantee on the Ohio data-center campus from a proposed $250 billion to less than $120 billion on August 17.",
+      "claimFindingIds": [
+        "finance-yahoo-com-54a88032-2026-08-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "constraint-hbm-stacked-memory-supply",
+      "status": "unchanged",
+      "reasoning": "Suppliers can still meet only 60% to 70% of the stacked-memory volume asked for Rubin Ultra, and Micron still covers about half of customer demand. Samsung's HBM4 yield near 80% has not yet turned into more delivered supply.",
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "dim-bottleneck",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today on the physical cap. The most recent reads still show memory limited to 60% to 70% of requested volume and GlobalWafers running its wafer lines at effectively full use.",
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-thelec-net-c15d2de4-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "unchanged",
+      "reasoning": "Today's evidence points both ways, so there is no net change. Hudson River Trading committed to NVIDIA racks on CoreWeave on August 20, while Cerebras began shipping its rival CS-4 rack this quarter.",
+      "claimFindingIds": [
+        "www-coreweave-com-ece65e78-2026-08-1",
+        "www-stocktitan-net-587e9583-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today. DRAM supply is still reported tight through 2027, which limits the capacity available for stacked memory, and Micron calls DRAM the number one constraint its largest customers face.",
+      "claimFindingIds": [
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-21",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "1306bdbcff182704cc8000e34232cfec554d994800e80e6826334f4d1542f04d",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-21T16:01:28.805613+00:00"
+  }
+}

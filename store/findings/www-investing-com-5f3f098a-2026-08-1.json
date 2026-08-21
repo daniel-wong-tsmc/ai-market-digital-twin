@@ -1,0 +1,50 @@
+{
+  "id": "www-investing-com-5f3f098a-2026-08-1",
+  "statement": "Nvidia publicly denied a report that it would ship a China-specific LPU by year-end, saying it has no LPU sales in China and no China-specific LPU on its roadmap.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "The denial keeps Nvidia's China accelerator revenue path closed, following the CEO's statement that Nvidia had largely conceded China to Huawei.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "With no China-specific product in the roadmap, export-control-constrained China demand does not convert into Nvidia revenue and shifts to domestic Chinese suppliers."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/nvidia-to-ship-ai-chip-for-china-by-yearend-the-information-reports-4870258",
+      "date": "2026-08-20",
+      "excerpt": "The reporting in The Information on Nvidia's LPU is incorrect. We have no LPU sales in the China market today, and no China-specific LPU product in our roadmap.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/nvidia-to-ship-ai-chip-for-china-by-yearend-the-information-reports-4870258",
+      "date": "2026-08-20",
+      "excerpt": "CEO Jensen Huang stated in May 2026 that Nvidia had 'largely conceded' China's AI chip market to Huawei Technologies.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary wire coverage carrying a direct company denial; reports conflict and no filing was fetched."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend flat -> flat); sources: Reuters (via Investing.com), Tom's Hardware",
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-20",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -467,3 +467,14 @@
 {"seq":466,"asOf":"2026-08","kind":"append-observation","pageId":"entity:samsung","findingId":"www-freemalaysiatoday-com-7dfc89b4-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":467,"asOf":"2026-08","kind":"append-observation","pageId":"entity:samsung","findingId":"www-freemalaysiatoday-com-7dfc89b4-2026-08-4","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":468,"asOf":"2026-08","kind":"append-observation","pageId":"entity:samsung","findingId":"www-freemalaysiatoday-com-7dfc89b4-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":469,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-koreaherald-com-f4194135-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":470,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-coreweave-com-ece65e78-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":471,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-fool-com-8380942c-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":472,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-fool-com-8380942c-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":473,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-coreweave-com-ece65e78-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":474,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"lambda-ai-3a9372dc-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":475,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"finance-yahoo-com-c272e9ae-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":476,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-investing-com-5f3f098a-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":477,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"finance-yahoo-com-54a88032-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":478,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-65f0d00a-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":479,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"finance-yahoo-com-f400b412-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}

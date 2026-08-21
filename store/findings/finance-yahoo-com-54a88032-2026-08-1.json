@@ -1,0 +1,44 @@
+{
+  "id": "finance-yahoo-com-54a88032-2026-08-1",
+  "statement": "Nvidia scaled back its financial guarantee for the planned OpenAI data-center campus in Ohio from a proposed $250 billion to less than $120 billion, covering only the first phase.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Vendor balance-sheet backstops have been a key enabler of marginal-buyer AI compute build-outs, so a much smaller guarantee tightens the financing behind committed GPU deployments.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud",
+      "energy.power-generation"
+    ],
+    "direction": "negative",
+    "mechanism": "A reduced Nvidia backstop shifts more of the Ohio campus financing onto third parties, which can slow or shrink the committed GPU build-out at that site."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (citing Wall Street Journal reporting)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-scales-back-250-billion-234356524.html",
+      "date": "2026-08-17",
+      "excerpt": "Nvidia has revised its financial commitment to a planned OpenAI data-center campus in Ohio",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying Wall Street Journal and Reuters reporting; no primary filing or company statement."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> falling); sources: Nvidia Newsroom (official), Yahoo Finance (citing Wall Street Journal reporting)",
+  "asOf": "2026-08",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-17",
+  "capturedAt": "2026-08-21T15:11:52Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
