@@ -1676,6 +1676,31 @@ def _site(args):
     return 0
 
 
+def _price_pull(args) -> int:
+    """F122: pull today's GPU rental prices into ONE local snapshot CSV (renderer-side,
+    display-only). Exit 0 even when every provider fails — the JSON says so; exit 2 only
+    for operator mistakes. Wall-clock isolated to this CLI edge."""
+    import datetime as _dt
+    from pathlib import Path as _Path
+    from gpu_agent.pricepull import DEFAULT_SNAPSHOT_DIR, run_pull
+    as_of = args.as_of or _dt.date.today().isoformat()
+    try:
+        _dt.date.fromisoformat(as_of)
+    except ValueError:
+        print(f"[price-pull] malformed --as-of {as_of!r} (need YYYY-MM-DD)", file=sys.stderr)
+        return 2
+    out_dir = _Path(args.out) if args.out else DEFAULT_SNAPSHOT_DIR
+    try:
+        out_dir.mkdir(parents=True, exist_ok=True)
+    except OSError as e:
+        print(f"[price-pull] cannot create --out {out_dir}: {e}", file=sys.stderr)
+        return 2
+    retrieved_at = _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    result = run_pull(as_of, out_dir, retrieved_at=retrieved_at)
+    print(json.dumps(result))
+    return 0
+
+
 def _price_sync(args):
     """F98: local curated price folder -> store/series JSONL (renderer-side, display-only).
 
@@ -2030,6 +2055,12 @@ def main(argv=None) -> int:
                     help="plain-language overrides json (default: "
                          "store/<cat>/plain-language/<latest>.json when present)")
     st.add_argument("--out", default="site")
+    pp = sub.add_parser("price-pull",
+                        help="F122: pull GPU rental prices -> one local snapshot CSV per day "
+                             "(never blocks a cycle)")
+    pp.add_argument("--as-of", dest="as_of", default=None, help="YYYY-MM-DD (the cycle day)")
+    pp.add_argument("--out", default=None,
+                    help="snapshot folder (default gpu_agent/data/leasing_snapshots)")
     ps = sub.add_parser("price-sync",
                         help="F98: local price folder -> store/series (renderer-side)")
     ps.add_argument("--data", default=None)
@@ -2173,6 +2204,8 @@ def main(argv=None) -> int:
         return _report(args)
     if args.cmd == "site":
         return _site(args)
+    if args.cmd == "price-pull":
+        return _price_pull(args)
     if args.cmd == "price-sync":
         return _price_sync(args)
     if args.cmd == "series-refresh":
