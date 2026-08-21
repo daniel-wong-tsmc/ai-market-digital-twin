@@ -344,6 +344,17 @@ Please answer these four:
 If the answer to (1) is no, the fallback is Option D alone with a 250 MB trip point, and this becomes
 an October decision instead of an August one.
 
+**ANSWERED 2026-08-22 (user, interactive, relayed decision session — recorded in
+docs/fix-backlog.md F92 and docs/superpowers/HANDOFF.md):**
+
+1. **YES** — forward-only reference scorecards approved. Design-weight: the interactive brainstorm
+   with the user must run before any build lane is dispatched.
+2. **First cycle after the change merges** — no back-dating, no migration of existing files.
+3. **YES to both** — trip points accepted as written; year-partitioning (Option B) is the
+   pre-chosen hatch if one trips.
+4. **YES** — large-file storage (git-lfs) permanently ruled out on §3C's measurements; not to be
+   re-litigated.
+
 ---
 
 ## Decision provenance

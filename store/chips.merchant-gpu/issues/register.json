@@ -4,31 +4,6 @@
  "issues": [
   {
    "checkCount": 2,
-   "id": "constraint-hbm-stacked-memory-supply",
-   "improvedStreak": 1,
-   "latest": {
-    "assessedAsOf": "2026-08-21",
-    "claimFindingIds": [
-     "en-sedaily-com-b1c000ac-2026-08-1",
-     "www-investing-com-87498f82-2026-08-1",
-     "en-sedaily-com-80cdc180-2026-08-1"
-    ],
-    "reasoning": "Suppliers can still meet only 60% to 70% of the stacked-memory volume asked for Rubin Ultra, and Micron still covers about half of customer demand. Samsung's HBM4 yield near 80% has not yet turned into more delivered supply.",
-    "status": "unchanged"
-   },
-   "openedAsOf": "2026-08",
-   "reopenedAsOf": [],
-   "resolvedAsOf": null,
-   "state": "open",
-   "title": "HBM stacked memory supply",
-   "trigger": {
-    "kind": "binding-constraint",
-    "label": "HBM stacked memory supply"
-   },
-   "worsenedCount": 1
-  },
-  {
-   "checkCount": 2,
    "id": "dim-bottleneck",
    "improvedStreak": 0,
    "latest": {
