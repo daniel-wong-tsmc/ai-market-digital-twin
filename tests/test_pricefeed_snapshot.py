@@ -81,11 +81,24 @@ def test_load_points_prefers_snapshot_and_falls_back_to_legacy(tmp_path):
     # snapshot exists at/before 2026-08-21 -> snapshot wins, legacy ignored
     assert {p.provider for p in load_points("2026-08-21", legacy, snapshot_dir=snaps)} == \
         {"aws", "azure", "coreweave", "runpod"}
-    # before the first snapshot -> legacy
-    pts = load_points("2026-07-08", legacy, snapshot_dir=snaps)
-    assert [(p.provider, p.model) for p in pts] == [("aws", "H100")]
+    # before the first snapshot, but the folder IS in the snapshot era -> no points at all.
+    # Mixing a snapshot basket with a legacy basket would fabricate a price move (Fix 1).
+    assert load_points("2026-07-08", legacy, snapshot_dir=snaps) == []
     # no snapshot dir at all -> legacy
     assert len(load_points("2026-08-21", legacy, snapshot_dir=tmp_path / "none")) == 1
+
+
+def test_snapshot_era_never_compares_snapshot_basket_with_legacy_basket(tmp_path):
+    """Pin: with any snapshot present, a pre-snapshot date has no price and no comparison."""
+    legacy = tmp_path / "legacy"; legacy.mkdir()
+    (legacy / "aws_price.csv").write_text(AWS, encoding="utf-8")
+    snaps = tmp_path / "snaps"
+    _snap(snaps, "2026-08-22", ROWS)
+    d = price_delta("2026-08-22", "2026-07-23", legacy, snapshot_dir=snaps)
+    assert d["H100"]["current"] == pytest.approx(7.0)
+    assert d["H100"]["prior"] is None
+    assert d["H100"]["pct_delta"] is None
+    assert headline_prices("2026-07-23", legacy, snapshot_dir=snaps) == {}
 
 
 def test_headline_prices_from_snapshot_is_median_of_provider_medians(tmp_path):

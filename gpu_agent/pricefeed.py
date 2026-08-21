@@ -145,6 +145,17 @@ def _snapshot_file(as_of: str, snapshot_dir=DEFAULT_SNAPSHOT_DIR) -> Path | None
     return best[1] if best else None
 
 
+def _snapshot_era(snapshot_dir=DEFAULT_SNAPSHOT_DIR) -> bool:
+    """True when the folder holds at least one daily snapshot — i.e. this machine has
+    entered the snapshot era. Once it has, prices come ONLY from snapshots: mixing a
+    snapshot basket (Azure/AWS/RunPod/CoreWeave) with a legacy-folder basket
+    (aws/coreweave/gcp/oracle) would manufacture a price move that never happened."""
+    d = Path(snapshot_dir)
+    if not d.is_dir():
+        return False
+    return any(_SNAPSHOT_RE.match(p.name) for p in d.iterdir())
+
+
 def _snapshot_date_yymmdd(path: Path) -> str:
     iso = _SNAPSHOT_RE.match(path.name).group(1)
     return iso[2:4] + iso[5:7] + iso[8:10]
@@ -386,12 +397,15 @@ def _coreweave_points(as_of: str, data_dir=DEFAULT_DATA_DIR) -> list[PricePoint]
 
 def load_points(as_of: str, data_dir=DEFAULT_DATA_DIR,
                 snapshot_dir=DEFAULT_SNAPSHOT_DIR) -> list[PricePoint]:
-    """Every normalized PricePoint for `as_of`. F122: a daily snapshot at/before the label
-    is the source when one exists; otherwise the legacy four-folder readers (nearest scrape
-    at/before the label). Deterministic; read-only."""
-    snap = _snapshot_points(as_of, snapshot_dir)
-    if snap:
-        return snap
+    """Every normalized PricePoint for `as_of`. F122: the two backends are never mixed.
+
+    If the snapshot folder holds ANY snapshot (`_snapshot_era`), snapshots are the only
+    source — and a label older than the first snapshot honestly returns [], so no price
+    and no comparison, rather than a fake move against a differently-composed legacy
+    provider basket. Only a machine with no snapshots at all falls back to the legacy
+    four-folder readers (nearest scrape at/before the label). Deterministic; read-only."""
+    if _snapshot_era(snapshot_dir):
+        return _snapshot_points(as_of, snapshot_dir)
     return (_aws_points(as_of, data_dir) + _coreweave_points(as_of, data_dir)
             + _gcp_points(as_of, data_dir) + _oracle_points(as_of, data_dir))
 

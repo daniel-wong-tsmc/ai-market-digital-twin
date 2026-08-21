@@ -4,8 +4,10 @@
   User request: "each time we run the GPU agent, also check the GPU prices" (process from
   `C:\Users\danie\gpu-price-tracker`). Design interactive, ZERO AFK-defaults (spec
   `docs/superpowers/specs/2026-08-20-f122-price-pull-design.md`). Shipped on the branch:
-  `gpu_agent/pricepull.py` + `price-pull` verb; `pricefeed` snapshot backend (snapshot wins, legacy
-  fallback); `price_local` rental-from-snapshot + decoupled staleness; run-cycle step 7 = "Price-pull +
+  `gpu_agent/pricepull.py` + `price-pull` verb; `pricefeed` snapshot backend — once ANY snapshot
+  exists, prices come only from snapshots, and dates before the first snapshot show no price and no
+  comparison rather than a fake move (the legacy scrape folders are used only on a machine with no
+  snapshots at all); `price_local` rental-from-snapshot + decoupled staleness; run-cycle step 7 = "Price-pull +
   price-sync" (F83 fingerprint moved EXACTLY once, same commit); backlog F122. Outside the repo
   (uncommitted by nature): launcher `run-gpu-market` Step 4 is now a pointer; `gpu-price-tracker\MOVED.md`.
   Verification (live proof taken 2026-08-22): suite 2612 passed / 6 skipped on the branch; live

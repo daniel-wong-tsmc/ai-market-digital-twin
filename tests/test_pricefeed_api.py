@@ -1,7 +1,14 @@
 # tests/test_pricefeed_api.py
+from pathlib import Path
+
 from gpu_agent.pricefeed import (
     load_points, headline_prices, price_delta, custom_silicon_series, lookback_label,
 )
+
+# These tests exercise the LEGACY four-folder backend, so they must run outside the
+# snapshot era. Without an explicit empty snapshot folder they would read the real
+# machine's gpu_agent/data/leasing_snapshots/ and stop being hermetic.
+NO_SNAPS = Path("__no_snapshots__")
 
 # reuse the per-adapter fixtures inline (small)
 AWS = ("instance,term,region,260601,260707,260708\n"
@@ -27,7 +34,7 @@ def _write_all(tmp_path):
 
 def test_load_points_unions_all_providers(tmp_path):
     _write_all(tmp_path)
-    provs = {p.provider for p in load_points("2026-07-08", tmp_path)}
+    provs = {p.provider for p in load_points("2026-07-08", tmp_path, snapshot_dir=NO_SNAPS)}
     assert provs == {"aws", "oracle", "gcp", "coreweave"}
 
 
@@ -35,7 +42,7 @@ def test_headline_price_is_median_of_provider_medians(tmp_path):
     _write_all(tmp_path)
     # fresh H100 provider medians: aws 6.88, oracle 10.0, gcp 9.796551; coreweave (260305) is stale (>45d) -> excluded
     # median of [6.88, 9.796551, 10.0] = 9.796551
-    hp = headline_prices("2026-07-08", tmp_path, max_staleness_days=45)
+    hp = headline_prices("2026-07-08", tmp_path, max_staleness_days=45, snapshot_dir=NO_SNAPS)
     assert round(hp["H100"], 4) == 9.7966
     assert "B200" not in hp                      # no B200 in these fixtures
 
@@ -44,13 +51,13 @@ def test_stale_provider_included_when_window_widened(tmp_path):
     _write_all(tmp_path)
     # widen staleness so CoreWeave's 260305 point (124d before 260708) is admitted:
     # provider medians [aws 6.88, coreweave 6.155, gcp 9.796551, oracle 10.0] -> median = (6.88+9.796551)/2 = 8.338276
-    hp = headline_prices("2026-07-08", tmp_path, max_staleness_days=400)
+    hp = headline_prices("2026-07-08", tmp_path, max_staleness_days=400, snapshot_dir=NO_SNAPS)
     assert round(hp["H100"], 4) == 8.3383
 
 
 def test_custom_silicon_is_trainium_only(tmp_path):
     _write_all(tmp_path)
-    cs = custom_silicon_series("2026-07-08", tmp_path)
+    cs = custom_silicon_series("2026-07-08", tmp_path, snapshot_dir=NO_SNAPS)
     assert {p.model for p in cs} == {"Trainium1"}
     assert all(p.gpu_class == "custom_silicon" and p.provider == "aws" for p in cs)
 
@@ -59,14 +66,15 @@ def test_price_delta_since_last_week(tmp_path):
     _write_all(tmp_path)
     # AWS H100: 260708 uses 55.04 (6.88/gpu); a week back 2026-07-01 -> nearest col <=260701 is 260601 = 50.0 (6.25/gpu)
     # but oracle/gcp have no 260601 rows, so at lookback only AWS+CoreWeave(stale,excluded) -> H100 median = 6.25
-    d = price_delta("2026-07-08", lookback_label("2026-07-08", 7), tmp_path, max_staleness_days=45)
-    assert d["H100"]["current"] == round(headline_prices("2026-07-08", tmp_path)["H100"], 4)
+    d = price_delta("2026-07-08", lookback_label("2026-07-08", 7), tmp_path,
+                    max_staleness_days=45, snapshot_dir=NO_SNAPS)
+    assert d["H100"]["current"] == round(headline_prices("2026-07-08", tmp_path, snapshot_dir=NO_SNAPS)["H100"], 4)
     assert d["H100"]["prior"] == 6.25
     assert d["H100"]["abs_delta"] is not None
 
 
 def test_determinism_same_asof_same_bytes(tmp_path):
     _write_all(tmp_path)
-    a = load_points("2026-07-08", tmp_path)
-    b = load_points("2026-07-08", tmp_path)
+    a = load_points("2026-07-08", tmp_path, snapshot_dir=NO_SNAPS)
+    b = load_points("2026-07-08", tmp_path, snapshot_dir=NO_SNAPS)
     assert a == b                                # frozen dataclasses compare by value
