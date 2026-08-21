@@ -28,7 +28,13 @@ SNAPSHOT_FIELDS = ["provider", "gpu_model", "price_type", "usd_per_gpu_hr",
                    "source", "retrieved_at"]
 
 
-def http_get(url, headers=None, data=None, timeout=60):
+# A pull issues up to ~40 requests (Vast.ai is 8 models x 4 counts; Azure paginates), so a
+# generous per-request timeout compounds into a cycle step that hangs for many minutes on a
+# bad network day. Bound each request instead.
+HTTP_TIMEOUT = 20
+
+
+def http_get(url, headers=None, data=None, timeout=HTTP_TIMEOUT):
     req = urllib.request.Request(url, data=data, headers={**UA, **(headers or {})})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return r.read().decode("utf-8", errors="replace")

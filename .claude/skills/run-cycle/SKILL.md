@@ -442,8 +442,9 @@ gpu_prices-<YYYY-MM-DD>.csv`, gitignored, never committed:
 says so; `path` is then `null`). Record it in the cycle log under a `pricePull` key:
 `result: done` (rows > 0, no failures), `partial` (rows > 0, some `failed`), or `empty` (rows 0), plus
 `rows`, `perProvider`, `failed` and `snapshot` (the path). A non-empty `failed` list is a real finding —
-keep the provider + error text, do not reduce it to a count. Exit 2 means an operator mistake (bad
-`--as-of`); log it and move on.
+keep the provider + error text, do not reduce it to a count. A pull that takes more than a few
+minutes is itself a finding — record the wall time next to `pricePull`. Exit 2 means an operator
+mistake (bad `--as-of`); log `result: failed` with the stderr text and move on.
 
 **Price-sync (F98).** Refresh the local price series before the site is rebuilt. It reads the snapshot
 just written (and the legacy folders for earlier dates):

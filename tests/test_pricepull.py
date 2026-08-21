@@ -186,3 +186,9 @@ def test_run_pull_rows_sorted_by_model_then_price(tmp_path):
     with (tmp_path / "gpu_prices-2026-08-20.csv").open(newline="", encoding="utf-8") as f:
         got = [(r["gpu_model"], float(r["usd_per_gpu_hr"])) for r in csv.DictReader(f)]
     assert got == [("B200", 7.0), ("B200", 9.0), ("H200", 5.0)]
+
+
+def test_http_get_default_timeout_is_bounded():
+    """Fix 3: ~40 requests per pull, so a stalled provider must not cost minutes each."""
+    import inspect
+    assert inspect.signature(p.http_get).parameters["timeout"].default == p.HTTP_TIMEOUT == 20
