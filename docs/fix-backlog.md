@@ -1107,6 +1107,22 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   its own `dashboard/brief_model._indicator_labels`, not `reader.indicator_label`, so the
   web brief still shows the tails until F121 lands.
 
+- [x] **F122 — Daily GPU leasing-price pull, in-repo, feeding the brief.** *(Numbered 2026-08-20,
+  assistant-minted after F121 was taken mid-session by the report-quality-pair lane — renumber if
+  collided again.)* The user's standalone `C:\Users\danie\gpu-price-tracker\pull_gpu_prices.py`
+  (Azure / AWS / RunPod / Vast.ai / CoreWeave, optional Lambda) is now `gpu_agent/pricepull.py` behind
+  `gpu-agent price-pull --as-of <day>`, run inside run-cycle step 7 ("Price-pull + price-sync") every
+  cycle. One LOCAL, gitignored snapshot per day in `gpu_agent/data/leasing_snapshots/` (user decision:
+  not committed). `pricefeed.load_points` prefers the newest snapshot at/before the label (on-demand,
+  US regions) and falls back to the legacy `scrape_data/` folders for earlier dates, which revives the
+  dashboard H100 tile, the brief's price lines and `gpuRental{OnDemand,Spot,1yr}`; `price_local` no
+  longer lets the stale hardware purchase-price folder suppress fresh rental rows (separate `stale
+  rental data` warning). Supersedes the launcher skill's 2026-08-20 "Step 4" subagent dispatch (now a
+  pointer). NOT covered, on purpose: hardware purchase prices (thinkmate/serversimply) — that `stale
+  price folder` warning persists honestly. Spec
+  `docs/superpowers/specs/2026-08-20-f122-price-pull-design.md`; plan
+  `docs/superpowers/plans/2026-08-20-f122-price-pull.md`. Lane `f122-price-pull`.
+
 ## From the 2026-07-13 documentation gap review (F88–F94) — what the docs still don't cover
 
 > Source: a "what is missing from our documentation to achieve the goal?" review (2026-07-13),
