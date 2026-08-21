@@ -1,0 +1,49 @@
+{
+  "id": "247wallst-com-db4b25b9-2026-08-3",
+  "statement": "Marvell may be taking custom-silicon share at Google from incumbent supplier Broadcom rather than the win representing net new industry spend.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "unknown",
+  "why": "If Google's custom-silicon budget is being redistributed rather than expanded, the read-through for total accelerator demand is neutral even though one vendor gains.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Reallocation of the same Google custom-ASIC spend between vendors changes vendor share without changing total non-GPU accelerator volume."
+  },
+  "evidence": [
+    {
+      "source": "24/7 Wall St. (reporting Marvell Technology SEC 8-K)",
+      "url": "https://247wallst.com/investing/2026/08/19/marvell-technology-rockets-13-on-12-2b-google-warrant-broadcom-falls-3-alphabet-unmoved/",
+      "date": "2026-08-18",
+      "excerpt": "a zero sum shift rather than an industry rising tide",
+      "tier": "secondary"
+    },
+    {
+      "source": "24/7 Wall St. (reporting Marvell Technology SEC 8-K)",
+      "url": "https://247wallst.com/investing/2026/08/19/marvell-technology-rockets-13-on-12-2b-google-warrant-broadcom-falls-3-alphabet-unmoved/",
+      "date": "2026-08-18",
+      "excerpt": "the incumbent supplier for Google's tensor processing units through a long-term agreement signed in April running through 2031.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The document supplies no split of Google's custom-silicon spend between vendors and no unit or dollar share figures; the zero-sum reading is the outlet's interpretation supported only by same-day share-price moves, so it is a plausible but unverified inference.",
+  "confidence": {
+    "level": "low",
+    "basis": "Interpretation by a single secondary outlet with no share data; share moves are not evidence of volume reallocation."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Marvell / Broadcom",
+  "observedAt": "2026-08-18",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

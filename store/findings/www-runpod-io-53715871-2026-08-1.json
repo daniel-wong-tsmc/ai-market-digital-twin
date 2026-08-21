@@ -1,0 +1,52 @@
+{
+  "id": "www-runpod-io-53715871-2026-08-1",
+  "statement": "RunPod lists an on-demand Secure Cloud rate of $3.29 per GPU-hour for the H100 SXM, captured 2026-08-22 with no prior-period baseline.",
+  "kind": "measured",
+  "value": {
+    "number": 3.29,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Per-GPU rental rates are the visible reference cost of renting an accelerator, but a single capture with no baseline shows a level, not a direction.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Listed per-GPU hourly rates set the reference cost of accelerator capacity for renters; with no baseline this is a static level and a display overlay only."
+  },
+  "evidence": [
+    {
+      "source": "RunPod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-08-22",
+      "excerpt": "H100 SXM - Community rate absent; Secure '$3.29/hr'.",
+      "tier": "secondary"
+    },
+    {
+      "source": "RunPod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-08-22",
+      "excerpt": "All listed pricing represents per-hour on-demand rates.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single vendor pricing page capture, secondary tier; cheaper Community Cloud rates did not render, so only the Secure Cloud tier is visible."
+  },
+  "dispersion": "conflicting same-key reports: value 6.79 -> 3.29 (tol 1%); sources: RunPod",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "RunPod",
+  "observedAt": "2026-08-22",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

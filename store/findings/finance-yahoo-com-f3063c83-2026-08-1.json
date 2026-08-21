@@ -1,0 +1,49 @@
+{
+  "id": "finance-yahoo-com-f3063c83-2026-08-1",
+  "statement": "Nvidia is in early talks with South Korean inference-chip designer Rebellions about a partnership, investment or possible acquisition.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "The leading merchant GPU vendor engaging a well-funded NPU designer signals that data-center inference silicon is becoming a contested supply lane.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "mixed",
+    "mechanism": "An independently funded inference-NPU designer backed by SK Hynix, Samsung Ventures and Arm represents alternative accelerator supply that Nvidia is now seeking to partner with or absorb."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Bloomberg wire story)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-talks-chip-startup-rebellions-074543725.html",
+      "date": "2026-08-21",
+      "excerpt": "possible collaborations, including a technical partnership, an investment or perhaps even an acquisition.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (Bloomberg wire story)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-talks-chip-startup-rebellions-074543725.html",
+      "date": "2026-08-21",
+      "excerpt": "recently valued at approximately $2.3 billion",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary wire story; neither company commented and talks are described as preliminary."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> unknown); sources: Yahoo Finance (Bloomberg wire story)",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "Nvidia / Rebellions",
+  "observedAt": "2026-08-21",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

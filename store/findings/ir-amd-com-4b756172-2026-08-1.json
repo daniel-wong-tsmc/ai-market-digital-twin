@@ -1,0 +1,43 @@
+{
+  "id": "ir-amd-com-4b756172-2026-08-1",
+  "statement": "AMD agreed to acquire Toronto-based AI inference silicon specialist Taalas and will integrate its inference optimization technology with Instinct GPUs, Helios, EPYC and ROCm.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A second credible full-stack inference platform broadens the supply of accelerators buyers can qualify against the market leader.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "infrastructure.cluster-software"
+    ],
+    "direction": "mixed",
+    "mechanism": "Folding a dedicated inference-silicon team into AMD's Instinct and ROCm stack adds alternative inference capacity and software maturity, competing for the same inference workloads as incumbent merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (official press release)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1296/amd-acquires-taalas-to-advance-compute-solutions-for-rapidly-growing-ai-inference-market",
+      "date": "2026-08-06",
+      "excerpt": "The acquisition will integrate Taalas' inference optimization technology, which addresses 'compute and memory bottlenecks associated with general-purpose architectures,' with AMD Instinct GPUs and other platforms including AMD Helios, EPYC CPUs, and ROCm software.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary AMD investor-relations press release announcing a definitive agreement."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,54 @@
+{
+  "id": "www-digitimes-com-8bf55f8c-2026-08-1",
+  "statement": "Lead times for high-capacitance, high-specification MLCCs used in AI servers are stretching toward 40 weeks on AI server demand.",
+  "kind": "measured",
+  "value": {
+    "number": 40.0,
+    "unit": "weeks"
+  },
+  "trend": "rising",
+  "why": "Passive components are cheap but gating: a 40-week wait on a specification-specific capacitor can hold up whole AI server builds regardless of accelerator availability.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.electrical-equipment",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "negative",
+    "mechanism": "Extending long-lead passive component supply constrains AI server assembly throughput, delaying deployment of accelerators and the racks, power and fabric around them."
+  },
+  "evidence": [
+    {
+      "source": "DIGITIMES",
+      "url": "https://www.digitimes.com/news/a20260817VL221/ai-server-mlcc-demand-infrastructure.html",
+      "date": "2026-08-17",
+      "excerpt": "AI server demand pushes high-end MLCC lead times toward 40 weeks.",
+      "tier": "secondary"
+    },
+    {
+      "source": "DIGITIMES",
+      "url": "https://www.digitimes.com/news/a20260817VL221/ai-server-mlcc-demand-infrastructure.html",
+      "date": "2026-08-17",
+      "excerpt": "Multilayer ceramic capacitor (MLCC) supply is increasingly diverging by product specification, with mainstream components remaining relatively stable while lead times for some high-capacitance, high-specification parts used in AI servers stretch toward 40...",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary trade outlet, paywalled beyond the lede; the 40-week figure comes from the headline with the body figure cut off and no named suppliers or per-supplier detail visible."
+  },
+  "dispersion": "Document notes supply is diverging by specification: mainstream MLCC remains relatively stable while only high-capacitance, high-specification parts stretch out.",
+  "asOf": "2026-08",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "MLCC suppliers / AI server supply chain",
+  "observedAt": "2026-08-17",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

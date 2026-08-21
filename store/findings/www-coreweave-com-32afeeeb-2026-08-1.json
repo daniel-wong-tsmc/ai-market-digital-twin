@@ -1,0 +1,49 @@
+{
+  "id": "www-coreweave-com-32afeeeb-2026-08-1",
+  "statement": "CoreWeave lists an on-demand rate of $49.24 per hour for an eight-GPU NVIDIA HGX H100 node in both North America and Europe, with no prior-period baseline shown.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Listed rental rates are the visible reference price for renting accelerators, but a single capture without a baseline says nothing about direction.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Published rental rates set the reference cost of accelerator capacity for renters; as a static level with no baseline it is a display overlay only."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-08-22",
+      "excerpt": "On-Demand Price: $49.24 / Hour",
+      "tier": "secondary"
+    },
+    {
+      "source": "CoreWeave",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-08-22",
+      "excerpt": "these are per-8-GPU-node (HGX) or per-4-GPU-node (GB200 NVL72) prices, not per-single-GPU prices",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor pricing page captured once; secondary source with no baseline or history, and the unit is per node rather than per GPU."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> unknown); sources: CoreWeave",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "coreweave",
+  "observedAt": "2026-08-22",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

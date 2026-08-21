@@ -1,0 +1,47 @@
+{
+  "id": "nvidianews-nvidia-com-09f767dd-2026-08-1",
+  "statement": "NVIDIA reported record Q1 FY2027 Data Center revenue of $75.2 billion, up 92% year over year and 21% sequentially.",
+  "kind": "measured",
+  "value": {
+    "number": 75.2,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Data Center revenue is the most direct read on realised merchant-GPU demand and its sequential growth shows the buildout is still accelerating.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "Record shipped data-center revenue pulls through HBM, advanced packaging and rack-scale networking content in proportion to accelerator volume."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom (official press release)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027",
+      "date": "2026-05-20",
+      "excerpt": "Record Data Center revenue of $75.2 billion, up 92% from a year ago",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary company earnings release with reported figures."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-05-20",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

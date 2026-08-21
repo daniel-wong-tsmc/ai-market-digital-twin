@@ -1,0 +1,43 @@
+{
+  "id": "247wallst-com-db4b25b9-2026-08-2",
+  "statement": "Google is broadening non-GPU accelerator supply by adding Marvell-developed AI inference accelerators and near-memory compute alongside its existing TPU program.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "More qualified suppliers of inference silicon widen the pool of compute that does not depend on merchant GPU allocation.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "mixed",
+    "mechanism": "Additional custom accelerator programs add wafer and packaging demand that competes with merchant GPUs for the same foundry and advanced-packaging capacity while adding alternative compute supply."
+  },
+  "evidence": [
+    {
+      "source": "24/7 Wall St. (reporting Marvell Technology SEC 8-K)",
+      "url": "https://247wallst.com/investing/2026/08/19/marvell-technology-rockets-13-on-12-2b-google-warrant-broadcom-falls-3-alphabet-unmoved/",
+      "date": "2026-08-18",
+      "excerpt": "The expanded partnership spans custom silicon programs that attach to the TPU ecosystem, including AI inference accelerators, storage controllers, network interface controllers, memory interface controllers, and near-memory compute.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary-only sourcing from one outlet."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "Google / Marvell",
+  "observedAt": "2026-08-18",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

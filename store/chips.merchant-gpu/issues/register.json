@@ -1,19 +1,19 @@
 {
- "asOf": "2026-08-21",
+ "asOf": "2026-08-22",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 2,
+   "checkCount": 3,
    "id": "dim-bottleneck",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-21",
+    "assessedAsOf": "2026-08-22",
     "claimFindingIds": [
-     "en-sedaily-com-b1c000ac-2026-08-1",
+     "www-digitimes-com-8bf55f8c-2026-08-1",
      "www-thelec-net-c15d2de4-2026-08-1"
     ],
-    "reasoning": "No new evidence arrived today on the physical cap. The most recent reads still show memory limited to 60% to 70% of requested volume and GlobalWafers running its wafer lines at effectively full use.",
-    "status": "unchanged"
+    "reasoning": "A new shortage showed up further down the parts list: waits for high-specification AI-server capacitors are stretching toward 40 weeks, on top of wafer lines already running at effectively full use.",
+    "status": "worsened"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -24,20 +24,22 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 1
+   "worsenedCount": 2
   },
   {
-   "checkCount": 2,
+   "checkCount": 3,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-21",
+    "assessedAsOf": "2026-08-22",
     "claimFindingIds": [
-     "www-coreweave-com-ece65e78-2026-08-1",
-     "www-stocktitan-net-587e9583-2026-08-1"
+     "247wallst-com-db4b25b9-2026-08-2",
+     "ir-amd-com-4b756172-2026-08-1",
+     "www-globenewswire-com-df26a829-2026-08-1",
+     "www-stocktitan-net-587e9583-2026-08-3"
     ],
-    "reasoning": "Today's evidence points both ways, so there is no net change. Hudson River Trading committed to NVIDIA racks on CoreWeave on August 20, while Cerebras began shipping its rival CS-4 rack this quarter.",
-    "status": "unchanged"
+    "reasoning": "Three alternatives moved at once: Google added Marvell chips beside its own, AMD bought Taalas to build purpose-made inference silicon, and Cerebras started shipping its CS-4 rack with OpenAI and AWS named as customers.",
+    "status": "worsened"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -48,19 +50,19 @@
     "kind": "dimension-weak",
     "label": "moat"
    },
-   "worsenedCount": 1
+   "worsenedCount": 2
   },
   {
-   "checkCount": 1,
+   "checkCount": 2,
    "id": "constraint-stacked-memory-and-server-dram",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-08-21",
+    "assessedAsOf": "2026-08-22",
     "claimFindingIds": [
      "www-trendforce-com-17fa2dc8-2026-08-1",
      "www-investing-com-87498f82-2026-08-1"
     ],
-    "reasoning": "No new evidence arrived today. DRAM supply is still reported tight through 2027, which limits the capacity available for stacked memory, and Micron calls DRAM the number one constraint its largest customers face.",
+    "reasoning": "No new evidence arrived today. DRAM supply is still reported tight through 2027, limiting the capacity available for stacked memory, and Micron still calls DRAM the number one constraint its largest customers face.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
@@ -71,6 +73,30 @@
    "trigger": {
     "kind": "binding-constraint",
     "label": "stacked memory and server DRAM"
+   },
+   "worsenedCount": 0
+  },
+  {
+   "checkCount": 1,
+   "id": "constraint-stacked-high-bandwidth-memory-supply",
+   "improvedStreak": 0,
+   "latest": {
+    "assessedAsOf": "2026-08-22",
+    "claimFindingIds": [
+     "en-sedaily-com-b1c000ac-2026-08-1",
+     "en-sedaily-com-80cdc180-2026-08-1"
+    ],
+    "reasoning": "No new evidence arrived today. Suppliers can still meet only 60% to 70% of the stacked-memory volume asked for Rubin Ultra, and Korean yields near 80% have not yet turned into more delivered supply.",
+    "status": "unchanged"
+   },
+   "openedAsOf": "2026-08",
+   "reopenedAsOf": [],
+   "resolvedAsOf": null,
+   "state": "open",
+   "title": "Stacked high-bandwidth memory supply",
+   "trigger": {
+    "kind": "binding-constraint",
+    "label": "Stacked high-bandwidth memory supply"
    },
    "worsenedCount": 0
   }

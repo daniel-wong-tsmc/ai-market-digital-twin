@@ -1,0 +1,29 @@
+{
+  "seriesName": "Marvell data center segment revenue by quarter",
+  "unit": "US$ millions",
+  "form": "columns",
+  "sourceName": "Marvell Technology, Inc. Investor Relations",
+  "points": [
+    {
+      "label": "Q3 FY2026 (ended Nov 1, 2025)",
+      "value": 1517.9,
+      "sourceUrl": "https://investor.marvell.com/news-events/press-releases/detail/1011/marvell-technology-inc-reports-fourth-quarter-and-fiscal-year-2026-financial-results",
+      "publishedAt": "2026-03-05"
+    },
+    {
+      "label": "Q4 FY2026 (ended Jan 31, 2026)",
+      "value": 1651.3,
+      "sourceUrl": "https://investor.marvell.com/news-events/press-releases/detail/1011/marvell-technology-inc-reports-fourth-quarter-and-fiscal-year-2026-financial-results",
+      "publishedAt": "2026-03-05"
+    },
+    {
+      "label": "Q1 FY2027 (ended May 2, 2026)",
+      "value": 1832.7,
+      "sourceUrl": "https://investor.marvell.com/news-events/press-releases/detail/1023/marvell-technology-inc-reports-first-quarter-of-fiscal-year-2027-financial-results",
+      "publishedAt": "2026-06-04"
+    }
+  ],
+  "pair": false,
+  "notes": "This is not a direct measure of the new Google warrant/$120B ceiling itself -- no site meeting the verification rule (paywall-free, bot-accessible) publishes a quarter-by-quarter breakout of that $120 billion custom-product revenue trajectory. Instead this series is Marvell's own reported data center segment revenue for its three most recent quarters (all from investor.marvell.com press releases), which is the real base the Google deal's cumulative $120B revenue ceiling would be layered on top of -- it shows the segment already growing quarter over quarter (about 9% then about 11% sequentially) before the expanded Google agreement. Q2 FY2027 results (which would show the first full quarter after the August 18, 2026 warrant/deal expansion) are not yet published as of 2026-08-22; Marvell's press release detail page for that quarter did not exist yet at fetch time. The $12.2 billion warrant value and the 240-tranche x $500 million = $120 billion structure themselves come from Marvell's SEC 8-K filing (sec.gov), a different site, so per the single-source rule those figures are described in notes only and not mixed into the points array.",
+  "bulletIndex": 1
+}

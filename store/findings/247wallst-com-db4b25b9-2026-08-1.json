@@ -1,0 +1,51 @@
+{
+  "id": "247wallst-com-db4b25b9-2026-08-1",
+  "statement": "Marvell and Google expanded a custom-silicon commercial agreement backed by a Google warrant whose vesting is tied to Custom Products revenue tranches implying a cumulative ceiling of roughly $120 billion.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A hyperscaler tying equity vesting to its own custom-accelerator purchases signals a durable, large-scale shift of AI compute spend toward in-house silicon rather than merchant GPUs.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.networking-silicon"
+    ],
+    "direction": "mixed",
+    "mechanism": "Google-funded custom inference accelerators, NICs and memory-interface parts substitute for merchant GPU attach in the TPU ecosystem, expanding ASIC/networking-silicon volume while capping merchant-GPU share of that spend."
+  },
+  "evidence": [
+    {
+      "source": "24/7 Wall St. (reporting Marvell Technology SEC 8-K)",
+      "url": "https://247wallst.com/investing/2026/08/19/marvell-technology-rockets-13-on-12-2b-google-warrant-broadcom-falls-3-alphabet-unmoved/",
+      "date": "2026-08-18",
+      "excerpt": "with one tranche vesting for each $500 million in Custom Products revenue -- implying a potential cumulative revenue ceiling of approximately $120 billion",
+      "tier": "secondary"
+    },
+    {
+      "source": "24/7 Wall St. (reporting Marvell Technology SEC 8-K)",
+      "url": "https://247wallst.com/investing/2026/08/19/marvell-technology-rockets-13-on-12-2b-google-warrant-broadcom-falls-3-alphabet-unmoved/",
+      "date": "2026-08-18",
+      "excerpt": "AI inference accelerators, storage, networking and memory interface controllers, and near memory computing technologies for Google.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying SEC 8-K terms; no separately fetched filing or second publisher, so capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "Marvell Technology / Google",
+  "observedAt": "2026-08-18",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

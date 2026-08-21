@@ -1,0 +1,233 @@
+{
+  "headline": "Big buyers stop waiting and go shopping for other chips",
+  "deck": "Memory is still the thing that caps how many chips get built, so Google, AMD and Cerebras all spent this week buying or building alternatives instead.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The cap is still memory, and now the small parts too",
+      "paragraphs": [
+        "Nothing has changed about why supply is not catching up. NVIDIA's memory suppliers can meet only 60% to 70% of the stacked-memory volume asked of them for the Rubin Ultra generation. Micron said at its August 10 forum that it can supply no more than about half of customer demand, calls this memory the number one constraint its largest customers face, and has no line of sight to when supply meets demand. TrendForce reported on August 4 that DRAM supply stays tight through 2027, which limits how much factory capacity can be turned over to stacked memory at all.",
+        "The squeeze keeps spreading down the parts list. GlobalWafers said on August 6 that its 300mm, 200mm and 150mm lines are effectively at full use, with shortages already showing on some advanced 12-inch products. New this week: Digitimes reported on August 17 that lead times for the high-specification capacitors used in AI servers are stretching toward 40 weeks. These are cheap components, and a server does not ship without them.",
+        "The packaging step that bonds these parts together is the one place that may have eased, and even there the sources disagree. Reporting in early July put the shortfall narrowing from roughly 20% to about 10% by the end of 2026. An August 5 report still put the gap near 20% for the year, even with monthly capacity climbing toward 130,000 to 140,000 wafers."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-thelec-net-c15d2de4-2026-08-1",
+        "www-digitimes-com-8bf55f8c-2026-08-1",
+        "www-forbes-com-335e62f0-2026-07-1",
+        "www-trendforce-com-836f33fa-2026-08-1"
+      ],
+      "sourceLine": "Micron's August 10 forum remarks, Seoul Economic Daily on Rubin Ultra memory, TrendForce, The Elec on wafer lines, Digitimes on component waits and Forbes on packaging capacity.",
+      "relatedDocs": [
+        {
+          "url": "https://www.digitimes.com/news/a20260817VL221/ai-server-mlcc-demand-infrastructure.html",
+          "title": "AI server component lead times stretch toward 40 weeks",
+          "outlet": "DIGITIMES",
+          "date": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Customers quietly line up chips that are not GPUs",
+      "paragraphs": [
+        "The clearest move of the week came from Google. On August 18 it widened a custom-chip agreement with Marvell, backed by a warrant whose vesting is tied to revenue steps implying a ceiling of roughly $120 billion. Google is adding Marvell inference parts and near-memory compute alongside its own in-house chip programme. One read of the deal is that Marvell is taking work from Broadcom rather than the industry spending more, so the news is about who supplies the volume, not whether the volume exists.",
+        "AMD made the same bet with its wallet. On August 6 it agreed to buy Taalas, a Toronto firm that builds silicon purpose-made for running finished models, and said it will fold that technology into its own GPUs, racks, server chips and software. AMD calls this kind of work one of the fastest-growing parts of the market. Chips that hardwire a model into the silicon could take the cheap, high-volume end of that work away from general-purpose GPUs.",
+        "And a rival rack is now shipping. Cerebras launched its CS-4 wafer-scale system on August 19, claiming more than 4,400 words per second for a single user on an open model, up to 30 times the per-user speed of GPU-based systems and up to ten times the output per unit of electricity of its own last generation, with first shipments this quarter. It names OpenAI, G42 and AWS among its customers. None of this replaces the GPU order book today, but every one of these buyers is building a second door."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "247wallst-com-db4b25b9-2026-08-1",
+        "247wallst-com-db4b25b9-2026-08-2",
+        "247wallst-com-db4b25b9-2026-08-3",
+        "ir-amd-com-4b756172-2026-08-1",
+        "ir-amd-com-4b756172-2026-08-2",
+        "ir-amd-com-a2b1e088-2026-08-2",
+        "www-globenewswire-com-df26a829-2026-08-1",
+        "www-globenewswire-com-df26a829-2026-08-2",
+        "www-stocktitan-net-587e9583-2026-08-3"
+      ],
+      "sourceLine": "24/7 Wall St. on Marvell's filing with Google, AMD's own announcement of the Taalas purchase, and Cerebras's launch release.",
+      "relatedDocs": [
+        {
+          "url": "https://247wallst.com/investing/2026/08/19/marvell-technology-rockets-13-on-12-2b-google-warrant-broadcom-falls-3-alphabet-unmoved/",
+          "title": "Marvell jumps on a Google custom-chip warrant",
+          "outlet": "24/7 Wall St. (reporting Marvell Technology SEC 8-K)",
+          "date": "2026-08-18"
+        },
+        {
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1296/amd-acquires-taalas-to-advance-compute-solutions-for-rapidly-growing-ai-inference-market",
+          "title": "AMD acquires Taalas to broaden its work on running finished models",
+          "outlet": "AMD Investor Relations (official press release)",
+          "date": "2026-08-06"
+        },
+        {
+          "url": "https://www.globenewswire.com/news-release/2026/08/19/3347356/0/en/cerebras-unveils-cs-4-up-to-30-times-faster-than-gpu-based-solutions.html",
+          "title": "Cerebras unveils the CS-4 wafer-scale system",
+          "outlet": "Cerebras Systems (GlobeNewswire press release, reprinted by Manila Times)",
+          "date": "2026-08-19"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Rental prices are the fastest read on whether any of this is loosening, and today they look calm. RunPod listed an H100 at $3.29 per chip per hour on its secure cloud, and CoreWeave listed an eight-chip H100 machine at $49.24 an hour, both captured today with no earlier figure to compare against. Watch whether those numbers start to slide, because cheaper rentals would be the first sign that supply has caught up.",
+        "The real relief would come from more good memory coming off the lines. Samsung's yield on its newest stacked memory has reached close to 80%, up from below 60% when volume production started in February 2026 and about four months ahead of the expected timeline, and SK Hynix's yield has separately touched 80%. Watch whether that holds as volume climbs. Watch, too, which memory specification NVIDIA settles on for Rubin Ultra: TrendForce says four options have been under review since the third quarter, and that choice decides how much memory each shipped system eats.",
+        "Two smaller signals stay in view. NVIDIA's chief executive has held early talks with the Korean chip designer Rebellions about a partnership, investment or purchase, which would be another step into building rather than buying. And on August 20 NVIDIA denied a report that it would ship a China-specific part by year end, saying no such chip is on its roadmap, so the China channel should not be counted on for relief."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "www-runpod-io-53715871-2026-08-1",
+        "www-coreweave-com-32afeeeb-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-3",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "finance-yahoo-com-c272e9ae-2026-08-1",
+        "finance-yahoo-com-e946ae80-2026-08-1"
+      ],
+      "sourceLine": "RunPod and CoreWeave price pages captured today, Seoul Economic Daily on Korean memory yields, TrendForce on Rubin Ultra options, and Bloomberg and Reuters wire reports on NVIDIA.",
+      "relatedDocs": [
+        {
+          "url": "https://www.runpod.io/pricing",
+          "title": "RunPod on-demand cloud price list",
+          "outlet": "RunPod",
+          "date": "2026-08-22"
+        },
+        {
+          "url": "https://www.coreweave.com/pricing",
+          "title": "CoreWeave on-demand price list",
+          "outlet": "CoreWeave",
+          "date": "2026-08-22"
+        },
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-talks-chip-startup-rebellions-074543725.html",
+          "title": "Nvidia in early talks with chip startup Rebellions",
+          "outlet": "Yahoo Finance (Bloomberg wire story)",
+          "date": "2026-08-21"
+        },
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-ship-ai-chip-china-170938345.html",
+          "title": "Nvidia denies having a China-specific chip on its roadmap",
+          "outlet": "Yahoo Finance (Reuters wire story)",
+          "date": "2026-08-20"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "How fast memory makers are raising factory spending, the one thing that eventually lifts the cap.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How fast AI servers are actually leaving the factories, which is what all the committed money turns into.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a chip costs to buy outright, the first place easier supply would show up.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "Memory suppliers can fill only 60% to 70% of the volume asked for NVIDIA's next flagship, and waits for basic AI-server capacitors are stretching toward 40 weeks.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-07",
+      "text": "Reporting in early July put the packaging shortfall narrowing from roughly 20% to about 10% by end-2026; an August 5 report still put it near 20%.",
+      "scene": 1
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Google widened its custom-chip deal with Marvell on August 18, backed by a warrant tied to revenue steps implying a ceiling of roughly $120 billion.",
+      "claimFindingIds": [
+        "247wallst-com-db4b25b9-2026-08-1"
+      ]
+    },
+    {
+      "text": "Micron said on August 10 it can supply no more than about half of customer demand and has no line of sight to when that changes.",
+      "claimFindingIds": [
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "text": "Digitimes reported on August 17 that waits for the high-specification capacitors inside AI servers are stretching toward 40 weeks, a new drag on shipments.",
+      "claimFindingIds": [
+        "www-digitimes-com-8bf55f8c-2026-08-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "A new shortage showed up further down the parts list: waits for high-specification AI-server capacitors are stretching toward 40 weeks, on top of wafer lines already running at effectively full use.",
+      "claimFindingIds": [
+        "www-digitimes-com-8bf55f8c-2026-08-1",
+        "www-thelec-net-c15d2de4-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "Three alternatives moved at once: Google added Marvell chips beside its own, AMD bought Taalas to build purpose-made inference silicon, and Cerebras started shipping its CS-4 rack with OpenAI and AWS named as customers.",
+      "claimFindingIds": [
+        "247wallst-com-db4b25b9-2026-08-2",
+        "ir-amd-com-4b756172-2026-08-1",
+        "www-globenewswire-com-df26a829-2026-08-1",
+        "www-stocktitan-net-587e9583-2026-08-3"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today. DRAM supply is still reported tight through 2027, limiting the capacity available for stacked memory, and Micron still calls DRAM the number one constraint its largest customers face.",
+      "claimFindingIds": [
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-high-bandwidth-memory-supply",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today. Suppliers can still meet only 60% to 70% of the stacked-memory volume asked for Rubin Ultra, and Korean yields near 80% have not yet turned into more delivered supply.",
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-1"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-22",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "2ee8c18c8dca33272c10f82a68eba81a0318ba936f071079f1a0d4488b8ecd2b",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-21T17:58:40.214810+00:00"
+  }
+}

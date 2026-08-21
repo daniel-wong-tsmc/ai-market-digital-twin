@@ -9,31 +9,124 @@
       "findingIds": [
         "finance-yahoo-com-2f05647b-2026-07-1",
         "thetechcapital-com-796ec195-2026-07-1",
-        "pr-tsmc-com-7f560c3b-2026-08-2",
-        "www-tradingkey-com-855cb780-2026-07-2"
+        "finance-yahoo-com-baa362f5-2026-07-2",
+        "pr-tsmc-com-7f560c3b-2026-08-2"
       ],
       "thesisIds": [
         "nvda-demand-durability",
+        "cloud-backlog-conversion-becomes-the-demand-proof-point",
         "broadening-ai-demand-tightens-tsmc-capacity-and-pricing",
-        "cloud-backlog-conversion-becomes-the-demand-proof-point"
+        "backlog-duration-lengthens-as-demand-is-booked-years-ahead"
       ],
-      "watchItem": "Leading-edge wafer demand rests on a buildout the four largest US cloud buyers now guide to about $725 billion for 2026, up roughly 77% from $410 billion, and TSMC has already lifted full-year revenue growth guidance above 40% and capex to $60-64 billion. The exposure is that wafer-start plans are now anchored to spending guidance that is revised upward mid-year rather than to shipped volume."
+      "watchItem": "Demand for AI compute is running well ahead of what the chain can deliver, with the four largest cloud customers guiding to roughly $725 billion of 2026 capital spending and cloud order books filling faster than capacity is delivered. Wafer-start planning across leading-edge nodes is exposed to how long that booked-ahead demand holds."
     },
     {
       "dimensions": [
         "bottleneck"
       ],
       "findingIds": [
-        "finance-biggo-com-ae5dcd41-2026-07-1",
+        "www-tradingkey-com-855cb780-2026-07-1",
         "supplyics-com-c83015c2-2026-08-2",
         "www-trendforce-com-836f33fa-2026-08-1",
-        "cryptobriefing-com-c3c1a1c3-2026-08-2"
+        "www-fool-com-f229964a-2026-07-1"
       ],
       "thesisIds": [
         "supply-constraint-binding",
         "packaging-tightness-starts-to-ease-while-memory-does-not"
       ],
-      "watchItem": "Advanced packaging is still the constraint that decides how much accelerator revenue can actually be realized: lines are booked through 2027 at 52 to 78 week waits, and the sources disagree on whether the shortfall has narrowed to about 10% or remains near 20% even as monthly capacity climbs toward 130,000 to 140,000 wafers. The open question is which of those two gap estimates the 2027 order book turns out to match."
+      "watchItem": "Advanced packaging, not wafer fabrication, is still the gate on how much accelerator revenue can actually ship: lines are booked into 2027 at waits of 52 to 78 weeks even as monthly capacity climbs toward 130,000 wafers. Reports now disagree on whether the shortfall has narrowed to about 10 percent or remains near 20 percent, so the size of the gap is the live question."
+    },
+    {
+      "dimensions": [
+        "bottleneck",
+        "strategicRisk"
+      ],
+      "findingIds": [
+        "supplyics-com-c83015c2-2026-08-3",
+        "www-forbes-com-7c91863a-2026-07-2",
+        "siliconanalysts-com-528fac70-2026-07-4",
+        "www-trendforce-com-836f33fa-2026-08-1"
+      ],
+      "thesisIds": [
+        "ai-packaging-supply-is-concentrated-in-a-few-buyers",
+        "customer-concentration-risk"
+      ],
+      "watchItem": "Advanced-packaging allocation is concentrated in very few hands: the top three customers hold more than 85 percent of capacity for 2026 and 2027, with one of them at about 60 percent. That concentration is an exposure in both directions, because a single large order cut would leave capacity that is hard to refill."
+    },
+    {
+      "dimensions": [
+        "competitiveStructure"
+      ],
+      "findingIds": [
+        "www-tomshardware-com-f77e9757-2026-07-1",
+        "siliconanalysts-com-47ffeeeb-2026-07-3",
+        "qz-com-36c37a60-2026-08-1",
+        "247wallst-com-db4b25b9-2026-08-1",
+        "www-investing-com-b7ff2af7-2026-08-2"
+      ],
+      "thesisIds": [
+        "custom-asic-substitution",
+        "nvidia-s-share-slips-while-its-sales-still-grow",
+        "a-third-designer-enters-the-custom-ai-chip-business",
+        "the-custom-ai-chip-alternative-depends-on-two-design-houses"
+      ],
+      "watchItem": "The leading-node customer base is shifting mix rather than shrinking: custom cloud silicon is growing far faster than merchant GPUs and is projected near 28 percent of AI servers in 2026, with a large Maia order under negotiation and a third design house entering the field. The exposure is to which vendors carry the volume, not to whether the volume exists."
+    },
+    {
+      "dimensions": [
+        "unitEconomics",
+        "momentum"
+      ],
+      "findingIds": [
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-3",
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "siliconanalysts-com-216b07a8-2026-07-2",
+        "www-techtimes-com-669598b1-2026-07-1"
+      ],
+      "thesisIds": [
+        "nvidia-holds-a-premium-gross-margin-as-it-ramps-new-chips",
+        "memory-makers-capture-a-growing-share-of-ai-server-profit",
+        "rising-memory-costs-inflate-ai-server-economics",
+        "pricing-power-persistence"
+      ],
+      "watchItem": "End-market pricing stays firm: the leading accelerator vendor holds a gross margin near 75 percent and foundry gross margin reached 67.7 percent on revenue up 36 percent. The pressure point is memory, where suppliers are taking a growing share of AI-server profit and component prices are up sharply, so pricing across the chain now turns on where memory costs settle."
+    },
+    {
+      "dimensions": [
+        "bottleneck"
+      ],
+      "findingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-thelec-net-c15d2de4-2026-08-1"
+      ],
+      "thesisIds": [
+        "memory-supply-is-the-new-choke-point-on-accelerator-shipments",
+        "memory-shortage-now-shrinks-the-product-not-just-the-volume",
+        "silicon-wafer-supply-tightens-behind-the-memory-crunch"
+      ],
+      "watchItem": "Stacked memory has become the tightest link in the chain: suppliers can meet only 60 to 70 percent of requested volume for the next flagship generation, one supplier says it covers about half of demand, and the flagship's memory configuration has been cut as a result. Silicon wafer lines are also at full utilisation, so the squeeze now sits one step further back as well."
+    },
+    {
+      "dimensions": [
+        "moat",
+        "competitiveStructure"
+      ],
+      "findingIds": [
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-4",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+        "www-trendforce-com-b8196a71-2026-08-1"
+      ],
+      "thesisIds": [
+        "packaging-work-starts-to-spread-beyond-tsmc",
+        "the-alternative-packaging-route-has-its-own-choke-point",
+        "the-second-largest-foundry-fills-up-and-raises-prices",
+        "intel-returns-as-a-data-center-supplier"
+      ],
+      "watchItem": "Second-source packaging is moving from talk to orders: a cloud customer has committed to more than three million units of Intel's bridge packaging for 2028 delivery, that route's yield is reported above 90 percent at roughly half the cost, and the second-largest foundry raised prices 10 to 15 percent because it is full. The alternative route has its own choke point, with a single sole-source capacitor supplier already fully booked."
     },
     {
       "dimensions": [
@@ -41,106 +134,21 @@
         "competitiveStructure"
       ],
       "findingIds": [
-        "supplyics-com-c83015c2-2026-08-3",
-        "www-forbes-com-7c91863a-2026-07-2",
-        "www-trendforce-com-836f33fa-2026-08-1",
-        "siliconanalysts-com-528fac70-2026-07-4"
-      ],
-      "thesisIds": [
-        "ai-packaging-supply-is-concentrated-in-a-few-buyers",
-        "customer-concentration-risk"
-      ],
-      "watchItem": "Packaging allocation is concentrated in very few hands: the top three customers hold more than 85% of capacity for 2026 and 2027, with one buyer near 60% and reserving 800,000 to 850,000 wafers of this year's output. That concentration means a single buyer's order change moves a large block of booked capacity at once."
-    },
-    {
-      "dimensions": [
-        "competitiveStructure",
-        "moat"
-      ],
-      "findingIds": [
-        "siliconanalysts-com-47ffeeeb-2026-07-3",
-        "qz-com-36c37a60-2026-08-1",
-        "www-tomshardware-com-f77e9757-2026-07-1",
-        "www-investing-com-b7ff2af7-2026-08-2"
-      ],
-      "thesisIds": [
-        "custom-asic-substitution",
-        "a-third-designer-enters-the-custom-ai-chip-business",
-        "nvidia-s-share-slips-while-its-sales-still-grow"
-      ],
-      "watchItem": "The leading-node customer base is shifting toward hyperscaler in-house silicon: custom chips are projected to grow from $8 billion in 2024 past $25 billion in 2026, one cloud buyer is negotiating capacity for upward of 300,000 of its own accelerators for 2027 delivery, and a third design house has raised its share target to 15-20%. The exposure runs both ways, since merchant-GPU share erodes while the same custom programs land as new leading-node volume."
-    },
-    {
-      "dimensions": [
-        "unitEconomics"
-      ],
-      "findingIds": [
-        "www-tradingkey-com-855cb780-2026-07-2",
-        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
-        "siliconanalysts-com-216b07a8-2026-07-2",
-        "www-techtimes-com-669598b1-2026-07-1"
-      ],
-      "thesisIds": [
-        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing",
-        "the-second-largest-foundry-fills-up-and-raises-prices",
-        "memory-makers-capture-a-growing-share-of-ai-server-profit"
-      ],
-      "watchItem": "Pricing power across the chain is firm but not evenly held: TSMC posted a 67.7% gross margin with revenue up 36%, the second-largest foundry raised prices 10-15% on new orders, and memory suppliers booked an 87% gross margin on data-center parts. The exposure is that memory currently captures the widest margin in the AI server, so end-customer willingness to absorb further price increases is the thing being tested."
-    },
-    {
-      "dimensions": [
-        "bottleneck",
-        "unitEconomics"
-      ],
-      "findingIds": [
-        "en-sedaily-com-b1c000ac-2026-08-1",
-        "www-investing-com-87498f82-2026-08-1",
-        "247wallst-com-3508dabf-2026-08-1",
-        "www-trendforce-com-17fa2dc8-2026-08-1"
-      ],
-      "thesisIds": [
-        "memory-supply-is-the-new-choke-point-on-accelerator-shipments",
-        "memory-shortage-now-shrinks-the-product-not-just-the-volume",
-        "rising-memory-costs-inflate-ai-server-economics"
-      ],
-      "watchItem": "Stacked memory now caps accelerator output ahead of packaging: suppliers can meet only 60% to 70% of requested volume for the next flagship generation, the largest US supplier says it can cover no more than about half of demand, and the flagship's memory has been cut from a planned 1TB toward 192GB. Memory scarcity that shrinks the product rather than the unit count changes how much packaging and wafer demand each shipped system carries."
-    },
-    {
-      "dimensions": [
-        "competitiveStructure",
-        "moat"
-      ],
-      "findingIds": [
-        "techsoda-substack-com-3b7a4ff5-2026-08-1",
-        "cryptobriefing-com-c3c1a1c3-2026-08-1",
-        "www-intc-com-9e1300a4-2026-08-2",
-        "techsoda-substack-com-3b7a4ff5-2026-08-4",
-        "techsoda-substack-com-3b7a4ff5-2026-08-5"
-      ],
-      "thesisIds": [
-        "packaging-work-starts-to-spread-beyond-tsmc",
-        "the-alternative-packaging-route-has-its-own-choke-point",
-        "intel-returns-as-a-data-center-supplier"
-      ],
-      "watchItem": "A second-source packaging route is forming: one rival reports bridge-packaging yield above 90% targeting 2027 volume at roughly half the cost of CoWoS, has won an order for more than 3 million units from a major cloud buyer, and its foundry revenue grew 31% to $5.8 billion. That route carries its own limits, with a sole silicon-capacitor supplier already fully booked and the technology described as a better fit for custom chips than for high-bandwidth accelerators."
-    },
-    {
-      "dimensions": [
-        "strategicRisk",
-        "momentum"
-      ],
-      "findingIds": [
-        "nvidianews-nvidia-com-cfc51804-2026-08-1",
         "finance-yahoo-com-54a88032-2026-08-1",
         "www-sec-gov-125b52f2-2026-07-1",
-        "abc-xyz-33e70a64-2026-07-4"
+        "www-sec-gov-125b52f2-2026-07-2",
+        "finance-yahoo-com-1e50b7f4-2026-08-2",
+        "www-forbes-com-9a1166d5-2026-07-1"
       ],
       "thesisIds": [
         "vendor-financed-demand-circularity",
+        "customer-concentration-risk",
+        "export-control-exposure",
+        "conditional-china-re-opening-with-a-capped-ceiling",
         "hyperscaler-ai-spending-may-outrun-near-term-returns",
         "investors-now-treat-bigger-ai-budgets-as-a-cost"
       ],
-      "watchItem": "Part of the demand behind these bookings is vendor-funded rather than customer-funded: financing platforms with six asset managers aim to mobilize over $500 billion of third-party capital, one campus guarantee was cut from a proposed $250 billion to under $120 billion, and three direct customers make up 21%, 17% and 16% of one vendor's revenue. Share prices falling on the days buyers raise capex plans is the early signal that this funding channel can tighten."
+      "watchItem": "A large slice of the demand behind these orders is vendor-supported or policy-exposed: one vendor cut a proposed customer guarantee from $250 billion to under $120 billion, three direct customers make up more than half of its revenue, and China data-center revenue has collapsed with licensed shipments still trivial. Investors are also starting to treat rising AI budgets as a cost, which is the earliest visible sign of an order slowdown."
     }
   ]
 }

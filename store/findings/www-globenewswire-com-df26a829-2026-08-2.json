@@ -1,0 +1,44 @@
+{
+  "id": "www-globenewswire-com-df26a829-2026-08-2",
+  "statement": "Cerebras claims the CS-4 delivers up to 10 times more throughput per watt than the prior-generation CS-3.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Throughput per watt sets how much inference a power-constrained site can serve, so a large generational gain changes the economics of non-GPU inference capacity.",
+  "impact": {
+    "targets": [
+      "chips.ai-silicon-startups",
+      "chips.merchant-gpu",
+      "energy.efficiency",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "mixed",
+    "mechanism": "Higher throughput per watt lets a fixed power envelope serve more inference, easing the power constraint on capacity additions and improving the competitive position of non-GPU systems."
+  },
+  "evidence": [
+    {
+      "source": "Cerebras Systems (GlobeNewswire press release, reprinted by Manila Times)",
+      "url": "https://www.globenewswire.com/news-release/2026/08/19/3347356/0/en/cerebras-unveils-cs-4-up-to-30-times-faster-than-gpu-based-solutions.html",
+      "date": "2026-08-19",
+      "excerpt": "up to 10x more throughput per watt than the CS-3, vastly improving data center economics.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Self-reported vendor comparison against its own prior generation, published via a press-release wire; no GPU baseline and no independent measurement."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "Cerebras Systems",
+  "observedAt": "2026-08-19",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

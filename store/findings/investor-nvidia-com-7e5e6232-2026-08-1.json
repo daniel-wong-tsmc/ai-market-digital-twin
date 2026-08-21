@@ -1,0 +1,52 @@
+{
+  "id": "investor-nvidia-com-7e5e6232-2026-08-1",
+  "statement": "NVIDIA signed memorandums of understanding with Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR to establish compute financing platforms intended to mobilize over $500 billion of third-party capital for AI infrastructure.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Financing availability is the binding constraint for the marginal AI-infrastructure buyer, so dedicated capital pools at attractive rates directly loosen who can afford to order accelerators.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "Third-party capital pools underwrite GPU purchases by frontier labs, enterprises and AI clouds, converting compute into a financeable asset and easing the credit constraint on marginal orders."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom / investor.nvidia.com (official press release)",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Partners-With-Apollo-BlackRock-Blackstone-Brookfield-Goldman-Sachs-and-KKR-to-Establish-AI-Compute-Infrastructure-Financing-Platforms-to-Mobilize-Over-500-Billion-of-Third-Party-Capital/default.aspx",
+      "date": "2026-08-10",
+      "excerpt": "to mobilize over $500 billion of third-party capital",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA Newsroom / investor.nvidia.com (official press release)",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Partners-With-Apollo-BlackRock-Blackstone-Brookfield-Goldman-Sachs-and-KKR-to-Establish-AI-Compute-Infrastructure-Financing-Platforms-to-Mobilize-Over-500-Billion-of-Third-Party-Capital/default.aspx",
+      "date": "2026-08-10",
+      "excerpt": "to create dedicated pools of capital at significant scale at attractive rates for NVIDIA customers.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary company press release on NVIDIA investor relations naming the six counterparties and the target capital figure."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: NVIDIA Newsroom / investor.nvidia.com (official press release)",
+  "asOf": "2026-08",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-10",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

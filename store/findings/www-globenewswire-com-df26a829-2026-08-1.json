@@ -1,0 +1,51 @@
+{
+  "id": "www-globenewswire-com-df26a829-2026-08-1",
+  "statement": "Cerebras launched the CS-4 wafer-scale system, claiming more than 4,400 tokens per second per user on GPT-OSS-120B and up to 30 times the per-user speed of GPU solutions, with first shipments in Q3 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A shipping non-GPU inference system with a large claimed latency advantage is a live alternative to merchant GPUs for interactive inference workloads.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "models.reasoning-agentic",
+      "models.open-weight"
+    ],
+    "direction": "mixed",
+    "mechanism": "Wafer-scale systems shipping this quarter add non-GPU inference capacity aimed at latency-sensitive serving of open-weight models, competing for inference workloads that would otherwise run on merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "Cerebras Systems (GlobeNewswire press release, reprinted by Manila Times)",
+      "url": "https://www.globenewswire.com/news-release/2026/08/19/3347356/0/en/cerebras-unveils-cs-4-up-to-30-times-faster-than-gpu-based-solutions.html",
+      "date": "2026-08-19",
+      "excerpt": "more than 4,400 tokens second per user (TPS/user), up to 30 times faster than GPU solutions.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Cerebras Systems (GlobeNewswire press release, reprinted by Manila Times)",
+      "url": "https://www.globenewswire.com/news-release/2026/08/19/3347356/0/en/cerebras-unveils-cs-4-up-to-30-times-faster-than-gpu-based-solutions.html",
+      "date": "2026-08-19",
+      "excerpt": "First CS-4 shipments begin this quarter",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor press release distributed over a wire and reprinted; benchmark claims are self-reported with no independent verification and the reprint is syndication of one story, not multi-publisher corroboration."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "Cerebras Systems",
+  "observedAt": "2026-08-19",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

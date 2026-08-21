@@ -1,0 +1,50 @@
+{
+  "id": "ir-amd-com-4b756172-2026-08-2",
+  "statement": "AMD frames AI inference as one of the fastest-growing segments of the AI market and is building its portfolio around it.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A major vendor reallocating acquisitions toward inference is a read on where accelerator demand is shifting relative to training.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.reasoning-agentic",
+      "applications.enterprise-copilots"
+    ],
+    "direction": "positive",
+    "mechanism": "Vendor investment aimed at inference workloads indicates growing deployed inference volume, which sustains accelerator purchase demand beyond training buildouts."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (official press release)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1296/amd-acquires-taalas-to-advance-compute-solutions-for-rapidly-growing-ai-inference-market",
+      "date": "2026-08-06",
+      "excerpt": "one of the fastest-growing segments of the AI market.",
+      "tier": "primary"
+    },
+    {
+      "source": "AMD Investor Relations (official press release)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1296/amd-acquires-taalas-to-advance-compute-solutions-for-rapidly-growing-ai-inference-market",
+      "date": "2026-08-06",
+      "excerpt": "AMD is building a full-stack AI platform that gives customers the flexibility to deploy the right compute solutions for every AI workload.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Primary source, but the growth claim is qualitative vendor characterisation with no volume or revenue figure attached."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-08-06",
+  "capturedAt": "2026-08-21T17:18:45Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
