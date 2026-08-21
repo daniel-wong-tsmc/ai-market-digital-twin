@@ -21,10 +21,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from gpu_agent.asof import days_between, period_end
+from gpu_agent.pricepull import DEFAULT_SNAPSHOT_DIR   # F122: daily snapshots (local only)
 
 DEFAULT_DATA_DIR = Path(__file__).parent / "scrape_data"
 HEADLINE_MODELS = ("H100", "H200", "B200", "B300")
-PROVIDERS = ("aws", "coreweave", "gcp", "oracle")
+# legacy four + the F122 snapshot providers; headline_prices takes one median per provider
+PROVIDERS = ("aws", "coreweave", "gcp", "oracle", "azure", "runpod", "vast.ai", "lambda")
 
 
 @dataclass(frozen=True)
@@ -117,6 +119,75 @@ def _vendor(text: str) -> str:
     if "amd" in low or "mi300" in low or "mi355" in low:
         return "amd"
     return "nvidia"
+
+
+# --- F122 daily snapshot backend ------------------------------------------------------
+# One CSV per cycle day written by `price-pull` (gpu_agent/pricepull.py). When a snapshot
+# exists at/before the requested label it is the price source; the legacy four-folder
+# readers below answer only for earlier dates. Headline rule: on-demand, US regions.
+
+_SNAPSHOT_RE = re.compile(r"^gpu_prices-(\d{4}-\d{2}-\d{2})\.csv$")
+_AZURE_US_PREFIXES = ("eastus", "westus", "centralus", "northcentralus",
+                      "southcentralus", "westcentralus")
+
+
+def _snapshot_file(as_of: str, snapshot_dir=DEFAULT_SNAPSHOT_DIR) -> Path | None:
+    """Newest gpu_prices-<YYYY-MM-DD>.csv dated at/before period_end(as_of), else None."""
+    d = Path(snapshot_dir)
+    if not d.is_dir():
+        return None
+    target = period_end(as_of).isoformat()
+    best: tuple[str, Path] | None = None
+    for p in d.iterdir():
+        m = _SNAPSHOT_RE.match(p.name)
+        if m and m.group(1) <= target and (best is None or m.group(1) > best[0]):
+            best = (m.group(1), p)
+    return best[1] if best else None
+
+
+def _snapshot_date_yymmdd(path: Path) -> str:
+    iso = _SNAPSHOT_RE.match(path.name).group(1)
+    return iso[2:4] + iso[5:7] + iso[8:10]
+
+
+def _is_us_region(provider: str, region: str) -> bool:
+    """US-region rule per provider (spec §3 table). Unknown provider -> False."""
+    p = (provider or "").lower()
+    r = (region or "").strip()
+    if p == "azure":
+        return r.lower().startswith(_AZURE_US_PREFIXES)
+    if p == "aws":
+        return r.startswith("us-")
+    if p == "vast.ai":
+        return r.endswith(", US")
+    return p in ("runpod", "coreweave", "lambda")
+
+
+def _snapshot_points(as_of: str, snapshot_dir=DEFAULT_SNAPSHOT_DIR) -> list[PricePoint]:
+    path = _snapshot_file(as_of, snapshot_dir)
+    if path is None:
+        return []
+    pdate = _snapshot_date_yymmdd(path)
+    points: list[PricePoint] = []
+    with open(path, newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if (r.get("price_type") or "") != "on_demand":
+                continue
+            provider = (r.get("provider") or "").lower()
+            if not _is_us_region(provider, r.get("region") or ""):
+                continue
+            model = _match_model(r.get("gpu_model") or "")
+            if model is None:
+                continue
+            price = _money(r.get("usd_per_gpu_hr"))
+            if price is None or price <= 0:
+                continue
+            points.append(PricePoint(
+                provider=provider, vendor=_vendor(r.get("gpu_model") or ""), model=model,
+                gpu_class="gpu", region=r.get("region") or "", term="on_demand",
+                usd_per_gpu_hour=round(price, 6), price_date=pdate, as_of=as_of,
+                instance=r.get("instance") or ""))
+    return sorted(points, key=lambda p: (p.provider, p.model, p.instance))
 
 
 # --- shared CSV reader ----------------------------------------------------------------
@@ -313,9 +384,14 @@ def _coreweave_points(as_of: str, data_dir=DEFAULT_DATA_DIR) -> list[PricePoint]
 
 # --- aggregation (public API) ---------------------------------------------------------
 
-def load_points(as_of: str, data_dir=DEFAULT_DATA_DIR) -> list[PricePoint]:
-    """Every normalized PricePoint across all four providers for `as_of` (nearest scrape
+def load_points(as_of: str, data_dir=DEFAULT_DATA_DIR,
+                snapshot_dir=DEFAULT_SNAPSHOT_DIR) -> list[PricePoint]:
+    """Every normalized PricePoint for `as_of`. F122: a daily snapshot at/before the label
+    is the source when one exists; otherwise the legacy four-folder readers (nearest scrape
     at/before the label). Deterministic; read-only."""
+    snap = _snapshot_points(as_of, snapshot_dir)
+    if snap:
+        return snap
     return (_aws_points(as_of, data_dir) + _coreweave_points(as_of, data_dir)
             + _gcp_points(as_of, data_dir) + _oracle_points(as_of, data_dir))
 
@@ -341,12 +417,13 @@ def _fresh(points, as_of, max_staleness_days):
 
 
 def headline_prices(as_of: str, data_dir=DEFAULT_DATA_DIR,
-                    max_staleness_days: int = 45) -> dict[str, float]:
+                    max_staleness_days: int = 45,
+                    snapshot_dir=DEFAULT_SNAPSHOT_DIR) -> dict[str, float]:
     """Representative $/GPU-hr per headline model (H100/H200/B200/B300): the median of
     per-provider medians over fresh gpu-class points. A model absent from the data is
     omitted. Two-level median keeps a provider with several SKUs (e.g. GCP's H100 base +
     Plus) as a single vote."""
-    pts = _fresh([p for p in load_points(as_of, data_dir)
+    pts = _fresh([p for p in load_points(as_of, data_dir, snapshot_dir)
                   if p.gpu_class == "gpu" and p.model in HEADLINE_MODELS],
                  as_of, max_staleness_days)
     out: dict[str, float] = {}
@@ -364,12 +441,13 @@ def headline_prices(as_of: str, data_dir=DEFAULT_DATA_DIR,
 
 
 def price_delta(as_of: str, lookback: str, data_dir=DEFAULT_DATA_DIR,
-                max_staleness_days: int = 45) -> dict[str, dict]:
+                max_staleness_days: int = 45,
+                snapshot_dir=DEFAULT_SNAPSHOT_DIR) -> dict[str, dict]:
     """Per headline model: current headline price at `as_of`, prior at `lookback`, and the
     absolute + percent change. Missing either side -> deltas are None (honest 'no
     comparison', never a fabricated 0)."""
-    cur = headline_prices(as_of, data_dir, max_staleness_days)
-    prev = headline_prices(lookback, data_dir, max_staleness_days)
+    cur = headline_prices(as_of, data_dir, max_staleness_days, snapshot_dir)
+    prev = headline_prices(lookback, data_dir, max_staleness_days, snapshot_dir)
     out: dict[str, dict] = {}
     for model in HEADLINE_MODELS:
         c, p = cur.get(model), prev.get(model)
@@ -381,8 +459,10 @@ def price_delta(as_of: str, lookback: str, data_dir=DEFAULT_DATA_DIR,
     return out
 
 
-def custom_silicon_series(as_of: str, data_dir=DEFAULT_DATA_DIR) -> list[PricePoint]:
+def custom_silicon_series(as_of: str, data_dir=DEFAULT_DATA_DIR,
+                          snapshot_dir=DEFAULT_SNAPSHOT_DIR) -> list[PricePoint]:
     """The custom-silicon points (AWS Trainium) as a separate labeled series — the
     substitution signal (§5.6 Optional). NOTE: GCP TPU is NOT present in the scrape data,
     so this series is Trainium-only today."""
-    return [p for p in load_points(as_of, data_dir) if p.gpu_class == "custom_silicon"]
+    return [p for p in load_points(as_of, data_dir, snapshot_dir)
+            if p.gpu_class == "custom_silicon"]
