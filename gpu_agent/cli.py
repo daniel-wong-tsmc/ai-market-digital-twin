@@ -1712,7 +1712,10 @@ def _price_sync(args):
     if not as_of:
         import datetime
         as_of = datetime.date.today().isoformat()   # wall-clock isolated here only
-    out = sync_series(args.data or DEFAULT_LEASING_DIR, args.series, as_of)
+    from gpu_agent.pricepull import DEFAULT_SNAPSHOT_DIR
+    snapshot_dir = args.snapshots or DEFAULT_SNAPSHOT_DIR
+    out = sync_series(args.data or DEFAULT_LEASING_DIR, args.series, as_of,
+                      snapshot_dir=snapshot_dir)
     for w in out["warnings"]:
         print(f"[price-sync] WARNING: {w}")
     print(f"[price-sync] written={out['written']} as_of={as_of}")
@@ -2066,6 +2069,8 @@ def main(argv=None) -> int:
     ps.add_argument("--data", default=None)
     ps.add_argument("--series", default="store/series")
     ps.add_argument("--as-of", dest="as_of", default=None)
+    ps.add_argument("--snapshots", default=None,
+                    help="F122 daily snapshot folder (default gpu_agent/data/leasing_snapshots)")
     srf = sub.add_parser("series-refresh",
                          help="F79 G4: calendar gap-check the scoring series / "
                               "ingest validated candidate points (never blocks a cycle)")

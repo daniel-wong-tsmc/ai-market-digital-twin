@@ -243,3 +243,80 @@ def test_sync_series_bad_as_of_warns_and_writes_nothing(tmp_path):
     assert [p.name for p in after] == [p.name for p in before]
     for p in after:
         assert p.read_bytes() == before_bytes[p.name]
+
+
+# --- F122: rental modalities from the daily snapshots; staleness decoupled ---------
+
+import csv as _csv
+from gpu_agent.pricepull import SNAPSHOT_FIELDS
+
+
+def _snap(dir_, date, rows):
+    dir_.mkdir(parents=True, exist_ok=True)
+    path = dir_ / f"gpu_prices-{date}.csv"
+    with path.open("w", newline="", encoding="utf-8") as f:
+        w = _csv.DictWriter(f, fieldnames=SNAPSHOT_FIELDS)
+        w.writeheader()
+        for r in rows:
+            w.writerow(dict(zip(SNAPSHOT_FIELDS, r)))
+    return path
+
+
+SNAP_ROWS = [
+    ("AWS", "H100", "on_demand", "7.0", "56.0", "8", "p5.48xlarge", "us-east-1", "s", "t"),
+    ("Azure", "H100", "on_demand", "9.0", "72.0", "8", "ND96", "eastus", "s", "t"),
+    ("AWS", "H100", "spot", "3.0", "24.0", "8", "p5.48xlarge", "us-east-1", "s", "t"),
+    ("Azure", "H100", "spot", "5.0", "40.0", "8", "ND96", "eastus", "s", "t"),
+    ("Azure", "H100", "spot", "1.0", "8.0", "8", "ND96", "australiaeast", "s", "t"),   # non-US
+    ("AWS", "H100", "reserved_1yr", "4.0", "32.0", "8", "p5.48xlarge", "us-east-1", "s", "t"),
+    ("Vast.ai", "H100", "interruptible_min", "0.9", "0.9", "1", "1x", "Georgia, US", "s", "t"),  # not spot
+    # NOTE (pre-flight ruling): no B200 row here on purpose — a lone blackwell on-demand row would
+    # out-rank hopper on the ladder and the hopper expectations below would be wrong.
+]
+
+
+def test_read_rental_points_from_snapshot_all_three_modalities(tmp_path):
+    snaps = tmp_path / "snaps"
+    _snap(snaps, "2026-08-20", SNAP_ROWS)
+    pts = read_rental_points(tmp_path / "no-legacy", {"H100"}, "260831", snapshot_dir=snaps)
+    by_mod = {p.modality: p for p in pts}
+    assert by_mod["on_demand"].usd_per_gpu_hour == pytest.approx((7.0 + 9.0) / 2)
+    assert by_mod["spot"].usd_per_gpu_hour == pytest.approx((3.0 + 5.0) / 2)   # non-US + interruptible excluded
+    assert by_mod["1yr"].usd_per_gpu_hour == pytest.approx(4.0)
+    assert all(p.date == "260820" and p.model == "H100" for p in pts)
+    assert by_mod["spot"].source == "gpu_prices-2026-08-20.csv"
+
+
+def test_read_rental_points_snapshot_dir_none_is_legacy_only(tmp_path):
+    d = _mk_leasing(tmp_path)
+    legacy = read_rental_points(d, {"H100"}, "260708")
+    assert read_rental_points(d, {"H100"}, "260708", snapshot_dir=None) == legacy
+
+
+def test_sync_series_fresh_rental_writes_current_month_while_hardware_is_stale(tmp_path):
+    # hardware data ends 2026-07-01 -> stale at 2026-08-20 (>45d); rental snapshot is fresh
+    _write_hw(tmp_path, ["NVIDIA H100 Card,30000.0,29500.0,29999.0"])
+    snaps = tmp_path / "snaps"
+    _snap(snaps, "2026-08-20", SNAP_ROWS)
+    series = tmp_path / "series"
+    out = sync_series(tmp_path, series, "2026-08-20", benchmarks=BENCH, snapshot_dir=snaps)
+    assert any(w.startswith("stale price folder") for w in out["warnings"])      # hardware, unchanged
+    assert not any(w.startswith("stale rental data") for w in out["warnings"])
+    hw_rows = [json.loads(l) for l in (series / "gpuSpotPrice.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert all(r["period"] != "2026-08" for r in hw_rows)                         # hardware still frozen
+    od = [json.loads(l) for l in (series / "gpuRentalOnDemand.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert od[-1]["period"] == "2026-08" and od[-1]["value"] == pytest.approx(8.0)   # median(7, 9)
+    assert od[-1]["note"] == "generation=hopper"
+    spot = [json.loads(l) for l in (series / "gpuRentalSpot.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert spot[-1]["period"] == "2026-08" and spot[-1]["value"] == pytest.approx(4.0)
+    assert out["written"]["gpuRentalOnDemand"] >= 1
+
+
+def test_sync_series_stale_rental_warns_and_skips_current_month(tmp_path):
+    d = _mk_leasing(tmp_path)                       # legacy rental ends 260708
+    _write_hw(tmp_path, ["NVIDIA H100 Card,30000.0,29500.0,29999.0"])
+    series = tmp_path / "series"
+    out = sync_series(d, series, "2026-11-30", benchmarks=BENCH, snapshot_dir=tmp_path / "none")
+    assert any(w.startswith("stale rental data") for w in out["warnings"])
+    od = [json.loads(l) for l in (series / "gpuRentalOnDemand.jsonl").read_text(encoding="utf-8").splitlines()]
+    assert all(r["period"] != "2026-11" for r in od)
