@@ -85,7 +85,7 @@ def read_hardware_points(data_dir, benchmarks) -> list[HardwarePoint]:
 import statistics
 
 from gpu_agent.pricefeed import (AWS_INSTANCE_MAP, _nearest_at_or_before,
-                                 load_points)
+                                 _snapshot_date_yymmdd, _SNAPSHOT_RE, load_points)
 
 
 @dataclass(frozen=True)
@@ -229,12 +229,20 @@ def read_rental_points(leasing_dir, models, month_end_yymmdd, snapshot_dir=None)
         used = max(p.price_date for p in od)
         model = sorted({p.model for p in od})[0]
         out.append(RentalPoint("on_demand", model, used, med, "pricefeed"))
-    spot = _snapshot_rental(snapshot_dir, models, month_end_yymmdd, "spot", "spot") \
-        if snapshot_dir is not None else []
-    out += spot or _spot_points(leasing_dir, models, month_end_yymmdd)
-    term = _snapshot_rental(snapshot_dir, models, month_end_yymmdd, "reserved_1yr", "1yr") \
-        if snapshot_dir is not None else []
-    out += term or _term_points(leasing_dir, models, month_end_yymmdd)
+    # A truncated / corrupt snapshot must degrade to the legacy fallback, never traceback
+    # out of `price-sync` and take the whole cycle step down with it.
+    def _snap_safe(price_type, modality):
+        if snapshot_dir is None:
+            return []
+        try:
+            return _snapshot_rental(snapshot_dir, models, month_end_yymmdd,
+                                    price_type, modality)
+        except Exception:
+            return []
+
+    out += _snap_safe("spot", "spot") or _spot_points(leasing_dir, models, month_end_yymmdd)
+    out += (_snap_safe("reserved_1yr", "1yr")
+            or _term_points(leasing_dir, models, month_end_yymmdd))
     return out
 
 
@@ -343,6 +351,18 @@ def _parse_as_of(as_of: str) -> str | None:
     return None
 
 
+def _snapshot_months(snapshot_dir) -> set[str]:
+    """The "YYYY-MM" months for which a daily snapshot exists. Empty when there is no
+    snapshot folder."""
+    if snapshot_dir is None:
+        return set()
+    d = Path(snapshot_dir)
+    if not d.is_dir():
+        return set()
+    return {_month_of(_snapshot_date_yymmdd(p)) for p in d.iterdir()
+            if _SNAPSHOT_RE.match(p.name)}
+
+
 def sync_series(data_dir, series_dir, as_of, benchmarks=None, snapshot_dir=None):
     benchmarks = benchmarks or load_benchmarks()
     series_dir = Path(series_dir)
@@ -366,8 +386,12 @@ def sync_series(data_dir, series_dir, as_of, benchmarks=None, snapshot_dir=None)
     # 'latest' as of that month's end.
     # F122: rental months are no longer bounded by the hardware folder — the current
     # period is always considered so fresh rental snapshots can write even when the
-    # hardware (purchase-price) folder is stale.
-    months = sorted({_month_of(p.date) for p in hw} | {current_period})
+    # hardware (purchase-price) folder is stale. Every month that HAS a snapshot is
+    # considered too: the hardware folder is frozen, so a month in which no cycle
+    # completed would otherwise never get rental rows despite having snapshots.
+    # (The hardware loop below is unaffected — it still requires hw points in the month.)
+    months = sorted({_month_of(p.date) for p in hw} | _snapshot_months(snapshot_dir)
+                    | {current_period})
     rows = []
     for m in months:
         if m == current_period and stale:

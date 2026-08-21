@@ -320,3 +320,47 @@ def test_sync_series_stale_rental_warns_and_skips_current_month(tmp_path):
     assert any(w.startswith("stale rental data") for w in out["warnings"])
     od = [json.loads(l) for l in (series / "gpuRentalOnDemand.jsonl").read_text(encoding="utf-8").splitlines()]
     assert all(r["period"] != "2026-11" for r in od)
+
+
+def test_read_rental_points_survives_a_corrupt_snapshot(tmp_path):
+    """Fix 4: a truncated/garbage snapshot must not traceback out of price-sync."""
+    snaps = tmp_path / "snaps"
+    snaps.mkdir(parents=True, exist_ok=True)
+    (snaps / "gpu_prices-2026-08-20.csv").write_text(
+        ",".join(SNAPSHOT_FIELDS) + "\nnot,a,valid,row\n", encoding="utf-8")
+    pts = read_rental_points(tmp_path / "no-legacy", {"H100"}, "260831", snapshot_dir=snaps)
+    assert isinstance(pts, list)
+
+
+def test_read_rental_points_snapshot_reader_exception_falls_back(tmp_path, monkeypatch):
+    """Fix 4: any exception out of _snapshot_rental degrades to the legacy fallback."""
+    import gpu_agent.price_local as pl
+
+    d = _mk_leasing(tmp_path)
+    snaps = tmp_path / "snaps"
+    _snap(snaps, "2026-07-08", SNAP_ROWS)
+
+    def boom(*a, **k):
+        raise ValueError("truncated snapshot")
+
+    monkeypatch.setattr(pl, "_snapshot_rental", boom)
+    pts = pl.read_rental_points(d, {"H100"}, "260708", snapshot_dir=snaps)
+    by_mod = {p.modality: p for p in pts}
+    assert by_mod["spot"].source == "aws_spot_price.csv"       # legacy fallback used
+    assert by_mod["1yr"].source == "aws_price.csv"
+
+
+def test_sync_series_rental_months_include_snapshot_months(tmp_path):
+    """Fix 2: months with a snapshot but no hardware data still get rental rows."""
+    (tmp_path / "hw.csv").write_text(
+        "gpu,260701\nNVIDIA H100 Card,30000.0\n", encoding="utf-8")
+    snaps = tmp_path / "snaps"
+    _snap(snaps, "2026-08-05", SNAP_ROWS)
+    _snap(snaps, "2026-09-03", SNAP_ROWS)
+    series = tmp_path / "series"
+    sync_series(tmp_path, series, "2026-09-10", benchmarks=BENCH, snapshot_dir=snaps)
+    od = [json.loads(l) for l in
+          (series / "gpuRentalOnDemand.jsonl").read_text(encoding="utf-8").splitlines()]
+    by_period = {r["period"]: r for r in od}
+    assert "2026-08" in by_period and "2026-09" in by_period
+    assert by_period["2026-08"]["publishedAt"] == "2026-08-05"
