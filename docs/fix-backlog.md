@@ -1107,10 +1107,27 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   its own `dashboard/brief_model._indicator_labels`, not `reader.indicator_label`, so the
   web brief still shows the tails until F121 lands.
 
-> Numbering note 2026-08-22: **F122 is RESERVED** for the daily GPU leasing-price pull being
-> built by a concurrent instance in `.worktrees/f122-price-pull` (spec `d723d35`). F123–F128
-> below were minted 2026-08-22 in the relayed decision session (user-assigned via the
-> orchestrator; usual concurrent-mint caveat — renumber if collided).
+- [x] **F122 — Daily GPU leasing-price pull, in-repo, feeding the brief.** *(Numbered 2026-08-20,
+  assistant-minted after F121 was taken mid-session by the report-quality-pair lane.)* The user's
+  standalone `C:\Users\danie\gpu-price-tracker\pull_gpu_prices.py` (Azure / AWS / RunPod / Vast.ai /
+  CoreWeave, optional Lambda) is now `gpu_agent/pricepull.py` behind `gpu-agent price-pull --as-of
+  <day>`, run inside run-cycle step 7 ("Price-pull + price-sync") every cycle. One LOCAL, gitignored
+  snapshot per day in `gpu_agent/data/leasing_snapshots/` (user decision: not committed). Once ANY
+  snapshot exists on a machine, `pricefeed.load_points` answers ONLY from snapshots (newest at/before
+  the label; on-demand, US regions) — dates before the first snapshot show no price and no
+  comparison, so a snapshot basket is never compared with the legacy `scrape_data/` basket (final
+  review caught that a cross-source "−26 % H100" would otherwise have shipped); the legacy folders
+  are read only on a machine with no snapshots at all. This revives the dashboard H100 tile, the
+  brief's price lines and `gpuRental{OnDemand,Spot,1yr}`; `price_local` no longer lets the stale
+  hardware purchase-price folder suppress fresh rental rows (separate `stale rental data` warning)
+  and fills rental months from snapshot files even when no cycle ran that month. Supersedes the
+  launcher skill's 2026-08-20 "Step 4" subagent dispatch (now a pointer). NOT covered, on purpose:
+  hardware purchase prices (thinkmate/serversimply) — that `stale price folder` warning persists
+  honestly. Spec `docs/superpowers/specs/2026-08-20-f122-price-pull-design.md`; plan
+  `docs/superpowers/plans/2026-08-20-f122-price-pull.md`. Lane `f122-price-pull`.
+
+> Numbering note 2026-08-22: F123–F128 below were minted 2026-08-22 in the relayed decision
+> session (user-assigned via the orchestrator; usual concurrent-mint caveat — renumber if collided).
 
 - [ ] **F123 — Issue identity must survive a constraint relabel.** The register minted three
   "different" issues for one real problem in three cycles because the id derives from the exact

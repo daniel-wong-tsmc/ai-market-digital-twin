@@ -49,7 +49,7 @@ report the rest `skipped-no-assignment` (surfaced, never dropped).
 
 ## Procedure
 
-<!-- run-cycle-step-fingerprint: sha256=1060c828c59ee034200904fd010715193e28f64a48733fbd6487a97a2f7c54b9 — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
+<!-- run-cycle-step-fingerprint: sha256=ce869181dbe4c8ba0782e04acffa4da33d69fc9930f2d33a74405985f3dc7505 — F83 conformance pin over the ordered Procedure step list; regenerate this AND EXPECTED_STEPS in tests/test_run_cycle_conformance.py in lockstep if the steps legitimately change. -->
 
 ### 1. Resolve the scope to a cycle plan (deterministic — no LLM)
 ```
@@ -430,12 +430,30 @@ run, possibly another instance's, owns it (restore or wait; never overwrite it).
 the suite's `tests/test_store_cycle_log_integrity.py` tripwire goes red on a skeleton and blocks
 the commit.
 
-### 7. Price-sync (deterministic — no LLM)
-Refresh the local price series before the site is rebuilt (F98):
+### 7. Price-pull + price-sync (deterministic — no LLM)
+**Price-pull (F122).** Snapshot today's GPU rental prices (Azure, AWS, RunPod, Vast.ai, CoreWeave;
+Lambda only if a key is set) into ONE local CSV for the cycle day — `gpu_agent/data/leasing_snapshots/
+gpu_prices-<YYYY-MM-DD>.csv`, gitignored, never committed:
+```
+.venv/Scripts/python -m gpu_agent.cli price-pull --as-of <YYYY-MM-DD>
+```
+`--as-of` is the **full cycle day**, not the `YYYY-MM` `<asOf>`. It prints one JSON line —
+`{"date","path","rows","perProvider","failed"}` — and exits 0 even when every provider fails (the JSON
+says so; `path` is then `null`). Record it in the cycle log under a `pricePull` key:
+`result: done` (rows > 0, no failures), `partial` (rows > 0, some `failed`), or `empty` (rows 0), plus
+`rows`, `perProvider`, `failed` and `snapshot` (the path). A non-empty `failed` list is a real finding —
+keep the provider + error text, do not reduce it to a count. A pull that takes more than a few
+minutes is itself a finding — record the wall time next to `pricePull`. Exit 2 means an operator
+mistake (bad `--as-of`); log `result: failed` with the stderr text and move on.
+
+**Price-sync (F98).** Refresh the local price series before the site is rebuilt. It reads the snapshot
+just written (and the legacy folders for earlier dates):
 ```
 .venv/Scripts/python -m gpu_agent.cli price-sync --as-of <asOf>
 ```
-Warnings are logged, never fatal — this step never blocks the cycle.
+Warnings are logged, never fatal — **neither half of this step ever blocks the cycle.** Expect the
+`stale price folder` warning to persist: it is about hardware purchase prices, which price-pull does not
+collect. A `stale rental data` warning means no rental reading landed within 45 days — check `pricePull`.
 
 **(7b) Series-refresh — top up the published series (F79).** Ask the calendar which curated series
 are due but missing a point:

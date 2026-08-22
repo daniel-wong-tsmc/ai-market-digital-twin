@@ -292,6 +292,25 @@
   concurrent instance. LIVE CRITERIA PENDING: tomorrow's scheduled run (task fixes), first
   over-budget day (F119 fold), first novel-token day (F120 block firing in anger).
 
+- **Date: 2026-08-20 — F122 LEASING-PRICE PULL BUILT ON LANE `f122-price-pull` — AWAITING USER MERGE.**
+  User request: "each time we run the GPU agent, also check the GPU prices" (process from
+  `C:\Users\danie\gpu-price-tracker`). Design interactive, ZERO AFK-defaults (spec
+  `docs/superpowers/specs/2026-08-20-f122-price-pull-design.md`). Shipped on the branch:
+  `gpu_agent/pricepull.py` + `price-pull` verb; `pricefeed` snapshot backend — once ANY snapshot
+  exists, prices come only from snapshots, and dates before the first snapshot show no price and no
+  comparison rather than a fake move (the legacy scrape folders are used only on a machine with no
+  snapshots at all); `price_local` rental-from-snapshot + decoupled staleness; run-cycle step 7 = "Price-pull +
+  price-sync" (F83 fingerprint moved EXACTLY once, same commit); backlog F122. Outside the repo
+  (uncommitted by nature): launcher `run-gpu-market` Step 4 is now a pointer; `gpu-price-tracker\MOVED.md`.
+  Verification (live proof taken 2026-08-22): suite 2612 passed / 6 skipped on the branch; live
+  `price-pull` 873 rows (Azure 666, AWS 53, RunPod 88, Vast.ai 48, CoreWeave 18, Lambda 0; failed: none);
+  `headline_prices('2026-08-22')` = {'H100': 7.37, 'H200': 8.5012, 'B200': 7.695, 'B300': 6.185}. ⚠ AT
+  MERGE: nothing to rebuild — snapshots are local; the next cycle's step 7 writes the first
+  root-checkout snapshot and `dashboard-json` then shows the H100 tile. ⚠ Known, honest: `stale price
+  folder` keeps firing (hardware purchase prices are not collected). Also observed this session: F83
+  scheduler fix + F119/F120 merged by another instance on 2026-08-20 (the resume-point line above
+  predates them).
+
 - **Date: 2026-08-20 — INTERRUPTED v8 CYCLE FINISHED FROM THE THESIS SEAM; COMMITTED + PUSHED `70c8aab`.**
   Resumed the 2026-08-19 run at its death point by user direction (interactive, NOT AFK). No
   re-gather: steps 3(a)–3(d4) are that run's own artifacts read back from disk, and the cycle log
@@ -2128,8 +2147,13 @@ User gave **"go"** 2026-07-06. Actioned:
 
 ## ⚠ CONCURRENT-INSTANCE COORDINATION (still live)
 
-- **⚠ ACTIVE LANE (another instance): `.worktrees/f122-price-pull` (2026-08-20).** F122 daily
-  GPU leasing-price pull; spec commit `d723d35` off `320a495`. Do not touch its worktree or branch.
+- **F122 lane BUILT + REVIEWED — AWAITING USER MERGE (2026-08-22).** Branch `f122-price-pull`,
+  worktree `.worktrees/f122-price-pull`, base `320a495`, main (`d2e3124`) merged INTO the branch
+  2026-08-22 (docs-only conflicts resolved). Touches `pricefeed.py`, `price_local.py`, `pricepull.py`
+  (new), `cli.py` (new `price-pull` verb + `price-sync --snapshots`), run-cycle SKILL.md step 7 + the
+  F83 pin (moved once). F6 / narrator / scoring pins untouched. No `store/`, `site/`, `web/` or
+  registry change — no post-merge data refresh needed. Sentinel
+  `.superpowers/handoffs/f122-price-pull-DONE.md`. (Supersedes the "ACTIVE LANE" placeholder below.)
 
 - **THREE FIX LANES MERGED + CLOSED (2026-08-20 later session):** `f112a-amd-staleness` (merge
   `75578a8`), `report-quality-pair` (F119+F120), `f83-scheduler-fix` — final merge `320a495`,

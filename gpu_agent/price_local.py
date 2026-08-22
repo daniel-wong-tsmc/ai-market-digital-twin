@@ -85,7 +85,7 @@ def read_hardware_points(data_dir, benchmarks) -> list[HardwarePoint]:
 import statistics
 
 from gpu_agent.pricefeed import (AWS_INSTANCE_MAP, _nearest_at_or_before,
-                                 load_points)
+                                 _snapshot_date_yymmdd, _SNAPSHOT_RE, load_points)
 
 
 @dataclass(frozen=True)
@@ -181,10 +181,46 @@ def _term_points(leasing_dir, models, month_end) -> list[RentalPoint]:
                         statistics.median(per_gpu), "aws_price.csv")]
 
 
-def read_rental_points(leasing_dir, models, month_end_yymmdd) -> list[RentalPoint]:
+def _snapshot_rental(snapshot_dir, models, month_end_yymmdd, price_type, modality):
+    """F122: one RentalPoint (median $/GPU-hr) for `modality` from the newest daily
+    snapshot at/before the month end — on-demand/spot/reserved_1yr rows, US regions only."""
+    from gpu_agent.pricefeed import (_is_us_region, _match_model, _money, _snapshot_date_yymmdd,
+                                     _snapshot_file)
+    path = _snapshot_file(_yymmdd_to_label(month_end_yymmdd), snapshot_dir)
+    if path is None:
+        return []
+    vals, found = [], set()
+    with open(path, newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            if (r.get("price_type") or "") != price_type:
+                continue
+            if not _is_us_region(r.get("provider") or "", r.get("region") or ""):
+                continue
+            model = _match_model(r.get("gpu_model") or "")
+            if model not in models:
+                continue
+            price = _money(r.get("usd_per_gpu_hr"))
+            if price is None or price <= 0:
+                continue
+            vals.append(price)
+            found.add(model)
+    if not vals:
+        return []
+    return [RentalPoint(modality, sorted(found)[0], _snapshot_date_yymmdd(path),
+                        statistics.median(vals), path.name)]
+
+
+def read_rental_points(leasing_dir, models, month_end_yymmdd, snapshot_dir=None) -> list[RentalPoint]:
+    """Rental readings for `models` at the month end. `snapshot_dir=None` -> legacy folders
+    only (hermetic for tests); the CLI passes the real snapshot folder. When a snapshot
+    exists it is the source for every modality; legacy files are the fallback per modality."""
     out: list[RentalPoint] = []
+    label = _yymmdd_to_label(month_end_yymmdd)
     try:
-        pts = load_points(_yymmdd_to_label(month_end_yymmdd), data_dir=leasing_dir)
+        if snapshot_dir is not None:
+            pts = load_points(label, data_dir=leasing_dir, snapshot_dir=snapshot_dir)
+        else:
+            pts = load_points(label, data_dir=leasing_dir, snapshot_dir=Path("__no_snapshots__"))
     except Exception:
         pts = []
     od = [p for p in pts if p.gpu_class == "gpu" and p.model in models]
@@ -193,8 +229,20 @@ def read_rental_points(leasing_dir, models, month_end_yymmdd) -> list[RentalPoin
         used = max(p.price_date for p in od)
         model = sorted({p.model for p in od})[0]
         out.append(RentalPoint("on_demand", model, used, med, "pricefeed"))
-    out += _spot_points(leasing_dir, models, month_end_yymmdd)
-    out += _term_points(leasing_dir, models, month_end_yymmdd)
+    # A truncated / corrupt snapshot must degrade to the legacy fallback, never traceback
+    # out of `price-sync` and take the whole cycle step down with it.
+    def _snap_safe(price_type, modality):
+        if snapshot_dir is None:
+            return []
+        try:
+            return _snapshot_rental(snapshot_dir, models, month_end_yymmdd,
+                                    price_type, modality)
+        except Exception:
+            return []
+
+    out += _snap_safe("spot", "spot") or _spot_points(leasing_dir, models, month_end_yymmdd)
+    out += (_snap_safe("reserved_1yr", "1yr")
+            or _term_points(leasing_dir, models, month_end_yymmdd))
     return out
 
 
@@ -303,7 +351,19 @@ def _parse_as_of(as_of: str) -> str | None:
     return None
 
 
-def sync_series(data_dir, series_dir, as_of, benchmarks=None):
+def _snapshot_months(snapshot_dir) -> set[str]:
+    """The "YYYY-MM" months for which a daily snapshot exists. Empty when there is no
+    snapshot folder."""
+    if snapshot_dir is None:
+        return set()
+    d = Path(snapshot_dir)
+    if not d.is_dir():
+        return set()
+    return {_month_of(_snapshot_date_yymmdd(p)) for p in d.iterdir()
+            if _SNAPSHOT_RE.match(p.name)}
+
+
+def sync_series(data_dir, series_dir, as_of, benchmarks=None, snapshot_dir=None):
     benchmarks = benchmarks or load_benchmarks()
     series_dir = Path(series_dir)
     warnings = []
@@ -324,7 +384,14 @@ def sync_series(data_dir, series_dir, as_of, benchmarks=None):
 
     # hardware series: per month, the latest point of the generation that was
     # 'latest' as of that month's end.
-    months = sorted({_month_of(p.date) for p in hw})
+    # F122: rental months are no longer bounded by the hardware folder — the current
+    # period is always considered so fresh rental snapshots can write even when the
+    # hardware (purchase-price) folder is stale. Every month that HAS a snapshot is
+    # considered too: the hardware folder is frozen, so a month in which no cycle
+    # completed would otherwise never get rental rows despite having snapshots.
+    # (The hardware loop below is unaffected — it still requires hw points in the month.)
+    months = sorted({_month_of(p.date) for p in hw} | _snapshot_months(snapshot_dir)
+                    | {current_period})
     rows = []
     for m in months:
         if m == current_period and stale:
@@ -373,26 +440,35 @@ def sync_series(data_dir, series_dir, as_of, benchmarks=None):
                                 for g in ranked_gens)
     if any_rental_configured:
         per_mod = {k: [] for k in files}
+        rental_cutoff = _yymmdd_date(as_of_yymmdd) - _dt.timedelta(days=45)
+        current_month_fresh = False
         for m in months:
-            if m == current_period and stale:
-                continue
             m_end = _month_end_yymmdd(m)
             month_pts, used_gen = [], None
             for gen in ranked_gens:
                 gmodels = set((gen.get("rental") or {}).get("models") or [])
                 if not gmodels:
                     continue
-                pts = [rp for rp in read_rental_points(data_dir, gmodels, m_end)
+                pts = [rp for rp in read_rental_points(data_dir, gmodels, m_end,
+                                                       snapshot_dir=snapshot_dir)
                        if _month_of(rp.date) == m]
+                if m == current_period:
+                    # F122: the current month's rental rows are gated by RENTAL freshness,
+                    # not by the hardware folder's staleness.
+                    pts = [rp for rp in pts if _yymmdd_date(rp.date) >= rental_cutoff]
                 if pts:
                     month_pts, used_gen = pts, gen
                     break
+            if m == current_period and month_pts:
+                current_month_fresh = True
             for rp in month_pts:
                 per_mod[rp.modality].append(_reading(
                     ids[rp.modality], m, rp.usd_per_gpu_hour, "USD_per_hr",
                     rp.date, as_of, rp.source,
                     f"{rp.model} {words[rp.modality]} rent",
                     f"generation={used_gen['id']}"))
+        if not current_month_fresh:
+            warnings.append(f"stale rental data: no rental reading within 45 days of as_of {as_of}")
         for mod, fname in files.items():
             _upsert(series_dir / fname, per_mod[mod], current_period)
             written[ids[mod]] = len(per_mod[mod])
