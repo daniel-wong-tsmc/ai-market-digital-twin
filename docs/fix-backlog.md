@@ -1141,7 +1141,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   opening a twin. Touches `gpu_agent/issues.py` open-trigger logic only; narrator prompt and pins
   untouched.
 
-- [ ] **F124 — Footer disclaimer on every public page (approved wording).** Posture doc §4,
+- [x] **F124 — Footer disclaimer on every public page (approved wording).** Posture doc §4,
   wording and placement DECIDED 2026-08-22: "Independent personal project. The analysis here is
   one individual's own work, produced from public sources. It is not affiliated with, endorsed
   by, or representative of any employer, and it is not investment advice." Small template change
