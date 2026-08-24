@@ -1,0 +1,50 @@
+{
+  "id": "www-taipeitimes-com-390166c7-2026-08-1",
+  "statement": "Taiwan's Keelung District Prosecutors indicted nine people, including employees of Nvidia and Super Micro, over allegedly exporting AI servers with export-controlled Nvidia chips to China and other destinations",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A second jurisdiction prosecuting vendor employees directly shows enforcement is widening beyond the United States to the place where the servers are actually built.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Criminal enforcement inside the manufacturing hub tightens the diversion channel and raises compliance friction on accelerator shipments, shrinking the demand that can be legally served."
+  },
+  "evidence": [
+    {
+      "source": "Taipei Times",
+      "url": "https://www.taipeitimes.com/News/taiwan/archives/2026/08/24/2003863053",
+      "date": "2026-08-24",
+      "excerpt": "colluded with one another at various levels for enormous profit, illegally exporting high-end servers,",
+      "tier": "secondary"
+    },
+    {
+      "source": "Taipei Times",
+      "url": "https://www.taipeitimes.com/News/taiwan/archives/2026/08/24/2003863053",
+      "date": "2026-08-24",
+      "excerpt": "rigorous internal control procedures",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting of an indictment, which is an allegation not a verdict; no dollar figure is given in this article and no primary prosecutorial document was fetched."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: Fortune, Taipei Times",
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-24",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

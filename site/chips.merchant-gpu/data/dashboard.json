@@ -1,98 +1,110 @@
 {
-  "asOf": "2026-08-23",
+  "asOf": "2026-08-24",
   "bullets": [
     {
-      "chart": null,
-      "date": "2026-08-23",
-      "noChartReason": {
-        "cause": "no-published-number",
-        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
-      },
-      "sources": [
-        {
-          "date": "2026-08-21",
-          "outlet": "Yahoo Finance (citing The Information / Reuters reporting)",
-          "tier": "secondary",
-          "title": "Yahoo Finance (citing The Information / Reuters reporting)",
-          "url": "https://finance.yahoo.com/technology/articles/nvidia-invest-3-billion-lancium-014211358.html"
-        }
-      ],
-      "storyHref": "story/2026-08-23.html",
-      "text": "NVIDIA agreed to invest up to $3 billion in power developer Lancium, taking about 20% ownership, a sign electricity now limits growth as much as chips do."
-    },
-    {
-      "chart": null,
-      "date": "2026-08-23",
-      "noChartReason": {
-        "cause": "no-published-number",
-        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
-      },
-      "sources": [
-        {
-          "date": "2026-08-21",
-          "outlet": "Yahoo Finance (Bloomberg syndication)",
-          "tier": "secondary",
-          "title": "Yahoo Finance (Bloomberg syndication)",
-          "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-taps-google-chip-veteran-195955567.html"
-        }
-      ],
-      "storyHref": "story/2026-08-23.html",
-      "text": "Anthropic hired the founder of Google's custom-chip programme and placed about $250 million of first orders with startup Fractile, saying it is short of data-centre capacity."
-    },
-    {
       "chart": {
-        "caption": "Found today — single source: Silicon Data.",
-        "form": "line",
+        "caption": "Found today — single source: Evertiq.",
+        "form": "columns",
         "points": [
           {
             "hollow": false,
-            "label": "2024-06 to 2024-12 (Neocloud median)",
-            "sourceUrl": "https://www.silicondata.com/blog/h100-rental-price-over-time",
-            "value": 2.99
+            "label": "Total DRAM industry",
+            "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+            "value": 81.0
           },
           {
             "hollow": false,
-            "label": "2025-01 to 2025-05 (Neocloud median)",
-            "sourceUrl": "https://www.silicondata.com/blog/h100-rental-price-over-time",
-            "value": 3.5
+            "label": "Samsung",
+            "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+            "value": 93.4
           },
           {
             "hollow": false,
-            "label": "2025-06 (Neocloud, single month)",
-            "sourceUrl": "https://www.silicondata.com/blog/h100-rental-price-over-time",
-            "value": 3.29
+            "label": "SK Hynix",
+            "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+            "value": 62.5
           },
           {
             "hollow": false,
-            "label": "2025-07 to 2025-12 (Neocloud median)",
-            "sourceUrl": "https://www.silicondata.com/blog/h100-rental-price-over-time",
-            "value": 3.33
+            "label": "Micron",
+            "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+            "value": 81.6
+          },
+          {
+            "hollow": false,
+            "label": "Nanya",
+            "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+            "value": 60.0
+          },
+          {
+            "hollow": false,
+            "label": "Winbond",
+            "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+            "value": 91.4
           }
         ],
         "researched": true,
         "source": {
-          "date": "2025-12-21",
-          "outlet": "Silicon Data",
+          "date": "2026-06-08",
+          "outlet": "Evertiq",
           "tier": "secondary",
-          "title": "H100 Neocloud rental price, median $/GPU-hour by period",
-          "url": "https://www.silicondata.com/blog/h100-rental-price-over-time"
+          "title": "DRAM industry revenue growth by maker, Q1 2026 (quarter-on-quarter)",
+          "url": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter"
         },
-        "title": "H100 Neocloud rental price, median $/GPU-hour by period",
-        "unit": "US$ per GPU-hour"
+        "title": "DRAM industry revenue growth by maker, Q1 2026 (quarter-on-quarter)",
+        "unit": "% QoQ revenue growth"
       },
-      "date": "2026-08-23",
+      "date": "2026-08-24",
       "noChartReason": null,
       "sources": [
         {
-          "date": "2026-08-23",
-          "outlet": "Lambda (lambda.ai) official GPU cloud pricing page",
+          "date": "2026-08-22",
+          "outlet": "BigGo Finance",
           "tier": "secondary",
-          "title": "Lambda (lambda.ai) official GPU cloud pricing page",
-          "url": "https://lambda.ai/service/gpu-cloud/pricing"
+          "title": "BigGo Finance",
+          "url": "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018"
         }
       ],
-      "storyHref": "story/2026-08-23.html",
-      "text": "Lambda's price list today still shows an H100 renting at $3.99 to $4.29 an hour, so nothing yet suggests supply has caught up with demand."
+      "storyHref": "story/2026-08-24.html",
+      "text": "NVIDIA is reported to be raising AI server prices by more than 15% for machines shipping from early next year, as memory contract prices climb about 50%."
+    },
+    {
+      "chart": null,
+      "date": "2026-08-24",
+      "noChartReason": {
+        "cause": "estimate-only",
+        "reason": "The number we track for this is our own estimate, not a published figure, so we don't draw it."
+      },
+      "sources": [
+        {
+          "date": "2026-08-23",
+          "outlet": "24/7 Wall St.",
+          "tier": "secondary",
+          "title": "24/7 Wall St.",
+          "url": "https://247wallst.com/investing/2026/08/23/22-billion-in-customer-deposits-did-not-stop-this-chip-ceo-from-selling-37-million/"
+        }
+      ],
+      "storyHref": "story/2026-08-24.html",
+      "text": "Micron's chief executive said on August 23 that customers are asking for about 50% more memory than the company can commit to supply."
+    },
+    {
+      "chart": null,
+      "date": "2026-08-24",
+      "noChartReason": {
+        "cause": "no-published-number",
+        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
+      },
+      "sources": [
+        {
+          "date": "2026-08-24",
+          "outlet": "Taipei Times",
+          "tier": "secondary",
+          "title": "Taipei Times",
+          "url": "https://www.taipeitimes.com/News/taiwan/archives/2026/08/24/2003863053"
+        }
+      ],
+      "storyHref": "story/2026-08-24.html",
+      "text": "Taiwan prosecutors today indicted 9 people, including Nvidia and Super Micro employees, over allegedly exporting AI servers with controlled chips to China."
     }
   ],
   "categoryId": "chips.merchant-gpu",
@@ -116,31 +128,24 @@
           "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994"
         },
         {
-          "date": "2026-08-04",
-          "outlet": "TrendForce",
+          "date": "2026-08-23",
+          "outlet": "24/7 Wall St.",
           "tier": "secondary",
-          "title": "TrendForce",
-          "url": "https://www.trendforce.com/presscenter/news/20260804-13166.html"
+          "title": "24/7 Wall St.",
+          "url": "https://247wallst.com/investing/2026/08/23/22-billion-in-customer-deposits-did-not-stop-this-chip-ceo-from-selling-37-million/"
         }
       ],
       "id": "bottleneck",
       "plainName": "What is holding shipments back",
       "ratingWord": "Weak",
-      "reasoning": "Packaging has eased to roughly a 10 percent shortfall while wafer lines run at full utilisation, so memory now sets the shipping ceiling.",
-      "summary": "Memory suppliers can fill only 60 to 70 percent of the volume NVIDIA requested for its next flagship, and Micron says it can serve about half of total demand with no line of sight to balance.",
+      "reasoning": "Advanced packaging improved to roughly a ten percent shortfall, so the chain stays tight for a different physical reason than a quarter ago.",
+      "summary": "Memory suppliers can cover only 60 to 70 percent of the volume requested for NVIDIA's next generation, Micron says it can ship about half of what customers ask and calls memory the top constraint, and silicon wafer lines run at full utilisation.",
       "tone": "bad"
     },
     {
       "confidence": "High — drawn from company filings and calls.",
       "direction": "improving",
       "evidence": [
-        {
-          "date": "2026-05-20",
-          "outlet": "NVIDIA Newsroom (official press release)",
-          "tier": "primary",
-          "title": "NVIDIA Newsroom (official press release)",
-          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
-        },
         {
           "date": "2026-08-04",
           "outlet": "AMD Investor Relations",
@@ -149,18 +154,25 @@
           "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
         },
         {
-          "date": "2026-07-23",
-          "outlet": "Intel Investor Relations",
+          "date": "2026-05-20",
+          "outlet": "NVIDIA Newsroom (official press release)",
           "tier": "primary",
-          "title": "Intel Investor Relations",
-          "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
+          "title": "NVIDIA Newsroom (official press release)",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
+        },
+        {
+          "date": "2026-08-17",
+          "outlet": "NVIDIA Newsroom (official)",
+          "tier": "primary",
+          "title": "NVIDIA Newsroom (official)",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute"
         }
       ],
       "id": "momentum",
       "plainName": "How hard buyers are buying",
       "ratingWord": "Very strong",
-      "reasoning": "Forward money confirms it: SpaceX put about $15.8 billion into AI compute in a single quarter and analysts size the 2026-2028 buildout near $4.1 trillion.",
-      "summary": "NVIDIA posted a record $75.2 billion data-center quarter, AMD's data-center revenue more than doubled to $6.7 billion, and Intel's data-center line grew 59 percent, so every merchant supplier sells everything it can build.",
+      "reasoning": "Vendor results match the orders, with record NVIDIA data-center revenue of $75.2 billion and AMD data-center revenue up 107 percent year over year.",
+      "summary": "Buyer spending keeps accelerating, with one bank projecting about $4.1 trillion of AI infrastructure outlay from 2026 to 2028, SpaceX putting roughly $15.8 billion into AI compute in a single quarter, and NVIDIA securing a 4.25 gigawatt Ohio campus under a twenty-year lease.",
       "tone": "good"
     },
     {
@@ -192,41 +204,41 @@
       "id": "competitiveStructure",
       "plainName": "Whether buyers have a second choice",
       "ratingWord": "Mixed",
-      "reasoning": "The challengers now arrive as complete racks, so buyers can swap a whole system rather than qualify a single chip.",
-      "summary": "AMD's Helios rack reached production with Anthropic committing up to two gigawatts, while Google, Microsoft, MediaTek and Cerebras all put non-GPU compute into customer hands this year.",
+      "reasoning": "NVIDIA answered by pulling Vera Rubin into production on an eighteen-month cycle, so the leader holds its position while the field fills in around it.",
+      "summary": "Credible alternatives now ship: AMD put its Helios rack into production with Anthropic taking up to two gigawatts, Google added Marvell-designed accelerators under an agreement whose incentives imply a ceiling near $120 billion, and Microsoft is negotiating foundry capacity for hundreds of thousands of its own parts.",
       "tone": "mixed"
     },
     {
       "confidence": "Medium — the underlying reports are single-source in places.",
-      "direction": "worsening",
+      "direction": "flat",
       "evidence": [
         {
-          "date": "2026-07-24",
-          "outlet": "Silicon Analysts",
+          "date": "2026-08-05",
+          "outlet": "Yahoo Finance",
           "tier": "secondary",
-          "title": "Silicon Analysts",
-          "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026"
+          "title": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html"
         },
         {
-          "date": "2026-05-21",
-          "outlet": "Tom's Hardware custom AI ASIC state of play",
+          "date": "2026-07-31",
+          "outlet": "Investing.com (MediaTek Q2 2026 earnings call transcript)",
           "tier": "secondary",
-          "title": "Tom's Hardware custom AI ASIC state of play",
-          "url": "https://www.tomshardware.com/tech-industry/semiconductors/custom-ai-asics-examined-from-broadcom-to-mtia"
+          "title": "Investing.com (MediaTek Q2 2026 earnings call transcript)",
+          "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-mediatek-q2-2026-revenue-beats-guidance-as-ai-push-grows-93CH-4826949"
         },
         {
-          "date": "2026-06-29",
-          "outlet": "TechTimes / Network World",
+          "date": "2026-08-03",
+          "outlet": "The Register",
           "tier": "secondary",
-          "title": "TechTimes / Network World",
-          "url": "https://www.techtimes.com/articles/319338/20260629/amd-helios-faces-nvidia-vera-rubin-july-23-keynote-memory-leads-training-trails.htm"
+          "title": "The Register",
+          "url": "https://www.theregister.com/ai-and-ml/2026/08/03/mediatek-lines-up-5b-war-chest-for-ai-datacenter-push/5282304"
         }
       ],
       "id": "moat",
       "plainName": "How safe NVIDIA's lead looks",
       "ratingWord": "Weak",
-      "reasoning": "The largest buyers already run roughly two-thirds of their compute on silicon they designed themselves, so the hold on pricing keeps thinning.",
-      "summary": "NVIDIA's accelerator share is tracking down from an 87 percent peak in 2024 toward 75 percent this year as custom chip shipments grow nearly three times faster than merchant GPUs.",
+      "reasoning": "Share forecasts still point down as custom chips grow faster, and the newest custom win looks partly like one design house taking work from another.",
+      "summary": "NVIDIA still takes as much as 90 percent of accelerator spending in a given quarter, and an industry analyst publicly doubted MediaTek's 15 to 20 percent share goal given its sub-one-percent starting point.",
       "tone": "bad"
     },
     {
@@ -258,14 +270,21 @@
       "id": "unitEconomics",
       "plainName": "How profitable the sellers are",
       "ratingWord": "Strong",
-      "reasoning": "AMD's accelerator margin runs slightly below its company average, which caps how far the second source can cut price to win volume.",
-      "summary": "NVIDIA holds a 75 percent gross margin, AMD sits at 56 percent and Intel has climbed to 41.8 percent, so scarcity still lands in vendor profit instead of being competed away.",
+      "reasoning": "The soft spot is that AMD earns slightly less on accelerators than on its company average, so faster accelerator growth trims the blended margin.",
+      "summary": "Margins held high across the chain: NVIDIA at 75 percent, AMD at 54 percent reported and 56 percent adjusted, Intel improved to 40.4 percent, and TSMC at 67.7 percent.",
       "tone": "good"
     },
     {
       "confidence": "High — drawn from company filings and calls.",
       "direction": "worsening",
       "evidence": [
+        {
+          "date": "2026-08-05",
+          "outlet": "AMD Investor Relations (SEC Form 10-Q)",
+          "tier": "primary",
+          "title": "AMD Investor Relations (SEC Form 10-Q)",
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm"
+        },
         {
           "date": "2026-05-21",
           "outlet": "NVIDIA Form 10-Q Q1 FY2027",
@@ -274,25 +293,18 @@
           "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000052/nvda-20260426.htm"
         },
         {
-          "date": "2026-08-10",
-          "outlet": "NVIDIA Newsroom (official)",
+          "date": "2026-08-17",
+          "outlet": "NVIDIA Newsroom",
           "tier": "primary",
-          "title": "NVIDIA Newsroom (official)",
-          "url": "https://nvidianews.nvidia.com/news/nvidia-partners-with-apollo-blackrock-blackstone-brookfield-goldman-sachs-and-kkr-to-establish-ai-compute-infrastructure-financing-platforms-to-mobilize-over-500-billion-of-third-party-capital"
-        },
-        {
-          "date": "2026-08-05",
-          "outlet": "AMD SEC Filing (10-Q)",
-          "tier": "primary",
-          "title": "AMD SEC Filing (10-Q)",
-          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm"
+          "title": "NVIDIA Newsroom",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute"
         }
       ],
       "id": "strategicRisk",
       "plainName": "What could go wrong",
       "ratingWord": "Mixed",
-      "reasoning": "It also cut one customer guarantee from $250 billion to under $120 billion, which shows the vendor itself is trimming how much buyer risk it carries.",
-      "summary": "Three direct customers supply more than half of NVIDIA's revenue, and the vendor is arranging over $500 billion of outside capital for the people who buy its chips.",
+      "reasoning": "Vendor-arranged financing keeps growing, with over $500 billion of outside capital being organised, even as NVIDIA trimmed one customer guarantee from $250 billion to under $120 billion.",
+      "summary": "Enforcement hardened, with Taiwan indicting nine people over servers carrying controlled chips bound for China, while buyer concentration deepened as two customers each planned up to six gigawatts of AMD accelerators and three NVIDIA customers made up 21, 17 and 16 percent of revenue.",
       "tone": "mixed"
     }
   ],
@@ -357,21 +369,14 @@
       },
       {
         "date": "2026-08-01",
-        "demand": 4.373333333333336,
-        "supply": 0.1466666666666667
+        "demand": 4.406666666666668,
+        "supply": 0.05333333333333336
       }
     ],
     "sources": [
       {
         "assessment": true,
         "basedOn": [
-          {
-            "date": "2026-05-20",
-            "outlet": "NVIDIA Newsroom (official press release)",
-            "tier": "primary",
-            "title": "NVIDIA Newsroom (official press release)",
-            "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
-          },
           {
             "date": "2026-08-04",
             "outlet": "AMD Investor Relations",
@@ -380,11 +385,18 @@
             "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
           },
           {
-            "date": "2026-07-23",
-            "outlet": "Intel Investor Relations",
+            "date": "2026-05-20",
+            "outlet": "NVIDIA Newsroom (official press release)",
             "tier": "primary",
-            "title": "Intel Investor Relations",
-            "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
+            "title": "NVIDIA Newsroom (official press release)",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
+          },
+          {
+            "date": "2026-08-17",
+            "outlet": "NVIDIA Newsroom (official)",
+            "tier": "primary",
+            "title": "NVIDIA Newsroom (official)",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute"
           }
         ]
       }
@@ -393,8 +405,8 @@
   "issues": {
     "open": [
       {
-        "assessedAsOf": "2026-08-23",
-        "checkCount": 4,
+        "assessedAsOf": "2026-08-24",
+        "checkCount": 5,
         "history": [
           {
             "asOf": "2026-08-19",
@@ -411,34 +423,38 @@
           {
             "asOf": "2026-08-23",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-08-24",
+            "status": "worsened"
           }
         ],
         "id": "dim-bottleneck",
-        "reasoning": "A second limit is now visible beside memory. NVIDIA agreed to invest up to $3 billion in power developer Lancium and is in advanced talks over Cloverleaf's powered land, which it would not do if electricity and ready sites were plentiful.",
+        "reasoning": "The shortage is now showing up in prices. NVIDIA is reported to be lifting AI server prices more than 15%, memory contract prices have risen about 50% this year, and Micron says customers want about 50% more memory than it can commit.",
         "sources": [
           {
-            "date": "2026-08-21",
-            "outlet": "Yahoo Finance (citing The Information / Reuters reporting)",
+            "date": "2026-08-22",
+            "outlet": "BigGo Finance",
             "tier": "secondary",
-            "title": "Yahoo Finance (citing The Information / Reuters reporting)",
-            "url": "https://finance.yahoo.com/technology/articles/nvidia-invest-3-billion-lancium-014211358.html"
+            "title": "BigGo Finance",
+            "url": "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018"
           },
           {
-            "date": "2026-08-21",
-            "outlet": "Yahoo Finance (citing Wall Street Journal reporting)",
+            "date": "2026-08-23",
+            "outlet": "24/7 Wall St.",
             "tier": "secondary",
-            "title": "Yahoo Finance (citing Wall Street Journal reporting)",
-            "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-advanced-talks-invest-hundreds-132327433.html"
+            "title": "24/7 Wall St.",
+            "url": "https://247wallst.com/investing/2026/08/23/22-billion-in-customer-deposits-did-not-stop-this-chip-ceo-from-selling-37-million/"
           }
         ],
         "status": "worsened",
         "title": "Bottleneck",
         "trackedSince": "2026-08",
-        "worsenedCount": 3
+        "worsenedCount": 4
       },
       {
-        "assessedAsOf": "2026-08-23",
-        "checkCount": 4,
+        "assessedAsOf": "2026-08-24",
+        "checkCount": 5,
         "history": [
           {
             "asOf": "2026-08-19",
@@ -455,17 +471,21 @@
           {
             "asOf": "2026-08-23",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-08-24",
+            "status": "unchanged"
           }
         ],
         "id": "dim-moat",
-        "reasoning": "Anthropic hired the founder of Google's custom-chip programme to run its own silicon work and placed about $250 million of first orders with startup Fractile. Microsoft is negotiating capacity for upward of 300,000 of its own Maia 300 chips for 2027.",
+        "reasoning": "No new evidence arrived today about rivals taking share. NVIDIA is still described as taking as much as 90% of AI chip spending in a given quarter, and Microsoft's plan for upward of 300,000 of its own chips for 2027 has not moved.",
         "sources": [
           {
-            "date": "2026-08-21",
-            "outlet": "Yahoo Finance (Bloomberg syndication)",
+            "date": "2026-08-05",
+            "outlet": "Yahoo Finance",
             "tier": "secondary",
-            "title": "Yahoo Finance (Bloomberg syndication)",
-            "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-taps-google-chip-veteran-195955567.html"
+            "title": "Yahoo Finance",
+            "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html"
           },
           {
             "date": "2026-08-11",
@@ -475,14 +495,14 @@
             "url": "https://qz.com/microsoft-maia-300-ai-chip-unveil-fall-tsmc-081026"
           }
         ],
-        "status": "worsened",
+        "status": "unchanged",
         "title": "Moat",
         "trackedSince": "2026-08",
         "worsenedCount": 3
       },
       {
-        "assessedAsOf": "2026-08-23",
-        "checkCount": 3,
+        "assessedAsOf": "2026-08-24",
+        "checkCount": 4,
         "history": [
           {
             "asOf": "2026-08-21",
@@ -495,34 +515,38 @@
           {
             "asOf": "2026-08-23",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-08-24",
+            "status": "worsened"
           }
         ],
         "id": "constraint-stacked-memory-and-server-dram",
-        "reasoning": "No new evidence arrived today. Memory supply is still reported short through 2027, limiting what can be turned over to the stacked kind, and Micron still says it can serve only about half of customer demand.",
+        "reasoning": "Memory contract prices have risen roughly 50% so far this year and are pushing into the cost of every AI server, while Micron says customers want about 50% more memory than it can promise.",
         "sources": [
           {
-            "date": "2026-08-04",
-            "outlet": "TrendForce",
+            "date": "2026-08-22",
+            "outlet": "BigGo Finance",
             "tier": "secondary",
-            "title": "TrendForce",
-            "url": "https://www.trendforce.com/presscenter/news/20260804-13166.html"
+            "title": "BigGo Finance",
+            "url": "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018"
           },
           {
-            "date": "2026-08-10",
-            "outlet": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
+            "date": "2026-08-23",
+            "outlet": "24/7 Wall St.",
             "tier": "secondary",
-            "title": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
-            "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994"
+            "title": "24/7 Wall St.",
+            "url": "https://247wallst.com/investing/2026/08/23/22-billion-in-customer-deposits-did-not-stop-this-chip-ceo-from-selling-37-million/"
           }
         ],
-        "status": "unchanged",
+        "status": "worsened",
         "title": "stacked memory and server DRAM",
         "trackedSince": "2026-08",
-        "worsenedCount": 0
+        "worsenedCount": 1
       },
       {
-        "assessedAsOf": "2026-08-23",
-        "checkCount": 2,
+        "assessedAsOf": "2026-08-24",
+        "checkCount": 3,
         "history": [
           {
             "asOf": "2026-08-22",
@@ -531,10 +555,14 @@
           {
             "asOf": "2026-08-23",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-08-24",
+            "status": "unchanged"
           }
         ],
         "id": "constraint-stacked-high-bandwidth-memory-supply",
-        "reasoning": "No new evidence arrived today. Suppliers can still meet only 60% to 70% of the volume asked for Rubin Ultra, and Korean yields near 80% have not yet shown up as extra delivered parts.",
+        "reasoning": "No new supply evidence arrived today. Suppliers can still meet only 60% to 70% of the volume asked for Rubin Ultra, and Samsung's new stacking design saves about 100 watts per accelerator but adds no memory.",
         "sources": [
           {
             "date": "2026-08-07",
@@ -544,29 +572,33 @@
             "url": "https://en.sedaily.com/international/2026/08/07/nvidia-weighs-cutting-hbm-capacity-for-rubin-ultra"
           },
           {
-            "date": "2026-08-10",
-            "outlet": "Seoul Economic Daily (en.sedaily.com)",
+            "date": "2026-08-23",
+            "outlet": "ServeTheHome",
             "tier": "secondary",
-            "title": "Seoul Economic Daily (en.sedaily.com)",
-            "url": "https://en.sedaily.com/finance/2026/08/10/samsung-hits-80-percent-yield-on-hbm4-speeds-up-hbm4e"
+            "title": "ServeTheHome",
+            "url": "https://www.servethehome.com/samsung-evolving-hbm-base-die-at-hot-chips-2026/"
           }
         ],
         "status": "unchanged",
-        "title": "Stacked high-bandwidth memory supply",
+        "title": "Stacked memory supply per accelerator",
         "trackedSince": "2026-08",
         "worsenedCount": 0
       },
       {
-        "assessedAsOf": "2026-08-23",
-        "checkCount": 1,
+        "assessedAsOf": "2026-08-24",
+        "checkCount": 2,
         "history": [
           {
             "asOf": "2026-08-23",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-08-24",
+            "status": "unchanged"
           }
         ],
         "id": "constraint-hbm4-memory-allocation-per-accelerator",
-        "reasoning": "No new evidence arrived today. NVIDIA is still testing Rubin Ultra at 192GB and 256GB of memory against a planned 1TB, and four specifications remain under review, so the memory each machine gets is still unsettled.",
+        "reasoning": "No new evidence arrived today. NVIDIA is still testing Rubin Ultra at 192GB and 256GB of memory against a planned 1TB, with four memory specifications under review, so the amount each machine gets remains unsettled.",
         "sources": [
           {
             "date": "2026-08-07",
@@ -593,38 +625,24 @@
   },
   "schemaVersion": "1.2",
   "verdict": {
-    "answer": "Not yet. NVIDIA starts paying for the electricity, not just the chips",
+    "answer": "Not yet. The memory shortage finally shows up on the invoice",
     "chip": {
       "direction": "widening",
       "label": "Gap widening"
     },
     "confidence": "We are confident in this read",
     "question": "Is supply catching up to demand?",
-    "soWhat": "Memory still caps how many chips get built, and nothing moved that today. What moved is where the seller is putting its money: power plants and ready-to-build land.",
+    "soWhat": "Nothing about the supply of stacked memory got better. What changed is the price: the seller is reported to be raising machine prices more than 15%, and the memory maker says customers want half again more than it can promise.",
     "sources": [
       {
         "assessment": true,
         "basedOn": [
           {
-            "date": "2026-08-07",
-            "outlet": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
+            "date": "2026-08-22",
+            "outlet": "BigGo Finance",
             "tier": "secondary",
-            "title": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
-            "url": "https://en.sedaily.com/international/2026/08/07/nvidia-weighs-cutting-hbm-capacity-for-rubin-ultra"
-          },
-          {
-            "date": "2026-08-10",
-            "outlet": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
-            "tier": "secondary",
-            "title": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
-            "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994"
-          },
-          {
-            "date": "2026-08-04",
-            "outlet": "TrendForce",
-            "tier": "secondary",
-            "title": "TrendForce",
-            "url": "https://www.trendforce.com/presscenter/news/20260804-13166.html"
+            "title": "BigGo Finance",
+            "url": "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018"
           }
         ]
       }

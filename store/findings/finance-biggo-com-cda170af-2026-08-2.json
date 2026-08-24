@@ -1,0 +1,43 @@
+{
+  "id": "finance-biggo-com-cda170af-2026-08-2",
+  "statement": "DRAM contract prices have risen roughly 50% cumulatively this year with further increases projected, pushing memory cost into AI server bills of materials",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Rising contract memory prices are the clearest read that memory supply is tight relative to AI system demand, and memory is a gating input for accelerator systems.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Contract DRAM price escalation signals supply shortfall and raises the memory share of accelerator system cost, tightening system supply economics."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018",
+      "date": "2026-08-22",
+      "excerpt": "DRAM contract prices have risen approximately 50% cumulatively this year, with an estimated additional 30% increase in the fourth quarter of 2025 and a further 20% in early 2026.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator restating a Bloomberg figure; price percentages are not bit-supply growth, so the value is left unset rather than forced into the indicator unit."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-22",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

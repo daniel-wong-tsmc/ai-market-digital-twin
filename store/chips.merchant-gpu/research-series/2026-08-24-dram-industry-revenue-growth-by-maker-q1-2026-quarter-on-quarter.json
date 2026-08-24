@@ -1,0 +1,47 @@
+{
+  "seriesName": "DRAM industry revenue growth by maker, Q1 2026 (quarter-on-quarter)",
+  "unit": "% QoQ revenue growth",
+  "form": "columns",
+  "sourceName": "Evertiq",
+  "points": [
+    {
+      "label": "Total DRAM industry",
+      "value": 81.0,
+      "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+      "publishedAt": "2026-06-08"
+    },
+    {
+      "label": "Samsung",
+      "value": 93.4,
+      "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+      "publishedAt": "2026-06-08"
+    },
+    {
+      "label": "SK Hynix",
+      "value": 62.5,
+      "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+      "publishedAt": "2026-06-08"
+    },
+    {
+      "label": "Micron",
+      "value": 81.6,
+      "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+      "publishedAt": "2026-06-08"
+    },
+    {
+      "label": "Nanya",
+      "value": 60.0,
+      "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+      "publishedAt": "2026-06-08"
+    },
+    {
+      "label": "Winbond",
+      "value": 91.4,
+      "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+      "publishedAt": "2026-06-08"
+    }
+  ],
+  "pair": false,
+  "notes": "This is contextual, not a direct measure of the >15% AI server price hike or the ~50% cumulative DRAM contract price claim in the bullet. It shows the memory-industry revenue surge (Q1 2026 vs Q4 2025, quarter-on-quarter, by maker) that underlies the cost pressure NVIDIA is reportedly passing on. The article's own DRAM contract-price figure ('approximately 93 to 98 percent') was excluded because it is a hedged range, not a bare published number, per the no-range rule. All points are actual reported Q1 2026 results (not forecasts) from a single page on evertiq.com, which the underlying data ultimately traces to TrendForce, but the citable, openly-readable page here is evertiq.com's own article, not trendforce.com.",
+  "bulletIndex": 1
+}

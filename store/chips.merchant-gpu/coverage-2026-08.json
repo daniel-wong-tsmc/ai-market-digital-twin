@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-08",
-  "capturedAt": "2026-08-23T05:13:00Z",
+  "capturedAt": "2026-08-24T13:07:55Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
@@ -13,14 +13,6 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "amd-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
       "paywalledNote": null
     },
     {
@@ -37,14 +29,6 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "coreweave-pricing",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'CoreWeave GPU pricing page' was not fetched. URL patterns: ['coreweave.com']",
       "paywalledNote": null
     },
     {
@@ -69,6 +53,14 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Open-web reporting on hyperscaler custom ASICs (competitive alternatives)' was not fetched. URL patterns: ['blog.google', 'aws.amazon.com/machine-learning', 'techcrunch.com', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "channel-checks",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Open-web channel checks: lead times, inventory notes from distributors' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com']",
       "paywalledNote": null
     },
     {
@@ -118,6 +110,14 @@
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Frontier model release and funding trackers (company newsrooms + industry press)' was not fetched. URL patterns: ['openai.com', 'anthropic.com', 'blog.google', 'techcrunch.com', 'semianalysis.com']",
       "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "upstream-component-leadtimes",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
+      "paywalledNote": null
     }
   ],
   "gapCounts": {
@@ -131,16 +131,16 @@
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://247wallst.com/investing/2026/08/22/ais-absurd-spending-boom-hyperscalers-are-spending-102-of-cloud-revenue-on-capex/",
-    "https://finance.yahoo.com/technology/ai/articles/anthropic-taps-google-chip-veteran-195955567.html",
-    "https://finance.yahoo.com/technology/articles/nvidia-invest-3-billion-lancium-014211358.html",
-    "https://fudzilla.com/nvidia-denies-china-lpu/",
-    "https://gcn.com/nvidia-vera-rubin-chips-begin-shipping/20421/",
-    "https://lambda.ai/service/gpu-cloud/pricing",
-    "https://nvidianews.nvidia.com/",
-    "https://www.bloomberg.com/news/articles/2026-08-22/nvidia-customers-notified-about-ai-related-price-hikes-above-15",
-    "https://www.digitimes.com/news/a20260817VL221/ai-server-mlcc-demand-infrastructure.html",
-    "https://www.theregister.com/legal/2026/08/21/supermicro-fired-staff-after-probe-into-25-billion-gpus-to-china-smuggling-operation/5290791"
+    "https://247wallst.com/investing/2026/08/23/22-billion-in-customer-deposits-did-not-stop-this-chip-ceo-from-selling-37-million/",
+    "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018",
+    "https://fortune.com/2026/08/20/supermicro-investigation-ceo-nvidia-smuggling/",
+    "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+    "https://lambda.ai/service/gpu-cloud",
+    "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+    "https://www.coreweave.com/pricing",
+    "https://www.servethehome.com/samsung-evolving-hbm-base-die-at-hot-chips-2026/",
+    "https://www.taipeitimes.com/News/taiwan/archives/2026/08/24/2003863053",
+    "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/08/24/taiwan-indicts-nine-including-employees-of-nvidia-and-super-micro-over-alleged-illegal-export-of-ai-servers-to-foreign-countries"
   ],
   "judgedIndicatorIds": [
     "D2",

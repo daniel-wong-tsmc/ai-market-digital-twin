@@ -1,0 +1,51 @@
+{
+  "id": "nvidianews-nvidia-com-db4ca926-2026-08-3",
+  "statement": "NVIDIA will invest $1.5 billion in SB Energy, alongside a cited $4.2 billion regional grid investment with AEP Ohio tied to at least 10 gigawatts of new generation",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "The chip vendor putting its own balance sheet behind the power developer that houses its customers is vendor-supplied financing, which loosens the capital constraint on the marginal buyer.",
+  "impact": {
+    "targets": [
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Vendor equity into the site developer plus utility-scale grid spend eases the financing and power bottleneck that would otherwise limit how fast buyers can absorb accelerators."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom (official)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+      "date": "2026-08-17",
+      "excerpt": "$1.5 billion",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA Newsroom (official)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+      "date": "2026-08-17",
+      "excerpt": "at least 10 gigawatts",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Investment figures stated verbatim in NVIDIA's own press release; no credit-condition index value is asserted because the release gives none."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-17",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

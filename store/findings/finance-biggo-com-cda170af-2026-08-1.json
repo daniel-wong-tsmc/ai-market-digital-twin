@@ -1,0 +1,51 @@
+{
+  "id": "finance-biggo-com-cda170af-2026-08-1",
+  "statement": "NVIDIA is reported to be raising prices on AI server systems by more than 15% in many cases for systems shipping from early next year",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "A double-digit system price increase driven by input costs lowers the compute a buyer gets per dollar, which is the main brake on how much capacity budgets convert into deployed accelerators.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "chips.hbm-memory"
+    ],
+    "direction": "negative",
+    "mechanism": "Higher system prices at a fixed capital budget reduce units deployed per dollar, compressing effective compute purchased even as vendor revenue per unit rises."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018",
+      "date": "2026-08-22",
+      "excerpt": "server prices for systems equipped with its AI chips will rise by more than 15% in many cases.",
+      "tier": "secondary"
+    },
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018",
+      "date": "2026-08-22",
+      "excerpt": "The price increases will take effect for systems shipping starting early next year.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary aggregator citing Bloomberg; other outlets named in the document were surfaced only as search snippets and not independently fetched, so the three-publisher corroboration bar is not met."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "flopsPerDollar",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-22",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

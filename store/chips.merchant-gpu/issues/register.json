@@ -1,18 +1,19 @@
 {
- "asOf": "2026-08-23",
+ "asOf": "2026-08-24",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 4,
+   "checkCount": 5,
    "id": "dim-bottleneck",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-23",
+    "assessedAsOf": "2026-08-24",
     "claimFindingIds": [
-     "finance-yahoo-com-afa8fca2-2026-08-1",
-     "finance-yahoo-com-f400b412-2026-08-1"
+     "finance-biggo-com-cda170af-2026-08-1",
+     "finance-biggo-com-cda170af-2026-08-2",
+     "247wallst-com-e58dd832-2026-08-3"
     ],
-    "reasoning": "A second limit is now visible beside memory. NVIDIA agreed to invest up to $3 billion in power developer Lancium and is in advanced talks over Cloverleaf's powered land, which it would not do if electricity and ready sites were plentiful.",
+    "reasoning": "The shortage is now showing up in prices. NVIDIA is reported to be lifting AI server prices more than 15%, memory contract prices have risen about 50% this year, and Micron says customers want about 50% more memory than it can commit.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -24,21 +25,20 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 3
+   "worsenedCount": 4
   },
   {
-   "checkCount": 4,
+   "checkCount": 5,
    "id": "dim-moat",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-08-23",
+    "assessedAsOf": "2026-08-24",
     "claimFindingIds": [
-     "finance-yahoo-com-d93fe0e4-2026-08-1",
-     "finance-yahoo-com-d93fe0e4-2026-08-2",
+     "finance-yahoo-com-171fe64e-2026-08-4",
      "qz-com-36c37a60-2026-08-1"
     ],
-    "reasoning": "Anthropic hired the founder of Google's custom-chip programme to run its own silicon work and placed about $250 million of first orders with startup Fractile. Microsoft is negotiating capacity for upward of 300,000 of its own Maia 300 chips for 2027.",
-    "status": "worsened"
+    "reasoning": "No new evidence arrived today about rivals taking share. NVIDIA is still described as taking as much as 90% of AI chip spending in a given quarter, and Microsoft's plan for upward of 300,000 of its own chips for 2027 has not moved.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -52,17 +52,17 @@
    "worsenedCount": 3
   },
   {
-   "checkCount": 3,
+   "checkCount": 4,
    "id": "constraint-stacked-memory-and-server-dram",
-   "improvedStreak": 2,
+   "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-23",
+    "assessedAsOf": "2026-08-24",
     "claimFindingIds": [
-     "www-trendforce-com-17fa2dc8-2026-08-1",
-     "www-investing-com-87498f82-2026-08-1"
+     "finance-biggo-com-cda170af-2026-08-2",
+     "247wallst-com-e58dd832-2026-08-3"
     ],
-    "reasoning": "No new evidence arrived today. Memory supply is still reported short through 2027, limiting what can be turned over to the stacked kind, and Micron still says it can serve only about half of customer demand.",
-    "status": "unchanged"
+    "reasoning": "Memory contract prices have risen roughly 50% so far this year and are pushing into the cost of every AI server, while Micron says customers want about 50% more memory than it can promise.",
+    "status": "worsened"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -73,43 +73,43 @@
     "kind": "binding-constraint",
     "label": "stacked memory and server DRAM"
    },
-   "worsenedCount": 0
+   "worsenedCount": 1
   },
   {
-   "checkCount": 2,
+   "checkCount": 3,
    "id": "constraint-stacked-high-bandwidth-memory-supply",
-   "improvedStreak": 1,
+   "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-23",
+    "assessedAsOf": "2026-08-24",
     "claimFindingIds": [
      "en-sedaily-com-b1c000ac-2026-08-1",
-     "en-sedaily-com-80cdc180-2026-08-1"
+     "www-servethehome-com-0b5bddaa-2026-08-2"
     ],
-    "reasoning": "No new evidence arrived today. Suppliers can still meet only 60% to 70% of the volume asked for Rubin Ultra, and Korean yields near 80% have not yet shown up as extra delivered parts.",
+    "reasoning": "No new supply evidence arrived today. Suppliers can still meet only 60% to 70% of the volume asked for Rubin Ultra, and Samsung's new stacking design saves about 100 watts per accelerator but adds no memory.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "Stacked high-bandwidth memory supply",
+   "title": "Stacked memory supply per accelerator",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "Stacked high-bandwidth memory supply"
+    "label": "Stacked memory supply per accelerator"
    },
    "worsenedCount": 0
   },
   {
-   "checkCount": 1,
+   "checkCount": 2,
    "id": "constraint-hbm4-memory-allocation-per-accelerator",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-08-23",
+    "assessedAsOf": "2026-08-24",
     "claimFindingIds": [
      "en-sedaily-com-b1c000ac-2026-08-2",
      "www-trendforce-com-17fa2dc8-2026-08-1"
     ],
-    "reasoning": "No new evidence arrived today. NVIDIA is still testing Rubin Ultra at 192GB and 256GB of memory against a planned 1TB, and four specifications remain under review, so the memory each machine gets is still unsettled.",
+    "reasoning": "No new evidence arrived today. NVIDIA is still testing Rubin Ultra at 192GB and 256GB of memory against a planned 1TB, with four memory specifications under review, so the amount each machine gets remains unsettled.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",

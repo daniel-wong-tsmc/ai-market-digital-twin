@@ -1,0 +1,45 @@
+{
+  "id": "www-coreweave-com-a883627d-2026-08-1",
+  "statement": "CoreWeave publishes NVIDIA GB200 NVL72 on-demand capacity at $42.00 per hour in North America",
+  "kind": "measured",
+  "value": {
+    "number": 42.0,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "This is a published rental level with no stated prior price, so it belongs to the pricing overlay rather than to demand or supply.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Published rental levels for current-generation rack-scale systems describe where pricing sits; with no baseline they carry no directional information."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-08-24",
+      "excerpt": "$42.00",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own public pricing page observed directly, but the page does not state whether rates are per GPU or per node."
+  },
+  "dispersion": "conflicting same-key reports: value 49.24 -> 42.0 (tol 1%); sources: CoreWeave",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-24",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

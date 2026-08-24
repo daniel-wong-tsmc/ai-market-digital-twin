@@ -1,0 +1,50 @@
+{
+  "id": "ir-amd-com-cc018d28-2026-08-4",
+  "statement": "AMD launched the Instinct MI400 Series family including MI455X for large-scale AI training and inference, plus MI430X for HPC and sovereign AI",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A shipping second source for training-class accelerators widens the pool of parts buyers can actually get, which is the main relief valve when the incumbent is allocation-constrained.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "A new training-class accelerator family from the second merchant vendor adds non-incumbent supply into a constrained market and gives buyers an alternative allocation channel."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (ir.amd.com)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "AMD Instinct MI400 Series GPU family, including MI455X",
+      "tier": "primary"
+    },
+    {
+      "source": "AMD Investor Relations (ir.amd.com)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "MI430X, the most advanced accelerator for HPC and sovereign AI workloads.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Product launch stated in AMD's own results release; no volume or availability figure is given, so no quantity is asserted."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

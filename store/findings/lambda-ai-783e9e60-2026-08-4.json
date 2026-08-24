@@ -1,0 +1,42 @@
+{
+  "id": "lambda-ai-783e9e60-2026-08-4",
+  "statement": "Lambda's public catalog lists no H200, GB200, or AMD MI300X/MI355X on-demand capacity as of 2026-08-24",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A major independent cloud offering no alternative-vendor accelerators on its public menu suggests non-incumbent supply is still not reaching self-serve renters at scale.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Absence of alternative-vendor and newest-generation parts from a public rental catalog indicates that alternative accelerator supply is not yet available through self-serve channels, keeping renters dependent on incumbent parts."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (Lambda Labs)",
+      "url": "https://lambda.ai/service/gpu-cloud",
+      "date": "2026-08-24",
+      "excerpt": "H200, GB200, and MI300X/MI355X are NOT listed anywhere on this page as of the observation date.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Absence of a listing on one vendor's public page is weak evidence; capacity may exist under reserved or contract terms not shown publicly."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> unknown); sources: CoreWeave, Lambda (Lambda Labs)",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-24",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
