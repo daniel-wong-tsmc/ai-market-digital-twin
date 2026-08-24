@@ -1,0 +1,43 @@
+{
+  "id": "nvidianews-nvidia-com-3b511207-2026-08-1",
+  "statement": "SpaceXAI committed to deploy NVIDIA Vera CPUs and to expand its Grok AI infrastructure on the NVIDIA Vera Rubin platform as it scales toward gigawatts of capacity.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named frontier lab standardizing its next build on Nvidia's newest platform is a design win that locks forward accelerator and CPU demand to Nvidia rather than to a rival or in-house part.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.reasoning-agentic",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Choosing Vera CPUs and Vera Rubin systems for orchestration and training converts a gigawatt-scale buildout into committed Nvidia platform purchases and displaces x86 CPU content in the same racks."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/spacexai-adopts-nvidia-vera-cpu-to-accelerate-agentic-ai-at-massive-scale",
+      "date": "2026-08-24",
+      "excerpt": "NVIDIA announced that SpaceXAI will deploy NVIDIA Vera CPUs to accelerate its next-generation agentic AI applications.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor announcement on NVIDIA's own newsroom with the customer's president quoted on the record; no unit or dollar figures are claimed."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: NVIDIA Newsroom",
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-24",
+  "capturedAt": "2026-08-24T16:49:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

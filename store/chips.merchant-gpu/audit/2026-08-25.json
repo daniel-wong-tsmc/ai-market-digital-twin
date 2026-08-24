@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-08-25",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "jarvislabs-ai-475be7e7-2026-08-1",
+        "jarvislabs-ai-475be7e7-2026-08-2",
+        "nebius-com-fa885ed3-2026-08-1",
+        "lambda-ai-783e9e60-2026-08-1",
+        "lambda-ai-783e9e60-2026-08-4"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-2",
+        "www-digitimes-com-f25fa2c7-2026-08-1",
+        "www-digitimes-com-f25fa2c7-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-3b511207-2026-08-1",
+        "jarvislabs-ai-475be7e7-2026-08-1",
+        "nebius-com-fa885ed3-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "jarvislabs-ai-475be7e7-2026-08-1",
+        "nebius-com-fa885ed3-2026-08-1",
+        "lambda-ai-783e9e60-2026-08-4"
+      ]
+    },
+    {
+      "claimKey": "bullet:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-digitimes-com-f25fa2c7-2026-08-1",
+        "www-digitimes-com-f25fa2c7-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-bottleneck",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-moat",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-171fe64e-2026-08-4"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-stacked-memory-and-server-dram",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-stacked-high-bandwidth-memory-supply",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-hbm4-memory-allocation-per-accelerator",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "pr-tsmc-com-7f560c3b-2026-08-1",
+        "pr-tsmc-com-7f560c3b-2026-08-2",
+        "finance-yahoo-com-2f05647b-2026-07-1",
+        "nvidianews-nvidia-com-09f767dd-2026-08-1",
+        "www-thelec-net-c15d2de4-2026-08-1",
+        "www-tomshardware-com-9086563b-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-tradingkey-com-855cb780-2026-07-1",
+        "www-trendforce-com-836f33fa-2026-08-1",
+        "supplyics-com-c83015c2-2026-08-2",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "flagged",
+      "flaggedTokens": [
+        "192"
+      ],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "404kresearch-substack-com-3985c52f-2026-08-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "siliconanalysts-com-79e017b3-2026-07-2"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "qz-com-36c37a60-2026-08-1",
+        "247wallst-com-db4b25b9-2026-08-1",
+        "www-investing-com-b7ff2af7-2026-08-2",
+        "techcrunch-com-6b79ddb7-1",
+        "www-faf-ae-6bcac1ba-2026-07-2"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+        "finance-biggo-com-cda170af-2026-08-1",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-3"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-3",
+        "techsoda-substack-com-3b7a4ff5-2026-08-4",
+        "www-intc-com-9e1300a4-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:6",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "supplyics-com-c83015c2-2026-08-3",
+        "www-forbes-com-7c91863a-2026-07-2",
+        "finance-yahoo-com-4ffdbfce-2026-08-1",
+        "finance-yahoo-com-4ffdbfce-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:7",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-digitimes-com-f25fa2c7-2026-08-1",
+        "www-digitimes-com-f25fa2c7-2026-08-2",
+        "www-digitimes-com-f25fa2c7-2026-08-3"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 19,
+    "flagged": 1,
+    "skipped": 0
+  }
+}

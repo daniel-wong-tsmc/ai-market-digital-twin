@@ -1,0 +1,43 @@
+{
+  "id": "finance-yahoo-com-4ffdbfce-2026-08-1",
+  "statement": "Nvidia cut its planned financial guarantee for the OpenAI/SB Energy Ohio data center from $250 billion to less than $120 billion, covering only the first ~5GW phase of a 10GW project.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Vendor-provided financing backstops are what let an unprofitable marginal buyer commit to gigawatt-scale compute; shrinking the backstop tightens the financing conditions behind that demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "models.frontier-closed"
+    ],
+    "direction": "negative",
+    "mechanism": "A smaller Nvidia guarantee means less vendor credit support behind the OpenAI build, so the second ~5GW phase must find third-party capital before the associated GPU orders can be underwritten."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Reuters)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-scales-back-250-billion-234356524.html",
+      "date": "2026-08-15",
+      "excerpt": "The revised plan would lower Nvidia's financial guarantee to 'less than $120 billion' to address investor concerns about risk for the OpenAI data center.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet restating a Wall Street Journal report sourced to people familiar with the matter; no filing or named official confirms the revised figure."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-15",
+  "capturedAt": "2026-08-24T16:49:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

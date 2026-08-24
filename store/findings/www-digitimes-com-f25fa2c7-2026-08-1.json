@@ -1,0 +1,50 @@
+{
+  "id": "www-digitimes-com-f25fa2c7-2026-08-1",
+  "statement": "Large US cloud providers grew server procurement 11.6% quarter-over-quarter in 2Q26 but are forecast to add only 1.7% quarter-over-quarter in 3Q26, a sharp deceleration.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Hyperscaler procurement is the largest single pull on AI server and accelerator demand, so a step down from double-digit to low-single-digit sequential growth signals the buying pace is cooling.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Slower sequential procurement by the largest cloud buyers reduces the near-term order flow that feeds accelerator and AI-server shipments."
+  },
+  "evidence": [
+    {
+      "source": "Digitimes",
+      "url": "https://www.digitimes.com/reports/item.php?id=20260814RS400",
+      "date": "2026-08-20",
+      "excerpt": "Large US cloud providers increased procurement by '11.6% quarter-over-quarter' in 2Q26.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Digitimes",
+      "url": "https://www.digitimes.com/reports/item.php?id=20260814RS400",
+      "date": "2026-08-20",
+      "excerpt": "large cloud provider procurement anticipated to rise only '1.7% quarter-over-quarter'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary research house; underlying data sits behind a paid subscription and was not independently verified."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-20",
+  "capturedAt": "2026-08-24T16:49:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

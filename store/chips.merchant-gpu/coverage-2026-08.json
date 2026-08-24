@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-08",
-  "capturedAt": "2026-08-24T13:07:55Z",
+  "capturedAt": "2026-08-24T17:01:00Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
@@ -33,6 +33,14 @@
     },
     {
       "type": "source",
+      "id": "coreweave-pricing",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'CoreWeave GPU pricing page' was not fetched. URL patterns: ['coreweave.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
       "id": "trendforce-gpu-tracker",
       "priority": "required",
       "acquisitionStatus": "paywalled",
@@ -53,14 +61,6 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Open-web reporting on hyperscaler custom ASICs (competitive alternatives)' was not fetched. URL patterns: ['blog.google', 'aws.amazon.com/machine-learning', 'techcrunch.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "channel-checks",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Open-web channel checks: lead times, inventory notes from distributors' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com']",
       "paywalledNote": null
     },
     {
@@ -110,37 +110,29 @@
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Frontier model release and funding trackers (company newsrooms + industry press)' was not fetched. URL patterns: ['openai.com', 'anthropic.com', 'blog.google', 'techcrunch.com', 'semianalysis.com']",
       "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "upstream-component-leadtimes",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
-      "paywalledNote": null
     }
   ],
   "gapCounts": {
-    "total": 14,
-    "source": 14,
+    "total": 13,
+    "source": 13,
     "indicator": 0,
-    "required": 14,
+    "required": 13,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://247wallst.com/investing/2026/08/23/22-billion-in-customer-deposits-did-not-stop-this-chip-ceo-from-selling-37-million/",
-    "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018",
-    "https://fortune.com/2026/08/20/supermicro-investigation-ceo-nvidia-smuggling/",
-    "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
-    "https://lambda.ai/service/gpu-cloud",
-    "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
-    "https://www.coreweave.com/pricing",
-    "https://www.servethehome.com/samsung-evolving-hbm-base-die-at-hot-chips-2026/",
-    "https://www.taipeitimes.com/News/taiwan/archives/2026/08/24/2003863053",
-    "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/08/24/taiwan-indicts-nine-including-employees-of-nvidia-and-super-micro-over-alleged-illegal-export-of-ai-servers-to-foreign-countries"
+    "https://finance.yahoo.com/technology/ai/articles/nvidia-scales-back-250-billion-234356524.html",
+    "https://ir.amd.com/news-events/press-releases/detail/1297/amd-appoints-tim-ryan-to-board-of-directors",
+    "https://jarvislabs.ai/blog/h200-price",
+    "https://nebius.com/prices",
+    "https://nvidianews.nvidia.com/news/nvidia-groq-3-lpx-now-in-full-production-with-world-class-speed-for-agentic-ai",
+    "https://nvidianews.nvidia.com/news/nvidia-sets-conference-call-for-second-quarter-financial-results-6927195",
+    "https://nvidianews.nvidia.com/news/spacexai-adopts-nvidia-vera-cpu-to-accelerate-agentic-ai-at-massive-scale",
+    "https://tech.yahoo.com/ai/articles/chinas-moonshot-ai-reportedly-used-100000459.html",
+    "https://www.digitimes.com/reports/item.php?id=20260814RS400",
+    "https://www.tradingkey.com/analysis/stocks/us-stocks/262103776-nvidia-nvda-225-229-breakout-rubin-demand-spacex-endorsement-august-26-earnings-tradingkey"
   ],
   "judgedIndicatorIds": [
     "D2",

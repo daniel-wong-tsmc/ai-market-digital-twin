@@ -1,0 +1,43 @@
+{
+  "id": "tech-yahoo-com-d98ba886-2026-08-1",
+  "statement": "China's Moonshot AI reportedly trained its Kimi K3 model on Nvidia Blackwell chips accessed through offshore rental, and the U.S. Commerce Department is formally investigating Chinese firms' access to advanced U.S. chips.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Reported circumvention of export controls raises the odds of tighter rules, including closing the remote-access rental loophole, which would cut off a channel through which Chinese demand currently reaches Nvidia hardware.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.open-weight",
+      "infrastructure.neocloud"
+    ],
+    "direction": "negative",
+    "mechanism": "If the proposed Remote Access Security Act treats remote access as an export event, offshore rental to Chinese labs stops counting as a legal route, removing that slice of accessible demand for Nvidia parts."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Tech (mirror of Tom's Hardware)",
+      "url": "https://tech.yahoo.com/ai/articles/chinas-moonshot-ai-reportedly-used-100000459.html",
+      "date": "2026-07-29",
+      "excerpt": "China's Moonshot AI reportedly used Nvidia Blackwell chips for training its Kimi K3 model, allegedly circumventing both U.S. export controls and Chinese import controls to acquire the compute.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet mirroring one story, reporting allegations rather than confirmed findings; document is also older than the current collection window."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-07-29",
+  "capturedAt": "2026-08-24T16:49:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

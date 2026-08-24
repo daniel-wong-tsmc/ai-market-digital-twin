@@ -1,0 +1,41 @@
+{
+  "seriesName": "DRAM supplier revenue growth, Q1 2026 (quarter-on-quarter)",
+  "unit": "% QoQ revenue growth",
+  "form": "columns",
+  "sourceName": "evertiq.com",
+  "points": [
+    {
+      "label": "Samsung",
+      "value": 93.4,
+      "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+      "publishedAt": "2026-06-08"
+    },
+    {
+      "label": "SK Hynix",
+      "value": 62.5,
+      "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+      "publishedAt": "2026-06-08"
+    },
+    {
+      "label": "Micron",
+      "value": 81.6,
+      "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+      "publishedAt": "2026-06-08"
+    },
+    {
+      "label": "Nanya",
+      "value": 60.0,
+      "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+      "publishedAt": "2026-06-08"
+    },
+    {
+      "label": "Winbond",
+      "value": 91.4,
+      "sourceUrl": "https://evertiq.com/news/2026-06-08-dram-prices-surge-industry-revenue-up-81-in-a-single-quarter",
+      "publishedAt": "2026-06-08"
+    }
+  ],
+  "pair": false,
+  "notes": "This series does not directly measure the 'half of demand' or '60-70% of Rubin Ultra volume' figures cited in the bullet -- those figures are hedged/rounded in their original sources (Micron's transcript says 'no more than half' as a spoken hedge, not a bare percentage; the Sedaily Rubin Ultra piece does not print the 60-70% figure as visible page text, only describes reduced die specs). Per the task rules, neither of those can be reported as a bare-number point. Instead this series contextualizes the same underlying memory-market squeeze: all five major DRAM suppliers posted large quarter-on-quarter revenue jumps in Q1 2026 (industry-wide DRAM revenue reached USD 97 billion, up 81% QoQ) as demand for AI-driven memory (HBM/DDR5) outstripped supply -- the same dynamic Micron and Nvidia's suppliers describe in the bullet. All five points are individual-supplier figures on the same evertiq.com page, each a bare percentage in the unit field's terms.",
+  "bulletIndex": 2
+}

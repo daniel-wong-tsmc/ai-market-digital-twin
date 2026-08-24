@@ -1,20 +1,19 @@
 {
- "asOf": "2026-08-24",
+ "asOf": "2026-08-25",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 5,
+   "checkCount": 6,
    "id": "dim-bottleneck",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-08-24",
+    "assessedAsOf": "2026-08-25",
     "claimFindingIds": [
-     "finance-biggo-com-cda170af-2026-08-1",
-     "finance-biggo-com-cda170af-2026-08-2",
-     "247wallst-com-e58dd832-2026-08-3"
+     "www-investing-com-87498f82-2026-08-1",
+     "en-sedaily-com-b1c000ac-2026-08-1"
     ],
-    "reasoning": "The shortage is now showing up in prices. NVIDIA is reported to be lifting AI server prices more than 15%, memory contract prices have risen about 50% this year, and Micron says customers want about 50% more memory than it can commit.",
-    "status": "worsened"
+    "reasoning": "No new supply evidence arrived today. Micron still says it can supply no more than about half of what customers ask for, and NVIDIA's memory suppliers still cover only 60% to 70% of the volume requested for Rubin Ultra.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -28,16 +27,15 @@
    "worsenedCount": 4
   },
   {
-   "checkCount": 5,
+   "checkCount": 6,
    "id": "dim-moat",
-   "improvedStreak": 1,
+   "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-24",
+    "assessedAsOf": "2026-08-25",
     "claimFindingIds": [
-     "finance-yahoo-com-171fe64e-2026-08-4",
-     "qz-com-36c37a60-2026-08-1"
+     "finance-yahoo-com-171fe64e-2026-08-4"
     ],
-    "reasoning": "No new evidence arrived today about rivals taking share. NVIDIA is still described as taking as much as 90% of AI chip spending in a given quarter, and Microsoft's plan for upward of 300,000 of its own chips for 2027 has not moved.",
+    "reasoning": "No new evidence arrived today on rivals taking share. NVIDIA is still described as accounting for as much as 90% of AI chip sales in a given quarter.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
@@ -52,40 +50,38 @@
    "worsenedCount": 3
   },
   {
-   "checkCount": 4,
+   "checkCount": 5,
    "id": "constraint-stacked-memory-and-server-dram",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-24",
+    "assessedAsOf": "2026-08-25",
     "claimFindingIds": [
-     "finance-biggo-com-cda170af-2026-08-2",
-     "247wallst-com-e58dd832-2026-08-3"
+     "www-investing-com-87498f82-2026-08-1"
     ],
-    "reasoning": "Memory contract prices have risen roughly 50% so far this year and are pushing into the cost of every AI server, while Micron says customers want about 50% more memory than it can promise.",
-    "status": "worsened"
+    "reasoning": "No new memory-price or supply evidence arrived today. Micron's position stands: it can supply no more than about half of demand, calls server memory the number one constraint, and has no line of sight to when supply meets demand.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "stacked memory and server DRAM",
+   "title": "HBM4 and server DRAM supply",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "stacked memory and server DRAM"
+    "label": "HBM4 and server DRAM supply"
    },
    "worsenedCount": 1
   },
   {
-   "checkCount": 3,
+   "checkCount": 4,
    "id": "constraint-stacked-high-bandwidth-memory-supply",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-08-24",
+    "assessedAsOf": "2026-08-25",
     "claimFindingIds": [
-     "en-sedaily-com-b1c000ac-2026-08-1",
-     "www-servethehome-com-0b5bddaa-2026-08-2"
+     "en-sedaily-com-b1c000ac-2026-08-1"
     ],
-    "reasoning": "No new supply evidence arrived today. Suppliers can still meet only 60% to 70% of the volume asked for Rubin Ultra, and Samsung's new stacking design saves about 100 watts per accelerator but adds no memory.",
+    "reasoning": "No new evidence arrived today. Suppliers can still meet only 60% to 70% of the stacked-memory volume requested for the Rubin Ultra generation.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
@@ -100,16 +96,16 @@
    "worsenedCount": 0
   },
   {
-   "checkCount": 2,
+   "checkCount": 3,
    "id": "constraint-hbm4-memory-allocation-per-accelerator",
-   "improvedStreak": 1,
+   "improvedStreak": 2,
    "latest": {
-    "assessedAsOf": "2026-08-24",
+    "assessedAsOf": "2026-08-25",
     "claimFindingIds": [
      "en-sedaily-com-b1c000ac-2026-08-2",
      "www-trendforce-com-17fa2dc8-2026-08-1"
     ],
-    "reasoning": "No new evidence arrived today. NVIDIA is still testing Rubin Ultra at 192GB and 256GB of memory against a planned 1TB, with four memory specifications under review, so the amount each machine gets remains unsettled.",
+    "reasoning": "No new evidence arrived today. NVIDIA is still testing the part at 192GB and 256GB of memory against a planned 1TB, with four memory specifications under review, so how much each machine gets remains unsettled.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",

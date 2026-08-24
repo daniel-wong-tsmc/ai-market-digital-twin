@@ -529,3 +529,13 @@
 {"seq":528,"asOf":"2026-08","kind":"append-observation","pageId":"entity:other","findingId":"247wallst-com-e58dd832-2026-08-3","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":529,"asOf":"2026-08","kind":"append-observation","pageId":"entity:other","findingId":"www-servethehome-com-0b5bddaa-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":530,"asOf":"2026-08","kind":"append-observation","pageId":"entity:other","findingId":"247wallst-com-e58dd832-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":531,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-digitimes-com-f25fa2c7-2026-08-3","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":532,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-digitimes-com-f25fa2c7-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":533,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-digitimes-com-f25fa2c7-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":534,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"jarvislabs-ai-475be7e7-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":535,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"nebius-com-fa885ed3-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":536,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"finance-yahoo-com-4ffdbfce-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":537,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-3b511207-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":538,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"tech-yahoo-com-d98ba886-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":539,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"jarvislabs-ai-475be7e7-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":540,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"finance-yahoo-com-4ffdbfce-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
