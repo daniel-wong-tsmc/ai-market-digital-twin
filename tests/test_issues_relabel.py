@@ -168,3 +168,86 @@ def test_rename_target_is_deterministic_when_two_open_issues_match():
     # V10 overlaps V8 at 0.75 and V9 at 0.5 -> the higher ratio wins.
     assert opened == ["constraint-hbm-stacked-memory-supply"]
     assert len(reg2.issues) == 2
+
+
+# --- the append-only guarantee and the counters --------------------------------
+
+def test_history_and_counters_survive_a_rename(tmp_path):
+    cat_dir = tmp_path / CATEGORY_ID
+    reg, _ = open_issues(_empty_register(), _scorecard(V8), "2026-08-19")
+    iid = reg.issues[0].id
+
+    reg, lines = apply_assessments(
+        reg,
+        [{"issueId": iid, "status": "worsened", "reasoning": "worse",
+          "claimFindingIds": ["f-1"]}],
+        _scorecard(V8), "2026-08-19",
+    )
+    append_history(cat_dir, lines)
+    history_path = cat_dir / "issues" / "history.jsonl"
+    before_bytes = history_path.read_bytes()
+
+    reg, _ = open_issues(reg, _scorecard(V9), "2026-08-21")
+
+    issue = reg.issues[0]
+    assert issue.id == iid, "the id is the thread history hangs on"
+    assert issue.worsenedCount == 1
+    assert issue.checkCount == 1
+    assert issue.latest.reasoning == "worse"
+    assert issue.openedAsOf == "2026-08-19"
+
+    # Append-only: the rename touched no history line.
+    assert history_path.read_bytes() == before_bytes
+    tail = read_history_tail(cat_dir, iid, 5)
+    assert [t["status"] for t in tail] == ["worsened"]
+
+
+def test_renamed_issue_keeps_counting_under_the_new_label():
+    """The point of the whole fix: after a relabel, an "unchanged" assessment
+    while the constraint still fires must NOT count as improvement."""
+    reg, _ = open_issues(_empty_register(), _scorecard(V8), "2026-08-19")
+    reg, _ = open_issues(reg, _scorecard(V9), "2026-08-21")
+    iid = reg.issues[0].id
+    reg, _ = apply_assessments(
+        reg,
+        [{"issueId": iid, "status": "unchanged", "reasoning": "", "claimFindingIds": []}],
+        _scorecard(V9), "2026-08-21",
+    )
+    assert reg.issues[0].improvedStreak == 0
+    assert reg.issues[0].state == "open"
+
+
+def test_without_the_fix_shape_a_stranded_twin_would_drift_to_resolved():
+    """Guards the failure mode itself: five quiet cycles under a re-worded label
+    must leave the issue open, because the rename keeps the trigger matching."""
+    reg, _ = open_issues(_empty_register(), _scorecard(V8), "2026-08-19")
+    reg, _ = open_issues(reg, _scorecard(V9), "2026-08-21")
+    iid = reg.issues[0].id
+    for day in ("2026-08-22", "2026-08-23", "2026-08-24", "2026-08-25", "2026-08-26"):
+        reg, _ = apply_assessments(
+            reg,
+            [{"issueId": iid, "status": "unchanged", "reasoning": "",
+              "claimFindingIds": []}],
+            _scorecard(V9), day,
+        )
+    assert reg.issues[0].state == "open"
+    assert reg.issues[0].resolvedAsOf is None
+
+
+def test_positive_control_a_stranded_issue_really_does_drift_to_resolved():
+    """Proves the guard above is not vacuous. Same five quiet cycles, but the
+    issue is left stranded under the OLD label while the scorecard shows the new
+    one -- exactly the pre-fix state. trigger_still_firing reads False, every
+    "unchanged" counts as improvement, and the register tells the reader
+    "Resolved" about a constraint that is still biting."""
+    reg, _ = open_issues(_empty_register(), _scorecard(V8), "2026-08-19")
+    iid = reg.issues[0].id
+    for day in ("2026-08-22", "2026-08-23", "2026-08-24", "2026-08-25", "2026-08-26"):
+        reg, _ = apply_assessments(
+            reg,
+            [{"issueId": iid, "status": "unchanged", "reasoning": "",
+              "claimFindingIds": []}],
+            _scorecard(V9), day,   # live scorecard names the NEW label
+        )
+    assert reg.issues[0].state == "resolved"
+    assert reg.issues[0].resolvedAsOf == "2026-08-26"
