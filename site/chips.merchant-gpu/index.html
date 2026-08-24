@@ -21,9 +21,16 @@
           'Helvetica Neue', Arial, sans-serif;
         line-height: 1.55;
       }
+      .noscript .disclaimer {
+        margin-top: 2.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid #ddd;
+        font-size: 0.8125rem;
+        color: #666;
+      }
     </style>
-    <script type="module" crossorigin src="./assets/index-DjMiXzyy.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CWr3BYEt.css">
+    <script type="module" crossorigin src="./assets/index-DDm7QqF9.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BySvvlB0.css">
   </head>
   <body>
     <div id="root"></div>
@@ -46,6 +53,19 @@
           Today's answer is not written into this file, so it cannot be shown
           here. <a href="story/">The story archive</a> has the latest reading in
           full.
+        </p>
+        <!--
+          F124: the standing independence disclaimer, docs/publishing-posture.md
+          section 4, approved verbatim 2026-08-22. It belongs here as well as in
+          the app's own footer: with scripting off this block is the whole page,
+          and it is also what a link-preview crawler reads. Unlike a verdict,
+          this text is fixed policy — it cannot go stale between rebuilds.
+        -->
+        <p class="disclaimer">
+          Independent personal project. The analysis here is one individual's
+          own work, produced from public sources. It is not affiliated with,
+          endorsed by, or representative of any employer, and it is not
+          investment advice.
         </p>
       </div>
     </noscript>
