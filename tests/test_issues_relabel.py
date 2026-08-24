@@ -62,3 +62,109 @@ def test_overlap_reports_shared_specific_and_ratio():
     assert shared == 3               # stacked, memory, supply
     assert specific == 2             # "supply" is generic
     assert ratio == 0.75
+
+
+# --- open_issues: rename instead of minting a twin -----------------------------
+
+def _scorecard(label):
+    """Minimal scorecard: one binding constraint, no weak+worsening dims."""
+    return {
+        "categoryStatus": {
+            "rating": "Strong",
+            "direction": "steady",
+            "bottleneck": "bottleneck",
+            "reason": "...",
+            "constraintLabel": label,
+        },
+        "dimensionRatings": {},
+    }
+
+
+def _empty_register():
+    return IssueRegister(schemaVersion=1, categoryId=CATEGORY_ID, asOf="", issues=[])
+
+
+def test_v8_to_v9_relabel_renames_instead_of_minting_a_twin():
+    reg, _ = open_issues(_empty_register(), _scorecard(V8), "2026-08-19")
+    assert [i.id for i in reg.issues] == ["constraint-hbm-stacked-memory-supply"]
+
+    reg, opened = open_issues(reg, _scorecard(V9), "2026-08-21")
+
+    assert len(reg.issues) == 1, "a relabel must not open a twin"
+    issue = reg.issues[0]
+    assert issue.id == "constraint-hbm-stacked-memory-supply"
+    assert issue.title == V9
+    assert issue.trigger.label == V9
+    assert issue.openedAsOf == "2026-08-19"
+    assert issue.reopenedAsOf == []
+    assert opened == ["constraint-hbm-stacked-memory-supply"]
+
+
+def test_three_cycle_relabel_chain_stays_one_issue():
+    reg = _empty_register()
+    for label, day in ((V8, "2026-08-19"), (V9, "2026-08-21"), (V10, "2026-08-22")):
+        reg, _ = open_issues(reg, _scorecard(label), day)
+    assert len(reg.issues) == 1
+    assert reg.issues[0].id == "constraint-hbm-stacked-memory-supply"
+    assert reg.issues[0].title == V10
+
+
+def test_unrelated_new_constraint_still_mints_a_new_issue():
+    reg, _ = open_issues(_empty_register(), _scorecard(V8), "2026-08-19")
+    reg, opened = open_issues(reg, _scorecard("CoWoS advanced packaging capacity"),
+                              "2026-08-21")
+    assert len(reg.issues) == 2
+    assert opened == ["constraint-cowos-advanced-packaging-capacity"]
+
+
+def test_rerunning_open_after_a_rename_is_a_no_op():
+    reg, _ = open_issues(_empty_register(), _scorecard(V8), "2026-08-19")
+    reg, _ = open_issues(reg, _scorecard(V9), "2026-08-21")
+    before = reg.model_dump()
+    reg2, opened = open_issues(reg, _scorecard(V9), "2026-08-21")
+    assert opened == []
+    assert reg2.model_dump() == before
+
+
+def test_resolved_issue_is_not_a_rename_target():
+    reg, _ = open_issues(_empty_register(), _scorecard(V8), "2026-08-19")
+    reg = reg.model_copy(update={
+        "issues": [reg.issues[0].model_copy(update={"state": "resolved",
+                                                    "resolvedAsOf": "2026-08-20"})]
+    })
+    reg, opened = open_issues(reg, _scorecard(V9), "2026-08-21")
+    assert len(reg.issues) == 2
+    assert opened == ["constraint-stacked-memory-and-server-dram"]
+
+
+def test_exact_id_hit_on_open_issue_refreshes_a_stale_label():
+    # v8 -> v9 renames in place (the id still derives from the v8 wording). A
+    # revert to the v8 wording finds the standing issue by id; its stored label
+    # must follow back, or trigger_still_firing reads False against the live
+    # scorecard -- the same F123 bug from the other direction.
+    reg, _ = open_issues(_empty_register(), _scorecard(V8), "2026-08-19")
+    reg, _ = open_issues(reg, _scorecard(V9), "2026-08-21")
+    reg, opened = open_issues(reg, _scorecard(V8), "2026-08-22")
+    assert len(reg.issues) == 1
+    assert reg.issues[0].trigger.label == V8
+    assert reg.issues[0].title == V8
+
+
+def test_rename_target_is_deterministic_when_two_open_issues_match():
+    # The committed register really does hold two open constraint issues, so a
+    # tie is reachable and must not depend on iteration order.
+    reg = IssueRegister(
+        schemaVersion=1, categoryId=CATEGORY_ID, asOf="2026-08-21",
+        issues=[
+            Issue(id="constraint-stacked-memory-and-server-dram",
+                  title=V9, state="open", openedAsOf="2026-08-21",
+                  trigger=IssueTrigger(kind="binding-constraint", label=V9)),
+            Issue(id="constraint-hbm-stacked-memory-supply",
+                  title=V8, state="open", openedAsOf="2026-08-19",
+                  trigger=IssueTrigger(kind="binding-constraint", label=V8)),
+        ],
+    )
+    reg2, opened = open_issues(reg, _scorecard(V10), "2026-08-22")
+    # V10 overlaps V8 at 0.75 and V9 at 0.5 -> the higher ratio wins.
+    assert opened == ["constraint-hbm-stacked-memory-supply"]
+    assert len(reg2.issues) == 2
