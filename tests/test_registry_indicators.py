@@ -97,3 +97,33 @@ def test_leading_demand_indicators_reweighted_for_freshness():
     assert vrg.weight == 0.16
     assert rpo.scoring is True and rpo.side == "demand" and rpo.dimension == "momentum"
     assert vrg.scoring is True and vrg.side == "demand" and vrg.dimension == "momentum"
+
+
+def test_f121_labels_carry_no_old_scheme_paren_id_tail():
+    # F121: seven labels used to end in a retired-scheme short id, e.g.
+    # "Hyperscaler capex-revision direction (D1)". Those tails leaked raw ids into
+    # every above-the-fold label row and tripped the F120 acronym gate; the F120
+    # display-layer strip covered them, this asserts the DATA itself is clean.
+    import re
+    tail = re.compile(r"\s*\([A-Z]\d{1,2}\)\s*$")
+    reg = IndicatorRegistry.load(REG)
+    offenders = sorted(k for k, v in reg.indicators.items()
+                       if v.get("label") and tail.search(v["label"]))
+    assert offenders == [], f"labels still carry old-scheme id tails: {offenders}"
+
+
+def test_f121_cleaned_labels_are_exact():
+    # The cleanup drops ONLY the parenthesised tail -- the semantic wording of each
+    # label is untouched (these strings are baked verbatim into the emitted extract
+    # brain prompt, so any rewording would be a separate, prompt-moving decision).
+    reg = IndicatorRegistry.load(REG)
+    expected = {
+        "pkgCapacityOrderSpread": "Advanced-packaging capacity-order spread",
+        "hbmSupplyCapex": "HBM bit-supply growth + memory capex",
+        "upstreamLeadTimes": "Upstream long-lead component lead times",
+        "hyperscalerCapexRevision": "Hyperscaler capex-revision direction",
+        "odmMonthlyAiRevenue": "Taiwan ODM monthly AI-server revenue",
+        "tokenEconomics": "Inference token economics",
+        "marginalBuyerFinancing": "Marginal-buyer financing conditions",
+    }
+    assert {k: reg.indicators[k]["label"] for k in expected} == expected
