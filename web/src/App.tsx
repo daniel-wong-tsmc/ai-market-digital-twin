@@ -8,6 +8,7 @@ import {Bullets} from './components/Bullets';
 import {Dimensions} from './components/Dimensions';
 import {Issues} from './components/Issues';
 import {Footer} from './components/Footer';
+import {Disclaimer} from './components/Disclaimer';
 import {loadDashboard, plainDate, plainDateWithWeekday} from './load';
 import type {Dashboard} from './load';
 
@@ -63,6 +64,14 @@ export function App() {
     return (
       <div className="shell">
         <p className="loading">Loading today&rsquo;s reading&hellip;</p>
+        {/*
+          F124: the two states below the ready one return early and never reach
+          <Footer>, so the disclaimer is placed in each of them by hand.
+          docs/publishing-posture.md §4 asks for every public page, and a page
+          that is still loading — or that failed — is just as public as one
+          showing the day's reading.
+        */}
+        <Disclaimer />
       </div>
     );
   }
@@ -73,6 +82,7 @@ export function App() {
         <p className="loadfail" role="alert">
           Today&rsquo;s reading could not be loaded. {state.message}
         </p>
+        <Disclaimer />
       </div>
     );
   }
