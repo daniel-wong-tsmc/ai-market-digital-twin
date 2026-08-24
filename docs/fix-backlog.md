@@ -1165,7 +1165,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   rejected the way an invented one already is. Gated: extraction prompt/gate changes re-run the
   eval gate; F6 expected byte-untouched (gate code, not prompt bytes — verify in-lane).
 
-- [ ] **F128 — Codify the unattended-run mechanics the user ruled on 2026-08-22 (GATED: F83
+- [x] **F128 — Codify the unattended-run mechanics the user ruled on 2026-08-22 (GATED: F83
   fingerprint re-record).** Four standing per-cycle deviations are now ACCEPTED PRACTICE by
   interactive ruling and must move from "re-flagged every run" into the run-cycle skill's text:
   (1) brains run with Read on their own split prompt files + exactly one Write to their own
