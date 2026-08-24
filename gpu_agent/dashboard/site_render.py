@@ -15,6 +15,18 @@ HOW_LINKS = {"alert": "how/alert.html", "demand": "how/demand.html",
 
 _TILE_SIDES = ("demand", "supply", "gap")
 
+# F124 -- the standing independence disclaimer, docs/publishing-posture.md
+# section 4. Wording APPROVED VERBATIM by the user, interactive, 2026-08-22:
+# do not reword, re-punctuate or "tidy" it. The React app carries the same
+# sentence in web/src/components/Disclaimer.tsx and a test pins the two
+# together (web/src/__tests__/copy-pins.test.ts), so an edit here without a
+# matching edit there turns the web suite red rather than drifting quietly.
+DISCLAIMER = (
+    "Independent personal project. The analysis here is one individual's own "
+    "work, produced from public sources. It is not affiliated with, endorsed "
+    "by, or representative of any employer, and it is not investment advice."
+)
+
 SITE_CSS = """
 :root { --ink:#1a1a1a; --muted:#666; --line:#ddd; --green:#2e7d32; --yellow:#f9a825;
         --orange:#ef6c00; --red:#c62828; }
@@ -44,16 +56,40 @@ th, td { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid var(-
 ul { padding-left: 1.2rem; }
 details { margin: .3rem 0; }
 .callmore { color: var(--muted); }
+/* F124: the standing disclaimer. Quiet fine print -- a standing notice, not
+   part of the day's reading. */
+.disclaimer { margin: 3rem 0 0; padding-top: 1rem; border-top: 1px solid var(--line);
+              color: var(--muted); font-size: .8rem; line-height: 1.5; }
 """
+
+# Written into the page as-is, not through esc(). Two reasons. It is a fixed
+# constant three lines up, never data from a fetched page, so there is nothing
+# to escape against. And esc() would turn the apostrophe in "individual's" into
+# &#x27;, which renders identically but means the approved sentence no longer
+# appears verbatim in the built files -- anyone grepping site/ for the wording
+# the posture doc approved would come up empty. The assert keeps that honest:
+# if the wording ever gains a character HTML cares about, the build stops here
+# instead of emitting broken markup.
+assert not (set("<>&") & set(DISCLAIMER)), \
+    "the disclaimer gained an HTML-special character; escape it or reword"
+_DISCLAIMER_HTML = f'<footer class="disclaimer">{DISCLAIMER}</footer>'
 
 
 def page(title: str, body: str, depth: int = 0) -> str:
+    """The one HTML shell every emitted page goes through.
+
+    F124: the disclaimer is appended HERE rather than in each renderer, so
+    every page the builder writes today -- and every page a later lane adds --
+    carries it without anyone having to remember. A renderer that assembles its
+    own <html> instead of calling this would slip past that guarantee;
+    tests/dashboard/test_site_build.py walks the whole emitted set to catch it.
+    """
     css_href = ("../" * depth) + "style.css"
     return ("<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n"
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
             f"<title>{esc(title)}</title>\n"
             f"<link rel=\"stylesheet\" href=\"{css_href}\">\n"
-            f"</head>\n<body>\n{body}\n</body>\n</html>\n")
+            f"</head>\n<body>\n{body}\n{_DISCLAIMER_HTML}\n</body>\n</html>\n")
 
 
 def render_index_redirect(target_href: str, label: str) -> str:
