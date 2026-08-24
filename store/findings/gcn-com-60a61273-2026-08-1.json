@@ -1,0 +1,53 @@
+{
+  "id": "gcn-com-60a61273-2026-08-1",
+  "statement": "NVIDIA's Vera Rubin platform reached full production on July 21, 2026, with shipments underway to OpenAI, CoreWeave, Google Cloud, Microsoft Azure, Meta and Dell, compressing the usual 24-30 month cycle into 18 months.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A next-generation platform entering volume production earlier than the normal cadence adds accelerator supply and pulls forward the upgrade cycle across cloud buyers.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud",
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "Full production and broad customer shipments increase deliverable accelerator units and pull HBM, packaging and fabric content along with them."
+  },
+  "evidence": [
+    {
+      "source": "GCN (Government Computer News)",
+      "url": "https://gcn.com/nvidia-vera-rubin-chips-begin-shipping/20421/",
+      "date": "2026-08-04",
+      "excerpt": "NVIDIA confirmed that its Vera Rubin AI chip platform reached full production on July 21, 2026, with shipments now underway to major cloud providers and systems manufacturers.",
+      "tier": "secondary"
+    },
+    {
+      "source": "GCN (Government Computer News)",
+      "url": "https://gcn.com/nvidia-vera-rubin-chips-begin-shipping/20421/",
+      "date": "2026-08-04",
+      "excerpt": "NVIDIA compressed its typical 24-30 month semiconductor cycle into 18 months from Blackwell launch to Rubin production.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary trade outlet relaying vendor claims; no primary NVIDIA release in evidence."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-23T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

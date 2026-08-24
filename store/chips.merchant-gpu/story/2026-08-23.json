@@ -1,0 +1,244 @@
+{
+  "headline": "NVIDIA starts paying for the electricity, not just the chips",
+  "deck": "Memory still caps how many chips get built, and nothing moved that today. What moved is where the seller is putting its money: power plants and ready-to-build land.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The ceiling has not moved",
+      "paragraphs": [
+        "Little changed today about why supply is not catching up. NVIDIA's memory suppliers can still meet only 60% to 70% of the stacked-memory volume asked of them for the Rubin Ultra generation, as reported on August 7. Micron said at its August 10 forum that it can supply no more than about half of customer demand, calls this memory the number one limit its biggest customers face, and has no line of sight to when supply meets demand. TrendForce said on August 4 that memory supply stays short through 2027, which caps how much factory capacity can be turned over to the stacked kind at all.",
+        "Rental prices are the fastest read on whether any of this is loosening, and today they are flat. Lambda's price list, captured today, shows an H100 at $3.99 to $4.29 per chip per hour and a B200 at $6.69 to $6.99, with reserved clusters starting at $5.54 and $8.87. The same seller showed the same $3.99 and $6.69 low end on August 19, and its newest publicly rentable part is still the B200: no H200, no GB200, nothing from AMD. Nobody is discounting chips they cannot build enough of."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "lambda-ai-fa91ee98-2026-08-1",
+        "lambda-ai-591ae243-2026-08-1",
+        "lambda-ai-591ae243-2026-08-3"
+      ],
+      "sourceLine": "Seoul Economic Daily on the Rubin Ultra memory shortfall, Micron's August 10 forum remarks, TrendForce, and Lambda's own price page captured today.",
+      "relatedDocs": [
+        {
+          "url": "https://lambda.ai/service/gpu-cloud/pricing",
+          "title": "Lambda's rental price list, captured today",
+          "outlet": "Lambda (lambda.ai) official GPU cloud pricing page",
+          "date": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The chip seller buys into power and land",
+      "paragraphs": [
+        "The news today is about electricity. NVIDIA will invest up to $3 billion in Lancium, the power developer behind the Stargate campus in Abilene, Texas, taking about 20% ownership for an initial $2 billion. Separately, it is in advanced talks to put several hundred million dollars into Cloverleaf Infrastructure, which develops data-centre land that already has power connected, has sold more than 7 gigawatts and has a pipeline above 10 gigawatts. Both were reported on August 21.",
+        "This follows the same pattern set a few days earlier. On August 17 NVIDIA guaranteed SB Energy's Ohio campus to host only NVIDIA machines, an initial 4.25 gigawatts with an option to reach 8, with its payment obligation capped at $105 billion and paid out only if OpenAI defaults. On the same day it emerged that NVIDIA had cut that promise from a proposed $250 billion to under $120 billion, covering only the first phase. On August 10 it signed non-binding memorandums with Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR to raise over $500 billion of outside money for its customers.",
+        "Read plainly: a company that sells chips is now spending its own balance sheet on power stations, land and financing. That is what a seller does when the thing stopping its product is no longer only the product."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "finance-yahoo-com-afa8fca2-2026-08-1",
+        "finance-yahoo-com-f400b412-2026-08-1",
+        "nvidianews-nvidia-com-65f0d00a-2026-08-1",
+        "nvidianews-nvidia-com-b38ebbeb-2026-08-1",
+        "nvidianews-nvidia-com-b38ebbeb-2026-08-4",
+        "finance-yahoo-com-54a88032-2026-08-1",
+        "nvidianews-nvidia-com-cfc51804-2026-08-1"
+      ],
+      "sourceLine": "Wall Street Journal and Reuters reporting carried by Yahoo Finance on the Lancium and Cloverleaf investments, plus NVIDIA's own announcements on the Ohio campus and its financing partners.",
+      "relatedDocs": [
+        {
+          "url": "https://finance.yahoo.com/technology/articles/nvidia-invest-3-billion-lancium-014211358.html",
+          "title": "NVIDIA to invest up to $3 billion in power developer Lancium",
+          "outlet": "Yahoo Finance (citing The Information / Reuters reporting)",
+          "date": "2026-08-21"
+        },
+        {
+          "url": "https://nvidianews.nvidia.com/",
+          "title": "NVIDIA's own newsroom for the two weeks to August 20",
+          "outlet": "NVIDIA Newsroom (nvidianews.nvidia.com, official)",
+          "date": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The buyers keep hiring chip designers",
+      "paragraphs": [
+        "Anthropic hired the founder of Google's custom chip programme to lead its own semiconductor work, reported on August 21. It still buys chips from NVIDIA, Google and Amazon. In the same reporting it says it is short of data-centre capacity, and it has placed about $250 million of first orders with the startup Fractile plus capacity agreements with Riot Platforms and Volta Infra Holdings.",
+        "Microsoft is doing the same at larger scale. On August 11 it was reported to be negotiating factory capacity for upward of 300,000 of its own Maia 300 chips for delivery in 2027, with a longer-term goal above one million units. Every one of those is a chip it does not buy from a merchant supplier.",
+        "The money behind all of this keeps growing. UBS said on August 22 that the largest cloud buyers will spend about $4.1 trillion on AI infrastructure from 2026 to 2028, roughly triple the $1.3 trillion of the prior six years. Demand is not the problem, and it has not been for a long time."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "finance-yahoo-com-d93fe0e4-2026-08-1",
+        "finance-yahoo-com-d93fe0e4-2026-08-2",
+        "qz-com-36c37a60-2026-08-1",
+        "247wallst-com-c9ca352c-2026-08-1"
+      ],
+      "sourceLine": "Bloomberg reporting carried by Yahoo Finance on Anthropic's chip hire, Quartz on Microsoft's Maia orders, and 24/7 Wall St. on the UBS spending estimate.",
+      "relatedDocs": [
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-taps-google-chip-veteran-195955567.html",
+          "title": "Anthropic hires Google's custom-chip founder and orders from a startup",
+          "outlet": "Yahoo Finance (Bloomberg syndication)",
+          "date": "2026-08-21"
+        },
+        {
+          "url": "https://247wallst.com/investing/2026/08/22/ais-absurd-spending-boom-hyperscalers-are-spending-102-of-cloud-revenue-on-capex/",
+          "title": "UBS sizes the three-year buildout at about $4.1 trillion",
+          "outlet": "24/7 Wall St.",
+          "date": "2026-08-22"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "The one thing that would genuinely lift the ceiling is more good memory coming off the lines. Samsung's yield on its newest stacked memory reached close to 80% as of August 10, up from below 60% when volume production began in February, and SK Hynix's yield has separately touched 80%. Watch whether that turns into delivered volume rather than a lab number. Watch, too, which memory specification NVIDIA settles on for Rubin Ultra: four options have been under review since the third quarter, and that single choice decides how much memory each shipped machine consumes.",
+        "For a monthly read on whether more memory is actually leaving the country that makes most of it, watch Korea. Its semiconductor exports nearly tripled from a year earlier to $26 billion in the first 20 days of August, 47.2% of the country's $55.2 billion of total exports. If the next reading flattens, the memory line is not getting any longer.",
+        "Nothing on the calendar forces a resolution. NVIDIA's own newsroom carried no earnings date and no pricing announcement in the two weeks to August 20. So the next real signal is likely to be a price: either the rental rates on Lambda's list starting to slide, or a memory yield number that finally shows up as shipped parts."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "en-sedaily-com-80cdc180-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-3",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-koreaherald-com-f4194135-2026-08-1",
+        "nvidianews-nvidia-com-19092c36-2026-08-1",
+        "lambda-ai-fa91ee98-2026-08-1"
+      ],
+      "sourceLine": "Seoul Economic Daily on Korean memory yields, TrendForce on the Rubin Ultra options, the Korea Herald on August export figures, and NVIDIA's own newsroom.",
+      "relatedDocs": [
+        {
+          "url": "https://lambda.ai/service/gpu-cloud/pricing",
+          "title": "Lambda's rental price list, captured today",
+          "outlet": "Lambda (lambda.ai) official GPU cloud pricing page",
+          "date": "2026-08-23"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "How fast memory makers are raising factory spending, the one thing that eventually lifts the ceiling.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Which way the biggest buyers are moving their spending plans, and they are still moving up.",
+      "scene": 3
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a chip costs to buy outright, the first place easier supply would show up.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "Memory suppliers can still fill only 60% to 70% of the volume asked for NVIDIA's next flagship, and Micron can serve about half of total demand.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "NVIDIA put money into electricity and land: up to $3 billion for power developer Lancium, plus talks over Cloverleaf's ready-to-build sites.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "NVIDIA agreed to invest up to $3 billion in power developer Lancium, taking about 20% ownership, a sign electricity now limits growth as much as chips do.",
+      "claimFindingIds": [
+        "finance-yahoo-com-afa8fca2-2026-08-1"
+      ]
+    },
+    {
+      "text": "Anthropic hired the founder of Google's custom-chip programme and placed about $250 million of first orders with startup Fractile, saying it is short of data-centre capacity.",
+      "claimFindingIds": [
+        "finance-yahoo-com-d93fe0e4-2026-08-1",
+        "finance-yahoo-com-d93fe0e4-2026-08-2"
+      ]
+    },
+    {
+      "text": "Lambda's price list today still shows an H100 renting at $3.99 to $4.29 an hour, so nothing yet suggests supply has caught up with demand.",
+      "claimFindingIds": [
+        "lambda-ai-fa91ee98-2026-08-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "A second limit is now visible beside memory. NVIDIA agreed to invest up to $3 billion in power developer Lancium and is in advanced talks over Cloverleaf's powered land, which it would not do if electricity and ready sites were plentiful.",
+      "claimFindingIds": [
+        "finance-yahoo-com-afa8fca2-2026-08-1",
+        "finance-yahoo-com-f400b412-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "Anthropic hired the founder of Google's custom-chip programme to run its own silicon work and placed about $250 million of first orders with startup Fractile. Microsoft is negotiating capacity for upward of 300,000 of its own Maia 300 chips for 2027.",
+      "claimFindingIds": [
+        "finance-yahoo-com-d93fe0e4-2026-08-1",
+        "finance-yahoo-com-d93fe0e4-2026-08-2",
+        "qz-com-36c37a60-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today. Memory supply is still reported short through 2027, limiting what can be turned over to the stacked kind, and Micron still says it can serve only about half of customer demand.",
+      "claimFindingIds": [
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-high-bandwidth-memory-supply",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today. Suppliers can still meet only 60% to 70% of the volume asked for Rubin Ultra, and Korean yields near 80% have not yet shown up as extra delivered parts.",
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today. NVIDIA is still testing Rubin Ultra at 192GB and 256GB of memory against a planned 1TB, and four specifications remain under review, so the memory each machine gets is still unsettled.",
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-23",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "e4f67b7f2be936ce1e957d6dee133f114f64d7d06d10dccd61b959fe1f8f8b0f",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-24T11:07:03.031248+00:00"
+  }
+}

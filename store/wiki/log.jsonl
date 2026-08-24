@@ -499,3 +499,16 @@
 {"seq":498,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-09f767dd-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":499,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"finance-yahoo-com-e946ae80-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":500,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"investor-nvidia-com-7e5e6232-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":501,"asOf":"2026-08","kind":"create-page","pageId":"entity:anthropic-google-nvidia-custom-silicon-competitive-displacement","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":502,"asOf":"2026-08","kind":"append-observation","pageId":"entity:anthropic-google-nvidia-custom-silicon-competitive-displacement","findingId":"finance-yahoo-com-d93fe0e4-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":503,"asOf":"2026-08","kind":"append-observation","pageId":"entity:anthropic-google-nvidia-custom-silicon-competitive-displacement","findingId":"finance-yahoo-com-d93fe0e4-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":504,"asOf":"2026-08","kind":"create-page","pageId":"entity:hyperscalers-amazon-alphabet-microsoft-meta-spacex-oracle-ubs-estimate","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":505,"asOf":"2026-08","kind":"append-observation","pageId":"entity:hyperscalers-amazon-alphabet-microsoft-meta-spacex-oracle-ubs-estimate","findingId":"247wallst-com-c9ca352c-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":506,"asOf":"2026-08","kind":"create-page","pageId":"entity:nvidia-lancium-power-infrastructure-stargate","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":507,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia-lancium-power-infrastructure-stargate","findingId":"finance-yahoo-com-afa8fca2-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":508,"asOf":"2026-08","kind":"create-page","pageId":"entity:super-micro-computer-nvidia","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":509,"asOf":"2026-08","kind":"append-observation","pageId":"entity:super-micro-computer-nvidia","findingId":"www-theregister-com-e876727e-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":510,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"lambda-ai-fa91ee98-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":511,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"gcn-com-60a61273-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":512,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-19092c36-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":513,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"fudzilla-com-9c8ce5ad-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}

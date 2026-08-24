@@ -1,0 +1,35 @@
+{
+  "seriesName": "H100 Neocloud rental price, median $/GPU-hour by period",
+  "unit": "US$ per GPU-hour",
+  "form": "line",
+  "sourceName": "Silicon Data",
+  "points": [
+    {
+      "label": "2024-06 to 2024-12 (Neocloud median)",
+      "value": 2.99,
+      "sourceUrl": "https://www.silicondata.com/blog/h100-rental-price-over-time",
+      "publishedAt": "2025-12-21"
+    },
+    {
+      "label": "2025-01 to 2025-05 (Neocloud median)",
+      "value": 3.5,
+      "sourceUrl": "https://www.silicondata.com/blog/h100-rental-price-over-time",
+      "publishedAt": "2025-12-21"
+    },
+    {
+      "label": "2025-06 (Neocloud, single month)",
+      "value": 3.29,
+      "sourceUrl": "https://www.silicondata.com/blog/h100-rental-price-over-time",
+      "publishedAt": "2025-12-21"
+    },
+    {
+      "label": "2025-07 to 2025-12 (Neocloud median)",
+      "value": 3.33,
+      "sourceUrl": "https://www.silicondata.com/blog/h100-rental-price-over-time",
+      "publishedAt": "2025-12-21"
+    }
+  ],
+  "pair": false,
+  "notes": "All four points come from one table on a single Silicon Data article ('H100 Rental Price Over Time (2023-2025)'), published 2025-12-21. 'Neocloud' is Silicon Data's tier label for providers like Lambda, CoreWeave, etc. -- the same category Lambda's own pricing (cited in the bullet: H100 SXM at $3.99-$4.29/hr on-demand today) belongs to. Values used are the article's own stated MEDIAN ('med') figures for each period, not ranges -- ranges (e.g. $3.00-$4.19) were left out per the bare-number rule. The table also has Hyperscaler and Marketplace tiers with their own medians on the same page if a supply/demand-style comparison is wanted instead; only Neocloud was pulled here as the closest match to Lambda's category. Periods are multi-month buckets as published by the source, not single dates, except the 2025-06 row which is a single month. This shows Lambda-category (neocloud) H100 pricing holding in the roughly $3.00-$3.50/hr median band through late 2025, i.e. well below the bullet's current $3.99-$4.29 on-demand figure from Lambda's own site -- consistent with the bullet's point that prices have not come down, if anything Lambda sits above this recent neocloud median trend.",
+  "bulletIndex": 3
+}

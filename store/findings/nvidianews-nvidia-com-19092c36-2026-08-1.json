@@ -1,0 +1,51 @@
+{
+  "id": "nvidianews-nvidia-com-19092c36-2026-08-1",
+  "statement": "NVIDIA's newsroom for the two weeks to August 20, 2026 shows no earnings-date, Rubin-pricing or Blackwell-pricing release, but does announce an exclusive deal for SB Energy's Ohio campus to host only NVIDIA AI compute.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "An exclusivity guarantee over a large power-and-datacenter campus locks future capacity to NVIDIA silicon rather than rival accelerators.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Committing a named campus to exclusively host NVIDIA compute reserves incoming datacenter capacity for merchant GPUs and forecloses competing silicon at that site."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom (nvidianews.nvidia.com, official)",
+      "url": "https://nvidianews.nvidia.com/",
+      "date": "2026-08-20",
+      "excerpt": "'NVIDIA Guarantees SB Energy's PORTS-Pike Technology Campus in Ohio to Exclusively Host NVIDIA AI Compute' (press release announcing a partnership for AI compute capacity in Ohio)",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA Newsroom (nvidianews.nvidia.com, official)",
+      "url": "https://nvidianews.nvidia.com/",
+      "date": "2026-08-20",
+      "excerpt": "No Q2 FY2027 earnings-date announcement, no Rubin-specific pricing release, and no Blackwell pricing release appeared in the newsroom listing for this window as of the fetch.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: NVIDIA's own official newsroom index, including a first-party press release title."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-20",
+  "capturedAt": "2026-08-23T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

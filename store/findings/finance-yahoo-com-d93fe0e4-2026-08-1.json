@@ -1,0 +1,52 @@
+{
+  "id": "finance-yahoo-com-d93fe0e4-2026-08-1",
+  "statement": "Anthropic hired the founder of Google's custom chip program to lead its own semiconductor development, while continuing to source chips from Nvidia, Google and Amazon.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A major model lab staffing up to build its own accelerators points to slower long-run merchant-GPU share of that customer's spend, even though it buys Nvidia today.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.hyperscaler-asic",
+      "models.frontier-closed",
+      "chips.eda-ip"
+    ],
+    "direction": "mixed",
+    "mechanism": "In-house silicon programs at large model labs shift a share of future accelerator purchases away from merchant GPUs toward custom parts, while near-term purchases continue."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Bloomberg syndication)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-taps-google-chip-veteran-195955567.html",
+      "date": "2026-08-21",
+      "excerpt": "the hire underscores Anthropic's push toward building proprietary semiconductors",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (Bloomberg syndication)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-taps-google-chip-veteran-195955567.html",
+      "date": "2026-08-21",
+      "excerpt": "The company currently sources chips from multiple vendors including Nvidia, Google, and Amazon.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary syndication of one Bloomberg story; personnel move, no order or revenue data."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Anthropic / Google / NVIDIA (custom silicon competitive displacement)",
+  "observedAt": "2026-08-21",
+  "capturedAt": "2026-08-23T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

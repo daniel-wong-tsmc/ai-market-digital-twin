@@ -207,14 +207,24 @@ def test_real_2026_08_08_story_artifact_golden_claim_count():
     '2026-08-08') gave claimsAudited=15, flagged=0, skipped=0, with keys
     scene:1..4 and bullet:0.. (exact list asserted below)."""
     art = run_audit("store", "chips.merchant-gpu", "2026-08-08")
-    assert art.summary["claimsAudited"] == 15
+    story_claims = [c for c in art.claims
+                    if c.claimKey.startswith(("scene:", "bullet:"))]
+    assert [c.claimKey for c in story_claims] == [
+        "scene:1", "scene:2", "scene:3", "scene:4",
+        "bullet:0", "bullet:1", "bullet:2"]
     assert art.summary["skipped"] == 0
-    assert len(art.claims) == 15
     assert all(not c.claimKey.startswith("issue:") for c in art.claims)
     # The claims this pin is ABOUT are the ones the story artifact produces.
     # They must all stay clean.
     assert all(c.verdict == "clean" for c in art.claims
                if c.claimKey.startswith(("scene:", "bullet:")))
+    # Neither `claimsAudited` nor `len(art.claims)` is pinned as a total, for the
+    # same reason `flagged` is not (below): the per-month implication artifact
+    # contributes `impl:*` claims, and its LINE COUNT changes every cycle. The
+    # 2026-08-23 cycle rewrote August's implications from 8 lines to 5, dropping
+    # the total from 15 to 12 while all 7 story claims stayed byte-identical.
+    # The story claim list above is what this pin was written to protect.
+    #
     # `flagged` is deliberately NOT pinned as a total. run_audit also audits the
     # implication artifact, and that artifact is per-MONTH
     # (store/implications/<cat>/2026-08.json), so EVERY later cycle in the same

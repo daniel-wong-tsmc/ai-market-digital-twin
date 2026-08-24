@@ -1,0 +1,50 @@
+{
+  "id": "fudzilla-com-9c8ce5ad-2026-08-1",
+  "statement": "Nvidia publicly denies any China LPU sales or a China-specific LPU product in its roadmap, contradicting a report of planned small-batch shipments to Chinese customers before year-end.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Whether Nvidia opens a China-legal inference product line changes the size of its addressable China revenue, which is the main export-control-exposed slice of demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "models.reasoning-agentic"
+    ],
+    "direction": "negative",
+    "mechanism": "A denied China-specific product removes an assumed incremental China demand channel for Nvidia inference silicon."
+  },
+  "evidence": [
+    {
+      "source": "Fudzilla",
+      "url": "https://fudzilla.com/nvidia-denies-china-lpu/",
+      "date": "2026-08-21",
+      "excerpt": "We have no LPU sales in the China market today, and no China-specific LPU product in our roadmap.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Fudzilla",
+      "url": "https://fudzilla.com/nvidia-denies-china-lpu/",
+      "date": "2026-08-21",
+      "excerpt": "The Information reported in August 2026 that Nvidia planned to begin small-batch shipments of a language-processing unit to Chinese customers before year-end.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet relaying a company statement that directly conflicts with another outlet's reporting; no filing."
+  },
+  "dispersion": "Nvidia's denial directly contradicts The Information's report citing two Nvidia employees and customer orders.",
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-21",
+  "capturedAt": "2026-08-23T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
