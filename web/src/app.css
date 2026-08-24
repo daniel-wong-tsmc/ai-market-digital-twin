@@ -453,6 +453,25 @@ footer {
 footer nav { display: flex; flex-wrap: wrap; gap: var(--space-6); }
 footer a { font-size: var(--text-body); }
 
+/* F124: the standing disclaimer (docs/publishing-posture.md §4). Quiet fine
+   print — a standing notice, not part of the day's reading. Inside the footer
+   it takes a full row of its own rather than sitting beside the links, which
+   the flex row would otherwise do to it. Outside the footer (the loading and
+   load-failed shells) the same rule gives it its own rule-off line. */
+.disclaimer {
+  flex-basis: 100%;
+  margin: var(--space-5) 0 0;
+  color: var(--color-text-muted);
+  font-size: var(--text-small, 0.8125rem);
+  line-height: 1.5;
+  max-width: 46rem;
+}
+.shell > .disclaimer {
+  margin-top: var(--space-16);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
 /* ---------- responsive (mock lines 370-388) ---------- */
 @media (max-width: 900px) {
   .change { grid-template-columns: 4.5rem minmax(0, 1fr); }

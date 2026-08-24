@@ -572,3 +572,28 @@ def test_evidence_explore_targets_resolve_on_both_surfaces(tmp_path):
     for t in _explore_targets(perm):
         file_part = t.split("#", 1)[0]
         assert (site / "story" / file_part).resolve().exists(), f"permalink dead explore: {t}"
+
+
+def test_every_emitted_html_page_carries_the_disclaimer(tmp_path):
+    """F124: not "the shell has it" but "every file on disk has it".
+
+    docs/publishing-posture.md section 4 says the disclaimer appears in the
+    footer of EVERY public page. site_render.page() is the one shell every
+    renderer goes through today, so one edit covered the lot -- but nothing
+    stops a later lane assembling its own <html>. This test walks the whole
+    emitted set, so that lane fails here instead of shipping a page with no
+    disclaimer on it.
+    """
+    from gpu_agent.dashboard.site_render import DISCLAIMER
+
+    _build(tmp_path)
+    pages = sorted((tmp_path / "site").rglob("*.html"))
+    # The committed React app is a build INPUT, never staged into a scratch
+    # build, so every .html found here is one this builder wrote.
+    # A floor, not a count: it only guards against the walk finding nothing and
+    # the assertion below passing vacuously. The fixture store is small (the
+    # real site emits 50+); 10 is comfortably under what these fixtures build.
+    assert len(pages) >= 10, f"suspiciously few pages built: {len(pages)}"
+    missing = [str(p.relative_to(tmp_path)) for p in pages
+               if DISCLAIMER not in p.read_text(encoding="utf-8")]
+    assert missing == []

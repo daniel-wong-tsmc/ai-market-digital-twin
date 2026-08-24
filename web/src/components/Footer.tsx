@@ -6,6 +6,7 @@
  * so it is not invented here.
  */
 import type {FooterLink} from '../load';
+import {Disclaimer} from './Disclaimer';
 
 export interface FooterProps {
   links: FooterLink[];
@@ -21,6 +22,11 @@ export function Footer({links}: FooterProps) {
           </a>
         ))}
       </nav>
+      {/*
+        F124: the standing disclaimer, below the links rather than beside them.
+        It is a notice about the whole site, not another place to go.
+      */}
+      <Disclaimer />
     </footer>
   );
 }
