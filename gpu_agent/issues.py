@@ -94,6 +94,68 @@ def issue_id(trigger: IssueTrigger) -> str:
     return f"dim-{trigger.label}"
 
 
+# --- F123: matching a re-worded constraint label to a standing issue ------------
+#
+# The id above is slugged from the exact constraintLabel, so a re-wording of the
+# same real constraint mints a twin id and strands the original issue's counters
+# (and a stranded issue drifts to a false reader-facing "Resolved"). Real case:
+# "HBM stacked memory supply" -> "stacked memory and server DRAM" ->
+# "Stacked high-bandwidth memory supply" across three 2026-08 cycles.
+#
+# The match is on label tokens alone. The alternative -- anchoring on a stable
+# indicator id -- has nothing to anchor to: categoryStatus carries only
+# rating/direction/bottleneck/reason/constraintLabel, and `bottleneck` is the
+# dimension key, not an indicator of the constraint. Inventing one would mean a
+# new brain-emitted field, i.e. a judgment-prompt edit, i.e. a moved pin.
+
+LABEL_STOP_WORDS = {
+    "and", "or", "the", "a", "an", "of", "for", "in", "on", "to",
+    "with", "at", "by", "is", "its",
+}
+
+# Words that describe *any* supply constraint. They count toward the overlap
+# ratio, but two labels sharing only these are not the same constraint --
+# "wafer supply capacity" and "power supply capacity" are different problems.
+GENERIC_LABEL_TOKENS = {
+    "supply", "capacity", "shortage", "availability",
+    "constraint", "constraints", "limits", "limited",
+}
+
+RENAME_MIN_SHARED_TOKENS = 2
+RENAME_MIN_OVERLAP = 0.5
+
+
+def _label_tokens(label: str) -> set[str]:
+    """Content words of a label: the same slug used for ids, split on '-', with
+    stop words dropped."""
+    slug = _slug(label)
+    if not slug:
+        return set()
+    return {t for t in slug.split("-") if t and t not in LABEL_STOP_WORDS}
+
+
+def _label_overlap(a: str, b: str) -> tuple[int, int, float]:
+    """(shared token count, shared non-generic token count, overlap coefficient).
+
+    Overlap coefficient -- |A n B| / min(|A|, |B|) -- rather than Jaccard: the
+    real v8->v9 pair scores only 0.33 on Jaccard, so any Jaccard threshold loose
+    enough to catch it is loose enough to catch unrelated labels."""
+    ta, tb = _label_tokens(a), _label_tokens(b)
+    if not ta or not tb:
+        return 0, 0, 0.0
+    shared = ta & tb
+    ratio = len(shared) / min(len(ta), len(tb))
+    return len(shared), len(shared - GENERIC_LABEL_TOKENS), ratio
+
+
+def _labels_match(a: str, b: str) -> bool:
+    """True if these two labels name the same constraint re-worded."""
+    shared, specific, ratio = _label_overlap(a, b)
+    return (shared >= RENAME_MIN_SHARED_TOKENS
+            and specific >= 1
+            and ratio >= RENAME_MIN_OVERLAP)
+
+
 def _title_from_dim_key(key: str) -> str:
     """dimensionRatings has no display label for a dim, so build one: split the camelCase
     key into words, lowercase them, and capitalize only the first word.
