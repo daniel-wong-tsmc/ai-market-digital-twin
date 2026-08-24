@@ -1129,7 +1129,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
 > Numbering note 2026-08-22: F123–F128 below were minted 2026-08-22 in the relayed decision
 > session (user-assigned via the orchestrator; usual concurrent-mint caveat — renumber if collided).
 
-- [ ] **F123 — Issue identity must survive a constraint relabel.** The register minted three
+- [x] **F123 — Issue identity must survive a constraint relabel.** The register minted three
   "different" issues for one real problem in three cycles because the id derives from the exact
   binding-constraint label (`constraint-hbm-stacked-memory-supply` v8 →
   `constraint-stacked-memory-and-server-dram` v9), and every stranded id drifts toward a false
