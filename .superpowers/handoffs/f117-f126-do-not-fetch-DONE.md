@@ -147,6 +147,13 @@ as **AFK-default**, never as user-approved.
    ignore was overridden for this one file. Flagging it in case the merger would rather
    it stayed untracked.
 
+## Rebase note
+
+This branch is based on main @ `f6d61f9`. By the time the lane finished, main had moved
+to `c6dad78` (a handoff-doc commit from another instance). Nothing in this lane touched
+main, and the moved commits are documentation, but rebase before merging rather than
+assuming a clean fast-forward.
+
 ## Merger notes — shared files this lane changed
 
 Expect conflicts with any concurrent lane touching these:
