@@ -66,6 +66,48 @@ def test_quarter_labels_do_not_end_sentences(text, expected):
     assert _count_sentences(text) == expected
 
 
+@pytest.mark.parametrize("text,expected", [
+    # Dotted acronyms and initials. These are the shape of "U.S." but are not on
+    # (and cannot all be on) the abbreviation list.
+    ("A.I. spending rose. Chips followed.", 2),
+    ("Ph.D. hires rose. Attrition fell.", 2),
+    ("R.O.E. improved. Debt fell.", 2),
+    ("The co-founder, J.H. Lee, spoke. He left.", 2),
+    # Numbered labels.
+    ("Section 2.1. covers this. See below.", 2),
+    # Abbreviations that are not on the list.
+    ("The Fed. raised rates. Chips fell.", 2),
+    ("Shipments to Calif. rose. Texas fell.", 2),
+    ("Rev. was up. Costs held.", 2),
+    ("Volume rose 3 mn. units. Prices held.", 2),
+])
+def test_dotted_acronyms_and_unlisted_abbreviations_do_not_over_count(text, expected):
+    """Over-counting is the UNSAFE direction — it rejects honest work.
+
+    Found in code review: every one of these counted 3 instead of 2, and a
+    realistic 58-word two-sentence passage opening on "Ph.D." was rejected by the
+    real gate. Fixed by requiring a real sentence end to be followed by a capital
+    (or end of text), and by never treating a token with an internal period as a
+    sentence end.
+    """
+    assert _count_sentences(text) == expected
+
+
+def test_the_review_false_rejection_passes_the_gate():
+    """The exact passage code review used to demonstrate the bug: 58 words, two
+    sentences, ordinary financial prose. It must NOT be rejected."""
+    text = (
+        "Ph.D. hires rose 12% year over year as the company expanded its research "
+        "organization across three continents, adding engineering staff in Santa "
+        "Clara, Austin, Bangalore and Munich during the quarter in order to support "
+        "the next generation of accelerator design work that is now underway across "
+        "the portfolio. Rev. per employee held roughly flat against the prior year."
+    )
+    assert _count_words(text) == 58
+    assert _count_sentences(text) == 2
+    assert excerpt_length_violations("f", text) == []
+
+
 @pytest.mark.parametrize("text,counted,really", [
     # Terminator inside a closing quote or bracket.
     ("He said 'it is done.' Then he left.", 1, 2),
@@ -116,6 +158,16 @@ from gpu_agent.gate import check_finding, excerpt_length_violations   # noqa: E4
 from tests.test_gate_finding import _base         # noqa: E402
 
 
+def _sentences(count, words_each):
+    """`count` capitalised sentences of `words_each` words each.
+
+    Capitalised because a sentence end is only counted when a capital follows it —
+    that rule is what stops an unlisted abbreviation being read as a full stop.
+    """
+    return " ".join("Word " + " ".join(["word"] * (words_each - 2)) + " end."
+                    for _ in range(count))
+
+
 def _long_errors(text):
     """Violations mentioning excerpt length, for a finding carrying `text`."""
     f = _base(evidence=[{"source": "S", "url": "u", "date": "2026-05-01",
@@ -144,8 +196,7 @@ def test_over_sentences_only_passes():
 
 
 def test_over_both_limits_is_rejected():
-    text = " ".join(["word"] * 14 + ["one."] + ["word"] * 14 + ["two."]
-                    + ["word"] * 14 + ["three."] + ["word"] * 14 + ["four."])
+    text = _sentences(4, 15)
     assert _count_words(text) == 60
     assert _count_sentences(text) == 4
     assert _long_errors(text) == ["f: excerpt too long (60 words > 50 and 4 sentences > 2)"]
@@ -159,8 +210,7 @@ def test_over_absolute_cap_is_rejected_even_as_one_sentence():
 
 
 def test_over_both_and_over_absolute_reports_only_the_absolute_cap():
-    text = " ".join(["word"] * 39 + ["one."] + ["word"] * 39 + ["two."]
-                    + ["word"] * 39 + ["three."])
+    text = _sentences(3, 40)
     assert _count_words(text) == 120
     assert _count_sentences(text) == 3
     assert _long_errors(text) == ["f: excerpt too long (120 words > 100 absolute cap)"]
