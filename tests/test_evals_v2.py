@@ -2,6 +2,7 @@
 Spec: docs/superpowers/specs/2026-07-05-eval-v2-replicate-baseline-design.md."""
 from __future__ import annotations
 import json
+import math
 import statistics
 import pytest
 from gpu_agent.evals.cases import EvalCase
@@ -45,8 +46,10 @@ def test_case_medians_positives_only_median_of_three():
 def test_pooled_epsilon_uses_sample_stdev_over_quantum_floor():
     hist = {"extract": [6.5, 6.6, 6.4, 6.7, 6.3]}   # spread ~0.158 stdev
     eps = pooled_epsilon(hist, {"extract": 0.01})
-    # 2 * sample stdev, above the tiny quantum floor
-    assert eps["extract"] == pytest.approx(2 * 0.158113883, abs=1e-6)
+    # F129: the size-aware prediction band (t_{0.975,4} * sqrt(1+1/5)) * sample stdev,
+    # above the tiny quantum floor. Was a fixed 2 * stdev before F129.
+    assert eps["extract"] == pytest.approx(
+        2.776 * math.sqrt(1 + 1 / 5) * 0.158113883, abs=1e-6)
 
 def test_pooled_epsilon_quantum_floor_when_history_too_short():
     assert pooled_epsilon({"thesis": [6.0]}, {"thesis": 0.5}) == {"thesis": 0.5}
@@ -266,9 +269,11 @@ def test_build_baseline_v2_shape():
     b = build_baseline_v2(reports, ["r1", "r2", "r3"], _cases3(), None, "spot-checked")
     assert b["schemaVersion"] == 2
     assert b["seamMeans"]["extract"] == pytest.approx((6.5 + 6.0 + 6.5) / 3)
-    # F73c: epsilon is now 2*sample-stdev of the replicate seam means (0.577), above the
-    # 0.5 quantum floor — the pooled-dispersion band replaces the v1 half-range.
-    assert b["epsilon"]["extract"] == pytest.approx(2 * statistics.stdev([6.5, 6.0, 6.5]))
+    # F73c: epsilon is the pooled-dispersion band over the replicate seam means, above the
+    # 0.5 quantum floor — replacing the v1 half-range. F129: the band multiplier is now
+    # size-aware (t_{0.975,n-1} * sqrt(1+1/n)) instead of a fixed 2.0.
+    assert b["epsilon"]["extract"] == pytest.approx(
+        4.303 * math.sqrt(4 / 3) * statistics.stdev([6.5, 6.0, 6.5]))
     assert b["caseMedians"] == {"e1": 7, "e2": 6}
     assert [r["runDir"] for r in b["replicates"]] == ["r1", "r2", "r3"]
     assert b["provenance"]["humanReview"] == "spot-checked"
@@ -337,3 +342,38 @@ def test_rebaseline_v2_governance(tmp_path):
     m1 = tmp_path / "mig"; m1.mkdir()
     rebaseline_v2(_write_runs(m1, good), v1, HASHES, _cases3())
     assert load_baseline(v1)["schemaVersion"] == 2
+
+
+# --- F129: small-sample-corrected epsilon (t-based prediction band) ------------
+
+def test_t_multiplier_table_pins():
+    from gpu_agent.evals.harness import t_quantile_975
+    assert t_quantile_975(1) == pytest.approx(12.706)
+    assert t_quantile_975(2) == pytest.approx(4.303)
+    assert t_quantile_975(4) == pytest.approx(2.776)
+    assert t_quantile_975(10) == pytest.approx(2.228)
+    assert t_quantile_975(30) == pytest.approx(2.042)
+    assert t_quantile_975(31) == pytest.approx(1.96)     # normal fallback beyond df=30
+    assert t_quantile_975(500) == pytest.approx(1.96)
+
+def test_prediction_band_multiplier_shrinks_as_pool_grows():
+    from gpu_agent.evals.harness import prediction_band_multiplier
+    assert prediction_band_multiplier(3) == pytest.approx(4.303 * math.sqrt(1 + 1 / 3))
+    assert prediction_band_multiplier(11) == pytest.approx(2.228 * math.sqrt(1 + 1 / 11))
+    assert (prediction_band_multiplier(3) > prediction_band_multiplier(6)
+            > prediction_band_multiplier(20))
+
+def test_pooled_epsilon_n3_extract_live_pool():
+    # The live post-F105 extract pool. Fixed EPS_Z=2.0 gave 0.629, which failed two good
+    # runs by 0.038 (F121, 2026-08-24). The t-based prediction band gives ~1.563.
+    hist = {"extract": [6.5, 6.75, 7.125]}
+    eps = pooled_epsilon(hist, {"extract": 0.125})
+    expected = 4.303 * math.sqrt(4 / 3) * statistics.stdev([6.5, 6.75, 7.125])
+    assert eps["extract"] == pytest.approx(expected)
+    assert eps["extract"] == pytest.approx(1.563, abs=0.002)
+
+def test_pooled_epsilon_quantum_floor_for_zero_stdev_pool():
+    # implication/judge/thesis pools are flat: stdev 0 -> the quantum floor holds.
+    eps = pooled_epsilon({"implication": [8.0, 8.0, 8.0], "thesis": [6.0, 6.0, 6.0]},
+                         {"implication": 1.0, "thesis": 0.5})
+    assert eps == {"implication": 1.0, "thesis": 0.5}
