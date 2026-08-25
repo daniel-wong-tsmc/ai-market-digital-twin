@@ -76,6 +76,28 @@ def _future_dated(date: str, as_of: str) -> bool:
     g = len(as_of)
     return bool(as_of) and date[:g] > as_of
 
+def excerpt_length_violations(fid: str, excerpt: str) -> list[str]:
+    """F127 — the excerpt length cap, as one callable rule.
+
+    Public so that a caller wanting to check a bare excerpt (a store audit, a
+    review script) uses the same rule `check_finding` applies, rather than a
+    second copy of it that can drift.
+
+    An excerpt is rejected when it breaks BOTH decided limits, or when it breaks
+    the absolute backstop on its own. Over the backstop reports only that, since
+    the two messages would say the same thing twice.
+    """
+    words = _count_words(excerpt)
+    if words > EXCERPT_ABSOLUTE_MAX_WORDS:
+        return [f"{fid}: excerpt too long ({words} words > "
+                f"{EXCERPT_ABSOLUTE_MAX_WORDS} absolute cap)"]
+    sentences = _count_sentences(excerpt)
+    if words > EXCERPT_MAX_WORDS and sentences > EXCERPT_MAX_SENTENCES:
+        return [f"{fid}: excerpt too long ({words} words > {EXCERPT_MAX_WORDS} "
+                f"and {sentences} sentences > {EXCERPT_MAX_SENTENCES})"]
+    return []
+
+
 def check_finding(f: Finding, *, valid_targets: frozenset[str] | None = None) -> list[str]:
     errors: list[str] = []
     if f.kind == Kind.measured and f.value is None:
@@ -115,18 +137,7 @@ def check_finding(f: Finding, *, valid_targets: frozenset[str] | None = None) ->
             errors.append(f"{f.id}: evidence date not ISO (YYYY-MM-DD): {e.date!r}")
         elif _future_dated(e.date, f.asOf):
             errors.append(f"{f.id}: future-dated evidence {e.date} vs asOf {f.asOf}")
-        # F127 — excerpt length cap (posture doc §2, DECIDED 2026-08-22). Rejected
-        # only when BOTH decided limits are broken, or when the absolute backstop is.
-        words = _count_words(e.excerpt)
-        if words > EXCERPT_ABSOLUTE_MAX_WORDS:
-            errors.append(f"{f.id}: excerpt too long ({words} words > "
-                          f"{EXCERPT_ABSOLUTE_MAX_WORDS} absolute cap)")
-        else:
-            sentences = _count_sentences(e.excerpt)
-            if words > EXCERPT_MAX_WORDS and sentences > EXCERPT_MAX_SENTENCES:
-                errors.append(f"{f.id}: excerpt too long ({words} words > "
-                              f"{EXCERPT_MAX_WORDS} and {sentences} sentences > "
-                              f"{EXCERPT_MAX_SENTENCES})")
+        errors.extend(excerpt_length_violations(f.id, e.excerpt))   # F127
     # F21 — impact quality
     if not f.impact.targets:
         errors.append(f"{f.id}: impact.targets empty")

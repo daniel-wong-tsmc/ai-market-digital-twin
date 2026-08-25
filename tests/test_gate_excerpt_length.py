@@ -83,7 +83,7 @@ def test_real_store_excerpt_is_one_sentence():
 
 # --- the gate itself -------------------------------------------------------
 
-from gpu_agent.gate import check_finding          # noqa: E402
+from gpu_agent.gate import check_finding, excerpt_length_violations   # noqa: E402
 from tests.test_gate_finding import _base         # noqa: E402
 
 
@@ -161,10 +161,9 @@ def test_every_committed_store_excerpt_survives_the_gate():
                 if not isinstance(excerpt, str):
                     continue
                 checked += 1
-                words = _count_words(excerpt)
-                sentences = _count_sentences(excerpt)
-                if words > EXCERPT_ABSOLUTE_MAX_WORDS or (
-                        words > EXCERPT_MAX_WORDS and sentences > EXCERPT_MAX_SENTENCES):
-                    offenders.append(f"{path.name}: {words}w/{sentences}s")
+                # The real rule, not a second copy of it that could drift.
+                if excerpt_length_violations(path.name, excerpt):
+                    offenders.append(f"{path.name}: {_count_words(excerpt)}w/"
+                                     f"{_count_sentences(excerpt)}s")
     assert checked > 500, f"only {checked} excerpts scanned - store path wrong?"
     assert offenders == []
