@@ -1154,10 +1154,24 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   must be DESIGNED, not improvised: needs its own small brainstorm before build (how a
   replacement writes without violating no-silent-deletion and the F66 verbatim-excerpt gate).
 
-- [ ] **F126 — Publisher do-not-fetch list wired into the fetch runner.** Posture doc §3(4)
+- [x] **F126 — Publisher do-not-fetch list wired into the fetch runner.** Posture doc §3(4)
   DECIDED 2026-08-22. A refusal list already exists in the fetch runner for other reasons;
   add a publisher-objection list beside it, with the source inventory recording why a domain
   is refused. Small, mechanical.
+  **DONE on branch `f117-f126-fetch-registry`** (built as one lane with F117, which needed
+  the same file). `registry/do-not-fetch.json` holds both kinds: `publisher-objection` (the
+  publisher asked not to be used at all) and `blocks-plain-readers` (F117's kind). Only the
+  first is a refusal — `webreach.validate_request` refuses it with
+  `refused: publisher objection (<domain>)` before argv is built, the manifest row carries
+  that reason, and the chart verifier rejects any point citing such a domain before a single
+  request goes out. The second kind is deliberately NOT refused in the fetch runner, because
+  it records a fact about the chart verifier's plain reader rather than a request from the
+  publisher, and gatherers still read those pages for claims. Both commands that fetch
+  (`webreach-fetch`, `chart-research accept`) take `--do-not-fetch`, defaulting to the
+  repo-relative path, and a missing file is an empty list rather than a failed cycle. **No
+  publisher has ever objected**, so that kind ships wired and tested but with an empty list;
+  honouring the first objection is a one-line entry, not a build. Posture doc §3(4)'s
+  bracketed note updated to match; the DECIDED clause text is untouched.
 
 - [ ] **F127 — Enforce the 50-word/two-sentence excerpt cap in the extraction gate.** Posture
   doc §2 DECIDED 2026-08-22. Today the cap is policy only (measured: all 334 stored excerpts
@@ -1910,7 +1924,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   generation (developer.nvidia.com) and AI compute per Cerebras wafer (ServeTheHome). Zero prose-value and zero hedge rejections; both surviving researchers explicitly routed around sites that refuse automated readers, which is exactly what rule 8 was written to cause. The
   one rejection (Counterpoint Research foundry share, 5/5 points HTTP 403) is the NEW gap filed as F117 below, not a recurrence of this one.
 
-- [ ] **F117 — Rule 8's bot-blocking list is a registry lookup, and the registry is missing the
+- [x] **F117 — Rule 8's bot-blocking list is a registry lookup, and the registry is missing the
   domains that actually block (found live, 2026-08-19 cycle).**
   F116's rule 8 names the bot-blocking publishers by reading `registry/licensed-sources.json`.
   On the first cycle after that fix, the one rejected candidate cited
@@ -1929,6 +1943,27 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   fix them together, since a learned blocklist needs the verifier to distinguish the two.
   *(Concurrent-mint caveat: F117 chosen against a backlog max of F116 on 2026-08-20; renumber if
   collided. Number minted by the assistant, not the user.)*
+  **DONE on branch `f117-f126-fetch-registry`** (built as one lane with F126). All three
+  problems are closed together. `registry/do-not-fetch.json` is the one place a domain we
+  must not read is written down, with a `kind` on every entry saying which of the two
+  reasons applies (see F126 below for the other kind). It ships seeded with
+  **counterpointresearch.com** as `blocks-plain-readers`. The verifier no longer has to be
+  told: any point whose page answers HTTP 401, 403 or 429 gets that domain appended to the
+  same file automatically, once, with the page that proved it and the story date — so the
+  list stops lagging the sites that actually block, which was problem (a). The F116 tail is
+  fixed with it: a failure line now reads `blocked (HTTP 403)`, `not found (HTTP 404)` or
+  the old `unreachable (...)`, three different things that used to arrive as one word.
+  Problem (b), the real one, is answered in rule 8 itself: the brief now tells the
+  researcher plainly that the machine re-checking its numbers is a DIFFERENT reader with
+  different access, so a page opening cleanly for it proves nothing — and rule 8 names both
+  do-not-fetch lists beside the licensed one. **What stays open:** the middle candidate fix,
+  exposing the verifier's own fetch as a pre-flight the researcher can call. Research agents
+  are dispatched WebFetch-only, with no shell, so they cannot call the verifier's reader at
+  all; closing that would mean a new tool seam, not a flag. Telling them their own fetch
+  proves nothing is the honest fix available today. Also open by design: nothing ever
+  un-blocks a domain — a site that starts answering again still verifies normally (the
+  verifier keeps fetching `blocks-plain-readers` domains), so a stale entry costs a warning
+  line in a brief, not a lost series, and removing it is a human edit.
 
 - [ ] **F118 — A curated series can go permanently un-refillable when its construction recipe is
   not written down (found live, 2026-08-19 cycle).**
