@@ -571,3 +571,20 @@ def test_rule_8_survives_a_missing_do_not_fetch_registry(tmp_path, monkeypatch):
     assert "counterpointresearch.com" not in prompt
     assert "proves nothing" in prompt.lower()
     assert "NO-SERIES-FOUND" in prompt
+
+
+def test_build_research_prompt_reads_the_registry_it_is_pointed_at(tmp_path):
+    """Review finding: `--do-not-fetch` was accepted by `chart-research emit`
+    and then ignored, so the brief was built from a file nobody named."""
+    reg = tmp_path / "elsewhere.json"
+    reg.write_text(json.dumps({"version": 1, "entries": [
+        {"domain": "namedfile.test", "kind": "blocks-plain-readers",
+         "since": "2026-08-25", "why": "403s the reader"}]}, indent=2) + "\n",
+        encoding="utf-8", newline="\n")
+
+    prompt = build_research_prompt({"text": "Any bullet."}, [],
+                                   do_not_fetch_path=reg)
+
+    assert "namedfile.test" in prompt
+    # and NOT the repo default's seeded domain
+    assert "counterpointresearch.com" not in prompt

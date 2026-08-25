@@ -610,7 +610,8 @@ def test_accept_with_no_answer_files_is_an_empty_result(tmp_path):
     result = accept_research(CATEGORY, str(store_root),
                               str(tmp_path / "work" / "daily-2026-08-06"),
                               fetch_html=_fetch_fixture)
-    assert result == {"accepted": [], "rejected": [], "missing": []}
+    assert result == {"accepted": [], "rejected": [], "missing": [],
+                      "warnings": []}
 
 
 def test_accept_writes_no_curated_registry_file(tmp_path, monkeypatch):
@@ -861,3 +862,35 @@ def test_a_missing_registry_file_never_breaks_accept_research(tmp_path):
 
     assert result["rejected"] == []
     assert len(result["accepted"]) == 1
+
+
+def test_an_unreadable_registry_is_reported_not_swallowed(tmp_path):
+    """Fail-open is the deliberate choice -- a cycle must not die over a policy
+    file -- but it must not be SILENT: with the list unreadable, a publisher
+    who objected would be fetched, and the person reading the cycle journal has
+    to be able to find out why."""
+    store_root = _make_store(tmp_path)
+    work_dir = tmp_path / "work" / f"daily-{STORY_DATE}"
+    _answer(work_dir, 1, "candidate-good")
+    reg = tmp_path / "do-not-fetch.json"
+    reg.write_text("{not json", encoding="utf-8")
+
+    result = accept_research(CATEGORY, str(store_root), str(work_dir),
+                             fetch_html=_fetch_fixture, do_not_fetch_path=reg)
+
+    assert len(result["accepted"]) == 1, "a bad policy file never blocks a cycle"
+    assert result["warnings"], "but it is never silent either"
+    assert "do-not-fetch" in result["warnings"][0]
+    assert str(reg) in result["warnings"][0]
+
+
+def test_a_healthy_run_reports_no_warnings(tmp_path):
+    store_root = _make_store(tmp_path)
+    work_dir = tmp_path / "work" / f"daily-{STORY_DATE}"
+    _answer(work_dir, 1, "candidate-good")
+
+    result = accept_research(CATEGORY, str(store_root), str(work_dir),
+                             fetch_html=_fetch_fixture,
+                             do_not_fetch_path=tmp_path / "missing.json")
+
+    assert result["warnings"] == []

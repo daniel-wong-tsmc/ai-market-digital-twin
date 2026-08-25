@@ -31,14 +31,17 @@ strand an unattended cycle is worse than no policy file.
 This module is a STDLIB-ONLY LEAF on purpose. The fetch runner
 (`gpu_agent.gathering.webreach`, which needs pydantic and subprocess), the
 chart verifier and the researcher's prompt builder all import it, and none of
-them should drag the others' dependencies along. That is also why the one
-host matcher this repo has -- `matching_domain` -- lives here rather than in
-the fetch runner: the licensed list and the do-not-fetch list must never
-disagree about what "the same site" means.
+them should drag the others' dependencies along. That is also why
+`matching_domain` lives here rather than in the fetch runner: the licensed
+list and the do-not-fetch list must never disagree about what "the same site"
+means, so they share one matcher. (Other host helpers elsewhere in the repo --
+`gathering/ingest.py`, `manifest.py` -- answer different questions and are
+deliberately left alone.)
 """
 from __future__ import annotations
 
 import json
+import os
 import pathlib
 from dataclasses import dataclass
 from typing import Iterable
@@ -111,10 +114,28 @@ class DoNotFetchEntry:
 
 
 class DoNotFetchRegistry:
-    """The loaded do-not-fetch list. Entries are held sorted by domain."""
+    """The loaded do-not-fetch list. Entries are held sorted by domain.
 
-    def __init__(self, entries: list[DoNotFetchEntry] | None = None) -> None:
+    `unreadable` says the file was THERE but could not be parsed, which is a
+    different situation from "no such file" and must not be treated the same
+    way. Reads still degrade to empty either way -- a cycle must not die over a
+    policy file -- but a writer has to refuse to rewrite a file it could not
+    read, or one stray comma plus one learned domain would erase every
+    publisher objection on record.
+
+    `document` and `rows` keep the file exactly as it was found, so a learned
+    append can put back every row and every key this code does not understand
+    (a hand-added `contact:`, a `kind` a future version introduces) instead of
+    silently dropping them.
+    """
+
+    def __init__(self, entries: list[DoNotFetchEntry] | None = None, *,
+                 unreadable: bool = False, document: dict | None = None,
+                 rows: list | None = None) -> None:
         self.entries = sorted(entries or [], key=lambda e: e.domain)
+        self.unreadable = unreadable
+        self.document = document if isinstance(document, dict) else {}
+        self.rows = list(rows or [])
 
     @property
     def is_empty(self) -> bool:
@@ -151,16 +172,28 @@ def load_do_not_fetch(path=DO_NOT_FETCH_REGISTRY) -> DoNotFetchRegistry:
     """The registry at `path`, or an EMPTY registry when the file is missing,
     unreadable or malformed. Never raises.
 
-    A row with a blank domain or an unrecognised `kind` is DROPPED rather than
-    trusted: a typo'd kind must not become a silent third policy.
+    A file that is present but unparseable comes back empty AND flagged
+    `unreadable=True`, so a caller that reads can carry on while a caller that
+    writes knows to keep its hands off. A missing file is not unreadable: there
+    is nothing there to damage, and the first learned entry creates it.
+
+    A row with a blank domain or an unrecognised `kind` is dropped from
+    `entries` rather than trusted -- a typo'd kind must not become a silent
+    third policy -- but it is KEPT verbatim in `rows`, so a later append writes
+    it back untouched instead of deleting a line somebody meant.
     """
+    path = pathlib.Path(path)
     try:
-        data = json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
-    except (OSError, ValueError):
+        text = path.read_text(encoding="utf-8")
+    except OSError:
         return DoNotFetchRegistry()
+    try:
+        data = json.loads(text)
+    except ValueError:
+        return DoNotFetchRegistry(unreadable=True)
     rows = data.get("entries") if isinstance(data, dict) else None
     if not isinstance(rows, list):
-        return DoNotFetchRegistry()
+        return DoNotFetchRegistry(unreadable=True)
     out: list[DoNotFetchEntry] = []
     for r in rows:
         if not isinstance(r, dict):
@@ -174,7 +207,7 @@ def load_do_not_fetch(path=DO_NOT_FETCH_REGISTRY) -> DoNotFetchRegistry:
             domain=domain, kind=kind,
             since=str(r.get("since") or ""), why=str(r.get("why") or ""),
             firstSeenUrl=str(first_seen) if first_seen else None))
-    return DoNotFetchRegistry(out)
+    return DoNotFetchRegistry(out, document=data, rows=rows)
 
 
 def record_blocked_domain(path, domain: str, *, since: str,
@@ -185,13 +218,28 @@ def record_blocked_domain(path, domain: str, *, since: str,
 
     Returns False and changes nothing when:
 
-    - the domain is already listed under EITHER kind. Idempotence is what makes
-      this safe to call on every cycle -- and skipping a domain already listed
-      as `publisher-objection` is deliberate: an objection must never be
-      quietly downgraded to a mere technical block.
+    - the file is there but could not be parsed. This is the important one: a
+      file we cannot read is a file we must not rewrite, or one stray comma in
+      a hand-edited entry plus one learned domain would erase every publisher
+      objection on record.
+    - the domain is already covered -- exact host OR a subdomain of a listed
+      domain, the same matching every read path uses. Idempotence is what makes
+      this safe to call on every cycle, and matching the read path is what
+      stops one blocking site growing an entry per subdomain it serves a 403
+      from. Skipping a domain already listed as `publisher-objection` is
+      deliberate too: an objection must never be quietly downgraded to a mere
+      technical block.
     - the write fails. A read-only checkout, a locked file or a path that is a
       directory must not break a cycle, so the failure is swallowed and the
       caller simply learns nothing this time.
+
+    Every existing row is written back VERBATIM -- unknown keys, unknown kinds
+    and the document's other top-level fields included -- because a bookkeeping
+    append has no business deleting something a person put there on purpose.
+
+    The write goes to a temp file in the same directory and is then renamed
+    over the target, so a crash mid-write cannot leave the truncated JSON that
+    would trip the unreadable check above on the next run.
 
     `since` is supplied by the caller rather than read from the clock: the
     verifier passes the STORY date, so re-running a cycle produces the same
@@ -202,17 +250,28 @@ def record_blocked_domain(path, domain: str, *, since: str,
         return False
     path = pathlib.Path(path)
     reg = load_do_not_fetch(path)
-    if any(e.domain == domain for e in reg.entries):
+    if reg.unreadable:
         return False
-    rows = [_row(e) for e in reg.entries]
+    if matching_domain(f"https://{domain}/", reg.domains()) is not None:
+        return False
+    rows = list(reg.rows)
     rows.append(_row(DoNotFetchEntry(
         domain=domain, kind=KIND_BLOCKS_READERS, since=since,
         why=why or LEARNED_WHY, firstSeenUrl=first_seen_url)))
-    rows.sort(key=lambda r: r["domain"])
+    rows.sort(key=lambda r: str(r.get("domain") or "").lower()
+              if isinstance(r, dict) else "")
+    document = dict(reg.document) or {"version": 1}
+    document["entries"] = rows
+    tmp = path.with_name(path.name + ".tmp")
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps({"version": 1, "entries": rows}, indent=2) + "\n",
-                        encoding="utf-8", newline="\n")
+        tmp.write_text(json.dumps(document, indent=2) + "\n",
+                       encoding="utf-8", newline="\n")
+        os.replace(tmp, path)
     except OSError:
+        try:
+            tmp.unlink()
+        except OSError:
+            pass
         return False
     return True

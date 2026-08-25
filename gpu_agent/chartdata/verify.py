@@ -390,8 +390,12 @@ def accept_research(category_id: str, store_dir: str, work_dir: str,
     """Verify this cycle's research answers and quarantine the survivors.
 
     Returns `{'accepted': [path, ...], 'rejected': [{'file', 'failures'}, ...],
-    'missing': [path, ...]}` -- `missing` being the honest NO-SERIES-FOUND
-    answers, which are a correct outcome and not an error.
+    'missing': [path, ...], 'warnings': [str, ...]}` -- `missing` being the
+    honest NO-SERIES-FOUND answers, which are a correct outcome and not an
+    error, and `warnings` being things that did not stop the run but that a
+    person reading the cycle journal must not have to guess at (today: a
+    do-not-fetch registry that is present but unreadable, which means the
+    refusals it holds are NOT being applied this cycle).
 
     NEVER raises. Any failure at any level (a store with no story, an
     unreadable answer file, a source page that will not load) becomes a
@@ -422,12 +426,14 @@ def accept_research(category_id: str, store_dir: str, work_dir: str,
     accepted: list[str] = []
     rejected: list[dict] = []
     missing: list[str] = []
+    warnings: list[str] = []
 
     try:
         fetcher = fetch_html or _default_fetch_html
         answers = _answer_files(work_dir)
         if not answers:
-            return {"accepted": accepted, "rejected": rejected, "missing": missing}
+            return {"accepted": accepted, "rejected": rejected, "missing": missing,
+                "warnings": warnings}
 
         cat_dir = Path(store_dir) / category_id
         try:
@@ -438,11 +444,20 @@ def accept_research(category_id: str, store_dir: str, work_dir: str,
                 rejected.append({"file": str(path),
                                  "failures": [f"cannot resolve story date: "
                                               f"{type(e).__name__}: {e}"]})
-            return {"accepted": accepted, "rejected": rejected, "missing": missing}
+            return {"accepted": accepted, "rejected": rejected, "missing": missing,
+                "warnings": warnings}
 
         dnf_path = (Path(do_not_fetch_path) if do_not_fetch_path is not None
                     else DO_NOT_FETCH_REGISTRY)
         do_not_fetch = load_do_not_fetch(dnf_path)
+        if do_not_fetch.unreadable:
+            # Fail-open is deliberate (a cycle must never die over a policy
+            # file) but it must not be silent: with the list unreadable, a
+            # publisher who objected WOULD be fetched this cycle.
+            warnings.append(
+                f"do-not-fetch registry could not be read, so no publisher "
+                f"objection or known block is being applied this cycle: "
+                f"{dnf_path}")
 
         def _learn(domain: str, url: str) -> None:
             # F117: the list is learned, not hand-maintained -- a hand-kept one
@@ -504,7 +519,9 @@ def accept_research(category_id: str, store_dir: str, work_dir: str,
                 continue
             accepted.append(str(target))
 
-        return {"accepted": accepted, "rejected": rejected, "missing": missing}
+        return {"accepted": accepted, "rejected": rejected, "missing": missing,
+                "warnings": warnings}
     except Exception as e:  # noqa: BLE001 -- deliberate outer net: see docstring.
         rejected.append({"file": "*", "failures": [f"{type(e).__name__}: {e}"]})
-        return {"accepted": accepted, "rejected": rejected, "missing": missing}
+        return {"accepted": accepted, "rejected": rejected, "missing": missing,
+                "warnings": warnings}

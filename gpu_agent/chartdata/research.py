@@ -139,7 +139,8 @@ def _findings_for_bullet(claim_finding_ids: list[str], findings_by_id: dict[str,
     return findings
 
 
-def emit_research(category_id: str, store_dir: str, work_dir: str) -> list[Path]:
+def emit_research(category_id: str, store_dir: str, work_dir: str,
+                  do_not_fetch_path=None) -> list[Path]:
     """Write one research prompt per CHARTLESS dashboard bullet for
     `category_id`'s latest cycle, to
     `<work_dir>/chart-research/bullet-<n>-prompt.txt` (1-indexed, matching
@@ -174,7 +175,8 @@ def emit_research(category_id: str, store_dir: str, work_dir: str) -> list[Path]
             continue
         claim_ids = claim_ids_per_bullet[i - 1] if i - 1 < len(claim_ids_per_bullet) else []
         findings = _findings_for_bullet(claim_ids, findings_by_id)
-        prompt = build_research_prompt(bullet, findings)
+        prompt = build_research_prompt(bullet, findings,
+                                       do_not_fetch_path=do_not_fetch_path)
         out_dir.mkdir(parents=True, exist_ok=True)
         path = out_dir / f"bullet-{i}-prompt.txt"
         path.write_text(prompt, encoding="utf-8")

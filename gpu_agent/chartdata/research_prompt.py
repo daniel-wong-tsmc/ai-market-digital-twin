@@ -19,7 +19,8 @@ import json
 from pathlib import Path
 
 from gpu_agent.fetch_policy import (
-    KIND_BLOCKS_READERS, KIND_OBJECTION, load_do_not_fetch)
+    DO_NOT_FETCH_REGISTRY, KIND_BLOCKS_READERS, KIND_OBJECTION,
+    load_do_not_fetch)
 
 _NO_SERIES_TOKEN = "NO-SERIES-FOUND"
 
@@ -44,13 +45,14 @@ def _licensed_domains() -> list[str]:
     return [d for d in domains if isinstance(d, str) and d.strip()]
 
 
-def _do_not_fetch_lists() -> tuple[list[str], list[str]]:
+def _do_not_fetch_lists(path=None) -> tuple[list[str], list[str]]:
     """(publishers who objected, sites that turn the plain reader away), read
-    from `registry/do-not-fetch.json` at prompt-build time. Missing means two
-    empty lists and a generic warning, never a crashed emit -- the same rule
-    the licensed registry follows, and the same reason: this builder runs from
-    worktrees and odd working directories too."""
-    reg = load_do_not_fetch()
+    at prompt-build time from `path` -- `registry/do-not-fetch.json` unless the
+    caller names another. Missing means two empty lists and a generic warning,
+    never a crashed emit -- the same rule the licensed registry follows, and
+    the same reason: this builder runs from worktrees and odd working
+    directories too."""
+    reg = load_do_not_fetch(path if path is not None else DO_NOT_FETCH_REGISTRY)
     return reg.domains(KIND_OBJECTION), reg.domains(KIND_BLOCKS_READERS)
 
 
@@ -165,7 +167,8 @@ def _findings_block(findings: list[dict]) -> str:
     return "\n".join(lines) if lines else "(No findings are attached to this story beyond the text above.)"
 
 
-def build_research_prompt(bullet: dict, findings: list[dict]) -> str:
+def build_research_prompt(bullet: dict, findings: list[dict],
+                          do_not_fetch_path=None) -> str:
     """The prompt handed to a tool-USING research agent for ONE chartless
     dashboard bullet: today's story text for this bullet, the findings
     already cited for it (statement + URL, for context and as a starting
@@ -189,10 +192,15 @@ def build_research_prompt(bullet: dict, findings: list[dict]) -> str:
     dispatches producing candidates that are thrown away, so the
     instruction and the enforcement are stated together and tested
     together (`tests/test_chart_research.py`).
+
+    `do_not_fetch_path` names the registry rule 8 reads; it defaults to
+    `registry/do-not-fetch.json`, the same file the verifier learns into, so
+    the list the researcher is warned about and the list the desk enforces
+    cannot drift apart.
     """
     bullet_text = (bullet.get("text") or "").strip()
     findings_block = _findings_block(findings)
-    objections, blocked = _do_not_fetch_lists()
+    objections, blocked = _do_not_fetch_lists(do_not_fetch_path)
     rules = _RULES.replace("{reachability_rule}",
                            _reachability_rule(_licensed_domains(), objections,
                                               blocked))

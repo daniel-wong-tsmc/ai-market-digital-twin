@@ -336,7 +336,8 @@ def _chart_research(args) -> int:
         return 0
     from gpu_agent.chartdata.research import emit_research
     try:
-        paths = emit_research(args.category, args.store, args.work)
+        paths = emit_research(args.category, args.store, args.work,
+                              do_not_fetch_path=args.do_not_fetch)
     except Exception as e:  # noqa: BLE001 -- see docstring: never block the cycle
         print(f"gpu-agent chart-research: error: {e}", file=sys.stderr)
         return 1
@@ -1938,9 +1939,10 @@ def main(argv=None) -> int:
                      help="store root (scorecards+story under <store>/<category>/; "
                           "accept quarantines under <store>/<category>/research-series/)")
     crp.add_argument("--do-not-fetch", default="registry/do-not-fetch.json",
-                     help="do-not-fetch registry: a point citing a publisher who "
-                          "objected is rejected before any fetch, and every domain "
-                          "that turns the plain reader away is learned back into "
+                     help="do-not-fetch registry. `emit` names its domains in the "
+                          "brief's rule 8; `accept` rejects a point citing a "
+                          "publisher who objected before any fetch, and learns "
+                          "every domain that turns the plain reader away back into "
                           "this same file")
     crp.add_argument("--work", required=True,
                      help="this cycle's work dir (emit writes "
