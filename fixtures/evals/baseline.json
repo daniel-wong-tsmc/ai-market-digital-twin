@@ -17,7 +17,7 @@
     "thesis-2026-07-03-01": 6
   },
   "epsilon": {
-    "extract": 0.6291528696058958,
+    "extract": 1.5630285128379597,
     "implication": 1.0,
     "judge": 0.25,
     "thesis": 0.5
@@ -30,6 +30,10 @@
   },
   "provenance": {
     "asOf": "2026-07-18",
+    "epsRecompute": {
+      "asOf": "2026-08-25",
+      "formula": "t-prediction-band-v1"
+    },
     "forceReason": null,
     "graderModel": "opus",
     "humanReview": "F98b upstreamLeadTimes (S4) adoption. Sole prompt change is the extract seam (verified char-level: one +87-char indicator line; judge/thesis/implication hash-identical). Decision r1 clean PASS extract=7.00; r1+r2 PASS mean=6.69. r3 top-up marginal-fail extract=6.12; 3-run extract mean=6.50 > bar 6.285; dispersion 0.875 < 1.0 (noise, not breakage). No --force.",
