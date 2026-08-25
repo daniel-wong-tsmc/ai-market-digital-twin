@@ -7,6 +7,8 @@ from typing import Optional
 from urllib.parse import urlparse
 from pydantic import BaseModel
 
+from gpu_agent.fetch_policy import (
+    DoNotFetchRegistry, KIND_OBJECTION, matching_domain)
 from gpu_agent.web_reach_ensure import detect_os
 from gpu_agent.web_reach_ensure import SECRETS_DIR
 from gpu_agent.web_reach_ensure import resolve_secret as _resolve_secret_base
@@ -49,13 +51,25 @@ def _tool_entry(registry: dict, tool_id: str) -> dict | None:
 
 
 def validate_request(req: FetchRequest, registry: dict,
-                     licensed_domains: set[str]) -> str | None:
-    """Refuse only on: unknown tool, unknown verb, or (for url-kind targets) a
-    non-http(s) scheme / unparseable host. D6: licensed/inventoried domains
-    (TrendForce, SemiAnalysis, ...) are NO LONGER refused here -- they are fetched
-    like any other host and flagged via `licensed_source_host` instead, so
-    `licensed_domains` is accepted for call-site/signature stability but is not
-    consulted for a refusal decision."""
+                     licensed_domains: set[str],
+                     do_not_fetch: DoNotFetchRegistry | None = None) -> str | None:
+    """Refuse on: unknown tool, unknown verb, (for url-kind targets) a
+    non-http(s) scheme / unparseable host, or a host whose publisher has asked
+    not to be used at all.
+
+    D6: licensed/inventoried domains (TrendForce, SemiAnalysis, ...) are NOT
+    refused here -- they are fetched like any other host and flagged via
+    `licensed_source_host` instead, so `licensed_domains` is accepted for
+    call-site/signature stability but is not consulted for a refusal decision.
+
+    F126: `do_not_fetch` is. A `publisher-objection` domain (posture doc
+    section 3(4): the publisher asked not to be used at all) is refused
+    outright with `refused: publisher objection (<domain>)`. The registry's
+    other kind, `blocks-plain-readers`, is deliberately NOT refused here: that
+    kind records that the chart verifier's plain reader is turned away, which
+    is a fact about that reader, not a request from the publisher, and
+    gatherers still read those pages for claims. Omitting `do_not_fetch`
+    refuses nothing new, so every pre-F126 call site keeps its behaviour."""
     tool = _tool_entry(registry, req.toolId)
     if tool is None:
         return f"unknown tool: {req.toolId}"
@@ -69,6 +83,10 @@ def validate_request(req: FetchRequest, registry: dict,
         host = parsed.hostname
         if not host:
             return f"refused scheme/shape: {req.target!r} (unparseable host)"
+        if do_not_fetch is not None:
+            objection = do_not_fetch.match(req.target, kind=KIND_OBJECTION)
+            if objection is not None:
+                return f"refused: publisher objection ({objection.domain})"
     return None
 
 
@@ -78,17 +96,12 @@ def licensed_source_host(target: str, licensed_domains: set[str]) -> str | None:
     its now-removed domain refusal, including reading `parsed.hostname` so
     userinfo (`user:pass@host`) can't hide the real host), or None if it doesn't
     match any licensed domain -- including when `target` isn't a fetchable
-    http(s) URL at all (e.g. a query-kind request's free-text target)."""
-    parsed = urlparse(target)
-    if parsed.scheme not in ("http", "https") or not parsed.netloc:
-        return None
-    host = parsed.hostname
-    if not host:
-        return None
-    for dom in licensed_domains:
-        if host == dom or host.endswith("." + dom):
-            return dom
-    return None
+    http(s) URL at all (e.g. a query-kind request's free-text target).
+
+    The matching itself is `fetch_policy.matching_domain` -- the one host
+    matcher this repo has, shared with the do-not-fetch registry so the two
+    lists can never disagree about what "the same site" means."""
+    return matching_domain(target, licensed_domains)
 
 
 def resolve_secret(name: str, *, secrets_dir: pathlib.Path | None = None) -> str | None:
@@ -198,7 +211,8 @@ def _scrub(text: str | None, secrets: list[str]) -> str | None:
 
 
 def run_requests(requests_path, out_dir, registry: dict, licensed_domains: set[str],
-                 timeout: int = 120) -> dict:
+                 timeout: int = 120,
+                 do_not_fetch: DoNotFetchRegistry | None = None) -> dict:
     """Read a JSON array of FetchRequest objects from requests_path, validate each
     (BEFORE building/executing anything), execute the allowed ones as argv arrays
     (shell=False), save stdout to a sanitized-path result file, and write/return a
@@ -206,7 +220,12 @@ def run_requests(requests_path, out_dir, registry: dict, licensed_domains: set[s
     batch -- the manifest is still written covering every other request. D6: every
     EXECUTED row (i.e. not refused) carries `licensedSource` -- the matched
     licensed/inventoried domain, or None -- so a licensed-domain fetch is allowed but
-    never silent; refused rows always keep `licensedSource: None`."""
+    never silent; refused rows always keep `licensedSource: None`.
+
+    F126: `do_not_fetch` is passed straight to `validate_request`, so a request
+    aimed at a publisher who asked not to be used is refused with its reason in
+    the row's `refused` field and nothing is ever built or executed for it. One
+    refusal never stops the rest of the batch."""
     requests_path = pathlib.Path(requests_path)
     raw = json.loads(requests_path.read_text(encoding="utf-8"))
     if not isinstance(raw, list):
@@ -223,7 +242,7 @@ def run_requests(requests_path, out_dir, registry: dict, licensed_domains: set[s
         row = {"toolId": req.toolId, "verb": req.verb, "target": req.target,
                "path": None, "bytes": 0, "exitCode": None, "refused": None, "error": None,
                "licensedSource": None}
-        reason = validate_request(req, registry, licensed_domains)
+        reason = validate_request(req, registry, licensed_domains, do_not_fetch)
         if reason is not None:
             row["refused"] = reason
             results.append(row)

@@ -321,15 +321,23 @@ def _chart_research(args) -> int:
     trust gate that can strand a cycle is worse than none. Rejections are
     data in the printed summary (and thence the cycle journal), never an
     exit code.
+
+    F117/F126: `accept` reads `--do-not-fetch` and learns into the same file.
+    A point citing a publisher who asked not to be used is rejected before any
+    fetch; every domain that turns the plain reader away is recorded there so
+    the next `emit` can warn the researcher off it. A missing file is an empty
+    list, never an error.
     """
     if args.action == "accept":
         from gpu_agent.chartdata.verify import accept_research
-        result = accept_research(args.category, args.store, args.work)
+        result = accept_research(args.category, args.store, args.work,
+                                 do_not_fetch_path=args.do_not_fetch)
         print(json.dumps(result, indent=2))
         return 0
     from gpu_agent.chartdata.research import emit_research
     try:
-        paths = emit_research(args.category, args.store, args.work)
+        paths = emit_research(args.category, args.store, args.work,
+                              do_not_fetch_path=args.do_not_fetch)
     except Exception as e:  # noqa: BLE001 -- see docstring: never block the cycle
         print(f"gpu-agent chart-research: error: {e}", file=sys.stderr)
         return 1
@@ -1660,12 +1668,18 @@ def _webreach_fetch(args) -> int:
     requests file, or a syntactically-valid-but-structurally-malformed registry/licensed
     file (e.g. missing an expected key -> KeyError), is a usage error (exit 2) caught
     here before anything runs. D6: licensed/inventoried domains are no longer refused --
-    they execute like any other request and are flagged per-row via `licensedSource`."""
+    they execute like any other request and are flagged per-row via `licensedSource`.
+    F126: a domain whose publisher asked not to be used at all IS refused, with the
+    reason in the row's `refused` field. A missing/malformed --do-not-fetch file is an
+    empty list, never a usage error -- a cycle must not fail over a policy file."""
+    from gpu_agent.fetch_policy import load_do_not_fetch
     from gpu_agent.gathering import webreach
     try:
         registry = json.loads(pathlib.Path(args.registry).read_text(encoding="utf-8"))
         licensed = webreach.load_licensed_domains(pathlib.Path(args.licensed))
-        manifest = webreach.run_requests(args.requests, args.out_dir, registry, licensed)
+        do_not_fetch = load_do_not_fetch(pathlib.Path(args.do_not_fetch))
+        manifest = webreach.run_requests(args.requests, args.out_dir, registry, licensed,
+                                         do_not_fetch=do_not_fetch)
     except (OSError, json.JSONDecodeError, ValueError, KeyError, ValidationError) as e:
         print(f"gpu-agent webreach-fetch: error: {e}", file=sys.stderr)
         return 2
@@ -1924,6 +1938,12 @@ def main(argv=None) -> int:
     crp.add_argument("--store", default="store",
                      help="store root (scorecards+story under <store>/<category>/; "
                           "accept quarantines under <store>/<category>/research-series/)")
+    crp.add_argument("--do-not-fetch", default="registry/do-not-fetch.json",
+                     help="do-not-fetch registry. `emit` names its domains in the "
+                          "brief's rule 8; `accept` rejects a point citing a "
+                          "publisher who objected before any fetch, and learns "
+                          "every domain that turns the plain reader away back into "
+                          "this same file")
     crp.add_argument("--work", required=True,
                      help="this cycle's work dir (emit writes "
                           "<work>/chart-research/bullet-<n>-prompt.txt; accept reads "
@@ -2163,6 +2183,11 @@ def main(argv=None) -> int:
                     help="licensed/inventoried source domains (TrendForce, SemiAnalysis, "
                          "...); fetches to these are executed and flagged via the "
                          "manifest's licensedSource field, not refused (D6)")
+    wf.add_argument("--do-not-fetch", default="registry/do-not-fetch.json",
+                    help="domains we must not read. A publisher-objection domain is "
+                         "refused outright; a blocks-plain-readers domain is NOT "
+                         "refused here (that kind is about the chart verifier's "
+                         "reader). Missing file = empty list, never an error")
     ga = sub.add_parser("gather-assemble",
                         help="assemble a directory of reader-gatherer blob files into the "
                              "single blobs.json envelope `ingest --blobs` accepts")

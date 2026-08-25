@@ -85,3 +85,51 @@ def test_build_argv_never_splits_or_formats_other_slots():
                                      "kind": "url"}}}
     argv = build_argv(tool, FetchRequest(toolId="t", verb="read", target="https://e.com"))
     assert argv == ["t", "read", "https://e.com", "--flag{x}"]  # only {target}, verbatim slots otherwise
+
+
+# --------------------------------------------------------------------------- #
+# F126: a publisher who asked not to be used is refused here, before anything
+# is built or executed. A site that merely blocks the verifier's plain reader
+# is NOT -- that is a fact about the verifier's reader, not about permission,
+# and gatherers still read those pages for claims.
+# --------------------------------------------------------------------------- #
+
+from gpu_agent.fetch_policy import (   # noqa: E402 -- grouped with its own tests
+    DoNotFetchEntry, DoNotFetchRegistry, KIND_BLOCKS_READERS, KIND_OBJECTION)
+
+_DO_NOT_FETCH = DoNotFetchRegistry([
+    DoNotFetchEntry("objector.test", KIND_OBJECTION, "2026-08-25", "asked us not to"),
+    DoNotFetchEntry("blocker.test", KIND_BLOCKS_READERS, "2026-08-25", "403s the reader"),
+])
+
+
+def test_a_publisher_objection_domain_is_refused_with_a_clear_reason():
+    reason = validate_request(_req(target="https://objector.test/a"), REGISTRY,
+                              LICENSED, _DO_NOT_FETCH)
+    assert reason == "refused: publisher objection (objector.test)"
+
+
+def test_a_publisher_objection_covers_subdomains_and_userinfo():
+    for url in ("https://news.objector.test/a", "https://user:pw@objector.test/a",
+                "https://OBJECTOR.test:8443/a"):
+        assert validate_request(_req(target=url), REGISTRY, LICENSED,
+                                _DO_NOT_FETCH) == (
+            "refused: publisher objection (objector.test)")
+
+
+def test_a_blocks_plain_readers_domain_is_not_refused_by_the_fetch_runner():
+    """Gatherers may still read those pages for claims -- the block is about
+    the verifier's plain reader, not about permission."""
+    assert validate_request(_req(target="https://blocker.test/a"), REGISTRY,
+                            LICENSED, _DO_NOT_FETCH) is None
+
+
+def test_a_query_kind_target_is_never_matched_against_the_do_not_fetch_list():
+    """A free-text search target has no host to judge; it must pass through."""
+    assert validate_request(_req(verb="search", target="objector.test foundry share"),
+                            REGISTRY, LICENSED, _DO_NOT_FETCH) is None
+
+
+def test_omitting_the_do_not_fetch_registry_refuses_nothing_new():
+    assert validate_request(_req(target="https://objector.test/a"), REGISTRY,
+                            LICENSED) is None

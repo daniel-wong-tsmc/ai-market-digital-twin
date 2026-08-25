@@ -18,6 +18,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from gpu_agent.fetch_policy import (
+    DO_NOT_FETCH_REGISTRY, KIND_BLOCKS_READERS, KIND_OBJECTION,
+    load_do_not_fetch)
+
 _NO_SERIES_TOKEN = "NO-SERIES-FOUND"
 
 # The desk's registered licensed publishers (`registry/licensed-sources.json`,
@@ -41,28 +45,67 @@ def _licensed_domains() -> list[str]:
     return [d for d in domains if isinstance(d, str) and d.strip()]
 
 
-def _reachability_rule(domains: list[str]) -> str:
+def _do_not_fetch_lists(path=None) -> tuple[list[str], list[str]]:
+    """(publishers who objected, sites that turn the plain reader away), read
+    at prompt-build time from `path` -- `registry/do-not-fetch.json` unless the
+    caller names another. Missing means two empty lists and a generic warning,
+    never a crashed emit -- the same rule the licensed registry follows, and
+    the same reason: this builder runs from worktrees and odd working
+    directories too."""
+    reg = load_do_not_fetch(path if path is not None else DO_NOT_FETCH_REGISTRY)
+    return reg.domains(KIND_OBJECTION), reg.domains(KIND_BLOCKS_READERS)
+
+
+def _listed(domains: list[str]) -> str:
+    return "\n".join(f"     - {d}" for d in domains)
+
+
+def _reachability_rule(licensed: list[str], objections: list[str],
+                       blocked: list[str]) -> str:
     """Rule 8: the verifier re-reads every cited page with a plain automated
     reader, so a publisher that turns such readers away can never verify.
+
     Three live cycles (2026-08-10/11) lost every candidate to gaps this rule
-    and rule 9 now close."""
+    and rule 9 now close. The 2026-08-19 cycle then lost one to a publisher on
+    no list at all, whose page opened cleanly for the researcher's own reader
+    three times while the verifier got 403 five times (F117) -- so the rule now
+    says plainly that checking a page yourself proves nothing, and names both
+    do-not-fetch lists as well as the licensed one.
+    """
     base = (
         "8. After you answer, a machine re-opens every URL you cite with a\n"
         "   plain automated reader (no login, no cookies, no browser) and\n"
-        "   looks for each number on the page. A site that turns automated\n"
-        "   readers away (a paywall, a login wall, a \"403 Forbidden\" or\n"
-        "   \"access denied\" page, a bot check) can NEVER pass that\n"
-        "   verification, however real its numbers are, and the whole series\n"
-        "   is rejected. Prefer a publisher whose page opens plainly."
+        "   looks for each number on the page. That machine is a DIFFERENT\n"
+        "   reader from the one you use, with different access: a page that\n"
+        "   opens cleanly for you can still turn it away, so checking a page\n"
+        "   yourself proves nothing about whether its numbers will verify.\n"
+        "   A site that turns automated readers away (a paywall, a login\n"
+        "   wall, a \"403 Forbidden\" or \"access denied\" page, a bot check)\n"
+        "   can NEVER pass that verification, however real its numbers are,\n"
+        "   and the whole series is rejected. Prefer a publisher whose page\n"
+        "   opens plainly."
     )
-    if domains:
-        listed = "\n".join(f"     - {d}" for d in domains)
+    if licensed:
         base += (
             "\n   Known licensed publishers that fail this check -- do not cite\n"
             "   them as a point's source:\n"
-            f"{listed}\n"
+            f"{_listed(licensed)}\n"
             "   If the only home for a number is one of these, treat it as\n"
             "   unavailable."
+        )
+    if objections:
+        base += (
+            "\n   Publishers who have asked us not to use their material at all.\n"
+            "   NEVER cite these, whatever they publish and however well their\n"
+            "   pages open:\n"
+            f"{_listed(objections)}"
+        )
+    if blocked:
+        base += (
+            "\n   Sites already known to turn the plain reader away. Treat\n"
+            "   anything they publish as unavailable, however well the page\n"
+            "   opens for you:\n"
+            f"{_listed(blocked)}"
         )
     return base
 
@@ -124,7 +167,8 @@ def _findings_block(findings: list[dict]) -> str:
     return "\n".join(lines) if lines else "(No findings are attached to this story beyond the text above.)"
 
 
-def build_research_prompt(bullet: dict, findings: list[dict]) -> str:
+def build_research_prompt(bullet: dict, findings: list[dict],
+                          do_not_fetch_path=None) -> str:
     """The prompt handed to a tool-USING research agent for ONE chartless
     dashboard bullet: today's story text for this bullet, the findings
     already cited for it (statement + URL, for context and as a starting
@@ -137,19 +181,29 @@ def build_research_prompt(bullet: dict, findings: list[dict]) -> str:
     Four of the rules exist because the verifier or the schema enforces
     them: every point must come from one site; that site must be publicly
     reachable; it must also answer a plain automated re-fetch (rule 8,
-    with the registered licensed publishers named -- three live cycles
-    lost candidates to a 403 the brief never warned about); and `value`
+    which names three lists -- the registered licensed publishers, the
+    publishers who asked not to be used, and the sites already known to
+    turn the plain reader away -- and states the thing no list can cover:
+    the re-fetch is done by a DIFFERENT reader, so the researcher checking
+    a page itself proves nothing); and `value`
     must be a bare number, never prose or a hedge (rule 9 -- the same
     cycles lost the rest to "$35.6 billion" and "close to 80%"). A gate
     that rejects something its own prompt never asked for just burns
     dispatches producing candidates that are thrown away, so the
     instruction and the enforcement are stated together and tested
     together (`tests/test_chart_research.py`).
+
+    `do_not_fetch_path` names the registry rule 8 reads; it defaults to
+    `registry/do-not-fetch.json`, the same file the verifier learns into, so
+    the list the researcher is warned about and the list the desk enforces
+    cannot drift apart.
     """
     bullet_text = (bullet.get("text") or "").strip()
     findings_block = _findings_block(findings)
+    objections, blocked = _do_not_fetch_lists(do_not_fetch_path)
     rules = _RULES.replace("{reachability_rule}",
-                           _reachability_rule(_licensed_domains()))
+                           _reachability_rule(_licensed_domains(), objections,
+                                              blocked))
 
     return f"""\
 You are researching a chart for today's GPU market dashboard.

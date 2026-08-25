@@ -122,8 +122,12 @@ worth a fight with someone who would rather not be quoted.
    designed rather than improvised.]`
 4. **A domain-level objection stops future fetching too.** If a publisher asks not to be used at
    all, its domain goes on a do-not-fetch list and the source inventory records why. `[DECIDED
-   2026-08-22, user, interactive. A refusal list exists in the fetch runner for other reasons;
-   wiring a publisher-objection list into it is filed as F126.]`
+   2026-08-22, user, interactive. BUILT 2026-08-25 (F126). The list lives in
+   `registry/do-not-fetch.json`; an objection is one entry with `kind: publisher-objection`,
+   and the fetch runner then refuses every request to that domain outright, while the chart
+   verifier rejects any point citing it before fetching. The same file carries a second kind,
+   `blocks-plain-readers`, for sites that merely turn our automated reader away — that kind is
+   NOT a refusal. No publisher has ever objected, so the objection list is currently empty.]`
 5. **Escalate anything legal to the user immediately** — no agent, session, or automation answers a
    legal letter. That is a human decision, always.
 6. **Write it down.** Every objection and its resolution is recorded in the repository so the next

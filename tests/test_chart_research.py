@@ -522,3 +522,69 @@ def test_no_registry_writers_guard_is_not_decorative():
     ]
     for line in should_not_fire:
         assert not _is_write_line(line), f"guard false-positived on: {line!r}"
+
+
+# ---------------------------------------------------------------------------
+# F117: rule 8's real finding. On 2026-08-19 the researcher's own reader opened
+# counterpointresearch.com cleanly three times while the verifier's plain
+# reader got HTTP 403 five times. Naming domains will always lag; telling the
+# researcher that its own fetch proves nothing will not.
+# ---------------------------------------------------------------------------
+
+def test_rule_8_says_the_researchers_own_fetch_proves_nothing():
+    prompt = build_research_prompt({"text": "Any bullet."}, []).lower()
+    assert "different" in prompt and "reader" in prompt
+    assert "proves nothing" in prompt
+
+
+def test_rule_8_names_the_blocked_domains_from_the_shipped_registry():
+    """The seeded blocks-plain-readers domain is read from
+    registry/do-not-fetch.json, not hard-coded, so the list the researcher is
+    warned about and the list the verifier learns into cannot drift apart."""
+    prompt = build_research_prompt({"text": "Any bullet."}, [])
+    assert "counterpointresearch.com" in prompt
+    lowered = prompt.lower()
+    assert "turn the plain reader away" in lowered
+    assert "unavailable" in lowered
+    # the licensed-publisher list is still there
+    assert "trendforce.com" in prompt
+
+
+def test_rule_8_lists_a_publisher_objection_when_one_exists(tmp_path, monkeypatch):
+    """No publisher has ever objected, so the shipped list is empty -- but the
+    brief must name one the day it is not."""
+    monkeypatch.chdir(tmp_path)
+    (tmp_path / "registry").mkdir()
+    (tmp_path / "registry" / "do-not-fetch.json").write_text(
+        json.dumps({"version": 1, "entries": [
+            {"domain": "objector.test", "kind": "publisher-objection",
+             "since": "2026-08-25", "why": "asked us not to"}]}, indent=2) + "\n",
+        encoding="utf-8", newline="\n")
+    prompt = build_research_prompt({"text": "Any bullet."}, [])
+    assert "objector.test" in prompt
+    assert "never cite" in prompt.lower()
+
+
+def test_rule_8_survives_a_missing_do_not_fetch_registry(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    prompt = build_research_prompt({"text": "Any bullet."}, [])
+    assert "counterpointresearch.com" not in prompt
+    assert "proves nothing" in prompt.lower()
+    assert "NO-SERIES-FOUND" in prompt
+
+
+def test_build_research_prompt_reads_the_registry_it_is_pointed_at(tmp_path):
+    """Review finding: `--do-not-fetch` was accepted by `chart-research emit`
+    and then ignored, so the brief was built from a file nobody named."""
+    reg = tmp_path / "elsewhere.json"
+    reg.write_text(json.dumps({"version": 1, "entries": [
+        {"domain": "namedfile.test", "kind": "blocks-plain-readers",
+         "since": "2026-08-25", "why": "403s the reader"}]}, indent=2) + "\n",
+        encoding="utf-8", newline="\n")
+
+    prompt = build_research_prompt({"text": "Any bullet."}, [],
+                                   do_not_fetch_path=reg)
+
+    assert "namedfile.test" in prompt
+    # and NOT the repo default's seeded domain
+    assert "counterpointresearch.com" not in prompt

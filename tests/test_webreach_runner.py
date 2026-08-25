@@ -433,3 +433,29 @@ def test_cli_webreach_fetch_exit_2_on_non_list_json(tmp_path):
                    "--registry", str(reg_path),
                    "--licensed", str(licensed_path)])
     assert rc == 2
+
+
+def test_a_publisher_objection_row_is_refused_and_never_executed(tmp_path):
+    """F126: an objected-to publisher is refused before argv is built, so the
+    manifest row carries the reason and no result file exists at all."""
+    from gpu_agent.fetch_policy import (
+        DoNotFetchEntry, DoNotFetchRegistry, KIND_OBJECTION)
+    dnf = DoNotFetchRegistry([DoNotFetchEntry(
+        "objector.test", KIND_OBJECTION, "2026-08-25", "asked us not to")])
+    req_path = _write_requests(tmp_path, [
+        {"toolId": "fake-fetch", "verb": "read", "target": "https://objector.test/a"},
+        {"toolId": "fake-fetch", "verb": "read", "target": "https://example.com/b"},
+    ])
+    out_dir = tmp_path / "out"
+
+    manifest = run_requests(req_path, out_dir, _fake_registry(), LICENSED,
+                            do_not_fetch=dnf)
+
+    refused, executed = manifest["results"]
+    assert refused["refused"] == "refused: publisher objection (objector.test)"
+    assert refused["path"] is None
+    assert refused["exitCode"] is None
+    assert refused["licensedSource"] is None
+    # one refusal never stops the rest of the batch
+    assert executed["refused"] is None
+    assert executed["exitCode"] == 0
