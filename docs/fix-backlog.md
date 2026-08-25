@@ -1141,6 +1141,21 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   opening a twin. Touches `gpu_agent/issues.py` open-trigger logic only; narrator prompt and pins
   untouched.
 
+  **Follow-up, 2026-08-25 (user-approved hand merge of the leftover pair).** F123 stops new twins
+  from being minted but left the pair that already existed in `register.json`. On the user's
+  interactive decision the older issue `constraint-stacked-memory-and-server-dram` ("HBM4 and
+  server DRAM supply") survives and the twin `constraint-stacked-high-bandwidth-memory-supply`
+  ("Stacked memory supply per accelerator") was removed; the survivor's
+  `latest.claimFindingIds` gained the twin's finding id (union, survivor's first) and keeps its
+  own title, trigger label and counters — the two issues were checked on the same days, so the
+  check counts were deliberately not summed. `constraint-hbm4-memory-allocation-per-accelerator`
+  is a different question and was left alone. `history.jsonl` was left untouched as the audit
+  trail. The merge is a re-runnable, idempotent one-off in
+  `scripts/oneoff_merge_issue_twin_2026_08_25.py`, pinned by
+  `tests/test_oneoff_merge_issue_twin_2026_08_25.py`; a dry run of `open_issues` against the
+  merged register with the 2026-08-v13 scorecard reports `touched: []`, so the next cycle does
+  not re-mint the twin.
+
 - [x] **F124 — Footer disclaimer on every public page (approved wording).** Posture doc §4,
   wording and placement DECIDED 2026-08-22: "Independent personal project. The analysis here is
   one individual's own work, produced from public sources. It is not affiliated with, endorsed

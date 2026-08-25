@@ -56,7 +56,8 @@
    "latest": {
     "assessedAsOf": "2026-08-25",
     "claimFindingIds": [
-     "www-investing-com-87498f82-2026-08-1"
+     "www-investing-com-87498f82-2026-08-1",
+     "en-sedaily-com-b1c000ac-2026-08-1"
     ],
     "reasoning": "No new memory-price or supply evidence arrived today. Micron's position stands: it can supply no more than about half of demand, calls server memory the number one constraint, and has no line of sight to when supply meets demand.",
     "status": "unchanged"
@@ -71,29 +72,6 @@
     "label": "HBM4 and server DRAM supply"
    },
    "worsenedCount": 1
-  },
-  {
-   "checkCount": 4,
-   "id": "constraint-stacked-high-bandwidth-memory-supply",
-   "improvedStreak": 1,
-   "latest": {
-    "assessedAsOf": "2026-08-25",
-    "claimFindingIds": [
-     "en-sedaily-com-b1c000ac-2026-08-1"
-    ],
-    "reasoning": "No new evidence arrived today. Suppliers can still meet only 60% to 70% of the stacked-memory volume requested for the Rubin Ultra generation.",
-    "status": "unchanged"
-   },
-   "openedAsOf": "2026-08",
-   "reopenedAsOf": [],
-   "resolvedAsOf": null,
-   "state": "open",
-   "title": "Stacked memory supply per accelerator",
-   "trigger": {
-    "kind": "binding-constraint",
-    "label": "Stacked memory supply per accelerator"
-   },
-   "worsenedCount": 0
   },
   {
    "checkCount": 3,
