@@ -7,6 +7,62 @@ from gpu_agent.publisher import collapsed_publisher_set
 
 _ISO_PREFIX = re.compile(r"^\d{4}-\d{2}-\d{2}")
 
+# F127 — excerpt length cap. Posture doc §2, DECIDED 2026-08-22: an excerpt is
+# "at most two sentences or about 50 words". That "or" is read literally — an
+# excerpt is rejected only when it breaks BOTH limits. Measured over all 644
+# committed excerpts, nothing breaks both, while a hard 50-word cap alone would
+# have rejected a real 70-word one-sentence 10-Q quote. The absolute cap is the
+# backstop that stops a run-on (which counts as one sentence) from walking past
+# the gate at any length.
+EXCERPT_MAX_WORDS = 50
+EXCERPT_MAX_SENTENCES = 2
+EXCERPT_ABSOLUTE_MAX_WORDS = 100
+
+_SENTENCE_END = re.compile(r"[.!?]+(?=\s|$)")
+
+# Tokens that end in "." without ending a sentence. Financial prose only needs a
+# short list; anything missed makes the counter count HIGH, so keep it current.
+_ABBREVIATIONS = frozenset({
+    "u.s.", "u.k.", "e.u.", "u.s.a.",
+    "inc.", "corp.", "co.", "ltd.", "llc.", "plc.", "gmbh.",
+    "mr.", "mrs.", "ms.", "dr.", "prof.", "sr.", "jr.", "st.",
+    "vs.", "etc.", "e.g.", "i.e.", "cf.", "al.",
+    "no.", "fig.", "approx.", "est.", "avg.", "yr.", "qtr.",
+    "jan.", "feb.", "mar.", "apr.", "jun.", "jul.", "aug.",
+    "sept.", "sep.", "oct.", "nov.", "dec.",
+})
+
+
+def _count_words(text: str) -> int:
+    """Word count the way the posture doc measured it: whitespace split."""
+    return len(text.split())
+
+
+def _count_sentences(text: str) -> int:
+    """Count sentences, biased to UNDER-count.
+
+    Under-counting lets a long excerpt through; over-counting rejects a real one.
+    The count is only ever consulted for an excerpt already over EXCERPT_MAX_WORDS,
+    and EXCERPT_ABSOLUTE_MAX_WORDS backstops genuine bulk, so leniency is safe.
+    A decimal point ("$6.7B", "54.3%") is never a terminator because the lookahead
+    requires whitespace or end-of-string after the dot.
+    """
+    folded = " ".join(text.split())
+    count = 0
+    for match in _SENTENCE_END.finditer(folded):
+        tokens = folded[:match.end()].split()
+        if not tokens:
+            continue
+        last = tokens[-1].lower().strip("\"'([{<")
+        if last in _ABBREVIATIONS:
+            continue
+        # A single character before the punctuation: an initial, or the tail of
+        # "U.S." once the earlier dot has already been consumed.
+        if len(last.rstrip(".!?")) <= 1:
+            continue
+        count += 1
+    return max(count, 1)
+
 def _future_dated(date: str, as_of: str) -> bool:
     """Grain-aware vintage compare: truncate the evidence date to asOf's grain
     (month 'YYYY-MM' or day 'YYYY-MM-DD') and compare lexically."""
