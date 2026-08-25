@@ -1,0 +1,44 @@
+{
+  "id": "www-digitimes-com-f25fa2c7-2026-08-2",
+  "statement": "Tight supply of memory, CPUs and IC substrate is named as the primary brake on server shipment growth and is expected to keep restraining it through 3Q26.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Long-lead components gate how many servers can actually be built regardless of order book, so persistent tightness caps shipments even when demand is present.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Constrained memory, CPU and substrate supply limits server assembly throughput, so accelerator-bearing systems ship later than orders would otherwise allow."
+  },
+  "evidence": [
+    {
+      "source": "Digitimes",
+      "url": "https://www.digitimes.com/reports/item.php?id=20260814RS400",
+      "date": "2026-08-20",
+      "excerpt": "report identifies 'tight supply of key components such as memory, CPU, and IC substrate' as the primary impediment to growth momentum, expected to continue restraining shipment acceleration through 3Q26.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary research house behind a paywall; the constraint is described qualitatively with no lead-time figures given."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-20",
+  "capturedAt": "2026-08-24T16:49:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

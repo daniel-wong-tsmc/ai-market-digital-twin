@@ -1129,7 +1129,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
 > Numbering note 2026-08-22: F123–F128 below were minted 2026-08-22 in the relayed decision
 > session (user-assigned via the orchestrator; usual concurrent-mint caveat — renumber if collided).
 
-- [ ] **F123 — Issue identity must survive a constraint relabel.** The register minted three
+- [x] **F123 — Issue identity must survive a constraint relabel.** The register minted three
   "different" issues for one real problem in three cycles because the id derives from the exact
   binding-constraint label (`constraint-hbm-stacked-memory-supply` v8 →
   `constraint-stacked-memory-and-server-dram` v9), and every stranded id drifts toward a false
@@ -1141,7 +1141,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   opening a twin. Touches `gpu_agent/issues.py` open-trigger logic only; narrator prompt and pins
   untouched.
 
-- [ ] **F124 — Footer disclaimer on every public page (approved wording).** Posture doc §4,
+- [x] **F124 — Footer disclaimer on every public page (approved wording).** Posture doc §4,
   wording and placement DECIDED 2026-08-22: "Independent personal project. The analysis here is
   one individual's own work, produced from public sources. It is not affiliated with, endorsed
   by, or representative of any employer, and it is not investment advice." Small template change
@@ -1165,7 +1165,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   rejected the way an invented one already is. Gated: extraction prompt/gate changes re-run the
   eval gate; F6 expected byte-untouched (gate code, not prompt bytes — verify in-lane).
 
-- [ ] **F128 — Codify the unattended-run mechanics the user ruled on 2026-08-22 (GATED: F83
+- [x] **F128 — Codify the unattended-run mechanics the user ruled on 2026-08-22 (GATED: F83
   fingerprint re-record).** Four standing per-cycle deviations are now ACCEPTED PRACTICE by
   interactive ruling and must move from "re-flagged every run" into the run-cycle skill's text:
   (1) brains run with Read on their own split prompt files + exactly one Write to their own
@@ -1177,6 +1177,26 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   + full text by path. One lane, one deliberate F83 conformance-pin re-record via the recorded
   recipe; F6 and the narrator pin byte-untouched. After it merges, cycle logs stop recording
   these four as deviations.
+
+- [x] **F129 — small-sample-corrected eval epsilon (t-based prediction band) + recompute-eps
+  verb.** DONE on branch `f129-eval-eps`. The F6 noise allowance was statistically
+  overconfident on a small pool: `pooled_epsilon` used a fixed `EPS_Z = 2.0` times the sample
+  stdev, which assumes the stdev is known. At the typical post-rebaseline pool of n=3 it is
+  not. Live evidence: the extract seam's bar of 6.163 failed two good runs by 0.038 on
+  2026-08-24 (F121) while historical same-golden-set draws span 5.375-7.125 — the same swings
+  F73 and F107 already documented. The band is now size-aware,
+  `t_{0.975,n-1} * sqrt(1 + 1/n) * sample stdev`, floored at the quantum: a 95% prediction
+  band for the NEXT run rather than a confidence band on the mean. t quantiles are a hardcoded
+  df=1..30 table (1.96 beyond), stdlib only, no new dependencies; it still converges — at large
+  n the multiplier returns to ~2.0, so this only loosens the small-sample case. `EPS_Z` stays
+  for back-compat and the non-poisoning invariant in `append_run_to_history` is untouched.
+  New `gpu-agent eval recompute-eps` recomputes `epsilon` from the committed `seamHistory` and
+  the true quanta, writes `fixtures/evals/baseline.json`, prints old->new per seam and stamps
+  `provenance.epsRecompute` — deterministic, no runs, and the only sanctioned writer of an
+  epsilon-only baseline change (project law: never hand-edit baseline.json). Applied in-lane:
+  extract 0.629 -> 1.563; implication/judge/thesis have flat pools (stdev 0) and stay at their
+  quantum floors 1.0/0.25/0.5. promptHashes byte-unchanged; the F6 pin, narrator pin, F83
+  fingerprint and scoring replay pin all stay green.
 
 ## From the 2026-07-13 documentation gap review (F88–F94) — what the docs still don't cover
 

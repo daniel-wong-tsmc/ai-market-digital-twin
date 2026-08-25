@@ -1,0 +1,55 @@
+{
+  "id": "finance-yahoo-com-d93fe0e4-2026-08-2",
+  "statement": "Anthropic reports data center capacity constraints while placing about $250 million in initial chip orders with startup Fractile plus capacity agreements with Riot Platforms and Volta Infra Holdings.",
+  "kind": "measured",
+  "value": {
+    "number": 0.25,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A frontier lab buying from an alternative silicon startup and locking third-party capacity shows compute demand running ahead of available supply and spilling into non-Nvidia channels.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "models.frontier-closed"
+    ],
+    "direction": "mixed",
+    "mechanism": "Capacity scarcity pushes a large buyer toward alternative accelerators and leased capacity, adding supply routes while confirming excess compute demand."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Bloomberg syndication)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-taps-google-chip-veteran-195955567.html",
+      "date": "2026-08-21",
+      "excerpt": "Anthropic faces data center capacity constraints and seeks custom hardware tailored to its specific needs",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (Bloomberg syndication)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-taps-google-chip-veteran-195955567.html",
+      "date": "2026-08-21",
+      "excerpt": "approximately $250 million in initial orders from UK-based startup Fractile, plus capacity agreements with Riot Platforms and Volta Infra Holdings",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; order figure is approximate and not company-filed."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "Anthropic / Google / NVIDIA (custom silicon competitive displacement)",
+  "observedAt": "2026-08-21",
+  "capturedAt": "2026-08-23T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

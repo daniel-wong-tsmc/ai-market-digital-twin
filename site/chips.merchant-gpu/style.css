@@ -27,6 +27,10 @@ th, td { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid var(-
 ul { padding-left: 1.2rem; }
 details { margin: .3rem 0; }
 .callmore { color: var(--muted); }
+/* F124: the standing disclaimer. Quiet fine print -- a standing notice, not
+   part of the day's reading. */
+.disclaimer { margin: 3rem 0 0; padding-top: 1rem; border-top: 1px solid var(--line);
+              color: var(--muted); font-size: .8rem; line-height: 1.5; }
 
 .hero { font-size: 1.45rem; font-weight: 600; margin: 1rem 0 .5rem; }
 .hero .rating { text-transform: uppercase; }

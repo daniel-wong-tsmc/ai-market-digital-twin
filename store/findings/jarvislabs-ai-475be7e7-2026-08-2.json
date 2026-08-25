@@ -1,0 +1,42 @@
+{
+  "id": "jarvislabs-ai-475be7e7-2026-08-2",
+  "statement": "Street purchase price for a single H200 SXM module is quoted at $30,000-$40,000, and an 8-GPU HGX server at $350,000-$420,000, as of August 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "The document gives a price range with no baseline or stated change, so this is a static hardware price level rather than a movement.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Secondary-market hardware pricing shows what buyers pay outside allocation channels and serves as a confirmation overlay on merchant-GPU scarcity."
+  },
+  "evidence": [
+    {
+      "source": "Jarvislabs.ai (blog)",
+      "url": "https://jarvislabs.ai/blog/h200-price",
+      "date": "2026-08-25",
+      "excerpt": "Also notes hardware purchase prices: single H200 SXM module '$30,000–$40,000' street price; 8-GPU HGX server '$350,000–$420,000' street price.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator blog quoting unattributed street prices as a range; no dealer quote or filing behind the figures."
+  },
+  "dispersion": "Quoted as a range: $30,000-$40,000 per H200 SXM module; $350,000-$420,000 per 8-GPU HGX server.",
+  "asOf": "2026-08",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-25",
+  "capturedAt": "2026-08-24T16:49:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

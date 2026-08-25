@@ -2,7 +2,8 @@ import re
 
 from gpu_agent.dashboard.site_model import build_site_model
 from gpu_agent.dashboard.site_render import (
-    HOW_LINKS, page, render_category_page, render_index_redirect,
+    DISCLAIMER, HOW_LINKS, SITE_CSS, page, render_category_page,
+    render_index_redirect,
 )
 from gpu_agent.reader import lint_acronyms
 
@@ -174,3 +175,32 @@ def test_appendix_has_raw_scores_findings_and_runs():
     for d in m["trend"]["dates"]:
         assert d in html
     assert str(len(m["runs"])) in html or m["runs"][0]["date"] in html
+
+
+# --- F124: the standing independence disclaimer -----------------------------
+# docs/publishing-posture.md section 4, decided with the user 2026-08-22. The
+# wording is APPROVED VERBATIM, so these tests pin it character for character:
+# a reword is a copy change and needs the user, not a test edit.
+
+APPROVED_DISCLAIMER = (
+    "Independent personal project. The analysis here is one individual's own "
+    "work, produced from public sources. It is not affiliated with, endorsed "
+    "by, or representative of any employer, and it is not investment advice."
+)
+
+
+def test_disclaimer_is_the_approved_wording_character_for_character():
+    assert DISCLAIMER == APPROVED_DISCLAIMER
+
+
+def test_every_shell_page_carries_the_disclaimer_in_its_footer():
+    html = page("Any page", "<p>body</p>")
+    assert '<footer class="disclaimer">' in html
+    assert APPROVED_DISCLAIMER in html
+    # In the footer -- last thing in the body, not floating in the head.
+    assert html.index('<footer class="disclaimer">') > html.index("<body>")
+    assert html.index(APPROVED_DISCLAIMER) < html.index("</body>")
+
+
+def test_the_disclaimer_is_styled_rather_than_left_as_bare_text():
+    assert ".disclaimer" in SITE_CSS

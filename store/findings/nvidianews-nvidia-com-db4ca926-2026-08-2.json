@@ -1,0 +1,44 @@
+{
+  "id": "nvidianews-nvidia-com-db4ca926-2026-08-2",
+  "statement": "NVIDIA will be the exclusive AI compute infrastructure provider at the PORTS-Pike campus, with SB Energy building, owning and operating the data center for OpenAI",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Exclusivity at a site of this size locks a competitor out of gigawatts of already-permitted power, which is currently the scarcest input in the chain.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud"
+    ],
+    "direction": "positive",
+    "mechanism": "An exclusivity guarantee ties a specific powered site to one vendor's accelerators, converting scarce power capacity into a locked-in design win and foreclosing alternative silicon at that site."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom (official)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+      "date": "2026-08-17",
+      "excerpt": "AI is becoming infrastructure - the foundation for intelligence in every industry - and land, power and shell have become vital in the age of AI.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Stated in NVIDIA's own press release, which is the authoritative source for its own commercial arrangement."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-17",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

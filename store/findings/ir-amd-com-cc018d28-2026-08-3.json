@@ -1,0 +1,44 @@
+{
+  "id": "ir-amd-com-cc018d28-2026-08-3",
+  "statement": "AMD announced a strategic partnership with Anthropic to deploy up to 2 gigawatts of MI450 Series GPUs in AMD Helios racks",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named frontier model developer committing gigawatt-scale capacity to a non-incumbent accelerator is the strongest kind of design win, because it shows the software barrier is being crossed.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "A multiyear gigawatt-scale commitment from a frontier lab converts into forward accelerator orders and rack build-out, and validates the challenger software stack for other buyers."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (ir.amd.com)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "a strategic partnership with Anthropic to deploy up to 2 gigawatts of MI450 Series GPUs in AMD Helios racks and a multiyear collaboration to optimize AMD Instinct GPUs.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Announced in AMD's own results press release; deployment is stated as up to 2 gigawatts, an upper bound rather than a firm order."
+  },
+  "dispersion": "Stated as up to 2 gigawatts, an upper bound.",
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

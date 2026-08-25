@@ -1,0 +1,35 @@
+{
+  "seriesName": "Nebius AI Cloud on-demand GPU rental rates by chip",
+  "unit": "US$ per GPU-hour",
+  "form": "columns",
+  "sourceName": "Nebius",
+  "points": [
+    {
+      "label": "NVIDIA HGX H100 (on-demand)",
+      "value": 3.85,
+      "sourceUrl": "https://nebius.com/prices",
+      "publishedAt": "2026-08-25"
+    },
+    {
+      "label": "NVIDIA HGX H200 (on-demand)",
+      "value": 4.5,
+      "sourceUrl": "https://nebius.com/prices",
+      "publishedAt": "2026-08-25"
+    },
+    {
+      "label": "NVIDIA HGX B200 (on-demand)",
+      "value": 7.15,
+      "sourceUrl": "https://nebius.com/prices",
+      "publishedAt": "2026-08-25"
+    },
+    {
+      "label": "NVIDIA HGX B300 (on-demand)",
+      "value": 7.85,
+      "sourceUrl": "https://nebius.com/prices",
+      "publishedAt": "2026-08-25"
+    }
+  ],
+  "pair": false,
+  "notes": "All four points are on-demand GPU-hour rates listed on the same Nebius pricing page, as of the date checked (2026-08-25). This contextualizes the bullet's $4.50 H200 on-demand figure by showing where it sits relative to the older H100 and newer B200/B300 chips on the same provider's own price list. It does not directly cover Jarvislabs' $3.99 or Lambda's absence of H200, since rule 5 requires every point to come from one site; those two facts are already sourced separately in the bullet.",
+  "bulletIndex": 1
+}

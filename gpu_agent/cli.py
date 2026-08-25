@@ -1,5 +1,6 @@
 from __future__ import annotations
 import argparse, hashlib, json, pathlib, re, sys
+import datetime as _dt
 from datetime import datetime, timezone
 from pydantic import ValidationError
 from gpu_agent.assignment import load_assignment
@@ -58,8 +59,9 @@ from gpu_agent.cycle import AssignmentProvider, CycleEntry, CyclePlan, build_cyc
 from gpu_agent.report import load_scorecard, find_prior, render_report
 from gpu_agent.evals.cases import load_cases, CaseError
 from gpu_agent.evals.harness import (
-    BASELINE_SCHEMA_VERSION, build_grade_prompt, build_report, evaluate_v2,
-    gate_brain_answer, load_baseline, rebaseline_v2, record_grades)
+    BASELINE_SCHEMA_VERSION, EPS_FORMULA_TAG, _seed_history, build_grade_prompt,
+    build_report, evaluate_v2, gate_brain_answer, load_baseline, rebaseline_v2,
+    recompute_epsilon, record_grades, seam_quanta)
 from gpu_agent.evals.prompt_hash import compute_prompt_hashes
 from gpu_agent.asof import AsOfError
 from gpu_agent.corpus import (
@@ -1114,6 +1116,49 @@ def _eval(args) -> int:
             print(f"  - {r}")
         return 0 if v["pass"] else 1
 
+    if args.action == "recompute-eps":
+        # F129: recompute epsilon from the COMMITTED seamHistory + the true quanta. No runs,
+        # no hand-editing — this command is the only sanctioned writer of an epsilon-only
+        # baseline change (project law: never hand-edit baseline.json).
+        baseline = load_baseline(args.baseline)
+        if baseline is None:
+            print(f"gpu-agent eval: error: no baseline at {args.baseline}", file=sys.stderr)
+            return 2
+        if baseline.get("schemaVersion") != BASELINE_SCHEMA_VERSION:
+            print("gpu-agent eval: error: recompute-eps requires a schema-v2 baseline",
+                  file=sys.stderr)
+            return 2
+        # True quanta: the baseline's own stored quanta (recorded by the rebaseline that
+        # built it); any seam missing there is derived from the case set.
+        quanta = dict(baseline.get("quanta") or {})
+        history = _seed_history(baseline)
+        if any(s not in quanta for s in history):
+            try:
+                quanta.update({s: q for s, q in
+                               seam_quanta(load_cases(pathlib.Path(args.cases))).items()
+                               if s not in quanta})
+            except CaseError as e:
+                print(f"gpu-agent eval: case error: {e}", file=sys.stderr)
+                return 1
+        missing = sorted(s for s in history if s not in quanta)
+        if missing:
+            print("gpu-agent eval: error: no true quantum for seam(s): "
+                  + ", ".join(missing), file=sys.stderr)
+            return 1
+        old = dict(baseline.get("epsilon") or {})
+        as_of = _dt.date.today().isoformat()
+        new_baseline = recompute_epsilon(baseline, quanta, as_of)
+        p = pathlib.Path(args.baseline)
+        p.write_text(json.dumps(new_baseline, indent=2, sort_keys=True), "utf-8")
+        print(f"epsilon recomputed ({EPS_FORMULA_TAG}) -> {args.baseline}")
+        for seam in sorted(new_baseline["epsilon"]):
+            n = len(history.get(seam, []))
+            o = old.get(seam)
+            o_txt = f"{o:.3f}" if isinstance(o, (int, float)) else "(none)"
+            print(f"  {seam}: {o_txt} -> {new_baseline['epsilon'][seam]:.3f}  "
+                  f"(n={n}, quantum {quanta[seam]:.3f})")
+        return 0
+
     if args.action == "rebaseline":
         if not args.runs:
             print("gpu-agent eval: error: rebaseline needs --runs <d1> <d2> <d3> "
@@ -1983,7 +2028,8 @@ def main(argv=None) -> int:
                     help="write the audit artifact here instead of <store>/<category>/audit/<date>.json")
     ev = sub.add_parser("eval", help="F6 eval harness: golden-set emit/record + rebaseline")
     ev.add_argument("action", choices=["emit-brain", "record-brain", "emit-grade",
-                                       "record-grade", "verdict", "rebaseline"])
+                                       "record-grade", "verdict", "rebaseline",
+                                       "recompute-eps"])
     ev.add_argument("--cases", default="fixtures/evals/cases")
     ev.add_argument("--out", default="", help="run dir (required for emit-*/record-*)")
     ev.add_argument("--as-of", default="", type=_as_of_opt,

@@ -1,0 +1,45 @@
+{
+  "id": "jarvislabs-ai-475be7e7-2026-08-1",
+  "statement": "H200 on-demand rental at Jarvislabs.ai is listed at $3.99 per GPU-hour in August 2026, with interruptible spot at $1.99 per GPU-hour.",
+  "kind": "measured",
+  "value": {
+    "number": 3.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A posted rental rate is a static price level for H200 capacity with no stated baseline or prior period in the document, so it records where rental pricing sits rather than which way it is moving.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Listed rental rates set the cost of renting H200 capacity from neocloud providers, which is the price overlay against which merchant-GPU purchase economics are compared."
+  },
+  "evidence": [
+    {
+      "source": "Jarvislabs.ai (blog)",
+      "url": "https://jarvislabs.ai/blog/h200-price",
+      "date": "2026-08-25",
+      "excerpt": "Jarvislabs.ai: On-demand '$3.99' per GPU-hour; Spot (interruptible) '$1.99' per GPU-hour; availability single GPU or 8-GPU nodes.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator blog; only the provider's own rate is first-party, and competitor figures were not separately fetched except one Nebius cross-check."
+  },
+  "dispersion": "Competitor H200 on-demand rates cited in the same post span roughly $3.82 (Vast.ai marketplace) to about $10.00-$10.60 at AWS/Azure/Oracle.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-25",
+  "capturedAt": "2026-08-24T16:49:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

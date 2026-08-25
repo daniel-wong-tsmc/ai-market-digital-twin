@@ -1,0 +1,60 @@
+{
+  "id": "nvidianews-nvidia-com-db4ca926-2026-08-1",
+  "statement": "NVIDIA secured 4.25 IT-GW of AI factory capacity at SB Energy's PORTS-Pike campus in Ohio with an option on the remaining 3.75 IT-GW, for a planned 8 IT-GW total dedicated to OpenAI under a 20-year lease, phasing online from 2028",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "An eight-gigawatt site contracted to a single model developer for two decades is committed forward demand for accelerators at a scale that only shows up in long-dated infrastructure deals.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "Securing land, power and shell capacity that is exclusive to one vendor's compute converts multi-year power availability into a reserved pipeline of accelerator deployments for a named customer."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom (official)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+      "date": "2026-08-17",
+      "excerpt": "4.25 IT-GW",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA Newsroom (official)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+      "date": "2026-08-17",
+      "excerpt": "8 IT-GW capacity for OpenAI",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA Newsroom (official)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute",
+      "date": "2026-08-17",
+      "excerpt": "in phases beginning in 2028",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Company-issued press release on NVIDIA's own newsroom, which the document notes also appears as an 8-K exhibit under NVIDIA's EDGAR filer number."
+  },
+  "dispersion": "3.75 IT-GW of the 8 IT-GW total is an option rather than a secured commitment; capacity is dated from 2028 onward.",
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-17",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

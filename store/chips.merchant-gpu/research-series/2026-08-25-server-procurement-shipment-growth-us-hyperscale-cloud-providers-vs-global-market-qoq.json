@@ -1,0 +1,35 @@
+{
+  "seriesName": "Server procurement/shipment growth: US hyperscale cloud providers vs. global market (QoQ)",
+  "unit": "percent QoQ growth",
+  "form": "columns",
+  "sourceName": "BigGo Finance",
+  "points": [
+    {
+      "label": "US hyperscale CSP procurement growth, 2Q26",
+      "value": 11.6,
+      "sourceUrl": "https://finance.biggo.com/news/21eb2952-e7a8-423e-91af-60751b19f9e4",
+      "publishedAt": "2026-08-04"
+    },
+    {
+      "label": "US hyperscale CSP procurement growth, 3Q26 (forecast)",
+      "value": 1.7,
+      "sourceUrl": "https://finance.biggo.com/news/21eb2952-e7a8-423e-91af-60751b19f9e4",
+      "publishedAt": "2026-08-04"
+    },
+    {
+      "label": "Global server shipment growth, 2Q26",
+      "value": 3.8,
+      "sourceUrl": "https://finance.biggo.com/news/21eb2952-e7a8-423e-91af-60751b19f9e4",
+      "publishedAt": "2026-08-04"
+    },
+    {
+      "label": "Global server shipment growth, 3Q26 (forecast)",
+      "value": 2.8,
+      "sourceUrl": "https://finance.biggo.com/news/21eb2952-e7a8-423e-91af-60751b19f9e4",
+      "publishedAt": "2026-08-04"
+    }
+  ],
+  "pair": true,
+  "notes": "All four figures come from one BigGo Finance article (itself summarizing a DIGITIMES report, id 20260814RS400, which is paywalled and was excluded as a citable source). The 2Q26 figures (11.6%, 3.8%) are reported actuals; the 3Q26 figures (1.7%, 2.8%) are explicitly labelled as forecasts by the source, not actuals -- flag this on the chart. Presented as a comparison pair: US hyperscale CSP procurement growth vs. the broader global server shipment growth rate, each across the same two quarters, to show the sharper deceleration hitting large cloud providers specifically.",
+  "bulletIndex": 3
+}

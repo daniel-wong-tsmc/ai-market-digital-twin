@@ -1,0 +1,45 @@
+{
+  "id": "nebius-com-fa885ed3-2026-08-1",
+  "statement": "Nebius lists NVIDIA HGX H200 rental at $4.50 per GPU-hour on-demand and $2.45 preemptible as of 2026-08-25.",
+  "kind": "measured",
+  "value": {
+    "number": 4.5,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A published provider rate card with no prior-period comparison is a price level, not a change.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Provider list pricing is the direct cost of renting H200 capacity and anchors the rental price overlay for the merchant-GPU category."
+  },
+  "evidence": [
+    {
+      "source": "Nebius AI Cloud",
+      "url": "https://nebius.com/prices",
+      "date": "2026-08-25",
+      "excerpt": "NVIDIA HGX H200: Preemptible \"$2.45\"/GPU-hour, On-demand \"$4.50\"/GPU-hour.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Provider's own public rate card, but an open-web page rather than an authoritative filing."
+  },
+  "dispersion": "conflicting same-key reports: value 7.15 -> 4.5 (tol 1%); sources: Nebius AI Cloud",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-25",
+  "capturedAt": "2026-08-24T16:49:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

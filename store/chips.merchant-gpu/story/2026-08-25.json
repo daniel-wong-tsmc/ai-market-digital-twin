@@ -1,0 +1,208 @@
+{
+  "headline": "A quiet day, and the new numbers are all rental prices",
+  "deck": "Nothing arrived to change the memory shortage. What did arrive is a price list: H200 capacity now rents at $3.99 and $4.50 per chip per hour at two providers, while a third still has none to sell.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The only fresh numbers today are prices",
+      "paragraphs": [
+        "Little changed today in the supply story. The new information is a set of prices, captured today. Jarvislabs lists NVIDIA's H200 chip to rent at $3.99 per chip per hour, with an interruptible version at $1.99. Nebius lists the same hardware at $4.50 per chip per hour on demand and $2.45 for capacity that can be taken back.",
+        "Lambda still lists no H200, no GB200 and nothing from AMD. Its newest publicly rentable part is the B200, published at $6.69 per chip per hour. The same generation of hardware sits on one provider's shelf and is missing from another's, which is what a market looks like when capacity is spread unevenly rather than plentiful.",
+        "Buying outright is the other half of the picture. A single H200 module is quoted on the street at $30,000 to $40,000, and an eight-GPU server at $350,000 to $420,000. Those are asking prices, not deals done, but they are the numbers a buyer is quoted this month."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "jarvislabs-ai-475be7e7-2026-08-1",
+        "jarvislabs-ai-475be7e7-2026-08-2",
+        "nebius-com-fa885ed3-2026-08-1",
+        "lambda-ai-783e9e60-2026-08-1",
+        "lambda-ai-783e9e60-2026-08-4"
+      ],
+      "sourceLine": "Jarvislabs and Nebius price pages captured today, plus Lambda's own published catalogue.",
+      "relatedDocs": [
+        {
+          "url": "https://jarvislabs.ai/blog/h200-price",
+          "title": "What an H200 costs to rent and to buy",
+          "outlet": "Jarvislabs.ai (blog)",
+          "date": "2026-08-25"
+        },
+        {
+          "url": "https://nebius.com/prices",
+          "title": "Nebius published hourly rates, captured today",
+          "outlet": "Nebius AI Cloud",
+          "date": "2026-08-25"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Why supply still has not caught up",
+      "paragraphs": [
+        "Nothing arrived today to change the reason supply lags. Micron said on August 10 that it can supply no more than about half of what customers ask for, called ordinary server memory the number one constraint its largest customers face, and said it has no line of sight to when supply meets demand. That remains the plainest statement anyone in the chain has given.",
+        "NVIDIA's own memory suppliers can meet only 60% to 70% of the volume requested for the coming Rubin Ultra generation, reported on August 7. NVIDIA's answer has been to design around the shortage rather than wait it out: the part is being tested at 192GB of memory against a planned 1TB.",
+        "The effect shows up in what actually gets built. Large US cloud providers grew server buying 11.6% quarter over quarter in the second quarter, but are forecast to add only 1.7% in the third. Tight supply of memory, processors and the boards that carry them is named as the main brake, so the slowdown reads as a limit on parts rather than a fall in appetite."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-2",
+        "www-digitimes-com-f25fa2c7-2026-08-1",
+        "www-digitimes-com-f25fa2c7-2026-08-2"
+      ],
+      "sourceLine": "Micron's August 10 forum remarks via Investing.com, Seoul Economic Daily on the Rubin Ultra shortfall, and Digitimes on cloud server buying.",
+      "relatedDocs": [
+        {
+          "url": "https://www.digitimes.com/reports/item.php?id=20260814RS400",
+          "title": "Cloud server buying slows as parts stay scarce",
+          "outlet": "Digitimes",
+          "date": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "What to watch next",
+      "paragraphs": [
+        "The demand side keeps adding names. NVIDIA said yesterday that SpaceXAI has committed to its Vera processors and will expand its Grok computing on the Vera Rubin platform as it scales toward gigawatts of capacity. Watch whether that commitment turns into delivered racks or simply joins the queue behind everyone else.",
+        "The rental rates are the fastest thermometer anyone has. If H200 hours at $3.99 and $4.50 drift down over the coming weeks, that is the first honest sign capacity has loosened. If they hold or climb, the shortage is intact whatever else is announced.",
+        "The one change that would genuinely lift the ceiling is more good memory coming off the lines. Samsung's yield on its newest stacked memory reached close to 80%, up from below 60% when volume production began, roughly four months ahead of the expected timeline. Watch whether that turns into parts on ships rather than a laboratory result."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "nvidianews-nvidia-com-3b511207-2026-08-1",
+        "jarvislabs-ai-475be7e7-2026-08-1",
+        "nebius-com-fa885ed3-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-1"
+      ],
+      "sourceLine": "NVIDIA's newsroom on the SpaceXAI commitment, today's Jarvislabs and Nebius rates, and Seoul Economic Daily on Korean memory yields.",
+      "relatedDocs": [
+        {
+          "url": "https://nvidianews.nvidia.com/news/spacexai-adopts-nvidia-vera-cpu-to-accelerate-agentic-ai-at-massive-scale",
+          "title": "SpaceXAI commits to NVIDIA's Vera processors",
+          "outlet": "NVIDIA Newsroom",
+          "date": "2026-08-24"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a chip costs to buy outright, the cleanest read on whether hardware is scarce.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How many servers are actually leaving factories, the test of whether parts are reaching buyers.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "How fast memory makers are raising factory spending, the one thing that eventually lifts the ceiling.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "H200 capacity rents at $3.99 per chip per hour at Jarvislabs and $4.50 at Nebius, while Lambda still lists none at all.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "Micron says it can supply no more than about half of what customers ask for, with no line of sight to when that changes.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Jarvislabs lists NVIDIA H200 rental at $3.99 per chip per hour and Nebius at $4.50, while Lambda's catalogue still shows no H200 at all.",
+      "claimFindingIds": [
+        "jarvislabs-ai-475be7e7-2026-08-1",
+        "nebius-com-fa885ed3-2026-08-1",
+        "lambda-ai-783e9e60-2026-08-4"
+      ]
+    },
+    {
+      "text": "Micron says it can supply no more than about half of customer demand, and NVIDIA's memory suppliers cover only 60% to 70% of requested Rubin Ultra volume.",
+      "claimFindingIds": [
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1"
+      ]
+    },
+    {
+      "text": "Large US cloud providers raised server buying 11.6% in the second quarter but are forecast to add just 1.7% in the third, held back by scarce parts.",
+      "claimFindingIds": [
+        "www-digitimes-com-f25fa2c7-2026-08-1",
+        "www-digitimes-com-f25fa2c7-2026-08-2"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "unchanged",
+      "reasoning": "No new supply evidence arrived today. Micron still says it can supply no more than about half of what customers ask for, and NVIDIA's memory suppliers still cover only 60% to 70% of the volume requested for Rubin Ultra.",
+      "claimFindingIds": [
+        "www-investing-com-87498f82-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today on rivals taking share. NVIDIA is still described as accounting for as much as 90% of AI chip sales in a given quarter.",
+      "claimFindingIds": [
+        "finance-yahoo-com-171fe64e-2026-08-4"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "unchanged",
+      "reasoning": "No new memory-price or supply evidence arrived today. Micron's position stands: it can supply no more than about half of demand, calls server memory the number one constraint, and has no line of sight to when supply meets demand.",
+      "claimFindingIds": [
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-high-bandwidth-memory-supply",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today. Suppliers can still meet only 60% to 70% of the stacked-memory volume requested for the Rubin Ultra generation.",
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today. NVIDIA is still testing the part at 192GB and 256GB of memory against a planned 1TB, with four memory specifications under review, so how much each machine gets remains unsettled.",
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-25",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "df1e0b6f09fed919eacf80537a67b6093e67c18bd023009438ada886abc5e0ed",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-24T17:25:14.322269+00:00"
+  }
+}

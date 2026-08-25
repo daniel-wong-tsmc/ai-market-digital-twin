@@ -37,7 +37,17 @@ const EXPECTED =
   "This page needs scripting turned on to show today's reading. " +
   'The question this page answers: Is supply catching up to demand? ' +
   "Today's answer is not written into this file, so it cannot be shown " +
-  'here. The story archive has the latest reading in full.';
+  'here. The story archive has the latest reading in full. ' +
+  // F124: the standing independence disclaimer, docs/publishing-posture.md §4.
+  // The pin grew by design. What it guards against is a VERDICT being baked
+  // into a file the daily cycle never rewrites -- a verdict here goes stale the
+  // moment the reading changes, and then contradicts the page's own data. The
+  // disclaimer is standing policy text: it goes stale only if the policy
+  // changes, and the policy is a committed document. The "states no verdict of
+  // its own" check below is untouched and still guards the real hazard.
+  "Independent personal project. The analysis here is one individual's own " +
+  'work, produced from public sources. It is not affiliated with, endorsed ' +
+  'by, or representative of any employer, and it is not investment advice.';
 
 describe('the no-scripting fallback', () => {
   it('says exactly what it is meant to say, and nothing more', () => {

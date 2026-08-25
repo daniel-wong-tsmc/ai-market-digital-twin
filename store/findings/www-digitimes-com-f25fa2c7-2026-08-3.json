@@ -1,0 +1,43 @@
+{
+  "id": "www-digitimes-com-f25fa2c7-2026-08-3",
+  "statement": "Agentic AI adoption is shifting cloud providers' deployments away from accelerator-led AI servers toward more CPU-centric compute and storage servers.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "A change in what cloud providers buy alters the mix inside data center spend, so the same overall budget converts into fewer GPU-heavy systems.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.ai-storage"
+    ],
+    "direction": "mixed",
+    "mechanism": "Deployment mix moving toward CPU and storage servers redirects a share of cloud capex away from accelerator-led systems, trimming merchant-GPU content per rack while lifting CPU and storage demand."
+  },
+  "evidence": [
+    {
+      "source": "Digitimes",
+      "url": "https://www.digitimes.com/reports/item.php?id=20260814RS400",
+      "date": "2026-08-20",
+      "excerpt": "'agentic AI applications has shifted cloud service providers' compute deployments away from accelerator-led AI servers toward more CPU-centric servers for compute and storage.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary paywalled research note; the mix shift is asserted qualitatively with no split of units or dollars."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-20",
+  "capturedAt": "2026-08-24T16:49:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

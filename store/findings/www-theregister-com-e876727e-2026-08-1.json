@@ -1,0 +1,53 @@
+{
+  "id": "www-theregister-com-e876727e-2026-08-1",
+  "statement": "Supermicro's board probe into a US indictment over roughly $2.5 billion of Nvidia GPU servers diverted to China found no current senior management knowledge and no direct sales to restricted parties, but led to terminations and an expanded export-compliance program.",
+  "kind": "measured",
+  "value": {
+    "number": 2.5,
+    "unit": "USD_B"
+  },
+  "trend": "unknown",
+  "why": "A multi-billion-dollar diversion channel being shut down and compliance tightened removes a gray-market outlet for Nvidia systems and raises friction on China-bound shipments.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Tighter export-compliance enforcement at a major server builder closes an indirect China demand channel for Nvidia GPU systems."
+  },
+  "evidence": [
+    {
+      "source": "The Register",
+      "url": "https://www.theregister.com/legal/2026/08/21/supermicro-fired-staff-after-probe-into-25-billion-gpus-to-china-smuggling-operation/5290791",
+      "date": "2026-08-21",
+      "excerpt": "for violating export controls on approximately $2.5 billion in Nvidia GPU-equipped servers bound for China",
+      "tier": "secondary"
+    },
+    {
+      "source": "The Register",
+      "url": "https://www.theregister.com/legal/2026/08/21/supermicro-fired-staff-after-probe-into-25-billion-gpus-to-china-smuggling-operation/5290791",
+      "date": "2026-08-21",
+      "excerpt": "had knowledge of the alleged diversion scheme or of any actual diversion.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; the fetched article did not reference the underlying SEC filing or a termination count."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Super Micro Computer / NVIDIA",
+  "observedAt": "2026-08-21",
+  "capturedAt": "2026-08-23T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

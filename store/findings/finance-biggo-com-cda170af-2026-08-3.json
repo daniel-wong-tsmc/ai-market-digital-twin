@@ -1,0 +1,48 @@
+{
+  "id": "finance-biggo-com-cda170af-2026-08-3",
+  "statement": "NVL72 GB200 Blackwell racks are cited at $2.8 million to $3.4 million per unit, with Vera Rubin NVL72 pre-shipment inquiries at $5 million to $7 million per unit",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "These are static rack price levels quoted as context with no stated baseline or change, so they serve only as a display overlay on hardware pricing.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rack-level system price levels describe where hardware pricing sits; without a stated prior level they carry no directional demand or supply information."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018",
+      "date": "2026-08-22",
+      "excerpt": "NVL72 GB200 racks built on the Blackwell architecture were already priced at $2.8 million to $3.4 million per unit",
+      "tier": "secondary"
+    },
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018",
+      "date": "2026-08-22",
+      "excerpt": "Vera Rubin-based NVL72 VR200 systems have drawn pre-shipment inquiries of $5 million to $7 million per unit.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator; figures are per-rack ranges rather than a single per-GPU level, so no number is asserted."
+  },
+  "dispersion": "Quoted as ranges per rack, not a single point level; unit basis is per rack, not per GPU.",
+  "asOf": "2026-08",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-22",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

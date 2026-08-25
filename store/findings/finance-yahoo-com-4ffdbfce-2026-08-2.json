@@ -1,0 +1,43 @@
+{
+  "id": "finance-yahoo-com-4ffdbfce-2026-08-2",
+  "statement": "The largest single tranche of Nvidia-backed data center demand rests on OpenAI, which is unprofitable and seeking over $500 billion of third-party capital to fund its compute platforms.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Concentration of forward GPU demand in one loss-making buyer that depends on outside capital makes that demand contingent on capital markets rather than on operating cash flow.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "If third-party capital does not arrive at the targeted scale, the buyer cannot fund the committed compute, and the orders behind Nvidia's largest project exposure do not convert."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Reuters)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-scales-back-250-billion-234356524.html",
+      "date": "2026-08-15",
+      "excerpt": "OpenAI is targeting over $500 billion in third-party capital across its compute financing platforms, and OpenAI's valuation is cited at $852 billion, with OpenAI remaining unprofitable, limiting its ability to fund large-scale commitments independently.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary open-web restatement of a single wire story; no primary filing corroborates the capital target or profitability characterization."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-15",
+  "capturedAt": "2026-08-24T16:49:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

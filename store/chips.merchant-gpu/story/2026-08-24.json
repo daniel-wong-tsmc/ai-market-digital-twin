@@ -1,0 +1,248 @@
+{
+  "headline": "The memory shortage finally shows up on the invoice",
+  "deck": "Nothing about the supply of stacked memory got better. What changed is the price: the seller is reported to be raising machine prices more than 15%, and the memory maker says customers want half again more than it can promise.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Prices, not deliveries, are what moved",
+      "paragraphs": [
+        "NVIDIA is reported to be raising the price of its AI server systems by more than 15% in many cases, for machines shipping from early next year. That was reported on August 22. The reason given is cost, not greed: contract prices for ordinary computer memory have risen roughly 50% so far this year, and that memory now sits as a large line in the bill for every AI server built.",
+        "The size of these machines makes the increase real money. A rack of the current generation is cited at $2.8 million to $3.4 million per unit. Enquiries ahead of shipment for the next generation are running at $5 million to $7 million per unit. A rise of more than 15% on top of that is a serious number for any buyer planning a campus.",
+        "Read plainly: when a seller can raise prices this far into a buildout and expect buyers to pay, it is telling you supply has not caught up. Nobody discounts a product they cannot make enough of."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "finance-biggo-com-cda170af-2026-08-1",
+        "finance-biggo-com-cda170af-2026-08-2",
+        "finance-biggo-com-cda170af-2026-08-3"
+      ],
+      "sourceLine": "BigGo Finance reporting of August 22 on NVIDIA system prices, memory contract prices and per-rack costs.",
+      "relatedDocs": [
+        {
+          "url": "https://finance.biggo.com/news/451a4604-e731-4952-b459-579778eca018",
+          "title": "NVIDIA reported to lift AI server prices for early next year",
+          "outlet": "BigGo Finance",
+          "date": "2026-08-22"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The memory maker puts a number on the gap",
+      "paragraphs": [
+        "Micron's chief executive said, in reporting dated August 23, that customers are asking for about 50% more memory than the company can commit to supply. That is the clearest measure yet of the gap, and it comes from the seller rather than an outside estimate. Micron also projects about $22 billion of cash deposits and related commitments under signed agreements where the buyer pays whether or not it takes delivery.",
+        "That fits what NVIDIA's own suppliers have said. Reported on August 7, they can meet only 60% to 70% of the stacked-memory volume asked of them for the Rubin Ultra generation. Buyers paying deposits years ahead, and suppliers filling two-thirds of the order, describe the same shortage from opposite ends.",
+        "There is some engineering progress. At a chip conference on August 23, Samsung showed a design that stacks four memory units directly on top of a 1,200-watt accelerator, saving roughly 100 watts while carrying more data. That is a better way to use memory, not more memory. It does not change what can be shipped this year."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "247wallst-com-e58dd832-2026-08-3",
+        "247wallst-com-e58dd832-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-servethehome-com-0b5bddaa-2026-08-2"
+      ],
+      "sourceLine": "24/7 Wall St. on Micron's remarks and deposits, Seoul Economic Daily on the Rubin Ultra shortfall, and ServeTheHome from the August chip conference.",
+      "relatedDocs": [
+        {
+          "url": "https://247wallst.com/investing/2026/08/23/22-billion-in-customer-deposits-did-not-stop-this-chip-ceo-from-selling-37-million/",
+          "title": "Micron's customers want half again more memory than it can promise",
+          "outlet": "24/7 Wall St.",
+          "date": "2026-08-23"
+        },
+        {
+          "url": "https://www.servethehome.com/samsung-evolving-hbm-base-die-at-hot-chips-2026/",
+          "title": "Samsung's new way of stacking memory on an accelerator",
+          "outlet": "ServeTheHome",
+          "date": "2026-08-23"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Nine people go on trial over where the chips went",
+      "paragraphs": [
+        "Today Taiwan's Keelung prosecutors indicted nine people, including employees of Nvidia and Super Micro, over allegedly exporting AI servers carrying controlled Nvidia chips to China and other destinations. This is the first time this case has produced named charges rather than raids.",
+        "Super Micro's own board looked into the matter and reported on August 21. It found no knowledge among current senior managers and no direct sales to restricted parties, but the company fired staff and widened its export-compliance work anyway. The underlying US indictment covers roughly $2.5 billion of servers.",
+        "For a buyer, the point is simple. Some share of the machines that get built is spoken for by rules about who may own them, and the people who move them are now facing criminal charges. That keeps a slice of the world's demand permanently off the table for the legal supply."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-taipeitimes-com-390166c7-2026-08-1",
+        "www-theregister-com-e876727e-2026-08-1"
+      ],
+      "sourceLine": "Taipei Times and wire coverage of today's indictment, plus The Register on Super Micro's own board review.",
+      "relatedDocs": [
+        {
+          "url": "https://www.taipeitimes.com/News/taiwan/archives/2026/08/24/2003863053",
+          "title": "Taiwan indicts nine over AI server exports",
+          "outlet": "Taipei Times",
+          "date": "2026-08-24"
+        },
+        {
+          "url": "https://www.thestar.com.my/aseanplus/aseanplus-news/2026/08/24/taiwan-indicts-nine-including-employees-of-nvidia-and-super-micro-over-alleged-illegal-export-of-ai-servers-to-foreign-countries",
+          "title": "Nine charged, including Nvidia and Super Micro employees",
+          "outlet": "The Star (Malaysia, via wire)",
+          "date": "2026-08-24"
+        },
+        {
+          "url": "https://fortune.com/2026/08/20/supermicro-investigation-ceo-nvidia-smuggling/",
+          "title": "Inside the Super Micro investigation",
+          "outlet": "Fortune",
+          "date": "2026-08-20"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Watch whether the reported price rise of more than 15% actually sticks when buyers get their quotes for early next year. If buyers pay it without argument, the shortage is worse than the headline numbers suggest. If they push back, that is the first sign the balance is turning.",
+        "Rental prices are the fastest check, and today they are unmoved. Lambda's list, captured today, shows its B200 chip at $6.69 per chip per hour, and it still offers no H200, no GB200 and nothing from AMD. CoreWeave, also captured today, publishes its current top-end rack at $42.00 an hour. When rented capacity starts to look plentiful, these are the first numbers that will fall.",
+        "The one thing that would genuinely lift the ceiling is more good memory coming off the lines. Korean production quality reached close to 80% as of August 10, up from below 60% when volume production began in February. Watch whether that turns into parts on ships rather than a laboratory result."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "finance-biggo-com-cda170af-2026-08-1",
+        "lambda-ai-783e9e60-2026-08-1",
+        "lambda-ai-783e9e60-2026-08-4",
+        "www-coreweave-com-a883627d-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-1"
+      ],
+      "sourceLine": "Lambda's and CoreWeave's own price pages captured today, BigGo Finance on the reported price rise, and Seoul Economic Daily on Korean memory quality.",
+      "relatedDocs": [
+        {
+          "url": "https://lambda.ai/service/gpu-cloud",
+          "title": "Lambda's rental catalogue, captured today",
+          "outlet": "Lambda (Lambda Labs)",
+          "date": "2026-08-24"
+        },
+        {
+          "url": "https://www.coreweave.com/pricing",
+          "title": "CoreWeave's published hourly rates, captured today",
+          "outlet": "CoreWeave",
+          "date": "2026-08-24"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a chip costs to buy outright, the first place a real price rise would show.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "How fast memory makers are raising factory spending, the one thing that eventually lifts the ceiling.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How many servers are actually leaving factories, the test of whether any of this reaches buyers.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "NVIDIA is reported to be lifting AI server prices more than 15% for machines shipping from early next year, with memory contract prices up roughly 50% this year.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "Micron's chief executive says customers want about 50% more memory than the company can commit to supply.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "NVIDIA is reported to be raising AI server prices by more than 15% for machines shipping from early next year, as memory contract prices climb about 50%.",
+      "claimFindingIds": [
+        "finance-biggo-com-cda170af-2026-08-1",
+        "finance-biggo-com-cda170af-2026-08-2"
+      ]
+    },
+    {
+      "text": "Micron's chief executive said on August 23 that customers are asking for about 50% more memory than the company can commit to supply.",
+      "claimFindingIds": [
+        "247wallst-com-e58dd832-2026-08-3"
+      ]
+    },
+    {
+      "text": "Taiwan prosecutors today indicted 9 people, including Nvidia and Super Micro employees, over allegedly exporting AI servers with controlled chips to China.",
+      "claimFindingIds": [
+        "www-taipeitimes-com-390166c7-2026-08-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "The shortage is now showing up in prices. NVIDIA is reported to be lifting AI server prices more than 15%, memory contract prices have risen about 50% this year, and Micron says customers want about 50% more memory than it can commit.",
+      "claimFindingIds": [
+        "finance-biggo-com-cda170af-2026-08-1",
+        "finance-biggo-com-cda170af-2026-08-2",
+        "247wallst-com-e58dd832-2026-08-3"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today about rivals taking share. NVIDIA is still described as taking as much as 90% of AI chip spending in a given quarter, and Microsoft's plan for upward of 300,000 of its own chips for 2027 has not moved.",
+      "claimFindingIds": [
+        "finance-yahoo-com-171fe64e-2026-08-4",
+        "qz-com-36c37a60-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "worsened",
+      "reasoning": "Memory contract prices have risen roughly 50% so far this year and are pushing into the cost of every AI server, while Micron says customers want about 50% more memory than it can promise.",
+      "claimFindingIds": [
+        "finance-biggo-com-cda170af-2026-08-2",
+        "247wallst-com-e58dd832-2026-08-3"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-high-bandwidth-memory-supply",
+      "status": "unchanged",
+      "reasoning": "No new supply evidence arrived today. Suppliers can still meet only 60% to 70% of the volume asked for Rubin Ultra, and Samsung's new stacking design saves about 100 watts per accelerator but adds no memory.",
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-servethehome-com-0b5bddaa-2026-08-2"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today. NVIDIA is still testing Rubin Ultra at 192GB and 256GB of memory against a planned 1TB, with four memory specifications under review, so the amount each machine gets remains unsettled.",
+      "claimFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-24",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "c06ba73e7243ffd02395762e2d2ab828a50085924acbb88bcab5f3167a64eebf",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-24T13:27:25.838802+00:00"
+  }
+}

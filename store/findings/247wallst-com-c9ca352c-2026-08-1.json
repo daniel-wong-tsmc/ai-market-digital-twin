@@ -1,0 +1,56 @@
+{
+  "id": "247wallst-com-c9ca352c-2026-08-1",
+  "statement": "UBS projects hyperscalers will deploy about $4.1 trillion on AI infrastructure from 2026 to 2028, roughly tripling the $1.3 trillion spent over the prior six years.",
+  "kind": "measured",
+  "value": {
+    "number": 4100.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Hyperscaler capital spending is the single largest source of merchant-GPU demand, so a tripling of the multi-year budget sets the ceiling for accelerator, networking and datacenter orders.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo",
+      "infrastructure.networking-fabric",
+      "chips.hyperscaler-asic",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed multi-year AI infrastructure budgets convert into purchase orders for GPUs, servers, network fabric and the power/space to host them."
+  },
+  "evidence": [
+    {
+      "source": "24/7 Wall St.",
+      "url": "https://247wallst.com/investing/2026/08/22/ais-absurd-spending-boom-hyperscalers-are-spending-102-of-cloud-revenue-on-capex/",
+      "date": "2026-08-22",
+      "excerpt": "$4.1 trillion on AI infrastructure from 2026 to 2028",
+      "tier": "secondary"
+    },
+    {
+      "source": "24/7 Wall St.",
+      "url": "https://247wallst.com/investing/2026/08/22/ais-absurd-spending-boom-hyperscalers-are-spending-102-of-cloud-revenue-on-capex/",
+      "date": "2026-08-22",
+      "excerpt": "triples the $1.3 trillion deployed over the previous six years",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying a third-party analyst projection; no filing or vendor guidance corroboration."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "Hyperscalers (Amazon, Alphabet, Microsoft, Meta, SpaceX, Oracle) / UBS estimate",
+  "observedAt": "2026-08-22",
+  "capturedAt": "2026-08-23T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

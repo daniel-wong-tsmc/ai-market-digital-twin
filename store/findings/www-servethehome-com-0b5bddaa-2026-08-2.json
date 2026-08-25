@@ -1,0 +1,51 @@
+{
+  "id": "www-servethehome-com-0b5bddaa-2026-08-2",
+  "statement": "Samsung's example configuration pairs four zHBM stacks directly on top of a 1,200W accelerator, described as conserving roughly 100 watts while raising bandwidth",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Power is the hard limit on how much compute a site can host, so energy saved per accelerator translates directly into more deployable capacity behind the same grid connection.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "energy.efficiency",
+      "energy.cooling"
+    ],
+    "direction": "positive",
+    "mechanism": "Cutting memory-interface power and improving bandwidth per accelerator raises usable compute per watt, easing the power ceiling that limits how many accelerators a site can deploy."
+  },
+  "evidence": [
+    {
+      "source": "ServeTheHome",
+      "url": "https://www.servethehome.com/samsung-evolving-hbm-base-die-at-hot-chips-2026/",
+      "date": "2026-08-23",
+      "excerpt": "significant bandwidth gains while conserving approximately 100 watts of energy",
+      "tier": "secondary"
+    },
+    {
+      "source": "ServeTheHome",
+      "url": "https://www.servethehome.com/samsung-evolving-hbm-base-die-at-hot-chips-2026/",
+      "date": "2026-08-23",
+      "excerpt": "a 1,200W GPU",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor-presented example configuration reported by a single secondary outlet; no performance-per-watt metric is stated, so no value is asserted."
+  },
+  "dispersion": "Stated for one described example configuration, not a measured product benchmark.",
+  "asOf": "2026-08",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "other",
+  "observedAt": "2026-08-23",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

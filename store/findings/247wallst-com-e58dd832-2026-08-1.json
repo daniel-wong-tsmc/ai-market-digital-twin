@@ -1,0 +1,53 @@
+{
+  "id": "247wallst-com-e58dd832-2026-08-1",
+  "statement": "Micron projects $22 billion of cash deposits and related financial commitments under signed take-or-pay memory supply agreements",
+  "kind": "measured",
+  "value": {
+    "number": 22.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Customers prepaying billions of dollars to lock in memory supply is a hard commitment signal that AI accelerator demand is being pulled forward through the memory chain.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Prepaid take-or-pay deposits convert expected AI accelerator build-out into contracted memory revenue and fund the memory capacity that gates accelerator module output."
+  },
+  "evidence": [
+    {
+      "source": "24/7 Wall St.",
+      "url": "https://247wallst.com/investing/2026/08/23/22-billion-in-customer-deposits-did-not-stop-this-chip-ceo-from-selling-37-million/",
+      "date": "2026-08-23",
+      "excerpt": "Under the SEAs we have signed so far, we project to receive cash deposits and related financial commitments of $22 billion.",
+      "tier": "secondary"
+    },
+    {
+      "source": "24/7 Wall St.",
+      "url": "https://247wallst.com/investing/2026/08/23/22-billion-in-customer-deposits-did-not-stop-this-chip-ceo-from-selling-37-million/",
+      "date": "2026-08-23",
+      "excerpt": "roughly $18 billion of that is cash deposits, with the balance in letters of credit.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet restating figures first disclosed on Micron's fiscal Q3 FY2026 earnings call; no primary filing or transcript fetched, and the two named corroborating pieces were not independently fetched."
+  },
+  "dispersion": "conflicting same-key reports: value 100.0 -> 22.0 (tol 1%); sources: 24/7 Wall St.",
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "other",
+  "observedAt": "2026-08-23",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

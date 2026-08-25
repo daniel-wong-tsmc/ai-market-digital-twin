@@ -2,17 +2,41 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-08",
-  "capturedAt": "2026-08-21T17:39:07Z",
+  "capturedAt": "2026-08-24T17:01:00Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
   "gaps": [
     {
       "type": "source",
+      "id": "nvda-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
       "id": "intc-earnings",
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Intel earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['intc.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "lambda-gpu-pricing",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "coreweave-pricing",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'CoreWeave GPU pricing page' was not fetched. URL patterns: ['coreweave.com']",
       "paywalledNote": null
     },
     {
@@ -89,26 +113,26 @@
     }
   ],
   "gapCounts": {
-    "total": 10,
-    "source": 10,
+    "total": 13,
+    "source": 13,
     "indicator": 0,
-    "required": 10,
+    "required": 13,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://247wallst.com/investing/2026/08/19/marvell-technology-rockets-13-on-12-2b-google-warrant-broadcom-falls-3-alphabet-unmoved/",
-    "https://finance.yahoo.com/technology/ai/articles/nvidia-ship-ai-chip-china-170938345.html",
-    "https://finance.yahoo.com/technology/ai/articles/nvidia-talks-chip-startup-rebellions-074543725.html",
-    "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Partners-With-Apollo-BlackRock-Blackstone-Brookfield-Goldman-Sachs-and-KKR-to-Establish-AI-Compute-Infrastructure-Financing-Platforms-to-Mobilize-Over-500-Billion-of-Third-Party-Capital/default.aspx",
-    "https://ir.amd.com/news-events/press-releases/detail/1296/amd-acquires-taalas-to-advance-compute-solutions-for-rapidly-growing-ai-inference-market",
-    "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027",
-    "https://www.coreweave.com/pricing",
-    "https://www.digitimes.com/news/a20260817VL221/ai-server-mlcc-demand-infrastructure.html",
-    "https://www.globenewswire.com/news-release/2026/08/19/3347356/0/en/cerebras-unveils-cs-4-up-to-30-times-faster-than-gpu-based-solutions.html",
-    "https://www.runpod.io/pricing"
+    "https://finance.yahoo.com/technology/ai/articles/nvidia-scales-back-250-billion-234356524.html",
+    "https://ir.amd.com/news-events/press-releases/detail/1297/amd-appoints-tim-ryan-to-board-of-directors",
+    "https://jarvislabs.ai/blog/h200-price",
+    "https://nebius.com/prices",
+    "https://nvidianews.nvidia.com/news/nvidia-groq-3-lpx-now-in-full-production-with-world-class-speed-for-agentic-ai",
+    "https://nvidianews.nvidia.com/news/nvidia-sets-conference-call-for-second-quarter-financial-results-6927195",
+    "https://nvidianews.nvidia.com/news/spacexai-adopts-nvidia-vera-cpu-to-accelerate-agentic-ai-at-massive-scale",
+    "https://tech.yahoo.com/ai/articles/chinas-moonshot-ai-reportedly-used-100000459.html",
+    "https://www.digitimes.com/reports/item.php?id=20260814RS400",
+    "https://www.tradingkey.com/analysis/stocks/us-stocks/262103776-nvidia-nvda-225-229-breakout-rubin-demand-spacex-endorsement-august-26-earnings-tradingkey"
   ],
   "judgedIndicatorIds": [
     "D2",

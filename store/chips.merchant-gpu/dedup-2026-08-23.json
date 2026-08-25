@@ -1,0 +1,98 @@
+{
+  "asOf": "2026-08",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "finance-yahoo-com-d93fe0e4-2026-08-2",
+      "entity": "Anthropic / Google / NVIDIA (custom silicon competitive displacement)",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-d93fe0e4-2026-08-1",
+      "entity": "Anthropic / Google / NVIDIA (custom silicon competitive displacement)",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "247wallst-com-c9ca352c-2026-08-1",
+      "entity": "Hyperscalers (Amazon, Alphabet, Microsoft, Meta, SpaceX, Oracle) / UBS estimate",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-afa8fca2-2026-08-1",
+      "entity": "NVIDIA / Lancium (power infrastructure, Stargate)",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-theregister-com-e876727e-2026-08-1",
+      "entity": "Super Micro Computer / NVIDIA",
+      "indicatorId": "exportControlExposure",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "lambda-ai-fa91ee98-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "lambda-ai-3a9372dc-2026-08-1",
+      "detail": "value 4.29 -> 3.99 (tol 1%)"
+    },
+    {
+      "findingId": "gcn-com-60a61273-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "finance-yahoo-com-c272e9ae-2026-08-1",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "nvidianews-nvidia-com-19092c36-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "lambda-ai-591ae243-2026-08-3",
+      "detail": "statement/trend changed (trend unknown -> unknown)"
+    },
+    {
+      "findingId": "fudzilla-com-9c8ce5ad-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "exportControlExposure",
+      "verdict": "update",
+      "priorFindingId": "finance-yahoo-com-e946ae80-2026-08-1",
+      "detail": "magnitude 2 -> 1"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "www-digitimes-com-e2dce00a-2026-08-1",
+      "entity": "MLCC suppliers / AI server supply chain",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "duplicate",
+      "priorFindingId": "www-digitimes-com-8bf55f8c-2026-08-1",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "www-bloomberg-com-45387645-2026-08-1",
+      "entity": "nvidia",
+      "indicatorId": "grossMargin",
+      "verdict": "duplicate",
+      "priorFindingId": "investor-nvidia-com-c649ac13-2026-07-3",
+      "detail": "unchanged within tolerance"
+    }
+  ]
+}

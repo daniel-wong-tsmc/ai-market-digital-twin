@@ -1,19 +1,19 @@
 {
- "asOf": "2026-08-22",
+ "asOf": "2026-08-25",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 3,
+   "checkCount": 6,
    "id": "dim-bottleneck",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-08-22",
+    "assessedAsOf": "2026-08-25",
     "claimFindingIds": [
-     "www-digitimes-com-8bf55f8c-2026-08-1",
-     "www-thelec-net-c15d2de4-2026-08-1"
+     "www-investing-com-87498f82-2026-08-1",
+     "en-sedaily-com-b1c000ac-2026-08-1"
     ],
-    "reasoning": "A new shortage showed up further down the parts list: waits for high-specification AI-server capacitors are stretching toward 40 weeks, on top of wafer lines already running at effectively full use.",
-    "status": "worsened"
+    "reasoning": "No new supply evidence arrived today. Micron still says it can supply no more than about half of what customers ask for, and NVIDIA's memory suppliers still cover only 60% to 70% of the volume requested for Rubin Ultra.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -24,22 +24,19 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 2
+   "worsenedCount": 4
   },
   {
-   "checkCount": 3,
+   "checkCount": 6,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-22",
+    "assessedAsOf": "2026-08-25",
     "claimFindingIds": [
-     "247wallst-com-db4b25b9-2026-08-2",
-     "ir-amd-com-4b756172-2026-08-1",
-     "www-globenewswire-com-df26a829-2026-08-1",
-     "www-stocktitan-net-587e9583-2026-08-3"
+     "finance-yahoo-com-171fe64e-2026-08-4"
     ],
-    "reasoning": "Three alternatives moved at once: Google added Marvell chips beside its own, AMD bought Taalas to build purpose-made inference silicon, and Cerebras started shipping its CS-4 rack with OpenAI and AWS named as customers.",
-    "status": "worsened"
+    "reasoning": "No new evidence arrived today on rivals taking share. NVIDIA is still described as accounting for as much as 90% of AI chip sales in a given quarter.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -50,53 +47,75 @@
     "kind": "dimension-weak",
     "label": "moat"
    },
-   "worsenedCount": 2
+   "worsenedCount": 3
   },
   {
-   "checkCount": 2,
+   "checkCount": 5,
    "id": "constraint-stacked-memory-and-server-dram",
-   "improvedStreak": 1,
+   "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-22",
+    "assessedAsOf": "2026-08-25",
     "claimFindingIds": [
-     "www-trendforce-com-17fa2dc8-2026-08-1",
      "www-investing-com-87498f82-2026-08-1"
     ],
-    "reasoning": "No new evidence arrived today. DRAM supply is still reported tight through 2027, limiting the capacity available for stacked memory, and Micron still calls DRAM the number one constraint its largest customers face.",
+    "reasoning": "No new memory-price or supply evidence arrived today. Micron's position stands: it can supply no more than about half of demand, calls server memory the number one constraint, and has no line of sight to when supply meets demand.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "stacked memory and server DRAM",
+   "title": "HBM4 and server DRAM supply",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "stacked memory and server DRAM"
+    "label": "HBM4 and server DRAM supply"
+   },
+   "worsenedCount": 1
+  },
+  {
+   "checkCount": 4,
+   "id": "constraint-stacked-high-bandwidth-memory-supply",
+   "improvedStreak": 1,
+   "latest": {
+    "assessedAsOf": "2026-08-25",
+    "claimFindingIds": [
+     "en-sedaily-com-b1c000ac-2026-08-1"
+    ],
+    "reasoning": "No new evidence arrived today. Suppliers can still meet only 60% to 70% of the stacked-memory volume requested for the Rubin Ultra generation.",
+    "status": "unchanged"
+   },
+   "openedAsOf": "2026-08",
+   "reopenedAsOf": [],
+   "resolvedAsOf": null,
+   "state": "open",
+   "title": "Stacked memory supply per accelerator",
+   "trigger": {
+    "kind": "binding-constraint",
+    "label": "Stacked memory supply per accelerator"
    },
    "worsenedCount": 0
   },
   {
-   "checkCount": 1,
-   "id": "constraint-stacked-high-bandwidth-memory-supply",
-   "improvedStreak": 0,
+   "checkCount": 3,
+   "id": "constraint-hbm4-memory-allocation-per-accelerator",
+   "improvedStreak": 2,
    "latest": {
-    "assessedAsOf": "2026-08-22",
+    "assessedAsOf": "2026-08-25",
     "claimFindingIds": [
-     "en-sedaily-com-b1c000ac-2026-08-1",
-     "en-sedaily-com-80cdc180-2026-08-1"
+     "en-sedaily-com-b1c000ac-2026-08-2",
+     "www-trendforce-com-17fa2dc8-2026-08-1"
     ],
-    "reasoning": "No new evidence arrived today. Suppliers can still meet only 60% to 70% of the stacked-memory volume asked for Rubin Ultra, and Korean yields near 80% have not yet turned into more delivered supply.",
+    "reasoning": "No new evidence arrived today. NVIDIA is still testing the part at 192GB and 256GB of memory against a planned 1TB, with four memory specifications under review, so how much each machine gets remains unsettled.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "Stacked high-bandwidth memory supply",
+   "title": "HBM4 memory allocation per accelerator",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "Stacked high-bandwidth memory supply"
+    "label": "HBM4 memory allocation per accelerator"
    },
    "worsenedCount": 0
   }

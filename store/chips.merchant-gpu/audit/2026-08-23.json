@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-08-23",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "lambda-ai-fa91ee98-2026-08-1",
+        "lambda-ai-591ae243-2026-08-1",
+        "lambda-ai-591ae243-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-afa8fca2-2026-08-1",
+        "finance-yahoo-com-f400b412-2026-08-1",
+        "nvidianews-nvidia-com-65f0d00a-2026-08-1",
+        "nvidianews-nvidia-com-b38ebbeb-2026-08-1",
+        "nvidianews-nvidia-com-b38ebbeb-2026-08-4",
+        "finance-yahoo-com-54a88032-2026-08-1",
+        "nvidianews-nvidia-com-cfc51804-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-d93fe0e4-2026-08-1",
+        "finance-yahoo-com-d93fe0e4-2026-08-2",
+        "qz-com-36c37a60-2026-08-1",
+        "247wallst-com-c9ca352c-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "en-sedaily-com-80cdc180-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-3",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-koreaherald-com-f4194135-2026-08-1",
+        "nvidianews-nvidia-com-19092c36-2026-08-1",
+        "lambda-ai-fa91ee98-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-afa8fca2-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-d93fe0e4-2026-08-1",
+        "finance-yahoo-com-d93fe0e4-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "bullet:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "lambda-ai-fa91ee98-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-bottleneck",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-afa8fca2-2026-08-1",
+        "finance-yahoo-com-f400b412-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-moat",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-d93fe0e4-2026-08-1",
+        "finance-yahoo-com-d93fe0e4-2026-08-2",
+        "qz-com-36c37a60-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-stacked-memory-and-server-dram",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-stacked-high-bandwidth-memory-supply",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-hbm4-memory-allocation-per-accelerator",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-2f05647b-2026-07-1",
+        "nvidianews-nvidia-com-09f767dd-2026-08-1",
+        "247wallst-com-c9ca352c-2026-08-1",
+        "www-thelec-net-c15d2de4-2026-08-1",
+        "www-tomshardware-com-9086563b-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-biggo-com-ae5dcd41-2026-07-1",
+        "www-trendforce-com-836f33fa-2026-08-1",
+        "supplyics-com-c83015c2-2026-08-2",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "pr-tsmc-com-7f560c3b-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "qz-com-36c37a60-2026-08-1",
+        "siliconanalysts-com-47ffeeeb-2026-07-3",
+        "techcrunch-com-6b79ddb7-1",
+        "siliconanalysts-com-528fac70-2026-07-4",
+        "www-investing-com-b7ff2af7-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "pr-tsmc-com-7f560c3b-2026-08-2",
+        "nvidianews-nvidia-com-7b7a02ff-2026-07-3",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+        "finance-biggo-com-c310c4ca-2026-07-06-1"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-3",
+        "techsoda-substack-com-3b7a4ff5-2026-08-4",
+        "www-intc-com-0fa743ed-2026-07-2"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 17,
+    "flagged": 0,
+    "skipped": 0
+  }
+}

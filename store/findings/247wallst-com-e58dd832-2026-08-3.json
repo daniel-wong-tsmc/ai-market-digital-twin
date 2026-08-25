@@ -1,0 +1,43 @@
+{
+  "id": "247wallst-com-e58dd832-2026-08-3",
+  "statement": "Micron's CEO says customers are asking for about 50% more memory than the company can commit to supply",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Demand running half again above committable supply is a direct statement of memory scarcity, which is the binding input constraint on accelerator output and cost.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Committable memory supply below stated customer demand rations memory allocation, lengthens effective lead times, and raises the memory share of accelerator system cost."
+  },
+  "evidence": [
+    {
+      "source": "24/7 Wall St.",
+      "url": "https://247wallst.com/investing/2026/08/23/22-billion-in-customer-deposits-did-not-stop-this-chip-ceo-from-selling-37-million/",
+      "date": "2026-08-23",
+      "excerpt": "50% more memory than Micron can commit",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet quoting a dated CEO remark; qualitative gap statement with no verifiable supply-growth figure attached."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: 24/7 Wall St., ServeTheHome",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "other",
+  "observedAt": "2026-08-23",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

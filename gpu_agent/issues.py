@@ -94,6 +94,68 @@ def issue_id(trigger: IssueTrigger) -> str:
     return f"dim-{trigger.label}"
 
 
+# --- F123: matching a re-worded constraint label to a standing issue ------------
+#
+# The id above is slugged from the exact constraintLabel, so a re-wording of the
+# same real constraint mints a twin id and strands the original issue's counters
+# (and a stranded issue drifts to a false reader-facing "Resolved"). Real case:
+# "HBM stacked memory supply" -> "stacked memory and server DRAM" ->
+# "Stacked high-bandwidth memory supply" across three 2026-08 cycles.
+#
+# The match is on label tokens alone. The alternative -- anchoring on a stable
+# indicator id -- has nothing to anchor to: categoryStatus carries only
+# rating/direction/bottleneck/reason/constraintLabel, and `bottleneck` is the
+# dimension key, not an indicator of the constraint. Inventing one would mean a
+# new brain-emitted field, i.e. a judgment-prompt edit, i.e. a moved pin.
+
+LABEL_STOP_WORDS = {
+    "and", "or", "the", "a", "an", "of", "for", "in", "on", "to",
+    "with", "at", "by", "is", "its",
+}
+
+# Words that describe *any* supply constraint. They count toward the overlap
+# ratio, but two labels sharing only these are not the same constraint --
+# "wafer supply capacity" and "power supply capacity" are different problems.
+GENERIC_LABEL_TOKENS = {
+    "supply", "capacity", "shortage", "availability",
+    "constraint", "constraints", "limits", "limited",
+}
+
+RENAME_MIN_SHARED_TOKENS = 2
+RENAME_MIN_OVERLAP = 0.5
+
+
+def _label_tokens(label: str) -> set[str]:
+    """Content words of a label: the same slug used for ids, split on '-', with
+    stop words dropped."""
+    slug = _slug(label)
+    if not slug:
+        return set()
+    return {t for t in slug.split("-") if t and t not in LABEL_STOP_WORDS}
+
+
+def _label_overlap(a: str, b: str) -> tuple[int, int, float]:
+    """(shared token count, shared non-generic token count, overlap coefficient).
+
+    Overlap coefficient -- |A n B| / min(|A|, |B|) -- rather than Jaccard: the
+    real v8->v9 pair scores only 0.33 on Jaccard, so any Jaccard threshold loose
+    enough to catch it is loose enough to catch unrelated labels."""
+    ta, tb = _label_tokens(a), _label_tokens(b)
+    if not ta or not tb:
+        return 0, 0, 0.0
+    shared = ta & tb
+    ratio = len(shared) / min(len(ta), len(tb))
+    return len(shared), len(shared - GENERIC_LABEL_TOKENS), ratio
+
+
+def _labels_match(a: str, b: str) -> bool:
+    """True if these two labels name the same constraint re-worded."""
+    shared, specific, ratio = _label_overlap(a, b)
+    return (shared >= RENAME_MIN_SHARED_TOKENS
+            and specific >= 1
+            and ratio >= RENAME_MIN_OVERLAP)
+
+
 def _title_from_dim_key(key: str) -> str:
     """dimensionRatings has no display label for a dim, so build one: split the camelCase
     key into words, lowercase them, and capitalize only the first word.
@@ -145,12 +207,48 @@ def trigger_still_firing(issue: Issue, scorecard: dict) -> bool:
 
 # --- lifecycle: opening / reopening ---------------------------------------------
 
+def _find_rename_target(issues: list[Issue], label: str) -> Optional[int]:
+    """Index of the open binding-constraint issue this re-worded label belongs
+    to, or None (F123).
+
+    Only OPEN constraint issues are candidates: silently reopening a
+    long-resolved issue because a new constraint happens to share two words
+    would be worse than minting a fresh id.
+
+    Deterministic ordering -- best overlap ratio, then most shared tokens, then
+    earliest register position. The register really can hold two open constraint
+    issues at once, so ties are reachable and must not depend on iteration
+    order."""
+    best: Optional[tuple[float, int, int]] = None
+    best_idx: Optional[int] = None
+    for idx, issue in enumerate(issues):
+        if issue.state != "open" or issue.trigger.kind != "binding-constraint":
+            continue
+        shared, specific, ratio = _label_overlap(issue.trigger.label, label)
+        if (shared < RENAME_MIN_SHARED_TOKENS or specific < 1
+                or ratio < RENAME_MIN_OVERLAP):
+            continue
+        key = (ratio, shared, -idx)
+        if best is None or key > best:
+            best, best_idx = key, idx
+    return best_idx
+
+
 def open_issues(register: IssueRegister, scorecard: dict, as_of: str
                  ) -> tuple[IssueRegister, list[str]]:
     """Applies both triggers to the scorecard. Existing open issue with the same id is
-    left untouched. A resolved issue whose trigger fires again is reopened in place
-    (same id, reopenedAsOf grows, streak counters reset, opened/resolved history kept).
-    New issues are appended. Never removes or reorders entries."""
+    left untouched (bar a stale label refresh, below). A resolved issue whose trigger
+    fires again is reopened in place (same id, reopenedAsOf grows, streak counters
+    reset, opened/resolved history kept). New issues are appended. Never removes or
+    reorders entries.
+
+    F123: a binding-constraint label that matches no id is first checked against the
+    open constraint issues by token overlap (_find_rename_target). A hit RENAMES that
+    standing issue -- title and trigger label update, id, counters and history persist
+    -- instead of opening a twin. An open issue found by exact id whose stored label
+    has gone stale (the label swung back to an earlier wording) is refreshed for the
+    same reason: trigger_still_firing compares the stored label to the live scorecard,
+    so a stale one reads as "no longer firing"."""
     issues = list(register.issues)
     index_by_id = {issue.id: i for i, issue in enumerate(issues)}
     touched: list[str] = []
@@ -159,13 +257,36 @@ def open_issues(register: IssueRegister, scorecard: dict, as_of: str
         iid = issue_id(trig)
         title = trig.label if trig.kind == "binding-constraint" else _title_from_dim_key(trig.label)
 
-        if iid in index_by_id:
-            idx = index_by_id[iid]
+        idx = index_by_id.get(iid)
+        if idx is None and trig.kind == "binding-constraint":
+            # F123: the brain re-worded the same constraint. Rename the standing
+            # issue rather than minting a twin -- a twin strands the real issue's
+            # counters, and a stranded issue's trigger stops matching the live
+            # scorecard, so it drifts to a false reader-facing "Resolved".
+            # Dimension issues are excluded: their labels are keys from a closed
+            # list and cannot be re-worded, so fuzzy matching there is pure risk.
+            idx = _find_rename_target(issues, trig.label)
+
+        if idx is not None:
             existing = issues[idx]
             if existing.state == "open":
+                if existing.trigger.label != trig.label or existing.title != title:
+                    # A rename, not a reopen: id, openedAsOf, reopenedAsOf,
+                    # latest and every counter persist -- the issue never went
+                    # away, it was re-worded. history.jsonl is not touched at
+                    # all on this path, so the append-only guarantee holds by
+                    # construction.
+                    issues[idx] = existing.model_copy(update={
+                        "title": title,
+                        "trigger": trig,
+                    })
+                    touched.append(existing.id)
                 continue
             issues[idx] = existing.model_copy(update={
                 "state": "open",
+                # A reopen under a re-worded label carries the new wording too.
+                "title": title,
+                "trigger": trig,
                 "reopenedAsOf": existing.reopenedAsOf + [as_of],
                 "improvedStreak": 0,
                 "worsenedCount": 0,
@@ -177,7 +298,9 @@ def open_issues(register: IssueRegister, scorecard: dict, as_of: str
                 # counters describe only checks since this reopen.
                 "checkCount": 0,
             })
-            touched.append(iid)
+            # Reachable only via the exact-id branch (_find_rename_target
+            # returns open issues only), so existing.id == iid here.
+            touched.append(existing.id)
         else:
             new_issue = Issue(
                 id=iid,

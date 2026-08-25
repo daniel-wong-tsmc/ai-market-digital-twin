@@ -1,0 +1,53 @@
+{
+  "id": "lambda-ai-fa91ee98-2026-08-1",
+  "statement": "Lambda lists on-demand NVIDIA H100 SXM at $3.99-$4.29 per GPU-hour and B200 SXM6 at $6.69-$6.99 per GPU-hour, with reserved cluster pricing from $5.54 (H100) and $8.87 (B200) at scale.",
+  "kind": "measured",
+  "value": {
+    "number": 3.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Published rental rates are a live read on what GPU capacity clears at, useful as a display overlay against vendor hardware pricing.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rental price levels set the cost basis for renting rather than buying accelerators, but this snapshot carries no baseline or change so it scores nothing."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (lambda.ai) official GPU cloud pricing page",
+      "url": "https://lambda.ai/service/gpu-cloud/pricing",
+      "date": "2026-08-23",
+      "excerpt": "\"NVIDIA H100 SXM\": \"$3.99\" to \"$4.29\" per GPU/hour",
+      "tier": "secondary"
+    },
+    {
+      "source": "Lambda (lambda.ai) official GPU cloud pricing page",
+      "url": "https://lambda.ai/service/gpu-cloud/pricing",
+      "date": "2026-08-23",
+      "excerpt": "NVIDIA HGX B200 -- 16 GPUs: \"$9.86\" per GPU/hour; 64 GPUs: \"$9.36\" per GPU/hour; 256+ GPUs: \"$8.87\" per GPU/hour",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own live price page, but a single publisher and a static snapshot with no prior baseline."
+  },
+  "dispersion": "On-demand rates span a range per model (e.g. H100 $3.99-$4.29); reserved rates fall with cluster size.",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-23",
+  "capturedAt": "2026-08-23T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

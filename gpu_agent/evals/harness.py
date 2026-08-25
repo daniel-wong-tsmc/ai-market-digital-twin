@@ -4,6 +4,7 @@ candidate prompt produces invalid output), not an eval bug."""
 from __future__ import annotations
 import copy
 import json
+import math
 import pathlib
 import statistics
 from pydantic import BaseModel, ConfigDict, ValidationError
@@ -196,18 +197,58 @@ def compute_epsilon(replicate_means: list[dict[str, float]],
     return eps
 
 
-EPS_Z = 2.0  # pooled-dispersion band width (~95% for a normal); tune here only
+EPS_Z = 2.0  # pre-F129 fixed band width (~95% for a normal). Kept for back-compat only:
+# pooled_epsilon now uses the size-aware t prediction band below.
+
+# F129: two-sided 95% Student-t quantiles, t_{0.975, df}, for df = 1..30. Hardcoded because
+# the stdlib has no t distribution and this project takes no new dependencies. Beyond df=30
+# the t is within ~2% of the normal, so we fall back to 1.96.
+_T975 = {
+    1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571,
+    6: 2.447, 7: 2.365, 8: 2.306, 9: 2.262, 10: 2.228,
+    11: 2.201, 12: 2.179, 13: 2.160, 14: 2.145, 15: 2.131,
+    16: 2.120, 17: 2.110, 18: 2.101, 19: 2.093, 20: 2.086,
+    21: 2.080, 22: 2.074, 23: 2.069, 24: 2.064, 25: 2.060,
+    26: 2.056, 27: 2.052, 28: 2.048, 29: 2.045, 30: 2.042,
+}
+_T975_LARGE = 1.96
+
+
+def t_quantile_975(df: int) -> float:
+    """The two-sided 95% Student-t quantile for `df` degrees of freedom (table lookup;
+    1.96 — the normal limit — for df > 30 or a non-positive df)."""
+    if df < 1:
+        return _T975_LARGE
+    return _T975.get(df, _T975_LARGE)
+
+
+def prediction_band_multiplier(n: int) -> float:
+    """The multiplier on the sample stdev that turns a pool of `n` past runs into a 95%
+    PREDICTION band for the NEXT run: t_{0.975, n-1} * sqrt(1 + 1/n). The sqrt term is the
+    extra width for predicting a new draw rather than the mean; the t quantile is the extra
+    width for not knowing the true stdev. At n=3 it is ~4.97; it settles toward ~2.0 as the
+    pool grows, so this only ever loosens the small-sample case."""
+    if n < 2:
+        return 0.0
+    return t_quantile_975(n - 1) * math.sqrt(1.0 + 1.0 / n)
 
 
 def pooled_epsilon(history: dict[str, list[float]],
                    quanta: dict[str, float]) -> dict[str, float]:
-    """Per-seam epsilon = max(EPS_Z * sample stdev of the seam's accumulated run history,
-    the quantum floor). Converges on real run noise as the history grows (unlike the v1
-    half-range, which can only widen). The quantum floor holds when the history has fewer
-    than 2 points to take a sample stdev over."""
+    """Per-seam epsilon = max(size-aware prediction band over the seam's accumulated run
+    history, the quantum floor).
+
+    F129: the band is `prediction_band_multiplier(n) * sample stdev`, replacing the fixed
+    EPS_Z=2.0. With the typical post-rebaseline pool of n=3 the old fixed z badly
+    underestimated the true spread of same-golden-set draws (live: the extract seam failed
+    two good runs by 0.038 while historical draws span 5.375-7.125). The band still
+    converges as the history grows — at large n the multiplier tends to ~2.0, i.e. the old
+    behaviour. The quantum floor holds when the history has fewer than 2 points to take a
+    sample stdev over (and whenever the pool is flat, stdev 0)."""
     eps: dict[str, float] = {}
     for seam, vals in history.items():
-        disp = EPS_Z * statistics.stdev(vals) if len(vals) >= 2 else 0.0
+        disp = (prediction_band_multiplier(len(vals)) * statistics.stdev(vals)
+                if len(vals) >= 2 else 0.0)
         eps[seam] = max(disp, quanta[seam])
     return eps
 
@@ -220,6 +261,23 @@ def _seed_history(baseline: dict) -> dict[str, list[float]]:
         return {s: list(v) for s, v in baseline["seamHistory"].items()}
     return {s: [r["seamMeans"][s] for r in baseline["replicates"]]
             for s in baseline["replicates"][0]["seamMeans"]}
+
+
+EPS_FORMULA_TAG = "t-prediction-band-v1"  # F129: t_{0.975,n-1} * sqrt(1+1/n) * stdev, quantum-floored
+
+
+def recompute_epsilon(baseline: dict, quanta: dict[str, float], as_of: str) -> dict:
+    """F129: a NEW baseline dict whose `epsilon` is recomputed from the committed
+    `seamHistory` and the true quanta, with an additive provenance note. Deterministic —
+    no runs needed, nothing else in the baseline is touched (promptHashes especially).
+    `quanta` supplies the true per-seam floor; a seam missing from it floors at 0."""
+    history = _seed_history(baseline)
+    new = copy.deepcopy(baseline)
+    new["epsilon"] = pooled_epsilon(history, {s: quanta.get(s, 0.0) for s in history})
+    prov = dict(new.get("provenance") or {})
+    prov["epsRecompute"] = {"asOf": as_of, "formula": EPS_FORMULA_TAG}
+    new["provenance"] = prov
+    return new
 
 
 def append_run_to_history(baseline: dict, report: dict, quanta: dict[str, float],

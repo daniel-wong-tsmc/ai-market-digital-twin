@@ -1,0 +1,45 @@
+{
+  "id": "ir-amd-com-cc018d28-2026-08-2",
+  "statement": "AMD guided Q3 2026 revenue to approximately $13 billion, plus or minus $300 million",
+  "kind": "measured",
+  "value": {
+    "number": 13.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Forward guidance is the vendor's own read on near-term order flow, and a step up from the reported quarter indicates demand it already has visibility on.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Sequentially higher revenue guidance reflects booked and expected accelerator and server demand, signaling continued shipment growth into the next quarter."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations (ir.amd.com)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results",
+      "date": "2026-08-04",
+      "excerpt": "revenue to be approximately $13 billion, plus or minus $300 million",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Guidance stated verbatim in AMD's own results release; the implied growth rate and full-year 2027 commentary in the document come from secondary summary and are not asserted here."
+  },
+  "dispersion": "Guidance band of plus or minus $300 million.",
+  "asOf": "2026-08",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-04",
+  "capturedAt": "2026-08-24T13:02:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

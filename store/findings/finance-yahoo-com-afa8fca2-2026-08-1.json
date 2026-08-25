@@ -1,0 +1,55 @@
+{
+  "id": "finance-yahoo-com-afa8fca2-2026-08-1",
+  "statement": "Nvidia will invest up to $3 billion in Lancium, the power-infrastructure developer behind the Stargate campus in Abilene, Texas, taking about 20% ownership for an initial $2 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 3.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Nvidia funding a power developer signals that grid hookups and campus power, not chips, are the binding constraint on deploying GPUs, and it ties Nvidia's own capital to unlocking future rack demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Capital into a power developer accelerates energized datacenter capacity, which is the gating factor converting GPU supply into installed demand."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (citing The Information / Reuters reporting)",
+      "url": "https://finance.yahoo.com/technology/articles/nvidia-invest-3-billion-lancium-014211358.html",
+      "date": "2026-08-21",
+      "excerpt": "Nvidia will invest up to $3 billion in Lancium, the power infrastructure developer behind the Stargate data center campus in Texas.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (citing The Information / Reuters reporting)",
+      "url": "https://finance.yahoo.com/technology/articles/nvidia-invest-3-billion-lancium-014211358.html",
+      "date": "2026-08-21",
+      "excerpt": "The initial $2 billion investment grants Nvidia approximately 20% ownership, with an optional additional $1 billion contingent on Lancium achieving specific milestones, including grid hookups.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator relaying The Information/Reuters; neither Nvidia nor Lancium confirmed the deal to Reuters."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "NVIDIA / Lancium (power infrastructure, Stargate)",
+  "observedAt": "2026-08-21",
+  "capturedAt": "2026-08-23T00:00:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
