@@ -33,6 +33,13 @@ _ABBREVIATIONS = frozenset({
 })
 
 
+# Period/quarter labels: "Q3.", "H1.", "1H.", "FY26.", "CY2026.". Financial prose is
+# full of these and a static list cannot cover the fiscal-year forms. Note this also
+# swallows a genuine sentence that happens to END on such a label ("...grew in Q3.
+# Margins held."), which under-counts — the safe direction.
+_PERIOD_LABEL = re.compile(r"^(?:fy|cy|q|h)\d+\.$|^\d+[hq]\.$")
+
+
 def _count_words(text: str) -> int:
     """Word count the way the posture doc measured it: whitespace split."""
     return len(text.split())
@@ -54,7 +61,7 @@ def _count_sentences(text: str) -> int:
         if not tokens:
             continue
         last = tokens[-1].lower().strip("\"'([{<")
-        if last in _ABBREVIATIONS:
+        if last in _ABBREVIATIONS or _PERIOD_LABEL.match(last):
             continue
         # A single character before the punctuation: an initial, or the tail of
         # "U.S." once the earlier dot has already been consumed.

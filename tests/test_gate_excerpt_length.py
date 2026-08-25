@@ -54,6 +54,18 @@ def test_abbreviations_and_decimals_do_not_end_sentences(text):
     assert _count_sentences(text) == 1
 
 
+@pytest.mark.parametrize("text,expected", [
+    # Quarter and half-year labels are abbreviations, not sentence ends. Getting
+    # these wrong over-counts, which is the unsafe direction: it rejects real work.
+    ("Q3. was strong. Q4. was better.", 2),
+    ("H1. shipments rose. H2. should follow.", 2),
+    ("FY26. guidance was raised again this week.", 1),
+    ("Revenue in 1H. tracked ahead of plan.", 1),
+])
+def test_quarter_labels_do_not_end_sentences(text, expected):
+    assert _count_sentences(text) == expected
+
+
 def test_real_store_excerpt_is_one_sentence():
     # Verbatim from store/findings/ir-amd-com-cfa508a5-2026-08-3.json: 70 words in
     # a single sentence. The longest excerpt ever committed to this store.
