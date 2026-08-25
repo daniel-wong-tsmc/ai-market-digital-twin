@@ -1200,10 +1200,17 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   rejected when it is **over 50 words AND over two sentences**, or when it passes a **100-word
   absolute ceiling** regardless of sentence count. Word count is `len(excerpt.split())`; sentence
   count is terminal punctuation minus abbreviations, initials and decimals, deliberately biased to
-  under-count. 25 new tests, including one that scans every committed excerpt and fails if the new
-  rule would reject any. F6 verified byte-untouched: `git diff --name-only main` lists only
+  under-count. The counter is not infallible and does not pretend to be: an abbreviation that is
+  both unlisted and followed by a capitalised word still over-counts by one, which is a further
+  reason the gate needs BOTH limits broken. Note also that `wiki/ingest.py::route_findings`
+  writes to the store without running the gate at all — pre-existing, shared by every other gate
+  rule, not closed here. Code review (dispatched in-lane) caught a real bug before merge: the
+  first draft read dotted acronyms and unlisted abbreviations as sentence ends, so a realistic
+  58-word two-sentence passage was being rejected; fixed and regression-tested.
+  New tests, including one that scans every committed excerpt and fails if the new rule would
+  reject any. F6 verified byte-untouched: `git diff --name-only main` lists only
   `gpu_agent/gate.py`, two test files and the two design docs, and
-  `tests/test_evals_baseline_pin.py` passes 2/2. Full suite 2745 passed / 6 skipped.
+  `tests/test_evals_baseline_pin.py` passes 2/2.
   **Three AFK-defaults — the user was AFK and approved none of them** (full reasoning in
   `.superpowers/handoffs/f127-excerpt-length-QUESTIONS.md`):
   (1) **"two sentences **or** 50 words" is read as OR, not AND.** Re-measuring the store on this

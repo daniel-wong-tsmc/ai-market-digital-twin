@@ -57,10 +57,19 @@ Violation messages follow the existing house style:
 
 This is the single shared gate. `gpu_agent/extraction/extractor.py` calls it (line ~144)
 right after its own verbatim check, and `check_scorecard` calls it for every finding in a
-scorecard. Putting the length check in the extractor next to the verbatim check would cover
-only the extraction path; putting it in `check_finding` covers every path an excerpt travels
-through, which is what F127 asks for. Grep confirms these are the only two callers in
-product code.
+scorecard — which is how `gpu_agent/judgment/judge.py` and `gpu_agent/pipeline.py` reach it.
+Putting the length check in the extractor next to the verbatim check would cover only the
+extraction path; putting it in `check_finding` covers **every path that runs the gate**,
+which is what F127 asks for.
+
+One honest caveat, raised in code review. `gpu_agent/wiki/ingest.py::route_findings` appends
+straight into the finding store without calling `check_finding`, and the CLI verb behind it
+(`wiki-ingest --findings`) validates its input against the schema only. So a hand-written
+findings file can put an over-long excerpt into `store/` without meeting this rule. That hole
+is **pre-existing and not F127's**: every other `check_finding` rule (F2e, F8, F17) is bypassed
+by exactly the same path, and in a normal cycle that file is the already-gated output of
+`extract`. Closing it would change behaviour for every gate rule at once and belongs in its
+own item, not here.
 
 ## Counting
 
@@ -75,10 +84,23 @@ the ones that are not really sentence ends:
 - a decimal point (`$6.7B`, `54.3%`) — the "followed by whitespace" rule already excludes
   these, since a digit follows the dot.
 
-Errors here are deliberately biased toward **under**-counting. Under-counting lets a long
-excerpt through; over-counting rejects a legitimate one. Since the sentence count only
-matters at all once an excerpt is already over 50 words, and the 100-word backstop catches
-genuine bulk, leniency is the safe direction.
+Two further rules, both added after code review found the first draft over-counting:
+
+- a terminator only counts when end-of-text or a **capital or digit** follows it. Real prose
+  capitalises after a full stop; an abbreviation does not. This is what separates "Rev. was
+  up" and "the Fed. raised" from a genuine sentence end, without needing them on a list;
+- a token with a period **inside** it is an acronym, a pair of initials, or a numbered label
+  ("A.I.", "Ph.D.", "J.H.", "2.1."), never a sentence end.
+
+Errors are deliberately biased toward **under**-counting. Under-counting lets a long excerpt
+through; over-counting rejects a legitimate one. Since the sentence count only matters once
+an excerpt is already over 50 words, and the 100-word backstop catches genuine bulk, leniency
+is the safe direction.
+
+**The counter is not infallible, and this is the case that survives:** an abbreviation that is
+both unlisted and followed by a capitalised word still reads as a full stop and over-counts by
+one. That is precisely why the gate requires BOTH limits to be broken rather than trusting the
+sentence count alone. Anyone tightening the counter must re-run the store audit first.
 
 Minimum returned is 1, so an excerpt with no terminal punctuation counts as one sentence.
 
