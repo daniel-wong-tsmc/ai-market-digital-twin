@@ -1091,7 +1091,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   direction: add one lint pass over the fully assembled above-fold string right before
   `render_report`/`render_daily` returns it, so a genuinely novel off-allowlist token BLOCKS the
   render instead of shipping silently until a shadow-check happens to catch it.
-- [ ] **F121 — registry/indicators.json labels carry old-scheme id tails.** *(Numbered
+- [x] **F121 — registry/indicators.json labels carry old-scheme id tails.** *(Numbered
   2026-08-20, user-assigned via the orchestrator during the report-quality-pair lane; same
   concurrent-mint caveat as F119/F120 — if another session minted F121 first, take the next
   free number.)* Seven labels embed retired-scheme ids in parentheses — e.g.

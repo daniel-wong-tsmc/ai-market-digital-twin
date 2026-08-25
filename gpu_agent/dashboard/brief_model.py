@@ -148,11 +148,12 @@ def _indicator_labels():
     # `label` field. IndicatorRegistry.indicators is a dict of RAW dicts (not
     # model objects), so this reads v.get("label"), not v.label. Never allowed
     # to raise: any registry-load problem just means no label overrides.
-    # Several registry labels append the internal doctrine code, e.g.
-    # "Marginal-buyer financing conditions (X5)"; strip that trailing code so
-    # the exec-facing tile shows plain English and the exec-copy register lint
-    # (lint_tile_labels) does not reject it the first time such an indicator
-    # becomes an agenda occupant.
+    # Several registry labels used to append the internal doctrine code, e.g.
+    # "Marginal-buyer financing conditions (X5)"; F121 (2026-08-24) cleaned those
+    # seven labels in registry/indicators.json, so the strip below is now a no-op.
+    # It is kept as belt-and-braces: the exec-facing tile must show plain English
+    # and the exec-copy register lint (lint_tile_labels) must not reject a label
+    # the first time such an indicator becomes an agenda occupant.
     try:
         from gpu_agent.config import REGISTRY_PATH
         from gpu_agent.registry.indicators import IndicatorRegistry

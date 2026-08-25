@@ -275,11 +275,11 @@ def test_f120_strip_stale_paren_ids_unit():
 
 def test_f120_indicator_label_sheds_old_scheme_id_tail():
     # Round-3 remediation (user-approved 2026-08-20, Option A): registry labels
-    # themselves carry old-scheme id tails ("Hyperscaler capex-revision direction
-    # (D1)"). indicator_label — the single display seam every label row goes
-    # through (board, quick glance, change lines) — strips the tail; the registry
-    # DATA stays byte-untouched (labels feed emitted brain prompts raw, so the F6
-    # pin never moves; the data cleanup itself is F121).
+    # themselves carried old-scheme id tails ("Hyperscaler capex-revision direction
+    # (D1)"), and indicator_label — the single display seam every label row goes
+    # through (board, quick glance, change lines) — strips the tail. F121
+    # (2026-08-24) then cleaned the registry DATA, so this now asserts the clean
+    # label arrives clean AND survives the retained belt-and-braces strip.
     label = reader.indicator_label("hyperscalerCapexRevision", _reg())
     assert label == "Hyperscaler capex-revision direction"
     assert "(D1)" not in label
