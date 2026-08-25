@@ -39,6 +39,8 @@ import html as _html
 import ipaddress
 import json
 import re
+import urllib.error
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Optional
 from urllib.parse import urlparse
@@ -46,6 +48,9 @@ from urllib.parse import urlparse
 from gpu_agent.chartdata.fetch import _default_fetch_html
 from gpu_agent.chartdata.research import CandidateSeries
 from gpu_agent.dashboard.export_json import _latest_story
+from gpu_agent.fetch_policy import (
+    DO_NOT_FETCH_REGISTRY, KIND_BLOCKS_READERS, KIND_OBJECTION,
+    DoNotFetchRegistry, load_do_not_fetch, record_blocked_domain)
 from gpu_agent.numeric_tokens import numeric_tokens, supported
 from gpu_agent.wiki.ingest import slug
 
@@ -139,6 +144,55 @@ def _unreachable_host_reason(host: str) -> str | None:
     return None
 
 
+# HTTP answers that mean "this reader is not welcome here" rather than "this
+# page is gone" or "the network broke". F116 tail: all three used to arrive as
+# the same "unreachable" line, so nothing downstream -- a person reading the
+# cycle journal, or the learned do-not-fetch list -- could tell a locked door
+# from a broken road.
+_BLOCKED_STATUSES = (401, 403, 429)
+
+
+@dataclass(frozen=True)
+class _FetchFailure:
+    """Why one page could not be read. Classified once per page and reused for
+    every point that cites it, so a series whose points share a source page
+    costs one fetch and one classification, not N."""
+    kind: str            # "blocked" | "not-found" | "unreachable"
+    status: int | None   # the HTTP status, when there was one
+    detail: str          # the raw exception text, for the unreachable case
+
+
+def _classify_fetch_failure(exc: Exception, known_blocker: bool) -> _FetchFailure:
+    """Turn a failed fetch into one of three honest answers.
+
+    `known_blocker` is True when the domain is already recorded as one that
+    turns plain readers away: such a site often answers with a connection reset
+    or a redirect loop rather than a clean 403, and calling that "unreachable"
+    is what hid the problem in the first place.
+    """
+    detail = f"{type(exc).__name__}: {exc}"
+    status = exc.code if isinstance(exc, urllib.error.HTTPError) else None
+    if status in _BLOCKED_STATUSES:
+        return _FetchFailure("blocked", status, detail)
+    if status == 404:
+        return _FetchFailure("not-found", status, detail)
+    if known_blocker:
+        return _FetchFailure("blocked", None, detail)
+    return _FetchFailure("unreachable", None, detail)
+
+
+def _failure_line(i: int, url: str, failure: _FetchFailure) -> str:
+    """The one human-readable line a failed point contributes."""
+    if failure.kind == "blocked" and failure.status is not None:
+        return f"point {i}: {url} blocked (HTTP {failure.status})"
+    if failure.kind == "blocked":
+        return (f"point {i}: {url} blocked (known to turn plain readers away; "
+                f"{failure.detail})")
+    if failure.kind == "not-found":
+        return f"point {i}: {url} not found (HTTP {failure.status})"
+    return f"point {i}: {url} unreachable ({failure.detail})"
+
+
 def page_text(raw_html: str) -> str:
     """The visible text of a page: script/style bodies removed, tags replaced
     by spaces (never by nothing -- `<td>6.7</td><td>1</td>` must not fuse into
@@ -166,7 +220,10 @@ def _value_tokens(value: float) -> set[str]:
 
 
 def verify_candidate(cand: CandidateSeries,
-                     fetch_html: Callable[[str], str]) -> tuple[bool, list[str]]:
+                     fetch_html: Callable[[str], str],
+                     do_not_fetch: Optional[DoNotFetchRegistry] = None,
+                     on_blocked: Optional[Callable[[str, str], None]] = None,
+                     ) -> tuple[bool, list[str]]:
     """Re-find every claimed point in the page it says it came from.
 
     All-or-nothing: returns `(True, [])` only when EVERY point is re-found.
@@ -177,7 +234,24 @@ def verify_candidate(cand: CandidateSeries,
     whose points share one source page costs one fetch, not N.
 
     A `fetch_html` that raises is not an error here -- that point is reported
-    unreachable and the candidate is rejected. Nothing escapes this function.
+    as failed and the candidate is rejected. Nothing escapes this function.
+    The failure line says WHICH kind of failure it was (F116 tail): `blocked
+    (HTTP 403)` for a page that turns the reader away, `not found (HTTP 404)`
+    for a page that is gone, and the original `unreachable (...)` for a broken
+    network. Before this, all three read the same, so a locked door was
+    indistinguishable from a broken road.
+
+    `do_not_fetch` (F117/F126) is consulted for both of its kinds:
+
+    - a `publisher-objection` host is rejected in the pre-check loop below, so
+      not a single request goes out to a publisher who asked not to be used;
+    - a `blocks-plain-readers` host is still FETCHED -- a site may start
+      answering again, and the list is a warning, not a ban -- but if that
+      fetch fails, the line says blocked rather than unreachable.
+
+    `on_blocked(domain, url)` is called at most once per blocked domain, with
+    the page that proved it. That is how `accept_research` learns a domain into
+    the registry; this function itself writes nothing.
 
     A candidate with NO points is rejected outright, and `pair=True` requires
     at least two (review finding, Critical): `CandidateSeries` only enforces
@@ -227,6 +301,13 @@ def verify_candidate(cand: CandidateSeries,
         if reason is not None:
             failures.append(f"point {i}: {reason} ({url})")
             continue
+        if do_not_fetch is not None:
+            objection = do_not_fetch.match(url, kind=KIND_OBJECTION)
+            if objection is not None:
+                failures.append(
+                    f"point {i}: {objection.domain} is on the do-not-fetch list "
+                    f"(publisher objection) ({url})")
+                continue
         hosts.append(host)
     if failures:
         return False, failures
@@ -237,17 +318,26 @@ def verify_candidate(cand: CandidateSeries,
                        f"its points span {len(distinct)} sites: "
                        f"{', '.join(distinct)}"]
 
+    learned: set[str] = set()
     for i, point in enumerate(cand.points, start=1):
         url = point.sourceUrl
         if url not in cache:
             try:
                 cache[url] = numeric_tokens(page_text(fetch_html(url)))
-            except Exception as e:  # noqa: BLE001 -- deliberate: an unreachable
-                # source is a rejection, never a crashed cycle.
-                cache[url] = f"{type(e).__name__}: {e}"
+            except Exception as e:  # noqa: BLE001 -- deliberate: a source that
+                # will not load is a rejection, never a crashed cycle.
+                known_blocker = (
+                    do_not_fetch is not None
+                    and do_not_fetch.match(url, kind=KIND_BLOCKS_READERS) is not None)
+                cache[url] = _classify_fetch_failure(e, known_blocker)
         pool = cache[url]
-        if isinstance(pool, str):
-            failures.append(f"point {i}: {url} unreachable ({pool})")
+        if isinstance(pool, _FetchFailure):
+            failures.append(_failure_line(i, url, pool))
+            if pool.kind == "blocked" and on_blocked is not None:
+                blocked_host = _host(url)
+                if blocked_host and blocked_host not in learned:
+                    learned.add(blocked_host)
+                    on_blocked(blocked_host, url)
             continue
         tokens = _value_tokens(point.value)
         if not tokens or not any(supported(t, pool) for t in tokens):

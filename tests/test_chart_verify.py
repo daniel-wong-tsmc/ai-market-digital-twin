@@ -656,3 +656,208 @@ def test_cli_chart_research_accept_exits_zero_on_a_broken_store(tmp_path, capsys
     assert rc == 0
     out = json.loads(capsys.readouterr().out)
     assert out["accepted"] == []
+
+
+# ---------------------------------------------------------------------------
+# F116 tail + F117: a page that turns the reader away says so, and the domain
+# is learned into registry/do-not-fetch.json.
+#
+# On the 2026-08-19 cycle a researcher cited counterpointresearch.com for five
+# points. Its own reader opened the page cleanly three times; the verifier's
+# plain reader got HTTP 403 on all five, and every failure line said
+# "unreachable" -- exactly what a DNS failure or a timeout says. Nothing
+# downstream could tell a locked door from a broken road.
+# ---------------------------------------------------------------------------
+import urllib.error   # noqa: E402 -- grouped with the tests that need it
+
+from gpu_agent.fetch_policy import (   # noqa: E402
+    KIND_BLOCKS_READERS, KIND_OBJECTION, DoNotFetchEntry, DoNotFetchRegistry,
+    load_do_not_fetch)
+
+_BLOCKED_URL = "https://blocker.test/report"
+_OBJECTOR_URL = "https://objector.test/report"
+
+
+def _cand_at(url: str) -> CandidateSeries:
+    """A minimal 3-point candidate whose points all live at `url`."""
+    return CandidateSeries.model_validate({
+        "seriesName": "Foundry share", "unit": "percent", "form": "columns",
+        "sourceName": "Example", "pair": False,
+        "points": [{"label": f"Q{i}", "value": float(i), "sourceUrl": url,
+                    "publishedAt": "2026-01-01"} for i in (1, 2, 3)],
+    })
+
+
+def _raiser(code: int):
+    def fetch(url: str) -> str:
+        raise urllib.error.HTTPError(url, code, "nope", None, None)
+    return fetch
+
+
+def _blocked_registry() -> DoNotFetchRegistry:
+    return DoNotFetchRegistry([DoNotFetchEntry(
+        "blocker.test", KIND_BLOCKS_READERS, "2026-08-19", "403s the reader")])
+
+
+def _objection_registry() -> DoNotFetchRegistry:
+    return DoNotFetchRegistry([DoNotFetchEntry(
+        "objector.test", KIND_OBJECTION, "2026-08-25", "asked us not to")])
+
+
+def test_a_page_that_turns_the_reader_away_reports_blocked_not_unreachable():
+    for code in (401, 403, 429):
+        ok, failures = verify_candidate(_cand_at(_BLOCKED_URL), _raiser(code))
+        assert ok is False
+        assert f"blocked (HTTP {code})" in failures[0]
+        assert "unreachable" not in failures[0]
+
+
+def test_a_missing_page_reports_not_found_rather_than_blocked():
+    ok, failures = verify_candidate(_cand_at("https://gone.test/p"), _raiser(404))
+    assert ok is False
+    assert "not found (HTTP 404)" in failures[0]
+    assert "blocked" not in failures[0]
+
+
+def test_an_ordinary_network_failure_still_reports_unreachable():
+    ok, failures = verify_candidate(_cand_at("https://flaky.test/p"), _boom)
+    assert ok is False
+    assert "unreachable" in failures[0]
+    assert "blocked" not in failures[0]
+
+
+def test_a_known_blocking_domain_says_blocked_even_without_an_http_status():
+    ok, failures = verify_candidate(_cand_at(_BLOCKED_URL), _boom,
+                                    do_not_fetch=_blocked_registry())
+    assert ok is False
+    assert "blocked" in failures[0]
+    assert "known to turn plain readers away" in failures[0]
+
+
+def test_a_publisher_objection_is_rejected_before_a_single_fetch_goes_out():
+    calls = []
+
+    def fetch(url: str) -> str:
+        calls.append(url)
+        return "1 2 3"
+
+    ok, failures = verify_candidate(_cand_at(_OBJECTOR_URL), fetch,
+                                    do_not_fetch=_objection_registry())
+    assert ok is False
+    assert calls == []
+    assert "publisher objection" in failures[0]
+    assert "objector.test" in failures[0]
+
+
+def test_a_blocking_domain_is_still_fetched_because_a_site_may_recover():
+    """The list is a warning, not a ban: a site that starts answering again
+    verifies normally."""
+    calls = []
+
+    def fetch(url: str) -> str:
+        calls.append(url)
+        return "<p>1.0 2.0 3.0</p>"
+
+    ok, failures = verify_candidate(_cand_at(_BLOCKED_URL), fetch,
+                                    do_not_fetch=_blocked_registry())
+    assert calls == [_BLOCKED_URL]
+    assert ok is True
+    assert failures == []
+
+
+def test_on_blocked_fires_once_per_domain_with_the_page_that_proved_it():
+    seen = []
+    ok, failures = verify_candidate(_cand_at(_BLOCKED_URL), _raiser(403),
+                                    on_blocked=lambda d, u: seen.append((d, u)))
+    assert ok is False
+    assert len(failures) == 3, "all three points still report their own failure"
+    assert seen == [("blocker.test", _BLOCKED_URL)]
+
+
+def test_on_blocked_does_not_fire_for_a_plain_network_failure():
+    seen = []
+    verify_candidate(_cand_at("https://flaky.test/p"), _boom,
+                     on_blocked=lambda d, u: seen.append((d, u)))
+    assert seen == []
+
+
+# --- auto-learn through accept_research -------------------------------------
+
+def _blocked_answer(tmp_path: Path):
+    """A store + work tree whose single answer cites a page that 403s."""
+    store_root = _make_store(tmp_path)
+    work_dir = tmp_path / "work" / f"daily-{STORY_DATE}"
+    d = work_dir / "chart-research"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "bullet-1.json").write_text(
+        _cand_at(_BLOCKED_URL).model_dump_json(indent=2), encoding="utf-8")
+    return store_root, work_dir
+
+
+def test_accept_research_learns_a_403_domain_into_the_registry(tmp_path):
+    """F117: a hand-maintained list will always lag, so the verifier records
+    every domain that turns its reader away, in the same file a person edits."""
+    store_root, work_dir = _blocked_answer(tmp_path)
+    reg = tmp_path / "do-not-fetch.json"
+
+    result = accept_research(CATEGORY, str(store_root), str(work_dir),
+                             fetch_html=_raiser(403), do_not_fetch_path=reg)
+
+    assert result["accepted"] == []
+    entry = load_do_not_fetch(reg).match(_BLOCKED_URL)
+    assert entry is not None
+    assert entry.kind == KIND_BLOCKS_READERS
+    assert entry.firstSeenUrl == _BLOCKED_URL
+
+
+def test_the_learned_since_date_is_the_story_date_so_a_rerun_is_identical(tmp_path):
+    """This module writes no wall-clock field anywhere, so re-running a cycle
+    produces the same bytes. A learned entry has to obey the same rule."""
+    store_root, work_dir = _blocked_answer(tmp_path)
+    reg = tmp_path / "do-not-fetch.json"
+
+    accept_research(CATEGORY, str(store_root), str(work_dir),
+                    fetch_html=_raiser(403), do_not_fetch_path=reg)
+    assert load_do_not_fetch(reg).entries[0].since == STORY_DATE
+
+    before = reg.read_text(encoding="utf-8")
+    accept_research(CATEGORY, str(store_root), str(work_dir),
+                    fetch_html=_raiser(403), do_not_fetch_path=reg)
+    assert reg.read_text(encoding="utf-8") == before
+
+
+def test_accept_research_reads_the_same_registry_path_it_learns_into(tmp_path):
+    """A custom path must never be read from one file and written to another."""
+    store_root = _make_store(tmp_path)
+    work_dir = tmp_path / "work" / f"daily-{STORY_DATE}"
+    d = work_dir / "chart-research"
+    d.mkdir(parents=True, exist_ok=True)
+    (d / "bullet-1.json").write_text(
+        _cand_at(_OBJECTOR_URL).model_dump_json(indent=2), encoding="utf-8")
+    reg = tmp_path / "do-not-fetch.json"
+    reg.write_text(json.dumps({"version": 1, "entries": [
+        {"domain": "objector.test", "kind": KIND_OBJECTION,
+         "since": "2026-08-25", "why": "asked us not to"}]}, indent=2) + "\n",
+        encoding="utf-8", newline="\n")
+    calls = []
+
+    result = accept_research(CATEGORY, str(store_root), str(work_dir),
+                             fetch_html=lambda u: calls.append(u) or "1 2 3",
+                             do_not_fetch_path=reg)
+
+    assert calls == [], "an objected-to publisher must never be fetched"
+    assert result["accepted"] == []
+    assert "publisher objection" in result["rejected"][0]["failures"][0]
+
+
+def test_a_missing_registry_file_never_breaks_accept_research(tmp_path):
+    store_root = _make_store(tmp_path)
+    work_dir = tmp_path / "work" / f"daily-{STORY_DATE}"
+    _answer(work_dir, 1, "candidate-good")
+
+    result = accept_research(CATEGORY, str(store_root), str(work_dir),
+                             fetch_html=_fetch_fixture,
+                             do_not_fetch_path=tmp_path / "nope" / "missing.json")
+
+    assert result["rejected"] == []
+    assert len(result["accepted"]) == 1
