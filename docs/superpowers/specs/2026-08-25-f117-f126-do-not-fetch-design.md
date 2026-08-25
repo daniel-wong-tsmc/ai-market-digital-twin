@@ -89,12 +89,24 @@ It exports:
 - `load_do_not_fetch(path=DO_NOT_FETCH_REGISTRY) -> DoNotFetchRegistry` — a missing
   file, unreadable file, or malformed JSON returns an **empty** registry. A registry
   that can strand a cycle is worse than no registry, so this never raises. Entries with
-  an unknown `kind` or a blank `domain` are dropped rather than trusted.
+  an unknown `kind` or a blank `domain` are dropped from `entries` rather than trusted,
+  but kept verbatim in `rows`. A file that is **present but unparseable** comes back
+  flagged `unreadable=True` — reads carry on, writers must not.
 - `record_blocked_domain(path, domain, *, since, first_seen_url) -> bool` — idempotent
   append of a `blocks-plain-readers` entry. Returns `False` and touches nothing if the
-  domain is already present under **either** kind (an objection must never be quietly
-  downgraded to a block). Rewrites the whole file sorted by domain with stable key
-  order. Never raises: a read-only checkout must not break a cycle.
+  file is unreadable, or if the domain is already covered under **either** kind (matched
+  the same exact-host-or-subdomain way every read path matches, so one blocking site
+  cannot grow an entry per subdomain; and an objection is never quietly downgraded to a
+  block). Existing rows and the document's other top-level keys are written back
+  verbatim. The write is atomic (temp file + rename). Never raises: a read-only checkout
+  must not break a cycle.
+
+**Why the unreadable flag matters (code review, 2026-08-25 — a data-loss path).** The
+loader turning every parse failure into an empty registry is right for readers and fatal
+for writers: rebuilding the file from an empty list would erase every publisher objection
+on record the first time a stray comma met a learned domain. Distinguishing "absent" from
+"present but unparseable" is what closes it, and `accept_research` reports the unreadable
+case in its summary so a fail-open is never a silent one.
 
 ## 4. Enforcement, seam by seam
 
@@ -170,8 +182,11 @@ Rule 8 keeps everything it says today and gains the two things F117 found:
 
 - `webreach-fetch` gains `--do-not-fetch` (default `registry/do-not-fetch.json`), loads
   it, passes it to `run_requests`.
-- `chart-research accept` gains `--do-not-fetch` (same default), passed to
-  `accept_research` as both the pre-check source and the auto-learn target.
+- `chart-research` gains `--do-not-fetch` (same default) on both actions:
+  `accept` passes it to `accept_research` as both the pre-check source and the auto-learn
+  target, and `emit` threads it through `emit_research` to `build_research_prompt` so
+  rule 8 names the domains from the file the operator actually asked for. (Code review
+  caught that the flag was originally accepted by `emit` and then ignored.)
 
 Both default to the repo-relative path and treat a missing file as empty, so a worktree,
 an odd cwd, or a stripped-down machine degrades to today's behaviour rather than
@@ -217,3 +232,7 @@ crashing a cycle.
 | Learned `since` = the story date, not the wall clock | AFK-default (mechanical). Follows verify.py's standing no-wall-clock rule so cycle reruns stay byte-identical. |
 | 404 gets its own `not found (HTTP 404)` line | AFK-default. The user asked for blocked vs not-found vs unreachable; 404 is the not-found case. |
 | A domain already listed as `publisher-objection` is never downgraded by auto-learn | AFK-default (safety). An objection outranks a technical block. |
+| Rule 8 lists a kind only when that kind has domains in it | AFK-default. The brief names both kinds and says what to do with each, but an empty list produces no text — telling a researcher about an empty list is noise. The `publisher-objection` half is tested against a registry that has one. |
+| A trailing-dot FQDN (`trendforce.com.`) is normalised on both sides of the matcher | AFK-default (safety). Found by self-review: it named the same host every resolver would reach, so typing the dot walked past a refusal. |
+| An unreadable registry blocks the learned WRITE but not the reads | AFK-default (code review, Critical). Reads must fail open so a cycle never dies over a policy file; writes must fail closed so a damaged file is never rebuilt from nothing. |
+| `warnings` added to `accept_research`'s returned summary | AFK-default (code review, Minor). Fail-open must not be silent. This changes that function's returned shape; one existing test pinned it and was updated. |
