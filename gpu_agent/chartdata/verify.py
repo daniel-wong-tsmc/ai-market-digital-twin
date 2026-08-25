@@ -385,7 +385,8 @@ def _answer_files(work_dir: str) -> list[tuple[int, Path]]:
 
 
 def accept_research(category_id: str, store_dir: str, work_dir: str,
-                    fetch_html: Optional[Callable[[str], str]] = None) -> dict:
+                    fetch_html: Optional[Callable[[str], str]] = None,
+                    do_not_fetch_path=None) -> dict:
     """Verify this cycle's research answers and quarantine the survivors.
 
     Returns `{'accepted': [path, ...], 'rejected': [{'file', 'failures'}, ...],
@@ -403,6 +404,20 @@ def accept_research(category_id: str, store_dir: str, work_dir: str,
     came from -- Task 5 matches an accepted candidate back to its bullet
     through that field, and a missing one renders identically to "no series
     found", i.e. an invisible failure. It is set on every persisted record.
+
+    F117/F126 -- the do-not-fetch registry. `do_not_fetch_path` defaults to
+    `registry/do-not-fetch.json`. The registry is READ from that path (a
+    publisher who objected has its points rejected before any fetch) and
+    LEARNED INTO the same path: every domain that turns the plain reader away
+    is appended once, as a `blocks-plain-readers` entry, so the list the
+    researcher's brief warns about stops lagging behind reality. A missing
+    file means an empty registry, and the first learned entry creates it; a
+    file that cannot be written is simply not written, because a cycle must
+    never fail over a bookkeeping append.
+
+    The learned `since` date is the STORY date, never the wall clock, so
+    re-running a cycle produces the same bytes here as everywhere else in
+    this module.
     """
     accepted: list[str] = []
     rejected: list[dict] = []
@@ -424,6 +439,17 @@ def accept_research(category_id: str, store_dir: str, work_dir: str,
                                  "failures": [f"cannot resolve story date: "
                                               f"{type(e).__name__}: {e}"]})
             return {"accepted": accepted, "rejected": rejected, "missing": missing}
+
+        dnf_path = (Path(do_not_fetch_path) if do_not_fetch_path is not None
+                    else DO_NOT_FETCH_REGISTRY)
+        do_not_fetch = load_do_not_fetch(dnf_path)
+
+        def _learn(domain: str, url: str) -> None:
+            # F117: the list is learned, not hand-maintained -- a hand-kept one
+            # will always lag the sites that actually block. `since` is the
+            # story date, so a cycle rerun writes identical bytes.
+            record_blocked_domain(dnf_path, domain, since=story_date,
+                                  first_seen_url=url)
 
         out_dir = cat_dir / "research-series"
 
@@ -448,7 +474,7 @@ def accept_research(category_id: str, store_dir: str, work_dir: str,
                                               f"{type(e).__name__}: {e}"]})
                 continue
 
-            ok, failures = verify_candidate(cand, fetcher)
+            ok, failures = verify_candidate(cand, fetcher, do_not_fetch, _learn)
             if not ok:
                 rejected.append({"file": str(path), "failures": failures})
                 continue
