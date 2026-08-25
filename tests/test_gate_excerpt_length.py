@@ -66,6 +66,35 @@ def test_quarter_labels_do_not_end_sentences(text, expected):
     assert _count_sentences(text) == expected
 
 
+@pytest.mark.parametrize("text,counted,really", [
+    # Terminator inside a closing quote or bracket.
+    ("He said 'it is done.' Then he left.", 1, 2),
+    ('She said "we are sold out." Demand held.', 1, 2),
+    # Sentence ending on a single-letter word. The same rule is what makes the
+    # trailing "S." of "U.S." harmless, so the two cannot be separated cheaply.
+    ("The answer is A. The next is B.", 1, 2),
+    ("They ship Model X. Margins improved.", 1, 2),
+    # Sentence ending on a quarter label.
+    ("Shipments rose in Q3. Margins held.", 1, 2),
+])
+def test_known_undercounts_are_all_in_the_safe_direction(text, counted, really):
+    """These are wrong on purpose.
+
+    Under-counting makes a long excerpt more likely to PASS; over-counting would
+    reject honest work. Every known inaccuracy in _count_sentences errs the first
+    way. If a future edit makes one of these accurate, that is fine — but re-run
+    the store audit first.
+    """
+    assert counted < really
+    assert _count_sentences(text) == counted
+
+
+def test_a_bare_year_still_ends_a_sentence():
+    """The period-label regex must not swallow "in 2026." — it is anchored to the
+    FY/CY/Q/H forms precisely so bare years keep working."""
+    assert _count_sentences("Revenue reached a record in 2026. Margins held.") == 2
+
+
 def test_real_store_excerpt_is_one_sentence():
     # Verbatim from store/findings/ir-amd-com-cfa508a5-2026-08-3.json: 70 words in
     # a single sentence. The longest excerpt ever committed to this store.
