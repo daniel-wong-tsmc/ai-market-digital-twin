@@ -90,6 +90,14 @@ service, a wire, or an aggregator, and we will not present a source's reporting 
   - **Follow-up if approved** (not built in this lane): add a length check to the extraction gate so
     an over-long excerpt is rejected the way an invented one already is. This is a small code
     change, and it should be a separate backlog item so the eval gate can be re-run against it.
+    `[BUILT 2026-08-25 (F127). The length cap is now enforced in code, in `gpu_agent/gate.py`,
+    which every saved finding passes through — an over-long excerpt is thrown away exactly like an
+    invented one. The rule follows the "or" in the norm above literally: a passage is rejected only
+    if it is **both** longer than 50 words **and** more than two sentences, plus a hard ceiling of
+    100 words that nothing may pass. Re-measured when this was built: the store has grown to 644
+    excerpts and one of them is 70 words in a single sentence — a real quote from an AMD filing —
+    so a flat 50-word limit would have thrown away honest work. Nothing already saved is rejected
+    by the rule as built, and a test checks that on every run.]`
 - **No stacking** `[DECIDED 2026-08-22, user, interactive]`: several short excerpts from the same article, spread
   across several findings, must not add up to a reproduction of that article. If a single article is
   the source of more than **three** findings in one cycle, that is a signal to link to it rather

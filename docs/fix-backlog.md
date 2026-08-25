@@ -1188,11 +1188,36 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   honouring the first objection is a one-line entry, not a build. Posture doc §3(4)'s
   bracketed note updated to match; the DECIDED clause text is untouched.
 
-- [ ] **F127 — Enforce the 50-word/two-sentence excerpt cap in the extraction gate.** Posture
+- [x] **F127 — Enforce the 50-word/two-sentence excerpt cap in the extraction gate.** Posture
   doc §2 DECIDED 2026-08-22. Today the cap is policy only (measured: all 334 stored excerpts
   ≤ 40 words). Add a length check beside the existing verbatim check so an over-long excerpt is
   rejected the way an invented one already is. Gated: extraction prompt/gate changes re-run the
   eval gate; F6 expected byte-untouched (gate code, not prompt bytes — verify in-lane).
+  **DONE on branch `f127-excerpt-length`.** The check lives in `gpu_agent/gate.py::check_finding`,
+  not beside the verbatim check in `extraction/extractor.py`: the verbatim check needs the fetched
+  page and cannot move, while `check_finding` is the one function both the extractor and
+  `check_scorecard` route through, so one edit covers every path an excerpt travels. An excerpt is
+  rejected when it is **over 50 words AND over two sentences**, or when it passes a **100-word
+  absolute ceiling** regardless of sentence count. Word count is `len(excerpt.split())`; sentence
+  count is terminal punctuation minus abbreviations, initials and decimals, deliberately biased to
+  under-count. 25 new tests, including one that scans every committed excerpt and fails if the new
+  rule would reject any. F6 verified byte-untouched: `git diff --name-only main` lists only
+  `gpu_agent/gate.py`, two test files and the two design docs, and
+  `tests/test_evals_baseline_pin.py` passes 2/2. Full suite 2745 passed / 6 skipped.
+  **Three AFK-defaults — the user was AFK and approved none of them** (full reasoning in
+  `.superpowers/handoffs/f127-excerpt-length-QUESTIONS.md`):
+  (1) **"two sentences **or** 50 words" is read as OR, not AND.** Re-measuring the store on this
+  branch falsified the item's own premise above: the store has grown from 334 to **644** excerpts,
+  and one is now **70 words** — a verbatim one-sentence AMD 10-Q gross-margin quote in
+  `store/findings/ir-amd-com-cfa508a5-2026-08-3.json`. Two others run to three and four sentences
+  (both under 30 and 40 words). None breaks both limits. A hard 50-word cap would therefore have
+  rejected a real, well-sourced finding, contradicting the posture doc's own claim that the norm
+  "costs nothing today". The OR reading is also literally what the DECIDED text says.
+  (2) **The 100-word ceiling is invented**, not in the posture doc. Without it the OR rule has a
+  trivial bypass: text with no sentence-ending punctuation counts as one sentence and passes at any
+  length. 100 is twice the norm and well clear of the largest excerpt ever stored (70).
+  (3) **Nothing under `store/` was edited** — it is append-only, and under the rule as built
+  nothing stored is non-conforming, so no exemption list was needed.
 
 - [x] **F128 — Codify the unattended-run mechanics the user ruled on 2026-08-22 (GATED: F83
   fingerprint re-record).** Four standing per-cycle deviations are now ACCEPTED PRACTICE by
