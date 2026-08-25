@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "domain": "counterpointresearch.com",
+      "kind": "blocks-plain-readers",
+      "since": "2026-08-19",
+      "why": "HTTP 403 to the verifier's plain reader on all 5 points, 2026-08-19 cycle; opened fine to the researcher's WebFetch"
+    }
+  ]
+}
