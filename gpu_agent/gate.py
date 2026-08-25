@@ -108,6 +108,18 @@ def check_finding(f: Finding, *, valid_targets: frozenset[str] | None = None) ->
             errors.append(f"{f.id}: evidence date not ISO (YYYY-MM-DD): {e.date!r}")
         elif _future_dated(e.date, f.asOf):
             errors.append(f"{f.id}: future-dated evidence {e.date} vs asOf {f.asOf}")
+        # F127 — excerpt length cap (posture doc §2, DECIDED 2026-08-22). Rejected
+        # only when BOTH decided limits are broken, or when the absolute backstop is.
+        words = _count_words(e.excerpt)
+        if words > EXCERPT_ABSOLUTE_MAX_WORDS:
+            errors.append(f"{f.id}: excerpt too long ({words} words > "
+                          f"{EXCERPT_ABSOLUTE_MAX_WORDS} absolute cap)")
+        else:
+            sentences = _count_sentences(e.excerpt)
+            if words > EXCERPT_MAX_WORDS and sentences > EXCERPT_MAX_SENTENCES:
+                errors.append(f"{f.id}: excerpt too long ({words} words > "
+                              f"{EXCERPT_MAX_WORDS} and {sentences} sentences > "
+                              f"{EXCERPT_MAX_SENTENCES})")
     # F21 — impact quality
     if not f.impact.targets:
         errors.append(f"{f.id}: impact.targets empty")

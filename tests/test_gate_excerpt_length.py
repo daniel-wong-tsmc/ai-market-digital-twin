@@ -67,3 +67,92 @@ def test_real_store_excerpt_is_one_sentence():
     )
     assert _count_words(excerpt) == 70
     assert _count_sentences(excerpt) == 1
+
+
+# --- the gate itself -------------------------------------------------------
+
+from gpu_agent.gate import check_finding          # noqa: E402
+from tests.test_gate_finding import _base         # noqa: E402
+
+
+def _long_errors(text):
+    """Violations mentioning excerpt length, for a finding carrying `text`."""
+    f = _base(evidence=[{"source": "S", "url": "u", "date": "2026-05-01",
+                         "excerpt": text, "tier": "primary"}])
+    return [e for e in check_finding(f) if "excerpt too long" in e]
+
+
+def test_short_excerpt_passes():
+    assert _long_errors("Gross margin was 54% in the quarter.") == []
+
+
+def test_over_words_only_passes():
+    # 60 words in one sentence: over the word limit, inside the sentence limit.
+    text = " ".join(["word"] * 59) + " end."
+    assert _count_words(text) == 60
+    assert _count_sentences(text) == 1
+    assert _long_errors(text) == []
+
+
+def test_over_sentences_only_passes():
+    # Four sentences, well under 50 words.
+    text = "One here. Two here. Three here. Four here."
+    assert _count_sentences(text) == 4
+    assert _count_words(text) <= EXCERPT_MAX_WORDS
+    assert _long_errors(text) == []
+
+
+def test_over_both_limits_is_rejected():
+    text = " ".join(["word"] * 14 + ["one."] + ["word"] * 14 + ["two."]
+                    + ["word"] * 14 + ["three."] + ["word"] * 14 + ["four."])
+    assert _count_words(text) == 60
+    assert _count_sentences(text) == 4
+    assert _long_errors(text) == ["f: excerpt too long (60 words > 50 and 4 sentences > 2)"]
+
+
+def test_over_absolute_cap_is_rejected_even_as_one_sentence():
+    text = " ".join(["word"] * 119) + " end."
+    assert _count_words(text) == 120
+    assert _count_sentences(text) == 1
+    assert _long_errors(text) == ["f: excerpt too long (120 words > 100 absolute cap)"]
+
+
+def test_over_both_and_over_absolute_reports_only_the_absolute_cap():
+    text = " ".join(["word"] * 39 + ["one."] + ["word"] * 39 + ["two."]
+                    + ["word"] * 39 + ["three."])
+    assert _count_words(text) == 120
+    assert _count_sentences(text) == 3
+    assert _long_errors(text) == ["f: excerpt too long (120 words > 100 absolute cap)"]
+
+
+def test_every_committed_store_excerpt_survives_the_gate():
+    """F127 must not be retroactively destructive: nothing already committed
+    under store/ may be rejected by the rule this lane adds."""
+    import json
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1] / "store"
+    checked = 0
+    offenders = []
+    for path in sorted(root.rglob("*.json")):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, UnicodeDecodeError, OSError):
+            continue
+        for item in (data if isinstance(data, list) else [data]):
+            if not isinstance(item, dict):
+                continue
+            for ev in item.get("evidence") or []:
+                if not isinstance(ev, dict):
+                    continue
+                excerpt = ev.get("excerpt")
+                if not isinstance(excerpt, str):
+                    continue
+                checked += 1
+                words = _count_words(excerpt)
+                sentences = _count_sentences(excerpt)
+                if words > EXCERPT_ABSOLUTE_MAX_WORDS or (
+                        words > EXCERPT_MAX_WORDS and sentences > EXCERPT_MAX_SENTENCES):
+                    offenders.append(f"{path.name}: {words}w/{sentences}s")
+    assert checked > 500, f"only {checked} excerpts scanned - store path wrong?"
+    assert offenders == []
