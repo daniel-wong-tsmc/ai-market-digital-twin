@@ -169,3 +169,54 @@ def test_eval_rebaseline_without_seams_is_unscoped(tmp_path):
     b = json.loads(baseline.read_text("utf-8"))
     assert "seamRebaselines" not in b["provenance"]
     assert b["provenance"]["forceReason"] == "whole"
+
+
+# --- F129: `eval recompute-eps` -----------------------------------------------
+
+def _eps_baseline(tmp_path):
+    """A fixture copy shaped like the live baseline: a small seamHistory, stored true
+    quanta, stale (pre-F129) epsilon, and provenance that must survive untouched."""
+    p = tmp_path / "baseline.json"
+    p.write_text(json.dumps({
+        "schemaVersion": 2, "promptHashes": {"extract": "a" * 64}, "replicates": [],
+        "seamMeans": {"extract": 6.79, "thesis": 6.0},
+        "seamHistory": {"extract": [6.5, 6.75, 7.125], "thesis": [6.0, 6.0, 6.0]},
+        "quanta": {"extract": 0.125, "thesis": 0.5},
+        "epsilon": {"extract": 0.6291528696058958, "thesis": 0.5},
+        "caseMedians": {"extract-t-01": 7},
+        "provenance": {"asOf": "2026-07-18", "graderModel": "opus",
+                       "forceReason": None, "humanReview": "keep me"},
+    }, indent=2, sort_keys=True), "utf-8")
+    return p
+
+def test_recompute_eps_roundtrip(tmp_path, capsys):
+    import math, statistics
+    p = _eps_baseline(tmp_path)
+    assert main(["eval", "recompute-eps", "--baseline", str(p)]) == 0
+    b = json.loads(p.read_text("utf-8"))
+    expected = 4.303 * math.sqrt(4 / 3) * statistics.stdev([6.5, 6.75, 7.125])
+    assert b["epsilon"]["extract"] == pytest.approx(expected)
+    assert b["epsilon"]["thesis"] == pytest.approx(0.5)      # zero-stdev -> quantum floor
+    out = capsys.readouterr().out
+    assert "extract" in out and "0.629" in out and "1.563" in out
+    # provenance: additive note, nothing else disturbed
+    prov = b["provenance"]
+    assert prov["humanReview"] == "keep me" and prov["asOf"] == "2026-07-18"
+    assert prov["graderModel"] == "opus" and prov["forceReason"] is None
+    assert prov["epsRecompute"]["formula"]
+    assert prov["epsRecompute"]["asOf"]
+    # every other baseline field is untouched (promptHashes especially)
+    assert b["promptHashes"] == {"extract": "a" * 64}
+    assert b["seamHistory"] == {"extract": [6.5, 6.75, 7.125], "thesis": [6.0, 6.0, 6.0]}
+    assert b["caseMedians"] == {"extract-t-01": 7}
+
+def test_recompute_eps_is_idempotent(tmp_path):
+    p = _eps_baseline(tmp_path)
+    assert main(["eval", "recompute-eps", "--baseline", str(p)]) == 0
+    first = json.loads(p.read_text("utf-8"))["epsilon"]
+    assert main(["eval", "recompute-eps", "--baseline", str(p)]) == 0
+    assert json.loads(p.read_text("utf-8"))["epsilon"] == first
+
+def test_recompute_eps_refuses_missing_baseline(tmp_path, capsys):
+    assert main(["eval", "recompute-eps",
+                 "--baseline", str(tmp_path / "nope.json")]) == 2
