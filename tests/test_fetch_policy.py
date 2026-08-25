@@ -27,6 +27,14 @@ def test_matching_domain_matches_exact_host_and_dot_suffix_subdomain():
         assert matching_domain(url, DOMAINS) == expected
 
 
+def test_matching_domain_is_not_fooled_by_a_trailing_dot_fqdn():
+    """A trailing dot makes an absolute DNS name: trendforce.com. and
+    trendforce.com are the same host to any resolver, so a refusal decision
+    must not be dodged by typing the dot."""
+    assert matching_domain("https://trendforce.com./x", DOMAINS) == "trendforce.com"
+    assert matching_domain("https://news.trendforce.com./x", DOMAINS) == "trendforce.com"
+
+
 def test_matching_domain_rejects_lookalikes_and_non_urls():
     for url in ["https://nottrendforce.com/x", "https://trendforce.com.evil.test/x",
                 "https://example.test/x", "file:///etc/passwd", "H100 spot pricing"]:
@@ -108,6 +116,13 @@ def test_record_blocked_domain_creates_the_file_when_it_is_missing(tmp_path):
     p = tmp_path / "sub" / "r.json"
     assert record_blocked_domain(p, "alpha.test", since="2026-08-19") is True
     assert load_do_not_fetch(p).domains() == ["alpha.test"]
+
+
+def test_a_trailing_dot_host_is_learned_as_the_same_domain(tmp_path):
+    p = tmp_path / "r.json"
+    assert record_blocked_domain(p, "alpha.test.", since="2026-08-19") is True
+    assert load_do_not_fetch(p).domains() == ["alpha.test"]
+    assert record_blocked_domain(p, "alpha.test", since="2026-08-20") is False
 
 
 def test_record_blocked_domain_swallows_a_write_failure(tmp_path):

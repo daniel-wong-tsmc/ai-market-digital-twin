@@ -71,6 +71,10 @@ def matching_domain(target: str, domains: Iterable[str]) -> str | None:
     URL at all -- a free-text search target, a `file://` path, a bare
     `example.test/x` with no scheme.
 
+    A trailing dot -- `trendforce.com.`, an absolute DNS name -- is stripped
+    from both sides, because it names the same host every resolver would reach
+    and must not be a way to dodge a refusal.
+
     `domains` is iterated in sorted order so the answer is deterministic when
     a host could match two listed domains (`b.example.com` and `example.com`);
     the alphabetically first wins, and both are correct answers to "is this
@@ -86,10 +90,11 @@ def matching_domain(target: str, domains: Iterable[str]) -> str | None:
         host = (parsed.hostname or "").lower()
     except ValueError:   # malformed IPv6 literal, e.g. "https://[oops/"
         return None
+    host = host.rstrip(".")
     if not host:
         return None
-    for dom in sorted(d.lower() for d in domains):
-        if host == dom or host.endswith("." + dom):
+    for dom in sorted(d.lower().rstrip(".") for d in domains):
+        if dom and (host == dom or host.endswith("." + dom)):
             return dom
     return None
 
@@ -192,7 +197,7 @@ def record_blocked_domain(path, domain: str, *, since: str,
     verifier passes the STORY date, so re-running a cycle produces the same
     bytes.
     """
-    domain = (domain or "").strip().lower()
+    domain = (domain or "").strip().lower().strip(".")
     if not domain:
         return False
     path = pathlib.Path(path)
