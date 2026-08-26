@@ -2,6 +2,13 @@
   "version": 1,
   "entries": [
     {
+      "domain": "analyticsindiamag.com",
+      "kind": "blocks-plain-readers",
+      "since": "2026-08-26",
+      "why": "learned automatically: the verifier's plain reader was turned away (HTTP 401/403/429)",
+      "firstSeenUrl": "https://analyticsindiamag.com/ai-news/am-intelligence-orders-9000-nvidia-rubin-gpus-for-hyderabad-ai-factory"
+    },
+    {
       "domain": "counterpointresearch.com",
       "kind": "blocks-plain-readers",
       "since": "2026-08-19",

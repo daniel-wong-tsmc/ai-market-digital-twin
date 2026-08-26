@@ -539,3 +539,10 @@
 {"seq":538,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"tech-yahoo-com-d98ba886-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":539,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"jarvislabs-ai-475be7e7-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":540,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"finance-yahoo-com-4ffdbfce-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":541,"asOf":"2026-08","kind":"append-observation","pageId":"entity:intel","findingId":"newsroom-intel-com-84d48eaa-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":542,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-trendforce-com-01be0e4e-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":543,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-trendforce-com-01be0e4e-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":544,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"finance-yahoo-com-52a75f48-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":545,"asOf":"2026-08","kind":"append-observation","pageId":"entity:multi","findingId":"www-trendforce-com-8eaf3884-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":546,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-taipeitimes-com-8d02612a-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":547,"asOf":"2026-08","kind":"append-observation","pageId":"entity:nvidia","findingId":"zdnet-co-kr-1640e7a5-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}

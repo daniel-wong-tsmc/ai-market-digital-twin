@@ -1,0 +1,42 @@
+{
+  "id": "finance-yahoo-com-52a75f48-2026-08-1",
+  "statement": "Nvidia-backed neocloud Lambda is in talks for a pre-IPO round of up to $3 billion at a valuation of $12 billion or more, months after borrowing $917 million for chips.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A marginal GPU buyer is still able to raise large equity and chip-backed debt, which sustains its ability to keep ordering accelerators.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Fresh pre-IPO equity plus prior chip-purchase debt funds continued GPU procurement by a neocloud operator, feeding merchant-GPU demand."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (Bloomberg restatement)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/ai-cloud-provider-lambda-in-talks-for-3-billion-pre-ipo-round-234205946.html",
+      "date": "2026-08-25",
+      "excerpt": "Nvidia-backed AI cloud provider Lambda is in talks to raise up to $3 billion in a pre-IPO financing round that could value the company at $12 billion or more",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet restating a Bloomberg report; talks are ongoing and deal terms are not finalized, and no filing corroborates."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-25",
+  "capturedAt": "2026-08-26T10:50:19Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

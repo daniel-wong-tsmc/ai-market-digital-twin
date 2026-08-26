@@ -1,0 +1,44 @@
+{
+  "id": "www-taipeitimes-com-8d02612a-2026-08-1",
+  "statement": "AM Intelligence placed a binding order for 9,000 NVIDIA Vera Rubin systems for a first AI factory in Hyderabad, India, within a US$8 billion plan for 1GW of compute capacity.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A binding order for next-generation rack-scale systems from a new non-hyperscaler buyer shows demand broadening beyond the established US customer base.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "A committed multi-thousand-unit rack-scale order converts planned power capacity into booked accelerator demand for delivery next year."
+  },
+  "evidence": [
+    {
+      "source": "Taipei Times",
+      "url": "https://www.taipeitimes.com/News/biz/archives/2026/08/26/2003863126",
+      "date": "2026-08-26",
+      "excerpt": "has placed a binding order for '9,000 Nvidia Corp Vera Rubin systems' for its first AI factory in Hyderabad, India",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary only: one fetched outlet relaying an originating Bloomberg report; no NVIDIA or AM Intelligence release or filing could be located or fetched."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: PR Newswire, Taipei Times",
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-26T10:50:19Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

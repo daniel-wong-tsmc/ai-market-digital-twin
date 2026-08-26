@@ -1,0 +1,43 @@
+{
+  "id": "www-trendforce-com-01be0e4e-2026-08-2",
+  "statement": "Jalapeno adds a new claimant on HBM4 supply in an already-constrained memory market where NVIDIA holds substantial capacity.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Another high-volume HBM4 consumer tightens an input that already gates accelerator output.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "negative",
+    "mechanism": "A new six-stack-per-package HBM4 buyer competes for constrained memory allocation, tightening supply available to accelerator makers."
+  },
+  "evidence": [
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/",
+      "date": "2026-08-26",
+      "excerpt": "TrendForce notes this is a new contender for HBM4 supply and could impact the already-constrained HBM market where NVIDIA already holds substantial capacity.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade commentary; the Samsung HBM4 supply relationship is reported as believed, not confirmed by the suppliers."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-26T10:50:19Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "zdnet-co-kr-1640e7a5-2026-08-1",
+  "statement": "Samsung and SK Hynix are shifting their primary HBM4 configuration for NVIDIA to 8-high and cutting 12-high output in the second half of 2026, on thermal and stacking-yield grounds.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "If the tallest HBM stacks cannot be yielded or cooled at volume, memory capacity per accelerator is capped and the memory supply chain for the top platform changes.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "energy.cooling",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Retreating from 12-high to 8-high stacks lowers memory capacity per accelerator and signals that stacking, bonding, and packaging yields constrain HBM4 supply."
+  },
+  "evidence": [
+    {
+      "source": "ZDNet Korea",
+      "url": "https://zdnet.co.kr/view/?no=20260826094826",
+      "date": "2026-08-26",
+      "excerpt": "Samsung and SK Hynix are increasing shipments of HBM4 8-high (8-stack) memory to NVIDIA while reducing 12-high output.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary only: one fetched Korean outlet citing an unnamed industry source; a consistent second headline was noted but not fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-26T10:50:19Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

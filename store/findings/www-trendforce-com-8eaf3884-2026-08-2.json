@@ -1,0 +1,43 @@
+{
+  "id": "www-trendforce-com-8eaf3884-2026-08-2",
+  "statement": "TSMC's CoWoS advanced packaging is described as facing severe supply constraints amid surging AI semiconductor demand.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Advanced packaging is the long-lead step that caps how many accelerators can actually be built regardless of wafer starts.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "negative",
+    "mechanism": "Constrained CoWoS capacity lengthens the long-lead packaging step and limits accelerator output."
+  },
+  "evidence": [
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/05/11/news-sk-hynix-reportedly-tests-intel-emib-2-5d-packaging-with-hbm-amid-tsmc-cowos-tightness/",
+      "date": "2026-05-11",
+      "excerpt": "TSMC's CoWoS (Chip-on-Wafer-on-Substrate) technology has been facing severe supply constraints amid surging AI semiconductor demand.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary trade article that is more than three months old; no lead-time figure or period is stated."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-05-11",
+  "capturedAt": "2026-08-26T10:50:19Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

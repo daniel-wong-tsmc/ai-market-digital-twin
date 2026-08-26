@@ -1,0 +1,43 @@
+{
+  "id": "newsroom-intel-com-84d48eaa-2026-08-1",
+  "statement": "Intel detailed Crescent Island, a next-generation datacenter GPU optimized for AI inference, at Hot Chips 2026, alongside its Diamond Rapids Xeon.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A credible second merchant supplier of inference accelerators widens the pool of non-NVIDIA silicon buyers can qualify.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "energy.efficiency"
+    ],
+    "direction": "mixed",
+    "mechanism": "An air-cooled inference accelerator with large on-card memory adds alternative accelerator supply and competitive pressure on the incumbent merchant-GPU line."
+  },
+  "evidence": [
+    {
+      "source": "Intel Newsroom",
+      "url": "https://newsroom.intel.com/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026",
+      "date": "2026-08-24",
+      "excerpt": "Intel discussed three complementary architectures at Hot Chips 2026: next-gen Xeon codenamed Diamond Rapids, next-gen datacenter GPU optimized for AI inference codenamed Crescent Island",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single vendor newsroom announcement, treated as secondary; conference disclosure of architecture, not shipping volumes or design wins."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-08-24",
+  "capturedAt": "2026-08-26T10:50:19Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,193 @@
+{
+  "headline": "The memory makers just made the stacks shorter",
+  "deck": "Samsung and SK Hynix are moving NVIDIA to 8-high memory stacks and cutting the taller 12-high output this half. On the same day, OpenAI put a chip of its own in the queue for that same memory.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Less memory per machine, decided by the memory makers",
+      "paragraphs": [
+        "The two Korean memory makers have effectively decided how much memory each NVIDIA machine will get, and the answer is less. Samsung and SK Hynix are making the 8-high stack their main build for NVIDIA and cutting output of the taller 12-high version in the second half of this year. The reasons given are heat and the difficulty of stacking that many layers without losing parts.",
+        "That matters because a shorter stack means less memory inside each machine. NVIDIA has already been designing around this. On August 7 its memory suppliers were reported able to cover only 60% to 70% of the volume NVIDIA asked for on its coming Rubin Ultra part, and that part was being tested at 192GB of memory against a planned 1TB. TrendForce counted four different memory recipes under review.",
+        "The shortage underneath has not moved. Micron said on August 10 that it can supply no more than about half of what customers ask for, and that it has no line of sight to when supply meets demand."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "zdnet-co-kr-1640e7a5-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-2",
+        "www-trendforce-com-17fa2dc8-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1"
+      ],
+      "sourceLine": "ZDNet Korea on the Korean memory makers' stack decision, with Seoul Economic Daily, TrendForce and Micron's own August remarks for the background.",
+      "relatedDocs": [
+        {
+          "url": "https://zdnet.co.kr/view/?no=20260826094826",
+          "title": "Korean memory makers shift NVIDIA to the shorter stack",
+          "outlet": "ZDNet Korea",
+          "date": "2026-08-26"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "A new name joins the line for the same memory",
+      "paragraphs": [
+        "OpenAI unveiled Jalapeno today, its first inference chip of its own, built on TSMC's 3nm process with Broadcom as the design partner. Each package carries six stacks of HBM4, the very memory NVIDIA is short of.",
+        "The plain reading is that Jalapeno is one more claimant on HBM4 in a market that is already constrained and where NVIDIA holds a substantial share of what is made. Every stack that goes into somebody else's chip is a stack that does not go into a merchant GPU.",
+        "This is not one company acting alone. Microsoft was reported on August 11 to be negotiating factory capacity for upward of 300,000 of its own Maia 300 chips for 2027 delivery, with a longer-term goal above one million units. Google is adding Marvell-designed inference parts alongside its own in-house line. The largest buyers are no longer only buyers."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "www-trendforce-com-01be0e4e-2026-08-1",
+        "www-trendforce-com-01be0e4e-2026-08-2",
+        "qz-com-36c37a60-2026-08-1",
+        "247wallst-com-db4b25b9-2026-08-2"
+      ],
+      "sourceLine": "TrendForce on OpenAI's Jalapeno chip today, with earlier August reporting on Microsoft's and Google's own silicon.",
+      "relatedDocs": [
+        {
+          "url": "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/",
+          "title": "OpenAI shows its own inference chip, built on six stacks of HBM4",
+          "outlet": "TrendForce",
+          "date": "2026-08-26"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Orders keep arriving in binding form. AM Intelligence placed a firm order for 9,000 NVIDIA Vera Rubin systems for a first AI factory in Hyderabad, India, inside a US$8 billion plan for one gigawatt of capacity. Watch whether an order that size gets filled on schedule or simply joins the queue behind everyone else.",
+        "Rental rates stay the fastest thermometer anyone has. H200 capacity was listed yesterday at $3.99 per chip per hour at Jarvislabs and $4.50 at Nebius. If those drift down over the coming weeks, capacity has genuinely loosened. If they hold or climb, the shortage is intact whatever else gets announced.",
+        "The one development that would truly lift the ceiling is better memory yields. Samsung reported on August 10 that its yield on the new stacked memory reached close to 80%, up from below 60% when volume production began, roughly four months ahead of the expected timeline. Watch whether the makers spend that gain bringing the taller 12-high stacks back, rather than settling at 8-high and shipping more machines with less memory each."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "www-taipeitimes-com-8d02612a-2026-08-1",
+        "jarvislabs-ai-475be7e7-2026-08-1",
+        "nebius-com-fa885ed3-2026-08-1",
+        "en-sedaily-com-80cdc180-2026-08-1",
+        "zdnet-co-kr-1640e7a5-2026-08-1"
+      ],
+      "sourceLine": "Taipei Times on the Hyderabad order, yesterday's Jarvislabs and Nebius rate cards, and Seoul Economic Daily on Korean memory yields.",
+      "relatedDocs": [
+        {
+          "url": "https://www.taipeitimes.com/News/biz/archives/2026/08/26/2003863126",
+          "title": "A binding order for 9,000 Vera Rubin systems in India",
+          "outlet": "Taipei Times",
+          "date": "2026-08-26"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a chip costs to buy outright, the cleanest read on whether hardware is scarce.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How many servers are actually leaving factories, the test of whether parts reach buyers.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "How fast memory makers are raising factory spending, the one thing that eventually lifts the ceiling.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "Samsung and SK Hynix are making the 8-high stack the main build for NVIDIA and cutting the taller 12-high output in the second half of this year.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "OpenAI's new Jalapeno chip carries six stacks of HBM4, adding one more claimant to memory that is already short.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Samsung and SK Hynix are cutting the taller 12-high memory stacks for NVIDIA this half and making 8-high the standard, so each machine gets less memory.",
+      "claimFindingIds": [
+        "zdnet-co-kr-1640e7a5-2026-08-1"
+      ]
+    },
+    {
+      "text": "OpenAI unveiled Jalapeno, its own inference chip on a 3nm process with Broadcom, carrying six stacks of the same scarce HBM4 memory NVIDIA needs.",
+      "claimFindingIds": [
+        "www-trendforce-com-01be0e4e-2026-08-1",
+        "www-trendforce-com-01be0e4e-2026-08-2"
+      ]
+    },
+    {
+      "text": "AM Intelligence placed a binding order for 9,000 NVIDIA Vera Rubin systems in Hyderabad, part of a US$8 billion plan for one gigawatt of capacity.",
+      "claimFindingIds": [
+        "www-taipeitimes-com-8d02612a-2026-08-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "Samsung and SK Hynix are cutting 12-high stack output for NVIDIA this half and making 8-high the main build, so each machine carries less memory. OpenAI's new Jalapeno chip adds another claimant on the same short HBM4 supply.",
+      "claimFindingIds": [
+        "zdnet-co-kr-1640e7a5-2026-08-1",
+        "www-trendforce-com-01be0e4e-2026-08-2"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "OpenAI unveiled Jalapeno, its first inference chip of its own, built on TSMC 3nm with Broadcom. A large buyer designing its own part is one less buyer competing for merchant GPUs.",
+      "claimFindingIds": [
+        "www-trendforce-com-01be0e4e-2026-08-1",
+        "www-trendforce-com-01be0e4e-2026-08-2"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "worsened",
+      "reasoning": "The Korean makers are cutting 12-high output in the second half of this year, and OpenAI's Jalapeno adds a fresh claimant on HBM4 in a market already described as constrained.",
+      "claimFindingIds": [
+        "zdnet-co-kr-1640e7a5-2026-08-1",
+        "www-trendforce-com-01be0e4e-2026-08-2"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "worsened",
+      "reasoning": "Making 8-high the main build for NVIDIA settles the question in the direction of less memory per machine, on top of Rubin Ultra already being tested at 192GB against a planned 1TB.",
+      "claimFindingIds": [
+        "zdnet-co-kr-1640e7a5-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-2"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-26",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "6aaf7511eb4933e3f86c770d3c3d47a78e070ef471bedd35fe6e73a8bb6ad9de",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-26T12:23:45.846739+00:00"
+  }
+}

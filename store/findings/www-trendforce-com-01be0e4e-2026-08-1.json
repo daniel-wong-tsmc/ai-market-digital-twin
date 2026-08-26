@@ -1,0 +1,44 @@
+{
+  "id": "www-trendforce-com-01be0e4e-2026-08-1",
+  "statement": "OpenAI unveiled Jalapeno, its first custom inference chip, built on TSMC 3nm with Broadcom as ASIC partner and six HBM4 stacks per package.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A large model developer shipping its own inference silicon is direct alternative supply that can displace merchant-GPU racks for inference workloads.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.foundry-packaging",
+      "models.frontier-closed"
+    ],
+    "direction": "mixed",
+    "mechanism": "Custom inference silicon from a top model developer substitutes for merchant GPUs on its own workloads while adding foundry and ASIC demand."
+  },
+  "evidence": [
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/",
+      "date": "2026-08-26",
+      "excerpt": "OpenAI unveiled its first custom inference chip, Jalapeno, just ahead of NVIDIA's latest earnings report on August 26.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade coverage; the headline benchmark comparisons are explicitly not apples-to-apples because speculative decoding was disabled on Jalapeno but used for the competing rack results."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: TrendForce",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-26T10:50:19Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
