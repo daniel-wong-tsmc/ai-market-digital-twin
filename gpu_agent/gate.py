@@ -7,11 +7,124 @@ from gpu_agent.publisher import collapsed_publisher_set
 
 _ISO_PREFIX = re.compile(r"^\d{4}-\d{2}-\d{2}")
 
+# F127 — excerpt length cap. Posture doc §2, DECIDED 2026-08-22: an excerpt is
+# "at most two sentences or about 50 words". That "or" is read literally — an
+# excerpt is rejected only when it breaks BOTH limits. Measured over all 644
+# committed excerpts, nothing breaks both, while a hard 50-word cap alone would
+# have rejected a real 70-word one-sentence 10-Q quote. The absolute cap is the
+# backstop that stops a run-on (which counts as one sentence) from walking past
+# the gate at any length.
+EXCERPT_MAX_WORDS = 50
+EXCERPT_MAX_SENTENCES = 2
+EXCERPT_ABSOLUTE_MAX_WORDS = 100
+
+# A sentence end is terminal punctuation followed by end-of-text, or by whitespace
+# and then the start of a new sentence: an optional opening quote or bracket, then
+# a capital or a digit. Requiring the capital is what stops an abbreviation the list
+# does not know ("the Fed. raised", "Rev. was up", "3 mn. units") from being read as
+# a sentence end — real prose capitalises after a full stop, abbreviations do not.
+_SENTENCE_END = re.compile(r"[.!?]+(?=\s+[\"'“‘(\[]?[A-Z0-9]|\s*$)")
+
+# A token carrying a period INSIDE it is an acronym, a pair of initials or a
+# numbered label ("A.I.", "Ph.D.", "J.H.", "2.1."), never a sentence end. Letters
+# and ordinals only — a decimal amount ("$6.7B.") may legitimately end a sentence.
+_INTERNAL_PERIOD = re.compile(r"^[a-z]+(?:\.[a-z]+)+\.$|^\d+(?:\.\d+)+\.$")
+
+# Tokens that end in "." without ending a sentence. Financial prose only needs a
+# short list; anything missed makes the counter count HIGH, so keep it current.
+_ABBREVIATIONS = frozenset({
+    "u.s.", "u.k.", "e.u.", "u.s.a.",
+    "inc.", "corp.", "co.", "ltd.", "llc.", "plc.", "gmbh.",
+    "mr.", "mrs.", "ms.", "dr.", "prof.", "sr.", "jr.", "st.",
+    "vs.", "etc.", "e.g.", "i.e.", "cf.", "al.",
+    "no.", "fig.", "approx.", "est.", "avg.", "yr.", "qtr.",
+    "jan.", "feb.", "mar.", "apr.", "jun.", "jul.", "aug.",
+    "sept.", "sep.", "oct.", "nov.", "dec.",
+})
+
+
+# Period/quarter labels: "Q3.", "H1.", "1H.", "FY26.", "CY2026.". Financial prose is
+# full of these and a static list cannot cover the fiscal-year forms. Note this also
+# swallows a genuine sentence that happens to END on such a label ("...grew in Q3.
+# Margins held."), which under-counts — the safe direction.
+_PERIOD_LABEL = re.compile(r"^(?:fy|cy|q|h)\d+\.$|^\d+[hq]\.$")
+
+
+def _count_words(text: str) -> int:
+    """Word count the way the posture doc measured it: whitespace split."""
+    return len(text.split())
+
+
+def _count_sentences(text: str) -> int:
+    """Count sentences, biased to UNDER-count.
+
+    Under-counting lets a long excerpt through; over-counting rejects a real one,
+    so every judgement call here is made in the first direction. The count is only
+    ever consulted for an excerpt already over EXCERPT_MAX_WORDS, and
+    EXCERPT_ABSOLUTE_MAX_WORDS backstops genuine bulk, so leniency is cheap.
+
+    Three rules keep it there: a decimal point is never a terminator (the lookahead
+    needs whitespace after the dot); a terminator only counts when a capital or a
+    digit follows it, which is what stops an abbreviation the list does not know
+    ("the Fed. raised", "Rev. was up") from reading as a full stop; and a token with
+    a period inside it is an acronym or a numbered label, never a sentence end.
+
+    It is NOT infallible, and the claim to check before tightening it is this one:
+    an abbreviation that is unlisted AND followed by a capitalised word still counts
+    as a sentence end, over-counting by one. That is why the gate requires BOTH
+    limits to be broken rather than trusting this number on its own.
+    """
+    folded = " ".join(text.split())
+    count = 0
+    for match in _SENTENCE_END.finditer(folded):
+        # Walk back to the start of the token this terminator ends, rather than
+        # re-slicing and re-splitting the whole prefix on every match.
+        start = folded.rfind(" ", 0, match.end()) + 1
+        last = folded[start:match.end()].lower().strip("\"'([{<")
+        if not last:
+            continue
+        if (last in _ABBREVIATIONS or _PERIOD_LABEL.match(last)
+                or _INTERNAL_PERIOD.match(last)):
+            continue
+        # A single character before the punctuation: an initial, or the tail of
+        # "U.S." once the earlier dot has already been consumed.
+        if len(last.rstrip(".!?")) <= 1:
+            continue
+        count += 1
+    return max(count, 1)
+
 def _future_dated(date: str, as_of: str) -> bool:
     """Grain-aware vintage compare: truncate the evidence date to asOf's grain
     (month 'YYYY-MM' or day 'YYYY-MM-DD') and compare lexically."""
     g = len(as_of)
     return bool(as_of) and date[:g] > as_of
+
+def excerpt_length_violations(fid: str, excerpt: str) -> list[str]:
+    """F127 — the excerpt length cap, as one callable rule.
+
+    Public so that a caller wanting to check a bare excerpt (a store audit, a
+    review script) uses the same rule `check_finding` applies, rather than a
+    second copy of it that can drift.
+
+    An excerpt is rejected when it breaks BOTH decided limits, or when it breaks
+    the absolute backstop on its own. Over the backstop reports only that, since
+    the two messages would say the same thing twice.
+
+    A non-string excerpt is not this rule's business to complain about — the schema
+    already requires a string — so it is passed over rather than crashing an audit.
+    """
+    if not isinstance(excerpt, str):
+        return []
+    words = _count_words(excerpt)
+    if words > EXCERPT_ABSOLUTE_MAX_WORDS:
+        return [f"{fid}: excerpt too long ({words} words > "
+                f"{EXCERPT_ABSOLUTE_MAX_WORDS} absolute cap)"]
+    sentences = _count_sentences(excerpt)
+    if words > EXCERPT_MAX_WORDS and sentences > EXCERPT_MAX_SENTENCES:
+        return [f"{fid}: excerpt too long ({words} words > {EXCERPT_MAX_WORDS} "
+                f"and {sentences} sentences > {EXCERPT_MAX_SENTENCES})"]
+    return []
+
 
 def check_finding(f: Finding, *, valid_targets: frozenset[str] | None = None) -> list[str]:
     errors: list[str] = []
@@ -52,6 +165,7 @@ def check_finding(f: Finding, *, valid_targets: frozenset[str] | None = None) ->
             errors.append(f"{f.id}: evidence date not ISO (YYYY-MM-DD): {e.date!r}")
         elif _future_dated(e.date, f.asOf):
             errors.append(f"{f.id}: future-dated evidence {e.date} vs asOf {f.asOf}")
+        errors.extend(excerpt_length_violations(f.id, e.excerpt))   # F127
     # F21 — impact quality
     if not f.impact.targets:
         errors.append(f"{f.id}: impact.targets empty")

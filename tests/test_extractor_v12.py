@@ -58,6 +58,37 @@ def test_excerpt_not_in_doc_dropped():
     assert any("excerpt not found in source document" in v for v in out.dropped[0].violations)
 
 
+# 4b. F127 — a genuine but over-long excerpt is dropped the same way
+def _long_passage():
+    """60 words across three capitalised sentences — over both decided limits.
+
+    Capitalised because the gate only counts a full stop as a sentence end when a
+    capital follows it, which is what keeps unlisted abbreviations from inflating
+    the count.
+    """
+    return " ".join("Word " + " ".join(["word"] * 18) + " end." for _ in range(3))
+
+
+LONG_DOC = RawDocument(
+    id="d2", source="NVIDIA 10-Q", url="http://sec/nvda-long", date="2026-05-01",
+    tier="primary", entity="NVDA",
+    content="Preamble. " + _long_passage() + " Postamble.")
+
+
+def test_over_long_excerpt_dropped_even_though_it_is_verbatim():
+    """The excerpt really is in the document, so only the length check fires."""
+    passage = _long_passage()
+    assert passage in LONG_DOC.content
+    d = _draft()
+    d["evidence"][0]["url"] = "http://sec/nvda-long"
+    d["evidence"][0]["excerpt"] = passage
+    out = extract_findings(LONG_DOC, _client(d), **KW)
+    assert not out.findings
+    violations = out.dropped[0].violations
+    assert any("excerpt too long (60 words > 50 and 3 sentences > 2)" in v for v in violations)
+    assert not any("excerpt not found" in v for v in violations)
+
+
 # 5. F2c — evidence url must match the document
 def test_evidence_url_mismatch_dropped():
     d = _draft()
