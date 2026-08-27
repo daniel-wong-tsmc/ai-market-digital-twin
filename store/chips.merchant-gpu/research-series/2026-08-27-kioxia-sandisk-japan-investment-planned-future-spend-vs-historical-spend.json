@@ -1,0 +1,23 @@
+{
+  "seriesName": "Kioxia-Sandisk Japan investment: planned future spend vs. historical spend",
+  "unit": "US$ billions",
+  "form": "bars",
+  "sourceName": "Kioxia Corporation",
+  "points": [
+    {
+      "label": "Invested in Japan over past 25 years",
+      "value": 50.0,
+      "sourceUrl": "https://www.kioxia.com/en-jp/about/news/2026/20260827-3.html",
+      "publishedAt": "2026-08-27"
+    },
+    {
+      "label": "Planned investment in Japan through 2032",
+      "value": 31.0,
+      "sourceUrl": "https://www.kioxia.com/en-jp/about/news/2026/20260827-3.html",
+      "publishedAt": "2026-08-27"
+    }
+  ],
+  "pair": true,
+  "notes": "Both figures are lower-bound ('over') numbers stated in the same Kioxia/Sandisk August 27, 2026 press release: over $50 billion invested in Japan over the past 25 years, versus over $31 billion planned through 2032 (contingent on government support). Useful context for the bullet's point that this new money is spread over roughly 6-7 years, not an immediate injection -- it is on the same order of magnitude as a quarter-century of prior spending, underscoring that relief, if it comes, arrives slowly. Both numbers came from the same single page, so the one-source rule is satisfied. Could not find a verifiable, non-hedged, single-source year-by-year capex breakdown or NAND price series that would support a longer point list; industry price-forecast figures found elsewhere (TrendForce, etc.) were hedged forecasts and/or from a banned publisher, so they were excluded per the rules.",
+  "bulletIndex": 2
+}

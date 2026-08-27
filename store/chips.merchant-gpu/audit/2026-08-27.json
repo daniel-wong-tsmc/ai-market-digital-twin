@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-08-27",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-1",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-3",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-4",
+        "www-marketbeat-com-01fd246e-2026-08-1",
+        "www-marketbeat-com-01fd246e-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "seekingalpha-com-042d1010-2026-08-1",
+        "seekingalpha-com-042d1010-2026-08-2",
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-05506162-2026-08-1",
+        "nvidianews-nvidia-com-05506162-2026-08-5",
+        "techcrunch-com-1c1bca81-2026-08-1",
+        "techcrunch-com-1c1bca81-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-thenews-com-pk-706f7e70-2026-08-1",
+        "www-runpod-io-dccdb718-2026-08-1",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-3",
+        "www-marketbeat-com-01fd246e-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "bullet:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-1",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "bullet:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "seekingalpha-com-042d1010-2026-08-1",
+        "seekingalpha-com-042d1010-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "bullet:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-05506162-2026-08-1",
+        "nvidianews-nvidia-com-05506162-2026-08-5"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-bottleneck",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-marketbeat-com-01fd246e-2026-08-1",
+        "www-marketbeat-com-01fd246e-2026-08-3",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-moat",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-05506162-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-stacked-memory-and-server-dram",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-marketbeat-com-01fd246e-2026-08-3",
+        "www-marketbeat-com-01fd246e-2026-08-1",
+        "seekingalpha-com-042d1010-2026-08-1",
+        "seekingalpha-com-042d1010-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-hbm4-memory-allocation-per-accelerator",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-marketbeat-com-01fd246e-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-1",
+        "nvidianews-nvidia-com-05506162-2026-08-1",
+        "247wallst-com-c9ca352c-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "supplyics-com-c83015c2-2026-08-2",
+        "www-trendforce-com-836f33fa-2026-08-1",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "supplyics-com-c83015c2-2026-08-3",
+        "www-forbes-com-7c91863a-2026-07-2"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-marketbeat-com-01fd246e-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-trendforce-com-01be0e4e-2026-08-1",
+        "qz-com-36c37a60-2026-08-1",
+        "www-faf-ae-6bcac1ba-2026-07-2",
+        "247wallst-com-db4b25b9-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "flagged",
+      "flaggedTokens": [
+        "44.7"
+      ],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "pr-tsmc-com-7f560c3b-2026-08-2",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+        "finance-biggo-com-cda170af-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:6",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "www-trendforce-com-b8196a71-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "impl:7",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-4ffdbfce-2026-08-1",
+        "investor-nvidia-com-7e5e6232-2026-08-1",
+        "www-digitimes-com-f25fa2c7-2026-08-1"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 19,
+    "flagged": 1,
+    "skipped": 0
+  }
+}

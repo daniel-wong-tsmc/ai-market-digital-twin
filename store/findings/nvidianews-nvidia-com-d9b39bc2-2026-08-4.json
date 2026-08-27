@@ -1,0 +1,42 @@
+{
+  "id": "nvidianews-nvidia-com-d9b39bc2-2026-08-4",
+  "statement": "NVIDIA assumes no Data Center compute revenue from China in its Q3 FY2027 outlook.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Zeroing out a large market removes a demand pool and shows policy risk already priced into the plan.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Excluding China compute revenue removes an addressable demand block from the forward outlook."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+      "date": "2026-08-26",
+      "excerpt": "NVIDIA is not assuming any Data Center compute revenue from China in its outlook.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: explicit statement in the company's results release."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend falling -> falling); sources: MarketBeat (Q2 FY2027 earnings call transcript excerpt), NVIDIA Newsroom",
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

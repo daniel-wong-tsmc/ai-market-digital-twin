@@ -1,0 +1,243 @@
+{
+  "headline": "The biggest seller can fill only seven orders in ten",
+  "deck": "NVIDIA's own numbers show record sales and a shrinking profit margin at the same time, because memory costs more than it expected. Fresh money for memory factories arrived today, but it is the wrong kind and it runs to 2032.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Record sales, and a margin bent by memory prices",
+      "paragraphs": [
+        "NVIDIA reported $89.0 billion of data center revenue for its second quarter on August 26, up 117 percent from a year earlier, and told investors to expect about $108.0 billion in the current quarter. On any ordinary reading that is a company selling everything it can make.",
+        "The telling detail sits next to it. NVIDIA guided its gross margin down to 74.0 percent. On the same call management said memory pricing has been extreme, worse than the company itself expected, and is set to rise again next year. So the market leader is paying more for the parts it cannot do without, and it is showing up in the profit on each machine.",
+        "Management also said plainly that it has supply for about 70 percent of demand and that the whole chain is running flat out. That single sentence is the answer to why supply is not catching up: it is not caution, and it is not lack of orders. The company also assumes no data center revenue from China at all in this outlook."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-1",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-3",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-4",
+        "www-marketbeat-com-01fd246e-2026-08-1",
+        "www-marketbeat-com-01fd246e-2026-08-3"
+      ],
+      "sourceLine": "NVIDIA's own second-quarter release of August 26 and the transcript of the same day's earnings call.",
+      "relatedDocs": [
+        {
+          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+          "title": "NVIDIA reports second-quarter results and guides to $108 billion",
+          "outlet": "NVIDIA Newsroom",
+          "date": "2026-08-26"
+        },
+        {
+          "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/",
+          "title": "Supply covers about 70 percent of demand, and memory prices are climbing",
+          "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+          "date": "2026-08-26"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "New money for memory, but not the memory that binds",
+      "paragraphs": [
+        "Today brought the first sizeable supply-side answer in a while. Kioxia and Sandisk said they will invest more than $31 billion in Japan through 2032, subject to government support, to expand flash memory output for AI demand at their shared Yokkaichi plant.",
+        "Two things temper that. The spend runs to 2032, so it does nothing for a machine anyone wants to build this year or next. And flash is not the stacked memory that sits beside the processor and decides how many accelerators actually ship.",
+        "On that stacked memory, nothing has loosened. Micron said on August 10 that it can supply no more than about half of what customers ask for, called memory the number one constraint its largest customers face, and said it has no line of sight to when supply meets demand."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "seekingalpha-com-042d1010-2026-08-1",
+        "seekingalpha-com-042d1010-2026-08-2",
+        "www-investing-com-87498f82-2026-08-1"
+      ],
+      "sourceLine": "Kioxia's own announcement and Seeking Alpha's report of it today, with Micron's August 10 remarks for the standing shortage.",
+      "relatedDocs": [
+        {
+          "url": "https://seekingalpha.com/news/4637427-kioxia-and-sandisk-to-invest-over-31b-in-japan?feed_item_type=news",
+          "title": "Kioxia and Sandisk to put over $31 billion into Japanese flash memory",
+          "outlet": "Seeking Alpha",
+          "date": "2026-08-27"
+        },
+        {
+          "url": "https://www.kioxia.com/en-jp/about/news/2026/20260827-3.html",
+          "title": "Kioxia announces a long-dated Japanese memory expansion",
+          "outlet": "Kioxia newsroom (official press release)",
+          "date": "2026-08-27"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Orders keep arriving in blocks nobody can quietly absorb",
+      "paragraphs": [
+        "Amazon Web Services said on August 26 it will deploy 2 million more NVIDIA accelerators across its sites in 2027 and 2028. That is one buyer, one announcement, and a number that dwarfs anything the memory chain is adding this decade.",
+        "The day before, Anthropic was reported to have committed roughly $45 billion over six years to Nscale for capacity built on NVIDIA systems. Model builders are still able to raise the money to buy compute well ahead of the revenue it will earn.",
+        "Both point at the same uncomfortable shape. Near-term demand sits with a small number of very large buyers, with a single cloud committing millions of units. That keeps the order book full, and it also means one of them changing its mind moves a very large block at once."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "nvidianews-nvidia-com-05506162-2026-08-1",
+        "nvidianews-nvidia-com-05506162-2026-08-5",
+        "techcrunch-com-1c1bca81-2026-08-1",
+        "techcrunch-com-1c1bca81-2026-08-3"
+      ],
+      "sourceLine": "NVIDIA's joint announcement with AWS and TechCrunch on Anthropic's compute deal, both from August 26.",
+      "relatedDocs": [
+        {
+          "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
+          "title": "AWS to take 2 million more NVIDIA accelerators in 2027 and 2028",
+          "outlet": "NVIDIA Newsroom",
+          "date": "2026-08-26"
+        },
+        {
+          "url": "https://techcrunch.com/2026/08/26/anthropic-continues-compute-gobbling-streak-in-45-billion-deal-with-nscale/",
+          "title": "Anthropic signs a $45 billion compute deal with Nscale",
+          "outlet": "TechCrunch",
+          "date": "2026-08-26"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "A new cost may be about to land on top of the memory bill. The Trump administration is reported today to be weighing sweeping tariffs on semiconductors and on tech products including data center servers. Nothing is confirmed, and no rate has been named, so treat it as a risk to watch rather than a fact to price.",
+        "Rental rates remain the quickest thermometer. Runpod listed its newest Blackwell part, the B300, at $7.89 per chip per hour today. If that number drifts down over the coming weeks, capacity has genuinely loosened; if it holds or climbs, the shortage is intact whatever gets announced.",
+        "The one figure that would settle the argument is NVIDIA's own margin. It has guided to 74.0 percent while saying memory prices will rise again next year. Watch whether that guide holds. If it slips further, the memory bill is winning; if it holds, the seller is passing the cost on."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-thenews-com-pk-706f7e70-2026-08-1",
+        "www-runpod-io-dccdb718-2026-08-1",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-3",
+        "www-marketbeat-com-01fd246e-2026-08-3"
+      ],
+      "sourceLine": "Today's tariff report, Runpod's rate card as captured today, and NVIDIA's own margin guidance.",
+      "relatedDocs": [
+        {
+          "url": "https://www.thenews.com.pk/latest/1413820-trump-administration-weighs-new-sweeping-tariffs-on-semiconductors-report",
+          "title": "Washington said to be weighing new tariffs on chips and servers",
+          "outlet": "The News (Pakistan), restating a Reuters/CNBC-sourced report",
+          "date": "2026-08-27"
+        },
+        {
+          "url": "https://www.runpod.io/pricing",
+          "title": "Runpod lists the B300 at $7.89 per chip per hour",
+          "outlet": "Runpod",
+          "date": "2026-08-27"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a chip costs to buy outright, the cleanest read on whether hardware is still scarce.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "How fast memory makers are raising factory spending, the one thing that eventually lifts the ceiling.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How many servers actually leave the factories, the test of whether these orders turn into machines.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "NVIDIA posted $89.0 billion of data center revenue, guided the next quarter to $108.0 billion, and guided its gross margin down to 74.0 percent on memory costs.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "Kioxia and Sandisk committed more than $31 billion to Japanese flash memory capacity through 2032, subject to government support.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "NVIDIA posted $89.0 billion of data center revenue, up 117 percent in a year, but guided its gross margin down to 74.0 percent on memory costs.",
+      "claimFindingIds": [
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-1",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-3"
+      ]
+    },
+    {
+      "text": "Kioxia and Sandisk will put over $31 billion into Japanese flash memory through 2032 if the government helps, so relief is years away and not the scarce kind.",
+      "claimFindingIds": [
+        "seekingalpha-com-042d1010-2026-08-1",
+        "seekingalpha-com-042d1010-2026-08-2"
+      ]
+    },
+    {
+      "text": "Amazon Web Services will deploy 2 million more NVIDIA accelerators in 2027 and 2028, showing demand still sits with a handful of very large buyers.",
+      "claimFindingIds": [
+        "nvidianews-nvidia-com-05506162-2026-08-1",
+        "nvidianews-nvidia-com-05506162-2026-08-5"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "NVIDIA said on its August 26 call that it has supply for only about 70 percent of demand and that memory pricing has been worse than it expected, with further rises next year. Its gross margin guide fell to 74.0 percent.",
+      "claimFindingIds": [
+        "www-marketbeat-com-01fd246e-2026-08-1",
+        "www-marketbeat-com-01fd246e-2026-08-3",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-3"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "unchanged",
+      "reasoning": "No new evidence today about rivals taking ground. The one large order in view runs the other way: AWS committed to 2 million more NVIDIA accelerators for 2027 and 2028.",
+      "claimFindingIds": [
+        "nvidianews-nvidia-com-05506162-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "worsened",
+      "reasoning": "The largest buyer of this memory now says prices went past its own expectations and will rise again next year, while it can still only supply about 70 percent of demand. Today's $31 billion Japanese commitment covers flash and runs to 2032.",
+      "claimFindingIds": [
+        "www-marketbeat-com-01fd246e-2026-08-3",
+        "www-marketbeat-com-01fd246e-2026-08-1",
+        "seekingalpha-com-042d1010-2026-08-1",
+        "seekingalpha-com-042d1010-2026-08-2"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today on how much stacked memory goes into each accelerator. NVIDIA repeated only that it can supply about 70 percent of demand with the chain running flat out.",
+      "claimFindingIds": [
+        "www-marketbeat-com-01fd246e-2026-08-1"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-08-27",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "eb6855d7dbe7bc4825635961ff044286450f0d5e316c8670d73510a1811d2a0d",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-08-27T13:18:42.357323+00:00"
+  }
+}

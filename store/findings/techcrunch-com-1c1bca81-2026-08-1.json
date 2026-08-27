@@ -1,0 +1,47 @@
+{
+  "id": "techcrunch-com-1c1bca81-2026-08-1",
+  "statement": "Anthropic is reported to have committed roughly $45 billion over six years to Nscale for compute built on NVIDIA Vera Rubin systems.",
+  "kind": "measured",
+  "value": {
+    "number": 45.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A single model lab committing this much money for next-generation NVIDIA systems is a large forward demand signal.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "A multi-year purchase commitment to a neocloud converts into orders for NVIDIA next-generation systems and the sites to house them."
+  },
+  "evidence": [
+    {
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/08/26/anthropic-continues-compute-gobbling-streak-in-45-billion-deal-with-nscale/",
+      "date": "2026-08-26",
+      "excerpt": "described as a \"$45 billion in AI compute\" commitment over \"six years\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Secondary reporting sourced to unnamed sources; neither party confirmed the deal on the record."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: NVIDIA Newsroom, TechCrunch",
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

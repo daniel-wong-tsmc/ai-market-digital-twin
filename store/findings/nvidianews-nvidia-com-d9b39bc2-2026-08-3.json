@@ -1,0 +1,46 @@
+{
+  "id": "nvidianews-nvidia-com-d9b39bc2-2026-08-3",
+  "statement": "NVIDIA guided Q3 FY2027 revenue to $108.0 billion plus or minus 2%, with gross margin guided down to 74.0%.",
+  "kind": "measured",
+  "value": {
+    "number": 108.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Guidance is the vendor's own forward demand read, and the margin step-down hints at rising input costs.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Higher guided revenue signals continuing demand, while a one-point margin decline points to more expensive memory and packaging inputs."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+      "date": "2026-08-26",
+      "excerpt": "revenue expected to be $108.0 billion, plus or minus 2%; GAAP and non-GAAP gross margins expected to be 74.0%, plus or minus 50 basis points",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: guidance stated in the company's results release."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: MarketBeat (Q2 FY2027 earnings call transcript excerpt), NVIDIA Newsroom",
+  "asOf": "2026-08",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "nvidianews-nvidia-com-05506162-2026-08-5",
+  "statement": "NVIDIA's near-term unit demand appears heavily concentrated in a small number of hyperscale buyers, with AWS alone committing millions of GPUs.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "Concentration cuts both ways: it lifts visibility now but makes revenue sensitive to one buyer's capex decision.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "If a handful of clouds account for most committed units, a single buyer pausing would remove a large share of demand at once."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
+      "date": "2026-08-26",
+      "excerpt": "This builds on a prior commitment",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": "The release describes one customer committing to millions of GPUs on top of an existing million-plus order. The document gives no share-of-revenue breakdown, so concentration is inferred from the size of a single named commitment rather than measured.",
+  "confidence": {
+    "level": "medium",
+    "basis": "Inference from one customer announcement; the document contains no customer-mix data."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

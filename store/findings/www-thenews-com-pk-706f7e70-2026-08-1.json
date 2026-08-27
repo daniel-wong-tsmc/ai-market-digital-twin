@@ -1,0 +1,45 @@
+{
+  "id": "www-thenews-com-pk-706f7e70-2026-08-1",
+  "statement": "The Trump administration is reported to be weighing sweeping new tariffs on semiconductors and on tech products including data-center servers, with no official confirmation.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Tariffs on servers and chips would raise the delivered cost of AI buildouts and could slow orders while buyers wait for clarity.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "chips.foundry-packaging",
+      "energy.electrical-equipment"
+    ],
+    "direction": "negative",
+    "mechanism": "Higher import duties on chips and servers raise buildout costs and inject policy uncertainty into purchase timing."
+  },
+  "evidence": [
+    {
+      "source": "The News (Pakistan), restating a Reuters/CNBC-sourced report",
+      "url": "https://www.thenews.com.pk/latest/1413820-trump-administration-weighs-new-sweeping-tariffs-on-semiconductors-report",
+      "date": "2026-08-27",
+      "excerpt": "The Trump administration is considering sweeping new tariffs targeting semiconductors and a broader range of tech products, including gaming consoles, laptops, and data-center servers equipped with chips.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Secondary restatement of another outlet's report; no official confirmation and the framework may change."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend flat -> unknown); sources: The News (Pakistan), restating a Reuters/CNBC-sourced report",
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

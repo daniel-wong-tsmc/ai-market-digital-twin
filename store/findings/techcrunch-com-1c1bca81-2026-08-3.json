@@ -1,0 +1,43 @@
+{
+  "id": "techcrunch-com-1c1bca81-2026-08-3",
+  "statement": "Anthropic's run of very large compute commitments in about eight months suggests model labs still have ample financing to buy accelerators ahead of revenue.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "If the marginal buyer of GPUs can keep raising money, demand holds up even before the compute earns its keep.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "Easy financing for model labs sustains forward orders that would otherwise wait on realised revenue."
+  },
+  "evidence": [
+    {
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/08/26/anthropic-continues-compute-gobbling-streak-in-45-billion-deal-with-nscale/",
+      "date": "2026-08-26",
+      "excerpt": "a $10 billion six-year deal with Volta (Norway data center), a $5 billion compute deal with AMD, a SpaceX arrangement providing \"$1.25 billion worth of capacity each month\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The article lists several multi-billion-dollar commitments by one lab within roughly eight months. The document states no financing terms, so the read on funding conditions is inferred from the pace and size of the commitments rather than observed directly.",
+  "confidence": {
+    "level": "medium",
+    "basis": "Inference from a list of reported deals in one secondary article; no financing data in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

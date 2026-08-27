@@ -1,0 +1,44 @@
+{
+  "id": "nvidianews-nvidia-com-05506162-2026-08-4",
+  "statement": "New AWS G7 instances are claimed to deliver 4.6x AI inference performance versus the previous generation, and vector indexing up to 9x faster at a quarter of the cost.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Falling cost per unit of useful work tends to expand the volume of work customers buy rather than shrink spending.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "models.reasoning-agentic",
+      "models.embeddings"
+    ],
+    "direction": "positive",
+    "mechanism": "Better performance per dollar lowers the price of inference and retrieval workloads, encouraging larger deployments."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
+      "date": "2026-08-26",
+      "excerpt": "vector indexing achieving 'up to 9x faster vector indexing at a quarter of the cost.'",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Primary source but vendor-selected benchmark claims with no stated baseline configuration."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "flopsPerDollar",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

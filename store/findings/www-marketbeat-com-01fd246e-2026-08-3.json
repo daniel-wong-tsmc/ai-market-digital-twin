@@ -1,0 +1,43 @@
+{
+  "id": "www-marketbeat-com-01fd246e-2026-08-3",
+  "statement": "NVIDIA reports extreme memory pricing conditions that exceeded its expectations and are expected to rise further next year.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Memory is the biggest bought-in cost in an accelerator, so this squeezes margins and signals a tight HBM market.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.ai-storage"
+    ],
+    "direction": "negative",
+    "mechanism": "Sharply higher memory prices indicate memory supply is short relative to accelerator build plans, raising system cost."
+  },
+  "evidence": [
+    {
+      "source": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+      "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/",
+      "date": "2026-08-26",
+      "excerpt": "We are experiencing extreme pricing conditions in memory. The magnitude of the price increase has exceeded our prior expectations and are headed even higher into next year.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary transcript aggregator; single source, no corroborating memory-vendor filing fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

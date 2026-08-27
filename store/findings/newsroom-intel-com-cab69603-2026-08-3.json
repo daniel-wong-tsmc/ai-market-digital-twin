@@ -1,0 +1,42 @@
+{
+  "id": "newsroom-intel-com-cab69603-2026-08-3",
+  "statement": "Intel says some customers now approach it first for advanced packaging, with no customers named.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Customers leading with a packaging request rather than a wafer request suggests packaging, not lithography, is the scarce step.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Inbound demand for packaging slots signals tight industry packaging capacity and pulls work toward a second supplier."
+  },
+  "evidence": [
+    {
+      "source": "Intel Newsroom",
+      "url": "https://newsroom.intel.com/intel-foundry/intels-us-advanced-packaging-enables-next-generation-ai-semiconductors",
+      "date": "2026-07-29",
+      "excerpt": "Some of the customers are coming to us first for advanced packaging.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Unnamed customers, a single quoted employee, secondary vendor source."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-07-29",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

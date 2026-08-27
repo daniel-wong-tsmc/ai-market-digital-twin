@@ -1,18 +1,19 @@
 {
- "asOf": "2026-08-26",
+ "asOf": "2026-08-27",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 7,
+   "checkCount": 8,
    "id": "dim-bottleneck",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-26",
+    "assessedAsOf": "2026-08-27",
     "claimFindingIds": [
-     "zdnet-co-kr-1640e7a5-2026-08-1",
-     "www-trendforce-com-01be0e4e-2026-08-2"
+     "www-marketbeat-com-01fd246e-2026-08-1",
+     "www-marketbeat-com-01fd246e-2026-08-3",
+     "nvidianews-nvidia-com-d9b39bc2-2026-08-3"
     ],
-    "reasoning": "Samsung and SK Hynix are cutting 12-high stack output for NVIDIA this half and making 8-high the main build, so each machine carries less memory. OpenAI's new Jalapeno chip adds another claimant on the same short HBM4 supply.",
+    "reasoning": "NVIDIA said on its August 26 call that it has supply for only about 70 percent of demand and that memory pricing has been worse than it expected, with further rises next year. Its gross margin guide fell to 74.0 percent.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -24,20 +25,19 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 5
+   "worsenedCount": 6
   },
   {
-   "checkCount": 7,
+   "checkCount": 8,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-26",
+    "assessedAsOf": "2026-08-27",
     "claimFindingIds": [
-     "www-trendforce-com-01be0e4e-2026-08-1",
-     "www-trendforce-com-01be0e4e-2026-08-2"
+     "nvidianews-nvidia-com-05506162-2026-08-1"
     ],
-    "reasoning": "OpenAI unveiled Jalapeno, its first inference chip of its own, built on TSMC 3nm with Broadcom. A large buyer designing its own part is one less buyer competing for merchant GPUs.",
-    "status": "worsened"
+    "reasoning": "No new evidence today about rivals taking ground. The one large order in view runs the other way: AWS committed to 2 million more NVIDIA accelerators for 2027 and 2028.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -51,16 +51,17 @@
    "worsenedCount": 4
   },
   {
-   "checkCount": 6,
+   "checkCount": 7,
    "id": "constraint-stacked-memory-and-server-dram",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-26",
+    "assessedAsOf": "2026-08-27",
     "claimFindingIds": [
-     "zdnet-co-kr-1640e7a5-2026-08-1",
-     "www-trendforce-com-01be0e4e-2026-08-2"
+     "www-marketbeat-com-01fd246e-2026-08-3",
+     "www-marketbeat-com-01fd246e-2026-08-1",
+     "seekingalpha-com-042d1010-2026-08-2"
     ],
-    "reasoning": "The Korean makers are cutting 12-high output in the second half of this year, and OpenAI's Jalapeno adds a fresh claimant on HBM4 in a market already described as constrained.",
+    "reasoning": "The largest buyer of this memory now says prices went past its own expectations and will rise again next year, while it can still only supply about 70 percent of demand. Today's $31 billion Japanese commitment covers flash and runs to 2032.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -72,29 +73,28 @@
     "kind": "binding-constraint",
     "label": "HBM4 and server DRAM supply"
    },
-   "worsenedCount": 2
+   "worsenedCount": 3
   },
   {
-   "checkCount": 4,
+   "checkCount": 5,
    "id": "constraint-hbm4-memory-allocation-per-accelerator",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-26",
+    "assessedAsOf": "2026-08-27",
     "claimFindingIds": [
-     "zdnet-co-kr-1640e7a5-2026-08-1",
-     "en-sedaily-com-b1c000ac-2026-08-2"
+     "www-marketbeat-com-01fd246e-2026-08-1"
     ],
-    "reasoning": "Making 8-high the main build for NVIDIA settles the question in the direction of less memory per machine, on top of Rubin Ultra already being tested at 192GB against a planned 1TB.",
-    "status": "worsened"
+    "reasoning": "No new evidence arrived today on how much stacked memory goes into each accelerator. NVIDIA repeated only that it can supply about 70 percent of demand with the chain running flat out.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "HBM4 stacked-memory allocation",
+   "title": "HBM4 stacked memory supply",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "HBM4 stacked-memory allocation"
+    "label": "HBM4 stacked memory supply"
    },
    "worsenedCount": 1
   }

@@ -1,0 +1,53 @@
+{
+  "id": "seekingalpha-com-042d1010-2026-08-1",
+  "statement": "Kioxia and Sandisk plan to invest over $31 billion in Japan through 2032, contingent upon government support.",
+  "kind": "measured",
+  "value": {
+    "number": 31.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A large multi-year memory capex plan is a forward read on how much storage supply arrives later this decade.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "infrastructure.ai-storage",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed memory capex expands future flash bit supply, easing the storage side of AI buildouts if the government support arrives."
+  },
+  "evidence": [
+    {
+      "source": "Seeking Alpha",
+      "url": "https://seekingalpha.com/news/4637427-kioxia-and-sandisk-to-invest-over-31b-in-japan?feed_item_type=news",
+      "date": "2026-08-27",
+      "excerpt": "Kioxia Corporation and Sandisk announced plans to invest \"over $31 billion\" (stated as approximately 5 trillion yen) in Japan, with the investment period running \"through 2032\"",
+      "tier": "secondary"
+    },
+    {
+      "source": "Kioxia newsroom (official press release)",
+      "url": "https://www.kioxia.com/en-jp/about/news/2026/20260827-3.html",
+      "date": "2026-08-27",
+      "excerpt": "The investment will support 'the ongoing buildout of infrastructure at the Yokkaichi Plant and the Kitakami Plant, along with related infrastructure, technology.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet restating a company announcement; the fetched text was truncated on what the money funds."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

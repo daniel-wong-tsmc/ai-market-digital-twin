@@ -1,0 +1,43 @@
+{
+  "id": "seekingalpha-com-042d1010-2026-08-2",
+  "statement": "The Kioxia-Sandisk spend is tied to expanding NAND flash capacity for AI-driven demand, building on their Yokkaichi joint venture.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "It shows AI demand pulling investment into flash storage, not only into GPUs and high-bandwidth memory.",
+  "impact": {
+    "targets": [
+      "infrastructure.ai-storage",
+      "infrastructure.datacenter-colo",
+      "chips.hbm-memory"
+    ],
+    "direction": "positive",
+    "mechanism": "More NAND capacity supports the storage tier that AI clusters need alongside accelerators."
+  },
+  "evidence": [
+    {
+      "source": "Seeking Alpha",
+      "url": "https://seekingalpha.com/news/4637427-kioxia-and-sandisk-to-invest-over-31b-in-japan?feed_item_type=news",
+      "date": "2026-08-27",
+      "excerpt": "The purpose is tied to expanding flash memory / NAND production capacity to support AI-driven demand",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary source only, and the article text was truncated mid-sentence on the specifics."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: Seeking Alpha, The News (Pakistan), restating a Reuters/CNBC-sourced report",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

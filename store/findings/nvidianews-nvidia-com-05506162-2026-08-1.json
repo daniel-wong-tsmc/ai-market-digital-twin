@@ -1,0 +1,45 @@
+{
+  "id": "nvidianews-nvidia-com-05506162-2026-08-1",
+  "statement": "AWS plans to deploy 2 million additional NVIDIA Blackwell Ultra, Rubin and Rubin Ultra GPUs across its global infrastructure in 2027-2028.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named multi-year unit commitment from the largest cloud buyer is the clearest forward read on merchant-GPU demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "chips.hbm-memory",
+      "chips.networking-silicon",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed hyperscaler unit volume pulls through GPU, HBM, packaging and fabric orders across the 2027-2028 window."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
+      "date": "2026-08-26",
+      "excerpt": "AWS plans to deploy 2 million additional NVIDIA GPUs across its global infrastructure in 2027-2028",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary joint announcement from the vendor's own newsroom naming the customer, products and window."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: NVIDIA Newsroom, TechCrunch",
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

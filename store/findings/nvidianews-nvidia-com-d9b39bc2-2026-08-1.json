@@ -1,0 +1,47 @@
+{
+  "id": "nvidianews-nvidia-com-d9b39bc2-2026-08-1",
+  "statement": "NVIDIA Data Center revenue was $89.0 billion in Q2 FY2027, up 18% sequentially and 117% year over year.",
+  "kind": "measured",
+  "value": {
+    "number": 89.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Data Center revenue is the direct scoreboard for merchant-GPU demand actually converting into shipments.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Realised data-center revenue at this scale confirms sustained pull-through of accelerators, memory and packaging."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+      "date": "2026-08-26",
+      "excerpt": "second-quarter revenue was $89.0 billion, up 18% from the previous quarter and up 117% from a year ago",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: the company's own quarterly results release."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

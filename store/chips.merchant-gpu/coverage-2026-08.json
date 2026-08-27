@@ -2,11 +2,19 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-08",
-  "capturedAt": "2026-08-26T12:01:19Z",
+  "capturedAt": "2026-08-27T12:44:02Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
   "gaps": [
+    {
+      "type": "source",
+      "id": "nvda-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
+      "paywalledNote": null
+    },
     {
       "type": "source",
       "id": "amd-earnings",
@@ -21,14 +29,6 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Intel earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['intc.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "lambda-gpu-pricing",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
       "paywalledNote": null
     },
     {
@@ -57,14 +57,6 @@
     },
     {
       "type": "source",
-      "id": "open-web-asic",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Open-web reporting on hyperscaler custom ASICs (competitive alternatives)' was not fetched. URL patterns: ['blog.google', 'aws.amazon.com/machine-learning', 'techcrunch.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "channel-checks",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -85,14 +77,6 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'NVIDIA 10-K risk factor section (geopolitical / export control exposure)' was not fetched. URL patterns: ['investor.nvidia.com/annual-reports', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "vendor-pr-trade-press",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Vendor press releases + trade press on merchant-GPU design wins' was not fetched. URL patterns: ['nvidianews.nvidia.com', 'ir.amd.com/news-events', 'tomshardware.com', 'semianalysis.com']",
       "paywalledNote": null
     },
     {
@@ -121,14 +105,6 @@
     },
     {
       "type": "source",
-      "id": "frontier-release-funding",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Frontier model release and funding trackers (company newsrooms + industry press)' was not fetched. URL patterns: ['openai.com', 'anthropic.com', 'blog.google', 'techcrunch.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "upstream-component-leadtimes",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -137,25 +113,26 @@
     }
   ],
   "gapCounts": {
-    "total": 16,
-    "source": 16,
+    "total": 13,
+    "source": 13,
     "indicator": 0,
-    "required": 16,
+    "required": 13,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://finance.yahoo.com/technology/ai/articles/ai-cloud-provider-lambda-in-talks-for-3-billion-pre-ipo-round-234205946.html",
-    "https://investor.nvidia.com/financial-info/financial-reports/",
-    "https://lambda.ai/service/gpu-cloud",
-    "https://newsroom.intel.com/client-computing/intel-outlines-architectures-for-agentic-ai-at-hot-chips-2026",
-    "https://www.prnewswire.com/news-releases/lancium-announces-partnership-with-nvidia-to-advance-gigawatt-scale-ai-factory-development-across-its-15-gw-portfolio-302858393.html",
-    "https://www.taipeitimes.com/News/biz/archives/2026/08/26/2003863126",
-    "https://www.trendforce.com/news/2026/05/11/news-sk-hynix-reportedly-tests-intel-emib-2-5d-packaging-with-hbm-amid-tsmc-cowos-tightness/",
-    "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/",
-    "https://zdnet.co.kr/view/?no=20260826094826"
+    "https://newsroom.intel.com/intel-foundry/intels-us-advanced-packaging-enables-next-generation-ai-semiconductors",
+    "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
+    "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+    "https://seekingalpha.com/news/4637427-kioxia-and-sandisk-to-invest-over-31b-in-japan?feed_item_type=news",
+    "https://techcrunch.com/2026/08/26/anthropic-continues-compute-gobbling-streak-in-45-billion-deal-with-nscale/",
+    "https://www.kioxia.com/en-jp/about/news/2026/20260827-3.html",
+    "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/",
+    "https://www.runpod.io/pricing",
+    "https://www.servethehome.com/sk-hynix-hbm-packaging-at-hot-chips-2026/",
+    "https://www.thenews.com.pk/latest/1413820-trump-administration-weighs-new-sweeping-tariffs-on-semiconductors-report"
   ],
   "judgedIndicatorIds": [
     "D2",

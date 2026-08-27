@@ -1,47 +1,114 @@
 {
-  "asOf": "2026-08-26",
+  "asOf": "2026-08-27",
   "bullets": [
     {
-      "chart": null,
-      "date": "2026-08-26",
-      "noChartReason": {
-        "cause": "estimate-only",
-        "reason": "The number we track for this is our own estimate, not a published figure, so we don't draw it."
+      "chart": {
+        "caption": "Found today — single source: NVIDIA Newsroom (nvidianews.nvidia.com press releases).",
+        "form": "columns",
+        "points": [
+          {
+            "hollow": false,
+            "label": "Q2 FY2026 (quarter ended Jul 27, 2025)",
+            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2026",
+            "value": 41.1
+          },
+          {
+            "hollow": false,
+            "label": "Q4 FY2026 (quarter ended Jan 25, 2026)",
+            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+            "value": 62.3
+          },
+          {
+            "hollow": false,
+            "label": "Q1 FY2027 (quarter ended Apr 26, 2026)",
+            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027",
+            "value": 75.2
+          },
+          {
+            "hollow": false,
+            "label": "Q2 FY2027 (quarter ended Aug 24, 2026)",
+            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+            "value": 89.0
+          }
+        ],
+        "researched": true,
+        "source": {
+          "date": "2026-08-26",
+          "outlet": "NVIDIA Newsroom (nvidianews.nvidia.com press releases)",
+          "tier": "secondary",
+          "title": "NVIDIA Data Center segment revenue by quarter",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
+        },
+        "title": "NVIDIA Data Center segment revenue by quarter",
+        "unit": "US$ billions"
       },
+      "date": "2026-08-27",
+      "noChartReason": null,
       "sources": [
         {
           "date": "2026-08-26",
-          "outlet": "ZDNet Korea",
-          "tier": "secondary",
-          "title": "ZDNet Korea",
-          "url": "https://zdnet.co.kr/view/?no=20260826094826"
+          "outlet": "NVIDIA Newsroom",
+          "tier": "primary",
+          "title": "NVIDIA Newsroom",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
         }
       ],
-      "storyHref": "story/2026-08-26.html",
-      "text": "Samsung and SK Hynix are cutting the taller 12-high memory stacks for NVIDIA this half and making 8-high the standard, so each machine gets less memory."
+      "storyHref": "story/2026-08-27.html",
+      "text": "NVIDIA posted $89.0 billion of data center revenue, up 117 percent in a year, but guided its gross margin down to 74.0 percent on memory costs."
     },
     {
-      "chart": null,
-      "date": "2026-08-26",
-      "noChartReason": {
-        "cause": "estimate-only",
-        "reason": "The number we track for this is our own estimate, not a published figure, so we don't draw it."
+      "chart": {
+        "caption": "Found today — single source: Kioxia Corporation.",
+        "form": "bars",
+        "points": [
+          {
+            "hollow": false,
+            "label": "Invested in Japan over past 25 years",
+            "sourceUrl": "https://www.kioxia.com/en-jp/about/news/2026/20260827-3.html",
+            "value": 50.0
+          },
+          {
+            "hollow": false,
+            "label": "Planned investment in Japan through 2032",
+            "sourceUrl": "https://www.kioxia.com/en-jp/about/news/2026/20260827-3.html",
+            "value": 31.0
+          }
+        ],
+        "researched": true,
+        "source": {
+          "date": "2026-08-27",
+          "outlet": "Kioxia Corporation",
+          "tier": "secondary",
+          "title": "Kioxia-Sandisk Japan investment: planned future spend vs. historical spend",
+          "url": "https://www.kioxia.com/en-jp/about/news/2026/20260827-3.html"
+        },
+        "title": "Kioxia-Sandisk Japan investment: planned future spend vs. historical spend",
+        "unit": "US$ billions"
       },
+      "date": "2026-08-27",
+      "noChartReason": null,
       "sources": [
         {
-          "date": "2026-08-26",
-          "outlet": "TrendForce",
+          "date": "2026-08-27",
+          "outlet": "Seeking Alpha",
           "tier": "secondary",
-          "title": "TrendForce",
-          "url": "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/"
+          "title": "Seeking Alpha",
+          "url": "https://seekingalpha.com/news/4637427-kioxia-and-sandisk-to-invest-over-31b-in-japan?feed_item_type=news"
+        },
+        {
+          "date": "2026-08-27",
+          "outlet": "Kioxia newsroom (official press release)",
+          "tier": "secondary",
+          "title": "Kioxia newsroom (official press release)",
+          "url": "https://www.kioxia.com/en-jp/about/news/2026/20260827-3.html"
         }
       ],
-      "storyHref": "story/2026-08-26.html",
-      "text": "OpenAI unveiled Jalapeno, its own inference chip on a 3nm process with Broadcom, carrying six stacks of the same scarce HBM4 memory NVIDIA needs."
+      "storyHref": "story/2026-08-27.html",
+      "text": "Kioxia and Sandisk will put over $31 billion into Japanese flash memory through 2032 if the government helps, so relief is years away and not the scarce kind."
     },
     {
       "chart": null,
-      "date": "2026-08-26",
+      "date": "2026-08-27",
       "noChartReason": {
         "cause": "no-published-number",
         "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
@@ -49,14 +116,14 @@
       "sources": [
         {
           "date": "2026-08-26",
-          "outlet": "Taipei Times",
-          "tier": "secondary",
-          "title": "Taipei Times",
-          "url": "https://www.taipeitimes.com/News/biz/archives/2026/08/26/2003863126"
+          "outlet": "NVIDIA Newsroom",
+          "tier": "primary",
+          "title": "NVIDIA Newsroom",
+          "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai"
         }
       ],
-      "storyHref": "story/2026-08-26.html",
-      "text": "AM Intelligence placed a binding order for 9,000 NVIDIA Vera Rubin systems in Hyderabad, part of a US$8 billion plan for one gigawatt of capacity."
+      "storyHref": "story/2026-08-27.html",
+      "text": "Amazon Web Services will deploy 2 million more NVIDIA accelerators in 2027 and 2028, showing demand still sits with a handful of very large buyers."
     }
   ],
   "categoryId": "chips.merchant-gpu",
@@ -65,6 +132,13 @@
       "confidence": "Medium — the underlying reports are single-source in places.",
       "direction": "worsening",
       "evidence": [
+        {
+          "date": "2026-08-26",
+          "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+          "tier": "secondary",
+          "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+          "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
+        },
         {
           "date": "2026-08-07",
           "outlet": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
@@ -78,20 +152,13 @@
           "tier": "secondary",
           "title": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
           "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994"
-        },
-        {
-          "date": "2026-08-04",
-          "outlet": "404K Semi-Ai Research (Substack)",
-          "tier": "secondary",
-          "title": "404K Semi-Ai Research (Substack)",
-          "url": "https://404kresearch.substack.com/p/rubin-ultra-hbm-capacity-cut-to-192gb"
         }
       ],
       "id": "bottleneck",
       "plainName": "What is holding shipments back",
       "ratingWord": "Weak",
-      "reasoning": "Advanced packaging is easing, with the shortfall narrowing from about 20 percent to about 10 percent, which leaves stacked memory as the tighter limit on shipments.",
-      "summary": "Memory suppliers can cover only 60 to 70 percent of the volume NVIDIA requested for Rubin Ultra, Micron says it can meet about half of customer demand with no line of sight to balance, and NVIDIA is cutting memory per accelerator to raise unit output from a fixed pool.",
+      "reasoning": "Packaging tightness eased to roughly a 10% shortfall, which leaves memory as the limit that now forces smaller memory configurations on the next flagship.",
+      "summary": "Nvidia says it can supply only about 70% of demand, its memory partners can fill just 60-70% of the requested stacked-memory volume, and Micron can cover barely half of what customers ask for.",
       "tone": "bad"
     },
     {
@@ -99,11 +166,11 @@
       "direction": "improving",
       "evidence": [
         {
-          "date": "2026-05-20",
-          "outlet": "NVIDIA Newsroom (official press release)",
+          "date": "2026-08-26",
+          "outlet": "NVIDIA Newsroom",
           "tier": "primary",
-          "title": "NVIDIA Newsroom (official press release)",
-          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
+          "title": "NVIDIA Newsroom",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
         },
         {
           "date": "2026-08-04",
@@ -113,18 +180,18 @@
           "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
         },
         {
-          "date": "2026-07-22",
-          "outlet": "Yahoo Finance (Tech)",
+          "date": "2026-08-26",
+          "outlet": "TechCrunch",
           "tier": "secondary",
-          "title": "Yahoo Finance (Tech)",
-          "url": "https://finance.yahoo.com/sectors/technology/articles/google-microsoft-meta-amazon-capex-131823436.html"
+          "title": "TechCrunch",
+          "url": "https://techcrunch.com/2026/08/26/anthropic-continues-compute-gobbling-streak-in-45-billion-deal-with-nscale/"
         }
       ],
       "id": "momentum",
       "plainName": "How hard buyers are buying",
       "ratingWord": "Very strong",
-      "reasoning": "NVIDIA posted record data-center revenue of $75.2 billion, up 92 percent, while AMD's data-center segment more than doubled to $6.7 billion and AMD guided the next quarter to about $13 billion, so the pull spans more than one vendor.",
-      "summary": "The four largest US cloud buyers plan about $725 billion of 2026 capital spending, up 77 percent, and UBS sees roughly $4.1 trillion of AI infrastructure spending across 2026 to 2028.",
+      "reasoning": "A model builder committed roughly $45 billion over six years for accelerator capacity, so the order book keeps building.",
+      "summary": "The leading vendor posted $89.0 billion of data center revenue, up 117 percent year over year, and guided the next quarter to $108 billion, while the second source more than doubled its own data center revenue.",
       "tone": "good"
     },
     {
@@ -139,25 +206,25 @@
           "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
         },
         {
-          "date": "2026-07-23",
-          "outlet": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+          "date": "2026-08-26",
+          "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
           "tier": "secondary",
-          "title": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
-          "url": "https://www.servethehome.com/amd-advancing-ai-2026-keynote-live-coverage/"
+          "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+          "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
         },
         {
-          "date": "2026-08-04",
-          "outlet": "GCN (Government Computer News)",
+          "date": "2026-08-26",
+          "outlet": "TrendForce",
           "tier": "secondary",
-          "title": "GCN (Government Computer News)",
-          "url": "https://gcn.com/nvidia-vera-rubin-chips-begin-shipping/20421/"
+          "title": "TrendForce",
+          "url": "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/"
         }
       ],
       "id": "competitiveStructure",
       "plainName": "Whether buyers have a second choice",
       "ratingWord": "Mixed",
-      "reasoning": "Cerebras started shipping a wafer-scale rack and MediaTek moved a second accelerator onto Intel packaging, so credible non-NVIDIA supply keeps arriving even as Vera Rubin ships in volume.",
-      "summary": "AMD put its Helios rack into production with Anthropic committing up to 2 gigawatts, and OpenAI unveiled its own inference chip built with Broadcom on a 3nm process.",
+      "reasoning": "A cloud buyer also expanded a custom-silicon agreement worth up to roughly $120 billion, so buyers keep adding routes around the merchant part.",
+      "summary": "A credible second source now ships rack-scale systems with a two-gigawatt anchor customer, and a large model builder unveiled its own inference chip on a 3nm process.",
       "tone": "mixed"
     },
     {
@@ -165,11 +232,11 @@
       "direction": "worsening",
       "evidence": [
         {
-          "date": "2026-07-24",
-          "outlet": "Silicon Analysts",
+          "date": "2026-08-05",
+          "outlet": "Yahoo Finance",
           "tier": "secondary",
-          "title": "Silicon Analysts",
-          "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026"
+          "title": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html"
         },
         {
           "date": "2026-05-21",
@@ -189,8 +256,8 @@
       "id": "moat",
       "plainName": "How safe NVIDIA's lead looks",
       "ratingWord": "Weak",
-      "reasoning": "Custom silicon from the large cloud buyers already consumes roughly two-thirds of AI compute, and Anthropic has opened talks with Samsung about a chip of its own.",
-      "summary": "NVIDIA's accelerator share is projected to fall from a 2024 peak of 87 percent to 75 percent in 2026, with custom chip shipments growing 44.6 percent against 16.1 percent for merchant parts.",
+      "reasoning": "A design house raised its own share target to 15 to 20 percent, so the defensible ground keeps shrinking.",
+      "summary": "The leader still holds roughly 70 to 90 percent of accelerator sales, but custom chips already consume about two-thirds of all compute and are growing 44.6 percent against 16.1 percent for merchant parts.",
       "tone": "bad"
     },
     {
@@ -222,8 +289,8 @@
       "id": "unitEconomics",
       "plainName": "How profitable the sellers are",
       "ratingWord": "Strong",
-      "reasoning": "AMD reached 54 percent on a reported basis and Intel climbed to 41.8 percent, so vendors are passing rising memory costs through rather than eating them.",
-      "summary": "NVIDIA held a 75.0 percent non-GAAP gross margin and guided the next quarter to the same level, and TSMC reported 67.7 percent.",
+      "reasoning": "Accelerator revenue still earns slightly less than the corporate average at the challenger, which caps how far this can improve.",
+      "summary": "Vendors are holding premium margins as they ramp new parts: 75 percent at the market leader, 54 percent at the challenger versus 40 percent a year earlier, and 67.7 percent at the foundry.",
       "tone": "good"
     },
     {
@@ -231,32 +298,32 @@
       "direction": "worsening",
       "evidence": [
         {
-          "date": "2026-05-21",
-          "outlet": "NVIDIA Form 10-Q Q1 FY2027",
+          "date": "2026-08-17",
+          "outlet": "NVIDIA Newsroom",
           "tier": "primary",
-          "title": "NVIDIA Form 10-Q Q1 FY2027",
-          "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000052/nvda-20260426.htm"
+          "title": "NVIDIA Newsroom",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute"
         },
         {
-          "date": "2026-08-10",
-          "outlet": "NVIDIA Newsroom / investor.nvidia.com (official press release)",
+          "date": "2026-08-05",
+          "outlet": "AMD Investor Relations (SEC Form 10-Q)",
           "tier": "primary",
-          "title": "NVIDIA Newsroom / investor.nvidia.com (official press release)",
-          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Partners-With-Apollo-BlackRock-Blackstone-Brookfield-Goldman-Sachs-and-KKR-to-Establish-AI-Compute-Infrastructure-Financing-Platforms-to-Mobilize-Over-500-Billion-of-Third-Party-Capital/default.aspx"
+          "title": "AMD Investor Relations (SEC Form 10-Q)",
+          "url": "https://ir.amd.com/financial-information/sec-filings/content/0000002488-26-000123/amd-20260627.htm"
         },
         {
-          "date": "2026-08-15",
-          "outlet": "Yahoo Finance (Reuters)",
-          "tier": "secondary",
-          "title": "Yahoo Finance (Reuters)",
-          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-scales-back-250-billion-234356524.html"
+          "date": "2026-08-26",
+          "outlet": "NVIDIA Newsroom",
+          "tier": "primary",
+          "title": "NVIDIA Newsroom",
+          "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai"
         }
       ],
       "id": "strategicRisk",
       "plainName": "What could go wrong",
       "ratingWord": "Mixed",
-      "reasoning": "NVIDIA cut its Ohio guarantee from $250 billion to under $120 billion, a real reduction that still leaves the largest single block of demand resting on an unprofitable customer seeking more than $500 billion of third-party funding.",
-      "summary": "Three direct NVIDIA customers account for 21, 17 and 16 percent of revenue, and NVIDIA has signed agreements with six asset managers to mobilize over $500 billion of outside capital for its own buyers.",
+      "reasoning": "Demand sits with a handful of names, China data center revenue is assumed at zero, and prosecutors indicted nine people over diverted servers.",
+      "summary": "Sellers are underwriting their own buyers, signing agreements to mobilise over $500 billion of outside capital, and the leader cut one guarantee from $250 billion to under $120 billion, which shows how movable that support is.",
       "tone": "mixed"
     }
   ],
@@ -321,8 +388,8 @@
       },
       {
         "date": "2026-08-01",
-        "demand": 3.8866666666666685,
-        "supply": -0.21333333333333337
+        "demand": 3.9933333333333354,
+        "supply": -0.05333333333333333
       }
     ],
     "sources": [
@@ -330,11 +397,11 @@
         "assessment": true,
         "basedOn": [
           {
-            "date": "2026-05-20",
-            "outlet": "NVIDIA Newsroom (official press release)",
+            "date": "2026-08-26",
+            "outlet": "NVIDIA Newsroom",
             "tier": "primary",
-            "title": "NVIDIA Newsroom (official press release)",
-            "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
+            "title": "NVIDIA Newsroom",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
           },
           {
             "date": "2026-08-04",
@@ -357,8 +424,8 @@
   "issues": {
     "open": [
       {
-        "assessedAsOf": "2026-08-26",
-        "checkCount": 7,
+        "assessedAsOf": "2026-08-27",
+        "checkCount": 8,
         "history": [
           {
             "asOf": "2026-08-19",
@@ -387,34 +454,38 @@
           {
             "asOf": "2026-08-26",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-08-27",
+            "status": "worsened"
           }
         ],
         "id": "dim-bottleneck",
-        "reasoning": "Samsung and SK Hynix are cutting 12-high stack output for NVIDIA this half and making 8-high the main build, so each machine carries less memory. OpenAI's new Jalapeno chip adds another claimant on the same short HBM4 supply.",
+        "reasoning": "NVIDIA said on its August 26 call that it has supply for only about 70 percent of demand and that memory pricing has been worse than it expected, with further rises next year. Its gross margin guide fell to 74.0 percent.",
         "sources": [
           {
             "date": "2026-08-26",
-            "outlet": "ZDNet Korea",
-            "tier": "secondary",
-            "title": "ZDNet Korea",
-            "url": "https://zdnet.co.kr/view/?no=20260826094826"
+            "outlet": "NVIDIA Newsroom",
+            "tier": "primary",
+            "title": "NVIDIA Newsroom",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
           },
           {
             "date": "2026-08-26",
-            "outlet": "TrendForce",
+            "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
             "tier": "secondary",
-            "title": "TrendForce",
-            "url": "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/"
+            "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+            "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
           }
         ],
         "status": "worsened",
         "title": "Bottleneck",
         "trackedSince": "2026-08",
-        "worsenedCount": 5
+        "worsenedCount": 6
       },
       {
-        "assessedAsOf": "2026-08-26",
-        "checkCount": 7,
+        "assessedAsOf": "2026-08-27",
+        "checkCount": 8,
         "history": [
           {
             "asOf": "2026-08-19",
@@ -443,27 +514,31 @@
           {
             "asOf": "2026-08-26",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-08-27",
+            "status": "unchanged"
           }
         ],
         "id": "dim-moat",
-        "reasoning": "OpenAI unveiled Jalapeno, its first inference chip of its own, built on TSMC 3nm with Broadcom. A large buyer designing its own part is one less buyer competing for merchant GPUs.",
+        "reasoning": "No new evidence today about rivals taking ground. The one large order in view runs the other way: AWS committed to 2 million more NVIDIA accelerators for 2027 and 2028.",
         "sources": [
           {
             "date": "2026-08-26",
-            "outlet": "TrendForce",
-            "tier": "secondary",
-            "title": "TrendForce",
-            "url": "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/"
+            "outlet": "NVIDIA Newsroom",
+            "tier": "primary",
+            "title": "NVIDIA Newsroom",
+            "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai"
           }
         ],
-        "status": "worsened",
+        "status": "unchanged",
         "title": "Moat",
         "trackedSince": "2026-08",
         "worsenedCount": 4
       },
       {
-        "assessedAsOf": "2026-08-26",
-        "checkCount": 6,
+        "assessedAsOf": "2026-08-27",
+        "checkCount": 7,
         "history": [
           {
             "asOf": "2026-08-21",
@@ -488,34 +563,38 @@
           {
             "asOf": "2026-08-26",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-08-27",
+            "status": "worsened"
           }
         ],
         "id": "constraint-stacked-memory-and-server-dram",
-        "reasoning": "The Korean makers are cutting 12-high output in the second half of this year, and OpenAI's Jalapeno adds a fresh claimant on HBM4 in a market already described as constrained.",
+        "reasoning": "The largest buyer of this memory now says prices went past its own expectations and will rise again next year, while it can still only supply about 70 percent of demand. Today's $31 billion Japanese commitment covers flash and runs to 2032.",
         "sources": [
           {
             "date": "2026-08-26",
-            "outlet": "ZDNet Korea",
+            "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
             "tier": "secondary",
-            "title": "ZDNet Korea",
-            "url": "https://zdnet.co.kr/view/?no=20260826094826"
+            "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+            "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
           },
           {
-            "date": "2026-08-26",
-            "outlet": "TrendForce",
+            "date": "2026-08-27",
+            "outlet": "Seeking Alpha",
             "tier": "secondary",
-            "title": "TrendForce",
-            "url": "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/"
+            "title": "Seeking Alpha",
+            "url": "https://seekingalpha.com/news/4637427-kioxia-and-sandisk-to-invest-over-31b-in-japan?feed_item_type=news"
           }
         ],
         "status": "worsened",
         "title": "HBM4 and server DRAM supply",
         "trackedSince": "2026-08",
-        "worsenedCount": 2
+        "worsenedCount": 3
       },
       {
-        "assessedAsOf": "2026-08-26",
-        "checkCount": 4,
+        "assessedAsOf": "2026-08-27",
+        "checkCount": 5,
         "history": [
           {
             "asOf": "2026-08-23",
@@ -532,28 +611,25 @@
           {
             "asOf": "2026-08-26",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-08-27",
+            "status": "unchanged"
           }
         ],
         "id": "constraint-hbm4-memory-allocation-per-accelerator",
-        "reasoning": "Making 8-high the main build for NVIDIA settles the question in the direction of less memory per machine, on top of Rubin Ultra already being tested at 192GB against a planned 1TB.",
+        "reasoning": "No new evidence arrived today on how much stacked memory goes into each accelerator. NVIDIA repeated only that it can supply about 70 percent of demand with the chain running flat out.",
         "sources": [
           {
             "date": "2026-08-26",
-            "outlet": "ZDNet Korea",
+            "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
             "tier": "secondary",
-            "title": "ZDNet Korea",
-            "url": "https://zdnet.co.kr/view/?no=20260826094826"
-          },
-          {
-            "date": "2026-08-07",
-            "outlet": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
-            "tier": "secondary",
-            "title": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
-            "url": "https://en.sedaily.com/international/2026/08/07/nvidia-weighs-cutting-hbm-capacity-for-rubin-ultra"
+            "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+            "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
           }
         ],
-        "status": "worsened",
-        "title": "HBM4 stacked-memory allocation",
+        "status": "unchanged",
+        "title": "HBM4 stacked memory supply",
         "trackedSince": "2026-08",
         "worsenedCount": 1
       }
@@ -562,38 +638,31 @@
   },
   "schemaVersion": "1.2",
   "verdict": {
-    "answer": "Not yet. The memory makers just made the stacks shorter",
+    "answer": "Not yet. The biggest seller can fill only seven orders in ten",
     "chip": {
       "direction": "widening",
       "label": "Gap widening"
     },
-    "confidence": "We are confident in this read",
+    "confidence": "We are reasonably confident in this read",
     "question": "Is supply catching up to demand?",
-    "soWhat": "Samsung and SK Hynix are moving NVIDIA to 8-high memory stacks and cutting the taller 12-high output this half. On the same day, OpenAI put a chip of its own in the queue for that same memory.",
+    "soWhat": "NVIDIA's own numbers show record sales and a shrinking profit margin at the same time, because memory costs more than it expected. Fresh money for memory factories arrived today, but it is the wrong kind and it runs to 2032.",
     "sources": [
       {
         "assessment": true,
         "basedOn": [
           {
             "date": "2026-08-26",
-            "outlet": "ZDNet Korea",
-            "tier": "secondary",
-            "title": "ZDNet Korea",
-            "url": "https://zdnet.co.kr/view/?no=20260826094826"
+            "outlet": "NVIDIA Newsroom",
+            "tier": "primary",
+            "title": "NVIDIA Newsroom",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
           },
           {
-            "date": "2026-08-07",
-            "outlet": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
+            "date": "2026-08-26",
+            "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
             "tier": "secondary",
-            "title": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
-            "url": "https://en.sedaily.com/international/2026/08/07/nvidia-weighs-cutting-hbm-capacity-for-rubin-ultra"
-          },
-          {
-            "date": "2026-08-04",
-            "outlet": "TrendForce",
-            "tier": "secondary",
-            "title": "TrendForce",
-            "url": "https://www.trendforce.com/presscenter/news/20260804-13166.html"
+            "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+            "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
           }
         ]
       }

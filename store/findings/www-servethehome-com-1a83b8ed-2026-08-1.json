@@ -1,0 +1,43 @@
+{
+  "id": "www-servethehome-com-1a83b8ed-2026-08-1",
+  "statement": "SK hynix says packaging choice changes how much mechanical and thermal stress an HBM stack must absorb, comparing TSMC CoWoS-S and CoWoS-L with Intel's EMIB.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "If packaging method drives HBM yield stress, packaging choice becomes a real constraint on accelerator output, not just a cost question.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Packaging-induced stress on HBM cubes and interposers affects assembly yield, linking packaging technology choice to deliverable accelerator volume."
+  },
+  "evidence": [
+    {
+      "source": "ServeTheHome",
+      "url": "https://www.servethehome.com/sk-hynix-hbm-packaging-at-hot-chips-2026/",
+      "date": "2026-08-23",
+      "excerpt": "packaging choice changes how much mechanical and thermal stress the HBM stack must absorb",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary conference write-up; no filing or vendor document corroborating."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> unknown); sources: Intel Newsroom, ServeTheHome",
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "intel",
+  "observedAt": "2026-08-23",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

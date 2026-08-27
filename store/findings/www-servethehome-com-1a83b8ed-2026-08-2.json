@@ -1,0 +1,43 @@
+{
+  "id": "www-servethehome-com-1a83b8ed-2026-08-2",
+  "statement": "SK hynix showed HBM4 at 48GB with 12-high stacks in production and 16-high under qualification, targeting 2048 GB/s across 2048 IOs.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "HBM4 reaching production is what lets the next accelerator generation ship in volume.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Production-stage HBM4 stacks add memory supply and bandwidth for next-generation accelerators, with 16-high still at qualification limiting near-term upside."
+  },
+  "evidence": [
+    {
+      "source": "ServeTheHome",
+      "url": "https://www.servethehome.com/sk-hynix-hbm-packaging-at-hot-chips-2026/",
+      "date": "2026-08-23",
+      "excerpt": "HBM4 at 48GB capacity with '12-high in production and 16-high under qualification'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary conference coverage of a vendor presentation; single outlet."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-08-23",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "www-runpod-io-dccdb718-2026-08-1",
+  "statement": "Runpod Secure Cloud lists B300 on-demand rental at $7.89 per GPU-hour.",
+  "kind": "measured",
+  "value": {
+    "number": 7.89,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A current listed rental level for the newest part, with no prior price stated, so it is a level and not a move.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Display overlay only: a static rental level with no baseline gives no direction on demand or supply."
+  },
+  "evidence": [
+    {
+      "source": "Runpod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-08-27",
+      "excerpt": "B300: \"$7.89/hr\" (Secure Cloud)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single vendor pricing page read at fetch time; no historical series on the page."
+  },
+  "dispersion": "conflicting same-key reports: value 1.59 -> 7.89 (tol 1%); sources: Runpod",
+  "asOf": "2026-08",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-27T12:25:55Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

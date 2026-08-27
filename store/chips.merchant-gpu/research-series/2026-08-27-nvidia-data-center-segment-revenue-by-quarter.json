@@ -1,0 +1,35 @@
+{
+  "seriesName": "NVIDIA Data Center segment revenue by quarter",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "NVIDIA Newsroom (nvidianews.nvidia.com press releases)",
+  "points": [
+    {
+      "label": "Q2 FY2026 (quarter ended Jul 27, 2025)",
+      "value": 41.1,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2026",
+      "publishedAt": "2025-08-27"
+    },
+    {
+      "label": "Q4 FY2026 (quarter ended Jan 25, 2026)",
+      "value": 62.3,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "publishedAt": "2026-02-25"
+    },
+    {
+      "label": "Q1 FY2027 (quarter ended Apr 26, 2026)",
+      "value": 75.2,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027",
+      "publishedAt": "2026-05-20"
+    },
+    {
+      "label": "Q2 FY2027 (quarter ended Aug 24, 2026)",
+      "value": 89.0,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+      "publishedAt": "2026-08-26"
+    }
+  ],
+  "pair": false,
+  "notes": "All four points are NVIDIA's own Data Center segment revenue figures, each quoted from that quarter's earnings press release on nvidianews.nvidia.com (same single source site, per rule 5). This skips Q3 FY2026 because I could not confirm its Data Center revenue figure from a nvidianews.nvidia.com page within the research window; the series still shows the acceleration trend (up roughly 117% year over year by Q2 FY2027, matching today's bullet) using four confirmed, same-site quarters instead of guessing the missing one. Figures are Data Center segment revenue specifically, not total company revenue, verified by direct quote from each press release.",
+  "bulletIndex": 1
+}
