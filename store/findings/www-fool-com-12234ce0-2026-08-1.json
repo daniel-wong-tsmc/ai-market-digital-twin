@@ -1,0 +1,53 @@
+{
+  "id": "www-fool-com-12234ce0-2026-08-1",
+  "statement": "Nvidia's long-term supply commitments rose to $279 billion over the next few years, up from $119 billion three months earlier, with $92 billion due in the remainder of fiscal 2027 and $87 billion and $88 billion across fiscal 2028 and 2029.",
+  "kind": "measured",
+  "value": {
+    "number": 279.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "More than doubling committed purchase obligations in one quarter is a hard financial signal that the vendor is locking in components for a much larger build plan.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Binding supply commitments reserve memory and manufacturing capacity ahead of shipment, pulling forward orders across the upstream chain."
+  },
+  "evidence": [
+    {
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/",
+      "date": "2026-08-29",
+      "excerpt": "$279 billion on supply commitments over the next few years -- up from $119 billion only three months earlier",
+      "tier": "secondary"
+    },
+    {
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/",
+      "date": "2026-08-29",
+      "excerpt": "$92 billion is due in the remainder of fiscal 2027, followed by $87 billion and $88 billion across fiscal 2028 and 2029.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet summarizing figures that originate in Nvidia's filing; the filing itself is not the fetched document."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-29",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

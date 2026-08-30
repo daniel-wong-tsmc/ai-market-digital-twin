@@ -1,0 +1,35 @@
+{
+  "seriesName": "Marvell Data Center segment quarterly revenue",
+  "unit": "US$ millions",
+  "form": "columns",
+  "sourceName": "Marvell Technology, Inc. (Investor Relations press releases)",
+  "points": [
+    {
+      "label": "Q3 FY2026 (three months ended Nov 1, 2025)",
+      "value": 1517.9,
+      "sourceUrl": "https://investor.marvell.com/news-events/press-releases/detail/999/marvell-technology-inc-reports-third-quarter-of-fiscal-year-2026-financial-results",
+      "publishedAt": "2025-12-02"
+    },
+    {
+      "label": "Q4 FY2026",
+      "value": 1651.3,
+      "sourceUrl": "https://investor.marvell.com/news-events/press-releases/detail/1011/marvell-technology-inc-reports-fourth-quarter-and-fiscal-year-2026-financial-results",
+      "publishedAt": "2026-03-05"
+    },
+    {
+      "label": "Q1 FY2027 (three months ended May 2, 2026)",
+      "value": 1832.7,
+      "sourceUrl": "https://investor.marvell.com/news-events/press-releases/detail/1023/marvell-technology-inc-reports-first-quarter-of-fiscal-year-2027-financial-results",
+      "publishedAt": "2026-05-27"
+    },
+    {
+      "label": "Q2 FY2027",
+      "value": 2171.5,
+      "sourceUrl": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results",
+      "publishedAt": "2026-08-27"
+    }
+  ],
+  "pair": false,
+  "notes": "All four points come from Marvell's own investor-relations press releases (investor.marvell.com), each from the 'Revenue by End Market' table for that quarter, so this is a single-source series. It contextualizes today's bullet (Marvell raising its fiscal 2028 revenue outlook to ~$18B from ~$16.5B, with custom-chip business expected to more than double) by showing the underlying Data Center segment revenue trend that is driving that outlook: it rose from $1,517.9M (Q3 FY2026) to $2,171.5M (Q2 FY2027), the same Q2 FY2027 release in which management raised the FY2028 outlook. Note this series is the broader Data Center segment (which includes custom silicon, connectivity, and switching), not the custom-chip sub-line alone -- Marvell's releases do not break out a quarterly custom-chip-only revenue dollar figure in these press releases. The $18B/$16.5B FY2028 figures themselves are forward-looking guidance, not historical published numbers, so they are not included as series points per the no-forecast rule.",
+  "bulletIndex": 3
+}

@@ -1,0 +1,54 @@
+{
+  "id": "investor-marvell-com-06e10afa-2026-08-1",
+  "statement": "Marvell's data center segment revenue reached $2.171 billion in Q2 FY2027, up 46% year over year and 79% of total company revenue of $2.739 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 2.171,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Data center is now nearly four-fifths of Marvell's revenue and is growing faster than the company overall, which reads as continued AI infrastructure buying by its customers.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.networking-silicon",
+      "infrastructure.networking-fabric",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Growth in custom silicon and data-center connectivity revenue tracks the same AI build-out that drives merchant GPU and fabric demand."
+  },
+  "evidence": [
+    {
+      "source": "Marvell Technology Investor Relations",
+      "url": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results",
+      "date": "2026-08-27",
+      "excerpt": "Data center segment revenue reached $2.171 billion in Q2 FY2027, representing 46% year-over-year growth and constituting 79% of total company revenue.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Marvell Technology Investor Relations",
+      "url": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results",
+      "date": "2026-08-27",
+      "excerpt": "Net revenue for the second quarter of fiscal 2027 was $2.739 billion",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company press release captured as a secondary-tier document rather than an authoritative filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "marvell",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

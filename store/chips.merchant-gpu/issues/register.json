@@ -1,18 +1,19 @@
 {
- "asOf": "2026-08-30",
+ "asOf": "2026-08-31",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 9,
+   "checkCount": 10,
    "id": "dim-bottleneck",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-30",
+    "assessedAsOf": "2026-08-31",
     "claimFindingIds": [
-     "finance-biggo-com-0a772c62-2026-08-2",
-     "finance-biggo-com-0a772c62-2026-08-1"
+     "www-fool-com-12234ce0-2026-08-1",
+     "www-fool-com-12234ce0-2026-08-3",
+     "www-fool-com-12234ce0-2026-08-2"
     ],
-    "reasoning": "Labour trouble hit two of the three big memory makers at once: SK hynix's union rejected its wage deal by 25 votes, and about 80% of Micron's unionised Taiwan workers back action at sites holding roughly 60% of its capacity.",
+    "reasoning": "NVIDIA more than doubled supply commitments to $279 billion, mainly for memory, and still says memory cannot cover full customer demand. It guided next fiscal year to 70% growth against customer forecasts implying roughly 140%.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -24,19 +25,20 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 7
+   "worsenedCount": 8
   },
   {
-   "checkCount": 9,
+   "checkCount": 10,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-30",
+    "assessedAsOf": "2026-08-31",
     "claimFindingIds": [
-     "www-trendforce-com-01be0e4e-2026-08-1"
+     "investor-marvell-com-06e10afa-2026-08-3",
+     "investor-marvell-com-06e10afa-2026-08-1"
     ],
-    "reasoning": "No new evidence arrived today on rivals to merchant GPUs. The most recent development is still OpenAI's own inference chip, Jalapeno, unveiled on August 26.",
-    "status": "unchanged"
+    "reasoning": "Marvell, which designs custom chips for large cloud buyers, raised its fiscal 2028 outlook to about $18 billion from $16.5 billion and expects its custom business to more than double, with data centre revenue already up 46% to $2.171 billion.",
+    "status": "worsened"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -47,19 +49,20 @@
     "kind": "dimension-weak",
     "label": "moat"
    },
-   "worsenedCount": 4
+   "worsenedCount": 5
   },
   {
-   "checkCount": 8,
+   "checkCount": 9,
    "id": "constraint-stacked-memory-and-server-dram",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-30",
+    "assessedAsOf": "2026-08-31",
     "claimFindingIds": [
-     "finance-biggo-com-0a772c62-2026-08-1",
-     "news-skhynix-com-0eb7edb1-2026-08-1"
+     "www-fool-com-12234ce0-2026-08-3",
+     "www-fool-com-12234ce0-2026-08-1",
+     "finance-technews-tw-da5768a2-2026-08-1"
     ],
-    "reasoning": "A possible strike at Micron's Taiwan plants, which hold roughly 60% of its capacity, threatens near-term memory output, while SK hynix's new US packaging plant will not reach mass production until the second half of 2029.",
+    "reasoning": "NVIDIA's $279 billion of commitments is chiefly high-bandwidth and server memory, and supply is described as unable to cover full demand. Separately, about 80% of Micron's Taiwan union members back strike action, with mediation still pending.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -71,14 +74,14 @@
     "kind": "binding-constraint",
     "label": "HBM4 and server DRAM supply"
    },
-   "worsenedCount": 4
+   "worsenedCount": 5
   },
   {
-   "checkCount": 6,
+   "checkCount": 7,
    "id": "constraint-hbm4-memory-allocation-per-accelerator",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-30",
+    "assessedAsOf": "2026-08-31",
     "claimFindingIds": [
      "zdnet-co-kr-1640e7a5-2026-08-1"
     ],
@@ -89,10 +92,10 @@
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "High-bandwidth memory supply",
+   "title": "stacked memory supply",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "High-bandwidth memory supply"
+    "label": "stacked memory supply"
    },
    "worsenedCount": 1
   }

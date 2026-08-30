@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-08-31",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-fool-com-12234ce0-2026-08-1",
+        "www-fool-com-12234ce0-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-fool-com-12234ce0-2026-08-2",
+        "www-fool-com-12234ce0-2026-08-4",
+        "www-marketbeat-com-01fd246e-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "investor-marvell-com-06e10afa-2026-08-1",
+        "investor-marvell-com-06e10afa-2026-08-2",
+        "investor-marvell-com-06e10afa-2026-08-3",
+        "247wallst-com-db4b25b9-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-technews-tw-da5768a2-2026-08-1",
+        "finance-biggo-com-0a772c62-2026-08-1",
+        "www-fool-com-12234ce0-2026-08-1",
+        "www-freepressjournal-in-36c153cb-2026-08-1",
+        "www-econotimes-com-f3939240-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-fool-com-12234ce0-2026-08-1",
+        "www-fool-com-12234ce0-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "bullet:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-fool-com-12234ce0-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "bullet:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "investor-marvell-com-06e10afa-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-bottleneck",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-fool-com-12234ce0-2026-08-1",
+        "www-fool-com-12234ce0-2026-08-3",
+        "www-fool-com-12234ce0-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-moat",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "investor-marvell-com-06e10afa-2026-08-3",
+        "investor-marvell-com-06e10afa-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-stacked-memory-and-server-dram",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-fool-com-12234ce0-2026-08-3",
+        "www-fool-com-12234ce0-2026-08-1",
+        "finance-technews-tw-da5768a2-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-hbm4-memory-allocation-per-accelerator",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "zdnet-co-kr-1640e7a5-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-trendforce-com-836f33fa-2026-08-1",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "www-fool-com-f229964a-2026-07-1",
+        "supplyics-com-c83015c2-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-marketbeat-com-01fd246e-2026-08-1",
+        "www-fool-com-12234ce0-2026-08-2",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "pr-tsmc-com-7f560c3b-2026-08-2",
+        "www-thelec-net-c15d2de4-2026-08-1",
+        "www-tomshardware-com-9086563b-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "qz-com-36c37a60-2026-08-1",
+        "www-trendforce-com-01be0e4e-2026-08-1",
+        "247wallst-com-db4b25b9-2026-08-1",
+        "techcrunch-com-6b79ddb7-1"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-forbes-com-7c91863a-2026-07-2",
+        "supplyics-com-c83015c2-2026-08-3",
+        "www-sec-gov-125b52f2-2026-07-1"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+        "finance-biggo-com-cda170af-2026-08-1",
+        "finance-biggo-com-b332e712-2026-08-4"
+      ]
+    },
+    {
+      "claimKey": "impl:6",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "www-trendforce-com-b8196a71-2026-08-1",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "techsoda-substack-com-3b7a4ff5-2026-08-3",
+        "techsoda-substack-com-3b7a4ff5-2026-08-4"
+      ]
+    },
+    {
+      "claimKey": "impl:7",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-freepressjournal-in-36c153cb-2026-08-1",
+        "www-econotimes-com-f3939240-2026-08-1",
+        "finance-yahoo-com-4ffdbfce-2026-08-1",
+        "investor-nvidia-com-7e5e6232-2026-08-1"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 19,
+    "flagged": 0,
+    "skipped": 0
+  }
+}

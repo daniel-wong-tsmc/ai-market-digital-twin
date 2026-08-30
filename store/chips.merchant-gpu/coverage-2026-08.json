@@ -2,19 +2,11 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-08",
-  "capturedAt": "2026-08-30T04:14:13Z",
+  "capturedAt": "2026-08-30T16:20:26Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
   "gaps": [
-    {
-      "type": "source",
-      "id": "nvda-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
-      "paywalledNote": null
-    },
     {
       "type": "source",
       "id": "amd-earnings",
@@ -65,6 +57,22 @@
     },
     {
       "type": "source",
+      "id": "open-web-asic",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Open-web reporting on hyperscaler custom ASICs (competitive alternatives)' was not fetched. URL patterns: ['blog.google', 'aws.amazon.com/machine-learning', 'techcrunch.com', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "channel-checks",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Open-web channel checks: lead times, inventory notes from distributors' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
       "id": "bis-export-controls",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -77,6 +85,14 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'NVIDIA 10-K risk factor section (geopolitical / export control exposure)' was not fetched. URL patterns: ['investor.nvidia.com/annual-reports', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "vendor-pr-trade-press",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Vendor press releases + trade press on merchant-GPU design wins' was not fetched. URL patterns: ['nvidianews.nvidia.com', 'ir.amd.com/news-events', 'tomshardware.com', 'semianalysis.com']",
       "paywalledNote": null
     },
     {
@@ -102,29 +118,45 @@
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Hyperscaler AI run-rate and model-lab ARR disclosures' was not fetched. URL patterns: ['microsoft.com', 'blogs.microsoft.com', 'openai.com', 'anthropic.com', 'blog.google', 'aws.amazon.com/machine-learning', 'semianalysis.com']",
       "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "frontier-release-funding",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Frontier model release and funding trackers (company newsrooms + industry press)' was not fetched. URL patterns: ['openai.com', 'anthropic.com', 'blog.google', 'techcrunch.com', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "upstream-component-leadtimes",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
+      "paywalledNote": null
     }
   ],
   "gapCounts": {
-    "total": 12,
-    "source": 12,
+    "total": 16,
+    "source": 16,
     "indicator": 0,
-    "required": 12,
+    "required": 16,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://finance.biggo.com/news/293528b8-ee19-4e4f-95bf-68b17470950d",
-    "https://finance.biggo.com/news/US_NVDA_2026-08-26",
-    "https://investinglive.com/stocks/wsj-report-nvidia-pauses-ai-cloud-revenue-share-deals-amid-antitrust-and-control-concerns/",
-    "https://news.skhynix.com/en/groundbreaking-ceremony-in-indiana/",
-    "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
-    "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
-    "https://techcrunch.com/2026/08/28/neocloud-lambda-secures-1b-in-debt-to-buy-more-chips/",
-    "https://www.digitimes.com/news/a20260826VL221/nvidia-samsung-sk-hynix-hbm4-hbm.html",
-    "https://www.freepressjournal.in/tech/trump-plans-chip-tariffs-that-could-hit-servers-laptops-tech-industry-warns-of-ai-setback",
-    "https://www.techtimes.com/articles/325957/20260829/commerce-drafts-ai-chip-rule-loophole-it-created-rescinding-biden-know-your-customer.htm"
+    "http://www.econotimes.com/US-Probes-Apex-Logistics-Over-Nvidia-AI-Chip-Shipments-to-China-1750578",
+    "https://247wallst.com/investing/2026/08/25/coreweaves-ai-data-center-capacity-is-exploding-its-35-billion-debt-load-still-makes-the-stock-untouchable/",
+    "https://finance.technews.tw/2026/08/29/ipp/",
+    "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results",
+    "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Second-Quarter-Fiscal-2027/default.aspx",
+    "https://newsroom.amd.com/news/rocm-10-software-ai-native-developer-experiences/",
+    "https://theedgemalaysia.com/node/815932",
+    "https://www.fool.com/investing/2026/08/27/openai-is-reportedly-targeting-an-ipo-debut-above/",
+    "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/",
+    "https://www.investing.com/news/transcripts/earnings-call-transcript-nvidia-beats-q2-2026-estimates-as-ai-demand-stays-hot-93CH-4878028"
   ],
   "judgedIndicatorIds": [
     "D2",

@@ -1,0 +1,53 @@
+{
+  "id": "finance-technews-tw-da5768a2-2026-08-1",
+  "statement": "A preliminary tally at Micron's Taoyuan and Taichung, Taiwan unions found approximately 80% of employees support strike action over the internal performance-bonus system; no strike has been called and mediation is still pending.",
+  "kind": "measured",
+  "value": {
+    "number": 80.0,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "Taiwan is described as about 60% of Micron's global production capacity and a core high-bandwidth-memory manufacturing hub, so a credible strike threat there is a risk to memory output that feeds AI accelerators.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Labor action at sites carrying most of Micron's capacity would reduce or delay memory output, tightening high-bandwidth-memory supply used in GPU systems."
+  },
+  "evidence": [
+    {
+      "source": "TechNews (finance.technews.tw)",
+      "url": "https://finance.technews.tw/2026/08/29/ipp/",
+      "date": "2026-08-29",
+      "excerpt": "a preliminary tally found approximately 80% of employees",
+      "tier": "secondary"
+    },
+    {
+      "source": "TechNews (finance.technews.tw)",
+      "url": "https://finance.technews.tw/2026/08/29/ipp/",
+      "date": "2026-08-29",
+      "excerpt": "Taiwan represents approximately 60% of Micron's global production capacity and serves as a core HBM manufacturing hub.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary Taiwanese outlet reporting a union's own preliminary tally; no company confirmation and no formal strike vote has occurred."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: TechNews (finance.technews.tw)",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "micron",
+  "observedAt": "2026-08-29",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

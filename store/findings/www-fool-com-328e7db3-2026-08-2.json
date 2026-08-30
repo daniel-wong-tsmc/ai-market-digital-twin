@@ -1,0 +1,46 @@
+{
+  "id": "www-fool-com-328e7db3-2026-08-2",
+  "statement": "OpenAI booked $13.1 billion of revenue in 2025 against a 2025 operating loss of $20.9 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 20.9,
+    "unit": "USD_B"
+  },
+  "trend": "unknown",
+  "why": "Losses larger than revenue mean a major compute buyer depends on outside capital to keep paying for GPUs, so its purchasing is tied to funding conditions.",
+  "impact": {
+    "targets": [
+      "models.frontier-closed",
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "negative",
+    "mechanism": "A cash-burning marginal buyer must keep raising capital to sustain compute commitments, so any funding tightening would flow straight through to accelerator orders."
+  },
+  "evidence": [
+    {
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/investing/2026/08/27/openai-is-reportedly-targeting-an-ipo-debut-above/",
+      "date": "2026-08-27",
+      "excerpt": "Actual booked revenue for 2025 was \"$13.1 billion,\" against a 2025 operating loss of \"$20.9 billion.\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet reporting figures not published by the company itself."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> unknown); sources: The Motley Fool",
+  "asOf": "2026-08",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "openai",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

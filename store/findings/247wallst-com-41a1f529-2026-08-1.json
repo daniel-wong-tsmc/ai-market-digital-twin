@@ -1,0 +1,46 @@
+{
+  "id": "247wallst-com-41a1f529-2026-08-1",
+  "statement": "CoreWeave's revenue backlog stood at $104.2 billion after the second quarter of 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 104.2,
+    "unit": "USD_B"
+  },
+  "trend": "unknown",
+  "why": "A backlog of this size is contracted future AI compute revenue and indicates committed demand for GPU capacity, but the document gives no prior-period backlog figure, so no direction can be inferred.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Contracted neocloud backlog is converted into GPU and data-center capacity purchases as the committed capacity is built and delivered."
+  },
+  "evidence": [
+    {
+      "source": "24/7 Wall St.",
+      "url": "https://247wallst.com/investing/2026/08/25/coreweaves-ai-data-center-capacity-is-exploding-its-35-billion-debt-load-still-makes-the-stock-untouchable/",
+      "date": "2026-08-25",
+      "excerpt": "Its revenue backlog stood at $104.2 billion after the second quarter of 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet restating CoreWeave's reported Q2 2026 backlog; no filing is cited inside the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "coreweave",
+  "observedAt": "2026-08-25",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

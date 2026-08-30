@@ -1,0 +1,50 @@
+{
+  "id": "newsroom-amd-com-6939960b-2026-08-2",
+  "statement": "AMD says ROCm.AI is now generally available, while the new ROCm CLI component is a Technology Preview, with support for vLLM, SGLang and Megatron-LM.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Software maturity and framework coverage are the usual blocker to using AMD accelerators, so general availability marks a step toward a workable alternative to the incumbent GPU stack; the preview status of the CLI shows the stack is not fully finished.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.cluster-software",
+      "models.open-weight"
+    ],
+    "direction": "positive",
+    "mechanism": "A more usable open GPU software stack lowers the switching cost for buyers, adding alternative accelerator supply to the market."
+  },
+  "evidence": [
+    {
+      "source": "AMD Newsroom",
+      "url": "https://newsroom.amd.com/news/rocm-10-software-ai-native-developer-experiences/",
+      "date": "2026-08-27",
+      "excerpt": "ROCm.AI is now generally available,",
+      "tier": "secondary"
+    },
+    {
+      "source": "AMD Newsroom",
+      "url": "https://newsroom.amd.com/news/rocm-10-software-ai-native-developer-experiences/",
+      "date": "2026-08-27",
+      "excerpt": "Technology Preview.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor announcement only, no customer adoption evidence and no shipment or revenue guidance in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

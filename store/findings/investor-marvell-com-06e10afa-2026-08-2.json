@@ -1,0 +1,46 @@
+{
+  "id": "investor-marvell-com-06e10afa-2026-08-2",
+  "statement": "Marvell guided Q3 FY2027 net revenue to $3.150 billion plus or minus 5%, for the quarter ending October 31, 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 3.15,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "The guided figure is above the $2.739 billion just reported, so the company expects sequential growth in AI-linked silicon revenue.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.networking-silicon",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher vendor revenue guidance signals customers' near-term order books for custom accelerators and data-center connectivity are still expanding."
+  },
+  "evidence": [
+    {
+      "source": "Marvell Technology Investor Relations",
+      "url": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results",
+      "date": "2026-08-27",
+      "excerpt": "Net revenue is expected to be $3.150 billion +/- 5%,",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company press release captured at secondary tier; forward guidance carries a stated plus or minus 5% band."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "marvell",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

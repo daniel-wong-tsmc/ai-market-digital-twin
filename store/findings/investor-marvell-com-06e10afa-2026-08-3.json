@@ -1,0 +1,50 @@
+{
+  "id": "investor-marvell-com-06e10afa-2026-08-3",
+  "statement": "Per wire coverage of the same earnings, Marvell raised its fiscal 2028 revenue outlook to approximately $18 billion from about $16.5 billion, with data-center revenue expected to grow more than 60% and the custom business expected to more than double year over year in fiscal 2028.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A doubling of custom accelerator business points to hyperscalers putting more of their compute budget into in-house silicon programs alongside merchant GPUs.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.networking-silicon"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rising custom-silicon design wins add to total AI accelerator demand while also giving hyperscalers an alternative to buying merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "Marvell Technology Investor Relations",
+      "url": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results",
+      "date": "2026-08-27",
+      "excerpt": "Marvell raised its fiscal 2028 revenue outlook to approximately $18 billion",
+      "tier": "secondary"
+    },
+    {
+      "source": "Marvell Technology Investor Relations",
+      "url": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results",
+      "date": "2026-08-27",
+      "excerpt": "a significant acceleration in our Custom business beginning in the second half of fiscal 2027.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "The fiscal 2028 target is relayed inside this document as wire coverage of the earnings rather than quoted from the release itself."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "marvell",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

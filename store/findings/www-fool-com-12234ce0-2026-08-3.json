@@ -1,0 +1,43 @@
+{
+  "id": "www-fool-com-12234ce0-2026-08-3",
+  "statement": "The jump in Nvidia's supply commitments is primarily related to the procurement of memory, specifically high bandwidth memory and server DRAM for the Vera Rubin ramp, and memory supply is described as unable to support full customer demand.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Memory is named as the binding constraint on how many accelerators can ship, which makes it the current chokepoint for the whole GPU chain.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Insufficient high-bandwidth-memory and server DRAM output caps accelerator production regardless of order volume, and large forward commitments crowd out other memory buyers."
+  },
+  "evidence": [
+    {
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/",
+      "date": "2026-08-29",
+      "excerpt": "primarily related to the procurement of memory",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet characterizing the driver of the commitment increase and the memory constraint."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-29",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

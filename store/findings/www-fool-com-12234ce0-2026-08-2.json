@@ -1,0 +1,45 @@
+{
+  "id": "www-fool-com-12234ce0-2026-08-2",
+  "statement": "Nvidia guided fiscal 2028 to 70% total revenue growth even though CFO Colette Kress said customer forecasts implied roughly 140% growth, because memory supply could not support the full demand implied by those forecasts.",
+  "kind": "measured",
+  "value": {
+    "number": 70.0,
+    "unit": "pct_yoy"
+  },
+  "trend": "rising",
+  "why": "The gap between customer-implied growth and the guided number puts a figure on how much revenue is being left on the table by component scarcity rather than weak demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "Guidance still rises sharply, but the shortfall against customer forecasts shows shipments are capped by memory availability rather than by order intake."
+  },
+  "evidence": [
+    {
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/",
+      "date": "2026-08-29",
+      "excerpt": "70% total revenue growth ... fueled by ongoing Blackwell shipments, scaling Vera Rubin as it reaches full production,",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary account of statements made on the August 26 earnings call; the call transcript is not this document."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: Investing.com, The Motley Fool",
+  "asOf": "2026-08",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-29",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "247wallst-com-41a1f529-2026-08-2",
+  "statement": "CoreWeave raised full-year 2026 capital-expenditure guidance to $35 billion to $39 billion, after spending $9.4 billion of capex in a single quarter.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A raised capex plan from a large GPU buyer points to more accelerator and data-center orders ahead; the document reports a range rather than a single figure, so no point value is recorded.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher committed capital spending by a neocloud translates into incremental GPU, networking and colocation purchase orders."
+  },
+  "evidence": [
+    {
+      "source": "24/7 Wall St.",
+      "url": "https://247wallst.com/investing/2026/08/25/coreweaves-ai-data-center-capacity-is-exploding-its-35-billion-debt-load-still-makes-the-stock-untouchable/",
+      "date": "2026-08-25",
+      "excerpt": "full-year 2026 guidance was raised to $35 billion to $39 billion",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet only; guidance range restated without a linked company filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "coreweave",
+  "observedAt": "2026-08-25",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

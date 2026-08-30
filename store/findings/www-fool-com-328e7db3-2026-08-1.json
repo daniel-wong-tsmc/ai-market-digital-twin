@@ -1,0 +1,54 @@
+{
+  "id": "www-fool-com-328e7db3-2026-08-1",
+  "statement": "OpenAI's annualized revenue run rate is cited at over $40 billion as of August 2026, versus $25 billion in early 2026, about $20 billion at end of 2025 and $3.7 billion in late 2024.",
+  "kind": "measured",
+  "value": {
+    "number": 40.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Run-rate revenue at the largest model developer is the closest available read on how fast paid AI usage is growing, which underwrites its compute purchases.",
+  "impact": {
+    "targets": [
+      "models.frontier-closed",
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising subscription and API revenue funds continued GPU capacity commitments by one of the largest compute buyers."
+  },
+  "evidence": [
+    {
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/investing/2026/08/27/openai-is-reportedly-targeting-an-ipo-debut-above/",
+      "date": "2026-08-27",
+      "excerpt": "over $40 billion.",
+      "tier": "secondary"
+    },
+    {
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/investing/2026/08/27/openai-is-reportedly-targeting-an-ipo-debut-above/",
+      "date": "2026-08-27",
+      "excerpt": "the $40 billion ARR figure originates from Bloomberg reporting dated 2026-08-13/14 (outside this sweep's recency window) but is restated here in an Aug 27, 2026 secondary account without revision.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary account restating a mid-August Bloomberg figure; the company has not published these run-rate numbers directly."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "apiArr",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "openai",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

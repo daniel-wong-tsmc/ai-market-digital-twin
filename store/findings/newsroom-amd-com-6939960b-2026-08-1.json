@@ -1,0 +1,52 @@
+{
+  "id": "newsroom-amd-com-6939960b-2026-08-1",
+  "statement": "AMD claims ROCm 10 delivers an average 3.3x inference improvement and 2.4x training improvement versus ROCm 7, benchmarked on AMD Instinct MI355X systems.",
+  "kind": "measured",
+  "value": {
+    "number": 3.3,
+    "unit": "x_inference_vs_ROCm7"
+  },
+  "trend": "rising",
+  "why": "Software gains on installed MI355X hardware raise the useful work per dollar of already-purchased silicon, which is the main lever AMD has to close the practical gap with the incumbent stack.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.cluster-software"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher throughput per installed GPU improves effective compute per dollar and makes the non-incumbent GPU line more competitive on cost per token."
+  },
+  "evidence": [
+    {
+      "source": "AMD Newsroom",
+      "url": "https://newsroom.amd.com/news/rocm-10-software-ai-native-developer-experiences/",
+      "date": "2026-08-27",
+      "excerpt": "average 3.3x inference improvement",
+      "tier": "secondary"
+    },
+    {
+      "source": "AMD Newsroom",
+      "url": "https://newsroom.amd.com/news/rocm-10-software-ai-native-developer-experiences/",
+      "date": "2026-08-27",
+      "excerpt": "2.4x training improvement",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor-published benchmark claim in a secondary-tier announcement, with no independent verification and no named customer deployment."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "flopsPerDollar",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

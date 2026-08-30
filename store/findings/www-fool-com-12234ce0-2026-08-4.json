@@ -1,0 +1,42 @@
+{
+  "id": "www-fool-com-12234ce0-2026-08-4",
+  "statement": "Nvidia management indicated gross margins will see a further dip into the low 70% range by the end of fiscal 2027 due to rising memory costs.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Margin guidance moving down on memory cost is the price effect of the same supply tightness showing up in the vendor's own economics; no single percentage figure is given, only a range.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "negative",
+    "mechanism": "Rising memory input cost compresses accelerator margins, which signals scarce components being bid up across the chain."
+  },
+  "evidence": [
+    {
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/",
+      "date": "2026-08-29",
+      "excerpt": "a further dip into the low 70% range",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary summary of management commentary; the source gives a range rather than a specific guided margin."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: NVIDIA Investor Relations, The Motley Fool",
+  "asOf": "2026-08",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-29",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

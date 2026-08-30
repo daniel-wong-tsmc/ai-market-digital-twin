@@ -4,98 +4,124 @@
   "lines": [
     {
       "dimensions": [
-        "momentum"
-      ],
-      "findingIds": [
-        "nvidianews-nvidia-com-d9b39bc2-2026-08-1",
-        "nvidianews-nvidia-com-d9b39bc2-2026-08-3",
-        "finance-biggo-com-b332e712-2026-08-2"
-      ],
-      "thesisIds": [
-        "nvda-demand-durability"
-      ],
-      "watchItem": "NVIDIA's data-centre sales reached $89.0 billion in its July quarter, up 117% from a year earlier, and it guided the next quarter to $108.0 billion. It guided the following fiscal year to about 70% growth while calling that figure supply-limited, so leading-edge wafer demand is running ahead of what the chain can build."
-    },
-    {
-      "dimensions": [
         "bottleneck",
-        "competitiveStructure"
+        "unitEconomics"
       ],
       "findingIds": [
         "www-trendforce-com-836f33fa-2026-08-1",
-        "supplyics-com-c83015c2-2026-08-3",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "www-fool-com-f229964a-2026-07-1",
         "supplyics-com-c83015c2-2026-08-2"
       ],
       "thesisIds": [
         "supply-constraint-binding",
-        "ai-packaging-supply-is-concentrated-in-a-few-buyers",
         "packaging-tightness-starts-to-ease-while-memory-does-not"
       ],
-      "watchItem": "One buyer has reserved roughly 800,000 to 850,000 wafers of 2026 advanced-packaging capacity, over half the year's total, and packaging is pre-booked above 85% for 2026 and 2027 with the top three customers holding more than 85% of it. Reports still disagree on the size of the shortfall, one putting it at about 10% in mid-2026 and another at about 20% for the year."
+      "watchItem": "Advanced packaging remains the gate on how much accelerator revenue the chain can realize: lines are booked through 2027, NVIDIA has reserved roughly 800,000 to 850,000 wafers of 2026 capacity, and the supply-demand gap is still put at about 20 percent even as monthly output climbs toward 130,000 to 140,000 wafers. Watch whether the gap narrows as the added capacity lands."
     },
     {
       "dimensions": [
-        "bottleneck"
+        "bottleneck",
+        "momentum"
       ],
       "findingIds": [
         "www-marketbeat-com-01fd246e-2026-08-1",
+        "www-fool-com-12234ce0-2026-08-2",
         "en-sedaily-com-b1c000ac-2026-08-1",
         "www-investing-com-87498f82-2026-08-1"
       ],
       "thesisIds": [
         "memory-supply-is-the-new-choke-point-on-accelerator-shipments",
-        "supply-constraint-binding"
+        "vendor-guidance-now-measures-the-shortfall-not-the-demand"
       ],
-      "watchItem": "NVIDIA says it has supply for about 70% of demand, its stacked-memory suppliers can meet only 60% to 70% of the volume requested for its next top-end part, and Micron says it can supply no more than about half of what customers ask for. Memory, not packaging alone, now sets how many accelerators actually ship."
+      "watchItem": "Stacked memory, not packaging, is now the tighter limit on shipped units: NVIDIA says it has supply for about 70 percent of demand, guided fiscal 2028 growth to about 70 percent against customer forecasts implying roughly 140 percent, and its memory suppliers can meet only 60 to 70 percent of requested volume for the next top-end part. Packaging slots booked against accelerators that cannot get memory is the exposure to watch."
     },
     {
       "dimensions": [
-        "unitEconomics"
+        "momentum",
+        "bottleneck"
       ],
       "findingIds": [
-        "finance-biggo-com-cda170af-2026-08-1",
-        "finance-biggo-com-b332e712-2026-08-3",
-        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1"
+        "pr-tsmc-com-7f560c3b-2026-08-2",
+        "www-thelec-net-c15d2de4-2026-08-1",
+        "www-tomshardware-com-9086563b-2026-08-1"
       ],
       "thesisIds": [
-        "chip-vendors-pass-memory-costs-into-system-prices",
-        "rising-memory-costs-inflate-ai-server-economics",
-        "the-second-largest-foundry-fills-up-and-raises-prices"
+        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing",
+        "silicon-wafer-supply-tightens-behind-the-memory-crunch"
       ],
-      "watchItem": "NVIDIA is raising AI server system prices by more than 15% for shipments from early next year, while guiding its own gross margin to 74% with a stated floor of 71% to 72% because of memory costs. Samsung raised contract chipmaking prices 10% to 15% on new orders, so price increases are moving through several layers of the chain at once."
+      "watchItem": "Leading-edge wafer demand keeps broadening while the layer beneath it tightens: TSMC raised 2026 revenue growth guidance to slightly above 40 percent and capital spending to $60-64 billion, and GlobalWafers reports its 300mm, 200mm and 150mm lines at effectively full utilization with constraints already showing on some advanced 300mm products. Watch whether blank-wafer and memory tightness caps the wafer starts the order book implies."
     },
     {
       "dimensions": [
-        "competitiveStructure"
+        "competitiveStructure",
+        "moat"
       ],
       "findingIds": [
         "qz-com-36c37a60-2026-08-1",
         "www-trendforce-com-01be0e4e-2026-08-1",
+        "247wallst-com-db4b25b9-2026-08-1",
         "techcrunch-com-6b79ddb7-1"
       ],
       "thesisIds": [
         "custom-asic-substitution",
-        "model-builders-start-designing-their-own-chips"
+        "model-builders-start-designing-their-own-chips",
+        "a-large-buyer-adds-a-second-designer-for-its-own-chips"
       ],
-      "watchItem": "Microsoft is reported to be negotiating TSMC capacity for upward of 300,000 of its own Maia 300 chips for 2027 delivery, OpenAI's first custom inference chip is built on TSMC 3nm with Broadcom as design partner, and Anthropic is in early talks with Samsung about a custom chip on a 2nm process. The leading-node customer list is widening from merchant GPU vendors toward the model builders themselves."
+      "watchItem": "The leading-node customer base is widening from merchant GPU vendors toward buyers designing their own parts: Microsoft is reported in talks for upward of 300,000 Maia 300 chips for 2027 with a long-term goal above one million units, OpenAI's first inference chip uses a 3nm process with Broadcom, and Marvell's expanded Google agreement carries a warrant implying a cumulative ceiling near $120 billion. Anthropic is separately in early talks with Samsung on a 2nm custom chip."
     },
     {
       "dimensions": [
-        "moat",
+        "strategicRisk",
         "competitiveStructure"
       ],
       "findingIds": [
+        "www-forbes-com-7c91863a-2026-07-2",
+        "supplyics-com-c83015c2-2026-08-3",
+        "www-sec-gov-125b52f2-2026-07-1"
+      ],
+      "thesisIds": [
+        "ai-packaging-supply-is-concentrated-in-a-few-buyers",
+        "customer-concentration-risk"
+      ],
+      "watchItem": "Packaging demand sits with very few names: the top three customers hold more than 85 percent of capacity with NVIDIA at roughly 60 percent, and NVIDIA's own revenue shows three direct customers at 21, 17 and 16 percent. A single large buyer slowing orders would leave capacity that is hard to refill quickly."
+    },
+    {
+      "dimensions": [
+        "unitEconomics",
+        "momentum"
+      ],
+      "findingIds": [
+        "www-tradingkey-com-855cb780-2026-07-2",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
+        "finance-biggo-com-cda170af-2026-08-1",
+        "finance-biggo-com-b332e712-2026-08-4"
+      ],
+      "thesisIds": [
+        "pricing-power-persistence",
+        "the-second-largest-foundry-fills-up-and-raises-prices",
+        "chip-vendors-pass-memory-costs-into-system-prices"
+      ],
+      "watchItem": "Pricing conditions across the chain are firm: TSMC posted a 67.7 percent gross margin in the second quarter of 2026, up 9.1 points year over year, Samsung raised advanced contract chipmaking prices 10 to 15 percent on new orders in July 2026, and NVIDIA is reported to be raising AI server system prices by more than 15 percent for shipments from early next year. Watch how far memory cost inflation travels into end prices before it meets buyer resistance."
+    },
+    {
+      "dimensions": [
+        "competitiveStructure",
+        "moat"
+      ],
+      "findingIds": [
         "cryptobriefing-com-c3c1a1c3-2026-08-1",
-        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "www-trendforce-com-b8196a71-2026-08-1",
         "cryptobriefing-com-c3c1a1c3-2026-08-2",
         "techsoda-substack-com-3b7a4ff5-2026-08-3",
         "techsoda-substack-com-3b7a4ff5-2026-08-4"
       ],
       "thesisIds": [
         "packaging-work-starts-to-spread-beyond-tsmc",
-        "the-alternative-packaging-route-has-its-own-choke-point"
+        "the-alternative-packaging-route-has-its-own-choke-point",
+        "intel-returns-as-a-data-center-supplier"
       ],
-      "watchItem": "Google has committed to more than 3 million units of Intel's bridge-style advanced packaging for its next in-house accelerator with 2028 delivery, Intel reports yield on that route above 90% and targets 2027 production at roughly half the cost of TSMC's CoWoS packaging, and TSMC announced a bridge-style packaging development with Kinsus in late July 2026. Intel holds about 13.7% of stacked-chip packaging capacity against TSMC's roughly 70%, and Intel's sole silicon-capacitor supplier for that route is already fully booked."
+      "watchItem": "A second packaging route is gaining real orders: Google has committed to more than 3 million units of Intel's embedded bridge packaging for a next-generation in-house chip delivering in 2028, Intel reports high demand and a growing backlog for that bridge packaging targeting high-volume production in 2027, and TSMC responded by announcing a similar bridge technology with Kinsus in late July 2026. Secondary coverage still puts Intel near 13.7 percent of global 2.5D packaging capacity against about 70 percent for TSMC, and Intel's bridge route depends on a single fully booked silicon capacitor supplier."
     },
     {
       "dimensions": [
@@ -103,28 +129,16 @@
       ],
       "findingIds": [
         "www-freepressjournal-in-36c153cb-2026-08-1",
-        "www-originbrief-app-91d7b25f-2026-07-5"
+        "www-econotimes-com-f3939240-2026-08-1",
+        "finance-yahoo-com-4ffdbfce-2026-08-1",
+        "investor-nvidia-com-7e5e6232-2026-08-1"
       ],
       "thesisIds": [
         "tariffs-on-finished-ai-hardware-become-a-new-policy-risk",
-        "us-onshoring-broadens-the-ai-hardware-supply-base"
+        "enforcement-closes-the-gray-route-into-china",
+        "vendor-financed-demand-circularity"
       ],
-      "watchItem": "Washington is reported to be preparing tariffs on imported chips that would extend to finished data-centre servers, with duty-free import allowances sized to each company's US chip-fabrication investment; no rate or start date is given and the account says the plan could still change substantially. TSMC has announced an incremental $100 billion US investment linked to the January 2026 US-Taiwan trade and investment deal."
-    },
-    {
-      "dimensions": [
-        "strategicRisk",
-        "momentum"
-      ],
-      "findingIds": [
-        "finance-yahoo-com-4ffdbfce-2026-08-1",
-        "investinglive-com-da6583e3-2026-08-1"
-      ],
-      "thesisIds": [
-        "vendor-financed-demand-circularity",
-        "the-vendor-financing-programme-draws-internal-and-partner-pushback"
-      ],
-      "watchItem": "NVIDIA cut its financial guarantee for the OpenAI data-centre campus in Ohio from $250 billion to less than $120 billion, and reporting says it paused certain deals under a compute-partnership financing programme carrying $36 billion of commitments, which NVIDIA denies is halted. Part of the order flow behind leading-node volume rests on the chip vendor's own credit support rather than on customer cash."
+      "watchItem": "Policy and buyer financing sit under the order book. Washington is reported to be preparing semiconductor tariffs extending to finished data-center servers, with duty-free allowances sized to each company's US fabrication investment and no rate or start date set; enforcement is widening, with an unproven and unconfirmed investigation into a freight forwarder over 47 Nvidia server shipments, and NVIDIA has cut one customer guarantee from $250 billion to under $120 billion while lining up over $500 billion of third-party capital."
     }
   ]
 }

@@ -1,0 +1,46 @@
+{
+  "id": "247wallst-com-41a1f529-2026-08-4",
+  "statement": "CoreWeave scaled active data center capacity from roughly 70 megawatts at the end of 2023 to about 1.5 gigawatts by mid-2026.",
+  "kind": "measured",
+  "value": {
+    "number": 1.5,
+    "unit": "GW"
+  },
+  "trend": "rising",
+  "why": "Live capacity is the physical base for rentable GPU compute, so a build-out of this size adds non-hyperscaler supply of AI compute to the market.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "More energized data-center capacity means more installed GPUs available for rent, expanding alternative compute supply outside the large clouds."
+  },
+  "evidence": [
+    {
+      "source": "24/7 Wall St.",
+      "url": "https://247wallst.com/investing/2026/08/25/coreweaves-ai-data-center-capacity-is-exploding-its-35-billion-debt-load-still-makes-the-stock-untouchable/",
+      "date": "2026-08-25",
+      "excerpt": "CoreWeave has scaled active data center capacity from roughly 70 megawatts (MW) at the end of 2023 to about 1.5 GW by mid-2026.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; capacity figures are approximations given without a company source in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "coreweave",
+  "observedAt": "2026-08-25",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

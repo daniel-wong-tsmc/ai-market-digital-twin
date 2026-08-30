@@ -15,6 +15,13 @@
       "why": "HTTP 403 to the verifier's plain reader on all 5 points, 2026-08-19 cycle; opened fine to the researcher's WebFetch"
     },
     {
+      "domain": "fool.com",
+      "kind": "blocks-plain-readers",
+      "since": "2026-08-31",
+      "why": "learned automatically: the verifier's plain reader was turned away (HTTP 401/403/429)",
+      "firstSeenUrl": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
+    },
+    {
       "domain": "mbiz.heraldcorp.com",
       "kind": "blocks-plain-readers",
       "since": "2026-08-30",

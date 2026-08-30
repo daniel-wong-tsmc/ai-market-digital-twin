@@ -1,0 +1,41 @@
+{
+  "seriesName": "NVIDIA quarterly revenue growth, year-over-year",
+  "unit": "percent year-over-year",
+  "form": "columns",
+  "sourceName": "NVIDIA Newsroom (company press releases)",
+  "points": [
+    {
+      "label": "Q2 FY2026",
+      "value": 56.0,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2026",
+      "publishedAt": "2025-08-27"
+    },
+    {
+      "label": "Q3 FY2026",
+      "value": 62.0,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2026",
+      "publishedAt": "2025-11-19"
+    },
+    {
+      "label": "Q4 FY2026",
+      "value": 73.0,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "publishedAt": "2026-02-25"
+    },
+    {
+      "label": "Q1 FY2027",
+      "value": 85.0,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027",
+      "publishedAt": "2026-05-20"
+    },
+    {
+      "label": "Q2 FY2027",
+      "value": 106.0,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+      "publishedAt": "2026-08-26"
+    }
+  ],
+  "pair": false,
+  "notes": "Each value is the year-over-year revenue growth percentage NVIDIA states verbatim in its own press-release opening bullets (e.g. Q2 FY2027: 'Revenue of $96.2 billion, up 106% from a year ago'). This is actual reported quarterly growth, not the forward-looking 70% fiscal-2028 guide or the 140% customer-forecast figure from the Q2 FY2027 earnings call -- those two numbers are guidance/commentary, not a published historical series, so they are not included as points here. The chart's usefulness is contextual: it shows growth already decelerating quarter over quarter even before the 70% FY2028 guide takes hold (56% -> 62% -> 73% -> 85% -> 106%; note the trend is still accelerating as of the most recent quarter, which is part of why the CFO's memory-supply-constrained 70% guide reads as a sharp deceleration from recent trend, let alone the 140% customer ask).",
+  "bulletIndex": 2
+}

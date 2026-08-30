@@ -1,0 +1,56 @@
+{
+  "id": "www-econotimes-com-f3939240-2026-08-1",
+  "statement": "US Bureau of Industry and Security is investigating Apex Logistics over 47 shipments during 2024 of Nvidia-powered servers and AI systems made by Super Micro Computer, allegedly routed from Taiwan through the United States, Southeast Asia and Hong Kong into China; no primary BIS notice on this investigation could be located as of 2026-08-31.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "The alleged route describes a diversion channel for controlled accelerators, and enforcement against a freight forwarder would extend export-control pressure further down the shipping chain than earlier cases.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Tighter policing of transshipment routes reduces the volume of controlled GPU systems that can reach restricted end markets and raises compliance cost for legitimate shipments."
+  },
+  "evidence": [
+    {
+      "source": "EconoTimes",
+      "url": "http://www.econotimes.com/US-Probes-Apex-Logistics-Over-Nvidia-AI-Chip-Shipments-to-China-1750578",
+      "date": "2026-08-27",
+      "excerpt": "47 shipments",
+      "tier": "secondary"
+    },
+    {
+      "source": "EconoTimes",
+      "url": "http://www.econotimes.com/US-Probes-Apex-Logistics-Over-Nvidia-AI-Chip-Shipments-to-China-1750578",
+      "date": "2026-08-27",
+      "excerpt": "Taiwan to the United States, then through Southeast Asia and Hong Kong before entering China.",
+      "tier": "secondary"
+    },
+    {
+      "source": "EconoTimes",
+      "url": "http://www.econotimes.com/US-Probes-Apex-Logistics-Over-Nvidia-AI-Chip-Shipments-to-China-1750578",
+      "date": "2026-08-27",
+      "excerpt": "no primary BIS press release or federal register notice describing this specific investigation could be located on bis.gov",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary account attributed to Bloomberg reporting; the document itself records that no primary BIS confirmation was found, and all claims remain alleged."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend flat -> unknown); sources: EconoTimes, NVIDIA Investor Relations",
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-30T16:04:18Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
