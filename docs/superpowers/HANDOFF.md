@@ -2814,6 +2814,42 @@ F57/F58/F59 → F60 → F64 → F65 → F66. Eval-v2, if approved, slots in as i
 F63's re-gate. F56 remains a safe tiny side item.
 
 ## Newest state (newest first)
+  - **2026-08-31 daily cycle (scheduled headless): chips.merchant-gpu v17 shipped + pushed
+    `f4da19c` (`main == origin/main`).** Scorecard `store/chips.merchant-gpu/2026-08-v17.json` -
+    **DMI 4.507 / SMI -0.093** (Strong, steady; prior v16 3.940 / -0.107). Report
+    `work/daily-2026-08-31/report.txt`. TOP-UP gather (store full: 436 aged in, 93 faded,
+    `notCovered` EMPTY): 10 docs in ONE round (1 primary, 9 secondary), L1 dropped 0, cap reached
+    at end of round 1. 28 findings gated / 0 dropped; L2 new 8 / update 9 / duplicate 11; corpus
+    merged 453; wiki-ingest routed 17 to 6 pages, lint clean. Day's substance: NVIDIA's Q2 FY2027
+    release (IR mirror) and its ~$279B supply commitments, AMD ROCm 10, a reported US probe into a
+    freight forwarder over NVIDIA shipments to China (secondary only, unconfirmed), Micron Taiwan
+    union strike-support survey, Marvell's Q2 FY2027 custom-silicon raise, CoreWeave backlog/debt,
+    OpenAI run-rate/IPO reports. Judge CLEAN on attempt 1 (0 bypasses); thesis passed on retry 1
+    (85 judged: 54 strengthened / 24 reaffirmed / 6 weakened / 1 adjusted / 0 broken; 2 proposed);
+    implication passed on retry 1 (8 lines; first attempt used the acronym EMIB); narrator `done`
+    first attempt (`store/chips.merchant-gpu/story/2026-08-31.json`); **citation audit CLEAN (19
+    claims, 0 flagged)**; coverage record 16 gaps (16 source, 2 paywalled by design); issues 4 open
+    / 4 assessed / 0 resolved; price-pull 879 rows, 0 failed (58s); priceSync done (standing
+    warning); v2 shadow stamped; chart-fetch all 3 not due; chart-research 2 of 3 accepted (fool.com
+    blocked the verifier -> auto-learned into `registry/do-not-fetch.json`); dashboard.json written;
+    site rebuilt (7 pages). Replay pin line added for v17. Suite **2769 passed / 6 skipped**.
+      - **AFK-DEFAULT decisions this run (all recorded in `store/cycle-log.json` deviations; none
+        user-approved):** (1) brain seams again dispatched as `plain-language-writer` on opus - still
+        no tool-less brain agent type registered; (2) extraction read its own prompt file (F88);
+        (3) **captured-at kept as the true UTC clock `2026-08-30T16:04:18Z`** although the cycle day
+        is 2026-08-31 - the scheduled run starts just after local midnight, and captured-at is only a
+        stamp (no windowing logic reads it); all `--date` artifacts use 2026-08-31; (4) wiki
+        write-back ran AFTER the scorecard, not before judgment as daily-mode (d-daily) orders - to
+        honour the "never half-commit a failed cycle" rule; judgment does not read the wiki.
+      - **Things the user should look at:** (a) **DMI +0.567 in one day with all six dimension
+        ratings unchanged** and WHAT MOVED empty - an indicator-level move under unchanged ratings;
+        not investigated headless, read the v16 -> v17 diff. (b) `gather_priority` printed `heavy`
+        for `amd-earnings` 27 days after AMD's print - looks like a bug against the manifest's
+        `earningsDates`. (c) `webreach-fetch` crawl4ai path FAILED with a cp1252 `charmap`
+        UnicodeEncodeError (U+1F92F) - the runner should write tool output as UTF-8. (d)
+        `tokenEconomics 2026-07` series gap now 9 cycles running for the same structural reason
+        (basket membership unrecorded) - needs a user decision. (e) `nvdaDataCenterRevenue`
+        chart-fetch still `skipped` 5 days after the NVIDIA print (third cycle).
   - **2026-08-30 daily cycle (scheduled headless): chips.merchant-gpu v16 shipped + pushed
     `cecba62` (`main == origin/main`).** Scorecard `store/chips.merchant-gpu/2026-08-v16.json` —
     **DMI 3.940 / SMI -0.107** (Strong, steady; prior v15 3.993 / -0.053). Report
