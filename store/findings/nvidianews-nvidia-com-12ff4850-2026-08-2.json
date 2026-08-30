@@ -1,0 +1,44 @@
+{
+  "id": "nvidianews-nvidia-com-12ff4850-2026-08-2",
+  "statement": "The new AWS commitment sits on top of a prior 1-million-GPU commitment announced at NVIDIA GTC 2026 that AWS said demand had already exceeded.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A hyperscaler saying demand already ran past its previous GPU commitment is a revision upward in planned compute spend, not a restatement.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "energy.power-generation",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Exceeding an existing GPU commitment forces upward revision of capital plans for accelerators, facilities and power."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
+      "date": "2026-08-26",
+      "excerpt": "on top of a prior 1-million-GPU commitment announced at NVIDIA GTC 2026 that AWS said demand had already exceeded",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor newsroom announcement attributing the demand statement to AWS; no capex dollar revision is given, only unit commitments."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amazon",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

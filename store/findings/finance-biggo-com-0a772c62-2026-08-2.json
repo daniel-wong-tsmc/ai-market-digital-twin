@@ -1,0 +1,49 @@
+{
+  "id": "finance-biggo-com-0a772c62-2026-08-2",
+  "statement": "Labor friction is spreading across memory suppliers: the SK hynix union rejected its wage agreement on Aug 25-26, 2026 by 50.08% opposed (7,535 votes) against 49.92% in favor (7,510 votes), a 25-vote margin on 93.81% turnout (15,045 ballots), while the Samsung union ratified its deal in May 2026 by a 73.7% vote on 95.5% turnout (62,616 ballots).",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Unsettled wage agreements at SK hynix, alongside the Micron Taiwan dispute, raise the odds of disruption at the two largest HBM suppliers.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Unresolved labor agreements at HBM makers add a non-technical risk to memory output that feeds GPU module assembly."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/293528b8-ee19-4e4f-95bf-68b17470950d",
+      "date": "2026-08-28",
+      "excerpt": "SK hynix union REJECTED its wage agreement on Aug 25-26, 2026 by a razor-thin margin",
+      "tier": "secondary"
+    },
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/293528b8-ee19-4e4f-95bf-68b17470950d",
+      "date": "2026-08-28",
+      "excerpt": "50.08% opposed (7,535 votes) vs 49.92% favored (7,510 votes), a 25-vote margin, with 93.81% turnout (15,045 ballots cast)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary comparator data cited inside one article; no union or company primary document read."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "sk-hynix",
+  "observedAt": "2026-08-28",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

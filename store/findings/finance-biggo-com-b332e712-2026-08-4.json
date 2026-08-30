@@ -1,0 +1,43 @@
+{
+  "id": "finance-biggo-com-b332e712-2026-08-4",
+  "statement": "NVIDIA said memory scarcity is driven in large part by the AI build-out itself and that the magnitude of the memory price increase has exceeded its prior expectations, with prices headed even higher into next year.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "The buyer of last resort for HBM is telling investors memory prices are running past its own forecasts, which points to tight memory supply persisting through next year.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Memory scarcity raises accelerator bill-of-materials cost and caps how many systems can be built regardless of order book."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance (citing NVIDIA Q2 FY2027 earnings call)",
+      "url": "https://finance.biggo.com/news/US_NVDA_2026-08-26",
+      "date": "2026-08-26",
+      "excerpt": "the magnitude of the price increase has exceeded our prior expectations and are headed even higher into next year.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Management quote relayed by a single secondary outlet; no primary transcript read."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> rising); sources: BigGo Finance (citing NVIDIA Q2 FY2027 earnings call), Digitimes (headline/lede, paywalled beyond)",
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

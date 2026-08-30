@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-08-30",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-1",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-3",
+        "www-marketbeat-com-01fd246e-2026-08-1",
+        "nvidianews-nvidia-com-12ff4850-2026-08-1",
+        "nvidianews-nvidia-com-12ff4850-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-biggo-com-0a772c62-2026-08-2",
+        "finance-biggo-com-0a772c62-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "news-skhynix-com-0eb7edb1-2026-08-1",
+        "seekingalpha-com-042d1010-2026-08-1",
+        "seekingalpha-com-042d1010-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-biggo-com-0a772c62-2026-08-1",
+        "www-techtimes-com-3b32a828-2026-08-2",
+        "www-freepressjournal-in-36c153cb-2026-08-1",
+        "investinglive-com-da6583e3-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-biggo-com-0a772c62-2026-08-2",
+        "finance-biggo-com-0a772c62-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-1",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-3",
+        "www-marketbeat-com-01fd246e-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "news-skhynix-com-0eb7edb1-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-bottleneck",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-biggo-com-0a772c62-2026-08-2",
+        "finance-biggo-com-0a772c62-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-moat",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-trendforce-com-01be0e4e-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-stacked-memory-and-server-dram",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-biggo-com-0a772c62-2026-08-1",
+        "news-skhynix-com-0eb7edb1-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-hbm4-memory-allocation-per-accelerator",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "zdnet-co-kr-1640e7a5-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-1",
+        "nvidianews-nvidia-com-d9b39bc2-2026-08-3",
+        "finance-biggo-com-b332e712-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-trendforce-com-836f33fa-2026-08-1",
+        "supplyics-com-c83015c2-2026-08-3",
+        "supplyics-com-c83015c2-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-marketbeat-com-01fd246e-2026-08-1",
+        "en-sedaily-com-b1c000ac-2026-08-1",
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-biggo-com-cda170af-2026-08-1",
+        "finance-biggo-com-b332e712-2026-08-3",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "qz-com-36c37a60-2026-08-1",
+        "www-trendforce-com-01be0e4e-2026-08-1",
+        "techcrunch-com-6b79ddb7-1"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2",
+        "techsoda-substack-com-3b7a4ff5-2026-08-3",
+        "techsoda-substack-com-3b7a4ff5-2026-08-4"
+      ]
+    },
+    {
+      "claimKey": "impl:6",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-freepressjournal-in-36c153cb-2026-08-1",
+        "www-originbrief-app-91d7b25f-2026-07-5"
+      ]
+    },
+    {
+      "claimKey": "impl:7",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-4ffdbfce-2026-08-1",
+        "investinglive-com-da6583e3-2026-08-1"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 19,
+    "flagged": 0,
+    "skipped": 0
+  }
+}

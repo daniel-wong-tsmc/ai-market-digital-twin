@@ -1,0 +1,52 @@
+{
+  "id": "nvidianews-nvidia-com-12ff4850-2026-08-1",
+  "statement": "AWS and NVIDIA expanded their partnership, with AWS planning to deploy 2 million additional GPUs across AWS global infrastructure in 2027-2028 using NVIDIA Blackwell Ultra, Rubin, Rubin Ultra and RTX PRO 4500 Blackwell Server Edition, plus 100,000 GPUs cited for secure AWS infrastructure serving US government federal and national-security workloads.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named multi-generation deployment commitment from the largest cloud provider locks in merchant-GPU volume two years out and spans current and next-generation parts.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.networking-fabric",
+      "chips.hbm-memory",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "A committed 2-million-GPU deployment pulls through accelerators, HBM, NVLink and fabric, and the data center capacity and power to host them."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
+      "date": "2026-08-26",
+      "excerpt": "AWS plans to deploy '2 million additional GPUs' across AWS global infrastructure in 2027-2028",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
+      "date": "2026-08-26",
+      "excerpt": "GPU models named for the new deployment: NVIDIA Blackwell Ultra, NVIDIA Rubin, NVIDIA Rubin Ultra, and NVIDIA RTX PRO 4500 Blackwell Server Edition.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Joint announcement published on NVIDIA's own newsroom, a primary source, with named products and deployment years; no dollar value disclosed."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "AWS and NVIDIA",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

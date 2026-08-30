@@ -1,0 +1,51 @@
+{
+  "id": "investinglive-com-da6583e3-2026-08-2",
+  "statement": "The same report says internal NVIDIA employees raised concerns that the compute-partnership program could trigger antitrust scrutiny, that partners objected to restrictions on which customers could rent the chips, and that NVIDIA preferred spreading capacity across multiple smaller firms rather than concentrating it with one large client; the article links this to NVIDIA scaling back financial support for OpenAI's Ohio data center project.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "How NVIDIA allocates capacity and balance-sheet support across customers shapes concentration risk on both its revenue and its customers' buildouts.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "models.frontier-closed"
+    ],
+    "direction": "mixed",
+    "mechanism": "Spreading allocation across smaller buyers reduces single-customer dependence but removes committed support from the largest projects, which can slow those specific buildouts."
+  },
+  "evidence": [
+    {
+      "source": "InvestingLive (citing WSJ report)",
+      "url": "https://investinglive.com/stocks/wsj-report-nvidia-pauses-ai-cloud-revenue-share-deals-amid-antitrust-and-control-concerns/",
+      "date": "2026-08-27",
+      "excerpt": "Internal employees raised concerns that the program could trigger antitrust scrutiny.",
+      "tier": "secondary"
+    },
+    {
+      "source": "InvestingLive (citing WSJ report)",
+      "url": "https://investinglive.com/stocks/wsj-report-nvidia-pauses-ai-cloud-revenue-share-deals-amid-antitrust-and-control-concerns/",
+      "date": "2026-08-27",
+      "excerpt": "a broader recalibration of how deeply Nvidia ties its balance sheet to customer arrangements.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Anonymous-sourced WSJ reporting relayed by one secondary outlet; no filing or company statement confirms the internal concerns or the allocation preference."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

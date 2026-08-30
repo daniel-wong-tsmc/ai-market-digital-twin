@@ -89,6 +89,7 @@ PINNED = {
     "2026-08-v13.json": W_CURRENT,  # 2026-08-25 daily cycle (scheduled headless); post-F60 -> CURRENT
     "2026-08-v14.json": W_CURRENT,  # 2026-08-26 daily cycle (scheduled headless); post-F60 -> CURRENT
     "2026-08-v15.json": W_CURRENT,  # 2026-08-27 daily cycle (scheduled headless; first with NVIDIA Q2 FY2027); post-F60 -> CURRENT
+    "2026-08-v16.json": W_CURRENT,  # 2026-08-30 daily cycle (scheduled headless); post-F60 -> CURRENT
 }
 # Pre-v1.2 originals: superseded by replays, pinned structurally (original -> replay).
 SUPERSEDED = {

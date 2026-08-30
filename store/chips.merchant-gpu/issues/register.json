@@ -1,19 +1,18 @@
 {
- "asOf": "2026-08-27",
+ "asOf": "2026-08-30",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 8,
+   "checkCount": 9,
    "id": "dim-bottleneck",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-27",
+    "assessedAsOf": "2026-08-30",
     "claimFindingIds": [
-     "www-marketbeat-com-01fd246e-2026-08-1",
-     "www-marketbeat-com-01fd246e-2026-08-3",
-     "nvidianews-nvidia-com-d9b39bc2-2026-08-3"
+     "finance-biggo-com-0a772c62-2026-08-2",
+     "finance-biggo-com-0a772c62-2026-08-1"
     ],
-    "reasoning": "NVIDIA said on its August 26 call that it has supply for only about 70 percent of demand and that memory pricing has been worse than it expected, with further rises next year. Its gross margin guide fell to 74.0 percent.",
+    "reasoning": "Labour trouble hit two of the three big memory makers at once: SK hynix's union rejected its wage deal by 25 votes, and about 80% of Micron's unionised Taiwan workers back action at sites holding roughly 60% of its capacity.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -25,18 +24,18 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 6
+   "worsenedCount": 7
   },
   {
-   "checkCount": 8,
+   "checkCount": 9,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-27",
+    "assessedAsOf": "2026-08-30",
     "claimFindingIds": [
-     "nvidianews-nvidia-com-05506162-2026-08-1"
+     "www-trendforce-com-01be0e4e-2026-08-1"
     ],
-    "reasoning": "No new evidence today about rivals taking ground. The one large order in view runs the other way: AWS committed to 2 million more NVIDIA accelerators for 2027 and 2028.",
+    "reasoning": "No new evidence arrived today on rivals to merchant GPUs. The most recent development is still OpenAI's own inference chip, Jalapeno, unveiled on August 26.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
@@ -51,17 +50,16 @@
    "worsenedCount": 4
   },
   {
-   "checkCount": 7,
+   "checkCount": 8,
    "id": "constraint-stacked-memory-and-server-dram",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-27",
+    "assessedAsOf": "2026-08-30",
     "claimFindingIds": [
-     "www-marketbeat-com-01fd246e-2026-08-3",
-     "www-marketbeat-com-01fd246e-2026-08-1",
-     "seekingalpha-com-042d1010-2026-08-2"
+     "finance-biggo-com-0a772c62-2026-08-1",
+     "news-skhynix-com-0eb7edb1-2026-08-1"
     ],
-    "reasoning": "The largest buyer of this memory now says prices went past its own expectations and will rise again next year, while it can still only supply about 70 percent of demand. Today's $31 billion Japanese commitment covers flash and runs to 2032.",
+    "reasoning": "A possible strike at Micron's Taiwan plants, which hold roughly 60% of its capacity, threatens near-term memory output, while SK hynix's new US packaging plant will not reach mass production until the second half of 2029.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -73,28 +71,28 @@
     "kind": "binding-constraint",
     "label": "HBM4 and server DRAM supply"
    },
-   "worsenedCount": 3
+   "worsenedCount": 4
   },
   {
-   "checkCount": 5,
+   "checkCount": 6,
    "id": "constraint-hbm4-memory-allocation-per-accelerator",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-08-27",
+    "assessedAsOf": "2026-08-30",
     "claimFindingIds": [
-     "www-marketbeat-com-01fd246e-2026-08-1"
+     "zdnet-co-kr-1640e7a5-2026-08-1"
     ],
-    "reasoning": "No new evidence arrived today on how much stacked memory goes into each accelerator. NVIDIA repeated only that it can supply about 70 percent of demand with the chain running flat out.",
+    "reasoning": "No new evidence arrived today on how much memory goes into each chip. The latest word remains the August 26 report that Samsung and SK hynix are shifting NVIDIA's main memory to 8-high stacks and cutting 12-high output.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "HBM4 stacked memory supply",
+   "title": "High-bandwidth memory supply",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "HBM4 stacked memory supply"
+    "label": "High-bandwidth memory supply"
    },
    "worsenedCount": 1
   }

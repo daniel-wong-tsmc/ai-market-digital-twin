@@ -1,0 +1,51 @@
+{
+  "id": "finance-biggo-com-b332e712-2026-08-2",
+  "statement": "NVIDIA guided FY2028 revenue growth of approximately 70%, explicitly labeled supply-constrained, with Jensen Huang saying demand is much greater than 70% and that supply, not demand, is the limit.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A full-year growth guide set by what can be built rather than what can be sold means the reported number understates underlying demand and pins the bottleneck upstream.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Guidance capped by supply signals durable order demand while confirming that memory and packaging capacity, not customer appetite, sets shipment volumes."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance (citing NVIDIA Q2 FY2027 earnings call)",
+      "url": "https://finance.biggo.com/news/US_NVDA_2026-08-26",
+      "date": "2026-08-26",
+      "excerpt": "Approximately 70% (supply-constrained)",
+      "tier": "secondary"
+    },
+    {
+      "source": "BigGo Finance (citing NVIDIA Q2 FY2027 earnings call)",
+      "url": "https://finance.biggo.com/news/US_NVDA_2026-08-26",
+      "date": "2026-08-26",
+      "excerpt": "Even though our demand is much greater than 70%, our supply allows us to confidently deliver 70%.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Direct quotes but relayed by one secondary outlet; not read from an NVIDIA filing or transcript."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: BigGo Finance (citing NVIDIA Q2 FY2027 earnings call), NVIDIA Newsroom",
+  "asOf": "2026-08",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

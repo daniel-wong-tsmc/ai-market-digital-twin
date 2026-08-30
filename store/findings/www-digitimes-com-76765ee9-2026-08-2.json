@@ -1,0 +1,42 @@
+{
+  "id": "www-digitimes-com-76765ee9-2026-08-2",
+  "statement": "Background reporting carried in the same document, dated 2026-08-09, says Samsung reached golden yield in the 80% range for HBM4 by August 2026, up from below 60% when mass production began in February 2026, while NVIDIA is described as having tested Rubin Ultra prototypes and strongly considering prioritizing HBM4E 8-high or the previous-generation HBM4 because of capacity limits said to extend into 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Samsung improving HBM4 yield adds a second qualified supplier, which loosens the single-supplier chokepoint even while total capacity stays tight into 2027.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Better Samsung yield expands alternative HBM4 supply, but the stated capacity limits into 2027 keep total memory availability the binding constraint."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance (background, 2026-08-09) as carried in the Digitimes dispatch",
+      "url": "https://www.digitimes.com/news/a20260826VL221/nvidia-samsung-sk-hynix-hbm4-hbm.html",
+      "date": "2026-08-26",
+      "excerpt": "Samsung achieved 'golden yield' in the 80% range for HBM4 by August 2026, up from below 60% when mass production began in February 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Secondary background from a 2026-08-09 BigGo Finance piece with source quotes truncated mid-sentence in the document; the supporting Sammy Fans summary was not independently fetched (HTTP 403)."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "samsung",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

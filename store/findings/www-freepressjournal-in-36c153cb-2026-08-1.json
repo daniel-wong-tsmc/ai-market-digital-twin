@@ -1,0 +1,52 @@
+{
+  "id": "www-freepressjournal-in-36c153cb-2026-08-1",
+  "statement": "The Trump administration is preparing tariffs on imported semiconductors that would extend to finished hardware including data center servers, laptops and gaming consoles, with Commerce Secretary Howard Lutnick championing a framework that sizes duty-free import allowances to a company's US chip-fabrication investment; officials are examining tiered rates and import caps varying by trading partner, no rate or implementation date is given, and the account states the plan could still change substantially before finalisation.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Extending semiconductor tariffs to complete servers would raise the landed cost of AI infrastructure and tie relief to US fab commitments, changing where and at what cost buyers build.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "chips.foundry-packaging",
+      "infrastructure.neocloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Tariffs on imported servers raise capital cost per deployed rack, and exemptions tied to domestic fab investment favor firms with US manufacturing commitments over those without."
+  },
+  "evidence": [
+    {
+      "source": "Free Press Journal (citing CNBC/Politico reporting)",
+      "url": "https://www.freepressjournal.in/tech/trump-plans-chip-tariffs-that-could-hit-servers-laptops-tech-industry-warns-of-ai-setback",
+      "date": "2026-08-28",
+      "excerpt": "The Trump administration is preparing tariffs on imported semiconductors that would extend to finished hardware including data center servers, laptops, and gaming consoles.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Free Press Journal (citing CNBC/Politico reporting)",
+      "url": "https://www.freepressjournal.in/tech/trump-plans-chip-tariffs-that-could-hit-servers-laptops-tech-industry-warns-of-ai-setback",
+      "date": "2026-08-28",
+      "excerpt": "the plan could still change substantially before finalisation",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Preliminary plans reported by CNBC and Politico citing eight people with knowledge of discussions and relayed by two secondary outlets; nothing is finalized, no rate is confirmed, and the White House did not confirm a rate."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: Free Press Journal (citing CNBC/Politico reporting), Free Press Journal (citing CNBC/Politico reporting), quoting Yahoo Finance/Quartz 2026-08-27",
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "US government",
+  "observedAt": "2026-08-28",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

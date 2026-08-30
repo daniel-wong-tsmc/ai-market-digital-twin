@@ -1,0 +1,45 @@
+{
+  "id": "finance-biggo-com-b332e712-2026-08-3",
+  "statement": "NVIDIA reiterated Q3 gross margin guidance of 74% plus or minus 50 basis points and cited a Q4 gross-margin floor of 71-72%, a step down attributed to memory costs.",
+  "kind": "measured",
+  "value": {
+    "number": 74.0,
+    "unit": "pct"
+  },
+  "trend": "falling",
+  "why": "A guided margin path from 74% down to a 71-72% floor shows rising input costs being absorbed rather than fully passed through.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "negative",
+    "mechanism": "Higher memory prices compress accelerator gross margin, which is the cleanest read on pricing power versus input cost."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance (citing NVIDIA Q2 FY2027 earnings call)",
+      "url": "https://finance.biggo.com/news/US_NVDA_2026-08-26",
+      "date": "2026-08-26",
+      "excerpt": "Q3 gross margin guidance reiterated as 74% plus/minus 50 basis points",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary summary of call guidance; the 74% figure matches the primary press release but the 71-72% Q4 floor is only in this retelling."
+  },
+  "dispersion": "conflicting same-key reports: value 75.0 -> 74.0 (tol 1%); sources: BigGo Finance (citing NVIDIA Q2 FY2027 earnings call), NVIDIA Newsroom",
+  "asOf": "2026-08",
+  "indicatorId": "grossMargin",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

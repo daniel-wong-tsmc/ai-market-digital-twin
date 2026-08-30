@@ -1,0 +1,44 @@
+{
+  "id": "nvidianews-nvidia-com-9c78f4f0-2026-08-4",
+  "statement": "NVIDIA announced the Vera Rubin platform is ramping into full production with racks running at partners including CoreWeave, Google Cloud, Microsoft Azure, Oracle Cloud Infrastructure and Nebius; no RPO or backlog dollar figure was disclosed in this press release.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Named partners running production racks turns a launch claim into deployed capacity across both hyperscalers and neoclouds.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "Full production ramp with named deployments confirms the next-generation platform is shipping, pulling rack-scale system and fabric spend with it."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+      "date": "2026-08-26",
+      "excerpt": "Announced the NVIDIA Vera Rubin platform is ramping into full production with racks running at partners including CoreWeave, Google Cloud, Microsoft Azure, Oracle Cloud Infrastructure and Nebius.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Stated in NVIDIA's own earnings release, a primary source; no unit volumes or dollar values attached."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "nvidianews-nvidia-com-12ff4850-2026-08-3",
+  "statement": "AWS and NVIDIA cited G7 instances delivering 4.6x AI inference performance and 2.1x graphics performance versus G6, GPU-accelerated data processing up to 3.7x faster with 30% better price performance versus CPU configurations, and vector indexing up to 9x faster at one-quarter the cost.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Vendor-stated cost-per-unit-of-work improvements are what make GPU instances displace CPU workloads, widening the addressable base beyond model training.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.cluster-software",
+      "models.embeddings"
+    ],
+    "direction": "positive",
+    "mechanism": "Better price performance against CPUs shifts general data processing and vector search onto GPUs, adding demand outside AI training."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
+      "date": "2026-08-26",
+      "excerpt": "GPU-accelerated data processing delivers 'up to 3.7x faster' speeds with '30% better price performance' versus CPU configurations",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
+      "date": "2026-08-26",
+      "excerpt": "vector indexing achieves 'up to 9x faster' performance at 'one-quarter the cost'",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Primary source, but these are vendor marketing benchmarks with no disclosed methodology or workload definition."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "flopsPerDollar",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "AWS and NVIDIA",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

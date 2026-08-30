@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-08",
-  "capturedAt": "2026-08-27T12:44:02Z",
+  "capturedAt": "2026-08-30T04:14:13Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
@@ -33,6 +33,14 @@
     },
     {
       "type": "source",
+      "id": "lambda-gpu-pricing",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
       "id": "coreweave-pricing",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -53,14 +61,6 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Open-web analyst notes / trade press on GPU market share' was not fetched. URL patterns: ['tomshardware.com', 'anandtech.com', 'techpowerup.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "channel-checks",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Open-web channel checks: lead times, inventory notes from distributors' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com']",
       "paywalledNote": null
     },
     {
@@ -102,37 +102,29 @@
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Hyperscaler AI run-rate and model-lab ARR disclosures' was not fetched. URL patterns: ['microsoft.com', 'blogs.microsoft.com', 'openai.com', 'anthropic.com', 'blog.google', 'aws.amazon.com/machine-learning', 'semianalysis.com']",
       "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "upstream-component-leadtimes",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
-      "paywalledNote": null
     }
   ],
   "gapCounts": {
-    "total": 13,
-    "source": 13,
+    "total": 12,
+    "source": 12,
     "indicator": 0,
-    "required": 13,
+    "required": 12,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://newsroom.intel.com/intel-foundry/intels-us-advanced-packaging-enables-next-generation-ai-semiconductors",
+    "https://finance.biggo.com/news/293528b8-ee19-4e4f-95bf-68b17470950d",
+    "https://finance.biggo.com/news/US_NVDA_2026-08-26",
+    "https://investinglive.com/stocks/wsj-report-nvidia-pauses-ai-cloud-revenue-share-deals-amid-antitrust-and-control-concerns/",
+    "https://news.skhynix.com/en/groundbreaking-ceremony-in-indiana/",
     "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai",
     "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
-    "https://seekingalpha.com/news/4637427-kioxia-and-sandisk-to-invest-over-31b-in-japan?feed_item_type=news",
-    "https://techcrunch.com/2026/08/26/anthropic-continues-compute-gobbling-streak-in-45-billion-deal-with-nscale/",
-    "https://www.kioxia.com/en-jp/about/news/2026/20260827-3.html",
-    "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/",
-    "https://www.runpod.io/pricing",
-    "https://www.servethehome.com/sk-hynix-hbm-packaging-at-hot-chips-2026/",
-    "https://www.thenews.com.pk/latest/1413820-trump-administration-weighs-new-sweeping-tariffs-on-semiconductors-report"
+    "https://techcrunch.com/2026/08/28/neocloud-lambda-secures-1b-in-debt-to-buy-more-chips/",
+    "https://www.digitimes.com/news/a20260826VL221/nvidia-samsung-sk-hynix-hbm4-hbm.html",
+    "https://www.freepressjournal.in/tech/trump-plans-chip-tariffs-that-could-hit-servers-laptops-tech-industry-warns-of-ai-setback",
+    "https://www.techtimes.com/articles/325957/20260829/commerce-drafts-ai-chip-rule-loophole-it-created-rescinding-biden-know-your-customer.htm"
   ],
   "judgedIndicatorIds": [
     "D2",

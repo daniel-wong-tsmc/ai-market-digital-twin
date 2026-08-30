@@ -1,0 +1,57 @@
+{
+  "id": "finance-biggo-com-0a772c62-2026-08-1",
+  "statement": "Micron's unionized Taiwan workforce is moving toward a strike over bonus terms, with around 80% of unionized workers backing labor action; Taiwan hosts roughly 60% of Micron's global production capacity, mandatory mediation is expected to begin mid-September 2026, and a formal strike vote becomes possible in September 2026 if talks fail.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Micron is a major DRAM and HBM supplier; a work stoppage at sites representing roughly 60% of its global capacity would tighten memory availability for AI accelerator builds.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "A strike or slowdown at Micron's Taiwan fabs would cut memory output, and HBM/DRAM supply is already the binding constraint on GPU system shipments."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/293528b8-ee19-4e4f-95bf-68b17470950d",
+      "date": "2026-08-28",
+      "excerpt": "around 80% of unionized workers support labor action",
+      "tier": "secondary"
+    },
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/293528b8-ee19-4e4f-95bf-68b17470950d",
+      "date": "2026-08-28",
+      "excerpt": "Taiwan hosts roughly 60% of Micron's global production capacity.",
+      "tier": "secondary"
+    },
+    {
+      "source": "BigGo Finance",
+      "url": "https://finance.biggo.com/news/293528b8-ee19-4e4f-95bf-68b17470950d",
+      "date": "2026-08-28",
+      "excerpt": "mandatory mediation expected to begin mid-September 2026; if talks fail, a formal strike vote becomes possible in September 2026.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet (BigGo Finance) with specific survey and timeline detail; no strike has occurred and no company or union filing confirms the vote share."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "micron",
+  "observedAt": "2026-08-28",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "news-skhynix-com-0eb7edb1-2026-08-1",
+  "statement": "SK hynix broke ground on its first US HBM packaging base, an advanced memory packaging plant in West Lafayette, Indiana, backed by over $4 billion; the cleanroom is expected to open by October 2028 and mass production of next-generation HBM is scheduled for the second half of 2029, with wafers made in South Korea shipped to Indiana for packaging and testing.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "It adds committed HBM packaging capacity inside the US, but on a timeline that does nothing for the current shortage.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "New advanced packaging and test capacity expands the back-end step that gates HBM output, and a US-located site reduces tariff and geographic concentration exposure for US customers from 2029."
+  },
+  "evidence": [
+    {
+      "source": "SK hynix Newsroom (official)",
+      "url": "https://news.skhynix.com/en/groundbreaking-ceremony-in-indiana/",
+      "date": "2026-08-28",
+      "excerpt": "cleanroom expected to open by October 2028; mass production of next-generation HBM scheduled to begin in the second half of 2029",
+      "tier": "secondary"
+    },
+    {
+      "source": "SK hynix Newsroom (official)",
+      "url": "https://news.skhynix.com/en/groundbreaking-ceremony-in-indiana/",
+      "date": "2026-08-28",
+      "excerpt": "advanced wafers produced in South Korea will be shipped to Indiana for advanced packaging and testing",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company newsroom announcement stamped secondary tier in this dispatch; capacity and output figures are not disclosed and the production date is three years out."
+  },
+  "dispersion": null,
+  "asOf": "2026-08",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "sk-hynix",
+  "observedAt": "2026-08-28",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

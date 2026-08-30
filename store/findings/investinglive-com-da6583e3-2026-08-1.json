@@ -1,0 +1,50 @@
+{
+  "id": "investinglive-com-da6583e3-2026-08-1",
+  "statement": "Per WSJ reporting relayed by InvestingLive, NVIDIA has paused certain deals under its AI Compute Partnership financing program, which gave cloud providers credit support in exchange for revenue sharing and under which the company disclosed $36 billion in commitments on six-year agreements; NVIDIA denies the program is halted, saying the underlying business model introduced in July remains in place.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Vendor-supplied credit has been part of how smaller AI clouds fund GPU purchases, so any pullback tightens financing for a segment of marginal buyers.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "If vendor credit support slows, neoclouds that relied on it must raise costlier third-party debt, which can delay or shrink GPU orders."
+  },
+  "evidence": [
+    {
+      "source": "InvestingLive (citing WSJ report)",
+      "url": "https://investinglive.com/stocks/wsj-report-nvidia-pauses-ai-cloud-revenue-share-deals-amid-antitrust-and-control-concerns/",
+      "date": "2026-08-27",
+      "excerpt": "Nvidia has paused certain deals under its AI Compute Partnership financing program, which offered credit support to cloud providers in exchange for revenue sharing. The company disclosed $36 billion in commitments under six-year agreements.",
+      "tier": "secondary"
+    },
+    {
+      "source": "InvestingLive (citing WSJ report)",
+      "url": "https://investinglive.com/stocks/wsj-report-nvidia-pauses-ai-cloud-revenue-share-deals-amid-antitrust-and-control-concerns/",
+      "date": "2026-08-27",
+      "excerpt": "The underlying business model introduced in July remains in place and continues to evolve amid high demand.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Secondary relay of WSJ reporting that NVIDIA partly denies; the article itself notes no official NVIDIA newsroom post addressing the $36B pause claim was found, and the denial reaches this article only through a spokesperson quote."
+  },
+  "dispersion": "WSJ reporting says deals are paused; an NVIDIA spokesperson says the underlying program continues.",
+  "asOf": "2026-08",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,29 @@
+{
+  "seriesName": "SK hynix investment decisions for new Korean memory fabs",
+  "unit": "trillion Korean won",
+  "form": "columns",
+  "sourceName": "SK hynix Newsroom",
+  "points": [
+    {
+      "label": "Yongin Y1 fab — added facility investment (announced Feb 2026)",
+      "value": 21.6,
+      "sourceUrl": "https://news.skhynix.com/en/new-facility-investment-for-yongin-semiconductor-cluster/",
+      "publishedAt": "2026-02-25"
+    },
+    {
+      "label": "Yongin Y2 fab (announced Aug 2026)",
+      "value": 35.2,
+      "sourceUrl": "https://news.skhynix.com/en/fab-facility-investment-2026/",
+      "publishedAt": "2026-08-07"
+    },
+    {
+      "label": "Cheongju M17 fab (announced Aug 2026)",
+      "value": 19.1,
+      "sourceUrl": "https://news.skhynix.com/en/fab-facility-investment-2026/",
+      "publishedAt": "2026-08-07"
+    }
+  ],
+  "pair": false,
+  "notes": "All three figures are board-approved investment decisions published by SK hynix's own newsroom, so the series is same-source and public. Scope differs between points and readers should know it: the 21.6 trillion won for Yongin Y1 is an additional facility investment to be spent by the end of December 2030 on a fab already under construction (the page says total Y1 construction comes to roughly 31 trillion won including an earlier 9.4 trillion won tranche), while the 35.2 trillion won for Yongin Y2 and 19.1 trillion won for Cheongju M17 are the whole-fab amounts approved on 2026-08-07 (a combined package the company describes as about 54 trillion won). The Indiana packaging plant in the bullet is deliberately NOT plotted: SK hynix states it only as 'over $4 billion,' which is a hedge in a different currency, and turning it into a bar would mean inventing a number. The honest read of the chart is directional — it shows the scale of the money SK hynix is committing to fabs at home, against which the US packaging site is a much smaller and later commitment.",
+  "bulletIndex": 3
+}

@@ -1,0 +1,35 @@
+{
+  "seriesName": "NVIDIA quarterly Data Center revenue",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "NVIDIA Newsroom (quarterly earnings press releases)",
+  "points": [
+    {
+      "label": "Q3 FY2026",
+      "value": 51.2,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2026",
+      "publishedAt": "2025-11-19"
+    },
+    {
+      "label": "Q4 FY2026",
+      "value": 62.3,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "publishedAt": "2026-02-25"
+    },
+    {
+      "label": "Q1 FY2027",
+      "value": 75.2,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027",
+      "publishedAt": "2026-05-20"
+    },
+    {
+      "label": "Q2 FY2027",
+      "value": 89.0,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
+      "publishedAt": "2026-08-26"
+    }
+  ],
+  "pair": false,
+  "notes": "All four points are reported (actual, not forecast) Data Center segment revenue, each taken from NVIDIA's own earnings press release for that quarter on nvidianews.nvidia.com, so the whole series sits on one site. Each release states the figure as, e.g., 'Third-quarter revenue was a record $51.2 billion, up 25% from the previous quarter and up 66% from a year ago.' The quarter-over-quarter steps NVIDIA quotes (up 22%, up 21%, up 18%) are consistent with the four values. Two things a reader should know. First, the $108.0 billion Q3 FY2027 figure in the bullet is company guidance, not a reported result, so it is deliberately left out of the series. Second, the 'supply for about 70% of demand' remark is a hedged verbal statement, not a published number, so it is not chartable either; this series instead shows the demand-driven revenue ramp that the supply comment is about. NVIDIA changed its reporting segments in Q1 FY2027 (splitting into Data Center and Edge computing), so the FY2026 quarters and FY2027 quarters are not guaranteed to be defined identically.",
+  "bulletIndex": 2
+}

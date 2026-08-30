@@ -1,0 +1,51 @@
+{
+  "id": "www-techtimes-com-3b32a828-2026-08-2",
+  "statement": "The same search summary says Commerce is drafting a rule to block Chinese AI firms from renting Nvidia GPU time through Southeast Asian data centers, while export-control lawyers say the administration lacks statutory authority to enforce it; this is a draft proposal, not a published or effective rule, with no RIN, docket number, effective date or performance threshold found, and no primary confirmation that any such rule took effect on 2026-08-28.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Remote access through offshore data centers is currently how China-linked users reach restricted chips, so a rule closing it would cut a real demand channel, but nothing has been enacted.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "If adopted, restricting Chinese firms from renting GPU capacity offshore would remove a source of utilization for Southeast Asian data centers and the GPUs installed in them."
+  },
+  "evidence": [
+    {
+      "source": "TechTimes (search-engine cached summary; primary article fetch returned HTTP 403)",
+      "url": "https://www.techtimes.com/articles/325957/20260829/commerce-drafts-ai-chip-rule-loophole-it-created-rescinding-biden-know-your-customer.htm",
+      "date": "2026-08-29",
+      "excerpt": "Commerce is drafting a rule to block Chinese AI firms from renting Nvidia GPU time through Southeast Asian data centers, though export-control lawyers say the Trump administration lacks statutory authority to enforce it.",
+      "tier": "secondary"
+    },
+    {
+      "source": "TechTimes (search-engine cached summary; primary article fetch returned HTTP 403)",
+      "url": "https://www.techtimes.com/articles/325957/20260829/commerce-drafts-ai-chip-rule-loophole-it-created-rescinding-biden-know-your-customer.htm",
+      "date": "2026-08-29",
+      "excerpt": "This is characterized in the search summary as a DRAFT rule (Commerce 'is drafting'), not a finalized/published Federal Register rule.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Search-engine summary only, page not readable (HTTP 403), explicitly flagged as a draft rather than a finalized rule, no federalregister.gov or bis.gov entry located, and lawyers quoted disputing enforceability."
+  },
+  "dispersion": "The document notes the only confirmed finalized BIS action found was the 2026-01-15 license-review revision, not the 2026-08-28 rule replacement described in the dispatch brief.",
+  "asOf": "2026-08",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "US Department of Commerce",
+  "observedAt": "2026-08-29",
+  "capturedAt": "2026-08-30T04:10:00Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
