@@ -2814,6 +2814,69 @@ F57/F58/F59 → F60 → F64 → F65 → F66. Eval-v2, if approved, slots in as i
 F63's re-gate. F56 remains a safe tiny side item.
 
 ## Newest state (newest first)
+  - **2026-08-30 daily cycle (scheduled headless): chips.merchant-gpu v16 shipped + pushed
+    `cecba62` (`main == origin/main`).** Scorecard `store/chips.merchant-gpu/2026-08-v16.json` —
+    **DMI 3.940 / SMI -0.107** (Strong, steady; prior v15 3.993 / -0.053). Report
+    `work/daily-2026-08-30/report.txt`. TOP-UP gather (store coverage already full: 419 findings
+    aged in, 93 faded, `notCovered` EMPTY): 10 docs in ONE round (2 primary, 8 secondary), L1
+    dropped 0 as already-seen, cap reached at end of round 1 so round 2 did not run. NVIDIA is 4
+    days past its Q2 FY2027 print, so `nvda-earnings` / `nvda-10k-risk-factors` ranked `heavy` and
+    took the filing budget; AMD (26d past) ranked `light`. 23 findings gated / 0 dropped; corpus
+    merged 436 (fresh new 10 / update 7 / duplicate 6); wiki-ingest routed 17 to 10 pages, lint
+    clean. Day's substance: NVIDIA's Q2 FY2027 print and its ~$20B Vera Rubin ramp, AWS adding 2
+    million more NVIDIA GPUs, a Micron Taiwan labour action threatening a large share of memory
+    output, SK hynix breaking ground on its first US high-bandwidth-memory packaging site, a
+    DRAFT (not finalized) US rule aimed at China's remote access to US AI chips, and Lambda
+    raising $1B of debt to buy NVIDIA chips for lease. Thesis passed on retry 1 — 82 judged (52
+    strengthened, 21 reaffirmed, 6 weakened, 3 adjusted, 0 broken); implication 8 lines (first
+    attempt); narrator `done` (first attempt, story `store/chips.merchant-gpu/story/2026-08-30.json`);
+    **citation audit CLEAN (19 claims, 0 flagged)**; coverage record 12 gaps (12 source, 0
+    indicator, 2 paywalled by design); issues-open 4 open, issues-update 4 assessed / 0 resolved;
+    price-pull 875 rows over 5 providers, 0 failed (66s); priceSync done (standing stale
+    price-folder warning, non-fatal); v2 shadow stamped; chart-fetch all 3 series not yet due;
+    chart-research 2 of 3 candidates verified + accepted (the third rejected — its cited page,
+    `mbiz.heraldcorp.com`, turned the verifier away with HTTP 403, and the domain was
+    auto-learned into `registry/do-not-fetch.json`); dashboard.json written; site rebuilt (7
+    pages). **NO GATE BYPASSED** (voiceLint clean on retry 1, sufficiency clean, 0 bypasses).
+    Suite **2768 passed / 6 skipped**.
+      - **Also fixed en route (`3d547e9`, its own commit): `main` was RED on a fresh clone.** The
+        2026-08-27 cycle committed `2026-08-v15.json` but left its replay-pin line uncommitted in
+        the working tree, so `tests/test_scoring_v1_replay_pin.py::test_no_unpinned_scorecard`
+        would fail for anyone cloning the repo. Backfilled the v15 line (the prior cycle's own
+        3-day-old work, confirmed by file mtime and by every worktree branch being stale) and
+        added the v16 line. No weights moved; `W_CURRENT` is the post-F60 default.
+      - **AFK-DEFAULTS THIS RUN (nobody was watching — re-surface these):**
+        1. **Brain seams ran as `plain-language-writer`, not a tool-less agent type.** Unattended-run
+           mechanic 1 wants extraction dispatched TOOL-LESS with its prompt inlined, and the other
+           four seams with Read + exactly one Write. This harness registers no tool-less type
+           (available: claude, Explore, general-purpose, Plan, statusline-setup,
+           plain-language-writer, web-gatherer). Inlining extraction was ALSO not available:
+           `extract-prompt.json` carries the fetched document text, so inlining it would have pulled
+           page content through the coordinator's own context — an F88 violation. Chose the
+           narrowest available type that can reach NO web and NO shell (Read/Grep/Write), on
+           `model: opus`, each seam reading its own prompt files and writing its own single answer
+           file, told explicitly to ignore that type's prose-rewriting persona. The
+           "cannot reach outside its prompt" property is PRESERVED; what is lost is the tool-less
+           purity of extraction and the persona-neutrality of the type. **Ask: register a proper
+           tool-less brain agent type.** (Good news vs 2026-08-27: `web-gatherer` DID resolve this
+           run, so the F88 *gatherer* wall was structural again, not merely instructed.)
+        2. **Extraction read its own prompt file** rather than receiving it inlined — same root
+           cause as (1), chosen to keep page text out of the coordinator's context. No prompt text
+           changed and no prompt hash moved.
+        3. **Round 2 of the gather was not run** — the 10-doc daily cap was reached at the end of
+           round 1. Unchased leads are all listed in the cycle log's `gather.skipped`.
+      - **STANDING BLOCKER, now 8 cycles running — needs a user decision.** `seriesRefresh` again
+        wrote NOTHING for the `tokenEconomics` 2026-07 gap, and that is the correct answer. The
+        series is a *construction* ("median of 6 volume rates + median of 14 price rates over a
+        trailing 9 months"), but its **basket membership is recorded nowhere** — not in
+        `registry/indicators.json` (prose only, no `sourceInventory`), not in any builder script,
+        and the per-point notes name only the single newest input each cycle (5 distinct keys
+        across the entire history, against the 6+14 needed). Any number built from today's
+        reachable price sheets would use a different basket and would silently change what the
+        series measures mid-history. **This gap cannot close until someone writes down the basket.**
+      - Repeat observation (also logged 2026-08-27): `chart-fetch` reported `nvdaDataCenterRevenue`
+        as `skipped` again in the week *after* NVIDIA's Q2 FY2027 print. Its due-date logic looks
+        worth a look; not changed here.
   - **2026-08-07 daily cycle (scheduled headless): chips.merchant-gpu v4 shipped + pushed
     `442ab38` (`main == origin/main`).** Scorecard `store/chips.merchant-gpu/2026-08-v4.json` —
     **DMI 3.440 / SMI -0.200** (Strong, improving; prior v3 3.573 / -0.040). TOP-UP gather (store
