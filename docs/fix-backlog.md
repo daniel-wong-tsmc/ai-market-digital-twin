@@ -1283,9 +1283,16 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   pinned by a test). The live gather skill already documented "that entity's next earnings
   date", so this restores documented intent rather than changing design; no skill edit needed.
   6 new tests; suite 2775 passed / 6 skipped; F6 pin green, zero prompt bytes moved; no
-  `store/` or `registry/` edits. F131 does **not** share this defect — `nvdaDataCenterRevenue`
-  is skipped because `registry/chart-series.json` gives it `"fetcher": null` and
-  `due_series` returns early on a null fetcher before any date logic runs.
+  `store/` or `registry/` edits. ~~F131 does **not** share this defect~~ — **corrected by the F131
+  lane, 2026-08-31:** F131 *does* share it. The sentence below is right about the *reported
+  symptom* (`nvdaDataCenterRevenue` is skipped because `registry/chart-series.json` gives it
+  `"fetcher": null` and `due_series` returns early on a null fetcher before any date logic runs)
+  but wrong about the defect: `cli.py` handed `run_fetch` `manifest.earningsDates.values()` — the
+  same flattened, vendor-less calendar — so AMD's chart counted as due during NVIDIA's earnings
+  week, exactly as `amd-earnings` went heavy here. It was invisible in production only because
+  `store/series/amdDataCenterRevenue.jsonl` does not exist yet, which forced that series due for
+  an unrelated reason. Fixed on the chart side under F131, and the date arithmetic for both sides
+  now lives in one shared `manifest.earnings_window` helper so the two cannot drift again.
 
 - [x] **F131 — `chart-fetch` never comes due after an earnings print.** Observed v15–v17. Branch
   `f131-chartfetch-due`. **Re-scoped 2026-08-31 (user ruling) to the date logic only**; the
