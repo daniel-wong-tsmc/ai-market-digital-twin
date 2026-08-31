@@ -1259,6 +1259,38 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   quantum floors 1.0/0.25/0.5. promptHashes byte-unchanged; the F6 pin, narrator pin, F83
   fingerprint and scoring replay pin all stay green.
 
+> **Minted 2026-08-31 (interactive session; F130–F132 dispatched as parallel lanes the same
+> session, F133 parked design-weight).** F130–F132 observed live by the v16/v17 scheduled
+> cycles; F133 surfaced by the F127 lane. Question-stop binds every dispatched lane.
+
+- [ ] **F130 — `gather_priority` ranks a vendor's earnings `heavy` weeks after the print.**
+  Observed 2026-08-31 (v17 cycle): `gather_priority` printed `heavy` for `amd-earnings` 27 days
+  after AMD's report, against the manifest's `earningsDates`. Looks like a due-date/window bug in
+  the priority logic (stale date parse, wrong comparison, or a window that never closes). Find
+  the root cause, fix with tests, and check the same logic explains F131's symptom or rule it
+  out. No prompt bytes expected to move; verify F6 pin untouched in-lane.
+
+- [ ] **F131 — `chart-fetch` never comes due after an earnings print (`nvdaDataCenterRevenue`
+  still `skipped` 5 days / 3 cycles after NVIDIA's Q2 FY2027 release).** Observed v15–v17. The
+  series' due-date logic decides "not yet due" in the exact week its source has fresh numbers.
+  Diagnose the due computation in `gpu_agent/chartdata/` (cadence anchor, last-point date, or
+  earnings-calendar linkage), fix with tests. Distinct from F130's gather-side priority but the
+  two may share a date-handling defect — lanes must compare notes at review time.
+
+- [ ] **F132 — webreach crawl4ai runner crashes on non-cp1252 output (`UnicodeEncodeError`,
+  U+1F92F).** Observed 2026-08-31 (v17): the crawl4ai path FAILED writing tool output because
+  the stream/file used the Windows cp1252 default instead of UTF-8. Make the runner write tool
+  output (and any captured stdout/stderr) as UTF-8 with `errors="replace"` everywhere it
+  persists text; regression-test with an emoji-bearing fixture. Stdlib-only expected.
+
+- [ ] **F133 — `wiki/ingest.py::route_findings` writes findings to the store WITHOUT the
+  findings gate (design-weight: interactive brainstorm before any lane).** Surfaced by the F127
+  lane, confirmed pre-existing: the `wiki-ingest --findings` path bypasses F127 AND every other
+  gate rule (F2e/F8/F17). The fix is not mechanical — which gate rules apply on the wiki path,
+  what happens to a rejected finding mid-ingest, and whether already-routed store content gets
+  audited retroactively are all design forks. PARKED for the user per the standing
+  design-weight rule; do not dispatch a lane before that brainstorm.
+
 ## From the 2026-07-13 documentation gap review (F88–F94) — what the docs still don't cover
 
 > Source: a "what is missing from our documentation to achieve the goal?" review (2026-07-13),
