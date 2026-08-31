@@ -111,6 +111,35 @@ def test_quarterly_entry_without_an_earnings_key_raises_value_error(tmp_path):
         load_chart_series(str(bad_path))
 
 
+def _entry(**overrides) -> dict:
+    base = {
+        "id": "broken", "name": "Broken series", "sourceName": "Nowhere",
+        "sourceUrl": "https://example.com", "cadence": "quarterly",
+        "quality": "hard-fact", "topicTags": ["broken"], "form": "columns",
+        "unit": "USD", "fetcher": None, "earningsKey": "amd",
+    }
+    base.update(overrides)
+    return base
+
+
+def test_monthly_entry_carrying_an_earnings_key_raises_value_error(tmp_path):
+    """A monthly series is never scheduled off an earnings date, so a key on
+    one is a mistake -- and a silent one, since nothing would ever read it."""
+    bad_path = tmp_path / "chart-series.json"
+    bad_path.write_text(json.dumps({"series": [
+        _entry(cadence="monthly", form="line", earningsKey="amd")]}), encoding="utf-8")
+    with pytest.raises(ValueError, match="earningsKey"):
+        load_chart_series(str(bad_path))
+
+
+def test_empty_string_earnings_key_raises_value_error(tmp_path):
+    bad_path = tmp_path / "chart-series.json"
+    bad_path.write_text(json.dumps({"series": [_entry(earningsKey="")]}),
+                        encoding="utf-8")
+    with pytest.raises(ValueError, match="earningsKey"):
+        load_chart_series(str(bad_path))
+
+
 def test_non_string_earnings_key_raises_value_error(tmp_path):
     bad = {
         "series": [

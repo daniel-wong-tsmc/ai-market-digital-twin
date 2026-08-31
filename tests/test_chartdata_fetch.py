@@ -244,20 +244,29 @@ def test_due_series_due_on_the_last_day_of_the_window(tmp_path):
 
 
 def test_due_series_not_due_the_day_after_the_window_closes(tmp_path):
+    """Paired with a positive control on the last in-window day. On its own an
+    empty result proves nothing -- a build that ignored the calendar entirely
+    would also return [] here (review finding). The pair pins the boundary."""
     series = _series_fixture()
     _seed_amd_file(tmp_path)
-    due = due_series(series, "2026-08-19", AMD_CALENDAR, store_dir=str(tmp_path))
-    assert due == []
+    assert [cs.id for cs in due_series(series, "2026-08-18", AMD_CALENDAR,
+                                        store_dir=str(tmp_path))] \
+        == ["amdDataCenterRevenue"]
+    assert due_series(series, "2026-08-19", AMD_CALENDAR,
+                      store_dir=str(tmp_path)) == []
 
 
 def test_due_series_not_due_the_day_before_the_print(tmp_path):
     """Forward-only: nothing has been published yet, so there is nothing a
     fetch could pick up. The old symmetric window burned three of its seven
-    days here."""
+    days here. Paired with a positive control on the print day itself."""
     series = _series_fixture()
     _seed_amd_file(tmp_path)
-    due = due_series(series, "2026-08-03", AMD_CALENDAR, store_dir=str(tmp_path))
-    assert due == []
+    assert due_series(series, "2026-08-03", AMD_CALENDAR,
+                      store_dir=str(tmp_path)) == []
+    assert [cs.id for cs in due_series(series, "2026-08-04", AMD_CALENDAR,
+                                        store_dir=str(tmp_path))] \
+        == ["amdDataCenterRevenue"]
 
 
 # ── F131 defect C: each series is scoped to its OWN company's print ────────
@@ -268,12 +277,18 @@ def test_due_series_not_due_the_day_before_the_print(tmp_path):
 # the registry entry, matched against the manifest's earningsDates keys.
 
 def test_due_series_ignores_another_companys_earnings_date(tmp_path):
-    """AMD's series must NOT wake up during NVIDIA's earnings week."""
+    """AMD's series must NOT wake up during NVIDIA's earnings week.
+
+    Paired with a positive control: the SAME as-of date, three days after a
+    print, does make AMD due when the print is AMD's own. Without that pair an
+    empty result could just mean the calendar was ignored."""
     series = _series_fixture()
     _seed_amd_file(tmp_path)
-    due = due_series(series, "2026-08-29", {"nvidia": "2026-08-26"},
-                     store_dir=str(tmp_path))
-    assert due == []
+    assert due_series(series, "2026-08-29", {"nvidia": "2026-08-26"},
+                      store_dir=str(tmp_path)) == []
+    assert [cs.id for cs in due_series(series, "2026-08-29", {"amd": "2026-08-26"},
+                                        store_dir=str(tmp_path))] \
+        == ["amdDataCenterRevenue"]
 
 
 def test_due_series_picks_its_own_date_out_of_a_multi_company_calendar(tmp_path):
@@ -291,18 +306,32 @@ def test_due_series_picks_its_own_date_out_of_a_multi_company_calendar(tmp_path)
 
 
 def test_due_series_survives_a_calendar_with_no_entry_for_this_series(tmp_path):
+    """No crash. Paired with a positive control on the same date so this can't
+    pass merely because the calendar was never consulted.
+
+    NOTE: the resulting silence is a known open problem, not a settled design
+    -- see 'Q5' in .superpowers/handoffs/f131-chartfetch-due-QUESTIONS.md. This
+    test pins only that the run survives, NOT that silence is the right answer.
+    Expect it to change once that question is answered."""
     series = _series_fixture()
     _seed_amd_file(tmp_path)
     assert due_series(series, "2026-08-09", {}, store_dir=str(tmp_path)) == []
+    assert [cs.id for cs in due_series(series, "2026-08-09", AMD_CALENDAR,
+                                        store_dir=str(tmp_path))] \
+        == ["amdDataCenterRevenue"]
 
 
 def test_due_series_survives_an_unparseable_date_in_the_calendar(tmp_path):
-    """A junk date must be ignored, not crash the daily run."""
+    """A junk date must be ignored, not crash the daily run. Paired with a
+    positive control on the same date. Same open question as above applies to
+    the silence itself."""
     series = _series_fixture()
     _seed_amd_file(tmp_path)
-    due = due_series(series, "2026-08-09", {"amd": "not-a-date"},
-                     store_dir=str(tmp_path))
-    assert due == []
+    assert due_series(series, "2026-08-09", {"amd": "not-a-date"},
+                      store_dir=str(tmp_path)) == []
+    assert [cs.id for cs in due_series(series, "2026-08-09", AMD_CALENDAR,
+                                        store_dir=str(tmp_path))] \
+        == ["amdDataCenterRevenue"]
 
 
 # ── run_fetch: the never-raises + idempotent-append guarantees ────────────
@@ -458,18 +487,50 @@ def test_run_fetch_leaves_a_monthly_series_in_skipped_not_not_fetchable(tmp_path
     assert "gpuSpotPrice" not in result["notFetchable"]
 
 
-def test_run_fetch_every_registry_series_lands_in_exactly_one_bucket(tmp_path):
+@pytest.mark.parametrize("as_of, expected_bucket", [
+    # nothing due: AMD sits in 'skipped'
+    ("2026-09-15", "skipped"),
+    # inside AMD's own window: AMD moves into 'fetched'
+    ("2026-08-09", "fetched"),
+])
+def test_run_fetch_every_registry_series_lands_in_exactly_one_bucket(
+        tmp_path, as_of, expected_bucket):
     """No series may be double-counted or silently dropped between the four
-    buckets -- the property that makes the summary trustworthy at a glance."""
+    buckets -- the property that makes the summary trustworthy at a glance.
+
+    Parametrised over a not-due AND a due date on purpose: with nothing ever
+    due, 'fetched' and 'failed' are both empty and the test only ever checks
+    skipped + notFetchable, which is close to tautological (review finding).
+    The second case exercises a series actually moving between buckets."""
     series = _series_fixture()
     _seed_amd_file(tmp_path)
-    result = run_fetch(series, "2026-09-15", AMD_CALENDAR, str(tmp_path),
+    result = run_fetch(series, as_of, AMD_CALENDAR, str(tmp_path),
                         fetch_html=_stub_fetch_html())
-    reported = ([f["id"] for f in result["fetched"]]
-                + [f["id"] for f in result["failed"]]
-                + list(result["skipped"]) + list(result["notFetchable"]))
+
+    buckets = {
+        "fetched": [f["id"] for f in result["fetched"]],
+        "failed": [f["id"] for f in result["failed"]],
+        "skipped": list(result["skipped"]),
+        "notFetchable": list(result["notFetchable"]),
+    }
+    reported = [sid for ids in buckets.values() for sid in ids]
     assert sorted(reported) == sorted(series)
     assert len(reported) == len(set(reported))
+    # and the AMD series really did move, rather than the totals just adding up
+    assert "amdDataCenterRevenue" in buckets[expected_bucket]
+    assert result["notFetchable"] == ["nvdaDataCenterRevenue"]
+
+
+def test_run_fetch_buckets_use_the_series_id_not_the_dict_key(tmp_path):
+    """The four-bucket partition must not rest on the caller's dict being
+    keyed by series id. A hand-built dict with a mismatched key used to put one
+    series in two buckets at once (review finding)."""
+    series = _series_fixture()
+    remapped = {"WRONGKEY": series["nvdaDataCenterRevenue"]}
+    result = run_fetch(remapped, "2026-09-15", AMD_CALENDAR, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert result["notFetchable"] == ["nvdaDataCenterRevenue"]
+    assert result["skipped"] == []
 
 
 # ── review finding #1: a corrupt line must never silently wipe history ────

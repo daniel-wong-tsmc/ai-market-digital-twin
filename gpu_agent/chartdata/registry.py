@@ -100,6 +100,9 @@ def _validate_entry(entry: dict) -> ChartSeries:
     if cadence == "quarterly" and earnings_key is None:
         _fail(entry_id, "earningsKey is required for a quarterly series (it names "
                         "the company whose earnings calendar schedules it)")
+    if cadence != "quarterly" and earnings_key is not None:
+        _fail(entry_id, f"earningsKey is meaningless on a {cadence!r} series (only "
+                        "quarterly series are scheduled off an earnings date)")
 
     return ChartSeries(
         id=entry["id"],

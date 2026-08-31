@@ -108,7 +108,12 @@ def test_chart_fetch_does_not_wake_a_series_on_another_companys_earnings_date(
     list with the company names stripped off -- so AMD matched NVIDIA's date
     and would have been fetched here. No network is reachable in this test, so
     a regression shows up as a 'failed' entry rather than a silent pass."""
-    registry_path = _write_json(tmp_path / "chart-series.json", REGISTRY)
+    # sourceUrl is deliberately un-fetchable: if this assertion ever regresses,
+    # the CLI must fail fast rather than make a real 20-second request to
+    # ir.amd.com. No test in this file may reach the live network.
+    registry = json.loads(json.dumps(REGISTRY))
+    registry["series"][0]["sourceUrl"] = "not-a-valid-url"
+    registry_path = _write_json(tmp_path / "chart-series.json", registry)
     manifest = {**MANIFEST,
                 "earningsDates": {"amd": "2026-08-04", "nvidia": "2026-08-26"}}
     manifest_path = _write_json(tmp_path / "manifest.json", manifest)
