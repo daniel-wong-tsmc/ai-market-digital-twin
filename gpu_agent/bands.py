@@ -3,10 +3,20 @@
 Pure, deterministic, stdlib-only: maps a raw DMI/SMI-style value in roughly
 [-1, 1] to one of five words (accelerating/firm/flat/softening/contracting),
 and, given the prior cycle's value, renders the earned "WORD ARROW (was WORD)"
-line the report leads with — words first, no invented magnitudes (charter Part
-17). Raw indices move to the trust footer (docs/superpowers/specs/
-2026-07-02-thesis-book-design.md §4); this module is the only place the
-threshold numbers live, so retuning them retunes every caller at once.
+line — words first, no invented magnitudes (charter Part 17). Raw indices move to
+the trust footer (docs/superpowers/specs/2026-07-02-thesis-book-design.md §4);
+this module is the only place the threshold numbers live, so retuning them
+retunes every caller at once.
+
+F136 (2026-08-31): the brief's HEADLINE demand/supply lines no longer use the word
+bands. The demand number is a running total that has grown past 4.5, far above the
+top band's 0.30 floor, so the banded headline was permanently pinned at
+"ACCELERATING = (was ACCELERATING)" and could not report a move of any size.
+change_line() below replaced it there — it reports the day-over-day change, so it
+carries the same information at any scale and never needs retuning. band_word /
+band_with_prior are UNCHANGED and still serve the web dashboard tiles, the
+change-detector's band-crossing checks, and the appendix raw-index table, where the
+absolute level (not the move) is the point.
 """
 from __future__ import annotations
 
@@ -47,6 +57,39 @@ def band_word(value: float) -> str:
         elif value > threshold:
             return word
     return "contracting"
+
+
+def _two_dp(value: float) -> str:
+    """Two decimals, with the '-0.00' that a tiny negative would otherwise print
+    normalised to '0.00' — a minus sign in front of a zero reads as a real minus."""
+    text = f"{value:.2f}"
+    return "0.00" if text == "-0.00" else text
+
+
+def change_line(value: float, prior: float | None) -> str:
+    """F136: '4.51, up 0.57 since the last run' — the headline demand/supply wording.
+
+    Why this replaced the word band on the headline. band_with_prior below maps a value
+    onto five words whose top band starts at 0.30. The demand number is a running total
+    that has grown past 4.5, so every value lands in the top band and the headline was
+    permanently pinned at 'ACCELERATING = (was ACCELERATING)' — it could not report a
+    move of any size. This line reports the day-over-day change directly, so it carries
+    the same information whether the number sits at 0.5, 4.5 or 450, and never needs
+    the thresholds retuned. The word bands are unchanged and still serve the dashboard
+    tiles and the appendix raw-index table, where the absolute level is the point.
+
+    Two decimals throughout; a move that rounds to 0.00 reads 'unchanged' rather than
+    claiming a change the reader cannot see. Plain words only — no acronyms, so it
+    passes the above-the-fold reader lint.
+    """
+    level = _two_dp(value)
+    if prior is None:
+        return f"{level}, first tracked run — nothing to compare yet"
+    delta = value - prior
+    if abs(delta) < 0.005:      # rounds to 0.00 at the displayed precision
+        return f"{level}, unchanged since the last run"
+    direction = "up" if delta > 0 else "down"
+    return f"{level}, {direction} {abs(delta):.2f} since the last run"
 
 
 def band_with_prior(value: float, prior: float | None) -> str:

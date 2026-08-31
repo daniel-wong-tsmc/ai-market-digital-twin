@@ -14,7 +14,7 @@ no calling internals directly):
   3. render `gpu-agent report` over that tmp store.
   4. assert the spec-§4 acceptance shape in one place: THE CALLS carries all six
      seed theses with verdicts (the all-reaffirmed "Nothing changed" compact path
-     IS that rendering for this cycle shape); STATE speaks band words; WHY carries
+     IS that rendering for this cycle shape); STATE leads with the day-over-day change (F136); WHY carries
      all three group headers; the raw DMI value is demoted below TRUST & COVERAGE;
      exit codes are 0 throughout.
   5. byte-determinism across two report invocations with a fixed --render-ts.
@@ -49,7 +49,6 @@ SEED_IDS = [
     "export-control-exposure",
 ]
 
-BAND_WORDS = ("ACCELERATING", "FIRM", "FLAT", "SOFTENING", "CONTRACTING")
 
 
 def _run(*args: str):
@@ -145,12 +144,12 @@ def test_full_cycle_report_leads_with_the_thesis_book(tmp_path):
             entry["title"] in ln and "reaffirmed =" in ln for ln in compact_lines
         ), (entry["id"], calls_section)
 
-    # --- STATE OF THE MARKET: words-first band, not a raw number ---------------------
+    # --- STATE OF THE MARKET: plain-words day-over-day change (F136) -------------------
     state_section = out[i_state:i_moved]
     assert "Demand: " in state_section
-    assert any(marker in state_section for marker in ("(was ", "(no prior)"))
+    # F136: change-first headline, not the saturating word band.
     demand_line = next(ln for ln in state_section.splitlines() if "Demand: " in ln)
-    assert any(word in demand_line for word in BAND_WORDS), demand_line
+    assert "since the last run" in demand_line or "first tracked run" in demand_line, demand_line
     assert "DMI" not in demand_line
 
     # --- WHY: all three group headers present -----------------------------------------
@@ -160,6 +159,8 @@ def test_full_cycle_report_leads_with_the_thesis_book(tmp_path):
     assert "Contested:" in why_section
 
     # --- raw DMI value demoted below the fold: only after TRUST & COVERAGE ------------
+    # F136: it is the LABELLED index ("DMI 0.070") that stays below the fold. The
+    # headline Demand line carries a bare number above it by design.
     dmi_occurrences = _find_all(out, "DMI 0.")
     assert dmi_occurrences, "expected the raw DMI value in the appendix raw-index table"
     for idx in dmi_occurrences:

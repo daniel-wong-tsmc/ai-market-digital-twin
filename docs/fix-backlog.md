@@ -1349,7 +1349,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   build: the fix changes what each cycle records (a per-run watermark), a design fork under the
   question-stop rule.
 
-- [ ] **F136 — the brief's headline change line saturates: "Demand: ACCELERATING (was
+- [x] **F136 — the brief's headline change line saturates: "Demand: ACCELERATING (was
   ACCELERATING)" is permanently stuck.** Same audit. The word-scale mapping tops out near 0.30
   while DMI sits at 4.5, so the headline can never show movement again; the real `Δ +0.567` was
   disclosed only ~400 lines down. Context the fix must respect (also from the audit): DMI is a
@@ -1359,6 +1359,29 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   design pass (likely with the user): what the headline should actually say when the scale is
   saturated, and whether coverage-driven vs re-rating-driven movement should be separated in
   the reader-facing line.
+  **Done 2026-08-31 (lane `f136-headline-scale`).** Design settled with the user before the
+  build. The headline Demand/Supply lines now lead with the day-over-day change in plain words
+  plus the number — on real v16→v17 data, `Demand: 4.51, up 0.57 since the last run` — via a new
+  `bands.change_line`. It carries the same information whether the number sits at 0.5, 4.5 or
+  450, so it never needs the thresholds retuned. The word bands are DROPPED from the headline
+  (user ruling: they must not be the information carrier); they are untouched and still serve
+  the web dashboard tiles and the appendix raw-index table, where the absolute level is the
+  point. New `gpu_agent/coverage.py` derives the coverage-vs-re-rating split deterministically:
+  it groups each scorecard's findings by the frozen scoring code's own (company, indicator) key,
+  slices them into never-before-tracked / dropped / shared, and re-runs the FROZEN
+  `scoring.dmi_smi_contribution` over each disjoint slice — no scoring arithmetic is duplicated
+  and none is changed. On v16→v17 that reproduces the audit exactly: +0.567 total = +0.520 newly
+  tracked + +0.047 re-rating. When coverage genuinely dominates, STATE OF THE MARKET carries one
+  plain qualifier line directly under the Demand line. Three guards keep it honest and it stays
+  silent unless all pass: the split must reconcile with the scorecards' STORED demand numbers
+  (per-category weight overrides the renderer cannot see); both parts must pull the same way as
+  the move (a real case, v11 -> v12, had +0.14 coverage and -0.11 re-rating on a +0.03 move,
+  where "most of that move" would have been false); and coverage narrowing is worded as
+  "companies we stopped tracking", never as newly tracked. Over the 40 stored merchant-gpu
+  cycles the qualifier shows on 14 and stays silent on 26. Whether the demand number should be a
+  total or an average stays out of scope — frozen v1 scoring, F79's v2 path. Suite 2850 passed /
+  6 skipped (baseline 2826 + 24 new); the F6 eval pin, narrator prompt pin, F83 fingerprint and
+  the scoring replay pin are all green and byte-untouched.
 
 - [x] **F132 — webreach crawl4ai runner crashes on non-cp1252 output (`UnicodeEncodeError`,
   U+1F92F).** Observed 2026-08-31 (v17): the crawl4ai path FAILED writing tool output because

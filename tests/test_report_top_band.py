@@ -41,8 +41,9 @@ def test_band_has_title_dot_tiles_constraint():
     lines = out.splitlines()
     assert "MERCHANT GPU" in lines[0] and "2026-07-08" in lines[0]
     assert "YELLOW" in lines[0] and "(was GREEN)" in lines[0]
-    assert "Demand: FIRM" in out and "(was SOFTENING)" in out     # banded, moved
-    assert "Supply: SOFTENING" in out and "(was SOFTENING)" in out
+    # F136: change-first, not the saturating word band.
+    assert "Demand: 0.10, up 0.20 since the last run" in out
+    assert "Supply: -0.10, unchanged since the last run" in out
     assert "Gap:" in out
     assert "Binding constraint: memory scarcity" in out
 
@@ -52,9 +53,11 @@ def test_first_run_variants():
                           AlertState(color="green", priorColor=None, rawColor="green"),
                           _change(prior_state=None, prior_asof=None))
     assert "(first tracked run)" in out
-    assert "(no prior)" in out                       # bands.band_with_prior fallback
+    assert "first tracked run — nothing to compare yet" in out   # F136 change-line fallback
     assert "Binding constraint" not in out           # None -> line omitted
-    assert "nothing to compare yet" in out
+    # named explicitly: bands.change_line now emits its own "nothing to compare yet",
+    # so a bare substring check would no longer prove the Since-yesterday line renders.
+    assert "Since yesterday: first tracked run" in out
 
 
 def test_since_yesterday_counts_calls():

@@ -898,9 +898,12 @@ def _category_title(category_id: str) -> str:
 
 
 def render_top_band(sc, state, alert, change) -> str:
-    """EXEC TOP BAND (2026-07-11 amendment, spec §3): title + alert dot + banded tiles +
-    binding constraint + since-yesterday count. Words only (read direction, not level);
-    every line passes reader.lint_acronyms; deterministic."""
+    """EXEC TOP BAND (2026-07-11 amendment, spec §3): title + alert dot + demand/supply
+    tiles + binding constraint + since-yesterday count. F136: the tiles now read the
+    day-over-day change in plain words rather than a word band that saturated (the band
+    scale tops out at 0.30; the demand number is a running total past 4.5, so the banded
+    tile was pinned at "ACCELERATING = (was ACCELERATING)" whatever happened). Every line
+    passes reader.lint_acronyms; deterministic."""
     was = (f" (was {alert.priorColor.upper()})" if alert.priorColor
            else " (first tracked run)")
     lines = [f"{_category_title(sc.categoryId)} — DAILY — {sc.asOf}"
@@ -909,8 +912,11 @@ def render_top_band(sc, state, alert, change) -> str:
     prior1 = (change.priors or {}).get("yesterday") if change is not None else None
     p_dem = prior1.demand if prior1 is not None else None
     p_sup = prior1.supply if prior1 is not None else None
-    lines.append(f"  Demand: {bands.band_with_prior(state.demand, p_dem)}      "
-                 f"Supply: {bands.band_with_prior(state.supply, p_sup)}")
+    # F136: day-over-day change, not the word band. The bands saturate (top band starts
+    # at 0.30; demand is now ~4.5), so the banded line was pinned at "ACCELERATING =
+    # (was ACCELERATING)" forever. bands.change_line carries the move at any scale.
+    lines.append(f"  Demand: {bands.change_line(state.demand, p_dem)}      "
+                 f"Supply: {bands.change_line(state.supply, p_sup)}")
     lines.append(f"  Gap: {_sdgi_interpretation(state.sdgi)}")
     if state.constraintLabel:
         lines.append(f"  Binding constraint: {state.constraintLabel}")
@@ -1060,7 +1066,7 @@ def render_report(
         if for_tsmc is not None:
             top.append(for_tsmc)
         top += [
-            brief.render_state_of_market(sc, prior, track),
+            brief.render_state_of_market(sc, prior, track, registry=registry),
             brief.render_why(thesis_book, thesis_last_findings),
             brief.render_demand_supply_board(sc, horizons, registry=registry),
             brief.render_storylines(movement),
@@ -1069,7 +1075,7 @@ def render_report(
     else:
         top = [
             render_header(sc, render_ts),
-            brief.render_state_of_market(sc, prior, track),       # words-first BLUF
+            brief.render_state_of_market(sc, prior, track, registry=registry),   # plain-words BLUF
             brief.render_what_moved(movement),
             brief.render_the_calls(thesis_book, sc, thesis_last_findings, registry=registry),
         ]
