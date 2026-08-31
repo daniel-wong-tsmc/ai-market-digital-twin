@@ -1263,12 +1263,29 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
 > session, F133 parked design-weight).** F130–F132 observed live by the v16/v17 scheduled
 > cycles; F133 surfaced by the F127 lane. Question-stop binds every dispatched lane.
 
-- [ ] **F130 — `gather_priority` ranks a vendor's earnings `heavy` weeks after the print.**
+- [x] **F130 — `gather_priority` ranks a vendor's earnings `heavy` weeks after the print.**
   Observed 2026-08-31 (v17 cycle): `gather_priority` printed `heavy` for `amd-earnings` 27 days
   after AMD's report, against the manifest's `earningsDates`. Looks like a due-date/window bug in
   the priority logic (stale date parse, wrong comparison, or a window that never closes). Find
   the root cause, fix with tests, and check the same logic explains F131's symptom or rule it
   out. No prompt bytes expected to move; verify F6 pin untouched in-lane.
+  CLOSED 2026-08-31 (lane f130-gather-priority). Root cause: `gather_priority` scanned **every**
+  value in `manifest.earningsDates` and returned `heavy` on the first hit, with nothing tying a
+  date to the source being scored — so one vendor's print made every earnings-window source in
+  the category heavy (NVIDIA printed 2026-08-26, five days out, so `amd-earnings` went heavy 27
+  days after AMD's own print). Not a stale parse and not an unclosing window. Fix per four
+  user-decided rulings (2026-08-31, interactive — recorded in
+  `.superpowers/handoffs/f130-gather-priority-QUESTIONS.md`): (1) scope `heavy` per vendor;
+  (2) new optional `ExpectedSource.earningsKey`, set in `manifests/chips.merchant-gpu.json`
+  (`nvda-earnings`/`nvda-10k-risk-factors` → `nvidia`, `amd-earnings` → `amd`); (3) an
+  earnings-window source with no key, or a key with no date, is `light` — it never rides
+  another vendor's print; (4) the ±7-day symmetric window is unchanged (deliberate no-change,
+  pinned by a test). The live gather skill already documented "that entity's next earnings
+  date", so this restores documented intent rather than changing design; no skill edit needed.
+  6 new tests; suite 2775 passed / 6 skipped; F6 pin green, zero prompt bytes moved; no
+  `store/` or `registry/` edits. F131 does **not** share this defect — `nvdaDataCenterRevenue`
+  is skipped because `registry/chart-series.json` gives it `"fetcher": null` and
+  `due_series` returns early on a null fetcher before any date logic runs.
 
 - [ ] **F131 — `chart-fetch` never comes due after an earnings print (`nvdaDataCenterRevenue`
   still `skipped` 5 days / 3 cycles after NVIDIA's Q2 FY2027 release).** Observed v15–v17. The

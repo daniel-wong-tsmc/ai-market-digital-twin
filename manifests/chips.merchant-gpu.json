@@ -128,7 +128,8 @@
       "license": "public",
       "refresh": "quarterly",
       "indicators": ["D2", "grossMargin", "S9", "S10", "rpoBacklog", "vendorRevenueGuidance"],
-      "cadence": "earnings-window"
+      "cadence": "earnings-window",
+      "earningsKey": "nvidia"
     },
     {
       "id": "amd-earnings",
@@ -140,7 +141,8 @@
       "license": "public",
       "refresh": "quarterly",
       "indicators": ["D2", "grossMargin", "S9", "rpoBacklog", "vendorRevenueGuidance"],
-      "cadence": "earnings-window"
+      "cadence": "earnings-window",
+      "earningsKey": "amd"
     },
     {
       "id": "intc-earnings",
@@ -243,7 +245,8 @@
       "license": "public",
       "refresh": "annual",
       "indicators": ["exportControlExposure", "customerConcentration"],
-      "cadence": "earnings-window"
+      "cadence": "earnings-window",
+      "earningsKey": "nvidia"
     },
     {
       "id": "vendor-pr-trade-press",
