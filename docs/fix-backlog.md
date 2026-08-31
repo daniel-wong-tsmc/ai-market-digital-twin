@@ -1369,8 +1369,14 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   real move would have scored with no evidence behind it and folded below the materiality bar);
   `collect_movement` gains `since_seq`/`restart`/`prevRunDate`; `render_what_moved` renders the
   honest restart state and names the run it compared against by date instead of the month. No
-  Procedure step added, so **all four pins stayed green and byte-untouched**. Suite **2842
-  passed / 6 skipped** (baseline 2826 + 16 new tests).
+  Procedure step added, so **all four pins stayed green and byte-untouched**. Code review caught
+  two real bugs, both fixed: the marker was recorded *before* the report was delivered (a failed
+  `--out` write would have advanced the watermark on a report nobody saw, hiding those moves from
+  the next run forever), and a `--no-prior` render both consumed and wrote a marker while
+  discarding the diff it computed — so a throwaway diagnostic run could lock in a watermark the
+  real cycle render could not correct. `--no-prior` and off-convention filenames now take no part
+  in change tracking, and the watermark is bounded by the period label rather than the raw event
+  count. Suite **2848 passed / 6 skipped** (baseline 2826 + 22 new tests).
 
 - [ ] **F136 — the brief's headline change line saturates: "Demand: ACCELERATING (was
   ACCELERATING)" is permanently stuck.** Same audit. The word-scale mapping tops out near 0.30
