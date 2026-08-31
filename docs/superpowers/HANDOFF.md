@@ -2814,6 +2814,16 @@ F57/F58/F59 → F60 → F64 → F65 → F66. Eval-v2, if approved, slots in as i
 F63's re-gate. F56 remains a safe tiny side item.
 
 ## Newest state (newest first)
+  - **2026-08-31 (repeat scheduled fire, later in the day) — NO CYCLE RUN; TODAY'S SWEEP WAS ALREADY
+    DONE. AFK-default (precedent: the 2026-08-25 eighth fire).** Orientation: clean tree,
+    `git pull --ff-only` "Already up to date", `main == origin/main`. Today's run is complete and
+    pushed: scorecard `store/chips.merchant-gpu/2026-08-v17.json` (DMI 4.507 / SMI -0.093) in
+    `f4da19c`, story/dedup/audit artifacts for 2026-08-31 on disk, `store/cycle-log.json` newest
+    entry is `work/daily-2026-08-31` with status `done`. No fresh uncommitted `store/`/`site/`
+    output, so no other instance is mid-run. Preflight passed anyway (`import gpu_agent` ok;
+    `web-reach-ensure --json` all four tools ok, no drift). Re-running would have written a
+    duplicate same-day v18 at live cost, so the fire was closed as a no-op; this handoff note is
+    the only change.
   - **2026-08-31 daily cycle (scheduled headless): chips.merchant-gpu v17 shipped + pushed
     `f4da19c` (`main == origin/main`).** Scorecard `store/chips.merchant-gpu/2026-08-v17.json` -
     **DMI 4.507 / SMI -0.093** (Strong, steady; prior v16 3.940 / -0.107). Report

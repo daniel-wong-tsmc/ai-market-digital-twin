@@ -45,6 +45,10 @@ class ExpectedSource(BaseModel):
     indicators: list[str] = Field(default_factory=list)
     paywalledNote: str | None = None
     cadence: Optional[Literal["earnings-window", "weekly"]] = None
+    # F130: which key in CoverageManifest.earningsDates this source follows.
+    # Only meaningful with cadence == "earnings-window". None means "no vendor
+    # linked" -> the source never rides another vendor's print (stays "light").
+    earningsKey: str | None = None
 
     @property
     def is_paywalled(self) -> bool:
@@ -167,22 +171,32 @@ def gather_priority(
     """Return "heavy", "light", or "normal" gather priority for a source.
 
     - No cadence set → "normal".
-    - cadence == "earnings-window" and any manifest.earningsDates value falls
-      within +/-7 days of `today` → "heavy".
-    - Otherwise (cadence set but not currently in an earnings window,
-      including cadence == "weekly") → "light".
+    - cadence == "earnings-window" and THIS SOURCE'S OWN vendor date —
+      manifest.earningsDates[source.earningsKey] — falls within +/-7 days of
+      `today` → "heavy".
+    - Otherwise (cadence set but not currently in this vendor's earnings
+      window, including cadence == "weekly") → "light".
+
+    F130: the vendor scoping is load-bearing. This used to scan every value in
+    manifest.earningsDates and return "heavy" on the first hit, so one vendor
+    reporting made EVERY earnings-window source in the category heavy —
+    amd-earnings ranked heavy 27 days after AMD's print because NVIDIA had
+    reported 5 days earlier. A source with no earningsKey, or a key the
+    manifest has no date for, is "light": it never rides another vendor's
+    print. The +/-7-day window itself is unchanged.
 
     Pure: `today` must be passed in — never reads the real clock.
     """
     if source.cadence is None:
         return "normal"
 
-    if source.cadence == "earnings-window":
-        for raw_date in manifest.earningsDates.values():
+    if source.cadence == "earnings-window" and source.earningsKey is not None:
+        raw_date = manifest.earningsDates.get(source.earningsKey)
+        if raw_date is not None:
             try:
                 earnings_date = dt.date.fromisoformat(raw_date)
             except ValueError:
-                continue
+                return "light"
             if abs((earnings_date - today).days) <= 7:
                 return "heavy"
 

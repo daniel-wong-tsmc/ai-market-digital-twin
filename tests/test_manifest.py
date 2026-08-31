@@ -294,14 +294,16 @@ def test_gather_priority_normal_when_no_cadence():
 
 
 def test_gather_priority_heavy_within_earnings_window():
-    source = ExpectedSource(**{**MINIMAL_MANIFEST["expectedSources"][0], "cadence": "earnings-window"})
+    source = ExpectedSource(**{**MINIMAL_MANIFEST["expectedSources"][0],
+                               "cadence": "earnings-window", "earningsKey": "nvidia"})
     manifest = CoverageManifest(**{**MINIMAL_MANIFEST, "earningsDates": {"nvidia": "2026-08-01"}})
     today = dt.date(2026, 7, 25)  # 7 days before 2026-08-01
     assert gather_priority(source, manifest, today) == "heavy"
 
 
 def test_gather_priority_light_outside_earnings_window():
-    source = ExpectedSource(**{**MINIMAL_MANIFEST["expectedSources"][0], "cadence": "earnings-window"})
+    source = ExpectedSource(**{**MINIMAL_MANIFEST["expectedSources"][0],
+                               "cadence": "earnings-window", "earningsKey": "nvidia"})
     manifest = CoverageManifest(**{**MINIMAL_MANIFEST, "earningsDates": {"nvidia": "2026-10-01"}})
     today = dt.date(2026, 7, 25)
     assert gather_priority(source, manifest, today) == "light"
@@ -314,8 +316,106 @@ def test_gather_priority_light_for_weekly_cadence():
     assert gather_priority(source, manifest, today) == "light"
 
 
+def test_gather_priority_light_for_other_vendors_print():
+    """F130: one vendor reporting must NOT make another vendor's source heavy.
+
+    Live 2026-08-31: NVIDIA printed 2026-08-26 (5 days out), AMD printed
+    2026-08-04 (27 days out). amd-earnings was ranked heavy off NVIDIA's date.
+    """
+    source = ExpectedSource(**{
+        **MINIMAL_MANIFEST["expectedSources"][0],
+        "id": "amd-earnings",
+        "cadence": "earnings-window",
+        "earningsKey": "amd",
+    })
+    manifest = CoverageManifest(**{
+        **MINIMAL_MANIFEST,
+        "earningsDates": {"nvidia": "2026-08-26", "amd": "2026-08-04"},
+    })
+    today = dt.date(2026, 8, 31)
+    assert gather_priority(source, manifest, today) == "light"
+
+
+def test_gather_priority_heavy_only_for_the_vendor_that_just_printed():
+    """The same manifest/day: NVIDIA's own source IS heavy (5 days after print)."""
+    source = ExpectedSource(**{
+        **MINIMAL_MANIFEST["expectedSources"][0],
+        "cadence": "earnings-window",
+        "earningsKey": "nvidia",
+    })
+    manifest = CoverageManifest(**{
+        **MINIMAL_MANIFEST,
+        "earningsDates": {"nvidia": "2026-08-26", "amd": "2026-08-04"},
+    })
+    today = dt.date(2026, 8, 31)
+    assert gather_priority(source, manifest, today) == "heavy"
+
+
+def test_gather_priority_light_when_no_earnings_key_declared():
+    """F130 ruling 3: an earnings-window source with no earningsKey is light --
+    it must not ride another vendor's print (e.g. intc-earnings)."""
+    source = ExpectedSource(**{
+        **MINIMAL_MANIFEST["expectedSources"][0],
+        "id": "intc-earnings",
+        "cadence": "earnings-window",
+    })
+    manifest = CoverageManifest(**{
+        **MINIMAL_MANIFEST,
+        "earningsDates": {"nvidia": "2026-08-26", "amd": "2026-08-04"},
+    })
+    today = dt.date(2026, 8, 31)
+    assert source.earningsKey is None
+    assert gather_priority(source, manifest, today) == "light"
+
+
+def test_gather_priority_light_when_earnings_key_has_no_date():
+    """A declared key that the manifest has no date for is also light."""
+    source = ExpectedSource(**{
+        **MINIMAL_MANIFEST["expectedSources"][0],
+        "id": "intc-earnings",
+        "cadence": "earnings-window",
+        "earningsKey": "intel",
+    })
+    manifest = CoverageManifest(**{
+        **MINIMAL_MANIFEST,
+        "earningsDates": {"nvidia": "2026-08-26"},
+    })
+    today = dt.date(2026, 8, 31)
+    assert gather_priority(source, manifest, today) == "light"
+
+
+def test_gather_priority_window_stays_symmetric_seven_days():
+    """F130 ruling 4: the +/-7-day window is a deliberate no-change --
+    heavy at exactly 7 days either side of the vendor's own print, light at 8."""
+    def _priority(day: int) -> str:
+        source = ExpectedSource(**{
+            **MINIMAL_MANIFEST["expectedSources"][0],
+            "cadence": "earnings-window",
+            "earningsKey": "nvidia",
+        })
+        manifest = CoverageManifest(**{
+            **MINIMAL_MANIFEST, "earningsDates": {"nvidia": "2026-08-26"}})
+        return gather_priority(source, manifest, dt.date(2026, 8, 26) + dt.timedelta(days=day))
+
+    assert _priority(-7) == "heavy"
+    assert _priority(7) == "heavy"
+    assert _priority(-8) == "light"
+    assert _priority(8) == "light"
+
+
+def test_real_manifest_earnings_sources_declare_an_earnings_key():
+    """The shipped manifest links every earnings-window source to a vendor."""
+    m = load_manifest(Path(__file__).parent.parent / "manifests" / "chips.merchant-gpu.json")
+    linked = {s.id: s.earningsKey
+              for s in m.expectedSources if s.cadence == "earnings-window"}
+    assert linked["nvda-earnings"] == "nvidia"
+    assert linked["amd-earnings"] == "amd"
+    assert linked["nvda-10k-risk-factors"] == "nvidia"
+
+
 def test_gather_priority_ignores_unparseable_earnings_date():
-    source = ExpectedSource(**{**MINIMAL_MANIFEST["expectedSources"][0], "cadence": "earnings-window"})
+    source = ExpectedSource(**{**MINIMAL_MANIFEST["expectedSources"][0],
+                               "cadence": "earnings-window", "earningsKey": "nvidia"})
     manifest = CoverageManifest(**{**MINIMAL_MANIFEST, "earningsDates": {"nvidia": "not-a-date"}})
     today = dt.date(2026, 7, 25)
     assert gather_priority(source, manifest, today) == "light"
