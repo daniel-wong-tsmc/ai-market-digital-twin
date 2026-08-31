@@ -100,8 +100,15 @@ export.
 | `--manifest` | | `manifests/<category>.json` | coverage manifest (its `earningsDates` gate the earnings-window fetchers) |
 | `--registry` | | `registry/chart-series.json` | chart-series registry path |
 
-Prints a `{'fetched', 'failed', 'skipped'}` summary as JSON; log it verbatim, then log
-`chartFetch: done` regardless of whether anything in `failed` was non-empty.
+Prints a `{'fetched', 'failed', 'skipped', 'notFetchable'}` summary as JSON; log it verbatim, then
+log `chartFetch: done` regardless of whether anything in `failed` was non-empty.
+
+`skipped` means "not due this cycle" and is routine. `notFetchable` (F131) is different and worth
+acting on: those series have no fetcher wired up, so they can never refresh on any cycle — a
+standing gap, not a scheduling one. A series sitting in `notFetchable` cycle after cycle needs a
+backlog item, not patience. Quarterly series are due from their own company's print date E through
+E+14; the manifest's `earningsDates` supplies E, matched per company via each registry entry's
+`earningsKey`.
 
 ## dashboard-json
 
