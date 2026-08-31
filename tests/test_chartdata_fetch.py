@@ -170,40 +170,139 @@ def test_parse_raises_parsefailed_on_unrecognized_markup():
 
 # ── due_series ─────────────────────────────────────────────────────────────
 
-def test_due_series_quarterly_due_on_earnings_day_when_file_exists(tmp_path):
-    series = _series_fixture()
+AMD_CALENDAR = {"amd": "2026-08-04"}
+
+
+def _seed_amd_file(tmp_path) -> None:
+    """Give the AMD series an existing store file, so the missing-file rule
+    stops forcing it due and the earnings-window logic is what's under test.
+    Every window test needs this -- without it the series is due on every
+    date for an unrelated reason (this is exactly why F131's window defect
+    stayed invisible in production: store/series/amdDataCenterRevenue.jsonl
+    does not exist yet, so AMD was permanently due by accident)."""
     (tmp_path / "amdDataCenterRevenue.jsonl").write_text(
         '{"indicatorId":"amdDataCenterRevenue","period":"2026-Q1"}\n', encoding="utf-8")
-    due = due_series(series, "2026-08-04", ["2026-08-04"], store_dir=str(tmp_path))
+
+
+def test_due_series_quarterly_due_on_earnings_day_when_file_exists(tmp_path):
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    due = due_series(series, "2026-08-04", AMD_CALENDAR, store_dir=str(tmp_path))
     assert [cs.id for cs in due] == ["amdDataCenterRevenue"]
 
 
 def test_due_series_quarterly_not_due_mid_quarter_when_file_exists(tmp_path):
     series = _series_fixture()
-    (tmp_path / "amdDataCenterRevenue.jsonl").write_text(
-        '{"indicatorId":"amdDataCenterRevenue","period":"2026-Q1"}\n', encoding="utf-8")
-    due = due_series(series, "2026-09-15", ["2026-08-04"], store_dir=str(tmp_path))
+    _seed_amd_file(tmp_path)
+    due = due_series(series, "2026-09-15", AMD_CALENDAR, store_dir=str(tmp_path))
     assert due == []
 
 
 def test_due_series_quarterly_due_when_file_missing_even_off_earnings_window(tmp_path):
     series = _series_fixture()
-    due = due_series(series, "2026-09-15", ["2026-08-04"], store_dir=str(tmp_path))
+    due = due_series(series, "2026-09-15", AMD_CALENDAR, store_dir=str(tmp_path))
     assert [cs.id for cs in due] == ["amdDataCenterRevenue"]
 
 
 def test_due_series_never_due_for_fetcher_none_series(tmp_path):
     series = _series_fixture()
-    due = due_series(series, "2026-08-04", ["2026-08-04"], store_dir=str(tmp_path))
+    due = due_series(series, "2026-08-04", AMD_CALENDAR, store_dir=str(tmp_path))
     ids = {cs.id for cs in due}
     assert "nvdaDataCenterRevenue" not in ids
 
 
 def test_due_series_never_due_for_monthly_series(tmp_path):
     series = _series_fixture()
-    due = due_series(series, "2026-08-04", ["2026-08-04"], store_dir=str(tmp_path))
+    due = due_series(series, "2026-08-04", AMD_CALENDAR, store_dir=str(tmp_path))
     ids = {cs.id for cs in due}
     assert "gpuSpotPrice" not in ids
+
+
+# ── F131 defect B: the window is forward-only, print day E .. E+14 ─────────
+#
+# The old window was symmetric +/-3 days, so a series with an existing store
+# file went not-due four days after its own print -- in the exact week the
+# source page carries fresh numbers -- and was "due" for three days BEFORE
+# the print, when there is by definition nothing new to fetch. User ruling
+# 2026-08-31: forward-only, E through E+14.
+
+def test_due_series_still_due_five_days_after_the_print(tmp_path):
+    """The literal F131 symptom, as observed live on 2026-08-31: five days
+    past the print, in the week the source has fresh numbers. Under the old
+    +/-3 window this returned [] -- this is the regression test for it."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    due = due_series(series, "2026-08-09", AMD_CALENDAR, store_dir=str(tmp_path))
+    assert [cs.id for cs in due] == ["amdDataCenterRevenue"]
+
+
+def test_due_series_due_on_the_last_day_of_the_window(tmp_path):
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    due = due_series(series, "2026-08-18", AMD_CALENDAR, store_dir=str(tmp_path))
+    assert [cs.id for cs in due] == ["amdDataCenterRevenue"]
+
+
+def test_due_series_not_due_the_day_after_the_window_closes(tmp_path):
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    due = due_series(series, "2026-08-19", AMD_CALENDAR, store_dir=str(tmp_path))
+    assert due == []
+
+
+def test_due_series_not_due_the_day_before_the_print(tmp_path):
+    """Forward-only: nothing has been published yet, so there is nothing a
+    fetch could pick up. The old symmetric window burned three of its seven
+    days here."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    due = due_series(series, "2026-08-03", AMD_CALENDAR, store_dir=str(tmp_path))
+    assert due == []
+
+
+# ── F131 defect C: each series is scoped to its OWN company's print ────────
+#
+# The calendar used to arrive as a bare list of dates with the company names
+# stripped off, so every quarterly series was tested against every company's
+# print date. User ruling 2026-08-31: scope via an explicit `earningsKey` on
+# the registry entry, matched against the manifest's earningsDates keys.
+
+def test_due_series_ignores_another_companys_earnings_date(tmp_path):
+    """AMD's series must NOT wake up during NVIDIA's earnings week."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    due = due_series(series, "2026-08-29", {"nvidia": "2026-08-26"},
+                     store_dir=str(tmp_path))
+    assert due == []
+
+
+def test_due_series_picks_its_own_date_out_of_a_multi_company_calendar(tmp_path):
+    """Both companies in the calendar: AMD is due in AMD's window and quiet
+    in NVIDIA's, driven entirely by its own earningsKey."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    calendar = {"nvidia": "2026-08-26", "amd": "2026-08-04"}
+
+    in_amd_window = due_series(series, "2026-08-09", calendar, store_dir=str(tmp_path))
+    assert [cs.id for cs in in_amd_window] == ["amdDataCenterRevenue"]
+
+    in_nvda_window = due_series(series, "2026-08-29", calendar, store_dir=str(tmp_path))
+    assert in_nvda_window == []
+
+
+def test_due_series_survives_a_calendar_with_no_entry_for_this_series(tmp_path):
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    assert due_series(series, "2026-08-09", {}, store_dir=str(tmp_path)) == []
+
+
+def test_due_series_survives_an_unparseable_date_in_the_calendar(tmp_path):
+    """A junk date must be ignored, not crash the daily run."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    due = due_series(series, "2026-08-09", {"amd": "not-a-date"},
+                     store_dir=str(tmp_path))
+    assert due == []
 
 
 # ── run_fetch: the never-raises + idempotent-append guarantees ────────────
@@ -214,7 +313,7 @@ def test_run_fetch_never_raises_when_fetch_html_blows_up(tmp_path):
     def _boom(url):
         raise RuntimeError("network is down")
 
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                         fetch_html=_boom)
 
     assert result["fetched"] == []
@@ -229,7 +328,7 @@ def test_run_fetch_reports_failure_dict_shape_and_never_raises_on_parse_failure(
     quarterly-results block, so discovery itself fails first) -- the point is
     the failure surfaces as a normal 'failed' entry, not an exception."""
     series = _series_fixture()
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                         fetch_html=lambda url: "<html>garbage</html>")
     assert result["fetched"] == []
     assert len(result["failed"]) == 1
@@ -242,7 +341,7 @@ def test_run_fetch_end_to_end_discovers_and_parses_the_real_fixtures(tmp_path):
     -> discover the real Q2 2026 detail URL -> fetch + parse it -> 6.718."""
     series = _series_fixture()
     calls: list[str] = []
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                         fetch_html=_stub_fetch_html(calls))
 
     assert result["failed"] == []
@@ -262,7 +361,7 @@ def test_run_fetch_end_to_end_discovers_and_parses_the_real_fixtures(tmp_path):
 
 def test_run_fetch_appends_points_in_the_existing_series_row_format(tmp_path):
     series = _series_fixture()
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                         fetch_html=_stub_fetch_html())
 
     assert result["failed"] == []
@@ -285,12 +384,12 @@ def test_run_fetch_appends_points_in_the_existing_series_row_format(tmp_path):
 
 def test_run_fetch_append_is_idempotent_across_two_runs(tmp_path):
     series = _series_fixture()
-    run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
               fetch_html=_stub_fetch_html())
     path = tmp_path / "amdDataCenterRevenue.jsonl"
     first_rows = path.read_text(encoding="utf-8").splitlines()
 
-    result2 = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result2 = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                          fetch_html=_stub_fetch_html())
 
     second_rows = path.read_text(encoding="utf-8").splitlines()
@@ -309,13 +408,68 @@ def test_run_fetch_append_is_idempotent_across_two_runs(tmp_path):
 
 def test_run_fetch_skips_non_due_series(tmp_path):
     series = _series_fixture()
-    (tmp_path / "amdDataCenterRevenue.jsonl").write_text(
-        '{"indicatorId":"amdDataCenterRevenue","period":"2026-Q1"}\n', encoding="utf-8")
-    result = run_fetch(series, "2026-09-15", ["2026-08-04"], str(tmp_path),
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-09-15", AMD_CALENDAR, str(tmp_path),
                         fetch_html=_stub_fetch_html())
     assert result["fetched"] == []
     assert result["failed"] == []
-    assert set(result["skipped"]) == set(series)
+    # nvdaDataCenterRevenue is no longer lumped in with "not due this week" --
+    # see the notFetchable tests below.
+    assert set(result["skipped"]) == {"amdDataCenterRevenue", "gpuSpotPrice"}
+
+
+# ── F131 defect: "no fetcher wired up" must not hide inside 'skipped' ──────
+#
+# A series with no fetcher can NEVER be fetched, but it used to be reported
+# in the same bucket as "not due this week". That is why nvdaDataCenterRevenue
+# read as a scheduling hiccup for three consecutive cycles instead of as a
+# missing fetcher. User ruling 2026-08-31: give it its own bucket.
+
+def test_run_fetch_reports_a_fetcherless_quarterly_series_as_not_fetchable(tmp_path):
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-09-15", AMD_CALENDAR, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert result["notFetchable"] == ["nvdaDataCenterRevenue"]
+    assert "nvdaDataCenterRevenue" not in result["skipped"]
+
+
+def test_run_fetch_reports_not_fetchable_even_inside_the_earnings_window(tmp_path):
+    """The live F131 symptom: NVIDIA printed on 2026-08-26 and the series was
+    still reported as merely 'skipped' five days later. It must now be
+    reported as not fetchable at all, on any date."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-08-31", {"nvidia": "2026-08-26"}, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert result["notFetchable"] == ["nvdaDataCenterRevenue"]
+    assert "nvdaDataCenterRevenue" not in result["skipped"]
+
+
+def test_run_fetch_leaves_a_monthly_series_in_skipped_not_not_fetchable(tmp_path):
+    """gpuSpotPrice has no fetcher here either, but it is not broken -- it is
+    maintained end to end by price-sync (gpu_agent/price_local.py). Only a
+    series this module OWNS and cannot fetch is a problem worth flagging."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-09-15", AMD_CALENDAR, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert "gpuSpotPrice" in result["skipped"]
+    assert "gpuSpotPrice" not in result["notFetchable"]
+
+
+def test_run_fetch_every_registry_series_lands_in_exactly_one_bucket(tmp_path):
+    """No series may be double-counted or silently dropped between the four
+    buckets -- the property that makes the summary trustworthy at a glance."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-09-15", AMD_CALENDAR, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    reported = ([f["id"] for f in result["fetched"]]
+                + [f["id"] for f in result["failed"]]
+                + list(result["skipped"]) + list(result["notFetchable"]))
+    assert sorted(reported) == sorted(series)
+    assert len(reported) == len(set(reported))
 
 
 # ── review finding #1: a corrupt line must never silently wipe history ────
@@ -332,7 +486,7 @@ def test_run_fetch_with_a_corrupt_existing_line_fails_and_leaves_file_untouched(
     original_content = good_rows + corrupt_line
     path.write_text(original_content, encoding="utf-8")
 
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                         fetch_html=_stub_fetch_html())
 
     # The three genuine historical quarters must NOT have vanished -- the
@@ -346,10 +500,11 @@ def test_run_fetch_with_a_corrupt_existing_line_fails_and_leaves_file_untouched(
 # ── review finding #2: run_fetch must never raise, even on a bad argument ─
 
 def test_run_fetch_never_raises_when_series_argument_is_none():
-    result = run_fetch(None, "2026-08-04", ["2026-08-04"], "store/series",
+    result = run_fetch(None, "2026-08-04", AMD_CALENDAR, "store/series",
                         fetch_html=lambda url: "")
     assert result["fetched"] == []
     assert result["skipped"] == []
+    assert result["notFetchable"] == []
     assert result["failed"] and result["failed"][0]["id"] == "*"
 
 
@@ -359,25 +514,43 @@ def test_run_fetch_never_raises_when_earnings_dates_argument_is_none():
                         fetch_html=lambda url: "")
     assert result["fetched"] == []
     assert result["skipped"] == []
+    assert result["notFetchable"] == []
     assert result["failed"] and result["failed"][0]["id"] == "*"
+
+
+def test_run_fetch_never_raises_but_fails_loudly_on_the_old_list_calendar_shape(tmp_path):
+    """F131: the calendar used to be a bare list of dates. If some caller
+    still passes one, it must fail LOUDLY -- a list silently matches no
+    company key, which would leave every quarterly series quietly never-due
+    and recreate the very bug this lane fixed."""
+    series = _series_fixture()
+    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+                        fetch_html=lambda url: "")
+    assert result["fetched"] == []
+    assert result["skipped"] == []
+    assert result["notFetchable"] == []
+    assert result["failed"] and result["failed"][0]["id"] == "*"
+    assert "mapping" in result["failed"][0]["error"]
 
 
 def test_run_fetch_never_raises_when_store_dir_argument_is_none():
     series = _series_fixture()
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], None,
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, None,
                         fetch_html=lambda url: "")
     assert result["fetched"] == []
     assert result["skipped"] == []
+    assert result["notFetchable"] == []
     assert result["failed"] and result["failed"][0]["id"] == "*"
 
 
 def test_run_fetch_never_raises_when_series_values_are_plain_dicts(tmp_path):
     series = {"amdDataCenterRevenue": {"id": "amdDataCenterRevenue",
                                         "cadence": "quarterly", "fetcher": "amd_dc_revenue"}}
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                         fetch_html=lambda url: "")
     assert result["fetched"] == []
     assert result["skipped"] == []
+    assert result["notFetchable"] == []
     assert result["failed"] and result["failed"][0]["id"] == "*"
 
 
@@ -392,7 +565,7 @@ def test_run_fetch_fails_when_landing_page_has_no_matching_link(tmp_path):
         '<a href="/slides.pdf" aria-label="Slide Presentation Q2 2026 PDF">Slides</a>'
         '</div>'
     )
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                         fetch_html=lambda url: no_link_landing_html)
     assert result["fetched"] == []
     failed_ids = [f["id"] for f in result["failed"]]
@@ -415,7 +588,7 @@ def test_run_fetch_fails_when_detail_fetch_blows_up_after_successful_discovery(t
             raise RuntimeError("detail page fetch timed out")
         raise AssertionError(f"unexpected fetch_html call for {url!r}")
 
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                         fetch_html=_fetch)
     assert result["fetched"] == []
     failed_ids = [f["id"] for f in result["failed"]]
@@ -450,7 +623,7 @@ def test_run_fetch_fails_loudly_when_parsed_quarter_is_older_than_stored(tmp_pat
     series = _series_fixture()
     _seed_store_row(tmp_path, "2026-Q3")
 
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                        fetch_html=_stub_fetch_html())
 
     assert result["fetched"] == []
@@ -468,7 +641,7 @@ def test_staleness_violation_leaves_the_store_file_byte_identical(tmp_path):
     path = _seed_store_row(tmp_path, "2026-Q3")
     before = path.read_text(encoding="utf-8")
 
-    run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
               fetch_html=_stub_fetch_html())
 
     assert path.read_text(encoding="utf-8") == before
@@ -481,7 +654,7 @@ def test_equal_newest_quarter_is_allowed_and_backfills_older_periods(tmp_path):
     series = _series_fixture()
     _seed_store_row(tmp_path, "2026-Q2")
 
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                        fetch_html=_stub_fetch_html())
 
     assert result["failed"] == []
@@ -493,7 +666,7 @@ def test_first_ever_fetch_with_no_store_file_passes_the_staleness_check(tmp_path
     2026-08-20); the fetch appends all parsed periods normally."""
     series = _series_fixture()
 
-    result = run_fetch(series, "2026-08-04", ["2026-08-04"], str(tmp_path),
+    result = run_fetch(series, "2026-08-04", AMD_CALENDAR, str(tmp_path),
                        fetch_html=_stub_fetch_html())
 
     assert result["failed"] == []
