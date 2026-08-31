@@ -1411,6 +1411,19 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   total or an average stays out of scope — frozen v1 scoring, F79's v2 path. Suite 2850 passed /
   6 skipped (baseline 2826 + 24 new); the F6 eval pin, narrator prompt pin, F83 fingerprint and
   the scoring replay pin are all green and byte-untouched.
+  **Post-merge ruling (USER-DECIDED 2026-08-31, at merge):** the Supply half keeps the SAME
+  number-first treatment as Demand even though its scale is not saturated today — uniform line,
+  nothing to revisit if Supply's number later drifts past the scale too.
+
+- [ ] **F137 — the saturated band ceiling silently disables two alert rules
+  (`gap-band-changed` and `demand-reversal` can never fire).** Found by the F136 lane in
+  passing, deliberately NOT fixed there (different surface — it changes what the alert dot
+  says). `gpu_agent/change.py` band-checks `sdgi` (now ~4.6) and `demand` (now ~4.5) against
+  the same 0.30 word-band ceiling F136 removed from the headline, so both rules have been dead
+  for as long as those numbers have been above 0.30 — the escalation ladder is quietly missing
+  two rungs. Fix direction is the F136 precedent (compare changes/levels numerically, not via
+  the saturated bands), but what the alert should SAY and when it should fire is a reader-facing
+  design call — NEEDS A USER RULING before build, question-stop applies.
 
 - [x] **F132 — webreach crawl4ai runner crashes on non-cp1252 output (`UnicodeEncodeError`,
   U+1F92F).** Observed 2026-08-31 (v17): the crawl4ai path FAILED writing tool output because
