@@ -1586,7 +1586,12 @@ def _report(args) -> int:
         since_seq = None
         restart = False
         prev_run_date = None
-        run_key = _scorecard_run_key(args.scorecard)
+        # Only a real cycle render takes part in change tracking. `--no-prior` explicitly
+        # asks for a standalone read of one scorecard, and an off-convention filename is an
+        # ad-hoc render we cannot place in the chain — neither is "the last run", so neither
+        # reads a marker nor lays one down. Letting either write would let a throwaway
+        # preview lock in a watermark the real cycle render could no longer correct.
+        run_key = None if getattr(args, "no_prior", False) else _scorecard_run_key(args.scorecard)
         ledger = None
         if run_key is not None:
             ledger = RunMarkerLedger(pathlib.Path(args.store), sc.categoryId)
@@ -1600,6 +1605,11 @@ def _report(args) -> int:
                 # the real list resume next cycle (user-decided 2026-08-31). NOT a claim
                 # that the market was quiet.
                 restart = True
+        elif prior is not None and not getattr(args, "no_prior", False):
+            # An ad-hoc render with a prior on disk. Falling through to the month window
+            # here would print "nothing new cleared the materiality bar" — the exact
+            # sentence F135 exists to stop. Say we have no starting point instead.
+            restart = True
         movement = collect_movement(store, as_of=sc.asOf, prev_as_of=prev_as_of,
                                     since_seq=since_seq, restart=restart,
                                     prev_run_date=prev_run_date,
@@ -1607,7 +1617,7 @@ def _report(args) -> int:
         if ledger is not None and not getattr(args, "no_marker", False):
             marker_plan = (ledger, RunMarker(
                 categoryId=sc.categoryId, asOf=run_key[0], version=run_key[1],
-                wikiSeq=store.log.count(), storyDate=_run_date(args)))
+                wikiSeq=store.seq_watermark(sc.asOf), storyDate=_run_date(args)))
     # F75: surface any bypassed/waived gate from the run's cycle log in the trust footer.
     from gpu_agent import brief
     gate_waivers: list[str] = []
@@ -1646,18 +1656,6 @@ def _report(args) -> int:
                          thesis_book=thesis_book, thesis_last_findings=thesis_last_findings,
                          daily=getattr(args, "daily", False), gate_waivers=gate_waivers,
                          change=change, state=state, alert=alert, implications=implications)
-    # F135: record this run's notebook watermark, but only once the report actually
-    # rendered — a run that died mid-render must not advance the starting point and hide
-    # its own moves from the next one. Append-only and idempotent by (asOf, version), so a
-    # re-render of the same scorecard writes nothing and the $0 replay stays a replay.
-    if marker_plan is not None:
-        ledger, marker = marker_plan
-        try:
-            ledger.record(marker)
-        except OSError as e:
-            print(f"gpu-agent report: warning: could not record the run marker at "
-                  f"{ledger.path}: {e}; the next run will compare against an older "
-                  f"starting point", file=sys.stderr)
     # The report emits non-ASCII glyphs (↑↓→ — Δ). A default Windows cp1252
     # terminal would crash on print(); force stdout to UTF-8 so the CLI runs
     # on the user's own platform (covers both the report and the "wrote" line).
@@ -1668,6 +1666,20 @@ def _report(args) -> int:
         print(f"wrote {args.out}")
     else:
         print(text)
+    # F135: record this run's notebook watermark — LAST, once the report has actually been
+    # delivered (written to --out or printed). A run that died before the reader saw it must
+    # not advance the starting point, because the next run would then begin after those
+    # events and they would never be reported at all. Append-only and idempotent by
+    # (asOf, version), so a re-render of the same scorecard writes nothing and the $0 replay
+    # stays a replay.
+    if marker_plan is not None:
+        ledger, marker = marker_plan
+        try:
+            ledger.record(marker)
+        except OSError as e:
+            print(f"gpu-agent report: warning: could not record the run marker at "
+                  f"{ledger.path}: {e}; the next run will compare against an older "
+                  f"starting point", file=sys.stderr)
     return 0
 
 

@@ -46,16 +46,27 @@ class RunMarker(BaseModel):
 
 
 class RunMarkerLedger:
-    """Append-only per-category ledger of :class:`RunMarker` rows."""
+    """Append-only per-category ledger of :class:`RunMarker` rows.
+
+    SINGLE WRITER ASSUMED. Unlike the wiki log this takes no lock: it is written once per
+    category per cycle, by the report step, and a cycle renders its categories in sequence.
+    Two `report` runs racing on the same category could both pass the idempotency check and
+    append the same `(asOf, version)` twice. That is survivable rather than corrupting —
+    `open("a")` is O_APPEND so the lines cannot interleave, and `previous()` excludes the
+    current key and resolves ties to the first line — but it is an assumption, not a
+    guarantee. Add a lock here if the report ever runs concurrently per category.
+    """
 
     def __init__(self, store_root, category_id: str):
         self.root = pathlib.Path(store_root)
         self.categoryId = category_id
         self.path = self.root / category_id / "run-markers.jsonl"
+        self._warned: set[int] = set()   # line numbers already reported as unreadable
 
     def read(self) -> list[RunMarker]:
         """Every marker on disk, in file (append) order. Unparseable lines are skipped
-        with a warning — never raised — so a damaged ledger cannot cost us the report."""
+        with a warning — never raised — so a damaged ledger cannot cost us the report. One
+        run reads the ledger two or three times, so each bad line is reported only once."""
         if not self.path.exists():
             return []
         out: list[RunMarker] = []
@@ -65,8 +76,10 @@ class RunMarkerLedger:
             try:
                 out.append(RunMarker.model_validate_json(line))
             except Exception as e:  # noqa: BLE001 — skip the bad line, keep the good ones
-                print(f"gpu-agent: warning: run-marker ledger {self.path} line {n} is "
-                      f"unreadable ({type(e).__name__}); skipping it", file=sys.stderr)
+                if n not in self._warned:
+                    self._warned.add(n)
+                    print(f"gpu-agent: warning: run-marker ledger {self.path} line {n} is "
+                          f"unreadable ({type(e).__name__}); skipping it", file=sys.stderr)
         return out
 
     def latest(self) -> Optional[RunMarker]:

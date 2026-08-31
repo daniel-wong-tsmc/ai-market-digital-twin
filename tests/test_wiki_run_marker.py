@@ -19,6 +19,8 @@ import io
 import json
 import shutil
 
+import pytest
+
 from gpu_agent.registry.horizon import IndicatorHorizons
 from gpu_agent.registry.indicators import IndicatorRegistry
 from gpu_agent.schema.finding import Confidence, Evidence, Finding, Impact, Kind
@@ -333,6 +335,111 @@ def test_no_wiki_store_means_no_ledger_and_no_crash(tmp_path):
     out = _render(store, 2)
     assert "CATEGORY REPORT" in out
     assert _ledger_lines(store) == []
+
+
+def test_marker_is_not_recorded_when_the_report_is_never_delivered(tmp_path):
+    """A run that dies before the reader sees the report must NOT advance the starting
+    point — otherwise the next run begins after those events and nobody ever hears about
+    them. --out into a missing directory is the concrete failure."""
+    store, ws = _seed_store(tmp_path)
+    route_findings(ws, [_f("f-nv1", "NVDA", "rpoBacklog", as_of=FIX_MONTH)], as_of=FIX_MONTH)
+    with pytest.raises((OSError, FileNotFoundError)):
+        _render(store, 2, out=str(tmp_path / "no-such-dir" / "report.txt"))
+    assert _ledger_lines(store) == [], (
+        "the watermark advanced even though the report was never delivered")
+
+
+def test_no_prior_render_neither_reads_nor_writes_a_marker(tmp_path):
+    """--no-prior is a standalone read of one scorecard, not a cycle run."""
+    store, ws = _seed_store(tmp_path)
+    route_findings(ws, [_f("f-nv1", "NVDA", "rpoBacklog", as_of=FIX_MONTH)], as_of=FIX_MONTH)
+    out = _render(store, 2, no_prior=True)
+    assert _ledger_lines(store) == [], "--no-prior must not lay down a watermark"
+    assert "no prior cycle to compare" in out
+
+    # And it must not have consumed an existing marker either: the real cycle render that
+    # follows still sees the restart state and records the marker itself.
+    real = _render(store, 2)
+    assert "change tracking restarts this run" in real
+    assert len(_ledger_lines(store)) == 1
+
+
+def test_ad_hoc_scorecard_filename_says_so_instead_of_claiming_nothing_moved(tmp_path):
+    """An off-convention filename cannot be placed in the run chain. It must not fall back
+    to the month window — that prints the very sentence F135 exists to stop."""
+    store, ws = _seed_store(tmp_path)
+    route_findings(ws, [_f("f-nv1", "NVDA", "rpoBacklog", as_of=FIX_MONTH)], as_of=FIX_MONTH)
+    ad_hoc = store / CATEGORY / "scratch-copy.json"
+    shutil.copy(store / CATEGORY / f"{FIX_MONTH}-v2.json", ad_hoc)
+    args = argparse.Namespace(
+        scorecard=str(ad_hoc), prior=str(store / CATEGORY / f"{FIX_MONTH}-v1.json"),
+        no_prior=False, store=str(store), registry="registry/indicators.json",
+        out=None, render_ts="2026-06-02T00:00:00Z")
+    buf = io.StringIO()
+    from gpu_agent import cli
+    with contextlib.redirect_stdout(buf):
+        assert cli._report(args) == 0
+    out = buf.getvalue()
+    assert "nothing new cleared the materiality bar" not in out
+    assert "change tracking restarts this run" in out
+    assert _ledger_lines(store) == [], "an ad-hoc render must not write a marker"
+
+
+def test_unwritable_ledger_warns_but_still_delivers_the_report(tmp_path, monkeypatch):
+    """A damaged watermark must never cost the executive the report."""
+    store, ws = _seed_store(tmp_path)
+    route_findings(ws, [_f("f-nv1", "NVDA", "rpoBacklog", as_of=FIX_MONTH)], as_of=FIX_MONTH)
+
+    def _boom(self, marker):
+        raise OSError("disk is read-only")
+
+    monkeypatch.setattr(RunMarkerLedger, "record", _boom)
+    err = io.StringIO()
+    with contextlib.redirect_stderr(err):
+        out = _render(store, 2)
+    assert "CATEGORY REPORT" in out, "the report must still be delivered"
+    assert "could not record the run marker" in err.getvalue()
+
+
+def test_watermark_ignores_events_stamped_with_a_later_period(tmp_path):
+    """The window is bounded by the period label, so the watermark must be too — an event
+    already stamped with next month's label is outside this run's window and must not be
+    left behind the next run's watermark either."""
+    store, ws = _seed_store(tmp_path)
+    route_findings(ws, [_f("f-nv1", "NVDA", "rpoBacklog", as_of=FIX_MONTH)], as_of=FIX_MONTH)
+    in_window = ws.seq_watermark(FIX_MONTH)
+    route_findings(ws, [_f("f-next", "AMD", "rpoBacklog", as_of="2026-07")], as_of="2026-07")
+    assert ws.seq_watermark(FIX_MONTH) == in_window, (
+        "a later-period event must not advance this run's watermark")
+    assert ws.seq_watermark("2026-07") > in_window
+
+    _render(store, 2)
+    assert json.loads(_ledger_lines(store)[0])["wikiSeq"] == in_window
+
+
+def test_state_transition_is_reconstructed_from_before_the_marker(tmp_path):
+    """The subtlest new function: a page's state as it stood AT the marker, which the
+    period-label lookup cannot answer because every event that month shares one label."""
+    reg, hz = _reg_hz()
+    ws = _store(tmp_path)
+    route_findings(ws, [_f("f-nv1", "NVDA", "rpoBacklog", as_of=MONTH)], as_of=MONTH)
+    ws.record_state("entity:nvidia", as_of=MONTH, state="on-track",
+                    trajectory="accelerating", salience=0.9)
+    marker = ws.log.count()
+    route_findings(ws, [_f("f-nv2", "NVDA", "rpoBacklog", as_of=MONTH)], as_of=MONTH)
+    ws.record_state("entity:nvidia", as_of=MONTH, state="at-risk",
+                    trajectory="softening", salience=0.5)
+
+    diff = ws.diff(MONTH, MONTH, since_seq=marker)
+    assert diff.changed_pages[0].stateTransition == {"from": "on-track", "to": "at-risk"}
+    move = diff.index_moves[0]
+    assert (move.oldState, move.newState) == ("on-track", "at-risk")
+    assert (move.oldTrajectory, move.newTrajectory) == ("accelerating", "softening")
+
+    mv = collect_movement(ws, as_of=MONTH, prev_as_of=MONTH, since_seq=marker,
+                          registry=reg, horizons=hz)
+    row = next(r for r in mv.moved if r.stateFrom)
+    assert (row.stateFrom, row.stateTo) == ("on-track", "at-risk")
 
 
 def test_report_writes_only_the_marker_ledger_into_the_store(tmp_path):

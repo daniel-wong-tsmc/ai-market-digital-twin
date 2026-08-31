@@ -177,6 +177,17 @@ class WikiStore:
         return [Observation(asOf=e.asOf, findingId=e.findingId)
                 for e in self._events_for(page_id, "append-observation")]
 
+    def seq_watermark(self, as_of) -> int:
+        """Where a run that reported up to `as_of` leaves the notebook (F135): one past the
+        highest sequence number among events at or before that period label.
+
+        Deliberately NOT the raw event count. `diff` bounds its window with
+        `e.asOf <= as_of`, so an event already stamped with a LATER label is outside this
+        run's window; counting it here would also put it behind the next run's watermark
+        and it would never be reported by anyone."""
+        seqs = [e.seq for e in self.log.read() if e.asOf <= as_of]
+        return max(seqs) + 1 if seqs else 0
+
     def observations_since(self, page_id, since_seq, *, up_to_as_of=None) -> list[Observation]:
         """The page's observations numbered `since_seq` or higher (F135). The sequence
         twin of the period-label window `observations()` callers used to slice by hand —
