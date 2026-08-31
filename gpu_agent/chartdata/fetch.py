@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Callable
 
 from gpu_agent.chartdata.registry import ChartSeries
+from gpu_agent.manifest import earnings_window
 
 DEFAULT_STORE_DIR = "store/series"
 # F131 (user ruling 2026-08-31): the earnings window is FORWARD-ONLY -- a
@@ -76,7 +77,7 @@ def not_fetchable(series: dict[str, ChartSeries]) -> list[ChartSeries]:
 
 
 def _in_earnings_window(cs: ChartSeries, as_of: _dt.date,
-                         earnings_dates: dict[str, str]) -> bool:
+                         earnings_dates: Mapping[str, str]) -> bool:
     """Is `as_of` inside the forward-only window after THIS series' company's
     print? (F131 defect C.)
 
@@ -86,15 +87,13 @@ def _in_earnings_window(cs: ChartSeries, as_of: _dt.date,
     against every company's print date and AMD's chart woke up during NVIDIA's
     earnings week.
 
-    A missing key, or a date that won't parse, means "no window" rather than an
-    exception: this runs inside the unattended daily pipeline.
+    Delegates to the shared `manifest.earnings_window` helper, which the
+    gather side calls too (with its own +/-7 shape). A missing key, a key the
+    calendar has no date for, or a date that won't parse all mean "no window"
+    rather than an exception: this runs inside the unattended daily pipeline.
     """
-    if cs.earningsKey is None:
-        return False
-    earnings = _parse_date(earnings_dates.get(cs.earningsKey))
-    if earnings is None:
-        return False
-    return 0 <= (as_of - earnings).days <= _EARNINGS_WINDOW_DAYS
+    return earnings_window(earnings_dates, cs.earningsKey, as_of,
+                            days_before=0, days_after=_EARNINGS_WINDOW_DAYS)
 
 
 def due_series(
@@ -120,7 +119,7 @@ def due_series(
     manifest's `earningsDates` field stores it -- pass the mapping, never
     `.values()`.
 
-    Returns series sorted by id for deterministic output; `store_dir` scopes
+    Returns series in a stable order for deterministic output; `store_dir` scopes
     the missing-file check to a caller-chosen store root (tests pass a tmp
     dir; the CLI passes the real store).
     """
@@ -234,7 +233,7 @@ def _append_points(store_dir: str, cs: ChartSeries, points: list[dict],
 def run_fetch(
     series: dict[str, ChartSeries],
     as_of_date: str,
-    earnings_dates: list[str],
+    earnings_dates: Mapping[str, str],
     store_dir: str,
     fetch_html: Callable[[str], str] | None = None,
 ) -> dict:
@@ -317,7 +316,14 @@ def run_fetch(
                 # fetch failure escape into the unattended daily pipeline.
                 failed.append({"id": cs.id, "error": f"{type(e).__name__}: {e}"})
 
-        skipped = sorted(sid for sid in series
+        # Every bucket is expressed in the SAME id space -- each series' own
+        # cs.id, never the dict key that happens to point at it. load_chart_series
+        # keys by id so the two coincide today, but a caller that built the dict
+        # by hand with a mismatched key would otherwise put one series in two
+        # buckets at once (review finding: the four-bucket partition must not
+        # rest on an unstated precondition).
+        all_ids = {series[sid].id for sid in series}
+        skipped = sorted(sid for sid in all_ids
                           if sid not in due_ids and sid not in unfetchable_ids)
         return {"fetched": fetched, "failed": failed, "skipped": skipped,
                 "notFetchable": sorted(unfetchable_ids)}

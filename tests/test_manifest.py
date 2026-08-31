@@ -10,6 +10,7 @@ from gpu_agent.manifest import (
     ManifestLoadError,
     load_manifest,
     compute_coverage_gaps,
+    earnings_window,
     gather_priority,
 )
 
@@ -284,6 +285,53 @@ def test_load_manifest_rejects_unknown_cadence_value(tmp_path):
     f.write_text(json.dumps(bad), encoding="utf-8")
     with pytest.raises(ManifestLoadError):
         load_manifest(f)
+
+
+# ── earnings_window: the shared helper behind F130 and F131 ────────────────
+#
+# Both lanes independently got vendor scoping wrong in the same way, so the
+# date arithmetic now lives in one place. The window SHAPE stays per-caller:
+# gather uses +/-7, chart-fetch uses forward-only 0..+14. Both are user-chosen
+# and neither may drift into the other.
+
+CAL = {"amd": "2026-08-04", "nvidia": "2026-08-26"}
+
+
+def test_earnings_window_is_scoped_to_its_own_vendor():
+    """The whole point of the helper: another vendor's print never counts."""
+    three_days_after_nvidia = dt.date(2026, 8, 29)
+    assert earnings_window(CAL, "nvidia", three_days_after_nvidia,
+                           days_before=7, days_after=7) is True
+    assert earnings_window(CAL, "amd", three_days_after_nvidia,
+                           days_before=7, days_after=7) is False
+
+
+def test_earnings_window_symmetric_shape_matches_the_gather_side():
+    key, e = "amd", dt.date(2026, 8, 4)
+    def w(offset):
+        return earnings_window(CAL, key, e + dt.timedelta(days=offset),
+                               days_before=7, days_after=7)
+    assert [w(-8), w(-7), w(0), w(7), w(8)] == [False, True, True, True, False]
+
+
+def test_earnings_window_forward_only_shape_matches_the_chart_side():
+    key, e = "amd", dt.date(2026, 8, 4)
+    def w(offset):
+        return earnings_window(CAL, key, e + dt.timedelta(days=offset),
+                               days_before=0, days_after=14)
+    assert [w(-1), w(0), w(14), w(15)] == [False, True, True, False]
+
+
+@pytest.mark.parametrize("calendar, key", [
+    ({}, "amd"),                      # key not in the calendar
+    (CAL, None),                      # series/source declares no key
+    ({"amd": "not-a-date"}, "amd"),   # unparseable date
+    ({"amd": None}, "amd"),           # null date
+    ({"amd": 20260804}, "amd"),       # non-string date
+])
+def test_earnings_window_returns_false_and_never_raises_on_bad_input(calendar, key):
+    assert earnings_window(calendar, key, dt.date(2026, 8, 4),
+                           days_before=7, days_after=7) is False
 
 
 def test_gather_priority_normal_when_no_cadence():
