@@ -414,8 +414,27 @@ empty state ("no implication recorded this cycle").
 This prints the full board-ready report to the session — the overall category status, all six dimensions
 (with any `under-supported` dimension shown, never dropped — Part 18 #8), DMI/SMI/**SDGI** with a plain-language
 read and **Δ vs the prior cycle**, the per-entity panel, evidence quality per dimension, the sources list, and
-the coverage/skip gaps. Surface the report text alongside the scorecard path in the cycle log. It is a pure
-projection of the saved scorecard (`report` never edits canonical state — Part 35), so it replays for $0.
+the coverage/skip gaps. Surface the report text alongside the scorecard path in the cycle log. The report text
+is a pure projection of the saved scorecard (`report` never edits canonical state — Part 35), so it replays for $0.
+
+**F135 (user-approved 2026-08-31) — the one write this step makes.** Once the report has been delivered,
+`report` appends a single line to `store/<id>/run-markers.jsonl` recording how far the wiki notebook had
+advanced when this run read it. That watermark is bookkeeping about *when a run happened*, not market state, so
+it does not breach the never-edits-canonical rule above: nothing already on disk is touched, the ledger is
+append-only, and the append is idempotent by `(asOf, version)` — re-rendering the same scorecard writes nothing
+and is still byte-identical. It exists because every notebook event is stamped with the **month**, so the old
+"what changed since the last run" question compared `2026-08` against `2026-08` and printed nothing on every run
+but the month's first. The next run reads this marker and asks "everything added since sequence N" instead.
+
+Operator notes:
+- The run that **creates** a category's ledger prints "change tracking restarts this run"; the real list
+  resumes on the next cycle. Expect this once per category the first time this ships.
+- Pass **`--no-marker`** for any render that must stay strictly read-only (replays, dashboard consumers).
+- `--no-prior` renders and renders of an off-convention scorecard filename neither read nor write a marker —
+  they are not cycle runs. Because the first recording of an `(asOf, version)` wins, running the real cycle
+  render is what should lay the marker down; an earlier preview of that same scorecard (without `--no-marker`)
+  would fix the watermark at that moment, which makes the NEXT run re-report moves already shown. Over-reporting,
+  never loss.
 *(If `gpu-agent report` is unavailable in an older checkout, skip this step and log it as deferred.)*
 
 **Session-output rule (F67).** The session's FINAL message for a cycle is the rendered

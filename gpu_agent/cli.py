@@ -23,6 +23,7 @@ from gpu_agent.wiki.ingest import route_findings, build_bundle, apply_enrichment
 from gpu_agent.wiki.lint import lint
 from gpu_agent.wiki.lifecycle import lifecycle, apply_lifecycle
 from gpu_agent.wiki.movement import collect_movement
+from gpu_agent.wiki.marker import RunMarker, RunMarkerLedger
 from gpu_agent.judgment.judge import judge_findings
 from gpu_agent.judgment.judge import JudgmentResult, JudgmentError
 from gpu_agent.llm.client import LLMError
@@ -1486,6 +1487,26 @@ def _latest_thesis_findings(history_path: pathlib.Path) -> dict:
     return latest
 
 
+def _scorecard_run_key(scorecard_path):
+    """(asOf, version) for a scorecard, read from its `<asOf>-v<N>.json` filename — the
+    same identity `find_prior` orders the chain by, and the key F135's run-marker ledger
+    is idempotent on. None for a file that does not follow the convention (an ad-hoc
+    render), in which case no marker is read or written and nothing changes."""
+    from gpu_agent.report import _VERSION_RE
+    m = _VERSION_RE.match(pathlib.Path(scorecard_path).name)
+    return (m.group(1), int(m.group(2))) if m else None
+
+
+def _run_date(args) -> str:
+    """This run's calendar date, for the marker's display field only. Takes `--render-ts`
+    when given (so a byte-reproducible render is reproducible here too) and otherwise the
+    UTC date. Never reaches a render function — those still read no clock."""
+    ts = getattr(args, "render_ts", None)
+    if ts:
+        return str(ts)[:10]
+    return datetime.now(timezone.utc).date().isoformat()
+
+
 def _report(args) -> int:
     """Handler for `gpu-agent report`: load scorecard + optional prior → render."""
     try:
@@ -1554,11 +1575,49 @@ def _report(args) -> int:
     horizons = IndicatorHorizons.load(args.registry)   # same file; carries the cadenceHorizon tags
     wiki_dir = pathlib.Path(args.store) / "wiki"
     movement = None
+    marker_plan = None            # (ledger, RunMarker) to append once the report renders
     if wiki_dir.exists():
         store = WikiStore(wiki_dir, FindingStore(pathlib.Path(args.store) / "findings"))
         prev_as_of = prior.asOf if prior is not None else None
+        # F135. The period label on every notebook event is the MONTH, so "after the prior
+        # run's label, up to this run's label" is an empty question for every run but the
+        # month's first — WHAT MOVED printed nothing all August. Diff by the notebook's own
+        # sequence number instead, taken from the previous run's marker.
+        since_seq = None
+        restart = False
+        prev_run_date = None
+        # Only a real cycle render takes part in change tracking. `--no-prior` explicitly
+        # asks for a standalone read of one scorecard, and an off-convention filename is an
+        # ad-hoc render we cannot place in the chain — neither is "the last run", so neither
+        # reads a marker nor lays one down. Letting either write would let a throwaway
+        # preview lock in a watermark the real cycle render could no longer correct.
+        run_key = None if getattr(args, "no_prior", False) else _scorecard_run_key(args.scorecard)
+        ledger = None
+        if run_key is not None:
+            ledger = RunMarkerLedger(pathlib.Path(args.store), sc.categoryId)
+            prev_marker = ledger.previous(as_of=run_key[0], version=run_key[1])
+            if prev_marker is not None:
+                since_seq = prev_marker.wikiSeq
+                prev_run_date = prev_marker.storyDate
+            elif prior is not None:
+                # A prior cycle exists but never recorded a marker: this is the first run
+                # after the fix. Honest restart — set the starting point, say so, and let
+                # the real list resume next cycle (user-decided 2026-08-31). NOT a claim
+                # that the market was quiet.
+                restart = True
+        elif prior is not None and not getattr(args, "no_prior", False):
+            # An ad-hoc render with a prior on disk. Falling through to the month window
+            # here would print "nothing new cleared the materiality bar" — the exact
+            # sentence F135 exists to stop. Say we have no starting point instead.
+            restart = True
         movement = collect_movement(store, as_of=sc.asOf, prev_as_of=prev_as_of,
+                                    since_seq=since_seq, restart=restart,
+                                    prev_run_date=prev_run_date,
                                     registry=registry, horizons=horizons)
+        if ledger is not None and not getattr(args, "no_marker", False):
+            marker_plan = (ledger, RunMarker(
+                categoryId=sc.categoryId, asOf=run_key[0], version=run_key[1],
+                wikiSeq=store.seq_watermark(sc.asOf), storyDate=_run_date(args)))
     # F75: surface any bypassed/waived gate from the run's cycle log in the trust footer.
     from gpu_agent import brief
     gate_waivers: list[str] = []
@@ -1607,6 +1666,20 @@ def _report(args) -> int:
         print(f"wrote {args.out}")
     else:
         print(text)
+    # F135: record this run's notebook watermark — LAST, once the report has actually been
+    # delivered (written to --out or printed). A run that died before the reader saw it must
+    # not advance the starting point, because the next run would then begin after those
+    # events and they would never be reported at all. Append-only and idempotent by
+    # (asOf, version), so a re-render of the same scorecard writes nothing and the $0 replay
+    # stays a replay.
+    if marker_plan is not None:
+        ledger, marker = marker_plan
+        try:
+            ledger.record(marker)
+        except OSError as e:
+            print(f"gpu-agent report: warning: could not record the run marker at "
+                  f"{ledger.path}: {e}; the next run will compare against an older "
+                  f"starting point", file=sys.stderr)
     return 0
 
 
@@ -2122,6 +2195,11 @@ def main(argv=None) -> int:
     rp.add_argument("--change-first", action="store_true",
                     help="F78 daily: lead with the three-horizon change lines + quick-glance "
                          "tiers (reads the store at asOf-1/7/30 days). Overrides --daily's order.")
+    rp.add_argument("--no-marker", action="store_true",
+                    help="do not record this run's change-tracking marker (F135). The report "
+                         "still reads the previous run's marker; it just leaves the ledger "
+                         "at <store>/<category>/run-markers.jsonl untouched. Use it for "
+                         "replays, ad-hoc renders and any read-only consumer.")
     rp.add_argument("--cycle-log", default=None,
                     help="path to the run's cycle-log JSON; any gate the log records as "
                          "bypassed/waived (gates.*) surfaces a waiver line in the trust footer (F75)")

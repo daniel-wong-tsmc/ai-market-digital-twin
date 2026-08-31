@@ -1337,7 +1337,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   Done when the series leaves `notFetchable` and a real quarter lands in
   `store/series/nvdaDataCenterRevenue.jsonl`.
 
-- [ ] **F135 — the report's "WHAT MOVED SINCE LAST RUN" list has been empty since 2026-08-05
+- [x] **F135 — the report's "WHAT MOVED SINCE LAST RUN" list has been empty since 2026-08-05
   (month-label diff window is empty by definition).** Found by the 2026-08-31 DMI-jump audit
   (read-only; full report was at `.superpowers/handoffs/dmi-v17-audit-REPORT.md`, gitignored).
   The wiki/storyline notebook stamps entries with the MONTH label (`2026-08`) and the report
@@ -1348,6 +1348,35 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   "everything since sequence N" — works with data already on disk. NEEDS A USER RULING before
   build: the fix changes what each cycle records (a per-run watermark), a design fork under the
   question-stop rule.
+  **Done 2026-08-31 (lane `f135-what-moved`).** Mechanism re-verified in-lane before any code:
+  `2026-08 vs 2026-08` → 0 moved / 48 quiet; `2026-08 vs 2026-07` → 26 new + 9 changed. One
+  finding beyond the audit: the notebook holds only **6 `lint` events in the project's whole
+  life** (one in all of August against ~20 runs), so `wiki-lint` events cannot stand in as run
+  boundaries — an explicitly recorded marker really was required. **Question-stopped** on where
+  the marker lives (`.superpowers/handoffs/f135-what-moved-QUESTIONS.md`): the two homes the
+  brief suggested were both unsuitable (the cycle log is hand-authored and overwritten each run;
+  the story artifact sits behind the narrator prompt pin), and adding a new run-cycle step —
+  how F109 shipped its equivalent — would have moved the F83 fingerprint, which this lane was
+  not authorised to re-record. **Both questions answered by the user 2026-08-31 (USER-DECIDED,
+  zero AFK-defaults): (Q1) option A** — the existing `report` step records the marker into a new
+  append-only `store/<id>/run-markers.jsonl`, idempotent by `(asOf, version)`, with a
+  `--no-marker` flag so replays and read-only consumers never write; the run-cycle skill's
+  "report never edits canonical state" sentence softened as framed, since a run watermark is
+  bookkeeping about *when a run happened*, not market state. **(Q2)** the restart wording
+  verbatim, and the `(vs …)` tail dropped on the restart run. Shipped: `wiki/marker.py`;
+  `since_seq` windows through `WikiStore.diff`, `observations_since`, `_state_before_seq` and
+  `score_moves`/`_score_move` (the scoring window had the *same* month bug — without fixing it a
+  real move would have scored with no evidence behind it and folded below the materiality bar);
+  `collect_movement` gains `since_seq`/`restart`/`prevRunDate`; `render_what_moved` renders the
+  honest restart state and names the run it compared against by date instead of the month. No
+  Procedure step added, so **all four pins stayed green and byte-untouched**. Code review caught
+  two real bugs, both fixed: the marker was recorded *before* the report was delivered (a failed
+  `--out` write would have advanced the watermark on a report nobody saw, hiding those moves from
+  the next run forever), and a `--no-prior` render both consumed and wrote a marker while
+  discarding the diff it computed — so a throwaway diagnostic run could lock in a watermark the
+  real cycle render could not correct. `--no-prior` and off-convention filenames now take no part
+  in change tracking, and the watermark is bounded by the period label rather than the raw event
+  count. Suite **2848 passed / 6 skipped** (baseline 2826 + 22 new tests).
 
 - [x] **F136 — the brief's headline change line saturates: "Demand: ACCELERATING (was
   ACCELERATING)" is permanently stuck.** Same audit. The word-scale mapping tops out near 0.30

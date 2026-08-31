@@ -261,6 +261,14 @@ def _moved_tag(row):
     return "MOVED", "="
 
 
+def _prev_run_label(movement) -> str:
+    """What to call the run we are comparing against. F135: when the run's own date is
+    known, name it — "the 2026-08-30 run" — instead of the period label, which is the
+    month and therefore names several runs at once. Falls back to the label."""
+    date = getattr(movement, "prevRunDate", None)
+    return f"the {date} run" if date else movement.prevAsOf
+
+
 def render_what_moved(movement) -> str:
     """WHAT MOVED SINCE LAST RUN: the materiality-ranked daily diff (4-4b score_moves),
     each row tagged NEW/WATCH/UP/DOWN/CHANGED/MOVED, cited + tiered, provisional marked;
@@ -269,10 +277,18 @@ def render_what_moved(movement) -> str:
     if movement is None:
         lines.append("  (no wiki store yet — needs a multi-cycle store from daily cycles)")
         return "\n".join(lines)
+    if movement.restart:
+        # F135, user-decided 2026-08-31: the first run after the change-tracking fix has no
+        # earlier starting point to measure from. Say that in plain words — and drop the
+        # "(vs ...)" tail, because naming a comparison point we did not actually use is
+        # exactly what made the old output misleading.
+        lines.append("  (change tracking restarts this run — this run sets the new starting point,")
+        lines.append("   so the list of what moved resumes next cycle)")
+        return "\n".join(lines)
     if movement.prevAsOf is None:
         lines.append("  (no prior cycle to compare — first tracked cycle)")
         return "\n".join(lines)
-    lines[0] += f"  (vs {movement.prevAsOf})"
+    lines[0] += f"  (vs {_prev_run_label(movement)})"
     for row in movement.moved:
         tag, arrow = _moved_tag(row)
         # Reader contract (spec §1 row 3): a source COUNT + tier label, never an id dump —
@@ -286,11 +302,12 @@ def render_what_moved(movement) -> str:
         trans = f"  {row.stateFrom} → {row.stateTo}" if (row.stateFrom and row.stateTo) else ""
         lines.append(f"  {arrow} {tag:<6} {row.title}  {cite}{tier_part}{prov}{contra}{trans}")
     if not movement.moved:
+        label = _prev_run_label(movement)
         if movement.foldedCount:
-            lines.append(f"  (no material moves vs {movement.prevAsOf} — "
+            lines.append(f"  (no material moves vs {label} — "
                          f"{movement.foldedCount} below-threshold items folded)")
         else:
-            lines.append(f"  (no material moves vs {movement.prevAsOf} — "
+            lines.append(f"  (no material moves vs {label} — "
                          f"nothing new cleared the materiality bar)")
     if movement.moved and movement.foldedCount:
         lines.append(f"  ({movement.foldedCount} lower-materiality items folded — see wiki-lint)")
