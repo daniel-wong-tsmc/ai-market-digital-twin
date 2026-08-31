@@ -1283,16 +1283,59 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   pinned by a test). The live gather skill already documented "that entity's next earnings
   date", so this restores documented intent rather than changing design; no skill edit needed.
   6 new tests; suite 2775 passed / 6 skipped; F6 pin green, zero prompt bytes moved; no
-  `store/` or `registry/` edits. F131 does **not** share this defect — `nvdaDataCenterRevenue`
-  is skipped because `registry/chart-series.json` gives it `"fetcher": null` and
-  `due_series` returns early on a null fetcher before any date logic runs.
+  `store/` or `registry/` edits. ~~F131 does **not** share this defect~~ — **corrected by the F131
+  lane, 2026-08-31:** F131 *does* share it. The sentence below is right about the *reported
+  symptom* (`nvdaDataCenterRevenue` is skipped because `registry/chart-series.json` gives it
+  `"fetcher": null` and `due_series` returns early on a null fetcher before any date logic runs)
+  but wrong about the defect: `cli.py` handed `run_fetch` `manifest.earningsDates.values()` — the
+  same flattened, vendor-less calendar — so AMD's chart counted as due during NVIDIA's earnings
+  week, exactly as `amd-earnings` went heavy here. It was invisible in production only because
+  `store/series/amdDataCenterRevenue.jsonl` does not exist yet, which forced that series due for
+  an unrelated reason. Fixed on the chart side under F131, and the date arithmetic for both sides
+  now lives in one shared `manifest.earnings_window` helper so the two cannot drift again.
 
-- [ ] **F131 — `chart-fetch` never comes due after an earnings print (`nvdaDataCenterRevenue`
-  still `skipped` 5 days / 3 cycles after NVIDIA's Q2 FY2027 release).** Observed v15–v17. The
-  series' due-date logic decides "not yet due" in the exact week its source has fresh numbers.
-  Diagnose the due computation in `gpu_agent/chartdata/` (cadence anchor, last-point date, or
-  earnings-calendar linkage), fix with tests. Distinct from F130's gather-side priority but the
-  two may share a date-handling defect — lanes must compare notes at review time.
+- [x] **F131 — `chart-fetch` never comes due after an earnings print.** Observed v15–v17. Branch
+  `f131-chartfetch-due`. **Re-scoped 2026-08-31 (user ruling) to the date logic only**; the
+  reported symptom's own cause — NVIDIA has no fetcher at all — split out as **F134**. Root cause
+  of the symptom: `nvdaDataCenterRevenue` carries `"fetcher": null` and `due_series` drops any
+  fetcher-less series *before* it looks at a date, so it could never come due on any date; it was
+  filed under `skipped` alongside "not due this week", which is why three cycles read it as a
+  scheduling hiccup. Two genuine date defects found underneath and fixed here: (B) the earnings
+  window was symmetric ±3 days, so a series with an existing store file went not-due four days
+  after its own print and was "due" for three days *before* it, when nothing is published yet —
+  now **forward-only, E through E+14**; (C) `cli.py` passed `manifest.earningsDates.values()`, a
+  bare list with the company names stripped off, so every quarterly series was tested against
+  every company's print date and AMD's chart woke up during NVIDIA's earnings week — series are
+  now scoped to their own company via a new required `earningsKey` field on quarterly
+  `registry/chart-series.json` entries. Also split `notFetchable` out of `skipped` so a
+  permanently-unfetchable series can never hide inside a routine skip again. **Round 2** (two
+  further user rulings after code review): (Q5) a quarterly series with a fetcher whose earnings
+  date is missing, unparseable, or stale (past E+14) now reports in its own `staleCalendar`
+  bucket instead of a silent skip — the manifest is hand-edited and nothing refreshes it, so once
+  a series' store file exists an unusable entry made it quietly never-due forever, F131's own bug
+  in a new place; (Q6) an unparseable `as_of` now raises rather than reporting a whole no-op cycle
+  as routine skips. `chart-fetch` therefore prints five buckets: `fetched`, `failed`, `skipped`
+  (routine), `notFetchable` (build a fetcher), `staleCalendar` (update the manifest). Defect (C) is the
+  **same defect F130 fixed** on the gather side (`gather_priority` walked the same flattened
+  calendar); the shared window helper unifying both call sites is Phase 2 of this lane, after
+  F130 merges. Close-out: `.superpowers/handoffs/f131-chartfetch-due-DONE.md`.
+
+- [ ] **F134 — `nvdaDataCenterRevenue` has no fetcher, so its chart can never refresh.** Split out
+  of F131 by user ruling 2026-08-31. Symptom: the series reports as `notFetchable` on every cycle
+  (before F131 it hid inside `skipped`, which is how it went unnoticed for three cycles) — its
+  `registry/chart-series.json` entry carries `"fetcher": null` and no NVIDIA fetcher exists in
+  `gpu_agent/chartdata/fetchers/`, so the chart shows whatever was last written by hand. Why
+  split: F131 is date logic provable against recorded data, whereas this needs live markup that
+  no fixture in the repo has — different evidence, different risk, and F131 should not sit parked
+  waiting on a live cycle. First step: **capture fixture HTML from
+  `investor.nvidia.com/financial-info/quarterly-results/` during a live cycle** (the landing page
+  plus one quarterly detail page), saved to `fixtures/chartdata/`, exactly as
+  `fixtures/chartdata/amd-ir-*.html` were. Then a `nvda_dc_revenue` parser + landing-page
+  discoverer mirroring `gpu_agent/chartdata/fetchers/amd_dc_revenue.py`, registration in
+  `FETCHERS`/`DISCOVERERS`, and finally flipping `"fetcher": null` → `"nvda_dc_revenue"` in the
+  registry. The F112(a) staleness guard and the idempotent append already cover the append side.
+  Done when the series leaves `notFetchable` and a real quarter lands in
+  `store/series/nvdaDataCenterRevenue.jsonl`.
 
 - [x] **F132 — webreach crawl4ai runner crashes on non-cp1252 output (`UnicodeEncodeError`,
   U+1F92F).** Observed 2026-08-31 (v17): the crawl4ai path FAILED writing tool output because

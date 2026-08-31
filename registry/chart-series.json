@@ -10,7 +10,8 @@
       "topicTags": ["amdDataCenter", "amd"],
       "form": "columns",
       "unit": "US$ billions",
-      "fetcher": "amd_dc_revenue"
+      "fetcher": "amd_dc_revenue",
+      "earningsKey": "amd"
     },
     {
       "id": "nvdaDataCenterRevenue",
@@ -22,7 +23,8 @@
       "topicTags": ["nvidia", "nvidiaDataCenter"],
       "form": "columns",
       "unit": "US$ billions",
-      "fetcher": null
+      "fetcher": null,
+      "earningsKey": "nvidia"
     },
     {
       "id": "gpuSpotPrice",

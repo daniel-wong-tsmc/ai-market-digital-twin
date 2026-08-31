@@ -15,17 +15,26 @@ from __future__ import annotations
 
 import datetime as _dt
 import json
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Callable
 
 from gpu_agent.chartdata.registry import ChartSeries
+from gpu_agent.manifest import earnings_window
 
 DEFAULT_STORE_DIR = "store/series"
-# quarterly series are due when as_of is this many days (inclusive) from a
-# known earnings date -- wide enough to survive a same-week re-run, narrow
-# enough that a fetch attempt outside earnings season is never mistaken for
-# "due".
-_EARNINGS_WINDOW_DAYS = 3
+# F131 (user ruling 2026-08-31): the earnings window is FORWARD-ONLY -- a
+# quarterly series is due from its print day E through E+_EARNINGS_WINDOW_DAYS
+# inclusive, and never before E.
+#
+# It used to be symmetric (+/-3 days), which was wrong twice over: the three
+# days before a print are dead weight (the numbers do not exist yet), and the
+# window shut four days after the print, in the exact week the source page is
+# freshest. The daily cycle does not run every day, so a window with only ~4
+# usable days could miss a print for an entire quarter. 14 days forward gives
+# the run a fortnight of chances; a re-fetch that finds nothing new is already
+# a no-op thanks to the idempotent append in _append_points.
+_EARNINGS_WINDOW_DAYS = 14
 
 
 class ParseFailed(Exception):
@@ -50,32 +59,123 @@ def _parse_date(s: str) -> _dt.date | None:
         return None
 
 
+def not_fetchable(series: dict[str, ChartSeries]) -> list[ChartSeries]:
+    """Series this module OWNS but has no way to fetch: quarterly, and no
+    fetcher wired up (F131 -- nvdaDataCenterRevenue is the live example).
+
+    Reported separately from 'not due this week' so a permanently-unfetchable
+    series can't hide inside a routine skip. It did exactly that for three
+    consecutive cycles before F131 was filed.
+
+    Deliberately excludes monthly series: gpuSpotPrice has no fetcher here
+    either, but it is not broken -- price-sync (gpu_agent/price_local.py) owns
+    it end to end. Only a series chart-fetch is supposed to be able to get,
+    and can't, belongs in this bucket.
+    """
+    return [series[sid] for sid in sorted(series)
+            if series[sid].cadence == "quarterly" and series[sid].fetcher is None]
+
+
+def has_usable_calendar_entry(cs: ChartSeries, as_of: _dt.date,
+                               earnings_dates: Mapping[str, str]) -> bool:
+    """Can this series still be scheduled off the earnings calendar as of
+    `as_of`? (F131 Q5, user ruling 2026-08-31.)
+
+    False in three cases, all of which mean "a person has to update the
+    manifest before this series can ever refresh again":
+
+      - the calendar has no entry for the series' `earningsKey`;
+      - it has one, but the date won't parse;
+      - it has a valid date whose window has already closed (`as_of` is past
+        E + _EARNINGS_WINDOW_DAYS) -- i.e. the calendar is STALE.
+
+    True before and during the window: a series whose print simply hasn't
+    happened yet is waiting on the calendar, not on a person, and reporting
+    that would cry wolf for most of every quarter.
+
+    Why this exists: the scheduler correctly asks "has THIS company reported
+    recently?", but nothing keeps the calendar current -- it is hand-edited and
+    nothing in the repo refreshes it. Once a series' store file exists, an
+    unusable entry made it quietly never-due again forever, looking exactly
+    like a routine skip. That is F131's own headline bug in a new place.
+    """
+    if cs.earningsKey is None:
+        return False
+    raw = earnings_dates.get(cs.earningsKey)
+    earnings = _parse_date(raw) if isinstance(raw, str) else None
+    if earnings is None:
+        return False
+    return (as_of - earnings).days <= _EARNINGS_WINDOW_DAYS
+
+
+def _in_earnings_window(cs: ChartSeries, as_of: _dt.date,
+                         earnings_dates: Mapping[str, str]) -> bool:
+    """Is `as_of` inside the forward-only window after THIS series' company's
+    print? (F131 defect C.)
+
+    The calendar is keyed by company -- 'amd', 'nvidia' -- and the series says
+    which key is its own via `earningsKey`. It used to arrive as a bare list of
+    dates with the names stripped off, so every quarterly series was tested
+    against every company's print date and AMD's chart woke up during NVIDIA's
+    earnings week.
+
+    Delegates to the shared `manifest.earnings_window` helper, which the
+    gather side calls too (with its own +/-7 shape). A missing key, a key the
+    calendar has no date for, or a date that won't parse all mean "no window"
+    rather than an exception: this runs inside the unattended daily pipeline.
+    """
+    return earnings_window(earnings_dates, cs.earningsKey, as_of,
+                            days_before=0, days_after=_EARNINGS_WINDOW_DAYS)
+
+
 def due_series(
     series: dict[str, ChartSeries],
     as_of_date: str,
-    earnings_dates: list[str],
+    earnings_dates: dict[str, str],
     store_dir: str = DEFAULT_STORE_DIR,
 ) -> list[ChartSeries]:
     """Which chart series are due for a fetch attempt as of `as_of_date`.
 
     - fetcher is None (no fetcher wired up yet, e.g. nvdaDataCenterRevenue):
-      never due -- there is nothing that could fetch it.
+      never due -- there is nothing that could fetch it. See `not_fetchable`,
+      which reports these so they can't pass for a routine skip.
     - cadence == 'monthly': never due here -- price-sync (gpu_agent/price_local.py)
       owns those series end to end.
-    - cadence == 'quarterly': due when `as_of_date` falls within
-      +/-_EARNINGS_WINDOW_DAYS days of any of `earnings_dates`, OR the
-      series' store file is missing entirely (first-ever fetch, or a file
-      that was never written because the series has no history yet).
+    - cadence == 'quarterly': due when `as_of_date` falls in the forward-only
+      window E .. E+_EARNINGS_WINDOW_DAYS after ITS OWN company's print date
+      (`earnings_dates[cs.earningsKey]`), OR the series' store file is missing
+      entirely (first-ever fetch, or a file that was never written because the
+      series has no history yet).
 
-    Returns series sorted by id for deterministic output; `store_dir` scopes
+    `earnings_dates` maps a company key to an ISO print date, exactly as a
+    manifest's `earningsDates` field stores it -- pass the mapping, never
+    `.values()`.
+
+    Returns series in a stable order for deterministic output; `store_dir` scopes
     the missing-file check to a caller-chosen store root (tests pass a tmp
     dir; the CLI passes the real store).
     """
+    # Checked up front, and loudly: run_fetch turns this into its synthetic
+    # '*' failure. Two reasons it must raise rather than degrade to "no
+    # window". A caller handing over a broken calendar has a config bug that
+    # silence would bury. And the pre-F131 call shape was a bare LIST of
+    # dates -- a list would otherwise match nothing here and every quarterly
+    # series would quietly stop being due, resurrecting F131 in a new form.
+    if not isinstance(earnings_dates, Mapping):
+        raise TypeError(
+            "earnings_dates must be a mapping of company key -> ISO date "
+            f"(e.g. manifest.earningsDates), got {type(earnings_dates).__name__}")
+
+    # F131 Q6 (user ruling 2026-08-31): an unparseable as_of is an OPERATOR
+    # error, not a data condition, so it fails loudly for the same reason the
+    # calendar guard above does. It used to return [] with nothing recorded,
+    # which meant a cycle that did nothing at all printed a clean-looking
+    # summary of routine skips.
     as_of = _parse_date(as_of_date)
     if as_of is None:
-        return []
+        raise ValueError(
+            f"as_of_date must be an ISO date (YYYY-MM-DD), got {as_of_date!r}")
 
-    earnings = [d for d in (_parse_date(s) for s in earnings_dates) if d is not None]
     store_path = Path(store_dir)
 
     out = []
@@ -86,9 +186,7 @@ def due_series(
         if cs.cadence != "quarterly":
             continue
         file_missing = not (store_path / f"{cs.id}.jsonl").exists()
-        near_earnings = any(abs((as_of - e).days) <= _EARNINGS_WINDOW_DAYS
-                             for e in earnings)
-        if file_missing or near_earnings:
+        if file_missing or _in_earnings_window(cs, as_of, earnings_dates):
             out.append(cs)
     return out
 
@@ -173,7 +271,7 @@ def _append_points(store_dir: str, cs: ChartSeries, points: list[dict],
 def run_fetch(
     series: dict[str, ChartSeries],
     as_of_date: str,
-    earnings_dates: list[str],
+    earnings_dates: Mapping[str, str],
     store_dir: str,
     fetch_html: Callable[[str], str] | None = None,
 ) -> dict:
@@ -183,9 +281,20 @@ def run_fetch(
     per-series failure leaves that series' file exactly as it was.
 
     Returns {'fetched': [{'id', 'newPoints'}], 'failed': [{'id', 'error'}],
-    'skipped': [id, ...]} -- 'skipped' lists every registry series that
-    wasn't due this call (wrong cadence, no fetcher, or outside the earnings
-    window with an existing file). On a failure so broad it couldn't even
+    'skipped': [id, ...], 'notFetchable': [id, ...], 'staleCalendar': [id, ...]}.
+
+    'skipped' is the routine bucket: not due this call, but nothing is wrong --
+    wrong cadence, or the earnings window simply hasn't opened yet.
+
+    The other two both mean "this will never refresh on its own until a person
+    acts", and they are separate because the ACTION differs. 'notFetchable'
+    (F131 Q4) lists quarterly series with no fetcher wired up -- somebody must
+    build one. 'staleCalendar' (F131 Q5) lists quarterly series that have a
+    fetcher but no usable earnings date -- somebody must update the manifest.
+    Both used to hide inside 'skipped', where three consecutive cycles read
+    the first as a routine skip.
+
+    Every registry series lands in exactly one of the five buckets. On a failure so broad it couldn't even
     get as far as computing which series are due (e.g. `series=None`,
     `earnings_dates=None`, a non-ChartSeries value in `series`) the whole
     call reports one synthetic {'id': '*', ...} failure with empty
@@ -199,6 +308,7 @@ def run_fetch(
 
         due = due_series(series, as_of_date, earnings_dates, store_dir=store_dir)
         due_ids = {cs.id for cs in due}
+        unfetchable_ids = {cs.id for cs in not_fetchable(series)}
         fetched: list[dict] = []
         failed: list[dict] = []
         html_fetcher = fetch_html or _default_fetch_html
@@ -251,12 +361,36 @@ def run_fetch(
                 # fetch failure escape into the unattended daily pipeline.
                 failed.append({"id": cs.id, "error": f"{type(e).__name__}: {e}"})
 
-        skipped = sorted(sid for sid in series if sid not in due_ids)
-        return {"fetched": fetched, "failed": failed, "skipped": skipped}
+        # Every bucket is expressed in the SAME id space -- each series' own
+        # cs.id, never the dict key that happens to point at it. load_chart_series
+        # keys by id so the two coincide today, but a caller that built the dict
+        # by hand with a mismatched key would otherwise put one series in two
+        # buckets at once (review finding: the four-bucket partition must not
+        # rest on an unstated precondition).
+        all_ids = {series[sid].id for sid in series}
+        # F131 Q5: a quarterly series that COULD be fetched but has no usable
+        # calendar entry is reported, not quietly skipped. Precedence is
+        # deliberate: a series already due is being handled right now, and one
+        # with no fetcher needs a fetcher built before its calendar matters --
+        # so both of those win over this bucket, keeping every series in
+        # exactly one place.
+        as_of = _parse_date(as_of_date)
+        stale_ids = {
+            cs.id for cs in (series[sid] for sid in series)
+            if cs.cadence == "quarterly" and cs.fetcher is not None
+            and cs.id not in due_ids and cs.id not in unfetchable_ids
+            and not has_usable_calendar_entry(cs, as_of, earnings_dates)
+        }
+        skipped = sorted(sid for sid in all_ids
+                          if sid not in due_ids and sid not in unfetchable_ids
+                          and sid not in stale_ids)
+        return {"fetched": fetched, "failed": failed, "skipped": skipped,
+                "notFetchable": sorted(unfetchable_ids),
+                "staleCalendar": sorted(stale_ids)}
     except Exception as e:  # noqa: BLE001 -- deliberate, see docstring above.
         return {"fetched": [],
                 "failed": [{"id": "*", "error": f"{type(e).__name__}: {e}"}],
-                "skipped": []}
+                "skipped": [], "notFetchable": [], "staleCalendar": []}
 
 
 def _default_fetch_html(url: str) -> str:  # pragma: no cover -- network path,

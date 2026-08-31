@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Literal, Optional
 from urllib.parse import urlparse
@@ -163,6 +164,54 @@ def _url_matches(url: str, pattern: str) -> bool:
     return host == pattern or host.endswith("." + pattern)
 
 
+# ── Earnings window (pure — no I/O) ─────────────────────────────────────────
+
+def earnings_window(
+    earnings_dates: "Mapping[str, str]",
+    key: str | None,
+    today: dt.date,
+    *,
+    days_before: int,
+    days_after: int,
+) -> bool:
+    """Is `today` inside the earnings window around `key`'s print date?
+
+    The single place the desk answers "has this vendor just reported?". Two
+    callers used to answer it separately and got it wrong in the same way
+    (F130 on the gather side, F131 on the chart side): both scanned every date
+    in `earnings_dates` with the vendor names thrown away, so ONE vendor
+    reporting made EVERY earnings-window item look live. Hence `key` is
+    required here rather than optional-with-a-fallback — there is deliberately
+    no way to ask this question without saying whose print you mean.
+
+    The window SHAPE stays the caller's decision, because the two callers
+    legitimately differ and both shapes are user-chosen:
+
+      - gather_priority: days_before=7, days_after=7 — a symmetric run-up plus
+        follow-up around the print, for deciding how hard to gather.
+      - chartdata.fetch.due_series: days_before=0, days_after=14 — forward
+        only, because the numbers a chart series wants do not exist until the
+        print happens.
+
+    Returns False, never raises, for every "cannot answer" case: no key, a key
+    the calendar has no date for, or a date that will not parse. All three are
+    "not in a window", and both callers already degrade safely on that.
+
+    Pure: `today` must be passed in — never reads the real clock.
+    """
+    if key is None:
+        return False
+    raw_date = earnings_dates.get(key)
+    if not isinstance(raw_date, str):
+        return False
+    try:
+        earnings_date = dt.date.fromisoformat(raw_date)
+    except ValueError:
+        return False
+    delta = (today - earnings_date).days
+    return -days_before <= delta <= days_after
+
+
 # ── Gather priority (pure — no I/O) ──────────────────────────────────────────
 
 def gather_priority(
@@ -185,20 +234,22 @@ def gather_priority(
     manifest has no date for, is "light": it never rides another vendor's
     print. The +/-7-day window itself is unchanged.
 
+    F131 refactor: the date arithmetic moved into the shared `earnings_window`
+    helper, which chartdata.fetch also calls. Behaviour here is unchanged --
+    same +/-7 days, same "light" for a missing key, a key with no date, or an
+    unparseable date. The point of sharing it is that the vendor-scoping bug
+    both lanes hit independently can now only be fixed, or broken, in one
+    place.
+
     Pure: `today` must be passed in — never reads the real clock.
     """
     if source.cadence is None:
         return "normal"
 
-    if source.cadence == "earnings-window" and source.earningsKey is not None:
-        raw_date = manifest.earningsDates.get(source.earningsKey)
-        if raw_date is not None:
-            try:
-                earnings_date = dt.date.fromisoformat(raw_date)
-            except ValueError:
-                return "light"
-            if abs((earnings_date - today).days) <= 7:
-                return "heavy"
+    if source.cadence == "earnings-window" and earnings_window(
+            manifest.earningsDates, source.earningsKey, today,
+            days_before=7, days_after=7):
+        return "heavy"
 
     return "light"
 

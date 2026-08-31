@@ -43,6 +43,12 @@ class ChartSeries:
     form: str               # 'columns' | 'bars' | 'line'
     unit: str
     fetcher: str | None     # key into FETCHERS; None = maintained elsewhere
+    # F131: which company's earnings calendar schedules this series. Matched
+    # against a manifest's `earningsDates` keys ('amd', 'nvidia'). REQUIRED on
+    # a quarterly series -- see _validate_entry for why that is enforced at
+    # load time rather than defaulted. A monthly series is never scheduled off
+    # an earnings date, so it simply has no key.
+    earningsKey: str | None = None
 
     @property
     def chartable(self) -> bool:
@@ -83,6 +89,21 @@ def _validate_entry(entry: dict) -> ChartSeries:
     if fetcher is not None and not isinstance(fetcher, str):
         _fail(entry_id, "fetcher must be a string or null")
 
+    # F131: a quarterly series is scheduled off ONE company's print date, and
+    # `earningsKey` names that company. It is required rather than defaulted
+    # because a quarterly series with no key would match no print date at all
+    # and go silently never-due -- exactly the failure F131 was filed for.
+    # Failing at load time makes that impossible to ship unnoticed.
+    earnings_key = entry.get("earningsKey")
+    if earnings_key is not None and (not isinstance(earnings_key, str) or not earnings_key):
+        _fail(entry_id, "earningsKey must be a non-empty string or null")
+    if cadence == "quarterly" and earnings_key is None:
+        _fail(entry_id, "earningsKey is required for a quarterly series (it names "
+                        "the company whose earnings calendar schedules it)")
+    if cadence != "quarterly" and earnings_key is not None:
+        _fail(entry_id, f"earningsKey is meaningless on a {cadence!r} series (only "
+                        "quarterly series are scheduled off an earnings date)")
+
     return ChartSeries(
         id=entry["id"],
         name=entry["name"],
@@ -94,6 +115,7 @@ def _validate_entry(entry: dict) -> ChartSeries:
         form=form,
         unit=entry["unit"],
         fetcher=fetcher,
+        earningsKey=earnings_key,
     )
 
 

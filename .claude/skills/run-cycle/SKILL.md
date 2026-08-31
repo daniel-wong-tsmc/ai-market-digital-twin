@@ -580,10 +580,19 @@ quarterly data-center revenue), so each one carries a fresh point when a new one
 ```
 .venv/Scripts/python -m gpu_agent.cli chart-fetch --category <id> --as-of <asOf>
 ```
-It prints a plain summary of what it fetched, what wasn't due yet, and what failed. **A failed
-fetch here is only written to the log — it never stops the cycle.** Log the printed summary,
-then log `chartFetch: done` either way; a chart that couldn't be refreshed just keeps showing
-its last known point until a later cycle succeeds.
+It prints a plain summary of what it fetched, what wasn't due yet, what failed, and what it has
+no way to fetch at all. **A failed fetch here is only written to the log — it never stops the
+cycle.** Log the printed summary, then log `chartFetch: done` either way; a chart that couldn't
+be refreshed just keeps showing its last known point until a later cycle succeeds.
+
+Three of those buckets mean different things. `skipped` is routine — that series just isn't due
+this cycle. The other two will say the same thing every cycle until a person acts, so note them
+once and don't wait for them to clear on their own:
+
+- `notFetchable` — nothing can ever refresh that series, because no fetcher was ever built for it.
+- `staleCalendar` — the series could be fetched, but the earnings date it schedules off is
+  missing, unreadable, or more than two weeks old. The category's manifest needs a fresh date for
+  that vendor before the chart can refresh again.
 
 **(7d2) Chart-research — dig for a published series when no curated chart fits (F113).** After the
 narrator and citation audit have run, some dashboard bullets still have no chart: the curated series

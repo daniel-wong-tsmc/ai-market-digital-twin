@@ -264,8 +264,9 @@ def _chart_fetch(args) -> int:
 
     Exit code is 0 even when a fetch failed for one or more series -- a broken
     source page must never fail the unattended daily run. The full
-    {'fetched', 'failed', 'skipped'} summary is printed as JSON either way, so
-    a failure is still visible to whoever (or whatever) reads the run's log.
+    {'fetched', 'failed', 'skipped', 'notFetchable'} summary is printed as JSON
+    either way, so a failure is still visible to whoever (or whatever) reads
+    the run's log.
     The only non-zero exit is 1, and only when the manifest itself can't be
     loaded (ManifestLoadError) -- that is an operator/config problem, not a
     per-series fetch failure, and there is nothing to fetch without it.
@@ -278,7 +279,12 @@ def _chart_fetch(args) -> int:
         return 1
 
     series = load_chart_series(args.registry)
-    earnings_dates = list(manifest.earningsDates.values())
+    # F131: pass the calendar KEYED BY COMPANY, never `.values()`. Flattening
+    # it to bare dates lost the linkage, so every quarterly series was tested
+    # against every company's print date -- AMD's chart woke up during
+    # NVIDIA's earnings week. Each series names its own key via
+    # registry earningsKey.
+    earnings_dates = dict(manifest.earningsDates)
     series_dir = str(pathlib.Path(args.store) / "series")
     result = run_fetch(series, args.as_of, earnings_dates, series_dir)
     print(json.dumps(result, indent=2))
