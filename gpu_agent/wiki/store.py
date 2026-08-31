@@ -177,6 +177,15 @@ class WikiStore:
         return [Observation(asOf=e.asOf, findingId=e.findingId)
                 for e in self._events_for(page_id, "append-observation")]
 
+    def observations_since(self, page_id, since_seq, *, up_to_as_of=None) -> list[Observation]:
+        """The page's observations numbered `since_seq` or higher (F135). The sequence
+        twin of the period-label window `observations()` callers used to slice by hand —
+        needed because within one month every observation carries the same label."""
+        self._read(page_id)  # raises PageNotFound if absent
+        return [Observation(asOf=e.asOf, findingId=e.findingId)
+                for e in self._events_for(page_id, "append-observation")
+                if e.seq >= since_seq and (up_to_as_of is None or e.asOf <= up_to_as_of)]
+
     def state_history(self, page_id) -> list[StateChange]:
         self._read(page_id)
         return [StateChange(asOf=e.asOf, state=e.state, trajectory=e.trajectory,
@@ -215,13 +224,39 @@ class WikiStore:
         last = sorted(sc, key=lambda e: (e.asOf, e.seq))[-1]
         return {"state": last.state, "trajectory": last.trajectory, "salience": last.salience}
 
+    def _state_before_seq(self, events, seq):
+        """The page's state as it stood at sequence number `seq` — i.e. the last
+        state-change recorded strictly before it (F135). The period-label variant above
+        cannot answer this: within one month every event carries the same label."""
+        sc = [e for e in events if e.kind == "state-change" and e.seq < seq]
+        if not sc:
+            return None
+        last = sorted(sc, key=lambda e: e.seq)[-1]
+        return {"state": last.state, "trajectory": last.trajectory, "salience": last.salience}
+
     def _title_or(self, page_id):
         try:
             return self.get_page(page_id).title
         except PageNotFound:
             return page_id
 
-    def diff(self, as_of, prev_as_of) -> WikiDiff:
+    def diff(self, as_of, prev_as_of, *, since_seq=None) -> WikiDiff:
+        """Pages that appeared or changed inside a window.
+
+        Two ways to name the window:
+
+        - By PERIOD LABEL (the original): "after `prev_as_of`, up to `as_of`". Correct only
+          when the two labels differ. Because every event carries the scorecard's period
+          label and that label is the month, two runs in one month ask an empty question —
+          the F135 defect.
+        - By SEQUENCE (`since_seq`, F135): "every event numbered `since_seq` or higher".
+          `since_seq` is the notebook's event count at the end of the previous run, taken
+          from that run's marker. This works within a single month and needs nothing new
+          on disk in the notebook itself.
+
+        `prev_as_of` is still accepted (and still names the prior scorecard for display and
+        for the caller's scoring) when `since_seq` is given; it just no longer picks the
+        window."""
         by_page: dict[str, list] = {}
         for e in self.log.read():
             if e.pageId:
@@ -232,8 +267,14 @@ class WikiStore:
             existed_now = any(e.asOf <= as_of for e in evs)
             if not existed_now:
                 continue
-            existed_prev = any(e.asOf <= prev_as_of for e in evs)
-            window = [e for e in evs if prev_as_of < e.asOf <= as_of]
+            if since_seq is None:
+                existed_prev = any(e.asOf <= prev_as_of for e in evs)
+                window = [e for e in evs if prev_as_of < e.asOf <= as_of]
+                prev_state_fn = lambda evs=evs: self._state_at(evs, prev_as_of)
+            else:
+                existed_prev = any(e.seq < since_seq for e in evs)
+                window = [e for e in evs if e.seq >= since_seq and e.asOf <= as_of]
+                prev_state_fn = lambda evs=evs: self._state_before_seq(evs, since_seq)
             new_findings = [e.findingId for e in window
                             if e.kind == "append-observation" and e.findingId]
             now_state = self._state_at(evs, as_of) or {}
@@ -246,7 +287,7 @@ class WikiStore:
             if not window:
                 result.quiet_pages.append(pid)
                 continue
-            prev_state = self._state_at(evs, prev_as_of) or {}
+            prev_state = prev_state_fn() or {}
             trans = None
             if prev_state.get("state") != now_state.get("state"):
                 trans = {"from": prev_state.get("state", ""), "to": now_state.get("state", "")}

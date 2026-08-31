@@ -162,10 +162,16 @@ def _is_scoring(registry, indicator_id):
 
 def _score_move(store, page_id, *, as_of, prev_as_of, is_new, state_transition,
                 contradiction_note, registry, horizons, config=DEFAULT_LINT_CONFIG,
-                missing_acc=None, untagged_acc=None):
+                missing_acc=None, untagged_acc=None, since_seq=None):
     page = store.get_page(page_id)
-    lo = prev_as_of or ""
-    window = [o for o in store.observations(page_id) if lo < o.asOf <= as_of]
+    if since_seq is None:
+        lo = prev_as_of or ""
+        window = [o for o in store.observations(page_id) if lo < o.asOf <= as_of]
+    else:
+        # F135: inside one month every observation carries the same period label, so the
+        # label window above is empty and a real move would score with no evidence behind
+        # it. Slice by sequence number instead — the same window the diff used.
+        window = store.observations_since(page_id, since_seq, up_to_as_of=as_of)
     contributing = []
     pairs = []  # (observation, finding)
     for o in window:
@@ -291,9 +297,13 @@ def health_report(store, *, as_of, contradictions, horizons, config=DEFAULT_LINT
 
 
 def score_moves(store, diff, contradictions, *, as_of, prev_as_of, registry, horizons,
-                config=DEFAULT_LINT_CONFIG, missing_acc=None, untagged_acc=None):
+                config=DEFAULT_LINT_CONFIG, missing_acc=None, untagged_acc=None,
+                since_seq=None):
     """Assemble the move-set (diff pages + any contradicted page), score each, split on the
-    material threshold. Both lists are ranked by score descending."""
+    material threshold. Both lists are ranked by score descending.
+
+    `since_seq` (F135) must match whatever `diff` was built with: pass it so each move's
+    contributing evidence is drawn from the same window the diff used."""
     new_ids = {pd.id for pd in diff.new_pages}
     delta_by_id = {pd.id: pd for pd in (list(diff.new_pages) + list(diff.changed_pages))}
     im_by_id = {im.id: im for im in diff.index_moves}
@@ -314,7 +324,8 @@ def score_moves(store, diff, contradictions, *, as_of, prev_as_of, registry, hor
         mv = _score_move(store, pid, as_of=as_of, prev_as_of=prev_as_of, is_new=is_new,
                          state_transition=st, contradiction_note=note,
                          registry=registry, horizons=horizons, config=config,
-                         missing_acc=missing_acc, untagged_acc=untagged_acc)
+                         missing_acc=missing_acc, untagged_acc=untagged_acc,
+                         since_seq=since_seq)
         (material if mv.score >= config.material_threshold else dropped).append(mv)
     material.sort(key=lambda m: m.score, reverse=True)
     dropped.sort(key=lambda m: m.score, reverse=True)
