@@ -74,8 +74,11 @@ def test_state_header_full():
     assert "STATE OF THE MARKET" in out
     assert "Strong, improving" in out                 # categoryStatus headline
     assert "demand outruns the packaging ramp" in out
-    assert "Demand: FIRM ▲ (was FLAT)" in out          # band_word(0.07)=firm, band_word(0.04)=flat, rose
-    assert "Supply: FIRM = (was FIRM)" in out          # band_word(0.05)=firm both cycles, unchanged
+    # F136: the Demand/Supply lines report the day-over-day change, not the word band —
+    # the band scale saturated above 0.30 and the demand number is now a running total
+    # past 4.5, so the banded line could never report a move again.
+    assert "Demand: 0.07, up 0.03 since the last run" in out
+    assert "Supply: 0.05, unchanged since the last run" in out
     assert "Gap: Demand and supply roughly balanced" in out
     assert "BINDING CONSTRAINT: advanced packaging (CoWoS)" in out
 
@@ -105,16 +108,15 @@ def test_degrades_without_categorystatus_or_indices():
 
 
 def test_no_unearned_magnitude_word_on_demand_supply_lines():
-    # Honesty (Part 17, band-map release): the Demand/Supply band word is now earned
-    # via gpu_agent.bands' fixed, retunable thresholds — "accelerating" is a legitimate
-    # band word (dmi/smi=0.9 lands at/above the 0.30 floor), never an ad-hoc adjective
-    # like "strong"/"weak"/"slight"/"moderate", which bands.py never produces.
-    sc = _sc(dmi=0.9, smi=0.9, category_status=_catstat())  # large values -> ACCELERATING band
+    # Honesty (Part 17): the Demand/Supply line still never invents an adjective. F136
+    # replaced the saturating band word with the measured day-over-day change, so the
+    # line now carries only the number and the plain direction word — nothing judged.
+    sc = _sc(dmi=0.9, smi=0.9, category_status=_catstat())
     out = render_state_of_market(sc, None)
     demand_line = [ln for ln in out.splitlines() if "Demand: " in ln][0]
-    for banned in ("strong", "weak", "slight", "moderate"):
+    for banned in ("strong", "weak", "slight", "moderate", "accelerating"):
         assert banned not in demand_line.lower()
-    assert "ACCELERATING" in demand_line     # earned via the >= 0.30 threshold, not invented
+    assert "0.90, first tracked run" in demand_line
 
 
 # ── F67 Task 5: BLUF constraint noun + reconciliation note ──────────────────

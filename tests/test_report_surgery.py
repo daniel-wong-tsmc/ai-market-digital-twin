@@ -3,8 +3,9 @@ STATE + index demotion + CLI thesis-book loading.
 
 Five scenarios, per the task brief:
   1. section order — THE CALLS < STATE OF THE MARKET < WHY < WHAT MOVED < TRUST & COVERAGE.
-  2. raw 'DMI 0.' appears ONLY after the TRUST & COVERAGE heading; the STATE section
-     speaks bands (words first, Part 17).
+  2. the LABELLED raw index ('DMI 0.') appears ONLY after the TRUST & COVERAGE heading;
+     the STATE section leads with the day-over-day change in plain words (F136 replaced
+     the saturated word band there — see gpu_agent/bands.py).
   3. thesis_book=None -> THE CALLS/WHY render honest empty states; still byte-stable.
   4. CLI: gpu-agent report over a store WITH a seeded+judged thesis book shows THE CALLS
      content; without a theses store, the honest empty-state line.
@@ -126,6 +127,10 @@ def test_dmi_raw_value_appears_only_after_trust_and_coverage_heading():
     prior = _sc(dmi=0.04, smi=0.05)
     sc = _rich_sc()   # dmi=0.07 -> "DMI 0.070" once the raw table renders it
     out = render_report(sc, prior, _reg(), render_ts="fixed")
+    # F136 reconciliation: what stays below the fold is the LABELLED raw index
+    # ("DMI 0.070") — the acronym and its table. The headline Demand line now shows a
+    # bare number above the fold by design (user ruling, 2026-08-31): the word band it
+    # replaced had saturated and could not report a move at all.
     i_trust = out.index("TRUST & COVERAGE")
     occurrences = _find_all(out, "DMI 0.")
     assert occurrences, "expected the raw DMI value to appear in the trust footer table"
@@ -135,7 +140,7 @@ def test_dmi_raw_value_appears_only_after_trust_and_coverage_heading():
         )
 
 
-def test_state_section_speaks_bands_not_raw_numbers():
+def test_state_section_leads_with_the_change_and_names_no_raw_index():
     prior = _sc(dmi=0.04, smi=0.05)
     sc = _rich_sc()
     out = render_report(sc, prior, _reg(), render_ts="fixed")
@@ -143,11 +148,10 @@ def test_state_section_speaks_bands_not_raw_numbers():
     i_why = out.index("WHY")
     state_section = out[i_state:i_why]
     assert "Demand: " in state_section
-    assert any(marker in state_section for marker in ("(was ", "(no prior)"))
-    # a real band word (not a raw index) backs the Demand: line
+    # F136: the line reports the day-over-day change in plain words (the word band
+    # saturated and could never show a move again). It still names no acronym.
     demand_line = next(ln for ln in state_section.splitlines() if "Demand: " in ln)
-    assert any(w in demand_line for w in
-               ("ACCELERATING", "FIRM", "FLAT", "SOFTENING", "CONTRACTING"))
+    assert "since the last run" in demand_line
     assert "DMI" not in demand_line
 
 

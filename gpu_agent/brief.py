@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 from gpu_agent.schema.scorecard import Scorecard
 from gpu_agent.thesis import CONVICTION_RANK, ThesisBook
 from gpu_agent import bands
+from gpu_agent import coverage
 from gpu_agent import reader
 from gpu_agent import report   # module ref, resolved at call-time — avoids the report<->brief cycle
 
@@ -18,10 +19,11 @@ def _dir_arrow(value: float) -> str:
     return _ARROW[report._momentum_word(value)]
 
 
-def render_state_of_market(sc: Scorecard, prior: Optional[Scorecard], track=None) -> str:
-    """STATE OF THE MARKET (BLUF): demand/supply momentum as a words-first band
-    (gpu_agent.bands — earned via fixed, retunable thresholds, never an invented
-    magnitude — Part 17), the SDGI gap wording, the brain's earned categoryStatus
+def render_state_of_market(sc: Scorecard, prior: Optional[Scorecard], track=None,
+                           *, registry=None) -> str:
+    """STATE OF THE MARKET (BLUF): the demand/supply day-over-day change in plain words
+    (gpu_agent.bands.change_line — measured, never an invented magnitude — Part 17; see
+    the F136 note below), the SDGI gap wording, the brain's earned categoryStatus
     headline + binding constraint, and NOW/NEXT + divergence from the two indices.
     Optional fields degrade cleanly. ``track`` (F49, optional) is accepted for call-site
     compatibility but no longer rendered here — see the F67 Task 8 note below.
@@ -32,7 +34,13 @@ def render_state_of_market(sc: Scorecard, prior: Optional[Scorecard], track=None
 
     F67 Task 8: the "Price overlay: … PMI …" line is dropped entirely — PMI is an
     off-allowlist acronym and the price story now lives in the appendix PRICE TRACK
-    section, never above reader.APPENDIX_DIVIDER."""
+    section, never above reader.APPENDIX_DIVIDER.
+
+    F136: the Demand/Supply lines now report the day-over-day CHANGE (bands.change_line)
+    instead of a word band that saturated years ago. ``registry`` (optional keyword) is
+    the IndicatorRegistry; supplied, it unlocks one extra honest line saying when most
+    of a demand move is newly tracked companies rather than a re-rating of what was
+    already tracked (gpu_agent.coverage). Omitted, everything else renders unchanged."""
     ds = sc.demandSupply
     sdgi = report.compute_sdgi(sc)
     p_dmi = prior.demandSupply.dmiContribution if prior else None
@@ -42,8 +50,18 @@ def render_state_of_market(sc: Scorecard, prior: Optional[Scorecard], track=None
     cs = sc.categoryStatus
     if cs is not None:
         lines.append(f"  {cs.rating}, {cs.direction} — {cs.reason}")
-    lines.append(f"  Demand: {bands.band_with_prior(ds.dmiContribution, p_dmi)}")
-    lines.append(f"  Supply: {bands.band_with_prior(ds.smiContribution, p_smi)}")
+    # F136: the headline demand/supply lines lead with the day-over-day change, not the
+    # word band. The band scale saturates above 0.30 and the demand number is a running
+    # total now past 4.5, so the banded line read "ACCELERATING = (was ACCELERATING)" no
+    # matter how far the number moved. bands.change_line carries the move at any scale;
+    # the word bands still serve the dashboard tiles and the appendix raw-index table.
+    lines.append(f"  Demand: {bands.change_line(ds.dmiContribution, p_dmi)}")
+    # Directly under the Demand line it qualifies — "that demand move" must not have to
+    # reach back across the Supply line to find its referent.
+    qualifier = coverage.qualifier_line(coverage.demand_split(sc, prior, registry))
+    if qualifier is not None:
+        lines.append(f"  {qualifier}")
+    lines.append(f"  Supply: {bands.change_line(ds.smiContribution, p_smi)}")
     lines.append(f"  Gap: {report._sdgi_interpretation(sdgi)}")
 
     if (cs is not None and cs.rating in ("Strong", "Very strong")
