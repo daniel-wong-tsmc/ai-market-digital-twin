@@ -60,6 +60,31 @@ def test_run_survives_non_ascii_output():
     assert isinstance(r.stdout, str)  # decoded in text mode, not bytes
 
 
+def test_run_child_encodes_emoji_output_on_a_cp1252_machine(monkeypatch):
+    # F132 companion guard. The test above covers OUR decoding; this covers the
+    # child's own ENCODING, which is the half that killed the 2026-08-31 crawl4ai
+    # fetch. PYTHONIOENCODING=cp1252 in the parent simulates the user's Windows box
+    # (a child inherits it when no env is passed), so this fails on the pre-fix
+    # code even on a UTF-8 CI host.
+    monkeypatch.setenv("PYTHONIOENCODING", "cp1252")
+    monkeypatch.delenv("PYTHONUTF8", raising=False)
+    cmd = f'"{sys.executable}" -c "print(chr(0x1f92f))"'
+    r = wre._run(cmd, 30)
+    assert r.returncode == 0, f"child died under cp1252: {r.stderr!r}"
+    assert chr(0x1f92f) in r.stdout
+
+
+def test_run_env_still_inherits_the_ambient_environment(monkeypatch):
+    # The UTF-8 switches must be ADDED to os.environ, never replace it: the health
+    # and install commands need PATH, and keyed tools need their credential vars.
+    monkeypatch.setenv("F132_CANARY", "still-here")
+    cmd = (f'"{sys.executable}" -c '
+           f'"import os, sys; sys.stdout.write(os.environ.get(\'F132_CANARY\', \'MISSING\'))"')
+    r = wre._run(cmd, 30)
+    assert r.returncode == 0
+    assert r.stdout.strip() == "still-here"
+
+
 def test_augment_path_prepends_local_bin_and_is_idempotent(monkeypatch):
     import os
     expanded = os.path.expanduser(os.path.join("~", ".local", "bin"))

@@ -1674,6 +1674,14 @@ def _webreach_fetch(args) -> int:
     empty list, never a usage error -- a cycle must not fail over a policy file."""
     from gpu_agent.fetch_policy import load_do_not_fetch
     from gpu_agent.gathering import webreach
+    # F132: this command's own summary/error lines can carry non-ASCII from an
+    # attacker-controlled target (a URL with an emoji, echoed back inside a
+    # ValidationError). A default Windows cp1252 terminal would crash on print();
+    # force stdout/stderr to UTF-8 so reporting a bad request can never itself be
+    # the crash. Same treatment `report` already gives its glyphs.
+    for _stream in (sys.stdout, sys.stderr):
+        if hasattr(_stream, "reconfigure"):
+            _stream.reconfigure(encoding="utf-8", errors="replace")
     try:
         registry = json.loads(pathlib.Path(args.registry).read_text(encoding="utf-8"))
         licensed = webreach.load_licensed_domains(pathlib.Path(args.licensed))

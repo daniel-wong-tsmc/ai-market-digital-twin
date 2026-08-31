@@ -459,3 +459,169 @@ def test_a_publisher_objection_row_is_refused_and_never_executed(tmp_path):
     # one refusal never stops the rest of the batch
     assert executed["refused"] is None
     assert executed["exitCode"] == 0
+
+
+# ---------------------------------------------------------------------------
+# F132 -- the runner must force child tools to speak UTF-8.
+#
+# Observed live 2026-08-31 (v17 cycle): `crwl crawl <tomshardware url>` exited 1
+# with "Error: 'charmap' codec can't encode character '\U0001f92f'". The crash was
+# in the CHILD, not in this module: on Windows a Python child whose stdout is a
+# pipe defaults to the locale encoding (cp1252), so the first astral-plane
+# character in the fetched page killed the fetch. Every write path inside
+# webreach.py was already `encoding="utf-8"`; what was missing was telling the
+# child process the same thing via its environment.
+#
+# These tests simulate the cp1252 machine by setting PYTHONIOENCODING=cp1252 in
+# the PARENT environment, which a child inherits when the runner passes no `env`.
+# That makes them fail on the pre-fix code on ANY host (including UTF-8 CI boxes)
+# and pass only once the runner overrides the child's text encoding.
+# ---------------------------------------------------------------------------
+
+EMOJI = "\U0001f92f"  # the exact character that broke the live v17 fetch
+
+
+def _emoji_registry():
+    """Fake tools that emit an astral-plane character on stdout -- the shape of the
+    real crawl4ai failure. `healthCmd` emits one too, so the version probe is
+    covered by the same guarantee."""
+    version_cmd = (f'"{sys.executable}" -c "'
+                   f"print('v9.9.9 ' + chr(0x1f92f) + ' fake-tool')\"")
+    return {"tools": [{
+        "id": "emoji-fetch",
+        "enabled": True,
+        "role": "fetch",
+        "healthCmd": {"windows": version_cmd, "macos": version_cmd, "linux": version_cmd},
+        "fetchVerbs": {
+            "read": {
+                "argv": [sys.executable, "-c",
+                         "import sys; print('PAGE ' + chr(0x1f92f) + ' ' + sys.argv[1])",
+                         "{target}"],
+                "kind": "url",
+            },
+            "encshow": {
+                "argv": [sys.executable, "-c",
+                         "import sys; print(sys.stdout.encoding)",
+                         "{target}"],
+                "kind": "url",
+            },
+        },
+    }]}
+
+
+@pytest.fixture
+def cp1252_machine(monkeypatch):
+    """Stand in for the user's Windows console: a child that is handed no explicit
+    encoding falls back to cp1252 and dies on the first emoji."""
+    monkeypatch.setenv("PYTHONIOENCODING", "cp1252")
+    monkeypatch.delenv("PYTHONUTF8", raising=False)
+
+
+def test_emoji_page_content_survives_a_cp1252_machine(tmp_path, cp1252_machine):
+    """F132 regression: the fetch must succeed and the emoji must land in the
+    result file byte-for-byte, even when the ambient encoding is cp1252."""
+    req_path = _write_requests(tmp_path, [
+        {"toolId": "emoji-fetch", "verb": "read", "target": "https://example.com/a"}])
+    out_dir = tmp_path / "out"
+
+    manifest = run_requests(req_path, out_dir, _emoji_registry(), LICENSED)
+
+    row = manifest["results"][0]
+    assert row["error"] is None, f"fetch failed under cp1252: {row['error']!r}"
+    assert row["exitCode"] == 0
+    saved = pathlib.Path(row["path"]).read_text(encoding="utf-8")
+    assert saved == f"PAGE {EMOJI} https://example.com/a\n"
+
+
+def test_child_stdout_encoding_is_utf8_on_a_cp1252_machine(tmp_path, cp1252_machine):
+    """Directly pin the mechanism: the child's own stdout encoding is UTF-8."""
+    req_path = _write_requests(tmp_path, [
+        {"toolId": "emoji-fetch", "verb": "encshow", "target": "https://example.com/a"}])
+    out_dir = tmp_path / "out"
+
+    manifest = run_requests(req_path, out_dir, _emoji_registry(), LICENSED)
+
+    row = manifest["results"][0]
+    assert row["error"] is None
+    saved = pathlib.Path(row["path"]).read_text(encoding="utf-8").strip().lower()
+    assert saved.replace("-", "") == "utf8", f"child stdout encoding was {saved!r}"
+
+
+def test_tool_version_probe_survives_emoji_on_a_cp1252_machine(tmp_path, cp1252_machine):
+    """The healthCmd probe runs through the same hardening, so an emoji in a tool's
+    version banner cannot degrade the recorded version to 'unknown'."""
+    req_path = _write_requests(tmp_path, [
+        {"toolId": "emoji-fetch", "verb": "read", "target": "https://example.com/a"}])
+    out_dir = tmp_path / "out"
+
+    manifest = run_requests(req_path, out_dir, _emoji_registry(), LICENSED)
+
+    assert manifest["toolVersions"] == {"emoji-fetch": f"v9.9.9 {EMOJI} fake-tool"}
+
+
+def test_hardened_env_still_inherits_the_ambient_environment(tmp_path, monkeypatch):
+    """The UTF-8 forcing must ADD to the environment, never replace it: tools that
+    read credentials/config from env vars (and PATH itself) must still work."""
+    monkeypatch.setenv("F132_CANARY", "still-here")
+    registry = {"tools": [{
+        "id": "env-echo", "enabled": True, "role": "fetch",
+        "healthCmd": {},
+        "fetchVerbs": {"read": {
+            "argv": [sys.executable, "-c",
+                     "import os, sys; sys.stdout.write(os.environ.get('F132_CANARY', 'MISSING'))",
+                     "{target}"],
+            "kind": "url"}}}]}
+    req_path = _write_requests(tmp_path, [
+        {"toolId": "env-echo", "verb": "read", "target": "https://example.com/a"}])
+    out_dir = tmp_path / "out"
+
+    manifest = run_requests(req_path, out_dir, registry, LICENSED)
+
+    row = manifest["results"][0]
+    assert row["error"] is None
+    assert pathlib.Path(row["path"]).read_text(encoding="utf-8") == "still-here"
+
+
+def test_cli_webreach_fetch_error_line_survives_a_cp1252_stdout(tmp_path, monkeypatch):
+    """F132: the command's own report must not become the crash. A schema-invalid
+    request whose target carries an emoji is echoed back inside the ValidationError;
+    printing that to a cp1252 stream would raise UnicodeEncodeError and lose the
+    exit-2 usage error. Here stdout/stderr are replaced with real cp1252 text
+    streams, so the pre-fix code raises instead of returning 2.
+
+    The emoji reaches the message because pydantic echoes the offending input. That
+    is a detail of pydantic's error text, so the test asserts the emoji really did
+    get written -- otherwise a future pydantic that stopped echoing `input_value`
+    would leave this test passing while testing nothing."""
+    import io
+    reg_path = tmp_path / "registry.json"
+    reg_path.write_text(json.dumps(_fake_registry()), encoding="utf-8")
+    licensed_path = tmp_path / "licensed.json"
+    licensed_path.write_text(json.dumps({"version": 1, "domains": sorted(LICENSED)}),
+                             encoding="utf-8")
+    # `verb` missing -> ValidationError; the emoji target rides along in the message.
+    req_path = _write_requests(tmp_path, [
+        {"toolId": "fake-fetch", "target": f"https://example.com/{EMOJI}"}])
+
+    buffers = {}
+    for name in ("stdout", "stderr"):
+        buffers[name] = io.BytesIO()
+        monkeypatch.setattr(
+            sys, name,
+            io.TextIOWrapper(buffers[name], encoding="cp1252", errors="strict"))
+
+    rc = cli.main(["webreach-fetch",
+                   "--requests", str(req_path),
+                   "--out-dir", str(tmp_path / "out"),
+                   "--registry", str(reg_path),
+                   "--licensed", str(licensed_path)])
+    sys.stdout.flush()
+    sys.stderr.flush()
+    assert rc == 2
+    written = (buffers["stdout"].getvalue() + buffers["stderr"].getvalue())
+    # The stream was reconfigured to UTF-8, so the emoji is on disk as UTF-8 bytes;
+    # if pydantic ever stops echoing the input this assertion fails loudly rather
+    # than letting the test rot into a no-op.
+    assert EMOJI.encode("utf-8") in written, (
+        "emoji never reached the error line -- this test is no longer exercising "
+        f"the cp1252 encode path: {written!r}")
