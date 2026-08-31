@@ -53,6 +53,37 @@ def load_registry(path: pathlib.Path = REGISTRY_PATH) -> dict:
     return json.loads(pathlib.Path(path).read_text(encoding="utf-8"))
 
 
+def utf8_env() -> dict[str, str]:
+    """F132: the ambient environment plus the two switches that make a Python child
+    process speak UTF-8 on its stdout/stderr (and for its own file I/O), regardless
+    of the machine's locale. THE one home for this -- `gpu_agent.gathering.webreach`
+    imports it from here rather than keeping a second copy, the same way it already
+    imports `resolve_secret`/`detect_os` (F106 finding 4: this module is the
+    stdlib-only half that must stay importable on a bare clone with no pydantic).
+
+    Why it exists: `subprocess.run(encoding="utf-8")` only says how WE DECODE what
+    the child sends. It says nothing about how the child ENCODES. On Windows a Python
+    child whose stdout is a pipe falls back to the ANSI code page (cp1252 here), so
+    the first astral-plane character in a fetched page kills the child before a byte
+    reaches us. Observed live 2026-08-31 (v17): `crwl crawl <tomshardware url>` exited
+    1 with "'charmap' codec can't encode character '\\U0001f92f'" and the fetch was
+    lost. `PYTHONIOENCODING=utf-8:replace` fixes the child's streams (the `:replace`
+    half means it can never die over one unencodable character either); `PYTHONUTF8=1`
+    puts it in UTF-8 mode so any file it writes matches.
+
+    This ADDS to `os.environ` rather than replacing it -- children still need PATH
+    (including `_augment_path`'s fix-up, which is why this is built per call), HOME,
+    proxy settings and any credential env vars. Non-Python tools ignore both variables
+    harmlessly; a non-Python tool emitting legacy bytes is not fixed by this, but the
+    caller's `errors="replace"` decode turns that into mojibake, not a lost fetch.
+    Nothing here touches argv or the shell, so the F88 injection wall (shell=False
+    argv, scheme/tool/verb validation) is untouched."""
+    env = dict(os.environ)
+    env["PYTHONIOENCODING"] = "utf-8:replace"
+    env["PYTHONUTF8"] = "1"
+    return env
+
+
 def _run(cmd: str, timeout: int) -> subprocess.CompletedProcess:
     # shell=True: registry commands may use the OS shell (cmd.exe on Windows,
     # /bin/sh on POSIX). Each OS's recipe is authored for its own shell.
@@ -60,9 +91,12 @@ def _run(cmd: str, timeout: int) -> subprocess.CompletedProcess:
     # localized doctor text); decode as UTF-8 and never crash on undecodable
     # bytes, so the reader thread can't die and drop the returncode (the Windows
     # cp1252 default raised UnicodeDecodeError on real install output).
+    # env (F132): see utf8_env below -- the settings above only control how WE
+    # decode the child; utf8_env controls how the child ENCODES in the first place.
+    # Built at call time so _augment_path()'s PATH fix-up still reaches the child.
     return subprocess.run(cmd, shell=True, timeout=timeout,
                           capture_output=True, text=True,
-                          encoding="utf-8", errors="replace")
+                          encoding="utf-8", errors="replace", env=utf8_env())
 
 
 def health_ok(tool: dict, os_key: str, timeout: int = _HEALTH_TIMEOUT) -> bool:

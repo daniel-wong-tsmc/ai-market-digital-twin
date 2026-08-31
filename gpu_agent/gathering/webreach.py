@@ -12,6 +12,9 @@ from gpu_agent.fetch_policy import (
 from gpu_agent.web_reach_ensure import detect_os
 from gpu_agent.web_reach_ensure import SECRETS_DIR
 from gpu_agent.web_reach_ensure import resolve_secret as _resolve_secret_base
+# F132: the one UTF-8-forcing environment builder, shared with the ensure/health
+# probe so the two can never drift. See its docstring for why it is needed at all.
+from gpu_agent.web_reach_ensure import utf8_env as _utf8_env
 
 LICENSED_REGISTRY = pathlib.Path("registry/licensed-sources.json")
 
@@ -193,7 +196,8 @@ def _tool_version(tool: dict, os_key: str, timeout: int = _TOOL_VERSION_TIMEOUT)
         return "unknown"
     try:
         cp = subprocess.run(cmd, shell=True, timeout=timeout, capture_output=True,
-                            text=True, encoding="utf-8", errors="replace")
+                            text=True, encoding="utf-8", errors="replace",
+                            env=_utf8_env())
     except (subprocess.TimeoutExpired, OSError):
         return "unknown"
     if cp.returncode != 0:
@@ -260,7 +264,8 @@ def run_requests(requests_path, out_dir, registry: dict, licensed_domains: set[s
 
         try:
             cp = subprocess.run(argv, shell=False, capture_output=True, text=True,
-                                encoding="utf-8", errors="replace", timeout=timeout)
+                                encoding="utf-8", errors="replace", timeout=timeout,
+                                env=_utf8_env())
         except (subprocess.TimeoutExpired, OSError) as e:
             row["error"] = _scrub(str(e), secrets)
             results.append(row)

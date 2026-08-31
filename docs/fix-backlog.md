@@ -1323,11 +1323,30 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   Done when the series leaves `notFetchable` and a real quarter lands in
   `store/series/nvdaDataCenterRevenue.jsonl`.
 
-- [ ] **F132 — webreach crawl4ai runner crashes on non-cp1252 output (`UnicodeEncodeError`,
+- [x] **F132 — webreach crawl4ai runner crashes on non-cp1252 output (`UnicodeEncodeError`,
   U+1F92F).** Observed 2026-08-31 (v17): the crawl4ai path FAILED writing tool output because
   the stream/file used the Windows cp1252 default instead of UTF-8. Make the runner write tool
   output (and any captured stdout/stderr) as UTF-8 with `errors="replace"` everywhere it
   persists text; regression-test with an emoji-bearing fixture. Stdlib-only expected.
+  **Done 2026-08-31 (lane `f132-webreach-utf8`).** The premise needed one correction: every
+  write path inside `webreach.py` was ALREADY `encoding="utf-8"`, and the surviving manifest row
+  (`work/daily-2026-08-31/webreach-B2/fetch-manifest.json`) shows the crash was in the CHILD --
+  `crwl` exited 1 having printed `Error: 'charmap' codec can't encode character '\U0001f92f'`.
+  A Python child on Windows whose stdout is a pipe encodes with the ANSI code page, so the
+  runner's own UTF-8 decoding never got a byte to decode. Fix: one shared
+  `web_reach_ensure.utf8_env()` hands every child `PYTHONIOENCODING=utf-8:replace` +
+  `PYTHONUTF8=1` ADDED to `os.environ` (PATH -- including `_augment_path`'s fix-up, since it is
+  built per call -- proxies and credential vars still reach the tool). It lives in the
+  stdlib-only module and `webreach.py` imports it, the same way it already imports
+  `resolve_secret`/`detect_os`, so the two call sites can never drift. Applied to the fetch
+  `subprocess.run`, the `healthCmd` version probe, and `web_reach_ensure._run` (the
+  preflight/install probe, same bug class); and `cli._webreach_fetch`
+  reconfigures its own stdout/stderr to UTF-8 so an emoji-bearing target echoed back in a
+  usage error can't crash the report instead of printing it. F88 wall untouched -- env only,
+  still `shell=False` argv with unchanged scheme/tool/verb validation. 7 new tests (5 red on
+  pre-fix code on any host: they set `PYTHONIOENCODING=cp1252` in the parent to simulate the
+  user's box; 2 pin that the env is added, never replaced). Suite 2776 passed / 6 skipped;
+  F6 pin green with zero prompt-byte changes.
 
 - [ ] **F133 — `wiki/ingest.py::route_findings` writes findings to the store WITHOUT the
   findings gate (design-weight: interactive brainstorm before any lane).** Surfaced by the F127
