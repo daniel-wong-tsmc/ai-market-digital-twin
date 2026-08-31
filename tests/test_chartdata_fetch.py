@@ -305,14 +305,12 @@ def test_due_series_picks_its_own_date_out_of_a_multi_company_calendar(tmp_path)
     assert in_nvda_window == []
 
 
-def test_due_series_survives_a_calendar_with_no_entry_for_this_series(tmp_path):
-    """No crash. Paired with a positive control on the same date so this can't
-    pass merely because the calendar was never consulted.
-
-    NOTE: the resulting silence is a known open problem, not a settled design
-    -- see 'Q5' in .superpowers/handoffs/f131-chartfetch-due-QUESTIONS.md. This
-    test pins only that the run survives, NOT that silence is the right answer.
-    Expect it to change once that question is answered."""
+def test_due_series_is_not_due_when_the_calendar_has_no_entry(tmp_path):
+    """`due_series` answers only "should I fetch this now?", and the answer is
+    still no -- there is no print date to schedule against. What CHANGED under
+    ruling Q5 is that this no longer passes silently: run_fetch reports it in
+    the staleCalendar bucket (see the Q5 tests below). Paired with a positive
+    control so it can't pass merely because the calendar was never consulted."""
     series = _series_fixture()
     _seed_amd_file(tmp_path)
     assert due_series(series, "2026-08-09", {}, store_dir=str(tmp_path)) == []
@@ -321,10 +319,9 @@ def test_due_series_survives_a_calendar_with_no_entry_for_this_series(tmp_path):
         == ["amdDataCenterRevenue"]
 
 
-def test_due_series_survives_an_unparseable_date_in_the_calendar(tmp_path):
-    """A junk date must be ignored, not crash the daily run. Paired with a
-    positive control on the same date. Same open question as above applies to
-    the silence itself."""
+def test_due_series_is_not_due_on_an_unparseable_date_in_the_calendar(tmp_path):
+    """A junk date must not crash the daily run, and must not be treated as a
+    window either. Reported via staleCalendar rather than silently, per Q5."""
     series = _series_fixture()
     _seed_amd_file(tmp_path)
     assert due_series(series, "2026-08-09", {"amd": "not-a-date"},
@@ -436,9 +433,12 @@ def test_run_fetch_append_is_idempotent_across_two_runs(tmp_path):
 
 
 def test_run_fetch_skips_non_due_series(tmp_path):
+    """as_of sits BEFORE AMD's print, so the window simply hasn't opened --
+    the routine case. (Past E+14 it would be staleCalendar instead; see the Q5
+    tests below.)"""
     series = _series_fixture()
     _seed_amd_file(tmp_path)
-    result = run_fetch(series, "2026-09-15", AMD_CALENDAR, str(tmp_path),
+    result = run_fetch(series, "2026-08-01", AMD_CALENDAR, str(tmp_path),
                         fetch_html=_stub_fetch_html())
     assert result["fetched"] == []
     assert result["failed"] == []
@@ -488,20 +488,22 @@ def test_run_fetch_leaves_a_monthly_series_in_skipped_not_not_fetchable(tmp_path
 
 
 @pytest.mark.parametrize("as_of, expected_bucket", [
-    # nothing due: AMD sits in 'skipped'
-    ("2026-09-15", "skipped"),
+    # before the print: the window has not opened, AMD sits in 'skipped'
+    ("2026-08-01", "skipped"),
     # inside AMD's own window: AMD moves into 'fetched'
     ("2026-08-09", "fetched"),
+    # past E+14 with a store file: AMD moves into 'staleCalendar'
+    ("2026-09-15", "staleCalendar"),
 ])
 def test_run_fetch_every_registry_series_lands_in_exactly_one_bucket(
         tmp_path, as_of, expected_bucket):
-    """No series may be double-counted or silently dropped between the four
+    """No series may be double-counted or silently dropped between the five
     buckets -- the property that makes the summary trustworthy at a glance.
 
-    Parametrised over a not-due AND a due date on purpose: with nothing ever
-    due, 'fetched' and 'failed' are both empty and the test only ever checks
-    skipped + notFetchable, which is close to tautological (review finding).
-    The second case exercises a series actually moving between buckets."""
+    Parametrised across all three states one series can be in on purpose: with
+    nothing ever due, 'fetched' and 'failed' are both empty and the test would
+    only ever check skipped + notFetchable, which is close to tautological
+    (review finding). These cases walk one series through three buckets."""
     series = _series_fixture()
     _seed_amd_file(tmp_path)
     result = run_fetch(series, as_of, AMD_CALENDAR, str(tmp_path),
@@ -512,6 +514,7 @@ def test_run_fetch_every_registry_series_lands_in_exactly_one_bucket(
         "failed": [f["id"] for f in result["failed"]],
         "skipped": list(result["skipped"]),
         "notFetchable": list(result["notFetchable"]),
+        "staleCalendar": list(result["staleCalendar"]),
     }
     reported = [sid for ids in buckets.values() for sid in ids]
     assert sorted(reported) == sorted(series)
@@ -519,6 +522,124 @@ def test_run_fetch_every_registry_series_lands_in_exactly_one_bucket(
     # and the AMD series really did move, rather than the totals just adding up
     assert "amdDataCenterRevenue" in buckets[expected_bucket]
     assert result["notFetchable"] == ["nvdaDataCenterRevenue"]
+
+
+# ── F131 Q5: an unusable earnings calendar is reported, never a quiet skip ──
+#
+# The scheduler now correctly asks "has THIS company reported recently?" -- but
+# nothing keeps the calendar current. It is hand-edited, and nothing in the repo
+# refreshes it. Once a series' store file exists, a missing/unparseable/stale
+# calendar entry made it quietly never-due again, forever, looking exactly like
+# a routine skip. That is this lane's own headline bug class in a new place.
+# User ruling 2026-08-31: reportable condition, not a skip.
+#
+# It gets its own bucket rather than joining notFetchable because the two need
+# DIFFERENT actions: notFetchable means "somebody must build a fetcher",
+# staleCalendar means "somebody must update the earnings date". Merging them
+# would hide which one you are looking at.
+
+def test_run_fetch_reports_a_stale_calendar_entry(tmp_path):
+    """The live 2026-08-31 case: AMD printed 2026-08-04, so its window closed
+    on 08-18. With a store file present the series would otherwise sit in
+    'skipped' forever, indistinguishable from "not due this week"."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-08-31", AMD_CALENDAR, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert result["staleCalendar"] == ["amdDataCenterRevenue"]
+    assert "amdDataCenterRevenue" not in result["skipped"]
+
+
+def test_run_fetch_reports_a_calendar_with_no_entry_for_this_series(tmp_path):
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-08-09", {}, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert result["staleCalendar"] == ["amdDataCenterRevenue"]
+
+
+def test_run_fetch_reports_an_unparseable_calendar_date(tmp_path):
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-08-09", {"amd": "not-a-date"}, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert result["staleCalendar"] == ["amdDataCenterRevenue"]
+
+
+def test_run_fetch_before_the_print_is_a_routine_skip_not_a_stale_calendar(tmp_path):
+    """The window simply has not opened yet. The calendar is fine and nobody
+    needs to do anything, so this must stay an ordinary skip -- otherwise the
+    new bucket cries wolf for most of every quarter."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-08-01", AMD_CALENDAR, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert result["staleCalendar"] == []
+    assert "amdDataCenterRevenue" in result["skipped"]
+
+
+def test_run_fetch_inside_the_window_is_not_a_stale_calendar(tmp_path):
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-08-09", AMD_CALENDAR, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert result["staleCalendar"] == []
+    assert [f["id"] for f in result["fetched"]] == ["amdDataCenterRevenue"]
+
+
+def test_run_fetch_a_due_series_is_never_also_reported_stale(tmp_path):
+    """A missing store file forces the series due even with a stale calendar.
+    It is being fetched right now, so it is not waiting on anybody."""
+    series = _series_fixture()
+    result = run_fetch(series, "2026-08-31", AMD_CALENDAR, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert result["staleCalendar"] == []
+    assert [f["id"] for f in result["fetched"]] == ["amdDataCenterRevenue"]
+
+
+def test_run_fetch_no_fetcher_beats_stale_calendar(tmp_path):
+    """nvdaDataCenterRevenue has BOTH problems on 2026-08-31 (no fetcher, and
+    a calendar entry whose window closed on 09-09). Building a fetcher is the
+    prerequisite, so it must report as notFetchable and appear nowhere else."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-09-30", AMD_CALENDAR, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert result["notFetchable"] == ["nvdaDataCenterRevenue"]
+    assert "nvdaDataCenterRevenue" not in result["staleCalendar"]
+
+
+def test_run_fetch_monthly_series_are_never_reported_stale(tmp_path):
+    """gpuSpotPrice is not scheduled off an earnings date at all."""
+    series = _series_fixture()
+    _seed_amd_file(tmp_path)
+    result = run_fetch(series, "2026-08-31", AMD_CALENDAR, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert "gpuSpotPrice" not in result["staleCalendar"]
+    assert "gpuSpotPrice" in result["skipped"]
+
+
+# ── F131 Q6: an unparseable --as-of is an operator error, not a quiet no-op ──
+
+def test_run_fetch_fails_loudly_on_an_unparseable_as_of(tmp_path):
+    """It used to return [] with nothing recorded, so a whole cycle that did
+    nothing at all printed a clean-looking summary of routine skips. Same
+    principle as the non-mapping calendar guard: a config error must surface."""
+    series = _series_fixture()
+    result = run_fetch(series, "not-a-date", AMD_CALENDAR, str(tmp_path),
+                        fetch_html=_stub_fetch_html())
+    assert result["fetched"] == []
+    assert result["skipped"] == []
+    assert result["notFetchable"] == []
+    assert result["staleCalendar"] == []
+    assert result["failed"] and result["failed"][0]["id"] == "*"
+    assert "as_of_date" in result["failed"][0]["error"]
+
+
+def test_due_series_raises_on_an_unparseable_as_of(tmp_path):
+    series = _series_fixture()
+    with pytest.raises(ValueError, match="as_of_date"):
+        due_series(series, "2026-13-45", AMD_CALENDAR, store_dir=str(tmp_path))
 
 
 def test_run_fetch_buckets_use_the_series_id_not_the_dict_key(tmp_path):
@@ -566,6 +687,7 @@ def test_run_fetch_never_raises_when_series_argument_is_none():
     assert result["fetched"] == []
     assert result["skipped"] == []
     assert result["notFetchable"] == []
+    assert result["staleCalendar"] == []
     assert result["failed"] and result["failed"][0]["id"] == "*"
 
 
@@ -576,6 +698,7 @@ def test_run_fetch_never_raises_when_earnings_dates_argument_is_none():
     assert result["fetched"] == []
     assert result["skipped"] == []
     assert result["notFetchable"] == []
+    assert result["staleCalendar"] == []
     assert result["failed"] and result["failed"][0]["id"] == "*"
 
 
@@ -590,6 +713,7 @@ def test_run_fetch_never_raises_but_fails_loudly_on_the_old_list_calendar_shape(
     assert result["fetched"] == []
     assert result["skipped"] == []
     assert result["notFetchable"] == []
+    assert result["staleCalendar"] == []
     assert result["failed"] and result["failed"][0]["id"] == "*"
     assert "mapping" in result["failed"][0]["error"]
 
@@ -601,6 +725,7 @@ def test_run_fetch_never_raises_when_store_dir_argument_is_none():
     assert result["fetched"] == []
     assert result["skipped"] == []
     assert result["notFetchable"] == []
+    assert result["staleCalendar"] == []
     assert result["failed"] and result["failed"][0]["id"] == "*"
 
 
@@ -612,6 +737,7 @@ def test_run_fetch_never_raises_when_series_values_are_plain_dicts(tmp_path):
     assert result["fetched"] == []
     assert result["skipped"] == []
     assert result["notFetchable"] == []
+    assert result["staleCalendar"] == []
     assert result["failed"] and result["failed"][0]["id"] == "*"
 
 

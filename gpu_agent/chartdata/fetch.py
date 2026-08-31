@@ -76,6 +76,38 @@ def not_fetchable(series: dict[str, ChartSeries]) -> list[ChartSeries]:
             if series[sid].cadence == "quarterly" and series[sid].fetcher is None]
 
 
+def has_usable_calendar_entry(cs: ChartSeries, as_of: _dt.date,
+                               earnings_dates: Mapping[str, str]) -> bool:
+    """Can this series still be scheduled off the earnings calendar as of
+    `as_of`? (F131 Q5, user ruling 2026-08-31.)
+
+    False in three cases, all of which mean "a person has to update the
+    manifest before this series can ever refresh again":
+
+      - the calendar has no entry for the series' `earningsKey`;
+      - it has one, but the date won't parse;
+      - it has a valid date whose window has already closed (`as_of` is past
+        E + _EARNINGS_WINDOW_DAYS) -- i.e. the calendar is STALE.
+
+    True before and during the window: a series whose print simply hasn't
+    happened yet is waiting on the calendar, not on a person, and reporting
+    that would cry wolf for most of every quarter.
+
+    Why this exists: the scheduler correctly asks "has THIS company reported
+    recently?", but nothing keeps the calendar current -- it is hand-edited and
+    nothing in the repo refreshes it. Once a series' store file exists, an
+    unusable entry made it quietly never-due again forever, looking exactly
+    like a routine skip. That is F131's own headline bug in a new place.
+    """
+    if cs.earningsKey is None:
+        return False
+    raw = earnings_dates.get(cs.earningsKey)
+    earnings = _parse_date(raw) if isinstance(raw, str) else None
+    if earnings is None:
+        return False
+    return (as_of - earnings).days <= _EARNINGS_WINDOW_DAYS
+
+
 def _in_earnings_window(cs: ChartSeries, as_of: _dt.date,
                          earnings_dates: Mapping[str, str]) -> bool:
     """Is `as_of` inside the forward-only window after THIS series' company's
@@ -134,9 +166,15 @@ def due_series(
             "earnings_dates must be a mapping of company key -> ISO date "
             f"(e.g. manifest.earningsDates), got {type(earnings_dates).__name__}")
 
+    # F131 Q6 (user ruling 2026-08-31): an unparseable as_of is an OPERATOR
+    # error, not a data condition, so it fails loudly for the same reason the
+    # calendar guard above does. It used to return [] with nothing recorded,
+    # which meant a cycle that did nothing at all printed a clean-looking
+    # summary of routine skips.
     as_of = _parse_date(as_of_date)
     if as_of is None:
-        return []
+        raise ValueError(
+            f"as_of_date must be an ISO date (YYYY-MM-DD), got {as_of_date!r}")
 
     store_path = Path(store_dir)
 
@@ -243,13 +281,20 @@ def run_fetch(
     per-series failure leaves that series' file exactly as it was.
 
     Returns {'fetched': [{'id', 'newPoints'}], 'failed': [{'id', 'error'}],
-    'skipped': [id, ...], 'notFetchable': [id, ...]}. 'skipped' lists every
-    registry series that wasn't due this call but could have been -- wrong
-    cadence, or outside the earnings window with an existing file.
-    'notFetchable' (F131) lists quarterly series with no fetcher wired up:
-    those can never be fetched, and used to hide inside 'skipped' where three
-    consecutive cycles read them as a routine skip. Every registry series
-    lands in exactly one of the four buckets. On a failure so broad it couldn't even
+    'skipped': [id, ...], 'notFetchable': [id, ...], 'staleCalendar': [id, ...]}.
+
+    'skipped' is the routine bucket: not due this call, but nothing is wrong --
+    wrong cadence, or the earnings window simply hasn't opened yet.
+
+    The other two both mean "this will never refresh on its own until a person
+    acts", and they are separate because the ACTION differs. 'notFetchable'
+    (F131 Q4) lists quarterly series with no fetcher wired up -- somebody must
+    build one. 'staleCalendar' (F131 Q5) lists quarterly series that have a
+    fetcher but no usable earnings date -- somebody must update the manifest.
+    Both used to hide inside 'skipped', where three consecutive cycles read
+    the first as a routine skip.
+
+    Every registry series lands in exactly one of the five buckets. On a failure so broad it couldn't even
     get as far as computing which series are due (e.g. `series=None`,
     `earnings_dates=None`, a non-ChartSeries value in `series`) the whole
     call reports one synthetic {'id': '*', ...} failure with empty
@@ -323,14 +368,29 @@ def run_fetch(
         # buckets at once (review finding: the four-bucket partition must not
         # rest on an unstated precondition).
         all_ids = {series[sid].id for sid in series}
+        # F131 Q5: a quarterly series that COULD be fetched but has no usable
+        # calendar entry is reported, not quietly skipped. Precedence is
+        # deliberate: a series already due is being handled right now, and one
+        # with no fetcher needs a fetcher built before its calendar matters --
+        # so both of those win over this bucket, keeping every series in
+        # exactly one place.
+        as_of = _parse_date(as_of_date)
+        stale_ids = {
+            cs.id for cs in (series[sid] for sid in series)
+            if cs.cadence == "quarterly" and cs.fetcher is not None
+            and cs.id not in due_ids and cs.id not in unfetchable_ids
+            and not has_usable_calendar_entry(cs, as_of, earnings_dates)
+        }
         skipped = sorted(sid for sid in all_ids
-                          if sid not in due_ids and sid not in unfetchable_ids)
+                          if sid not in due_ids and sid not in unfetchable_ids
+                          and sid not in stale_ids)
         return {"fetched": fetched, "failed": failed, "skipped": skipped,
-                "notFetchable": sorted(unfetchable_ids)}
+                "notFetchable": sorted(unfetchable_ids),
+                "staleCalendar": sorted(stale_ids)}
     except Exception as e:  # noqa: BLE001 -- deliberate, see docstring above.
         return {"fetched": [],
                 "failed": [{"id": "*", "error": f"{type(e).__name__}: {e}"}],
-                "skipped": [], "notFetchable": []}
+                "skipped": [], "notFetchable": [], "staleCalendar": []}
 
 
 def _default_fetch_html(url: str) -> str:  # pragma: no cover -- network path,
