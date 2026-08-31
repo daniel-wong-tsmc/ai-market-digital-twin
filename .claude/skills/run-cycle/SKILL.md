@@ -585,10 +585,14 @@ no way to fetch at all. **A failed fetch here is only written to the log — it 
 cycle.** Log the printed summary, then log `chartFetch: done` either way; a chart that couldn't
 be refreshed just keeps showing its last known point until a later cycle succeeds.
 
-Two of those buckets mean different things. `skipped` is routine — that series just isn't due
-this cycle. `notFetchable` means nothing can ever refresh that series, because no fetcher was
-ever built for it; it will say the same thing every cycle until someone builds one, so note it
-once and don't wait for it to clear on its own.
+Three of those buckets mean different things. `skipped` is routine — that series just isn't due
+this cycle. The other two will say the same thing every cycle until a person acts, so note them
+once and don't wait for them to clear on their own:
+
+- `notFetchable` — nothing can ever refresh that series, because no fetcher was ever built for it.
+- `staleCalendar` — the series could be fetched, but the earnings date it schedules off is
+  missing, unreadable, or more than two weeks old. The category's manifest needs a fresh date for
+  that vendor before the chart can refresh again.
 
 **(7d2) Chart-research — dig for a published series when no curated chart fits (F113).** After the
 narrator and citation audit have run, some dashboard bullets still have no chart: the curated series

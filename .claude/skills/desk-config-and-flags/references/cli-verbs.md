@@ -100,15 +100,22 @@ export.
 | `--manifest` | | `manifests/<category>.json` | coverage manifest (its `earningsDates` gate the earnings-window fetchers) |
 | `--registry` | | `registry/chart-series.json` | chart-series registry path |
 
-Prints a `{'fetched', 'failed', 'skipped', 'notFetchable'}` summary as JSON; log it verbatim, then
-log `chartFetch: done` regardless of whether anything in `failed` was non-empty.
+Prints a `{'fetched', 'failed', 'skipped', 'notFetchable', 'staleCalendar'}` summary as JSON; log
+it verbatim, then log `chartFetch: done` regardless of whether anything in `failed` was non-empty.
 
-`skipped` means "not due this cycle" and is routine. `notFetchable` (F131) is different and worth
-acting on: those series have no fetcher wired up, so they can never refresh on any cycle — a
-standing gap, not a scheduling one. A series sitting in `notFetchable` cycle after cycle needs a
-backlog item, not patience. Quarterly series are due from their own company's print date E through
-E+14; the manifest's `earningsDates` supplies E, matched per company via each registry entry's
-`earningsKey`.
+`skipped` means "not due this cycle" and is routine — including a series whose earnings window
+hasn't opened yet. The other two buckets both mean "this will never refresh on its own until a
+person acts", and they are separate because the fix differs:
+
+- `notFetchable` (F131) — no fetcher wired up. Somebody must build one. Needs a backlog item, not
+  patience.
+- `staleCalendar` (F131) — has a fetcher, but no usable earnings date: the manifest has no entry
+  for its `earningsKey`, the date won't parse, or the window closed (past E+14). Somebody must
+  update `manifests/<category>.json`'s `earningsDates`. This is the expected state for a vendor
+  that reported more than two weeks ago and hasn't had its next date filled in.
+
+Quarterly series are due from their own company's print date E through E+14; `earningsDates`
+supplies E, matched per company via each registry entry's `earningsKey`.
 
 ## dashboard-json
 

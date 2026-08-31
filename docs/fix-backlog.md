@@ -1308,7 +1308,14 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   every company's print date and AMD's chart woke up during NVIDIA's earnings week — series are
   now scoped to their own company via a new required `earningsKey` field on quarterly
   `registry/chart-series.json` entries. Also split `notFetchable` out of `skipped` so a
-  permanently-unfetchable series can never hide inside a routine skip again. Defect (C) is the
+  permanently-unfetchable series can never hide inside a routine skip again. **Round 2** (two
+  further user rulings after code review): (Q5) a quarterly series with a fetcher whose earnings
+  date is missing, unparseable, or stale (past E+14) now reports in its own `staleCalendar`
+  bucket instead of a silent skip — the manifest is hand-edited and nothing refreshes it, so once
+  a series' store file exists an unusable entry made it quietly never-due forever, F131's own bug
+  in a new place; (Q6) an unparseable `as_of` now raises rather than reporting a whole no-op cycle
+  as routine skips. `chart-fetch` therefore prints five buckets: `fetched`, `failed`, `skipped`
+  (routine), `notFetchable` (build a fetcher), `staleCalendar` (update the manifest). Defect (C) is the
   **same defect F130 fixed** on the gather side (`gather_priority` walked the same flattened
   calendar); the shared window helper unifying both call sites is Phase 2 of this lane, after
   F130 merges. Close-out: `.superpowers/handoffs/f131-chartfetch-due-DONE.md`.
