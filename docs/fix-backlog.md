@@ -1337,6 +1337,29 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   Done when the series leaves `notFetchable` and a real quarter lands in
   `store/series/nvdaDataCenterRevenue.jsonl`.
 
+- [ ] **F135 — the report's "WHAT MOVED SINCE LAST RUN" list has been empty since 2026-08-05
+  (month-label diff window is empty by definition).** Found by the 2026-08-31 DMI-jump audit
+  (read-only; full report was at `.superpowers/handoffs/dmi-v17-audit-REPORT.md`, gitignored).
+  The wiki/storyline notebook stamps entries with the MONTH label (`2026-08`) and the report
+  diffs "after 2026-08 up to 2026-08" — an empty window every run except the month's first.
+  Verified against the stored notebook: the month-window question returns 0 moves / 48 quiet,
+  while `2026-08 vs 2026-07` returns 26 new + 9 changed pages. It last worked 2026-08-04. The
+  audit's recommended smallest fix: each run records the notebook's sequence number and diffs
+  "everything since sequence N" — works with data already on disk. NEEDS A USER RULING before
+  build: the fix changes what each cycle records (a per-run watermark), a design fork under the
+  question-stop rule.
+
+- [ ] **F136 — the brief's headline change line saturates: "Demand: ACCELERATING (was
+  ACCELERATING)" is permanently stuck.** Same audit. The word-scale mapping tops out near 0.30
+  while DMI sits at 4.5, so the headline can never show movement again; the real `Δ +0.567` was
+  disclosed only ~400 lines down. Context the fix must respect (also from the audit): DMI is a
+  running total that grows as coverage widens — of v17's +0.567, roughly +0.52 was new
+  never-before-tracked companies/indicators entering coverage and only ~+0.05 genuine
+  re-rating, so a naive louder headline would mostly amplify coverage growth. Needs a small
+  design pass (likely with the user): what the headline should actually say when the scale is
+  saturated, and whether coverage-driven vs re-rating-driven movement should be separated in
+  the reader-facing line.
+
 - [x] **F132 — webreach crawl4ai runner crashes on non-cp1252 output (`UnicodeEncodeError`,
   U+1F92F).** Observed 2026-08-31 (v17): the crawl4ai path FAILED writing tool output because
   the stream/file used the Windows cp1252 default instead of UTF-8. Make the runner write tool
