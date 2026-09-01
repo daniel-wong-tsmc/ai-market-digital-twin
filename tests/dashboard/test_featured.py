@@ -23,16 +23,16 @@ def test_library_loads_four_entries_with_required_keys():
 
 
 def test_rule_tag_hit_beats_bigger_move():
-    quiet_tagged = _r("gap", 0.10, 0.09, priority=2, tags=["gap-band-changed"])
+    quiet_tagged = _r("gap", 0.10, 0.09, priority=2, tags=["gap-moved-sharply"])
     big_mover = _r("price", 3.00, 1.00, priority=1)
-    sel = select_featured([big_mover, quiet_tagged], triggers=["gap-band-changed"])
+    sel = select_featured([big_mover, quiet_tagged], triggers=["gap-moved-sharply"])
     assert sel.reading.metric_id == "gap" and sel.reason_code == "alert-rule"
 
 
 def test_two_tagged_hits_tie_break_by_priority():
-    a = _r("a", 1.0, 1.0, priority=3, tags=["gap-band-changed"])
+    a = _r("a", 1.0, 1.0, priority=3, tags=["gap-moved-sharply"])
     b = _r("b", 1.0, 1.0, priority=2, tags=["high-call-moved"])
-    sel = select_featured([a, b], triggers=["gap-band-changed", "high-call-moved"])
+    sel = select_featured([a, b], triggers=["gap-moved-sharply", "high-call-moved"])
     assert sel.reading.metric_id == "b"
 
 
@@ -64,9 +64,9 @@ def test_zero_moves_fall_back_to_priority():
 
 
 def test_unknown_triggers_are_ignored_and_empty_readings_give_none():
-    a = _r("a", 0.3, None, priority=1, tags=["gap-band-changed"])
+    a = _r("a", 0.3, None, priority=1, tags=["gap-moved-sharply"])
     assert select_featured([a], triggers=["no-such-rule"]).reason_code == "priority"
-    assert select_featured([], triggers=["gap-band-changed"]) is None
+    assert select_featured([], triggers=["gap-moved-sharply"]) is None
 
 
 def test_normalized_change():

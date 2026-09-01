@@ -8,6 +8,7 @@ never here — the engine keeps registry ids for stable diffing.
 """
 from __future__ import annotations
 import datetime
+import statistics
 from pathlib import Path
 from typing import Optional
 
@@ -376,8 +377,34 @@ def build_change_report(store_dir, sc: Scorecard, book: Optional[ThesisBook] = N
 # F79 swaps the trigger definitions for sigma-bands, keeping AlertState/fold intact.
 
 _ALERT_RANK = {"green": 0, "yellow": 1, "orange": 2, "red": 3}
-_BAND_RANK = ["contracting"] + [w for _, w in reversed(bands.BANDS)]  # mirrors bands._WORD_RANK
-_YELLOW_RULES = ("gap-band-changed", "high-call-moved", "constraint-rotated", "calls-co-move")
+_YELLOW_RULES = ("gap-moved-sharply", "high-call-moved", "constraint-rotated", "calls-co-move")
+
+# F137 (2026-09-01, USER-DECIDED — see .superpowers/handoffs/f137-alert-rules-QUESTIONS.md).
+# Two ladder rules used to compare BAND WORDS from gpu_agent.bands: "gap-band-changed" fired
+# when the gap's word changed, and "demand-reversal" when demand's word ranked lower. The top
+# word starts at 0.30 and has no upper edge, and both indices are running totals now above
+# 4.5 — so both values were pinned in that one word and neither rule could ever fire. Over the
+# 54 stored runs "gap-band-changed" fired once, in July, at the moment the numbers crossed
+# 0.30 for the last time; "demand-reversal" never fired at all, not even on 2026-08-v13 where
+# demand fell 0.573 while the gap fell 0.493 together. Same ceiling F136 removed from the
+# brief's headline (bands.change_line).
+#
+# The replacement measures each run's move against how much the series usually moves, so it
+# says the same thing whether the numbers sit at 0.5 or 450 and never needs retuning:
+#   gap-moved-sharply  the gap moved more than 1.5x its usual run-to-run move   (Q1 / 1E)
+#   demand-reversal    demand fell more than 1.0x its usual run-to-run move     (Q2 / 2E)
+#                      AND the gap fell with it (the asymmetric escalator is unchanged)
+# Replayed over the stored history that is 8 of 53 runs (15%) and 4 of 53 (7.5%) —
+# tests/test_change_alert_replay.py pins both sets.
+#
+# Both rules compare a run with the run IMMEDIATELY BEFORE it, which is the pairing the
+# options table the user chose from was measured on. The other rules keep their 7-day
+# window. Known limitation, booked as F138: the ladder still evaluates at asOf-keyed run
+# points, so a month of daily cycles is one point in the de-escalation fold.
+_SWING_WINDOW = 10           # runs of recent history the "usual move" is measured over
+_SWING_MIN_VALUES = 4        # fewest history values (3 moves) before a spread means anything
+_GAP_SWING_MULTIPLE = 1.5
+_DEMAND_SWING_MULTIPLE = 1.0
 
 
 class AlertState(BaseModel):
@@ -385,10 +412,27 @@ class AlertState(BaseModel):
     priorColor: Optional[str] = None  # prior run's displayed color; None on the first run
     rawColor: str = "green"           # today's raw ladder evaluation (pre-fold)
     triggers: list[str] = Field(default_factory=list)   # today's fired rule ids
+    # F137: rule id -> the plain size clause the reader sees after the rule's sentence
+    # ("0.55, about 1.7 times its usual run-to-run move"). Only the two size-aware rules
+    # appear here; the others carry no number.
+    triggerSizes: dict[str, str] = Field(default_factory=dict)
 
 
-def _band_rank(word: str) -> int:
-    return _BAND_RANK.index(word)
+def usual_swing(history: list[float]) -> Optional[float]:
+    """How much a series usually moves from one run to the next.
+
+    The spread of the run-to-run moves across the last _SWING_WINDOW values, all of which
+    must pre-date the run being judged — no lookahead, so replaying any past run reproduces
+    that run's own color. Returns None when there is too little history for a spread to mean
+    anything, or when the series has never moved at all (a spread of zero would make every
+    twitch "sharp").
+    """
+    window = list(history)[-_SWING_WINDOW:]
+    if len(window) < _SWING_MIN_VALUES:
+        return None
+    moves = [window[i] - window[i - 1] for i in range(1, len(window))]
+    spread = statistics.pstdev(moves)
+    return spread if spread > 0 else None
 
 
 def _thesis_moves_between(book: ThesisBook, after_asof: str, at_or_before_asof: str):
@@ -426,14 +470,47 @@ def _high_break_between(book: ThesisBook, after_asof: str, at_or_before_asof: st
     return False
 
 
+def _swing_phrase(move: float, swing: float, *, lead: str = "") -> str:
+    """The plain size clause shown after a rule's sentence — 'up 0.49, about 1.7 times its
+    usual run-to-run move', 'demand fell 0.57, about 2.4 times its usual run-to-run move'.
+
+    Two decimals, no jargon, no invented precision. `lead` names the mover when the sentence
+    does not; without one the clause opens with the direction, matching the wording F136
+    settled on for the brief's headline (bands.change_line) — a bare number would leave the
+    reader unable to tell a jump from a collapse.
+    """
+    head = lead if lead else ("up " if move > 0 else "down ")
+    return (f"{head}{abs(move):.2f}, about {abs(move) / swing:.1f} times its usual "
+            "run-to-run move")
+
+
 def _raw_alert(cur: StateVector, prior7: Optional[StateVector], prior7_asof: Optional[str],
-               book: Optional[ThesisBook]) -> tuple[str, list[str]]:
-    """One run's raw ladder color. First match from the top wins; co-occurrence is counted at
-    the RULE level (two rules fed by one event still count as two — spec §4)."""
+               book: Optional[ThesisBook], *,
+               gap_history: Optional[list[float]] = None,
+               demand_history: Optional[list[float]] = None,
+               ) -> tuple[str, list[str], dict[str, str]]:
+    """One run's raw ladder color, its fired rule ids, and the size clause for the rules that
+    carry one. First match from the top wins; co-occurrence is counted at the RULE level (two
+    rules fed by one event still count as two — spec §4).
+
+    `gap_history` / `demand_history` are the index values of every run BEFORE this one, in run
+    order (last element = the immediately preceding run). They feed the two F137 rules; omit
+    them and those two rules simply stay silent.
+    """
     triggers: list[str] = []
+    sizes: dict[str, str] = {}
+    gap_history = list(gap_history or [])
+    demand_history = list(demand_history or [])
+
+    # F137 Q1: the gap moved much more than it usually does.
+    if gap_history:
+        gap_move = cur.sdgi - gap_history[-1]
+        swing = usual_swing(gap_history)
+        if swing is not None and abs(gap_move) > _GAP_SWING_MULTIPLE * swing:
+            triggers.append("gap-moved-sharply")
+            sizes["gap-moved-sharply"] = _swing_phrase(gap_move, swing)
+
     if prior7 is not None:
-        if bands.band_word(cur.sdgi) != bands.band_word(prior7.sdgi):
-            triggers.append("gap-band-changed")
         if (cur.constraintLabel and prior7.constraintLabel
                 and cur.constraintLabel != prior7.constraintLabel):
             triggers.append("constraint-rotated")
@@ -447,24 +524,33 @@ def _raw_alert(cur: StateVector, prior7: Optional[StateVector], prior7_asof: Opt
                 break
         if _high_break_between(book, prior7_asof, cur.asOf):
             triggers.append("high-call-broke")
-    if prior7 is not None:
-        demand_worsened = _band_rank(bands.band_word(cur.demand)) < _band_rank(
-            bands.band_word(prior7.demand))
-        gap_toward_glut = round(cur.sdgi, _ROUND) < round(prior7.sdgi, _ROUND)
-        if demand_worsened and gap_toward_glut:
-            triggers.append("demand-reversal")   # asymmetric: this pair ALONE escalates
+
+    # F137 Q2: buyers pulled back sharply while the shortage eased at the same time.
+    # Asymmetric by design — this pair ALONE escalates, because the downside is the
+    # expensive thing to miss.
+    if demand_history and gap_history:
+        demand_drop = demand_history[-1] - cur.demand
+        gap_fell = round(cur.sdgi, _ROUND) < round(gap_history[-1], _ROUND)
+        swing = usual_swing(demand_history)
+        if (swing is not None and gap_fell
+                and demand_drop > _DEMAND_SWING_MULTIPLE * swing):
+            triggers.append("demand-reversal")
+            sizes["demand-reversal"] = _swing_phrase(demand_drop, swing, lead="demand fell ")
 
     y_hits = [t for t in triggers if t in _YELLOW_RULES]
-    if "high-call-broke" in triggers and "gap-band-changed" in triggers:
-        return "red", triggers
+    if "high-call-broke" in triggers and "gap-moved-sharply" in triggers:
+        return "red", triggers, sizes
     if "high-call-broke" in triggers or "demand-reversal" in triggers or len(y_hits) >= 2:
-        return "orange", triggers
+        return "orange", triggers, sizes
     if y_hits:
-        return "yellow", triggers
-    return "green", triggers
+        return "yellow", triggers, sizes
+    return "green", triggers, sizes
 
 
-def _raw_alert_for(store_dir, sc_run: Scorecard, book: Optional[ThesisBook]) -> tuple[str, list[str]]:
+def _raw_alert_for(store_dir, sc_run: Scorecard, book: Optional[ThesisBook], *,
+                   gap_history: Optional[list[float]] = None,
+                   demand_history: Optional[list[float]] = None,
+                   ) -> tuple[str, list[str], dict[str, str]]:
     cur = build_state(sc_run)
     target = period_end(sc_run.asOf) - datetime.timedelta(days=7)
     prior_path = nearest_run_at_or_before(store_dir, sc_run.categoryId, target)
@@ -472,7 +558,60 @@ def _raw_alert_for(store_dir, sc_run: Scorecard, book: Optional[ThesisBook]) -> 
     if prior_path is not None:
         prior_sc = load_scorecard(prior_path)
         prior7, prior7_asof = build_state(prior_sc), prior_sc.asOf
-    return _raw_alert(cur, prior7, prior7_asof, book)
+    return _raw_alert(cur, prior7, prior7_asof, book,
+                      gap_history=gap_history, demand_history=demand_history)
+
+
+def _stored_index_series(store_dir, category_id: str, sc: Scorecard):
+    """Every stored scorecard for a category in run order, as (path, gap, demand), with the
+    run that IS `sc` left out.
+
+    This is the FULL stored series — 54 files for merchant-GPU at F137 time — not the ladder's
+    asOf-keyed run set, which keeps one file per asOf label and so folds a month of daily
+    cycles into a single point (booked as F138). The two F137 rules need real run-to-run moves
+    to measure a usual swing against, so they read the full series.
+
+    Nothing at or after `sc`'s own position is returned, so no rule can peek at a run that had
+    not happened yet and a replay of any past run reproduces that run's own color. A Scorecard
+    carries its asOf label but not its version number, so `sc`'s position is found by value:
+    the LAST stored file carrying `sc`'s asOf whose three index numbers are `sc`'s own is taken
+    to be `sc`'s copy in the store, and everything from there on is dropped. When no file
+    matches — `sc` has not been written yet — `sc` is treated as newer than every stored run
+    sharing its asOf label, which is the contract the report CLI and the dashboard both meet
+    (each loads the newest stored file for the label). The one tie this cannot resolve, two
+    consecutive versions with identical demand, supply AND gap to three decimals, degrades to a
+    same-value comparison: the rules see a move of zero and stay quiet.
+    """
+    cat_dir = Path(store_dir) / category_id
+    rows = []
+    if cat_dir.is_dir():
+        for p in cat_dir.glob("*.json"):
+            m = _VERSION_RE.match(p.name)
+            if not m:
+                continue
+            try:
+                pe = period_end(m.group(1))
+            except AsOfError:
+                continue
+            rows.append((pe, int(m.group(2)), m.group(1), p))
+    rows.sort(key=lambda t: (t[0], t[1]))
+
+    today_key = (round(compute_sdgi(sc), _ROUND),
+                 round(sc.demandSupply.dmiContribution, _ROUND),
+                 round(sc.demandSupply.smiContribution, _ROUND))
+    states = [build_state(load_scorecard(p)) for _pe, _v, _a, p in rows]
+
+    cut = len(rows)
+    for i in range(len(rows) - 1, -1, -1):
+        if rows[i][2] != sc.asOf:
+            continue
+        st = states[i]
+        if (round(st.sdgi, _ROUND), round(st.demand, _ROUND),
+                round(st.supply, _ROUND)) == today_key:
+            cut = i
+            break
+
+    return [(rows[i][3], states[i].sdgi, states[i].demand) for i in range(cut)]
 
 
 def _fold_displayed(raws: list[str]) -> list[str]:
@@ -511,12 +650,25 @@ def alert_state(store_dir, sc: Scorecard, book: Optional[ThesisBook] = None) -> 
             if as_of not in runs or ver > runs[as_of][0]:
                 runs[as_of] = (ver, p)
     ordered = sorted(runs, key=period_end)
-    raws = [_raw_alert_for(store_dir, load_scorecard(runs[a][1]), book)[0] for a in ordered]
-    raw_today, triggers = _raw_alert_for(store_dir, sc, book)
+    # F137: the full stored index series, read ONCE, so each evaluated run can be handed the
+    # history that pre-dates it (no lookahead, and no re-reading the store per run).
+    series = _stored_index_series(store_dir, sc.categoryId, sc)
+    at = {p: i for i, (p, _g, _d) in enumerate(series)}
+    gaps = [g for _p, g, _d in series]
+    dems = [d for _p, _g, d in series]
+
+    raws: list[str] = []
+    for a in ordered:
+        path = runs[a][1]
+        cut = at.get(path, len(series))
+        raws.append(_raw_alert_for(store_dir, load_scorecard(path), book,
+                                   gap_history=gaps[:cut], demand_history=dems[:cut])[0])
+    raw_today, triggers, sizes = _raw_alert_for(store_dir, sc, book,
+                                                gap_history=gaps, demand_history=dems)
     raws.append(raw_today)
     disp = _fold_displayed(raws)
     return AlertState(color=disp[-1], priorColor=(disp[-2] if len(disp) > 1 else None),
-                      rawColor=raw_today, triggers=triggers)
+                      rawColor=raw_today, triggers=triggers, triggerSizes=sizes)
 
 
 # ---------------------------------------------------------------------------

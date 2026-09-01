@@ -30,18 +30,26 @@ def _drop_fullwidth_plus(text: str) -> str:
     return text.replace(_FULLWIDTH_PLUS, "+") if text else text
 
 # Alert-ladder rule ids -> plain English (unknown ids fall back to id with spaces).
+# F137 (user-approved wording, 2026-09-01): the first and last sentences described a
+# band-word test that no longer exists — both rules now measure a run's move against how
+# much the series usually moves, and both carry the size with them.
 _RULE_PLAIN = {
-    "gap-band-changed": "the demand-vs-supply gap band changed within the last week",
+    "gap-moved-sharply": "the demand-vs-supply gap moved much more than it usually does",
     "high-call-moved": "a high-confidence call moved within the last week",
     "constraint-rotated": "the main limiting factor changed within the last week",
     "calls-co-move": "two or more calls moved in the same direction within the last week",
     "high-call-broke": "a high-confidence call broke or was retired within the last week",
-    "demand-reversal": "demand worsened while the gap moved toward glut within the last week",
+    "demand-reversal": "buyers pulled back sharply while the shortage eased at the same time",
 }
 
 
-def rule_plain(rule_id: str) -> str:
-    return _RULE_PLAIN.get(rule_id, rule_id.replace("-", " "))
+def rule_plain(rule_id: str, sizes: dict | None = None) -> str:
+    """The reader's sentence for one fired rule. When the rule carries a size (F137's two
+    self-tuning rules do), it is appended so the reader can judge the move themselves
+    rather than take 'sharply' on trust."""
+    text = _RULE_PLAIN.get(rule_id, rule_id.replace("-", " "))
+    size = (sizes or {}).get(rule_id)
+    return f"{text} - {size}" if size else text
 
 
 def read_implication(store_root, category_id: str, as_of: str):
@@ -85,8 +93,8 @@ def _top_row(rows, side_key):
 def _why(model, featured, rows, sc):
     why = []
     a = model["alert"]
-    fired = "; ".join(rule_plain(t) for t in a["triggers"]) if a["triggers"] else \
-        "no alert rule fired"
+    fired = "; ".join(rule_plain(t, a.get("sizes")) for t in a["triggers"]) \
+        if a["triggers"] else "no alert rule fired"
     text = f"The light is {a['color'].upper()} because {fired}."
     if a["raw"] != a["color"]:
         text += (f" Today's raw read was {a['raw'].upper()}; the shown color only steps"

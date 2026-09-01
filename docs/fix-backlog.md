@@ -1444,7 +1444,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   number-first treatment as Demand even though its scale is not saturated today — uniform line,
   nothing to revisit if Supply's number later drifts past the scale too.
 
-- [ ] **F137 — the saturated band ceiling silently disables two alert rules
+- [x] **F137 — the saturated band ceiling silently disables two alert rules
   (`gap-band-changed` and `demand-reversal` can never fire).** Found by the F136 lane in
   passing, deliberately NOT fixed there (different surface — it changes what the alert dot
   says). `gpu_agent/change.py` band-checks `sdgi` (now ~4.6) and `demand` (now ~4.5) against
@@ -1453,6 +1453,52 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   two rungs. Fix direction is the F136 precedent (compare changes/levels numerically, not via
   the saturated bands), but what the alert should SAY and when it should fire is a reader-facing
   design call — NEEDS A USER RULING before build, question-stop applies.
+  **DONE 2026-09-01 (lane `f137-alert-rules`).** Premise confirmed and sharpened by replaying
+  all 54 stored scorecards: `gap-band-changed` fired exactly ONCE ever (the 2026-07 run, as the
+  numbers crossed 0.30 for the last time) and `demand-reversal` NEVER fired — not even on
+  2026-08-v13, where demand fell 0.573 while the gap fell 0.493 together, precisely the shape it
+  was written to catch. The suite missed it for a month because `tests/test_change_alert.py`
+  built its fixtures from 0.10 / 0.35 / −0.10, pre-drift values that straddle real band edges.
+  Third casualty nobody had noticed: those two rules were the ONLY `alertRuleTags` in
+  `registry/featured-metrics.json`, so `dashboard/featured.py`'s `alert-rule` branch was dead
+  code and the public page's *"Shown because it tracks what set off today's alert"* line had
+  never once been printed.
+  **Both rule shapes and both reader sentences USER-DECIDED 2026-09-01** off the replay tables
+  in `.superpowers/handoffs/f137-alert-rules-QUESTIONS.md` (Q1 option 1E, Q2 option 2E, Q3
+  wording verbatim + the id rename). Shipped: `gap-moved-sharply` (the gap moved more than 1.5×
+  its usual run-to-run move) and `demand-reversal` (demand fell more than 1.0× its usual
+  run-to-run move AND the gap fell with it — the asymmetric orange escalator is unchanged). The
+  "usual move" is the spread of the last 10 runs' moves, always read from history that pre-dates
+  the run being judged, so a replay of any past run reproduces that run's own colour, and the
+  rule says the same thing whether the numbers sit at 0.5 or 450 — it can never saturate again.
+  Replay: `gap-moved-sharply` fires on 8 of 53 runs (15%), `demand-reversal` on 4 of 53 (7.5%),
+  both sets pinned in `tests/test_change_alert_replay.py`; 2026-08-v13 now reads ORANGE.
+  Reader-facing: *"the demand-vs-supply gap moved much more than it usually does"* and *"buyers
+  pulled back sharply while the shortage eased at the same time"*, each followed by the actual
+  size, carried on `AlertState.triggerSizes`. The rename was chased through the registry, the
+  ladder explainer prose and the tests; the featured "alert-rule" reason is reachable again and
+  render-tested end to end. Scoring, `store/`, `bands.py` and the v2 shadow engine untouched; no
+  web-facing JSON shape moved. Suite 2900 passed / 6 skipped; web 171 passed; all four pins green.
+  Two follow-ups minted rather than folded in: **F138** (the ladder's run-set/cadence quirk) and
+  a note against **F79** (the v2 shadow engine repeats this bug class).
+
+- [ ] **F138 — the alert ladder is only evaluated seven times ever: 54 stored runs collapse to
+  7 `asOf`-keyed points, and "within the last week" reaches back a whole month.** Found by the
+  F137 lane 2026-09-01; deliberately NOT folded into F137 (it changes the meaning of every
+  colour in the historical record and touches how runs are keyed, so it needs its own review).
+  Runs are stored as `<asOf>-v<N>.json` and a whole month of daily cycles shares one month-grain
+  `asOf` — August's seventeen cycles are all `2026-08`, versions 1 to 17. `change.alert_state`
+  groups by `asOf` and keeps only the highest version, so the ladder's entire history is seven
+  points. Worse, its 7-day lookback resolves to the nearest run at/before seven days ago, which
+  at month grain is *last month's final run*: every single day in August the light was computed
+  by comparing August's newest scorecard against `2026-07-v21`, and the anti-flapping fold's
+  "steps down after two calm runs" is counted in MONTHS. F137's two repaired rules sidestep this
+  by reading the full stored series (`change._stored_index_series`) and comparing each run with
+  the one immediately before it, so they do fire daily — but `constraint-rotated`,
+  `high-call-moved`, `calls-co-move`, `high-call-broke` and the whole de-escalation fold still
+  run on the seven-point set. Fix direction: treat each stored version as one run. **NEEDS A USER
+  RULING before build** (it re-keys runs and rewrites the historical colour record, and it
+  interacts with F135's per-run sequence markers) — question-stop applies.
 
 - [x] **F132 — webreach crawl4ai runner crashes on non-cp1252 output (`UnicodeEncodeError`,
   U+1F92F).** Observed 2026-08-31 (v17): the crawl4ai path FAILED writing tool output because
@@ -1694,6 +1740,20 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   tolerance) seeded in `registry/series-calendar.json` are the assistant's proposed starting
   defaults, not numbers the user has reviewed and approved — they are plain JSON and can be
   edited at any time.** Full build record: `.superpowers/handoffs/f79-g4-refresh-DONE.md`.
+  **NOTE FROM THE F137 LANE, 2026-09-01 — the σ-band shadow engine repeats the bug class F137
+  just fixed; grade it BEFORE the G4 cutover.** F137 found that `change.raw_alert_v2` measures
+  spread across the whole history of index LEVELS (`statistics.stdev(prior_d)` /
+  `_v2_edges(sdgi_series[:-1])`). On a strongly trending series that spread is inflated by the
+  trend itself, so the thresholds drift out of reach exactly as the 0.30 word band did. Replayed
+  over the same 54 stored scorecards (index rules only, no thesis book): v2's `demand-reversal`
+  fires 3 times, **all in June, and never once after the numbers started climbing** — the same
+  silent death, a different door; meanwhile `gap-extreme` fires on **17 of 53 runs (31%)**,
+  because a rising series is nearly always above its own trailing mean. Raw v2 colour mix over
+  that walk: 21 green / 16 yellow / 16 orange. Cutting over to v2 as-is would re-introduce F137
+  under a new rule id. F137's fix measures the spread of recent run-to-run MOVES over a rolling
+  10-run window instead of the spread of levels over all history (`change.usual_swing`) — the
+  same correction applies here. **No v2 code was touched by the F137 lane** (frozen shadow
+  surface; the backtest harness reads it) — this is a finding to grade at G4, not a change.
 - [x] **F96 — Monthly-grain write-back collision: same-period price re-gather mints a stable id
   **✓ DONE 2026-07-26** — content-vintage ids merged `439fa6e`; live criterion PASSED (v18: 11 same-month updates, zero collisions).
   over changed content (F52-class residual).** Found in the live 2026-07-15 v8 daily cycle
