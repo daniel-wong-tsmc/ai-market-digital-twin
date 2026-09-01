@@ -39,7 +39,13 @@ def test_amd_entry_fields_match_brief():
     assert amd.sourceUrl == "https://ir.amd.com/financial-information/quarterly-results"
 
 
-def test_nvda_entry_has_no_fetcher_yet():
+def test_nvda_entry_is_wired_to_its_fetcher():
+    """F134 (user rulings 2026-09-01): NVIDIA finally has a fetcher, and its
+    sourceUrl points at the FINANCIAL-REPORTS page rather than the
+    quarterly-results page. That is not cosmetic -- the quarterly-results
+    page renders its quarter list in the browser, so the HTML a fetcher
+    receives from it carries no press-release links at all and no discoverer
+    could ever work against it."""
     series = load_chart_series(REGISTRY_PATH)
     nvda = series["nvdaDataCenterRevenue"]
     assert nvda.cadence == "quarterly"
@@ -47,7 +53,9 @@ def test_nvda_entry_has_no_fetcher_yet():
     assert nvda.topicTags == ("nvidia", "nvidiaDataCenter")
     assert nvda.form == "columns"
     assert nvda.unit == "US$ billions"
-    assert nvda.fetcher is None
+    assert nvda.fetcher == "nvda_dc_revenue"
+    assert nvda.sourceUrl == ("https://investor.nvidia.com/financial-info/"
+                              "financial-reports/default.aspx")
 
 
 def test_gpu_spot_price_is_estimate_and_never_chartable():

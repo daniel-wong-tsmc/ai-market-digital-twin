@@ -393,8 +393,31 @@ def run_fetch(
                 "skipped": [], "notFetchable": [], "staleCalendar": []}
 
 
+# F134 Q1 (user ruling 2026-09-01): both investor.nvidia.com and
+# nvidianews.nvidia.com answer HTTP 403 Forbidden to a request that sends no
+# User-Agent -- which is exactly what urllib sends by default. With an
+# ordinary browser User-Agent both serve the page immediately, so this is an
+# "identify yourself" rejection rather than a bot wall, and no mirror or cache
+# service is involved. AMD's pages are indifferent to the header, so one
+# shared value covers every fetcher rather than adding per-fetcher header
+# plumbing for the sake of one site.
+_USER_AGENT = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+               "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+
+
+def _build_request(url: str):
+    """Build the HTTP request _default_fetch_html sends.
+
+    Split out from the network call on purpose: the 403 that made this
+    necessary was invisible to every existing test precisely because the
+    request itself was never inspectable. This half is pure and covered;
+    the urlopen half below is not."""
+    import urllib.request
+    return urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
+
+
 def _default_fetch_html(url: str) -> str:  # pragma: no cover -- network path,
     # never exercised by tests; tests always inject fetch_html.
     import urllib.request
-    with urllib.request.urlopen(url, timeout=20) as resp:  # noqa: S310
+    with urllib.request.urlopen(_build_request(url), timeout=20) as resp:  # noqa: S310
         return resp.read().decode("utf-8", errors="replace")

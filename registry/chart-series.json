@@ -17,13 +17,13 @@
       "id": "nvdaDataCenterRevenue",
       "name": "Nvidia data center revenue",
       "sourceName": "Nvidia investor relations",
-      "sourceUrl": "https://investor.nvidia.com/financial-info/quarterly-results/",
+      "sourceUrl": "https://investor.nvidia.com/financial-info/financial-reports/default.aspx",
       "cadence": "quarterly",
       "quality": "hard-fact",
       "topicTags": ["nvidia", "nvidiaDataCenter"],
       "form": "columns",
       "unit": "US$ billions",
-      "fetcher": null,
+      "fetcher": "nvda_dc_revenue",
       "earningsKey": "nvidia"
     },
     {
