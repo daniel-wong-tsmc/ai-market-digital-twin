@@ -11,8 +11,10 @@ tests/test_chartdata_nvda_fetcher.py:
    server-rendered and lists every quarter's press release. NVIDIA's
    equivalent (investor.nvidia.com/financial-info/quarterly-results/) is a
    JavaScript shell: the quarter list is drawn in the browser by a Q4 Inc
-   widget from a JSON feed, so the HTML a fetcher receives contains ZERO
-   press-release links. registry/chart-series.json therefore points
+   widget from a JSON feed, so the HTML a fetcher receives carries no
+   press-release links at all (it has plenty of nav and footer links --
+   just nothing pointing at a quarter's results).
+   registry/chart-series.json therefore points
    sourceUrl at NVIDIA's *financial-reports* page instead, which IS
    server-rendered and carries a "Latest Report" block linking to the
    current quarter's release (saved copy:
@@ -23,7 +25,11 @@ tests/test_chartdata_nvda_fetcher.py:
    with PR Title"), so it can lag an actual print. The F112(a) staleness
    guard in fetch.py refuses to append a quarter older than the newest one
    stored, so the failure mode is "the chart updates late", never "the
-   chart shows the wrong quarter".
+   chart shows the wrong quarter" -- with one exception worth stating
+   plainly: that guard compares against what is already stored, so on the
+   FIRST ever fetch, with an empty store, there is nothing to compare and
+   a stale block would be believed. After that first point lands, the
+   guard is live.
 
 2. THERE IS NO EXACT FIGURE TO READ. AMD publishes a segment table with
    Data Center revenue in exact millions. NVIDIA publishes no such row in
@@ -65,6 +71,7 @@ from gpu_agent.chartdata.fetch import ParseFailed
 # half's links can never be picked up instead.
 _MASHUP_MARKER = 'class="module module-embed module-financial-mashup"'
 _NEWS_MARKER = "module-financial-mashup_news"
+_DOCUMENTS_MARKER = "module-financial-mashup_financials-and-events"
 _LINKS_MARKER = "module_links"
 _HREF_RE = re.compile(r'<a\s[^>]*href="([^"]+)"', re.IGNORECASE)
 
@@ -118,10 +125,14 @@ def _quarter_label(month_name: str, year: str) -> str:
     return f"{year}-Q{q}"
 
 
-def _iso_date(month_name: str, day: str, year: str) -> str:
+def _iso_date(month_name: str, day: str, year: str, which: str) -> str:
+    """`which` names the date being read, so the error says which one broke.
+    It used to hardcode "publication", which became wrong the moment a second
+    caller (the quarter-end date) was added."""
     month = _MONTH_TO_NUMBER.get(_canonical_month(month_name))
     if month is None:
-        raise ParseFailed(f"unrecognized month name in publication date: {month_name!r}")
+        raise ParseFailed(
+            f"unrecognized month name in {which} date: {month_name!r}")
     return f"{year}-{month:02d}-{int(day):02d}"
 
 
@@ -143,11 +154,13 @@ def discover(landing_html: str, landing_url: str) -> str:
             f"({_MASHUP_MARKER!r}) on the landing page -- NVIDIA's "
             "landing-page markup may have changed, or sourceUrl may be "
             "pointing at the JavaScript-rendered quarterly-results page, "
-            "whose served HTML carries no links at all")
+            "whose served HTML carries no press-release links")
 
-    # Bound the search to this module, so a later module's links can never
-    # be mistaken for the press release.
-    next_idx = landing_html.find('class="module module-', block_idx + 1)
+    # Bound the search to this module, closing on the SAME marker it opened
+    # with (as the AMD discoverer does) rather than on a broader
+    # 'class="module module-' prefix, which any nested element carrying such
+    # a class would truncate early.
+    next_idx = landing_html.find(_MASHUP_MARKER, block_idx + 1)
     block = landing_html[block_idx:next_idx if next_idx != -1 else len(landing_html)]
 
     news_idx = block.find(_NEWS_MARKER)
@@ -156,14 +169,28 @@ def discover(landing_html: str, landing_url: str) -> str:
             f"the 'Latest Report' block has no {_NEWS_MARKER!r} section -- "
             "NVIDIA's landing-page markup may have changed")
 
-    links_idx = block.find(_LINKS_MARKER, news_idx)
+    # Slice the news half OUT before looking for a link. Both bounds matter,
+    # and the review that added them proved why: with only a lower bound, a
+    # news half whose link NVIDIA had not posted yet (their own markup warns
+    # "After PR crosses: insert PR URL") let the search run on into the
+    # documents half and return, say, the SEC-filings URL -- a wrong page,
+    # fetched silently, with no error anywhere.
+    news_end = block.find(_DOCUMENTS_MARKER, news_idx)
+    news = block[news_idx:news_end if news_end != -1 else len(block)]
+
+    links_idx = news.find(_LINKS_MARKER)
     if links_idx == -1:
         raise ParseFailed(
             "found the 'Latest Report' news section but no "
             f"{_LINKS_MARKER!r} container inside it -- NVIDIA may not have "
             "posted this quarter's press-release link yet")
 
-    match = _HREF_RE.search(block, links_idx)
+    # ...and bound the href search to the links container itself, so an
+    # EMPTY container raises instead of borrowing the next anchor along.
+    container_end = news.find("</div>", links_idx)
+    container = news[links_idx:container_end if container_end != -1 else len(news)]
+
+    match = _HREF_RE.search(container)
     if not match:
         raise ParseFailed(
             "found the 'Latest Report' links container but no link inside "
@@ -193,15 +220,29 @@ def parse(html_text: str) -> list[dict]:
     this parser doesn't recognize -- never returns a guessed or partial
     result, and never converts a figure into the series' unit.
     """
-    figure_match = _DC_FIGURE_RE.search(html_text)
-    if not figure_match:
+    # Find EVERY statement of the figure, not just the first. There is no
+    # table row to anchor on the way the AMD parser anchors on a section
+    # heading, so a prior-quarter excerpt elsewhere on the page -- a "related
+    # releases" teaser, a newsroom card -- would otherwise be read as this
+    # quarter's number and stored under this quarter's label, silently. If
+    # the page states two different figures, we cannot know which is current,
+    # so a person has to look.
+    figures = _DC_FIGURE_RE.findall(html_text)
+    if not figures:
         raise ParseFailed(
             "could not find NVIDIA's 'Data Center revenue of $N billion' "
             "line in the release -- the subtitle wording may have changed. "
             "NVIDIA publishes this figure in prose only; there is no table "
             "row to fall back to")
 
-    raw_value, unit_word = figure_match.group(1), figure_match.group(2).lower()
+    distinct = {(v.replace(",", ""), u.lower()) for v, u in figures}
+    if len(distinct) > 1:
+        raise ParseFailed(
+            "the release states more than one different Data Center revenue "
+            f"figure ({sorted(distinct)}) -- refusing to guess which one is "
+            "this quarter's")
+
+    raw_value, unit_word = figures[0][0], figures[0][1].lower()
     if unit_word != _EXPECTED_UNIT_WORD:
         raise ParseFailed(
             f"NVIDIA stated Data Center revenue in {unit_word!r}, but this "
@@ -215,20 +256,30 @@ def parse(html_text: str) -> list[dict]:
     except ValueError as e:
         raise ParseFailed(f"unparseable Data Center revenue figure {raw_value!r}") from e
 
-    quarter_match = _QUARTER_END_RE.search(html_text)
-    if not quarter_match:
+    # Same discipline as the figure above: the quarter-end phrase appears
+    # several times on a real release (body text plus meta tags), and they
+    # must agree. Two different quarter-end dates on one page means we cannot
+    # tell which quarter is being reported.
+    quarter_dates = _QUARTER_END_RE.findall(html_text)
+    if not quarter_dates:
         raise ParseFailed(
             "could not find the 'quarter ended <Month DD, YYYY>' phrase -- "
             "without it there is no trustworthy way to label the quarter")
-    period = _quarter_label(quarter_match.group(1), quarter_match.group(3))
-    quarter_end = _iso_date(*quarter_match.groups())
+    if len({(m.capitalize(), d, y) for m, d, y in quarter_dates}) > 1:
+        raise ParseFailed(
+            f"the release states more than one quarter-end date "
+            f"({sorted(set(quarter_dates))}) -- refusing to guess which "
+            "quarter it reports")
+    month, day, year = quarter_dates[0]
+    period = _quarter_label(month, year)
+    quarter_end = _iso_date(month, day, year, "quarter-end")
 
     date_match = _ARTICLE_DATE_RE.search(html_text)
     if not date_match:
         raise ParseFailed(
             "could not find the release's article-date element -- NVIDIA's "
             "newsroom carries no published_time meta tag to fall back to")
-    published_at = _iso_date(*date_match.groups())
+    published_at = _iso_date(*date_match.groups(), "publication")
 
     url_match = _CANONICAL_URL_RE.search(html_text)
     source_url = url_match.group(1) if url_match else ""
@@ -250,6 +301,7 @@ def parse(html_text: str) -> list[dict]:
             f"Value as published by NVIDIA (${raw_value} billion) -- NVIDIA "
             f"states this figure in prose only, already rounded, and "
             f"publishes no exact one. Period is the calendar quarter in which "
-            f"NVIDIA's fiscal quarter ended, {quarter_end}; NVIDIA's own name "
-            f"for that quarter is a year ahead of the calendar."),
+            f"NVIDIA's fiscal quarter ended, {quarter_end}. NVIDIA's fiscal "
+            f"year ends in January, so its own name for this quarter can "
+            f"differ from the calendar label above."),
     }]

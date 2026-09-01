@@ -323,3 +323,112 @@ def test_a_fetcher_that_supplies_no_note_suffix_keeps_the_plain_note(tmp_path):
         "AMD investor relations: AMD data center revenue, 2026-Q2")
     assert _note(cs, {"period": "2026-Q2", "noteSuffix": "  "}) == (
         "AMD investor relations: AMD data center revenue, 2026-Q2")
+
+
+# ── code-review regressions (2026-09-01) ──────────────────────────────────
+#
+# Two ways this fetcher could have returned the wrong thing with no error at
+# all. Both were found by review rather than by a failing test, so both get a
+# test that fails against the old code.
+
+_DOCUMENTS_HALF = ('<div class="module-financial-mashup_financials-and-events">'
+                   '<div class="module_links">'
+                   '<a href="/financial-info/sec-filings/default.aspx">SEC</a>'
+                   '</div></div>')
+
+
+def _mashup(news_inner: str, documents: str = _DOCUMENTS_HALF) -> str:
+    return ('<div class="module module-embed module-financial-mashup">'
+            f'<div class="module-financial-mashup_news">{news_inner}</div>'
+            f'{documents}</div>')
+
+
+def test_discover_refuses_an_empty_links_container_instead_of_borrowing_a_link():
+    """NVIDIA's own markup warns "After PR crosses: insert PR URL", i.e. the
+    container really does sit empty between the print and a staffer updating
+    it. The search must stop at that container's end -- it used to run on
+    into the documents half and return the SEC-filings URL, a wrong page
+    fetched silently with no error anywhere."""
+    with pytest.raises(ParseFailed):
+        nvda_dc_revenue.discover(
+            _mashup('<div class="module_links"></div>'), _landing_url())
+
+
+def test_discover_never_reaches_into_the_documents_half_for_a_link():
+    """Same bug, other shape: the news half has no links container at all."""
+    with pytest.raises(ParseFailed):
+        nvda_dc_revenue.discover(
+            _mashup("<h3>NVIDIA Announces Financial Results</h3>"),
+            _landing_url())
+
+
+def test_discover_still_finds_the_news_link_when_a_documents_half_follows():
+    """Positive control for the two above: with a real link present, the
+    news half's link is the one returned -- the guard did not simply break
+    discovery."""
+    assert nvda_dc_revenue.discover(
+        _mashup('<div class="module_links">'
+                f'<a href="{REAL_DETAIL_URL}">Read More</a></div>'),
+        _landing_url()) == REAL_DETAIL_URL
+
+
+def test_parse_refuses_a_page_stating_two_different_data_center_figures():
+    """A prior-quarter excerpt elsewhere on the page -- a "related releases"
+    teaser, a newsroom card -- used to win simply by appearing first, storing
+    LAST quarter's number under THIS quarter's label. Unlike the AMD parser,
+    there is no table section to anchor on, so disagreement must be fatal."""
+    stale_teaser = "<aside>Data Center revenue of $76.7 billion</aside>"
+    with pytest.raises(ParseFailed):
+        nvda_dc_revenue.parse(stale_teaser + _synthetic_release())
+
+
+def test_parse_accepts_the_figure_repeated_identically():
+    """NVIDIA states the figure twice in a real release (subtitle and
+    Highlights). Agreement is fine; only disagreement is fatal."""
+    doubled = _synthetic_release().replace(
+        "</body>", "<p>Data Center revenue of $89.0 billion</p></body>")
+    assert nvda_dc_revenue.parse(doubled)[0]["value"] == pytest.approx(89.0)
+
+
+def test_parse_refuses_a_page_stating_two_different_quarter_end_dates():
+    with pytest.raises(ParseFailed):
+        nvda_dc_revenue.parse(
+            "<p>quarter ended April 26, 2026,</p>" + _synthetic_release())
+
+
+def test_default_fetch_html_actually_sends_the_built_request(monkeypatch):
+    """_build_request being right is worth nothing if _default_fetch_html
+    does not use it. Without this, reverting that function to urlopen(url)
+    leaves the whole suite green -- exactly the invisibility the split was
+    introduced to fix."""
+    import urllib.request
+
+    seen = {}
+
+    class _Resp:
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+        def read(self): return b"<html>ok</html>"
+
+    def _fake_urlopen(req, timeout=None):
+        seen["req"] = req
+        return _Resp()
+
+    monkeypatch.setattr(urllib.request, "urlopen", _fake_urlopen)
+    assert fetch_mod._default_fetch_html("https://investor.nvidia.com/x") == \
+        "<html>ok</html>"
+
+    req = seen["req"]
+    assert isinstance(req, urllib.request.Request)
+    assert "Mozilla/5.0" in req.get_header("User-agent")
+    assert req.full_url == "https://investor.nvidia.com/x"
+
+
+def test_note_does_not_claim_nvidias_fiscal_year_is_always_a_year_ahead():
+    """False for NVIDIA's January-ending quarter: the quarter ended
+    2027-01-25 is fiscal 2027 AND calendar 2027. The note is reader-facing
+    prose written into the data file, so it must not assert it."""
+    note = nvda_dc_revenue.parse(
+        _synthetic_release(quarter_end="January 25, 2027"))[0]["noteSuffix"]
+    assert "year ahead" not in note
+    assert "2027-01-25" in note
