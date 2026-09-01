@@ -235,8 +235,19 @@ def _row(cs: ChartSeries, point: dict, as_of_date: str) -> dict:
             "title": point.get("title", cs.sourceName),
         },
         "estimateGrade": False,
-        "note": f"{cs.sourceName}: {cs.name}, {point['period']}",
+        # F134 (Q3 ruling): a fetcher may append provenance the generic line
+        # cannot know -- e.g. that NVIDIA publishes only a rounded figure, and
+        # that its fiscal quarter name differs from the calendar label stored
+        # here. Optional, exactly like 'unit'/'sourceUrl'/'title' above; a
+        # fetcher that supplies nothing gets the same line it always did.
+        "note": _note(cs, point),
     }
+
+
+def _note(cs: ChartSeries, point: dict) -> str:
+    base = f"{cs.sourceName}: {cs.name}, {point['period']}"
+    suffix = str(point.get("noteSuffix") or "").strip()
+    return f"{base}. {suffix}" if suffix else base
 
 
 def _append_points(store_dir: str, cs: ChartSeries, points: list[dict],

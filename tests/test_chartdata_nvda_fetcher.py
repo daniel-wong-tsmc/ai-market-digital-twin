@@ -292,3 +292,34 @@ def test_default_fetch_request_preserves_the_url_it_was_given():
     goes through this same helper."""
     url = "https://ir.amd.com/financial-information/quarterly-results"
     assert fetch_mod._build_request(url).full_url == url
+
+
+# ── F134 Q3: the stored row must admit the figure is NVIDIA's rounding ─────
+
+def test_stored_row_note_records_that_the_figure_is_nvidias_own_rounding(tmp_path):
+    """A reader who opens the series file a year from now should be able to
+    see, without leaving the file, that this number is rounded as published
+    and that the quarter label is a calendar one -- the two things about this
+    series a reader would otherwise get wrong."""
+    series = {"nvdaDataCenterRevenue":
+              load_chart_series(REGISTRY_PATH)["nvdaDataCenterRevenue"]}
+    run_fetch(series, "2026-09-01", {"nvidia": "2026-08-26"}, str(tmp_path),
+              fetch_html=_stub_fetch_html())
+    note = json.loads((tmp_path / "nvdaDataCenterRevenue.jsonl").read_text(
+        encoding="utf-8").strip())["note"]
+
+    assert "89.0" in note
+    assert "rounded" in note.lower()
+    assert "2026-07-26" in note          # the real fiscal quarter end
+    assert "Nvidia data center revenue, 2026-Q3" in note   # generic line kept
+
+
+def test_a_fetcher_that_supplies_no_note_suffix_keeps_the_plain_note(tmp_path):
+    """The note hook is optional: AMD supplies nothing and must be
+    unaffected."""
+    from gpu_agent.chartdata.fetch import _note
+    cs = load_chart_series(REGISTRY_PATH)["amdDataCenterRevenue"]
+    assert _note(cs, {"period": "2026-Q2"}) == (
+        "AMD investor relations: AMD data center revenue, 2026-Q2")
+    assert _note(cs, {"period": "2026-Q2", "noteSuffix": "  "}) == (
+        "AMD investor relations: AMD data center revenue, 2026-Q2")

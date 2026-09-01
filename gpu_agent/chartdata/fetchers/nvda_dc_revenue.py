@@ -221,6 +221,7 @@ def parse(html_text: str) -> list[dict]:
             "could not find the 'quarter ended <Month DD, YYYY>' phrase -- "
             "without it there is no trustworthy way to label the quarter")
     period = _quarter_label(quarter_match.group(1), quarter_match.group(3))
+    quarter_end = _iso_date(*quarter_match.groups())
 
     date_match = _ARTICLE_DATE_RE.search(html_text)
     if not date_match:
@@ -242,4 +243,13 @@ def parse(html_text: str) -> list[dict]:
         "publishedAt": published_at,
         "sourceUrl": source_url,
         "title": title,
+        # Carried into the stored row's note (Q3 ruling): a reader looking at
+        # this number later should be able to see, without leaving the file,
+        # that NVIDIA rounded it and that the quarter label is a calendar one.
+        "noteSuffix": (
+            f"Value as published by NVIDIA (${raw_value} billion) -- NVIDIA "
+            f"states this figure in prose only, already rounded, and "
+            f"publishes no exact one. Period is the calendar quarter in which "
+            f"NVIDIA's fiscal quarter ended, {quarter_end}; NVIDIA's own name "
+            f"for that quarter is a year ahead of the calendar."),
     }]
