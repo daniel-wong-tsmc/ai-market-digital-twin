@@ -1500,6 +1500,18 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   RULING before build** (it re-keys runs and rewrites the historical colour record, and it
   interacts with F135's per-run sequence markers) — question-stop applies.
 
+- [ ] **F139 — one clock for the scheduler's success check and the cycle's day-keys.** Minted
+  2026-09-01 by user ruling (the 2026-08-31 blocker's question 2; question 1 was also USER-RULED:
+  the 00:04-local run COUNTS as that day's cycle — one run per local calendar day, no re-keying,
+  no do-over). Today the wrapper judges "did today succeed" by `capturedAt`'s UTC date while the
+  run's artifacts are keyed by the LOCAL date, so an after-midnight run makes every later fire
+  that day re-orient, mis-toast, and (2026-08-31) nearly start a second cycle into a spent
+  day-namespace — the day-key collision guard caught it at end of gather round 1. Fix: both the
+  wrapper's success check and the artifact-date derivation read the LOCAL calendar day, keeping
+  the collision guard as defense in depth. Machine-side task script + repo code both involved
+  (the 2026-08-20 scheduler-fix backups show where the wrapper lives). Related but distinct:
+  F135's watermark (shipped) and F138's asOf grain (parked).
+
 - [x] **F132 — webreach crawl4ai runner crashes on non-cp1252 output (`UnicodeEncodeError`,
   U+1F92F).** Observed 2026-08-31 (v17): the crawl4ai path FAILED writing tool output because
   the stream/file used the Windows cp1252 default instead of UTF-8. Make the runner write tool
