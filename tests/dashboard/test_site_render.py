@@ -204,3 +204,80 @@ def test_every_shell_page_carries_the_disclaimer_in_its_footer():
 
 def test_the_disclaimer_is_styled_rather_than_left_as_bare_text():
     assert ".disclaimer" in SITE_CSS
+
+
+# --- F137: the alert-rule featured reason is reachable again ---------------------------
+#
+# Before F137 the only two rules tagged in registry/featured-metrics.json were
+# `gap-band-changed` and `demand-reversal`, and both were structurally unable to fire
+# (see tests/test_change_alert_saturation.py). So select_featured's "alert-rule" branch
+# was dead code and the sentence below had never once been printed on the public page.
+# These tests drive the whole chain — alert state -> featured selection -> rendered HTML —
+# to prove it now renders.
+
+_ALERT_REASON = "Shown because it tracks what set off today's alert."
+
+
+def _model_with_alert(monkeypatch, color, triggers, sizes):
+    from gpu_agent import change as change_mod
+
+    def _stub(store_dir, sc, book=None):
+        return change_mod.AlertState(color=color, priorColor="green", rawColor=color,
+                                     triggers=list(triggers), triggerSizes=dict(sizes))
+
+    monkeypatch.setattr(change_mod, "alert_state", _stub)
+    return _model()
+
+
+def test_a_fired_gap_rule_makes_the_gap_the_featured_number(monkeypatch):
+    m = _model_with_alert(monkeypatch, "yellow", ["gap-moved-sharply"],
+                          {"gap-moved-sharply": "0.55, about 1.7 times its usual "
+                                                "run-to-run move"})
+    assert m["featured"]["metric_id"] == "gap-score"
+    assert m["featured"]["reason_code"] == "alert-rule"
+    assert m["featured"]["reason_text"] == _ALERT_REASON
+
+
+def test_the_alert_rule_reason_actually_renders_on_the_page(monkeypatch):
+    m = _model_with_alert(monkeypatch, "yellow", ["gap-moved-sharply"],
+                          {"gap-moved-sharply": "0.55, about 1.7 times its usual "
+                                                "run-to-run move"})
+    # the renderer HTML-escapes the apostrophe in "today's", so match the stable prefix
+    assert "Shown because it tracks what set off today" in render_how_featured(m)
+
+
+def test_the_alert_page_says_the_new_rule_in_plain_words_with_its_size(monkeypatch):
+    m = _model_with_alert(monkeypatch, "yellow", ["gap-moved-sharply"],
+                          {"gap-moved-sharply": "0.55, about 1.7 times its usual "
+                                                "run-to-run move"})
+    html = render_how_alert(m)
+    assert "the demand-vs-supply gap moved much more than it usually does" in html
+    assert "0.55, about 1.7 times its usual run-to-run move" in html
+    assert "gap band" not in html
+
+
+def test_a_fired_demand_reversal_features_demand_and_reads_plainly(monkeypatch):
+    m = _model_with_alert(monkeypatch, "orange", ["demand-reversal"],
+                          {"demand-reversal": "demand fell 0.57, about 2.4 times its "
+                                              "usual run-to-run move"})
+    assert m["featured"]["metric_id"] == "demand-momentum"
+    assert m["featured"]["reason_code"] == "alert-rule"
+    html = render_how_alert(m)
+    assert "buyers pulled back sharply while the shortage eased at the same time" in html
+    assert "demand fell 0.57" in html
+
+
+def test_the_why_line_carries_the_new_wording(monkeypatch):
+    m = _model_with_alert(monkeypatch, "yellow", ["gap-moved-sharply"],
+                          {"gap-moved-sharply": "0.55, about 1.7 times its usual "
+                                                "run-to-run move"})
+    why = next(w for w in m["why"] if w["topic"] == "alert")
+    assert "moved much more than it usually does" in why["text"]
+    assert "1.7 times its usual run-to-run move" in why["text"]
+
+
+def test_the_alert_ladder_explainer_no_longer_mentions_bands(monkeypatch):
+    m = _model_with_alert(monkeypatch, "green", [], {})
+    html = render_how_alert(m)
+    assert "gap band" not in html and "toward glut" not in html
+    assert "moved much more than it usually does" in html

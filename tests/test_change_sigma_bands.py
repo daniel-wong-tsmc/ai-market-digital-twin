@@ -125,9 +125,14 @@ def test_fold_semantics_shared_with_v1():
 
 
 def test_v1_ladder_untouched_by_stage4():
-    """The v1 path still renders until G4 — same signature, same quiet-green behavior."""
+    """The v1 path still renders until G4 — same quiet-green behavior.
+
+    F137 (2026-09-01) added a third return value (each fired rule's plain size clause) and
+    two keyword-only history arguments to _raw_alert; the v2 shadow engine below is
+    deliberately NOT touched by that change, which is what this test guards.
+    """
     from gpu_agent.change import StateVector
     cur = StateVector(asOf="2026-07-08", demand=0.1, supply=0.1, sdgi=0.1)
     prior = StateVector(asOf="2026-07-01", demand=0.1, supply=0.1, sdgi=0.1)
-    color, trig = _raw_alert(cur, prior, "2026-07-01", None)
-    assert color == "green" and trig == []
+    color, trig, sizes = _raw_alert(cur, prior, "2026-07-01", None)
+    assert color == "green" and trig == [] and sizes == {}

@@ -191,19 +191,20 @@ def render_category_page(model) -> str:
 
 _LADDER = [
     ("GREEN", "nothing on the watchlist moved this week"),
-    ("YELLOW", "one thing moved: the gap band changed, a high-confidence call moved, the "
-               "main limiting factor changed, or two calls moved together"),
+    ("YELLOW", "one thing moved: the demand-vs-supply gap moved much more than it usually "
+               "does, a high-confidence call moved, the main limiting factor changed, or "
+               "two calls moved together"),
     ("ORANGE", "two yellow-level things happened at once, a high-confidence call broke, or "
-               "demand worsened while the gap moved toward glut"),
-    ("RED", "a confirmed structural break: a high-confidence call broke AND the gap band "
-            "flipped in the same week"),
+               "buyers pulled back sharply while the shortage eased at the same time"),
+    ("RED", "a confirmed structural break: a high-confidence call broke AND the gap moved "
+            "much more than it usually does, in the same run"),
 ]
 
 
 def render_how_alert(model) -> str:
     a = model["alert"]
     ladder = "".join(f"<li><strong>{c}</strong>: {esc(d)}</li>" for c, d in _LADDER)
-    fired = ("".join(f"<li>{esc(rule_plain(t))}</li>" for t in a["triggers"])
+    fired = ("".join(f"<li>{esc(rule_plain(t, a.get('sizes')))}</li>" for t in a["triggers"])
              or "<li>none - no rule fired</li>")
     flap = ""
     if a["raw"] != a["color"]:

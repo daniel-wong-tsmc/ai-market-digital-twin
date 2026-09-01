@@ -22,7 +22,7 @@
       "howToRead": "Above zero: demand is outrunning supply. Below zero: supply is catching up.",
       "staticPriority": 2,
       "scale": 0.5,
-      "alertRuleTags": ["gap-band-changed"],
+      "alertRuleTags": ["gap-moved-sharply"],
       "honestyNote": "Early signal - about five weeks of history so far."
     },
     {

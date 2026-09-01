@@ -1,28 +1,28 @@
 # tests/test_change_alert_saturation.py
-"""F137 characterization — the saturated-band ceiling silently disables two alert rules.
+"""F137 — the saturated-band ceiling is gone from the alert ladder.
 
-These tests PIN THE CURRENT (broken) BEHAVIOUR so that the fix, when the user has
-chosen it, shows up as a deliberate, visible change here rather than as a silent
-drift. They assert nothing about what the rules SHOULD do.
+These started life (commit 5369831) as characterization tests pinning the BROKEN
+behaviour. The user chose the fix on 2026-09-01, so they now pin the repair: the same
+real-world moves that used to produce green must now speak, and the band words must no
+longer appear anywhere in the ladder's reasoning.
 
 Background. `bands.band_word` maps a value onto five words whose top band starts at
-0.30. The demand and gap numbers are running totals that have grown past 4.5 — every
-stored run since 2026-07-31 sits far above 0.30, so both values are pinned in the top
-band. Two ladder rules are defined purely in terms of that band:
+0.30 and has no upper edge. The demand and gap numbers are running totals that have
+grown past 4.5, so both were pinned in the top word. Two ladder rules were defined
+purely in terms of that word:
 
-  * `gap-band-changed`   fires when band_word(gap) differs from the prior run's.
-  * `demand-reversal`    fires when band_word(demand) RANKS LOWER than the prior run's
+  * `gap-band-changed`   fired when band_word(gap) differed from the prior run's.
+  * `demand-reversal`    fired when band_word(demand) RANKED LOWER than the prior run's
                          and the gap moved toward glut.
 
-Both are structurally unreachable once the two numbers are above the ceiling, no
-matter how large the underlying move is. F136 removed the same ceiling from the
-brief's headline demand/supply lines (see bands.change_line); the alert ladder still
-has it.
+Both were structurally unreachable, no matter how large the underlying move. F136 had
+already removed the same ceiling from the brief's headline demand/supply lines (see
+bands.change_line); this removes it from the alert ladder.
 """
 from __future__ import annotations
 import statistics
 
-from gpu_agent import bands
+from gpu_agent import bands, change
 from gpu_agent.change import StateVector, _raw_alert
 
 # Real values read off the stored scorecards (store/chips.merchant-gpu):
@@ -33,68 +33,95 @@ from gpu_agent.change import StateVector, _raw_alert
 LIVE_JUL, LIVE_AUG = (3.393, 4.107), (4.507, 4.600)
 BIG_DROP_FROM, BIG_DROP_TO = (4.407, 4.353), (3.833, 3.860)
 
+# A calm stretch of recent history at the live scale: runs about 0.20 apart, which is
+# the real median run-to-run gap move in August.
+CALM_GAP = [4.0, 4.2, 4.0, 4.2, 4.0, 4.2, 4.0, 4.2]
+CALM_DEM = [4.0, 4.1, 4.0, 4.1, 4.0, 4.1, 4.0, 4.1]
+
 
 def _st(demand, sdgi, *, constraint=None, as_of="2026-08"):
     return StateVector(asOf=as_of, demand=demand, supply=0.0, sdgi=sdgi,
                        constraintLabel=constraint)
 
 
-def test_every_stored_run_since_july_sits_in_the_top_band():
-    """The ceiling is not hypothetical: production values saturate both bands."""
+def test_every_stored_run_since_july_still_sits_in_the_top_band():
+    """The ceiling itself has not moved — bands.py is untouched, and it is still right
+    for the dashboard tiles and the appendix table. The ladder simply stopped using it."""
     for demand, gap in (LIVE_JUL, LIVE_AUG, BIG_DROP_FROM, BIG_DROP_TO):
         assert bands.band_word(demand) == "accelerating"
         assert bands.band_word(gap) == "accelerating"
 
 
-def test_gap_band_changed_cannot_fire_on_the_real_july_to_august_move():
-    """The gap rose 0.49 (4.107 -> 4.600) and the rule stayed silent."""
-    color, trig = _raw_alert(_st(*LIVE_AUG), _st(*LIVE_JUL, as_of="2026-07"),
-                             "2026-07", None)
-    assert "gap-band-changed" not in trig
-    assert color == "green"
+def test_the_ladder_no_longer_asks_a_band_question():
+    """The old mechanism is gone, not merely retuned: no band-word call survives in the
+    alert ladder, so no future value can saturate it back into silence."""
+    import inspect
+    src = inspect.getsource(change._raw_alert)
+    assert "band_word" not in src and "_band_rank" not in src
+    assert not hasattr(change, "_band_rank")
+    assert "gap-band-changed" not in change._YELLOW_RULES
 
 
-def test_gap_band_changed_cannot_fire_on_an_arbitrarily_large_move():
-    """Even a 4-point collapse in the gap leaves the rule silent, because both ends
-    of the move are still inside the one top band."""
-    _color, trig = _raw_alert(_st(9.0, 9.0), _st(9.0, 5.0, as_of="2026-07"),
-                             "2026-07", None)
-    assert "gap-band-changed" not in trig
+def test_the_real_july_to_august_gap_move_now_speaks():
+    """The gap rose 0.49 (4.107 -> 4.600). Under the band test this was green."""
+    color, trig, sizes = _raw_alert(_st(*LIVE_AUG), _st(*LIVE_JUL, as_of="2026-07"),
+                                    "2026-07", None,
+                                    gap_history=CALM_GAP + [LIVE_JUL[1]],
+                                    demand_history=CALM_DEM + [LIVE_JUL[0]])
+    assert color == "yellow" and "gap-moved-sharply" in trig
+    assert sizes["gap-moved-sharply"].startswith("0.49")
 
 
-def test_demand_reversal_cannot_fire_on_the_largest_recorded_demand_fall():
-    """Demand fell 0.574 and the gap fell 0.493 at the same time — exactly the
-    shape the rule was written to catch — and it stayed silent."""
-    color, trig = _raw_alert(_st(*BIG_DROP_TO), _st(*BIG_DROP_FROM, as_of="2026-07"),
-                             "2026-07", None)
-    assert "demand-reversal" not in trig
-    assert color == "green"
+def test_an_arbitrarily_large_gap_move_can_no_longer_hide_inside_one_band():
+    """A 4-point collapse used to leave the rule silent because both ends of the move
+    were still inside the one top word."""
+    _color, trig, _sizes = _raw_alert(_st(9.0, 5.0), _st(9.0, 9.0, as_of="2026-07"),
+                                      "2026-07", None,
+                                      gap_history=[9.0, 9.2, 9.0, 9.2, 9.0],
+                                      demand_history=[9.0] * 5)
+    assert "gap-moved-sharply" in trig
 
 
-def test_demand_reversal_needs_demand_to_fall_below_the_top_band_floor():
-    """Concretely: from today's 4.51, demand would have to lose more than 4.2 points
-    in one run — drop under 0.30 — before the rule can speak at all."""
+def test_the_largest_recorded_demand_fall_now_goes_orange():
+    """Demand fell 0.574 and the gap fell 0.493 at the same time — exactly the shape the
+    rule was written to catch. Under the band test this run was green."""
+    color, trig, sizes = _raw_alert(_st(*BIG_DROP_TO), _st(*BIG_DROP_FROM, as_of="2026-07"),
+                                    "2026-07", None,
+                                    gap_history=CALM_GAP + [BIG_DROP_FROM[1]],
+                                    demand_history=CALM_DEM + [BIG_DROP_FROM[0]])
+    assert color == "orange" and "demand-reversal" in trig
+    assert sizes["demand-reversal"].startswith("demand fell 0.57")
+
+
+def test_demand_no_longer_has_to_fall_4_points_to_be_heard():
+    """The old rule needed demand to drop under the 0.30 floor — from today's 4.51 that
+    is a fall of more than 4.2 in a single run, against a usual move of about 0.13."""
     today = 4.507
-    survives = [drop for drop in (0.5, 1.0, 2.0, 3.0, 4.0)
-                if bands.band_word(today - drop) == "accelerating"]
-    assert survives == [0.5, 1.0, 2.0, 3.0, 4.0]
-    assert bands.band_word(today - 4.3) != "accelerating"
+    assert all(bands.band_word(today - drop) == "accelerating"
+               for drop in (0.5, 1.0, 2.0, 3.0, 4.0))
+    # ...whereas the repaired rule hears a 0.30 fall against a calm history. (The run being
+    # compared against is the last value of the history: demand 4.1, gap 4.2.)
+    _c, trig, _s = _raw_alert(_st(CALM_DEM[-1] - 0.30, 4.10),
+                              _st(CALM_DEM[-1], CALM_GAP[-1], as_of="2026-07"),
+                              "2026-07", None,
+                              gap_history=CALM_GAP, demand_history=CALM_DEM)
+    assert "demand-reversal" in trig
 
 
-def test_the_two_dead_rules_are_the_only_featured_metric_alert_tags():
-    """Knock-on effect: registry/featured-metrics.json tags exactly these two rules,
-    so the dashboard's 'shown because it tracks today's alert' reason can never be
-    chosen either. Pinning the coupling so the fix has to consider it."""
+def test_the_featured_metric_tags_track_the_renamed_rule():
+    """registry/featured-metrics.json tags exactly the two repaired rules, so the
+    dashboard's 'shown because it tracks today's alert' reason is reachable again.
+    See tests/dashboard/test_featured.py for the render-level proof."""
     from gpu_agent.dashboard.featured import load_library
     tags = {t for m in load_library() for t in m["alertRuleTags"]}
-    assert tags == {"gap-band-changed", "demand-reversal"}
+    assert tags == {"gap-moved-sharply", "demand-reversal"}
 
 
-def test_existing_alert_tests_only_exercise_pre_drift_values():
-    """Why the suite never caught this: the ladder tests use values from before the
-    indices drifted (0.10 / 0.35 / -0.10), all of which straddle real band edges."""
+def test_the_old_pre_drift_fixtures_no_longer_stand_in_for_production():
+    """Why the suite missed this for a month: the ladder tests used 0.10 / 0.35 / -0.10,
+    values from before the indices drifted, all of which straddle real band edges.
+    Nothing in production has been below the top band since July."""
     assert bands.band_word(0.10) == "firm"
     assert bands.band_word(0.35) == "accelerating"
     assert bands.band_word(-0.10) == "softening"
-    # ...whereas nothing in production has been below the top band since July.
     assert min(statistics.mean(LIVE_JUL), statistics.mean(LIVE_AUG)) > 0.30

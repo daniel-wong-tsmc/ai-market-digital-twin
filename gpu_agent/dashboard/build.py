@@ -147,8 +147,11 @@ def build_model(category_id, store_dir, work_dir, plain_path, generated_at):
                           "sdgi": latest["sdgi"], "sdgi_direction": latest["sdgi_direction"]},
         "dimensions": dims, "runs": runs, "glossary_rows": glossary_rows,
         "slop_denylist": SLOP,
+        # F137: "sizes" carries each size-aware rule's plain measurement clause, so the
+        # page can say HOW MUCH the gap or demand moved instead of only "sharply".
         "alert": {"color": alert.color, "prior": alert.priorColor,
-                  "raw": alert.rawColor, "triggers": list(alert.triggers)},
+                  "raw": alert.rawColor, "triggers": list(alert.triggers),
+                  "sizes": dict(alert.triggerSizes)},
         "what_changed": what_changed,
     }
     return model, {"runs": len(recs), "claims": len(calls_raw), **counters}

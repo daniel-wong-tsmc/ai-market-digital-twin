@@ -6,6 +6,14 @@ from gpu_agent.thesis import ThesisBook, ThesisEntry
 from gpu_agent.change import (StateVector, AlertState, _raw_alert, _fold_displayed,
                               alert_state, build_state)
 
+# F137 (user-decided 2026-09-01): the gap and demand rules no longer compare band WORDS
+# (which saturate — see tests/test_change_alert_saturation.py). They compare each run's
+# move against how much the series usually moves, read from the recent history the
+# caller passes in. A calm history whose runs move about 0.10 apiece makes a 0.40 jump
+# "much more than usual" at any absolute level, which is the whole point.
+CALM = [0.00, 0.10, 0.00, 0.10, 0.00, 0.10, 0.00, 0.10]        # usual move ~0.10
+CALM_HIGH = [9.00, 9.10, 9.00, 9.10, 9.00, 9.10, 9.00, 9.10]   # same swing, huge level
+
 
 def _conf():
     return Confidence(level="medium", basis="b")
@@ -26,39 +34,71 @@ def _entry(eid="t1", conviction="high", status="registered", verdict="strengthen
 
 
 def test_green_when_nothing_moved():
-    color, trig = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", None)
+    color, trig, sizes = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", None)
+    assert color == "green" and trig == [] and sizes == {}
+
+
+def test_yellow_when_the_gap_moves_much_more_than_usual():
+    # history swings about 0.10 per run; this run jumps 0.50 off the last value (0.10).
+    color, trig, sizes = _raw_alert(_st(sdgi=0.60), _st(sdgi=0.10, as_of="2026-07-01"),
+                                    "2026-07-01", None, gap_history=CALM, demand_history=CALM)
+    assert color == "yellow" and "gap-moved-sharply" in trig
+    assert "0.50" in sizes["gap-moved-sharply"]
+    assert "times its usual run-to-run move" in sizes["gap-moved-sharply"]
+
+
+def test_the_gap_rule_works_the_same_at_any_level():
+    """F137's point: the old band test went silent once the numbers passed 0.30. The
+    same 0.50 jump on a series sitting at 9.0 must read exactly the same."""
+    _c, low, _s = _raw_alert(_st(sdgi=0.60), _st(sdgi=0.10, as_of="2026-07-01"),
+                             "2026-07-01", None, gap_history=CALM, demand_history=CALM)
+    _c, high, _s = _raw_alert(_st(sdgi=9.60), _st(sdgi=9.10, as_of="2026-07-01"),
+                              "2026-07-01", None, gap_history=CALM_HIGH,
+                              demand_history=CALM_HIGH)
+    assert "gap-moved-sharply" in low and "gap-moved-sharply" in high
+
+
+def test_an_ordinary_sized_gap_move_stays_quiet():
+    color, trig, _s = _raw_alert(_st(sdgi=0.20), _st(sdgi=0.10, as_of="2026-07-01"),
+                                 "2026-07-01", None, gap_history=CALM, demand_history=CALM)
     assert color == "green" and trig == []
 
 
-def test_yellow_on_gap_band_change():
-    # firm (0.10) -> accelerating (0.35) crosses a band edge
-    color, trig = _raw_alert(_st(sdgi=0.35), _st(sdgi=0.10, as_of="2026-07-01"),
-                             "2026-07-01", None)
-    assert color == "yellow" and "gap-band-changed" in trig
+def test_gap_rule_silent_until_there_is_enough_history():
+    """Fewer than four prior runs and the rule says nothing rather than guessing."""
+    _c, trig, _s = _raw_alert(_st(sdgi=5.0), _st(sdgi=0.10, as_of="2026-07-01"),
+                              "2026-07-01", None, gap_history=[0.0, 0.1, 0.0],
+                              demand_history=[0.0, 0.1, 0.0])
+    assert trig == []
+
+
+def test_gap_rule_silent_when_the_series_has_never_moved():
+    flat = [1.0] * 8
+    _c, trig, _s = _raw_alert(_st(sdgi=1.0), _st(sdgi=1.0, as_of="2026-07-01"),
+                              "2026-07-01", None, gap_history=flat, demand_history=flat)
+    assert trig == []
 
 
 def test_yellow_on_constraint_rotation():
-    color, trig = _raw_alert(_st(constraint="memory scarcity"),
-                             _st(constraint="export enforcement", as_of="2026-07-01"),
-                             "2026-07-01", None)
+    color, trig, _s = _raw_alert(_st(constraint="memory scarcity"),
+                                 _st(constraint="export enforcement", as_of="2026-07-01"),
+                                 "2026-07-01", None)
     assert color == "yellow" and "constraint-rotated" in trig
 
 
 def test_yellow_on_high_call_moved():
     book = ThesisBook(categoryId="c", entries=[_entry(changed="2026-07-05")])
-    color, trig = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", book)
+    color, trig, _s = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", book)
     assert color == "yellow" and "high-call-moved" in trig
 
 
 def test_reaffirmed_high_call_in_window_stays_green():
-    # USER-APPROVED 2026-07-12 (spec §4 governs): a plain reaffirmation re-stamps
-    # lastChangedAsOf without a real move — it must not fire high-call-moved/calls-co-move.
+    # USER-APPROVED 2026-07-12: "reaffirmed" re-stamps lastChangedAsOf without a real move,
+    # so a timestamp-only predicate would fire every day under daily cadence.
     book = ThesisBook(categoryId="c", entries=[
-        _entry(eid="t1", verdict="reaffirmed", direction=0, changed="2026-07-05"),
-        _entry(eid="t2", verdict="reaffirmed", direction=0, changed="2026-07-06")])
-    color, trig = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", book)
-    assert color == "green"
-    assert "high-call-moved" not in trig and "calls-co-move" not in trig
+        _entry(verdict="reaffirmed", direction=0, changed="2026-07-05")])
+    color, trig = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", book)[:2]
+    assert color == "green" and trig == []
 
 
 def test_yellow_on_high_call_challenged():
@@ -69,7 +109,7 @@ def test_yellow_on_high_call_challenged():
         update={"pendingChallenge": PendingChallenge(verdict="weakened", asOf="2026-07-05",
                                                      rationale="r", findingIds=[])})
     book = ThesisBook(categoryId="c", entries=[e])
-    color, trig = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", book)
+    color, trig, _s = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", book)
     assert color == "yellow" and "high-call-moved" in trig
 
 
@@ -79,44 +119,69 @@ def test_new_call_in_window_is_not_an_alert_trigger():
     e = _entry(verdict=None, direction=0, changed="2026-07-05").model_copy(
         update={"createdAsOf": "2026-07-05"})
     book = ThesisBook(categoryId="c", entries=[e])
-    color, trig = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", book)
+    color, trig, _s = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", book)
     assert color == "green" and trig == []
 
 
 def test_two_yellow_rules_escalate_orange():
-    color, trig = _raw_alert(_st(sdgi=0.35, constraint="memory"),
-                             _st(sdgi=0.10, constraint="export", as_of="2026-07-01"),
-                             "2026-07-01", None)
+    color, trig, _s = _raw_alert(_st(sdgi=0.60, constraint="memory"),
+                                 _st(sdgi=0.10, constraint="export", as_of="2026-07-01"),
+                                 "2026-07-01", None, gap_history=CALM, demand_history=CALM)
     assert color == "orange"
-    assert {"gap-band-changed", "constraint-rotated"} <= set(trig)
+    assert {"gap-moved-sharply", "constraint-rotated"} <= set(trig)
 
 
 def test_orange_on_high_break():
     book = ThesisBook(categoryId="c", entries=[
         _entry(status="retired", verdict="broken", changed="2026-07-06")])
-    color, trig = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", book)
+    color, trig, _s = _raw_alert(_st(), _st(as_of="2026-07-01"), "2026-07-01", book)
     assert color == "orange" and "high-call-broke" in trig
 
 
 def test_orange_on_asymmetric_demand_reversal():
-    # demand band worsens (firm 0.10 -> softening -0.10) AND sdgi slides toward glut
-    # WITHIN the same band (0.28 -> 0.10, both "firm") so no other rule fires.
-    color, trig = _raw_alert(_st(demand=-0.10, sdgi=0.10),
-                             _st(demand=0.10, sdgi=0.28, as_of="2026-07-01"),
-                             "2026-07-01", None)
+    """Demand falls further than it usually moves AND the gap falls with it. The gap's
+    own fall is ordinary-sized here, so the gap rule stays quiet and demand-reversal
+    escalates to orange on its own."""
+    dem_hist = [4.0, 4.1, 4.0, 4.1, 4.0, 4.1, 4.0, 4.1]      # usual move ~0.10
+    gap_hist = [4.0, 4.2, 4.0, 4.2, 4.0, 4.2, 4.0, 4.2]      # usual move ~0.20
+    color, trig, sizes = _raw_alert(_st(demand=3.80, sdgi=4.10),
+                                    _st(demand=4.10, sdgi=4.20, as_of="2026-07-01"),
+                                    "2026-07-01", None,
+                                    gap_history=gap_hist, demand_history=dem_hist)
     assert color == "orange" and trig == ["demand-reversal"]
+    assert sizes["demand-reversal"].startswith("demand fell 0.30")
 
 
-def test_red_on_break_plus_gap_band_flip():
+def test_demand_reversal_needs_the_gap_to_fall_too():
+    dem_hist = [4.0, 4.1, 4.0, 4.1, 4.0, 4.1, 4.0, 4.1]
+    gap_hist = [4.0, 4.2, 4.0, 4.2, 4.0, 4.2, 4.0, 4.2]
+    color, trig, _s = _raw_alert(_st(demand=3.80, sdgi=4.25),   # gap ROSE
+                                 _st(demand=4.10, sdgi=4.20, as_of="2026-07-01"),
+                                 "2026-07-01", None,
+                                 gap_history=gap_hist, demand_history=dem_hist)
+    assert "demand-reversal" not in trig and color == "green"
+
+
+def test_demand_rising_never_fires_the_reversal_rule():
+    dem_hist = [4.0, 4.1, 4.0, 4.1, 4.0, 4.1, 4.0, 4.1]
+    gap_hist = [4.0, 4.2, 4.0, 4.2, 4.0, 4.2, 4.0, 4.2]
+    _c, trig, _s = _raw_alert(_st(demand=4.50, sdgi=4.10),
+                              _st(demand=4.10, sdgi=4.20, as_of="2026-07-01"),
+                              "2026-07-01", None,
+                              gap_history=gap_hist, demand_history=dem_hist)
+    assert "demand-reversal" not in trig
+
+
+def test_red_on_break_plus_sharp_gap_move():
     book = ThesisBook(categoryId="c", entries=[
         _entry(status="retired", verdict="broken", changed="2026-07-06")])
-    color, trig = _raw_alert(_st(sdgi=-0.35), _st(sdgi=0.10, as_of="2026-07-01"),
-                             "2026-07-01", book)
-    assert color == "red"
+    color, trig, _s = _raw_alert(_st(sdgi=-0.60), _st(sdgi=0.10, as_of="2026-07-01"),
+                                 "2026-07-01", book, gap_history=CALM, demand_history=CALM)
+    assert color == "red" and "gap-moved-sharply" in trig
 
 
 def test_no_prior_run_is_green():
-    color, trig = _raw_alert(_st(), None, None, None)
+    color, trig, _s = _raw_alert(_st(), None, None, None)
     assert color == "green"
 
 
@@ -145,3 +210,4 @@ def test_alert_state_walk_deterministic(tmp_path):
     b = alert_state(tmp_path, today)
     assert a == b
     assert a.color == "green" and a.priorColor == "green" and a.rawColor == "green"
+    assert a.triggerSizes == {}
