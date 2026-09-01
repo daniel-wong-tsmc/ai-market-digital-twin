@@ -1,0 +1,43 @@
+{
+  "id": "www-investing-com-17df6d69-2026-09-1",
+  "statement": "China's CXMT has begun small-batch production of HBM3E, one generation behind SK Hynix, Samsung and Micron, with broader commercial availability targeted for 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A fourth HBM source, even a lagging one, starts to relieve the memory bottleneck that currently caps how many accelerators the industry can build.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.ai-silicon-startups",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "New domestic HBM output, initially tiny and yield-constrained, adds an additional memory source for China-market accelerators and over time nibbles at the three-supplier bottleneck."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com",
+      "url": "https://www.investing.com/news/stock-market-news/china-memory-leader-cxmt-begins-smallbatch-production-of-hbm3e-silicon--report-4882862",
+      "date": "2026-08-31",
+      "excerpt": "CXMT has begun low-volume production of HBM3E chips, currently one generation behind global leaders SK Hynix, Samsung, and Micron",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying a report; low yields and equipment sanctions are stated headwinds, and no company confirmation was fetched."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: Investing.com, Investing.com (citing Herald Economy)",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

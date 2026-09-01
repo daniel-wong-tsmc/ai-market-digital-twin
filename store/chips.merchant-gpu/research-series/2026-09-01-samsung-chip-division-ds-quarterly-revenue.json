@@ -1,0 +1,35 @@
+{
+  "seriesName": "Samsung chip division (DS) quarterly revenue",
+  "unit": "KRW trillions",
+  "form": "columns",
+  "sourceName": "Samsung Semiconductor Global Newsroom",
+  "points": [
+    {
+      "label": "Q3 2025",
+      "value": 33.1,
+      "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-third-quarter-2025-results/",
+      "publishedAt": "2025-10-30"
+    },
+    {
+      "label": "Q4 2025",
+      "value": 44.0,
+      "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-fourth-quarter-and-fy-2025-results/",
+      "publishedAt": "2026-01-29"
+    },
+    {
+      "label": "Q1 2026",
+      "value": 81.7,
+      "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-first-quarter-2026-results/",
+      "publishedAt": "2026-04-30"
+    },
+    {
+      "label": "Q2 2026",
+      "value": 127.5,
+      "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-second-quarter-2026-results/",
+      "publishedAt": "2026-07-30"
+    }
+  ],
+  "pair": false,
+  "notes": "These are Samsung's own reported, actual (not forecast) quarterly results for its Device Solutions division, which houses the memory business; each figure is quoted verbatim from Samsung's earnings release, e.g. 'The DS Division posted KRW 127.5 trillion in consolidated revenue and KRW 89.2 trillion in operating profit for the second quarter.' Honest caveats: the series measures the whole chip division (memory plus foundry and system LSI), not memory alone, because Samsung does not break out a memory-only revenue number in these releases; and it shows how hard memory demand and pricing have run, which is the backdrop to customers locking in long-term supply -- it does not itself measure the 70% contracted-capacity claim or anything about 2031. Samsung's releases attribute the jump to record memory revenue amid 'limited supply availability' and industry-wide price increases. Sourced entirely from one site (news.samsungsemiconductor.com); Samsung's main newsroom (news.samsung.com) repeatedly timed out for automated readers, so the semiconductor newsroom mirror was used instead.",
+  "bulletIndex": 1
+}

@@ -1,0 +1,42 @@
+{
+  "id": "www-investing-com-17df6d69-2026-09-3",
+  "statement": "CXMT's Shanghai IPO raised $8.6 billion, funding further memory capacity expansion by the world's fourth-largest DRAM maker.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Fresh capital of this size is what turns a small-batch HBM line into meaningful bit supply a few years out.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "IPO proceeds fund memory capex, which eventually adds DRAM and HBM bits to a market where supply is the binding constraint on accelerator output."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com",
+      "url": "https://www.investing.com/news/stock-market-news/china-memory-leader-cxmt-begins-smallbatch-production-of-hbm3e-silicon--report-4882862",
+      "date": "2026-08-31",
+      "excerpt": "CXMT's IPO in Shanghai raised $8.6 billion",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet reporting company financial context; the article does not state how proceeds are allocated, so the capacity link is inference."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: Investing.com, Investing.com (citing Herald Economy)",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -122,6 +122,7 @@
   "QUICK",
   "RED",
   "MERCHANT",
-  "DAILY"
+  "DAILY",
+  "CXMT"
  ]
 }

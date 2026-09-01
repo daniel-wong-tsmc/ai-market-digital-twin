@@ -1,0 +1,35 @@
+{
+  "seriesName": "SK hynix quarterly revenue",
+  "unit": "trillion Korean won",
+  "form": "columns",
+  "sourceName": "SK hynix Newsroom",
+  "points": [
+    {
+      "label": "3Q25",
+      "value": 24.4489,
+      "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
+      "publishedAt": "2025-10-29"
+    },
+    {
+      "label": "4Q25",
+      "value": 32.8267,
+      "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
+      "publishedAt": "2026-01-28"
+    },
+    {
+      "label": "1Q26",
+      "value": 52.5763,
+      "sourceUrl": "https://news.skhynix.com/en/q1-2026-business-results/",
+      "publishedAt": "2026-04-23"
+    },
+    {
+      "label": "2Q26",
+      "value": 79.3187,
+      "sourceUrl": "https://news.skhynix.com/en/q2-2026-business-results/",
+      "publishedAt": "2026-07-29"
+    }
+  ],
+  "pair": false,
+  "notes": "All four figures are reported revenue taken from SK hynix's own quarterly results announcements on its newsroom site (one page per quarter, same site throughout). The 4Q25 point comes from the FY25 results page, which reports both the fourth quarter and the full year; the value here is the fourth quarter alone. These are actual reported results, not forecasts. They contextualize the bullet by showing how fast SK hynix's revenue has grown during the memory shortage that its CEO says could last through 2030 - the backdrop to the 54.3 trillion won (about $38.3 billion) investment plan through 2031. The series does not itself measure investment, capacity, or shortage; it is the revenue trend behind that spending decision. Won figures are as published and have not been converted to dollars.",
+  "bulletIndex": 2
+}

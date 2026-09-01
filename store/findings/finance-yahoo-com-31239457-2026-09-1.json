@@ -1,0 +1,44 @@
+{
+  "id": "finance-yahoo-com-31239457-2026-09-1",
+  "statement": "Samsung has locked up about 70% of its memory capacity under long-term agreements with customers including Microsoft, Nvidia and Google, with the agreements running through 2031.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Capacity committed under multi-year contracts to a handful of very large buyers is not available to the merchant market, so the pool of uncommitted HBM and DRAM supply keeps shrinking for everyone else.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Long-term agreements pre-allocate the majority of one of the three HBM suppliers' output to a few hyperscale and GPU customers, leaving smaller accelerator and cloud buyers dependent on a thin, expensive spot pool."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (24/7 Wall St. syndication)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html",
+      "date": "2026-08-31",
+      "excerpt": "70% of its memory capacity",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet (syndicated 24/7 Wall St. piece on Yahoo Finance); no Samsung filing or company statement fetched to corroborate the 70% figure."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "samsung",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

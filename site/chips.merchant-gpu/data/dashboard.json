@@ -1,140 +1,134 @@
 {
-  "asOf": "2026-08-31",
+  "asOf": "2026-09-01",
   "bullets": [
     {
+      "chart": {
+        "caption": "Found today — single source: Samsung Semiconductor Global Newsroom.",
+        "form": "columns",
+        "points": [
+          {
+            "hollow": false,
+            "label": "Q3 2025",
+            "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-third-quarter-2025-results/",
+            "value": 33.1
+          },
+          {
+            "hollow": false,
+            "label": "Q4 2025",
+            "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-fourth-quarter-and-fy-2025-results/",
+            "value": 44.0
+          },
+          {
+            "hollow": false,
+            "label": "Q1 2026",
+            "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-first-quarter-2026-results/",
+            "value": 81.7
+          },
+          {
+            "hollow": false,
+            "label": "Q2 2026",
+            "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-second-quarter-2026-results/",
+            "value": 127.5
+          }
+        ],
+        "researched": true,
+        "source": {
+          "date": "2026-07-30",
+          "outlet": "Samsung Semiconductor Global Newsroom",
+          "tier": "secondary",
+          "title": "Samsung chip division (DS) quarterly revenue",
+          "url": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-second-quarter-2026-results/"
+        },
+        "title": "Samsung chip division (DS) quarterly revenue",
+        "unit": "KRW trillions"
+      },
+      "date": "2026-09-01",
+      "noChartReason": null,
+      "sources": [
+        {
+          "date": "2026-08-31",
+          "outlet": "Yahoo Finance (24/7 Wall St. syndication)",
+          "tier": "secondary",
+          "title": "Yahoo Finance (24/7 Wall St. syndication)",
+          "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html"
+        }
+      ],
+      "storyHref": "story/2026-09-01.html",
+      "text": "Samsung has locked about 70% of its memory capacity into long-term contracts running through 2031, leaving little uncommitted supply for new buyers."
+    },
+    {
+      "chart": {
+        "caption": "Found today — single source: SK hynix Newsroom.",
+        "form": "columns",
+        "points": [
+          {
+            "hollow": false,
+            "label": "3Q25",
+            "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
+            "value": 24.4489
+          },
+          {
+            "hollow": false,
+            "label": "4Q25",
+            "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
+            "value": 32.8267
+          },
+          {
+            "hollow": false,
+            "label": "1Q26",
+            "sourceUrl": "https://news.skhynix.com/en/q1-2026-business-results/",
+            "value": 52.5763
+          },
+          {
+            "hollow": false,
+            "label": "2Q26",
+            "sourceUrl": "https://news.skhynix.com/en/q2-2026-business-results/",
+            "value": 79.3187
+          }
+        ],
+        "researched": true,
+        "source": {
+          "date": "2026-07-29",
+          "outlet": "SK hynix Newsroom",
+          "tier": "secondary",
+          "title": "SK hynix quarterly revenue",
+          "url": "https://news.skhynix.com/en/q2-2026-business-results/"
+        },
+        "title": "SK hynix quarterly revenue",
+        "unit": "trillion Korean won"
+      },
+      "date": "2026-09-01",
+      "noChartReason": null,
+      "sources": [
+        {
+          "date": "2026-08-31",
+          "outlet": "Yahoo Finance (24/7 Wall St. syndication)",
+          "tier": "secondary",
+          "title": "Yahoo Finance (24/7 Wall St. syndication)",
+          "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html"
+        }
+      ],
+      "storyHref": "story/2026-09-01.html",
+      "text": "SK Hynix committed $38.3 billion of investment through 2031, and its chief executive says the memory shortage could persist through 2030."
+    },
+    {
       "chart": null,
-      "date": "2026-08-31",
+      "date": "2026-09-01",
       "noChartReason": {
-        "cause": "estimate-only",
-        "reason": "The number we track for this is our own estimate, not a published figure, so we don't draw it."
+        "cause": "no-published-number",
+        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
       },
       "sources": [
         {
-          "date": "2026-08-29",
-          "outlet": "The Motley Fool",
+          "date": "2026-08-31",
+          "outlet": "Investing.com",
           "tier": "secondary",
-          "title": "The Motley Fool",
-          "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
+          "title": "Investing.com",
+          "url": "https://www.investing.com/news/stock-market-news/china-memory-leader-cxmt-begins-smallbatch-production-of-hbm3e-silicon--report-4882862"
         }
       ],
-      "storyHref": "story/2026-08-31.html",
-      "text": "NVIDIA more than doubled its long-term supply commitments to $279 billion from $119 billion three months earlier, mostly to secure memory for its next chip."
-    },
-    {
-      "chart": {
-        "caption": "Found today — single source: NVIDIA Newsroom (company press releases).",
-        "form": "columns",
-        "points": [
-          {
-            "hollow": false,
-            "label": "Q2 FY2026",
-            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2026",
-            "value": 56.0
-          },
-          {
-            "hollow": false,
-            "label": "Q3 FY2026",
-            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2026",
-            "value": 62.0
-          },
-          {
-            "hollow": false,
-            "label": "Q4 FY2026",
-            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
-            "value": 73.0
-          },
-          {
-            "hollow": false,
-            "label": "Q1 FY2027",
-            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027",
-            "value": 85.0
-          },
-          {
-            "hollow": false,
-            "label": "Q2 FY2027",
-            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027",
-            "value": 106.0
-          }
-        ],
-        "researched": true,
-        "source": {
-          "date": "2026-08-26",
-          "outlet": "NVIDIA Newsroom (company press releases)",
-          "tier": "secondary",
-          "title": "NVIDIA quarterly revenue growth, year-over-year",
-          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
-        },
-        "title": "NVIDIA quarterly revenue growth, year-over-year",
-        "unit": "percent year-over-year"
-      },
-      "date": "2026-08-31",
-      "noChartReason": null,
-      "sources": [
-        {
-          "date": "2026-08-29",
-          "outlet": "The Motley Fool",
-          "tier": "secondary",
-          "title": "The Motley Fool",
-          "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
-        }
-      ],
-      "storyHref": "story/2026-08-31.html",
-      "text": "NVIDIA guided next fiscal year to 70% revenue growth while its finance chief said customer forecasts implied roughly 140%, blaming memory supply for the gap."
-    },
-    {
-      "chart": {
-        "caption": "Found today — single source: Marvell Technology, Inc. (Investor Relations press releases).",
-        "form": "columns",
-        "points": [
-          {
-            "hollow": false,
-            "label": "Q3 FY2026 (three months ended Nov 1, 2025)",
-            "sourceUrl": "https://investor.marvell.com/news-events/press-releases/detail/999/marvell-technology-inc-reports-third-quarter-of-fiscal-year-2026-financial-results",
-            "value": 1517.9
-          },
-          {
-            "hollow": false,
-            "label": "Q4 FY2026",
-            "sourceUrl": "https://investor.marvell.com/news-events/press-releases/detail/1011/marvell-technology-inc-reports-fourth-quarter-and-fiscal-year-2026-financial-results",
-            "value": 1651.3
-          },
-          {
-            "hollow": false,
-            "label": "Q1 FY2027 (three months ended May 2, 2026)",
-            "sourceUrl": "https://investor.marvell.com/news-events/press-releases/detail/1023/marvell-technology-inc-reports-first-quarter-of-fiscal-year-2027-financial-results",
-            "value": 1832.7
-          },
-          {
-            "hollow": false,
-            "label": "Q2 FY2027",
-            "sourceUrl": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results",
-            "value": 2171.5
-          }
-        ],
-        "researched": true,
-        "source": {
-          "date": "2026-08-27",
-          "outlet": "Marvell Technology, Inc. (Investor Relations press releases)",
-          "tier": "secondary",
-          "title": "Marvell Data Center segment quarterly revenue",
-          "url": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results"
-        },
-        "title": "Marvell Data Center segment quarterly revenue",
-        "unit": "US$ millions"
-      },
-      "date": "2026-08-31",
-      "noChartReason": null,
-      "sources": [
-        {
-          "date": "2026-08-27",
-          "outlet": "Marvell Technology Investor Relations",
-          "tier": "secondary",
-          "title": "Marvell Technology Investor Relations",
-          "url": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results"
-        }
-      ],
-      "storyHref": "story/2026-08-31.html",
-      "text": "Marvell raised its fiscal 2028 revenue outlook to about $18 billion from $16.5 billion, expecting its custom chip business to more than double."
+      "storyHref": "story/2026-09-01.html",
+      "text": "China's CXMT began small-batch production of HBM3E memory, one generation behind the three big suppliers, with wider commercial supply targeted for 2027."
     }
   ],
   "categoryId": "chips.merchant-gpu",
@@ -143,6 +137,13 @@
       "confidence": "Medium — the underlying reports are single-source in places.",
       "direction": "worsening",
       "evidence": [
+        {
+          "date": "2026-08-26",
+          "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+          "tier": "secondary",
+          "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+          "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
+        },
         {
           "date": "2026-08-07",
           "outlet": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
@@ -156,20 +157,13 @@
           "tier": "secondary",
           "title": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
           "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994"
-        },
-        {
-          "date": "2026-08-26",
-          "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
-          "tier": "secondary",
-          "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
-          "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
         }
       ],
       "id": "bottleneck",
       "plainName": "What is holding shipments back",
       "ratingWord": "Weak",
-      "reasoning": "Advanced packaging moved the other way over the same period, with the shortfall narrowing from about 20% in late 2025 to about 10% in mid-2026.",
-      "summary": "Memory sets the limit: suppliers can cover only 60% to 70% of the volume requested for the coming NVIDIA generation, Micron says it can ship about half of what customers ask and calls memory the number one constraint, and NVIDIA says it has supply for about 70% of demand.",
+      "reasoning": "Packaging has eased to about a 10% shortfall and HBM4 yields near 80%, so memory now holds the line rather than the packaging line.",
+      "summary": "NVIDIA says it can supply roughly 70% of demand, its memory suppliers cover only 60-70% of requested HBM for the 2027 flagship, and Micron can commit about half of what customers ask for, which forced memory cuts on Rubin Ultra.",
       "tone": "bad"
     },
     {
@@ -191,18 +185,18 @@
           "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
         },
         {
-          "date": "2026-08-26",
-          "outlet": "NVIDIA Newsroom",
-          "tier": "primary",
-          "title": "NVIDIA Newsroom",
-          "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai"
+          "date": "2026-08-25",
+          "outlet": "24/7 Wall St.",
+          "tier": "secondary",
+          "title": "24/7 Wall St.",
+          "url": "https://247wallst.com/investing/2026/08/25/coreweaves-ai-data-center-capacity-is-exploding-its-35-billion-debt-load-still-makes-the-stock-untouchable/"
         }
       ],
       "id": "momentum",
       "plainName": "How hard buyers are buying",
       "ratingWord": "Very strong",
-      "reasoning": "Buyer commitments keep building behind that: CoreWeave backlog stands at $104.2 billion, and Amazon added a further multi-million accelerator order on top of an earlier one-million commitment it says demand had already passed.",
-      "summary": "NVIDIA data center revenue reached $89.0 billion in the quarter to July, up 117% year over year, with the next quarter guided to $108.0 billion, and AMD data center revenue more than doubled to $6.7 billion.",
+      "reasoning": "Booked demand keeps building, with CoreWeave's backlog at $104.2 billion, even as US cloud server procurement growth slows to 1.7% sequentially in the third quarter.",
+      "summary": "NVIDIA data-centre revenue reached $89.0 billion, up 117% year over year, with the next quarter guided to $108 billion, and AMD's data-centre segment more than doubled to $6.7 billion.",
       "tone": "good"
     },
     {
@@ -218,24 +212,24 @@
         },
         {
           "date": "2026-07-23",
-          "outlet": "StorageReview",
-          "tier": "secondary",
-          "title": "StorageReview",
-          "url": "https://www.storagereview.com/news/amd-mi455x-and-helios-432gb-hbm4-72-gpu-racks-and-a-real-answer-to-vera-rubin"
+          "outlet": "Intel Corporation (IR press release)",
+          "tier": "primary",
+          "title": "Intel Corporation (IR press release)",
+          "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
         },
         {
-          "date": "2026-08-26",
-          "outlet": "TrendForce",
-          "tier": "secondary",
-          "title": "TrendForce",
-          "url": "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/"
+          "date": "2026-08-31",
+          "outlet": "NVIDIA Newsroom (official press release)",
+          "tier": "primary",
+          "title": "NVIDIA Newsroom (official press release)",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms"
         }
       ],
       "id": "competitiveStructure",
       "plainName": "Whether buyers have a second choice",
       "ratingWord": "Mixed",
-      "reasoning": "Large buyers are also adding their own parts: OpenAI unveiled a first inference chip built with Broadcom, and Google added Marvell-designed inference accelerators alongside its existing in-house program.",
-      "summary": "AMD now has a production rack-scale system with Anthropic committed to up to 2 gigawatts and Microsoft, Meta, OpenAI and Oracle named as adopters, so a second merchant supplier is real this cycle.",
+      "reasoning": "Buyers hold more credible second sources than a year ago, which erodes the seller's grip on allocation and price.",
+      "summary": "AMD moved its Helios rack into production, Intel Foundry grew 31% on better yields, and OpenAI, Google and MediaTek each advanced custom accelerators.",
       "tone": "mixed"
     },
     {
@@ -243,38 +237,45 @@
       "direction": "worsening",
       "evidence": [
         {
-          "date": "2026-08-05",
-          "outlet": "Yahoo Finance",
-          "tier": "secondary",
-          "title": "Yahoo Finance",
-          "url": "https://finance.yahoo.com/technology/article/amd-tops-q2-earnings-estimates-and-provides-strong-outlook-but-leaves-investors-unimpressed-110000620.html"
-        },
-        {
-          "date": "2026-07-13",
-          "outlet": "Foreign Affairs Forum (faf.ae)",
-          "tier": "secondary",
-          "title": "Foreign Affairs Forum (faf.ae)",
-          "url": "https://www.faf.ae/home/2026/7/13/silicons-new-sovereignty-how-nvidias-asic-gambit-is-redrawing-the-map-of-global-ai-power"
-        },
-        {
           "date": "2026-07-24",
           "outlet": "Silicon Analysts",
           "tier": "secondary",
           "title": "Silicon Analysts",
           "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026"
+        },
+        {
+          "date": "2026-05-21",
+          "outlet": "Tom's Hardware custom AI ASIC state of play",
+          "tier": "secondary",
+          "title": "Tom's Hardware custom AI ASIC state of play",
+          "url": "https://www.tomshardware.com/tech-industry/semiconductors/custom-ai-asics-examined-from-broadcom-to-mtia"
+        },
+        {
+          "date": "2026-06-29",
+          "outlet": "TechTimes / Network World",
+          "tier": "secondary",
+          "title": "TechTimes / Network World",
+          "url": "https://www.techtimes.com/articles/319338/20260629/amd-helios-faces-nvidia-vera-rubin-july-23-keynote-memory-leads-training-trails.htm"
         }
       ],
       "id": "moat",
       "plainName": "How safe NVIDIA's lead looks",
       "ratingWord": "Weak",
-      "reasoning": "Buyers keep funding substitutes: custom parts from the large clouds are reported to consume about two-thirds of compute, MediaTek raised its share target to 15-20%, and Anthropic is in early talks with Samsung about a chip of its own.",
-      "summary": "Share estimates for NVIDIA run from roughly 70% to as high as 90% depending on the measure, and the projections point down, to about 75% for 2026.",
+      "reasoning": "Networking attach and rack bundling still bind buyers in, yet they slow the share leak rather than stop it.",
+      "summary": "Share estimates place NVIDIA between 70% and 90% depending on the measure, with the projected path falling from 87% in 2024 toward 75% in 2026 while custom silicon already consumes about two-thirds of AI compute.",
       "tone": "bad"
     },
     {
       "confidence": "High — drawn from company filings and calls.",
       "direction": "worsening",
       "evidence": [
+        {
+          "date": "2026-08-04",
+          "outlet": "AMD Investor Relations",
+          "tier": "primary",
+          "title": "AMD Investor Relations",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
+        },
         {
           "date": "2026-08-12",
           "outlet": "AMD Investor Relations",
@@ -283,25 +284,18 @@
           "url": "https://ir.amd.com/news-events/press-releases"
         },
         {
-          "date": "2026-08-26",
-          "outlet": "BigGo Finance (citing NVIDIA Q2 FY2027 earnings call)",
-          "tier": "secondary",
-          "title": "BigGo Finance (citing NVIDIA Q2 FY2027 earnings call)",
-          "url": "https://finance.biggo.com/news/US_NVDA_2026-08-26"
-        },
-        {
-          "date": "2026-08-29",
-          "outlet": "The Motley Fool",
-          "tier": "secondary",
-          "title": "The Motley Fool",
-          "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
+          "date": "2026-07-23",
+          "outlet": "Intel Corporation Investor Relations (intc.com)",
+          "tier": "primary",
+          "title": "Intel Corporation Investor Relations (intc.com)",
+          "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
         }
       ],
       "id": "unitEconomics",
       "plainName": "How profitable the sellers are",
       "ratingWord": "Strong",
-      "reasoning": "AMD held adjusted gross margin at 56% and TSMC reported 67.7%, so vendor margins stay high and the trend from here is down.",
-      "summary": "NVIDIA still earns about 74% gross margin this quarter, but it has told investors memory costs push the floor to 71-72% next quarter and into the low 70s by the end of fiscal 2027.",
+      "reasoning": "Memory costs now push NVIDIA toward a 71-72% floor by the fourth quarter, which trims the level while leaving it far above the rest of the chain.",
+      "summary": "NVIDIA still earns about 74% gross margin, AMD holds 56% non-GAAP, Intel improved to 41.8%, and TSMC posted 67.7%.",
       "tone": "good"
     },
     {
@@ -323,18 +317,18 @@
           "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
         },
         {
-          "date": "2026-08-15",
-          "outlet": "Yahoo Finance (Reuters)",
-          "tier": "secondary",
-          "title": "Yahoo Finance (Reuters)",
-          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-scales-back-250-billion-234356524.html"
+          "date": "2026-08-10",
+          "outlet": "NVIDIA Newsroom / investor.nvidia.com (official press release)",
+          "tier": "primary",
+          "title": "NVIDIA Newsroom / investor.nvidia.com (official press release)",
+          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Partners-With-Apollo-BlackRock-Blackstone-Brookfield-Goldman-Sachs-and-KKR-to-Establish-AI-Compute-Infrastructure-Financing-Platforms-to-Mobilize-Over-500-Billion-of-Third-Party-Capital/default.aspx"
         }
       ],
       "id": "strategicRisk",
       "plainName": "What could go wrong",
       "ratingWord": "Mixed",
-      "reasoning": "Policy exposure remains unresolved: Taiwan indicted nine people over allegedly diverted servers, tariffs covering finished data center hardware are being drafted with no rate or date set, and NVIDIA assumes no China compute revenue in its outlook.",
-      "summary": "NVIDIA cut its guarantee for the Ohio campus from a proposed $250 billion to under $120 billion and, per reporting it denies, paused some deals under a financing program carrying $36 billion of commitments, while three direct customers made up 21%, 17% and 16% of its revenue.",
+      "reasoning": "Taiwan prosecutors indicted nine people over diverted servers, China contributes nothing to guidance, and Washington is drafting tariffs that would reach finished servers.",
+      "summary": "NVIDIA cut its guarantee on the Ohio campus from $250 billion to under $120 billion, its largest backed demand tranche rests on loss-making OpenAI, and three direct customers supply over half of revenue.",
       "tone": "mixed"
     }
   ],
@@ -365,7 +359,7 @@
       "date": "2026-08-01",
       "label": "Widest gap so far"
     },
-    "caption": "The gap widened in the latest reading. Demand and supply are each reading's own reported momentum score, not a raw shipment count. Some points are a single day's reading; others are a whole month's figure, placed at the start of that month.",
+    "caption": "The gap narrowed in the latest reading. Demand and supply are each reading's own reported momentum score, not a raw shipment count. Some points are a single day's reading; others are a whole month's figure, placed at the start of that month.",
     "points": [
       {
         "date": "2026-06-01",
@@ -401,6 +395,11 @@
         "date": "2026-08-01",
         "demand": 4.506666666666668,
         "supply": -0.0933333333333333
+      },
+      {
+        "date": "2026-09-01",
+        "demand": 4.540000000000003,
+        "supply": 0.3066666666666666
       }
     ],
     "sources": [
@@ -422,11 +421,11 @@
             "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
           },
           {
-            "date": "2026-08-26",
-            "outlet": "NVIDIA Newsroom",
+            "date": "2026-07-23",
+            "outlet": "Intel Corporation (IR press release)",
             "tier": "primary",
-            "title": "NVIDIA Newsroom",
-            "url": "https://nvidianews.nvidia.com/news/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai"
+            "title": "Intel Corporation (IR press release)",
+            "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
           }
         ]
       }
@@ -435,8 +434,8 @@
   "issues": {
     "open": [
       {
-        "assessedAsOf": "2026-08-31",
-        "checkCount": 10,
+        "assessedAsOf": "2026-09-01",
+        "checkCount": 11,
         "history": [
           {
             "asOf": "2026-08-19",
@@ -477,27 +476,31 @@
           {
             "asOf": "2026-08-31",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-01",
+            "status": "worsened"
           }
         ],
         "id": "dim-bottleneck",
-        "reasoning": "NVIDIA more than doubled supply commitments to $279 billion, mainly for memory, and still says memory cannot cover full customer demand. It guided next fiscal year to 70% growth against customer forecasts implying roughly 140%.",
+        "reasoning": "Samsung has committed about 70% of its memory capacity under contracts running to 2031, and SK Hynix's chief executive says the shortage could last through 2030. The new Indiana plant does not produce until 2029.",
         "sources": [
           {
-            "date": "2026-08-29",
-            "outlet": "The Motley Fool",
+            "date": "2026-08-31",
+            "outlet": "Yahoo Finance (24/7 Wall St. syndication)",
             "tier": "secondary",
-            "title": "The Motley Fool",
-            "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
+            "title": "Yahoo Finance (24/7 Wall St. syndication)",
+            "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html"
           }
         ],
         "status": "worsened",
         "title": "Bottleneck",
         "trackedSince": "2026-08",
-        "worsenedCount": 8
+        "worsenedCount": 9
       },
       {
-        "assessedAsOf": "2026-08-31",
-        "checkCount": 10,
+        "assessedAsOf": "2026-09-01",
+        "checkCount": 11,
         "history": [
           {
             "asOf": "2026-08-19",
@@ -538,27 +541,38 @@
           {
             "asOf": "2026-08-31",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-01",
+            "status": "worsened"
           }
         ],
         "id": "dim-moat",
-        "reasoning": "Marvell, which designs custom chips for large cloud buyers, raised its fiscal 2028 outlook to about $18 billion from $16.5 billion and expects its custom business to more than double, with data centre revenue already up 46% to $2.171 billion.",
+        "reasoning": "AMD Instinct MI355X systems went live in production at HUMAIN, with up to 250 megawatts planned from 2027. Separately, Alibaba's chip arm and Cambricon are testing Chinese memory for their own processors.",
         "sources": [
           {
-            "date": "2026-08-27",
-            "outlet": "Marvell Technology Investor Relations",
+            "date": "2026-08-31",
+            "outlet": "AMD Investor Relations",
+            "tier": "primary",
+            "title": "AMD Investor Relations",
+            "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live"
+          },
+          {
+            "date": "2026-08-31",
+            "outlet": "Investing.com",
             "tier": "secondary",
-            "title": "Marvell Technology Investor Relations",
-            "url": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results"
+            "title": "Investing.com",
+            "url": "https://www.investing.com/news/stock-market-news/china-memory-leader-cxmt-begins-smallbatch-production-of-hbm3e-silicon--report-4882862"
           }
         ],
         "status": "worsened",
         "title": "Moat",
         "trackedSince": "2026-08",
-        "worsenedCount": 5
+        "worsenedCount": 6
       },
       {
-        "assessedAsOf": "2026-08-31",
-        "checkCount": 9,
+        "assessedAsOf": "2026-09-01",
+        "checkCount": 10,
         "history": [
           {
             "asOf": "2026-08-21",
@@ -595,34 +609,31 @@
           {
             "asOf": "2026-08-31",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-01",
+            "status": "worsened"
           }
         ],
         "id": "constraint-stacked-memory-and-server-dram",
-        "reasoning": "NVIDIA's $279 billion of commitments is chiefly high-bandwidth and server memory, and supply is described as unable to cover full demand. Separately, about 80% of Micron's Taiwan union members back strike action, with mediation still pending.",
+        "reasoning": "About 70% of Samsung's capacity is now tied up to 2031, and spot high-bandwidth memory trades at roughly four to five times the contract price, showing how little supply is left uncommitted.",
         "sources": [
           {
-            "date": "2026-08-29",
-            "outlet": "The Motley Fool",
+            "date": "2026-08-31",
+            "outlet": "Yahoo Finance (24/7 Wall St. syndication)",
             "tier": "secondary",
-            "title": "The Motley Fool",
-            "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
-          },
-          {
-            "date": "2026-08-29",
-            "outlet": "TechNews (finance.technews.tw)",
-            "tier": "secondary",
-            "title": "TechNews (finance.technews.tw)",
-            "url": "https://finance.technews.tw/2026/08/29/ipp/"
+            "title": "Yahoo Finance (24/7 Wall St. syndication)",
+            "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html"
           }
         ],
         "status": "worsened",
         "title": "HBM4 and server DRAM supply",
         "trackedSince": "2026-08",
-        "worsenedCount": 5
+        "worsenedCount": 6
       },
       {
-        "assessedAsOf": "2026-08-31",
-        "checkCount": 7,
+        "assessedAsOf": "2026-09-01",
+        "checkCount": 8,
         "history": [
           {
             "asOf": "2026-08-23",
@@ -651,47 +662,51 @@
           {
             "asOf": "2026-08-31",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-09-01",
+            "status": "worsened"
           }
         ],
         "id": "constraint-hbm4-memory-allocation-per-accelerator",
-        "reasoning": "No new evidence arrived today on how much memory goes into each chip. The latest word remains the August 26 report that Samsung and SK hynix are shifting NVIDIA's main memory to 8-high stacks and cutting 12-high output.",
+        "reasoning": "NVIDIA's revived Rubin CPX carries 168 GB of HBM4 in place of 128 GB of ordinary graphics memory, and is due to enter production in the first quarter of 2027, adding another claim on scarce memory.",
         "sources": [
           {
-            "date": "2026-08-26",
-            "outlet": "ZDNet Korea",
+            "date": "2026-08-31",
+            "outlet": "Investing.com (citing TF International Securities analyst Ming-Chi Kuo)",
             "tier": "secondary",
-            "title": "ZDNet Korea",
-            "url": "https://zdnet.co.kr/view/?no=20260826094826"
+            "title": "Investing.com (citing TF International Securities analyst Ming-Chi Kuo)",
+            "url": "https://www.investing.com/news/stock-market-news/nvidia-revives-rubin-cpx-chip-program-with-2027-launch-planned-analyst-says-93CH-4882972"
           }
         ],
-        "status": "unchanged",
+        "status": "worsened",
         "title": "stacked memory supply",
         "trackedSince": "2026-08",
-        "worsenedCount": 1
+        "worsenedCount": 2
       }
     ],
     "resolved": []
   },
   "schemaVersion": "1.2",
   "verdict": {
-    "answer": "Not yet. NVIDIA puts $279 billion on the table to buy memory",
+    "answer": "Getting closer. The memory is already sold, some of it through 2031",
     "chip": {
-      "direction": "widening",
-      "label": "Gap widening"
+      "direction": "narrowing",
+      "label": "Gap narrowing"
     },
     "confidence": "We are confident in this read",
     "question": "Is supply catching up to demand?",
-    "soWhat": "The company more than doubled what it has promised to pay suppliers, mostly for memory, and still tells investors it can only plan on half the growth its customers are asking for.",
+    "soWhat": "Samsung has tied up about 70% of its memory output in long-term contracts, one rival says the shortage may run to 2030, and the new plants being built will not make a chip until 2029.",
     "sources": [
       {
         "assessment": true,
         "basedOn": [
           {
-            "date": "2026-08-29",
-            "outlet": "The Motley Fool",
+            "date": "2026-08-31",
+            "outlet": "Yahoo Finance (24/7 Wall St. syndication)",
             "tier": "secondary",
-            "title": "The Motley Fool",
-            "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
+            "title": "Yahoo Finance (24/7 Wall St. syndication)",
+            "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html"
           }
         ]
       }

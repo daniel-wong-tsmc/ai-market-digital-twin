@@ -22,6 +22,13 @@
       "firstSeenUrl": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
     },
     {
+      "domain": "marklapedus.substack.com",
+      "kind": "blocks-plain-readers",
+      "since": "2026-09-01",
+      "why": "learned automatically: the verifier's plain reader was turned away (HTTP 401/403/429)",
+      "firstSeenUrl": "https://marklapedus.substack.com/p/sk-hynix-lead-shrinks-in-dram-hbm"
+    },
+    {
       "domain": "mbiz.heraldcorp.com",
       "kind": "blocks-plain-readers",
       "since": "2026-08-30",

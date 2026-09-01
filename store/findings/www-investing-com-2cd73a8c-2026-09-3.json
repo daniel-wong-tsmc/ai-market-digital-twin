@@ -1,0 +1,44 @@
+{
+  "id": "www-investing-com-2cd73a8c-2026-09-3",
+  "statement": "The revived CPX is reported to carry a maximum power rating of 2,300 watts and to require a separate MGX ETL rack configuration.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "Per-accelerator power at this level forces liquid cooling and new rack power design, which pulls spending into the electrical and cooling supply chain.",
+  "impact": {
+    "targets": [
+      "energy.cooling",
+      "energy.electrical-equipment",
+      "infrastructure.datacenter-colo",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher per-part power ratings and a dedicated rack format increase demand for advanced cooling and electrical distribution per deployed accelerator."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (citing TF International Securities analyst Ming-Chi Kuo)",
+      "url": "https://www.investing.com/news/stock-market-news/nvidia-revives-rubin-cpx-chip-program-with-2027-launch-planned-analyst-says-93CH-4882972",
+      "date": "2026-08-31",
+      "excerpt": "a maximum power rating of 2,300 watts",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "Power and rack details come from the same unconfirmed analyst note about a 2027 part; the infrastructure pull follows logically but depends on the product actually shipping as described.",
+  "confidence": {
+    "level": "low",
+    "basis": "Unconfirmed specification for an unreleased product from a single analyst note."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 1; sources: Investing.com (citing TF International Securities analyst Ming-Chi Kuo), Investing.com earnings call transcript (NVIDIA Q2 FY2027 earnings call)",
+  "asOf": "2026-09",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

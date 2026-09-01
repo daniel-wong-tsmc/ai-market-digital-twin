@@ -1,0 +1,45 @@
+{
+  "id": "www-runpod-io-0f8e6327-2026-09-1",
+  "statement": "RunPod lists Secure Cloud on-demand B300 (288 GB HBM3e) at $7.89 per GPU-hour.",
+  "kind": "measured",
+  "value": {
+    "number": 7.89,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "The top listed tier shows what the newest rentable part costs a buyer today.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Static rental level with no stated baseline or change; carried as a display overlay only, not as a demand or supply signal."
+  },
+  "evidence": [
+    {
+      "source": "RunPod",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-09-01",
+      "excerpt": "B300 '288 GB HBM3e' $7.89/hr",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own published Secure Cloud price page; list rate, not transacted, and community/spot tier was not broken out in the fetch."
+  },
+  "dispersion": "conflicting same-key reports: value 1.59 -> 7.89 (tol 1%); sources: RunPod",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-09-01",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

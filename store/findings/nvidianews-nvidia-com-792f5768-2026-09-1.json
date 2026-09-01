@@ -1,0 +1,47 @@
+{
+  "id": "nvidianews-nvidia-com-792f5768-2026-09-1",
+  "statement": "NVIDIA has invested $3.5 billion in convertible bonds issued by MediaTek as part of a deepened custom-silicon partnership.",
+  "kind": "measured",
+  "value": {
+    "number": 3.5,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "NVIDIA is putting balance-sheet money behind a partner that builds custom accelerators, which shapes where non-NVIDIA silicon gets designed and whose fabric it attaches to.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.eda-ip",
+      "chips.networking-silicon"
+    ],
+    "direction": "mixed",
+    "mechanism": "Capital plus NVLink Fusion licensing pulls MediaTek's custom XPU work into NVIDIA's fabric, expanding alternative accelerator supply while keeping the interconnect and memory attach inside NVIDIA's ecosystem."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom (official press release)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms",
+      "date": "2026-08-31",
+      "excerpt": "NVIDIA has also invested $3.5 billion in convertible bonds issued by MediaTek.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: NVIDIA's official newsroom release states the $3.5 billion figure verbatim. The larger '$3.9B total deal' figure circulating in trade press was not found in the official text and is excluded."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

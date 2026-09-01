@@ -1,0 +1,42 @@
+{
+  "id": "www-investing-com-2cd73a8c-2026-09-2",
+  "statement": "The revived Rubin CPX is reported to carry 168 GB of HBM4, replacing the 128 GB of GDDR7 in the earlier CPX design.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "falling",
+  "why": "Swapping commodity graphics memory for HBM on a high-volume inference part pulls yet more scarce HBM into NVIDIA's bill of materials.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Moving a SKU from GDDR7 to HBM4 raises HBM content per shipped accelerator, tightening an already constrained memory supply if the reported specification holds."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (citing TF International Securities analyst Ming-Chi Kuo)",
+      "url": "https://www.investing.com/news/stock-market-news/nvidia-revives-rubin-cpx-chip-program-with-2027-launch-planned-analyst-says-93CH-4882972",
+      "date": "2026-08-31",
+      "excerpt": "168 GB of HBM4, compared to 288 GB on Rubin and 128 GB of GDDR7 in the earlier CPX version.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The memory change is described in an analyst note about an unreleased 2027 part; volumes are unknown, so the supply effect is a directional inference, not a measured draw on HBM bits.",
+  "confidence": {
+    "level": "low",
+    "basis": "Unconfirmed specification for an unreleased product from a single analyst note; no unit volumes stated."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

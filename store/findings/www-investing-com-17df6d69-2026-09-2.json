@@ -1,0 +1,43 @@
+{
+  "id": "www-investing-com-17df6d69-2026-09-2",
+  "statement": "Alibaba's T-Head and Cambricon are testing CXMT's HBM3E with plans to put it into commercial processors as early as next year.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "If Chinese accelerator designers can source domestic HBM, one of the last hard dependencies on Western-controlled supply weakens, and so does the pull for imported merchant GPUs.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "negative",
+    "mechanism": "A domestic memory path for Chinese accelerators substitutes local silicon for export-controlled merchant GPUs, trimming addressable China demand for the incumbent vendors."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com",
+      "url": "https://www.investing.com/news/stock-market-news/china-memory-leader-cxmt-begins-smallbatch-production-of-hbm3e-silicon--report-4882862",
+      "date": "2026-08-31",
+      "excerpt": "Domestic chip designers including Alibaba Group's T-Head unit and Cambricon Technologies are actively testing CXMT's HBM3E silicon, with plans to integrate the memory into commercial processors as early as next year.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; qualification stage only, with commercial integration stated as a plan rather than a shipment."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

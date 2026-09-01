@@ -1,0 +1,44 @@
+{
+  "id": "www-investing-com-fac86e4e-2026-09-4",
+  "statement": "NVIDIA claims Vera Rubin delivers 35x lower token cost than Grace Blackwell Ultra.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Cheaper tokens make more applications economic, which historically drives total inference volume up faster than price comes down.",
+  "impact": {
+    "targets": [
+      "models.reasoning-agentic",
+      "applications.ai-coding",
+      "applications.agent-platforms",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "A large drop in cost per token expands the set of workloads that clear their economics, raising token volume and, with it, aggregate accelerator demand."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com earnings call transcript (NVIDIA Q2 FY2027 earnings call)",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-nvidia-beats-q2-2026-estimates-as-ai-demand-stays-hot-93CH-4878028",
+      "date": "2026-08-26",
+      "excerpt": "delivering 30x higher throughput per megawatt and 35x lower token cost relative to Grace Blackwell Ultra",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor claim relayed in a third-party transcript; relative multiple with no stated workload, price point or independent verification."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "tokenEconomics",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

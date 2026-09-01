@@ -1,0 +1,208 @@
+{
+  "headline": "The memory is already sold, some of it through 2031",
+  "deck": "Samsung has tied up about 70% of its memory output in long-term contracts, one rival says the shortage may run to 2030, and the new plants being built will not make a chip until 2029.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Booked years ahead, before anyone new can order",
+      "paragraphs": [
+        "Samsung has locked about 70% of its memory capacity into long-term agreements with customers including Microsoft, NVIDIA and Google, and those agreements run through 2031. That is the clearest single reason supply is not catching up: most of what the factories will make for years is already promised.",
+        "What is left over is priced like a scarce good. Spot high-bandwidth memory sells for roughly four to five times the price paid under long-term contracts, which tells you how thin the uncommitted supply really is.",
+        "The people making it do not expect a quick fix. SK Hynix has committed $38.3 billion of investment through 2031, including a $4 billion memory packaging plant in Indiana that is meant to start production in 2029, and its chief executive says the shortage could last through 2030."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "finance-yahoo-com-31239457-2026-09-1",
+        "finance-yahoo-com-31239457-2026-09-2",
+        "finance-yahoo-com-31239457-2026-09-3"
+      ],
+      "sourceLine": "Yahoo Finance, carrying 24/7 Wall St., August 31.",
+      "relatedDocs": [
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html",
+          "title": "The memory shortage is not close to over",
+          "outlet": "Yahoo Finance (24/7 Wall St. syndication)",
+          "date": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "A new supplier arrives, one step behind",
+      "paragraphs": [
+        "China's CXMT has begun small-batch production of HBM3E, the memory generation before the one NVIDIA's newest chips want. It sits one generation behind SK Hynix, Samsung and Micron, and wider commercial supply is not targeted until 2027. Its Shanghai share sale raised $8.6 billion to pay for more capacity.",
+        "The early customers are not the big Western buyers. Alibaba's chip arm and Cambricon are testing the parts, with plans to put them into commercial processors as soon as next year.",
+        "So the near-term arithmetic does not change much. At an August 10 industry forum, Micron said it can supply no more than about half of what customers ask for, called memory the number one limit its largest customers face, and said it has no line of sight to when supply meets demand."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-investing-com-17df6d69-2026-09-1",
+        "www-investing-com-17df6d69-2026-09-2",
+        "www-investing-com-17df6d69-2026-09-3",
+        "www-investing-com-87498f82-2026-08-1"
+      ],
+      "sourceLine": "Investing.com, August 31, and a transcript of Micron's August 10 technology forum.",
+      "relatedDocs": [
+        {
+          "url": "https://www.investing.com/news/stock-market-news/china-memory-leader-cxmt-begins-smallbatch-production-of-hbm3e-silicon--report-4882862",
+          "title": "CXMT begins small-batch production of HBM3E",
+          "outlet": "Investing.com",
+          "date": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Meanwhile the queue for memory keeps growing",
+      "paragraphs": [
+        "NVIDIA has revived its Rubin CPX chip, with production expected to start in the first quarter of 2027. The revived design carries 168 GB of high-bandwidth memory in place of the 128 GB of ordinary graphics memory in the earlier version. That is one more product pulling on the part that is already short.",
+        "The buying side is spreading, too. NVIDIA put $3.5 billion into convertible bonds issued by MediaTek, and MediaTek will build its custom chips on NVIDIA's own connection technology. In Saudi Arabia, AMD Instinct MI355X systems went live in production at HUMAIN, with AMD, Cisco and HUMAIN planning up to 250 megawatts from 2027 and up to a gigawatt by 2030.",
+        "None of that adds a single memory stack. It adds claimants."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "www-investing-com-2cd73a8c-2026-09-1",
+        "www-investing-com-2cd73a8c-2026-09-2",
+        "nvidianews-nvidia-com-792f5768-2026-09-1",
+        "nvidianews-nvidia-com-792f5768-2026-09-2",
+        "ir-amd-com-5a9dfeb6-2026-09-1",
+        "ir-amd-com-5a9dfeb6-2026-09-2"
+      ],
+      "sourceLine": "Investing.com, August 31; NVIDIA's newsroom, August 31; AMD investor relations, August 31.",
+      "relatedDocs": [
+        {
+          "url": "https://www.investing.com/news/stock-market-news/nvidia-revives-rubin-cpx-chip-program-with-2027-launch-planned-analyst-says-93CH-4882972",
+          "title": "NVIDIA revives the Rubin CPX chip for a 2027 launch",
+          "outlet": "Investing.com (citing TF International Securities analyst Ming-Chi Kuo)",
+          "date": "2026-08-31"
+        },
+        {
+          "url": "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms",
+          "title": "NVIDIA and MediaTek deepen their partnership",
+          "outlet": "NVIDIA Newsroom (official press release)",
+          "date": "2026-08-31"
+        },
+        {
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live",
+          "title": "AMD, Cisco and HUMAIN expand Saudi Arabia's AI build-out",
+          "outlet": "AMD Investor Relations",
+          "date": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Watch the gap between spot and contract memory prices. While uncommitted memory still trades at four to five times the contracted price, nothing has loosened, whatever anyone announces.",
+        "Then watch three dates. CXMT is aiming at wider commercial supply in 2027, and whether Alibaba's chip arm and Cambricon actually ship processors using it will show if a fourth supplier is real. NVIDIA's revived Rubin CPX is due to enter production in the first quarter of 2027, which will test whether the memory can be found for yet another design. And SK Hynix's Indiana plant is scheduled to produce in 2029, a reminder of how long the honest fix takes."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "finance-yahoo-com-31239457-2026-09-2",
+        "finance-yahoo-com-31239457-2026-09-3",
+        "www-investing-com-17df6d69-2026-09-1",
+        "www-investing-com-17df6d69-2026-09-2",
+        "www-investing-com-2cd73a8c-2026-09-1"
+      ],
+      "sourceLine": "Yahoo Finance, August 31; Investing.com, August 31.",
+      "relatedDocs": []
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Shows how hard the memory makers are spending to add capacity, the only durable way out of a shortage that is booked out to 2031.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Shows how fast AI servers are really leaving the factories, the honest test of whether new commitments turn into shipped machines.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-09",
+      "text": "Samsung's memory is about 70% committed under contracts running to 2031, and spot supply costs four to five times the contract price.",
+      "scene": 1
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Samsung has locked about 70% of its memory capacity into long-term contracts running through 2031, leaving little uncommitted supply for new buyers.",
+      "claimFindingIds": [
+        "finance-yahoo-com-31239457-2026-09-1"
+      ]
+    },
+    {
+      "text": "SK Hynix committed $38.3 billion of investment through 2031, and its chief executive says the memory shortage could persist through 2030.",
+      "claimFindingIds": [
+        "finance-yahoo-com-31239457-2026-09-3"
+      ]
+    },
+    {
+      "text": "China's CXMT began small-batch production of HBM3E memory, one generation behind the three big suppliers, with wider commercial supply targeted for 2027.",
+      "claimFindingIds": [
+        "www-investing-com-17df6d69-2026-09-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "Samsung has committed about 70% of its memory capacity under contracts running to 2031, and SK Hynix's chief executive says the shortage could last through 2030. The new Indiana plant does not produce until 2029.",
+      "claimFindingIds": [
+        "finance-yahoo-com-31239457-2026-09-1",
+        "finance-yahoo-com-31239457-2026-09-3"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "AMD Instinct MI355X systems went live in production at HUMAIN, with up to 250 megawatts planned from 2027. Separately, Alibaba's chip arm and Cambricon are testing Chinese memory for their own processors.",
+      "claimFindingIds": [
+        "ir-amd-com-5a9dfeb6-2026-09-1",
+        "ir-amd-com-5a9dfeb6-2026-09-2",
+        "www-investing-com-17df6d69-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "worsened",
+      "reasoning": "About 70% of Samsung's capacity is now tied up to 2031, and spot high-bandwidth memory trades at roughly four to five times the contract price, showing how little supply is left uncommitted.",
+      "claimFindingIds": [
+        "finance-yahoo-com-31239457-2026-09-1",
+        "finance-yahoo-com-31239457-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "worsened",
+      "reasoning": "NVIDIA's revived Rubin CPX carries 168 GB of HBM4 in place of 128 GB of ordinary graphics memory, and is due to enter production in the first quarter of 2027, adding another claim on scarce memory.",
+      "claimFindingIds": [
+        "www-investing-com-2cd73a8c-2026-09-2",
+        "www-investing-com-2cd73a8c-2026-09-1"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-01",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "4b0b6b378cc169391ba01cb99dfd7a54f3521665929203993e1274be37eb6b92",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-09-01T01:35:50.907775+00:00"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "id": "www-investing-com-fac86e4e-2026-09-1",
+  "statement": "NVIDIA's CFO said the revenue opportunity per gigawatt of AI data-center capacity rises to about $40 billion with Vera Rubin, up from $25 billion with Blackwell and roughly $18 billion before.",
+  "kind": "measured",
+  "value": {
+    "number": 40.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "This is the clearest statement of how much NVIDIA content sits inside each gigawatt built, and it is rising fast generation over generation.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "A higher revenue-per-gigawatt figure means each unit of new power capacity converts into materially more NVIDIA data-center revenue, raising the revenue ceiling for a given buildout pace."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com earnings call transcript (NVIDIA Q2 FY2027 earnings call)",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-nvidia-beats-q2-2026-estimates-as-ai-demand-stays-hot-93CH-4878028",
+      "date": "2026-08-26",
+      "excerpt": "our revenue opportunity has grown from roughly $18 billion per gigawatt to $25 billion with Blackwell, to $40 billion with Vera Rubin.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Third-party transcript of an official earnings call rather than a filed document; the underlying event is anchored to NVIDIA's 8-K of the same date, but the quoted figure was not verified against the primary filing text."
+  },
+  "dispersion": "Roughly $18B per gigawatt historically, $25B with Grace Blackwell, $40B with Vera Rubin.",
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

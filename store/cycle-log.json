@@ -1,9 +1,9 @@
 {
  "scope": "category:chips.merchant-gpu",
- "asOf": "2026-08",
+ "asOf": "2026-09",
  "mode": "daily",
- "capturedAt": "2026-08-30T16:04:18Z",
- "runDir": "work/daily-2026-08-31",
+ "capturedAt": "2026-09-01T01:08:44Z",
+ "runDir": "work/daily-2026-09-01",
  "unattended": true,
  "stages": [
   {
@@ -25,135 +25,114 @@
    "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
    "status": "done",
    "manifestRef": "manifests/chips.merchant-gpu.json",
-   "scorecard": "store/chips.merchant-gpu/2026-08-v17.json",
-   "dmi": 4.507,
-   "smi": -0.093,
-   "priorScorecard": "store/chips.merchant-gpu/2026-08-v16.json",
-   "priorDmi": 3.94,
-   "priorSmi": -0.107,
+   "scorecard": "store/chips.merchant-gpu/2026-09-v1.json",
+   "dmi": 4.54,
+   "smi": 0.307,
+   "priorScorecard": "store/chips.merchant-gpu/2026-08-v17.json",
+   "priorDmi": 4.507,
+   "priorSmi": -0.093,
    "observations": [
-    "DMI moved +0.567 (3.940 -> 4.507) and SDGI +0.553 in one daily cycle while all six dimension ratings render 'same' and the report's WHAT MOVED block says nothing cleared the materiality bar. The move is therefore at the indicator/score level beneath unchanged ratings. Not investigated in a headless run; flagged for the user to read against the v16 -> v17 diff."
+    "First cycle of the 2026-09 analysis month (v1). SMI swung -0.093 -> +0.307; DMI +0.033. Month-rollover effects also visible in the thesis stage: a large promotion wave (35 theses promoted to registered at the 30-days-judged bar).",
+    "chart-fetch FETCHED amdDataCenterRevenue (3 new points) with staleCalendar empty, where the 2026-08-31 handoff predicted 'staleCalendar: [amdDataCenterRevenue]' (manifest earningsDates amd=2026-08-04, past its window). Either the manifest gained a fresh date or the F131 window logic behaves differently than the handoff expected - worth a human read, not changed here."
    ],
    "gather": {
     "documentsGathered": 10,
-    "primary": 1,
-    "secondary": 9,
+    "primary": 3,
+    "secondary": 7,
     "duplicates": 0,
     "dropped": [],
     "droppedKnown": 0,
     "droppedKnownDetail": [],
     "rounds": 1,
-    "cap": "maxDocuments=10 (daily cap) budgeted 4/3/3 across 3 round-1 web-gatherer subagents -> 10 blobs, cap reached at the end of round 1; round 2 not run (maxRounds=2, 1 used; maxSubagentsPerRound=3, 3 used). gather-assemble found 0 duplicate URLs. L1 dropped 0 as already-seen (gatherers were handed the 246-URL seen list up front).",
+    "cap": "maxDocuments=10 (daily cap) budgeted 4/4/2 across 3 round-1 web-gatherer subagents -> 10 blobs, cap reached at end of round 1; round 2 not run (maxRounds=2, 1 used; maxSubagentsPerRound=3, 3 used). gather-assemble found 0 duplicate URLs; L1 dropped 0 as already-seen.",
     "topUp": true,
-    "topUpReason": "store coverage present (436 findings aged in, 93 faded, notCovered EMPTY) -> gather capped at 10 and aimed at material updates rather than re-derived ground",
-    "earningsWindow": "gather_priority printed 'heavy' for nvda-earnings, nvda-10k-risk-factors AND amd-earnings on 2026-08-31. NVIDIA reported 2026-08-26 (5d, inside +/-7d) so 'heavy' is right; AMD reported 2026-08-04 (27d) yet the code also said 'heavy' - a discrepancy with the manifest's earningsDates worth a look, not changed here. Filing budget went to NVIDIA: the investor.nvidia.com Q2 FY2027 release mirror (the nvidianews copy and the 10-Q were already in the seen list). The SEC-hosted CFO commentary returned HTTP 403. No AMD or Intel filing/IR item dated 2026-08-24+ was found; AMD's ROCm 10 newsroom post was the only in-window AMD official item.",
+    "topUpReason": "store coverage present (402 findings aged in, 144 faded; notCovered: D6, gpuSpotPrice) -> gather capped at 10; price slice (2 docs) aimed squarely at the D6/gpuSpotPrice gap",
+    "earningsWindow": "gather_priority on 2026-09-01: nvda-earnings + nvda-10k-risk-factors 'heavy' (NVIDIA reported 2026-08-26, 6d, inside +/-7d), amd-earnings 'light', intc-earnings 'normal'. Filing budget went to NVIDIA: official MediaTek press release (nvidianews) + Q2 FY2027 8-K (sec.gov); AMD's official item this window was the ir.amd.com AMD/Cisco/HUMAIN release.",
     "skipped": [
-     "round 2 not run: maxDocuments=10 (daily cap) reached at end of round 1; unchased leads recorded in gather notes (SEC CFO commentary q2fy27cfocommentary.htm HTTP 403; Samsung 8-high HBM4 NVHBM story; Marvell/Google custom-chip remarks; WSJ NVIDIA/OpenAI $250B guarantee downsizing from last30days leads)",
+     "round 2 not run: maxDocuments=10 (daily cap) reached at end of round 1; unchased leads: MediaTek's own investor release on the $3.5B convertible bond; investor.nvidia.com official transcript page (Investing.com transcript used); Cisco newsroom JV framing; guru3d/techpowerup SK Hynix-denial articles (HTTP 403); fresh Intel GPU news slice",
      "expectedSource trendforce-gpu-tracker not fetched: manifest is_paywalled=true (licensed-api) - logged as coverage gap, never fetched",
      "expectedSource semianalysis not fetched: manifest is_paywalled=true (licensed-api) - logged as coverage gap, never fetched",
-     "intc-earnings: no Intel official item dated 2026-08-24 or later found; nothing written for Intel this cycle",
-     "no BIS / Federal Register rule dated 2026-08-24 or later found on bis.gov/news-updates; the reported China remote-access rule remains a DRAFT with no primary text; not blobbed",
-     "price-class fetch slot (1 allowed) unused: no new GPU-class rental listing dated 2026-08-24+ found; rental prices pulled deterministically at run-cycle step 7 (price-pull, 879 rows)",
-     "market-share-pct: no open-web share note dated 2026-08-24 or later from an allowed publisher; slot used for OpenAI ARR/IPO instead",
-     "primary pages unreachable (HTTP 403 / paywalled body): sec.gov q2fy27cfocommentary.htm, tomshardware.com (Vera Rubin, Micron strike), wccftech.com (Micron strike), qz.com (draft remote-access rule) - secondary accounts used and flagged inside each blob",
-     "web-reach runner: agent-reach read (Jina) of the tomshardware.com Micron page returned a 707-byte block page; crawl4ai crawl of the same URL FAILED with a cp1252 'charmap' UnicodeEncodeError inside the runner (a tooling bug, not a page problem) - blob 21 was re-sourced from finance.technews.tw instead",
-     "last30days discovery ran (Reddit 4 / HN 4 / GitHub 4; X + YouTube unavailable on this machine): its leads were WSJ/Bloomberg/CNBC pages already covered or paywalled; none chased within the cap"
+     "vast.ai spot pricing not captured: prices render only via interactive JS, not reachable by WebFetch text extraction; RunPod Secure Cloud rates captured as the marketplace substitute",
+     "last30days discovery skipped (AFK-default): HuggingNews leads + earnings-window seeds + price slice already oversubscribed the 10-doc budget (same call as the 2026-08-31 fire)"
     ],
-    "pursuedDespiteAge": [
-     {
-      "ref": "https://www.fool.com/investing/2026/08/27/openai-is-reportedly-targeting-an-ipo-debut-above/ (blob 32)",
-      "date": "2026-08-27",
-      "ageDays": 4,
-      "reason": "page is in-window but its $40B ARR figure restates Bloomberg reporting of 2026-08-13/14 (17d), unrevised - recorded so the age of the underlying number is not silent"
-     }
-    ],
-    "huggingnews": "step 2c ran: one webreach-fetch request (verb 'latest', tag 'ai-compute-chips', keyed) returned 17 stories dated 2026-08-28..30, handed to gatherer B as a LEAD SOURCE ONLY (read by the gatherer, not the coordinator). No huggingnews story was ingested as a blob.",
+    "pursuedDespiteAge": [],
     "huggingnewsFallback": [],
-    "last30days": "step 2b ran (10s): Reddit 4 threads / HN 4 stories / GitHub 4 results; X and YouTube unavailable on this machine. Leads were Bloomberg/CNBC/WSJ pages already covered or paywalled; none chased within the cap. Its brief was NOT ingested."
+    "licensedSources": []
    },
-   "webReach": {
-    "note": "web-reach-ensure --json --unattended run at preflight; no install or upgrade attempted. agent-reach doctor --json also run. All 4 registry tools healthy, no drift: agent-reach 1.5.0, last30days skill-present, crawl4ai 0.9.0, huggingnews api-skill-v0.0.2 (keyed). Runner use this cycle: huggingnews latest OK; agent-reach read (Jina) of a tomshardware.com page returned a 707-byte block page; crawl4ai crawl of the same URL FAILED inside the runner with a cp1252 'charmap' UnicodeEncodeError (character U+1F92F) - a tooling bug in the runner's output handling, not a page problem. Needs a fix (webreach-fetch should write tool output as UTF-8).",
-    "driftAny": false,
-    "unattended": true,
-    "nonRegistryChannels": "agent-reach doctor reported github/twitter 'warn' and youtube/reddit/facebook/instagram 'off'; none used by this category's gather."
-   },
-   "licensedSourcesFetched": [],
-   "answers": {
-    "extract": "work/daily-2026-08-31/extract-answer.json",
-    "judge": "work/daily-2026-08-31/judge-answer.json",
-    "judgeSamples": [
-     "work/daily-2026-08-31/judge-answer-1.json",
-     "work/daily-2026-08-31/judge-answer-2.json",
-     "work/daily-2026-08-31/judge-answer-3.json"
-    ],
-    "thesis": "work/daily-2026-08-31/thesis-answer.json",
-    "implication": "work/daily-2026-08-31/implication-answer.json",
-    "narrator": "work/daily-2026-08-31/narrator-answer.json"
-   },
-   "corpusArtifacts": {
-    "coverage": "work/daily-2026-08-31/corpus-coverage.json",
-    "findings": "work/daily-2026-08-31/corpus-findings.json",
-    "dedupedFresh": "work/daily-2026-08-31/deduped-fresh.json",
-    "report": "work/daily-2026-08-31/corpus-report.json",
-    "pipelineReport": "work/daily-2026-08-31/corpus-pipeline-report.json"
-   },
-   "corpusCounts": {
-    "storeInWindow": 436,
-    "fadedOut": 93,
-    "freshNew": 8,
-    "freshUpdate": 9,
+   "corpus": {
+    "storeInWindow": 402,
+    "faded": 144,
+    "freshNew": 1,
+    "freshUpdate": 17,
     "freshDuplicate": 11,
-    "merged": 453,
-    "lifecycleExcluded": [
-     {
-      "id": "entity:nvda",
-      "category": "chips.merchant-gpu"
-     }
-    ],
-    "note": "counts are list lengths; the full id lists live in corpus-report.json (gitignored work/) and replay from the committed answers."
+    "merged": 420,
+    "artifacts": [
+     "work/daily-2026-09-01/corpus-coverage.json",
+     "work/daily-2026-09-01/corpus-findings.json",
+     "work/daily-2026-09-01/deduped-fresh.json",
+     "work/daily-2026-09-01/corpus-report.json"
+    ]
    },
-   "dedupReport": "store/chips.merchant-gpu/dedup-2026-08-31.json",
-   "dedupCounts": {
-    "new": 8,
-    "update": 9,
+   "dedupDaily": {
+    "new": 1,
+    "update": 17,
     "duplicate": 11,
-    "docsDroppedKnown": 0
-   },
-   "findingsGated": 28,
-   "wikiIngest": {
-    "routed": 17,
-    "pages": 6,
-    "input": "work/daily-2026-08-31/deduped.json (daily L2 NEW+UPDATE stream)",
-    "lint": "clean"
+    "report": "store/chips.merchant-gpu/dedup-2026-09-01.json"
    },
    "unregisteredEntities": {
     "count": 2,
     "names": [
-     "marvell",
-     "openai"
-    ],
-    "note": "Not in docs/taxonomy.json seedEntities. Flagged, never rejected. Surfaced by the Marvell Q2 FY2027 release and the OpenAI run-rate/IPO report."
+     "market",
+     "multi"
+    ]
    },
-   "coverageRecord": {
-    "path": "store/chips.merchant-gpu/coverage-2026-08.json",
-    "gapCounts": {
-     "total": 16,
-     "source": 16,
-     "indicator": 0,
-     "required": 16,
-     "preferred": 0,
-     "optional": 0,
-     "waived": 0,
-     "paywalled": 2
+   "webReach": {
+    "agent-reach": {
+     "tool": "agent-reach",
+     "status": "ok",
+     "version": "1.5.0",
+     "pin": "1.5.0",
+     "drift": false
     },
-    "note": "16 of 17 expected sources not hit by this 10-document top-up (only nvda-earnings hit, via investor.nvidia.com), 2 of them paywalled by design. The store still carries the rest from earlier cycles - the record is per-cycle fetched URLs, as F109 specifies."
+    "last30days": {
+     "tool": "last30days",
+     "status": "ok",
+     "version": "skill-present",
+     "pin": "skill-present",
+     "drift": false
+    },
+    "crawl4ai": {
+     "tool": "crawl4ai",
+     "status": "ok",
+     "version": "0.9.0",
+     "pin": "0.9.0",
+     "drift": false
+    },
+    "huggingnews": {
+     "tool": "huggingnews",
+     "status": "ok",
+     "keyed": true,
+     "version": "api-skill-v0.0.2",
+     "pin": "api-skill-v0.0.2",
+     "drift": false
+    }
    },
-   "gates": {
-    "voiceLint": "clean on first attempt",
-    "sufficiency": "clean",
-    "bypasses": 0,
-    "judgeRetry": "none - all three samples aggregated cleanly on attempt 1"
+   "answers": {
+    "extract": "work/daily-2026-09-01/extract-answer.json",
+    "judge": "work/daily-2026-09-01/judge-answer.json",
+    "thesis": "work/daily-2026-09-01/thesis-answer.json",
+    "implication": "work/daily-2026-09-01/implication-answer.json",
+    "narrator": "work/daily-2026-09-01/narrator-answer.json"
    },
+   "category": "done",
+   "thesis": "done (1 voice-lint retry: banned word 'leverage' in one mechanism; clean on re-gate; 4 new provisional theses; 35 promoted to registered)",
+   "implication": "done (1 gate retry: acronym 'OSAT' not allowlisted + banned word 'leverage'; clean on re-gate; 7 lines)",
+   "narrator": "done (1 gate retry: 3 related-doc outlet strings not verbatim from docPool; clean on re-gate)",
+   "issues-open": "done (opened 0, open 4)",
+   "issues-update": "done (assessed 4, notAssessed 0, resolved [])",
+   "citation-audit": "clean (claims 18, flagged 0, skipped 0)",
+   "write-back": "done (18 findings routed to 5 pages; wiki-lint exit 0)",
+   "coverage": "done (store/chips.merchant-gpu/coverage-2026-09.json: 12 gaps - 11 source, 1 indicator, 11 required, 0 waived)",
    "stageStatuses": {
     "category": "done",
     "thesis": "done",
@@ -165,139 +144,58 @@
     "layer": "deferred",
     "main": "deferred"
    },
-   "issuesOpen": {
-    "register": "store/chips.merchant-gpu/issues/register.json",
-    "opened": [
-     "constraint-hbm4-memory-allocation-per-accelerator"
-    ],
-    "open": 4,
-    "note": "same id re-reported as opened against the monthly scorecard, as on prior cycles; register count unchanged at 4"
-   },
-   "issuesUpdate": {
-    "assessed": 4,
-    "notAssessed": 0,
-    "resolved": []
-   },
-   "thesisGate": {
-    "result": "passed on retry 1 of 2",
-    "judged": 85,
-    "verdicts": {
-     "strengthened": 54,
-     "reaffirmed": 24,
-     "weakened": 6,
-     "adjusted": 1,
-     "broken": 0
-    },
-    "proposed": [
-     "vendor-guidance-now-measures-the-shortfall-not-the-demand",
-     "model-developers-buy-capacity-from-power-owning-industrial-firms"
-    ],
-    "firstAttemptViolation": "voice-lint: prior-generation-systems-stay-in-service-on-price: statement: 2 sentences (max 1); voice-lint: a-large-buyer-adds-a-second-designer-for-its-own-chips: mechanism: banned word 'leverage' (the same thesis tripped the same word on 2026-08-30). The brain re-wrote its own file changing only those two fields.",
-    "output": "work/daily-2026-08-31/thesis-gate.out"
-   },
-   "implicationGate": {
-    "result": "passed on retry 1 of 2",
-    "lines": 8,
-    "firstAttemptViolation": "line 7: acronyms 'EMIB' / 'EMIB-T' not on registry/acronyms.json allowlist; reworded to plain bridge-packaging wording.",
-    "artifact": "store/implications/chips.merchant-gpu/2026-08.json"
-   },
-   "narratorArtifact": {
-    "result": "done (passed on first attempt)",
-    "path": "store/chips.merchant-gpu/story/2026-08-31.json"
-   },
-   "citationAudit": {
-    "result": "clean",
-    "record": "store/chips.merchant-gpu/audit/2026-08-31.json",
-    "claims": 19,
-    "flagged": 0,
-    "skipped": 0
-   },
-   "pricePull": {
-    "result": "done",
-    "rows": 879,
-    "perProvider": {
-     "Azure": 666,
-     "AWS": 53,
-     "RunPod": 88,
-     "Vast.ai": 52,
-     "CoreWeave": 20,
-     "Lambda": 0
-    },
-    "failed": [],
-    "snapshot": "C:\\Users\\danie\\random_for_fun\\gpu_agent\\data\\leasing_snapshots\\gpu_prices-2026-08-31.csv",
-    "wallTimeSeconds": 58,
-    "note": "Lambda returned 0 rows (no API key on this machine); an unkeyed provider is skipped, not failed. Run before the gather finished (independent, deterministic)."
-   },
-   "priceSync": {
-    "result": "done",
-    "written": {
-     "gpuSpotPrice": 12,
-     "gpuRentalOnDemand": 1,
-     "gpuRentalSpot": 1,
-     "gpuRental1yr": 17
-    },
-    "warnings": [
-     "stale price folder: newest data 260602, as_of 2026-08"
-    ],
-    "note": "The stale-folder warning is the standing one about hardware PURCHASE prices, which price-pull does not collect. No stale-rental-data warning."
-   },
-   "seriesRefresh": {
-    "gaps": [
-     "tokenEconomics 2026-07"
-    ],
-    "written": [],
-    "rejected": [],
-    "alreadyPresent": [],
-    "empty": [
-     "tokenEconomics 2026-07"
-    ],
-    "notes": [
-     "Reader returned an empty envelope, correctly, for the 9th consecutive cycle: the stored tokenEconomics series is a CONSTRUCTION (median of 6 volume rates + median of 14 price rates, trailing 9 months) and the basket membership is recorded nowhere reachable (registry prose only, no builder script, per-point notes name one input each). A differently-built number would silently change the series mid-history, so none was written. Needs a user decision to record the basket membership."
-    ]
-   },
-   "v2Shadow": "stamped",
-   "chartFetch": {
-    "result": "done",
-    "fetched": [],
-    "failed": [],
-    "skipped": [
-     "amdDataCenterRevenue",
-     "gpuSpotPrice",
-     "nvdaDataCenterRevenue"
-    ],
-    "note": "nvdaDataCenterRevenue still 'skipped' 5 days after NVIDIA's Q2 FY2027 print (third cycle running); chart-fetch's due-date logic is worth a look, not changed here."
-   },
-   "chartResearch": {
-    "emitted": 3,
-    "answered": 3,
-    "accepted": 2,
-    "rejected": 1,
-    "missing": 0,
-    "acceptedSeries": [
-     "store/chips.merchant-gpu/research-series/2026-08-31-nvidia-quarterly-revenue-growth-year-over-year.json",
-     "store/chips.merchant-gpu/research-series/2026-08-31-marvell-data-center-segment-quarterly-revenue.json"
-    ],
-    "rejectedDetail": [
-     {
-      "file": "work/daily-2026-08-31/chart-research/bullet-1.json",
-      "failures": [
-       "all 5 points: https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/ blocked (HTTP 403) to the verifier's plain reader; whole candidate failed (no partial charts). fool.com auto-learned into registry/do-not-fetch.json."
-      ]
-     }
-    ]
-   },
-   "dashboardJson": {
-    "result": "done",
-    "path": "site/chips.merchant-gpu/data/dashboard.json"
-   },
-   "report": "work/daily-2026-08-31/report.txt",
-   "deviations": [
-    "BRAIN SEAMS DISPATCHED AS 'plain-language-writer' (Read/Grep/Write), NOT A TOOL-LESS TYPE (AFK-default, same as the 2026-08-30 cycle). This harness still registers no tool-less agent type (.claude/agents holds only plain-language-writer and web-gatherer). All six brain dispatches (extract, judge x3, thesis, implication, narrator) ran as subagent_type plain-language-writer on model opus, each reading its own prompt file(s) and writing its own single answer file, with an explicit instruction to ignore that type's prose persona. 'Cannot reach outside its prompt' is PRESERVED (no WebSearch / WebFetch / Bash on that type); lost is the tool-less purity of extraction and the persona-neutrality of the type. Gatherers and chart-research readers ran as web-gatherer (structural F88 wall). Needs the user: register a proper tool-less brain agent type.",
-    "EXTRACTION READ ITS OWN PROMPT FILE instead of receiving it inlined (AFK-default, same root cause): inlining extract-prompt.json would route fetched page text through the coordinator's context (F88). No prompt text changed, no hash moved.",
-    "CAPTURED-AT IS THE TRUE UTC CLOCK, 2026-08-30T16:04:18Z, although the cycle day is 2026-08-31 (AFK-default). The scheduled run started just after local midnight (UTC+8), so the honest UTC instant falls on the prior calendar day. captured-at is only a stamp on findings and the corpus-merge anchor (no windowing logic reads it), so the honest value was kept rather than a rounded one; every --date / dedup / story / audit artifact uses the cycle day 2026-08-31.",
-    "WIKI WRITE-BACK RAN AFTER THE SCORECARD, NOT BEFORE JUDGMENT (AFK-default). Daily mode step (d-daily) orders wiki-ingest of the L2 stream before judgment; the standard (d2) rule says skip write-back if the scorecard fails ('never half-commit a failed cycle'). Judgment reads corpus-findings.json, not the wiki, so ordering it after the scorecard costs nothing and honours both; the input was still the daily L2 NEW+UPDATE stream (deduped.json).",
-    "GATHERER ROUND 2 NOT RUN: the 10-document daily cap was reached at the end of round 1 (4/3/3 across 3 web-gatherer subagents), so the trail stopped with leads unchased (each listed in gather.skipped). Cap behaving as designed. One extra gatherer-B re-dispatch (runner round-trip 2 of 3) rewrote blob 21 from a page it could actually read after both web-reach readers failed on the original URL; no new document was added by it."
-   ]
+   "gates": {
+    "voiceLint": "3 single-retry seams, all clean on re-gate: thesis (banned word 'leverage'), implication (acronym 'OSAT' + 'leverage'), narrator (3 outlet strings not verbatim from docPool)",
+    "sufficiency": "clean (no failure recorded anywhere in this run's artifacts)",
+    "bypasses": 0,
+    "judgeRetry": "none recorded - judge answer applied on attempt 1",
+    "note": "stageStatuses+gates transcribed from this entry's own per-stage records by the interactive coordinator session: the headless run died after finalize_log.py but before adding the outcome maps and committing"
+   }
   }
+ ],
+ "pricePull": {
+  "result": "done",
+  "rows": 954,
+  "perProvider": {
+   "Azure": 747,
+   "AWS": 53,
+   "RunPod": 88,
+   "Vast.ai": 46,
+   "CoreWeave": 20,
+   "Lambda": 0
+  },
+  "failed": [],
+  "snapshot": "gpu_agent/data/leasing_snapshots/gpu_prices-2026-09-01.csv",
+  "note": "Lambda returned 0 rows but reported no failure"
+ },
+ "priceSync": "done (written gpuSpotPrice 12, gpuRentalOnDemand 2, gpuRentalSpot 2, gpuRental1yr 17; expected 'stale price folder' hardware-price warning persists)",
+ "seriesRefresh": {
+  "gaps": [
+   "tokenEconomics 2026-07"
+  ],
+  "written": [],
+  "rejected": [],
+  "alreadyPresent": [],
+  "note": "reader returned an honest empty envelope: the point is a composite of undisclosed basket medians it cannot reproduce; same outcome as prior cycles (tokenEconomics parked for interactive basket work per HANDOFF)"
+ },
+ "v2Shadow": "stamped",
+ "chartFetch": "done (fetched amdDataCenterRevenue +3 points; skipped gpuSpotPrice not due; notFetchable nvdaDataCenterRevenue - known F134; staleCalendar empty - see observations)",
+ "chartResearch": {
+  "accepted": [
+   "store/chips.merchant-gpu/research-series/2026-09-01-samsung-chip-division-ds-quarterly-revenue.json",
+   "store/chips.merchant-gpu/research-series/2026-09-01-sk-hynix-quarterly-revenue.json"
+  ],
+  "rejected": [
+   "bullet-3 (HBM supplier share): all 3 points cite a substack page that blocks re-fetch (HTTP 403) - candidate failed whole, no partial chart"
+  ],
+  "missing": []
+ },
+ "dashboardJson": "done (site/chips.merchant-gpu/data/dashboard.json)",
+ "runMarker": "F135 ledger created this run: store/chips.merchant-gpu/run-markers.jsonl seq wikiSeq=629 (asOf 2026-09 v1, storyDate 2026-09-01); report printed the expected one-time change-tracking restart",
+ "deviations": [
+  "wiki-ingest was mistakenly run BEFORE the F62 corpus assembly, which made the corpus merge classify all 29 fresh findings as duplicates; corrected mid-run by git-restoring the 6 wiki files and deleting the 18 just-written store/findings/*-2026-09-* files (all this run's own, regenerable writes), then re-running corpus -> pipeline -> wiki-ingest in the prescribed order. Final store state is identical to a correctly-ordered run.",
+  "AFK-default: 'CXMT' added to registry/acronyms.json allowed list - the report renderer blocked shipping on it as an unknown all-caps token and its own error text prescribes exactly this remedy; CXMT (ChangXin Memory Technologies) is a real company name.",
+  "AFK-default: last30days discovery skipped for budget (also listed under gather.skipped).",
+  "capturedAt was first set to a hand-typed future time (03:25Z); caught before any store write and the extract gate re-run with the real clock (01:08:44Z), which is the value used everywhere."
  ]
 }

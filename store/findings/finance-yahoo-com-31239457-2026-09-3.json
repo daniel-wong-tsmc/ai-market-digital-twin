@@ -1,0 +1,50 @@
+{
+  "id": "finance-yahoo-com-31239457-2026-09-3",
+  "statement": "SK Hynix has committed $38.3 billion of investment through 2031, including a $4 billion HBM packaging plant in Indiana targeting 2029 production, while its CEO says the memory shortage could persist through 2030.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Memory capex of this size adds real HBM supply, but only late in the decade, so the near-term gap between HBM demand and available bits stays open.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Large multi-year memory and advanced-packaging capex eventually loosens the HBM bottleneck that caps accelerator output, but the stated shortage horizon through 2030 means the relief lands beyond the current planning window."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (24/7 Wall St. syndication)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html",
+      "date": "2026-08-31",
+      "excerpt": "SK Hynix has committed $38.3 billion in investments through 2031, including a $4 billion HBM packaging facility in Indiana targeting 2029 production",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (24/7 Wall St. syndication)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html",
+      "date": "2026-08-31",
+      "excerpt": "could persist through 2030",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary syndicated article paraphrasing SK Hynix statements; capex figures not verified against an SK Hynix filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "samsung",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

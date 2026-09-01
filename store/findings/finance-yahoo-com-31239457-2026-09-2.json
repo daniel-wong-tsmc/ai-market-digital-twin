@@ -1,0 +1,43 @@
+{
+  "id": "finance-yahoo-com-31239457-2026-09-2",
+  "statement": "Spot HBM3E modules are reported to sell at roughly four to five times the long-term-agreement price, indicating an extremely thin uncontracted memory channel.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "A spot price several times the contract price is the classic signature of near-zero available channel inventory; buyers without a long-term agreement are paying scarcity rents.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "negative",
+    "mechanism": "Depleted uncontracted memory inventory raises the bill-of-materials cost and lengthens practical availability for accelerator builders who are not party to a long-term agreement."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (24/7 Wall St. syndication)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html",
+      "date": "2026-08-31",
+      "excerpt": "A 36GB HBM3E module reportedly sells for about 2.87 million won (around $2,100) on the spot market, compared with just 500,000 to 700,000 won ($300 to $400) under long-term agreements",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade-press reporting of spot pricing, hedged with 'reportedly' in the source; no primary price index fetched."
+  },
+  "dispersion": "Spot roughly $2,100 per 36GB module versus $300-$400 under long-term agreement, a four-to-five times gap.",
+  "asOf": "2026-09",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "samsung",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

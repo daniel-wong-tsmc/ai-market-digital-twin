@@ -1,0 +1,44 @@
+{
+  "id": "ir-amd-com-5a9dfeb6-2026-09-1",
+  "statement": "AMD Instinct MI355X GPU infrastructure is now live in production at HUMAIN in Saudi Arabia, serving GPU-as-a-service customers on Cisco Silicon One-based networking.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named sovereign customer moving from announcement to live production traffic is a real, bankable AMD accelerator win rather than a memorandum of understanding.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.networking-fabric",
+      "chips.networking-silicon"
+    ],
+    "direction": "positive",
+    "mechanism": "A production MI355X deployment with a paying sovereign cloud operator validates AMD's rack-scale stack and pulls accelerator, CPU and AI-fabric volume with it."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live",
+      "date": "2026-08-31",
+      "excerpt": "AMD Instinct MI355X GPU-based AI infrastructure, built on Cisco Silicon One-based AI networking, is now live in Saudi Arabia and serving HUMAIN customers in the Kingdom and beyond",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: AMD's own investor-relations press release announcing the live deployment."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

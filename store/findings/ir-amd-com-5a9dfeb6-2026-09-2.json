@@ -1,0 +1,51 @@
+{
+  "id": "ir-amd-com-5a9dfeb6-2026-09-2",
+  "statement": "AMD, Cisco and HUMAIN plan up to 250 MW of AI infrastructure starting in 2027, within a joint-venture target of up to 1 GW by 2030.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A gigawatt-scale pipeline anchored on Instinct parts is meaningful non-NVIDIA accelerator capacity, which widens the buyer's set of options.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed megawatts on AMD silicon add credible alternative accelerator supply and pull matching power, cooling and colocation buildout in the Kingdom."
+  },
+  "evidence": [
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live",
+      "date": "2026-08-31",
+      "excerpt": "up to 250 MW of AI infrastructure",
+      "tier": "primary"
+    },
+    {
+      "source": "AMD Investor Relations",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live",
+      "date": "2026-08-31",
+      "excerpt": "up to 1 GW of AI infrastructure by 2030",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary AMD press release; note the figures are stated as 'up to' targets for phases beginning 2027, not contracted volumes."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -608,3 +608,22 @@
 {"seq":607,"asOf":"2026-08","kind":"create-page","pageId":"entity:openai","findingId":null,"state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":608,"asOf":"2026-08","kind":"append-observation","pageId":"entity:openai","findingId":"www-fool-com-328e7db3-2026-08-1","state":null,"trajectory":null,"salience":null,"detail":""}
 {"seq":609,"asOf":"2026-08","kind":"append-observation","pageId":"entity:openai","findingId":"www-fool-com-328e7db3-2026-08-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":610,"asOf":"2026-09","kind":"append-observation","pageId":"entity:amd","findingId":"ir-amd-com-5a9dfeb6-2026-09-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":611,"asOf":"2026-09","kind":"append-observation","pageId":"entity:amd","findingId":"ir-amd-com-5a9dfeb6-2026-09-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":612,"asOf":"2026-09","kind":"append-observation","pageId":"entity:market","findingId":"lambda-ai-b8db7b35-2026-09-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":613,"asOf":"2026-09","kind":"append-observation","pageId":"entity:market","findingId":"www-runpod-io-0f8e6327-2026-09-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":614,"asOf":"2026-09","kind":"append-observation","pageId":"entity:multi","findingId":"www-investing-com-17df6d69-2026-09-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":615,"asOf":"2026-09","kind":"append-observation","pageId":"entity:multi","findingId":"www-investing-com-17df6d69-2026-09-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":616,"asOf":"2026-09","kind":"append-observation","pageId":"entity:multi","findingId":"www-investing-com-17df6d69-2026-09-3","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":617,"asOf":"2026-09","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-investing-com-fac86e4e-2026-09-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":618,"asOf":"2026-09","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-792f5768-2026-09-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":619,"asOf":"2026-09","kind":"append-observation","pageId":"entity:nvidia","findingId":"nvidianews-nvidia-com-792f5768-2026-09-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":620,"asOf":"2026-09","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-investing-com-2cd73a8c-2026-09-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":621,"asOf":"2026-09","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-investing-com-2cd73a8c-2026-09-3","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":622,"asOf":"2026-09","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-investing-com-2cd73a8c-2026-09-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":623,"asOf":"2026-09","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-investing-com-fac86e4e-2026-09-4","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":624,"asOf":"2026-09","kind":"append-observation","pageId":"entity:nvidia","findingId":"www-investing-com-fac86e4e-2026-09-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":625,"asOf":"2026-09","kind":"append-observation","pageId":"entity:samsung","findingId":"finance-yahoo-com-31239457-2026-09-2","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":626,"asOf":"2026-09","kind":"append-observation","pageId":"entity:samsung","findingId":"finance-yahoo-com-31239457-2026-09-1","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":627,"asOf":"2026-09","kind":"append-observation","pageId":"entity:samsung","findingId":"finance-yahoo-com-31239457-2026-09-3","state":null,"trajectory":null,"salience":null,"detail":""}
+{"seq":628,"asOf":"2026-09","kind":"lint","pageId":null,"findingId":null,"state":null,"trajectory":null,"salience":null,"detail":"material 4; dropped 1; stale 43; orphans 46; contradictions 0"}

@@ -1,0 +1,43 @@
+{
+  "id": "www-investing-com-2cd73a8c-2026-09-1",
+  "statement": "Analyst Ming-Chi Kuo reports NVIDIA has revived the Rubin CPX program with production expected to begin in the first quarter of 2027.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "Reviving a previously cut inference-focused part would add another product to NVIDIA's cadence and signal that demand for prefill-optimized silicon is strong enough to justify it.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.reasoning-agentic",
+      "infrastructure.neocloud"
+    ],
+    "direction": "positive",
+    "mechanism": "An extra SKU in the Rubin generation broadens the addressable inference workload mix and lifts NVIDIA's shipped product cadence, assuming the reported schedule holds."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (citing TF International Securities analyst Ming-Chi Kuo)",
+      "url": "https://www.investing.com/news/stock-market-news/nvidia-revives-rubin-cpx-chip-program-with-2027-launch-planned-analyst-says-93CH-4882972",
+      "date": "2026-08-31",
+      "excerpt": "Nvidia has revived the program, with production expected to begin in 1Q27",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The claim comes from one analyst's research note relayed by trade press, with no NVIDIA confirmation in the article and a prior report that the part had been cut. Treating it as a hypothesis about NVIDIA's roadmap rather than an established fact.",
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying one analyst note; no official NVIDIA confirmation, and the program was previously reported as cancelled."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "releaseCadence",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

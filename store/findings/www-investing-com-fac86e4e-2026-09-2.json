@@ -1,0 +1,44 @@
+{
+  "id": "www-investing-com-fac86e4e-2026-09-2",
+  "statement": "NVIDIA guided Vera Rubin to about 20% of data-center revenue in Q3 FY2027 and described it as the fastest product ramp in the company's history.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A brand-new platform reaching a fifth of data-center revenue in its first full quarter shows customers are absorbing the new generation immediately, not waiting.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "A steep Vera Rubin ramp pulls forward HBM, advanced packaging and rack-scale system demand while lifting NVIDIA's own guided data-center revenue mix."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com earnings call transcript (NVIDIA Q2 FY2027 earnings call)",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-nvidia-beats-q2-2026-estimates-as-ai-demand-stays-hot-93CH-4878028",
+      "date": "2026-08-26",
+      "excerpt": "we expect Vera Rubin to account for about 20% of data center revenue in Q3.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Third-party transcript of the official earnings call; guidance stated as a share of revenue, not a dollar amount, so no dollar value is recorded."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

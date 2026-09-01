@@ -1,0 +1,44 @@
+{
+  "id": "nvidianews-nvidia-com-792f5768-2026-09-2",
+  "statement": "MediaTek is adopting NVIDIA NVLink Fusion, NVLink-C2C and NVHBM as the design foundation for custom silicon connecting XPUs to NVIDIA's scale-up fabric.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Every custom accelerator that attaches to NVIDIA's interconnect and memory stack keeps the rack architecture, and the attached content, on NVIDIA's terms.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.networking-silicon",
+      "chips.hyperscaler-asic",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "Licensing NVLink Fusion to a major merchant chip designer extends NVIDIA's fabric standard into third-party custom silicon, widening the installed base that NVIDIA's networking and memory technologies serve."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom (official press release)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms",
+      "date": "2026-08-31",
+      "excerpt": "NVIDIA NVLink Fusion chiplet, connecting XPUs to the NVIDIA NVLink scale-up fabric",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary source: NVIDIA official press release naming the platform components adopted."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: NVIDIA Newsroom (official press release)",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-01T01:08:44Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
