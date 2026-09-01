@@ -69,7 +69,7 @@ def test_the_real_july_to_august_gap_move_now_speaks():
                                     gap_history=CALM_GAP + [LIVE_JUL[1]],
                                     demand_history=CALM_DEM + [LIVE_JUL[0]])
     assert color == "yellow" and "gap-moved-sharply" in trig
-    assert sizes["gap-moved-sharply"].startswith("0.49")
+    assert sizes["gap-moved-sharply"].startswith("up 0.49")
 
 
 def test_an_arbitrarily_large_gap_move_can_no_longer_hide_inside_one_band():

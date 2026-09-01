@@ -97,7 +97,7 @@ def test_the_biggest_recorded_gap_jump_now_fires(series):
     _c, trig, sizes = _raw_alert(series[i][1], prior, None, None,
                                  gap_history=gaps[:i], demand_history=dems[:i])
     assert "gap-moved-sharply" in trig
-    assert sizes["gap-moved-sharply"].startswith("1.02")
+    assert sizes["gap-moved-sharply"].startswith("up 1.02")
 
 
 def test_firing_rates_stay_in_the_band_the_user_approved(series):

@@ -43,7 +43,7 @@ def test_yellow_when_the_gap_moves_much_more_than_usual():
     color, trig, sizes = _raw_alert(_st(sdgi=0.60), _st(sdgi=0.10, as_of="2026-07-01"),
                                     "2026-07-01", None, gap_history=CALM, demand_history=CALM)
     assert color == "yellow" and "gap-moved-sharply" in trig
-    assert "0.50" in sizes["gap-moved-sharply"]
+    assert sizes["gap-moved-sharply"].startswith("up 0.50")
     assert "times its usual run-to-run move" in sizes["gap-moved-sharply"]
 
 
@@ -211,3 +211,46 @@ def test_alert_state_walk_deterministic(tmp_path):
     assert a == b
     assert a.color == "green" and a.priorColor == "green" and a.rawColor == "green"
     assert a.triggerSizes == {}
+
+
+def test_history_never_peeks_at_runs_that_had_not_happened_yet(tmp_path):
+    """F137 review fix: the rules read history out of the store, so the store walk must
+    stop at the run being judged. Replaying an older run must not see its successors —
+    otherwise a past run's color would change every time a new cycle lands."""
+    from gpu_agent.change import _stored_index_series
+
+    cat = tmp_path / "chips.merchant-gpu"
+    cat.mkdir(parents=True)
+    made = []
+    for ver, dmi in enumerate([0.1, 0.2, 0.3, 0.4, 0.5], start=1):
+        sc = Scorecard(categoryId="chips.merchant-gpu", asOf="2026-08", findings=[],
+                       demandSupply=DemandSupply(dmiContribution=dmi, smiContribution=0.0),
+                       narrative="n", confidence=_conf())
+        (cat / f"2026-08-v{ver}.json").write_text(sc.model_dump_json(), "utf-8")
+        made.append(sc)
+
+    third = _stored_index_series(tmp_path, "chips.merchant-gpu", made[2])
+    assert [round(d, 3) for _p, _g, d in third] == [0.1, 0.2]
+
+    newest = _stored_index_series(tmp_path, "chips.merchant-gpu", made[-1])
+    assert [round(d, 3) for _p, _g, d in newest] == [0.1, 0.2, 0.3, 0.4]
+
+
+def test_an_unstored_run_still_sees_the_whole_history(tmp_path):
+    """The other half of the contract: a run that has not been written to the store yet
+    is treated as newer than everything in it, so nothing is dropped."""
+    from gpu_agent.change import _stored_index_series
+
+    cat = tmp_path / "chips.merchant-gpu"
+    cat.mkdir(parents=True)
+    for ver, dmi in enumerate([0.1, 0.2, 0.3], start=1):
+        sc = Scorecard(categoryId="chips.merchant-gpu", asOf="2026-08", findings=[],
+                       demandSupply=DemandSupply(dmiContribution=dmi, smiContribution=0.0),
+                       narrative="n", confidence=_conf())
+        (cat / f"2026-08-v{ver}.json").write_text(sc.model_dump_json(), "utf-8")
+
+    unsaved = Scorecard(categoryId="chips.merchant-gpu", asOf="2026-08", findings=[],
+                        demandSupply=DemandSupply(dmiContribution=0.9, smiContribution=0.0),
+                        narrative="n", confidence=_conf())
+    series = _stored_index_series(tmp_path, "chips.merchant-gpu", unsaved)
+    assert [round(d, 3) for _p, _g, d in series] == [0.1, 0.2, 0.3]

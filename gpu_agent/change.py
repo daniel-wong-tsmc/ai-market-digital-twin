@@ -471,9 +471,16 @@ def _high_break_between(book: ThesisBook, after_asof: str, at_or_before_asof: st
 
 
 def _swing_phrase(move: float, swing: float, *, lead: str = "") -> str:
-    """The plain size clause shown after a rule's sentence — 'demand fell 0.57, about 2.4
-    times its usual run-to-run move'. Two decimals, no jargon, no invented precision."""
-    return (f"{lead}{abs(move):.2f}, about {abs(move) / swing:.1f} times its usual "
+    """The plain size clause shown after a rule's sentence — 'up 0.49, about 1.7 times its
+    usual run-to-run move', 'demand fell 0.57, about 2.4 times its usual run-to-run move'.
+
+    Two decimals, no jargon, no invented precision. `lead` names the mover when the sentence
+    does not; without one the clause opens with the direction, matching the wording F136
+    settled on for the brief's headline (bands.change_line) — a bare number would leave the
+    reader unable to tell a jump from a collapse.
+    """
+    head = lead if lead else ("up " if move > 0 else "down ")
+    return (f"{head}{abs(move):.2f}, about {abs(move) / swing:.1f} times its usual "
             "run-to-run move")
 
 
@@ -564,10 +571,16 @@ def _stored_index_series(store_dir, category_id: str, sc: Scorecard):
     cycles into a single point (booked as F138). The two F137 rules need real run-to-run moves
     to measure a usual swing against, so they read the full series.
 
-    `sc` is always the newest stored file for its asOf label (the report CLI and the dashboard
-    both load it out of the store), so its own copy is identified by value: the newest file
-    carrying today's asOf is dropped when its three index numbers are today's. If `sc` has not
-    been written yet there is simply nothing to drop.
+    Nothing at or after `sc`'s own position is returned, so no rule can peek at a run that had
+    not happened yet and a replay of any past run reproduces that run's own color. A Scorecard
+    carries its asOf label but not its version number, so `sc`'s position is found by value:
+    the LAST stored file carrying `sc`'s asOf whose three index numbers are `sc`'s own is taken
+    to be `sc`'s copy in the store, and everything from there on is dropped. When no file
+    matches — `sc` has not been written yet — `sc` is treated as newer than every stored run
+    sharing its asOf label, which is the contract the report CLI and the dashboard both meet
+    (each loads the newest stored file for the label). The one tie this cannot resolve, two
+    consecutive versions with identical demand, supply AND gap to three decimals, degrades to a
+    same-value comparison: the rules see a move of zero and stay quiet.
     """
     cat_dir = Path(store_dir) / category_id
     rows = []
@@ -586,22 +599,19 @@ def _stored_index_series(store_dir, category_id: str, sc: Scorecard):
     today_key = (round(compute_sdgi(sc), _ROUND),
                  round(sc.demandSupply.dmiContribution, _ROUND),
                  round(sc.demandSupply.smiContribution, _ROUND))
-    same_asof = [r for r in rows if r[2] == sc.asOf]
-    own_copy = None
-    if same_asof:
-        newest = same_asof[-1]
-        st = build_state(load_scorecard(newest[3]))
+    states = [build_state(load_scorecard(p)) for _pe, _v, _a, p in rows]
+
+    cut = len(rows)
+    for i in range(len(rows) - 1, -1, -1):
+        if rows[i][2] != sc.asOf:
+            continue
+        st = states[i]
         if (round(st.sdgi, _ROUND), round(st.demand, _ROUND),
                 round(st.supply, _ROUND)) == today_key:
-            own_copy = newest[3]
+            cut = i
+            break
 
-    out = []
-    for _pe, _ver, _as_of, p in rows:
-        if p == own_copy:
-            continue
-        st = build_state(load_scorecard(p))
-        out.append((p, st.sdgi, st.demand))
-    return out
+    return [(rows[i][3], states[i].sdgi, states[i].demand) for i in range(cut)]
 
 
 def _fold_displayed(raws: list[str]) -> list[str]:
