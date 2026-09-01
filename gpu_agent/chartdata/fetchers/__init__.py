@@ -17,12 +17,14 @@ unchanged from before this round.
 """
 from __future__ import annotations
 
-from gpu_agent.chartdata.fetchers import amd_dc_revenue
+from gpu_agent.chartdata.fetchers import amd_dc_revenue, nvda_dc_revenue
 
 FETCHERS = {
     "amd_dc_revenue": amd_dc_revenue.parse,
+    "nvda_dc_revenue": nvda_dc_revenue.parse,
 }
 
 DISCOVERERS = {
     "amd_dc_revenue": amd_dc_revenue.discover,
+    "nvda_dc_revenue": nvda_dc_revenue.discover,
 }
