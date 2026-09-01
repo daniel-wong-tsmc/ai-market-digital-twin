@@ -1320,7 +1320,7 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   calendar); the shared window helper unifying both call sites is Phase 2 of this lane, after
   F130 merges. Close-out: `.superpowers/handoffs/f131-chartfetch-due-DONE.md`.
 
-- [ ] **F134 — `nvdaDataCenterRevenue` has no fetcher, so its chart can never refresh.** Split out
+- [x] **F134 — `nvdaDataCenterRevenue` has no fetcher, so its chart can never refresh.** Split out
   of F131 by user ruling 2026-08-31. Symptom: the series reports as `notFetchable` on every cycle
   (before F131 it hid inside `skipped`, which is how it went unnoticed for three cycles) — its
   `registry/chart-series.json` entry carries `"fetcher": null` and no NVIDIA fetcher exists in
@@ -1336,6 +1336,35 @@ sub-project (the repo's existing sp1–sp4 pattern). Do not let a lane agent imp
   registry. The F112(a) staleness guard and the idempotent append already cover the append side.
   Done when the series leaves `notFetchable` and a real quarter lands in
   `store/series/nvdaDataCenterRevenue.jsonl`.
+  **Done 2026-09-01 (lane `f134-nvda-fetcher`).** The series now fetches itself; `notFetchable` is
+  empty for the whole registry, the state the lane existed to reach. Three fixtures captured
+  verbatim from the live site. NVIDIA's investor site turned out to be shaped differently from
+  AMD's in four ways, none of which the plan anticipated, so the lane **question-stopped** on all
+  four (`.superpowers/handoffs/f134-nvda-fetcher-QUESTIONS.md`); **all four answered by the user
+  2026-09-01, live, zero AFK-defaults, each with the lane's recommendation.** (Q1) Both NVIDIA
+  hosts answer **HTTP 403 to a request with no User-Agent** — exactly what the shared
+  `_default_fetch_html` sent — so a perfect parser would still have failed every cycle; a browser
+  UA was added to that shared helper, with `_build_request` split out so the headers are testable
+  without the network. (Q2) The registry's `sourceUrl`, NVIDIA's quarterly-results page, is a
+  **JavaScript shell** whose served HTML carries no press-release links at all, so an AMD-style
+  discoverer was impossible against it; `sourceUrl` was repointed to the server-rendered
+  `/financial-info/financial-reports/default.aspx`, whose "Latest Report" block links to the
+  quarter's release. That block is **hand-maintained by NVIDIA's IR staff** (their own HTML says
+  "After PR crosses: insert PR URL"), so it can lag a print — the F112(a) guard makes the failure
+  mode "updates late", never "wrong quarter", except on the very first fetch when an empty store
+  leaves nothing to compare against. (Q3) NVIDIA publishes **no exact Data Center figure in any
+  table**; it exists only as prose already rounded by NVIDIA ("$89.0 billion"), taken verbatim
+  into the series' billions unit with no conversion, and recorded as NVIDIA's own rounding in the
+  stored row's note via a new optional `noteSuffix`. Consequence: **one point per release, no
+  backfill**, unlike AMD's three-column table. (Q4) Quarters are labelled by the **calendar**
+  quarter the period ends in, as AMD's are, so NVIDIA's "Q2 FY2027" (ended 2026-07-26) charts as
+  `2026-Q3`. Code review then caught **two silent-wrong-answer bugs**, both verified against the
+  pre-fix code: `discover()` was only lower-bounded and returned the SEC-filings URL whenever the
+  press-release link was not yet posted, and the revenue figure was an unanchored first-match that
+  would have stored a prior-quarter teaser under the current quarter's label. Both closed with
+  proven regression tests. Suite 2872 → 2906 passed / 6 skipped; `store/` untouched (the first row
+  lands on the next live cycle); all four pins byte-untouched. Close-out:
+  `.superpowers/handoffs/f134-nvda-fetcher-DONE.md`.
 
 - [x] **F135 — the report's "WHAT MOVED SINCE LAST RUN" list has been empty since 2026-08-05
   (month-label diff window is empty by definition).** Found by the 2026-08-31 DMI-jump audit
