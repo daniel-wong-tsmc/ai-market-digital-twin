@@ -1,0 +1,55 @@
+{
+  "id": "www-lightreading-com-518cb6b0-2026-09-2",
+  "statement": "The Nscale-Figure agreement carries potential deployment of the NVIDIA Vera Rubin platform with up to 100,000 NVIDIA GPUs, with initial GPUs targeted for the second half of 2027 in Barstow, Texas.",
+  "kind": "measured",
+  "value": {
+    "number": 100000.0,
+    "unit": "gpus"
+  },
+  "trend": "rising",
+  "why": "A named next-generation NVIDIA platform win at hundred-thousand-GPU scale, tied to a specific site and start window, indicates where forward merchant-GPU volume is being reserved.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "A single-vendor platform selection at this scale locks forward accelerator, networking, site and power capacity to NVIDIA silicon for the 2027 build window."
+  },
+  "evidence": [
+    {
+      "source": "Light Reading",
+      "url": "https://www.lightreading.com/ai-machine-learning/nscale-signs-multi-year-partnership-with-figure-a-humanoid-robotics-company",
+      "date": "2026-09-03",
+      "excerpt": "potential to deploy the NVIDIA Vera Rubin platform with up to 100,000 NVIDIA GPUs.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Light Reading",
+      "url": "https://www.lightreading.com/ai-machine-learning/nscale-signs-multi-year-partnership-with-figure-a-humanoid-robotics-company",
+      "date": "2026-09-03",
+      "excerpt": "initial GPUs are targeted for deployment starting the second half of 2027 in Barstow, Texas.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet, and the GPU count is framed as potential and up to rather than ordered; deployment does not begin until the second half of 2027."
+  },
+  "dispersion": "Figure is stated as potential and up to 100,000 GPUs, not a firm order quantity.",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Nscale / Figure AI",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

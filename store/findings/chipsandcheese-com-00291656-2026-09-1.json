@@ -1,0 +1,53 @@
+{
+  "id": "chipsandcheese-com-00291656-2026-09-1",
+  "statement": "Intel detailed Crescent Island, a data-center inference GPU carrying up to 480 GB of LPDDR5X rather than HBM, positioned as a memory-capacity and FP64 alternative to NVIDIA parts.",
+  "kind": "measured",
+  "value": {
+    "number": 480.0,
+    "unit": "GB"
+  },
+  "trend": "rising",
+  "why": "A large-memory inference accelerator that skips HBM entirely widens the set of parts that can hold big models in local memory, and does so without competing for constrained HBM allocation.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "A credible non-HBM, high-capacity inference part adds alternative accelerator supply for memory-bound workloads and shifts some memory demand from HBM toward LPDDR5X, at the margin easing merchant-GPU scarcity in that niche."
+  },
+  "evidence": [
+    {
+      "source": "Chips and Cheese (George Cozma)",
+      "url": "https://chipsandcheese.com/p/hot-chips-2026-intels-crescent-island",
+      "date": "2026-08-27",
+      "excerpt": "up to 480 GB LPDDR5X DRAM (described as the highest capacity of any GPU/AI accelerator), estimated 1280-bit memory bus width",
+      "tier": "secondary"
+    },
+    {
+      "source": "Chips and Cheese (George Cozma)",
+      "url": "https://chipsandcheese.com/p/hot-chips-2026-intels-crescent-island",
+      "date": "2026-08-27",
+      "excerpt": "A single Crescent Island can easily run Deepseek-V4 Flash straight out of the VRAM which is an achievement that no other non-HBM GPU can claim.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary technical outlet reporting a conference disclosure; several performance and bandwidth figures in the piece are the author's estimates rather than vendor specifications."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> rising); sources: Chips and Cheese (George Cozma)",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "intel",
+  "observedAt": "2026-08-27",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "www-hyperstack-cloud-aa81f855-2026-09-1",
+  "statement": "Hyperstack lists NVIDIA H100 SXM on-demand rental at $3.20 per GPU-hour; a static level with no baseline or prior price stated on the page.",
+  "kind": "measured",
+  "value": {
+    "number": 3.2,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "The published on-demand rate marks where a mid-tier neocloud is asking for last-generation flagship capacity, giving a reference point for rental levels even though the page shows no change versus any earlier price.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Display overlay only: a rental level with no stated baseline shows where pricing sits but implies no direction for demand or supply."
+  },
+  "evidence": [
+    {
+      "source": "Hyperstack",
+      "url": "https://www.hyperstack.cloud/gpu-pricing",
+      "date": "2026-09-04",
+      "excerpt": "NVIDIA H100 SXM, 80 GB VRAM: $3.20 per hour.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own public pricing page, read directly, but a single secondary source and list prices may differ from transacted rates."
+  },
+  "dispersion": "conflicting same-key reports: value 2.0 -> 3.2 (tol 1%); sources: Hyperstack",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Hyperstack (NexGen Cloud)",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,52 @@
+{
+  "id": "www-prnewswire-com-d3031a05-2026-09-1",
+  "statement": "Equinix launched 'Equinix Inference Exchange' with NVIDIA and Together AI, anchoring the build on NVIDIA validated Enterprise Reference Architectures, with availability starting in Q1 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Standardising colocation inference capacity on the GPU vendor's own reference designs makes that vendor the default choice for enterprise inference buildouts.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.cluster-software",
+      "models.open-weight",
+      "applications.enterprise-copilots"
+    ],
+    "direction": "positive",
+    "mechanism": "A colocation-scale inference offering built on the vendor's reference architecture channels enterprise inference spend into merchant-GPU deployments hosted in neutral data centers."
+  },
+  "evidence": [
+    {
+      "source": "PR Newswire (Equinix newsroom release)",
+      "url": "https://www.prnewswire.com/news-releases/equinix-accelerates-ai-inference-for-enterprises-with-nvidia-and-together-ai-302867226.html",
+      "date": "2026-09-02",
+      "excerpt": "AI infrastructure purpose-built to maximize AI factory throughput and minimize token cost",
+      "tier": "secondary"
+    },
+    {
+      "source": "PR Newswire (Equinix newsroom release)",
+      "url": "https://www.prnewswire.com/news-releases/equinix-accelerates-ai-inference-for-enterprises-with-nvidia-and-together-ai-302867226.html",
+      "date": "2026-09-02",
+      "excerpt": "Equinix Inference Exchange will be available starting in Q1 2027.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor press release with no hardware SKUs, customer counts or capacity figures, and availability a quarter away."
+  },
+  "dispersion": "No MW/GW capacity or customer-count figures disclosed; specific NVIDIA hardware SKUs not named.",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-02",
+  "capturedAt": "2026-09-03T12:52:50Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

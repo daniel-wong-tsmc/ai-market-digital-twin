@@ -1,0 +1,250 @@
+{
+  "asOf": "2026-09",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "www-sec-gov-a82cb219-2026-09-1",
+      "entity": "broadcom",
+      "indicatorId": "D2",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "chipbriefing-substack-com-2fd15296-2026-09-2",
+      "entity": "broadcom",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-81ce92bb-2026-09-3",
+      "entity": "broadcom",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-81ce92bb-2026-09-1",
+      "entity": "broadcom",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-prnewswire-com-d3031a05-2026-09-2",
+      "entity": "equinix",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "chipbriefing-substack-com-2fd15296-2026-09-1",
+      "entity": "gmi-cloud",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "siliconangle-com-ebd2c1ae-2026-09-4",
+      "entity": "hpe",
+      "indicatorId": "D2",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "siliconangle-com-ebd2c1ae-2026-09-1",
+      "entity": "hpe",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-sec-gov-b2b6a12a-2026-09-2",
+      "entity": "hpe",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "lambda-ai-bfed0e52-2026-09-1",
+      "entity": "lambda-labs",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-f96fdb9b-2026-09-3",
+      "entity": "nscale",
+      "indicatorId": "D2",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-f96fdb9b-2026-09-2",
+      "entity": "nscale",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-f96fdb9b-2026-09-1",
+      "entity": "nscale",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "allweatherfinance-com-da1d5c1b-2026-09-2",
+      "entity": "sk-group",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "allweatherfinance-com-da1d5c1b-2026-09-3",
+      "entity": "sk-hynix",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "allweatherfinance-com-da1d5c1b-2026-09-1",
+      "entity": "south-korea-government",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "www-coreweave-com-0c409cc5-2026-09-1",
+      "entity": "coreweave",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "www-coreweave-com-32afeeeb-2026-08-1",
+      "detail": "statement/trend changed (trend unknown -> unknown)"
+    },
+    {
+      "findingId": "www-prnewswire-com-d3031a05-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "nvidianews-nvidia-com-792f5768-2026-09-2",
+      "detail": "magnitude 2 -> 1"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "www-investing-com-81ce92bb-2026-09-4",
+      "entity": "broadcom",
+      "indicatorId": "designWins",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-investing-com-81ce92bb-2026-09-2",
+      "entity": "broadcom",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-sec-gov-a82cb219-2026-09-2",
+      "entity": "broadcom",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-sec-gov-a82cb219-2026-09-3",
+      "entity": "broadcom",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-coreweave-com-0c409cc5-2026-09-2",
+      "entity": "coreweave",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-coreweave-com-0c409cc5-2026-09-3",
+      "entity": "coreweave",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-sec-gov-b2b6a12a-2026-09-1",
+      "entity": "hpe",
+      "indicatorId": "D2",
+      "verdict": "duplicate",
+      "priorFindingId": "siliconangle-com-ebd2c1ae-2026-09-4",
+      "detail": "corroborates siliconangle-com-ebd2c1ae-2026-09-4; evidence merged"
+    },
+    {
+      "findingId": "siliconangle-com-ebd2c1ae-2026-09-2",
+      "entity": "hpe",
+      "indicatorId": "rpoBacklog",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "siliconangle-com-ebd2c1ae-2026-09-3",
+      "entity": "hpe",
+      "indicatorId": "rpoBacklog",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-sec-gov-b2b6a12a-2026-09-3",
+      "entity": "hpe",
+      "indicatorId": "rpoBacklog",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "lambda-ai-bfed0e52-2026-09-2",
+      "entity": "lambda-labs",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "lambda-ai-bfed0e52-2026-09-3",
+      "entity": "lambda-labs",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

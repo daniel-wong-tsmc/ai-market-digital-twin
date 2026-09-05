@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-09-04",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-aroged-com-a319f429-2026-09-1",
+        "www-aroged-com-a319f429-2026-09-2",
+        "www-investing-com-81ce92bb-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-sec-gov-a82cb219-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-1",
+        "siliconangle-com-ebd2c1ae-2026-09-1",
+        "siliconangle-com-ebd2c1ae-2026-09-4",
+        "www-sec-gov-b2b6a12a-2026-09-2",
+        "www-investing-com-f96fdb9b-2026-09-1",
+        "www-lightreading-com-518cb6b0-2026-09-1",
+        "www-lightreading-com-518cb6b0-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-31239457-2026-09-1",
+        "finance-yahoo-com-31239457-2026-09-2",
+        "finance-yahoo-com-31239457-2026-09-3",
+        "allweatherfinance-com-da1d5c1b-2026-09-1",
+        "allweatherfinance-com-da1d5c1b-2026-09-2",
+        "allweatherfinance-com-da1d5c1b-2026-09-3",
+        "www-newegg-com-ed646195-2026-09-1",
+        "www-newegg-com-ed646195-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-2cd73a8c-2026-09-1",
+        "www-investing-com-2cd73a8c-2026-09-2",
+        "www-investing-com-17df6d69-2026-09-1",
+        "www-investing-com-17df6d69-2026-09-2",
+        "chipsandcheese-com-00291656-2026-09-1",
+        "ir-amd-com-5a9dfeb6-2026-09-1",
+        "ir-amd-com-5a9dfeb6-2026-09-2",
+        "blogs-nvidia-com-a6b8847a-2026-09-1",
+        "nvidianews-nvidia-com-792f5768-2026-09-1",
+        "nvidianews-nvidia-com-792f5768-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "bullet:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-sec-gov-a82cb219-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-aroged-com-a319f429-2026-09-1",
+        "www-aroged-com-a319f429-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "bullet:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "siliconangle-com-ebd2c1ae-2026-09-1",
+        "www-sec-gov-b2b6a12a-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-bottleneck",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-aroged-com-a319f429-2026-09-1",
+        "www-aroged-com-a319f429-2026-09-2",
+        "www-investing-com-81ce92bb-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-moat",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-sec-gov-a82cb219-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-1",
+        "ir-amd-com-5a9dfeb6-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-stacked-memory-and-server-dram",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-31239457-2026-09-1",
+        "finance-yahoo-com-31239457-2026-09-2",
+        "allweatherfinance-com-da1d5c1b-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-hbm4-memory-allocation-per-accelerator",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-2cd73a8c-2026-09-1",
+        "www-investing-com-2cd73a8c-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-aroged-com-a319f429-2026-09-2",
+        "www-aroged-com-a319f429-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-kucoin-com-eb3a7762-2026-09-1",
+        "finance-yahoo-com-31239457-2026-09-2",
+        "www-investing-com-81ce92bb-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-sec-gov-a82cb219-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-1",
+        "chipbriefing-substack-com-2fd15296-2026-09-2",
+        "nvidianews-nvidia-com-792f5768-2026-09-1",
+        "nvidianews-nvidia-com-792f5768-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-fac86e4e-2026-09-1",
+        "www-investing-com-fac86e4e-2026-09-4",
+        "finance-yahoo-com-31239457-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "allweatherfinance-com-da1d5c1b-2026-09-1",
+        "allweatherfinance-com-da1d5c1b-2026-09-2",
+        "www-investing-com-17df6d69-2026-09-1",
+        "www-investing-com-17df6d69-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-f96fdb9b-2026-09-1",
+        "www-lightreading-com-518cb6b0-2026-09-1",
+        "siliconangle-com-ebd2c1ae-2026-09-1",
+        "www-sec-gov-b2b6a12a-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "impl:6",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "chipbriefing-substack-com-2fd15296-2026-09-1",
+        "www-investing-com-f96fdb9b-2026-09-2",
+        "www-investing-com-f96fdb9b-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "impl:7",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-81ce92bb-2026-09-3",
+        "www-aroged-com-a319f429-2026-09-1"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 19,
+    "flagged": 0,
+    "skipped": 0
+  }
+}

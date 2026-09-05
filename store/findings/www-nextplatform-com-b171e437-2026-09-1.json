@@ -1,0 +1,53 @@
+{
+  "id": "www-nextplatform-com-b171e437-2026-09-1",
+  "statement": "TACC's Horizon supercomputer at UT Austin is built around roughly 4,000 Blackwell-generation NVIDIA GPUs (stated as 4,032), paired with 2,000 Grace CPU nodes and 800 GB/sec InfiniBand.",
+  "kind": "measured",
+  "value": {
+    "number": 4032.0,
+    "unit": "gpus"
+  },
+  "trend": "unknown",
+  "why": "A named academic buildout of this size shows Blackwell-class merchant GPUs winning FP64-sensitive scientific workloads, a segment outside the usual hyperscaler and neocloud demand base.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "An academic HPC centre standardising on Blackwell GPUs with Grace CPUs and InfiniBand fabric commits several thousand accelerators and matching network capacity to a single vendor's platform."
+  },
+  "evidence": [
+    {
+      "source": "The Next Platform",
+      "url": "https://www.nextplatform.com/2025/11/25/taccs-horizon-supercomputer-sets-the-pace-for-academic-science/amp/",
+      "date": "2025-11-25",
+      "excerpt": "will have around 4,000 GPUs. (The number is actually 4,032, despite what the chart above says.)",
+      "tier": "secondary"
+    },
+    {
+      "source": "The Next Platform",
+      "url": "https://www.nextplatform.com/2025/11/25/taccs-horizon-supercomputer-sets-the-pace-for-academic-science/amp/",
+      "date": "2025-11-25",
+      "excerpt": "expected startup in spring 2026, with full production expected by summer 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Single secondary outlet, published 2025-11-25 and so more than nine months stale relative to this run; the document notes no TACC or NVIDIA release closer to the present could be located to confirm delivery."
+  },
+  "dispersion": "GPU count given as around 4,000 in the chart but 4,032 in the text; the specific Blackwell variant is inferred (B200 likely per the article, NVL4 per other cited materials), not confirmed.",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "TACC (Texas Advanced Computing Center) / UT Austin",
+  "observedAt": "2025-11-25",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

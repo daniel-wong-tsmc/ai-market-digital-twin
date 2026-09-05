@@ -34,6 +34,13 @@
       "since": "2026-08-30",
       "why": "learned automatically: the verifier's plain reader was turned away (HTTP 401/403/429)",
       "firstSeenUrl": "https://mbiz.heraldcorp.com/article/10828788"
+    },
+    {
+      "domain": "sec.gov",
+      "kind": "blocks-plain-readers",
+      "since": "2026-09-04",
+      "why": "learned automatically: the verifier's plain reader was turned away (HTTP 401/403/429)",
+      "firstSeenUrl": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000011/avgo-02012026x8kxex99.htm"
     }
   ]
 }

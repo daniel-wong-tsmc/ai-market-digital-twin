@@ -1,134 +1,118 @@
 {
-  "asOf": "2026-09-01",
+  "asOf": "2026-09-04",
   "bullets": [
     {
-      "chart": {
-        "caption": "Found today — single source: Samsung Semiconductor Global Newsroom.",
-        "form": "columns",
-        "points": [
-          {
-            "hollow": false,
-            "label": "Q3 2025",
-            "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-third-quarter-2025-results/",
-            "value": 33.1
-          },
-          {
-            "hollow": false,
-            "label": "Q4 2025",
-            "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-fourth-quarter-and-fy-2025-results/",
-            "value": 44.0
-          },
-          {
-            "hollow": false,
-            "label": "Q1 2026",
-            "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-first-quarter-2026-results/",
-            "value": 81.7
-          },
-          {
-            "hollow": false,
-            "label": "Q2 2026",
-            "sourceUrl": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-second-quarter-2026-results/",
-            "value": 127.5
-          }
-        ],
-        "researched": true,
-        "source": {
-          "date": "2026-07-30",
-          "outlet": "Samsung Semiconductor Global Newsroom",
-          "tier": "secondary",
-          "title": "Samsung chip division (DS) quarterly revenue",
-          "url": "https://news.samsungsemiconductor.com/global/samsung-electronics-announces-second-quarter-2026-results/"
-        },
-        "title": "Samsung chip division (DS) quarterly revenue",
-        "unit": "KRW trillions"
-      },
-      "date": "2026-09-01",
-      "noChartReason": null,
-      "sources": [
-        {
-          "date": "2026-08-31",
-          "outlet": "Yahoo Finance (24/7 Wall St. syndication)",
-          "tier": "secondary",
-          "title": "Yahoo Finance (24/7 Wall St. syndication)",
-          "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html"
-        }
-      ],
-      "storyHref": "story/2026-09-01.html",
-      "text": "Samsung has locked about 70% of its memory capacity into long-term contracts running through 2031, leaving little uncommitted supply for new buyers."
-    },
-    {
-      "chart": {
-        "caption": "Found today — single source: SK hynix Newsroom.",
-        "form": "columns",
-        "points": [
-          {
-            "hollow": false,
-            "label": "3Q25",
-            "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
-            "value": 24.4489
-          },
-          {
-            "hollow": false,
-            "label": "4Q25",
-            "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
-            "value": 32.8267
-          },
-          {
-            "hollow": false,
-            "label": "1Q26",
-            "sourceUrl": "https://news.skhynix.com/en/q1-2026-business-results/",
-            "value": 52.5763
-          },
-          {
-            "hollow": false,
-            "label": "2Q26",
-            "sourceUrl": "https://news.skhynix.com/en/q2-2026-business-results/",
-            "value": 79.3187
-          }
-        ],
-        "researched": true,
-        "source": {
-          "date": "2026-07-29",
-          "outlet": "SK hynix Newsroom",
-          "tier": "secondary",
-          "title": "SK hynix quarterly revenue",
-          "url": "https://news.skhynix.com/en/q2-2026-business-results/"
-        },
-        "title": "SK hynix quarterly revenue",
-        "unit": "trillion Korean won"
-      },
-      "date": "2026-09-01",
-      "noChartReason": null,
-      "sources": [
-        {
-          "date": "2026-08-31",
-          "outlet": "Yahoo Finance (24/7 Wall St. syndication)",
-          "tier": "secondary",
-          "title": "Yahoo Finance (24/7 Wall St. syndication)",
-          "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html"
-        }
-      ],
-      "storyHref": "story/2026-09-01.html",
-      "text": "SK Hynix committed $38.3 billion of investment through 2031, and its chief executive says the memory shortage could persist through 2030."
-    },
-    {
       "chart": null,
-      "date": "2026-09-01",
+      "date": "2026-09-04",
       "noChartReason": {
         "cause": "no-published-number",
         "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
       },
       "sources": [
         {
-          "date": "2026-08-31",
+          "date": "2026-09-02",
+          "outlet": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+          "tier": "primary",
+          "title": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+          "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
+        },
+        {
+          "date": "2026-09-02",
           "outlet": "Investing.com",
           "tier": "secondary",
           "title": "Investing.com",
-          "url": "https://www.investing.com/news/stock-market-news/china-memory-leader-cxmt-begins-smallbatch-production-of-hbm3e-silicon--report-4882862"
+          "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-broadcom-tops-q3-2026-estimates-as-ai-sales-surge-93CH-4886849"
         }
       ],
-      "storyHref": "story/2026-09-01.html",
-      "text": "China's CXMT began small-batch production of HBM3E memory, one generation behind the three big suppliers, with wider commercial supply targeted for 2027."
+      "storyHref": "story/2026-09-04.html",
+      "text": "Broadcom sold $16.7 billion of chips for artificial-intelligence work last quarter, up 221% on a year earlier, and points to $230 billion by fiscal 2028."
+    },
+    {
+      "chart": {
+        "caption": "Found today — single source: StockAnalysis.com (TSMC cash flow statement).",
+        "form": "columns",
+        "points": [
+          {
+            "hollow": false,
+            "label": "FY2021",
+            "sourceUrl": "https://stockanalysis.com/stocks/TSM/financials/cash-flow-statement/",
+            "value": 839196.0
+          },
+          {
+            "hollow": false,
+            "label": "FY2022",
+            "sourceUrl": "https://stockanalysis.com/stocks/TSM/financials/cash-flow-statement/",
+            "value": 1082672.0
+          },
+          {
+            "hollow": false,
+            "label": "FY2023",
+            "sourceUrl": "https://stockanalysis.com/stocks/TSM/financials/cash-flow-statement/",
+            "value": 949817.0
+          },
+          {
+            "hollow": false,
+            "label": "FY2024",
+            "sourceUrl": "https://stockanalysis.com/stocks/TSM/financials/cash-flow-statement/",
+            "value": 956007.0
+          },
+          {
+            "hollow": false,
+            "label": "FY2025",
+            "sourceUrl": "https://stockanalysis.com/stocks/TSM/financials/cash-flow-statement/",
+            "value": 1272411.0
+          }
+        ],
+        "researched": true,
+        "source": {
+          "date": "2025-12-31",
+          "outlet": "StockAnalysis.com (TSMC cash flow statement)",
+          "tier": "secondary",
+          "title": "TSMC annual capital expenditures",
+          "url": "https://stockanalysis.com/stocks/TSM/financials/cash-flow-statement/"
+        },
+        "title": "TSMC annual capital expenditures",
+        "unit": "NT$ millions"
+      },
+      "date": "2026-09-04",
+      "noChartReason": null,
+      "sources": [
+        {
+          "date": "2026-09-02",
+          "outlet": "Aroged (citing Semicon Taiwan 2026 remarks)",
+          "tier": "secondary",
+          "title": "Aroged (citing Semicon Taiwan 2026 remarks)",
+          "url": "https://www.aroged.com/2026/09/02/tsmc-nearly-doubles-equipment-purchases-but-still-unable-to-meet-chip-demand/"
+        }
+      ],
+      "storyHref": "story/2026-09-04.html",
+      "text": "TSMC says it still cannot meet chip demand while building about 20 plants at once, with its equipment orders now 1.9 times December's plan."
+    },
+    {
+      "chart": null,
+      "date": "2026-09-04",
+      "noChartReason": {
+        "cause": "no-published-number",
+        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
+      },
+      "sources": [
+        {
+          "date": "2026-09-02",
+          "outlet": "Hewlett Packard Enterprise Co. (SEC EDGAR 8-K Exhibit 99.1)",
+          "tier": "primary",
+          "title": "Hewlett Packard Enterprise Co. (SEC EDGAR 8-K Exhibit 99.1)",
+          "url": "https://www.sec.gov/Archives/edgar/data/0001645590/000164559026000078/ex-991x922026x8k.htm"
+        },
+        {
+          "date": "2026-09-02",
+          "outlet": "SiliconANGLE",
+          "tier": "secondary",
+          "title": "SiliconANGLE",
+          "url": "https://siliconangle.com/2026/09/02/ai-demand-lifts-hpe-and-netapp-to-record-quarters-investors-sell-both/"
+        }
+      ],
+      "storyHref": "story/2026-09-04.html",
+      "text": "Hewlett Packard Enterprise booked record artificial-intelligence orders of $3.1 billion last quarter and lifted its full-year sales growth range to 34% to 37%."
     }
   ],
   "categoryId": "chips.merchant-gpu",
@@ -145,25 +129,25 @@
           "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
         },
         {
-          "date": "2026-08-07",
-          "outlet": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
-          "tier": "secondary",
-          "title": "Seoul Economic Daily (citing The Information / SemiAnalysis reporting)",
-          "url": "https://en.sedaily.com/international/2026/08/07/nvidia-weighs-cutting-hbm-capacity-for-rubin-ultra"
-        },
-        {
           "date": "2026-08-10",
           "outlet": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
           "tier": "secondary",
           "title": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
           "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994"
+        },
+        {
+          "date": "2026-08-29",
+          "outlet": "The Motley Fool",
+          "tier": "secondary",
+          "title": "The Motley Fool",
+          "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
         }
       ],
       "id": "bottleneck",
       "plainName": "What is holding shipments back",
       "ratingWord": "Weak",
-      "reasoning": "Packaging has eased to about a 10% shortfall and HBM4 yields near 80%, so memory now holds the line rather than the packaging line.",
-      "summary": "NVIDIA says it can supply roughly 70% of demand, its memory suppliers cover only 60-70% of requested HBM for the 2027 flagship, and Micron can commit about half of what customers ask for, which forced memory cuts on Rubin Ultra.",
+      "reasoning": "The squeeze is physical: NVIDIA's forward supply commitments jumped to $279 billion mainly for memory, and it cut the flagship Rubin Ultra to 192 gigabytes from 288.",
+      "summary": "NVIDIA can supply only about 70% of demand and Micron can fill roughly half of what customers ask, naming server DRAM the single largest constraint its hyperscale buyers face.",
       "tone": "bad"
     },
     {
@@ -178,25 +162,25 @@
           "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
         },
         {
+          "date": "2026-09-02",
+          "outlet": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+          "tier": "primary",
+          "title": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+          "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
+        },
+        {
           "date": "2026-08-04",
           "outlet": "AMD Investor Relations",
           "tier": "primary",
           "title": "AMD Investor Relations",
           "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
-        },
-        {
-          "date": "2026-08-25",
-          "outlet": "24/7 Wall St.",
-          "tier": "secondary",
-          "title": "24/7 Wall St.",
-          "url": "https://247wallst.com/investing/2026/08/25/coreweaves-ai-data-center-capacity-is-exploding-its-35-billion-debt-load-still-makes-the-stock-untouchable/"
         }
       ],
       "id": "momentum",
       "plainName": "How hard buyers are buying",
       "ratingWord": "Very strong",
-      "reasoning": "Booked demand keeps building, with CoreWeave's backlog at $104.2 billion, even as US cloud server procurement growth slows to 1.7% sequentially in the third quarter.",
-      "summary": "NVIDIA data-centre revenue reached $89.0 billion, up 117% year over year, with the next quarter guided to $108 billion, and AMD's data-centre segment more than doubled to $6.7 billion.",
+      "reasoning": "Order evidence sits underneath the print: record Hewlett Packard Enterprise AI bookings of $3.1 billion, Nscale contracted revenue near $103 billion, and Korea's $919 billion state data-center programme.",
+      "summary": "NVIDIA data-center revenue hit $89.0 billion, up 117% year over year, with the next quarter guided to $108 billion, while Broadcom AI silicon revenue rose 221% to $16.7 billion and AMD data-center revenue reached $6.7 billion, up 107%.",
       "tone": "good"
     },
     {
@@ -204,18 +188,11 @@
       "direction": "worsening",
       "evidence": [
         {
-          "date": "2026-08-04",
-          "outlet": "AMD Investor Relations (ir.amd.com)",
+          "date": "2026-08-31",
+          "outlet": "AMD Investor Relations",
           "tier": "primary",
-          "title": "AMD Investor Relations (ir.amd.com)",
-          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
-        },
-        {
-          "date": "2026-07-23",
-          "outlet": "Intel Corporation (IR press release)",
-          "tier": "primary",
-          "title": "Intel Corporation (IR press release)",
-          "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
+          "title": "AMD Investor Relations",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live"
         },
         {
           "date": "2026-08-31",
@@ -223,26 +200,26 @@
           "tier": "primary",
           "title": "NVIDIA Newsroom (official press release)",
           "url": "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms"
+        },
+        {
+          "date": "2026-07-23",
+          "outlet": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+          "tier": "secondary",
+          "title": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-keynote-live-coverage/"
         }
       ],
       "id": "competitiveStructure",
       "plainName": "Whether buyers have a second choice",
       "ratingWord": "Mixed",
-      "reasoning": "Buyers hold more credible second sources than a year ago, which erodes the seller's grip on allocation and price.",
-      "summary": "AMD moved its Helios rack into production, Intel Foundry grew 31% on better yields, and OpenAI, Google and MediaTek each advanced custom accelerators.",
+      "reasoning": "Intel's memory-heavy inference GPU and MediaTek building on NVIDIA's own rack wiring widen the field of credible suppliers again this cycle.",
+      "summary": "AMD's Helios racks reached production and its flagship data-center accelerator now serves paying customers in Saudi Arabia, while OpenAI's first in-house inference chip and Marvell's raised custom-silicon outlook add buyers who design around merchant parts.",
       "tone": "mixed"
     },
     {
       "confidence": "Medium — the underlying reports are single-source in places.",
       "direction": "worsening",
       "evidence": [
-        {
-          "date": "2026-07-24",
-          "outlet": "Silicon Analysts",
-          "tier": "secondary",
-          "title": "Silicon Analysts",
-          "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026"
-        },
         {
           "date": "2026-05-21",
           "outlet": "Tom's Hardware custom AI ASIC state of play",
@@ -256,19 +233,33 @@
           "tier": "secondary",
           "title": "TechTimes / Network World",
           "url": "https://www.techtimes.com/articles/319338/20260629/amd-helios-faces-nvidia-vera-rubin-july-23-keynote-memory-leads-training-trails.htm"
+        },
+        {
+          "date": "2026-08-18",
+          "outlet": "24/7 Wall St. (reporting Marvell Technology SEC 8-K)",
+          "tier": "secondary",
+          "title": "24/7 Wall St. (reporting Marvell Technology SEC 8-K)",
+          "url": "https://247wallst.com/investing/2026/08/19/marvell-technology-rockets-13-on-12-2b-google-warrant-broadcom-falls-3-alphabet-unmoved/"
         }
       ],
       "id": "moat",
       "plainName": "How safe NVIDIA's lead looks",
       "ratingWord": "Weak",
-      "reasoning": "Networking attach and rack bundling still bind buyers in, yet they slow the share leak rather than stop it.",
-      "summary": "Share estimates place NVIDIA between 70% and 90% depending on the measure, with the projected path falling from 87% in 2024 toward 75% in 2026 while custom silicon already consumes about two-thirds of AI compute.",
+      "reasoning": "Marvell winning custom work at Google and SK Hynix holding 58% of stacked memory show pricing power sliding toward suppliers and design partners.",
+      "summary": "Custom chips already take about two-thirds of AI compute and grow 44.6% this year against 16.1% for merchant GPUs, so the 70-80% revenue share keeps eroding.",
       "tone": "bad"
     },
     {
       "confidence": "High — drawn from company filings and calls.",
       "direction": "worsening",
       "evidence": [
+        {
+          "date": "2026-05-20",
+          "outlet": "NVIDIA Investor Relations press release",
+          "tier": "primary",
+          "title": "NVIDIA Investor Relations press release",
+          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx"
+        },
         {
           "date": "2026-08-04",
           "outlet": "AMD Investor Relations",
@@ -277,25 +268,18 @@
           "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
         },
         {
-          "date": "2026-08-12",
-          "outlet": "AMD Investor Relations",
-          "tier": "primary",
-          "title": "AMD Investor Relations",
-          "url": "https://ir.amd.com/news-events/press-releases"
-        },
-        {
-          "date": "2026-07-23",
-          "outlet": "Intel Corporation Investor Relations (intc.com)",
-          "tier": "primary",
-          "title": "Intel Corporation Investor Relations (intc.com)",
-          "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
+          "date": "2026-07-16",
+          "outlet": "TradingKey",
+          "tier": "secondary",
+          "title": "TradingKey",
+          "url": "https://www.tradingkey.com/analysis/stocks/more/262034508-tsmc-q2-earnings-beat-expectations-raises-full-year-outlook-tradingkey"
         }
       ],
       "id": "unitEconomics",
       "plainName": "How profitable the sellers are",
       "ratingWord": "Strong",
-      "reasoning": "Memory costs now push NVIDIA toward a 71-72% floor by the fourth quarter, which trims the level while leaving it far above the rest of the chain.",
-      "summary": "NVIDIA still earns about 74% gross margin, AMD holds 56% non-GAAP, Intel improved to 41.8%, and TSMC posted 67.7%.",
+      "reasoning": "The slide has started, and memory is the cause: NVIDIA now guides 74% with a stated floor of 71-72% and management points to the low seventies by year-end.",
+      "summary": "Vendor margins still carry the category: NVIDIA ran at 75% earlier in the year, TSMC at 67.7%, and AMD lifted its reported margin to 54%.",
       "tone": "good"
     },
     {
@@ -310,25 +294,25 @@
           "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000052/nvda-20260426.htm"
         },
         {
-          "date": "2026-08-26",
-          "outlet": "NVIDIA Newsroom",
-          "tier": "primary",
-          "title": "NVIDIA Newsroom",
-          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
-        },
-        {
           "date": "2026-08-10",
           "outlet": "NVIDIA Newsroom / investor.nvidia.com (official press release)",
           "tier": "primary",
           "title": "NVIDIA Newsroom / investor.nvidia.com (official press release)",
           "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Partners-With-Apollo-BlackRock-Blackstone-Brookfield-Goldman-Sachs-and-KKR-to-Establish-AI-Compute-Infrastructure-Financing-Platforms-to-Mobilize-Over-500-Billion-of-Third-Party-Capital/default.aspx"
+        },
+        {
+          "date": "2026-08-15",
+          "outlet": "Yahoo Finance (Reuters)",
+          "tier": "secondary",
+          "title": "Yahoo Finance (Reuters)",
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-scales-back-250-billion-234356524.html"
         }
       ],
       "id": "strategicRisk",
       "plainName": "What could go wrong",
       "ratingWord": "Mixed",
-      "reasoning": "Taiwan prosecutors indicted nine people over diverted servers, China contributes nothing to guidance, and Washington is drafting tariffs that would reach finished servers.",
-      "summary": "NVIDIA cut its guarantee on the Ohio campus from $250 billion to under $120 billion, its largest backed demand tranche rests on loss-making OpenAI, and three direct customers supply over half of revenue.",
+      "reasoning": "Outside financiers pledging over $500 billion soften that exposure, and the harder edge is policy: Taiwan indicted nine people over diverted AI servers and Washington is drafting tariffs on finished data-center hardware.",
+      "summary": "Three direct customers make up 21%, 17% and 16% of NVIDIA revenue, and the largest backed block of demand rests on OpenAI, which lost $20.9 billion in 2025; NVIDIA has already cut its Ohio guarantee from $250 billion to under $120 billion.",
       "tone": "mixed"
     }
   ],
@@ -356,10 +340,10 @@
   ],
   "gapChart": {
     "annotation": {
-      "date": "2026-08-01",
+      "date": "2026-09-01",
       "label": "Widest gap so far"
     },
-    "caption": "The gap narrowed in the latest reading. Demand and supply are each reading's own reported momentum score, not a raw shipment count. Some points are a single day's reading; others are a whole month's figure, placed at the start of that month.",
+    "caption": "The gap widened in the latest reading. Demand and supply are each reading's own reported momentum score, not a raw shipment count. Some points are a single day's reading; others are a whole month's figure, placed at the start of that month.",
     "points": [
       {
         "date": "2026-06-01",
@@ -398,8 +382,8 @@
       },
       {
         "date": "2026-09-01",
-        "demand": 4.540000000000003,
-        "supply": 0.3066666666666666
+        "demand": 5.660000000000001,
+        "supply": -0.22666666666666677
       }
     ],
     "sources": [
@@ -414,18 +398,18 @@
             "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
           },
           {
+            "date": "2026-09-02",
+            "outlet": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+            "tier": "primary",
+            "title": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+            "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
+          },
+          {
             "date": "2026-08-04",
             "outlet": "AMD Investor Relations",
             "tier": "primary",
             "title": "AMD Investor Relations",
             "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
-          },
-          {
-            "date": "2026-07-23",
-            "outlet": "Intel Corporation (IR press release)",
-            "tier": "primary",
-            "title": "Intel Corporation (IR press release)",
-            "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
           }
         ]
       }
@@ -434,8 +418,8 @@
   "issues": {
     "open": [
       {
-        "assessedAsOf": "2026-09-01",
-        "checkCount": 11,
+        "assessedAsOf": "2026-09-04",
+        "checkCount": 12,
         "history": [
           {
             "asOf": "2026-08-19",
@@ -480,27 +464,38 @@
           {
             "asOf": "2026-09-01",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-04",
+            "status": "worsened"
           }
         ],
         "id": "dim-bottleneck",
-        "reasoning": "Samsung has committed about 70% of its memory capacity under contracts running to 2031, and SK Hynix's chief executive says the shortage could last through 2030. The new Indiana plant does not produce until 2029.",
+        "reasoning": "TSMC said on 2 September it still cannot meet chip demand while building about 20 plants, with equipment demand at 1.9 times its December plan, and Broadcom added land, power and building shells to the list of limits.",
         "sources": [
           {
-            "date": "2026-08-31",
-            "outlet": "Yahoo Finance (24/7 Wall St. syndication)",
+            "date": "2026-09-02",
+            "outlet": "Aroged (citing Semicon Taiwan 2026 remarks)",
             "tier": "secondary",
-            "title": "Yahoo Finance (24/7 Wall St. syndication)",
-            "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html"
+            "title": "Aroged (citing Semicon Taiwan 2026 remarks)",
+            "url": "https://www.aroged.com/2026/09/02/tsmc-nearly-doubles-equipment-purchases-but-still-unable-to-meet-chip-demand/"
+          },
+          {
+            "date": "2026-09-02",
+            "outlet": "Investing.com",
+            "tier": "secondary",
+            "title": "Investing.com",
+            "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-broadcom-tops-q3-2026-estimates-as-ai-sales-surge-93CH-4886849"
           }
         ],
         "status": "worsened",
         "title": "Bottleneck",
         "trackedSince": "2026-08",
-        "worsenedCount": 9
+        "worsenedCount": 10
       },
       {
-        "assessedAsOf": "2026-09-01",
-        "checkCount": 11,
+        "assessedAsOf": "2026-09-04",
+        "checkCount": 12,
         "history": [
           {
             "asOf": "2026-08-19",
@@ -545,11 +540,22 @@
           {
             "asOf": "2026-09-01",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-04",
+            "status": "worsened"
           }
         ],
         "id": "dim-moat",
-        "reasoning": "AMD Instinct MI355X systems went live in production at HUMAIN, with up to 250 megawatts planned from 2027. Separately, Alibaba's chip arm and Cambricon are testing Chinese memory for their own processors.",
+        "reasoning": "Broadcom's custom chip sales for artificial-intelligence work reached $16.7 billion, up 221%, with $230 billion targeted by fiscal 2028, and AMD's systems went live for paying customers in Saudi Arabia on 31 August.",
         "sources": [
+          {
+            "date": "2026-09-02",
+            "outlet": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+            "tier": "primary",
+            "title": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+            "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
+          },
           {
             "date": "2026-08-31",
             "outlet": "AMD Investor Relations",
@@ -558,21 +564,21 @@
             "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live"
           },
           {
-            "date": "2026-08-31",
+            "date": "2026-09-02",
             "outlet": "Investing.com",
             "tier": "secondary",
             "title": "Investing.com",
-            "url": "https://www.investing.com/news/stock-market-news/china-memory-leader-cxmt-begins-smallbatch-production-of-hbm3e-silicon--report-4882862"
+            "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-broadcom-tops-q3-2026-estimates-as-ai-sales-surge-93CH-4886849"
           }
         ],
         "status": "worsened",
         "title": "Moat",
         "trackedSince": "2026-08",
-        "worsenedCount": 6
+        "worsenedCount": 7
       },
       {
-        "assessedAsOf": "2026-09-01",
-        "checkCount": 10,
+        "assessedAsOf": "2026-09-04",
+        "checkCount": 11,
         "history": [
           {
             "asOf": "2026-08-21",
@@ -613,10 +619,14 @@
           {
             "asOf": "2026-09-01",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-04",
+            "status": "unchanged"
           }
         ],
         "id": "constraint-stacked-memory-and-server-dram",
-        "reasoning": "About 70% of Samsung's capacity is now tied up to 2031, and spot high-bandwidth memory trades at roughly four to five times the contract price, showing how little supply is left uncommitted.",
+        "reasoning": "No new supply arrived today. Samsung still has about 70% of capacity locked to 2031 and spot stacked memory sells at four to five times contract price; a report that NVIDIA won better 2027 terms shifts who pays, not how much is made.",
         "sources": [
           {
             "date": "2026-08-31",
@@ -624,16 +634,23 @@
             "tier": "secondary",
             "title": "Yahoo Finance (24/7 Wall St. syndication)",
             "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html"
+          },
+          {
+            "date": "2026-09-03",
+            "outlet": "All-Weather Media (allweatherfinance.com)",
+            "tier": "secondary",
+            "title": "All-Weather Media (allweatherfinance.com)",
+            "url": "https://allweatherfinance.com/south-koreas-trillion-dollar-sovereign-ai-investment-nvidia-wins-sk-hynix-under-pressure/"
           }
         ],
-        "status": "worsened",
+        "status": "unchanged",
         "title": "HBM4 and server DRAM supply",
         "trackedSince": "2026-08",
         "worsenedCount": 6
       },
       {
-        "assessedAsOf": "2026-09-01",
-        "checkCount": 8,
+        "assessedAsOf": "2026-09-04",
+        "checkCount": 9,
         "history": [
           {
             "asOf": "2026-08-23",
@@ -666,10 +683,14 @@
           {
             "asOf": "2026-09-01",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-04",
+            "status": "worsened"
           }
         ],
         "id": "constraint-hbm4-memory-allocation-per-accelerator",
-        "reasoning": "NVIDIA's revived Rubin CPX carries 168 GB of HBM4 in place of 128 GB of ordinary graphics memory, and is due to enter production in the first quarter of 2027, adding another claim on scarce memory.",
+        "reasoning": "NVIDIA's revived Rubin CPX, due to start production in the first quarter of 2027, is reported to carry 168 gigabytes of stacked memory in place of 128 gigabytes of ordinary graphics memory, adding another claim on the same scarce pool.",
         "sources": [
           {
             "date": "2026-08-31",
@@ -682,31 +703,38 @@
         "status": "worsened",
         "title": "stacked memory supply",
         "trackedSince": "2026-08",
-        "worsenedCount": 2
+        "worsenedCount": 3
       }
     ],
     "resolved": []
   },
   "schemaVersion": "1.2",
   "verdict": {
-    "answer": "Getting closer. The memory is already sold, some of it through 2031",
+    "answer": "Not yet. The shortage is no longer just about memory",
     "chip": {
-      "direction": "narrowing",
-      "label": "Gap narrowing"
+      "direction": "widening",
+      "label": "Gap widening"
     },
     "confidence": "We are confident in this read",
     "question": "Is supply catching up to demand?",
-    "soWhat": "Samsung has tied up about 70% of its memory output in long-term contracts, one rival says the shortage may run to 2030, and the new plants being built will not make a chip until 2029.",
+    "soWhat": "Chip plants, buildings and power are all short at once, and buyers keep signing anyway.",
     "sources": [
       {
         "assessment": true,
         "basedOn": [
           {
-            "date": "2026-08-31",
-            "outlet": "Yahoo Finance (24/7 Wall St. syndication)",
+            "date": "2026-09-02",
+            "outlet": "Aroged (citing Semicon Taiwan 2026 remarks)",
             "tier": "secondary",
-            "title": "Yahoo Finance (24/7 Wall St. syndication)",
-            "url": "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html"
+            "title": "Aroged (citing Semicon Taiwan 2026 remarks)",
+            "url": "https://www.aroged.com/2026/09/02/tsmc-nearly-doubles-equipment-purchases-but-still-unable-to-meet-chip-demand/"
+          },
+          {
+            "date": "2026-09-02",
+            "outlet": "Investing.com",
+            "tier": "secondary",
+            "title": "Investing.com",
+            "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-broadcom-tops-q3-2026-estimates-as-ai-sales-surge-93CH-4886849"
           }
         ]
       }

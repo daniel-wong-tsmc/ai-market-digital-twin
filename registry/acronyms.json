@@ -123,6 +123,10 @@
   "RED",
   "MERCHANT",
   "DAILY",
-  "CXMT"
+  "CXMT",
+  "NVL",
+  "PNY",
+  "TACC",
+  "UT"
  ]
 }

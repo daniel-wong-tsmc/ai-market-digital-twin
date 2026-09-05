@@ -8,54 +8,32 @@
         "bottleneck"
       ],
       "findingIds": [
-        "www-fool-com-12234ce0-2026-08-2",
-        "www-marketbeat-com-01fd246e-2026-08-1",
-        "en-sedaily-com-b1c000ac-2026-08-1",
-        "www-investing-com-87498f82-2026-08-1"
+        "www-aroged-com-a319f429-2026-09-2",
+        "www-aroged-com-a319f429-2026-09-1"
       ],
       "thesisIds": [
-        "nvda-demand-durability",
-        "vendor-guidance-now-measures-the-shortfall-not-the-demand",
-        "memory-supply-is-the-new-choke-point-on-accelerator-shipments"
+        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing",
+        "building-the-plants-is-now-as-slow-as-filling-them"
       ],
-      "watchItem": "Order demand for accelerators runs far ahead of what the chain can build, but the shortfall now sits in memory rather than in wafers: the leading vendor guided to about 70% growth while customer forecasts implied roughly 140%, and its memory suppliers can cover only 60% to 70% of requested volume. Wafer-start plans that assume orders convert on schedule carry the risk that memory, not front-end capacity, sets the shipped number."
+      "watchItem": "Demand for leading-edge wafers still runs ahead of what the industry can build: TSMC's own tool demand sits at roughly 1.9 times the level projected nine months earlier, and it says it cannot meet chip demand while about 20 plants go up at once. Wafer-start plans across leading nodes are exposed to how long that gap stays open."
     },
     {
       "dimensions": [
         "bottleneck",
-        "competitiveStructure"
+        "unitEconomics"
       ],
       "findingIds": [
-        "www-trendforce-com-836f33fa-2026-08-1",
-        "supplyics-com-c83015c2-2026-08-2",
-        "supplyics-com-c83015c2-2026-08-3",
-        "cryptobriefing-com-c3c1a1c3-2026-08-2"
+        "www-kucoin-com-eb3a7762-2026-09-1",
+        "finance-yahoo-com-31239457-2026-09-2",
+        "www-investing-com-81ce92bb-2026-09-3"
       ],
       "thesisIds": [
+        "supply-constraint-binding",
+        "memory-supply-is-the-new-choke-point-on-accelerator-shipments",
         "packaging-tightness-starts-to-ease-while-memory-does-not",
-        "ai-packaging-supply-is-concentrated-in-a-few-buyers",
-        "supply-constraint-binding"
+        "memory-shortage-now-shrinks-the-product-not-just-the-volume"
       ],
-      "watchItem": "Advanced-packaging lines are booked through 2027 and more than 85% of 2026 and 2027 capacity is pre-sold, with one buyer holding roughly 60% and reserving 800,000 to 850,000 wafers of this year's output. Sources disagree on whether the shortfall has narrowed to about 10% or is still near 20%, so the size of the remaining gap is the open number to watch."
-    },
-    {
-      "dimensions": [
-        "moat",
-        "competitiveStructure",
-        "bottleneck"
-      ],
-      "findingIds": [
-        "cryptobriefing-com-c3c1a1c3-2026-08-1",
-        "techsoda-substack-com-3b7a4ff5-2026-08-1",
-        "techsoda-substack-com-3b7a4ff5-2026-08-4",
-        "www-trendforce-com-b8196a71-2026-08-1",
-        "siliconanalysts-com-528fac70-2026-07-5"
-      ],
-      "thesisIds": [
-        "packaging-work-starts-to-spread-beyond-tsmc",
-        "the-alternative-packaging-route-has-its-own-choke-point"
-      ],
-      "watchItem": "Packaging work is starting to move to rival routes: one large cloud buyer has ordered more than three million units of Intel bridge packaging for 2028 delivery, that supplier reports high demand and a growing backlog at roughly half the cost, and alternative Samsung and outside chip assembly and test providers quote much shorter waits. The offset is that the rival route has its own single fully-booked capacitor supplier and is described as a better fit for custom chips than for high-bandwidth accelerators."
+      "watchItem": "Advanced packaging is no longer the only thing rationing accelerator output: the leading vendor cut its next flagship to 192 gigabytes of stacked memory, and uncontracted stacked memory trades at four to five times the long-term contract price. Booked packaging slots can therefore still yield fewer finished systems than the allocation implies."
     },
     {
       "dimensions": [
@@ -63,17 +41,18 @@
         "moat"
       ],
       "findingIds": [
-        "qz-com-36c37a60-2026-08-1",
-        "www-trendforce-com-01be0e4e-2026-08-1",
-        "www-investing-com-b7ff2af7-2026-08-3",
-        "techcrunch-com-6b79ddb7-1"
+        "www-sec-gov-a82cb219-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-1",
+        "chipbriefing-substack-com-2fd15296-2026-09-2",
+        "nvidianews-nvidia-com-792f5768-2026-09-1",
+        "nvidianews-nvidia-com-792f5768-2026-09-2"
       ],
       "thesisIds": [
-        "model-builders-start-designing-their-own-chips",
+        "custom-asic-substitution",
         "a-third-designer-enters-the-custom-ai-chip-business",
-        "custom-asic-substitution"
+        "the-leading-vendor-pulls-rival-designers-onto-its-own-wiring"
       ],
-      "watchItem": "The leading-node customer base is broadening beyond the two merchant GPU vendors: one cloud provider is negotiating capacity for upward of 300,000 in-house accelerators for 2027 with a stated goal above a million, a model builder unveiled its first custom inference chip on a 3nm process, and a third design house puts its first accelerator into production this quarter. One model builder is also in early talks with a rival foundry on a 2nm custom part, which is the counterweight to watch."
+      "watchItem": "Custom accelerator silicon is scaling fast: Broadcom booked $16.7 billion of chip revenue for artificial-intelligence work in its third quarter, up 221% year over year, and points to $230 billion by fiscal 2028, while NVIDIA put $3.5 billion into MediaTek to bring a third designer onto its own connection fabric. The leading-node customer base tilts further toward custom designs alongside merchant accelerators."
     },
     {
       "dimensions": [
@@ -81,58 +60,86 @@
         "momentum"
       ],
       "findingIds": [
-        "finance-biggo-com-cda170af-2026-08-1",
-        "www-fool-com-12234ce0-2026-08-4",
-        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
-        "pr-tsmc-com-7f560c3b-2026-08-1",
-        "pr-tsmc-com-7f560c3b-2026-08-2"
+        "www-investing-com-fac86e4e-2026-09-1",
+        "www-investing-com-fac86e4e-2026-09-4",
+        "finance-yahoo-com-31239457-2026-09-2"
       ],
       "thesisIds": [
-        "chip-vendors-pass-memory-costs-into-system-prices",
-        "the-second-largest-foundry-fills-up-and-raises-prices",
-        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing",
-        "memory-makers-capture-a-growing-share-of-ai-server-profit"
+        "the-vendor-now-sells-revenue-per-gigawatt-not-chips",
+        "memory-makers-capture-a-growing-share-of-ai-server-profit",
+        "rising-memory-costs-inflate-ai-server-economics"
       ],
-      "watchItem": "Pricing power across the chain is firm but is shifting toward memory: the leading vendor is raising AI system prices by more than 15% for early-next-year shipments while its own gross margin steps down into the low 70s on memory costs, and the second-largest foundry has raised advanced contract prices 10% to 15% on new orders. Foundry results still show the demand side holding, with July revenue up 44.7% year over year and full-year growth guided slightly above 40%."
-    },
-    {
-      "dimensions": [
-        "competitiveStructure",
-        "strategicRisk"
-      ],
-      "findingIds": [
-        "www-intc-com-9e1300a4-2026-08-2",
-        "newsroom-intel-com-6cdf4bbc-2026-08-1",
-        "www-freemalaysiatoday-com-7dfc89b4-2026-08-3",
-        "www-freepressjournal-in-36c153cb-2026-08-1"
-      ],
-      "thesisIds": [
-        "intel-returns-as-a-data-center-supplier",
-        "the-second-largest-foundry-fills-up-and-raises-prices",
-        "tariffs-on-finished-ai-hardware-become-a-new-policy-risk",
-        "us-onshoring-broadens-the-ai-hardware-supply-base"
-      ],
-      "watchItem": "Two rivals are adding weight at once: the third US supplier grew foundry revenue 31% year over year and raised $15 billion of new equity for capacity, while the Korean competitor expects AI and high-performance work to pass 30% of its foundry revenue this year, up from 15% to 20% in late 2025. A separate policy track, tariffs on imported chips and finished servers with duty-free allowances sized to each company's US fabrication investment, has no announced rate or start date yet."
+      "watchItem": "The leading vendor now prices by power delivered rather than by chip, citing about $40 billion of revenue per gigawatt on its newest platform against $25 billion before and 35 times lower cost per token. End-market pricing stays firm, but memory suppliers hold the scarce input and capture a growing share of the value."
     },
     {
       "dimensions": [
         "strategicRisk",
-        "momentum"
+        "competitiveStructure"
       ],
       "findingIds": [
-        "finance-yahoo-com-4ffdbfce-2026-08-1",
-        "nvidianews-nvidia-com-b38ebbeb-2026-08-1",
-        "nvidianews-nvidia-com-b38ebbeb-2026-08-4",
-        "investinglive-com-da6583e3-2026-08-1",
-        "investor-nvidia-com-7e5e6232-2026-08-1"
+        "allweatherfinance-com-da1d5c1b-2026-09-1",
+        "allweatherfinance-com-da1d5c1b-2026-09-2",
+        "www-investing-com-17df6d69-2026-09-1",
+        "www-investing-com-17df6d69-2026-09-2"
       ],
       "thesisIds": [
-        "vendor-financed-demand-circularity",
-        "customer-concentration-risk",
-        "outside-investors-start-funding-the-compute-buildout",
-        "hyperscaler-ai-spending-may-outrun-near-term-returns"
+        "korea-becomes-a-second-centre-of-the-ai-buildout",
+        "government-money-underwrites-the-next-wave-of-ai-supply",
+        "china-starts-building-its-own-stacked-memory"
       ],
-      "watchItem": "A large slice of the order book behind leading-node and packaging bookings rests on buyers the chip vendors themselves finance: one vendor cut a site guarantee from $250 billion to under $120 billion, capped another at $105 billion on a single unprofitable tenant, and reporting says some compute-partnership deals were paused, which the vendor denies. Whether third-party money actually arrives, against memorandums meant to mobilise over $500 billion, is the exposure sitting under the demand line."
+      "watchItem": "Public money is redrawing where supply gets built: South Korea announced a $919 billion plan for 8.4 gigawatts of data-center computing by 2029, with SK Group taking 2 gigawatts of Rubin systems and Naver a 200-megawatt order. A Chinese memory maker has meanwhile started small-batch stacked-memory production one generation behind the leaders, with local designers already testing it."
+    },
+    {
+      "dimensions": [
+        "momentum",
+        "competitiveStructure"
+      ],
+      "findingIds": [
+        "www-investing-com-f96fdb9b-2026-09-1",
+        "www-lightreading-com-518cb6b0-2026-09-1",
+        "siliconangle-com-ebd2c1ae-2026-09-1",
+        "www-sec-gov-b2b6a12a-2026-09-2"
+      ],
+      "thesisIds": [
+        "cloud-backlog-conversion-becomes-the-demand-proof-point",
+        "mid-size-clouds-win-multi-year-ai-contracts",
+        "enterprise-hardware-makers-show-the-orders-in-their-own-books",
+        "robot-makers-join-the-list-of-gigawatt-scale-compute-buyers"
+      ],
+      "watchItem": "Contracted demand keeps building outside the cloud giants: one mid-size cloud says contracted revenue roughly doubled to about $103 billion, a robot maker signed an initial $3.5 billion commitment, and an enterprise hardware maker booked record orders of $3.1 billion for artificial-intelligence systems in a single quarter. Order books rather than shipments carry the demand signal this cycle."
+    },
+    {
+      "dimensions": [
+        "strategicRisk",
+        "unitEconomics"
+      ],
+      "findingIds": [
+        "chipbriefing-substack-com-2fd15296-2026-09-1",
+        "www-investing-com-f96fdb9b-2026-09-2",
+        "www-investing-com-f96fdb9b-2026-09-3"
+      ],
+      "thesisIds": [
+        "outside-investors-start-funding-the-compute-buildout",
+        "neocloud-gpu-buyers-carry-heavy-debt-loads",
+        "vendor-financed-demand-circularity"
+      ],
+      "watchItem": "Borrowed and third-party money funds a growing slice of accelerator purchases: a loan secured on chip-derived cash flows drew about $947 million of commitments against the far smaller sum sought, and a $45 billion compute agreement underpins one operator's expansion. That part of demand is exposed to credit conditions as much as to end-user appetite."
+    },
+    {
+      "dimensions": [
+        "bottleneck",
+        "strategicRisk"
+      ],
+      "findingIds": [
+        "www-investing-com-81ce92bb-2026-09-3",
+        "www-aroged-com-a319f429-2026-09-1"
+      ],
+      "thesisIds": [
+        "power-capacity-is-becoming-the-binding-limit-on-ai-buildout",
+        "grid-equipment-lead-times-gate-new-ai-sites",
+        "building-the-plants-is-now-as-slow-as-filling-them"
+      ],
+      "watchItem": "Land, power and building shells now set deployment timing alongside substrate, stacked memory and leading-edge wafers, and TSMC names construction labour and equipment delivery as its own limits into 2027. Site readiness decides when booked capacity turns into running systems."
     }
   ]
 }

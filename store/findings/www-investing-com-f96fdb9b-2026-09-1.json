@@ -1,0 +1,47 @@
+{
+  "id": "www-investing-com-f96fdb9b-2026-09-1",
+  "statement": "Nscale is telling prospective investors its total contracted revenue has roughly doubled to about $103 billion, from $51 billion previously disclosed.",
+  "kind": "measured",
+  "value": {
+    "number": 103.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Contracted revenue at a single neocloud on this scale represents committed future compute purchases that have to be met with accelerators.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Signed multi-year compute leases oblige the operator to buy and install GPUs, power and colocation capacity to serve them."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/nscale-doubles-contracted-revenue-to-103-billion-after-anthropic-win--report-4886830",
+      "date": "2026-09-02",
+      "excerpt": "The signed lease contracts carry an average duration of 5.7 years, equating to an annualized average of roughly $18 billion.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary report of a report (The Information), with a source cautioning the metrics are illustrative and not formal revenue guidance, ahead of a possible IPO."
+  },
+  "dispersion": "Annualized average of roughly $18 billion over an average 5.7-year contract duration; figures described as illustrative.",
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nscale",
+  "observedAt": "2026-09-02",
+  "capturedAt": "2026-09-03T12:52:50Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

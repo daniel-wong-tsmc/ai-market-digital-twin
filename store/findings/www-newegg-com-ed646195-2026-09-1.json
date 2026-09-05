@@ -1,0 +1,44 @@
+{
+  "id": "www-newegg-com-ed646195-2026-09-1",
+  "statement": "Newegg lists the PNY NVIDIA H100 80 GB PCIe card at $34,879.00, with other seller options from $29,500.00; a static level with no baseline or prior price stated.",
+  "kind": "measured",
+  "value": {
+    "number": 34879.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "unknown",
+  "why": "Retail and marketplace asking prices for last-generation data-center cards are the visible edge of the secondary hardware market, useful as a level reference even without a stated change.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Display overlay only: a listed hardware price with no stated baseline shows where asking prices sit but implies no direction for demand or supply."
+  },
+  "evidence": [
+    {
+      "source": "Newegg",
+      "url": "https://www.newegg.com/p/pl?d=nvidia+h100",
+      "date": "2026-09-04",
+      "excerpt": "PNY NVIDIA H100 Graphic Card, 80 GB HBM3 - PCIe 5.0 x16 - 2 Slot - Passive: Price $34,879.00, with More options from $29,500.00 - $34,879.00.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Marketplace listing page read directly, but asking prices from third-party sellers are not transacted prices and a single retail page is a thin sample."
+  },
+  "dispersion": "conflicting same-key reports: value 30999.0 -> 34879.0 (tol 1%); sources: Newegg",
+  "asOf": "2026-09",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Newegg marketplace listings (PNY, Supermicro, NVIDIA H100 NVL)",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

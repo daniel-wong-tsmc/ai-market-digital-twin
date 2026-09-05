@@ -1,0 +1,45 @@
+{
+  "id": "lambda-ai-bfed0e52-2026-09-1",
+  "statement": "Lambda listed on-demand NVIDIA H100 SXM at $3.99 per GPU-hour on its 8x GPU instances on 2026-09-03.",
+  "kind": "measured",
+  "value": {
+    "number": 3.99,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Published rental rates for the prior-generation flagship GPU are the reference level for what compute costs on the open market.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Displayed rental level is a price overlay only; with no baseline or change stated it carries no directional read on demand or supply."
+  },
+  "evidence": [
+    {
+      "source": "Lambda Labs (Lambda GPU Cloud)",
+      "url": "https://lambda.ai/service/gpu-cloud",
+      "date": "2026-09-03",
+      "excerpt": "8x GPU instances: NVIDIA B200 SXM6 $6.69; NVIDIA H100 SXM $3.99",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own published price page captured on the stated date, but a list price without contract or utilization context."
+  },
+  "dispersion": "conflicting same-key reports: value 2.79 -> 3.99 (tol 1%); sources: Lambda Labs (Lambda GPU Cloud)",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "lambda-labs",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-03T12:52:50Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

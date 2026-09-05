@@ -1,0 +1,46 @@
+{
+  "id": "www-aroged-com-a319f429-2026-09-2",
+  "statement": "TSMC's quarterly demand for semiconductor manufacturing tools has climbed to roughly 1.9 times the level projected in December 2025, per Deputy Co-COO Cliff Hou at Semicon Taiwan 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 1.9,
+    "unit": "ratio_vs_dec_2025_plan"
+  },
+  "trend": "rising",
+  "why": "Equipment buying is the earliest hard signal of how much wafer capacity a foundry expects to need; nearly doubling the planned tool intake in nine months says internal demand forecasts were revised sharply upward.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "A near-doubling of planned tool purchases signals much stronger expected accelerator demand and adds future wafer and packaging capacity, but the capacity only arrives after tool delivery and fab construction, so near-term output is unchanged."
+  },
+  "evidence": [
+    {
+      "source": "Aroged (citing Semicon Taiwan 2026 remarks)",
+      "url": "https://www.aroged.com/2026/09/02/tsmc-nearly-doubles-equipment-purchases-but-still-unable-to-meet-chip-demand/",
+      "date": "2026-09-02",
+      "excerpt": "quarterly demand for semiconductor manufacturing tools has climbed to roughly 1.9 times what was projected back in December 2025",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary report of a named executive's conference remark; the source document itself flags a garbled capex figure elsewhere in the same fetch, so the page's numeric fidelity is not fully reliable."
+  },
+  "dispersion": "Reported path: roughly 1.5x the original estimate during Q1 2026, reaching 1.9x by July 2026. The document also flags a garbled capex range in the fetched text and treats only the separately corroborated ~$64 billion 2026 capex figure as reliable.",
+  "asOf": "2026-09",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "tsmc",
+  "observedAt": "2026-09-02",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

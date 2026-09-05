@@ -1,0 +1,51 @@
+{
+  "id": "www-kucoin-com-eb3a7762-2026-09-1",
+  "statement": "NVIDIA has cut Rubin Ultra's memory to 192GB HBM4 (8-Hi) from the previously expected 288GB (12-Hi), with tight HBM supply and data-center power limits cited as the drivers.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "A flagship part shipping with a third to half less memory than planned is a direct read on how binding HBM allocation and rack power have become; it also cuts HBM content per accelerator across the coming generation.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "energy.efficiency",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "mixed",
+    "mechanism": "Reducing stack height and capacity per GPU lowers each unit's claim on constrained HBM and rack power, letting more units ship, while cutting HBM bit demand per accelerator; the document states peak FLOPs are unchanged."
+  },
+  "evidence": [
+    {
+      "source": "KuCoin News (citing SemiAnalysis via Huoxing Finance)",
+      "url": "https://www.kucoin.com/news/flash/nvidia-rubin-ultra-hbm-cut-to-192gb-amid-supply-and-power-constraints",
+      "date": "2026-08-03",
+      "excerpt": "The Rubin Ultra's core SKU will still use HBM4, with its theoretical peak FLOPs unchanged, but its HBM configuration has been reduced to 8-Hi and 192GB, down from the prior Rubin's 12-Hi and 288GB.",
+      "tier": "secondary"
+    },
+    {
+      "source": "KuCoin News (citing SemiAnalysis via Huoxing Finance)",
+      "url": "https://www.kucoin.com/news/flash/nvidia-rubin-ultra-hbm-cut-to-192gb-amid-supply-and-power-constraints",
+      "date": "2026-08-03",
+      "excerpt": "tight HBM supply and data center power constraints",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator relaying a research-house claim through a second outlet, with no NVIDIA confirmation in the document; the two accounts in the document disagree on the prior baseline."
+  },
+  "dispersion": "Prior baseline is reported as 288GB 12-Hi in the August 3 item but as 384GB HBM4E 12-Hi in the search-summarised September 1 follow-up; both describe the same despec to 192GB 8-Hi. The document flags this as an unreconciled discrepancy.",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "NVIDIA (Rubin Ultra)",
+  "observedAt": "2026-08-03",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "www-kucoin-com-eb3a7762-2026-09-2",
+  "statement": "If the reported memory despec holds, Rubin Ultra keeps its peak FLOPs while shedding a large share of memory cost, improving the compute delivered per dollar of system capital cost.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "Buyers decide on compute per dollar of total system cost, so stripping memory cost while holding peak throughput steady would make the flagship rack cheaper to deploy at the same nominal performance.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Lower memory content per system reduces capital cost per unit of peak compute, improving deployment feasibility for buyers, while shrinking HBM's share of the bill of materials."
+  },
+  "evidence": [
+    {
+      "source": "KuCoin News (citing SemiAnalysis via Huoxing Finance)",
+      "url": "https://www.kucoin.com/news/flash/nvidia-rubin-ultra-hbm-cut-to-192gb-amid-supply-and-power-constraints",
+      "date": "2026-08-03",
+      "excerpt": "Reducing HBM capacity and power specifications helps improve customer deployment feasibility, lower material costs, and mitigate the pressure of HBM price hikes next year.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The cost-share figures behind this (memory moving from roughly 40% to roughly 28% of total capital cost, HBM cost down more than half) come from a search-engine summary of a post that the document says could not be fetched or verified verbatim, and real delivered throughput on memory-bound workloads may fall even when peak FLOPs do not. The direction is plausible; the magnitude is not established.",
+  "confidence": {
+    "level": "low",
+    "basis": "Key numbers are explicitly unverified search summaries of an unfetchable page, and the two accounts disagree on the prior memory baseline."
+  },
+  "dispersion": "Follow-on cost figures marked in the document as unverified verbatim and not confirmable on a fetchable page.",
+  "asOf": "2026-09",
+  "indicatorId": "flopsPerDollar",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "NVIDIA (Rubin Ultra)",
+  "observedAt": "2026-09-01",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

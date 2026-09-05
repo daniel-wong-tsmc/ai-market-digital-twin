@@ -1,0 +1,50 @@
+{
+  "id": "chipbriefing-substack-com-2fd15296-2026-09-1",
+  "statement": "GMI Cloud's GPU-backed loan drew commitments of about NT$30 billion ($947 million) against the NT$13.9 billion it sought, showing lenders will finance AI compute on the security of chip-derived cash flows.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Oversubscribed collateralized lending loosens the financing constraint on the marginal GPU buyer, letting neoclouds order more capacity than equity alone would allow.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Bank appetite for loans backed by the sale of computing power lowers the cost of capital for GPU buildouts, converting into additional accelerator orders."
+  },
+  "evidence": [
+    {
+      "source": "Chip Briefing (chipbriefing.substack.com)",
+      "url": "https://chipbriefing.substack.com/p/daily-broadcom-forecast-disappoints",
+      "date": "2026-09-03",
+      "excerpt": "GMI Cloud, an Nvidia partner, secured commitments for more than double the amount it was seeking in a loan backed by the sale of computing power from advanced chips.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Chip Briefing (chipbriefing.substack.com)",
+      "url": "https://chipbriefing.substack.com/p/daily-broadcom-forecast-disappoints",
+      "date": "2026-09-03",
+      "excerpt": "around a dozen banks offered to lend the US-based data center operator about NT$30 billion ($947 million),",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary newsletter quoting a Bloomberg report that could not be fetched directly (HTTP 403); no filing or lender confirmation read."
+  },
+  "dispersion": "Orders could grow to about NT$40 billion if successful; borrower sought NT$13.9 billion.",
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "gmi-cloud",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-03T12:52:50Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

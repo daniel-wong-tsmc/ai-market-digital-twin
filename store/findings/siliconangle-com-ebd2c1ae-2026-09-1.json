@@ -1,0 +1,47 @@
+{
+  "id": "siliconangle-com-ebd2c1ae-2026-09-1",
+  "statement": "HPE booked record AI orders of $3.1 billion in fiscal Q3 2026, of which $2.4 billion came from AI systems and about $700 million from networking equipment.",
+  "kind": "measured",
+  "value": {
+    "number": 3.1,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Record AI orders at a mainstream server OEM show accelerator demand reaching beyond hyperscalers into enterprise and sovereign buyers.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.networking-fabric",
+      "infrastructure.datacenter-colo",
+      "applications.enterprise-copilots"
+    ],
+    "direction": "positive",
+    "mechanism": "AI system orders at an OEM convert into upstream accelerator and networking silicon purchases as the systems are built and shipped."
+  },
+  "evidence": [
+    {
+      "source": "SiliconANGLE",
+      "url": "https://siliconangle.com/2026/09/02/ai-demand-lifts-hpe-and-netapp-to-record-quarters-investors-sell-both/",
+      "date": "2026-09-02",
+      "excerpt": "Artificial intelligence orders set a company record at $3.1 billion, of which $2.4 billion came from AI systems",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade-press account of the earnings report; the AI order figures were not read in HPE's own filed press release."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: Hewlett Packard Enterprise Co. (SEC EDGAR 8-K Exhibit 99.1), SiliconANGLE",
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "hpe",
+  "observedAt": "2026-09-02",
+  "capturedAt": "2026-09-03T12:52:50Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

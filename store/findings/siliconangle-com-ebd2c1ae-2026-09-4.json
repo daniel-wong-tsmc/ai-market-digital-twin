@@ -1,0 +1,52 @@
+{
+  "id": "siliconangle-com-ebd2c1ae-2026-09-4",
+  "statement": "HPE fiscal Q3 2026 revenue was $12.2 billion, up 34% year-over-year, with the Cloud and AI segment at $9 billion (up 25.4%) and servers at $6.8 billion (up 35.3%).",
+  "kind": "measured",
+  "value": {
+    "number": 12.2,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Segment revenue growth confirms AI system shipments are actually converting to revenue rather than sitting in backlog.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising server and AI segment revenue reflects delivered accelerator-bearing systems, indicating sustained component offtake."
+  },
+  "evidence": [
+    {
+      "source": "SiliconANGLE",
+      "url": "https://siliconangle.com/2026/09/02/ai-demand-lifts-hpe-and-netapp-to-record-quarters-investors-sell-both/",
+      "date": "2026-09-02",
+      "excerpt": "revenue of $12.2 billion, up 34% year-over-year",
+      "tier": "secondary"
+    },
+    {
+      "source": "Hewlett Packard Enterprise Co. (SEC EDGAR 8-K Exhibit 99.1)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001645590/000164559026000078/ex-991x922026x8k.htm",
+      "date": "2026-09-02",
+      "excerpt": "Record revenue of $12.2 billion, up 34% year-over-year.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade-press account of a reported quarter; the same headline figure is echoed by HPE's filed release but was read here from the article."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "hpe",
+  "observedAt": "2026-09-02",
+  "capturedAt": "2026-09-03T12:52:50Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

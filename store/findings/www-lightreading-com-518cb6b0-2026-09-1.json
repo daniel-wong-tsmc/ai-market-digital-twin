@@ -1,0 +1,47 @@
+{
+  "id": "www-lightreading-com-518cb6b0-2026-09-1",
+  "statement": "Nscale signed a multi-year deal with Figure carrying an initial commitment of $3.5 billion of compute and stated intent to scale to over $6 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 3.5,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A multi-billion-dollar contracted compute commitment from a non-frontier-lab buyer shows demand for accelerator capacity broadening beyond model labs and hyperscalers into robotics, and it underwrites future neocloud purchase orders.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.procurement"
+    ],
+    "direction": "positive",
+    "mechanism": "Contracted multi-year compute revenue gives the neocloud the backlog it needs to place accelerator orders and secure power and colocation capacity ahead of delivery."
+  },
+  "evidence": [
+    {
+      "source": "Light Reading",
+      "url": "https://www.lightreading.com/ai-machine-learning/nscale-signs-multi-year-partnership-with-figure-a-humanoid-robotics-company",
+      "date": "2026-09-03",
+      "excerpt": "initial commitment of $3.5 billion of compute and the intent to scale to over $6 billion.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary trade outlet reporting a company announcement; no filing or contract in the document, and the deal is partly circular since Nscale is also investing in and becoming a shareholder of the buyer."
+  },
+  "dispersion": "Committed figure $3.5 billion, with intent to scale to over $6 billion; the upper figure is intent, not commitment.",
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "Nscale / Figure AI",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

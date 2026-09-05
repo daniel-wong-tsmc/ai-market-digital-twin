@@ -1,0 +1,44 @@
+{
+  "id": "blogs-nvidia-com-a6b8847a-2026-09-2",
+  "statement": "NVIDIA says Hugging Face will stay vendor-agnostic, with NVIDIA compute not mandatory and multi-accelerator support preserved, which if honored keeps a neutral distribution route open for competing accelerators.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "unknown",
+  "why": "Whether the platform truly stays neutral decides if rival accelerator vendors keep an unbiased shop window for their software stacks, which is the practical channel through which alternative supply reaches developers.",
+  "impact": {
+    "targets": [
+      "chips.ai-silicon-startups",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "models.open-weight"
+    ],
+    "direction": "mixed",
+    "mechanism": "A neutral hub keeps model artifacts portable across accelerators, sustaining alternative supply paths; a drift toward NVIDIA-preferred defaults would do the opposite."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA (official blog)",
+      "url": "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/",
+      "date": "2026-09-03",
+      "excerpt": "Deal emphasizes multi-cloud and multi-accelerator support, preserving developer choice across hardware platforms.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": "The document records only a stated intention by the acquirer, with no mechanism, governance structure or enforcement described, and the deal is not expected to close until the first half of 2027; the effect on alternative accelerator access is therefore projected, not observed.",
+  "confidence": {
+    "level": "medium",
+    "basis": "Primary company statement, but the claim is a forward commitment about post-close behaviour with no verifiable mechanism disclosed."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend flat -> unknown); sources: NVIDIA (official blog), NVIDIA Corporation (SEC EDGAR, Form 8-K)",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

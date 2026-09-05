@@ -1,0 +1,43 @@
+{
+  "id": "www-sec-gov-b2b6a12a-2026-09-2",
+  "statement": "HPE raised its FY26 revenue growth outlook range to 34% to 37% and its FY27 revenue growth outlook range to 13% to 17%.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Raising guidance for both the current and the following year is management saying the AI order book is firm enough to underwrite it.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "An upward guidance revision at a major AI server OEM implies higher planned accelerator and system purchases across the coming year."
+  },
+  "evidence": [
+    {
+      "source": "Hewlett Packard Enterprise Co. (SEC EDGAR 8-K Exhibit 99.1)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001645590/000164559026000078/ex-991x922026x8k.htm",
+      "date": "2026-09-02",
+      "excerpt": "HPE is raising its FY26 revenue growth outlook range to 34% to 37%",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Guidance quoted verbatim from the filed 8-K Exhibit 99.1; expressed as growth percentages, so no dollar level is recorded."
+  },
+  "dispersion": "FY26 growth 34%-37%; FY27 growth 13%-17% - a sharp deceleration in the outer year.",
+  "asOf": "2026-09",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "hpe",
+  "observedAt": "2026-09-02",
+  "capturedAt": "2026-09-03T12:52:50Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

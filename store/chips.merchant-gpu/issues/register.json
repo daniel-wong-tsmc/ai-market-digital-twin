@@ -1,18 +1,19 @@
 {
- "asOf": "2026-09-01",
+ "asOf": "2026-09-04",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 11,
+   "checkCount": 12,
    "id": "dim-bottleneck",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-01",
+    "assessedAsOf": "2026-09-04",
     "claimFindingIds": [
-     "finance-yahoo-com-31239457-2026-09-1",
-     "finance-yahoo-com-31239457-2026-09-3"
+     "www-aroged-com-a319f429-2026-09-1",
+     "www-aroged-com-a319f429-2026-09-2",
+     "www-investing-com-81ce92bb-2026-09-3"
     ],
-    "reasoning": "Samsung has committed about 70% of its memory capacity under contracts running to 2031, and SK Hynix's chief executive says the shortage could last through 2030. The new Indiana plant does not produce until 2029.",
+    "reasoning": "TSMC said on 2 September it still cannot meet chip demand while building about 20 plants, with equipment demand at 1.9 times its December plan, and Broadcom added land, power and building shells to the list of limits.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -24,20 +25,20 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 9
+   "worsenedCount": 10
   },
   {
-   "checkCount": 11,
+   "checkCount": 12,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-01",
+    "assessedAsOf": "2026-09-04",
     "claimFindingIds": [
-     "ir-amd-com-5a9dfeb6-2026-09-1",
-     "ir-amd-com-5a9dfeb6-2026-09-2",
-     "www-investing-com-17df6d69-2026-09-2"
+     "www-sec-gov-a82cb219-2026-09-1",
+     "www-investing-com-81ce92bb-2026-09-1",
+     "ir-amd-com-5a9dfeb6-2026-09-1"
     ],
-    "reasoning": "AMD Instinct MI355X systems went live in production at HUMAIN, with up to 250 megawatts planned from 2027. Separately, Alibaba's chip arm and Cambricon are testing Chinese memory for their own processors.",
+    "reasoning": "Broadcom's custom chip sales for artificial-intelligence work reached $16.7 billion, up 221%, with $230 billion targeted by fiscal 2028, and AMD's systems went live for paying customers in Saudi Arabia on 31 August.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -49,20 +50,21 @@
     "kind": "dimension-weak",
     "label": "moat"
    },
-   "worsenedCount": 6
+   "worsenedCount": 7
   },
   {
-   "checkCount": 10,
+   "checkCount": 11,
    "id": "constraint-stacked-memory-and-server-dram",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-01",
+    "assessedAsOf": "2026-09-04",
     "claimFindingIds": [
      "finance-yahoo-com-31239457-2026-09-1",
-     "finance-yahoo-com-31239457-2026-09-2"
+     "finance-yahoo-com-31239457-2026-09-2",
+     "allweatherfinance-com-da1d5c1b-2026-09-3"
     ],
-    "reasoning": "About 70% of Samsung's capacity is now tied up to 2031, and spot high-bandwidth memory trades at roughly four to five times the contract price, showing how little supply is left uncommitted.",
-    "status": "worsened"
+    "reasoning": "No new supply arrived today. Samsung still has about 70% of capacity locked to 2031 and spot stacked memory sells at four to five times contract price; a report that NVIDIA won better 2027 terms shifts who pays, not how much is made.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -76,16 +78,16 @@
    "worsenedCount": 6
   },
   {
-   "checkCount": 8,
+   "checkCount": 9,
    "id": "constraint-hbm4-memory-allocation-per-accelerator",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-01",
+    "assessedAsOf": "2026-09-04",
     "claimFindingIds": [
-     "www-investing-com-2cd73a8c-2026-09-2",
-     "www-investing-com-2cd73a8c-2026-09-1"
+     "www-investing-com-2cd73a8c-2026-09-1",
+     "www-investing-com-2cd73a8c-2026-09-2"
     ],
-    "reasoning": "NVIDIA's revived Rubin CPX carries 168 GB of HBM4 in place of 128 GB of ordinary graphics memory, and is due to enter production in the first quarter of 2027, adding another claim on scarce memory.",
+    "reasoning": "NVIDIA's revived Rubin CPX, due to start production in the first quarter of 2027, is reported to carry 168 gigabytes of stacked memory in place of 128 gigabytes of ordinary graphics memory, adding another claim on the same scarce pool.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -97,7 +99,7 @@
     "kind": "binding-constraint",
     "label": "stacked memory supply"
    },
-   "worsenedCount": 2
+   "worsenedCount": 3
   }
  ],
  "schemaVersion": 1

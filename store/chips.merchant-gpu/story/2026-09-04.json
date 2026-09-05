@@ -1,0 +1,240 @@
+{
+  "headline": "The shortage is no longer just about memory",
+  "deck": "Chip plants, buildings and power are all short at once, and buyers keep signing anyway.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "More than one thing is short",
+      "paragraphs": [
+        "The reason supply is not catching up changed shape this week. At a Taipei industry event on 2 September, TSMC said it still cannot meet chip demand even while it builds about 20 plants at the same time, naming construction labour shortages and slow equipment deliveries, and expecting the squeeze to last into 2027.",
+        "The scale of the catch-up effort is in its own order book: TSMC's quarterly demand for factory tools now runs at roughly 1.9 times the level it projected back in December 2025. Buying more machines has not closed the gap.",
+        "Broadcom's management made the same point in plainer words on 2 September. Land, power and finished building shells now decide when new capacity switches on, alongside packaging material, stacked memory and leading-edge wafers. Fixing one of those does not help while another is missing."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers shipped, change on a year earlier"
+      },
+      "claimFindingIds": [
+        "www-aroged-com-a319f429-2026-09-1",
+        "www-aroged-com-a319f429-2026-09-2",
+        "www-investing-com-81ce92bb-2026-09-3"
+      ],
+      "sourceLine": "Aroged, reporting Semicon Taiwan remarks (2 September); Broadcom third-quarter earnings call transcript via Investing.com (2 September).",
+      "relatedDocs": [
+        {
+          "url": "https://www.aroged.com/2026/09/02/tsmc-nearly-doubles-equipment-purchases-but-still-unable-to-meet-chip-demand/",
+          "title": "TSMC nearly doubles equipment purchases but still cannot meet chip demand",
+          "outlet": "Aroged (citing Semicon Taiwan 2026 remarks)",
+          "date": "2026-09-02"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Buyers keep signing anyway",
+      "paragraphs": [
+        "Broadcom reported $16.7 billion of chip revenue for artificial-intelligence work in its third quarter, up 221% on a year earlier and 54% on the quarter before, and told investors it has line of sight to roughly $230 billion by fiscal 2028.",
+        "The order books behind the chips are also filling. Hewlett Packard Enterprise booked record artificial-intelligence orders of $3.1 billion in its fiscal third quarter, $2.4 billion of it systems and about $700 million networking gear, on revenue of $12.2 billion, up 34%. It raised its full-year sales growth range to 34% to 37%.",
+        "Smaller operators are signing too. Nscale told prospective investors its contracted revenue has roughly doubled to about $103 billion, and on 3 September it signed the robot maker Figure to an initial $3.5 billion of compute, with stated intent to pass $6 billion and to run up to 100,000 chips in Barstow, Texas from the second half of 2027."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "www-sec-gov-a82cb219-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-1",
+        "siliconangle-com-ebd2c1ae-2026-09-1",
+        "siliconangle-com-ebd2c1ae-2026-09-4",
+        "www-sec-gov-b2b6a12a-2026-09-2",
+        "www-investing-com-f96fdb9b-2026-09-1",
+        "www-lightreading-com-518cb6b0-2026-09-1",
+        "www-lightreading-com-518cb6b0-2026-09-2"
+      ],
+      "sourceLine": "Broadcom and Hewlett Packard Enterprise filings on the securities regulator's site (2 September); Reuters via Investing.com; Light Reading (3 September).",
+      "relatedDocs": [
+        {
+          "url": "https://www.lightreading.com/ai-machine-learning/nscale-signs-multi-year-partnership-with-figure-a-humanoid-robotics-company",
+          "title": "Nscale signs multi-year partnership with Figure, a humanoid robotics company",
+          "outlet": "Light Reading",
+          "date": "2026-09-03"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Whoever holds the memory holds the schedule",
+      "paragraphs": [
+        "Almost none of the memory is loose. Samsung has tied up about 70% of its capacity in long-term deals with buyers including Microsoft, NVIDIA and Google that run to 2031, and the small uncontracted channel is dear: spot stacked memory trades at roughly four to five times the long-term contract price. SK Hynix has committed $38.3 billion of investment through 2031, including a $4 billion packaging plant in Indiana aimed at 2029 production, and its chief says the shortage could last through 2030.",
+        "Governments are now writing cheques against the same scarce parts. South Korea announced a $919 billion plan to build 8.4 gigawatts of data-centre computing by 2029, rising to 18.4 gigawatts by 2035, with SK Group taking 2 gigawatts of NVIDIA Rubin systems and Naver a 200-megawatt order, because Korea has no home-grown supplier of a top-end accelerator. The same report says NVIDIA may have secured a long-term memory agreement with SK Hynix plus better pricing for 2027, which would move terms in the chip vendor's favour rather than add supply.",
+        "The scarcity is visible at the retail counter. Newegg today shows a single H100 card listed at $34,879, with other sellers from $29,500, while every other comparable listing on the page is out of stock or marked coming soon."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "finance-yahoo-com-31239457-2026-09-1",
+        "finance-yahoo-com-31239457-2026-09-2",
+        "finance-yahoo-com-31239457-2026-09-3",
+        "allweatherfinance-com-da1d5c1b-2026-09-1",
+        "allweatherfinance-com-da1d5c1b-2026-09-2",
+        "allweatherfinance-com-da1d5c1b-2026-09-3",
+        "www-newegg-com-ed646195-2026-09-1",
+        "www-newegg-com-ed646195-2026-09-3"
+      ],
+      "sourceLine": "24/7 Wall St. via Yahoo Finance (31 August); All-Weather Media (3 September); Newegg listings checked today.",
+      "relatedDocs": [
+        {
+          "url": "https://www.newegg.com/p/pl?d=nvidia+h100",
+          "title": "H100 card listings and stock status",
+          "outlet": "Newegg",
+          "date": "2026-09-04"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Watch the new claims on the same memory. NVIDIA has revived its Rubin CPX design for production in the first quarter of 2027, and the revived part is reported to carry 168 gigabytes of stacked memory in place of the 128 gigabytes of ordinary graphics memory in the earlier design. Each new design that wants stacked memory pushes another one down.",
+        "Watch for supply that does not depend on the same three sellers. China's CXMT has started small-batch production of an earlier-generation stacked memory, a generation behind the leaders, with broader availability aimed at 2027, and Alibaba's chip arm and Cambricon are already testing it. Intel is taking the other route: its Crescent Island inference part carries up to 480 gigabytes of ordinary low-power memory instead.",
+        "And watch who is being locked in while parts are scarce. AMD's MI355X systems went live in Saudi Arabia on 31 August, with up to 250 megawatts planned from 2027. NVIDIA agreed on 3 September to buy Hugging Face, the main open-model distribution site, and has put $3.5 billion into MediaTek convertible bonds to pull a third designer onto its own connection fabric. If supply stays short into 2027, the contest shifts from who can ship to who has already tied up the customer."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-investing-com-2cd73a8c-2026-09-1",
+        "www-investing-com-2cd73a8c-2026-09-2",
+        "www-investing-com-17df6d69-2026-09-1",
+        "www-investing-com-17df6d69-2026-09-2",
+        "chipsandcheese-com-00291656-2026-09-1",
+        "ir-amd-com-5a9dfeb6-2026-09-1",
+        "ir-amd-com-5a9dfeb6-2026-09-2",
+        "blogs-nvidia-com-a6b8847a-2026-09-1",
+        "nvidianews-nvidia-com-792f5768-2026-09-1",
+        "nvidianews-nvidia-com-792f5768-2026-09-2"
+      ],
+      "sourceLine": "Investing.com (31 August); Chips and Cheese from the Hot Chips conference (27 August); AMD and NVIDIA company releases (31 August and 3 September).",
+      "relatedDocs": [
+        {
+          "url": "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/",
+          "title": "NVIDIA to acquire Hugging Face",
+          "outlet": "NVIDIA (official blog)",
+          "date": "2026-09-03"
+        },
+        {
+          "url": "https://chipsandcheese.com/p/hot-chips-2026-intels-crescent-island",
+          "title": "Hot Chips 2026: Intel's Crescent Island",
+          "outlet": "Chips and Cheese (George Cozma)",
+          "date": "2026-08-27"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Servers still ship far above last year, but the growth rate swings with which parts turn up.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Memory factory spending is running half again above last year; this is the tap everything else waits on.",
+      "scene": 4
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "The street price of a single chip shows whether scarcity is easing where anyone can buy.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-09",
+      "text": "Broadcom's chip sales for artificial-intelligence work hit $16.7 billion, up 221% on a year earlier, with $230 billion targeted by fiscal 2028.",
+      "scene": 2
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "Samsung had about 70% of its memory capacity tied up in long-term deals running to 2031, with spot stacked memory at four to five times contract prices.",
+      "scene": 3
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Broadcom sold $16.7 billion of chips for artificial-intelligence work last quarter, up 221% on a year earlier, and points to $230 billion by fiscal 2028.",
+      "claimFindingIds": [
+        "www-sec-gov-a82cb219-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-1"
+      ]
+    },
+    {
+      "text": "TSMC says it still cannot meet chip demand while building about 20 plants at once, with its equipment orders now 1.9 times December's plan.",
+      "claimFindingIds": [
+        "www-aroged-com-a319f429-2026-09-1",
+        "www-aroged-com-a319f429-2026-09-2"
+      ]
+    },
+    {
+      "text": "Hewlett Packard Enterprise booked record artificial-intelligence orders of $3.1 billion last quarter and lifted its full-year sales growth range to 34% to 37%.",
+      "claimFindingIds": [
+        "siliconangle-com-ebd2c1ae-2026-09-1",
+        "www-sec-gov-b2b6a12a-2026-09-2"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "TSMC said on 2 September it still cannot meet chip demand while building about 20 plants, with equipment demand at 1.9 times its December plan, and Broadcom added land, power and building shells to the list of limits.",
+      "claimFindingIds": [
+        "www-aroged-com-a319f429-2026-09-1",
+        "www-aroged-com-a319f429-2026-09-2",
+        "www-investing-com-81ce92bb-2026-09-3"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "Broadcom's custom chip sales for artificial-intelligence work reached $16.7 billion, up 221%, with $230 billion targeted by fiscal 2028, and AMD's systems went live for paying customers in Saudi Arabia on 31 August.",
+      "claimFindingIds": [
+        "www-sec-gov-a82cb219-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-1",
+        "ir-amd-com-5a9dfeb6-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "unchanged",
+      "reasoning": "No new supply arrived today. Samsung still has about 70% of capacity locked to 2031 and spot stacked memory sells at four to five times contract price; a report that NVIDIA won better 2027 terms shifts who pays, not how much is made.",
+      "claimFindingIds": [
+        "finance-yahoo-com-31239457-2026-09-1",
+        "finance-yahoo-com-31239457-2026-09-2",
+        "allweatherfinance-com-da1d5c1b-2026-09-3"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "worsened",
+      "reasoning": "NVIDIA's revived Rubin CPX, due to start production in the first quarter of 2027, is reported to carry 168 gigabytes of stacked memory in place of 128 gigabytes of ordinary graphics memory, adding another claim on the same scarce pool.",
+      "claimFindingIds": [
+        "www-investing-com-2cd73a8c-2026-09-1",
+        "www-investing-com-2cd73a8c-2026-09-2"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-04",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "24da7e50a56641643f2a06332a5f45f705ed46a7bd1e816946887ee226fd4b6c",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-09-03T17:35:19.167892+00:00"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "chipbriefing-substack-com-2fd15296-2026-09-2",
+  "statement": "Broadcom is reported to have landed large custom-silicon customers through co-designed chips including Google's TPU and OpenAI's Jalapeno, with no design problems noted.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Healthy progress on hyperscaler custom accelerators is the main substitution threat to merchant-GPU share inside the largest buyers.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.eda-ip"
+    ],
+    "direction": "mixed",
+    "mechanism": "Custom accelerators co-designed for the biggest buyers absorb workloads that would otherwise be served by merchant GPUs, trimming addressable demand."
+  },
+  "evidence": [
+    {
+      "source": "Chip Briefing (chipbriefing.substack.com)",
+      "url": "https://chipbriefing.substack.com/p/daily-broadcom-forecast-disappoints",
+      "date": "2026-09-03",
+      "excerpt": "co-design chips, including with Google's TPU and OpenAI's Jalapeno chips",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Brief mention in a secondary daily roundup with no figures, timing or volumes attached."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 3 -> 1; sources: Chip Briefing (chipbriefing.substack.com), Investing.com",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "broadcom",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-03T12:52:50Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

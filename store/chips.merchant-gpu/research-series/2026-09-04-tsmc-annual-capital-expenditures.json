@@ -1,0 +1,41 @@
+{
+  "seriesName": "TSMC annual capital expenditures",
+  "unit": "NT$ millions",
+  "form": "columns",
+  "sourceName": "StockAnalysis.com (TSMC cash flow statement)",
+  "points": [
+    {
+      "label": "FY2021",
+      "value": 839196.0,
+      "sourceUrl": "https://stockanalysis.com/stocks/TSM/financials/cash-flow-statement/",
+      "publishedAt": "2021-12-31"
+    },
+    {
+      "label": "FY2022",
+      "value": 1082672.0,
+      "sourceUrl": "https://stockanalysis.com/stocks/TSM/financials/cash-flow-statement/",
+      "publishedAt": "2022-12-31"
+    },
+    {
+      "label": "FY2023",
+      "value": 949817.0,
+      "sourceUrl": "https://stockanalysis.com/stocks/TSM/financials/cash-flow-statement/",
+      "publishedAt": "2023-12-31"
+    },
+    {
+      "label": "FY2024",
+      "value": 956007.0,
+      "sourceUrl": "https://stockanalysis.com/stocks/TSM/financials/cash-flow-statement/",
+      "publishedAt": "2024-12-31"
+    },
+    {
+      "label": "FY2025",
+      "value": 1272411.0,
+      "sourceUrl": "https://stockanalysis.com/stocks/TSM/financials/cash-flow-statement/",
+      "publishedAt": "2025-12-31"
+    }
+  ],
+  "pair": false,
+  "notes": "This is not a direct measure of the 1.9x equipment-order multiplier or the ~20-fabs figure in today's bullet (no single-site published series with 3+ clean bare-number points for those specific metrics could be found -- most reporting on the 1.9x/December-plan figure and the 20-fab count traces back to one Cliff Hou remark at SEMICON Taiwan, repeated verbatim across aroged.com, cryptobriefing.com, allweatherfinance.com, Tom's Hardware and Bloomberg, each giving only a single point, not a series, and Bloomberg/guru3d/macrotrends/financecharts blocked the plain-reader fetch with 403s). Instead this series gives TSMC's own reported annual capital-expenditure cash outflow (property/plant/equipment spend) for FY2021-FY2025, as aggregated on StockAnalysis.com's TSM cash-flow-statement page, retrieved 2026-09-04. It usefully contextualizes the bullet by showing the capex ramp (roughly NT$839bn in 2021 to roughly NT$1.27tn in 2025) underlying TSMC's current inability to keep up with equipment demand while building ~20 fabs at once. Source page shows these as negative cash-outflow figures (e.g. \"-1,272,411\" for FY2025); the bare values reported here are the absolute magnitudes of that same reported outflow. publishedAt for each point is the fiscal year-end the figure covers, not a specific article-publication date, since this is a continuously-updated data aggregator reflecting TSMC's own reported annual results rather than a dated news article. TSMC's own SEC 6-K earnings releases (sec.gov) were checked directly and confirmed to state 2025/2026 capital-budget GUIDANCE as ranges (e.g. \"between US$52 billion and US$56 billion\" for 2026, filed 2026-01-15; \"between US$38 billion and US$42 billion\" for 2025, filed 2025-01-16) -- these ranges were excluded per the no-ranges rule and because the pages did not additionally state single-number actual full-year capex figures.",
+  "bulletIndex": 2
+}

@@ -1,0 +1,48 @@
+{
+  "id": "www-investing-com-81ce92bb-2026-09-1",
+  "statement": "Broadcom management told the Q3 FY2026 call it has line of sight for fiscal 2028 AI semiconductor revenue to double again to $230 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 230.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A commitment of this scale from the leading custom-accelerator supplier reprices how much of AI compute spend will bypass merchant GPUs.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "chips.hbm-memory",
+      "chips.networking-silicon"
+    ],
+    "direction": "mixed",
+    "mechanism": "Custom accelerator revenue at this scale absorbs wafer, packaging and HBM supply and displaces merchant-GPU volume inside the largest buyers, while confirming total AI compute demand is still expanding."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com",
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-broadcom-tops-q3-2026-estimates-as-ai-sales-surge-93CH-4886849",
+      "date": "2026-09-02",
+      "excerpt": "In 2028, we expect the trajectory of growth to continue. We have line of sight for fiscal 2028 AI semiconductor revenue growth to again double to $230 billion.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary transcript coverage from one outlet; the figure does not appear in Broadcom's filed 8-K exhibit and no official transcript was available."
+  },
+  "dispersion": "conflicting same-key reports: value 34.8 -> 230.0 (tol 1%); sources: Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1), Investing.com",
+  "asOf": "2026-09",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "broadcom",
+  "observedAt": "2026-09-02",
+  "capturedAt": "2026-09-03T12:52:50Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

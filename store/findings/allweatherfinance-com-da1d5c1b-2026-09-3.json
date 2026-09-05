@@ -1,0 +1,42 @@
+{
+  "id": "allweatherfinance-com-da1d5c1b-2026-09-3",
+  "statement": "Nvidia may have secured a long-term SOCAMM agreement with SK Hynix plus preferential HBM pricing for 2027, which would shift memory-supply terms in the GPU vendor's favour.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "unknown",
+  "why": "Preferential access and pricing on HBM would ease the tightest input constraint on merchant-GPU output while compressing the memory supplier's take.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "A locked long-term memory agreement secures accelerator bill-of-materials supply for the GPU vendor while transferring pricing power away from the HBM maker."
+  },
+  "evidence": [
+    {
+      "source": "All-Weather Media (allweatherfinance.com)",
+      "url": "https://allweatherfinance.com/south-koreas-trillion-dollar-sovereign-ai-investment-nvidia-wins-sk-hynix-under-pressure/",
+      "date": "2026-09-03",
+      "excerpt": "Nvidia may have reached a long-term agreement with SK Hynix on SOCAMM and secured preferential pricing for HBM in 2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The source states only that such an agreement 'may' exist and that actual negotiated terms 'may differ' from current estimates, so this is an unconfirmed inference rather than a reported fact.",
+  "confidence": {
+    "level": "low",
+    "basis": "Hedged claim in a single secondary write-up quoting a paywalled newsletter; terms explicitly described as possibly different from estimates."
+  },
+  "dispersion": "Source notes actual negotiated terms 'may differ' from current estimates.",
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "sk-hynix",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-03T12:52:50Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

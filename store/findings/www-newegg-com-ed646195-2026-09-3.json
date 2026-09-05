@@ -1,0 +1,48 @@
+{
+  "id": "www-newegg-com-ed646195-2026-09-3",
+  "statement": "Every H100 NVL and H200 NVL listing on the Newegg search page is out of stock or coming soon, and no A100, RTX PRO 6000 or RTX 5090 products appeared at all; only the PNY H100 80 GB card shows a live price.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Retail channel availability is a rough but immediate read on whether data-center parts are reaching the open market; a page where nearly everything is out of stock points to channel supply still being absorbed upstream.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Sustained out-of-stock status across the higher-memory NVL variants indicates the retail channel is not being allocated inventory, consistent with extended effective lead times for buyers outside direct vendor allocation."
+  },
+  "evidence": [
+    {
+      "source": "Newegg",
+      "url": "https://www.newegg.com/p/pl?d=nvidia+h100",
+      "date": "2026-09-04",
+      "excerpt": "NVIDIA H200 NVL AI Accelerator Card, 141GB HBM3E 4.8TB/s PCIe 5.0 x16 Passive Cooling: Status OUT OF STOCK / COMING SOON, no price listed.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Newegg",
+      "url": "https://www.newegg.com/p/pl?d=nvidia+h100",
+      "date": "2026-09-04",
+      "excerpt": "No A100, RTX PRO 6000, or RTX 5090 products appeared on this search results page.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "One retailer's search page at a single moment; retail stock status is a weak proxy for enterprise channel supply and can reflect merchandising rather than scarcity."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "Newegg marketplace listings (PNY, Supermicro, NVIDIA H100 NVL)",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

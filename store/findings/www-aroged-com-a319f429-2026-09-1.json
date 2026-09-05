@@ -1,0 +1,51 @@
+{
+  "id": "www-aroged-com-a319f429-2026-09-1",
+  "statement": "TSMC still cannot meet current chip demand while building roughly 20 fabs at once, with construction labour shortages and equipment delivery constraints named as bottlenecks and tightness expected to persist into 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Foundry and long-lead equipment constraints set the ceiling on how many accelerators can physically be built, so a stated inability to meet demand into 2027 caps merchant-GPU shipment upside regardless of order books.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "negative",
+    "mechanism": "Construction and tool-delivery bottlenecks slow the ramp of new wafer capacity, so rising orders from customers including Nvidia and AMD queue behind a fixed near-term supply base and lead times stay extended."
+  },
+  "evidence": [
+    {
+      "source": "Aroged (citing Semicon Taiwan 2026 remarks)",
+      "url": "https://www.aroged.com/2026/09/02/tsmc-nearly-doubles-equipment-purchases-but-still-unable-to-meet-chip-demand/",
+      "date": "2026-09-02",
+      "excerpt": "TSMC still cannot meet current chip demand, and that customers including Nvidia and AMD continue increasing orders, intensifying supply constraints expected to persist into 2027",
+      "tier": "secondary"
+    },
+    {
+      "source": "Aroged (citing Semicon Taiwan 2026 remarks)",
+      "url": "https://www.aroged.com/2026/09/02/tsmc-nearly-doubles-equipment-purchases-but-still-unable-to-meet-chip-demand/",
+      "date": "2026-09-02",
+      "excerpt": "The company flagged a persistent shortage of construction workers and supply constraints on equipment deliveries as bottlenecks slowing its expansion.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying conference remarks by a named TSMC executive; no filing or transcript in the document to corroborate."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "tsmc",
+  "observedAt": "2026-09-02",
+  "capturedAt": "2026-09-03T16:54:39Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -2,11 +2,19 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-09",
-  "capturedAt": "2026-09-01T01:13:24Z",
+  "capturedAt": "2026-09-03T17:09:08Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
   "gaps": [
+    {
+      "type": "source",
+      "id": "lambda-gpu-pricing",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
+      "paywalledNote": null
+    },
     {
       "type": "source",
       "id": "coreweave-pricing",
@@ -57,19 +65,19 @@
     },
     {
       "type": "source",
+      "id": "vendor-pr-trade-press",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Vendor press releases + trade press on merchant-GPU design wins' was not fetched. URL patterns: ['nvidianews.nvidia.com', 'ir.amd.com/news-events', 'tomshardware.com', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
       "id": "semianalysis",
       "priority": "required",
       "acquisitionStatus": "paywalled",
       "reason": "Source 'SemiAnalysis channel-check lead-time data (deep tier)' requires a paid license (costUsd=0.0).",
       "paywalledNote": "SemiAnalysis publishes free headlines; deep channel-check lead-time data is behind a subscription. Paywalled portions are inventoried + labeled estimate, never scraped (Part 22)."
-    },
-    {
-      "type": "source",
-      "id": "gpu-marketplaces",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'GPU marketplaces / resale listings (secondary-market spot price)' was not fetched. URL patterns: ['ebay.com', 'amazon.com', 'newegg.com']",
-      "paywalledNote": null
     },
     {
       "type": "source",
@@ -94,37 +102,28 @@
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
       "paywalledNote": null
-    },
-    {
-      "type": "indicator",
-      "id": "gpuSpotPrice",
-      "priority": "optional",
-      "acquisitionStatus": "not-covered",
-      "reason": "Indicator 'gpuSpotPrice' (dimension: momentum) was not covered. Expected sources: ['gpu-marketplaces'].",
-      "paywalledNote": null
     }
   ],
   "gapCounts": {
     "total": 12,
-    "source": 11,
-    "indicator": 1,
-    "required": 11,
+    "source": 12,
+    "indicator": 0,
+    "required": 12,
     "preferred": 0,
-    "optional": 1,
+    "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://finance.yahoo.com/technology/ai/articles/memory-shortage-isn-t-close-155233128.html",
-    "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live",
-    "https://lambda.ai/pricing",
-    "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms",
-    "https://www.investing.com/news/stock-market-news/china-memory-leader-cxmt-begins-smallbatch-production-of-hbm3e-silicon--report-4882862",
-    "https://www.investing.com/news/stock-market-news/nvidia-revives-rubin-cpx-chip-program-with-2027-launch-planned-analyst-says-93CH-4882972",
-    "https://www.investing.com/news/stock-market-news/sk-hynix-weighs-intel-for-hbm4e-base-dies-herald-economy-reports-4882114",
-    "https://www.investing.com/news/transcripts/earnings-call-transcript-nvidia-beats-q2-2026-estimates-as-ai-demand-stays-hot-93CH-4878028",
-    "https://www.runpod.io/pricing",
-    "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/nvda-20260826.htm"
+    "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/",
+    "https://chipsandcheese.com/p/hot-chips-2026-intels-crescent-island",
+    "https://www.aroged.com/2026/09/02/tsmc-nearly-doubles-equipment-purchases-but-still-unable-to-meet-chip-demand/",
+    "https://www.hyperstack.cloud/gpu-pricing",
+    "https://www.kucoin.com/news/flash/nvidia-rubin-ultra-hbm-cut-to-192gb-amid-supply-and-power-constraints",
+    "https://www.lightreading.com/ai-machine-learning/nscale-signs-multi-year-partnership-with-figure-a-humanoid-robotics-company",
+    "https://www.newegg.com/p/pl?d=nvidia+h100",
+    "https://www.nextplatform.com/2025/11/25/taccs-horizon-supercomputer-sets-the-pace-for-academic-science/amp/",
+    "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000078/nvda-20260902.htm"
   ],
   "judgedIndicatorIds": [
     "D2",
@@ -136,6 +135,7 @@
     "designWins",
     "exportControlExposure",
     "flopsPerDollar",
+    "gpuSpotPrice",
     "grossMargin",
     "hbmSupplyCapex",
     "hyperscalerCapexRevision",

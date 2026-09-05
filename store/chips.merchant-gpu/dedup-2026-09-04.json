@@ -1,0 +1,162 @@
+{
+  "asOf": "2026-09",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "www-hyperstack-cloud-aa81f855-2026-09-1",
+      "entity": "Hyperstack (NexGen Cloud)",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-kucoin-com-eb3a7762-2026-09-2",
+      "entity": "NVIDIA (Rubin Ultra)",
+      "indicatorId": "flopsPerDollar",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-kucoin-com-eb3a7762-2026-09-1",
+      "entity": "NVIDIA (Rubin Ultra)",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-newegg-com-ed646195-2026-09-1",
+      "entity": "Newegg marketplace listings (PNY, Supermicro, NVIDIA H100 NVL)",
+      "indicatorId": "gpuSpotPrice",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-newegg-com-ed646195-2026-09-3",
+      "entity": "Newegg marketplace listings (PNY, Supermicro, NVIDIA H100 NVL)",
+      "indicatorId": "leadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-lightreading-com-518cb6b0-2026-09-2",
+      "entity": "Nscale / Figure AI",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-lightreading-com-518cb6b0-2026-09-1",
+      "entity": "Nscale / Figure AI",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-nextplatform-com-b171e437-2026-09-1",
+      "entity": "TACC (Texas Advanced Computing Center) / UT Austin",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "chipsandcheese-com-00291656-2026-09-1",
+      "entity": "intel",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "www-servethehome-com-1a83b8ed-2026-08-1",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "blogs-nvidia-com-a6b8847a-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "nvidianews-nvidia-com-792f5768-2026-09-1",
+      "detail": "magnitude 2 -> 1"
+    },
+    {
+      "findingId": "blogs-nvidia-com-a6b8847a-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "customerConcentration",
+      "verdict": "update",
+      "priorFindingId": "investinglive-com-da6583e3-2026-08-2",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "www-aroged-com-a319f429-2026-09-2",
+      "entity": "tsmc",
+      "indicatorId": "pkgCapacityOrderSpread",
+      "verdict": "update",
+      "priorFindingId": "pr-tsmc-com-7f560c3b-2026-08-2",
+      "detail": "magnitude 3 -> 2"
+    },
+    {
+      "findingId": "www-aroged-com-a319f429-2026-09-1",
+      "entity": "tsmc",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "update",
+      "priorFindingId": "finance-biggo-com-ae5dcd41-2026-07-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "www-hyperstack-cloud-aa81f855-2026-09-2",
+      "entity": "Hyperstack (NexGen Cloud)",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-hyperstack-cloud-aa81f855-2026-09-3",
+      "entity": "Hyperstack (NexGen Cloud)",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-newegg-com-ed646195-2026-09-2",
+      "entity": "Newegg marketplace listings (PNY, Supermicro, NVIDIA H100 NVL)",
+      "indicatorId": "gpuSpotPrice",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "chipsandcheese-com-00291656-2026-09-2",
+      "entity": "intel",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-sec-gov-87f75e92-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-sec-gov-87f75e92-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "customerConcentration",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}
