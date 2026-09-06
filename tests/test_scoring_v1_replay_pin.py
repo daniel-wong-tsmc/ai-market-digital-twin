@@ -94,6 +94,7 @@ PINNED = {
     "2026-09-v1.json": W_CURRENT,   # 2026-09-01 daily cycle (scheduled headless; died pre-commit, registered + committed by the interactive coordinator session); post-F60 -> CURRENT
     "2026-09-v2.json": W_CURRENT,   # 2026-09-03 daily cycle (scheduled headless; PARTIAL - died on an API 529 after the thesis seam, before implication/narrator/report/cycle-log; store writes landed; registered + committed by the 2026-09-04 scheduled run, AFK-default); post-F60 -> CURRENT
     "2026-09-v3.json": W_CURRENT,   # 2026-09-04 daily cycle (scheduled headless, 00:49 local fire); post-F60 -> CURRENT
+    "2026-09-v4.json": W_CURRENT,   # 2026-09-05 daily cycle (scheduled headless, 08:57 local fire; rescue-committed v3 first); post-F60 -> CURRENT
 }
 # Pre-v1.2 originals: superseded by replays, pinned structurally (original -> replay).
 SUPERSEDED = {

@@ -1,0 +1,186 @@
+{
+  "asOf": "2026-09",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "www-asacomputers-com-10ba37c6-2026-09-1",
+      "entity": "asacomputers-marketplace",
+      "indicatorId": "gpuSpotPrice",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-61f89a99-2026-09-3",
+      "entity": "broadcom",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "techcrunch-com-98047dc5-2026-09-1",
+      "entity": "crusoe",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "techcrunch-com-98047dc5-2026-09-2",
+      "entity": "crusoe",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "tech-ish-com-f8154af6-2026-09-1",
+      "entity": "deepseek",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "tech-ish-com-f8154af6-2026-09-2",
+      "entity": "deepseek",
+      "indicatorId": "exportControlExposure",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "thenextweb-com-81950285-2026-09-1",
+      "entity": "g42",
+      "indicatorId": "exportControlExposure",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "cryptobriefing-com-f08c6bf7-2026-09-1",
+      "entity": "matx",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "en-etnews-com-d7f78774-2026-09-2",
+      "entity": "micron",
+      "indicatorId": "market-share-pct",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-taipeitimes-com-9d7a9c86-2026-09-1",
+      "entity": "tsmc",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "finance-yahoo-com-61f89a99-2026-09-1",
+      "entity": "broadcom",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "update",
+      "priorFindingId": "www-investing-com-81ce92bb-2026-09-1",
+      "detail": "value 230.0 -> 58.0 (tol 1%)"
+    },
+    {
+      "findingId": "en-etnews-com-d7f78774-2026-09-1",
+      "entity": "micron",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "finance-technews-tw-da5768a2-2026-08-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "www-runpod-io-eb57b35c-2026-09-1",
+      "entity": "runpod",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "www-runpod-io-53715871-2026-08-1",
+      "detail": "value 3.29 -> 2.69 (tol 1%)"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "www-asacomputers-com-10ba37c6-2026-09-2",
+      "entity": "asacomputers-marketplace",
+      "indicatorId": "gpuSpotPrice",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-prnewswire-com-46b3e861-2026-09-1",
+      "entity": "broadcom",
+      "indicatorId": "D2",
+      "verdict": "duplicate",
+      "priorFindingId": "www-sec-gov-a82cb219-2026-09-1",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "finance-yahoo-com-61f89a99-2026-09-2",
+      "entity": "broadcom",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-prnewswire-com-46b3e861-2026-09-2",
+      "entity": "broadcom",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "tech-ish-com-f8154af6-2026-09-3",
+      "entity": "deepseek",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "cryptobriefing-com-f08c6bf7-2026-09-2",
+      "entity": "matx",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-runpod-io-eb57b35c-2026-09-2",
+      "entity": "runpod",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-runpod-io-eb57b35c-2026-09-3",
+      "entity": "runpod",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-taipeitimes-com-9d7a9c86-2026-09-2",
+      "entity": "tsmc",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

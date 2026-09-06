@@ -1,0 +1,47 @@
+{
+  "id": "finance-yahoo-com-61f89a99-2026-09-1",
+  "statement": "Broadcom guided full-year fiscal 2026 AI semiconductor revenue to approximately $58 billion, up 186% year over year.",
+  "kind": "measured",
+  "value": {
+    "number": 58.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Custom accelerator revenue at this scale shows hyperscaler AI spending is still expanding fast and is increasingly routed to in-house silicon rather than merchant GPUs.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "Strong AI silicon guidance confirms overall accelerator demand while shifting a growing share of that spend to custom XPUs that compete with merchant GPUs for the same foundry and HBM capacity."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/technology/ai/articles/broadcom-inc-avgo-q3-2026-110030403.html",
+      "date": "2026-09-03",
+      "excerpt": "Broadcom guided full-year fiscal 2026 AI semiconductor revenue to approximately $58 billion (up 186% from the prior year)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary paraphrase of the earnings call; the official transcript page could not be fetched."
+  },
+  "dispersion": "conflicting same-key reports: value 21.7 -> 58.0 (tol 1%); sources: Broadcom Inc. (official press release via PR Newswire), Yahoo Finance",
+  "asOf": "2026-09",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "broadcom",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-05T01:02:33Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

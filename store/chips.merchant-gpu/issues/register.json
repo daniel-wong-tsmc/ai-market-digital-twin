@@ -1,20 +1,18 @@
 {
- "asOf": "2026-09-04",
+ "asOf": "2026-09-05",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 12,
+   "checkCount": 13,
    "id": "dim-bottleneck",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-09-04",
+    "assessedAsOf": "2026-09-05",
     "claimFindingIds": [
-     "www-aroged-com-a319f429-2026-09-1",
-     "www-aroged-com-a319f429-2026-09-2",
-     "www-investing-com-81ce92bb-2026-09-3"
+     "en-etnews-com-d7f78774-2026-09-1"
     ],
-    "reasoning": "TSMC said on 2 September it still cannot meet chip demand while building about 20 plants, with equipment demand at 1.9 times its December plan, and Broadcom added land, power and building shells to the list of limits.",
-    "status": "worsened"
+    "reasoning": "Micron plans to add up to 60,000 stacked-memory wafers a month by the end of 2026, taking it to about 100,000 from 40,000 to 50,000 last year. That is the first addition in weeks that raises output rather than reshuffling it.",
+    "status": "improved"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -28,17 +26,17 @@
    "worsenedCount": 10
   },
   {
-   "checkCount": 12,
+   "checkCount": 13,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-04",
+    "assessedAsOf": "2026-09-05",
     "claimFindingIds": [
-     "www-sec-gov-a82cb219-2026-09-1",
-     "www-investing-com-81ce92bb-2026-09-1",
-     "ir-amd-com-5a9dfeb6-2026-09-1"
+     "finance-yahoo-com-61f89a99-2026-09-1",
+     "finance-yahoo-com-61f89a99-2026-09-3",
+     "tech-ish-com-f8154af6-2026-09-1"
     ],
-    "reasoning": "Broadcom's custom chip sales for artificial-intelligence work reached $16.7 billion, up 221%, with $230 billion targeted by fiscal 2028, and AMD's systems went live for paying customers in Saudi Arabia on 31 August.",
+    "reasoning": "Broadcom guided full-year custom-chip sales for artificial-intelligence work to about $58 billion, up 186%, with Anthropic set to pass Google as its biggest such customer in 2027, and DeepSeek is placing 160,000 Huawei chips instead of NVIDIA parts.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -50,45 +48,43 @@
     "kind": "dimension-weak",
     "label": "moat"
    },
-   "worsenedCount": 7
+   "worsenedCount": 8
   },
   {
-   "checkCount": 11,
+   "checkCount": 12,
    "id": "constraint-stacked-memory-and-server-dram",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-09-04",
+    "assessedAsOf": "2026-09-05",
     "claimFindingIds": [
-     "finance-yahoo-com-31239457-2026-09-1",
-     "finance-yahoo-com-31239457-2026-09-2",
-     "allweatherfinance-com-da1d5c1b-2026-09-3"
+     "en-etnews-com-d7f78774-2026-09-1",
+     "en-etnews-com-d7f78774-2026-09-2"
     ],
-    "reasoning": "No new supply arrived today. Samsung still has about 70% of capacity locked to 2031 and spot stacked memory sells at four to five times contract price; a report that NVIDIA won better 2027 terms shifts who pays, not how much is made.",
-    "status": "unchanged"
+    "reasoning": "Micron's plan to reach roughly 100,000 stacked-memory wafers a month adds real volume, though supply stays concentrated: SK Hynix held 50% of the market in the second quarter and Samsung 32%, against Micron's 18%.",
+    "status": "improved"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "HBM4 and server DRAM supply",
+   "title": "HBM and server DRAM supply",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "HBM4 and server DRAM supply"
+    "label": "HBM and server DRAM supply"
    },
    "worsenedCount": 6
   },
   {
-   "checkCount": 9,
+   "checkCount": 10,
    "id": "constraint-hbm4-memory-allocation-per-accelerator",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-09-04",
+    "assessedAsOf": "2026-09-05",
     "claimFindingIds": [
-     "www-investing-com-2cd73a8c-2026-09-1",
-     "www-investing-com-2cd73a8c-2026-09-2"
+     "en-etnews-com-d7f78774-2026-09-1"
     ],
-    "reasoning": "NVIDIA's revived Rubin CPX, due to start production in the first quarter of 2027, is reported to carry 168 gigabytes of stacked memory in place of 128 gigabytes of ordinary graphics memory, adding another claim on the same scarce pool.",
-    "status": "worsened"
+    "reasoning": "No new evidence arrived today on how much memory each accelerator gets. The only memory news was Micron's extra wafer capacity, which is about total output rather than what any single chip carries.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],

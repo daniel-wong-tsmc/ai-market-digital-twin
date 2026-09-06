@@ -1,0 +1,46 @@
+{
+  "id": "techcrunch-com-98047dc5-2026-09-2",
+  "statement": "Crusoe signed a $13 billion, five-year cloud contract to supply Jane Street with GPUs and other AI infrastructure.",
+  "kind": "measured",
+  "value": {
+    "number": 13.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A multi-year contracted backlog of this size underwrites accelerator purchases and shows demand widening beyond AI labs into quantitative finance.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Contracted multi-year revenue gives the operator the visibility and collateral to commit to large GPU fleet purchases in advance of deployment."
+  },
+  "evidence": [
+    {
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/09/03/crusoe-reportedly-raises-3b-at-a-30b-valuation/",
+      "date": "2026-09-03",
+      "excerpt": "Crusoe recently signed a $13 billion, five-year cloud contract to supply quantitative trading firm Jane Street with GPUs and other AI infrastructure through Crusoe's cloud platform",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; contract terms not disclosed in a filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "crusoe",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-05T01:02:33Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

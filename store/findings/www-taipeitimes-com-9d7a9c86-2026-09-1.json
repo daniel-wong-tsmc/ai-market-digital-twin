@@ -1,0 +1,47 @@
+{
+  "id": "www-taipeitimes-com-9d7a9c86-2026-09-1",
+  "statement": "TSMC announced in July a further US$100 billion investment in Arizona, bringing its total planned Arizona investment to US$265 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 265.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Leading-edge wafer and packaging capacity added on U.S. soil is the single biggest lever on how many accelerators can be built later this decade.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed foundry capital expands leading-edge wafer and advanced packaging capacity, relieving the upstream constraint on merchant GPU and custom accelerator output over time."
+  },
+  "evidence": [
+    {
+      "source": "Taipei Times",
+      "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/02/2003863570",
+      "date": "2026-09-02",
+      "excerpt": "TSMC announced in July a further US$100 billion investment in Arizona, bringing the total planned investment to US$265 billion.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary newspaper report restating a previously announced company commitment; no filing cited."
+  },
+  "dispersion": "conflicting same-key reports: value 20.0 -> 265.0 (tol 1%); sources: Taipei Times",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "tsmc",
+  "observedAt": "2026-09-02",
+  "capturedAt": "2026-09-05T01:02:33Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

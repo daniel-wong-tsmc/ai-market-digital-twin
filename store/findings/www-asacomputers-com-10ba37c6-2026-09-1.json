@@ -1,0 +1,44 @@
+{
+  "id": "www-asacomputers-com-10ba37c6-2026-09-1",
+  "statement": "US reseller ASA Computers lists the NVIDIA H200 141GB board (SKU NVH200NVLTCGPU-KIT) at a single-unit price of $30,999.00.",
+  "kind": "measured",
+  "value": {
+    "number": 30999.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "unknown",
+  "why": "A dated retail list price for a current-generation accelerator board is a useful confirmation overlay on where channel hardware pricing sits.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Channel list pricing is a display-only reference level for merchant GPU hardware; no baseline or change is stated, so it carries no directional signal."
+  },
+  "evidence": [
+    {
+      "source": "ASA Computers",
+      "url": "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html",
+      "date": "2026-09-05",
+      "excerpt": "NVIDIA H200 141GB GPU (SKU NVH200NVLTCGPU-KIT) - 'Our price: $30,999.00'.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single reseller list page; the document notes these are single-unit list prices, not confirmed spot or resale pricing."
+  },
+  "dispersion": "conflicting same-key reports: value 7299.0 -> 30999.0 (tol 1%); sources: ASA Computers",
+  "asOf": "2026-09",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "asacomputers-marketplace",
+  "observedAt": "2026-09-05",
+  "capturedAt": "2026-09-05T01:02:33Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

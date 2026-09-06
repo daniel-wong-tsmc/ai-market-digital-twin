@@ -1,0 +1,43 @@
+{
+  "id": "en-etnews-com-d7f78774-2026-09-1",
+  "statement": "Micron plans to add up to 60,000 HBM wafers per month of capacity by end of 2026, taking it to roughly 100,000 wafers per month from 40,000-50,000 last year.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "HBM wafer capacity is the binding physical constraint on how many accelerator packages can ship, so a roughly doubled third-source capacity loosens the tightest link in the chain.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "More HBM wafer starts raise the bit supply available for accelerator packaging, easing the memory bottleneck that caps merchant GPU and ASIC output."
+  },
+  "evidence": [
+    {
+      "source": "Electronic Times (ET News, English edition)",
+      "url": "https://en.etnews.com/20260904200006",
+      "date": "2026-09-04",
+      "excerpt": "Micron plans to add up to 60,000 wafers per month in HBM production capacity (based on wafer input) by the end of this year.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary trade outlet citing an unnamed industry source; no company filing or confirmation."
+  },
+  "dispersion": "Capacity figures given as ranges (40,000-50,000 last year; up to 60,000 added; approximately 100,000 total).",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "micron",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-05T01:02:33Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

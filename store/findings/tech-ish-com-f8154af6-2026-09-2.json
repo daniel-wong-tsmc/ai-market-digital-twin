@@ -1,0 +1,43 @@
+{
+  "id": "tech-ish-com-f8154af6-2026-09-2",
+  "statement": "U.S. export restrictions have pushed DeepSeek into an architectural split: training stays on whatever Nvidia hardware it can secure while inference moves to Huawei 950DT chips.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "It shows export controls are now reshaping workload placement rather than just headline revenue, permanently shrinking the Chinese share of merchant GPU inference demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "models.open-weight"
+    ],
+    "direction": "negative",
+    "mechanism": "Controls block Nvidia inference sales into China, so the inference workload migrates to domestic silicon and only the harder-to-substitute training tier keeps buying merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "tech-ish",
+      "url": "https://tech-ish.com/2026/09/04/deepseek-turns-to-huawei-for-160000-ai-chips-as-nvidia-stays-locked-out-of-china/",
+      "date": "2026-09-04",
+      "excerpt": "U.S. restrictions on advanced Nvidia chip sales to China have forced this architectural split between training (still Nvidia-dependent) and inference (shifting to domestic Huawei silicon)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; qualitative characterisation rather than disclosed policy or filing data."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "deepseek",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-05T01:02:33Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

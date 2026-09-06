@@ -1,0 +1,35 @@
+{
+  "seriesName": "Broadcom quarterly AI semiconductor revenue, fiscal 2026",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "PR Newswire (Broadcom Inc. quarterly earnings press releases)",
+  "points": [
+    {
+      "label": "Q1 FY2026 (ended Feb 1, 2026)",
+      "value": 8.4,
+      "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-first-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302704490.html",
+      "publishedAt": "2026-03-04"
+    },
+    {
+      "label": "Q2 FY2026 (ended May 3, 2026)",
+      "value": 10.8,
+      "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
+      "publishedAt": "2026-06-03"
+    },
+    {
+      "label": "Q3 FY2026 (ended Aug 2, 2026)",
+      "value": 16.7,
+      "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-third-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302868129.html",
+      "publishedAt": "2026-09-02"
+    },
+    {
+      "label": "Q4 FY2026 (guided, not yet reported)",
+      "value": 21.7,
+      "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-third-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302868129.html",
+      "publishedAt": "2026-09-02"
+    }
+  ],
+  "pair": false,
+  "notes": "First three points are reported actuals (Q1-Q3 FY2026 AI semiconductor revenue) each quoted directly from Broadcom's own quarterly earnings press releases as syndicated on PR Newswire, all same publisher (prnewswire.com) per rule 5. The fourth point (Q4 FY2026, $21.7 billion) is company guidance disclosed in the Q3 release, not yet an actual reported quarter -- labelled '(guided, not yet reported)' so it is not mistaken for an actual. This quarterly build-up (8.4 -> 10.8 -> 16.7 -> 21.7) sums to roughly the ~$58 billion full-year fiscal 2026 AI revenue figure cited in today's bullet, giving the reader the underlying quarter-by-quarter path rather than just the single full-year total. Did not use investors.broadcom.com directly (repeated fetch timeouts); used the PR Newswire syndication of the same releases instead, which is not on the excluded-sites list. Did not find a separate full-year FY2026 guidance restatement inside the Q3 release itself -- that $58B figure lives in the Q2 release and in press coverage (e.g. Yahoo Finance/Seeking Alpha), already cited elsewhere in today's context notes, and was left out here since rule 5 requires all points from one site.",
+  "bulletIndex": 2
+}

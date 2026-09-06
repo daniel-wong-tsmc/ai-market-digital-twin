@@ -1,0 +1,44 @@
+{
+  "id": "thenextweb-com-81950285-2026-09-1",
+  "statement": "G42's licence-free access to cutting-edge AI chips expires around April 2027 unless it becomes U.S.-headquartered or re-applies, and executives have held exploratory talks about selling a controlling stake to American firms.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A hard expiry date on a large Gulf buyer's chip authorization puts a dated question mark over a meaningful slice of non-U.S. accelerator demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "If the authorization lapses without a U.S. ownership restructuring, G42 and Core42 lose licence-free purchasing and their planned accelerator orders stall or shift to licensed intermediaries."
+  },
+  "evidence": [
+    {
+      "source": "The Next Web",
+      "url": "https://thenextweb.com/news/g42-us-ownership-chip-access-export-control-endgame",
+      "date": "2026-09-04",
+      "excerpt": "G42 can buy cutting-edge chips without a US licence only until around April 2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Secondary outlet citing Bloomberg reporting; the document states no decision has been made and G42 declined to comment."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "g42",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-05T01:02:33Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

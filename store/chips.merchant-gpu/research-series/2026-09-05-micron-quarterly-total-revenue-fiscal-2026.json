@@ -1,0 +1,29 @@
+{
+  "seriesName": "Micron quarterly total revenue, fiscal 2026",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "Micron Technology Investor Relations (official press releases)",
+  "points": [
+    {
+      "label": "Q1 FY2026 (ended Nov 27, 2025)",
+      "value": 13.64,
+      "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-first-quarter-fiscal-2026",
+      "publishedAt": "2025-12-17"
+    },
+    {
+      "label": "Q2 FY2026 (ended Feb 26, 2026)",
+      "value": 23.86,
+      "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-second-quarter-fiscal-2026",
+      "publishedAt": "2026-03-18"
+    },
+    {
+      "label": "Q3 FY2026 (ended May 28, 2026)",
+      "value": 41.46,
+      "sourceUrl": "https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Results-for-the-Third-Quarter-of-Fiscal-2026/default.aspx",
+      "publishedAt": "2026-06-24"
+    }
+  ],
+  "pair": false,
+  "notes": "Could not find a published numeric series that directly tracks Micron's HBM wafer-per-month capacity over time (the 40,000-50,000 to 60,000/100,000 figures in today's bullet trace back to Korean trade press -- etnews and digitimes -- citing industry sources, not a Micron-published capacity series, so no verifiable multi-point wafer-capacity series exists on a single reachable site). Micron's own quarterly reports do not break out HBM revenue or HBM wafer volumes separately. As an honest substitute that contextualizes the same story, this series uses Micron's own reported total company revenue for the three most recent fiscal quarters (all from investors.micron.com press releases, same site), showing the revenue trajectory (record-to-record growth, +75% then +74% sequentially) coinciding with the period Micron says it is racing to add HBM capacity to meet demand. This is NOT an HBM-specific or wafer-capacity series -- it is total company revenue, offered only as adjacent context. Each press release also states the prior-quarter and year-ago figures inline, which corroborate the sequence (Q2 release confirms Q1's $13.64B; Q3 release confirms Q2's $23.86B).",
+  "bulletIndex": 1
+}

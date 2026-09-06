@@ -1,0 +1,46 @@
+{
+  "id": "en-etnews-com-d7f78774-2026-09-2",
+  "statement": "HBM supply remains concentrated in two Korean vendors: per Counterpoint data cited in the article, SK Hynix held 50% and Samsung 32% of the Q2 2026 HBM market versus Micron's 18%.",
+  "kind": "measured",
+  "value": {
+    "number": 18.0,
+    "unit": "pct_segment_rev"
+  },
+  "trend": "unknown",
+  "why": "When over 80% of HBM sits with two suppliers, accelerator makers carry concentrated supplier risk and limited pricing leverage.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "mixed",
+    "mechanism": "A concentrated HBM supplier base means any single-vendor yield or allocation shock propagates directly into merchant GPU and ASIC build plans."
+  },
+  "evidence": [
+    {
+      "source": "Electronic Times (ET News, English edition)",
+      "url": "https://en.etnews.com/20260904200006",
+      "date": "2026-09-04",
+      "excerpt": "SK Hynix ranked first in the global HBM market in the second quarter of this year with a 50% market share, Samsung Electronics held 32%, while Micron accounted for 18%.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Third-party research figures relayed by a single secondary outlet; not a filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "micron",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-05T01:02:33Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -2,17 +2,33 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-09",
-  "capturedAt": "2026-09-03T17:09:08Z",
+  "capturedAt": "2026-09-05T01:18:48Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
   "gaps": [
     {
       "type": "source",
-      "id": "lambda-gpu-pricing",
+      "id": "nvda-earnings",
       "priority": "required",
       "acquisitionStatus": "not-covered",
-      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
+      "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "amd-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "intc-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Intel earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['intc.com', 'sec.gov']",
       "paywalledNote": null
     },
     {
@@ -41,14 +57,6 @@
     },
     {
       "type": "source",
-      "id": "open-web-asic",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Open-web reporting on hyperscaler custom ASICs (competitive alternatives)' was not fetched. URL patterns: ['blog.google', 'aws.amazon.com/machine-learning', 'techcrunch.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "channel-checks",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -61,6 +69,14 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'BIS export control notices and Federal Register' was not fetched. URL patterns: ['bis.doc.gov', 'federalregister.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "nvda-10k-risk-factors",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'NVIDIA 10-K risk factor section (geopolitical / export control exposure)' was not fetched. URL patterns: ['investor.nvidia.com/annual-reports', 'sec.gov']",
       "paywalledNote": null
     },
     {
@@ -81,18 +97,18 @@
     },
     {
       "type": "source",
-      "id": "ai-app-revenue",
+      "id": "gpu-marketplaces",
       "priority": "required",
       "acquisitionStatus": "not-covered",
-      "reason": "Source 'Hyperscaler AI run-rate and model-lab ARR disclosures' was not fetched. URL patterns: ['microsoft.com', 'blogs.microsoft.com', 'openai.com', 'anthropic.com', 'blog.google', 'aws.amazon.com/machine-learning', 'semianalysis.com']",
+      "reason": "Source 'GPU marketplaces / resale listings (secondary-market spot price)' was not fetched. URL patterns: ['ebay.com', 'amazon.com', 'newegg.com']",
       "paywalledNote": null
     },
     {
       "type": "source",
-      "id": "frontier-release-funding",
+      "id": "ai-app-revenue",
       "priority": "required",
       "acquisitionStatus": "not-covered",
-      "reason": "Source 'Frontier model release and funding trackers (company newsrooms + industry press)' was not fetched. URL patterns: ['openai.com', 'anthropic.com', 'blog.google', 'techcrunch.com', 'semianalysis.com']",
+      "reason": "Source 'Hyperscaler AI run-rate and model-lab ARR disclosures' was not fetched. URL patterns: ['microsoft.com', 'blogs.microsoft.com', 'openai.com', 'anthropic.com', 'blog.google', 'aws.amazon.com/machine-learning', 'semianalysis.com']",
       "paywalledNote": null
     },
     {
@@ -105,25 +121,26 @@
     }
   ],
   "gapCounts": {
-    "total": 12,
-    "source": 12,
+    "total": 14,
+    "source": 14,
     "indicator": 0,
-    "required": 12,
+    "required": 14,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/",
-    "https://chipsandcheese.com/p/hot-chips-2026-intels-crescent-island",
-    "https://www.aroged.com/2026/09/02/tsmc-nearly-doubles-equipment-purchases-but-still-unable-to-meet-chip-demand/",
-    "https://www.hyperstack.cloud/gpu-pricing",
-    "https://www.kucoin.com/news/flash/nvidia-rubin-ultra-hbm-cut-to-192gb-amid-supply-and-power-constraints",
-    "https://www.lightreading.com/ai-machine-learning/nscale-signs-multi-year-partnership-with-figure-a-humanoid-robotics-company",
-    "https://www.newegg.com/p/pl?d=nvidia+h100",
-    "https://www.nextplatform.com/2025/11/25/taccs-horizon-supercomputer-sets-the-pace-for-academic-science/amp/",
-    "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000078/nvda-20260902.htm"
+    "https://cryptobriefing.com/coatue-matx-joint-venture-ai-chips/",
+    "https://en.etnews.com/20260904200006",
+    "https://finance.yahoo.com/technology/ai/articles/broadcom-inc-avgo-q3-2026-110030403.html",
+    "https://tech-ish.com/2026/09/04/deepseek-turns-to-huawei-for-160000-ai-chips-as-nvidia-stays-locked-out-of-china/",
+    "https://techcrunch.com/2026/09/03/crusoe-reportedly-raises-3b-at-a-30b-valuation/",
+    "https://thenextweb.com/news/g42-us-ownership-chip-access-export-control-endgame",
+    "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html",
+    "https://www.prnewswire.com/news-releases/broadcom-inc-announces-third-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302868129.html",
+    "https://www.runpod.io/pricing",
+    "https://www.taipeitimes.com/News/biz/archives/2026/09/02/2003863570"
   ],
   "judgedIndicatorIds": [
     "D2",

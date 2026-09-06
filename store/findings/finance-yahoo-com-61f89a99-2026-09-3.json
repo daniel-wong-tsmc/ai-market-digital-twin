@@ -1,0 +1,43 @@
+{
+  "id": "finance-yahoo-com-61f89a99-2026-09-3",
+  "statement": "Broadcom's AI revenue rests on six key customers including Google, OpenAI, Anthropic and Meta, with Anthropic described as on track to overtake Google as its largest custom AI chip customer in 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A demand base of six accounts, some of them frontier labs whose growth Broadcom is helping finance, makes the outlook sensitive to a single customer changing plans.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "models.frontier-closed"
+    ],
+    "direction": "mixed",
+    "mechanism": "Concentration in a handful of frontier labs and hyperscalers means one cancelled or deferred program would swing accelerator orders sharply, raising the variance around both custom silicon and merchant GPU demand."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/technology/ai/articles/broadcom-inc-avgo-q3-2026-110030403.html",
+      "date": "2026-09-03",
+      "excerpt": "Six key customers are cited as driving this demand, including Google, OpenAI, Anthropic, and Meta",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary paraphrase of call commentary from one outlet."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "broadcom",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-05T01:02:33Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

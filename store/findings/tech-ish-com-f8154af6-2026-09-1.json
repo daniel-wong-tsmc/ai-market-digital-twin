@@ -1,0 +1,47 @@
+{
+  "id": "tech-ish-com-f8154af6-2026-09-1",
+  "statement": "DeepSeek plans to deploy at least 160,000 Huawei Ascend 950DT chips at a new one-gigawatt data center in Ulanqab, Inner Mongolia, partially online by late 2027 or early 2028.",
+  "kind": "measured",
+  "value": {
+    "number": 160000.0,
+    "unit": "chips"
+  },
+  "trend": "rising",
+  "why": "A cluster of this size built on domestic Chinese accelerators is demand that merchant GPUs cannot serve, and it validates a non-Nvidia inference stack at scale.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "mixed",
+    "mechanism": "Substituting domestic accelerators for inference removes a large block of addressable merchant GPU demand while adding data center and power load in China."
+  },
+  "evidence": [
+    {
+      "source": "tech-ish",
+      "url": "https://tech-ish.com/2026/09/04/deepseek-turns-to-huawei-for-160000-ai-chips-as-nvidia-stays-locked-out-of-china/",
+      "date": "2026-09-04",
+      "excerpt": "DeepSeek is planning to deploy at least 160,000 of Huawei's Ascend 950DT chips at a new data center in Ulanqab, Inner Mongolia",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet relaying reporting attributed to Bloomberg; no company confirmation or filing."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend falling -> rising); sources: tech-ish",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": -1,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "deepseek",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-05T01:02:33Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

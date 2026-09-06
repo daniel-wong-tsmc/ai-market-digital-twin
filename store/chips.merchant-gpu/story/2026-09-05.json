@@ -1,0 +1,237 @@
+{
+  "headline": "The smallest memory maker starts adding capacity",
+  "deck": "Micron plans to roughly double its stacked-memory output by year end, while money and blocked buyers keep moving faster than the parts.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The first real addition to memory",
+      "paragraphs": [
+        "For weeks the answer to why supply is not catching up has been the same word: memory. Today brought the first sizeable addition to it. Micron plans to add up to 60,000 stacked-memory wafers a month by the end of 2026, taking it to roughly 100,000 a month, from 40,000 to 50,000 last year.",
+        "That still leaves the world's stacked memory in very few hands. In the second quarter of 2026 SK Hynix held 50% of that market and Samsung 32%, against Micron's 18%. Enlarging the smallest of the three helps, but it does not change who sets the terms.",
+        "The size of the shortfall it has to close is set out in NVIDIA's own numbers from a week ago. Its long-term supply promises rose to $279 billion, mainly to buy stacked memory and server memory for the next generation, and it guided next year to about 70% revenue growth when customer forecasts implied roughly 140%, because memory could not cover the rest."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "en-etnews-com-d7f78774-2026-09-1",
+        "en-etnews-com-d7f78774-2026-09-2",
+        "www-fool-com-12234ce0-2026-08-1",
+        "www-fool-com-12234ce0-2026-08-2",
+        "www-fool-com-12234ce0-2026-08-3"
+      ],
+      "sourceLine": "Electronic Times, English edition (4 September); The Motley Fool on NVIDIA's second-quarter results (29 August).",
+      "relatedDocs": [
+        {
+          "url": "https://en.etnews.com/20260904200006",
+          "title": "Micron to expand stacked-memory output by up to 60,000 wafers a month",
+          "outlet": "Electronic Times (ET News, English edition)",
+          "date": "2026-09-04"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The money arrives faster than the parts",
+      "paragraphs": [
+        "Cash for computing keeps landing ahead of the hardware. Crusoe raised $3 billion at a $30 billion valuation, about three times the value set roughly ten months earlier, and has signed a $13 billion five-year contract to supply Jane Street with chips and other computing equipment.",
+        "Lenders are just as willing. GMI Cloud sought NT$13.9 billion of borrowing secured on its chips and drew commitments of about NT$30 billion, roughly $947 million, so banks will now lend against the cash a chip is expected to earn.",
+        "The largest designer of custom chips is growing at the same pace. Broadcom guided full-year sales of chips for artificial-intelligence work to about $58 billion, up 186% on the year. That rests on six customers, including Google, OpenAI, Anthropic and Meta, with Anthropic expected to pass Google as its biggest custom-chip customer in 2027."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "techcrunch-com-98047dc5-2026-09-1",
+        "techcrunch-com-98047dc5-2026-09-2",
+        "chipbriefing-substack-com-2fd15296-2026-09-1",
+        "finance-yahoo-com-61f89a99-2026-09-1",
+        "finance-yahoo-com-61f89a99-2026-09-3"
+      ],
+      "sourceLine": "TechCrunch (3 September); Chip Briefing (3 September); Yahoo Finance on Broadcom's third-quarter call (3 September).",
+      "relatedDocs": [
+        {
+          "url": "https://techcrunch.com/2026/09/03/crusoe-reportedly-raises-3b-at-a-30b-valuation/",
+          "title": "Crusoe reportedly raises $3B at a $30B valuation",
+          "outlet": "TechCrunch",
+          "date": "2026-09-03"
+        },
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/broadcom-inc-avgo-q3-2026-110030403.html",
+          "title": "Broadcom third-quarter results and full-year outlook",
+          "outlet": "Yahoo Finance (Motley Fool wire feed excluded per do-not-fetch; this is the Yahoo Finance / GuruFocus-style earnings-call summary, not fool.com)",
+          "date": "2026-09-03"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Buyers who cannot get parts buy something else",
+      "paragraphs": [
+        "When the parts cannot be had, buyers change what they buy. DeepSeek plans to install at least 160,000 Huawei Ascend 950DT chips at a new one-gigawatt site in Ulanqab, Inner Mongolia, partly running by late 2027 or early 2028. Under US export limits it now trains on whatever NVIDIA hardware it can secure and moves the everyday serving work onto Huawei.",
+        "Investors are backing new designers on the same logic. Coatue Management is in early talks to form a joint venture worth billions of dollars with the chip startup MatX to fund chip purchases, with MatX's first part due in volume production in 2027.",
+        "At the counter nothing has loosened. A US reseller today lists a single H200 board at $30,999, and on Newegg yesterday every H100 and H200 rack card was out of stock or marked coming soon, with only one card showing a live price."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "tech-ish-com-f8154af6-2026-09-1",
+        "tech-ish-com-f8154af6-2026-09-2",
+        "cryptobriefing-com-f08c6bf7-2026-09-1",
+        "www-asacomputers-com-10ba37c6-2026-09-1",
+        "www-newegg-com-ed646195-2026-09-3"
+      ],
+      "sourceLine": "tech-ish (4 September); cryptobriefing (4 September); ASA Computers listing checked today; Newegg listings (4 September).",
+      "relatedDocs": [
+        {
+          "url": "https://tech-ish.com/2026/09/04/deepseek-turns-to-huawei-for-160000-ai-chips-as-nvidia-stays-locked-out-of-china/",
+          "title": "DeepSeek turns to Huawei for 160,000 chips as NVIDIA stays locked out of China",
+          "outlet": "tech-ish",
+          "date": "2026-09-04"
+        },
+        {
+          "url": "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html",
+          "title": "NVIDIA H200 141GB board, single-unit price",
+          "outlet": "ASA Computers",
+          "date": "2026-09-05"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Watch whether Micron's extra wafers actually turn up on time. Sixty thousand wafers a month by the end of 2026 is the first figure in weeks that would make more chips, rather than move scarce ones between buyers. If it slips, nothing else in the chain gets easier.",
+        "Watch the clock on who is allowed to buy. G42's permission to take top-end chips without a licence runs out around April 2027 unless it moves its headquarters to the United States or applies again, and its executives have held early talks about selling a controlling stake to American firms. DeepSeek's switch to Huawei shows where blocked demand ends up.",
+        "And watch Broadcom's customer list. If Anthropic passes Google as its largest custom-chip customer in 2027, the buyers with the deepest pockets will be designing more of their own hardware rather than queuing for someone else's."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "en-etnews-com-d7f78774-2026-09-1",
+        "thenextweb-com-81950285-2026-09-1",
+        "tech-ish-com-f8154af6-2026-09-2",
+        "finance-yahoo-com-61f89a99-2026-09-3"
+      ],
+      "sourceLine": "Electronic Times, English edition (4 September); The Next Web (4 September); tech-ish (4 September); Yahoo Finance (3 September).",
+      "relatedDocs": [
+        {
+          "url": "https://thenextweb.com/news/g42-us-ownership-chip-access-export-control-endgame",
+          "title": "G42's chip access and its US ownership question",
+          "outlet": "The Next Web",
+          "date": "2026-09-04"
+        },
+        {
+          "url": "https://cryptobriefing.com/coatue-matx-joint-venture-ai-chips/",
+          "title": "Coatue in talks over a joint venture with chip startup MatX",
+          "outlet": "cryptobriefing",
+          "date": "2026-09-04"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Memory factory spending is the tap everything else waits on, and today it finally buys extra output.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Buyers' spending plans keep being revised up, which is why the queue never shortens.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "The street price of one chip shows whether scarcity is easing where anyone can walk up and buy.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-09",
+      "text": "Micron plans to add up to 60,000 stacked-memory wafers a month by the end of 2026, taking output to roughly 100,000 a month.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "NVIDIA's long-term supply promises rose to $279 billion, mainly to secure stacked memory and server memory for its next generation.",
+      "scene": 1
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Micron plans to add up to 60,000 stacked-memory wafers a month by the end of 2026, roughly doubling output from 40,000 to 50,000 last year.",
+      "claimFindingIds": [
+        "en-etnews-com-d7f78774-2026-09-1"
+      ]
+    },
+    {
+      "text": "Broadcom guided full-year sales of chips for artificial-intelligence work to about $58 billion, up 186%, resting on six customers including Google, OpenAI and Anthropic.",
+      "claimFindingIds": [
+        "finance-yahoo-com-61f89a99-2026-09-1",
+        "finance-yahoo-com-61f89a99-2026-09-3"
+      ]
+    },
+    {
+      "text": "DeepSeek plans at least 160,000 Huawei chips at a new Chinese site from late 2027, moving serving work onto hardware it is allowed to buy.",
+      "claimFindingIds": [
+        "tech-ish-com-f8154af6-2026-09-1",
+        "tech-ish-com-f8154af6-2026-09-2"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "improved",
+      "reasoning": "Micron plans to add up to 60,000 stacked-memory wafers a month by the end of 2026, taking it to about 100,000 from 40,000 to 50,000 last year. That is the first addition in weeks that raises output rather than reshuffling it.",
+      "claimFindingIds": [
+        "en-etnews-com-d7f78774-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "Broadcom guided full-year custom-chip sales for artificial-intelligence work to about $58 billion, up 186%, with Anthropic set to pass Google as its biggest such customer in 2027, and DeepSeek is placing 160,000 Huawei chips instead of NVIDIA parts.",
+      "claimFindingIds": [
+        "finance-yahoo-com-61f89a99-2026-09-1",
+        "finance-yahoo-com-61f89a99-2026-09-3",
+        "tech-ish-com-f8154af6-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "improved",
+      "reasoning": "Micron's plan to reach roughly 100,000 stacked-memory wafers a month adds real volume, though supply stays concentrated: SK Hynix held 50% of the market in the second quarter and Samsung 32%, against Micron's 18%.",
+      "claimFindingIds": [
+        "en-etnews-com-d7f78774-2026-09-1",
+        "en-etnews-com-d7f78774-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today on how much memory each accelerator gets. The only memory news was Micron's extra wafer capacity, which is about total output rather than what any single chip carries.",
+      "claimFindingIds": [
+        "en-etnews-com-d7f78774-2026-09-1"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-05",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "efd85656af273186dfaa469c4693d5c4c59ef0af488b8e3885062092ac3aa0db",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-09-05T01:42:24.145022+00:00"
+  }
+}
