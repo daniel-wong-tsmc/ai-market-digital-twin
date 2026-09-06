@@ -1,0 +1,47 @@
+{
+  "id": "focustaiwan-tw-e2c71460-2026-09-1",
+  "statement": "Hon Hai (Foxconn) reported August 2026 consolidated sales of NT$921.77 billion, up 51.98 percent year on year, its best August ever, on AI-server demand.",
+  "kind": "measured",
+  "value": {
+    "number": 51.98,
+    "unit": "pct_yoy"
+  },
+  "trend": "rising",
+  "why": "Foxconn is the largest assembler of AI server racks, so its monthly sales are a near-real-time read on how many accelerator systems are actually shipping rather than merely being ordered.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "Record AI-server assembly revenue implies sustained pull-through of merchant GPUs and the racks, networking and facilities needed to house them."
+  },
+  "evidence": [
+    {
+      "source": "Focus Taiwan (CNA)",
+      "url": "https://focustaiwan.tw/business/202609050007",
+      "date": "2026-09-05",
+      "excerpt": "soaring 51.98 percent from a year earlier",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet reporting company-released monthly sales; no filing-level primary source in this document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "odmMonthlyAiRevenue",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "Hon Hai Precision Industry (Foxconn)",
+  "observedAt": "2026-09-05",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

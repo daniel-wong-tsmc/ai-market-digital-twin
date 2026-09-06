@@ -1,0 +1,44 @@
+{
+  "id": "blogs-nvidia-com-27dfecba-2026-09-1",
+  "statement": "NVIDIA signed a definitive agreement to acquire Hugging Face for approximately $12.93 billion, taking ownership of the main distribution hub for open models and its stated 18 million developers.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Hugging Face is where most developers first find and run open models; owning that front door reinforces the pull toward NVIDIA accelerators and the software stack around them, extending demand beyond hardware alone.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.open-weight",
+      "infrastructure.cluster-software",
+      "applications.ai-coding"
+    ],
+    "direction": "positive",
+    "mechanism": "Control of the dominant open-model repository steers default deployment paths toward NVIDIA hardware and its libraries, supporting merchant-GPU demand and lifting the open-weight and cluster-software layers that sit on top of it."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Blog (official)",
+      "url": "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/",
+      "date": "2026-09-03",
+      "excerpt": "NVIDIA announced a definitive agreement to acquire Hugging Face for approximately '$12.93 billion'",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: NVIDIA's own announcement, with the deal value tied to the related SEC 8-K entered into 2026-09-02."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

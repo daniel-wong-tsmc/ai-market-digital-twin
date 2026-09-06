@@ -1,0 +1,44 @@
+{
+  "id": "www-energyconnects-com-06347022-2026-09-1",
+  "statement": "Japan's $550 billion US investment initiative has earmarked a second tranche of $73 billion for nuclear projects in Tennessee and Alabama plus gas power plants in Pennsylvania and Texas, on top of a first tranche of $36 billion for oil, gas and critical minerals.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Power availability is the binding constraint on new AI data centers in the US, so committed funding for firm generation loosens the ceiling on how much accelerator capacity can actually be plugged in.",
+  "impact": {
+    "targets": [
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "infrastructure.datacenter-colo",
+      "energy.procurement"
+    ],
+    "direction": "positive",
+    "mechanism": "State-backed capital for nuclear and gas generation adds future firm supply to the grids that AI campuses depend on, easing the power bottleneck over time."
+  },
+  "evidence": [
+    {
+      "source": "EnergyConnects",
+      "url": "https://www.energyconnects.com/news/gas-lng/2026/september/japan-says-progress-made-on-550-billion-investment-pact-with-us",
+      "date": "2026-09-05",
+      "excerpt": "A second tranche of '$73 billion' was earmarked for nuclear power projects across Tennessee and Alabama, alongside natural gas power plants in Pennsylvania and Texas.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet reporting government statements; project-level detail and timing are not disclosed."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> rising); sources: EnergyConnects",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "Japan / US (multi)",
+  "observedAt": "2026-09-05",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "www-newegg-com-994c8b40-2026-09-2",
+  "statement": "Most H100-class listings on the same Newegg page are out of stock, including the NVIDIA H100 NVL and the Supermicro NVL card, while the H200 NVL accelerator is shown only as Coming Soon with no price.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Thin retail availability of data-center accelerators, with the newer H200 not yet purchasable, suggests channel stock is being absorbed upstream before it reaches open retail.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Out-of-stock and quote-only listings indicate constrained open-channel availability, which lengthens the practical wait for buyers outside direct allocation."
+  },
+  "evidence": [
+    {
+      "source": "Newegg",
+      "url": "https://www.newegg.com/p/pl?d=nvidia+h100",
+      "date": "2026-09-06",
+      "excerpt": "'NVIDIA H100 NVL Graphic Card', Out of Stock, Price: '$30,999.00', Seller: NVIDIA",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Retail stock status on one page is a weak proxy for lead times; no vendor lead-time figure is stated in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "Newegg / PNY",
+  "observedAt": "2026-09-06",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

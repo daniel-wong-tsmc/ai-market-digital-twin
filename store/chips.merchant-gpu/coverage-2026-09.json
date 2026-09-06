@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-09",
-  "capturedAt": "2026-09-05T01:18:48Z",
+  "capturedAt": "2026-09-06T10:22:36Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
@@ -33,10 +33,10 @@
     },
     {
       "type": "source",
-      "id": "coreweave-pricing",
+      "id": "lambda-gpu-pricing",
       "priority": "required",
       "acquisitionStatus": "not-covered",
-      "reason": "Source 'CoreWeave GPU pricing page' was not fetched. URL patterns: ['coreweave.com']",
+      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
       "paywalledNote": null
     },
     {
@@ -53,6 +53,14 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Open-web analyst notes / trade press on GPU market share' was not fetched. URL patterns: ['tomshardware.com', 'anandtech.com', 'techpowerup.com', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "open-web-asic",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Open-web reporting on hyperscaler custom ASICs (competitive alternatives)' was not fetched. URL patterns: ['blog.google', 'aws.amazon.com/machine-learning', 'techcrunch.com', 'semianalysis.com']",
       "paywalledNote": null
     },
     {
@@ -97,18 +105,18 @@
     },
     {
       "type": "source",
-      "id": "gpu-marketplaces",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'GPU marketplaces / resale listings (secondary-market spot price)' was not fetched. URL patterns: ['ebay.com', 'amazon.com', 'newegg.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "ai-app-revenue",
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Hyperscaler AI run-rate and model-lab ARR disclosures' was not fetched. URL patterns: ['microsoft.com', 'blogs.microsoft.com', 'openai.com', 'anthropic.com', 'blog.google', 'aws.amazon.com/machine-learning', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "frontier-release-funding",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Frontier model release and funding trackers (company newsrooms + industry press)' was not fetched. URL patterns: ['openai.com', 'anthropic.com', 'blog.google', 'techcrunch.com', 'semianalysis.com']",
       "paywalledNote": null
     },
     {
@@ -118,33 +126,40 @@
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
       "paywalledNote": null
+    },
+    {
+      "type": "indicator",
+      "id": "D6",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Indicator 'D6' (dimension: momentum) was not covered. Expected sources: ['lambda-gpu-pricing', 'coreweave-pricing'].",
+      "paywalledNote": null
     }
   ],
   "gapCounts": {
-    "total": 14,
-    "source": 14,
-    "indicator": 0,
-    "required": 14,
+    "total": 16,
+    "source": 15,
+    "indicator": 1,
+    "required": 16,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://cryptobriefing.com/coatue-matx-joint-venture-ai-chips/",
-    "https://en.etnews.com/20260904200006",
-    "https://finance.yahoo.com/technology/ai/articles/broadcom-inc-avgo-q3-2026-110030403.html",
-    "https://tech-ish.com/2026/09/04/deepseek-turns-to-huawei-for-160000-ai-chips-as-nvidia-stays-locked-out-of-china/",
-    "https://techcrunch.com/2026/09/03/crusoe-reportedly-raises-3b-at-a-30b-valuation/",
-    "https://thenextweb.com/news/g42-us-ownership-chip-access-export-control-endgame",
-    "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html",
-    "https://www.prnewswire.com/news-releases/broadcom-inc-announces-third-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302868129.html",
-    "https://www.runpod.io/pricing",
-    "https://www.taipeitimes.com/News/biz/archives/2026/09/02/2003863570"
+    "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/",
+    "https://focustaiwan.tw/business/202609050007",
+    "https://lambda.ai/service/gpu-cloud",
+    "https://thenextweb.com/news/bytedance-29-6-billion-loan-ai-data-centres",
+    "https://thenextweb.com/news/tcs-hypervault-one-gigawatt-hyderabad-campus-7-4-billion-water-neutral-claim-eu-data-centre-reporting-delegated-regulation-2024-1364",
+    "https://www.coreweave.com/news/coreweave-completes-industry-first-bring-up-of-nvidia-vera-rubin-nvl72",
+    "https://www.energyconnects.com/news/gas-lng/2026/september/japan-says-progress-made-on-550-billion-investment-pact-with-us",
+    "https://www.idc.com/resource-center/blog/smartphone-shipments-set-for-record-16-7-drop-in-2026-as-the-memory-crisis-hits-full-force/",
+    "https://www.newegg.com/p/pl?d=nvidia+h100",
+    "https://www.sumitomo-chem.co.jp/english/news/detail/20260831e.html"
   ],
   "judgedIndicatorIds": [
     "D2",
-    "D6",
     "S10",
     "S9",
     "apiArr",

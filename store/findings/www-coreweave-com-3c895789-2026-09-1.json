@@ -1,0 +1,44 @@
+{
+  "id": "www-coreweave-com-3c895789-2026-09-1",
+  "statement": "CoreWeave says it was the first AI cloud provider to bring up and fully validate an NVIDIA Vera Rubin NVL72 rack, delivered by Dell on 2026-05-31 and validated on 2026-06-01, with production Rubin instances expected in the second half of 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A working, validated next-generation rack in a commercial cloud shows the Rubin platform moving from launch claims to deployable systems, which pulls forward the ordering cycle for the new generation.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.networking-fabric",
+      "energy.cooling"
+    ],
+    "direction": "positive",
+    "mechanism": "First production validation de-risks the new platform for other buyers, accelerating orders for the accelerators, the rack-scale fabric and the liquid cooling around them."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave (official newsroom)",
+      "url": "https://www.coreweave.com/news/coreweave-completes-industry-first-bring-up-of-nvidia-vera-rubin-nvl72",
+      "date": "2026-06-01",
+      "excerpt": "CoreWeave became the first AI cloud provider to stand up a fully validated and operational Vera Rubin NVL72 on June 1, 2026.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company newsroom claim classified as secondary in this fetch; no independent corroboration in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "coreweave",
+  "observedAt": "2026-06-01",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

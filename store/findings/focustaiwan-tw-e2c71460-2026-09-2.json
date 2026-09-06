@@ -1,0 +1,43 @@
+{
+  "id": "focustaiwan-tw-e2c71460-2026-09-2",
+  "statement": "Hon Hai's cloud and networking division kept growing strongly and had already passed 50 percent of total company revenue for the first time in the second quarter of 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "The revenue mix shift shows AI infrastructure has become the majority of Foxconn's business, which makes the whole company's results a proxy for data-center spending rather than consumer electronics.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.networking-fabric",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "A rising AI share of contract-manufacturing revenue signals that data-center orders, not handsets, are setting the production schedule, supporting accelerator demand."
+  },
+  "evidence": [
+    {
+      "source": "Focus Taiwan (CNA)",
+      "url": "https://focustaiwan.tw/business/202609050007",
+      "date": "2026-09-05",
+      "excerpt": "enjoyed significant year-on-year revenue growth amid accelerating AI momentum",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; the mix figure is qualitative in this document, so no measured value is claimed."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Hon Hai Precision Industry (Foxconn)",
+  "observedAt": "2026-09-05",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,128 +1,202 @@
 {
-  "asOf": "2026-09-05",
+  "asOf": "2026-09-06",
   "bullets": [
     {
       "chart": {
-        "caption": "Found today — single source: Micron Technology Investor Relations (official press releases).",
-        "form": "columns",
+        "caption": "Servers actually shipped. Our assessment, based on the sources cited below.",
+        "form": "line",
         "points": [
           {
             "hollow": false,
-            "label": "Q1 FY2026 (ended Nov 27, 2025)",
-            "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-first-quarter-fiscal-2026",
-            "value": 13.64
+            "label": "2025-10",
+            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_10_0.html",
+            "value": 68.0081
           },
           {
             "hollow": false,
-            "label": "Q2 FY2026 (ended Feb 26, 2026)",
-            "sourceUrl": "https://investors.micron.com/news-releases/news-release-details/micron-technology-inc-reports-results-second-quarter-fiscal-2026",
-            "value": 23.86
+            "label": "2025-11",
+            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_11_0.html",
+            "value": 108.1493
           },
           {
             "hollow": false,
-            "label": "Q3 FY2026 (ended May 28, 2026)",
-            "sourceUrl": "https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Results-for-the-Third-Quarter-of-Fiscal-2026/default.aspx",
-            "value": 41.46
+            "label": "2025-12",
+            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_12_0.html",
+            "value": 120.3485
+          },
+          {
+            "hollow": false,
+            "label": "2026-01",
+            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_1_0.html",
+            "value": 100.2661
+          },
+          {
+            "hollow": false,
+            "label": "2026-02",
+            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_2_0.html",
+            "value": 98.505
+          },
+          {
+            "hollow": false,
+            "label": "2026-03",
+            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_3_0.html",
+            "value": 83.8414
+          },
+          {
+            "hollow": false,
+            "label": "2026-04",
+            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_4_0.html",
+            "value": 100.8692
+          },
+          {
+            "hollow": false,
+            "label": "2026-05",
+            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_5_0.html",
+            "value": 55.9221
+          },
+          {
+            "hollow": false,
+            "label": "2026-06",
+            "sourceUrl": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_6_0.html",
+            "value": 68.788
+          },
+          {
+            "hollow": false,
+            "label": "2026-07",
+            "sourceUrl": "https://www.quantatw.com/quanta/english/investment/financials_ms.aspx",
+            "value": 82.279
           }
         ],
-        "researched": true,
+        "researched": false,
         "source": {
-          "date": "2026-06-24",
-          "outlet": "Micron Technology Investor Relations (official press releases)",
-          "tier": "secondary",
-          "title": "Micron quarterly total revenue, fiscal 2026",
-          "url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Results-for-the-Third-Quarter-of-Fiscal-2026/default.aspx"
+          "assessment": true,
+          "basedOn": [
+            {
+              "date": "2025-11-10",
+              "outlet": "mopsov.twse.com.tw",
+              "tier": "secondary",
+              "title": "TWSE MOPS monthly revenue summary, listed companies, Oct 2025",
+              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_10_0.html"
+            },
+            {
+              "date": "2025-12-10",
+              "outlet": "mopsov.twse.com.tw",
+              "tier": "secondary",
+              "title": "TWSE MOPS monthly revenue summary, listed companies, Nov 2025",
+              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_11_0.html"
+            },
+            {
+              "date": "2026-01-10",
+              "outlet": "mopsov.twse.com.tw",
+              "tier": "secondary",
+              "title": "TWSE MOPS monthly revenue summary, listed companies, Dec 2025",
+              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_114_12_0.html"
+            },
+            {
+              "date": "2026-02-10",
+              "outlet": "mopsov.twse.com.tw",
+              "tier": "secondary",
+              "title": "TWSE MOPS monthly revenue summary, listed companies, Jan 2026",
+              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_1_0.html"
+            },
+            {
+              "date": "2026-03-10",
+              "outlet": "mopsov.twse.com.tw",
+              "tier": "secondary",
+              "title": "TWSE MOPS monthly revenue summary, listed companies, Feb 2026",
+              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_2_0.html"
+            },
+            {
+              "date": "2026-04-10",
+              "outlet": "mopsov.twse.com.tw",
+              "tier": "secondary",
+              "title": "TWSE MOPS monthly revenue summary, listed companies, Mar 2026",
+              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_3_0.html"
+            },
+            {
+              "date": "2026-05-10",
+              "outlet": "mopsov.twse.com.tw",
+              "tier": "secondary",
+              "title": "TWSE MOPS monthly revenue summary, listed companies, Apr 2026",
+              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_4_0.html"
+            },
+            {
+              "date": "2026-06-10",
+              "outlet": "mopsov.twse.com.tw",
+              "tier": "secondary",
+              "title": "TWSE MOPS monthly revenue summary, listed companies, May 2026",
+              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_5_0.html"
+            },
+            {
+              "date": "2026-07-10",
+              "outlet": "mopsov.twse.com.tw",
+              "tier": "secondary",
+              "title": "TWSE MOPS monthly revenue summary, listed companies, Jun 2026",
+              "url": "https://mopsov.twse.com.tw/nas/t21/sii/t21sc03_115_6_0.html"
+            },
+            {
+              "date": "2026-08-10",
+              "outlet": "quantatw.com",
+              "tier": "secondary",
+              "title": "Quanta Computer 2026 Monthly Sales; Wistron & Wiwynn TWSE monthly revenue filings (Aug 2026)",
+              "url": "https://www.quantatw.com/quanta/english/investment/financials_ms.aspx"
+            }
+          ]
         },
-        "title": "Micron quarterly total revenue, fiscal 2026",
-        "unit": "US$ billions"
+        "title": "Servers actually shipped",
+        "unit": "%, year over year"
       },
-      "date": "2026-09-05",
+      "date": "2026-09-06",
       "noChartReason": null,
       "sources": [
         {
-          "date": "2026-09-04",
-          "outlet": "Electronic Times (ET News, English edition)",
+          "date": "2026-09-05",
+          "outlet": "Focus Taiwan (CNA)",
           "tier": "secondary",
-          "title": "Electronic Times (ET News, English edition)",
-          "url": "https://en.etnews.com/20260904200006"
+          "title": "Focus Taiwan (CNA)",
+          "url": "https://focustaiwan.tw/business/202609050007"
         }
       ],
-      "storyHref": "story/2026-09-05.html",
-      "text": "Micron plans to add up to 60,000 stacked-memory wafers a month by the end of 2026, roughly doubling output from 40,000 to 50,000 last year."
-    },
-    {
-      "chart": {
-        "caption": "Found today — single source: PR Newswire (Broadcom Inc. quarterly earnings press releases).",
-        "form": "columns",
-        "points": [
-          {
-            "hollow": false,
-            "label": "Q1 FY2026 (ended Feb 1, 2026)",
-            "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-first-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302704490.html",
-            "value": 8.4
-          },
-          {
-            "hollow": false,
-            "label": "Q2 FY2026 (ended May 3, 2026)",
-            "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302790698.html",
-            "value": 10.8
-          },
-          {
-            "hollow": false,
-            "label": "Q3 FY2026 (ended Aug 2, 2026)",
-            "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-third-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302868129.html",
-            "value": 16.7
-          },
-          {
-            "hollow": false,
-            "label": "Q4 FY2026 (guided, not yet reported)",
-            "sourceUrl": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-third-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302868129.html",
-            "value": 21.7
-          }
-        ],
-        "researched": true,
-        "source": {
-          "date": "2026-09-02",
-          "outlet": "PR Newswire (Broadcom Inc. quarterly earnings press releases)",
-          "tier": "secondary",
-          "title": "Broadcom quarterly AI semiconductor revenue, fiscal 2026",
-          "url": "https://www.prnewswire.com/news-releases/broadcom-inc-announces-third-quarter-fiscal-year-2026-financial-results-and-quarterly-dividend-302868129.html"
-        },
-        "title": "Broadcom quarterly AI semiconductor revenue, fiscal 2026",
-        "unit": "US$ billions"
-      },
-      "date": "2026-09-05",
-      "noChartReason": null,
-      "sources": [
-        {
-          "date": "2026-09-03",
-          "outlet": "Yahoo Finance",
-          "tier": "secondary",
-          "title": "Yahoo Finance",
-          "url": "https://finance.yahoo.com/technology/ai/articles/broadcom-inc-avgo-q3-2026-110030403.html"
-        }
-      ],
-      "storyHref": "story/2026-09-05.html",
-      "text": "Broadcom guided full-year sales of chips for artificial-intelligence work to about $58 billion, up 186%, resting on six customers including Google, OpenAI and Anthropic."
+      "storyHref": "story/2026-09-06.html",
+      "text": "Hon Hai reported August sales of NT$921.77 billion, up 51.98% on the year and its best August ever, on demand for artificial-intelligence servers."
     },
     {
       "chart": null,
-      "date": "2026-09-05",
+      "date": "2026-09-06",
+      "noChartReason": {
+        "cause": "no-plain-name",
+        "reason": "We don't yet have a plain-English way to describe what this number measures, so we don't draw it."
+      },
+      "sources": [
+        {
+          "date": "2026-09-05",
+          "outlet": "The Next Web",
+          "tier": "secondary",
+          "title": "The Next Web",
+          "url": "https://thenextweb.com/news/tcs-hypervault-one-gigawatt-hyderabad-campus-7-4-billion-water-neutral-claim-eu-data-centre-reporting-delegated-regulation-2024-1364"
+        }
+      ],
+      "storyHref": "story/2026-09-06.html",
+      "text": "HyperVault, a Tata Consultancy Services unit, committed about $7.4 billion with partners to a one-gigawatt data-centre campus in Hyderabad, naming no chip supplier."
+    },
+    {
+      "chart": null,
+      "date": "2026-09-06",
       "noChartReason": {
         "cause": "no-published-number",
         "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
       },
       "sources": [
         {
-          "date": "2026-09-04",
-          "outlet": "tech-ish",
-          "tier": "secondary",
-          "title": "tech-ish",
-          "url": "https://tech-ish.com/2026/09/04/deepseek-turns-to-huawei-for-160000-ai-chips-as-nvidia-stays-locked-out-of-china/"
+          "date": "2026-09-03",
+          "outlet": "NVIDIA (official blog)",
+          "tier": "primary",
+          "title": "NVIDIA (official blog)",
+          "url": "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/"
         }
       ],
-      "storyHref": "story/2026-09-05.html",
-      "text": "DeepSeek plans at least 160,000 Huawei chips at a new Chinese site from late 2027, moving serving work onto hardware it is allowed to buy."
+      "storyHref": "story/2026-09-06.html",
+      "text": "NVIDIA agreed to buy Hugging Face for about $12.93 billion, taking the main place open models reach more than 18 million developers."
     }
   ],
   "categoryId": "chips.merchant-gpu",
@@ -156,8 +230,8 @@
       "id": "bottleneck",
       "plainName": "What is holding shipments back",
       "ratingWord": "Weak",
-      "reasoning": "Advanced packaging has eased to roughly a 10% shortfall, so memory now sets the ceiling on shipments.",
-      "summary": "NVIDIA says it can supply about 70% of demand and raised long-term supply commitments to $279 billion mainly to secure memory, while Micron can cover roughly half of what customers ask and calls DRAM the top constraint; suppliers meet only 60-70% of the memory volume requested for Rubin Ultra, forcing that part down to 192GB.",
+      "reasoning": "Packaging has eased to roughly a 10% shortfall, so memory now sets the ceiling, with Rubin Ultra cut to 192 gigabytes to stretch a fixed memory pool.",
+      "summary": "NVIDIA says it holds supply for about 70% of demand and its forward supply commitments jumped to $279 billion on memory purchases, while Micron can cover only about half of what customers ask and memory costs are up over 300% year on year.",
       "tone": "bad"
     },
     {
@@ -179,51 +253,51 @@
           "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
         },
         {
-          "date": "2026-08-04",
-          "outlet": "AMD Investor Relations",
-          "tier": "primary",
-          "title": "AMD Investor Relations",
-          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
+          "date": "2026-09-02",
+          "outlet": "Reuters (via Investing.com)",
+          "tier": "secondary",
+          "title": "Reuters (via Investing.com)",
+          "url": "https://www.investing.com/news/stock-market-news/nscale-doubles-contracted-revenue-to-103-billion-after-anthropic-win--report-4886830"
         }
       ],
       "id": "momentum",
       "plainName": "How hard buyers are buying",
       "ratingWord": "Very strong",
-      "reasoning": "Broadcom AI revenue rose 221% to $16.7 billion, AMD data-center revenue doubled to $6.7 billion and CoreWeave's booked backlog hit $104.2 billion, so the buying spans several vendors and several buyer tiers.",
-      "summary": "NVIDIA data-center revenue reached $89.0 billion in the July quarter, up 117% year over year, with the next quarter guided to $108 billion.",
+      "reasoning": "Contracted books kept building, with Nscale near $103 billion and CoreWeave at $104.2 billion.",
+      "summary": "NVIDIA data-center revenue reached $89.0 billion, up 117% year over year, with the coming quarter guided to $108.0 billion, and Broadcom AI chip revenue rose 221% to $16.7 billion.",
       "tone": "good"
     },
     {
-      "confidence": "Medium — the underlying reports are single-source in places.",
+      "confidence": "High — drawn from company filings and calls.",
       "direction": "worsening",
       "evidence": [
         {
-          "date": "2026-07-23",
-          "outlet": "StorageReview",
-          "tier": "secondary",
-          "title": "StorageReview",
-          "url": "https://www.storagereview.com/news/amd-mi455x-and-helios-432gb-hbm4-72-gpu-racks-and-a-real-answer-to-vera-rubin"
+          "date": "2026-08-04",
+          "outlet": "AMD Investor Relations (ir.amd.com)",
+          "tier": "primary",
+          "title": "AMD Investor Relations (ir.amd.com)",
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
         },
         {
-          "date": "2026-08-18",
-          "outlet": "24/7 Wall St. (reporting Marvell Technology SEC 8-K)",
-          "tier": "secondary",
-          "title": "24/7 Wall St. (reporting Marvell Technology SEC 8-K)",
-          "url": "https://247wallst.com/investing/2026/08/19/marvell-technology-rockets-13-on-12-2b-google-warrant-broadcom-falls-3-alphabet-unmoved/"
+          "date": "2026-08-31",
+          "outlet": "NVIDIA Newsroom (official press release)",
+          "tier": "primary",
+          "title": "NVIDIA Newsroom (official press release)",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms"
         },
         {
-          "date": "2026-08-11",
-          "outlet": "Quartz (citing The Information / Reuters reporting)",
+          "date": "2026-08-26",
+          "outlet": "TrendForce",
           "tier": "secondary",
-          "title": "Quartz (citing The Information / Reuters reporting)",
-          "url": "https://qz.com/microsoft-maia-300-ai-chip-unveil-fall-tsmc-081026"
+          "title": "TrendForce",
+          "url": "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/"
         }
       ],
       "id": "competitiveStructure",
       "plainName": "Whether buyers have a second choice",
       "ratingWord": "Mixed",
-      "reasoning": "Custom silicon is forecast to grow 44.6% against 16.1% for merchant GPUs, though AMD's volume ramp still slips to 2027.",
-      "summary": "AMD's Helios racks entered production with OpenAI, Meta, Anthropic, Microsoft and Oracle named as adopters, and custom parts keep arriving: Google added Marvell alongside its own accelerator, Microsoft is negotiating capacity for 300,000 Maia 300 chips, and OpenAI unveiled Jalapeno.",
+      "reasoning": "NVIDIA's investment in MediaTek pulls a rival designer onto its own fabric, softening that shift without reversing it.",
+      "summary": "AMD shipped production Helios racks and launched the MI400 family, while the larger change is buyers designing their own parts: OpenAI unveiled Jalapeno, Google added a Marvell award with a roughly $120 billion warrant ceiling, and Microsoft is negotiating capacity for 300,000 Maia chips.",
       "tone": "mixed"
     },
     {
@@ -255,8 +329,8 @@
       "id": "moat",
       "plainName": "How safe NVIDIA's lead looks",
       "ratingWord": "Weak",
-      "reasoning": "Networking offsets part of that, since NVIDIA took the data-center Ethernet switch revenue lead, yet the pull toward captive parts is the stronger force.",
-      "summary": "NVIDIA's accelerator share is projected to slide from a 2024 peak of 87% to about 75% this year, and in-house silicon at the largest buyers already absorbs roughly two-thirds of AI compute.",
+      "reasoning": "The offsetting strength is networking attach, where NVIDIA took the data-center Ethernet switch revenue lead.",
+      "summary": "NVIDIA accelerator share is projected at 75% for 2026 against an 87% peak in 2024, and custom silicon from the largest buyers already consumes roughly two-thirds of AI compute.",
       "tone": "bad"
     },
     {
@@ -271,11 +345,11 @@
           "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
         },
         {
-          "date": "2026-07-23",
-          "outlet": "Intel investor-relations press release",
+          "date": "2026-05-20",
+          "outlet": "NVIDIA Q1 FY2027 financial results press release (Form 8-K / NVIDIA IR)",
           "tier": "primary",
-          "title": "Intel investor-relations press release",
-          "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
+          "title": "NVIDIA Q1 FY2027 financial results press release (Form 8-K / NVIDIA IR)",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
         },
         {
           "date": "2026-08-26",
@@ -288,8 +362,8 @@
       "id": "unitEconomics",
       "plainName": "How profitable the sellers are",
       "ratingWord": "Strong",
-      "reasoning": "Memory is the only force pushing these margins down and it costs a few points, well short of eroding the premium.",
-      "summary": "NVIDIA holds gross margin near 74% but has named a 71-72% floor as memory costs land, while TSMC posted 67.7%, AMD 54% GAAP and Intel 40.4%.",
+      "reasoning": "Management has already named a floor near 71-72% as memory costs enter the bill of materials, which sets the direction down.",
+      "summary": "NVIDIA still guides a 74% gross margin and TSMC reported 67.7%, so the level stays high.",
       "tone": "good"
     },
     {
@@ -311,18 +385,18 @@
           "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
         },
         {
-          "date": "2026-08-15",
-          "outlet": "Yahoo Finance (Reuters)",
+          "date": "2026-09-03",
+          "outlet": "Yahoo Finance",
           "tier": "secondary",
-          "title": "Yahoo Finance (Reuters)",
-          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-scales-back-250-billion-234356524.html"
+          "title": "Yahoo Finance",
+          "url": "https://finance.yahoo.com/technology/ai/articles/broadcom-inc-avgo-q3-2026-110030403.html"
         }
       ],
       "id": "strategicRisk",
       "plainName": "What could go wrong",
       "ratingWord": "Mixed",
-      "reasoning": "NVIDIA cut its Ohio guarantee from $250 billion to under $120 billion and paused parts of its compute-financing program, which trims that exposure while China revenue stays assumed at zero and Taiwan prosecutors indict nine people over diverted servers.",
-      "summary": "Three direct customers account for 21%, 17% and 16% of NVIDIA revenue, and the largest tranche of vendor-backed demand rests on OpenAI, which booked $13.1 billion of 2025 revenue against a $20.9 billion operating loss.",
+      "reasoning": "Vendor-supported buying is being trimmed, with the Ohio guarantee cut from $250 billion to under $120 billion and parts of the compute financing program paused, while China data-center revenue is assumed at zero and Taiwan prosecutors indicted nine people over diverted servers.",
+      "summary": "Three direct customers made up 21%, 17% and 16% of NVIDIA revenue and Broadcom's AI business rests on six buyers, so the order book sits on very few names.",
       "tone": "mixed"
     }
   ],
@@ -392,8 +466,8 @@
       },
       {
         "date": "2026-09-01",
-        "demand": 5.780000000000002,
-        "supply": 0.019999999999999952
+        "demand": 6.440000000000002,
+        "supply": -0.10000000000000009
       }
     ],
     "sources": [
@@ -416,9 +490,9 @@
           },
           {
             "date": "2026-08-04",
-            "outlet": "AMD Investor Relations",
+            "outlet": "AMD Investor Relations (ir.amd.com)",
             "tier": "primary",
-            "title": "AMD Investor Relations",
+            "title": "AMD Investor Relations (ir.amd.com)",
             "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
           }
         ]
@@ -428,8 +502,8 @@
   "issues": {
     "open": [
       {
-        "assessedAsOf": "2026-09-05",
-        "checkCount": 13,
+        "assessedAsOf": "2026-09-06",
+        "checkCount": 14,
         "history": [
           {
             "asOf": "2026-08-19",
@@ -482,27 +556,38 @@
           {
             "asOf": "2026-09-05",
             "status": "improved"
+          },
+          {
+            "asOf": "2026-09-06",
+            "status": "unchanged"
           }
         ],
         "id": "dim-bottleneck",
-        "reasoning": "Micron plans to add up to 60,000 stacked-memory wafers a month by the end of 2026, taking it to about 100,000 from 40,000 to 50,000 last year. That is the first addition in weeks that raises output rather than reshuffling it.",
+        "reasoning": "No new supply evidence arrived today. Assembly set a record, with Hon Hai's August sales up 51.98%, but NVIDIA's late-August statement that it holds supply for about 70% of demand still stands.",
         "sources": [
           {
-            "date": "2026-09-04",
-            "outlet": "Electronic Times (ET News, English edition)",
+            "date": "2026-09-05",
+            "outlet": "Focus Taiwan (CNA)",
             "tier": "secondary",
-            "title": "Electronic Times (ET News, English edition)",
-            "url": "https://en.etnews.com/20260904200006"
+            "title": "Focus Taiwan (CNA)",
+            "url": "https://focustaiwan.tw/business/202609050007"
+          },
+          {
+            "date": "2026-08-26",
+            "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+            "tier": "secondary",
+            "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+            "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
           }
         ],
-        "status": "improved",
+        "status": "unchanged",
         "title": "Bottleneck",
         "trackedSince": "2026-08",
         "worsenedCount": 10
       },
       {
-        "assessedAsOf": "2026-09-05",
-        "checkCount": 13,
+        "assessedAsOf": "2026-09-06",
+        "checkCount": 14,
         "history": [
           {
             "asOf": "2026-08-19",
@@ -555,34 +640,31 @@
           {
             "asOf": "2026-09-05",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-06",
+            "status": "improved"
           }
         ],
         "id": "dim-moat",
-        "reasoning": "Broadcom guided full-year custom-chip sales for artificial-intelligence work to about $58 billion, up 186%, with Anthropic set to pass Google as its biggest such customer in 2027, and DeepSeek is placing 160,000 Huawei chips instead of NVIDIA parts.",
+        "reasoning": "NVIDIA agreed to buy Hugging Face for about $12.93 billion, taking the main hand-out point for open models and its 18 million developers, though it promises to keep the platform open to other makers' hardware.",
         "sources": [
           {
             "date": "2026-09-03",
-            "outlet": "Yahoo Finance",
-            "tier": "secondary",
-            "title": "Yahoo Finance",
-            "url": "https://finance.yahoo.com/technology/ai/articles/broadcom-inc-avgo-q3-2026-110030403.html"
-          },
-          {
-            "date": "2026-09-04",
-            "outlet": "tech-ish",
-            "tier": "secondary",
-            "title": "tech-ish",
-            "url": "https://tech-ish.com/2026/09/04/deepseek-turns-to-huawei-for-160000-ai-chips-as-nvidia-stays-locked-out-of-china/"
+            "outlet": "NVIDIA (official blog)",
+            "tier": "primary",
+            "title": "NVIDIA (official blog)",
+            "url": "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/"
           }
         ],
-        "status": "worsened",
+        "status": "improved",
         "title": "Moat",
         "trackedSince": "2026-08",
         "worsenedCount": 8
       },
       {
-        "assessedAsOf": "2026-09-05",
-        "checkCount": 12,
+        "assessedAsOf": "2026-09-06",
+        "checkCount": 13,
         "history": [
           {
             "asOf": "2026-08-21",
@@ -631,10 +713,14 @@
           {
             "asOf": "2026-09-05",
             "status": "improved"
+          },
+          {
+            "asOf": "2026-09-06",
+            "status": "unchanged"
           }
         ],
         "id": "constraint-stacked-memory-and-server-dram",
-        "reasoning": "Micron's plan to reach roughly 100,000 stacked-memory wafers a month adds real volume, though supply stays concentrated: SK Hynix held 50% of the market in the second quarter and Samsung 32%, against Micron's 18%.",
+        "reasoning": "No new memory evidence arrived today. The latest figure is still Micron's plan from 4 September to add up to 60,000 stacked-memory wafers a month by the end of 2026.",
         "sources": [
           {
             "date": "2026-09-04",
@@ -644,14 +730,14 @@
             "url": "https://en.etnews.com/20260904200006"
           }
         ],
-        "status": "improved",
+        "status": "unchanged",
         "title": "HBM and server DRAM supply",
         "trackedSince": "2026-08",
         "worsenedCount": 6
       },
       {
-        "assessedAsOf": "2026-09-05",
-        "checkCount": 10,
+        "assessedAsOf": "2026-09-06",
+        "checkCount": 11,
         "history": [
           {
             "asOf": "2026-08-23",
@@ -692,10 +778,14 @@
           {
             "asOf": "2026-09-05",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-09-06",
+            "status": "unchanged"
           }
         ],
         "id": "constraint-hbm4-memory-allocation-per-accelerator",
-        "reasoning": "No new evidence arrived today on how much memory each accelerator gets. The only memory news was Micron's extra wafer capacity, which is about total output rather than what any single chip carries.",
+        "reasoning": "No new evidence arrived on how much memory each accelerator carries. The nearest recent item, Micron's added wafer capacity from 4 September, is about total output rather than any single chip.",
         "sources": [
           {
             "date": "2026-09-04",
@@ -709,30 +799,62 @@
         "title": "stacked memory supply",
         "trackedSince": "2026-08",
         "worsenedCount": 3
+      },
+      {
+        "assessedAsOf": "2026-09-06",
+        "checkCount": 1,
+        "history": [
+          {
+            "asOf": "2026-09-06",
+            "status": "unchanged"
+          }
+        ],
+        "id": "constraint-high-bandwidth-memory-and-server-memory",
+        "reasoning": "No new evidence arrived today. The most recent reading remains NVIDIA's late-August disclosure that long-term supply promises rose to $279 billion, mainly to buy stacked memory and server memory.",
+        "sources": [
+          {
+            "date": "2026-08-29",
+            "outlet": "The Motley Fool",
+            "tier": "secondary",
+            "title": "The Motley Fool",
+            "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
+          }
+        ],
+        "status": "unchanged",
+        "title": "High-bandwidth memory and server memory",
+        "trackedSince": "2026-09",
+        "worsenedCount": 0
       }
     ],
     "resolved": []
   },
   "schemaVersion": "1.2",
   "verdict": {
-    "answer": "Not yet. The smallest memory maker starts adding capacity",
+    "answer": "Not yet. Record assembly, same ceiling on the parts",
     "chip": {
       "direction": "widening",
       "label": "Gap widening"
     },
     "confidence": "We are confident in this read",
     "question": "Is supply catching up to demand?",
-    "soWhat": "Micron plans to roughly double its stacked-memory output by year end, while money and blocked buyers keep moving faster than the parts.",
+    "soWhat": "Hon Hai posted its best August ever on server work, while the memory that caps output stayed where it was and new money went into land, power and distribution.",
     "sources": [
       {
         "assessment": true,
         "basedOn": [
           {
-            "date": "2026-09-04",
-            "outlet": "Electronic Times (ET News, English edition)",
+            "date": "2026-09-05",
+            "outlet": "Focus Taiwan (CNA)",
             "tier": "secondary",
-            "title": "Electronic Times (ET News, English edition)",
-            "url": "https://en.etnews.com/20260904200006"
+            "title": "Focus Taiwan (CNA)",
+            "url": "https://focustaiwan.tw/business/202609050007"
+          },
+          {
+            "date": "2026-08-26",
+            "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+            "tier": "secondary",
+            "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+            "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
           },
           {
             "date": "2026-08-29",

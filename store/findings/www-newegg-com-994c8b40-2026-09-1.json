@@ -1,0 +1,44 @@
+{
+  "id": "www-newegg-com-994c8b40-2026-09-1",
+  "statement": "Newegg lists a new PNY NVIDIA H100 80GB HBM3 card in stock at $34,879.00 sold by Newegg, with configuration options from $29,500.00 to $34,879.00, as fetched 2026-09-06.",
+  "kind": "measured",
+  "value": {
+    "number": 34879.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "unknown",
+  "why": "A retail listing gives a visible, checkable price for a single H100 board on the open channel, but this page shows no earlier price, so it is a level rather than a move.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Open-channel hardware pricing is a confirmation overlay on secondary-market accelerator value; with no stated baseline it does not indicate direction."
+  },
+  "evidence": [
+    {
+      "source": "Newegg",
+      "url": "https://www.newegg.com/p/pl?d=nvidia+h100",
+      "date": "2026-09-06",
+      "excerpt": "In-stock listing: 'PNY NVIDIA H100 Graphic Card', Price: '$34,879.00', Condition: New, Seller: Newegg",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single retail listing page with no publication date; fetch date used, and retail list price may not reflect volume transaction prices."
+  },
+  "dispersion": "Same page shows H100 variants at $30,948.99 (Supermicro NVL, out of stock) and $30,999.00 (NVIDIA H100 NVL, out of stock) against the in-stock PNY card at $34,879.00.",
+  "asOf": "2026-09",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Newegg / PNY",
+  "observedAt": "2026-09-06",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

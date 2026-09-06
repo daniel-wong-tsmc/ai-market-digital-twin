@@ -1,0 +1,44 @@
+{
+  "id": "www-sumitomo-chem-co-jp-addc4731-2026-09-1",
+  "statement": "Sumitomo Chemical has started mass production and sales of 4-inch indium phosphide epitaxial wafers at its Ibaraki Works, targeting around 10 billion yen of sales from the line by the mid-2030s.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Indium phosphide wafers are the base material for the optical parts that move data between AI racks, so a new qualified supplier widens a narrow upstream chokepoint.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.networking-silicon",
+      "infrastructure.networking-fabric",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Added mass-production capacity for optical wafer substrates increases the supply of components needed for high-speed data-center interconnect."
+  },
+  "evidence": [
+    {
+      "source": "Sumitomo Chemical Co., Ltd. (official news release)",
+      "url": "https://www.sumitomo-chem.co.jp/english/news/detail/20260831e.html",
+      "date": "2026-08-31",
+      "excerpt": "The company has established mass production of '4-inch indium phosphide (InP) epitaxial wafers' at its Ibaraki Works in Hitachi, Ibaraki Prefecture, and has begun selling the new products.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company news release classified as secondary in this fetch; the sales target is a long-dated company goal, not a committed volume."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "Sumitomo Chemical",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "www-sumitomo-chem-co-jp-addc4731-2026-09-2",
+  "statement": "Sumitomo Chemical positions itself as one of the few Japanese epitaxial-wafer makers able to stably mass-produce indium phosphide, a material it says is a core input for optical devices in next-generation data centers.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Optical interconnect parts have been a long-lead item for AI cluster builds, so an additional qualified source at the wafer level should gradually shorten those waits.",
+  "impact": {
+    "targets": [
+      "infrastructure.networking-fabric",
+      "chips.networking-silicon",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "More upstream wafer capacity for optical transceivers reduces the queue for long-lead interconnect components that gate cluster deployment."
+  },
+  "evidence": [
+    {
+      "source": "Sumitomo Chemical Co., Ltd. (official news release)",
+      "url": "https://www.sumitomo-chem.co.jp/english/news/detail/20260831e.html",
+      "date": "2026-08-31",
+      "excerpt": "one of the few epi houses in Japan capable of stably mass-producing InP epitaxial wafers",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Self-described company positioning with no volume, customer or lead-time data disclosed."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "Sumitomo Chemical",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

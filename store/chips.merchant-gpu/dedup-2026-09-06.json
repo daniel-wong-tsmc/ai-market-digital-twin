@@ -1,0 +1,186 @@
+{
+  "asOf": "2026-09",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "thenextweb-com-38370e85-2026-09-2",
+      "entity": "ByteDance",
+      "indicatorId": "exportControlExposure",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "thenextweb-com-38370e85-2026-09-3",
+      "entity": "ByteDance",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "thenextweb-com-38370e85-2026-09-1",
+      "entity": "ByteDance",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "focustaiwan-tw-e2c71460-2026-09-2",
+      "entity": "Hon Hai Precision Industry (Foxconn)",
+      "indicatorId": "D2",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "focustaiwan-tw-e2c71460-2026-09-1",
+      "entity": "Hon Hai Precision Industry (Foxconn)",
+      "indicatorId": "odmMonthlyAiRevenue",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-energyconnects-com-06347022-2026-09-1",
+      "entity": "Japan / US (multi)",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-newegg-com-994c8b40-2026-09-1",
+      "entity": "Newegg / PNY",
+      "indicatorId": "gpuSpotPrice",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-newegg-com-994c8b40-2026-09-2",
+      "entity": "Newegg / PNY",
+      "indicatorId": "leadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-sumitomo-chem-co-jp-addc4731-2026-09-1",
+      "entity": "Sumitomo Chemical",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-sumitomo-chem-co-jp-addc4731-2026-09-2",
+      "entity": "Sumitomo Chemical",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "thenextweb-com-17d83c28-2026-09-1",
+      "entity": "TCS (HyperVault)",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "thenextweb-com-17d83c28-2026-09-2",
+      "entity": "TCS (HyperVault)",
+      "indicatorId": "perfPerWatt",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-coreweave-com-3c895789-2026-09-1",
+      "entity": "coreweave",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-coreweave-com-3c895789-2026-09-2",
+      "entity": "coreweave",
+      "indicatorId": "perfPerWatt",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-coreweave-com-3c895789-2026-09-3",
+      "entity": "coreweave",
+      "indicatorId": "tokenEconomics",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-idc-com-9e83b089-2026-09-1",
+      "entity": "multi (memory supply chain)",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "blogs-nvidia-com-27dfecba-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "blogs-nvidia-com-a6b8847a-2026-09-2",
+      "detail": "statement/trend changed (trend unknown -> flat)"
+    },
+    {
+      "findingId": "blogs-nvidia-com-27dfecba-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "www-prnewswire-com-d3031a05-2026-09-1",
+      "detail": "magnitude 1 -> 2"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "www-energyconnects-com-06347022-2026-09-2",
+      "entity": "Japan / US (multi)",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "lambda-ai-b23aabc4-2026-09-2",
+      "entity": "lambda-labs",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "lambda-ai-b23aabc4-2026-09-1",
+      "entity": "lambda-labs",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": "lambda-ai-bfed0e52-2026-09-1",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "www-idc-com-9e83b089-2026-09-2",
+      "entity": "multi (memory supply chain)",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

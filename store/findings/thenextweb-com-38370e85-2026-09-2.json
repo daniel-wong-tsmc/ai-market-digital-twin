@@ -1,0 +1,43 @@
+{
+  "id": "thenextweb-com-38370e85-2026-09-2",
+  "statement": "US export controls keep ByteDance off NVIDIA's advanced chips, so its build-out reportedly leans on Arm and RISC-V custom silicon, Qualcomm inference parts and domestic Chinese suppliers including talks with Iluvatar CoreX and Baidu.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "One of the largest AI spenders outside the US hyperscalers is routing a very large budget away from merchant GPUs, which caps how much of that spending the leading vendor can capture.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "mixed",
+    "mechanism": "Export restrictions divert a major buyer's accelerator budget to custom and domestic silicon, subtracting from merchant-GPU demand while adding to alternative-silicon volume."
+  },
+  "evidence": [
+    {
+      "source": "The Next Web",
+      "url": "https://thenextweb.com/news/bytedance-29-6-billion-loan-ai-data-centres",
+      "date": "2026-09-03",
+      "excerpt": "Because US export controls limit ByteDance's access to Nvidia's advanced chips, its build-out reportedly runs through custom silicon on Arm and RISC-V, Qualcomm inference parts, and domestic Chinese suppliers",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet, and the supplier talks are described as under discussion rather than contracted."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "ByteDance",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

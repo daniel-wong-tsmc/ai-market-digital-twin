@@ -1,0 +1,44 @@
+{
+  "id": "blogs-nvidia-com-27dfecba-2026-09-2",
+  "statement": "NVIDIA says Hugging Face will stay an open platform supporting multi-cloud and multi-accelerator development after the acquisition closes.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "An explicit neutrality pledge keeps the largest model repository usable on rival accelerators, so the deal does not by itself foreclose non-NVIDIA silicon from the open-model channel.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.hyperscaler-asic",
+      "models.open-weight"
+    ],
+    "direction": "mixed",
+    "mechanism": "Continued multi-accelerator support preserves a distribution path for alternative silicon, partly offsetting the lock-in effect of NVIDIA owning the platform."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Blog (official)",
+      "url": "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/",
+      "date": "2026-09-03",
+      "excerpt": "will remain an open platform for the entire AI ecosystem",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: stated commitment in NVIDIA's own acquisition announcement."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

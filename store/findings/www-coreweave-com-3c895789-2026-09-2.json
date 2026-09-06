@@ -1,0 +1,44 @@
+{
+  "id": "www-coreweave-com-3c895789-2026-09-2",
+  "statement": "The Vera Rubin NVL72 rack is claimed to deliver up to 10x better inference per watt than Blackwell and to need up to one-fourth fewer GPUs for the same work.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Large gains in work done per watt and per chip stretch existing power and chip budgets, effectively adding usable compute without adding equivalent silicon or megawatts.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.efficiency",
+      "energy.cooling",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Better performance per watt raises effective compute supply per installed rack and per megawatt, easing the power ceiling while reducing chip count needed for a given workload."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave (official newsroom)",
+      "url": "https://www.coreweave.com/news/coreweave-completes-industry-first-bring-up-of-nvidia-vera-rubin-nvl72",
+      "date": "2026-06-01",
+      "excerpt": "up to 10x better inference per watt",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor performance claim with 'up to' framing, reported in a single company newsroom post and not independently benchmarked here."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "coreweave",
+  "observedAt": "2026-06-01",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

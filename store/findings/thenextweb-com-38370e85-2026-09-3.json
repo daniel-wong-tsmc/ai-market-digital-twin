@@ -1,0 +1,44 @@
+{
+  "id": "thenextweb-com-38370e85-2026-09-3",
+  "statement": "ByteDance is reported to be weighing AI infrastructure spending of up to $70 billion a year, which would put it in the same bracket as US hyperscalers, with proceeds aimed at projects outside China.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "If that spending level is real, it adds a hyperscaler-sized buyer to the offshore build-out, but the figure is a reported deliberation rather than an announced budget.",
+  "impact": {
+    "targets": [
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "A budget of that size would translate into large orders for compute, facilities and power across Southeast Asia where ByteDance holds offtake agreements."
+  },
+  "evidence": [
+    {
+      "source": "The Next Web",
+      "url": "https://thenextweb.com/news/bytedance-29-6-billion-loan-ai-data-centres",
+      "date": "2026-09-03",
+      "excerpt": "up to $70bn a year on AI infrastructure",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The loan closing is a hard fact, but the annual spending figure is described as something the company is weighing, sourced second-hand in the same article. Treating it as a planning scenario rather than a committed budget avoids reading an announced capex number into a deliberation.",
+  "confidence": {
+    "level": "low",
+    "basis": "Reported deliberation in one secondary outlet, no company confirmation or filing in this document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "ByteDance",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

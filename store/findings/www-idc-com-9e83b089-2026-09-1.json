@@ -1,0 +1,44 @@
+{
+  "id": "www-idc-com-9e83b089-2026-09-1",
+  "statement": "IDC says NAND and DRAM costs continue to rise, up over 300 percent year on year, in what it calls a memory crisis.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Memory is the single largest cost and supply constraint sitting next to the accelerator itself, so a cost spike of this scale signals a genuinely tight memory chain rather than a normal price cycle.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "models.small-ondevice",
+      "applications.consumer-ai"
+    ],
+    "direction": "mixed",
+    "mechanism": "Sharply higher memory costs raise the bill of materials for accelerator systems and squeeze every other device class competing for the same wafers, tightening effective supply."
+  },
+  "evidence": [
+    {
+      "source": "IDC (blog)",
+      "url": "https://www.idc.com/resource-center/blog/smartphone-shipments-set-for-record-16-7-drop-in-2026-as-the-memory-crisis-hits-full-force/",
+      "date": "2026-08-26",
+      "excerpt": "NAND and DRAM costs continue to rise, up over 300% YoY.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Analyst-firm blog, a single secondary source; the cost figure is stated as 'over 300%' without a precise level, so no measured value is claimed."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: IDC (blog)",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "multi (memory supply chain)",
+  "observedAt": "2026-08-26",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

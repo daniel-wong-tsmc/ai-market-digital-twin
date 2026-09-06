@@ -1,0 +1,44 @@
+{
+  "id": "www-coreweave-com-3c895789-2026-09-3",
+  "statement": "CoreWeave and NVIDIA claim the Vera Rubin NVL72 delivers one-tenth the cost per million tokens versus Blackwell.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "A large drop in the cost of serving tokens makes inference-heavy products cheaper to run, which historically expands usage volumes faster than unit prices fall.",
+  "impact": {
+    "targets": [
+      "models.reasoning-agentic",
+      "applications.agent-platforms",
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Cheaper serving economics lower the price floor for inference, encouraging more token volume and therefore more accelerator hours consumed overall."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave (official newsroom)",
+      "url": "https://www.coreweave.com/news/coreweave-completes-industry-first-bring-up-of-nvidia-vera-rubin-nvl72",
+      "date": "2026-06-01",
+      "excerpt": "one-tenth the cost per million tokens",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Unverified vendor economics claim with no workload definition or pricing detail, from one secondary source."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "tokenEconomics",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "coreweave",
+  "observedAt": "2026-06-01",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

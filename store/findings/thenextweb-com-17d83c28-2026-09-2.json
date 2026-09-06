@@ -1,0 +1,44 @@
+{
+  "id": "thenextweb-com-17d83c28-2026-09-2",
+  "statement": "HyperVault describes the Hyderabad campus as high-density, liquid-cooled compute infrastructure built on green energy and water-neutral principles, with no accelerator supplier named.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Designing for liquid cooling from the start implies racks built for current-generation accelerators, which points to dense GPU deployment even though no chip vendor is disclosed.",
+  "impact": {
+    "targets": [
+      "energy.cooling",
+      "energy.efficiency",
+      "infrastructure.datacenter-colo",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Liquid-cooled high-density design is a prerequisite for top-end accelerator racks, so it pulls demand for cooling equipment alongside the chips themselves."
+  },
+  "evidence": [
+    {
+      "source": "The Next Web",
+      "url": "https://thenextweb.com/news/tcs-hypervault-one-gigawatt-hyderabad-campus-7-4-billion-water-neutral-claim-eu-data-centre-reporting-delegated-regulation-2024-1364",
+      "date": "2026-09-05",
+      "excerpt": "high-density, liquid-cooled compute infrastructure on a global scale",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Company design language relayed by one secondary outlet, with no supplier, phase timeline or equipment detail disclosed."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "TCS (HyperVault)",
+  "observedAt": "2026-09-05",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

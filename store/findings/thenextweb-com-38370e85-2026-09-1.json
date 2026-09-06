@@ -1,0 +1,44 @@
+{
+  "id": "thenextweb-com-38370e85-2026-09-1",
+  "statement": "ByteDance closed a $29.6 billion syndicated loan for data-center spending, upsized from a $20 billion target after orders topped $30 billion, and priced at 68 basis points over SOFR versus 85 basis points on its previous facility.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Cheaper pricing on a much larger book shows lenders are still willing to fund AI build-outs on easier terms, which loosens the financing constraint on large non-hyperscaler buyers of compute.",
+  "impact": {
+    "targets": [
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "energy.procurement"
+    ],
+    "direction": "positive",
+    "mechanism": "Lower spreads and heavy oversubscription cut the cost of capital for data-center construction, letting marginal buyers commit to more compute capacity."
+  },
+  "evidence": [
+    {
+      "source": "The Next Web",
+      "url": "https://thenextweb.com/news/bytedance-29-6-billion-loan-ai-data-centres",
+      "date": "2026-09-03",
+      "excerpt": "Pricing: 68 basis points over SOFR, down from 85 basis points on the previous facility, reflecting strong lender demand.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; loan terms are reported rather than drawn from a filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "ByteDance",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "thenextweb-com-17d83c28-2026-09-1",
+  "statement": "TCS subsidiary HyperVault and partners committed 700 billion rupees (about $7.4 billion) to build an up-to-1-gigawatt AI data-center campus on 264 acres in Hyderabad.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A gigawatt-scale committed build in India adds a large new non-hyperscaler buyer of accelerators, power and cooling, and signals that AI capacity spending is broadening beyond the US majors.",
+  "impact": {
+    "targets": [
+      "infrastructure.datacenter-colo",
+      "chips.merchant-gpu",
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "energy.cooling"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed capital and secured land convert into future orders for accelerators, electrical equipment and cooling as the phases are built out."
+  },
+  "evidence": [
+    {
+      "source": "The Next Web",
+      "url": "https://thenextweb.com/news/tcs-hypervault-one-gigawatt-hyderabad-campus-7-4-billion-water-neutral-claim-eu-data-centre-reporting-delegated-regulation-2024-1364",
+      "date": "2026-09-05",
+      "excerpt": "TCS subsidiary HyperVault and its partners will commit '700 billion rupees (~$7.4B)' to build a 1 gigawatt AI data-center campus in Hyderabad, Telangana.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet reporting a company announcement; a second outlet is referenced only by headline, so corroboration is incomplete."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "TCS (HyperVault)",
+  "observedAt": "2026-09-05",
+  "capturedAt": "2026-09-06T08:02:30Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

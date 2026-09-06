@@ -1,0 +1,233 @@
+{
+  "headline": "Record assembly, same ceiling on the parts",
+  "deck": "Hon Hai posted its best August ever on server work, while the memory that caps output stayed where it was and new money went into land, power and distribution.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The assembly lines set a record",
+      "paragraphs": [
+        "Hon Hai, the largest contract manufacturer of these machines, reported August sales of NT$921.77 billion, up 51.98% on the same month last year and its best August on record, on demand for servers used for artificial-intelligence work.",
+        "The shift inside the company is just as telling. Its cloud and networking division passed half of total company sales for the first time in the second quarter of 2026, so building machines for data centres is now the larger part of the business.",
+        "None of that lifts the ceiling. At its late-August results NVIDIA said it holds supply for only about 70% of demand and that the whole chain is running flat out, and it guided next year to about 70% revenue growth when customer forecasts implied roughly 140%, because memory could not cover the rest. More assembly does not make more memory."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "focustaiwan-tw-e2c71460-2026-09-1",
+        "focustaiwan-tw-e2c71460-2026-09-2",
+        "www-marketbeat-com-01fd246e-2026-08-1",
+        "www-fool-com-12234ce0-2026-08-2"
+      ],
+      "sourceLine": "Focus Taiwan (5 September); MarketBeat on NVIDIA's late-August results call (26 August); The Motley Fool (29 August).",
+      "relatedDocs": [
+        {
+          "url": "https://focustaiwan.tw/business/202609050007",
+          "title": "Hon Hai posts best August sales on record on AI server demand",
+          "outlet": "Focus Taiwan (CNA)",
+          "date": "2026-09-05"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Today's money buys land and power",
+      "paragraphs": [
+        "The new commitments today were for sites and electricity rather than chips. HyperVault, a unit of Tata Consultancy Services, and its partners committed 700 billion rupees, about $7.4 billion, to a data-centre campus of up to one gigawatt on 264 acres in Hyderabad. The company describes it as high-density, liquid-cooled computing, and names no chip supplier.",
+        "Japan's $550 billion investment pact with the United States earmarked a second tranche of $73 billion for nuclear projects in Tennessee and Alabama and gas power plants in Pennsylvania and Texas, on top of a first tranche of $36 billion for oil, gas and critical minerals.",
+        "That matters because power is now part of the queue. Broadcom told its results call this month that land, power and building shells dictate when new capacity can be switched on, alongside packaging substrate, stacked memory and leading-edge wafers."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "thenextweb-com-17d83c28-2026-09-1",
+        "thenextweb-com-17d83c28-2026-09-2",
+        "www-energyconnects-com-06347022-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-3"
+      ],
+      "sourceLine": "The Next Web (5 September); EnergyConnects (5 September); Investing.com on Broadcom's results call (2 September).",
+      "relatedDocs": [
+        {
+          "url": "https://thenextweb.com/news/tcs-hypervault-one-gigawatt-hyderabad-campus-7-4-billion-water-neutral-claim-eu-data-centre-reporting-delegated-regulation-2024-1364",
+          "title": "HyperVault commits $7.4 billion to a one-gigawatt Hyderabad campus",
+          "outlet": "The Next Web",
+          "date": "2026-09-05"
+        },
+        {
+          "url": "https://www.energyconnects.com/news/gas-lng/2026/september/japan-says-progress-made-on-550-billion-investment-pact-with-us",
+          "title": "Japan says progress made on $550 billion investment pact with US",
+          "outlet": "EnergyConnects",
+          "date": "2026-09-05"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Scarce parts, so NVIDIA buys the shop window",
+      "paragraphs": [
+        "At the counter today, one card had a price. Newegg listed a new PNY NVIDIA H100 80GB at $34,879, with configuration options from $29,500. Most other H100-class listings on the same page were out of stock, and the H200 rack card appeared only as coming soon, with no price at all.",
+        "With the hardware capped, NVIDIA spent on distribution instead. It agreed to buy Hugging Face for about $12.93 billion, taking ownership of the main place open models are handed out, used by more than 18 million developers and over 200,000 companies and hosting 3 million models.",
+        "NVIDIA says the platform stays open after the deal closes, with its own computing not required and support for other makers' hardware kept. If that promise holds, rivals still have a neutral route to the people who decide what to run."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "www-newegg-com-994c8b40-2026-09-1",
+        "www-newegg-com-994c8b40-2026-09-2",
+        "blogs-nvidia-com-a6b8847a-2026-09-1",
+        "blogs-nvidia-com-27dfecba-2026-09-1",
+        "blogs-nvidia-com-27dfecba-2026-09-2"
+      ],
+      "sourceLine": "Newegg listings checked today; NVIDIA's official blog (3 September).",
+      "relatedDocs": [
+        {
+          "url": "https://www.newegg.com/p/pl?d=nvidia+h100",
+          "title": "NVIDIA H100 listings and prices",
+          "outlet": "Newegg",
+          "date": "2026-09-06"
+        },
+        {
+          "url": "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/",
+          "title": "NVIDIA to acquire Hugging Face",
+          "outlet": "NVIDIA Blog (official)",
+          "date": "2026-09-03"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Watch Hon Hai's next monthly sales. Assembly is the one part of the chain that can grow quickly, and August set a record at NT$921.77 billion. If those numbers keep climbing while finished machines stay rationed, the shortfall sits squarely on memory.",
+        "Watch whether the power money turns into working sites. Japan's $73 billion tranche for American nuclear and gas plants, and HyperVault's one-gigawatt Hyderabad campus, are both promises with long build times, and Broadcom has said land, power and building shells set the timing.",
+        "And watch South Korea. Its government plan of $919 billion for 8.4 gigawatts of computing by 2029 has SK Group taking two gigawatts of NVIDIA Rubin systems and Naver a 200-megawatt order, which loads more demand onto the same memory supplier everyone else is waiting on."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "focustaiwan-tw-e2c71460-2026-09-1",
+        "www-energyconnects-com-06347022-2026-09-1",
+        "thenextweb-com-17d83c28-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-3",
+        "allweatherfinance-com-da1d5c1b-2026-09-1",
+        "allweatherfinance-com-da1d5c1b-2026-09-2"
+      ],
+      "sourceLine": "Focus Taiwan (5 September); EnergyConnects (5 September); The Next Web (5 September); Investing.com on Broadcom's results call (2 September); All-Weather Media (3 September).",
+      "relatedDocs": []
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Monthly server sales show how much of the demand actually leaves a factory.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Buyers' spending plans keep being raised, which is why the queue never shortens.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "The street price of one card shows whether scarcity is easing where anyone can walk up and buy.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "Hon Hai's August sales reached NT$921.77 billion, up 51.98% on the year and its best August on record.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-09",
+      "text": "NVIDIA agreed to buy Hugging Face, the main hand-out point for open models, for about $12.93 billion.",
+      "scene": 3
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Hon Hai reported August sales of NT$921.77 billion, up 51.98% on the year and its best August ever, on demand for artificial-intelligence servers.",
+      "claimFindingIds": [
+        "focustaiwan-tw-e2c71460-2026-09-1"
+      ]
+    },
+    {
+      "text": "HyperVault, a Tata Consultancy Services unit, committed about $7.4 billion with partners to a one-gigawatt data-centre campus in Hyderabad, naming no chip supplier.",
+      "claimFindingIds": [
+        "thenextweb-com-17d83c28-2026-09-1",
+        "thenextweb-com-17d83c28-2026-09-2"
+      ]
+    },
+    {
+      "text": "NVIDIA agreed to buy Hugging Face for about $12.93 billion, taking the main place open models reach more than 18 million developers.",
+      "claimFindingIds": [
+        "blogs-nvidia-com-a6b8847a-2026-09-1",
+        "blogs-nvidia-com-27dfecba-2026-09-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "unchanged",
+      "reasoning": "No new supply evidence arrived today. Assembly set a record, with Hon Hai's August sales up 51.98%, but NVIDIA's late-August statement that it holds supply for about 70% of demand still stands.",
+      "claimFindingIds": [
+        "focustaiwan-tw-e2c71460-2026-09-1",
+        "www-marketbeat-com-01fd246e-2026-08-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "improved",
+      "reasoning": "NVIDIA agreed to buy Hugging Face for about $12.93 billion, taking the main hand-out point for open models and its 18 million developers, though it promises to keep the platform open to other makers' hardware.",
+      "claimFindingIds": [
+        "blogs-nvidia-com-a6b8847a-2026-09-1",
+        "blogs-nvidia-com-27dfecba-2026-09-1",
+        "blogs-nvidia-com-27dfecba-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "unchanged",
+      "reasoning": "No new memory evidence arrived today. The latest figure is still Micron's plan from 4 September to add up to 60,000 stacked-memory wafers a month by the end of 2026.",
+      "claimFindingIds": [
+        "en-etnews-com-d7f78774-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived on how much memory each accelerator carries. The nearest recent item, Micron's added wafer capacity from 4 September, is about total output rather than any single chip.",
+      "claimFindingIds": [
+        "en-etnews-com-d7f78774-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-high-bandwidth-memory-and-server-memory",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today. The most recent reading remains NVIDIA's late-August disclosure that long-term supply promises rose to $279 billion, mainly to buy stacked memory and server memory.",
+      "claimFindingIds": [
+        "www-fool-com-12234ce0-2026-08-1",
+        "www-fool-com-12234ce0-2026-08-3"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-06",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "b3a038976aad021debad8527a2412b5b722b037d34390698f634f3aaecffc241",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-09-06T10:45:44.580841+00:00"
+  }
+}
