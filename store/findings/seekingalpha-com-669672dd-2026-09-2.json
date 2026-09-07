@@ -1,0 +1,44 @@
+{
+  "id": "seekingalpha-com-669672dd-2026-09-2",
+  "statement": "OpenAI shipped GPT-6 Astra, continuing a rapid frontier-model release cadence from ChatGPT to o1 to Astra in four years.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Each frontier release resets the compute floor for training the next model and for serving inference on the new one, so release cadence is a leading indicator of accelerator demand.",
+  "impact": {
+    "targets": [
+      "models.frontier-closed",
+      "models.reasoning-agentic",
+      "chips.merchant-gpu",
+      "applications.consumer-ai"
+    ],
+    "direction": "positive",
+    "mechanism": "A new frontier model launch drives both the next training cluster order and a step-up in inference serving capacity, feeding merchant-GPU demand."
+  },
+  "evidence": [
+    {
+      "source": "seekingalpha.com",
+      "url": "https://seekingalpha.com/news/4640538-jensen-huang-says-agi-has-arrived-following-openais-gpt-6-astra-launch",
+      "date": "2026-09-07",
+      "excerpt": "From ChatGPT to o1 to Astra in 4 years. AGI has arrived.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Secondary coverage of a competitor CEO's social post; the document notes OpenAI itself has not characterised GPT-6 Astra as AGI and no primary launch document was read."
+  },
+  "dispersion": "The 'AGI has arrived' framing is Huang's characterisation only, not OpenAI's.",
+  "asOf": "2026-09",
+  "indicatorId": "releaseCadence",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "openai",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

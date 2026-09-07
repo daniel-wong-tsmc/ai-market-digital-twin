@@ -1,0 +1,43 @@
+{
+  "id": "siliconanalysts-com-ab8c9c31-2026-09-3",
+  "statement": "All three major HBM vendors are now in volume production of HBM4 for NVIDIA, with Samsung moved from qualified to volume shipping.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Three qualified HBM4 sources instead of one or two widens the memory supply available for next-generation accelerators and reduces single-supplier risk.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Multiple qualified HBM4 suppliers raise available memory bit supply and competitive pressure, removing memory as the limiting input for next-generation GPU builds."
+  },
+  "evidence": [
+    {
+      "source": "siliconanalysts.com",
+      "url": "https://siliconanalysts.com/newsletter/qual-watch/2026-08-25",
+      "date": "2026-08-25",
+      "excerpt": "All three major HBM vendors are now in volume production on HBM4 for NVIDIA",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary newsletter citing a Korean trade-press qualification report; no memory-vendor disclosure read directly."
+  },
+  "dispersion": "No bit-volume or share figures given for the three vendors; qualification status only.",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "market",
+  "observedAt": "2026-08-25",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

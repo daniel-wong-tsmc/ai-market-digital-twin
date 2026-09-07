@@ -1,0 +1,51 @@
+{
+  "id": "siliconanalysts-com-ab8c9c31-2026-09-2",
+  "statement": "CoWoS allocation, not HBM supply, is described as the binding constraint on AI system availability, with capacity around 105,000-130,000 wafers per month by Q4 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "Identifying which link in the chain binds tells you where added GPU output can and cannot come from over the next few quarters.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "If packaging allocation is the bottleneck, incremental HBM or wafer starts do not raise finished accelerator supply until packaging capacity expands, so system availability tracks CoWoS ramp rather than memory output."
+  },
+  "evidence": [
+    {
+      "source": "siliconanalysts.com",
+      "url": "https://siliconanalysts.com/newsletter/qual-watch/2026-08-25",
+      "date": "2026-08-25",
+      "excerpt": "CoWoS allocation is the binding constraint on system availability, not HBM supply.",
+      "tier": "secondary"
+    },
+    {
+      "source": "siliconanalysts.com",
+      "url": "https://siliconanalysts.com/newsletter/qual-watch/2026-08-25",
+      "date": "2026-08-25",
+      "excerpt": "~105,000-130,000 wafers/month by Q4 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary newsletter analysis citing a bank estimate for the capacity figure; no primary foundry confirmation, so capped at medium."
+  },
+  "dispersion": "Capacity given as a range of ~105,000-130,000 wafers/month attributed to JPMorgan; the binding-constraint call is the newsletter's own judgement.",
+  "asOf": "2026-09",
+  "indicatorId": "pkgCapacityOrderSpread",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "tsmc",
+  "observedAt": "2026-08-25",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

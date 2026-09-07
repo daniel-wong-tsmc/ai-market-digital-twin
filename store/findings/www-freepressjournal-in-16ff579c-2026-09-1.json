@@ -1,0 +1,46 @@
+{
+  "id": "www-freepressjournal-in-16ff579c-2026-09-1",
+  "statement": "A New York Times investigation reports $5.6 billion of advanced AI technology, including over $3 billion of Nvidia Blackwell-based AI servers, was allegedly routed to China between April 2024 and February 2026 through Inspur's US subsidiary Aivres.",
+  "kind": "measured",
+  "value": {
+    "number": 5.6,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Documented leakage of restricted accelerators to a blacklisted network is the kind of finding that triggers tighter export rules, which directly changes how much of the market a US merchant-GPU vendor can legally serve.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "chips.networking-silicon"
+    ],
+    "direction": "negative",
+    "mechanism": "Evidence that current-generation Blackwell systems reached restricted Chinese buyers raises the odds of tighter licensing, subsidiary-level enforcement and lost addressable China revenue for merchant-GPU vendors."
+  },
+  "evidence": [
+    {
+      "source": "freepressjournal.in (New York Times investigation, via IANS)",
+      "url": "https://www.freepressjournal.in/tech/inspur-group-allegedly-bypassed-us-ai-chip-curbs-sending-56-billion-in-advanced-technology-to-china-via-its-aivres-subsidiary",
+      "date": "2026-09-07",
+      "excerpt": "in advanced AI technology allegedly sent to China between April 2024 and February 2026, moved through Inspur's California-based subsidiary Aivres via Southeast Asia",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary republication of a New York Times investigation; the primary NYT text was not read directly and the claims are described as allegations, so capped at medium."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: freepressjournal.in (New York Times investigation, via IANS)",
+  "asOf": "2026-09",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

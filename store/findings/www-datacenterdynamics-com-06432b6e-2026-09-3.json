@@ -1,0 +1,44 @@
+{
+  "id": "www-datacenterdynamics-com-06432b6e-2026-09-3",
+  "statement": "Anthropic's committed capacity is concentrated in a handful of providers, with Google and AWS together contributing 11GW of the total.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "When one buyer's committed capacity sits mostly with two suppliers, both the buyer and those suppliers carry concentrated counterparty risk that can whipsaw order flow.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Two hyperscalers carrying the bulk of one lab's committed gigawatts concentrates the order book: their capex plans, and any renegotiation by the lab, move merchant-GPU and custom-silicon demand disproportionately."
+  },
+  "evidence": [
+    {
+      "source": "datacenterdynamics.com",
+      "url": "https://www.datacenterdynamics.com/en/news/anthropic-signed-517bn-in-compute-agreements-in-past-11-months/",
+      "date": "2026-09-06",
+      "excerpt": "the largest providers will be Google and AWS, which will combined contribute 11GW of capacity",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary, paywall-limited excerpts; provider split is reported without contract documents."
+  },
+  "dispersion": "Google and AWS shares are combined, not split individually.",
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "anthropic",
+  "observedAt": "2026-09-06",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

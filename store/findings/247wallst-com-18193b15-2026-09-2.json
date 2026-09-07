@@ -1,0 +1,43 @@
+{
+  "id": "247wallst-com-18193b15-2026-09-2",
+  "statement": "AMD has signed compute commitments totalling 8 gigawatts across Anthropic (2 GW) and OpenAI (6 GW), spreading frontier-lab accelerator demand beyond NVIDIA.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Gigawatt-scale commitments to a second merchant accelerator vendor are design wins that change how frontier-lab compute demand is split between suppliers.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "models.frontier-closed"
+    ],
+    "direction": "mixed",
+    "mechanism": "Committed gigawatts at AMD lift total merchant-GPU demand while diverting a share of frontier-lab spend away from the incumbent supplier, diversifying counterparty risk across chip vendors."
+  },
+  "evidence": [
+    {
+      "source": "247wallst.com",
+      "url": "https://247wallst.com/investing/2026/09/02/anthropic-just-committed-35-billion-to-compute-it-has-not-raised-the-money-for/",
+      "date": "2026-09-02",
+      "excerpt": "AMD has signed compute commitments totaling 8 gigawatts -- 2 gigawatts with Anthropic and 6 gigawatts with OpenAI -- distributing similar counterparty risk across chip suppliers.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; commitments stated in gigawatts with no dollar value or contract document read, so capped at medium."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: 247wallst.com, ir.amd.com",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-09-02",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

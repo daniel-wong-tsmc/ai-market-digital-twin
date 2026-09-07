@@ -1,0 +1,47 @@
+{
+  "id": "www-fool-com-fc0a1b5c-2026-09-2",
+  "statement": "NVIDIA's CFO indicated Vera Rubin will account for about 20% of data center revenue in Q3, which the article translates to roughly $20 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 20.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "How quickly a new accelerator generation takes revenue share inside the data center segment shows whether the product transition is pulling incremental demand or just replacing the prior part.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "A new generation reaching a fifth of data center revenue in its ramp quarter, described as the fastest product ramp in company history with hyperscaler orders secured, pulls forward memory, packaging and rack-fabric content per unit."
+  },
+  "evidence": [
+    {
+      "source": "fool.com",
+      "url": "https://www.fool.com/investing/2026/09/04/prediction-vera-rubin-is-about-to-become-a-20-bil/",
+      "date": "2026-09-04",
+      "excerpt": "We see Vera Rubin accounting for about 20% of data center revenue in Q3.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary article relaying a CFO quote; the dollar figure is the author's arithmetic from the percentage and guidance, not a company-stated number."
+  },
+  "dispersion": "The ~$20B is the article's derivation from 'about 20%' of data center revenue; the company stated a share, not a dollar amount.",
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

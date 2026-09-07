@@ -1,0 +1,43 @@
+{
+  "id": "www-digitimes-com-bcc418d8-2026-09-1",
+  "statement": "SK Hynix is accelerating its 1c (sixth-generation 10nm-class) DRAM ramp to roughly 34% of its own DRAM production by Q4 2026 as it prepares for HBM4E.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "The 1c node is the base die generation behind HBM4E, so how fast it ramps sets how quickly high-bandwidth memory supply for next-generation accelerators can grow.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "A faster 1c node mix shift raises the bit supply and cost efficiency available for HBM4E, easing the memory input to next-generation GPU builds."
+  },
+  "evidence": [
+    {
+      "source": "digitimes.com",
+      "url": "https://www.digitimes.com/news/a20260907VL207/sk-hynix-dram-hbm4-hbm.html",
+      "date": "2026-09-07",
+      "excerpt": "with the process expected to account for roughly 34% of its DRAM production by the fourth quarter (Q4 2026), as the company prepares for HBM4E",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary trade press, paywalled beyond the lede; no vendor disclosure read directly."
+  },
+  "dispersion": "The 34% figure is SK Hynix's own 1c-node share of its own DRAM production mix, not a market share and not a year-on-year bit-growth rate, so no measured value is recorded against the indicator's unit.",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "sk-hynix",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

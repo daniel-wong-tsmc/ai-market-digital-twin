@@ -1,0 +1,41 @@
+{
+  "id": "www-newegg-com-c6e5a7e1-2026-09-2",
+  "statement": "The only true H200 SKU on Newegg's H200 search page is out of stock with no price shown.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Retail unavailability of a current-generation accelerator is a small, visible sign that channel supply stays absorbed by large buyers rather than reaching the open market.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "An out-of-stock, unpriced listing for the current H200 NVL part indicates channel allocation is fully committed, so incremental buyers cannot source parts on the open retail market."
+  },
+  "evidence": [
+    {
+      "source": "newegg.com",
+      "url": "https://www.newegg.com/p/pl?d=nvidia+h200",
+      "date": "2026-09-07",
+      "excerpt": "status shown as 'OUT OF STOCK' / 'COMING SOON', no price displayed",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "One retail marketplace page, no publication date and no vendor statement; retail stock status is a weak proxy for datacenter channel supply."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 1; sources: fool.com, newegg.com",
+  "asOf": "2026-09",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

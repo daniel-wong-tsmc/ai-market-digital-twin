@@ -1,0 +1,51 @@
+{
+  "id": "seekingalpha-com-669672dd-2026-09-1",
+  "statement": "NVIDIA's CEO says OpenAI's GPT-6 Astra was trained on over 100,000 Grace Blackwell NVLink72 systems, with 400K GPUs coming online next.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A stated frontier training cluster size plus a named follow-on deployment is a direct read on how many current-generation merchant GPUs the largest lab is absorbing.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "Frontier training runs at 100K+ NVLink72 scale and a further 400K GPUs being brought online keep top-end accelerator and rack-scale fabric demand at capacity."
+  },
+  "evidence": [
+    {
+      "source": "seekingalpha.com",
+      "url": "https://seekingalpha.com/news/4640538-jensen-huang-says-agi-has-arrived-following-openais-gpt-6-astra-launch",
+      "date": "2026-09-07",
+      "excerpt": "GPT-6 Astra, trained on ~100K+ NVIDIA Grace Blackwell NVLink72.",
+      "tier": "secondary"
+    },
+    {
+      "source": "seekingalpha.com",
+      "url": "https://seekingalpha.com/news/4640538-jensen-huang-says-agi-has-arrived-following-openais-gpt-6-astra-launch",
+      "date": "2026-09-07",
+      "excerpt": "400K GPUs coming online next.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary write-up of a single vendor-CEO social post; the other outlets named in the document are syndication of that same post, not independent reporting, and no NVIDIA newsroom confirmation was found."
+  },
+  "dispersion": "Document notes the post reportedly first cited a larger 300,000-box figure before being deleted and reposted with the lower number, with no official explanation.",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

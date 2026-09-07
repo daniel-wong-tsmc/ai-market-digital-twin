@@ -1,0 +1,49 @@
+{
+  "id": "www-datacenterdynamics-com-06432b6e-2026-09-1",
+  "statement": "Anthropic has signed about $517 billion of compute capacity agreements in the past eleven months, far above the roughly $180 billion server-rental spend it previously guided investors toward through 2029.",
+  "kind": "measured",
+  "value": {
+    "number": 517.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Contracted compute commitments at a single frontier lab are the clearest forward read on how much accelerator and datacenter capacity must be built and bought.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "models.frontier-closed",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "positive",
+    "mechanism": "Half a trillion dollars of signed compute leases obliges cloud and neocloud counterparties to procure accelerators, power and datacenter shells to serve them, converting lab commitments into merchant-GPU and infrastructure orders."
+  },
+  "evidence": [
+    {
+      "source": "datacenterdynamics.com",
+      "url": "https://www.datacenterdynamics.com/en/news/anthropic-signed-517bn-in-compute-agreements-in-past-11-months/",
+      "date": "2026-09-06",
+      "excerpt": "Anthropic has signed $517 billion in compute capacity leases in the past 11 months... signed these agreements since October last year.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet compiling another outlet's analysis; both the DCD article and the underlying report were blocked by paywall, so only search-surfaced excerpts were read and the figure is an analyst tally, not a company disclosure."
+  },
+  "dispersion": "conflicting same-key reports: value 35.0 -> 517.0 (tol 1%); sources: 247wallst.com, datacenterdynamics.com",
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "anthropic",
+  "observedAt": "2026-09-06",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

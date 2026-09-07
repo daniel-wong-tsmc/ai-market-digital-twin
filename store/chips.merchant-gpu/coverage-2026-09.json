@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-09",
-  "capturedAt": "2026-09-06T10:22:36Z",
+  "capturedAt": "2026-09-07T12:36:40Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
@@ -17,14 +17,6 @@
     },
     {
       "type": "source",
-      "id": "amd-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "intc-earnings",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -33,10 +25,10 @@
     },
     {
       "type": "source",
-      "id": "lambda-gpu-pricing",
+      "id": "coreweave-pricing",
       "priority": "required",
       "acquisitionStatus": "not-covered",
-      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
+      "reason": "Source 'CoreWeave GPU pricing page' was not fetched. URL patterns: ['coreweave.com']",
       "paywalledNote": null
     },
     {
@@ -65,14 +57,6 @@
     },
     {
       "type": "source",
-      "id": "channel-checks",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Open-web channel checks: lead times, inventory notes from distributors' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "bis-export-controls",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -85,14 +69,6 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'NVIDIA 10-K risk factor section (geopolitical / export control exposure)' was not fetched. URL patterns: ['investor.nvidia.com/annual-reports', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "vendor-pr-trade-press",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Vendor press releases + trade press on merchant-GPU design wins' was not fetched. URL patterns: ['nvidianews.nvidia.com', 'ir.amd.com/news-events', 'tomshardware.com', 'semianalysis.com']",
       "paywalledNote": null
     },
     {
@@ -118,48 +94,33 @@
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Frontier model release and funding trackers (company newsrooms + industry press)' was not fetched. URL patterns: ['openai.com', 'anthropic.com', 'blog.google', 'techcrunch.com', 'semianalysis.com']",
       "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "upstream-component-leadtimes",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "indicator",
-      "id": "D6",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Indicator 'D6' (dimension: momentum) was not covered. Expected sources: ['lambda-gpu-pricing', 'coreweave-pricing'].",
-      "paywalledNote": null
     }
   ],
   "gapCounts": {
-    "total": 16,
-    "source": 15,
-    "indicator": 1,
-    "required": 16,
+    "total": 11,
+    "source": 11,
+    "indicator": 0,
+    "required": 11,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/",
-    "https://focustaiwan.tw/business/202609050007",
-    "https://lambda.ai/service/gpu-cloud",
-    "https://thenextweb.com/news/bytedance-29-6-billion-loan-ai-data-centres",
-    "https://thenextweb.com/news/tcs-hypervault-one-gigawatt-hyderabad-campus-7-4-billion-water-neutral-claim-eu-data-centre-reporting-delegated-regulation-2024-1364",
-    "https://www.coreweave.com/news/coreweave-completes-industry-first-bring-up-of-nvidia-vera-rubin-nvl72",
-    "https://www.energyconnects.com/news/gas-lng/2026/september/japan-says-progress-made-on-550-billion-investment-pact-with-us",
-    "https://www.idc.com/resource-center/blog/smartphone-shipments-set-for-record-16-7-drop-in-2026-as-the-memory-crisis-hits-full-force/",
-    "https://www.newegg.com/p/pl?d=nvidia+h100",
-    "https://www.sumitomo-chem.co.jp/english/news/detail/20260831e.html"
+    "https://247wallst.com/investing/2026/09/02/anthropic-just-committed-35-billion-to-compute-it-has-not-raised-the-money-for/",
+    "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live",
+    "https://seekingalpha.com/news/4640538-jensen-huang-says-agi-has-arrived-following-openais-gpt-6-astra-launch",
+    "https://siliconanalysts.com/newsletter/qual-watch/2026-08-25",
+    "https://www.datacenterdynamics.com/en/news/anthropic-signed-517bn-in-compute-agreements-in-past-11-months/",
+    "https://www.digitimes.com/news/a20260907VL207/sk-hynix-dram-hbm4-hbm.html",
+    "https://www.fool.com/investing/2026/09/04/prediction-vera-rubin-is-about-to-become-a-20-bil/",
+    "https://www.freepressjournal.in/tech/inspur-group-allegedly-bypassed-us-ai-chip-curbs-sending-56-billion-in-advanced-technology-to-china-via-its-aivres-subsidiary",
+    "https://www.newegg.com/p/pl?d=nvidia+h200",
+    "https://www.runpod.io/pricing"
   ],
   "judgedIndicatorIds": [
     "D2",
+    "D6",
     "S10",
     "S9",
     "apiArr",

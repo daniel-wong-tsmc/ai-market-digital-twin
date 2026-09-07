@@ -1,0 +1,43 @@
+{
+  "id": "247wallst-com-18193b15-2026-09-3",
+  "statement": "Anthropic's compute commitments are signed against funding it has not yet raised, so the marginal buyer of GPU capacity depends on future capital-market access.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "falling",
+  "why": "If the largest committed buyers cannot fund their commitments, contracted compute backlog may not convert into paid GPU shipments at the promised pace.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "models.frontier-closed"
+    ],
+    "direction": "negative",
+    "mechanism": "Compute commitments funded by not-yet-raised capital make future merchant-GPU orders contingent on an IPO or private raise; a closed funding window would force commitments to be stretched or cancelled."
+  },
+  "evidence": [
+    {
+      "source": "247wallst.com",
+      "url": "https://247wallst.com/investing/2026/09/02/anthropic-just-committed-35-billion-to-compute-it-has-not-raised-the-money-for/",
+      "date": "2026-09-02",
+      "excerpt": "This is another example of how we're likely to need that IPO to raise money",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The document reports a signed $35B commitment plus an analyst framing that the money to fund it is not yet raised. That is an inference about future financing conditions, not a measured credit indicator, so it is recorded as a hypothesis rather than an observation.",
+  "confidence": {
+    "level": "low",
+    "basis": "One analyst's opinion in a single secondary outlet; no financing terms, covenants or funding schedule disclosed."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "anthropic",
+  "observedAt": "2026-09-02",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

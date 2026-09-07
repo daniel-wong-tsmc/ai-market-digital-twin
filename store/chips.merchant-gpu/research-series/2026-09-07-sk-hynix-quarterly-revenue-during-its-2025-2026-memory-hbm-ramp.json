@@ -1,0 +1,35 @@
+{
+  "seriesName": "SK Hynix quarterly revenue during its 2025-2026 memory/HBM ramp",
+  "unit": "trillion Korean won",
+  "form": "columns",
+  "sourceName": "SK hynix Newsroom (official quarterly business results releases)",
+  "points": [
+    {
+      "label": "Q3 2025",
+      "value": 24.4489,
+      "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
+      "publishedAt": "2025-10-29"
+    },
+    {
+      "label": "Q4 2025",
+      "value": 32.8267,
+      "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
+      "publishedAt": "2026-01-28"
+    },
+    {
+      "label": "Q1 2026",
+      "value": 52.5763,
+      "sourceUrl": "https://news.skhynix.com/q1-2026-business-results/",
+      "publishedAt": "2026-04-22"
+    },
+    {
+      "label": "Q2 2026",
+      "value": 79.3187,
+      "sourceUrl": "https://news.skhynix.com/en/q2-2026-business-results/",
+      "publishedAt": "2026-07-29"
+    }
+  ],
+  "pair": false,
+  "notes": "This is NOT a direct series of the 1c DRAM 34%-of-production figure from the bullet -- no publisher (including SK hynix's own newsroom) was found to publish a quarterly or historical breakdown of DRAM output by process node (1a/1b/1c mix percentages). This series instead contextualizes the bullet: it shows SK hynix's own quarterly revenue climbing sharply (24.4489T won in Q3 2025 to 79.3187T won in Q2 2026, all in official SK hynix press releases) over the same stretch of time the company says it is shifting production to 1c DRAM ahead of HBM4E, i.e. the financial backdrop the 1c ramp is happening against. All four points come from the same official source, news.skhynix.com. The Digitimes article behind the day's bullet (https://www.digitimes.com/news/a20260907VL207/sk-hynix-dram-hbm4-hbm.html) gives only the single 34%-by-Q4-2026 figure with no comparison points on the same page, so it could not be used to build a same-site multi-point series by itself.",
+  "bulletIndex": 2
+}

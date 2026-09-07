@@ -1,0 +1,42 @@
+{
+  "id": "www-digitimes-com-bcc418d8-2026-09-2",
+  "statement": "DRAM market-share leadership is contested rather than settled: cross-check sources show Samsung ahead of SK Hynix on DRAM revenue share as of mid-2026, contradicting an 'SK Hynix overtakes Samsung' framing.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Two strong, closely matched memory suppliers competing for HBM qualification keeps memory supply growing and pricing power split, which matters for accelerator input cost and availability.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "A contested DRAM leadership position sustains competitive capacity investment by both vendors, adding memory supply available to accelerator builds rather than concentrating it with one supplier."
+  },
+  "evidence": [
+    {
+      "source": "digitimes.com",
+      "url": "https://www.digitimes.com/news/a20260907VL207/sk-hynix-dram-hbm4-hbm.html",
+      "date": "2026-09-07",
+      "excerpt": "instead show Samsung holding DRAM market-share leadership (Samsung ~38-38.6% vs SK hynix ~29%) as of mid-2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Share figures come from cross-check search snippets relayed inside a secondary article, dated mid-2026, and are in explicit tension with the framing of the original lead; no primary market-share report was read."
+  },
+  "dispersion": "Samsung reported at ~38-38.6% versus SK hynix ~29%; figures dated 2026-06-09 and flagged by the document as conflicting with an unconfirmed 'overtake' claim.",
+  "asOf": "2026-09",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "sk-hynix",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

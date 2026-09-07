@@ -1,0 +1,41 @@
+{
+  "seriesName": "NVIDIA Data Center segment revenue, by fiscal quarter",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "NVIDIA Newsroom (nvidianews.nvidia.com)",
+  "points": [
+    {
+      "label": "Q1 FY2026 (ended Apr 27, 2025)",
+      "value": 39.1,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2026",
+      "publishedAt": "2025-05-28"
+    },
+    {
+      "label": "Q2 FY2026 (ended Jul 27, 2025)",
+      "value": 41.1,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2026",
+      "publishedAt": "2025-08-27"
+    },
+    {
+      "label": "Q3 FY2026 (ended Oct 26, 2025)",
+      "value": 51.2,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2026",
+      "publishedAt": "2025-11-19"
+    },
+    {
+      "label": "Q4 FY2026 (ended Jan 25, 2026)",
+      "value": 62.3,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "publishedAt": "2026-02-25"
+    },
+    {
+      "label": "Q1 FY2027 (ended Apr 26, 2026)",
+      "value": 75.2,
+      "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027",
+      "publishedAt": "2026-05-28"
+    }
+  ],
+  "pair": false,
+  "notes": "This series does not directly report GPT-6 Astra training-cluster GPU counts (no published outlet has put a verifiable, unhedged number on '100,000 Grace Blackwell NVLink72 systems' or '400K GPUs' beyond the CEO's on-stage remark cited in the seeking-alpha piece, which is a quote, not a company data table, so it was not usable as a numeric point). Instead this is NVIDIA's own quarterly Data Center segment revenue -- the direct financial trace of the Blackwell/Grace Blackwell rack ramp that a claim like 'over 100,000 Grace Blackwell rack systems used for one model's training' would sit inside. All five points are from NVIDIA's own newsroom press releases, one figure per release, each independently fetched and quoted verbatim ('Record Data Center revenue of $51.2 billion...', 'First-quarter revenue was a record $75.2 billion...', etc.). Publication dates given are the press-release dates, not the fiscal period end dates (which are noted in each label).",
+  "bulletIndex": 1
+}

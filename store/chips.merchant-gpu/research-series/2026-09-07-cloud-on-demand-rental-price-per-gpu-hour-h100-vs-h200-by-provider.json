@@ -1,0 +1,131 @@
+{
+  "seriesName": "Cloud on-demand rental price per GPU-hour, H100 vs H200, by provider",
+  "unit": "US$ per GPU-hour",
+  "form": "bars",
+  "sourceName": "GetDeploying",
+  "points": [
+    {
+      "label": "Median across providers - H100",
+      "value": 3.32,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
+      "publishedAt": "2026-09-06"
+    },
+    {
+      "label": "Median across providers - H200",
+      "value": 4.4,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
+      "publishedAt": "2026-09-07"
+    },
+    {
+      "label": "Koyeb - H100",
+      "value": 2.5,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
+      "publishedAt": "2026-09-06"
+    },
+    {
+      "label": "Koyeb - H200",
+      "value": 3.0,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
+      "publishedAt": "2026-09-07"
+    },
+    {
+      "label": "Sesterce - H100",
+      "value": 2.75,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
+      "publishedAt": "2026-09-06"
+    },
+    {
+      "label": "Sesterce - H200",
+      "value": 4.4,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
+      "publishedAt": "2026-09-07"
+    },
+    {
+      "label": "Runcrate - H100",
+      "value": 2.75,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
+      "publishedAt": "2026-09-06"
+    },
+    {
+      "label": "Runcrate - H200",
+      "value": 4.4,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
+      "publishedAt": "2026-09-07"
+    },
+    {
+      "label": "Theta EdgeCloud - H100",
+      "value": 2.29,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
+      "publishedAt": "2026-09-06"
+    },
+    {
+      "label": "Theta EdgeCloud - H200",
+      "value": 3.69,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
+      "publishedAt": "2026-09-07"
+    },
+    {
+      "label": "Gcore - H100",
+      "value": 1.78,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
+      "publishedAt": "2026-09-06"
+    },
+    {
+      "label": "Gcore - H200",
+      "value": 3.17,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
+      "publishedAt": "2026-09-07"
+    },
+    {
+      "label": "OVH - H100",
+      "value": 2.99,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
+      "publishedAt": "2026-09-06"
+    },
+    {
+      "label": "OVH - H200",
+      "value": 6.2,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
+      "publishedAt": "2026-09-07"
+    },
+    {
+      "label": "Replicate - H100",
+      "value": 5.49,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
+      "publishedAt": "2026-09-06"
+    },
+    {
+      "label": "Replicate - H200",
+      "value": 5.49,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
+      "publishedAt": "2026-09-07"
+    },
+    {
+      "label": "AWS - H100",
+      "value": 6.88,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
+      "publishedAt": "2026-09-06"
+    },
+    {
+      "label": "AWS - H200",
+      "value": 7.91,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
+      "publishedAt": "2026-09-07"
+    },
+    {
+      "label": "Oracle Cloud - H100",
+      "value": 10.0,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
+      "publishedAt": "2026-09-06"
+    },
+    {
+      "label": "Oracle Cloud - H200",
+      "value": 10.0,
+      "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
+      "publishedAt": "2026-09-07"
+    }
+  ],
+  "pair": true,
+  "notes": "This is a cloud-rental price comparison (US$ per GPU-hour, on-demand), not a hardware purchase-price series, so it contextualizes rather than directly confirms Newegg's one-off $34,879 H100 card listing and out-of-stock H200. Both provider pages (nvidia-h100 and nvidia-h200) are on the same site, getdeploying.com, and each independently states a same-day median: H100 median $3.32/GPU-hr (stated as of 2026-09-06) and H200 median $4.40/GPU-hr (stated as of 2026-09-07). Where a provider listed a range or multiple tiers (e.g. spot vs reserved vs on-demand) rather than one bare on-demand figure, that provider was left out per rule 9; only providers with one clean number per GPU on each page were kept. The pattern -- H200 consistently priced at or above H100 across nearly every matched provider -- is directionally consistent with H200 being the scarcer, harder-to-source part referenced in the bullet, though this series speaks to cloud rental economics, not retail card availability.",
+  "bulletIndex": 3
+}

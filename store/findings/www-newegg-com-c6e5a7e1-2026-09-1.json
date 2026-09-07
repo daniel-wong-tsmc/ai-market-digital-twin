@@ -1,0 +1,44 @@
+{
+  "id": "www-newegg-com-c6e5a7e1-2026-09-1",
+  "statement": "A PNY NVIDIA H100 80GB HBM3 PCIe card is listed on Newegg at $34,879.00, with an options range from $29,500.00.",
+  "kind": "measured",
+  "value": {
+    "number": 34879.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "unknown",
+  "why": "A visible retail/resale asking price for a prior-generation accelerator is a display-level reference point for secondary-market hardware pricing.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Retail channel asking prices for accelerator cards are a static level reference for secondary-market hardware value; no baseline or change is stated, so no directional read is taken."
+  },
+  "evidence": [
+    {
+      "source": "newegg.com",
+      "url": "https://www.newegg.com/p/pl?d=nvidia+h200",
+      "date": "2026-09-07",
+      "excerpt": "priced at $34,879.00, with an options range shown as $29,500.00 - $34,879.00, Free Shipping.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single retail marketplace listing observed live; no prior price point on the page, so it is a level only."
+  },
+  "dispersion": "Options range $29,500.00 - $34,879.00 for the same SKU family; page carries no publication date, date shown is date-as-seen.",
+  "asOf": "2026-09",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

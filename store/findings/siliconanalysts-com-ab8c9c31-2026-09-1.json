@@ -1,0 +1,44 @@
+{
+  "id": "siliconanalysts-com-ab8c9c31-2026-09-1",
+  "statement": "TSMC CoWoS advanced-packaging lead times are reported at roughly 52-78 weeks, beyond twelve months.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Advanced packaging sits upstream of every high-end accelerator, so a year-plus lead time sets the floor on how fast new GPU supply can reach buyers.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.hbm-memory"
+    ],
+    "direction": "negative",
+    "mechanism": "Orders placed today for CoWoS capacity do not yield packaged parts for a year or more, capping near-term accelerator output regardless of order book strength."
+  },
+  "evidence": [
+    {
+      "source": "siliconanalysts.com",
+      "url": "https://siliconanalysts.com/newsletter/qual-watch/2026-08-25",
+      "date": "2026-08-25",
+      "excerpt": "TSMC CoWoS lead time -- now ~52-78 weeks (beyond 12 months)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary newsletter aggregating third-party sources; no foundry disclosure read, and the figure is given as a wide range rather than a point value."
+  },
+  "dispersion": "Reported as a range of ~52-78 weeks; no single point value stated, so no measured number is recorded.",
+  "asOf": "2026-09",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "tsmc",
+  "observedAt": "2026-08-25",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

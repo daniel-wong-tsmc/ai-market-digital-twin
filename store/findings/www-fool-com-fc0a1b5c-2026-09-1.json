@@ -1,0 +1,47 @@
+{
+  "id": "www-fool-com-fc0a1b5c-2026-09-1",
+  "statement": "NVIDIA guided to $108 billion of revenue for the coming quarter.",
+  "kind": "measured",
+  "value": {
+    "number": 108.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Vendor revenue guidance from the dominant merchant-GPU supplier is the single most direct read on near-term shipped accelerator demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Guided quarterly revenue at this level implies sustained accelerator shipment volume, pulling HBM and advanced-packaging consumption with it."
+  },
+  "evidence": [
+    {
+      "source": "fool.com",
+      "url": "https://www.fool.com/investing/2026/09/04/prediction-vera-rubin-is-about-to-become-a-20-bil/",
+      "date": "2026-09-04",
+      "excerpt": "guided for $108 billion in sales for next quarter",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary commentary relaying company guidance; the earnings release or transcript was not read directly, so capped at medium."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,45 @@
+{
+  "id": "www-runpod-io-75b2bfe3-2026-09-1",
+  "statement": "RunPod lists on-demand H100 SXM rental at $3.49 per GPU-hour on Secure Cloud and $2.69 per GPU-hour on Community Cloud.",
+  "kind": "measured",
+  "value": {
+    "number": 3.49,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Published on-demand rental rates for the prior-generation workhorse GPU are a display-level reference for what spare capacity costs on the open market.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Listed hourly rental rates are a static price level for rented accelerator capacity; with no stated baseline or change on the page, no directional demand or supply read is taken."
+  },
+  "evidence": [
+    {
+      "source": "runpod.io",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-09-07",
+      "excerpt": "H100 SXM: $2.69/hr (Community Cloud), $3.49/hr (Secure Cloud).",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Provider's own live pricing page read directly, but it is one provider and carries no publication date or history."
+  },
+  "dispersion": "conflicting same-key reports: value 6.79 -> 3.49 (tol 1%); sources: runpod.io",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T12:22:49Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

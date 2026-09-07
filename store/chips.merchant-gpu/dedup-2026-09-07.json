@@ -1,0 +1,210 @@
+{
+  "asOf": "2026-09",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "www-datacenterdynamics-com-06432b6e-2026-09-3",
+      "entity": "anthropic",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "247wallst-com-18193b15-2026-09-3",
+      "entity": "anthropic",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-datacenterdynamics-com-06432b6e-2026-09-1",
+      "entity": "anthropic",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "seekingalpha-com-669672dd-2026-09-2",
+      "entity": "openai",
+      "indicatorId": "releaseCadence",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-digitimes-com-bcc418d8-2026-09-2",
+      "entity": "sk-hynix",
+      "indicatorId": "market-share-pct",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "ir-amd-com-dc7278ba-2026-09-2",
+      "entity": "amd",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "ir-amd-com-5a9dfeb6-2026-09-2",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "247wallst-com-18193b15-2026-09-2",
+      "entity": "amd",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "ir-amd-com-5a9dfeb6-2026-09-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "www-runpod-io-75b2bfe3-2026-09-1",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "www-runpod-io-0f8e6327-2026-09-1",
+      "detail": "value 7.89 -> 3.49 (tol 1%)"
+    },
+    {
+      "findingId": "siliconanalysts-com-ab8c9c31-2026-09-3",
+      "entity": "market",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "supplyics-com-c83015c2-2026-08-4",
+      "detail": "statement/trend changed (trend falling -> rising)"
+    },
+    {
+      "findingId": "www-fool-com-fc0a1b5c-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "D2",
+      "verdict": "update",
+      "priorFindingId": "www-investing-com-fac86e4e-2026-09-1",
+      "detail": "value 40.0 -> 20.0 (tol 1%)"
+    },
+    {
+      "findingId": "seekingalpha-com-669672dd-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "blogs-nvidia-com-27dfecba-2026-09-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "www-freepressjournal-in-16ff579c-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "exportControlExposure",
+      "verdict": "update",
+      "priorFindingId": "www-econotimes-com-f3939240-2026-08-1",
+      "detail": "statement/trend changed (trend unknown -> rising)"
+    },
+    {
+      "findingId": "www-newegg-com-c6e5a7e1-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "gpuSpotPrice",
+      "verdict": "update",
+      "priorFindingId": "www-newegg-com-2121fd9f-2026-08-1",
+      "detail": "value 32879.0 -> 34879.0 (tol 1%)"
+    },
+    {
+      "findingId": "www-newegg-com-c6e5a7e1-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "leadTimes",
+      "verdict": "update",
+      "priorFindingId": "www-marketbeat-com-01fd246e-2026-08-1",
+      "detail": "magnitude 3 -> 1"
+    },
+    {
+      "findingId": "www-fool-com-fc0a1b5c-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "update",
+      "priorFindingId": "www-investing-com-fac86e4e-2026-09-2",
+      "detail": "magnitude 2 -> 3"
+    },
+    {
+      "findingId": "www-digitimes-com-bcc418d8-2026-09-1",
+      "entity": "sk-hynix",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "news-skhynix-com-0eb7edb1-2026-08-1",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "siliconanalysts-com-ab8c9c31-2026-09-2",
+      "entity": "tsmc",
+      "indicatorId": "pkgCapacityOrderSpread",
+      "verdict": "update",
+      "priorFindingId": "www-aroged-com-a319f429-2026-09-2",
+      "detail": "magnitude 2 -> 3"
+    },
+    {
+      "findingId": "siliconanalysts-com-ab8c9c31-2026-09-1",
+      "entity": "tsmc",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "update",
+      "priorFindingId": "www-aroged-com-a319f429-2026-09-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "ir-amd-com-dc7278ba-2026-09-1",
+      "entity": "amd",
+      "indicatorId": "designWins",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-datacenterdynamics-com-06432b6e-2026-09-2",
+      "entity": "anthropic",
+      "indicatorId": "rpoBacklog",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "247wallst-com-18193b15-2026-09-1",
+      "entity": "anthropic",
+      "indicatorId": "rpoBacklog",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-runpod-io-75b2bfe3-2026-09-2",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-runpod-io-75b2bfe3-2026-09-3",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-freepressjournal-in-16ff579c-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "exportControlExposure",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-fool-com-fc0a1b5c-2026-09-3",
+      "entity": "nvidia",
+      "indicatorId": "leadTimes",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}
