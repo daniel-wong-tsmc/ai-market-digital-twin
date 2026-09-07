@@ -1,0 +1,47 @@
+{
+  "id": "dallasexpress-com-7eda4f05-2026-09-1",
+  "statement": "A South Korea-backed gas project at Encinal, South Texas would add up to 6.3 GW of generation aimed at AI data centers, starting with a 1.4 GW first phase.",
+  "kind": "measured",
+  "value": {
+    "number": 6.3,
+    "unit": "GW"
+  },
+  "trend": "rising",
+  "why": "Dedicated multi-gigawatt generation earmarked for AI data centers relieves the power bottleneck that currently gates GPU-cluster deployment in Texas.",
+  "impact": {
+    "targets": [
+      "energy.power-generation",
+      "infrastructure.datacenter-colo",
+      "energy.grid-transmission",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "New gas-turbine and combined-cycle capacity reserved for AI data centers expands the power envelope available for GPU deployments, easing a binding non-chip constraint on cluster build-out."
+  },
+  "evidence": [
+    {
+      "source": "Dallas Express",
+      "url": "https://dallasexpress.com/state/south-korea-says-22-3b-texas-ai-power-deal-is-not-final-as-talks-continue/",
+      "date": "2026-09-07",
+      "excerpt": "Project capacity: an initial phase of '1.4 gigawatts of gas-turbine generation,' with a potential expansion of '4.9 additional gigawatts of combined-cycle capacity,' for a stated total potential of '6.3 gigawatts.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; the capacity figures describe a planned project that the Korean Industry Ministry says is not final, not commissioned capacity."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: Dallas Express",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

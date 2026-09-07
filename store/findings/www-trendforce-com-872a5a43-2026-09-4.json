@@ -1,0 +1,43 @@
+{
+  "id": "www-trendforce-com-872a5a43-2026-09-4",
+  "statement": "Samsung Electro-Mechanics secured AI-server MLCC contracts worth roughly KRW 745 billion combined, covering supply throughout 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Multi-year committed component contracts show AI-server builders locking in supply well ahead of need, which is direct evidence of expected sustained build volumes.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.electrical-equipment",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Contracted passive-component supply running through 2027 signals that AI-server production plans extend at least that far, implying continued accelerator demand behind them."
+  },
+  "evidence": [
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/08/18/news-mlcc-lead-times-diverge-as-high-end-products-stretch-to-5-10-months-on-ai-demand-tightness-may-extend-into-2027/",
+      "date": "2026-08-18",
+      "excerpt": "Demand visibility: Samsung Electro-Mechanics secured AI server contracts 'worth a combined roughly KRW 745 billion' covering supply throughout 2027.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary article; the figure is stated in Korean won and no USD conversion or filing reference is given, so no value is recorded."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-08-18",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

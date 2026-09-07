@@ -1,0 +1,47 @@
+{
+  "id": "en-sedaily-com-08f31bef-2026-09-3",
+  "statement": "AI infrastructure investment is projected at $1.3 trillion in 2027, a 60% year-over-year increase, with memory's share of that spend rising from 14% in 2025 to 57%.",
+  "kind": "measured",
+  "value": {
+    "number": 1300.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A 60% step-up in total AI infrastructure spend sets the size of the pool that GPU, memory and system vendors compete for, and the shift of that pool toward memory changes what a given dollar buys.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "mixed",
+    "mechanism": "A larger overall AI capex pool lifts accelerator demand, but memory taking 57% of the spend versus 14% two years earlier crowds out the share available for GPUs and other system content."
+  },
+  "evidence": [
+    {
+      "source": "Seoul Economic Daily (en.sedaily.com)",
+      "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days",
+      "date": "2026-09-07",
+      "excerpt": "Key figures cited: AI infrastructure investment is projected at $1.3 trillion next year, a 60% increase year-over-year. Memory's share of AI infrastructure spending is described as expanding from 14% in 2025, to 40% in the current year (2026), to 57% next year (2027).",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Sell-side projection (KB Securities) carried by a single secondary outlet; forward forecast rather than reported spend."
+  },
+  "dispersion": "Memory share path is steep and uncertain: 14% (2025) to 40% (2026) to 57% (2027).",
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "multi",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

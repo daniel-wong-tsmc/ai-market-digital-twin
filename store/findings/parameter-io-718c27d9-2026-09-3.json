@@ -1,0 +1,43 @@
+{
+  "id": "parameter-io-718c27d9-2026-09-3",
+  "statement": "HBM4 manufacturing is reported to demand roughly triple the wafer capacity of traditional DRAM.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Tripling wafer consumption per bit means the HBM ramp needed for AI accelerators structurally reduces total memory output available to everyone else.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Converting DRAM lines to HBM4 removes roughly two conventional DRAM bits for every HBM bit added, tightening overall memory supply that GPU systems depend on."
+  },
+  "evidence": [
+    {
+      "source": "Parameter.io",
+      "url": "https://parameter.io/sk-hynix-skhy-shares-surge-7-as-openais-gpt-6-astra-ignites-memory-chip-rally/",
+      "date": "2026-09-07",
+      "excerpt": "notes 'HBM4 manufacturing demands approximately triple the wafer capacity compared to traditional DRAM.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Approximate ratio described in a single secondary outlet without a named producer disclosure."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend falling -> falling); sources: IDC (idc.com), Parameter.io",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

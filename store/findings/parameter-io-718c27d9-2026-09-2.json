@@ -1,0 +1,43 @@
+{
+  "id": "parameter-io-718c27d9-2026-09-2",
+  "statement": "Memory inventories at both Samsung and SK Hynix have fallen beneath the 10-day supply threshold.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "With less than ten days of stock in hand, producers have no buffer to serve incremental AI-server memory orders, so allocation replaces open ordering.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Depleted producer inventory makes memory the binding input for GPU-server assembly, raising system cost and slowing accelerator shipments."
+  },
+  "evidence": [
+    {
+      "source": "Parameter.io",
+      "url": "https://parameter.io/sk-hynix-skhy-shares-surge-7-as-openais-gpt-6-astra-ignites-memory-chip-rally/",
+      "date": "2026-09-07",
+      "excerpt": "On supply: memory inventories at both Samsung and SK Hynix fell 'beneath the 10-day supply threshold.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet restating a sell-side figure; no producer filing confirms the inventory level."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "memory",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

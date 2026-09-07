@@ -1,0 +1,251 @@
+{
+  "headline": "Ten days of memory left on the shelf",
+  "deck": "Korea's two big memory makers are down to under ten days of stock, and the money going into AI building is tilting sharply toward the part that is short.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The cupboard is nearly empty",
+      "paragraphs": [
+        "Samsung Electronics and SK hynix are now holding less than ten days of memory in stock, measured through the third quarter of 2026. A maker that keeps only ten days of finished parts has no cushion left: everything coming off the line is already spoken for.",
+        "The gap is not expected to close next year. Demand for memory bits is forecast to grow more than 10 percentage points faster than supply in 2027. Part of the reason is the new stacked memory that sits on AI chips, which is reported to need roughly three times the factory wafer capacity of ordinary memory, so each extra stacked part comes out of the same pool that feeds everything else.",
+        "That is why the money is moving. AI building investment is put at about $1.3 trillion in 2027, a 60% rise on the year, and memory's share of that spend is forecast to climb to 57% from 14% in 2025. IDC said in late August that memory costs had risen more than 300% year on year, which it called a memory crisis."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "en-sedaily-com-08f31bef-2026-09-1",
+        "en-sedaily-com-08f31bef-2026-09-2",
+        "en-sedaily-com-08f31bef-2026-09-3",
+        "parameter-io-718c27d9-2026-09-1",
+        "parameter-io-718c27d9-2026-09-2",
+        "parameter-io-718c27d9-2026-09-3",
+        "www-idc-com-9e83b089-2026-09-1"
+      ],
+      "sourceLine": "Seoul Economic Daily (7 September); Parameter.io (7 September); IDC blog post (26 August).",
+      "relatedDocs": [
+        {
+          "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days",
+          "title": "Samsung and SK hynix memory stockpiles fall below 10 days",
+          "outlet": "Seoul Economic Daily (en.sedaily.com)",
+          "date": "2026-09-07"
+        },
+        {
+          "url": "https://parameter.io/sk-hynix-skhy-shares-surge-7-as-openais-gpt-6-astra-ignites-memory-chip-rally/",
+          "title": "Memory's share of AI building spending is forecast to reach 57% by 2027",
+          "outlet": "Parameter.io",
+          "date": "2026-09-07"
+        },
+        {
+          "url": "https://www.idc.com/resource-center/blog/smartphone-shipments-set-for-record-16-7-drop-in-2026-as-the-memory-crisis-hits-full-force/",
+          "title": "Memory costs up more than 300% year on year",
+          "outlet": "IDC (idc.com)",
+          "date": "2026-08-26"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "What the rental counter says today",
+      "paragraphs": [
+        "The by-the-hour market did put numbers on the board today. Lambda listed NVIDIA's B200 chips at $6.69 to $6.99 an hour for each chip. On the Vast.ai marketplace, where many small owners rent out their own machines, the same B200 with 192GB showed a median of $6.63 an hour, with the cheapest offers starting at $1.25.",
+        "Two prices that close together, from a company catalogue and an open marketplace, say the hourly market is working normally. It does not say the shortage has eased. Lambda still publishes no hourly price at all for reserved longer-term clusters of B200 or H100 machines, and sends buyers to its sales team instead.",
+        "Buying the hardware outright is another matter. On the ASA Computers page for NVIDIA data-centre and workstation cards, no stock or availability status was shown for any of the listed products. Renting time is easy; owning the machine is still not."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "lambda-ai-31b1a959-2026-09-1",
+        "lambda-ai-31b1a959-2026-09-4",
+        "vast-ai-7b70a7a6-2026-09-1",
+        "www-asacomputers-com-57167cf9-2026-09-4"
+      ],
+      "sourceLine": "lambda.ai and vast.ai pricing pages, checked today; asacomputers.com card listing, checked today.",
+      "relatedDocs": [
+        {
+          "url": "https://lambda.ai/pricing",
+          "title": "Lambda on-demand GPU prices",
+          "outlet": "lambda.ai",
+          "date": "2026-09-08"
+        },
+        {
+          "url": "https://vast.ai/pricing",
+          "title": "Vast.ai marketplace GPU prices",
+          "outlet": "vast.ai",
+          "date": "2026-09-08"
+        },
+        {
+          "url": "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html",
+          "title": "NVIDIA H100 80GB card listing",
+          "outlet": "asacomputers.com",
+          "date": "2026-09-08"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The other thing you cannot order in a hurry",
+      "paragraphs": [
+        "Chips are not the only queue. A South Korea-backed gas project at Encinal in south Texas would add up to 6.3 gigawatts of electricity aimed at AI data centres, starting with a first phase of 1.4 gigawatts. It is a plan, not a plant.",
+        "Texas is where the demand already sits. NVIDIA's chief executive confirmed on 7 September that OpenAI's GPT-6 Astra, its largest training run so far, used more than 100,000 Grace Blackwell chips on the Stargate site there.",
+        "The people selling the machines say the same thing. On its results call on 2 September, Broadcom's management said land, power and building shells decide when new capacity can be switched on, alongside limits on substrates, stacked memory and leading-edge wafers. In mid-August NVIDIA put $1.5 billion into the power developer SB Energy, alongside a cited $4.2 billion grid investment with AEP Ohio tied to at least 10 gigawatts of new generation."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "dallasexpress-com-7eda4f05-2026-09-1",
+        "www-tradingkey-com-3853b285-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-3",
+        "nvidianews-nvidia-com-db4ca926-2026-08-3"
+      ],
+      "sourceLine": "Dallas Express (7 September); TradingKey (7 September); Investing.com transcript of Broadcom's results call (2 September); NVIDIA newsroom (17 August).",
+      "relatedDocs": [
+        {
+          "url": "https://dallasexpress.com/state/south-korea-says-22-3b-texas-ai-power-deal-is-not-final-as-talks-continue/",
+          "title": "South Korea says Texas AI power deal is not final as talks continue",
+          "outlet": "Dallas Express",
+          "date": "2026-09-07"
+        },
+        {
+          "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262154185-jensenhuang-agi-openaiastra-benchmarks-400kgpu-deployment-tradingkey",
+          "title": "GPT-6 Astra trained on more than 100,000 Grace Blackwell chips in Texas",
+          "outlet": "TradingKey",
+          "date": "2026-09-07"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Watch the stock level first. Under ten days of memory on hand is the tightest reading we have seen from the two Korean makers, so the simplest test of whether supply is catching up is whether that number climbs back. In late August SK hynix's chief executive said the shortage could run all the way to 2030.",
+        "Watch the 2027 arithmetic. Demand for memory bits is forecast to grow more than 10 percentage points faster than supply next year. Nothing announced this week changes that gap, and until it narrows, more spending mostly buys higher prices rather than more machines.",
+        "And watch the Texas power plan. Up to 6.3 gigawatts, beginning with a 1.4 gigawatt first phase, would matter to how much of the ordered hardware can actually be switched on. Meanwhile the hourly rental price, $6.69 to $6.99 for a B200 at Lambda today, is the cheapest weekly check on whether any of this is loosening."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "en-sedaily-com-08f31bef-2026-09-1",
+        "en-sedaily-com-08f31bef-2026-09-2",
+        "finance-yahoo-com-31239457-2026-09-3",
+        "dallasexpress-com-7eda4f05-2026-09-1",
+        "lambda-ai-31b1a959-2026-09-1"
+      ],
+      "sourceLine": "Seoul Economic Daily (7 September); Yahoo Finance (31 August); Dallas Express (7 September); lambda.ai, checked today.",
+      "relatedDocs": []
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Money going into memory factories is the only thing that can lift the ceiling on how many machines get built.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "The street price of a single card shows whether scarcity is easing where anyone can walk up and buy one.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Big buyers keep raising what they plan to spend, and power and land now decide when any of it switches on.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-09",
+      "text": "Memory stock at Samsung and SK hynix has fallen below ten days of supply.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "NVIDIA put $1.5 billion into power developer SB Energy in mid-August, alongside a cited $4.2 billion grid investment with AEP Ohio.",
+      "scene": 3
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Samsung and SK hynix now hold under 10 days of memory stock, so the part that limits how many AI machines ship is in shorter supply.",
+      "claimFindingIds": [
+        "en-sedaily-com-08f31bef-2026-09-1"
+      ]
+    },
+    {
+      "text": "Lambda listed NVIDIA B200 chips at $6.69 to $6.99 an hour today while Vast.ai's marketplace showed a median of $6.63, so rental prices sit close together.",
+      "claimFindingIds": [
+        "lambda-ai-31b1a959-2026-09-1",
+        "vast-ai-7b70a7a6-2026-09-1"
+      ]
+    },
+    {
+      "text": "KB Securities expects memory to take 57% of AI building spending by 2027, up from 14% in 2025, shifting the profit toward memory makers.",
+      "claimFindingIds": [
+        "parameter-io-718c27d9-2026-09-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "Memory stock at Samsung and SK hynix has fallen below ten days of supply, and demand for memory bits is forecast to grow more than 10 percentage points faster than supply in 2027.",
+      "claimFindingIds": [
+        "en-sedaily-com-08f31bef-2026-09-1",
+        "en-sedaily-com-08f31bef-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "unchanged",
+      "reasoning": "No new evidence about rival chips arrived today. The day's fresh items are rental prices, with Lambda's B200 at $6.69 to $6.99 an hour, and Korean memory stock below ten days.",
+      "claimFindingIds": [
+        "lambda-ai-31b1a959-2026-09-1",
+        "en-sedaily-com-08f31bef-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "worsened",
+      "reasoning": "Korean makers are down to under ten days of memory stock, and stacked memory is reported to need roughly three times the wafer capacity of ordinary memory, so making more of it takes supply away from the rest.",
+      "claimFindingIds": [
+        "en-sedaily-com-08f31bef-2026-09-1",
+        "parameter-io-718c27d9-2026-09-3"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived on how much memory each chip carries. Today's memory news is about total stock, now below ten days at Samsung and SK hynix.",
+      "claimFindingIds": [
+        "en-sedaily-com-08f31bef-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-high-bandwidth-memory-and-server-memory",
+      "status": "worsened",
+      "reasoning": "Stock at both Korean suppliers is under ten days, and 2027 demand for memory bits is forecast to outgrow supply by more than 10 percentage points, reversing this week's earlier supply news.",
+      "claimFindingIds": [
+        "en-sedaily-com-08f31bef-2026-09-1",
+        "en-sedaily-com-08f31bef-2026-09-2"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-08",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "886a3766d3f10f1a0e2807e0981b2a5536619a39a0d62d1d943820bac957f73a",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-09-07T16:43:35.183010+00:00"
+  }
+}

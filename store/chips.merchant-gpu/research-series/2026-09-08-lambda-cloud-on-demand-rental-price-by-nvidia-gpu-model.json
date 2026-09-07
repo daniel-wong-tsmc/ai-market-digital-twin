@@ -1,0 +1,53 @@
+{
+  "seriesName": "Lambda Cloud on-demand rental price by NVIDIA GPU model",
+  "unit": "US$ per GPU-hour",
+  "form": "bars",
+  "sourceName": "Lambda",
+  "points": [
+    {
+      "label": "B200 SXM6 (8x)",
+      "value": 6.69,
+      "sourceUrl": "https://lambda.ai/pricing",
+      "publishedAt": "2026-09-08"
+    },
+    {
+      "label": "H100 PCIe (1x)",
+      "value": 3.29,
+      "sourceUrl": "https://lambda.ai/pricing",
+      "publishedAt": "2026-09-08"
+    },
+    {
+      "label": "GH200 (1x)",
+      "value": 2.29,
+      "sourceUrl": "https://lambda.ai/pricing",
+      "publishedAt": "2026-09-08"
+    },
+    {
+      "label": "A100 PCIe",
+      "value": 1.99,
+      "sourceUrl": "https://lambda.ai/pricing",
+      "publishedAt": "2026-09-08"
+    },
+    {
+      "label": "A10 (1x)",
+      "value": 1.29,
+      "sourceUrl": "https://lambda.ai/pricing",
+      "publishedAt": "2026-09-08"
+    },
+    {
+      "label": "A6000",
+      "value": 1.09,
+      "sourceUrl": "https://lambda.ai/pricing",
+      "publishedAt": "2026-09-08"
+    },
+    {
+      "label": "Tesla V100 (8x)",
+      "value": 0.79,
+      "sourceUrl": "https://lambda.ai/pricing",
+      "publishedAt": "2026-09-08"
+    }
+  ],
+  "pair": false,
+  "notes": "All figures are Lambda's own published list prices on its public pricing page, read on 2026-09-08; the page is a live price list with no publication date, so publishedAt is the date read. Each value is the exact printed price per GPU per hour for the configuration named in the label (Lambda prints a small range across 1x/2x/4x/8x setups for some models, e.g. B200 SXM6 runs $6.69 at 8x up to $6.99 at 1x, and H100 SXM runs $3.99-$4.29; only single printed prices are used here, and the H100 SXM range is omitted rather than turned into one number). Prices exclude sales tax/VAT/GST. This is one vendor's list price, not a market average, and it does not include the Vast.ai marketplace median mentioned in the bullet, which lives on a different site.",
+  "bulletIndex": 2
+}

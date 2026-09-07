@@ -1,0 +1,44 @@
+{
+  "id": "www-tradingkey-com-3853b285-2026-09-1",
+  "statement": "Jensen Huang confirmed that OpenAI's GPT-6 Astra training run, the company's largest to date, used more than 100,000 Nvidia Grace Blackwell GPUs on Stargate infrastructure in Texas.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A confirmed six-figure Grace Blackwell training cluster shows frontier training is still scaling on merchant GPUs rather than migrating to in-house silicon.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "The largest frontier training run to date running on Nvidia Grace Blackwell confirms merchant GPUs remain the platform for leading-edge training, sustaining accelerator demand."
+  },
+  "evidence": [
+    {
+      "source": "TradingKey",
+      "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262154185-jensenhuang-agi-openaiastra-benchmarks-400kgpu-deployment-tradingkey",
+      "date": "2026-09-07",
+      "excerpt": "Jensen Huang subsequently confirmed: 'Astra's training used more than 100,000 GPUs based on Nvidia's Grace Blackwell architecture.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Executive statements relayed by a single secondary outlet; the figure is a floor ('more than 100,000') with no filing or company release quoted."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: TradingKey",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

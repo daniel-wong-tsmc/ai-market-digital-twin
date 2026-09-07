@@ -1,70 +1,9 @@
 {
-  "asOf": "2026-09-07",
+  "asOf": "2026-09-08",
   "bullets": [
     {
       "chart": {
-        "caption": "Found today — single source: NVIDIA Newsroom (nvidianews.nvidia.com).",
-        "form": "columns",
-        "points": [
-          {
-            "hollow": false,
-            "label": "Q1 FY2026 (ended Apr 27, 2025)",
-            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2026",
-            "value": 39.1
-          },
-          {
-            "hollow": false,
-            "label": "Q2 FY2026 (ended Jul 27, 2025)",
-            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2026",
-            "value": 41.1
-          },
-          {
-            "hollow": false,
-            "label": "Q3 FY2026 (ended Oct 26, 2025)",
-            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2026",
-            "value": 51.2
-          },
-          {
-            "hollow": false,
-            "label": "Q4 FY2026 (ended Jan 25, 2026)",
-            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
-            "value": 62.3
-          },
-          {
-            "hollow": false,
-            "label": "Q1 FY2027 (ended Apr 26, 2026)",
-            "sourceUrl": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027",
-            "value": 75.2
-          }
-        ],
-        "researched": true,
-        "source": {
-          "date": "2026-05-28",
-          "outlet": "NVIDIA Newsroom (nvidianews.nvidia.com)",
-          "tier": "secondary",
-          "title": "NVIDIA Data Center segment revenue, by fiscal quarter",
-          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
-        },
-        "title": "NVIDIA Data Center segment revenue, by fiscal quarter",
-        "unit": "US$ billions"
-      },
-      "date": "2026-09-07",
-      "noChartReason": null,
-      "sources": [
-        {
-          "date": "2026-09-07",
-          "outlet": "seekingalpha.com",
-          "tier": "secondary",
-          "title": "seekingalpha.com",
-          "url": "https://seekingalpha.com/news/4640538-jensen-huang-says-agi-has-arrived-following-openais-gpt-6-astra-launch"
-        }
-      ],
-      "storyHref": "story/2026-09-07.html",
-      "text": "OpenAI's new GPT-6 Astra model was trained on over 100,000 NVIDIA Grace Blackwell rack systems, with a further wave of chips due to come online next."
-    },
-    {
-      "chart": {
-        "caption": "Found today — single source: SK hynix Newsroom (official quarterly business results releases).",
+        "caption": "Found today — single source: SK hynix Newsroom.",
         "form": "columns",
         "points": [
           {
@@ -82,7 +21,7 @@
           {
             "hollow": false,
             "label": "Q1 2026",
-            "sourceUrl": "https://news.skhynix.com/q1-2026-business-results/",
+            "sourceUrl": "https://news.skhynix.com/en/q1-2026-business-results/",
             "value": 52.5763
           },
           {
@@ -95,139 +34,183 @@
         "researched": true,
         "source": {
           "date": "2026-07-29",
-          "outlet": "SK hynix Newsroom (official quarterly business results releases)",
+          "outlet": "SK hynix Newsroom",
           "tier": "secondary",
-          "title": "SK Hynix quarterly revenue during its 2025-2026 memory/HBM ramp",
+          "title": "SK hynix quarterly revenue",
           "url": "https://news.skhynix.com/en/q2-2026-business-results/"
         },
-        "title": "SK Hynix quarterly revenue during its 2025-2026 memory/HBM ramp",
-        "unit": "trillion Korean won"
+        "title": "SK hynix quarterly revenue",
+        "unit": "trillion South Korean won"
       },
-      "date": "2026-09-07",
+      "date": "2026-09-08",
       "noChartReason": null,
       "sources": [
         {
           "date": "2026-09-07",
-          "outlet": "digitimes.com",
+          "outlet": "Seoul Economic Daily (en.sedaily.com)",
           "tier": "secondary",
-          "title": "digitimes.com",
-          "url": "https://www.digitimes.com/news/a20260907VL207/sk-hynix-dram-hbm4-hbm.html"
+          "title": "Seoul Economic Daily (en.sedaily.com)",
+          "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days"
         }
       ],
-      "storyHref": "story/2026-09-07.html",
-      "text": "SK Hynix plans to lift its newest memory to about 34% of its own production by the last quarter of 2026, preparing for the next stacked-memory generation."
+      "storyHref": "story/2026-09-08.html",
+      "text": "Samsung and SK hynix now hold under 10 days of memory stock, so the part that limits how many AI machines ship is in shorter supply."
     },
     {
       "chart": {
-        "caption": "Found today — single source: GetDeploying.",
+        "caption": "Found today — single source: Lambda.",
         "form": "bars",
         "points": [
           {
             "hollow": false,
-            "label": "Gcore - H100",
-            "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
-            "value": 1.78
+            "label": "B200 SXM6 (8x)",
+            "sourceUrl": "https://lambda.ai/pricing",
+            "value": 6.69
           },
           {
             "hollow": false,
-            "label": "Gcore - H200",
-            "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
-            "value": 3.17
+            "label": "H100 PCIe (1x)",
+            "sourceUrl": "https://lambda.ai/pricing",
+            "value": 3.29
           },
           {
             "hollow": false,
-            "label": "OVH - H100",
-            "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
-            "value": 2.99
+            "label": "GH200 (1x)",
+            "sourceUrl": "https://lambda.ai/pricing",
+            "value": 2.29
           },
           {
             "hollow": false,
-            "label": "OVH - H200",
-            "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
-            "value": 6.2
+            "label": "A100 PCIe",
+            "sourceUrl": "https://lambda.ai/pricing",
+            "value": 1.99
           },
           {
             "hollow": false,
-            "label": "Replicate - H100",
-            "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
-            "value": 5.49
+            "label": "A10 (1x)",
+            "sourceUrl": "https://lambda.ai/pricing",
+            "value": 1.29
           },
           {
             "hollow": false,
-            "label": "Replicate - H200",
-            "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
-            "value": 5.49
+            "label": "A6000",
+            "sourceUrl": "https://lambda.ai/pricing",
+            "value": 1.09
           },
           {
             "hollow": false,
-            "label": "AWS - H100",
-            "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
-            "value": 6.88
-          },
-          {
-            "hollow": false,
-            "label": "AWS - H200",
-            "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
-            "value": 7.91
-          },
-          {
-            "hollow": false,
-            "label": "Oracle Cloud - H100",
-            "sourceUrl": "https://getdeploying.com/gpus/nvidia-h100",
-            "value": 10.0
-          },
-          {
-            "hollow": false,
-            "label": "Oracle Cloud - H200",
-            "sourceUrl": "https://getdeploying.com/gpus/nvidia-h200",
-            "value": 10.0
+            "label": "Tesla V100 (8x)",
+            "sourceUrl": "https://lambda.ai/pricing",
+            "value": 0.79
           }
         ],
         "researched": true,
         "source": {
-          "date": "2026-09-07",
-          "outlet": "GetDeploying",
+          "date": "2026-09-08",
+          "outlet": "Lambda",
           "tier": "secondary",
-          "title": "Cloud on-demand rental price per GPU-hour, H100 vs H200, by provider",
-          "url": "https://getdeploying.com/gpus/nvidia-h200"
+          "title": "Lambda Cloud on-demand rental price by NVIDIA GPU model",
+          "url": "https://lambda.ai/pricing"
         },
-        "title": "Cloud on-demand rental price per GPU-hour, H100 vs H200, by provider",
+        "title": "Lambda Cloud on-demand rental price by NVIDIA GPU model",
         "unit": "US$ per GPU-hour"
       },
-      "date": "2026-09-07",
+      "date": "2026-09-08",
+      "noChartReason": null,
+      "sources": [
+        {
+          "date": "2026-09-08",
+          "outlet": "lambda.ai",
+          "tier": "secondary",
+          "title": "lambda.ai",
+          "url": "https://lambda.ai/pricing"
+        },
+        {
+          "date": "2026-09-08",
+          "outlet": "vast.ai",
+          "tier": "secondary",
+          "title": "vast.ai",
+          "url": "https://vast.ai/pricing"
+        }
+      ],
+      "storyHref": "story/2026-09-08.html",
+      "text": "Lambda listed NVIDIA B200 chips at $6.69 to $6.99 an hour today while Vast.ai's marketplace showed a median of $6.63, so rental prices sit close together."
+    },
+    {
+      "chart": {
+        "caption": "Found today — single source: SK hynix Newsroom.",
+        "form": "columns",
+        "points": [
+          {
+            "hollow": false,
+            "label": "Q3 2025",
+            "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
+            "value": 11.3834
+          },
+          {
+            "hollow": false,
+            "label": "Q4 2025",
+            "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
+            "value": 19.1696
+          },
+          {
+            "hollow": false,
+            "label": "Q1 2026",
+            "sourceUrl": "https://news.skhynix.com/en/q1-2026-business-results/",
+            "value": 37.6103
+          },
+          {
+            "hollow": false,
+            "label": "Q2 2026",
+            "sourceUrl": "https://news.skhynix.com/en/q2-2026-business-results/",
+            "value": 60.5426
+          }
+        ],
+        "researched": true,
+        "source": {
+          "date": "2026-07-29",
+          "outlet": "SK hynix Newsroom",
+          "tier": "secondary",
+          "title": "SK hynix quarterly operating profit",
+          "url": "https://news.skhynix.com/en/q2-2026-business-results/"
+        },
+        "title": "SK hynix quarterly operating profit",
+        "unit": "trillion Korean won"
+      },
+      "date": "2026-09-08",
       "noChartReason": null,
       "sources": [
         {
           "date": "2026-09-07",
-          "outlet": "newegg.com",
+          "outlet": "Parameter.io",
           "tier": "secondary",
-          "title": "newegg.com",
-          "url": "https://www.newegg.com/p/pl?d=nvidia+h200"
+          "title": "Parameter.io",
+          "url": "https://parameter.io/sk-hynix-skhy-shares-surge-7-as-openais-gpt-6-astra-ignites-memory-chip-rally/"
         }
       ],
-      "storyHref": "story/2026-09-07.html",
-      "text": "Newegg listed one H100 card at $34,879 while its only H200 product stayed out of stock, so scarcity at the counter has not eased."
+      "storyHref": "story/2026-09-08.html",
+      "text": "KB Securities expects memory to take 57% of AI building spending by 2027, up from 14% in 2025, shifting the profit toward memory makers."
     }
   ],
   "categoryId": "chips.merchant-gpu",
   "dimensions": [
     {
       "confidence": "Medium — the underlying reports are single-source in places.",
-      "direction": "worsening",
+      "direction": "flat",
       "evidence": [
+        {
+          "date": "2026-08-25",
+          "outlet": "siliconanalysts.com",
+          "tier": "secondary",
+          "title": "siliconanalysts.com",
+          "url": "https://siliconanalysts.com/newsletter/qual-watch/2026-08-25"
+        },
         {
           "date": "2026-08-26",
           "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
           "tier": "secondary",
           "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
           "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
-        },
-        {
-          "date": "2026-08-29",
-          "outlet": "The Motley Fool",
-          "tier": "secondary",
-          "title": "The Motley Fool",
-          "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
         },
         {
           "date": "2026-08-10",
@@ -240,8 +223,8 @@
       "id": "bottleneck",
       "plainName": "What is holding shipments back",
       "ratingWord": "Weak",
-      "reasoning": "Suppliers can fill only 60-70% of requested stacked memory, and NVIDIA cut memory content on its top part to 192GB to stretch a fixed pool.",
-      "summary": "NVIDIA says it holds supply for about 70% of demand and raised long-term commitments to $279 billion largely to lock in memory.",
+      "reasoning": "Stacked memory bites just as hard, with Micron able to cover roughly half of requests and Korean maker stockpiles under ten days.",
+      "summary": "Advanced-packaging waits still run 52 to 78 weeks and the leading vendor says it holds supply for only about 70% of demand.",
       "tone": "bad"
     },
     {
@@ -273,8 +256,8 @@
       "id": "momentum",
       "plainName": "How hard buyers are buying",
       "ratingWord": "Very strong",
-      "reasoning": "Broadcom AI chip sales more than tripled and Anthropic signed about $517 billion of capacity agreements, so orders keep running ahead of deliveries.",
-      "summary": "NVIDIA data-center revenue reached $89.0 billion, up 117% year over year, with the next quarter guided to $108 billion.",
+      "reasoning": "Buyers outside the chip vendors confirm the pull, with Nscale's contracted revenue near $103 billion and Foxconn posting its best August ever.",
+      "summary": "Quarterly data-center sales reached $89 billion with $108 billion guided for the next quarter, custom-chip sales at Broadcom rose 221% to $16.7 billion, and AMD's data-center line more than doubled.",
       "tone": "good"
     },
     {
@@ -282,18 +265,11 @@
       "direction": "worsening",
       "evidence": [
         {
-          "date": "2026-08-04",
-          "outlet": "AMD Investor Relations (ir.amd.com)",
+          "date": "2026-08-31",
+          "outlet": "NVIDIA Newsroom (official press release)",
           "tier": "primary",
-          "title": "AMD Investor Relations (ir.amd.com)",
-          "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
-        },
-        {
-          "date": "2026-07-23",
-          "outlet": "StorageReview",
-          "tier": "secondary",
-          "title": "StorageReview",
-          "url": "https://www.storagereview.com/news/amd-mi455x-and-helios-432gb-hbm4-72-gpu-racks-and-a-real-answer-to-vera-rubin"
+          "title": "NVIDIA Newsroom (official press release)",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms"
         },
         {
           "date": "2026-09-02",
@@ -301,13 +277,20 @@
           "tier": "secondary",
           "title": "247wallst.com",
           "url": "https://247wallst.com/investing/2026/09/02/anthropic-just-committed-35-billion-to-compute-it-has-not-raised-the-money-for/"
+        },
+        {
+          "date": "2026-08-26",
+          "outlet": "TrendForce",
+          "tier": "secondary",
+          "title": "TrendForce",
+          "url": "https://www.trendforce.com/news/2026/08/26/news-openai-debuts-jalapeno-ai-inference-chip-with-samsung-reportedly-supplying-hbm4/"
         }
       ],
       "id": "competitiveStructure",
       "plainName": "Whether buyers have a second choice",
       "ratingWord": "Mixed",
-      "reasoning": "OpenAI unveiled its own inference chip and Google widened its custom-silicon supply, so alternatives to merchant parts gained real ground this cycle.",
-      "summary": "AMD put its rack-scale Helios system into production and holds 8 gigawatts of frontier-lab commitments, giving buyers a second full-rack source.",
+      "reasoning": "The leader answers by pulling rival designers onto its own scale-up wiring through the MediaTek agreement, so the field widens while the centre of the system stays put.",
+      "summary": "Real alternatives now ship: AMD's Helios rack reached production and carries 8 gigawatts of committed frontier-lab demand, OpenAI unveiled its own 3nm inference chip, and Intel is sampling a memory-heavy inference part that sidesteps stacked memory.",
       "tone": "mixed"
     },
     {
@@ -315,18 +298,18 @@
       "direction": "worsening",
       "evidence": [
         {
-          "date": "2026-07-24",
-          "outlet": "Silicon Analysts",
-          "tier": "secondary",
-          "title": "Silicon Analysts",
-          "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026"
-        },
-        {
           "date": "2026-05-21",
           "outlet": "Tom's Hardware custom AI ASIC state of play",
           "tier": "secondary",
           "title": "Tom's Hardware custom AI ASIC state of play",
           "url": "https://www.tomshardware.com/tech-industry/semiconductors/custom-ai-asics-examined-from-broadcom-to-mtia"
+        },
+        {
+          "date": "2026-07-24",
+          "outlet": "Silicon Analysts",
+          "tier": "secondary",
+          "title": "Silicon Analysts",
+          "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026"
         },
         {
           "date": "2026-06-29",
@@ -339,21 +322,14 @@
       "id": "moat",
       "plainName": "How safe NVIDIA's lead looks",
       "ratingWord": "Weak",
-      "reasoning": "MediaTek raised its accelerator share goal and Anthropic opened talks on its own silicon, so the pool of substitutes keeps widening.",
-      "summary": "Forecasts put NVIDIA at 75% of accelerator sales in 2026 against an 87% peak, with custom chips growing 44.6% versus 16.1% for merchant parts.",
+      "reasoning": "Networking is the one place the leader gained ground, taking the data-center Ethernet switch revenue lead on bundled deployments.",
+      "summary": "Merchant share keeps sliding, from an 87% peak to a projected 75% for 2026, while custom accelerator shipments grow 44.6% against 16.1% for merchant parts and already carry a large slice of total compute.",
       "tone": "bad"
     },
     {
       "confidence": "High — drawn from company filings and calls.",
       "direction": "worsening",
       "evidence": [
-        {
-          "date": "2026-05-20",
-          "outlet": "NVIDIA Investor Relations press release",
-          "tier": "primary",
-          "title": "NVIDIA Investor Relations press release",
-          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx"
-        },
         {
           "date": "2026-08-04",
           "outlet": "AMD Investor Relations",
@@ -362,18 +338,25 @@
           "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
         },
         {
-          "date": "2026-07-16",
-          "outlet": "TradingKey",
+          "date": "2026-07-23",
+          "outlet": "Intel investor-relations press release",
+          "tier": "primary",
+          "title": "Intel investor-relations press release",
+          "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
+        },
+        {
+          "date": "2026-08-26",
+          "outlet": "BigGo Finance (citing NVIDIA Q2 FY2027 earnings call)",
           "tier": "secondary",
-          "title": "TradingKey",
-          "url": "https://www.tradingkey.com/analysis/stocks/more/262034508-tsmc-q2-earnings-beat-expectations-raises-full-year-outlook-tradingkey"
+          "title": "BigGo Finance (citing NVIDIA Q2 FY2027 earnings call)",
+          "url": "https://finance.biggo.com/news/US_NVDA_2026-08-26"
         }
       ],
       "id": "unitEconomics",
       "plainName": "How profitable the sellers are",
       "ratingWord": "Strong",
-      "reasoning": "Memory cost is now eating into that: NVIDIA flags a 71-72% floor and a further slide into the low seventies by the end of its fiscal year.",
-      "summary": "Margins still carry the category, with NVIDIA at 75%, TSMC at 67.7% and AMD lifting gross margin to 54%.",
+      "reasoning": "Memory cost is the drag: management now points to a floor of 71-72% and a further slide into the low seventies by the end of the fiscal year.",
+      "summary": "Margins remain high across the chain, with 74% guided at the leading accelerator vendor, 54% at AMD and 67.7% at the foundry, so each shipped system still earns well.",
       "tone": "good"
     },
     {
@@ -405,8 +388,8 @@
       "id": "strategicRisk",
       "plainName": "What could go wrong",
       "ratingWord": "Mixed",
-      "reasoning": "NVIDIA also cut its Ohio guarantee from $250 billion to under $120 billion, while Anthropic signs capacity against money it has yet to raise.",
-      "summary": "Three customers supply over half of NVIDIA revenue, the outlook assumes nothing from China, and Taiwan indicted nine people over diverted servers.",
+      "reasoning": "Frontier labs sign capacity against money they have yet to raise, and a fresh report of $5.6 billion of controlled hardware allegedly routed to China keeps enforcement pressure live.",
+      "summary": "Three direct customers supply 21%, 17% and 16% of the leader's revenue, China data-center revenue is assumed at zero, and the vendor cut its Ohio campus guarantee from $250 billion to under $120 billion.",
       "tone": "mixed"
     }
   ],
@@ -476,8 +459,8 @@
       },
       {
         "date": "2026-09-01",
-        "demand": 6.326666666666666,
-        "supply": 0.05333333333333323
+        "demand": 6.266666666666667,
+        "supply": -0.2133333333333334
       }
     ],
     "sources": [
@@ -512,13 +495,9 @@
   "issues": {
     "open": [
       {
-        "assessedAsOf": "2026-09-07",
-        "checkCount": 15,
+        "assessedAsOf": "2026-09-08",
+        "checkCount": 16,
         "history": [
-          {
-            "asOf": "2026-08-19",
-            "status": "worsened"
-          },
           {
             "asOf": "2026-08-21",
             "status": "unchanged"
@@ -574,39 +553,32 @@
           {
             "asOf": "2026-09-07",
             "status": "improved"
+          },
+          {
+            "asOf": "2026-09-08",
+            "status": "worsened"
           }
         ],
         "id": "dim-bottleneck",
-        "reasoning": "SK Hynix is speeding its newest memory toward about 34% of its own production by the last quarter of 2026, the first supply-side move in days, though shop listings show H200 parts still out of stock.",
+        "reasoning": "Memory stock at Samsung and SK hynix has fallen below ten days of supply, and demand for memory bits is forecast to grow more than 10 percentage points faster than supply in 2027.",
         "sources": [
           {
             "date": "2026-09-07",
-            "outlet": "digitimes.com",
+            "outlet": "Seoul Economic Daily (en.sedaily.com)",
             "tier": "secondary",
-            "title": "digitimes.com",
-            "url": "https://www.digitimes.com/news/a20260907VL207/sk-hynix-dram-hbm4-hbm.html"
-          },
-          {
-            "date": "2026-09-07",
-            "outlet": "newegg.com",
-            "tier": "secondary",
-            "title": "newegg.com",
-            "url": "https://www.newegg.com/p/pl?d=nvidia+h200"
+            "title": "Seoul Economic Daily (en.sedaily.com)",
+            "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days"
           }
         ],
-        "status": "improved",
+        "status": "worsened",
         "title": "Bottleneck",
         "trackedSince": "2026-08",
-        "worsenedCount": 10
+        "worsenedCount": 11
       },
       {
-        "assessedAsOf": "2026-09-07",
-        "checkCount": 15,
+        "assessedAsOf": "2026-09-08",
+        "checkCount": 16,
         "history": [
-          {
-            "asOf": "2026-08-19",
-            "status": "worsened"
-          },
           {
             "asOf": "2026-08-21",
             "status": "unchanged"
@@ -661,18 +633,29 @@
           },
           {
             "asOf": "2026-09-07",
+            "status": "unchanged"
+          },
+          {
+            "asOf": "2026-09-08",
             "status": "unchanged"
           }
         ],
         "id": "dim-moat",
-        "reasoning": "No new evidence about rival chips arrived today. The only related item runs the other way: OpenAI's newest model was trained on more than 100,000 NVIDIA rack systems.",
+        "reasoning": "No new evidence about rival chips arrived today. The day's fresh items are rental prices, with Lambda's B200 at $6.69 to $6.99 an hour, and Korean memory stock below ten days.",
         "sources": [
           {
-            "date": "2026-09-07",
-            "outlet": "seekingalpha.com",
+            "date": "2026-09-08",
+            "outlet": "lambda.ai",
             "tier": "secondary",
-            "title": "seekingalpha.com",
-            "url": "https://seekingalpha.com/news/4640538-jensen-huang-says-agi-has-arrived-following-openais-gpt-6-astra-launch"
+            "title": "lambda.ai",
+            "url": "https://lambda.ai/pricing"
+          },
+          {
+            "date": "2026-09-07",
+            "outlet": "Seoul Economic Daily (en.sedaily.com)",
+            "tier": "secondary",
+            "title": "Seoul Economic Daily (en.sedaily.com)",
+            "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days"
           }
         ],
         "status": "unchanged",
@@ -681,8 +664,8 @@
         "worsenedCount": 8
       },
       {
-        "assessedAsOf": "2026-09-07",
-        "checkCount": 14,
+        "assessedAsOf": "2026-09-08",
+        "checkCount": 15,
         "history": [
           {
             "asOf": "2026-08-21",
@@ -739,34 +722,38 @@
           {
             "asOf": "2026-09-07",
             "status": "improved"
+          },
+          {
+            "asOf": "2026-09-08",
+            "status": "worsened"
           }
         ],
         "id": "constraint-stacked-memory-and-server-dram",
-        "reasoning": "SK Hynix aims to have its newest memory at about 34% of its own production by the last quarter of 2026, on top of Micron's plan to add up to 60,000 stacked-memory wafers a month by year-end.",
+        "reasoning": "Korean makers are down to under ten days of memory stock, and stacked memory is reported to need roughly three times the wafer capacity of ordinary memory, so making more of it takes supply away from the rest.",
         "sources": [
           {
             "date": "2026-09-07",
-            "outlet": "digitimes.com",
+            "outlet": "Seoul Economic Daily (en.sedaily.com)",
             "tier": "secondary",
-            "title": "digitimes.com",
-            "url": "https://www.digitimes.com/news/a20260907VL207/sk-hynix-dram-hbm4-hbm.html"
+            "title": "Seoul Economic Daily (en.sedaily.com)",
+            "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days"
           },
           {
-            "date": "2026-09-04",
-            "outlet": "Electronic Times (ET News, English edition)",
+            "date": "2026-09-07",
+            "outlet": "Parameter.io",
             "tier": "secondary",
-            "title": "Electronic Times (ET News, English edition)",
-            "url": "https://en.etnews.com/20260904200006"
+            "title": "Parameter.io",
+            "url": "https://parameter.io/sk-hynix-skhy-shares-surge-7-as-openais-gpt-6-astra-ignites-memory-chip-rally/"
           }
         ],
-        "status": "improved",
-        "title": "HBM4 and server DRAM supply",
+        "status": "worsened",
+        "title": "HBM4 and CoWoS packaging supply",
         "trackedSince": "2026-08",
-        "worsenedCount": 6
+        "worsenedCount": 7
       },
       {
-        "assessedAsOf": "2026-09-07",
-        "checkCount": 12,
+        "assessedAsOf": "2026-09-08",
+        "checkCount": 13,
         "history": [
           {
             "asOf": "2026-08-23",
@@ -815,17 +802,21 @@
           {
             "asOf": "2026-09-07",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-09-08",
+            "status": "unchanged"
           }
         ],
         "id": "constraint-hbm4-memory-allocation-per-accelerator",
-        "reasoning": "No new evidence arrived on how much memory each chip carries. Today's SK Hynix item, a plan for its newest memory to be about 34% of its own production, is about total output rather than any single part.",
+        "reasoning": "No new evidence arrived on how much memory each chip carries. Today's memory news is about total stock, now below ten days at Samsung and SK hynix.",
         "sources": [
           {
             "date": "2026-09-07",
-            "outlet": "digitimes.com",
+            "outlet": "Seoul Economic Daily (en.sedaily.com)",
             "tier": "secondary",
-            "title": "digitimes.com",
-            "url": "https://www.digitimes.com/news/a20260907VL207/sk-hynix-dram-hbm4-hbm.html"
+            "title": "Seoul Economic Daily (en.sedaily.com)",
+            "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days"
           }
         ],
         "status": "unchanged",
@@ -834,8 +825,8 @@
         "worsenedCount": 3
       },
       {
-        "assessedAsOf": "2026-09-07",
-        "checkCount": 2,
+        "assessedAsOf": "2026-09-08",
+        "checkCount": 3,
         "history": [
           {
             "asOf": "2026-09-06",
@@ -844,68 +835,65 @@
           {
             "asOf": "2026-09-07",
             "status": "improved"
+          },
+          {
+            "asOf": "2026-09-08",
+            "status": "worsened"
           }
         ],
         "id": "constraint-high-bandwidth-memory-and-server-memory",
-        "reasoning": "Both named suppliers are now adding output: SK Hynix targets about 34% of its own production on its newest memory by the last quarter of 2026, and Micron up to 60,000 extra wafers a month by year-end.",
+        "reasoning": "Stock at both Korean suppliers is under ten days, and 2027 demand for memory bits is forecast to outgrow supply by more than 10 percentage points, reversing this week's earlier supply news.",
         "sources": [
           {
             "date": "2026-09-07",
-            "outlet": "digitimes.com",
+            "outlet": "Seoul Economic Daily (en.sedaily.com)",
             "tier": "secondary",
-            "title": "digitimes.com",
-            "url": "https://www.digitimes.com/news/a20260907VL207/sk-hynix-dram-hbm4-hbm.html"
-          },
-          {
-            "date": "2026-09-04",
-            "outlet": "Electronic Times (ET News, English edition)",
-            "tier": "secondary",
-            "title": "Electronic Times (ET News, English edition)",
-            "url": "https://en.etnews.com/20260904200006"
+            "title": "Seoul Economic Daily (en.sedaily.com)",
+            "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days"
           }
         ],
-        "status": "improved",
+        "status": "worsened",
         "title": "High-bandwidth memory and server memory",
         "trackedSince": "2026-09",
-        "worsenedCount": 0
+        "worsenedCount": 1
       }
     ],
     "resolved": []
   },
   "schemaVersion": "1.2",
   "verdict": {
-    "answer": "Not yet. The memory makers start to move",
+    "answer": "Not yet. Ten days of memory left on the shelf",
     "chip": {
       "direction": "widening",
       "label": "Gap widening"
     },
     "confidence": "We are confident in this read",
     "question": "Is supply catching up to demand?",
-    "soWhat": "SK Hynix is pushing its newest memory toward a third of its own output, while OpenAI's latest model shows how far ahead the demand for machines still runs.",
+    "soWhat": "Korea's two big memory makers are down to under ten days of stock, and the money going into AI building is tilting sharply toward the part that is short.",
     "sources": [
       {
         "assessment": true,
         "basedOn": [
           {
             "date": "2026-09-07",
-            "outlet": "seekingalpha.com",
+            "outlet": "Seoul Economic Daily (en.sedaily.com)",
             "tier": "secondary",
-            "title": "seekingalpha.com",
-            "url": "https://seekingalpha.com/news/4640538-jensen-huang-says-agi-has-arrived-following-openais-gpt-6-astra-launch"
+            "title": "Seoul Economic Daily (en.sedaily.com)",
+            "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days"
           },
           {
-            "date": "2026-09-06",
-            "outlet": "datacenterdynamics.com",
+            "date": "2026-09-07",
+            "outlet": "Parameter.io",
             "tier": "secondary",
-            "title": "datacenterdynamics.com",
-            "url": "https://www.datacenterdynamics.com/en/news/anthropic-signed-517bn-in-compute-agreements-in-past-11-months/"
+            "title": "Parameter.io",
+            "url": "https://parameter.io/sk-hynix-skhy-shares-surge-7-as-openais-gpt-6-astra-ignites-memory-chip-rally/"
           },
           {
             "date": "2026-08-26",
-            "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+            "outlet": "IDC (blog)",
             "tier": "secondary",
-            "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
-            "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
+            "title": "IDC (blog)",
+            "url": "https://www.idc.com/resource-center/blog/smartphone-shipments-set-for-record-16-7-drop-in-2026-as-the-memory-crisis-hits-full-force/"
           }
         ]
       }

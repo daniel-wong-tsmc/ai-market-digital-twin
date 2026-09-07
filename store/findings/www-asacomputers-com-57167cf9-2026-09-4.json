@@ -1,0 +1,41 @@
+{
+  "id": "www-asacomputers-com-57167cf9-2026-09-4",
+  "statement": "No stock or availability status was rendered for any of the listed NVIDIA data-center and workstation cards on the ASA Computers page.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Missing availability text means the listed prices cannot be read as evidence that the parts are actually in stock and shippable.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Absence of stock status limits what the reseller price level can say about physical channel availability of merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "asacomputers.com",
+      "url": "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html",
+      "date": "2026-09-08",
+      "excerpt": "No explicit stock/availability status text was rendered on the page for these items.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Directly observable absence on a single reseller page; absence of text is not proof of unavailability."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "asacomputers-marketplace",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

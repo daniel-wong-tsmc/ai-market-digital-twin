@@ -1,0 +1,47 @@
+{
+  "id": "parameter-io-718c27d9-2026-09-1",
+  "statement": "KB Securities forecasts hyperscaler AI infrastructure spending near $1.3 trillion by 2027, with memory's share of that investment rising to 57% from 14% in 2025.",
+  "kind": "measured",
+  "value": {
+    "number": 1300.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "The size and composition of the AI capex pool determine both how many accelerators get bought and how much of each system dollar goes to memory rather than logic.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "mixed",
+    "mechanism": "A larger total AI infrastructure budget raises accelerator demand, while memory absorbing 57% of it compresses the budget share left for GPUs and the rest of the server."
+  },
+  "evidence": [
+    {
+      "source": "Parameter.io",
+      "url": "https://parameter.io/sk-hynix-skhy-shares-surge-7-as-openais-gpt-6-astra-ignites-memory-chip-rally/",
+      "date": "2026-09-07",
+      "excerpt": "KB Securities forecasts worldwide hyperscaler AI infrastructure spending reaching 'approximately $1.3 trillion by 2027, with memory's investment share expanding to 57% from 14% in 2025.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Forward sell-side forecast relayed by a single secondary outlet; not a company disclosure or filing."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 3; sources: Parameter.io",
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "memory",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

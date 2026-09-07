@@ -1,0 +1,43 @@
+{
+  "id": "www-thecerbatgem-com-c3245843-2026-09-1",
+  "statement": "Dell's results are reported to have reinforced NVIDIA's view that enterprise and hyperscaler spending on AI servers remains strong.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A server OEM's reported results are the nearest independent check on whether hyperscaler and enterprise AI capex is still converting into shipped systems.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Sustained AI-server orders at an OEM imply continued pull-through of merchant GPU shipments into enterprise and hyperscaler deployments."
+  },
+  "evidence": [
+    {
+      "source": "The Cerbat Gem",
+      "url": "https://www.thecerbatgem.com/2026/09/03/nvidia-nasdaqnvda-price-target-raised-to-300-00.html",
+      "date": "2026-09-03",
+      "excerpt": "On demand: the article states Dell's results 'reinforced NVIDIA's view that enterprise and hyperscaler spending on AI servers remains strong.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Qualitative characterization in a single low-tier secondary aggregator; no Dell filing figure or NVIDIA disclosure is quoted."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

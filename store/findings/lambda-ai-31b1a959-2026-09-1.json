@@ -1,0 +1,45 @@
+{
+  "id": "lambda-ai-31b1a959-2026-09-1",
+  "statement": "Lambda Cloud lists NVIDIA B200 SXM6 on-demand at $6.69-$6.99 per GPU-hour.",
+  "kind": "measured",
+  "value": {
+    "number": 6.69,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A published on-demand list rate for the current-generation Blackwell part is the reference price against which neocloud and hyperscaler rental economics are compared.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Vendor-published rental levels set the observable cost of renting Blackwell capacity; no baseline or prior level is given on the page, so this is a static level only."
+  },
+  "evidence": [
+    {
+      "source": "lambda.ai",
+      "url": "https://lambda.ai/pricing",
+      "date": "2026-09-08",
+      "excerpt": "NVIDIA B200 SXM6: $6.69-$6.99/GPU/hr.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own public list page read directly, but a single secondary source with no prior-period baseline shown."
+  },
+  "dispersion": "conflicting same-key reports: value 3.29 -> 6.69 (tol 1%); sources: lambda.ai",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "lambda-labs",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

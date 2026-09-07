@@ -1,0 +1,45 @@
+{
+  "id": "vast-ai-7b70a7a6-2026-09-1",
+  "statement": "Vast.ai live marketplace shows B200 Blackwell 192GB at a median $6.63 per GPU-hour, with offers starting from $1.25.",
+  "kind": "measured",
+  "value": {
+    "number": 6.63,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "The median live offer for the newest Blackwell part shows where marketplace supply actually clears for current-generation capacity.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Live marketplace medians are the observable clearing level for rented Blackwell capacity; the page states no prior-period baseline, so this is a static level."
+  },
+  "evidence": [
+    {
+      "source": "vast.ai",
+      "url": "https://vast.ai/pricing",
+      "date": "2026-09-08",
+      "excerpt": "B200 Blackwell 192GB VRAM: 'from$1.25/hr median $6.63/hr'.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Read directly from the marketplace's own live price grid, but a single secondary source and offers update hourly."
+  },
+  "dispersion": "conflicting same-key reports: value 10.0 -> 6.63 (tol 1%); sources: vast.ai",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

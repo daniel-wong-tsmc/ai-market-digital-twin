@@ -1,0 +1,35 @@
+{
+  "seriesName": "SK hynix quarterly operating profit",
+  "unit": "trillion Korean won",
+  "form": "columns",
+  "sourceName": "SK hynix Newsroom",
+  "points": [
+    {
+      "label": "Q3 2025",
+      "value": 11.3834,
+      "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
+      "publishedAt": "2025-10-29"
+    },
+    {
+      "label": "Q4 2025",
+      "value": 19.1696,
+      "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
+      "publishedAt": "2026-01-28"
+    },
+    {
+      "label": "Q1 2026",
+      "value": 37.6103,
+      "sourceUrl": "https://news.skhynix.com/en/q1-2026-business-results/",
+      "publishedAt": "2026-04-23"
+    },
+    {
+      "label": "Q2 2026",
+      "value": 60.5426,
+      "sourceUrl": "https://news.skhynix.com/en/q2-2026-business-results/",
+      "publishedAt": "2026-07-29"
+    }
+  ],
+  "pair": false,
+  "notes": "These are actual reported quarterly results published by SK hynix itself, not forecasts, so they show the profit shift toward memory makers as it has already happened rather than restating KB Securities' 2027 projection. All four points come from SK hynix's own newsroom (one site), each quarter on its own results page; the Q4 2025 figure is taken from the FY25 results announcement, which reports the quarter alongside the full year. Operating profit is company-wide, covering all of SK hynix's memory business (HBM, DRAM, NAND), not an AI-only line, and the sharp rise reflects both higher volumes and steep memory price increases. Figures are in Korean won as published; no currency conversion was applied. KB Securities' own 14% (2025) / 40% (2026) / 57% (2027) memory-share numbers were found on SDxCentral but are forecasts, so they were not used as the series.",
+  "bulletIndex": 3
+}

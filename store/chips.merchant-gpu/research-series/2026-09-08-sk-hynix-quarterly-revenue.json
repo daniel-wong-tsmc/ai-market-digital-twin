@@ -1,0 +1,35 @@
+{
+  "seriesName": "SK hynix quarterly revenue",
+  "unit": "trillion South Korean won",
+  "form": "columns",
+  "sourceName": "SK hynix Newsroom",
+  "points": [
+    {
+      "label": "Q3 2025",
+      "value": 24.4489,
+      "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-3q25-financial-results/",
+      "publishedAt": "2025-10-29"
+    },
+    {
+      "label": "Q4 2025",
+      "value": 32.8267,
+      "sourceUrl": "https://news.skhynix.com/en/sk-hynix-announces-fy25-financial-results/",
+      "publishedAt": "2026-01-28"
+    },
+    {
+      "label": "Q1 2026",
+      "value": 52.5763,
+      "sourceUrl": "https://news.skhynix.com/en/q1-2026-business-results/",
+      "publishedAt": "2026-04-23"
+    },
+    {
+      "label": "Q2 2026",
+      "value": 79.3187,
+      "sourceUrl": "https://news.skhynix.com/en/q2-2026-business-results/",
+      "publishedAt": "2026-07-29"
+    }
+  ],
+  "pair": false,
+  "notes": "All four numbers are reported actuals taken from SK hynix's own quarterly results releases on news.skhynix.com (one release per point, same site throughout); no forecasts or estimates are included. The releases state the figures as, e.g., 'recorded 24.4489 trillion won in revenues' (3Q25), 'Reports 4Q25 revenue of 32.8267 trillion won' (4Q25), 'recorded 52.5763 trillion won in revenue' (1Q26), and 79.3187 trillion won for 2Q26. Caveat on fit: this is revenue at one of the two named memory makers, not an inventory measure. It contextualizes rather than proves the bullet -- revenue more than tripled in three quarters mainly because memory prices and AI-related demand (HBM, high-capacity server DRAM) rose sharply, which is the same squeeze the 'under 10 days of stock' claim describes. The 'under 10 days' inventory figure itself comes from a single KB Securities note reported on 2026-09-07; no publisher carries a multi-period published series of inventory days for Samsung and SK hynix, so no honest same-site chart of that metric exists. Revenue is in won and is not adjusted for currency moves; it also blends DRAM, NAND and HBM.",
+  "bulletIndex": 1
+}

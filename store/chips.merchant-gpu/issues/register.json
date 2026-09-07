@@ -1,19 +1,19 @@
 {
- "asOf": "2026-09-07",
+ "asOf": "2026-09-08",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 15,
+   "checkCount": 16,
    "id": "dim-bottleneck",
-   "improvedStreak": 1,
+   "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-07",
+    "assessedAsOf": "2026-09-08",
     "claimFindingIds": [
-     "www-digitimes-com-bcc418d8-2026-09-1",
-     "www-newegg-com-c6e5a7e1-2026-09-2"
+     "en-sedaily-com-08f31bef-2026-09-1",
+     "en-sedaily-com-08f31bef-2026-09-2"
     ],
-    "reasoning": "SK Hynix is speeding its newest memory toward about 34% of its own production by the last quarter of 2026, the first supply-side move in days, though shop listings show H200 parts still out of stock.",
-    "status": "improved"
+    "reasoning": "Memory stock at Samsung and SK hynix has fallen below ten days of supply, and demand for memory bits is forecast to grow more than 10 percentage points faster than supply in 2027.",
+    "status": "worsened"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -24,19 +24,19 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 10
+   "worsenedCount": 11
   },
   {
-   "checkCount": 15,
+   "checkCount": 16,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-07",
+    "assessedAsOf": "2026-09-08",
     "claimFindingIds": [
-     "seekingalpha-com-669672dd-2026-09-1",
-     "seekingalpha-com-669672dd-2026-09-2"
+     "lambda-ai-31b1a959-2026-09-1",
+     "en-sedaily-com-08f31bef-2026-09-1"
     ],
-    "reasoning": "No new evidence about rival chips arrived today. The only related item runs the other way: OpenAI's newest model was trained on more than 100,000 NVIDIA rack systems.",
+    "reasoning": "No new evidence about rival chips arrived today. The day's fresh items are rental prices, with Lambda's B200 at $6.69 to $6.99 an hour, and Korean memory stock below ten days.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
@@ -51,39 +51,39 @@
    "worsenedCount": 8
   },
   {
-   "checkCount": 14,
+   "checkCount": 15,
    "id": "constraint-stacked-memory-and-server-dram",
-   "improvedStreak": 3,
+   "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-07",
+    "assessedAsOf": "2026-09-08",
     "claimFindingIds": [
-     "www-digitimes-com-bcc418d8-2026-09-1",
-     "en-etnews-com-d7f78774-2026-09-1"
+     "en-sedaily-com-08f31bef-2026-09-1",
+     "parameter-io-718c27d9-2026-09-3"
     ],
-    "reasoning": "SK Hynix aims to have its newest memory at about 34% of its own production by the last quarter of 2026, on top of Micron's plan to add up to 60,000 stacked-memory wafers a month by year-end.",
-    "status": "improved"
+    "reasoning": "Korean makers are down to under ten days of memory stock, and stacked memory is reported to need roughly three times the wafer capacity of ordinary memory, so making more of it takes supply away from the rest.",
+    "status": "worsened"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "HBM4 and server DRAM supply",
+   "title": "HBM4 and CoWoS packaging supply",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "HBM4 and server DRAM supply"
+    "label": "HBM4 and CoWoS packaging supply"
    },
-   "worsenedCount": 6
+   "worsenedCount": 7
   },
   {
-   "checkCount": 12,
+   "checkCount": 13,
    "id": "constraint-hbm4-memory-allocation-per-accelerator",
-   "improvedStreak": 3,
+   "improvedStreak": 4,
    "latest": {
-    "assessedAsOf": "2026-09-07",
+    "assessedAsOf": "2026-09-08",
     "claimFindingIds": [
-     "www-digitimes-com-bcc418d8-2026-09-1"
+     "en-sedaily-com-08f31bef-2026-09-1"
     ],
-    "reasoning": "No new evidence arrived on how much memory each chip carries. Today's SK Hynix item, a plan for its newest memory to be about 34% of its own production, is about total output rather than any single part.",
+    "reasoning": "No new evidence arrived on how much memory each chip carries. Today's memory news is about total stock, now below ten days at Samsung and SK hynix.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
@@ -98,17 +98,17 @@
    "worsenedCount": 3
   },
   {
-   "checkCount": 2,
+   "checkCount": 3,
    "id": "constraint-high-bandwidth-memory-and-server-memory",
-   "improvedStreak": 1,
+   "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-07",
+    "assessedAsOf": "2026-09-08",
     "claimFindingIds": [
-     "www-digitimes-com-bcc418d8-2026-09-1",
-     "en-etnews-com-d7f78774-2026-09-1"
+     "en-sedaily-com-08f31bef-2026-09-1",
+     "en-sedaily-com-08f31bef-2026-09-2"
     ],
-    "reasoning": "Both named suppliers are now adding output: SK Hynix targets about 34% of its own production on its newest memory by the last quarter of 2026, and Micron up to 60,000 extra wafers a month by year-end.",
-    "status": "improved"
+    "reasoning": "Stock at both Korean suppliers is under ten days, and 2027 demand for memory bits is forecast to outgrow supply by more than 10 percentage points, reversing this week's earlier supply news.",
+    "status": "worsened"
    },
    "openedAsOf": "2026-09",
    "reopenedAsOf": [],
@@ -119,7 +119,7 @@
     "kind": "binding-constraint",
     "label": "High-bandwidth memory and server memory"
    },
-   "worsenedCount": 0
+   "worsenedCount": 1
   }
  ],
  "schemaVersion": 1

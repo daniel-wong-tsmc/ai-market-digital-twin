@@ -1,0 +1,46 @@
+{
+  "id": "www-trendforce-com-872a5a43-2026-09-2",
+  "statement": "Premium Samsung Electro-Mechanics high-capacitance MLCCs sourced through DigiKey are reaching around 40 weeks, or nearly ten months.",
+  "kind": "measured",
+  "value": {
+    "number": 40.0,
+    "unit": "weeks"
+  },
+  "trend": "rising",
+  "why": "A ten-month wait at the premium end means spot buyers cannot close gaps in their bill of materials within any current build cycle.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.electrical-equipment",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Distributor lead times near forty weeks on top-specification passives push AI-server completion dates out and force redesign or downgrade to lower-specification parts."
+  },
+  "evidence": [
+    {
+      "source": "TrendForce",
+      "url": "https://www.trendforce.com/news/2026/08/18/news-mlcc-lead-times-diverge-as-high-end-products-stretch-to-5-10-months-on-ai-demand-tightness-may-extend-into-2027/",
+      "date": "2026-08-18",
+      "excerpt": "Premium products sourced via distributor DigiKey -- specifically Samsung Electro-Mechanics high-capacitance MLCCs -- are reaching 'around 40 weeks, or nearly 10 months'.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary research article reporting one distributor's quoted lead time; not a supplier disclosure."
+  },
+  "dispersion": "conflicting same-key reports: value 20.0 -> 40.0 (tol 1%); sources: TrendForce",
+  "asOf": "2026-09",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "multi",
+  "observedAt": "2026-08-18",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

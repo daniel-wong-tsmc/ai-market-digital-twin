@@ -1,0 +1,42 @@
+{
+  "id": "lambda-ai-31b1a959-2026-09-4",
+  "statement": "Lambda does not publish hourly prices for reserved 1-Click Clusters on B200 or H100, directing buyers to contact sales instead.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Withdrawing reserved-capacity pricing from public view is consistent with a provider negotiating scarce large-cluster capacity case by case rather than listing it.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Quote-only pricing for multi-node reserved clusters reduces price transparency at the large-contract end of the rental market, where the marginal GPU demand actually clears."
+  },
+  "evidence": [
+    {
+      "source": "lambda.ai",
+      "url": "https://lambda.ai/pricing",
+      "date": "2026-09-08",
+      "excerpt": "The page does not list specific hourly prices for '1-Click Clusters' with B200 or H100 systems (reserved capacity); it directs users to 'Talk to our team' for pricing on those offerings.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Directly observable absence on the vendor's own page, but a single secondary source and the reason for the omission is not stated."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "lambda-labs",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

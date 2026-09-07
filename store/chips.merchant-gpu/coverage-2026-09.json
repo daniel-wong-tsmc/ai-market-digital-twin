@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-09",
-  "capturedAt": "2026-09-07T12:36:40Z",
+  "capturedAt": "2026-09-07T16:24:54Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
@@ -13,6 +13,14 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "amd-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
       "paywalledNote": null
     },
     {
@@ -57,6 +65,14 @@
     },
     {
       "type": "source",
+      "id": "channel-checks",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Open-web channel checks: lead times, inventory notes from distributors' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
       "id": "bis-export-controls",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -73,11 +89,27 @@
     },
     {
       "type": "source",
+      "id": "vendor-pr-trade-press",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Vendor press releases + trade press on merchant-GPU design wins' was not fetched. URL patterns: ['nvidianews.nvidia.com', 'ir.amd.com/news-events', 'tomshardware.com', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
       "id": "semianalysis",
       "priority": "required",
       "acquisitionStatus": "paywalled",
       "reason": "Source 'SemiAnalysis channel-check lead-time data (deep tier)' requires a paid license (costUsd=0.0).",
       "paywalledNote": "SemiAnalysis publishes free headlines; deep channel-check lead-time data is behind a subscription. Paywalled portions are inventoried + labeled estimate, never scraped (Part 22)."
+    },
+    {
+      "type": "source",
+      "id": "gpu-marketplaces",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'GPU marketplaces / resale listings (secondary-market spot price)' was not fetched. URL patterns: ['ebay.com', 'amazon.com', 'newegg.com']",
+      "paywalledNote": null
     },
     {
       "type": "source",
@@ -94,29 +126,37 @@
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Frontier model release and funding trackers (company newsrooms + industry press)' was not fetched. URL patterns: ['openai.com', 'anthropic.com', 'blog.google', 'techcrunch.com', 'semianalysis.com']",
       "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "upstream-component-leadtimes",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
+      "paywalledNote": null
     }
   ],
   "gapCounts": {
-    "total": 11,
-    "source": 11,
+    "total": 16,
+    "source": 16,
     "indicator": 0,
-    "required": 11,
+    "required": 16,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://247wallst.com/investing/2026/09/02/anthropic-just-committed-35-billion-to-compute-it-has-not-raised-the-money-for/",
-    "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live",
-    "https://seekingalpha.com/news/4640538-jensen-huang-says-agi-has-arrived-following-openais-gpt-6-astra-launch",
-    "https://siliconanalysts.com/newsletter/qual-watch/2026-08-25",
-    "https://www.datacenterdynamics.com/en/news/anthropic-signed-517bn-in-compute-agreements-in-past-11-months/",
-    "https://www.digitimes.com/news/a20260907VL207/sk-hynix-dram-hbm4-hbm.html",
-    "https://www.fool.com/investing/2026/09/04/prediction-vera-rubin-is-about-to-become-a-20-bil/",
-    "https://www.freepressjournal.in/tech/inspur-group-allegedly-bypassed-us-ai-chip-curbs-sending-56-billion-in-advanced-technology-to-china-via-its-aivres-subsidiary",
-    "https://www.newegg.com/p/pl?d=nvidia+h200",
-    "https://www.runpod.io/pricing"
+    "https://dallasexpress.com/state/south-korea-says-22-3b-texas-ai-power-deal-is-not-final-as-talks-continue/",
+    "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days",
+    "https://lambda.ai/pricing",
+    "https://parameter.io/sk-hynix-skhy-shares-surge-7-as-openais-gpt-6-astra-ignites-memory-chip-rally/",
+    "https://vast.ai/pricing",
+    "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html",
+    "https://www.idc.com/resource-center/blog/smartphone-shipments-set-for-record-16-7-drop-in-2026-as-the-memory-crisis-hits-full-force/",
+    "https://www.thecerbatgem.com/2026/09/03/nvidia-nasdaqnvda-price-target-raised-to-300-00.html",
+    "https://www.tradingkey.com/analysis/stocks/us-stocks/262154185-jensenhuang-agi-openaiastra-benchmarks-400kgpu-deployment-tradingkey",
+    "https://www.trendforce.com/news/2026/08/18/news-mlcc-lead-times-diverge-as-high-end-products-stretch-to-5-10-months-on-ai-demand-tightness-may-extend-into-2027/"
   ],
   "judgedIndicatorIds": [
     "D2",

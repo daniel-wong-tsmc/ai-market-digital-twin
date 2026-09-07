@@ -2,8 +2,8 @@
   "scope": "category:chips.merchant-gpu",
   "asOf": "2026-09",
   "mode": "daily",
-  "capturedAt": "2026-09-07T12:22:49Z",
-  "runDir": "work/daily-2026-09-07",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "runDir": "work/daily-2026-09-08",
   "unattended": true,
   "stages": [
     {
@@ -25,87 +25,102 @@
       "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
       "status": "done",
       "manifestRef": "manifests/chips.merchant-gpu.json",
-      "scorecard": "store/chips.merchant-gpu/2026-09-v6.json",
-      "dmi": 6.327,
-      "smi": 0.053,
-      "priorScorecard": "store/chips.merchant-gpu/2026-09-v5.json",
-      "priorDmi": 6.44,
-      "priorSmi": -0.1,
+      "scorecard": "store/chips.merchant-gpu/2026-09-v7.json",
+      "dmi": 6.267,
+      "smi": -0.213,
+      "priorScorecard": "store/chips.merchant-gpu/2026-09-v6.json",
+      "priorDmi": 6.327,
+      "priorSmi": 0.053,
       "observations": [
-        "Single-instance run, 20:22-local scheduled fire (capturedAt 12:22:49Z). Tree clean and main == origin/main at start; no work/daily-2026-09-07 claim existed. Every stage ran in this session.",
-        "DMI 6.44 -> 6.33 (-0.11); SMI -0.10 -> +0.05 (+0.15). Binding constraint per report: HBM4 and server DRAM supply. Issues register opened 'constraint-stacked-memory-and-server-dram' (open 5).",
-        "Gather: 3 web-gatherer subagents, one round, 10 blobs (1 primary: ir.amd.com AMD/Cisco/HUMAIN release; 9 secondary). gather-assemble 0 duplicate URLs; L1 dropped 0 known. HuggingNews latest (ai-compute-chips) + 6 detail fetches supplied the social leads; gatherers chased them to press pages. The Dell/CoreWeave 'first production Vera Rubin racks' lead resolved to the already-stored 2026-06-01 bring-up event and was not blobbed.",
-        "Blob 10 (Jensen Huang AGI/Astra remarks) carries an x.com URL with source seekingalpha.com (the gatherer chased the tweet to a Seeking Alpha write-up); ingest stamped it secondary. Left as the gatherer wrote it.",
-        "Extraction: 25 findings, 0 dropped; UNREGISTERED-ENTITY 3 (anthropic, market, openai). L2 new 5 / update 13 / duplicate 7. Corpus merged 489 (471 aged, 155 faded).",
-        "Judge 3/3 clean first pass (no voice-lint / sufficiency lines). Thesis clean first pass: 96 applied (42 reaffirmed / 46 strengthened / 12 weakened), 5 deferred by the corroboration rule (secondary-only reversal < 3 publishers), corroborated reversals applied on vendor-financed-demand-circularity, neocloud-gpu-buyers-grow-revenue-but-deepen-losses, memory-supply-is-the-new-choke-point-on-accelerator-shipments; 3 new provisional theses proposed (one-lab-s-compute-promises-outrun-its-own-spending-plan, china-assembles-a-home-made-stack-from-chip-to-memory, chip-access-now-depends-on-who-owns-the-buyer). Implication clean first pass, 8 lines.",
-        "Narrator: gate retry 1 (six related-doc outlet names prettified instead of copied from docPool; same brain rewrote its file), then citation audit flagged 'uncited number 400000' in scene 1 / bullet 0 -> narrator re-dispatched once per (e4), re-gated clean, audit clean (claims 20, flagged 0). Issues-update ran after the FIRST clean gate (assessed 5) and reported already-recorded on the re-run after the audit rewrite; the register reflects the first story version's assessments.",
-        "chart-research: 3 prompts emitted, 3 candidates, 3 ACCEPTED and verified (NVIDIA data-center revenue by fiscal quarter from nvidianews.nvidia.com; SK hynix quarterly revenue from its newsroom; H100 vs H200 on-demand rental price pair from getdeploying.com). First cycle with all bullets charted.",
-        "chart-fetch: nvdaDataCenterRevenue +0 points (in window until 09-09); staleCalendar [amdDataCenterRevenue] as every cycle; gpuSpotPrice skipped (not due).",
+        "Scheduled fire at 00:04 local 2026-09-08 (capturedAt 2026-09-07T16:06:10Z - the UTC date is still 09-07; the LOCAL calendar day is 09-08 and the story date is 2026-09-08). Tree held the COMPLETE but uncommitted 09-07 run (v6), dead 3 h in its final pytest/commit step; rescue-committed as ed5bd8e before this cycle's store writes (see deviations). No work/daily-2026-09-08 claim existed; every stage of this cycle ran in this session.",
+        "DMI 6.33 -> 6.27 (-0.06); SMI +0.05 -> -0.21 (-0.27). Binding constraint per report: HBM4 and CoWoS packaging supply. Issues register: issues-open reported opened ['constraint-stacked-memory-and-server-dram'] (already opened 09-07; register stays at open 5).",
+        "Gather: 3 web-gatherer subagents, one round of 9 blobs + one reader-tool round-trip (vast.ai/pricing via agent-reach, blob 33) = 10 blobs, 0 primary / 10 secondary. gather-assemble 0 duplicate URLs; L1 dropped 0 known. HuggingNews latest (ai-compute-chips) + 3 detail fetches (the two 09-07-dated stories and the FT smartphone-memory story) supplied the social leads; gatherers chased them to press/analyst pages. Blob 21 (IDC) was first written with a month-only date; the same gatherer re-dated it 2026-08-26 from the page, so it and the TrendForce MLCC piece (08-18) are the two pursuedDespiteAge entries.",
+        "No filing or official-IR page kept this cycle: gather_priority light for nvda-earnings / amd-earnings / nvda-10k-risk-factors; no nvidianews/ir.amd.com/intc.com/BIS item dated in the 7-day window was found by the gatherers.",
+        "Extraction: 34 findings, 0 dropped; UNREGISTERED-ENTITY 4 (asacomputers-marketplace, market, memory, multi). L2 new 3 / update 13 / duplicate 18. Corpus merged 503 (487 aged, 157 faded); 4 intra-batch duplicates dropped by the corpus merge.",
+        "Judge: sample 3 rejected once by voice-lint (acronym 'HPE' in momentum.rationale); that one sample was re-dispatched with 'fix these violations; change nothing else' and the pipeline passed on attempt 2. Samples 1-2 clean first pass; no sufficiency lines; no bypass.",
+        "Thesis clean first pass: 102 applied (47 strengthened / 35 reaffirmed / 22 weakened), 2 deferred by the corroboration rule (prior-generation-systems-stay-in-service-on-price, investors-now-treat-bigger-ai-budgets-as-a-cost), 3 new provisional theses proposed (memory-buffers-have-run-down-to-almost-nothing, power-plants-are-now-built-specifically-for-ai-sites, one-training-run-now-fills-a-hundred-thousand-systems), 1 promoted to registered (agent-style-workloads-tilt-cloud-buying-toward-general-purpose-servers). Implication clean first pass, 8 lines.",
+        "Narrator: gate retry 1 (bullet 1 carried no digit - 'under ten days' - the same brain rewrote it as '10 days'), then clean; issues-update assessed 5 / notAssessed 0; citation audit clean first pass (claims 20, flagged 0).",
+        "chart-research: 3 prompts emitted, 3 candidates, 3 ACCEPTED and verified (SK hynix quarterly revenue and quarterly operating profit from news.skhynix.com; Lambda on-demand price ladder by GPU model from lambda.ai/pricing).",
+        "chart-fetch: first invocation used --as-of 2026-09 as the skill text reads and the verb refused it ('as_of_date must be an ISO date'); re-run with 2026-09-08: nvdaDataCenterRevenue +0 points, gpuSpotPrice skipped (not due), staleCalendar [amdDataCenterRevenue] as every cycle. Skill text for (7d) says <asOf>; the verb wants the full cycle day - doc nit for an interactive session.",
+        "F135 run-marker for v7 records storyDate 2026-09-07 (derived from the UTC capturedAt) while the story artifact written this cycle is 2026-09-08 (local day). Bookkeeping only; not hand-edited.",
         "Two pre-existing tests in tests/test_handoff_integrity.py fail on the COMMITTED HANDOFF.md wording (since 09-01) - unrelated to store/; left for an interactive session."
       ],
       "gather": {
         "documentsGathered": 10,
-        "primary": 1,
-        "secondary": 9,
+        "primary": 0,
+        "secondary": 10,
         "duplicates": 0,
         "dropped": [],
         "droppedKnown": 0,
         "droppedKnownDetail": [],
         "rounds": 1,
-        "cap": "maxDocuments=10 (daily cap), maxSubagentsPerRound=3, one round: slices NVIDIA-headline/forward (4 blobs: 10-13), memory/export/AMD-Intel (3: 20-22), price+lead-time (3: 30-32). Cap reached exactly; no second round.",
+        "cap": "maxDocuments=10 (daily cap), maxSubagentsPerRound=3: slices NVIDIA-headline/forward (3 blobs: 10-12 of a 4-blob budget), memory/export/AMD-Intel (3: 20-22), price+lead-time (3: 30-32) + one reader-tool round-trip for vast.ai (blob 33). Cap reached exactly.",
         "topUp": true,
-        "topUpReason": "store coverage present (471 findings aged in, 155 faded; not covered: D6, gpuSpotPrice) -> gather capped at 10, price slice aimed at D6/gpuSpotPrice",
-        "earningsWindow": "gather_priority on 2026-09-07: nvda-earnings, amd-earnings, nvda-10k-risk-factors all light. No filing fetched this cycle.",
+        "topUpReason": "store coverage present (487 findings aged in, 157 faded; not covered: D6, gpuSpotPrice) -> gather capped at 10, price slice aimed at D6/gpuSpotPrice (Lambda + Vast.ai on-demand, ASA Computers H200 card price)",
+        "earningsWindow": "gather_priority on 2026-09-08: nvda-earnings, amd-earnings, nvda-10k-risk-factors all light. No filing fetched this cycle.",
         "skipped": [
-          "eBay H100 search: HTTP 403 (bot-blocked) - Newegg H200 listing used for gpuSpotPrice instead",
-          "theinformation.com Anthropic $517B article: paywalled 403 - datacenterdynamics.com secondary used (search-snippet content only, itself 403 on direct fetch)",
-          "tech-insider.org Inspur/Aivres piece: 403 - freepressjournal.in (NYT via IANS) used; NYT original paywalled, not fetched",
-          "datacenterdynamics.com / convergedigest.com Dell Vera Rubin rack items: 403; story resolved to the stored 2026-06-01 CoreWeave bring-up - not blobbed",
-          "Intel Gaudi/data-center weekly search: not run, memory/export gatherer's 3-blob budget spent",
-          "vast.ai / coreweave.com / lambda pricing pages: not fetched, price-class cap of 2 already used (RunPod + Newegg)",
-          "digitimes.com SK Hynix article paywalled beyond the lede; gatherer flagged in-blob that the 'overtakes Samsung' social claim could not be confirmed",
-          "TrendForce press pages: no in-window lead-time story; 08-17 liquid-cooling release not kept",
+          "wccftech.com Vera Rubin memory-price / Bernstein rack-BoM articles: HTTP 403 on WebFetch (mirrors also 403)",
+          "NVIDIA/IREN 5 GW partnership: dated 2026-05-07, not a fresh update - not kept",
+          "TrendForce Rubin-delay piece (04-08) and siliconanalysts.com CoWoS/HBM4 newsletter (08-25): outside the window and already covered in store - not re-derived",
+          "hyperscaler capex figures surfaced in search all trace to August-or-earlier guidance already in store; no September revision found",
+          "techtimes.com HBM4 supply-crunch article: HTTP 403 - Seoul Economic Daily used instead",
+          "digitimes.com a20260907VL217 (Samsung/SK Hynix DRAM-HBM4 demand): paywalled beyond headline - corroborator citation only, not blobbed",
+          "siliconanalysts.com HBM4 capacity-bottleneck page: undated aggregator, figures uncorroborated - not blobbed",
+          "AMD MI400/Helios and Intel Gaudi/Jaguar Shores: no item dated in the 09-01..09-08 window beyond store coverage - budget not spent",
+          "Federal Register / bis.doc.gov: no notice dated this week found",
+          "Reuters original wire on the Korea-Texas $22.3B gas plant: not directly fetchable - Dallas Express + oilprice.com used",
+          "amazon.com H100 listing B0CMJCD2HG: HTTP 500 - ASA Computers reseller page used for gpuSpotPrice",
+          "coreweave.com / nebius.com / hyperstack pricing pages: not fetched, price-class cap reached (Lambda + Vast.ai)",
           "last30days discovery: not run this cycle (see deviations)",
           "expectedSource trendforce-gpu-tracker / semianalysis: manifest is_paywalled=true - coverage gap, never fetched (standing)"
         ],
         "pursuedDespiteAge": [
           {
-            "ref": "https://siliconanalysts.com/newsletter/qual-watch/2026-08-25",
-            "date": "2026-08-25",
+            "ref": "https://www.trendforce.com/news/2026/08/18/news-mlcc-lead-times-diverge-as-high-end-products-stretch-to-5-10-months-on-ai-demand-tightness-may-extend-into-2027/",
+            "date": "2026-08-18",
+            "ageDays": 21,
+            "reason": "no lead-time article dated within the 7-day sweep surfaced for GPU/CoWoS/HBM/MLCC channel checks; this dated TrendForce piece carries verbatim week/month MLCC lead-time figures for the upstreamLeadTimes metric and no fresher equivalent was found"
+          },
+          {
+            "ref": "https://www.idc.com/resource-center/blog/smartphone-shipments-set-for-record-16-7-drop-in-2026-as-the-memory-crisis-hits-full-force/",
+            "date": "2026-08-26",
             "ageDays": 13,
-            "reason": "no in-window trade-press piece carried concrete CoWoS/HBM lead-time figures; this issue has verbatim sourced 52-78 week CoWoS lead times for a slow-moving, unresolved constraint"
+            "reason": "the primary analyst source behind the 09-05 FT social lead ('AI memory demand cuts smartphone shipments 17%'); kept as the publisher's own page rather than a paywalled FT restatement"
           }
         ],
         "huggingnewsFallback": [],
-        "licensedSources": [],
-        "huggingnews": "latest (ai-compute-chips, 1 ok) + 6 detail fetches (fetch-requests-hn-latest.json / -detail.json); every lead was a social post, chased to press/official pages; none ingested as fallback"
+        "licensedSources": [
+          "trendforce.com"
+        ],
+        "huggingnews": "latest (ai-compute-chips, 1 ok) + 3 detail fetches (fetch-requests-hn-latest.json / -detail.json); every lead was a social post, chased to press/analyst pages; none ingested as fallback"
       },
       "corpus": {
-        "storeInWindow": 471,
-        "faded": 155,
-        "freshNew": 5,
+        "storeInWindow": 487,
+        "faded": 157,
+        "freshNew": 3,
         "freshUpdate": 13,
-        "freshDuplicate": 7,
-        "merged": 489,
+        "freshDuplicate": 18,
+        "merged": 503,
         "artifacts": [
-          "work/daily-2026-09-07/corpus-coverage.json",
-          "work/daily-2026-09-07/corpus-findings.json",
-          "work/daily-2026-09-07/deduped-fresh.json",
-          "work/daily-2026-09-07/corpus-report.json"
+          "work/daily-2026-09-08/corpus-coverage.json",
+          "work/daily-2026-09-08/corpus-findings.json",
+          "work/daily-2026-09-08/deduped-fresh.json",
+          "work/daily-2026-09-08/corpus-report.json"
         ]
       },
       "dedupDaily": {
-        "new": 5,
+        "new": 3,
         "update": 13,
-        "duplicate": 7,
-        "report": "store/chips.merchant-gpu/dedup-2026-09-07.json"
+        "duplicate": 18,
+        "report": "store/chips.merchant-gpu/dedup-2026-09-08.json"
       },
       "unregisteredEntities": {
-        "count": 3,
+        "count": 4,
         "names": [
-          "anthropic",
+          "asacomputers-marketplace",
           "market",
-          "openai"
+          "memory",
+          "multi"
         ]
       },
       "webReach": {
@@ -140,21 +155,21 @@
         }
       },
       "answers": {
-        "extract": "work/daily-2026-09-07/extract-answer.json",
-        "judge": "work/daily-2026-09-07/judge-answer.json",
-        "thesis": "work/daily-2026-09-07/thesis-answer.json",
-        "implication": "work/daily-2026-09-07/implication-answer.json",
-        "narrator": "work/daily-2026-09-07/narrator-answer.json"
+        "extract": "work/daily-2026-09-08/extract-answer.json",
+        "judge": "work/daily-2026-09-08/judge-answer.json",
+        "thesis": "work/daily-2026-09-08/thesis-answer.json",
+        "implication": "work/daily-2026-09-08/implication-answer.json",
+        "narrator": "work/daily-2026-09-08/narrator-answer.json"
       },
       "category": "done",
-      "thesis": "done (clean on attempt 1: 96 judgments applied - 42 reaffirmed / 46 strengthened / 12 weakened; 5 deferred secondary-only reversals; 3 new provisional theses proposed)",
+      "thesis": "done (clean on attempt 1: 102 judgments applied - 47 strengthened / 35 reaffirmed / 22 weakened; 2 deferred secondary-only reversals; 3 new provisional theses proposed; 1 promoted to registered)",
       "implication": "done (clean on attempt 1; 8 lines)",
-      "narrator": "done (gate retry 1: outlet names; citation-audit retry 1: uncited number 400000; clean thereafter)",
-      "issues-open": "done (opened 1: constraint-stacked-memory-and-server-dram; open 5)",
-      "issues-update": "done (assessed 5, notAssessed 0, resolved []; recorded from the first gate-clean story version - the audit-driven rewrite reported already-recorded)",
-      "citation-audit": "clean on attempt 2 (claims 20, flagged 0, skipped 0; attempt 1 flagged 400000 in scene 1 / bullet 0)",
-      "write-back": "done (18 findings routed to 7 pages; wiki-lint exit 0)",
-      "coverage": "done (store/chips.merchant-gpu/coverage-2026-09.json: 11 gaps - 11 source, 0 indicator, 11 required, 0 waived)",
+      "narrator": "done (gate retry 1: bullet 1 had no digit; clean on attempt 2)",
+      "issues-open": "done (CLI reported opened ['constraint-stacked-memory-and-server-dram'] - already open since 09-07; open 5)",
+      "issues-update": "done (assessed 5, notAssessed 0, resolved [])",
+      "citation-audit": "clean on attempt 1 (claims 20, flagged 0, skipped 0)",
+      "write-back": "done (16 findings routed to 6 pages; wiki-lint exit 0)",
+      "coverage": "done (store/chips.merchant-gpu/coverage-2026-09.json: 16 gaps - 16 source, 0 indicator, 16 required, 0 waived)",
       "stageStatuses": {
         "category": "done",
         "thesis": "done",
@@ -167,28 +182,28 @@
         "main": "deferred"
       },
       "gates": {
-        "voiceLint": "judge: all 3 samples clean first pass. implication: clean first pass. narrator: 1 structural retry (outlet names), no lint line.",
+        "voiceLint": "judge: sample 3 rejected once (acronym 'HPE'), re-dispatched alone, clean on attempt 2; samples 1-2 clean. implication: clean first pass. narrator: 1 structural retry (bullet digit), no lint line.",
         "sufficiency": "clean",
         "bypasses": 0,
-        "judgeRetry": "0"
+        "judgeRetry": "1 (sample 3 only, voice-lint)"
       }
     }
   ],
   "pricePull": {
     "result": "done",
-    "rows": 890,
+    "rows": 882,
     "perProvider": {
       "Azure": 682,
       "AWS": 53,
       "RunPod": 83,
-      "Vast.ai": 52,
+      "Vast.ai": 44,
       "CoreWeave": 20,
       "Lambda": 0
     },
     "failed": [],
-    "snapshot": "gpu_agent/data/leasing_snapshots/gpu_prices-2026-09-07.csv",
-    "wallSeconds": 55,
-    "note": "Lambda returned 0 rows but reported no failure (same as 09-01, 09-04, 09-05, 09-06)"
+    "snapshot": "gpu_agent/data/leasing_snapshots/gpu_prices-2026-09-08.csv",
+    "wallSeconds": 59,
+    "note": "Lambda returned 0 rows but reported no failure (same as 09-01, 09-04, 09-05, 09-06, 09-07)"
   },
   "priceSync": "done (written gpuSpotPrice 12, gpuRentalOnDemand 2, gpuRentalSpot 2, gpuRental1yr 17; expected 'stale price folder' hardware-price warning persists)",
   "seriesRefresh": {
@@ -201,22 +216,23 @@
     "note": "reader (web-gatherer type, no Bash) returned an empty envelope: the median-of-6-volume-rates / median-of-14-price-rates basket behind the stored 153.2581 is not a disclosed list, so the construction cannot be reproduced; --ingest exit 0, nothing written (same undisclosed-basket gap as every prior cycle)."
   },
   "v2Shadow": "stamped",
-  "chartFetch": "done (fetched nvdaDataCenterRevenue +0 points; skipped gpuSpotPrice not due; staleCalendar [amdDataCenterRevenue] - expected, manifest needs AMD's next print date)",
+  "chartFetch": "done (fetched nvdaDataCenterRevenue +0 points; skipped gpuSpotPrice not due; staleCalendar [amdDataCenterRevenue] - expected, manifest needs AMD's next print date; first call with --as-of 2026-09 refused, re-run with 2026-09-08)",
   "chartResearch": {
     "accepted": [
-      "store\\chips.merchant-gpu\\research-series\\2026-09-07-nvidia-data-center-segment-revenue-by-fiscal-quarter.json",
-      "store\\chips.merchant-gpu\\research-series\\2026-09-07-sk-hynix-quarterly-revenue-during-its-2025-2026-memory-hbm-ramp.json",
-      "store\\chips.merchant-gpu\\research-series\\2026-09-07-cloud-on-demand-rental-price-per-gpu-hour-h100-vs-h200-by-provider.json"
+      "store\\chips.merchant-gpu\\research-series\\2026-09-08-sk-hynix-quarterly-revenue.json",
+      "store\\chips.merchant-gpu\\research-series\\2026-09-08-lambda-cloud-on-demand-rental-price-by-nvidia-gpu-model.json",
+      "store\\chips.merchant-gpu\\research-series\\2026-09-08-sk-hynix-quarterly-operating-profit.json"
     ],
     "rejected": [],
     "missing": [],
     "note": "3 of 3 bullets charted and verified against their cited pages; series written to store/chips.merchant-gpu/research-series/ (quarantined, never the curated registry)."
   },
   "dashboardJson": "done (site/chips.merchant-gpu/data/dashboard.json)",
-  "runMarker": "F135 marker appended: asOf 2026-09 v6, wikiSeq 733, storyDate 2026-09-07; WHAT MOVED printed vs the 2026-09-06 run",
+  "runMarker": "F135 marker appended: asOf 2026-09 v7, wikiSeq 749, storyDate 2026-09-07 (UTC date of capturedAt; the story artifact is 2026-09-08); WHAT MOVED printed vs the 2026-09-07 run",
   "deviations": [
-    "AFK-default: last30days discovery (gather-category step 2b) was NOT run this cycle. It is an in-session skill whose brief is leads-only; HuggingNews plus the gatherers' own searches filled the 10-doc daily cap in one round, so the extra discovery pass would have had no budget to spend. Same treatment as the 09-06 record (not run); logged here rather than silently. Reversible: nothing to undo.",
-    "Extraction was dispatched as the sealed 'brain' agent type (Read on its own split prompt files + one Write) rather than a literally tool-less inline dispatch, matching how the judge/thesis/implication/narrator seams run (mechanics 1) and how the 09-06 run laid out extract-parts/. The brain still cannot reach outside its prompt. Logged for transparency; no prompt text or hash changed.",
-    "issues-update sequencing: ran once after the first clean narrator gate (assessed 5) and again after the audit-driven narrator rewrite, where the CLI reported already-recorded for 2026-09-07. The register therefore carries the first story version's assessments; the final story artifact is the rewritten one (only the '400000' figure and outlet names differ). Not re-opened by hand."
+    "AFK-default: rescue-committed the dead 09-07 run (v6, ed5bd8e) before starting this cycle, on the 09-05/09-06 precedent: every v6 artifact was on disk and the on-disk cycle-log reported every stage done; the instance had been silent 3 h at a step that takes seconds. Full suite run first (2940 passed / 6 skipped / 2 pre-existing HANDOFF-wording failures). Reversible (git revert ed5bd8e).",
+    "AFK-default: last30days discovery (gather-category step 2b) was NOT run this cycle. HuggingNews plus the gatherers' own searches filled the 10-doc daily cap, so the extra discovery pass would have had no budget to spend. Same treatment as the 09-06 and 09-07 records; logged here rather than silently. Reversible: nothing to undo.",
+    "Extraction was dispatched as the sealed 'brain' agent type (Read on its own split prompt files + one Write) rather than a literally tool-less inline dispatch, matching the judge/thesis/implication/narrator seams (mechanics 1) and the 09-06/09-07 layout. The brain still cannot reach outside its prompt. No prompt text or hash changed.",
+    "Blob 21 (IDC) was re-written once by its own gatherer to replace a month-only 'date' with the page's full publication date (2026-08-26) before ingest; the coordinator never opened the blob and changed nothing else."
   ]
 }

@@ -1,0 +1,42 @@
+{
+  "id": "www-thecerbatgem-com-c3245843-2026-09-2",
+  "statement": "Sell-side price targets on NVIDIA were mostly raised in late August and early September 2026, consistent with analysts expecting data-center GPU revenue to keep growing, though the target range is unusually wide.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "Clustered target increases are an indirect read on whether the sell side still expects NVIDIA's data-center revenue line to expand, which is the single largest merchant-GPU demand proxy.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Upward revisions to analyst valuations generally follow upward revisions to modeled data-center revenue, so the cluster of raises implies expectations of continued accelerator demand."
+  },
+  "evidence": [
+    {
+      "source": "The Cerbat Gem",
+      "url": "https://www.thecerbatgem.com/2026/09/03/nvidia-nasdaqnvda-price-target-raised-to-300-00.html",
+      "date": "2026-09-03",
+      "excerpt": "Phillip Securities raised its price target 'from $285.00 to $300.00' and maintained a buy rating (research note issued Monday morning, early September 2026). Citigroup reaffirmed a buy rating and 'issued a $315.00 price objective (up from $300.00)' in a note dated Thursday, August 27.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The document reports price-target changes and ratings, not revenue guidance. Inferring a demand signal from valuation targets is an interpretation, so this is recorded as a hypothesis: most named houses raised targets (Phillip, Citigroup, Goldman, Citic, Seaport), which typically reflects higher modeled data-center revenue, but two moves cut against it (Itau BBA lowered to $218.00, and Seaport raised its target while still assigning a sell rating).",
+  "confidence": {
+    "level": "medium",
+    "basis": "Inference from third-party price targets carried by one low-tier secondary aggregator; no vendor guidance figure is quoted and the targets disagree materially."
+  },
+  "dispersion": "Targets span $180.00 to $315.00 against a stated average of $324.23; Itau BBA cut from $256.00 to $218.00 while Citic raised from $242.00 to $315.00.",
+  "asOf": "2026-09",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-07T16:06:10Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
