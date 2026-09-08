@@ -1,3 +1,10 @@
+# ⚠ NO-OP, 2026-09-08 08:21-local scheduled fire — DAY-KEY 09-08 ALREADY CONSUMED (v7 committed + pushed at 02:21 as `9495df5`, DMI 6.267 / SMI -0.213). Third consecutive no-op fire on this day (04:21, 06:21, 08:21). Tree clean, nothing to rescue, no cycle run. Only this note committed.
+- **Orientation:** `main == origin/main == 32f10e5`; `git pull --ff-only` clean ("Already up to date"); `git status` clean (zero dirty paths under store/, site/ or work/). `work/daily-2026-09-08/` last write 02:26 (the rescue suite log); `run-markers.jsonl` tail = v7. 2 `claude.exe` alive, none writing. Local clock 08:21 TST (UTC 00:21 09-08).
+- **Why stopped:** 09-01 ruling (one run per LOCAL calendar day) — a second 09-08 run would write the same story date and run dir. Wrapper brief says stop rather than improvise.
+- **Note for F139 (still open):** the wrapper fires every 2 h regardless of whether today's scorecard is already committed. A "scorecard for today already on main" check would have skipped all three of today's no-op fires. Needs a user ruling; not an AFK call.
+- **AFK-defaults this fire:** none. Nothing touched except this file.
+- **Where it stopped:** orientation, before preflight. CYCLE FAILED reported to the wrapper (no-op, not an error).
+
 # ⚠ NO-OP, 2026-09-08 06:21-local scheduled fire — DAY-KEY 09-08 ALREADY CONSUMED (v7 committed + pushed at 02:21 as `9495df5`, DMI 6.267 / SMI -0.213). Same condition as the 04:21 fire. Tree clean, nothing to rescue, no cycle run. Only this note committed.
 - **Orientation:** `main == origin/main == b36f15b`; `git pull --ff-only` clean ("Already up to date"); `git status` clean (zero dirty paths under store/, site/ or work/). `work/daily-2026-09-08/` last write 02:26 (the rescue suite log); `run-markers.jsonl` tail = v7. 2 `claude.exe` alive, none writing. Local clock 06:21 TST (UTC 22:21 09-07).
 - **Why stopped:** 09-01 ruling (one run per LOCAL calendar day) — a second 09-08 run would write the same story date and run dir. Wrapper brief says stop rather than improvise.
