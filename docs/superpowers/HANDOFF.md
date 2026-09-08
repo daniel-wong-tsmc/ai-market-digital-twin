@@ -1,3 +1,10 @@
+# ⚠ NO-OP, 2026-09-08 16:57-local scheduled fire — DAY-KEY 09-08 ALREADY CONSUMED (v7 committed + pushed at 02:21 as `9495df5`, DMI 6.267 / SMI -0.213). Eighth consecutive no-op fire on this day (04:21, 06:21, 08:21, 08:57, 10:57, 12:57, 14:57, 16:57). Tree clean, nothing to rescue, no cycle run. Only this note committed.
+- **Orientation:** `main == origin/main == cd73e51`; `git pull --ff-only` clean ("Already up to date"); `git status` clean (zero dirty paths under store/, site/ or work/). `store/chips.merchant-gpu/2026-09-v7.json` and `dedup-2026-09-08.json` on main; `run-markers.jsonl` tail = v7 (storyDate 2026-09-07). 2 `claude.exe` alive, none writing. Local clock 16:57 TST (UTC 08:57 09-08).
+- **Why stopped:** 09-01 ruling (one run per LOCAL calendar day) — a second 09-08 run would write the same story date and run dir. Wrapper brief says stop rather than improvise.
+- **Note for F139 (still open):** same ask as the previous seven notes — a "scorecard for today already on main" check in the wrapper would have skipped all eight of today's no-op fires. Needs a user ruling; not an AFK call.
+- **AFK-defaults this fire:** none. Nothing touched except this file.
+- **Where it stopped:** orientation, before preflight. CYCLE FAILED reported to the wrapper (no-op, not an error).
+
 # ⚠ NO-OP, 2026-09-08 14:57-local scheduled fire — DAY-KEY 09-08 ALREADY CONSUMED (v7 committed + pushed at 02:21 as `9495df5`, DMI 6.267 / SMI -0.213). Seventh consecutive no-op fire on this day (04:21, 06:21, 08:21, 08:57, 10:57, 12:57, 14:57). Tree clean, nothing to rescue, no cycle run. Only this note committed.
 - **Orientation:** `main == origin/main == 2e4c079`; `git pull --ff-only` clean ("Already up to date"); `git status` clean (zero dirty paths under store/, site/ or work/). `store/chips.merchant-gpu/2026-09-v7.json` on main; `run-markers.jsonl` tail = v7 (storyDate 2026-09-07). 2 `claude.exe` alive, none writing. Local clock 14:57 TST (UTC 06:57 09-08).
 - **Why stopped:** 09-01 ruling (one run per LOCAL calendar day) — a second 09-08 run would write the same story date and run dir. Wrapper brief says stop rather than improvise.
