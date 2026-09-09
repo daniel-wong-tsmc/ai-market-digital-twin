@@ -1,0 +1,46 @@
+{
+  "id": "247wallst-com-06246724-2026-09-2",
+  "statement": "Arm management cites demand exceeding $2 billion across fiscal 2027 and fiscal 2028 for its AGI CPU, a finished data-center part with Meta as lead customer.",
+  "kind": "measured",
+  "value": {
+    "number": 2.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A named multi-year demand pipeline for data-center CPU silicon indicates hyperscalers are still committing budget to accelerator-adjacent compute.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "The AGI CPU orchestrates and manages accelerators rather than replacing them, so its order book both signals rack demand and shifts some rack value away from merchant vendors."
+  },
+  "evidence": [
+    {
+      "source": "247wallst.com",
+      "url": "https://247wallst.com/investing/2026/09/07/arm-expands-into-ai-accelerators-with-samsung-but-its-not-the-data-center-goldmine-investors-hope-for/",
+      "date": "2026-09-07",
+      "excerpt": "exceeds $2 billion across fiscal 2027 and fiscal 2028",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Executive statement relayed by one secondary outlet; figure is a floor, not an audited backlog."
+  },
+  "dispersion": "Stated as exceeding $2B combined across two fiscal years; a floor rather than a point estimate.",
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "arm",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

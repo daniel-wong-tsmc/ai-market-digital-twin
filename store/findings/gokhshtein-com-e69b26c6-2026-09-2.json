@@ -1,0 +1,47 @@
+{
+  "id": "gokhshtein-com-e69b26c6-2026-09-2",
+  "statement": "Blackstone has committed $5 billion of equity to the Google TPU compute venture, with total investment potentially reaching $25 billion including leverage.",
+  "kind": "measured",
+  "value": {
+    "number": 5.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Large private-capital equity plus leverage for compute build-outs shows financing for marginal AI infrastructure buyers is still open.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Available equity and debt for compute ventures funds accelerator and data-center purchases that would otherwise not clear."
+  },
+  "evidence": [
+    {
+      "source": "gokhshtein.com",
+      "url": "https://gokhshtein.com/news/2026-09-08-google-blackstone-ai-venture-faces-data-center-delays",
+      "date": "2026-09-08",
+      "excerpt": "equity commitment to the venture, with total investment potentially reaching",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Deal terms relayed by a secondary aggregator summarising blocked Bloomberg reporting."
+  },
+  "dispersion": "$5B equity is committed; the $25B total is described only as potential once leverage is included.",
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "alphabet",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

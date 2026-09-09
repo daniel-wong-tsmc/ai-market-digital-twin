@@ -2,7 +2,7 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-09",
-  "capturedAt": "2026-09-07T16:24:54Z",
+  "capturedAt": "2026-09-09T01:28:55Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
@@ -17,18 +17,18 @@
     },
     {
       "type": "source",
-      "id": "amd-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "intc-earnings",
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Intel earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['intc.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "lambda-gpu-pricing",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
       "paywalledNote": null
     },
     {
@@ -89,14 +89,6 @@
     },
     {
       "type": "source",
-      "id": "vendor-pr-trade-press",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Vendor press releases + trade press on merchant-GPU design wins' was not fetched. URL patterns: ['nvidianews.nvidia.com', 'ir.amd.com/news-events', 'tomshardware.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "semianalysis",
       "priority": "required",
       "acquisitionStatus": "paywalled",
@@ -137,26 +129,26 @@
     }
   ],
   "gapCounts": {
-    "total": 16,
-    "source": 16,
+    "total": 15,
+    "source": 15,
     "indicator": 0,
-    "required": 16,
+    "required": 15,
     "preferred": 0,
     "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://dallasexpress.com/state/south-korea-says-22-3b-texas-ai-power-deal-is-not-final-as-talks-continue/",
+    "https://247wallst.com/investing/2026/09/07/arm-expands-into-ai-accelerators-with-samsung-but-its-not-the-data-center-goldmine-investors-hope-for/",
+    "https://cryptobriefing.com/anthropic-cuts-ties-iti-tech-advocacy/",
     "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days",
+    "https://gokhshtein.com/news/2026-09-08-google-blackstone-ai-venture-faces-data-center-delays",
+    "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live",
     "https://lambda.ai/pricing",
-    "https://parameter.io/sk-hynix-skhy-shares-surge-7-as-openais-gpt-6-astra-ignites-memory-chip-rally/",
-    "https://vast.ai/pricing",
-    "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html",
-    "https://www.idc.com/resource-center/blog/smartphone-shipments-set-for-record-16-7-drop-in-2026-as-the-memory-crisis-hits-full-force/",
-    "https://www.thecerbatgem.com/2026/09/03/nvidia-nasdaqnvda-price-target-raised-to-300-00.html",
-    "https://www.tradingkey.com/analysis/stocks/us-stocks/262154185-jensenhuang-agi-openaiastra-benchmarks-400kgpu-deployment-tradingkey",
-    "https://www.trendforce.com/news/2026/08/18/news-mlcc-lead-times-diverge-as-high-end-products-stretch-to-5-10-months-on-ai-demand-tightness-may-extend-into-2027/"
+    "https://newsroom.arm.com/news/arm-unveils-arm-ai-portal",
+    "https://nvidianews.nvidia.com/news/nvidia-to-acquire-hugging-face",
+    "https://shattered.io/google-ironwood-tpu-pricing-vs-nvidia-2026/",
+    "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html"
   ],
   "judgedIndicatorIds": [
     "D2",

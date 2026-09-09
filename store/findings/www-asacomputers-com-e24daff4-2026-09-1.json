@@ -1,0 +1,44 @@
+{
+  "id": "www-asacomputers-com-e24daff4-2026-09-1",
+  "statement": "ASA Computers lists the NVIDIA H200 141GB card at $30,999.00 on 2026-09-09.",
+  "kind": "measured",
+  "value": {
+    "number": 30999.0,
+    "unit": "USD_per_gpu"
+  },
+  "trend": "unknown",
+  "why": "Reseller card pricing is the daily confirmation overlay on secondary-market accelerator hardware levels.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Static hardware price level with no stated baseline or change; display overlay only."
+  },
+  "evidence": [
+    {
+      "source": "asacomputers.com",
+      "url": "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html",
+      "date": "2026-09-09",
+      "excerpt": "NVIDIA H200 141GB priced at \"$30,999.00\"",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Directly read reseller listing page; single dealer's asking price, not a market clearing price."
+  },
+  "dispersion": "conflicting same-key reports: value 7569.1 -> 30999.0 (tol 1%); sources: asacomputers.com",
+  "asOf": "2026-09",
+  "indicatorId": "gpuSpotPrice",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-09",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "247wallst-com-06246724-2026-09-1",
+  "statement": "Arm data center royalty revenue more than doubled year over year, with Neoverse shipments surpassing 1.5 billion cores.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Fast growth in Arm data center royalties is a proxy for continued AI rack deployment, since accelerator racks always carry a host CPU layer.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.eda-ip",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Data center CPU royalty growth tracks the number of AI servers being built, and those servers are the same racks that host merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "247wallst.com",
+      "url": "https://247wallst.com/investing/2026/09/07/arm-expands-into-ai-accelerators-with-samsung-but-its-not-the-data-center-goldmine-investors-hope-for/",
+      "date": "2026-09-07",
+      "excerpt": "data center royalty revenue more than doubled year over year",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet restating company disclosures; no primary filing fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "arm",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

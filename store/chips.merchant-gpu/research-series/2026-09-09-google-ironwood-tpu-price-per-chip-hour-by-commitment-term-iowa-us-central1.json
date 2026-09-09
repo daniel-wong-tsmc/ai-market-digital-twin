@@ -1,0 +1,35 @@
+{
+  "seriesName": "Google Ironwood TPU price per chip-hour by commitment term (Iowa, us-central1)",
+  "unit": "US$ per chip-hour",
+  "form": "columns",
+  "sourceName": "shattered.io",
+  "points": [
+    {
+      "label": "On-demand",
+      "value": 12.0,
+      "sourceUrl": "https://shattered.io/google-ironwood-tpu-pricing-vs-nvidia-2026/",
+      "publishedAt": "2026-09-08"
+    },
+    {
+      "label": "Dynamic Workload Scheduler Flex-start",
+      "value": 6.0,
+      "sourceUrl": "https://shattered.io/google-ironwood-tpu-pricing-vs-nvidia-2026/",
+      "publishedAt": "2026-09-08"
+    },
+    {
+      "label": "1-year committed use",
+      "value": 8.4,
+      "sourceUrl": "https://shattered.io/google-ironwood-tpu-pricing-vs-nvidia-2026/",
+      "publishedAt": "2026-09-08"
+    },
+    {
+      "label": "3-year committed use",
+      "value": 5.4,
+      "sourceUrl": "https://shattered.io/google-ironwood-tpu-pricing-vs-nvidia-2026/",
+      "publishedAt": "2026-09-08"
+    }
+  ],
+  "pair": false,
+  "notes": "All four figures are drawn from a single shattered.io article (published 2026-09-08) reporting Google's Ironwood (TPU v7) chip-hour pricing for the Iowa (us-central1) region; the article states these are Google Cloud's own published pricing-page figures. I could not independently confirm the numbers by fetching cloud.google.com/tpu/pricing directly -- the official Google page is too long for my page-reading tool and returned only a truncated placeholder on repeated attempts, so I fell back to the single-site rule and used shattered.io only, per the prompt's requirement that all points share one source site. A separate TECHi article (techi.com, 2026, undated exact day found) claimed Ironwood had 'no public price' as of roughly three months after its April 2026 GA date, and cited a much lower ~$1.60/hr figure as an unpublished, contract-specific rate for Anthropic (not a list price, so excluded here) -- that piece appears to predate the September pricing publication described by shattered.io, which is why it is not used as the series source. London (europe-west2) pricing ($13.20 on-demand, $9.24 1-year, $5.94 3-year) was also reported on the same shattered.io page but omitted here to keep the chart to one region for clarity; happy to add as a second series if wanted. NVIDIA B200 marketplace pricing (Spheron, ~$9.36/hr on-demand, ~$5.34-5.37/hr spot, as of 2026-07-07) is also quoted on the shattered.io page for comparison but is itself sourced there from a third party (Spheron), so it was left out of this series rather than mixing attribution.",
+  "bulletIndex": 1
+}

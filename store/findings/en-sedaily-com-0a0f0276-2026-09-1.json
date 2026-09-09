@@ -1,0 +1,44 @@
+{
+  "id": "en-sedaily-com-0a0f0276-2026-09-1",
+  "statement": "Samsung and SK hynix memory stockpiles have fallen below ten days of supply as of Q3 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Sub-ten-day memory inventory at the two largest suppliers means any demand surprise turns straight into allocation and price escalation for AI server memory.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.ai-storage"
+    ],
+    "direction": "negative",
+    "mechanism": "Thin memory inventory constrains how many accelerator boards and AI servers can be assembled, since each board needs its full memory complement."
+  },
+  "evidence": [
+    {
+      "source": "Seoul Economic Daily (en.sedaily.com)",
+      "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days",
+      "date": "2026-09-07",
+      "excerpt": "Memory stockpiles at Samsung Electronics and SK hynix have fallen to less than 10 days of supply as of Q3 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary Korean business daily relaying a broker forecast; no company filing consulted."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "memory",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

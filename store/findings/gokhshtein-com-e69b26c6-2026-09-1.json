@@ -1,0 +1,45 @@
+{
+  "id": "gokhshtein-com-e69b26c6-2026-09-1",
+  "statement": "The Google-Blackstone TPU compute joint venture faces site-level execution delays that put its 500 megawatt by 2027 target at risk.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "A stalled TPU-based capacity build slows the arrival of non-merchant accelerator capacity that would otherwise compete with GPU cloud supply.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "energy.power-generation"
+    ],
+    "direction": "mixed",
+    "mechanism": "Delayed data-center sites push out planned TPU capacity, leaving compute demand to be served by existing GPU supply for longer."
+  },
+  "evidence": [
+    {
+      "source": "gokhshtein.com",
+      "url": "https://gokhshtein.com/news/2026-09-08-google-blackstone-ai-venture-faces-data-center-delays",
+      "date": "2026-09-08",
+      "excerpt": "site-level execution delays",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary summary of Bloomberg reporting that could not be fetched directly; no cause of delay specified."
+  },
+  "dispersion": "Source does not say whether the delay is permitting, power, equipment lead times or chip availability.",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "alphabet",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

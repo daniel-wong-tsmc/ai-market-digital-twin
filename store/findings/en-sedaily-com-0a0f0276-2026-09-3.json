@@ -1,0 +1,44 @@
+{
+  "id": "en-sedaily-com-0a0f0276-2026-09-3",
+  "statement": "DRAM and NAND bit demand growth is expected to exceed bit supply growth by more than 10 percentage points next year.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A double-digit gap between memory demand and supply growth points to physical allocation limits on how many AI accelerator systems can ship.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.ai-storage"
+    ],
+    "direction": "negative",
+    "mechanism": "When bit demand outruns bit supply, memory is rationed and accelerator system build rates are capped by memory availability."
+  },
+  "evidence": [
+    {
+      "source": "Seoul Economic Daily (en.sedaily.com)",
+      "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days",
+      "date": "2026-09-07",
+      "excerpt": "bit-based demand growth for DRAM and NAND is expected to exceed supply by more than 10 percentage points next year",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Forward forecast relayed by one secondary outlet; stated as a floor of more than 10 points, not a point estimate."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: Seoul Economic Daily (en.sedaily.com)",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "memory",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

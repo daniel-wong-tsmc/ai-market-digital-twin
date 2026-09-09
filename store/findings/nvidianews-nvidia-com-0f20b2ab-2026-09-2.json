@@ -1,0 +1,44 @@
+{
+  "id": "nvidianews-nvidia-com-0f20b2ab-2026-09-2",
+  "statement": "NVIDIA is extending its stack toward local and agentic inference, announcing partner work on faster local inference and agentic cybersecurity in the same week.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Broadening from data-center training into local and agentic inference is how the vendor defends demand as training growth normalises.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.reasoning-agentic",
+      "models.small-ondevice",
+      "applications.agent-platforms"
+    ],
+    "direction": "positive",
+    "mechanism": "New inference and agent workloads on NVIDIA hardware add demand pools beyond hyperscaler training clusters."
+  },
+  "evidence": [
+    {
+      "source": "nvidianews.nvidia.com",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-to-acquire-hugging-face",
+      "date": "2026-09-03",
+      "excerpt": "NVIDIA, Microsoft and partners teaming up to provide faster inference and new tools for agents to run locally on NVIDIA hardware",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Primary newsroom listing, but the item is a product announcement with no volumes, revenue or guidance attached."
+  },
+  "dispersion": "No Rubin ramp update, export-control item or revised financial guidance appeared in the same newsroom window.",
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

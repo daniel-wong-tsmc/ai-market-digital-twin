@@ -1,0 +1,44 @@
+{
+  "id": "shattered-io-12684ad3-2026-09-3",
+  "statement": "Ironwood TPU three-year committed pricing of $5.40 per hour undercuts B200 on-demand marketplace pricing for customers willing to commit long-term.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Hyperscaler accelerators now compete on published price against merchant GPUs, which is how alternative silicon takes share from GPU rentals.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "models.frontier-closed"
+    ],
+    "direction": "mixed",
+    "mechanism": "Cheaper committed TPU capacity gives large training customers a priced alternative to merchant GPU rental, expanding non-GPU compute supply."
+  },
+  "evidence": [
+    {
+      "source": "shattered.io",
+      "url": "https://shattered.io/google-ironwood-tpu-pricing-vs-nvidia-2026/",
+      "date": "2026-09-08",
+      "excerpt": "Ironwood's three-year committed rate of $5.40/hr undercuts B200's on-demand pricing for customers willing to commit long-term",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary blog comparing a list rate against one third-party marketplace quote from a different date."
+  },
+  "dispersion": "Comparison mixes a September list rate against a July marketplace quote; no GB300 comparison is given.",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

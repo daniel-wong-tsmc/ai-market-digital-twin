@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-09-09",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-asacomputers-com-e24daff4-2026-09-1",
+        "www-newegg-com-c6e5a7e1-2026-09-2",
+        "www-newegg-com-994c8b40-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "shattered-io-12684ad3-2026-09-1",
+        "shattered-io-12684ad3-2026-09-3",
+        "ir-amd-com-841cc4c4-2026-09-1",
+        "gokhshtein-com-e69b26c6-2026-09-1",
+        "gokhshtein-com-e69b26c6-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-digitimes-com-bcc418d8-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-3",
+        "en-sedaily-com-0a0f0276-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-asacomputers-com-e24daff4-2026-09-1",
+        "www-newegg-com-c6e5a7e1-2026-09-2",
+        "gokhshtein-com-e69b26c6-2026-09-1",
+        "shattered-io-12684ad3-2026-09-3",
+        "www-digitimes-com-bcc418d8-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "shattered-io-12684ad3-2026-09-1",
+        "shattered-io-12684ad3-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "bullet:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-asacomputers-com-e24daff4-2026-09-1",
+        "www-newegg-com-c6e5a7e1-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "bullet:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-digitimes-com-bcc418d8-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-bottleneck",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-digitimes-com-bcc418d8-2026-09-1",
+        "gokhshtein-com-e69b26c6-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-moat",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "shattered-io-12684ad3-2026-09-1",
+        "shattered-io-12684ad3-2026-09-3",
+        "ir-amd-com-841cc4c4-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-stacked-memory-and-server-dram",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-digitimes-com-bcc418d8-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-hbm4-memory-allocation-per-accelerator",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "en-sedaily-com-0a0f0276-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-high-bandwidth-memory-and-server-memory",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-digitimes-com-bcc418d8-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-fool-com-12234ce0-2026-08-2",
+        "www-aroged-com-a319f429-2026-09-1",
+        "www-aroged-com-a319f429-2026-09-2",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "siliconanalysts-com-ab8c9c31-2026-09-1",
+        "siliconanalysts-com-ab8c9c31-2026-09-2",
+        "cryptobriefing-com-c3c1a1c3-2026-08-2"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "supplyics-com-c83015c2-2026-08-3",
+        "www-forbes-com-7c91863a-2026-07-2",
+        "siliconanalysts-com-528fac70-2026-07-4"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-3",
+        "techsoda-substack-com-3b7a4ff5-2026-08-4",
+        "www-trendforce-com-b8196a71-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-trendforce-com-01be0e4e-2026-08-1",
+        "qz-com-36c37a60-2026-08-1",
+        "finance-yahoo-com-61f89a99-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-1",
+        "www-investing-com-b7ff2af7-2026-08-3"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "flagged",
+      "flaggedTokens": [
+        "75"
+      ],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-biggo-com-b332e712-2026-08-3",
+        "finance-biggo-com-cda170af-2026-08-1",
+        "www-idc-com-9e83b089-2026-09-1",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:6",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "en-sedaily-com-0a0f0276-2026-09-1",
+        "parameter-io-718c27d9-2026-09-3",
+        "en-sedaily-com-0a0f0276-2026-09-3",
+        "www-investing-com-87498f82-2026-08-1"
+      ]
+    },
+    {
+      "claimKey": "impl:7",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-intc-com-9e1300a4-2026-08-2",
+        "www-freemalaysiatoday-com-7dfc89b4-2026-08-4",
+        "techcrunch-com-6b79ddb7-1",
+        "www-freepressjournal-in-36c153cb-2026-08-1",
+        "www-taipeitimes-com-9d7a9c86-2026-09-1"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 20,
+    "flagged": 1,
+    "skipped": 0
+  }
+}

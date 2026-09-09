@@ -1,0 +1,43 @@
+{
+  "id": "cryptobriefing-com-52530bf6-2026-09-2",
+  "statement": "US supply-chain risk designation tools were flagged by the industry group as being used as procurement leverage against specific AI vendors.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "unknown",
+  "why": "If security-designation tools become procurement levers, government AI compute buying could route around particular model vendors and their preferred hardware stacks.",
+  "impact": {
+    "targets": [
+      "models.frontier-closed",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Vendor exclusion from federal programmes redirects public-sector AI workloads and the associated accelerator purchases toward other suppliers."
+  },
+  "evidence": [
+    {
+      "source": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/anthropic-cuts-ties-iti-tech-advocacy/",
+      "date": "2026-09-08",
+      "excerpt": "supply-chain risk designation tools, designed to address genuine national security threats, were being repurposed as procurement weapons against vendors the administration found inconvenient.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The document reports an advocacy-group warning and a court finding of unlawful retaliation, but gives no contract values or volumes, so any effect on accelerator demand is inferred rather than measured.",
+  "confidence": {
+    "level": "low",
+    "basis": "Inference from one secondary outlet with no quantified procurement data."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,234 @@
+{
+  "headline": "A card at $30,999, and a rival with a price list",
+  "deck": "Buying an NVIDIA card still means paying up or waiting, and Google has now published an hourly price for its own chip that undercuts renting an NVIDIA part.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "What one card costs today",
+      "paragraphs": [
+        "ASA Computers listed NVIDIA's H200 141GB card at $30,999.00 today. That is the price for a single card, from one dealer, on one page.",
+        "Where the card is cheaper, it is not there to buy. On Newegg's H200 search page on 7 September, the only genuine H200 product was out of stock with no price shown. A day earlier the same picture held on the H100 pages: most H100-class listings, including the H100 NVL and the Supermicro card, were out of stock, and the H200 NVL was marked only as coming soon with no price.",
+        "This is what a shortage looks like at the counter. A published price with stock behind it sits near thirty-one thousand dollars; the cheaper listings simply have nothing to sell."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "www-asacomputers-com-e24daff4-2026-09-1",
+        "www-newegg-com-c6e5a7e1-2026-09-2",
+        "www-newegg-com-994c8b40-2026-09-2"
+      ],
+      "sourceLine": "asacomputers.com listing, checked today; Newegg search pages, checked 7 September and 6 September.",
+      "relatedDocs": [
+        {
+          "url": "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html",
+          "title": "NVIDIA H200 141GB card listed at $30,999",
+          "outlet": "asacomputers.com",
+          "date": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The rival now has a price, and a delay",
+      "paragraphs": [
+        "Google has published list pricing for its seventh-generation Ironwood chip: $12.00 per chip-hour on demand in Iowa and $13.20 in London. On a three-year commitment the price drops to $5.40 an hour, which undercuts what an NVIDIA B200 costs by the hour on the open market. For the first time a buyer can compare the two on a public page rather than through a sales call.",
+        "A second alternative is running in the field. AMD said on 31 August that its Instinct MI355X systems are live and serving customers at HUMAIN in Saudi Arabia, with up to 250 megawatts planned from 2027 and as much as one gigawatt by 2030.",
+        "But the alternatives hit the same wall as everyone else: buildings and power. The Google and Blackstone venture that is meant to house this compute is running into site-level delays that put its target of 500 megawatts by 2027 at risk. Blackstone has put in $5 billion of equity, with total investment potentially reaching $25 billion once borrowing is included. A cheaper price per hour does not help if the hall it belongs in opens late."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "shattered-io-12684ad3-2026-09-1",
+        "shattered-io-12684ad3-2026-09-3",
+        "ir-amd-com-841cc4c4-2026-09-1",
+        "gokhshtein-com-e69b26c6-2026-09-1",
+        "gokhshtein-com-e69b26c6-2026-09-2"
+      ],
+      "sourceLine": "shattered.io (8 September); AMD investor relations (31 August); gokhshtein.com (8 September).",
+      "relatedDocs": [
+        {
+          "url": "https://shattered.io/google-ironwood-tpu-pricing-vs-nvidia-2026/",
+          "title": "Google publishes hourly list pricing for its Ironwood chip",
+          "outlet": "shattered.io",
+          "date": "2026-09-08"
+        },
+        {
+          "url": "https://gokhshtein.com/news/2026-09-08-google-blackstone-ai-venture-faces-data-center-delays",
+          "title": "Google and Blackstone venture faces data centre delays",
+          "outlet": "gokhshtein.com",
+          "date": "2026-09-08"
+        },
+        {
+          "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live",
+          "title": "AMD Instinct systems go live with HUMAIN in Saudi Arabia",
+          "outlet": "ir.amd.com (AMD Investor Relations press release)",
+          "date": "2026-08-31"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "One supplier starts to move on memory",
+      "paragraphs": [
+        "There is one piece of genuine supply news. SK hynix is speeding up its newest memory line, the sixth-generation 10-nanometre class, to roughly 34% of its own memory output by the fourth quarter of 2026, in preparation for the next stacked memory generation.",
+        "Set that against the shelf. Stock at Samsung and SK hynix has fallen below ten days of supply in the third quarter, and demand for memory bits is forecast to grow more than 10 percentage points faster than supply next year. Cloud building plans for next year have been revised up to $1.3 trillion, a 60% rise on the year.",
+        "So the ramp is real but small against the gap. One supplier changing its production mix over one quarter does not close a shortfall measured in double-digit percentage points across a whole year."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "www-digitimes-com-bcc418d8-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-3",
+        "en-sedaily-com-0a0f0276-2026-09-2"
+      ],
+      "sourceLine": "Digitimes (7 September); Seoul Economic Daily (7 September).",
+      "relatedDocs": [
+        {
+          "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days",
+          "title": "Samsung and SK hynix memory stockpiles fall below 10 days",
+          "outlet": "Seoul Economic Daily (en.sedaily.com)",
+          "date": "2026-09-07"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Watch whether the cheap listings come back into stock. Today the only card with both a price and a seller was the H200 at $30,999.00, while Newegg's H200 page showed no price and no stock. Stock returning at a lower price would be the first honest sign that the queue is shortening.",
+        "Watch the 500 megawatts. If the Google and Blackstone venture hits that target in 2027, the cheaper chip-hour becomes real capacity that competes with rented NVIDIA machines; if the sites slip, the published $5.40 committed price stays a number on a page.",
+        "And watch the memory shelf. SK hynix's move to about 34% of its output on the newest line lands in the fourth quarter; until stock at the Korean makers climbs back above ten days, more spending mostly buys higher prices rather than more machines."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-asacomputers-com-e24daff4-2026-09-1",
+        "www-newegg-com-c6e5a7e1-2026-09-2",
+        "gokhshtein-com-e69b26c6-2026-09-1",
+        "shattered-io-12684ad3-2026-09-3",
+        "www-digitimes-com-bcc418d8-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-1"
+      ],
+      "sourceLine": "asacomputers.com, checked today; Newegg (7 September); gokhshtein.com (8 September); shattered.io (8 September); Digitimes and Seoul Economic Daily (7 September).",
+      "relatedDocs": []
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "The price of a single card is the plainest test of whether anyone can simply walk up and buy one.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Big buyers keep raising what they plan to spend, but halls and power decide when any of it runs.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Money going into memory factories is the only thing that lifts the ceiling on how many machines get built.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-09",
+      "text": "An H200 141GB card was listed at $30,999.00 today, while Newegg's only H200 product showed no price and no stock.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "AMD's Instinct MI355X systems went live with HUMAIN in Saudi Arabia on 31 August, with up to 250 megawatts planned from 2027.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Google now publishes an hourly price for its own chip: $12.00 in Iowa, and $5.40 on a three-year commitment, undercutting rented NVIDIA B200 time.",
+      "claimFindingIds": [
+        "shattered-io-12684ad3-2026-09-1",
+        "shattered-io-12684ad3-2026-09-3"
+      ]
+    },
+    {
+      "text": "ASA Computers listed NVIDIA's H200 141GB card at $30,999 today, while Newegg's only H200 product showed no price and no stock.",
+      "claimFindingIds": [
+        "www-asacomputers-com-e24daff4-2026-09-1",
+        "www-newegg-com-c6e5a7e1-2026-09-2"
+      ]
+    },
+    {
+      "text": "SK hynix is speeding its newest memory line to about 34% of its own output by the fourth quarter, with Korean stock below ten days.",
+      "claimFindingIds": [
+        "www-digitimes-com-bcc418d8-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "unchanged",
+      "reasoning": "Two moves cancel out. SK hynix is lifting its newest memory line to about 34% of output by the fourth quarter, while the Google and Blackstone venture's site delays put 500 megawatts of alternative capacity for 2027 at risk.",
+      "claimFindingIds": [
+        "www-digitimes-com-bcc418d8-2026-09-1",
+        "gokhshtein-com-e69b26c6-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "Google published list pricing for its own chip at $12.00 per chip-hour, and $5.40 on a three-year commitment that undercuts renting an NVIDIA B200. AMD's systems are also now live and serving customers in Saudi Arabia.",
+      "claimFindingIds": [
+        "shattered-io-12684ad3-2026-09-1",
+        "shattered-io-12684ad3-2026-09-3",
+        "ir-amd-com-841cc4c4-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "improved",
+      "reasoning": "SK hynix is speeding its sixth-generation 10-nanometre memory line to roughly 34% of its own output by the fourth quarter of 2026, in preparation for the next stacked memory generation.",
+      "claimFindingIds": [
+        "www-digitimes-com-bcc418d8-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived on how much memory each chip carries. The day's memory news is about total supply: stock at the Korean makers is still below ten days.",
+      "claimFindingIds": [
+        "en-sedaily-com-0a0f0276-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-high-bandwidth-memory-and-server-memory",
+      "status": "unchanged",
+      "reasoning": "The only supply move is a fourth-quarter plan, SK hynix taking its newest line to about 34% of output, while stock stays under ten days and bit demand is forecast to outgrow supply by more than 10 percentage points next year.",
+      "claimFindingIds": [
+        "www-digitimes-com-bcc418d8-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-1",
+        "en-sedaily-com-0a0f0276-2026-09-3"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-09",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "3424c0f35e8e46efaac150bd01f554f59a107563a92c17189088c95308a214f6",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-09-09T01:41:49.234317+00:00"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "id": "newsroom-arm-com-d7011ace-2026-09-1",
+  "statement": "Arm launched an AI Portal connecting more than 22 million developers to pre-optimized models across cloud, edge and physical AI, with Alibaba Qwen, Google Gemma and Ultralytics YOLO as launch content.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Developer tooling that makes models run well on non-GPU compute widens where inference workloads can be hosted.",
+  "impact": {
+    "targets": [
+      "models.small-ondevice",
+      "models.open-weight",
+      "infrastructure.cluster-software",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Pre-optimized models and deployment tooling lower the switching cost of running inference on Arm-based CPUs and edge silicon instead of GPUs."
+  },
+  "evidence": [
+    {
+      "source": "newsroom.arm.com",
+      "url": "https://newsroom.arm.com/news/arm-unveils-arm-ai-portal",
+      "date": "2026-09-08",
+      "excerpt": "Arm AI Portal connects more than 22 million developers and their agents to optimized AI software across the Arm compute platform spanning cloud, edge and physical AI.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor announcement page classified as secondary here; developer-count claim is self-reported and unaudited."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> rising); sources: 247wallst.com, newsroom.arm.com",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "arm",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

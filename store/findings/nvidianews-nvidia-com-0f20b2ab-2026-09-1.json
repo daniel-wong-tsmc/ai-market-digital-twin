@@ -1,0 +1,45 @@
+{
+  "id": "nvidianews-nvidia-com-0f20b2ab-2026-09-1",
+  "statement": "NVIDIA agreed to acquire Hugging Face for approximately $12.93 billion, moving deeper into the open-model and developer-tooling layer above its accelerators.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Owning the main hub where developers publish and deploy open models strengthens the software gravity that keeps workloads on NVIDIA hardware.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.open-weight",
+      "infrastructure.cluster-software",
+      "models.eval-hub-infra",
+      "applications.ai-coding"
+    ],
+    "direction": "positive",
+    "mechanism": "Control of the model and deployment hub reinforces developer lock-in around NVIDIA software stacks, raising the switching cost to rival accelerators."
+  },
+  "evidence": [
+    {
+      "source": "nvidianews.nvidia.com",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-to-acquire-hugging-face",
+      "date": "2026-09-03",
+      "excerpt": "Together, we will scale Hugging Face's platform, strengthen its infrastructure and expand access to AI for developers and institutions worldwide.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Official NVIDIA newsroom announcement with the deal value stated in the release."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-09-03",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

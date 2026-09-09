@@ -1,0 +1,44 @@
+{
+  "id": "ir-amd-com-841cc4c4-2026-09-2",
+  "statement": "AMD Instinct with ROCm and Cisco fabric is now shipping as a full production alternative stack for training and inference GPU-as-a-service.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A working non-NVIDIA training and inference stack in commercial service widens the pool of usable accelerator supply for buyers.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.cluster-software",
+      "infrastructure.networking-fabric",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Proven alternative silicon plus open software gives buyers a second qualified source, easing overall accelerator scarcity while pressuring incumbent share."
+  },
+  "evidence": [
+    {
+      "source": "ir.amd.com (AMD Investor Relations press release)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live",
+      "date": "2026-08-31",
+      "excerpt": "current deployment of AMD Instinct MI355X GPUs is now live and serving HUMAIN customers in Saudi Arabia and beyond",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor release describing systems already in production service."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-08-31",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

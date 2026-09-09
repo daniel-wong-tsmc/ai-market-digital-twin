@@ -1,0 +1,43 @@
+{
+  "id": "newsroom-arm-com-d7011ace-2026-09-2",
+  "statement": "Arm cites large optimization gains on its platform, including an over 4x speedup for Qwen3-TTS on a vivo X300 phone.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Software optimization that multiplies throughput on existing silicon effectively adds usable inference capacity without new chips.",
+  "impact": {
+    "targets": [
+      "models.small-ondevice",
+      "chips.merchant-gpu",
+      "energy.efficiency"
+    ],
+    "direction": "mixed",
+    "mechanism": "Better performance per unit of silicon means the same workload needs less hardware, easing effective compute scarcity at the margin."
+  },
+  "evidence": [
+    {
+      "source": "newsroom.arm.com",
+      "url": "https://newsroom.arm.com/news/arm-unveils-arm-ai-portal",
+      "date": "2026-09-08",
+      "excerpt": "Qwen3-TTS achieved an over 4x speedup on a vivo X300 smartphone",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor-reported benchmark on one device with no independent verification."
+  },
+  "dispersion": "Also cites over 40% improvement for Ultralytics YOLO26n using single-thread FP16 versus FP32.",
+  "asOf": "2026-09",
+  "indicatorId": "flopsPerDollar",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "arm",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

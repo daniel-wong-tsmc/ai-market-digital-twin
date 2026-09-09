@@ -1,0 +1,35 @@
+{
+  "seriesName": "ASA Computers listed prices for current-generation NVIDIA/PNY GPU cards",
+  "unit": "US$",
+  "form": "bars",
+  "sourceName": "ASA Computers",
+  "points": [
+    {
+      "label": "NVIDIA L40S 48GB Graphics Card",
+      "value": 7569.1,
+      "sourceUrl": "https://www.asacomputers.com/nvidia-l40s-48gb-graphics-card.html",
+      "publishedAt": "2026-09-09"
+    },
+    {
+      "label": "NVIDIA H200 141GB GPU (NVH200NVLTCGPU-KIT)",
+      "value": 30999.0,
+      "sourceUrl": "https://www.asacomputers.com/nvidia-h200-141gb-nvh200nvltcgpu-gpu-card.html",
+      "publishedAt": "2026-09-09"
+    },
+    {
+      "label": "NVIDIA GeForce RTX 5090 GPU Card",
+      "value": 3890.0,
+      "sourceUrl": "https://www.asacomputers.com/nvidia-geforce-rtx-5090-gpu-card.html",
+      "publishedAt": "2026-09-09"
+    },
+    {
+      "label": "NVIDIA RTX 6000 Ada",
+      "value": 7299.0,
+      "sourceUrl": "https://www.asacomputers.com/nvidia-rtx-6000-ada.html",
+      "publishedAt": "2026-09-09"
+    }
+  ],
+  "pair": false,
+  "notes": "All four prices are 'Our Price' listings pulled directly from ASA Computers' own product pages on the same date the H200 bullet was captured (2026-09-09); ASA does not date-stamp the page itself, so publishedAt reflects the day these listings were observed live. This contextualizes the H200's $30,999.00 price by showing where it sits relative to other current GPU cards ASA sells (L40S, RTX 5090, RTX 6000 Ada) -- the H200 is priced far above ASA's workstation/prosumer cards and roughly in line with prior-gen H100 pricing on the same site. Two additional ASA listings (PNY RTX 5000 Ada $4,152.00, PNY RTX PRO 5000 Blackwell $4,469.00) were seen on the category page but were not individually re-verified on their own product pages, so they were left out to keep every point independently confirmed.",
+  "bulletIndex": 2
+}

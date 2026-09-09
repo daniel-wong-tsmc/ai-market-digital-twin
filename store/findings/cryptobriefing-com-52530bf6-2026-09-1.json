@@ -1,0 +1,43 @@
+{
+  "id": "cryptobriefing-com-52530bf6-2026-09-1",
+  "statement": "A Washington trade group and Anthropic split over three pending US chip export-control bills, with the group lobbying to strip them from the defense policy bill.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Live legislative fights over chip export licensing and tracking set the boundary on how much AI silicon can legally ship to China.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.networking-silicon"
+    ],
+    "direction": "negative",
+    "mechanism": "If enacted, licence pre-review and chip-tracking requirements add friction and delay to export-controlled accelerator shipments."
+  },
+  "evidence": [
+    {
+      "source": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/anthropic-cuts-ties-iti-tech-advocacy/",
+      "date": "2026-09-08",
+      "excerpt": "The Chip Security Act would require companies to track their AI chips to counter U.S. tech smuggling.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Secondary crypto-news page whose own framing differs from search summaries of the bills story; primary Axios, Hill and WTTL pages could not be fetched, and no Federal Register or BIS text was located."
+  },
+  "dispersion": "Two conflicting accounts of the same split: a Pentagon-retaliation dispute in the fetched page versus an export-control bills dispute in unverified search summaries.",
+  "asOf": "2026-09",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-09T00:58:21Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
