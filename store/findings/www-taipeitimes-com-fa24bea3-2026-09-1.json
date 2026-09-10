@@ -1,0 +1,44 @@
+{
+  "id": "www-taipeitimes-com-fa24bea3-2026-09-1",
+  "statement": "Kioxia's NAND flash pricing rose 70% in the June quarter versus the prior three months, following a prior quarter with increases exceeding 100%.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Back-to-back quarterly price jumps of this size are the clearest sign that memory supply is far behind demand, and memory is the part of the chain that gates AI system builds.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.ai-storage",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Severe memory price inflation reflects scarce bit supply and raises the bill of materials for AI systems and storage, constraining how much capacity buyers can stand up per dollar."
+  },
+  "evidence": [
+    {
+      "source": "Taipei Times",
+      "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/10/2003863982",
+      "date": "2026-09-10",
+      "excerpt": "Kioxia's NAND flash memory pricing rose '70% increase' in the June quarter compared with the prior three-month period, after the prior quarter had seen price increases 'exceeding 100%'.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary newspaper report of a CEO interview; no filing in the document."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: Taipei Times",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "kioxia",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

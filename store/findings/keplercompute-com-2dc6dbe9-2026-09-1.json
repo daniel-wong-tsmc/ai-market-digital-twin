@@ -1,0 +1,50 @@
+{
+  "id": "keplercompute-com-2dc6dbe9-2026-09-1",
+  "statement": "Kepler Compute is marketing a new memory technology offering capacity beyond SRAM and HBM for inference, backed by $468M raised, with sampling in 2026 and production in 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A funded challenger to HBM aimed at inference is a possible future relief valve for the memory bottleneck that currently caps accelerator output, though nothing ships in volume before 2027.",
+  "impact": {
+    "targets": [
+      "chips.ai-silicon-startups",
+      "chips.hbm-memory",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "An alternative high-capacity memory path, if it reaches production, adds non-HBM supply for inference systems and reduces the degree to which accelerator shipments are gated by HBM allocation."
+  },
+  "evidence": [
+    {
+      "source": "keplercompute.com (company site)",
+      "url": "https://keplercompute.com/",
+      "date": "2026-09-09",
+      "excerpt": "Sampling in 2026. Production in 2027.",
+      "tier": "secondary"
+    },
+    {
+      "source": "keplercompute.com (company site)",
+      "url": "https://keplercompute.com/",
+      "date": "2026-09-09",
+      "excerpt": "Capacity beyond SRAM & HBM",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company's own marketing site, secondary tier; claims are unaudited and the headline capacity multiple is explicitly not stated on the page."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: keplercompute.com (company site)",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "kepler compute",
+  "observedAt": "2026-09-09",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

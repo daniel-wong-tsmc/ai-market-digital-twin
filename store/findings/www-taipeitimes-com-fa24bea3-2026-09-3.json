@@ -1,0 +1,43 @@
+{
+  "id": "www-taipeitimes-com-fa24bea3-2026-09-3",
+  "statement": "Kioxia's CEO saying another 70% quarterly price jump seems unlikely because even hyperscalers have limited budgets may signal that buyer budgets are starting to cap component price pass-through.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "unknown",
+  "why": "If the biggest buyers are near their budget ceilings, further component cost inflation starts to crowd out unit volume rather than being absorbed.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Budget-limited buyers facing higher component prices buy fewer systems per dollar, which would show up later as softer accelerator order growth."
+  },
+  "evidence": [
+    {
+      "source": "Taipei Times",
+      "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/10/2003863982",
+      "date": "2026-09-10",
+      "excerpt": "Even hyperscalers have limited budgets.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The supplier is voluntarily restraining price demands and citing hyperscaler budget limits as the reason. That is a supplier's read of buyer willingness to pay, not a measured change in orders, so it is only a signal that budget ceilings may be nearing, not evidence that capex has been cut.",
+  "confidence": {
+    "level": "low",
+    "basis": "Inference from one executive's remark in a single secondary report; no order or capex data supports it."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "kioxia",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "www-investing-com-9d51395c-2026-09-2",
+  "statement": "Huawei's Ascend 950DT card has risen above 250,000 yuan, a 20-50% jump from quotes given about two months earlier, with Cambricon, MetaX and Iluvatar CoreX raising prices similarly.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "The domestic Chinese accelerator line is the main alternative to imported merchant GPUs there; when its prices jump this fast, that alternative is getting scarcer and dearer, not cheaper.",
+  "impact": {
+    "targets": [
+      "chips.ai-silicon-startups",
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "negative",
+    "mechanism": "Sharp price increases across the domestic accelerator field signal that the substitute supply pool is constrained, weakening it as a relief valve for buyers shut out of merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950",
+      "date": "2026-09-10",
+      "excerpt": "Huawei's Ascend 950DT accelerator card has risen above 250,000 yuan ($37,255), representing a 20-50% jump from quotes given customers about two months prior, depending on contract terms",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary wire exclusive citing channel quotes rather than published price lists."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "huawei",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -2,43 +2,11 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-09",
-  "capturedAt": "2026-09-09T01:28:55Z",
+  "capturedAt": "2026-09-10T13:03:15Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
   "gaps": [
-    {
-      "type": "source",
-      "id": "nvda-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "intc-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Intel earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['intc.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "lambda-gpu-pricing",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "coreweave-pricing",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'CoreWeave GPU pricing page' was not fetched. URL patterns: ['coreweave.com']",
-      "paywalledNote": null
-    },
     {
       "type": "source",
       "id": "trendforce-gpu-tracker",
@@ -81,14 +49,6 @@
     },
     {
       "type": "source",
-      "id": "nvda-10k-risk-factors",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'NVIDIA 10-K risk factor section (geopolitical / export control exposure)' was not fetched. URL patterns: ['investor.nvidia.com/annual-reports', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "semianalysis",
       "priority": "required",
       "acquisitionStatus": "paywalled",
@@ -126,29 +86,37 @@
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
       "paywalledNote": null
+    },
+    {
+      "type": "indicator",
+      "id": "gpuSpotPrice",
+      "priority": "optional",
+      "acquisitionStatus": "not-covered",
+      "reason": "Indicator 'gpuSpotPrice' (dimension: momentum) was not covered. Expected sources: ['gpu-marketplaces'].",
+      "paywalledNote": null
     }
   ],
   "gapCounts": {
-    "total": 15,
-    "source": 15,
-    "indicator": 0,
-    "required": 15,
+    "total": 11,
+    "source": 10,
+    "indicator": 1,
+    "required": 10,
     "preferred": 0,
-    "optional": 0,
+    "optional": 1,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://247wallst.com/investing/2026/09/07/arm-expands-into-ai-accelerators-with-samsung-but-its-not-the-data-center-goldmine-investors-hope-for/",
-    "https://cryptobriefing.com/anthropic-cuts-ties-iti-tech-advocacy/",
-    "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days",
-    "https://gokhshtein.com/news/2026-09-08-google-blackstone-ai-venture-faces-data-center-delays",
-    "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live",
-    "https://lambda.ai/pricing",
-    "https://newsroom.arm.com/news/arm-unveils-arm-ai-portal",
-    "https://nvidianews.nvidia.com/news/nvidia-to-acquire-hugging-face",
-    "https://shattered.io/google-ironwood-tpu-pricing-vs-nvidia-2026/",
-    "https://www.asacomputers.com/nvidia-h100-80gb-nvh100tcgpu-gpu-card.html"
+    "https://dealroom.co/news/info-iclajk-how-anthropic-clinched-517-billion-in-compute-deals-in-11-months/",
+    "https://finance.yahoo.com/technology/ai/articles/openai-spend-750-billion-compute-163922916.html",
+    "https://keplercompute.com/",
+    "https://nvidianews.nvidia.com/news/nvidia-expands-ai-infrastructure-capacity-in-partnership-with-australias-data-center-ecosystem",
+    "https://www.coreweave.com/pricing",
+    "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950",
+    "https://www.investing.com/news/stock-market-news/openai-says-working-with-samsung-on-nextgeneration-chips-deepening-cooperation-4892715",
+    "https://www.runpod.io/pricing",
+    "https://www.sec.gov/Archives/edgar/data/0001046179/000104617926000658/tsm-revenue20260910.htm",
+    "https://www.taipeitimes.com/News/biz/archives/2026/09/10/2003863982"
   ],
   "judgedIndicatorIds": [
     "D2",
@@ -160,7 +128,6 @@
     "designWins",
     "exportControlExposure",
     "flopsPerDollar",
-    "gpuSpotPrice",
     "grossMargin",
     "hbmSupplyCapex",
     "hyperscalerCapexRevision",

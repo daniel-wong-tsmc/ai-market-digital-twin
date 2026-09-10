@@ -1,0 +1,23 @@
+{
+  "seriesName": "OpenAI's publicly reported compute spending target through 2030, before and after its 2026 upward revision",
+  "unit": "US$ billions",
+  "form": "bars",
+  "sourceName": "Yahoo Finance (finance.yahoo.com)",
+  "points": [
+    {
+      "label": "OpenAI compute spend target through 2030, as reported Feb 2026 (Reuters via Yahoo Finance)",
+      "value": 600.0,
+      "sourceUrl": "https://finance.yahoo.com/news/openai-sees-compute-spend-around-223950561.html",
+      "publishedAt": "2026-02-20"
+    },
+    {
+      "label": "OpenAI compute spend target through 2030, as reported July 2026 (WSJ via Yahoo Finance)",
+      "value": 750.0,
+      "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/openai-lifts-planned-compute-spending-144917731.html",
+      "publishedAt": "2026-07-22"
+    }
+  ],
+  "pair": true,
+  "notes": "Both figures are OpenAI's own stated compute-spend target through 2030, republished by Yahoo Finance from two different wire sources (Reuters, then WSJ) roughly five months apart -- the second article itself states the $750B figure is 'up from roughly $600 billion earlier this year,' confirming these are the same measure at two points in time, not two different metrics. Both source pages are on finance.yahoo.com, satisfying the single-site rule. This only yields 2 dated points, presented here as a labelled before/after comparison pair (old target vs. revised target) rather than a 3+ point series, since no third same-site, same-metric figure with its own verifiable number could be found. The Nvidia '70% of demand' supply figure quoted in the day's bullet could not be paired here: no matching same-site bare-number 'demand' figure (only hedged phrasing like 'demand is much higher') was found to make a clean supply-vs-demand pair without violating the bare-number rule.",
+  "bulletIndex": 2
+}

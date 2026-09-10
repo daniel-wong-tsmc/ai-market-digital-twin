@@ -1,0 +1,44 @@
+{
+  "id": "finance-yahoo-com-1404e5b0-2026-09-2",
+  "statement": "OpenAI's planned compute spend through 2030 has been revised upward, described as a 25% increase from earlier 2026 estimates.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "The direction of the revision matters more than the level: budgets moving up within the same year signal demand running ahead of prior plans.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "An upward in-year revision to compute budgets raises the order book that vendors and clouds plan capacity against."
+  },
+  "evidence": [
+    {
+      "source": "finance.yahoo.com (Wall Street Journal-sourced)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/openai-spend-750-billion-compute-163922916.html",
+      "date": "2026-09-09",
+      "excerpt": "a 25% increase from earlier 2026 estimates",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary report; the prior-estimate baseline is attributed to a search-result summary rather than a primary source."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "openai",
+  "observedAt": "2026-09-09",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

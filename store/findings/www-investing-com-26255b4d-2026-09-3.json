@@ -1,0 +1,44 @@
+{
+  "id": "www-investing-com-26255b4d-2026-09-3",
+  "statement": "OpenAI launched GPT-6 Astra on September 4, with improved computer use, professional work, science, coding and cybersecurity performance.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Frequent frontier releases keep raising the compute needed both to train the next model and to serve the extra usage each release attracts.",
+  "impact": {
+    "targets": [
+      "models.frontier-closed",
+      "models.reasoning-agentic",
+      "applications.ai-coding",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "A new frontier model release lifts both training and serving compute needs, sustaining accelerator demand."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/openai-says-working-with-samsung-on-nextgeneration-chips-deepening-cooperation-4892715",
+      "date": "2026-09-09",
+      "excerpt": "OpenAI launched GPT-6 Astra on September 4, featuring improved performance in computer use, professional work, science, coding, and cybersecurity.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary wire report; release noted in passing without release-cadence detail."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "releaseCadence",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "openai",
+  "observedAt": "2026-09-09",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

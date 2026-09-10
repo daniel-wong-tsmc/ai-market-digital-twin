@@ -1,0 +1,46 @@
+{
+  "id": "nvidianews-nvidia-com-8ee3d8d0-2026-09-1",
+  "statement": "NVIDIA is working with Australian cloud and infrastructure partners on a buildout of up to 2 gigawatts by 2027 to host multiple generations of NVIDIA DSX AI factories.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named, dated gigawatt-scale commitment in a new country is fresh committed sockets for the vendor's platform, and it shows demand pull outside the usual US hyperscaler base.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "infrastructure.networking-fabric",
+      "energy.power-generation",
+      "energy.cooling"
+    ],
+    "direction": "positive",
+    "mechanism": "Land, power and shell capacity built specifically for the vendor's AI factory platform locks future accelerator, networking and software purchases to that platform and pulls through power and cooling equipment."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA Newsroom",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-expands-ai-infrastructure-capacity-in-partnership-with-australias-data-center-ecosystem",
+      "date": "2026-09-09",
+      "excerpt": "with up to a 2-gigawatt buildout by 2027",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary vendor newsroom announcement naming the participating operators and the capacity target."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: NVIDIA Newsroom",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-09-09",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

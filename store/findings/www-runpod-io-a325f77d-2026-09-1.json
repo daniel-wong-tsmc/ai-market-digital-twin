@@ -1,0 +1,45 @@
+{
+  "id": "www-runpod-io-a325f77d-2026-09-1",
+  "statement": "Runpod lists NVIDIA H100 SXM on-demand at $2.69 per GPU-hour on Community Cloud and $3.49 on Secure Cloud.",
+  "kind": "measured",
+  "value": {
+    "number": 2.69,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "The prior-generation training SKU's price at a self-serve venue is the widest-used reference for rental levels; no baseline is given, so it reads as a level only.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Static rental price level; recorded as a display overlay only, with no inferred change in demand or supply."
+  },
+  "evidence": [
+    {
+      "source": "runpod.io",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-09-10",
+      "excerpt": "H100 SXM '$2.69/hr' / '$3.49/hr'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own public price page, secondary tier; no reserved-term or regional pricing shown."
+  },
+  "dispersion": "conflicting same-key reports: value 6.94 -> 2.69 (tol 1%); sources: runpod.io",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "finance-yahoo-com-1404e5b0-2026-09-3",
+  "statement": "NVIDIA's CEO is quoted saying the company can currently supply only 70% of the demand it sees, with OpenAI still calling itself really short on capacity.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A vendor publicly conceding it cannot fill a third of demand is a direct statement that supply, not appetite, is the binding constraint right now.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "infrastructure.neocloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Unmet demand at the accelerator vendor lengthens effective waiting times for buyers and keeps allocation, not order intake, the limiting factor on shipments."
+  },
+  "evidence": [
+    {
+      "source": "finance.yahoo.com (Wall Street Journal-sourced)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/openai-spend-750-billion-compute-163922916.html",
+      "date": "2026-09-09",
+      "excerpt": "we have supply for 70%...Our demand is much higher than that.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet quoting an executive remark; no primary transcript or filing in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-09-09",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

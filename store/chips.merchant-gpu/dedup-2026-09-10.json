@@ -1,0 +1,242 @@
+{
+  "asOf": "2026-09",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "dealroom-co-86775624-2026-09-2",
+      "entity": "anthropic",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "dealroom-co-86775624-2026-09-3",
+      "entity": "anthropic",
+      "indicatorId": "apiArr",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-9d51395c-2026-09-2",
+      "entity": "huawei",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-9d51395c-2026-09-3",
+      "entity": "huawei",
+      "indicatorId": "exportControlExposure",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-9d51395c-2026-09-1",
+      "entity": "huawei",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "keplercompute-com-2dc6dbe9-2026-09-1",
+      "entity": "kepler compute",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-taipeitimes-com-fa24bea3-2026-09-1",
+      "entity": "kioxia",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-taipeitimes-com-fa24bea3-2026-09-3",
+      "entity": "kioxia",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-26255b4d-2026-09-1",
+      "entity": "openai",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-1404e5b0-2026-09-2",
+      "entity": "openai",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-1404e5b0-2026-09-1",
+      "entity": "openai",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "www-runpod-io-a325f77d-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "www-runpod-io-dccdb718-2026-08-1",
+      "detail": "value 7.89 -> 2.69 (tol 1%)"
+    },
+    {
+      "findingId": "nvidianews-nvidia-com-8ee3d8d0-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "www-tradingkey-com-3853b285-2026-09-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "finance-yahoo-com-1404e5b0-2026-09-3",
+      "entity": "nvidia",
+      "indicatorId": "leadTimes",
+      "verdict": "update",
+      "priorFindingId": "www-newegg-com-c6e5a7e1-2026-09-2",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "www-investing-com-26255b4d-2026-09-2",
+      "entity": "openai",
+      "indicatorId": "apiArr",
+      "verdict": "update",
+      "priorFindingId": "www-fool-com-328e7db3-2026-08-1",
+      "detail": "magnitude 3 -> 2"
+    },
+    {
+      "findingId": "www-investing-com-26255b4d-2026-09-3",
+      "entity": "openai",
+      "indicatorId": "releaseCadence",
+      "verdict": "update",
+      "priorFindingId": "seekingalpha-com-669672dd-2026-09-2",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "www-sec-gov-5cdf8262-2026-09-1",
+      "entity": "tsmc",
+      "indicatorId": "odmMonthlyAiRevenue",
+      "verdict": "update",
+      "priorFindingId": "pr-tsmc-com-7f560c3b-2026-08-1",
+      "detail": "magnitude 2 -> 3"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "dealroom-co-86775624-2026-09-1",
+      "entity": "anthropic",
+      "indicatorId": "rpoBacklog",
+      "verdict": "duplicate",
+      "priorFindingId": "www-datacenterdynamics-com-06432b6e-2026-09-1",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "keplercompute-com-2dc6dbe9-2026-09-2",
+      "entity": "kepler compute",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-taipeitimes-com-fa24bea3-2026-09-2",
+      "entity": "kioxia",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-coreweave-com-417be05b-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-coreweave-com-417be05b-2026-09-3",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-coreweave-com-417be05b-2026-09-4",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-coreweave-com-417be05b-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": "www-coreweave-com-a883627d-2026-08-1",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "www-runpod-io-a325f77d-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-runpod-io-a325f77d-2026-09-3",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-runpod-io-a325f77d-2026-09-4",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "nvidianews-nvidia-com-8ee3d8d0-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-sec-gov-5cdf8262-2026-09-2",
+      "entity": "tsmc",
+      "indicatorId": "odmMonthlyAiRevenue",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

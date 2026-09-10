@@ -1,0 +1,237 @@
+{
+  "headline": "The memory squeeze reaches China's own chips",
+  "deck": "Chinese chipmakers are raising prices because they cannot get enough stacked memory, the same shortage that keeps Nvidia from filling a third of the orders it sees.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "China's alternatives get more expensive too",
+      "paragraphs": [
+        "Chinese chipmakers, including Huawei and Cambricon, raised their processor prices today because they cannot get enough high-bandwidth memory. Huawei's Ascend 950DT card has passed 250,000 yuan, a jump of 20 to 50 percent from quotes given about two months ago. Cambricon, MetaX and Iluvatar CoreX moved in the same direction.",
+        "The cause named in the reporting is the U.S. export controls put in place in December 2024, which cut Chinese buyers off from the main memory suppliers and pushed them into grey-market channels at several times international prices.",
+        "This matters because the home-grown Chinese parts were meant to be the way around a shortage of Nvidia chips. Instead they are stuck behind the same wall. The scarce thing is not the processor design; it is the memory that has to sit beside it."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "www-investing-com-9d51395c-2026-09-1",
+        "www-investing-com-9d51395c-2026-09-2",
+        "www-investing-com-9d51395c-2026-09-3"
+      ],
+      "sourceLine": "Reuters, reported today.",
+      "relatedDocs": [
+        {
+          "url": "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950",
+          "title": "China's AI chipmakers raise prices as memory shortage bites",
+          "outlet": "Reuters (via Investing.com)",
+          "date": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The order book keeps growing anyway",
+      "paragraphs": [
+        "OpenAI now plans to spend roughly $750 billion on compute through 2030, described as a 25 percent increase on its own earlier estimates this year. That is one customer, raising its plan again, in a year when it already could not get what it wanted.",
+        "Nvidia's chief executive said this week that the company can supply only about 70 percent of the demand it sees, and OpenAI still calls itself really short on capacity. Nvidia also said it is working with Australian partners on a build-out of up to 2 gigawatts by 2027 to house its machines.",
+        "So the gap is not closing from the demand side. Every extra dollar of planned spending lands on the same queue."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "finance-yahoo-com-1404e5b0-2026-09-1",
+        "finance-yahoo-com-1404e5b0-2026-09-2",
+        "finance-yahoo-com-1404e5b0-2026-09-3",
+        "nvidianews-nvidia-com-8ee3d8d0-2026-09-1"
+      ],
+      "sourceLine": "Wall Street Journal via Yahoo Finance (9 September); NVIDIA Newsroom (9 September).",
+      "relatedDocs": [
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/openai-spend-750-billion-compute-163922916.html",
+          "title": "OpenAI plans about $750 billion of compute spending through 2030",
+          "outlet": "finance.yahoo.com (Wall Street Journal-sourced)",
+          "date": "2026-09-09"
+        },
+        {
+          "url": "https://nvidianews.nvidia.com/news/nvidia-expands-ai-infrastructure-capacity-in-partnership-with-australias-data-center-ecosystem",
+          "title": "NVIDIA expands AI infrastructure capacity with Australian partners",
+          "outlet": "NVIDIA Newsroom",
+          "date": "2026-09-09"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "A first hint that buyers have a limit",
+      "paragraphs": [
+        "Kioxia, which makes the flash memory that goes into these machines, raised prices 70 percent in the June quarter, on top of a prior quarter with increases above 100 percent. Its chief executive then said another 70 percent jump seems unlikely, because even the biggest cloud buyers have limited budgets.",
+        "That is the first plain statement from a supplier that there is a ceiling on how much cost can be passed along. It is a comment, not a price cut, and prices have not come down.",
+        "Meanwhile the factories keep loading. TSMC reported August revenue of NT$514.81 billion today, up 53.3 percent on the same month last year and 10.1 percent on July. Output is still climbing; what it costs to fill each machine with memory is climbing faster."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "www-taipeitimes-com-fa24bea3-2026-09-1",
+        "www-taipeitimes-com-fa24bea3-2026-09-3",
+        "www-sec-gov-5cdf8262-2026-09-1"
+      ],
+      "sourceLine": "Taipei Times, today; TSMC monthly revenue filing at SEC EDGAR, today.",
+      "relatedDocs": [
+        {
+          "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/10/2003863982",
+          "title": "Kioxia flash prices rose 70% in the June quarter",
+          "outlet": "Taipei Times",
+          "date": "2026-09-10"
+        },
+        {
+          "url": "https://www.sec.gov/Archives/edgar/data/0001046179/000104617926000658/tsm-revenue20260910.htm",
+          "title": "TSMC August 2026 revenue of NT$514.81 billion",
+          "outlet": "SEC EDGAR (TSMC Form 6-K)",
+          "date": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Watch whether the Kioxia comment becomes a pattern. If other suppliers also say buyers have hit their budget limit, the run of component price rises stops being one-way, and the cost of building a machine settles. Until then, a 70 percent quarterly rise is the going rate.",
+        "Watch the Chinese prices. Huawei's card above 250,000 yuan, up 20 to 50 percent in two months, is the clearest read on how scarce memory is outside the contracted supply. If those quotes keep climbing, nothing has loosened anywhere.",
+        "And watch for memory that does not come from the same three factories. Kepler Compute is marketing a memory technology aimed at inference, backed by $468 million raised, with samples this year and production in 2027. A working alternative would be the first real relief; a slipped date would mean another year of the same queue."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-taipeitimes-com-fa24bea3-2026-09-1",
+        "www-taipeitimes-com-fa24bea3-2026-09-3",
+        "www-investing-com-9d51395c-2026-09-2",
+        "keplercompute-com-2dc6dbe9-2026-09-1"
+      ],
+      "sourceLine": "Taipei Times and Reuters, today; keplercompute.com, checked 9 September.",
+      "relatedDocs": [
+        {
+          "url": "https://keplercompute.com/",
+          "title": "Kepler Compute markets a memory technology for inference",
+          "outlet": "keplercompute.com (company site)",
+          "date": "2026-09-09"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What one chip costs to buy is the plainest test of whether the shortage is easing.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "The biggest buyers keep raising their plans, which keeps the queue for parts long.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Shipments show how much of all this spending actually turns into working machines.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-09",
+      "text": "Huawei's Ascend 950DT card passed 250,000 yuan today, up 20 to 50 percent from quotes given about two months earlier.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "TSMC reported August revenue of NT$514.81 billion, up 53.3 percent on a year earlier and 10.1 percent on July.",
+      "scene": 3
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Huawei's Ascend 950DT card now sells above 250,000 yuan, up 20 to 50 percent in two months, as the memory shortage reaches China's own chips.",
+      "claimFindingIds": [
+        "www-investing-com-9d51395c-2026-09-1",
+        "www-investing-com-9d51395c-2026-09-2"
+      ]
+    },
+    {
+      "text": "OpenAI now plans about $750 billion of compute spending through 2030, a 25 percent rise, while Nvidia says it can supply only 70 percent of demand.",
+      "claimFindingIds": [
+        "finance-yahoo-com-1404e5b0-2026-09-1",
+        "finance-yahoo-com-1404e5b0-2026-09-2",
+        "finance-yahoo-com-1404e5b0-2026-09-3"
+      ]
+    },
+    {
+      "text": "Kioxia raised flash memory prices 70 percent in the June quarter, but its chief says a repeat is unlikely because even the largest buyers have limited budgets.",
+      "claimFindingIds": [
+        "www-taipeitimes-com-fa24bea3-2026-09-1",
+        "www-taipeitimes-com-fa24bea3-2026-09-3"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "The memory shortage now forces Chinese chipmakers to raise prices, with Huawei's card up 20 to 50 percent in two months, while Nvidia says it can supply only 70 percent of the demand it sees.",
+      "claimFindingIds": [
+        "www-investing-com-9d51395c-2026-09-1",
+        "www-investing-com-9d51395c-2026-09-2",
+        "finance-yahoo-com-1404e5b0-2026-09-3"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived on market share. The day's competitive news is that Chinese alternatives are raising prices under the same memory limit, which neither helps nor hurts the leader's position.",
+      "claimFindingIds": [
+        "www-investing-com-9d51395c-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "worsened",
+      "reasoning": "Scarce high-bandwidth memory pushed Chinese chipmakers to raise processor prices, with Huawei's Ascend 950DT above 250,000 yuan, up 20 to 50 percent from about two months earlier.",
+      "claimFindingIds": [
+        "www-investing-com-9d51395c-2026-09-1",
+        "www-investing-com-9d51395c-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived on how much memory each chip carries. Today's memory news is about price and scarcity, not the amount fitted per accelerator.",
+      "claimFindingIds": [
+        "www-investing-com-9d51395c-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-high-bandwidth-memory-and-server-memory",
+      "status": "worsened",
+      "reasoning": "Memory scarcity spread further: Chinese chipmakers raised prices on it, and Kioxia's flash prices rose 70 percent in the June quarter after a prior quarter above 100 percent.",
+      "claimFindingIds": [
+        "www-investing-com-9d51395c-2026-09-1",
+        "www-taipeitimes-com-fa24bea3-2026-09-1"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-10",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "3d994b1869dae0c4764ff79980a8edcac530ff2b99683ce2d9eca0fc6d478a28",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-09-10T13:40:41.589394+00:00"
+  }
+}

@@ -4,37 +4,18 @@
   "lines": [
     {
       "dimensions": [
-        "momentum",
-        "bottleneck"
-      ],
-      "findingIds": [
-        "www-fool-com-12234ce0-2026-08-2",
-        "www-aroged-com-a319f429-2026-09-1",
-        "www-aroged-com-a319f429-2026-09-2",
-        "www-freemalaysiatoday-com-7dfc89b4-2026-08-3"
-      ],
-      "thesisIds": [
-        "vendor-guidance-now-measures-the-shortfall-not-the-demand",
-        "building-the-plants-is-now-as-slow-as-filling-them",
-        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing"
-      ],
-      "watchItem": "Demand keeps running ahead of what the chain can build: the leading accelerator vendor guided next fiscal year to about 70 percent growth while saying customer forecasts implied roughly 140 percent, and TSMC says it still cannot meet demand while building about twenty plants at once. Wafer-start planning is exposed to how fast construction labour and tool deliveries let new lines come up, with tool demand now near 1.9 times the level projected nine months earlier."
-    },
-    {
-      "dimensions": [
         "bottleneck",
-        "unitEconomics"
+        "moat"
       ],
       "findingIds": [
         "siliconanalysts-com-ab8c9c31-2026-09-1",
-        "siliconanalysts-com-ab8c9c31-2026-09-2",
-        "cryptobriefing-com-c3c1a1c3-2026-08-2"
+        "siliconanalysts-com-ab8c9c31-2026-09-2"
       ],
       "thesisIds": [
         "supply-constraint-binding",
         "packaging-tightness-starts-to-ease-while-memory-does-not"
       ],
-      "watchItem": "Advanced-packaging allocation is again described as the binding limit on AI system availability, with lines quoted at roughly 52 to 78 weeks and capacity around 105,000 to 130,000 wafers a month by the fourth quarter. How much accelerator revenue the market can actually realise turns on that allocation more than on wafer starts."
+      "watchItem": "Advanced-packaging allocation is again described as the binding limit on AI system availability, with lead times of roughly 52 to 78 weeks against capacity of about 105,000 to 130,000 wafers per month by the fourth quarter of 2026. The exposure is that packaged output, not wafer output, sets how much accelerator revenue the chain can realize."
     },
     {
       "dimensions": [
@@ -43,32 +24,45 @@
       ],
       "findingIds": [
         "supplyics-com-c83015c2-2026-08-3",
-        "www-forbes-com-7c91863a-2026-07-2",
-        "siliconanalysts-com-528fac70-2026-07-4"
+        "www-forbes-com-7c91863a-2026-07-2"
       ],
       "thesisIds": [
         "ai-packaging-supply-is-concentrated-in-a-few-buyers",
         "customer-concentration-risk"
       ],
-      "watchItem": "Advanced-packaging capacity is pre-booked above 85 percent for 2026 and 2027, with one buyer holding roughly 60 percent and the top three more than 85 percent. That concentration means a single buyer trimming orders would leave slots that are hard to refill quickly."
+      "watchItem": "Advanced-packaging capacity is pre-booked at more than 85 percent for 2026 and 2027, with one customer at roughly 60 percent of 2026 capacity and the top three customers above 85 percent of total capacity. That concentration means a single buyer trimming orders leaves slots that are hard to refill."
     },
     {
       "dimensions": [
-        "moat",
-        "competitiveStructure"
+        "momentum",
+        "bottleneck"
       ],
       "findingIds": [
-        "cryptobriefing-com-c3c1a1c3-2026-08-1",
-        "techsoda-substack-com-3b7a4ff5-2026-08-1",
-        "techsoda-substack-com-3b7a4ff5-2026-08-3",
-        "techsoda-substack-com-3b7a4ff5-2026-08-4",
-        "www-trendforce-com-b8196a71-2026-08-1"
+        "www-sec-gov-5cdf8262-2026-09-1",
+        "www-aroged-com-a319f429-2026-09-1",
+        "www-aroged-com-a319f429-2026-09-2"
       ],
       "thesisIds": [
-        "packaging-work-starts-to-spread-beyond-tsmc",
-        "the-alternative-packaging-route-has-its-own-choke-point"
+        "building-the-plants-is-now-as-slow-as-filling-them",
+        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing"
       ],
-      "watchItem": "A second packaging route is gathering real orders: Google has committed to more than three million units of Intel bridge packaging for delivery in 2028, Intel reports high yields and a growing backlog aimed at volume in 2027, and Intel holds about 14 percent of global 2.5D capacity against TSMC's roughly 70 percent. The route has its own limits, since its sole silicon-capacitor supplier is already fully booked."
+      "watchItem": "Leading-node loading is still running ahead of build-out: August 2026 revenue rose 53.3 percent year over year, the company says it cannot meet current demand while building about 20 plants at once, and its own quarterly tool demand has climbed to roughly 1.9 times the level projected in December 2025. Construction labour and equipment delivery are the named pacing items to watch."
+    },
+    {
+      "dimensions": [
+        "bottleneck",
+        "momentum"
+      ],
+      "findingIds": [
+        "www-fool-com-12234ce0-2026-08-2",
+        "www-fool-com-12234ce0-2026-08-3",
+        "en-sedaily-com-08f31bef-2026-09-1"
+      ],
+      "thesisIds": [
+        "vendor-guidance-now-measures-the-shortfall-not-the-demand",
+        "memory-buffers-have-run-down-to-almost-nothing"
+      ],
+      "watchItem": "Memory now caps how much of the accelerator ramp converts into shipments: the leading vendor guided fiscal 2028 growth to about 70 percent against customer forecasts implying roughly 140 percent, citing memory, while supplier stockpiles have fallen below ten days. Wafer and packaging plans booked against the unconstrained demand figure carry the risk of sitting idle behind the memory limit."
     },
     {
       "dimensions": [
@@ -76,18 +70,15 @@
         "momentum"
       ],
       "findingIds": [
-        "www-trendforce-com-01be0e4e-2026-08-1",
+        "www-faf-ae-6bcac1ba-2026-07-2",
         "qz-com-36c37a60-2026-08-1",
-        "finance-yahoo-com-61f89a99-2026-09-1",
-        "www-investing-com-81ce92bb-2026-09-1",
-        "www-investing-com-b7ff2af7-2026-08-3"
+        "www-trendforce-com-01be0e4e-2026-08-1"
       ],
       "thesisIds": [
         "custom-asic-substitution",
-        "model-labs-become-the-biggest-custom-chip-customers",
-        "a-third-designer-enters-the-custom-ai-chip-business"
+        "model-labs-become-the-biggest-custom-chip-customers"
       ],
-      "watchItem": "The leading-node customer base is broadening from merchant accelerator vendors toward model builders and cloud in-house parts: OpenAI's first inference chip is built on a 3-nanometre process, Microsoft is reported to be negotiating capacity for upward of 300,000 of its own accelerators for 2027, and Broadcom guides this year's AI chip revenue to about $58 billion with a stated path to $230 billion in fiscal 2028. A third design house is also entering, with its first part in production in the fourth quarter of 2026."
+      "watchItem": "The leading-node customer base is broadening from merchant accelerator vendors toward custom parts, with custom chip growth projected at 44.6 percent versus 16.1 percent for merchant GPUs and 27.8 percent of the server market in 2026, Microsoft negotiating capacity for upward of 300,000 Maia 300 chips, and OpenAI's first inference chip built on a 3nm process. The mix shift changes which customers hold the wafers rather than the total pulled."
     },
     {
       "dimensions": [
@@ -97,53 +88,44 @@
       "findingIds": [
         "finance-biggo-com-b332e712-2026-08-3",
         "finance-biggo-com-cda170af-2026-08-1",
-        "www-idc-com-9e83b089-2026-09-1",
-        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1"
+        "www-tradingkey-com-855cb780-2026-07-2"
       ],
       "thesisIds": [
-        "rising-memory-costs-inflate-ai-server-economics",
         "chip-vendors-pass-memory-costs-into-system-prices",
-        "the-second-largest-foundry-fills-up-and-raises-prices",
         "memory-makers-capture-a-growing-share-of-ai-server-profit"
       ],
-      "watchItem": "Bargaining power on price is shifting toward whoever holds the scarce input rather than the chip designer: memory costs are pushing the leading vendor's gross margin from 75 percent toward a stated floor of 71 to 72 percent, it is raising system prices by more than 15 percent from early next year, and memory and flash costs are reported up over 300 percent year on year. Samsung has also lifted advanced contract chipmaking prices 10 to 15 percent on new orders."
-    },
-    {
-      "dimensions": [
-        "bottleneck",
-        "unitEconomics"
-      ],
-      "findingIds": [
-        "en-sedaily-com-0a0f0276-2026-09-1",
-        "parameter-io-718c27d9-2026-09-3",
-        "en-sedaily-com-0a0f0276-2026-09-3",
-        "www-investing-com-87498f82-2026-08-1"
-      ],
-      "thesisIds": [
-        "memory-buffers-have-run-down-to-almost-nothing",
-        "memory-supply-is-the-new-choke-point-on-accelerator-shipments"
-      ],
-      "watchItem": "Stacked memory competes for the same silicon and leaves no cushion: buffers at the two largest suppliers have fallen below ten days, the newest stacked memory is reported to consume about three times the wafer capacity of standard memory, and bit demand is expected to outgrow bit supply by more than ten percentage points next year. One supplier says it can serve only about half of what customers ask for."
+      "watchItem": "Margin along the chain is moving toward the memory makers: the leading accelerator vendor's gross margin steps down from 75 percent toward a stated 71 to 72 percent floor on memory costs and it is raising AI server prices by more than 15 percent, while TSMC reported a 67.7 percent gross margin with 2026 revenue growth guided above 40 percent. Watch whether buyers keep absorbing component pass-through or start capping it."
     },
     {
       "dimensions": [
         "competitiveStructure",
-        "strategicRisk",
         "moat"
       ],
       "findingIds": [
-        "www-intc-com-9e1300a4-2026-08-2",
-        "www-freemalaysiatoday-com-7dfc89b4-2026-08-4",
-        "techcrunch-com-6b79ddb7-1",
-        "www-freepressjournal-in-36c153cb-2026-08-1",
-        "www-taipeitimes-com-9d7a9c86-2026-09-1"
+        "techsoda-substack-com-3b7a4ff5-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-3",
+        "cryptobriefing-com-c3c1a1c3-2026-08-1",
+        "techsoda-substack-com-3b7a4ff5-2026-08-5"
       ],
       "thesisIds": [
-        "intel-returns-as-a-data-center-supplier",
-        "tariffs-on-finished-ai-hardware-become-a-new-policy-risk",
-        "us-onshoring-broadens-the-ai-hardware-supply-base"
+        "packaging-work-starts-to-spread-beyond-tsmc",
+        "the-alternative-packaging-route-has-its-own-choke-point"
       ],
-      "watchItem": "Second-source and policy events are stacking up around the foundry position: Intel's foundry revenue grew 31 percent year over year with margins improving, Samsung holds about 7 percent of foundry revenue against TSMC's more than 70 percent and is in early talks to make a model builder's custom chip on a 2-nanometre process, and Washington is preparing chip tariffs that would reach finished servers with duty-free allowances sized to a company's United States fabrication investment."
+      "watchItem": "A second packaging route is forming around Intel's bridge technology, with reported yield above 90 percent at roughly half the cost of CoWoS, a Google order for more than 3 million units for 2028 delivery, and Intel at about 13.7 percent of 2.5D capacity against TSMC near 70 percent. The route is described as a better fit for custom chips than for high-bandwidth accelerators, so the near-term exposure sits in custom-silicon packaging share."
+    },
+    {
+      "dimensions": [
+        "strategicRisk"
+      ],
+      "findingIds": [
+        "www-taipeitimes-com-9d7a9c86-2026-09-1",
+        "www-freepressjournal-in-36c153cb-2026-08-1"
+      ],
+      "thesisIds": [
+        "us-onshoring-broadens-the-ai-hardware-supply-base",
+        "tariffs-on-finished-ai-hardware-become-a-new-policy-risk"
+      ],
+      "watchItem": "Policy is tying capacity location to market access: planned Arizona investment now totals $265 billion, while Washington is preparing semiconductor tariffs extending to finished servers with duty-free allowances sized to each company's US fabrication investment, and no rate or start date has been set. The open question is how the allowance formula treats investment already committed."
     }
   ]
 }

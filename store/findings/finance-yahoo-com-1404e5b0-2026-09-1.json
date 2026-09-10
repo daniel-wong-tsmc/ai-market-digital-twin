@@ -1,0 +1,49 @@
+{
+  "id": "finance-yahoo-com-1404e5b0-2026-09-1",
+  "statement": "OpenAI now plans to spend roughly $750 billion on compute infrastructure through 2030.",
+  "kind": "measured",
+  "value": {
+    "number": 750.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A planned three-quarter-trillion-dollar compute budget is one of the largest single forward demand pools for accelerators, cloud capacity and power over the rest of the decade.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Planned infrastructure spend of this size flows through partner clouds and hardware vendors as multi-year accelerator, network and data-center orders."
+  },
+  "evidence": [
+    {
+      "source": "finance.yahoo.com (Wall Street Journal-sourced)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/openai-spend-750-billion-compute-163922916.html",
+      "date": "2026-09-09",
+      "excerpt": "OpenAI now plans to spend roughly $750 billion on compute infrastructure through 2030",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator carrying a newspaper report; no filing or company statement in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "openai",
+  "observedAt": "2026-09-09",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

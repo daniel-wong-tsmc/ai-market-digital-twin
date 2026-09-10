@@ -1,0 +1,43 @@
+{
+  "id": "dealroom-co-86775624-2026-09-2",
+  "statement": "Anthropic's announced compute mix includes multiple gigawatts of Google TPUs and 2 GW of AMD chips alongside its NVIDIA-based capacity.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A leading lab deliberately spreading gigawatt-scale capacity across TPUs and AMD shows non-NVIDIA accelerators are being bought at scale, which both adds industry supply and splits the merchant-GPU share of a marquee buyer.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Committed TPU and AMD gigawatts substitute for part of the accelerator capacity that would otherwise be met by the leading merchant GPU vendor, widening effective supply while diluting one vendor's share of this buyer."
+  },
+  "evidence": [
+    {
+      "source": "dealroom.co",
+      "url": "https://dealroom.co/news/info-iclajk-how-anthropic-clinched-517-billion-in-compute-deals-in-11-months/",
+      "date": "2026-09-06",
+      "excerpt": "multiple GW of Google TPUs; 2 GW of AMD chips",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary restatement of another outlet's reporting; capacity splits are cited without primary contract documents."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "anthropic",
+  "observedAt": "2026-09-06",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

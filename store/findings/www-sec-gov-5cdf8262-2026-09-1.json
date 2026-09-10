@@ -1,0 +1,48 @@
+{
+  "id": "www-sec-gov-5cdf8262-2026-09-1",
+  "statement": "TSMC reported August 2026 consolidated revenue of NT$514.81 billion, up 53.3 percent year over year and 10.1 percent from July 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 53.3,
+    "unit": "pct_yoy"
+  },
+  "trend": "rising",
+  "why": "Monthly foundry revenue is the fastest hard read on whether AI silicon is actually shipping, and an acceleration to 53.3 percent says wafer output is still climbing, not plateauing.",
+  "impact": {
+    "targets": [
+      "chips.foundry-packaging",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.networking-silicon",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "positive",
+    "mechanism": "Record foundry revenue reflects wafer and packaging output being consumed by AI accelerator and networking customers, confirming that shipments behind the order book are being made."
+  },
+  "evidence": [
+    {
+      "source": "SEC EDGAR (TSMC Form 6-K)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001046179/000104617926000658/tsm-revenue20260910.htm",
+      "date": "2026-09-10",
+      "excerpt": "Consolidated revenue for August 2026 was 'NT$514.81 billion', an increase of '10.1 percent' from July 2026 (month-over-month) and an increase of '53.3 percent' from August 2025 (year-over-year).",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: company revenue report filed as a Form 6-K with the SEC."
+  },
+  "dispersion": "conflicting same-key reports: value 39.3 -> 53.3 (tol 1%); sources: SEC EDGAR (TSMC Form 6-K)",
+  "asOf": "2026-09",
+  "indicatorId": "odmMonthlyAiRevenue",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "tsmc",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

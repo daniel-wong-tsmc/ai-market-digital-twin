@@ -1,0 +1,45 @@
+{
+  "id": "www-investing-com-26255b4d-2026-09-1",
+  "statement": "OpenAI is deepening joint production and research with Samsung Electronics on next-generation chips, alongside its Broadcom-developed Jalapeno inference chip manufactured by TSMC.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "The largest single buyer of AI compute is building its own silicon path with multiple partners, which over time adds accelerator supply that does not come from the merchant GPU vendor.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "chips.hbm-memory",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "mixed",
+    "mechanism": "Custom inference silicon and a broadened memory and manufacturing partnership expand the buyer's non-merchant accelerator options while pulling foundry and memory capacity toward those parts."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/openai-says-working-with-samsung-on-nextgeneration-chips-deepening-cooperation-4892715",
+      "date": "2026-09-09",
+      "excerpt": "One of the areas where we have made the most progress...is our joint production and research on next-generation chips.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary wire report of a press-conference remark; the document notes specific technical details and timelines have not been disclosed."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "openai",
+  "observedAt": "2026-09-09",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

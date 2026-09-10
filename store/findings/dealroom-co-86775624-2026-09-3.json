@@ -1,0 +1,47 @@
+{
+  "id": "dealroom-co-86775624-2026-09-3",
+  "statement": "Anthropic's annualized revenue is reported to have exceeded $65 billion, with OpenAI's above $40 billion as of July 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 65.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Revenue at this run-rate is the cash engine that makes the compute commitments fundable, so it underwrites the durability of accelerator demand rather than just the announcement of it.",
+  "impact": {
+    "targets": [
+      "models.frontier-closed",
+      "models.reasoning-agentic",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher model-vendor revenue funds continued inference and training capacity purchases, sustaining orders for accelerators and cloud capacity."
+  },
+  "evidence": [
+    {
+      "source": "dealroom.co",
+      "url": "https://dealroom.co/news/info-iclajk-how-anthropic-clinched-517-billion-in-compute-deals-in-11-months/",
+      "date": "2026-09-06",
+      "excerpt": "Anthropic's annualized revenue reportedly exceeded $65 billion; OpenAI's exceeded $40 billion as of July 2026.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet, figure flagged as reported rather than disclosed by the company."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "apiArr",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "anthropic",
+  "observedAt": "2026-09-06",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,43 @@
+{
+  "id": "www-investing-com-9d51395c-2026-09-3",
+  "statement": "The Chinese HBM shortage is attributed to U.S. export controls implemented in December 2024, pushing buyers into grey-market channels at several times international prices.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Export controls are what split the market in two: they cut a roughly $50 billion domestic chip sector off from normal memory supply and equally foreclose that market to controlled Western parts.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "mixed",
+    "mechanism": "Controls foreclose China revenue for controlled accelerators and memory while also throttling the domestic substitute, so the demand that would otherwise flow to merchant GPUs stays out of reach."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950",
+      "date": "2026-09-10",
+      "excerpt": "the shortage stems from U.S. export controls implemented in December 2024 restricting advanced HBM exports to China",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary wire exclusive; policy background is summarised rather than sourced to the rule text."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "huawei",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

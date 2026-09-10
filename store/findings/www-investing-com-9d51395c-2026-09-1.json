@@ -1,0 +1,44 @@
+{
+  "id": "www-investing-com-9d51395c-2026-09-1",
+  "statement": "Chinese AI chipmakers including Huawei and Cambricon have raised processor prices because of high-bandwidth memory supply constraints.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "When memory scarcity is severe enough to force chip price rises, it confirms HBM is the binding bottleneck on accelerator output across the whole chain, not just in China.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Tight HBM allocation limits how many accelerator packages can be finished, so memory scarcity passes straight into higher finished-chip prices and constrained shipments."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950",
+      "date": "2026-09-10",
+      "excerpt": "Chinese AI chipmakers including Huawei and Cambricon have significantly increased prices for their processors due to high-bandwidth memory (HBM) supply constraints.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary wire exclusive based on unnamed channel sources; no filings."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "huawei",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

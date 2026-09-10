@@ -1,0 +1,44 @@
+{
+  "id": "www-investing-com-26255b4d-2026-09-2",
+  "statement": "ChatGPT Enterprise users at South Korean companies rose roughly 28-fold year over year through August.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Paid enterprise seat growth of this scale in one country is direct evidence that inference workloads, and the compute behind them, keep expanding.",
+  "impact": {
+    "targets": [
+      "applications.enterprise-copilots",
+      "models.frontier-closed",
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "More paid enterprise seats raise inference token volume, which pulls through cloud capacity and accelerator purchases."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/openai-says-working-with-samsung-on-nextgeneration-chips-deepening-cooperation-4892715",
+      "date": "2026-09-09",
+      "excerpt": "ChatGPT Enterprise users at South Korean companies surged approximately 28-fold year-over-year through August",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary wire report citing company-supplied adoption figures with no absolute base."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "apiArr",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "openai",
+  "observedAt": "2026-09-09",
+  "capturedAt": "2026-09-10T12:48:32Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
