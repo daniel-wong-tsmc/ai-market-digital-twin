@@ -1,0 +1,45 @@
+{
+  "id": "cryptobriefing-com-2079a6de-2026-09-2",
+  "statement": "Nvidia posted 13% sequential growth in hyperscale revenue during Q2 of fiscal year 2027, per this trade report.",
+  "kind": "measured",
+  "value": {
+    "number": 13.0,
+    "unit": "pct_qoq"
+  },
+  "trend": "rising",
+  "why": "Sequential hyperscale revenue growth is the most direct read on whether the largest cloud buyers are still increasing merchant-GPU purchases quarter to quarter.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Continued sequential revenue growth from hyperscale customers indicates order flow for datacenter GPUs is still expanding rather than plateauing."
+  },
+  "evidence": [
+    {
+      "source": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/nvidia-grace-blackwell-shipments-increase/",
+      "date": "2026-09-10",
+      "excerpt": "13% sequential growth in hyperscale revenue during Q2 of its fiscal year 2027.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary open-web trade outlet only; no filing or transcript cited in the document, and the piece flags parts of its reporting as unconfirmed."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

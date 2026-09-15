@@ -1,0 +1,59 @@
+{
+  "seriesName": "Microsoft quarterly capital expenditure",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "Hallucination Yield (Microsoft Capex Tracker)",
+  "points": [
+    {
+      "label": "Q1 2024",
+      "value": 11.0,
+      "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+      "publishedAt": "2026-09-11"
+    },
+    {
+      "label": "Q3 2024",
+      "value": 14.9,
+      "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+      "publishedAt": "2026-09-11"
+    },
+    {
+      "label": "Q4 2024",
+      "value": 15.8,
+      "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+      "publishedAt": "2026-09-11"
+    },
+    {
+      "label": "Q1 2025",
+      "value": 16.7,
+      "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+      "publishedAt": "2026-09-11"
+    },
+    {
+      "label": "Q3 2025",
+      "value": 19.4,
+      "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+      "publishedAt": "2026-09-11"
+    },
+    {
+      "label": "Q4 2025",
+      "value": 29.9,
+      "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+      "publishedAt": "2026-09-11"
+    },
+    {
+      "label": "Q1 2026",
+      "value": 31.9,
+      "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+      "publishedAt": "2026-09-11"
+    },
+    {
+      "label": "Q2 2026",
+      "value": 41.0,
+      "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+      "publishedAt": "2026-09-11"
+    }
+  ],
+  "pair": false,
+  "notes": "This series tracks Microsoft's quarterly capital expenditure (in US$ billions), not gigawatt capacity directly -- no site was found publishing a numeric time series for Microsoft's gigawatt buildout itself (the 12GW-to-38GW-by-2032 figures from Bloomberg/Yahoo Finance are single point-in-time targets, not a series). This capex ramp is offered as context supporting the same underlying story (Microsoft rapidly scaling infrastructure spend to meet compute demand it currently cannot fully serve). All eight points come from one page, a capex tracker aggregating Microsoft's own official disclosures and 10-Q filings; the page itself states it does not interpolate missing quarters. Q2/Q1 2026 labeled as 'Official source' rather than a specific 10-Q on the page; some quarters (e.g. Q2 2024, Q2 2025) are absent from the tracker and were not included here since the tracker did not report them.",
+  "bulletIndex": 2
+}

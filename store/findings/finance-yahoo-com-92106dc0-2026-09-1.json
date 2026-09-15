@@ -1,0 +1,44 @@
+{
+  "id": "finance-yahoo-com-92106dc0-2026-09-1",
+  "statement": "Nvidia CEO Jensen Huang said AI infrastructure spending could reach $3 trillion to $4 trillion by 2030.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "The vendor's own spending projection frames how large the addressable buildout is assumed to be, which anchors capacity and capex planning across the chain.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "A multi-trillion spending trajectory implies sustained upward revision of datacenter capex plans that convert into GPU, facility and power orders."
+  },
+  "evidence": [
+    {
+      "source": "finance.yahoo.com",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-ceo-sees-4-trillion-170228673.html",
+      "date": "2026-09-11",
+      "excerpt": "AI infrastructure spending could reach $3 trillion to $4 trillion by 2030,",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "This is a forward projection by an interested vendor at a conference, not a booked or measured amount, so it is recorded as a hypothesis with no value.",
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting of vendor CEO remarks; projection is self-interested and unverified."
+  },
+  "dispersion": "Stated as a $3 trillion to $4 trillion range.",
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-09-11",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

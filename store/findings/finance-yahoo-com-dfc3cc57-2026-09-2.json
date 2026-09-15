@@ -1,0 +1,44 @@
+{
+  "id": "finance-yahoo-com-dfc3cc57-2026-09-2",
+  "statement": "Hardware shortages have forced Microsoft to turn away cloud and AI clients, restrict subscriptions and absorb service disruptions, with Temu shifting cloud operations to Oracle and an eight-hour GitHub outage in August 2026 tied to server constraints.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A hyperscaler refusing paying customers is direct evidence that deliverable compute, not customer appetite, is the binding limit right now.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "mixed",
+    "mechanism": "Unserved cloud demand keeps GPU allocation tight and pushes overflow workloads to rival clouds and neoclouds while sustaining accelerator orders."
+  },
+  "evidence": [
+    {
+      "source": "finance.yahoo.com",
+      "url": "https://finance.yahoo.com/technology/articles/microsoft-eyes-massive-data-center-233026556.html",
+      "date": "2026-09-11",
+      "excerpt": "Severe hardware constraints recently forced the tech giant to turn away cloud and AI clients, restrict subscriptions, and face service disruptions.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Qualitative account in a single secondary republish of Bloomberg reporting; no lead-time or capacity figure attached."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "microsoft",
+  "observedAt": "2026-09-11",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

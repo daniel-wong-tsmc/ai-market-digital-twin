@@ -2,11 +2,43 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-09",
-  "capturedAt": "2026-09-10T13:03:15Z",
+  "capturedAt": "2026-09-13T11:47:02Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
   "gaps": [
+    {
+      "type": "source",
+      "id": "nvda-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "amd-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "intc-earnings",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Intel earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['intc.com', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "lambda-gpu-pricing",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
+      "paywalledNote": null
+    },
     {
       "type": "source",
       "id": "trendforce-gpu-tracker",
@@ -45,6 +77,22 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'BIS export control notices and Federal Register' was not fetched. URL patterns: ['bis.doc.gov', 'federalregister.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "nvda-10k-risk-factors",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'NVIDIA 10-K risk factor section (geopolitical / export control exposure)' was not fetched. URL patterns: ['investor.nvidia.com/annual-reports', 'sec.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "vendor-pr-trade-press",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Vendor press releases + trade press on merchant-GPU design wins' was not fetched. URL patterns: ['nvidianews.nvidia.com', 'ir.amd.com/news-events', 'tomshardware.com', 'semianalysis.com']",
       "paywalledNote": null
     },
     {
@@ -97,26 +145,26 @@
     }
   ],
   "gapCounts": {
-    "total": 11,
-    "source": 10,
+    "total": 17,
+    "source": 16,
     "indicator": 1,
-    "required": 10,
+    "required": 16,
     "preferred": 0,
     "optional": 1,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://dealroom.co/news/info-iclajk-how-anthropic-clinched-517-billion-in-compute-deals-in-11-months/",
-    "https://finance.yahoo.com/technology/ai/articles/openai-spend-750-billion-compute-163922916.html",
-    "https://keplercompute.com/",
-    "https://nvidianews.nvidia.com/news/nvidia-expands-ai-infrastructure-capacity-in-partnership-with-australias-data-center-ecosystem",
+    "https://cryptobriefing.com/nvidia-grace-blackwell-shipments-increase/",
+    "https://finance.biggo.com/news/9a3e5894-ebc9-485b-8bbb-42ad50543287",
+    "https://finance.yahoo.com/technology/ai/articles/nvidia-ceo-sees-4-trillion-170228673.html",
+    "https://finance.yahoo.com/technology/articles/microsoft-eyes-massive-data-center-233026556.html",
+    "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
     "https://www.coreweave.com/pricing",
-    "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950",
-    "https://www.investing.com/news/stock-market-news/openai-says-working-with-samsung-on-nextgeneration-chips-deepening-cooperation-4892715",
-    "https://www.runpod.io/pricing",
-    "https://www.sec.gov/Archives/edgar/data/0001046179/000104617926000658/tsm-revenue20260910.htm",
-    "https://www.taipeitimes.com/News/biz/archives/2026/09/10/2003863982"
+    "https://www.d-matrix.ai/announcements/d-matrix-rackscale-nvidia/",
+    "https://www.taipeitimes.com/News/biz/archives/2026/09/12/2003864118",
+    "https://www.theregister.com/systems/2026/09/10/d-matrix-drinks-the-nvidia-kool-aid-with-nvlink-fusion-and-mgx-rack-designs/5295403",
+    "https://www.thestar.com.my/tech/tech-news/2026/09/10/us-doj-probes-nvidia039s-licensing-deal-with-ai-startup-groq-nyt-reports"
   ],
   "judgedIndicatorIds": [
     "D2",

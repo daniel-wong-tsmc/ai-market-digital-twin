@@ -1,0 +1,46 @@
+{
+  "id": "www-d-matrix-ai-d7c1613e-2026-09-2",
+  "statement": "NVIDIA's NVLink Fusion is being used to pull third-party inference silicon into NVIDIA rack systems built around Vera CPUs, NVLink switches, BlueField-4 DPUs, ConnectX-9 SuperNICs and Spectrum-X Ethernet.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Even when the accelerator is someone else's, NVIDIA keeps the CPU, interconnect and networking content in the rack, which protects its attach rate.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.networking-silicon",
+      "infrastructure.networking-fabric",
+      "chips.ai-silicon-startups",
+      "applications.ai-coding",
+      "applications.cx-agents"
+    ],
+    "direction": "positive",
+    "mechanism": "Opening the interconnect to partner silicon wins rack sockets for NVIDIA's surrounding components and targets latency-sensitive workloads such as coding assistants, chatbots and voice agents."
+  },
+  "evidence": [
+    {
+      "source": "d-matrix.ai",
+      "url": "https://www.d-matrix.ai/announcements/d-matrix-rackscale-nvidia/",
+      "date": "2026-09-10",
+      "excerpt": "NVLink Fusion enables partners to integrate custom silicon with NVIDIA's deep ecosystem of NVLink, advanced packaging, rack-scale systems and networking technologies.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single vendor announcement at secondary tier; no shipment or design-win counts disclosed."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: d-matrix.ai, theregister.com",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

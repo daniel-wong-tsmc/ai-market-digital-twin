@@ -1,0 +1,47 @@
+{
+  "id": "finance-biggo-com-e4041aa6-2026-09-2",
+  "statement": "Nscale reports total contracted business of about $103 billion, including a $45 billion agreement with Anthropic, with projected annual revenue of roughly $18.1 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 103.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Contracted backlog at a neocloud is forward demand for GPU capacity that must be bought and installed to be served.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "A contracted book of this size commits the operator to buying and powering large GPU fleets over the contract term."
+  },
+  "evidence": [
+    {
+      "source": "finance.biggo.com",
+      "url": "https://finance.biggo.com/news/9a3e5894-ebc9-485b-8bbb-42ad50543287",
+      "date": "2026-09-04",
+      "excerpt": "Nscale's total contracted business is about $103 billion, including a $45 billion agreement with Anthropic, with projected annual revenue of roughly $18.1 billion and adjusted EBITDA of $13.6 billion.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company-scale figures relayed by one secondary outlet; no filing or audited source in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "multi",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

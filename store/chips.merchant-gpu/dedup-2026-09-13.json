@@ -1,0 +1,234 @@
+{
+  "asOf": "2026-09",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "finance-yahoo-com-dfc3cc57-2026-09-1",
+      "entity": "microsoft",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-dfc3cc57-2026-09-2",
+      "entity": "microsoft",
+      "indicatorId": "leadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-taipeitimes-com-f206468a-2026-09-2",
+      "entity": "multi",
+      "indicatorId": "tokenEconomics",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "investor-oracle-com-b5058aa2-2026-09-1",
+      "entity": "oracle",
+      "indicatorId": "D2",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "investor-oracle-com-b5058aa2-2026-09-3",
+      "entity": "oracle",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "investor-oracle-com-b5058aa2-2026-09-4",
+      "entity": "oracle",
+      "indicatorId": "leadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "investor-oracle-com-b5058aa2-2026-09-2",
+      "entity": "oracle",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "www-coreweave-com-aa3202e2-2026-09-1",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "www-coreweave-com-76f05563-2026-08-1",
+      "detail": "value 49.24 -> 6.155 (tol 1%)"
+    },
+    {
+      "findingId": "www-d-matrix-ai-d7c1613e-2026-09-1",
+      "entity": "multi",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "shattered-io-12684ad3-2026-09-3",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "www-thestar-com-my-af5ac5ca-2026-09-1",
+      "entity": "multi",
+      "indicatorId": "customerConcentration",
+      "verdict": "update",
+      "priorFindingId": "cryptobriefing-com-52530bf6-2026-09-2",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "www-d-matrix-ai-d7c1613e-2026-09-2",
+      "entity": "multi",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "www-tomshardware-com-f77e9757-2026-07-3",
+      "detail": "magnitude 3 -> 2"
+    },
+    {
+      "findingId": "www-taipeitimes-com-f206468a-2026-09-1",
+      "entity": "multi",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "update",
+      "priorFindingId": "en-sedaily-com-08f31bef-2026-09-2",
+      "detail": "statement/trend changed (trend falling -> unknown)"
+    },
+    {
+      "findingId": "finance-biggo-com-e4041aa6-2026-09-1",
+      "entity": "multi",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "update",
+      "priorFindingId": "finance-yahoo-com-52a75f48-2026-08-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "finance-biggo-com-e4041aa6-2026-09-2",
+      "entity": "multi",
+      "indicatorId": "rpoBacklog",
+      "verdict": "update",
+      "priorFindingId": "www-trendforce-com-872a5a43-2026-09-4",
+      "detail": "magnitude 2 -> 3"
+    },
+    {
+      "findingId": "cryptobriefing-com-2079a6de-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "D2",
+      "verdict": "update",
+      "priorFindingId": "nvidianews-nvidia-com-0f20b2ab-2026-09-2",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "finance-yahoo-com-92106dc0-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "update",
+      "priorFindingId": "www-thecerbatgem-com-c3245843-2026-09-1",
+      "detail": "magnitude 2 -> 3"
+    },
+    {
+      "findingId": "cryptobriefing-com-2079a6de-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "leadTimes",
+      "verdict": "update",
+      "priorFindingId": "finance-yahoo-com-1404e5b0-2026-09-3",
+      "detail": "statement/trend changed (trend rising -> falling)"
+    },
+    {
+      "findingId": "cryptobriefing-com-2079a6de-2026-09-3",
+      "entity": "nvidia",
+      "indicatorId": "market-share-pct",
+      "verdict": "update",
+      "priorFindingId": "www-faf-ae-6bcac1ba-2026-07-1",
+      "detail": "magnitude 2 -> 1"
+    },
+    {
+      "findingId": "finance-yahoo-com-92106dc0-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "rpoBacklog",
+      "verdict": "update",
+      "priorFindingId": "www-fool-com-12234ce0-2026-08-1",
+      "detail": "value 279.0 -> 100.0 (tol 1%)"
+    },
+    {
+      "findingId": "finance-yahoo-com-92106dc0-2026-09-3",
+      "entity": "nvidia",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "update",
+      "priorFindingId": "finance-yahoo-com-f400b412-2026-08-1",
+      "detail": "magnitude 2 -> 3"
+    },
+    {
+      "findingId": "finance-yahoo-com-92106dc0-2026-09-4",
+      "entity": "nvidia",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "update",
+      "priorFindingId": "www-thecerbatgem-com-c3245843-2026-09-2",
+      "detail": "magnitude 1 -> 3"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "www-coreweave-com-aa3202e2-2026-09-2",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-coreweave-com-aa3202e2-2026-09-3",
+      "entity": "market",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-theregister-com-aa810562-2026-09-1",
+      "entity": "multi",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-theregister-com-aa810562-2026-09-2",
+      "entity": "multi",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-thestar-com-my-af5ac5ca-2026-09-2",
+      "entity": "multi",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "finance-biggo-com-e4041aa6-2026-09-3",
+      "entity": "multi",
+      "indicatorId": "customerConcentration",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-theregister-com-aa810562-2026-09-3",
+      "entity": "multi",
+      "indicatorId": "designWins",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

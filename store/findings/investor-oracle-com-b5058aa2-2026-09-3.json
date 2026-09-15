@@ -1,0 +1,54 @@
+{
+  "id": "investor-oracle-com-b5058aa2-2026-09-3",
+  "statement": "Oracle Q1 FY2027 capital expenditure reached $28.5 billion with full-year FY2027 capex guidance unchanged at $90 billion to $95 billion, while free cash flow was negative $5.4 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 28.5,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Capex held at guidance while cash flow turns negative shows the buildout is still being funded aggressively, which is what actually pays for GPUs.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.electrical-equipment"
+    ],
+    "direction": "positive",
+    "mechanism": "Maintained capex guidance keeps accelerator and facility orders flowing even as free cash flow deteriorates."
+  },
+  "evidence": [
+    {
+      "source": "investor.oracle.com",
+      "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+      "date": "2026-09-10",
+      "excerpt": "Capital expenditure hit $28.5 billion, up from $8.5 billion annually",
+      "tier": "secondary"
+    },
+    {
+      "source": "investor.oracle.com",
+      "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+      "date": "2026-09-10",
+      "excerpt": "capex guidance is unchanged at $90 billion to $95 billion",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Figures relayed within one fetched document; the capex and cash-flow quotes come from an outlet cited inside that document, not a separately fetched source."
+  },
+  "dispersion": "Free cash flow was negative $5.4 billion against negative $362 million in the prior-year quarter.",
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "oracle",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

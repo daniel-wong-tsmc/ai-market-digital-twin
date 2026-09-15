@@ -1,0 +1,50 @@
+{
+  "id": "cryptobriefing-com-2079a6de-2026-09-3",
+  "statement": "Blackwell GPUs could account for more than 70% of Nvidia's high-end market share by 2026, per estimates cited in this trade report.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "rising",
+  "why": "The pace at which Blackwell displaces prior generations inside Nvidia's own mix sets the mix of pricing, margin and packaging demand across the merchant-GPU category.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "A Blackwell-dominated high-end mix pulls demand toward higher-content packages with more HBM stacks and advanced packaging per unit."
+  },
+  "evidence": [
+    {
+      "source": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/nvidia-grace-blackwell-shipments-increase/",
+      "date": "2026-09-10",
+      "excerpt": "Blackwell GPUs could account for more than 70% of Nvidia's high-end market share by 2026",
+      "tier": "secondary"
+    },
+    {
+      "source": "cryptobriefing.com",
+      "url": "https://cryptobriefing.com/nvidia-grace-blackwell-shipments-increase/",
+      "date": "2026-09-10",
+      "excerpt": "Cumulative shipments of Blackwell GPU packages are estimated to be in the low millions by late 2025",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The document states this as a forward-looking estimate ('could account for'), not a realised share measurement, so it is recorded as a hypothesis with no measured value.",
+  "confidence": {
+    "level": "low",
+    "basis": "Forward estimate carried by a single secondary outlet with no named methodology or primary source."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

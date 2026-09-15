@@ -1,86 +1,158 @@
 {
-  "asOf": "2026-09-10",
+  "asOf": "2026-09-13",
   "bullets": [
     {
+      "chart": {
+        "caption": "Found today — single source: Oracle Investor Relations (investor.oracle.com).",
+        "form": "columns",
+        "points": [
+          {
+            "hollow": false,
+            "label": "Q2 FY2026",
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2025/Oracle-Announces-Fiscal-Year-2026-Second-Quarter-Financial-Results/default.aspx",
+            "value": 523.0
+          },
+          {
+            "hollow": false,
+            "label": "Q3 FY2026",
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Fiscal-Year-2026-Third-Quarter-Financial-Results/default.aspx",
+            "value": 553.0
+          },
+          {
+            "hollow": false,
+            "label": "Q4 FY2026",
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Record-Q4-and-FY-2026-Results-Driven-by-Cloud-Infrastructure--Cloud-Applications/default.aspx",
+            "value": 638.0
+          },
+          {
+            "hollow": false,
+            "label": "Q1 FY2027",
+            "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+            "value": 664.0
+          }
+        ],
+        "researched": true,
+        "source": {
+          "date": "2026-09-10",
+          "outlet": "Oracle Investor Relations (investor.oracle.com)",
+          "tier": "secondary",
+          "title": "Oracle Remaining Performance Obligations (AI cloud contract backlog) by quarter",
+          "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx"
+        },
+        "title": "Oracle Remaining Performance Obligations (AI cloud contract backlog) by quarter",
+        "unit": "US$ billions"
+      },
+      "date": "2026-09-13",
+      "noChartReason": null,
+      "sources": [
+        {
+          "date": "2026-09-10",
+          "outlet": "investor.oracle.com",
+          "tier": "secondary",
+          "title": "investor.oracle.com",
+          "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx"
+        }
+      ],
+      "storyHref": "story/2026-09-13.html",
+      "text": "Oracle delivered more than 300,000 GPUs last quarter, nearly triple the quarter before, and still says customer demand runs past the capacity it has available."
+    },
+    {
+      "chart": {
+        "caption": "Found today — single source: Hallucination Yield (Microsoft Capex Tracker).",
+        "form": "columns",
+        "points": [
+          {
+            "hollow": false,
+            "label": "Q1 2024",
+            "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+            "value": 11.0
+          },
+          {
+            "hollow": false,
+            "label": "Q3 2024",
+            "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+            "value": 14.9
+          },
+          {
+            "hollow": false,
+            "label": "Q4 2024",
+            "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+            "value": 15.8
+          },
+          {
+            "hollow": false,
+            "label": "Q1 2025",
+            "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+            "value": 16.7
+          },
+          {
+            "hollow": false,
+            "label": "Q3 2025",
+            "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+            "value": 19.4
+          },
+          {
+            "hollow": false,
+            "label": "Q4 2025",
+            "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+            "value": 29.9
+          },
+          {
+            "hollow": false,
+            "label": "Q1 2026",
+            "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+            "value": 31.9
+          },
+          {
+            "hollow": false,
+            "label": "Q2 2026",
+            "sourceUrl": "https://www.hallucinationyield.com/research/microsoft-capex/",
+            "value": 41.0
+          }
+        ],
+        "researched": true,
+        "source": {
+          "date": "2026-09-11",
+          "outlet": "Hallucination Yield (Microsoft Capex Tracker)",
+          "tier": "secondary",
+          "title": "Microsoft quarterly capital expenditure",
+          "url": "https://www.hallucinationyield.com/research/microsoft-capex/"
+        },
+        "title": "Microsoft quarterly capital expenditure",
+        "unit": "US$ billions"
+      },
+      "date": "2026-09-13",
+      "noChartReason": null,
+      "sources": [
+        {
+          "date": "2026-09-11",
+          "outlet": "finance.yahoo.com",
+          "tier": "secondary",
+          "title": "finance.yahoo.com",
+          "url": "https://finance.yahoo.com/technology/articles/microsoft-eyes-massive-data-center-233026556.html"
+        }
+      ],
+      "storyHref": "story/2026-09-13.html",
+      "text": "Microsoft has turned cloud customers away for lack of hardware and plans to grow compute from about 12 gigawatts today to over 38 gigawatts by 2032."
+    },
+    {
       "chart": null,
-      "date": "2026-09-10",
+      "date": "2026-09-13",
       "noChartReason": {
         "cause": "estimate-only",
         "reason": "The number we track for this is our own estimate, not a published figure, so we don't draw it."
       },
       "sources": [
         {
-          "date": "2026-09-10",
-          "outlet": "Reuters (via Investing.com)",
+          "date": "2026-09-12",
+          "outlet": "taipeitimes.com",
           "tier": "secondary",
-          "title": "Reuters (via Investing.com)",
-          "url": "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950"
+          "title": "taipeitimes.com",
+          "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/12/2003864118"
         }
       ],
-      "storyHref": "story/2026-09-10.html",
-      "text": "Huawei's Ascend 950DT card now sells above 250,000 yuan, up 20 to 50 percent in two months, as the memory shortage reaches China's own chips."
-    },
-    {
-      "chart": {
-        "caption": "Found today — single source: Yahoo Finance (finance.yahoo.com).",
-        "form": "bars",
-        "points": [
-          {
-            "hollow": false,
-            "label": "OpenAI compute spend target through 2030, as reported Feb 2026 (Reuters via Yahoo Finance)",
-            "sourceUrl": "https://finance.yahoo.com/news/openai-sees-compute-spend-around-223950561.html",
-            "value": 600.0
-          },
-          {
-            "hollow": false,
-            "label": "OpenAI compute spend target through 2030, as reported July 2026 (WSJ via Yahoo Finance)",
-            "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/openai-lifts-planned-compute-spending-144917731.html",
-            "value": 750.0
-          }
-        ],
-        "researched": true,
-        "source": {
-          "date": "2026-07-22",
-          "outlet": "Yahoo Finance (finance.yahoo.com)",
-          "tier": "secondary",
-          "title": "OpenAI's publicly reported compute spending target through 2030, before and after its 2026 upward revision",
-          "url": "https://finance.yahoo.com/technology/ai/articles/openai-lifts-planned-compute-spending-144917731.html"
-        },
-        "title": "OpenAI's publicly reported compute spending target through 2030, before and after its 2026 upward revision",
-        "unit": "US$ billions"
-      },
-      "date": "2026-09-10",
-      "noChartReason": null,
-      "sources": [
-        {
-          "date": "2026-09-09",
-          "outlet": "finance.yahoo.com (Wall Street Journal-sourced)",
-          "tier": "secondary",
-          "title": "finance.yahoo.com (Wall Street Journal-sourced)",
-          "url": "https://finance.yahoo.com/technology/ai/articles/openai-spend-750-billion-compute-163922916.html"
-        }
-      ],
-      "storyHref": "story/2026-09-10.html",
-      "text": "OpenAI now plans about $750 billion of compute spending through 2030, a 25 percent rise, while Nvidia says it can supply only 70 percent of demand."
-    },
-    {
-      "chart": null,
-      "date": "2026-09-10",
-      "noChartReason": {
-        "cause": "no-plain-name",
-        "reason": "We don't yet have a plain-English way to describe what this number measures, so we don't draw it."
-      },
-      "sources": [
-        {
-          "date": "2026-09-10",
-          "outlet": "Taipei Times",
-          "tier": "secondary",
-          "title": "Taipei Times",
-          "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/10/2003863982"
-        }
-      ],
-      "storyHref": "story/2026-09-10.html",
-      "text": "Kioxia raised flash memory prices 70 percent in the June quarter, but its chief says a repeat is unlikely because even the largest buyers have limited budgets."
+      "storyHref": "story/2026-09-13.html",
+      "text": "DeepSeek's claim that its models need less high-bandwidth memory knocked SK Hynix shares 2.2 percent and Samsung 3.5 percent, the first real doubt about memory demand."
     }
   ],
   "categoryId": "chips.merchant-gpu",
@@ -97,25 +169,25 @@
           "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days"
         },
         {
-          "date": "2026-09-07",
-          "outlet": "Parameter.io",
+          "date": "2026-08-10",
+          "outlet": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
           "tier": "secondary",
-          "title": "Parameter.io",
-          "url": "https://parameter.io/sk-hynix-skhy-shares-surge-7-as-openais-gpt-6-astra-ignites-memory-chip-rally/"
+          "title": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
+          "url": "https://www.investing.com/news/transcripts/micron-at-technology-leadership-forum-2026-ai-tightens-memory-market-93CH-4849994"
         },
         {
           "date": "2026-08-26",
-          "outlet": "IDC (blog)",
+          "outlet": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
           "tier": "secondary",
-          "title": "IDC (blog)",
-          "url": "https://www.idc.com/resource-center/blog/smartphone-shipments-set-for-record-16-7-drop-in-2026-as-the-memory-crisis-hits-full-force/"
+          "title": "MarketBeat (Q2 FY2027 earnings call transcript excerpt)",
+          "url": "https://www.marketbeat.com/earnings/reports/2026-8-26-nvidia-co-stock/"
         }
       ],
       "id": "bottleneck",
       "plainName": "What is holding shipments back",
       "ratingWord": "Weak",
-      "reasoning": "Advanced packaging still books at 52 to 78 week lead times, so shipments stay rationed on two fronts at once.",
-      "summary": "Samsung and SK hynix hold under ten days of memory stock, memory cost has climbed more than 300% year on year, and Nvidia says it can cover only about 70% of the demand it sees.",
+      "reasoning": "Packaging lead times of 52 to 78 weeks stack on top of that memory shortfall.",
+      "summary": "Memory stockpiles at Samsung and SK hynix have fallen below ten days, Micron can cover only about half of requested volume, and NVIDIA says it supplies roughly 70 percent of the demand it sees.",
       "tone": "bad"
     },
     {
@@ -137,18 +209,18 @@
           "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
         },
         {
-          "date": "2026-09-09",
-          "outlet": "finance.yahoo.com (Wall Street Journal-sourced)",
+          "date": "2026-09-10",
+          "outlet": "investor.oracle.com",
           "tier": "secondary",
-          "title": "finance.yahoo.com (Wall Street Journal-sourced)",
-          "url": "https://finance.yahoo.com/technology/ai/articles/openai-spend-750-billion-compute-163922916.html"
+          "title": "investor.oracle.com",
+          "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx"
         }
       ],
       "id": "momentum",
       "plainName": "How hard buyers are buying",
       "ratingWord": "Very strong",
-      "reasoning": "Buyers are committing years ahead, with OpenAI planning roughly $750 billion of compute through 2030 and Anthropic signing about $517 billion of capacity agreements in eleven months.",
-      "summary": "Nvidia's data center revenue reached $89.0 billion, up 117% year over year, with the next quarter guided to $108 billion, and Broadcom's AI chip revenue rose 221% to $16.7 billion.",
+      "reasoning": "OpenAI's plan to spend roughly $750 billion on compute through 2030, alongside Broadcom's $16.7 billion AI quarter, extends the order runway well past the current shipping window.",
+      "summary": "NVIDIA data-centre revenue reached $89.0 billion in the July quarter, up 117 percent, and Oracle added more than $30 billion of AI cloud contracts to lift its obligation book to $664 billion.",
       "tone": "good"
     },
     {
@@ -180,21 +252,14 @@
       "id": "competitiveStructure",
       "plainName": "Whether buyers have a second choice",
       "ratingWord": "Mixed",
-      "reasoning": "Nvidia's $3.5 billion investment in MediaTek pulls rival custom designs onto its own scale-up fabric, which blunts how much share these alternatives can take.",
-      "summary": "AMD racks now serve paying customers at Humain and carry 8 gigawatts of committed deployments, OpenAI unveiled its own inference chip, and Intel offers a memory-heavy inference part that skips stacked memory.",
+      "reasoning": "NVIDIA answers by pulling rival designers such as MediaTek onto its own scale-up fabric, which keeps the rack contest close.",
+      "summary": "AMD now runs Helios racks in production at Humain in Saudi Arabia and holds 8 gigawatts of committed deployments at Anthropic and OpenAI, while OpenAI's own Jalapeno inference chip adds another claimant on the same wafers and memory.",
       "tone": "mixed"
     },
     {
       "confidence": "Medium — the underlying reports are single-source in places.",
-      "direction": "flat",
+      "direction": "worsening",
       "evidence": [
-        {
-          "date": "2026-07-24",
-          "outlet": "Silicon Analysts",
-          "tier": "secondary",
-          "title": "Silicon Analysts",
-          "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026"
-        },
         {
           "date": "2026-05-21",
           "outlet": "Tom's Hardware custom AI ASIC state of play",
@@ -208,26 +273,26 @@
           "tier": "secondary",
           "title": "TechTimes / Network World",
           "url": "https://www.techtimes.com/articles/319338/20260629/amd-helios-faces-nvidia-vera-rubin-july-23-keynote-memory-leads-training-trails.htm"
+        },
+        {
+          "date": "2026-09-10",
+          "outlet": "cryptobriefing.com",
+          "tier": "secondary",
+          "title": "cryptobriefing.com",
+          "url": "https://cryptobriefing.com/nvidia-grace-blackwell-shipments-increase/"
         }
       ],
       "id": "moat",
       "plainName": "How safe NVIDIA's lead looks",
       "ratingWord": "Weak",
-      "reasoning": "Taking the data center Ethernet switch revenue lead gives the vendor a systems hold that slows the drift rather than reversing it.",
-      "summary": "Nvidia's accelerator share slides from a 2024 peak of 87% toward 75% this year as custom chip shipments grow 44.6% against 16.1% for merchant parts, and in-house silicon already runs roughly two-thirds of AI compute.",
+      "reasoning": "Blackwell parts still carry more than 70 percent of high-end volume, so the position gives ground steadily rather than suddenly.",
+      "summary": "Merchant accelerator share keeps slipping toward 70 percent as custom chips grow 44.6 percent a year against 16.1 percent for merchant GPUs and take 27.8 percent of the 2026 market.",
       "tone": "bad"
     },
     {
       "confidence": "High — drawn from company filings and calls.",
       "direction": "worsening",
       "evidence": [
-        {
-          "date": "2026-05-20",
-          "outlet": "NVIDIA Investor Relations press release",
-          "tier": "primary",
-          "title": "NVIDIA Investor Relations press release",
-          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx"
-        },
         {
           "date": "2026-08-04",
           "outlet": "AMD Investor Relations",
@@ -236,51 +301,58 @@
           "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
         },
         {
-          "date": "2026-07-23",
-          "outlet": "Intel Corporation Investor Relations (intc.com)",
-          "tier": "primary",
-          "title": "Intel Corporation Investor Relations (intc.com)",
-          "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
+          "date": "2026-08-26",
+          "outlet": "BigGo Finance (citing NVIDIA Q2 FY2027 earnings call)",
+          "tier": "secondary",
+          "title": "BigGo Finance (citing NVIDIA Q2 FY2027 earnings call)",
+          "url": "https://finance.biggo.com/news/US_NVDA_2026-08-26"
+        },
+        {
+          "date": "2026-08-29",
+          "outlet": "The Motley Fool",
+          "tier": "secondary",
+          "title": "The Motley Fool",
+          "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
         }
       ],
       "id": "unitEconomics",
       "plainName": "How profitable the sellers are",
       "ratingWord": "Strong",
-      "reasoning": "Memory cost sets a stated floor of 71% to 72% and pushes Nvidia toward the low 70s, which shaves the peak while leaving these the best margins in the chain.",
-      "summary": "Nvidia earned a 75% gross margin and still guides near 74%, AMD lifted its margin to 54% and Intel to 40.4%.",
+      "reasoning": "Price increases still cover the rising memory bill, so the level stays high and the trend bends down.",
+      "summary": "NVIDIA holds gross margin near 74 percent and points to a 71 to 72 percent floor, naming memory costs as the reason for the step down, while AMD lifted GAAP gross margin to 54 percent from 40 percent and TSMC posted 67.7 percent.",
       "tone": "good"
     },
     {
-      "confidence": "High — drawn from company filings and calls.",
+      "confidence": "Medium — the underlying reports are single-source in places.",
       "direction": "worsening",
       "evidence": [
-        {
-          "date": "2026-05-21",
-          "outlet": "NVIDIA Form 10-Q Q1 FY2027",
-          "tier": "primary",
-          "title": "NVIDIA Form 10-Q Q1 FY2027",
-          "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000052/nvda-20260426.htm"
-        },
-        {
-          "date": "2026-08-26",
-          "outlet": "NVIDIA Newsroom",
-          "tier": "primary",
-          "title": "NVIDIA Newsroom",
-          "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
-        },
         {
           "date": "2026-09-03",
           "outlet": "Yahoo Finance",
           "tier": "secondary",
           "title": "Yahoo Finance",
           "url": "https://finance.yahoo.com/technology/ai/articles/broadcom-inc-avgo-q3-2026-110030403.html"
+        },
+        {
+          "date": "2026-09-02",
+          "outlet": "247wallst.com",
+          "tier": "secondary",
+          "title": "247wallst.com",
+          "url": "https://247wallst.com/investing/2026/09/02/anthropic-just-committed-35-billion-to-compute-it-has-not-raised-the-money-for/"
+        },
+        {
+          "date": "2026-09-10",
+          "outlet": "thestar.com.my",
+          "tier": "secondary",
+          "title": "thestar.com.my",
+          "url": "https://www.thestar.com.my/tech/tech-news/2026/09/10/us-doj-probes-nvidia039s-licensing-deal-with-ai-startup-groq-nyt-reports"
         }
       ],
       "id": "strategicRisk",
       "plainName": "What could go wrong",
       "ratingWord": "Mixed",
-      "reasoning": "Nvidia cut its Ohio guarantee from $250 billion to under $120 billion and assumes no China data center revenue, while Taiwan prosecutors indicted nine people over diverted AI servers.",
-      "summary": "Three direct customers make up 21%, 17% and 16% of Nvidia revenue, Broadcom rests its AI business on six buyers, and Anthropic signs compute commitments against money it has not yet raised.",
+      "reasoning": "Regulators add pressure, with the Justice Department probing the $17 billion Groq licensing deal and reporting of $5.6 billion of hardware allegedly routed into China.",
+      "summary": "Buyer concentration deepens: Broadcom rests its AI revenue on six customers, Anthropic signed multi-gigawatt commitments against money it has yet to raise, and Google and AWS together hold 11 gigawatts of Anthropic's committed capacity.",
       "tone": "mixed"
     }
   ],
@@ -350,8 +422,8 @@
       },
       {
         "date": "2026-09-01",
-        "demand": 6.913333333333335,
-        "supply": -0.6266666666666669
+        "demand": 7.693333333333335,
+        "supply": -0.7200000000000001
       }
     ],
     "sources": [
@@ -386,13 +458,9 @@
   "issues": {
     "open": [
       {
-        "assessedAsOf": "2026-09-10",
-        "checkCount": 18,
+        "assessedAsOf": "2026-09-13",
+        "checkCount": 19,
         "history": [
-          {
-            "asOf": "2026-08-23",
-            "status": "worsened"
-          },
           {
             "asOf": "2026-08-24",
             "status": "worsened"
@@ -448,39 +516,39 @@
           {
             "asOf": "2026-09-10",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-13",
+            "status": "improved"
           }
         ],
         "id": "dim-bottleneck",
-        "reasoning": "The memory shortage now forces Chinese chipmakers to raise prices, with Huawei's card up 20 to 50 percent in two months, while Nvidia says it can supply only 70 percent of the demand it sees.",
+        "reasoning": "Physical output rose: Oracle delivered over 300,000 GPUs, nearly triple the prior quarter, and Grace Blackwell shipments were reported up 27 percent month over month. Demand still exceeds supply, but more finished product is clearing the chain.",
         "sources": [
           {
             "date": "2026-09-10",
-            "outlet": "Reuters (via Investing.com)",
+            "outlet": "investor.oracle.com",
             "tier": "secondary",
-            "title": "Reuters (via Investing.com)",
-            "url": "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950"
+            "title": "investor.oracle.com",
+            "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx"
           },
           {
-            "date": "2026-09-09",
-            "outlet": "finance.yahoo.com (Wall Street Journal-sourced)",
+            "date": "2026-09-10",
+            "outlet": "cryptobriefing.com",
             "tier": "secondary",
-            "title": "finance.yahoo.com (Wall Street Journal-sourced)",
-            "url": "https://finance.yahoo.com/technology/ai/articles/openai-spend-750-billion-compute-163922916.html"
+            "title": "cryptobriefing.com",
+            "url": "https://cryptobriefing.com/nvidia-grace-blackwell-shipments-increase/"
           }
         ],
-        "status": "worsened",
+        "status": "improved",
         "title": "Bottleneck",
         "trackedSince": "2026-08",
         "worsenedCount": 12
       },
       {
-        "assessedAsOf": "2026-09-10",
-        "checkCount": 18,
+        "assessedAsOf": "2026-09-13",
+        "checkCount": 19,
         "history": [
-          {
-            "asOf": "2026-08-23",
-            "status": "worsened"
-          },
           {
             "asOf": "2026-08-24",
             "status": "unchanged"
@@ -536,17 +604,35 @@
           {
             "asOf": "2026-09-10",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-09-13",
+            "status": "unchanged"
           }
         ],
         "id": "dim-moat",
-        "reasoning": "No new evidence arrived on market share. The day's competitive news is that Chinese alternatives are raising prices under the same memory limit, which neither helps nor hurts the leader's position.",
+        "reasoning": "Blackwell parts are still put at more than 70 percent of high-end volume, and d-Matrix is bringing its inference chips inside Nvidia's rack platform. Against that, the Justice Department is probing the $17 billion Groq licensing deal, so the position neither gained nor lost ground.",
         "sources": [
           {
             "date": "2026-09-10",
-            "outlet": "Reuters (via Investing.com)",
+            "outlet": "cryptobriefing.com",
             "tier": "secondary",
-            "title": "Reuters (via Investing.com)",
-            "url": "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950"
+            "title": "cryptobriefing.com",
+            "url": "https://cryptobriefing.com/nvidia-grace-blackwell-shipments-increase/"
+          },
+          {
+            "date": "2026-09-10",
+            "outlet": "d-matrix.ai",
+            "tier": "secondary",
+            "title": "d-matrix.ai",
+            "url": "https://www.d-matrix.ai/announcements/d-matrix-rackscale-nvidia/"
+          },
+          {
+            "date": "2026-09-10",
+            "outlet": "thestar.com.my",
+            "tier": "secondary",
+            "title": "thestar.com.my",
+            "url": "https://www.thestar.com.my/tech/tech-news/2026/09/10/us-doj-probes-nvidia039s-licensing-deal-with-ai-startup-groq-nyt-reports"
           }
         ],
         "status": "unchanged",
@@ -555,13 +641,9 @@
         "worsenedCount": 9
       },
       {
-        "assessedAsOf": "2026-09-10",
-        "checkCount": 17,
+        "assessedAsOf": "2026-09-13",
+        "checkCount": 18,
         "history": [
-          {
-            "asOf": "2026-08-23",
-            "status": "unchanged"
-          },
           {
             "asOf": "2026-08-24",
             "status": "worsened"
@@ -617,32 +699,32 @@
           {
             "asOf": "2026-09-10",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-13",
+            "status": "improved"
           }
         ],
         "id": "constraint-stacked-memory-and-server-dram",
-        "reasoning": "Scarce high-bandwidth memory pushed Chinese chipmakers to raise processor prices, with Huawei's Ascend 950DT above 250,000 yuan, up 20 to 50 percent from about two months earlier.",
+        "reasoning": "DeepSeek says its models need less high-bandwidth memory, sending SK Hynix down 2.2 percent and Samsung down 3.5 percent, and weakening the link between rising usage and rising memory orders. That is the first demand-side relief in weeks.",
         "sources": [
           {
-            "date": "2026-09-10",
-            "outlet": "Reuters (via Investing.com)",
+            "date": "2026-09-12",
+            "outlet": "taipeitimes.com",
             "tier": "secondary",
-            "title": "Reuters (via Investing.com)",
-            "url": "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950"
+            "title": "taipeitimes.com",
+            "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/12/2003864118"
           }
         ],
-        "status": "worsened",
-        "title": "Stacked memory and server DRAM",
+        "status": "improved",
+        "title": "HBM and server DRAM supply",
         "trackedSince": "2026-08",
         "worsenedCount": 8
       },
       {
-        "assessedAsOf": "2026-09-10",
-        "checkCount": 15,
+        "assessedAsOf": "2026-09-13",
+        "checkCount": 16,
         "history": [
-          {
-            "asOf": "2026-08-23",
-            "status": "unchanged"
-          },
           {
             "asOf": "2026-08-24",
             "status": "unchanged"
@@ -698,17 +780,21 @@
           {
             "asOf": "2026-09-10",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-09-13",
+            "status": "unchanged"
           }
         ],
         "id": "constraint-hbm4-memory-allocation-per-accelerator",
-        "reasoning": "No new evidence arrived on how much memory each chip carries. Today's memory news is about price and scarcity, not the amount fitted per accelerator.",
+        "reasoning": "No new evidence arrived today about how much stacked memory goes into each chip. The only memory news concerned how much memory the models themselves need, which is a separate question.",
         "sources": [
           {
-            "date": "2026-09-10",
-            "outlet": "Reuters (via Investing.com)",
+            "date": "2026-09-12",
+            "outlet": "taipeitimes.com",
             "tier": "secondary",
-            "title": "Reuters (via Investing.com)",
-            "url": "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950"
+            "title": "taipeitimes.com",
+            "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/12/2003864118"
           }
         ],
         "status": "unchanged",
@@ -717,8 +803,8 @@
         "worsenedCount": 3
       },
       {
-        "assessedAsOf": "2026-09-10",
-        "checkCount": 5,
+        "assessedAsOf": "2026-09-13",
+        "checkCount": 6,
         "history": [
           {
             "asOf": "2026-09-06",
@@ -739,18 +825,15 @@
           {
             "asOf": "2026-09-10",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-13",
+            "status": "improved"
           }
         ],
         "id": "constraint-high-bandwidth-memory-and-server-memory",
-        "reasoning": "Memory scarcity spread further: Chinese chipmakers raised prices on it, and Kioxia's flash prices rose 70 percent in the June quarter after a prior quarter above 100 percent.",
+        "reasoning": "Kioxia's flash prices rose 70 percent in the June quarter, but its chief executive said another jump that size looks unlikely because even the largest buyers have limited budgets. Prices that stop climbing are how a shortage starts to ease.",
         "sources": [
-          {
-            "date": "2026-09-10",
-            "outlet": "Reuters (via Investing.com)",
-            "tier": "secondary",
-            "title": "Reuters (via Investing.com)",
-            "url": "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950"
-          },
           {
             "date": "2026-09-10",
             "outlet": "Taipei Times",
@@ -759,7 +842,7 @@
             "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/10/2003863982"
           }
         ],
-        "status": "worsened",
+        "status": "improved",
         "title": "High-bandwidth memory and server memory",
         "trackedSince": "2026-09",
         "worsenedCount": 2
@@ -769,24 +852,38 @@
   },
   "schemaVersion": "1.2",
   "verdict": {
-    "answer": "Not yet. The memory squeeze reaches China's own chips",
+    "answer": "Not yet. More machines shipped, and still not enough",
     "chip": {
       "direction": "widening",
       "label": "Gap widening"
     },
     "confidence": "We are confident in this read",
     "question": "Is supply catching up to demand?",
-    "soWhat": "Chinese chipmakers are raising prices because they cannot get enough stacked memory, the same shortage that keeps Nvidia from filling a third of the orders it sees.",
+    "soWhat": "Oracle handed over three times as many GPUs as it did last quarter, yet buyers are still queueing. The first hint of relief comes from an odd place: models that need less memory.",
     "sources": [
       {
         "assessment": true,
         "basedOn": [
           {
             "date": "2026-09-10",
-            "outlet": "Reuters (via Investing.com)",
+            "outlet": "SEC EDGAR (TSMC Form 6-K)",
+            "tier": "primary",
+            "title": "SEC EDGAR (TSMC Form 6-K)",
+            "url": "https://www.sec.gov/Archives/edgar/data/0001046179/000104617926000658/tsm-revenue20260910.htm"
+          },
+          {
+            "date": "2026-09-10",
+            "outlet": "investor.oracle.com",
             "tier": "secondary",
-            "title": "Reuters (via Investing.com)",
-            "url": "https://www.investing.com/news/stock-market-news/exclusivechinas-ai-chipmakers-raise-prices-as-highbandwidth-memory-shortage-bites-4894950"
+            "title": "investor.oracle.com",
+            "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx"
+          },
+          {
+            "date": "2026-09-10",
+            "outlet": "cryptobriefing.com",
+            "tier": "secondary",
+            "title": "cryptobriefing.com",
+            "url": "https://cryptobriefing.com/nvidia-grace-blackwell-shipments-increase/"
           }
         ]
       }

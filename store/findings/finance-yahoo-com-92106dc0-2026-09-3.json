@@ -1,0 +1,53 @@
+{
+  "id": "finance-yahoo-com-92106dc0-2026-09-3",
+  "statement": "Nvidia says it is working through supply constraints spanning chips, memory, packaging, power and data centers, plus downstream limits on land, power and shell.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Constraints stacked across upstream components and downstream facilities determine how much of the ordered demand can actually be delivered this cycle.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "energy.electrical-equipment"
+    ],
+    "direction": "negative",
+    "mechanism": "Long-lead memory, packaging, electrical equipment and shell availability cap deliverable systems regardless of chip output."
+  },
+  "evidence": [
+    {
+      "source": "finance.yahoo.com",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-ceo-sees-4-trillion-170228673.html",
+      "date": "2026-09-11",
+      "excerpt": "chips, memory, packaging, power and data centers,",
+      "tier": "secondary"
+    },
+    {
+      "source": "finance.yahoo.com",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-ceo-sees-4-trillion-170228673.html",
+      "date": "2026-09-11",
+      "excerpt": "land, power, and shell.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Qualitative vendor statement carried by a single secondary outlet; no lead-time figures given."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-09-11",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

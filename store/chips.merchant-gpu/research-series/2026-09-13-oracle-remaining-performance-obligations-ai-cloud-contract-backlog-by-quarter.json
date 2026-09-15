@@ -1,0 +1,35 @@
+{
+  "seriesName": "Oracle Remaining Performance Obligations (AI cloud contract backlog) by quarter",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "Oracle Investor Relations (investor.oracle.com)",
+  "points": [
+    {
+      "label": "Q2 FY2026",
+      "value": 523.0,
+      "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2025/Oracle-Announces-Fiscal-Year-2026-Second-Quarter-Financial-Results/default.aspx",
+      "publishedAt": "2025-12-10"
+    },
+    {
+      "label": "Q3 FY2026",
+      "value": 553.0,
+      "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Fiscal-Year-2026-Third-Quarter-Financial-Results/default.aspx",
+      "publishedAt": "2026-03-10"
+    },
+    {
+      "label": "Q4 FY2026",
+      "value": 638.0,
+      "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Record-Q4-and-FY-2026-Results-Driven-by-Cloud-Infrastructure--Cloud-Applications/default.aspx",
+      "publishedAt": "2026-06-11"
+    },
+    {
+      "label": "Q1 FY2027",
+      "value": 664.0,
+      "sourceUrl": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+      "publishedAt": "2026-09-10"
+    }
+  ],
+  "pair": false,
+  "notes": "This series is Oracle's own reported Remaining Performance Obligations (booked contract backlog for cloud/AI capacity, mostly large AI contracts) each quarter, all sourced from Oracle Investor Relations press releases on investor.oracle.com (a single site, different quarterly pages). It contextualizes rather than directly proves the bullet's exact '300,000 GPUs delivered, nearly triple the prior quarter' figure -- the Q1 FY2027 release itself states 'more than 300,000 GPUs... and almost triple the capacity delivered in Q4 FY26' and RPO 'up to $664 billion,' but it does not give a bare numeric figure for GPUs or MW delivered in Q4 FY2026 to build a true GPU-delivery time series (Q4 FY26 release itself gives no GPU/MW delivery number, only RPO). The steadily rising RPO backlog (523 -> 553 -> 638 -> 664 $B across four consecutive quarters) is the best available same-site published numeric evidence that customer demand/bookings for Oracle's AI cloud capacity keeps outrunning what has been delivered, which is the substance of the bullet's demand-exceeds-supply claim. Could not find a same-site series of quarterly GPU-unit or MW-delivered counts because Oracle only started disclosing the '300,000 GPUs' / '850MW' figures starting with the Q1 FY2027 release; prior quarters' releases (checked Q4 FY2026) did not state a comparable bare number.",
+  "bulletIndex": 1
+}

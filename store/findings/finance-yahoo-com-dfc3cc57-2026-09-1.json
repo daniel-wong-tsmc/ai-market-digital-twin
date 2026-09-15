@@ -1,0 +1,56 @@
+{
+  "id": "finance-yahoo-com-dfc3cc57-2026-09-1",
+  "statement": "Microsoft aims to expand total compute capacity from roughly 12 gigawatts today to more than 38 gigawatts by 2032, with AI-focused infrastructure scaling from about 2 gigawatts to roughly one-third of that total.",
+  "kind": "measured",
+  "value": {
+    "number": 38.0,
+    "unit": "GW"
+  },
+  "trend": "rising",
+  "why": "A tripling of a top hyperscaler's compute footprint sets the multi-year order pipeline for GPUs, facilities and power.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "energy.electrical-equipment"
+    ],
+    "direction": "positive",
+    "mechanism": "Capacity targets of this scale translate into sustained procurement of AI accelerators, datacenter shells, electrical gear and firm power."
+  },
+  "evidence": [
+    {
+      "source": "finance.yahoo.com",
+      "url": "https://finance.yahoo.com/technology/articles/microsoft-eyes-massive-data-center-233026556.html",
+      "date": "2026-09-11",
+      "excerpt": "Microsoft aims to expand its total compute capacity from roughly 12 gigawatts today to more than 38 gigawatts by 2032 across owned and leased facilities.",
+      "tier": "secondary"
+    },
+    {
+      "source": "finance.yahoo.com",
+      "url": "https://finance.yahoo.com/technology/articles/microsoft-eyes-massive-data-center-233026556.html",
+      "date": "2026-09-11",
+      "excerpt": "AI-focused infrastructure is expected to scale to roughly one-third of the total 38-gigawatt capacity by 2032,",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary republish of Bloomberg reporting, and a Microsoft spokesperson reportedly disputed the projections without offering alternatives."
+  },
+  "dispersion": "A Microsoft spokesperson reportedly told Bloomberg the capacity projections cited were inaccurate but did not provide alternative figures.",
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "microsoft",
+  "observedAt": "2026-09-11",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

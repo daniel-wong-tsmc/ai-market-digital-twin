@@ -1,0 +1,49 @@
+{
+  "id": "www-thestar-com-my-af5ac5ca-2026-09-1",
+  "statement": "The U.S. Department of Justice is investigating whether Nvidia structured its $17 billion non-exclusive licensing deal with Groq, which included hiring Groq executives such as founder Jonathan Ross, to avoid antitrust review, and has sent Nvidia a formal information request.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Antitrust scrutiny of how the dominant GPU vendor absorbs rivals is a structural check on how concentrated accelerator supply is allowed to become.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "negative",
+    "mechanism": "A formal DOJ information request adds regulatory overhang and possible fines to the dominant vendor's acquisition and licensing playbook."
+  },
+  "evidence": [
+    {
+      "source": "thestar.com.my",
+      "url": "https://www.thestar.com.my/tech/tech-news/2026/09/10/us-doj-probes-nvidia039s-licensing-deal-with-ai-startup-groq-nyt-reports",
+      "date": "2026-09-10",
+      "excerpt": "a formal information request",
+      "tier": "secondary"
+    },
+    {
+      "source": "thestar.com.my",
+      "url": "https://www.thestar.com.my/tech/tech-news/2026/09/10/us-doj-probes-nvidia039s-licensing-deal-with-ai-startup-groq-nyt-reports",
+      "date": "2026-09-10",
+      "excerpt": "backdoor acquisition",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary republish of New York Times reporting sourced to two people familiar with the matter; syndication chain is a single original story, not independent publishers."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> rising); sources: finance.biggo.com, thestar.com.my",
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

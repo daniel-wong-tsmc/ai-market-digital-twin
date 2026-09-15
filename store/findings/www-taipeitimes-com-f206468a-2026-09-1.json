@@ -1,0 +1,50 @@
+{
+  "id": "www-taipeitimes-com-f206468a-2026-09-1",
+  "statement": "DeepSeek's announcement of reduced high-bandwidth memory requirements in its AI models knocked SK Hynix and Samsung shares down 2.2% and 3.5%, raising doubts about future HBM demand.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "If leading models need less high-bandwidth memory per unit of work, the memory content attached to each AI system falls, which is a direct hit to HBM demand assumptions.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "models.open-weight"
+    ],
+    "direction": "negative",
+    "mechanism": "Lower memory requirements per model reduce the HBM content needed per accelerator and soften expected memory bit demand."
+  },
+  "evidence": [
+    {
+      "source": "taipeitimes.com",
+      "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/12/2003864118",
+      "date": "2026-09-12",
+      "excerpt": "SK Hynix and Samsung Electronics shares declined 2.2% and 3.5% respectively following DeepSeek's announcement about reduced high-bandwidth memory requirements in its AI models.",
+      "tier": "secondary"
+    },
+    {
+      "source": "taipeitimes.com",
+      "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/12/2003864118",
+      "date": "2026-09-12",
+      "excerpt": "Local retail traders sold approximately $10 billion of these two stocks in September alone, rapidly exiting leveraged exchange-traded funds.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary republish of Bloomberg reporting; the document states no precise memory-reduction figure, only share-price reaction."
+  },
+  "dispersion": "The article does not state a precise memory-reduction figure; analysts quoted disagree, with some calling the stocks cheap versus global peers.",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-09-12",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

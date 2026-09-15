@@ -1,0 +1,50 @@
+{
+  "id": "investor-oracle-com-b5058aa2-2026-09-4",
+  "statement": "Oracle delivered over 300,000 GPUs to AI customers in the quarter, nearly triple Q4 FY2026 capacity, and states customer demand for AI training and inferencing continues exceeding available supply.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A named operator saying demand still exceeds supply after tripling GPU deliveries is a direct read on how tight merchant-GPU allocation remains.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rapidly rising deliveries add supply, but stated excess demand means allocation and wait times stay tight."
+  },
+  "evidence": [
+    {
+      "source": "investor.oracle.com",
+      "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+      "date": "2026-09-10",
+      "excerpt": "The company delivered over 300,000 GPUs to AI customers during the quarter -- nearly triple Q4 FY2026 capacity.",
+      "tier": "secondary"
+    },
+    {
+      "source": "investor.oracle.com",
+      "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+      "date": "2026-09-10",
+      "excerpt": "customer demand for AI training and inferencing services continues exceeding available supply",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own characterisation of demand versus supply in a press release fetched at secondary tier."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "oracle",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

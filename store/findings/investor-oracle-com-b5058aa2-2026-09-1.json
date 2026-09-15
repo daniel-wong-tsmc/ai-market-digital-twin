@@ -1,0 +1,47 @@
+{
+  "id": "investor-oracle-com-b5058aa2-2026-09-1",
+  "statement": "Oracle Q1 FY2027 cloud infrastructure revenue rose 121% to $7.4 billion, delivered alongside 850MW of additional datacenter capacity in the quarter.",
+  "kind": "measured",
+  "value": {
+    "number": 7.4,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Triple-digit growth in a major cloud's infrastructure line shows AI compute revenue is converting from contracts into delivered, billed capacity.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Revenue growth of this rate requires continued large-scale GPU and datacenter capacity purchases to serve the workloads behind it."
+  },
+  "evidence": [
+    {
+      "source": "investor.oracle.com",
+      "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+      "date": "2026-09-10",
+      "excerpt": "Q1 Cloud Infra (IaaS) Revenue up 121% in USD & up 120% in constant currency to $7.4 billion.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company investor press release captured through a secondary-tier fetch; no separate filing evidence and corroboration comes from a single additional outlet quoted inside the same document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "oracle",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

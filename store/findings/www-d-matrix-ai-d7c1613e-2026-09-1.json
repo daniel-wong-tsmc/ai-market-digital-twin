@@ -1,0 +1,51 @@
+{
+  "id": "www-d-matrix-ai-d7c1613e-2026-09-1",
+  "statement": "d-Matrix will integrate its Raptor inference XPUs into NVIDIA's MGX rackscale architecture using NVLink Fusion, with tape-out expected before year-end 2026 and initial availability in Q4 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A credible non-GPU inference accelerator entering NVIDIA's own rack ecosystem widens the pool of accelerators that can serve inference workloads.",
+  "impact": {
+    "targets": [
+      "chips.ai-silicon-startups",
+      "chips.merchant-gpu",
+      "infrastructure.networking-fabric",
+      "chips.networking-silicon"
+    ],
+    "direction": "mixed",
+    "mechanism": "Alternative inference silicon slotting into standard racks adds non-GPU capacity for inference while still pulling NVIDIA CPUs, DPUs, switches and Ethernet fabric into the same systems."
+  },
+  "evidence": [
+    {
+      "source": "d-matrix.ai",
+      "url": "https://www.d-matrix.ai/announcements/d-matrix-rackscale-nvidia/",
+      "date": "2026-09-10",
+      "excerpt": "Expected tape-out before year-end 2026; initial availability Q4 2027.",
+      "tier": "secondary"
+    },
+    {
+      "source": "d-matrix.ai",
+      "url": "https://www.d-matrix.ai/announcements/d-matrix-rackscale-nvidia/",
+      "date": "2026-09-10",
+      "excerpt": "features innovative 3D DRAM stacking combining a DRAM chip and SRAM compute chip in a single package",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor press release fetched at secondary tier; availability is more than a year out and no shipped volumes exist."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend falling -> rising); sources: d-matrix.ai, thestar.com.my",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "finance-yahoo-com-92106dc0-2026-09-4",
+  "statement": "Huang said Nvidia remained confident it could grow revenue 70% year over year while unconstrained customer demand growth exceeds 100% annually, implying demand outpaces supply.",
+  "kind": "measured",
+  "value": {
+    "number": 70.0,
+    "unit": "pct_yoy"
+  },
+  "trend": "rising",
+  "why": "The gap between the growth the vendor can deliver and the growth customers would take is the cleanest statement of how supply-limited the category is.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Guidance for 70% revenue growth against demand growth above 100% keeps allocation tight and supports pricing on merchant GPUs."
+  },
+  "evidence": [
+    {
+      "source": "finance.yahoo.com",
+      "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-ceo-sees-4-trillion-170228673.html",
+      "date": "2026-09-11",
+      "excerpt": "remained confident it could grow revenue 70% year over year",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting of CEO conference remarks rather than a formal guidance filing."
+  },
+  "dispersion": "Unconstrained customer demand growth described as exceeding 100% annually, above what Nvidia says it can supply.",
+  "asOf": "2026-09",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia",
+  "observedAt": "2026-09-11",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

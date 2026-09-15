@@ -1,0 +1,60 @@
+{
+  "id": "finance-biggo-com-e4041aa6-2026-09-1",
+  "statement": "Nscale is in talks to raise approximately $3.5 billion pre-IPO, including about $2 billion from Nvidia and up to $1.5 billion of convertible notes led by Third Point, at a valuation cap adjusted up to $30 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 3.5,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Neocloud GPU buying is funded by outside capital, so the size and pricing of a raise like this is a direct read on whether marginal buyers of merchant GPUs can still finance purchases.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Fresh equity and convertible financing at a roughly doubled valuation gives a large neocloud the balance sheet to keep placing GPU and datacenter orders."
+  },
+  "evidence": [
+    {
+      "source": "finance.biggo.com",
+      "url": "https://finance.biggo.com/news/9a3e5894-ebc9-485b-8bbb-42ad50543287",
+      "date": "2026-09-04",
+      "excerpt": "approximately $3.5 billion in financing ahead of a planned initial public offering.",
+      "tier": "secondary"
+    },
+    {
+      "source": "finance.biggo.com",
+      "url": "https://finance.biggo.com/news/9a3e5894-ebc9-485b-8bbb-42ad50543287",
+      "date": "2026-09-04",
+      "excerpt": "up to $1.5 billion of convertible notes to a group of investors",
+      "tier": "secondary"
+    },
+    {
+      "source": "finance.biggo.com",
+      "url": "https://finance.biggo.com/news/9a3e5894-ebc9-485b-8bbb-42ad50543287",
+      "date": "2026-09-04",
+      "excerpt": "adjusted up to a $30 billion valuation,",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying Bloomberg News reporting on a deal still described as in talks; no filing evidence."
+  },
+  "dispersion": "Article is dated 2026-09-04, before this sweep's recency window, and describes financing still in negotiation.",
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi",
+  "observedAt": "2026-09-04",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "www-taipeitimes-com-f206468a-2026-09-2",
+  "statement": "Cheaper memory use per inference in newer models could lower the hardware cost of serving tokens, weakening the link between token volume growth and accelerator and memory purchases.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "unknown",
+  "why": "Token economics decide how much hardware each unit of inference demand actually requires, so efficiency jumps can break the usual demand read-through.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "models.open-weight",
+      "models.reasoning-agentic"
+    ],
+    "direction": "mixed",
+    "mechanism": "Lower memory per served token cuts hardware needed per token, though cheaper inference can also raise total usage and offset the saving."
+  },
+  "evidence": [
+    {
+      "source": "taipeitimes.com",
+      "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/12/2003864118",
+      "date": "2026-09-12",
+      "excerpt": "DeepSeek's new model could stoke concerns about a slowdown",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The document reports only a share-price reaction and an analyst's concern, with no efficiency figure; the effect on hardware demand per token is therefore inferred and could be offset by higher usage.",
+  "confidence": {
+    "level": "low",
+    "basis": "Inference from qualitative analyst commentary in one secondary outlet, with no efficiency figure stated in the document."
+  },
+  "dispersion": "The same analyst notes upcoming models from Meta and OpenAI may have greater industry impact.",
+  "asOf": "2026-09",
+  "indicatorId": "tokenEconomics",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-09-12",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

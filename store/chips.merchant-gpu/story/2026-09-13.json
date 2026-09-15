@@ -1,0 +1,240 @@
+{
+  "headline": "More machines shipped, and still not enough",
+  "deck": "Oracle handed over three times as many GPUs as it did last quarter, yet buyers are still queueing. The first hint of relief comes from an odd place: models that need less memory.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Output really did go up",
+      "paragraphs": [
+        "For months the honest answer to \"why isn't supply catching up\" was that not enough finished machines were leaving the factories. This week that part changed. Oracle said it delivered more than 300,000 GPUs to AI customers in its latest quarter, nearly triple the previous quarter, and switched on 850 megawatts of extra data-centre capacity. Its cloud infrastructure revenue rose 121 percent to $7.4 billion.",
+        "The picture upstream matches. Grace Blackwell shipments are reported up 27 percent from the month before, with rack systems now leaving the line at hundreds of units a week. TSMC's August sales came in at NT$514.81 billion, up 53.3 percent on a year earlier and 10.1 percent on July. The chain is moving faster than it was."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "investor-oracle-com-b5058aa2-2026-09-4",
+        "investor-oracle-com-b5058aa2-2026-09-1",
+        "cryptobriefing-com-2079a6de-2026-09-1",
+        "www-sec-gov-5cdf8262-2026-09-1"
+      ],
+      "sourceLine": "Oracle Q1 FY2027 results (10 September 2026); cryptobriefing.com (10 September 2026); TSMC August revenue filing (10 September 2026).",
+      "relatedDocs": [
+        {
+          "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+          "title": "Oracle reports triple-digit growth in cloud infrastructure revenue",
+          "outlet": "investor.oracle.com",
+          "date": "2026-09-10"
+        },
+        {
+          "url": "https://cryptobriefing.com/nvidia-grace-blackwell-shipments-increase/",
+          "title": "Grace Blackwell shipments climb as rack output rises",
+          "outlet": "cryptobriefing.com",
+          "date": "2026-09-10"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The queue got longer anyway",
+      "paragraphs": [
+        "Even after tripling deliveries, Oracle said customer demand for AI training and inference keeps running past the capacity it has. Microsoft is short enough that it has turned cloud and AI customers away, limited subscriptions and absorbed service failures, including an eight-hour GitHub outage in August tied to server shortages. Its answer is to grow total compute from roughly 12 gigawatts today to more than 38 gigawatts by 2032.",
+        "Nvidia's chief executive put the same arithmetic plainly: the company is confident of growing revenue 70 percent year over year while unconstrained customer demand grows more than 100 percent a year. He also listed what is holding things back, and the list is long — chips, memory, packaging, power, data centres, and further down the line, land, electricity and buildings. No single fix clears all of it."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "investor-oracle-com-b5058aa2-2026-09-4",
+        "finance-yahoo-com-dfc3cc57-2026-09-1",
+        "finance-yahoo-com-dfc3cc57-2026-09-2",
+        "finance-yahoo-com-92106dc0-2026-09-3",
+        "finance-yahoo-com-92106dc0-2026-09-4"
+      ],
+      "sourceLine": "Oracle Q1 FY2027 results (10 September 2026); finance.yahoo.com reports on Microsoft capacity and Nvidia's chief executive (11 September 2026).",
+      "relatedDocs": [
+        {
+          "url": "https://finance.yahoo.com/technology/articles/microsoft-eyes-massive-data-center-233026556.html",
+          "title": "Microsoft eyes a far bigger data-centre footprint as hardware runs short",
+          "outlet": "finance.yahoo.com",
+          "date": "2026-09-11"
+        },
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-ceo-sees-4-trillion-170228673.html",
+          "title": "Nvidia chief sees trillions of AI infrastructure spending by 2030",
+          "outlet": "finance.yahoo.com",
+          "date": "2026-09-11"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "Relief from an unexpected direction",
+      "paragraphs": [
+        "The bottleneck everyone has been watching is memory. The first crack in it came not from a new factory but from a model. DeepSeek said its AI models now need less high-bandwidth memory, and the market took it seriously: SK Hynix shares fell 2.2 percent and Samsung 3.5 percent. If newer models use less memory for each answer they produce, the link between growing usage and growing hardware orders gets weaker.",
+        "A second, quieter sign came from Kioxia, whose flash memory prices rose 70 percent in the June quarter after a prior quarter above 100 percent. Its chief executive said another jump of that size looks unlikely, because even the largest buyers have limited budgets. Prices that cannot keep rising are the ordinary way a shortage begins to end."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-taipeitimes-com-f206468a-2026-09-1",
+        "www-taipeitimes-com-f206468a-2026-09-2",
+        "www-taipeitimes-com-fa24bea3-2026-09-1",
+        "www-taipeitimes-com-fa24bea3-2026-09-3"
+      ],
+      "sourceLine": "taipeitimes.com (12 September 2026) on memory-share falls; Taipei Times (10 September 2026) on Kioxia pricing.",
+      "relatedDocs": [
+        {
+          "url": "https://www.taipeitimes.com/News/biz/archives/2026/09/12/2003864118",
+          "title": "Memory shares fall after DeepSeek says its models need less memory",
+          "outlet": "taipeitimes.com",
+          "date": "2026-09-12"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Watch whether the memory relief is real or local. In China it is going the other way: chipmakers including Huawei and Cambricon have raised prices because of the memory shortage, with Huawei's Ascend 950DT card now above 250,000 yuan, a jump of 20 to 50 percent from quotes given two months earlier. Two different worlds, one shortage.",
+        "Watch also who gets to sell into the racks. d-Matrix will fold its own inference chips into Nvidia rack systems, with a tape-out due before the end of 2026 and availability in the last quarter of 2027 — a rival joining the leader's platform rather than fighting it. And watch Washington: the Justice Department is asking whether Nvidia structured its $17 billion licensing deal with Groq to sidestep antitrust review. The street price of a card, tracked below, is the simplest early tell of which way the balance tips."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "www-investing-com-9d51395c-2026-09-1",
+        "www-investing-com-9d51395c-2026-09-2",
+        "www-d-matrix-ai-d7c1613e-2026-09-1",
+        "www-thestar-com-my-af5ac5ca-2026-09-1"
+      ],
+      "sourceLine": "Reuters via Investing.com (10 September 2026); d-matrix.ai (10 September 2026); thestar.com.my (10 September 2026).",
+      "relatedDocs": [
+        {
+          "url": "https://www.d-matrix.ai/announcements/d-matrix-rackscale-nvidia/",
+          "title": "d-Matrix brings its inference chips into Nvidia rack systems",
+          "outlet": "d-matrix.ai",
+          "date": "2026-09-10"
+        },
+        {
+          "url": "https://www.thestar.com.my/tech/tech-news/2026/09/10/us-doj-probes-nvidia039s-licensing-deal-with-ai-startup-groq-nyt-reports",
+          "title": "US Justice Department probes Nvidia's licensing deal with Groq",
+          "outlet": "thestar.com.my",
+          "date": "2026-09-10"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "The best read on how many finished AI servers are actually leaving factories.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Shows whether the biggest buyers are still raising their building budgets.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "A falling street price would be the first sign the queue is clearing.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-09",
+      "text": "Oracle handed over more than 300,000 GPUs in the quarter and still said demand ran past supply.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-08",
+      "text": "TSMC's August sales rose 53.3 percent on a year earlier, so the factory side kept pace.",
+      "scene": 1
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Oracle delivered more than 300,000 GPUs last quarter, nearly triple the quarter before, and still says customer demand runs past the capacity it has available.",
+      "claimFindingIds": [
+        "investor-oracle-com-b5058aa2-2026-09-4"
+      ]
+    },
+    {
+      "text": "Microsoft has turned cloud customers away for lack of hardware and plans to grow compute from about 12 gigawatts today to over 38 gigawatts by 2032.",
+      "claimFindingIds": [
+        "finance-yahoo-com-dfc3cc57-2026-09-1",
+        "finance-yahoo-com-dfc3cc57-2026-09-2"
+      ]
+    },
+    {
+      "text": "DeepSeek's claim that its models need less high-bandwidth memory knocked SK Hynix shares 2.2 percent and Samsung 3.5 percent, the first real doubt about memory demand.",
+      "claimFindingIds": [
+        "www-taipeitimes-com-f206468a-2026-09-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "improved",
+      "reasoning": "Physical output rose: Oracle delivered over 300,000 GPUs, nearly triple the prior quarter, and Grace Blackwell shipments were reported up 27 percent month over month. Demand still exceeds supply, but more finished product is clearing the chain.",
+      "claimFindingIds": [
+        "investor-oracle-com-b5058aa2-2026-09-4",
+        "cryptobriefing-com-2079a6de-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "unchanged",
+      "reasoning": "Blackwell parts are still put at more than 70 percent of high-end volume, and d-Matrix is bringing its inference chips inside Nvidia's rack platform. Against that, the Justice Department is probing the $17 billion Groq licensing deal, so the position neither gained nor lost ground.",
+      "claimFindingIds": [
+        "cryptobriefing-com-2079a6de-2026-09-3",
+        "www-d-matrix-ai-d7c1613e-2026-09-1",
+        "www-thestar-com-my-af5ac5ca-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "improved",
+      "reasoning": "DeepSeek says its models need less high-bandwidth memory, sending SK Hynix down 2.2 percent and Samsung down 3.5 percent, and weakening the link between rising usage and rising memory orders. That is the first demand-side relief in weeks.",
+      "claimFindingIds": [
+        "www-taipeitimes-com-f206468a-2026-09-1",
+        "www-taipeitimes-com-f206468a-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today about how much stacked memory goes into each chip. The only memory news concerned how much memory the models themselves need, which is a separate question.",
+      "claimFindingIds": [
+        "www-taipeitimes-com-f206468a-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-high-bandwidth-memory-and-server-memory",
+      "status": "improved",
+      "reasoning": "Kioxia's flash prices rose 70 percent in the June quarter, but its chief executive said another jump that size looks unlikely because even the largest buyers have limited budgets. Prices that stop climbing are how a shortage starts to ease.",
+      "claimFindingIds": [
+        "www-taipeitimes-com-fa24bea3-2026-09-1",
+        "www-taipeitimes-com-fa24bea3-2026-09-3"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-13",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "debc637c1d2a2a6e0dc44e466716c7823b1267b8e95f54cbfad8cf10ef58f3b8",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-09-13T12:12:41.079260+00:00"
+  }
+}

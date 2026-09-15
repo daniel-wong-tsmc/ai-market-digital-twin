@@ -1,0 +1,47 @@
+{
+  "id": "investor-oracle-com-b5058aa2-2026-09-2",
+  "statement": "Oracle booked more than $30 billion of additional AI cloud contracts in Q1, lifting remaining performance obligations to $664 billion, a $209 billion year-over-year increase.",
+  "kind": "measured",
+  "value": {
+    "number": 664.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Backlog of this size is contracted future compute that must be built and equipped, making it the strongest forward demand signal in the quarter.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "chips.networking-silicon"
+    ],
+    "direction": "positive",
+    "mechanism": "Contracted AI cloud obligations commit the operator to multi-year accelerator, fabric and facility procurement."
+  },
+  "evidence": [
+    {
+      "source": "investor.oracle.com",
+      "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx",
+      "date": "2026-09-10",
+      "excerpt": "Oracle booked more than $30 billion of additional AI cloud contracts in Q1 increasing its RPO to $664 billion.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company press release fetched at secondary tier; corroborating outlet is quoted inside the same document rather than separately fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "oracle",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-13T11:31:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
