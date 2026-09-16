@@ -1,0 +1,51 @@
+{
+  "id": "moneycheck-com-0c0d636b-2026-09-1",
+  "statement": "Meta plans to put its third-generation custom MTIA 450 silicon into data centers in the first half of 2027 and a fourth-generation MTIA 500 in late 2027, explicitly to reduce dependence on Nvidia hardware.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A top-five buyer moving inference and training work onto in-house accelerators shifts spend away from merchant GPUs toward custom silicon and its design and foundry partners.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "Custom processors designed with Broadcom and built at TSMC substitute for merchant GPU purchases in Meta's fleet, lowering Meta's operating cost while diverting a share of accelerator demand."
+  },
+  "evidence": [
+    {
+      "source": "moneycheck.com",
+      "url": "https://moneycheck.com/meta-platforms-meta-stock-climbs-on-custom-ai-chip-development-news",
+      "date": "2026-09-15",
+      "excerpt": "The company intends to introduce custom processors into data centers during early 2027, aiming to reduce dependency on Nvidia hardware and lower operational expenses.",
+      "tier": "secondary"
+    },
+    {
+      "source": "moneycheck.com",
+      "url": "https://moneycheck.com/meta-platforms-meta-stock-climbs-on-custom-ai-chip-development-news",
+      "date": "2026-09-15",
+      "excerpt": "an initial batch of 12 test units arrived September 1 from TSMC, with performance metrics within 2-3% of design projections",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet summarising Bloomberg reporting; single publisher, no primary filing, and deployment is still at test-unit stage."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "meta",
+  "observedAt": "2026-09-15",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

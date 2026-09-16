@@ -1,0 +1,233 @@
+{
+  "headline": "Buyers start designing around the memory shortage",
+  "deck": "Fresh orders landed again this week, but the parts that turn orders into working machines are still the slow step, and the fixes on offer are dated 2027.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The orders land faster than the buildings",
+      "paragraphs": [
+        "Anthropic signed a six-year, $13.7 billion compute agreement with the developer RUM Group, to be served from a new data center in Georgia. The site is the catch: RUM Group disclosed financing trouble in August, and there is now doubt it will hit its late-2026 completion target, which puts delivery of that contract at risk.",
+        "The pattern is familiar. Oracle handed over more than 300,000 chips to its own customers last quarter, close to triple the quarter before, and still says demand for training and serving work runs past what it has available. Money and orders are not the shortage. Finished capacity is."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "www-pymnts-com-d542b456-2026-09-1",
+        "www-pymnts-com-d542b456-2026-09-3",
+        "investor-oracle-com-b5058aa2-2026-09-4"
+      ],
+      "sourceLine": "Sources: pymnts.com (Sept 14) and Oracle investor relations (Sept 10).",
+      "relatedDocs": [
+        {
+          "url": "https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-makes-13-7-compute-deal-with-trump-linked-rum-group/",
+          "title": "Anthropic signs a $13.7 billion compute deal for a Georgia site",
+          "outlet": "pymnts.com",
+          "date": "2026-09-14"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Two ways the memory pinch could ease",
+      "paragraphs": [
+        "Micron showed what it calls the first 512-gigabyte server memory module, enough to put up to 12 terabytes of memory in a single two-socket machine, and it says the part draws more than 60 percent less operating power than the four smaller modules it replaces. The date is the problem: volume production is not expected until the second half of 2027.",
+        "The other route is needing less memory in the first place. DeepSeek said its newer models require less high-bandwidth memory, and shares of the two Korean memory makers fell 2.2 percent and 3.5 percent on the news. If serving an answer takes cheaper memory, the link between rising usage and rising chip purchases gets looser. Neither route helps the machines being built this quarter."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "www-globenewswire-com-a3bb69ca-2026-09-1",
+        "www-globenewswire-com-a3bb69ca-2026-09-2",
+        "www-taipeitimes-com-f206468a-2026-09-1",
+        "www-taipeitimes-com-f206468a-2026-09-2"
+      ],
+      "sourceLine": "Sources: globenewswire.com (Sept 15) and Taipei Times (Sept 12).",
+      "relatedDocs": [
+        {
+          "url": "https://www.globenewswire.com/news-release/2026/09/15/3362200/14450/en/micron-advances-memory-innovation-with-the-world-s-first-ultra-dense-module-for-next-generation-servers.html",
+          "title": "Micron shows an ultra-dense memory module for next-generation servers",
+          "outlet": "globenewswire.com",
+          "date": "2026-09-15"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The biggest buyers are building their own",
+      "paragraphs": [
+        "Meta will put its third-generation in-house chip into data centers in the first half of 2027 and a fourth generation late that year, stated plainly as a way to depend less on Nvidia hardware, and it has committed to more than 1 gigawatt of capacity over the next twelve months. Broadcom, which co-designs parts like these, now projects its own artificial-intelligence chip sales rising from about $58 billion this year to $115 billion in 2027 and $230 billion in 2028. Samsung also co-led a 200-million-euro first round for Euclyd, a Dutch startup building an inference chip that is not a graphics part.",
+        "None of this makes the queue shorter. Broadcom's own management says land, power and building shells set the timing of new capacity, alongside packaging substrate, memory and leading-edge wafers. Custom chips change who is waiting in line, not how long the line is."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per chip"
+      },
+      "claimFindingIds": [
+        "moneycheck-com-0c0d636b-2026-09-1",
+        "moneycheck-com-0c0d636b-2026-09-2",
+        "www-fool-com-f8289755-2026-09-1",
+        "www-gate-com-666741c2-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-3"
+      ],
+      "sourceLine": "Sources: moneycheck.com (Sept 15), fool.com (Sept 9), gate.com (Sept 14) and a Broadcom earnings call transcript (Sept 2).",
+      "relatedDocs": [
+        {
+          "url": "https://moneycheck.com/meta-platforms-meta-stock-climbs-on-custom-ai-chip-development-news",
+          "title": "Meta moves its next in-house chips into 2027 data centers",
+          "outlet": "moneycheck.com",
+          "date": "2026-09-15"
+        },
+        {
+          "url": "https://www.fool.com/investing/2026/09/09/broadcom-forecasts-230-billion-in-ai-semiconductor/",
+          "title": "Broadcom forecasts $230 billion of chip sales in 2028",
+          "outlet": "fool.com",
+          "date": "2026-09-09"
+        },
+        {
+          "url": "https://www.gate.com/news/detail/NVDA/samsung-backs-ai-chip-rival-euclyd-in-231-million-series-a-round-24272517",
+          "title": "Samsung backs a Dutch chip startup building a non-graphics inference part",
+          "outlet": "gate.com",
+          "date": "2026-09-14"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "Three things worth watching next",
+      "paragraphs": [
+        "First, dates on the ground. Whether RUM Group's Georgia site meets its late-2026 target is the cleanest near-term test of whether signed money turns into serving capacity on schedule.",
+        "Second, whether the memory relief is real. Micron's dense module is a 2027 event, and DeepSeek's claim of lighter memory needs is so far a claim that moved share prices rather than a change in what buyers order.",
+        "Third, planning. Nvidia and Palantir are putting an artificial-intelligence planning system into Nvidia's own supply chain first, a chain the company describes as spanning millions of parts and thousands of suppliers. If better planning shows up anywhere as extra finished machines, that is where it should appear first."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-pymnts-com-d542b456-2026-09-3",
+        "www-globenewswire-com-a3bb69ca-2026-09-1",
+        "www-taipeitimes-com-f206468a-2026-09-1",
+        "nvidianews-nvidia-com-34de068e-2026-09-1",
+        "nvidianews-nvidia-com-34de068e-2026-09-2"
+      ],
+      "sourceLine": "Sources: pymnts.com (Sept 14), globenewswire.com (Sept 15), Taipei Times (Sept 12) and nvidianews.nvidia.com (Sept 10).",
+      "relatedDocs": [
+        {
+          "url": "https://nvidianews.nvidia.com/news/nvidia-and-palantir-bring-sovereign-intelligence-to-critical-supply-chains",
+          "title": "Nvidia and Palantir apply planning software to critical supply chains",
+          "outlet": "nvidianews.nvidia.com",
+          "date": "2026-09-10"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How fast finished servers are reaching buyers, measured against a year earlier.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "How hard memory makers are spending to add the capacity everyone is waiting on.",
+      "scene": 2
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-08",
+      "text": "The developer behind the new Georgia site disclosed financing trouble.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-09",
+      "text": "A denser memory module and lighter-memory models both point at relief, but not this year.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Anthropic committed $13.7 billion over six years to RUM Group for compute from a Georgia site whose late-2026 completion is already in doubt.",
+      "claimFindingIds": [
+        "www-pymnts-com-d542b456-2026-09-1",
+        "www-pymnts-com-d542b456-2026-09-3"
+      ]
+    },
+    {
+      "text": "Micron showed a 512-gigabyte server memory module holding 12 terabytes per machine, but volume production only starts in the second half of 2027.",
+      "claimFindingIds": [
+        "www-globenewswire-com-a3bb69ca-2026-09-1"
+      ]
+    },
+    {
+      "text": "Meta fields its third in-house chip in the first half of 2027 to lean less on Nvidia; Broadcom forecasts $230 billion of chip sales in 2028.",
+      "claimFindingIds": [
+        "moneycheck-com-0c0d636b-2026-09-1",
+        "www-fool-com-f8289755-2026-09-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "unchanged",
+      "reasoning": "Today's relief is dated later: Micron's 512-gigabyte module reaches volume only in the second half of 2027, and Broadcom still names land, power, building shells, substrate, memory and leading-edge wafers as what sets timing. Nothing moved the near-term physical limit.",
+      "claimFindingIds": [
+        "www-globenewswire-com-a3bb69ca-2026-09-1",
+        "www-investing-com-81ce92bb-2026-09-3"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "Meta set its third in-house chip for the first half of 2027 and a fourth for late 2027 to depend less on Nvidia, Broadcom projects $230 billion of chip sales in 2028, and Samsung backed a startup building a non-graphics inference part.",
+      "claimFindingIds": [
+        "moneycheck-com-0c0d636b-2026-09-1",
+        "www-fool-com-f8289755-2026-09-1",
+        "www-gate-com-666741c2-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "improved",
+      "reasoning": "Two easing signals arrived: DeepSeek says its newer models need less high-bandwidth memory, knocking the two Korean suppliers' shares 2.2 and 3.5 percent, and Micron demonstrated a 512-gigabyte module cutting operating power more than 60 percent.",
+      "claimFindingIds": [
+        "www-taipeitimes-com-f206468a-2026-09-1",
+        "www-globenewswire-com-a3bb69ca-2026-09-1",
+        "www-globenewswire-com-a3bb69ca-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "The only reading today is a demand-side claim: DeepSeek says newer models need less high-bandwidth memory, which knocked Korean supplier shares 2.2 and 3.5 percent but has not changed how much stacked memory any accelerator ships with. The supply picture stands where it was.",
+      "claimFindingIds": [
+        "www-taipeitimes-com-f206468a-2026-09-1",
+        "www-taipeitimes-com-f206468a-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-high-bandwidth-memory-and-server-memory",
+      "status": "improved",
+      "reasoning": "DeepSeek's claim that newer models need less high-bandwidth memory moved Korean supplier shares down 2.2 and 3.5 percent, and cheaper memory per answer would loosen the tie between usage growth and memory buying.",
+      "claimFindingIds": [
+        "www-taipeitimes-com-f206468a-2026-09-1",
+        "www-taipeitimes-com-f206468a-2026-09-2"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-16",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "c19404f70b7a0a5eafa96a9a001da1c3d4ab3567d53ba882ebeb72b8ca787fc7",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-09-16T00:37:04.730712+00:00"
+  }
+}

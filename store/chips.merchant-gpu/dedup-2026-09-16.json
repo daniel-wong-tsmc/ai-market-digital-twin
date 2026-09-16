@@ -1,0 +1,218 @@
+{
+  "asOf": "2026-09",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "www-qrcodepress-com-eb94a46d-2026-09-1",
+      "entity": "china",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-qrcodepress-com-eb94a46d-2026-09-2",
+      "entity": "china",
+      "indicatorId": "exportControlExposure",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-qrcodepress-com-eb94a46d-2026-09-3",
+      "entity": "china",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "moneycheck-com-0c0d636b-2026-09-1",
+      "entity": "meta",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-globenewswire-com-a3bb69ca-2026-09-3",
+      "entity": "micron",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-globenewswire-com-a3bb69ca-2026-09-2",
+      "entity": "micron",
+      "indicatorId": "perfPerWatt",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "mistral-ai-8ededf5f-2026-09-2",
+      "entity": "mistral",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "mistral-ai-8ededf5f-2026-09-1",
+      "entity": "mistral",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "www-pymnts-com-d542b456-2026-09-3",
+      "entity": "anthropic",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "update",
+      "priorFindingId": "247wallst-com-18193b15-2026-09-3",
+      "detail": "statement/trend changed (trend falling -> falling)"
+    },
+    {
+      "findingId": "www-pymnts-com-d542b456-2026-09-1",
+      "entity": "anthropic",
+      "indicatorId": "rpoBacklog",
+      "verdict": "update",
+      "priorFindingId": "www-datacenterdynamics-com-06432b6e-2026-09-1",
+      "detail": "value 517.0 -> 13.7 (tol 1%)"
+    },
+    {
+      "findingId": "www-fool-com-f8289755-2026-09-3",
+      "entity": "broadcom",
+      "indicatorId": "customerConcentration",
+      "verdict": "update",
+      "priorFindingId": "finance-yahoo-com-61f89a99-2026-09-3",
+      "detail": "statement/trend changed (trend unknown -> rising)"
+    },
+    {
+      "findingId": "www-fool-com-f8289755-2026-09-1",
+      "entity": "broadcom",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "update",
+      "priorFindingId": "finance-yahoo-com-61f89a99-2026-09-1",
+      "detail": "value 58.0 -> 230.0 (tol 1%)"
+    },
+    {
+      "findingId": "lambda-ai-858e4490-2026-09-1",
+      "entity": "lambda-labs",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "lambda-ai-31b1a959-2026-09-1",
+      "detail": "value 6.69 -> 9.86 (tol 1%)"
+    },
+    {
+      "findingId": "moneycheck-com-0c0d636b-2026-09-2",
+      "entity": "meta",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "update",
+      "priorFindingId": "techcrunch-com-bed0b1c2-2026-07-2",
+      "detail": "magnitude 3 -> 2"
+    },
+    {
+      "findingId": "www-globenewswire-com-a3bb69ca-2026-09-1",
+      "entity": "micron",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "finance-biggo-com-0a772c62-2026-08-1",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    },
+    {
+      "findingId": "nvidianews-nvidia-com-34de068e-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "nvidianews-nvidia-com-8ee3d8d0-2026-09-1",
+      "detail": "magnitude 2 -> 1"
+    },
+    {
+      "findingId": "nvidianews-nvidia-com-34de068e-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "leadTimes",
+      "verdict": "update",
+      "priorFindingId": "cryptobriefing-com-2079a6de-2026-09-1",
+      "detail": "magnitude 2 -> 1"
+    },
+    {
+      "findingId": "developer-nvidia-com-738db867-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "perfPerWatt",
+      "verdict": "update",
+      "priorFindingId": "www-investing-com-2cd73a8c-2026-09-3",
+      "detail": "magnitude 1 -> 2"
+    },
+    {
+      "findingId": "www-gate-com-666741c2-2026-09-1",
+      "entity": "samsung",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "www-digitimes-com-76765ee9-2026-08-2",
+      "detail": "statement/trend changed (trend rising -> rising)"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "www-pymnts-com-d542b456-2026-09-2",
+      "entity": "anthropic",
+      "indicatorId": "rpoBacklog",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-fool-com-f8289755-2026-09-2",
+      "entity": "broadcom",
+      "indicatorId": "D2",
+      "verdict": "duplicate",
+      "priorFindingId": "www-sec-gov-a82cb219-2026-09-1",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "www-qrcodepress-com-eb94a46d-2026-09-4",
+      "entity": "china",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "lambda-ai-858e4490-2026-09-2",
+      "entity": "lambda-labs",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "lambda-ai-858e4490-2026-09-3",
+      "entity": "lambda-labs",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "developer-nvidia-com-738db867-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "perfPerWatt",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-gate-com-666741c2-2026-09-2",
+      "entity": "samsung",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "id": "www-globenewswire-com-a3bb69ca-2026-09-1",
+  "statement": "Micron demonstrated what it calls the world's first 512GB DDR5 RDIMM, enabling up to 12TB of DRAM in a 24-slot dual-socket server, with volume production expected in the second half of 2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Denser server memory relieves a capacity constraint on large AI and database workloads and shows memory makers pushing TSV stacking capability beyond HBM.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "infrastructure.ai-storage",
+      "infrastructure.datacenter-colo",
+      "energy.efficiency",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Vertical interconnect packaging with through-silicon vias raises capacity per module, letting existing server footprints hold larger working sets that feed accelerator workloads."
+  },
+  "evidence": [
+    {
+      "source": "globenewswire.com",
+      "url": "https://www.globenewswire.com/news-release/2026/09/15/3362200/14450/en/micron-advances-memory-innovation-with-the-world-s-first-ultra-dense-module-for-next-generation-servers.html",
+      "date": "2026-09-15",
+      "excerpt": "the successful demonstration of what it describes as the world's first 512GB DDR5 RDIMM (registered dual in-line memory module), validated across multiple server platforms",
+      "tier": "secondary"
+    },
+    {
+      "source": "globenewswire.com",
+      "url": "https://www.globenewswire.com/news-release/2026/09/15/3362200/14450/en/micron-advances-memory-innovation-with-the-world-s-first-ultra-dense-module-for-next-generation-servers.html",
+      "date": "2026-09-15",
+      "excerpt": "Micron expects the 512GB RDIMMs to be in volume production in the second half of 2027.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company press release distributed via a newswire, secondary tier, single publisher; the module is demonstrated but not yet in volume production."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "micron",
+  "observedAt": "2026-09-15",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

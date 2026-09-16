@@ -1,0 +1,54 @@
+{
+  "id": "www-globenewswire-com-a3bb69ca-2026-09-2",
+  "statement": "Micron says the 512GB RDIMM cuts operating power by more than 60% versus four 128GB RDIMMs (16.0W against 44.2W) and delivers up to 1.4x higher performance on Spark SVM analytics versus 256GB DDR5.",
+  "kind": "measured",
+  "value": {
+    "number": 1.4,
+    "unit": "perf_per_W"
+  },
+  "trend": "rising",
+  "why": "Power per terabyte of memory is part of the same fixed-power arithmetic that governs how much accelerator capacity a site can host.",
+  "impact": {
+    "targets": [
+      "energy.efficiency",
+      "chips.hbm-memory",
+      "infrastructure.datacenter-colo",
+      "energy.cooling"
+    ],
+    "direction": "positive",
+    "mechanism": "Consolidating four modules into one lowers memory-subsystem draw, freeing power budget inside the rack for compute."
+  },
+  "evidence": [
+    {
+      "source": "globenewswire.com",
+      "url": "https://www.globenewswire.com/news-release/2026/09/15/3362200/14450/en/micron-advances-memory-innovation-with-the-world-s-first-ultra-dense-module-for-next-generation-servers.html",
+      "date": "2026-09-15",
+      "excerpt": "the 512GB RDIMM reduces operating power by more than 60% compared with four 128GB RDIMMs, based on 16.0W for one 512GB module versus 44.2W total for four 128GB modules",
+      "tier": "secondary"
+    },
+    {
+      "source": "globenewswire.com",
+      "url": "https://www.globenewswire.com/news-release/2026/09/15/3362200/14450/en/micron-advances-memory-innovation-with-the-world-s-first-ultra-dense-module-for-next-generation-servers.html",
+      "date": "2026-09-15",
+      "excerpt": "up to 1.4x higher performance for Spark SVM-based analytics versus 256GB DDR5",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor-supplied benchmark figures in a press release, single secondary publisher, no independent verification."
+  },
+  "dispersion": "Power claim is module-level (16.0W vs 44.2W); the 1.4x performance claim is workload-specific to Spark SVM analytics.",
+  "asOf": "2026-09",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "micron",
+  "observedAt": "2026-09-15",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

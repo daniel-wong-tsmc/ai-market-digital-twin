@@ -1,0 +1,43 @@
+{
+  "id": "nvidianews-nvidia-com-34de068e-2026-09-2",
+  "statement": "NVIDIA describes its own supply chain as one of the most complex globally, spanning millions of parts and thousands of suppliers, and is applying the AI stack there first.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "The scale and complexity of NVIDIA's supplier base is the machinery behind accelerator lead times; efforts to optimise it bear on how quickly supply can respond.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "Optimisation software applied to parts and supplier routing is aimed at improving visibility and decision-making across a chain that gates accelerator output."
+  },
+  "evidence": [
+    {
+      "source": "nvidianews.nvidia.com",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-and-palantir-bring-sovereign-intelligence-to-critical-supply-chains",
+      "date": "2026-09-10",
+      "excerpt": "one of the most complex supply chains",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Primary source, but the claim is qualitative self-description with no parts, timing or throughput figures to measure against."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

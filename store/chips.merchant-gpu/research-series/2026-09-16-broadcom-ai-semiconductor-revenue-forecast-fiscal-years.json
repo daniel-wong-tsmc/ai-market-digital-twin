@@ -1,0 +1,29 @@
+{
+  "seriesName": "Broadcom AI semiconductor revenue forecast (fiscal years)",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "Yahoo Finance (The Motley Fool)",
+  "points": [
+    {
+      "label": "Fiscal 2026 (expected)",
+      "value": 58.0,
+      "sourceUrl": "https://finance.yahoo.com/markets/stocks/articles/broadcom-forecasts-230-billion-ai-224100954.html",
+      "publishedAt": "2026-09-10"
+    },
+    {
+      "label": "Fiscal 2027 (forecast)",
+      "value": 115.0,
+      "sourceUrl": "https://finance.yahoo.com/markets/stocks/articles/broadcom-forecasts-230-billion-ai-224100954.html",
+      "publishedAt": "2026-09-10"
+    },
+    {
+      "label": "Fiscal 2028 (forecast)",
+      "value": 230.0,
+      "sourceUrl": "https://finance.yahoo.com/markets/stocks/articles/broadcom-forecasts-230-billion-ai-224100954.html",
+      "publishedAt": "2026-09-10"
+    }
+  ],
+  "pair": false,
+  "notes": "All three figures are Broadcom's own guidance given by CEO Hock Tan on the fiscal Q3 2026 earnings call (reported Sept 2, 2026), as relayed in this single Yahoo Finance article: 'For this year, it expects AI semiconductor revenue to total $58 billion... Next year, that figure is expected to rise to $115 billion... and in 2028, the forecast is for $230 billion.' These are company forecasts/guidance, not realized results -- labeled as such in each point's label. All three points come from the same article/URL to keep the chart single-sourced. Note the underlying content is a Motley Fool piece syndicated on Yahoo Finance; fool.com itself is excluded per the research rules, so the Yahoo Finance mirror is used instead. This series only supports the Broadcom half of the bullet (Meta's MTIA chip timeline has no comparable numeric series from a single non-excluded, bot-accessible publisher).",
+  "bulletIndex": 3
+}

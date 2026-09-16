@@ -1,0 +1,43 @@
+{
+  "id": "www-qrcodepress-com-eb94a46d-2026-09-3",
+  "statement": "High-bandwidth memory production is described as the primary bottleneck for China's domestic AI chip buildout.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "If HBM is the binding constraint, domestic capacity targets can slip regardless of how much investment or wafer output is available.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "negative",
+    "mechanism": "Limited domestic HBM output caps how many domestic accelerators can be finished, restraining the alternative supply the plan depends on."
+  },
+  "evidence": [
+    {
+      "source": "qrcodepress.com",
+      "url": "https://www.qrcodepress.com/ai-race-china-infrastructure-chips/8545960/",
+      "date": "2026-09-07",
+      "excerpt": "High-bandwidth memory production remains the primary bottleneck",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Qualitative assertion in a single secondary outlet with no bit-supply or capacity figures attached."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "china",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

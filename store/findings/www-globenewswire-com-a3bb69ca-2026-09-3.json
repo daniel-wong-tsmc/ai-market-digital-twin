@@ -1,0 +1,43 @@
+{
+  "id": "www-globenewswire-com-a3bb69ca-2026-09-3",
+  "statement": "AMD and Intel are both actively validating Micron's 512GB module on their server platforms, with JPMorganChase named as an enterprise voice of support.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Platform validation by both x86 vendors is the gate that turns a memory demonstration into shipping server configurations.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "infrastructure.datacenter-colo",
+      "infrastructure.ai-storage"
+    ],
+    "direction": "positive",
+    "mechanism": "Joint validation with AMD and Intel clears the path for the module to appear in qualified next-generation server platforms."
+  },
+  "evidence": [
+    {
+      "source": "globenewswire.com",
+      "url": "https://www.globenewswire.com/news-release/2026/09/15/3362200/14450/en/micron-advances-memory-innovation-with-the-world-s-first-ultra-dense-module-for-next-generation-servers.html",
+      "date": "2026-09-15",
+      "excerpt": "AMD and Intel are both actively validating the module across their respective server platforms.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary press-release source with partner quotes but no shipping dates from AMD or Intel."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "micron",
+  "observedAt": "2026-09-15",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

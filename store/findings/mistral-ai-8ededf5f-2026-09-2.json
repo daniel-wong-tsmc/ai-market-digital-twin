@@ -1,0 +1,44 @@
+{
+  "id": "mistral-ai-8ededf5f-2026-09-2",
+  "statement": "Samsung led Mistral's round, with NVIDIA, ASML, a16z, BlackRock funds and the Grand Duchy of Luxembourg among investors, tying strategic silicon and equipment suppliers to a European model lab.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Supplier participation in a customer's cap table signals expected forward purchase relationships and deeper supplier-customer concentration between chip vendors and labs.",
+  "impact": {
+    "targets": [
+      "models.open-weight",
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "chips.eda-ip"
+    ],
+    "direction": "positive",
+    "mechanism": "Strategic investors that also sell silicon and memory into AI training gain a funded customer, reinforcing the circular supplier-customer linkage."
+  },
+  "evidence": [
+    {
+      "source": "mistral.ai",
+      "url": "https://mistral.ai/news/mistral-makes-sovereign-open-weight-ai-to-frontier/",
+      "date": "2026-09-08",
+      "excerpt": "Existing investors participating: a16z, ASML, NVIDIA, Salesforce Ventures, General Catalyst, Index Ventures, Lightspeed, and others.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary source; investor list is disclosed but the commercial implications are not quantified."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "mistral",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

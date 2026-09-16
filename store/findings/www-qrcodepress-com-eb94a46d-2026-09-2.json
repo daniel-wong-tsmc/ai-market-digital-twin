@@ -1,0 +1,46 @@
+{
+  "id": "www-qrcodepress-com-eb94a46d-2026-09-2",
+  "statement": "The plan sets a goal of meeting 76% of Chinese AI chip demand with domestic chips by 2030, explicitly excluding Nvidia, AMD and Intel silicon because of US export controls.",
+  "kind": "measured",
+  "value": {
+    "number": 76.0,
+    "unit": "pct"
+  },
+  "trend": "rising",
+  "why": "A formal domestic-share target quantifies how much of the China accelerator market Western merchant vendors are expected to lose over the plan period.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.foundry-packaging"
+    ],
+    "direction": "negative",
+    "mechanism": "Policy-driven substitution toward domestic chips removes a share of addressable demand from merchant GPU vendors already restricted by export controls."
+  },
+  "evidence": [
+    {
+      "source": "qrcodepress.com",
+      "url": "https://www.qrcodepress.com/ai-race-china-infrastructure-chips/8545960/",
+      "date": "2026-09-07",
+      "excerpt": "76 percent of Chinese AI chip demand by 2030,",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet reporting a policy target; no primary government text or independent corroboration in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "china",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

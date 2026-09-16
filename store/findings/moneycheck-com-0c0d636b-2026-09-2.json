@@ -1,0 +1,48 @@
+{
+  "id": "moneycheck-com-0c0d636b-2026-09-2",
+  "statement": "Meta has committed to deploying more than 1 gigawatt of capacity over the next 12 months, developed with Broadcom on design and TSMC on production.",
+  "kind": "measured",
+  "value": {
+    "number": 1.0,
+    "unit": "GW"
+  },
+  "trend": "rising",
+  "why": "A gigawatt-scale deployment commitment over one year is a direct read on hyperscaler capital intensity and the pull on power, cooling and packaging capacity.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "energy.cooling",
+      "chips.foundry-packaging"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed capacity additions convert into orders for accelerators, advanced packaging, electrical equipment and cooling across the next four quarters."
+  },
+  "evidence": [
+    {
+      "source": "moneycheck.com",
+      "url": "https://moneycheck.com/meta-platforms-meta-stock-climbs-on-custom-ai-chip-development-news",
+      "date": "2026-09-15",
+      "excerpt": "Meta has committed to deploying over 1 gigawatt of capacity across the next 12 months, developed through partnerships with Broadcom (design) and TSMC (production).",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary outlet relaying press reports; no company filing or guidance document behind the gigawatt figure."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "meta",
+  "observedAt": "2026-09-15",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,55 @@
+{
+  "id": "mistral-ai-8ededf5f-2026-09-1",
+  "statement": "Mistral raised EUR 3 billion in a Series D at a post-money valuation above EUR 21 billion, with proceeds earmarked in part to scale compute capacity for training.",
+  "kind": "measured",
+  "value": {
+    "number": 3.0,
+    "unit": "EUR_B"
+  },
+  "trend": "rising",
+  "why": "Equity funding is the fuel for model-lab compute purchases; a round of this size signals that financing conditions for a marginal European buyer of accelerators remain open.",
+  "impact": {
+    "targets": [
+      "models.open-weight",
+      "models.frontier-closed",
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Fresh equity funds training-cluster procurement, adding to accelerator and cloud-capacity demand, though the release names no dollar amount or GPU count for compute."
+  },
+  "evidence": [
+    {
+      "source": "mistral.ai",
+      "url": "https://mistral.ai/news/mistral-makes-sovereign-open-weight-ai-to-frontier/",
+      "date": "2026-09-08",
+      "excerpt": "€3 billion in a Series D funding round at a post-money valuation of more than €21 billion",
+      "tier": "secondary"
+    },
+    {
+      "source": "mistral.ai",
+      "url": "https://mistral.ai/news/mistral-makes-sovereign-open-weight-ai-to-frontier/",
+      "date": "2026-09-08",
+      "excerpt": "scale its compute capacity for training powerful models",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company press release, secondary tier, single publisher; compute spend is described only in general language."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "mistral",
+  "observedAt": "2026-09-08",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

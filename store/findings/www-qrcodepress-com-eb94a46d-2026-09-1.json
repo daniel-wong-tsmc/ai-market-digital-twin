@@ -1,0 +1,55 @@
+{
+  "id": "www-qrcodepress-com-eb94a46d-2026-09-1",
+  "statement": "China's MIIT plan targets 9,800 exaflops of AI computing capacity by 2030, backed by $532 billion of infrastructure investment over five years, up from 2,185 exaflops in June 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 9800.0,
+    "unit": "exaflops"
+  },
+  "trend": "rising",
+  "why": "A state-funded capacity target of this size, built on domestic silicon, is the largest single source of accelerator supply outside the Western merchant chain.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "State investment scales domestically produced compute clusters, adding non-merchant accelerator supply while absorbing memory, power and packaging capacity."
+  },
+  "evidence": [
+    {
+      "source": "qrcodepress.com",
+      "url": "https://www.qrcodepress.com/ai-race-china-infrastructure-chips/8545960/",
+      "date": "2026-09-07",
+      "excerpt": "2030 Target: 9,800 exaflops of AI computing capacity by 2030",
+      "tier": "secondary"
+    },
+    {
+      "source": "qrcodepress.com",
+      "url": "https://www.qrcodepress.com/ai-race-china-infrastructure-chips/8545960/",
+      "date": "2026-09-07",
+      "excerpt": "China had 1,590 exaflops in 2025 and 2,185 exaflops by June 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single low-profile secondary outlet paraphrasing a government plan; the underlying MIIT document was not fetched."
+  },
+  "dispersion": "conflicting same-key reports: value 52.0 -> 9800.0 (tol 1%); sources: qrcodepress.com",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "china",
+  "observedAt": "2026-09-07",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

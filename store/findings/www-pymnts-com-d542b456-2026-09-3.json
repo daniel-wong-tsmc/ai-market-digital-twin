@@ -1,0 +1,43 @@
+{
+  "id": "www-pymnts-com-d542b456-2026-09-3",
+  "statement": "RUM Group disclosed financing challenges in August and there is doubt its Georgia data center will meet a late-2026 completion target, putting delivery of the Anthropic contract at risk.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Committed compute only becomes real demand if the counterparty can finance and build; shaky provider financing is the classic failure point in these deals.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "A provider with disclosed financing difficulties may not raise the capital to buy accelerators and complete the site, delaying or voiding the contracted capacity."
+  },
+  "evidence": [
+    {
+      "source": "pymnts.com",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-makes-13-7-compute-deal-with-trump-linked-rum-group/",
+      "date": "2026-09-14",
+      "excerpt": "the company disclosed financing challenges in August, and there is doubt the Georgia data center will meet its projected completion timeline of late 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; the risk is described qualitatively with no financing terms or covenant detail."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "anthropic",
+  "observedAt": "2026-09-14",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

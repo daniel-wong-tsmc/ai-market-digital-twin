@@ -1,0 +1,54 @@
+{
+  "id": "www-gate-com-666741c2-2026-09-1",
+  "statement": "Samsung co-led a EUR 200 million (about $231 million) Series A for Dutch startup Euclyd, which is building a non-GPU AI inference chip and memory architecture.",
+  "kind": "measured",
+  "value": {
+    "number": 231.0,
+    "unit": "USD_M"
+  },
+  "trend": "rising",
+  "why": "Capital flowing into alternative inference silicon backed by a major memory maker is an early marker of future competition for merchant GPU inference sockets.",
+  "impact": {
+    "targets": [
+      "chips.ai-silicon-startups",
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "energy.efficiency"
+    ],
+    "direction": "mixed",
+    "mechanism": "Funding plus Samsung's memory manufacturing and supply-chain support moves an alternative inference architecture toward production, adding potential non-GPU supply."
+  },
+  "evidence": [
+    {
+      "source": "gate.com",
+      "url": "https://www.gate.com/news/detail/NVDA/samsung-backs-ai-chip-rival-euclyd-in-231-million-series-a-round-24272517",
+      "date": "2026-09-14",
+      "excerpt": "EUR200 million (equivalent to $231 million)",
+      "tier": "secondary"
+    },
+    {
+      "source": "gate.com",
+      "url": "https://www.gate.com/news/detail/NVDA/samsung-backs-ai-chip-rival-euclyd-in-231-million-series-a-round-24272517",
+      "date": "2026-09-14",
+      "excerpt": "designing an AI chip system, with different architecture to GPUs, for inference, including the processor and memory architecture,",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary aggregator source; funding is confirmed but the product is pre-silicon."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> rising); sources: gate.com",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "samsung",
+  "observedAt": "2026-09-14",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "www-fool-com-f8289755-2026-09-3",
+  "statement": "Anthropic is expected to become Broadcom's largest XPU customer in 2027 and OpenAI could deploy more than 5 gigawatts of Broadcom's next-generation Jalapeno XPU in 2028.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Concentrating projected growth in a handful of model labs makes the custom-silicon outlook dependent on those labs' funding and deployment schedules.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "energy.power-generation"
+    ],
+    "direction": "mixed",
+    "mechanism": "A small set of frontier labs accounts for the bulk of projected XPU volume, so their capacity decisions swing both ASIC demand and merchant GPU share."
+  },
+  "evidence": [
+    {
+      "source": "fool.com",
+      "url": "https://www.fool.com/investing/2026/09/09/broadcom-forecasts-230-billion-in-ai-semiconductor/",
+      "date": "2026-09-09",
+      "excerpt": "Anthropic is expected to become Broadcom's largest XPU customer in 2027, while OpenAI could deploy more than 5 gigawatts of Broadcom's next-generation Jalapeno XPU in 2028.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet; the statements are expectations about future customers rather than confirmed orders."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "broadcom",
+  "observedAt": "2026-09-09",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

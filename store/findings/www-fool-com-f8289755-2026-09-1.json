@@ -1,0 +1,48 @@
+{
+  "id": "www-fool-com-f8289755-2026-09-1",
+  "statement": "Broadcom projects AI semiconductor revenue rising from roughly $58 billion this year to $115 billion in 2027 and $230 billion in 2028.",
+  "kind": "measured",
+  "value": {
+    "number": 230.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A custom-silicon vendor guiding to revenue larger than its entire current business implies a very large block of accelerator demand routed to ASICs rather than merchant GPUs.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "chips.hbm-memory",
+      "chips.networking-silicon"
+    ],
+    "direction": "mixed",
+    "mechanism": "Growth of this scale consumes leading-edge wafers, HBM and substrates while shifting a share of hyperscaler accelerator spend from merchant GPUs to custom XPUs."
+  },
+  "evidence": [
+    {
+      "source": "fool.com",
+      "url": "https://www.fool.com/investing/2026/09/09/broadcom-forecasts-230-billion-in-ai-semiconductor/",
+      "date": "2026-09-09",
+      "excerpt": "Broadcom projects AI semiconductor revenue growth from roughly $58 billion (current year) to $115 billion in 2027, and to $230 billion in 2028.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary commentary outlet, single publisher; the 2028 figure is a forward projection, not a reported result."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "broadcom",
+  "observedAt": "2026-09-09",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

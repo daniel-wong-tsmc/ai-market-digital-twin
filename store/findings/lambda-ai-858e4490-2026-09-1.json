@@ -1,0 +1,45 @@
+{
+  "id": "lambda-ai-858e4490-2026-09-1",
+  "statement": "Lambda lists reserved 1-Click Cluster pricing for NVIDIA HGX B200 at $9.86 per GPU-hour for a 16-GPU cluster on a two-week-to-one-year term.",
+  "kind": "measured",
+  "value": {
+    "number": 9.86,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Published neocloud rental levels are the visible clearing price for current-generation accelerator capacity, but this page gives no prior level or change, so it is a static level only.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Listed rental rate is a display overlay on merchant-GPU cloud economics; with no stated baseline it carries no directional signal."
+  },
+  "evidence": [
+    {
+      "source": "lambda.ai",
+      "url": "https://lambda.ai/pricing",
+      "date": "2026-09-16",
+      "excerpt": "$9.86",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "First-party vendor price page, but secondary tier and a single publisher with no historical comparison."
+  },
+  "dispersion": "conflicting same-key reports: value 3.99 -> 9.86 (tol 1%); sources: lambda.ai",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "lambda-labs",
+  "observedAt": "2026-09-16",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

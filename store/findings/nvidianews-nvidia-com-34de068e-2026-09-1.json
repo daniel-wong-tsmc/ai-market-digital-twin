@@ -1,0 +1,52 @@
+{
+  "id": "nvidianews-nvidia-com-34de068e-2026-09-1",
+  "statement": "NVIDIA and Palantir announced a supply-chain AI collaboration built on NVIDIA Nemotron open models and cuOpt, first deployed inside NVIDIA's own supply chain.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Pairing NVIDIA's open models with Palantir's enterprise platform pulls accelerated computing into industrial workloads beyond model training, widening the addressable demand base for GPUs.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.open-weight",
+      "applications.agent-platforms",
+      "applications.vertical-saas",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Reference architectures from Dell, Cisco, Rackspace and Nebius carry the stack into on-premises and cloud deployments, each of which requires NVIDIA accelerators to run inference."
+  },
+  "evidence": [
+    {
+      "source": "nvidianews.nvidia.com",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-and-palantir-bring-sovereign-intelligence-to-critical-supply-chains",
+      "date": "2026-09-10",
+      "excerpt": "The partnership combines Palantir's sovereign AI capabilities with NVIDIA's Nemotron open models to enhance supply chain visibility and decision-making.",
+      "tier": "primary"
+    },
+    {
+      "source": "nvidianews.nvidia.com",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-and-palantir-bring-sovereign-intelligence-to-critical-supply-chains",
+      "date": "2026-09-10",
+      "excerpt": "the deployment utilizes reference architectures supported by Dell Technologies, Cisco, Rackspace, and Nebius for on-premises or cloud deployment options",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary NVIDIA newsroom announcement with named technology components, partners and executive statements; the partnership itself is directly attested even though no volumes are given."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-09-10",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

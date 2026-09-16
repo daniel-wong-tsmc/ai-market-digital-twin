@@ -1,0 +1,48 @@
+{
+  "id": "www-pymnts-com-d542b456-2026-09-1",
+  "statement": "Anthropic signed a six-year, $13.7 billion compute procurement agreement with RUM Group, to be served from a new Georgia data center.",
+  "kind": "measured",
+  "value": {
+    "number": 13.7,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Multi-year committed compute spend is a forward booking of accelerator and data-center demand that must eventually be filled with hardware and power.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "A six-year purchase commitment obliges the provider to build and equip capacity, pulling through accelerator, colocation and power procurement."
+  },
+  "evidence": [
+    {
+      "source": "pymnts.com",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-makes-13-7-compute-deal-with-trump-linked-rum-group/",
+      "date": "2026-09-14",
+      "excerpt": "$13.7 billion",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet, no filing fetched; delivery depends on a data center whose financing and timeline the same article calls uncertain."
+  },
+  "dispersion": "conflicting same-key reports: value 517.0 -> 13.7 (tol 1%); sources: pymnts.com",
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "anthropic",
+  "observedAt": "2026-09-14",
+  "capturedAt": "2026-09-16T00:00:02Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
