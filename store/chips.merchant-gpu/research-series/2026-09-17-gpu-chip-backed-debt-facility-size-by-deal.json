@@ -1,0 +1,35 @@
+{
+  "seriesName": "GPU/chip-backed debt facility size by deal",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "FourWeekMBA",
+  "points": [
+    {
+      "label": "CoreWeave GPU infrastructure-backed debt facility (2023, led by Blackstone)",
+      "value": 2.3,
+      "sourceUrl": "https://fourweekmba.com/ai-crux-ai-blackstone-alphabet-22-billion-tpu-loan/",
+      "publishedAt": "2026-09-17"
+    },
+    {
+      "label": "CoreWeave GPU infrastructure-backed facility (2024, led by Blackstone)",
+      "value": 7.5,
+      "sourceUrl": "https://fourweekmba.com/ai-crux-ai-blackstone-alphabet-22-billion-tpu-loan/",
+      "publishedAt": "2026-09-17"
+    },
+    {
+      "label": "CoreWeave investment-grade rated GPU-backed financing (2026)",
+      "value": 8.5,
+      "sourceUrl": "https://fourweekmba.com/ai-crux-ai-blackstone-alphabet-22-billion-tpu-loan/",
+      "publishedAt": "2026-09-17"
+    },
+    {
+      "label": "Crux AI chip-backed loan to 10-bank syndicate led by Goldman Sachs (2026)",
+      "value": 22.0,
+      "sourceUrl": "https://fourweekmba.com/ai-crux-ai-blackstone-alphabet-22-billion-tpu-loan/",
+      "publishedAt": "2026-09-17"
+    }
+  ],
+  "pair": false,
+  "notes": "All four figures are quoted from the same FourWeekMBA article published 2026-09-17, which recounts the size of successive GPU/chip-backed debt facilities: CoreWeave's 2023 ($2.3B) and 2024 ($7.5B) Blackstone-led facilities, CoreWeave's 2026 $8.5B investment-grade GPU-backed financing, and the new $22B Crux AI loan (from a 10-bank syndicate led by Goldman Sachs, per Bloomberg, still described by the article as 'unverified'/being lined up as of publication). The publishedAt date given is the article's publication date, not the original closing date of each older facility (those exact closing dates were not stated on the page). The Crux AI loan also carries a separate $1 billion revolving credit facility not included in this series, and Blackstone's initial $5 billion equity commitment is a separate, non-debt figure also not included here.",
+  "bulletIndex": 3
+}

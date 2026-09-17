@@ -1,0 +1,47 @@
+{
+  "id": "newsletter-semianalysis-com-f8834642-2026-09-1",
+  "statement": "SemiAnalysis measures Vera Rubin NVL72 at between 1.4x and 3x the throughput per total cost of ownership of the latest GB300 TRTLLM configuration at a realistic 80 TPS P90 serving point, and roughly 67x on an apples-to-apples dense comparison at 170 TPS.",
+  "kind": "measured",
+  "value": {
+    "number": 3.0,
+    "unit": "x_throughput_per_TCO_vs_GB300"
+  },
+  "trend": "rising",
+  "why": "Cost per token delivered is the buying test for inference fleets; a next-generation part that lifts throughput per dollar pulls forward orders and shortens the useful economic life of installed Blackwell capacity.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "models.reasoning-agentic",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Better throughput per TCO lowers the cost of serving agentic inference, raising the return on buying Rubin and increasing total accelerator demand while pressuring the resale economics of prior-generation racks."
+  },
+  "evidence": [
+    {
+      "source": "SemiAnalysis (newsletter/licensed source)",
+      "url": "https://newsletter.semianalysis.com/p/vera-rubin-nvl72-agentic-inference",
+      "date": "2026-09-14",
+      "excerpt": "between 1.4x and 3x the throughput per TCO",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary analyst publication using its own ownership-cost assumptions; no vendor filing corroborates the figures, and the headline 67x applies only to a narrow 170 TPS dense comparison."
+  },
+  "dispersion": "1.4x-3x at 80 TPS P90 under ownership TCO, versus approximately 67x at 170 TPS dense; 10x more tokens per USD than B300 at 80 TPS P90.",
+  "asOf": "2026-09",
+  "indicatorId": "flopsPerDollar",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "NVIDIA / CoreWeave (Rubin NVL72 vs GB300 performance-per-cost)",
+  "observedAt": "2026-09-14",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

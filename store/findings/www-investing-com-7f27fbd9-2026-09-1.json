@@ -1,0 +1,44 @@
+{
+  "id": "www-investing-com-7f27fbd9-2026-09-1",
+  "statement": "Huawei pulled its Ascend roadmap forward, with the Ascend 960DT moved up three quarters to Q1 2027 and the 960PR a quarter earlier to Q3 2027, and the 970 and 980 following in 2028 and 2029.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "An accelerated domestic accelerator roadmap means Chinese buyers get credible local parts sooner, which erodes the share of China AI compute that merchant GPUs can win even where export rules allow sales.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "chips.foundry-packaging",
+      "chips.hbm-memory"
+    ],
+    "direction": "negative",
+    "mechanism": "Earlier Ascend availability enlarges the alternative accelerator supply inside China and substitutes for imported merchant GPUs in domestic deployments."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/chinas-huawei-sets-2027-launch-for-new-ai-chips-as-it-targets-nvidia-4904787",
+      "date": "2026-09-17",
+      "excerpt": "the Ascend 960DT is planned for Q1 2027 (moved up three quarters from the original schedule)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting of company statements about future launch dates; roadmap dates are announcements, not shipped product."
+  },
+  "dispersion": "960DT Q1 2027 and 960PR Q3 2027, with 970 in 2028 and 980 in 2029; over 1,000 systems deployed on earlier 910C processors and more than 5,200 developers working monthly on Ascend software.",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": -1,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "Huawei, NVIDIA",
+  "observedAt": "2026-09-17",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

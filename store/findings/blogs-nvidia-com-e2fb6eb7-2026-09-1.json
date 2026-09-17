@@ -1,0 +1,44 @@
+{
+  "id": "blogs-nvidia-com-e2fb6eb7-2026-09-1",
+  "statement": "NVIDIA, Google and Emerald AI launched the AI Energy Management Alliance (AEMA) on 2026-09-16 to set standards for grid-flexible data centers and faster interconnection pathways; no capacity or timing figures were stated.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Grid interconnection is a binding long-lead constraint on new AI data-center capacity; an industry standard for flexible, grid-enhancing sites could shorten the approval queue for compliant facilities and let ordered accelerators be installed sooner.",
+  "impact": {
+    "targets": [
+      "energy.grid-transmission",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Standardized response-speed, duration and ride-through metrics give utilities and grid operators a basis to grant faster interconnection to compliant sites, easing the power bottleneck that gates GPU deployment."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA (official blog)",
+      "url": "https://blogs.nvidia.com/blog/ai-energy-management-alliance/",
+      "date": "2026-09-16",
+      "excerpt": "establishes standards for ride-through capabilities, curtailment obligations, and faster interconnection pathways for compliant facilities",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Official NVIDIA announcement of the alliance, but wholly qualitative - the document states no numeric figures for interconnection-time reduction or MW/GW capacity."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "NVIDIA, Google, Emerald AI",
+  "observedAt": "2026-09-16",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

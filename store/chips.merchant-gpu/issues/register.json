@@ -1,19 +1,19 @@
 {
- "asOf": "2026-09-16",
+ "asOf": "2026-09-17",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 20,
+   "checkCount": 21,
    "id": "dim-bottleneck",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-09-16",
+    "assessedAsOf": "2026-09-17",
     "claimFindingIds": [
-     "www-globenewswire-com-a3bb69ca-2026-09-1",
-     "www-investing-com-81ce92bb-2026-09-3"
+     "wf-coreweave-com-c3bb5c08-2026-09-2",
+     "newsletter-semianalysis-com-f8834642-2026-09-2"
     ],
-    "reasoning": "Today's relief is dated later: Micron's 512-gigabyte module reaches volume only in the second half of 2027, and Broadcom still names land, power, building shells, substrate, memory and leading-edge wafers as what sets timing. Nothing moved the near-term physical limit.",
-    "status": "unchanged"
+    "reasoning": "First measured results on the new racks show 10 times more work per megawatt than the prior generation, and an independent count puts Rubin at 59.4 million tokens a second per megawatt against 28.5 million. Power is a hard limit, so that is real added capacity.",
+    "status": "improved"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -27,17 +27,17 @@
    "worsenedCount": 12
   },
   {
-   "checkCount": 20,
+   "checkCount": 21,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-16",
+    "assessedAsOf": "2026-09-17",
     "claimFindingIds": [
-     "moneycheck-com-0c0d636b-2026-09-1",
-     "www-fool-com-f8289755-2026-09-1",
-     "www-gate-com-666741c2-2026-09-1"
+     "www-investing-com-7f27fbd9-2026-09-1",
+     "www-investing-com-2e440991-2026-09-2",
+     "www-investing-com-2e81a8cf-2026-09-2"
     ],
-    "reasoning": "Meta set its third in-house chip for the first half of 2027 and a fourth for late 2027 to depend less on Nvidia, Broadcom projects $230 billion of chip sales in 2028, and Samsung backed a startup building a non-graphics inference part.",
+    "reasoning": "Huawei pulled its next accelerator forward three quarters to the first quarter of 2027, Arm says demand for its new data-center processor is twice its $1 billion target, and $22 billion of new bank money is going into Google's own accelerators rather than merchant chips.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -49,21 +49,19 @@
     "kind": "dimension-weak",
     "label": "moat"
    },
-   "worsenedCount": 10
+   "worsenedCount": 11
   },
   {
-   "checkCount": 19,
+   "checkCount": 20,
    "id": "constraint-stacked-memory-and-server-dram",
-   "improvedStreak": 2,
+   "improvedStreak": 3,
    "latest": {
-    "assessedAsOf": "2026-09-16",
+    "assessedAsOf": "2026-09-17",
     "claimFindingIds": [
-     "www-taipeitimes-com-f206468a-2026-09-1",
-     "www-globenewswire-com-a3bb69ca-2026-09-1",
-     "www-globenewswire-com-a3bb69ca-2026-09-2"
+     "hothardware-com-eac7ca90-2026-09-1"
     ],
-    "reasoning": "Two easing signals arrived: DeepSeek says its newer models need less high-bandwidth memory, knocking the two Korean suppliers' shares 2.2 and 3.5 percent, and Micron demonstrated a 512-gigabyte module cutting operating power more than 60 percent.",
-    "status": "improved"
+    "reasoning": "The only memory news today is preliminary: SK Hynix is in early talks to make memory at Intel's Ohio plant, with no investment size and no timeline disclosed. Nothing changes what is available to buy this quarter.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -77,16 +75,15 @@
    "worsenedCount": 8
   },
   {
-   "checkCount": 17,
+   "checkCount": 18,
    "id": "constraint-hbm4-memory-allocation-per-accelerator",
-   "improvedStreak": 3,
+   "improvedStreak": 4,
    "latest": {
-    "assessedAsOf": "2026-09-16",
+    "assessedAsOf": "2026-09-17",
     "claimFindingIds": [
-     "www-taipeitimes-com-f206468a-2026-09-1",
-     "www-taipeitimes-com-f206468a-2026-09-2"
+     "hothardware-com-eac7ca90-2026-09-1"
     ],
-    "reasoning": "The only reading today is a demand-side claim: DeepSeek says newer models need less high-bandwidth memory, which knocked Korean supplier shares 2.2 and 3.5 percent but has not changed how much stacked memory any accelerator ships with. The supply picture stands where it was.",
+    "reasoning": "No new evidence arrived on how much stacked memory each accelerator gets. The one memory item today, early SK Hynix talks about Intel's Ohio plant, names no volumes and no dates.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
@@ -101,26 +98,26 @@
    "worsenedCount": 3
   },
   {
-   "checkCount": 7,
+   "checkCount": 8,
    "id": "constraint-high-bandwidth-memory-and-server-memory",
-   "improvedStreak": 2,
+   "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-16",
+    "assessedAsOf": "2026-09-17",
     "claimFindingIds": [
-     "www-taipeitimes-com-f206468a-2026-09-1",
-     "www-taipeitimes-com-f206468a-2026-09-2"
+     "hothardware-com-eac7ca90-2026-09-1",
+     "wf-coreweave-com-c3bb5c08-2026-09-2"
     ],
-    "reasoning": "DeepSeek's claim that newer models need less high-bandwidth memory moved Korean supplier shares down 2.2 and 3.5 percent, and cheaper memory per answer would loosen the tie between usage growth and memory buying.",
-    "status": "improved"
+    "reasoning": "Today's gains are in power efficiency, not in memory or packaging. The single memory item, early SK Hynix talks about making memory at Intel's Ohio plant, carries no size and no timeline, so the parts constraint stands where it was.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-09",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "High-bandwidth memory and server memory",
+   "title": "high-bandwidth memory and packaging slots",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "High-bandwidth memory and server memory"
+    "label": "high-bandwidth memory and packaging slots"
    },
    "worsenedCount": 2
   }

@@ -1,0 +1,46 @@
+{
+  "id": "www-kucoin-com-e27002fe-2026-09-1",
+  "statement": "Nebius is raising on-demand GPU rental prices by roughly 17%-21% effective October 1, 2026, with B300 going from $7.85 to $9.50 per hour, a 21% increase and a cumulative rise of as much as 56% since May 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 9.5,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "rising",
+  "why": "A second rental price increase within months, on the newest Blackwell Ultra parts, is the clearest read that rentable accelerator capacity is scarce relative to demand.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising posted rental rates on scarce current-generation capacity indicate demand outrunning available fleets, which supports continued accelerator ordering by cloud operators."
+  },
+  "evidence": [
+    {
+      "source": "KuCoin News (flash article), corroborated by Futu News",
+      "url": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
+      "date": "2026-09-16",
+      "excerpt": "B300: $7.85 -> $9.50/hour (21% increase).",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary flash article resting on Odaily's read of private customer notices; no Nebius blog or press release covering this increase was found at fetch time."
+  },
+  "dispersion": "conflicting same-key reports: value 4.5 -> 9.5 (tol 1%); sources: KuCoin News (flash article), corroborated by Futu News",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Nebius (NVIDIA GPU rental/spot pricing)",
+  "observedAt": "2026-09-16",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

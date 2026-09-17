@@ -1,0 +1,43 @@
+{
+  "id": "www-pymnts-com-0606ebef-2026-09-3",
+  "statement": "Rum Group disclosed in August 2026 that it had insufficient financing for the construction and equipment behind the site Anthropic would lease.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "A counterparty that cannot fund its own build may not convert a signed contract into installed accelerators, so the headline commitment overstates near-term ordering.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Thin financing at the buildout operator delays or shrinks equipment purchases, weakening the link between contracted compute demand and actual accelerator shipments."
+  },
+  "evidence": [
+    {
+      "source": "PYMNTS.com (citing The Information)",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-makes-13-7-compute-deal-with-trump-linked-rum-group/",
+      "date": "2026-09-14",
+      "excerpt": "Rum disclosed insufficient financing for construction and equipment in August 2026",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary report referencing a company disclosure; no funding gap size or remedy is quantified in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Anthropic, Rum Group",
+  "observedAt": "2026-09-14",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

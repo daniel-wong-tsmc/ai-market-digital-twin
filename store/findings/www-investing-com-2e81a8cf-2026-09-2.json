@@ -1,0 +1,47 @@
+{
+  "id": "www-investing-com-2e81a8cf-2026-09-2",
+  "statement": "Crux AI will spend the $22 billion on Google TPUs and plans to bring its first 500 megawatts of capacity online in 2027, adding a large non-merchant accelerator fleet to the market.",
+  "kind": "measured",
+  "value": {
+    "number": 500.0,
+    "unit": "MW"
+  },
+  "trend": "rising",
+  "why": "Half a gigawatt of TPU-based cloud capacity funded and scheduled is compute that would otherwise likely have been bought as merchant GPUs, so it shifts where the next wave of accelerator spend lands.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "mixed",
+    "mechanism": "A financed, dated TPU buildout enlarges the supply of non-NVIDIA accelerator capacity available for rent, giving customers an alternative to merchant GPU clusters."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (citing Reuters)",
+      "url": "https://www.investing.com/news/stock-market-news/banks-provide-22-billion-chip-loan-to-blackstone-alphabet-cloud-venture-bloomberg-news-reports-4904543",
+      "date": "2026-09-16",
+      "excerpt": "plans to bring its first 500 megawatts of capacity online in 2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting of a plan, not a filing; capacity is a 2027 target and the document gives no delivered-to-date figure."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": -1,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "Blackstone, Alphabet (Google), Crux AI",
+  "observedAt": "2026-09-16",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

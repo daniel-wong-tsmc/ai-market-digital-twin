@@ -1,0 +1,43 @@
+{
+  "id": "www-investing-com-7f27fbd9-2026-09-2",
+  "statement": "Huawei's rotating chairman says the company lacks capacity to satisfy even Chinese demand and therefore has no plan for a full international expansion of Ascend.",
+  "kind": "observed",
+  "value": null,
+  "trend": "flat",
+  "why": "The substitution threat from Ascend is capped by fabrication capacity, so outside China the practical alternative to merchant GPUs remains thin regardless of roadmap dates.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "chips.hbm-memory"
+    ],
+    "direction": "positive",
+    "mechanism": "A self-declared capacity ceiling and no international go-to-market keeps Ascend out of non-China sockets, preserving merchant-GPU demand in the rest of the world."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/chinas-huawei-sets-2027-launch-for-new-ai-chips-as-it-targets-nvidia-4904787",
+      "date": "2026-09-17",
+      "excerpt": "Since we don't have enough capacity to even satisfy the demand in China, we don't have a plan to expand into the international market in a fully-fledged way.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Direct quote from Huawei's rotating chairman carried in secondary reporting; no capacity figures are given to size the ceiling."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Huawei, NVIDIA",
+  "observedAt": "2026-09-17",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

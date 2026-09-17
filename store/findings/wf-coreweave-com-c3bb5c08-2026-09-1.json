@@ -1,0 +1,45 @@
+{
+  "id": "wf-coreweave-com-c3bb5c08-2026-09-1",
+  "statement": "CoreWeave says it brought up a multi-rack NVIDIA Vera Rubin NVL72 cluster on CoreWeave Cloud, linking hundreds of Rubin GPUs, and claims to be the first AI cloud provider to validate Vera Rubin at rack scale.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Working multi-rack silicon in a commercial cloud marks the start of the Rubin revenue ramp; the first validated rack-scale deployment is the signal that volume shipments and installations follow.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.networking-fabric",
+      "energy.cooling",
+      "infrastructure.cluster-software"
+    ],
+    "direction": "positive",
+    "mechanism": "A validated rack-scale Rubin cluster at a large neocloud confirms the new platform is deployable, pulling forward customer orders and the matching NVLink, Spectrum-X Ethernet and liquid-cooling content."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave (official company blog)",
+      "url": "https://wf.coreweave.com/blog/what-it-takes-to-bring-up-a-multi-rack-nvidia-vera-rubin-nvl72-cluster",
+      "date": "2026-09-16",
+      "excerpt": "a single NVIDIA Vera Rubin NVL72 rack contains 72 NVIDIA Rubin GPUs and 36 Vera CPUs",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own marketing blog describing its own first-mover claim; no third-party verification and no broader availability timeline given."
+  },
+  "dispersion": "Hundreds of GPUs deployed today against a fabric the post says can extend to approximately 128,000 GPUs.",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "CoreWeave / NVIDIA (deployed GPU capacity)",
+  "observedAt": "2026-09-16",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

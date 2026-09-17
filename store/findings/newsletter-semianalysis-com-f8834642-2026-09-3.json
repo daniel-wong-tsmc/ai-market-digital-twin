@@ -1,0 +1,45 @@
+{
+  "id": "newsletter-semianalysis-com-f8834642-2026-09-3",
+  "statement": "SemiAnalysis cites a July 2026 rental cost of $8.5 per hour per chip for Rubin.",
+  "kind": "measured",
+  "value": {
+    "number": 8.5,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "Gives the rental level assumed for the newest generation in the article's cost modeling.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "A cited rental level used as a modeling input; the document states no baseline or change for it."
+  },
+  "evidence": [
+    {
+      "source": "SemiAnalysis (newsletter/licensed source)",
+      "url": "https://newsletter.semianalysis.com/p/vera-rubin-nvl72-agentic-inference",
+      "date": "2026-09-14",
+      "excerpt": "Rental cost figures cited (as of July 2026): Rubin '$8.5/hr/chip'; Blackwell Ultra NVL72 '$5/hr/chip'.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analyst citation of a July 2026 rental level, not a vendor price sheet."
+  },
+  "dispersion": "conflicting same-key reports: value 5.0 -> 8.5 (tol 1%); sources: SemiAnalysis (newsletter/licensed source)",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "NVIDIA / CoreWeave (Rubin NVL72 vs GB300 performance-per-cost)",
+  "observedAt": "2026-09-14",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

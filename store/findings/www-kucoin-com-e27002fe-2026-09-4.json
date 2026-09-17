@@ -1,0 +1,46 @@
+{
+  "id": "www-kucoin-com-e27002fe-2026-09-4",
+  "statement": "Nebius AI Cloud generated $575 million of revenue in Q2 2026, up 514% year over year, with total Nebius Group revenue up 454%.",
+  "kind": "measured",
+  "value": {
+    "number": 0.575,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Realized cloud revenue growing five-fold shows accelerator capacity is being sold and consumed, not just installed, which is the strongest confirmation that rental demand is real.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Rapid growth in AI cloud revenue funds and justifies further GPU fleet purchases by the operator."
+  },
+  "evidence": [
+    {
+      "source": "KuCoin News (flash article), corroborated by Futu News",
+      "url": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
+      "date": "2026-09-16",
+      "excerpt": "Nebius AI Cloud segment specifically generated $575 million in quarterly revenue, a 514% year-over-year increase.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Reported quarterly results restated in a secondary flash article; the underlying Nebius filing was not read here."
+  },
+  "dispersion": "Group revenue +454% year over year versus AI Cloud segment +514%.",
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Nebius (NVIDIA GPU rental/spot pricing)",
+  "observedAt": "2026-09-16",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "www-investing-com-2e440991-2026-09-2",
+  "statement": "Arm's official AGI CPU revenue target remains $1 billion, half the stated customer demand, a gap the article calls the company's single most pressing concern.",
+  "kind": "measured",
+  "value": {
+    "number": 1.0,
+    "unit": "USD_B"
+  },
+  "trend": "flat",
+  "why": "Guidance held at half of stated demand shows the constraint is conversion and manufacturing capacity, not appetite, which tempers how much of the demand signal should be read straight through to revenue.",
+  "impact": {
+    "targets": [
+      "chips.eda-ip",
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Guidance kept below demand implies supply or timing limits on AI-server CPU output, which can pace the rack deployments that accelerators ship into."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (citing CNBC Mad Money interview)",
+      "url": "https://www.investing.com/news/stock-market-news/why-is-arm-stock-climbing-today-93CH-4905113",
+      "date": "2026-09-17",
+      "excerpt": "Arm's official revenue target remains the more conservative $1 billion",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary article summarizing company guidance; no filing or earnings document was read."
+  },
+  "dispersion": "Official target $1 billion versus over $2 billion of stated customer demand.",
+  "asOf": "2026-09",
+  "indicatorId": "vendorRevenueGuidance",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Arm",
+  "observedAt": "2026-09-17",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

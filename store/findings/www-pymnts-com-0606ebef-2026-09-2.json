@@ -1,0 +1,49 @@
+{
+  "id": "www-pymnts-com-0606ebef-2026-09-2",
+  "statement": "Excluding the Rum agreement, Anthropic's compute deals over the past year total at least 14.8 gigawatts of capacity and could cost up to $517 billion over the next ten years.",
+  "kind": "measured",
+  "value": {
+    "number": 517.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A single model developer contracting nearly 15 gigawatts sets a floor under accelerator and power demand for years, far beyond any one quarter's order book.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "Gigawatt-scale multi-year compute commitments must be filled with accelerators, racks, power and cooling, pulling demand across the chain over a decade."
+  },
+  "evidence": [
+    {
+      "source": "PYMNTS.com (citing The Information)",
+      "url": "https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-makes-13-7-compute-deal-with-trump-linked-rum-group/",
+      "date": "2026-09-14",
+      "excerpt": "these arrangements total at least 14.8 gigawatts of compute capacity and could cost up to $517 billion over the next decade (ten years)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregation of deals with counterparties including Google, SpaceX and Nscale; the dollar figure is an upper bound over ten years, not a contracted amount."
+  },
+  "dispersion": "conflicting same-key reports: value 13.7 -> 517.0 (tol 1%); sources: PYMNTS.com (citing The Information)",
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "Anthropic, Rum Group",
+  "observedAt": "2026-09-14",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

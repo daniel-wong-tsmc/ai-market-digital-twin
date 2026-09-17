@@ -1,0 +1,226 @@
+{
+  "headline": "Rents go up again, and new racks squeeze more out of each megawatt",
+  "deck": "A cloud landlord raises chip rental prices for the second time since May, while the first measured results from Nvidia's newest racks show far more work per unit of power.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Renting a chip just got dearer again",
+      "paragraphs": [
+        "Nebius will raise its pay-as-you-go rental prices by roughly 17 to 21 percent on October 1. Its top current card goes from $7.85 to $9.50 an hour, a 21 percent step and as much as 56 percent more than it cost in May. Prices do not move like that when supply is catching up with demand.",
+        "The order book explains why. Nebius says customer demand is now visible more than 24 months out, with some reservations running into the first half of 2028, and its cloud arm booked $575 million of revenue last quarter, up 514 percent on a year earlier. Older hardware is where the cheap hours still are: the company's public price list shows an earlier mainstream card at $3.85 an hour, while a rival quotes a reserved 16-chip cluster at $9.86 per chip-hour."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per chip"
+      },
+      "claimFindingIds": [
+        "www-kucoin-com-e27002fe-2026-09-1",
+        "www-kucoin-com-e27002fe-2026-09-3",
+        "www-kucoin-com-e27002fe-2026-09-4",
+        "nebius-com-0eea50b8-2026-09-1",
+        "lambda-ai-858e4490-2026-09-1"
+      ],
+      "sourceLine": "Sources: KuCoin News (Sept 16), Nebius price list (Sept 17) and Lambda price list (Sept 16).",
+      "relatedDocs": [
+        {
+          "url": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
+          "title": "Nebius lifts rental prices by up to 21 percent from October 1",
+          "outlet": "KuCoin News (flash article), corroborated by Futu News",
+          "date": "2026-09-16"
+        },
+        {
+          "url": "https://nebius.com/prices",
+          "title": "Nebius public price list",
+          "outlet": "Nebius AI Cloud (official pricing page)",
+          "date": "2026-09-17"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The same power, more work",
+      "paragraphs": [
+        "CoreWeave says it has brought up a multi-rack cluster of Nvidia's new Vera Rubin machines, linking hundreds of the chips together, and calls itself the first cloud provider to prove the design at rack scale. Its first measured result is the number that matters: 10 times more tokens per megawatt than the Blackwell generation it replaces. A token is the unit of work these machines produce when answering a question.",
+        "An independent measurement is more conservative and points the same way. SemiAnalysis, in a note dated September 14, clocks Rubin at 59.4 million tokens a second per megawatt against 28.5 million for the best prior configuration, and calls that about 7 times better per megawatt overall. Electricity is one of the hard limits on how much capacity gets built, so more work per megawatt is real added supply rather than a marketing claim."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "wf-coreweave-com-c3bb5c08-2026-09-1",
+        "wf-coreweave-com-c3bb5c08-2026-09-2",
+        "newsletter-semianalysis-com-f8834642-2026-09-2"
+      ],
+      "sourceLine": "Sources: CoreWeave company blog (Sept 16) and SemiAnalysis (Sept 14).",
+      "relatedDocs": [
+        {
+          "url": "https://wf.coreweave.com/blog/what-it-takes-to-bring-up-a-multi-rack-nvidia-vera-rubin-nvl72-cluster",
+          "title": "CoreWeave brings up a multi-rack Vera Rubin cluster",
+          "outlet": "CoreWeave (official company blog)",
+          "date": "2026-09-16"
+        },
+        {
+          "url": "https://newsletter.semianalysis.com/p/vera-rubin-nvl72-agentic-inference",
+          "title": "Measured work per megawatt on the new Vera Rubin racks",
+          "outlet": "SemiAnalysis (newsletter/licensed source)",
+          "date": "2026-09-14"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The money arrives before the machines",
+      "paragraphs": [
+        "Ten banks led by Goldman Sachs are lending $22 billion to Crux AI, the venture backed by Blackstone and Alphabet, with the loan secured on the chips themselves and on customer contracts. Crux will spend the money on Google's own accelerators and plans to bring its first 500 megawatts online in 2027.",
+        "Lenders willing to take chips as security tell you how confident they are that the machines will be busy. They also tell you the shortage is not a funding problem. In the same week, Nvidia, Google and Emerald AI launched an alliance on data-center power, aimed at standards for grid-friendly sites and quicker grid connections. No capacity or timing figures came with it."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "www-investing-com-2e81a8cf-2026-09-1",
+        "www-investing-com-2e81a8cf-2026-09-2",
+        "blogs-nvidia-com-e2fb6eb7-2026-09-1"
+      ],
+      "sourceLine": "Sources: Investing.com, citing Reuters (Sept 16) and an Nvidia company blog post (Sept 16).",
+      "relatedDocs": [
+        {
+          "url": "https://www.investing.com/news/stock-market-news/banks-provide-22-billion-chip-loan-to-blackstone-alphabet-cloud-venture-bloomberg-news-reports-4904543",
+          "title": "Banks lend $22 billion against chips to a Blackstone and Alphabet venture",
+          "outlet": "Investing.com (citing Reuters)",
+          "date": "2026-09-16"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "First, whether October's higher rents stick. Nebius's increase of roughly 17 to 21 percent takes effect on the first of the month. If buyers pay it without argument, scarcity is still setting the price.",
+        "Second, the rivals. Huawei has pulled its next accelerator forward by three quarters, to the first quarter of 2027, yet its rotating chairman says the company cannot satisfy even Chinese demand and has no plan for a full international rollout. Arm holds a public revenue target of $1 billion for its new data-center processor while saying customer demand is twice that. The alternatives are arriving short, not spare.",
+        "Third, memory. SK Hynix is in preliminary talks to make high-bandwidth memory at Intel's Ohio plant, which would be its first memory manufacturing in the United States. No investment size and no timeline were given, so treat it as a statement of intent rather than supply."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-kucoin-com-e27002fe-2026-09-1",
+        "www-investing-com-7f27fbd9-2026-09-1",
+        "www-investing-com-7f27fbd9-2026-09-2",
+        "www-investing-com-2e440991-2026-09-2",
+        "hothardware-com-eac7ca90-2026-09-1"
+      ],
+      "sourceLine": "Sources: KuCoin News (Sept 16), Reuters via Investing.com (Sept 17), Investing.com (Sept 17) and HotHardware (Sept 16).",
+      "relatedDocs": [
+        {
+          "url": "https://www.investing.com/news/stock-market-news/chinas-huawei-sets-2027-launch-for-new-ai-chips-as-it-targets-nvidia-4904787",
+          "title": "Huawei sets a 2027 launch for its next accelerators",
+          "outlet": "Reuters (via Investing.com)",
+          "date": "2026-09-17"
+        },
+        {
+          "url": "https://hothardware.com/news/sk-hynix-tap-intel-ohio-fab-make-memory-chips-usa",
+          "title": "SK Hynix weighs making memory at Intel's Ohio plant",
+          "outlet": "HotHardware",
+          "date": "2026-09-16"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a single chip costs to buy outright, the cleanest read on scarcity.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How fast finished servers are reaching buyers, measured against a year earlier.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-09",
+      "text": "Rental prices rise again, and the first new-generation racks post measured results.",
+      "scene": 1
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Nebius raises pay-as-you-go chip rental prices 17 to 21 percent from October 1, its top card moving from $7.85 to $9.50 an hour.",
+      "claimFindingIds": [
+        "www-kucoin-com-e27002fe-2026-09-1"
+      ]
+    },
+    {
+      "text": "CoreWeave brought up a multi-rack Vera Rubin cluster and reports 10 times more work per megawatt than the Blackwell generation it replaces.",
+      "claimFindingIds": [
+        "wf-coreweave-com-c3bb5c08-2026-09-1",
+        "wf-coreweave-com-c3bb5c08-2026-09-2"
+      ]
+    },
+    {
+      "text": "Ten banks led by Goldman Sachs lent $22 billion to Crux AI, secured on the chips themselves, to bring 500 megawatts online in 2027.",
+      "claimFindingIds": [
+        "www-investing-com-2e81a8cf-2026-09-1",
+        "www-investing-com-2e81a8cf-2026-09-2"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "improved",
+      "reasoning": "First measured results on the new racks show 10 times more work per megawatt than the prior generation, and an independent count puts Rubin at 59.4 million tokens a second per megawatt against 28.5 million. Power is a hard limit, so that is real added capacity.",
+      "claimFindingIds": [
+        "wf-coreweave-com-c3bb5c08-2026-09-2",
+        "newsletter-semianalysis-com-f8834642-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "Huawei pulled its next accelerator forward three quarters to the first quarter of 2027, Arm says demand for its new data-center processor is twice its $1 billion target, and $22 billion of new bank money is going into Google's own accelerators rather than merchant chips.",
+      "claimFindingIds": [
+        "www-investing-com-7f27fbd9-2026-09-1",
+        "www-investing-com-2e440991-2026-09-2",
+        "www-investing-com-2e81a8cf-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "unchanged",
+      "reasoning": "The only memory news today is preliminary: SK Hynix is in early talks to make memory at Intel's Ohio plant, with no investment size and no timeline disclosed. Nothing changes what is available to buy this quarter.",
+      "claimFindingIds": [
+        "hothardware-com-eac7ca90-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived on how much stacked memory each accelerator gets. The one memory item today, early SK Hynix talks about Intel's Ohio plant, names no volumes and no dates.",
+      "claimFindingIds": [
+        "hothardware-com-eac7ca90-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "constraint-high-bandwidth-memory-and-server-memory",
+      "status": "unchanged",
+      "reasoning": "Today's gains are in power efficiency, not in memory or packaging. The single memory item, early SK Hynix talks about making memory at Intel's Ohio plant, carries no size and no timeline, so the parts constraint stands where it was.",
+      "claimFindingIds": [
+        "hothardware-com-eac7ca90-2026-09-1",
+        "wf-coreweave-com-c3bb5c08-2026-09-2"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-17",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "4f54fef50af9fe171bba0197b1f16e24ccc3876467d8ea0d69afe9b29d85d27b",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-09-17T12:12:46.883026+00:00"
+  }
+}

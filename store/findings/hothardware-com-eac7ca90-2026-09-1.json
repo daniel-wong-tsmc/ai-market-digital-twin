@@ -1,0 +1,43 @@
+{
+  "id": "hothardware-com-eac7ca90-2026-09-1",
+  "statement": "SK Hynix is in preliminary talks with Intel to make HBM and advanced DRAM at Intel's Ohio fab, which would be SK Hynix's first US memory manufacturing; no investment size or timeline was disclosed.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "HBM is the tightest input in the accelerator bill of materials; any credible addition of HBM/DRAM wafer capacity, and a US location that trims tariff and logistics friction, points to more memory supply behind future GPU builds.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.foundry-packaging",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Using Intel Ohio capacity would add HBM/advanced DRAM output outside Korea, easing the memory constraint on merchant-GPU assembly and validating Intel Foundry as an external-customer supplier."
+  },
+  "evidence": [
+    {
+      "source": "HotHardware",
+      "url": "https://hothardware.com/news/sk-hynix-tap-intel-ohio-fab-make-memory-chips-usa",
+      "date": "2026-09-16",
+      "excerpt": "SK Hynix is in talks with Intel about manufacturing memory chips at Intel's Ohio fabrication facility.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary restatement of a Reuters report resting on unnamed sources; talks are explicitly preliminary with no finalized agreement and no figures."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend unknown -> unknown); sources: HotHardware",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "SK Hynix, Intel",
+  "observedAt": "2026-09-16",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,35 @@
+{
+  "seriesName": "Nebius on-demand GPU hourly rental price after October 1, 2026 increase",
+  "unit": "US$ per GPU-hour",
+  "form": "columns",
+  "sourceName": "KuCoin",
+  "points": [
+    {
+      "label": "H100 (new price, from $3.85)",
+      "value": 4.5,
+      "sourceUrl": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
+      "publishedAt": "2026-09-17"
+    },
+    {
+      "label": "H200 (new price, from $4.50)",
+      "value": 5.4,
+      "sourceUrl": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
+      "publishedAt": "2026-09-17"
+    },
+    {
+      "label": "B200 (new price, from $7.15)",
+      "value": 8.5,
+      "sourceUrl": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
+      "publishedAt": "2026-09-17"
+    },
+    {
+      "label": "B300 (new price, from $7.85)",
+      "value": 9.5,
+      "sourceUrl": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
+      "publishedAt": "2026-09-17"
+    }
+  ],
+  "pair": false,
+  "notes": "All four points come from the same KuCoin article on Nebius's October 1, 2026 on-demand GPU price increase. Values shown are the new (post-increase) hourly prices; each label notes the prior price the article quotes for context, but only the new price is carried as the bare numeric value per rule 9. The old-price figures ($3.85, $4.50, $7.15, $7.85) are not separately plotted as points to avoid duplicating a currency-in-label issue -- they appear only in the label text, not as a value field.",
+  "bulletIndex": 1
+}

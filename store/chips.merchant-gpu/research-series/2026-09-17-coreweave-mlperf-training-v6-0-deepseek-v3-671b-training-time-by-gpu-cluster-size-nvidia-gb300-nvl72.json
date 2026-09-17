@@ -1,0 +1,29 @@
+{
+  "seriesName": "CoreWeave MLPerf Training v6.0: DeepSeek-V3 671B training time by GPU cluster size (NVIDIA GB300 NVL72)",
+  "unit": "minutes",
+  "form": "line",
+  "sourceName": "CoreWeave",
+  "points": [
+    {
+      "label": "2,048 GPUs (512 nodes)",
+      "value": 5.54,
+      "sourceUrl": "https://www.coreweave.com/news/coreweave-sets-new-ai-training-records-in-mlperf-r-training-v6-0-training-deepseek-v3-in-approximately-two-minutes",
+      "publishedAt": "2026-06-16"
+    },
+    {
+      "label": "4,096 GPUs (1,024 nodes)",
+      "value": 3.09,
+      "sourceUrl": "https://www.coreweave.com/news/coreweave-sets-new-ai-training-records-in-mlperf-r-training-v6-0-training-deepseek-v3-in-approximately-two-minutes",
+      "publishedAt": "2026-06-16"
+    },
+    {
+      "label": "8,192 GPUs (2,048 nodes)",
+      "value": 2.02,
+      "sourceUrl": "https://www.coreweave.com/news/coreweave-sets-new-ai-training-records-in-mlperf-r-training-v6-0-training-deepseek-v3-in-approximately-two-minutes",
+      "publishedAt": "2026-06-16"
+    }
+  ],
+  "pair": false,
+  "notes": "This series does not directly measure the bullet's specific '10x tokens per megawatt, Vera Rubin vs Blackwell' claim -- CoreWeave's Vera Rubin NVL72 blog post (wf.coreweave.com/blog/what-it-takes-to-bring-up-a-multi-rack-nvidia-vera-rubin-nvl72-cluster and www.coreweave.com/blog/nvidia-vera-rubin-nvl72-on-coreweave-10x-more-tokens-per-megawatt-than-blackwell) states only the 10x ratio and a qualitative chart shape, with no other bare numeric values usable under rule 9. Instead, this series contextualizes the story: it is CoreWeave's own published, same-site MLPerf Training v6.0 results (June 16, 2026) showing DeepSeek-V3 671B training time falling as GPU count rises on NVIDIA GB300 NVL72 -- the current Blackwell-generation hardware that Vera Rubin NVL72 is being measured against -- demonstrating the kind of at-scale performance benchmarking CoreWeave is now extending to Vera Rubin. All three points come from the single CoreWeave news page cited above.",
+  "bulletIndex": 2
+}

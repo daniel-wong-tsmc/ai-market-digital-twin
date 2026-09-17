@@ -1,0 +1,47 @@
+{
+  "id": "newsletter-semianalysis-com-f8834642-2026-09-2",
+  "statement": "SemiAnalysis measures Rubin at 59.4 million total tokens per second per megawatt at 100 TPS versus 28.5 million for GB300 Dynamo SGLang, and calls this 7x better token throughput per megawatt versus Blackwell overall.",
+  "kind": "measured",
+  "value": {
+    "number": 59.4,
+    "unit": "million_tok_per_s_per_MW"
+  },
+  "trend": "rising",
+  "why": "Power, not silicon, is the scarce input at most sites; more tokens per megawatt means each constrained megawatt supports more revenue, which raises willingness to pay for the newest racks.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.efficiency",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher tokens per megawatt converts a fixed power envelope into more sellable inference, pulling demand toward Rubin and stretching the output of existing grid connections."
+  },
+  "evidence": [
+    {
+      "source": "SemiAnalysis (newsletter/licensed source)",
+      "url": "https://newsletter.semianalysis.com/p/vera-rubin-nvl72-agentic-inference",
+      "date": "2026-09-14",
+      "excerpt": "59.4 million total tok/s/MW",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary analyst modeling; the document itself notes the 7x claim contrasts with the 3x figure NVIDIA's CEO stated at GTC, so the range is contested."
+  },
+  "dispersion": "7x per SemiAnalysis versus 3x claimed by NVIDIA's CEO at GTC; measured at 100 TPS among operating points of 170, 150, 100, 80, 75 and 60 TPS.",
+  "asOf": "2026-09",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "NVIDIA / CoreWeave (Rubin NVL72 vs GB300 performance-per-cost)",
+  "observedAt": "2026-09-14",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

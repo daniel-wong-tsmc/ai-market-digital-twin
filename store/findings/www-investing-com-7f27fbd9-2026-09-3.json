@@ -1,0 +1,42 @@
+{
+  "id": "www-investing-com-7f27fbd9-2026-09-3",
+  "statement": "Huawei's chairman asserts Ascend's share of China's AI chip market should be bigger than NVIDIA's, but the company provided no data to support the estimate.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "unknown",
+  "why": "If Ascend really has overtaken merchant GPUs in China, the China revenue line is structurally smaller than headline demand suggests; the claim is unverified, so it can only be treated as a possibility to watch.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "negative",
+    "mechanism": "A larger domestic share would mean Chinese AI compute spend routes to Ascend rather than to merchant GPUs, shrinking the addressable China segment."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/chinas-huawei-sets-2027-launch-for-new-ai-chips-as-it-targets-nvidia-4904787",
+      "date": "2026-09-17",
+      "excerpt": "Huawei did not provide data to support the estimate",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "The only support is an executive's stated belief; the article explicitly records that no supporting data was supplied and no percentage was given, so no measured share can be taken from this document.",
+  "confidence": {
+    "level": "low",
+    "basis": "Unsupported executive assertion in secondary reporting, flagged by the article itself as lacking data."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "market-share-pct",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Huawei, NVIDIA",
+  "observedAt": "2026-09-17",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

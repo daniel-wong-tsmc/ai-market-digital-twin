@@ -1,0 +1,47 @@
+{
+  "id": "wf-coreweave-com-c3bb5c08-2026-09-2",
+  "statement": "CoreWeave reports first measured performance for Vera Rubin, claiming 10x more tokens per megawatt than Blackwell.",
+  "kind": "measured",
+  "value": {
+    "number": 10.0,
+    "unit": "x_tokens_per_MW_vs_Blackwell"
+  },
+  "trend": "rising",
+  "why": "If a generation shift multiplies tokens per megawatt, buyers with fixed power allocations get far more sellable output per site, which raises the value of upgrading rather than adding power.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "energy.efficiency",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "More tokens per megawatt lifts revenue per constrained megawatt, strengthening the case to buy Rubin racks and easing the power ceiling on inference capacity growth."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave (official company blog)",
+      "url": "https://wf.coreweave.com/blog/what-it-takes-to-bring-up-a-multi-rack-nvidia-vera-rubin-nvl72-cluster",
+      "date": "2026-09-16",
+      "excerpt": "10x more tokens per megawatt than Blackwell",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Self-reported vendor benchmark on a company blog, with no test conditions, workload or interactivity target disclosed in the document."
+  },
+  "dispersion": "Conditions, workload and comparison configuration for the 10x figure are not stated in the article.",
+  "asOf": "2026-09",
+  "indicatorId": "perfPerWatt",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "CoreWeave / NVIDIA (deployed GPU capacity)",
+  "observedAt": "2026-09-16",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,48 @@
+{
+  "id": "www-investing-com-2e81a8cf-2026-09-1",
+  "statement": "A consortium of 10 banks led by Goldman Sachs, SMBC, Barclays, BNP Paribas and Bank of Nova Scotia is lending $22 billion to the Blackstone-Alphabet venture Crux AI, secured on the chips themselves and on customer contracts.",
+  "kind": "measured",
+  "value": {
+    "number": 22.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Large banks accepting AI accelerators as collateral shows the credit channel that funds non-hyperscaler compute buildouts is still wide open, which is what lets marginal buyers keep ordering.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.hyperscaler-asic",
+      "infrastructure.datacenter-colo",
+      "chips.merchant-gpu",
+      "energy.power-generation"
+    ],
+    "direction": "mixed",
+    "mechanism": "Chip-backed debt at this scale expands purchasing power for accelerator capacity generally, but this tranche funds Google TPUs rather than merchant GPUs, so it also finances a competing accelerator."
+  },
+  "evidence": [
+    {
+      "source": "Investing.com (citing Reuters)",
+      "url": "https://www.investing.com/news/stock-market-news/banks-provide-22-billion-chip-loan-to-blackstone-alphabet-cloud-venture-bloomberg-news-reports-4904543",
+      "date": "2026-09-16",
+      "excerpt": "will be backed by the value of those chips and Crux AI's customer contracts",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Two-step secondary chain - Investing.com citing Reuters citing Bloomberg's original report - with no loan documentation disclosed and no tenor stated."
+  },
+  "dispersion": "$22 billion of bank debt alongside Blackstone's initial $5 billion equity investment; syndication to more lenders still in progress and the debt may later be refinanced in the investment-grade bond market.",
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "Blackstone, Alphabet (Google), Crux AI",
+  "observedAt": "2026-09-16",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

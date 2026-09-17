@@ -1,0 +1,225 @@
+{
+  "asOf": "2026-09",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "www-pymnts-com-0606ebef-2026-09-3",
+      "entity": "Anthropic, Rum Group",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-pymnts-com-0606ebef-2026-09-2",
+      "entity": "Anthropic, Rum Group",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-2e440991-2026-09-2",
+      "entity": "Arm",
+      "indicatorId": "vendorRevenueGuidance",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-2e81a8cf-2026-09-2",
+      "entity": "Blackstone, Alphabet (Google), Crux AI",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-2e81a8cf-2026-09-1",
+      "entity": "Blackstone, Alphabet (Google), Crux AI",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "wf-coreweave-com-c3bb5c08-2026-09-1",
+      "entity": "CoreWeave / NVIDIA (deployed GPU capacity)",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "wf-coreweave-com-c3bb5c08-2026-09-2",
+      "entity": "CoreWeave / NVIDIA (deployed GPU capacity)",
+      "indicatorId": "perfPerWatt",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-7f27fbd9-2026-09-1",
+      "entity": "Huawei, NVIDIA",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-7f27fbd9-2026-09-2",
+      "entity": "Huawei, NVIDIA",
+      "indicatorId": "exportControlExposure",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-investing-com-7f27fbd9-2026-09-3",
+      "entity": "Huawei, NVIDIA",
+      "indicatorId": "market-share-pct",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "newsletter-semianalysis-com-f8834642-2026-09-3",
+      "entity": "NVIDIA / CoreWeave (Rubin NVL72 vs GB300 performance-per-cost)",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "newsletter-semianalysis-com-f8834642-2026-09-1",
+      "entity": "NVIDIA / CoreWeave (Rubin NVL72 vs GB300 performance-per-cost)",
+      "indicatorId": "flopsPerDollar",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "newsletter-semianalysis-com-f8834642-2026-09-2",
+      "entity": "NVIDIA / CoreWeave (Rubin NVL72 vs GB300 performance-per-cost)",
+      "indicatorId": "perfPerWatt",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "blogs-nvidia-com-e2fb6eb7-2026-09-1",
+      "entity": "NVIDIA, Google, Emerald AI",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-kucoin-com-e27002fe-2026-09-4",
+      "entity": "Nebius (NVIDIA GPU rental/spot pricing)",
+      "indicatorId": "D2",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-kucoin-com-e27002fe-2026-09-1",
+      "entity": "Nebius (NVIDIA GPU rental/spot pricing)",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-kucoin-com-e27002fe-2026-09-3",
+      "entity": "Nebius (NVIDIA GPU rental/spot pricing)",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "nebius-com-0eea50b8-2026-09-1",
+      "entity": "Nebius (NVIDIA GPU supply chain)",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "hothardware-com-eac7ca90-2026-09-1",
+      "entity": "SK Hynix, Intel",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [],
+  "findingsDuplicate": [
+    {
+      "findingId": "www-pymnts-com-0606ebef-2026-09-1",
+      "entity": "Anthropic, Rum Group",
+      "indicatorId": "rpoBacklog",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-investing-com-2e440991-2026-09-1",
+      "entity": "Arm",
+      "indicatorId": "rpoBacklog",
+      "verdict": "duplicate",
+      "priorFindingId": "247wallst-com-06246724-2026-09-2",
+      "detail": "unchanged within tolerance"
+    },
+    {
+      "findingId": "newsletter-semianalysis-com-f8834642-2026-09-4",
+      "entity": "NVIDIA / CoreWeave (Rubin NVL72 vs GB300 performance-per-cost)",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-kucoin-com-e27002fe-2026-09-2",
+      "entity": "Nebius (NVIDIA GPU rental/spot pricing)",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "nebius-com-0eea50b8-2026-09-2",
+      "entity": "Nebius (NVIDIA GPU supply chain)",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "nebius-com-0eea50b8-2026-09-3",
+      "entity": "Nebius (NVIDIA GPU supply chain)",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "nebius-com-0eea50b8-2026-09-4",
+      "entity": "Nebius (NVIDIA GPU supply chain)",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "hothardware-com-eac7ca90-2026-09-2",
+      "entity": "SK Hynix, Intel",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

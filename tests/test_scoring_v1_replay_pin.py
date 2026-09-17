@@ -102,6 +102,7 @@ PINNED = {
     "2026-09-v9.json": W_CURRENT,   # 2026-09-10 daily cycle (scheduled headless, 20:47 local fire; single instance, clean tree); post-F60 -> CURRENT
     "2026-09-v10.json": W_CURRENT,  # 2026-09-13 daily cycle (scheduled headless, 19:30 local fire; single instance, clean tree); post-F60 -> CURRENT
     "2026-09-v11.json": W_CURRENT,  # 2026-09-16 daily cycle (scheduled headless, 07:28 local fire; rescued v10 first, reused the dead 07:07 instance's gather); post-F60 -> CURRENT
+    "2026-09-v12.json": W_CURRENT,  # 2026-09-17 daily cycle (scheduled headless, 19:41 local fire; single instance, clean tree); post-F60 -> CURRENT
 }
 # Pre-v1.2 originals: superseded by replays, pinned structurally (original -> replay).
 SUPERSEDED = {

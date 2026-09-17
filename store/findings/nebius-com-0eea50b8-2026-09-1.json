@@ -1,0 +1,45 @@
+{
+  "id": "nebius-com-0eea50b8-2026-09-1",
+  "statement": "Nebius lists HGX H100 on-demand at $3.85 per GPU-hour on its public pricing page as of 2026-09-17.",
+  "kind": "measured",
+  "value": {
+    "number": 3.85,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "A published on-demand rental level for the prior-generation Hopper part anchors where neocloud list pricing sits before any announced change.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "List rental rates are a display overlay on GPU economics; this page states a level only, with no baseline or change alongside it."
+  },
+  "evidence": [
+    {
+      "source": "Nebius AI Cloud (official pricing page)",
+      "url": "https://nebius.com/prices",
+      "date": "2026-09-17",
+      "excerpt": "HGX H100 - Preemptible: $2.15, On-Demand: $3.85.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own published list page; a posted level, not a transacted or surveyed price."
+  },
+  "dispersion": "conflicting same-key reports: value 7.85 -> 3.85 (tol 1%); sources: Nebius AI Cloud (official pricing page)",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Nebius (NVIDIA GPU supply chain)",
+  "observedAt": "2026-09-17",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

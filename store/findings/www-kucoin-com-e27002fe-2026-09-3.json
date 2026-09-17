@@ -1,0 +1,43 @@
+{
+  "id": "www-kucoin-com-e27002fe-2026-09-3",
+  "statement": "Nebius says customer demand visibility now extends beyond 24 months, with some reservations running into the first half of 2028.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Multi-year forward reservations mean the fleet is effectively pre-sold, which underwrites further accelerator purchases and reduces the risk that current ordering is speculative.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed forward bookings give the operator contracted revenue against which to finance and order more GPU capacity."
+  },
+  "evidence": [
+    {
+      "source": "KuCoin News (flash article), corroborated by Futu News",
+      "url": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
+      "date": "2026-09-16",
+      "excerpt": "Nebius customer demand visibility now extends beyond 24 months, with some reservations extending into H1 2028.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Qualitative statement carried in a secondary flash article; no contracted dollar backlog figure is given."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Nebius (NVIDIA GPU rental/spot pricing)",
+  "observedAt": "2026-09-16",
+  "capturedAt": "2026-09-17T11:46:35Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
