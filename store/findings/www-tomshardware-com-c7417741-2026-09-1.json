@@ -1,0 +1,53 @@
+{
+  "id": "www-tomshardware-com-c7417741-2026-09-1",
+  "statement": "Elon Musk says SpaceXAI will add another 660,000 GB300 GPUs in three roughly 220,000-unit waves in Q4 2026, taking total GPUs in operation across Colossus 1 and Colossus 2 to about 1.44 million.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A single buyer absorbing hundreds of thousands of top-end GPUs in one quarter concentrates a large share of merchant-GPU demand in one account.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "chips.hbm-memory",
+      "infrastructure.networking-fabric",
+      "energy.power-generation",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Deployment at this scale by one customer sustains near-term accelerator, memory and fabric demand, while making the demand picture dependent on that customer continuing to buy."
+  },
+  "evidence": [
+    {
+      "source": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/tech-industry/data-centers/elon-musks-spacexai-to-add-another-660-000-ai-gpus-this-year-nearing-a-total-of-1-44-million-in-operation-firm-is-building-1-2-gigawatt-power-plant-to-bring-systems-fully-online",
+      "date": "2026-09-25",
+      "excerpt": "Another 220k GB300 will be fully operational next week and another 220k in November. If we get lucky, yet another 220k GB300 by late December.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/tech-industry/data-centers/elon-musks-spacexai-to-add-another-660-000-ai-gpus-this-year-nearing-a-total-of-1-44-million-in-operation-firm-is-building-1-2-gigawatt-power-plant-to-bring-systems-fully-online",
+      "date": "2026-09-25",
+      "excerpt": "would bring SpaceXAI's GB300 total to 1.1 million units and total GPUs in operation across both sites to approximately 1.44 million",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting of a social-media post by the company's owner; the third 220k wave is explicitly conditional ('if we get lucky') and the article body was not retrievable."
+  },
+  "dispersion": "Two waves stated as scheduled (next week, November) and a third conditional on luck by late December.",
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "xAI / SpaceXAI (Colossus 1 and Colossus 2 data centers)",
+  "observedAt": "2026-09-25",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

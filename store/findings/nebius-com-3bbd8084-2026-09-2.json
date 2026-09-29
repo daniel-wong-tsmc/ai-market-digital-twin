@@ -1,0 +1,50 @@
+{
+  "id": "nebius-com-3bbd8084-2026-09-2",
+  "statement": "Nebius raising on-demand rental prices for a second time in 2026 points to rentable GPU capacity staying scarce rather than slack building up in the chain.",
+  "kind": "hypothesis",
+  "value": null,
+  "trend": "falling",
+  "why": "A neocloud can only push list prices up twice in one year if utilization is high and customers have few cheaper alternatives, which says the chain is not carrying idle capacity.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Tight rentable capacity keeps utilization and pricing high for existing fleets, which supports continued accelerator purchases to add capacity."
+  },
+  "evidence": [
+    {
+      "source": "nebius.com",
+      "url": "https://nebius.com/prices",
+      "date": "2026-09-26",
+      "excerpt": "may increase or decrease based on available capacity, cluster utilization, customer demand",
+      "tier": "secondary"
+    },
+    {
+      "source": "nebius.com",
+      "url": "https://nebius.com/prices",
+      "date": "2026-09-26",
+      "excerpt": "reports this October hike as the second increase in the year: the first hike, reported around May 2026, raised on-demand H100 rental from $2.95/hour to $3.85/hour (about a 29% jump)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": "Two list-price increases inside one calendar year, on a page that ties spot pricing to available capacity and cluster utilization, is consistent with demand running ahead of deployable supply; the document offers no utilization figure, so this stays an inference rather than a measurement.",
+  "confidence": {
+    "level": "medium",
+    "basis": "Inference from a vendor price page plus search-summarized coverage of the earlier hike; no utilization or occupancy data in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S10",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "Nebius",
+  "observedAt": "2026-09-26",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

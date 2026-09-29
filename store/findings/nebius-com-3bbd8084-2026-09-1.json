@@ -1,0 +1,46 @@
+{
+  "id": "nebius-com-3bbd8084-2026-09-1",
+  "statement": "Nebius lists on-demand GPU rental rates rising effective October 1, 2026: H100 from $3.85 to $4.50 per GPU-hour, H200 $4.50 to $5.40, B200 $7.15 to $8.50, and B300 $7.85 to $9.50.",
+  "kind": "measured",
+  "value": {
+    "number": 4.5,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "rising",
+  "why": "Published rental rates are the most direct public read on how tight deployed GPU capacity is relative to customer demand.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Rental price is a display overlay only: it shows the level and direction of neocloud GPU pricing without itself scoring demand or supply."
+  },
+  "evidence": [
+    {
+      "source": "nebius.com",
+      "url": "https://nebius.com/prices",
+      "date": "2026-09-26",
+      "excerpt": "roughly a 17% rise for H100 ($3.85 to $4.50), 20% for H200 ($4.50 to $5.40), 19% for B200 ($7.15 to $8.50), and 21% for B300 ($7.85 to $9.50)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own public price page, treated as secondary rather than a filing; the prior-hike history is cross-referenced only via search, not a separately fetched document."
+  },
+  "dispersion": "On-demand $4.50 (H100) to $9.50 (B300) per GPU-hour from October 1; preemptible from $0.79 (H100/H200) to $0.99 (B200/B300).",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Nebius",
+  "observedAt": "2026-09-26",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

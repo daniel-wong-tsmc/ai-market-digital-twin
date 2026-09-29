@@ -1,0 +1,249 @@
+{
+  "headline": "Rents go up again, and the hold-up moves to power and permits",
+  "deck": "A cloud landlord raises its hourly prices for the second time this year, while a 2.45-gigawatt building site in New Mexico warns it may open late.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The price of an hour goes up again",
+      "paragraphs": [
+        "Renting a GPU - the chip that does the heavy work in AI - gets dearer from October 1. Nebius, which rents these chips by the hour, is lifting its published prices: an H100 goes from $3.85 to $4.50 an hour, an H200 from $4.50 to $5.40, a B200 from $7.15 to $8.50, and the newest B300 from $7.85 to $9.50.",
+        "This is the second time this year the same company has raised its list prices. Landlords do not raise rents when they have empty rooms. The plainest reading is that rentable capacity is still scarce, not that spare machines are piling up."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per chip"
+      },
+      "claimFindingIds": [
+        "nebius-com-3bbd8084-2026-09-1",
+        "nebius-com-3bbd8084-2026-09-2"
+      ],
+      "sourceLine": "Nebius published price list, September 26.",
+      "relatedDocs": [
+        {
+          "url": "https://nebius.com/prices",
+          "title": "Published hourly rental prices",
+          "outlet": "nebius.com",
+          "date": "2026-09-26"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The buyers keep writing bigger cheques",
+      "paragraphs": [
+        "Goldman Sachs now expects the five biggest buyers to spend $1.2 trillion on AI plant in 2027, up from $800 billion this year - a 54% jump, and more than Wall Street had pencilled in. The same note says those buyers would need roughly $300 billion of yearly AI revenue to break even on the outlay, and that more than a third of the 2027 spending is expected to be borrowed.",
+        "The individual deals match that picture. Anthropic agreed to pay Akamai $11.6 billion over seven years for cloud capacity, a relationship both sides say could reach about $20 billion. Akamai is putting roughly $5.5 billion into the build and adding about $1.7 billion to this year's spending simply to buy memory parts early, before they get scarcer.",
+        "Elon Musk's SpaceXAI says it will add another 660,000 chips in three waves of about 220,000 in the last quarter of this year, taking its total in operation to roughly 1.44 million."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "www-pymnts-com-9bf731e3-2026-09-1",
+        "www-pymnts-com-9bf731e3-2026-09-3",
+        "techcrunch-com-2913d505-2026-09-1",
+        "techcrunch-com-2913d505-2026-09-2",
+        "www-sec-gov-a4a1dfa4-2026-09-2",
+        "www-tomshardware-com-c7417741-2026-09-1"
+      ],
+      "sourceLine": "Goldman Sachs forecast via PYMNTS, Akamai's own filing, and trade reporting, September 24 to 25.",
+      "relatedDocs": [
+        {
+          "url": "https://www.pymnts.com/big-tech/2026/goldman-sachs-projects-big-tech-ai-infrastructure-spending-to-hit-1-2-trillion-in-2027/",
+          "title": "Goldman Sachs projects $1.2 trillion of AI infrastructure spending in 2027",
+          "outlet": "PYMNTS",
+          "date": "2026-09-25"
+        },
+        {
+          "url": "https://techcrunch.com/2026/09/25/anthropic-to-pay-akamai-11-6-billion-over-seven-years-in-cloud-deal/",
+          "title": "Anthropic to pay Akamai $11.6 billion over seven years",
+          "outlet": "TechCrunch",
+          "date": "2026-09-25"
+        },
+        {
+          "url": "https://www.tomshardware.com/tech-industry/data-centers/elon-musks-spacexai-to-add-another-660-000-ai-gpus-this-year-nearing-a-total-of-1-44-million-in-operation-firm-is-building-1-2-gigawatt-power-plant-to-bring-systems-fully-online",
+          "title": "SpaceXAI to add another 660,000 AI chips this year",
+          "outlet": "Tom's Hardware",
+          "date": "2026-09-25"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "What is actually in the way now",
+      "paragraphs": [
+        "The blockage is drifting away from the chip factories and toward the buildings that house the machines. Oracle has sent a formal notice to the developer of Project Jupiter, a 2.45-gigawatt campus in New Mexico, saying it can delay payment if the site is not running by its 2028 target. A gas pipeline permit there has slipped to February 1, 2027, nearly six months late, and another air-quality permit is due by November 23. The campus was financed with an $18 billion construction loan from about 20 banks. Both sides still say the project is on schedule.",
+        "Power is the other limit. SpaceXAI is building a 1.2-gigawatt power plant of its own simply to switch on machines it has already bought.",
+        "Upstream, the squeeze has not eased either. TSMC is reported to be planning wafer price rises of 3% to 6% for 2027, and supply-chain sources say its order book now stretches to 2030. Chips that are already spoken for four years out are not chips that can rescue this year's shortage."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "techcrunch-com-de27e2eb-2026-09-1",
+        "techcrunch-com-de27e2eb-2026-09-2",
+        "techcrunch-com-de27e2eb-2026-09-3",
+        "www-tomshardware-com-c7417741-2026-09-2",
+        "www-digitimes-com-2d20aaa6-2026-09-1",
+        "www-digitimes-com-2d20aaa6-2026-09-2"
+      ],
+      "sourceLine": "Reporting on the Oracle notice, September 24, and trade coverage of 2027 wafer pricing, September 24.",
+      "relatedDocs": [
+        {
+          "url": "https://techcrunch.com/2026/09/24/oracle-sends-force-majeure-notice-on-its-new-mexico-stargate-data-center/",
+          "title": "Oracle sends a late-delivery notice on its New Mexico campus",
+          "outlet": "TechCrunch; Insurance Journal (AP wire republish)",
+          "date": "2026-09-24"
+        },
+        {
+          "url": "https://www.digitimes.com/news/a20260924PD214/tsmc-wafer-price-2027-demand.html",
+          "title": "TSMC plans 3% to 6% wafer price rises for 2027",
+          "outlet": "digitimes.com",
+          "date": "2026-09-24"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Watch how much memory the new machines swallow. Supermicro has started shipping the newest Vera Rubin racks, each holding 72 chips - and 20.7 terabytes of high-speed memory per rack. A standard block of 16 racks, 1,152 chips, needs 331 terabytes. Every rack that ships takes a bite out of the same memory that everyone else is queueing for.",
+        "Watch the alternatives, too. In one independent test, sixteen of Google's own Ironwood chips served a model at 700 tokens a second against 452 on sixteen of Nvidia's GB200 chips, about 1.57 times faster. Results like that are what would eventually loosen a market where one supplier sets the pace.",
+        "Three near-term markers: whether customers accept the October 1 rent rise without cutting back, whether the New Mexico site clears its November 23 permit deadline, and whether buyers keep pre-buying memory a year ahead as Akamai just did."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-supermicro-com-9a2c110b-2026-09-1",
+        "www-supermicro-com-9a2c110b-2026-09-2",
+        "inferact-ai-ef541a77-2026-09-1",
+        "nebius-com-3bbd8084-2026-09-1",
+        "techcrunch-com-de27e2eb-2026-09-2",
+        "techcrunch-com-2913d505-2026-09-2"
+      ],
+      "sourceLine": "Supermicro shipping announcement, September 23, and an independent serving test published September 23.",
+      "relatedDocs": [
+        {
+          "url": "https://www.supermicro.com/en/pressreleases/supermicro-now-shipping-nvidia-vera-rubin-nvl72-racks",
+          "title": "Supermicro begins shipping the newest Vera Rubin racks",
+          "outlet": "supermicro.com",
+          "date": "2026-09-23"
+        },
+        {
+          "url": "https://inferact.ai/blog/tpu-megakernels",
+          "title": "A serving test of Google Ironwood chips against Nvidia GB200",
+          "outlet": "Inferact",
+          "date": "2026-09-23"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What one card costs to buy outright, next to what an hour of it costs to rent.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Which way the biggest buyers are revising their building budgets.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How fast finished servers are really leaving the factories.",
+      "scene": 3
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-09",
+      "text": "Hourly rental prices rise for a second time this year, effective October 1.",
+      "scene": 1
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Nebius raises rental prices from October 1, with its newest B300 chip going from $7.85 to $9.50 an hour, its second increase this year.",
+      "claimFindingIds": [
+        "nebius-com-3bbd8084-2026-09-1",
+        "nebius-com-3bbd8084-2026-09-2"
+      ]
+    },
+    {
+      "text": "Goldman Sachs expects the five biggest buyers to spend $1.2 trillion on AI plant in 2027, up from $800 billion this year, with over a third borrowed.",
+      "claimFindingIds": [
+        "www-pymnts-com-9bf731e3-2026-09-1",
+        "www-pymnts-com-9bf731e3-2026-09-3"
+      ]
+    },
+    {
+      "text": "Oracle warned that a 2.45-gigawatt New Mexico campus may miss its 2028 opening after a pipeline permit slipped to February 1, 2027.",
+      "claimFindingIds": [
+        "techcrunch-com-de27e2eb-2026-09-1",
+        "techcrunch-com-de27e2eb-2026-09-2"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "A named 2.45-gigawatt site now risks missing its 2028 opening on a permit pushed to February 1, 2027, and rental prices rise again from October 1 - the limit has moved to buildings and power without the chip shortage easing.",
+      "claimFindingIds": [
+        "techcrunch-com-de27e2eb-2026-09-1",
+        "techcrunch-com-de27e2eb-2026-09-2",
+        "nebius-com-3bbd8084-2026-09-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "An independent test put sixteen of Google's own chips at 700 tokens a second against 452 on sixteen Nvidia GB200 chips, and the new Anthropic-Akamai deal is framed as a bet on ordinary server chips rather than GPU training.",
+      "claimFindingIds": [
+        "inferact-ai-ef541a77-2026-09-1",
+        "techcrunch-com-2913d505-2026-09-3"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "worsened",
+      "reasoning": "Akamai is adding about $1.7 billion this year purely to pre-buy memory parts, while each new Vera Rubin rack carries 20.7 terabytes of high-speed memory - demand on the same scarce supply is rising, not falling.",
+      "claimFindingIds": [
+        "techcrunch-com-2913d505-2026-09-2",
+        "www-supermicro-com-9a2c110b-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-hbm4-memory-allocation-per-accelerator",
+      "status": "unchanged",
+      "reasoning": "No new evidence arrived today on how much memory each accelerator gets; the only fresh figure is per rack, at 20.7 terabytes in the newest racks now shipping.",
+      "claimFindingIds": [
+        "www-supermicro-com-9a2c110b-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-high-bandwidth-memory-and-server-memory",
+      "status": "worsened",
+      "reasoning": "A buyer is now spending roughly $1.7 billion ahead of need to secure memory, and a standard 16-rack block of the newest machines needs 331 terabytes of it, so the queue for memory is getting longer.",
+      "claimFindingIds": [
+        "techcrunch-com-2913d505-2026-09-2",
+        "www-supermicro-com-9a2c110b-2026-09-2"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-26",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "9b64e7c8a29f4ce22f1f6a6cdd0439b1919c42e5e46d6b55c5f80f1258b70245",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-09-28T01:34:50.434104+00:00"
+  }
+}

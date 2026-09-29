@@ -1,0 +1,54 @@
+{
+  "id": "www-sec-gov-a4a1dfa4-2026-09-2",
+  "statement": "Akamai estimates capital expenditures of approximately $5.5 billion tied to the $11.6 billion Anthropic commitment, and says the deal is the largest in company history and additive to more than $2.8 billion in prior multi-year cloud commitments.",
+  "kind": "measured",
+  "value": {
+    "number": 5.5,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Capex tied to a signed contract is committed build, not a plan that can quietly be trimmed, so it is a firm read on new capacity entering the market.",
+  "impact": {
+    "targets": [
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "chips.hbm-memory",
+      "energy.cooling"
+    ],
+    "direction": "positive",
+    "mechanism": "Contract-linked capex converts into orders for servers, memory, facility space and cooling on a defined schedule."
+  },
+  "evidence": [
+    {
+      "source": "SEC EDGAR (Akamai Technologies Inc 8-K, Exhibit 99.1)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001086222/000119312526401048/d288154dex991.htm",
+      "date": "2026-09-24",
+      "excerpt": "Akamai stated it estimates capital expenditures of approximately $5.5 billion tied to the $11.6 billion commitment",
+      "tier": "primary"
+    },
+    {
+      "source": "SEC EDGAR (Akamai Technologies Inc 8-K, Exhibit 99.1)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001086222/000119312526401048/d288154dex991.htm",
+      "date": "2026-09-24",
+      "excerpt": "additive to more than $2.8 billion in multi-year Cloud Infrastructure Services (CIS) commitments across its customer base previously announced earlier in 2026",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: capex estimate stated in Akamai's SEC-filed 8-K exhibit."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Akamai Technologies, Anthropic",
+  "observedAt": "2026-09-24",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

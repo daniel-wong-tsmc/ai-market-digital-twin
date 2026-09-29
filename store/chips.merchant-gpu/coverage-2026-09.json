@@ -2,41 +2,25 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-09",
-  "capturedAt": "2026-09-17T11:54:14Z",
+  "capturedAt": "2026-09-27T05:03:07Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
   "gaps": [
     {
       "type": "source",
-      "id": "nvda-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "amd-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "intc-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Intel earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['intc.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "lambda-gpu-pricing",
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "coreweave-pricing",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'CoreWeave GPU pricing page' was not fetched. URL patterns: ['coreweave.com']",
       "paywalledNote": null
     },
     {
@@ -49,26 +33,10 @@
     },
     {
       "type": "source",
-      "id": "channel-checks",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Open-web channel checks: lead times, inventory notes from distributors' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "bis-export-controls",
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'BIS export control notices and Federal Register' was not fetched. URL patterns: ['bis.doc.gov', 'federalregister.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "nvda-10k-risk-factors",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'NVIDIA 10-K risk factor section (geopolitical / export control exposure)' was not fetched. URL patterns: ['investor.nvidia.com/annual-reports', 'sec.gov']",
       "paywalledNote": null
     },
     {
@@ -88,6 +56,14 @@
       "paywalledNote": null
     },
     {
+      "type": "source",
+      "id": "ai-app-revenue",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Hyperscaler AI run-rate and model-lab ARR disclosures' was not fetched. URL patterns: ['microsoft.com', 'blogs.microsoft.com', 'openai.com', 'anthropic.com', 'blog.google', 'aws.amazon.com/machine-learning', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
       "type": "indicator",
       "id": "gpuSpotPrice",
       "priority": "optional",
@@ -97,26 +73,26 @@
     }
   ],
   "gapCounts": {
-    "total": 11,
-    "source": 10,
+    "total": 8,
+    "source": 7,
     "indicator": 1,
-    "required": 10,
+    "required": 7,
     "preferred": 0,
     "optional": 1,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://blogs.nvidia.com/blog/ai-energy-management-alliance/",
-    "https://hothardware.com/news/sk-hynix-tap-intel-ohio-fab-make-memory-chips-usa",
+    "https://inferact.ai/blog/tpu-megakernels",
     "https://nebius.com/prices",
-    "https://newsletter.semianalysis.com/p/vera-rubin-nvl72-agentic-inference",
-    "https://wf.coreweave.com/blog/what-it-takes-to-bring-up-a-multi-rack-nvidia-vera-rubin-nvl72-cluster",
-    "https://www.investing.com/news/stock-market-news/banks-provide-22-billion-chip-loan-to-blackstone-alphabet-cloud-venture-bloomberg-news-reports-4904543",
-    "https://www.investing.com/news/stock-market-news/chinas-huawei-sets-2027-launch-for-new-ai-chips-as-it-targets-nvidia-4904787",
-    "https://www.investing.com/news/stock-market-news/why-is-arm-stock-climbing-today-93CH-4905113",
-    "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
-    "https://www.pymnts.com/news/artificial-intelligence/2026/anthropic-makes-13-7-compute-deal-with-trump-linked-rum-group/"
+    "https://techcrunch.com/2026/09/24/oracle-sends-force-majeure-notice-on-its-new-mexico-stargate-data-center/",
+    "https://techcrunch.com/2026/09/25/anthropic-to-pay-akamai-11-6-billion-over-seven-years-in-cloud-deal/",
+    "https://www.digitimes.com/news/a20260924PD214/tsmc-wafer-price-2027-demand.html",
+    "https://www.nscale.com/press-releases/pre-ipo-convertible-financing",
+    "https://www.pymnts.com/big-tech/2026/goldman-sachs-projects-big-tech-ai-infrastructure-spending-to-hit-1-2-trillion-in-2027/",
+    "https://www.sec.gov/Archives/edgar/data/0001086222/000119312526401048/d288154dex991.htm",
+    "https://www.supermicro.com/en/pressreleases/supermicro-now-shipping-nvidia-vera-rubin-nvl72-racks",
+    "https://www.tomshardware.com/tech-industry/data-centers/elon-musks-spacexai-to-add-another-660-000-ai-gpus-this-year-nearing-a-total-of-1-44-million-in-operation-firm-is-building-1-2-gigawatt-power-plant-to-bring-systems-fully-online"
   ],
   "judgedIndicatorIds": [
     "D2",

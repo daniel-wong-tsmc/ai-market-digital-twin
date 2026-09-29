@@ -1,0 +1,54 @@
+{
+  "id": "inferact-ai-ef541a77-2026-09-1",
+  "statement": "Inferact reports a TPU v7 Ironwood megakernel serving Moonshot AI Kimi K3 at 700 tokens/s with speculative decoding on 16 chips, versus 452 tokens/s on 16 Nvidia GB200 GPUs running standard vLLM, a 1.57x advantage.",
+  "kind": "measured",
+  "value": {
+    "number": 1.57,
+    "unit": "x_tokens_per_s_vs_GB200"
+  },
+  "trend": "rising",
+  "why": "A non-Nvidia inference path showing parity-or-better decode throughput weakens the assumption that merchant GPUs are the only viable platform for serving frontier-scale models.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.cluster-software",
+      "models.reasoning-agentic"
+    ],
+    "direction": "mixed",
+    "mechanism": "If TPU-class accelerators plus a fused single-program decode kernel match or beat GB200 throughput on real models, inference buyers can substitute hyperscaler ASIC capacity for merchant GPU capacity, and software fusion becomes a lever on effective capacity."
+  },
+  "evidence": [
+    {
+      "source": "Inferact",
+      "url": "https://inferact.ai/blog/tpu-megakernels",
+      "date": "2026-09-23",
+      "excerpt": "the TPU v7 Ironwood megakernel achieved 700 tokens/s (reported elsewhere as 709 tokens/s) versus 452 tokens/s on GB200 in the standard vLLM configuration",
+      "tier": "secondary"
+    },
+    {
+      "source": "Inferact",
+      "url": "https://inferact.ai/blog/tpu-megakernels",
+      "date": "2026-09-23",
+      "excerpt": "Without speculative decoding, at batch size 1, the megakernel achieved 249 tokens/s versus 127 tokens/s on the GPU baseline",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary vendor blog post; the benchmark is self-reported by the party promoting the technique and covers one model on one configuration."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: Inferact",
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": -1,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "Google TPU v7 Ironwood, Nvidia GB200, Moonshot AI Kimi K3, Inferact",
+  "observedAt": "2026-09-23",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

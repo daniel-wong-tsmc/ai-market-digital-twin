@@ -1,0 +1,52 @@
+{
+  "id": "techcrunch-com-de27e2eb-2026-09-1",
+  "statement": "Oracle sent a force majeure notice to the Blue Owl Capital unit developing the 2.45 GW Project Jupiter Stargate campus in New Mexico, letting it delay payment if the site does not come online by its planned 2028 target; both parties say the project remains on schedule.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A payment-protection notice on a flagship AI campus is an early warning that a large tranche of planned accelerator deployment could slip to the right.",
+  "impact": {
+    "targets": [
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "energy.power-generation",
+      "energy.grid-transmission"
+    ],
+    "direction": "negative",
+    "mechanism": "If the campus misses its 2028 readiness, the GPU and equipment orders tied to filling 2.45 GW of capacity are deferred with it."
+  },
+  "evidence": [
+    {
+      "source": "TechCrunch; Insurance Journal (AP wire republish)",
+      "url": "https://techcrunch.com/2026/09/24/oracle-sends-force-majeure-notice-on-its-new-mexico-stargate-data-center/",
+      "date": "2026-09-24",
+      "excerpt": "The notice allows Oracle to delay payment on the campus if it does not come online as expected by its planned 2028 target.",
+      "tier": "secondary"
+    },
+    {
+      "source": "TechCrunch; Insurance Journal (AP wire republish)",
+      "url": "https://techcrunch.com/2026/09/24/oracle-sends-force-majeure-notice-on-its-new-mexico-stargate-data-center/",
+      "date": "2026-09-24",
+      "excerpt": "Project Jupiter remains on our planned schedule. We are fully committed to New Mexico and confident in our path forward.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary reporting; both Oracle and Blue Owl publicly dispute that the notice signals any delay, so the direction is contested."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Oracle; Blue Owl Capital (developer unit); Project Jupiter (New Mexico Stargate AI data center campus); OpenAI; SoftBank",
+  "observedAt": "2026-09-24",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

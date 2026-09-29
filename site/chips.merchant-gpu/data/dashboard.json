@@ -1,164 +1,110 @@
 {
-  "asOf": "2026-09-17",
+  "asOf": "2026-09-26",
   "bullets": [
     {
+      "chart": null,
+      "date": "2026-09-26",
+      "noChartReason": {
+        "cause": "no-published-number",
+        "reason": "Nobody is tracking a number for this yet — the reporting behind it is one-off, not a running series."
+      },
+      "sources": [
+        {
+          "date": "2026-09-26",
+          "outlet": "nebius.com",
+          "tier": "secondary",
+          "title": "nebius.com",
+          "url": "https://nebius.com/prices"
+        }
+      ],
+      "storyHref": "story/2026-09-26.html",
+      "text": "Nebius raises rental prices from October 1, with its newest B300 chip going from $7.85 to $9.50 an hour, its second increase this year."
+    },
+    {
+      "chart": null,
+      "date": "2026-09-26",
+      "noChartReason": {
+        "cause": "no-plain-name",
+        "reason": "We don't yet have a plain-English way to describe what this number measures, so we don't draw it."
+      },
+      "sources": [
+        {
+          "date": "2026-09-25",
+          "outlet": "PYMNTS",
+          "tier": "secondary",
+          "title": "PYMNTS",
+          "url": "https://www.pymnts.com/big-tech/2026/goldman-sachs-projects-big-tech-ai-infrastructure-spending-to-hit-1-2-trillion-in-2027/"
+        }
+      ],
+      "storyHref": "story/2026-09-26.html",
+      "text": "Goldman Sachs expects the five biggest buyers to spend $1.2 trillion on AI plant in 2027, up from $800 billion this year, with over a third borrowed."
+    },
+    {
       "chart": {
-        "caption": "Found today — single source: KuCoin.",
+        "caption": "Found today — single source: Epoch AI.",
         "form": "columns",
         "points": [
           {
             "hollow": false,
-            "label": "H100 (new price, from $3.85)",
-            "sourceUrl": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
-            "value": 4.5
+            "label": "Abilene, Texas",
+            "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+            "value": 1.2
           },
           {
             "hollow": false,
-            "label": "H200 (new price, from $4.50)",
-            "sourceUrl": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
-            "value": 5.4
+            "label": "Shackelford County, Texas",
+            "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+            "value": 2.0
           },
           {
             "hollow": false,
-            "label": "B200 (new price, from $7.15)",
-            "sourceUrl": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
-            "value": 8.5
+            "label": "Dona Ana County, New Mexico (Project Jupiter)",
+            "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+            "value": 2.2
           },
           {
             "hollow": false,
-            "label": "B300 (new price, from $7.85)",
-            "sourceUrl": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1",
-            "value": 9.5
+            "label": "Milam County, Texas",
+            "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+            "value": 1.2
+          },
+          {
+            "hollow": false,
+            "label": "Port Washington, Wisconsin",
+            "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+            "value": 1.3
+          },
+          {
+            "hollow": false,
+            "label": "Saline Township, Michigan",
+            "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+            "value": 1.4
           }
         ],
         "researched": true,
         "source": {
-          "date": "2026-09-17",
-          "outlet": "KuCoin",
+          "date": "2026-04-17",
+          "outlet": "Epoch AI",
           "tier": "secondary",
-          "title": "Nebius on-demand GPU hourly rental price after October 1, 2026 increase",
-          "url": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1"
+          "title": "Projected capacity of OpenAI Stargate US data center sites",
+          "url": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand"
         },
-        "title": "Nebius on-demand GPU hourly rental price after October 1, 2026 increase",
-        "unit": "US$ per GPU-hour"
+        "title": "Projected capacity of OpenAI Stargate US data center sites",
+        "unit": "gigawatts (GW)"
       },
-      "date": "2026-09-17",
+      "date": "2026-09-26",
       "noChartReason": null,
       "sources": [
         {
-          "date": "2026-09-16",
-          "outlet": "KuCoin News (flash article), corroborated by Futu News",
+          "date": "2026-09-24",
+          "outlet": "TechCrunch; Insurance Journal (AP wire republish)",
           "tier": "secondary",
-          "title": "KuCoin News (flash article), corroborated by Futu News",
-          "url": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1"
+          "title": "TechCrunch; Insurance Journal (AP wire republish)",
+          "url": "https://techcrunch.com/2026/09/24/oracle-sends-force-majeure-notice-on-its-new-mexico-stargate-data-center/"
         }
       ],
-      "storyHref": "story/2026-09-17.html",
-      "text": "Nebius raises pay-as-you-go chip rental prices 17 to 21 percent from October 1, its top card moving from $7.85 to $9.50 an hour."
-    },
-    {
-      "chart": {
-        "caption": "Found today — single source: CoreWeave.",
-        "form": "line",
-        "points": [
-          {
-            "hollow": false,
-            "label": "2,048 GPUs (512 nodes)",
-            "sourceUrl": "https://www.coreweave.com/news/coreweave-sets-new-ai-training-records-in-mlperf-r-training-v6-0-training-deepseek-v3-in-approximately-two-minutes",
-            "value": 5.54
-          },
-          {
-            "hollow": false,
-            "label": "4,096 GPUs (1,024 nodes)",
-            "sourceUrl": "https://www.coreweave.com/news/coreweave-sets-new-ai-training-records-in-mlperf-r-training-v6-0-training-deepseek-v3-in-approximately-two-minutes",
-            "value": 3.09
-          },
-          {
-            "hollow": false,
-            "label": "8,192 GPUs (2,048 nodes)",
-            "sourceUrl": "https://www.coreweave.com/news/coreweave-sets-new-ai-training-records-in-mlperf-r-training-v6-0-training-deepseek-v3-in-approximately-two-minutes",
-            "value": 2.02
-          }
-        ],
-        "researched": true,
-        "source": {
-          "date": "2026-06-16",
-          "outlet": "CoreWeave",
-          "tier": "secondary",
-          "title": "CoreWeave MLPerf Training v6.0: DeepSeek-V3 671B training time by GPU cluster size (NVIDIA GB300 NVL72)",
-          "url": "https://www.coreweave.com/news/coreweave-sets-new-ai-training-records-in-mlperf-r-training-v6-0-training-deepseek-v3-in-approximately-two-minutes"
-        },
-        "title": "CoreWeave MLPerf Training v6.0: DeepSeek-V3 671B training time by GPU cluster size (NVIDIA GB300 NVL72)",
-        "unit": "minutes"
-      },
-      "date": "2026-09-17",
-      "noChartReason": null,
-      "sources": [
-        {
-          "date": "2026-09-16",
-          "outlet": "CoreWeave (official company blog)",
-          "tier": "secondary",
-          "title": "CoreWeave (official company blog)",
-          "url": "https://wf.coreweave.com/blog/what-it-takes-to-bring-up-a-multi-rack-nvidia-vera-rubin-nvl72-cluster"
-        }
-      ],
-      "storyHref": "story/2026-09-17.html",
-      "text": "CoreWeave brought up a multi-rack Vera Rubin cluster and reports 10 times more work per megawatt than the Blackwell generation it replaces."
-    },
-    {
-      "chart": {
-        "caption": "Found today — single source: FourWeekMBA.",
-        "form": "columns",
-        "points": [
-          {
-            "hollow": false,
-            "label": "CoreWeave GPU infrastructure-backed debt facility (2023, led by Blackstone)",
-            "sourceUrl": "https://fourweekmba.com/ai-crux-ai-blackstone-alphabet-22-billion-tpu-loan/",
-            "value": 2.3
-          },
-          {
-            "hollow": false,
-            "label": "CoreWeave GPU infrastructure-backed facility (2024, led by Blackstone)",
-            "sourceUrl": "https://fourweekmba.com/ai-crux-ai-blackstone-alphabet-22-billion-tpu-loan/",
-            "value": 7.5
-          },
-          {
-            "hollow": false,
-            "label": "CoreWeave investment-grade rated GPU-backed financing (2026)",
-            "sourceUrl": "https://fourweekmba.com/ai-crux-ai-blackstone-alphabet-22-billion-tpu-loan/",
-            "value": 8.5
-          },
-          {
-            "hollow": false,
-            "label": "Crux AI chip-backed loan to 10-bank syndicate led by Goldman Sachs (2026)",
-            "sourceUrl": "https://fourweekmba.com/ai-crux-ai-blackstone-alphabet-22-billion-tpu-loan/",
-            "value": 22.0
-          }
-        ],
-        "researched": true,
-        "source": {
-          "date": "2026-09-17",
-          "outlet": "FourWeekMBA",
-          "tier": "secondary",
-          "title": "GPU/chip-backed debt facility size by deal",
-          "url": "https://fourweekmba.com/ai-crux-ai-blackstone-alphabet-22-billion-tpu-loan/"
-        },
-        "title": "GPU/chip-backed debt facility size by deal",
-        "unit": "US$ billions"
-      },
-      "date": "2026-09-17",
-      "noChartReason": null,
-      "sources": [
-        {
-          "date": "2026-09-16",
-          "outlet": "Investing.com (citing Reuters)",
-          "tier": "secondary",
-          "title": "Investing.com (citing Reuters)",
-          "url": "https://www.investing.com/news/stock-market-news/banks-provide-22-billion-chip-loan-to-blackstone-alphabet-cloud-venture-bloomberg-news-reports-4904543"
-        }
-      ],
-      "storyHref": "story/2026-09-17.html",
-      "text": "Ten banks led by Goldman Sachs lent $22 billion to Crux AI, secured on the chips themselves, to bring 500 megawatts online in 2027."
+      "storyHref": "story/2026-09-26.html",
+      "text": "Oracle warned that a 2.45-gigawatt New Mexico campus may miss its 2028 opening after a pipeline permit slipped to February 1, 2027."
     }
   ],
   "categoryId": "chips.merchant-gpu",
@@ -168,13 +114,6 @@
       "direction": "worsening",
       "evidence": [
         {
-          "date": "2026-09-09",
-          "outlet": "finance.yahoo.com (Wall Street Journal-sourced)",
-          "tier": "secondary",
-          "title": "finance.yahoo.com (Wall Street Journal-sourced)",
-          "url": "https://finance.yahoo.com/technology/ai/articles/openai-spend-750-billion-compute-163922916.html"
-        },
-        {
           "date": "2026-09-07",
           "outlet": "Seoul Economic Daily (en.sedaily.com)",
           "tier": "secondary",
@@ -182,31 +121,31 @@
           "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days"
         },
         {
-          "date": "2026-08-25",
-          "outlet": "siliconanalysts.com",
+          "date": "2026-09-07",
+          "outlet": "Parameter.io",
           "tier": "secondary",
-          "title": "siliconanalysts.com",
-          "url": "https://siliconanalysts.com/newsletter/qual-watch/2026-08-25"
+          "title": "Parameter.io",
+          "url": "https://parameter.io/sk-hynix-skhy-shares-surge-7-as-openais-gpt-6-astra-ignites-memory-chip-rally/"
+        },
+        {
+          "date": "2026-08-26",
+          "outlet": "IDC (blog)",
+          "tier": "secondary",
+          "title": "IDC (blog)",
+          "url": "https://www.idc.com/resource-center/blog/smartphone-shipments-set-for-record-16-7-drop-in-2026-as-the-memory-crisis-hits-full-force/"
         }
       ],
       "id": "bottleneck",
       "plainName": "What is holding shipments back",
       "ratingWord": "Weak",
-      "reasoning": "Advanced packaging still carries 52 to 78 week lead times, so both chokepoints bind and memory has tightened further this cycle.",
-      "summary": "Nvidia can serve only about 70 percent of the demand it sees, Micron can supply barely half of what customers ask for, and memory stockpiles at the two Korean suppliers have fallen below ten days.",
+      "reasoning": "Packaging output is rising and its shortfall has narrowed to roughly 10%, so memory, not packaging slots, now sets the ceiling on shipments.",
+      "summary": "Memory stockpiles at the two Korean suppliers have fallen below ten days, memory cost is up over 300% year on year, and Nvidia can serve only about 70% of the demand it sees.",
       "tone": "bad"
     },
     {
       "confidence": "High — drawn from company filings and calls.",
       "direction": "improving",
       "evidence": [
-        {
-          "date": "2026-09-02",
-          "outlet": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
-          "tier": "primary",
-          "title": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
-          "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
-        },
         {
           "date": "2026-08-26",
           "outlet": "NVIDIA Newsroom",
@@ -215,18 +154,25 @@
           "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
         },
         {
-          "date": "2026-09-04",
-          "outlet": "fool.com",
+          "date": "2026-09-02",
+          "outlet": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+          "tier": "primary",
+          "title": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+          "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
+        },
+        {
+          "date": "2026-09-10",
+          "outlet": "investor.oracle.com",
           "tier": "secondary",
-          "title": "fool.com",
-          "url": "https://www.fool.com/investing/2026/09/04/prediction-vera-rubin-is-about-to-become-a-20-bil/"
+          "title": "investor.oracle.com",
+          "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx"
         }
       ],
       "id": "momentum",
       "plainName": "How hard buyers are buying",
       "ratingWord": "Very strong",
-      "reasoning": "Anthropic alone signed about $517 billion of compute agreements in eleven months, so orders keep outrunning deliveries.",
-      "summary": "Nvidia data-center sales reached $89 billion in the quarter and the company guides to $108 billion next, while Oracle lifted booked cloud obligations to $664 billion and Broadcom posted $16.7 billion of AI chip sales, up 221 percent.",
+      "reasoning": "Broadcom's AI chip revenue of $16.7 billion, OpenAI's $750 billion compute plan and a forecast $1.2 trillion of 2027 buyer spending show the orders are broad, not one account.",
+      "summary": "Oracle's booked contracts reached $664 billion and Nvidia's data-center revenue reached $89.0 billion, up 117% year over year.",
       "tone": "good"
     },
     {
@@ -235,17 +181,17 @@
       "evidence": [
         {
           "date": "2026-08-31",
+          "outlet": "NVIDIA Newsroom (official press release)",
+          "tier": "primary",
+          "title": "NVIDIA Newsroom (official press release)",
+          "url": "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms"
+        },
+        {
+          "date": "2026-08-31",
           "outlet": "ir.amd.com (AMD Investor Relations press release)",
           "tier": "primary",
           "title": "ir.amd.com (AMD Investor Relations press release)",
           "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live"
-        },
-        {
-          "date": "2026-09-03",
-          "outlet": "NVIDIA Blog (official)",
-          "tier": "primary",
-          "title": "NVIDIA Blog (official)",
-          "url": "https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/"
         },
         {
           "date": "2026-09-02",
@@ -258,14 +204,21 @@
       "id": "competitiveStructure",
       "plainName": "Whether buyers have a second choice",
       "ratingWord": "Mixed",
-      "reasoning": "Nvidia answers by buying the main open-model distribution hub, which defends the position rather than restoring it.",
-      "summary": "Real alternatives now ship: Instinct racks run in production for Humain customers, Advanced Micro Devices holds 8 gigawatts of frontier-lab commitments, OpenAI unveiled its own inference chip and Huawei pulled its roadmap forward by three quarters.",
+      "reasoning": "Nvidia answers by pulling rival designers onto its own fabric, which keeps buyers inside its rack while the number of credible suppliers grows.",
+      "summary": "AMD carries 8 gigawatts of signed deployments and has live installations in Saudi Arabia, a $22 billion fleet of Google's own chips is being financed, Huawei pulled its roadmap forward, and OpenAI has its own inference chip.",
       "tone": "mixed"
     },
     {
       "confidence": "Medium — the underlying reports are single-source in places.",
       "direction": "worsening",
       "evidence": [
+        {
+          "date": "2026-07-24",
+          "outlet": "Silicon Analysts",
+          "tier": "secondary",
+          "title": "Silicon Analysts",
+          "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026"
+        },
         {
           "date": "2026-05-21",
           "outlet": "Tom's Hardware custom AI ASIC state of play",
@@ -279,20 +232,13 @@
           "tier": "secondary",
           "title": "TechTimes / Network World",
           "url": "https://www.techtimes.com/articles/319338/20260629/amd-helios-faces-nvidia-vera-rubin-july-23-keynote-memory-leads-training-trails.htm"
-        },
-        {
-          "date": "2026-07-24",
-          "outlet": "Silicon Analysts",
-          "tier": "secondary",
-          "title": "Silicon Analysts",
-          "url": "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026"
         }
       ],
       "id": "moat",
       "plainName": "How safe NVIDIA's lead looks",
       "ratingWord": "Weak",
-      "reasoning": "Share drift decides this one: custom chips from the large clouds already absorb about two-thirds of AI compute and forecasts put merchant share at 75 percent for 2026, down from 87 percent in 2024.",
-      "summary": "Nvidia still takes roughly 70 percent of accelerator revenue and just became the revenue leader in data-center Ethernet switches.",
+      "reasoning": "Its first place in data-center Ethernet switch revenue shows the defence has shifted from the chip to the whole rack.",
+      "summary": "Nvidia's accelerator share is projected to slide from a 2024 peak of 87% to 75% in 2026 while in-house silicon from the largest buyers already consumes roughly two-thirds of AI compute.",
       "tone": "bad"
     },
     {
@@ -324,8 +270,8 @@
       "id": "unitEconomics",
       "plainName": "How profitable the sellers are",
       "ratingWord": "Strong",
-      "reasoning": "Memory costs set the direction, with Nvidia naming a 71 to 72 percent floor and further slippage into the low seventies.",
-      "summary": "Vendor margins remain high in absolute terms: Nvidia holds gross margin near 74 percent, the leading foundry printed 67.7 percent, Advanced Micro Devices sits at 54 percent and Intel improved to 40.4 percent.",
+      "reasoning": "AMD at 54% and Intel at 41.8% are climbing, while planned 3-6% wafer price rises for 2027 add another layer of cost.",
+      "summary": "Nvidia still earns about 74% gross margin and holds pricing power, yet it has now named a 71-72% floor and told investors margins dip into the low 70s as memory cost lands, so the direction has turned down.",
       "tone": "good"
     },
     {
@@ -340,25 +286,25 @@
           "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
         },
         {
-          "date": "2026-05-21",
-          "outlet": "NVIDIA Form 10-Q Q1 FY2027",
-          "tier": "primary",
-          "title": "NVIDIA Form 10-Q Q1 FY2027",
-          "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000052/nvda-20260426.htm"
+          "date": "2026-09-25",
+          "outlet": "PYMNTS",
+          "tier": "secondary",
+          "title": "PYMNTS",
+          "url": "https://www.pymnts.com/big-tech/2026/goldman-sachs-projects-big-tech-ai-infrastructure-spending-to-hit-1-2-trillion-in-2027/"
         },
         {
-          "date": "2026-09-10",
-          "outlet": "thestar.com.my",
+          "date": "2026-09-02",
+          "outlet": "247wallst.com",
           "tier": "secondary",
-          "title": "thestar.com.my",
-          "url": "https://www.thestar.com.my/tech/tech-news/2026/09/10/us-doj-probes-nvidia039s-licensing-deal-with-ai-startup-groq-nyt-reports"
+          "title": "247wallst.com",
+          "url": "https://247wallst.com/investing/2026/09/02/anthropic-just-committed-35-billion-to-compute-it-has-not-raised-the-money-for/"
         }
       ],
       "id": "strategicRisk",
       "plainName": "What could go wrong",
       "ratingWord": "Mixed",
-      "reasoning": "Buyer financing is the live worry: Nvidia cut its Ohio guarantee from $250 billion to under $120 billion, and one Anthropic landlord admitted it lacks the money to build the site.",
-      "summary": "Three direct customers account for 21, 17 and 16 percent of Nvidia revenue, the vendor assumes no China data-center sales, and the Justice Department has sent a formal information request over the Groq licensing deal.",
+      "reasoning": "Nvidia cut its Ohio guarantee from $250 billion to under $120 billion and faces a Justice Department inquiry, so both the financing chain and the regulator now bite.",
+      "summary": "More than a third of 2027 AI investment is expected to be debt-funded, Anthropic signs capacity against money it has not yet raised, and one of its landlords has admitted it cannot finance the building.",
       "tone": "mixed"
     }
   ],
@@ -428,21 +374,14 @@
       },
       {
         "date": "2026-09-01",
-        "demand": 7.973333333333336,
-        "supply": -0.6266666666666668
+        "demand": 8.633333333333336,
+        "supply": -0.9600000000000001
       }
     ],
     "sources": [
       {
         "assessment": true,
         "basedOn": [
-          {
-            "date": "2026-09-02",
-            "outlet": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
-            "tier": "primary",
-            "title": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
-            "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
-          },
           {
             "date": "2026-08-26",
             "outlet": "NVIDIA Newsroom",
@@ -451,11 +390,18 @@
             "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
           },
           {
-            "date": "2026-08-31",
-            "outlet": "ir.amd.com (AMD Investor Relations press release)",
+            "date": "2026-09-02",
+            "outlet": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
             "tier": "primary",
-            "title": "ir.amd.com (AMD Investor Relations press release)",
-            "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live"
+            "title": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+            "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
+          },
+          {
+            "date": "2026-08-31",
+            "outlet": "NVIDIA Newsroom (official press release)",
+            "tier": "primary",
+            "title": "NVIDIA Newsroom (official press release)",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-and-mediatek-deepen-long-standing-partnership-to-build-ai-edge-to-cloud-computing-platforms"
           }
         ]
       }
@@ -464,13 +410,9 @@
   "issues": {
     "open": [
       {
-        "assessedAsOf": "2026-09-17",
-        "checkCount": 21,
+        "assessedAsOf": "2026-09-26",
+        "checkCount": 22,
         "history": [
-          {
-            "asOf": "2026-08-26",
-            "status": "worsened"
-          },
           {
             "asOf": "2026-08-27",
             "status": "worsened"
@@ -526,39 +468,39 @@
           {
             "asOf": "2026-09-17",
             "status": "improved"
+          },
+          {
+            "asOf": "2026-09-26",
+            "status": "worsened"
           }
         ],
         "id": "dim-bottleneck",
-        "reasoning": "First measured results on the new racks show 10 times more work per megawatt than the prior generation, and an independent count puts Rubin at 59.4 million tokens a second per megawatt against 28.5 million. Power is a hard limit, so that is real added capacity.",
+        "reasoning": "A named 2.45-gigawatt site now risks missing its 2028 opening on a permit pushed to February 1, 2027, and rental prices rise again from October 1 - the limit has moved to buildings and power without the chip shortage easing.",
         "sources": [
           {
-            "date": "2026-09-16",
-            "outlet": "CoreWeave (official company blog)",
+            "date": "2026-09-24",
+            "outlet": "TechCrunch; Insurance Journal (AP wire republish)",
             "tier": "secondary",
-            "title": "CoreWeave (official company blog)",
-            "url": "https://wf.coreweave.com/blog/what-it-takes-to-bring-up-a-multi-rack-nvidia-vera-rubin-nvl72-cluster"
+            "title": "TechCrunch; Insurance Journal (AP wire republish)",
+            "url": "https://techcrunch.com/2026/09/24/oracle-sends-force-majeure-notice-on-its-new-mexico-stargate-data-center/"
           },
           {
-            "date": "2026-09-14",
-            "outlet": "SemiAnalysis (newsletter/licensed source)",
+            "date": "2026-09-26",
+            "outlet": "nebius.com",
             "tier": "secondary",
-            "title": "SemiAnalysis (newsletter/licensed source)",
-            "url": "https://newsletter.semianalysis.com/p/vera-rubin-nvl72-agentic-inference"
+            "title": "nebius.com",
+            "url": "https://nebius.com/prices"
           }
         ],
-        "status": "improved",
+        "status": "worsened",
         "title": "Bottleneck",
         "trackedSince": "2026-08",
-        "worsenedCount": 12
+        "worsenedCount": 13
       },
       {
-        "assessedAsOf": "2026-09-17",
-        "checkCount": 21,
+        "assessedAsOf": "2026-09-26",
+        "checkCount": 22,
         "history": [
-          {
-            "asOf": "2026-08-26",
-            "status": "worsened"
-          },
           {
             "asOf": "2026-08-27",
             "status": "unchanged"
@@ -613,47 +555,40 @@
           },
           {
             "asOf": "2026-09-17",
+            "status": "worsened"
+          },
+          {
+            "asOf": "2026-09-26",
             "status": "worsened"
           }
         ],
         "id": "dim-moat",
-        "reasoning": "Huawei pulled its next accelerator forward three quarters to the first quarter of 2027, Arm says demand for its new data-center processor is twice its $1 billion target, and $22 billion of new bank money is going into Google's own accelerators rather than merchant chips.",
+        "reasoning": "An independent test put sixteen of Google's own chips at 700 tokens a second against 452 on sixteen Nvidia GB200 chips, and the new Anthropic-Akamai deal is framed as a bet on ordinary server chips rather than GPU training.",
         "sources": [
           {
-            "date": "2026-09-17",
-            "outlet": "Reuters (via Investing.com)",
+            "date": "2026-09-23",
+            "outlet": "Inferact",
             "tier": "secondary",
-            "title": "Reuters (via Investing.com)",
-            "url": "https://www.investing.com/news/stock-market-news/chinas-huawei-sets-2027-launch-for-new-ai-chips-as-it-targets-nvidia-4904787"
+            "title": "Inferact",
+            "url": "https://inferact.ai/blog/tpu-megakernels"
           },
           {
-            "date": "2026-09-17",
-            "outlet": "Investing.com (citing CNBC Mad Money interview)",
+            "date": "2026-09-25",
+            "outlet": "TechCrunch",
             "tier": "secondary",
-            "title": "Investing.com (citing CNBC Mad Money interview)",
-            "url": "https://www.investing.com/news/stock-market-news/why-is-arm-stock-climbing-today-93CH-4905113"
-          },
-          {
-            "date": "2026-09-16",
-            "outlet": "Investing.com (citing Reuters)",
-            "tier": "secondary",
-            "title": "Investing.com (citing Reuters)",
-            "url": "https://www.investing.com/news/stock-market-news/banks-provide-22-billion-chip-loan-to-blackstone-alphabet-cloud-venture-bloomberg-news-reports-4904543"
+            "title": "TechCrunch",
+            "url": "https://techcrunch.com/2026/09/25/anthropic-to-pay-akamai-11-6-billion-over-seven-years-in-cloud-deal/"
           }
         ],
         "status": "worsened",
         "title": "Moat",
         "trackedSince": "2026-08",
-        "worsenedCount": 11
+        "worsenedCount": 12
       },
       {
-        "assessedAsOf": "2026-09-17",
-        "checkCount": 20,
+        "assessedAsOf": "2026-09-26",
+        "checkCount": 21,
         "history": [
-          {
-            "asOf": "2026-08-26",
-            "status": "worsened"
-          },
           {
             "asOf": "2026-08-27",
             "status": "worsened"
@@ -709,108 +644,45 @@
           {
             "asOf": "2026-09-17",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-09-26",
+            "status": "worsened"
           }
         ],
         "id": "constraint-stacked-memory-and-server-dram",
-        "reasoning": "The only memory news today is preliminary: SK Hynix is in early talks to make memory at Intel's Ohio plant, with no investment size and no timeline disclosed. Nothing changes what is available to buy this quarter.",
+        "reasoning": "Akamai is adding about $1.7 billion this year purely to pre-buy memory parts, while each new Vera Rubin rack carries 20.7 terabytes of high-speed memory - demand on the same scarce supply is rising, not falling.",
         "sources": [
           {
-            "date": "2026-09-16",
-            "outlet": "HotHardware",
+            "date": "2026-09-24",
+            "outlet": "SEC EDGAR (Akamai Technologies Inc 8-K, Exhibit 99.1)",
+            "tier": "primary",
+            "title": "SEC EDGAR (Akamai Technologies Inc 8-K, Exhibit 99.1)",
+            "url": "https://www.sec.gov/Archives/edgar/data/0001086222/000119312526401048/d288154dex991.htm"
+          },
+          {
+            "date": "2026-09-25",
+            "outlet": "TechCrunch",
             "tier": "secondary",
-            "title": "HotHardware",
-            "url": "https://hothardware.com/news/sk-hynix-tap-intel-ohio-fab-make-memory-chips-usa"
+            "title": "TechCrunch",
+            "url": "https://techcrunch.com/2026/09/25/anthropic-to-pay-akamai-11-6-billion-over-seven-years-in-cloud-deal/"
+          },
+          {
+            "date": "2026-09-23",
+            "outlet": "supermicro.com",
+            "tier": "secondary",
+            "title": "supermicro.com",
+            "url": "https://www.supermicro.com/en/pressreleases/supermicro-now-shipping-nvidia-vera-rubin-nvl72-racks"
           }
         ],
-        "status": "unchanged",
+        "status": "worsened",
         "title": "HBM and server DRAM supply",
         "trackedSince": "2026-08",
-        "worsenedCount": 8
+        "worsenedCount": 9
       },
       {
-        "assessedAsOf": "2026-09-17",
-        "checkCount": 18,
-        "history": [
-          {
-            "asOf": "2026-08-26",
-            "status": "worsened"
-          },
-          {
-            "asOf": "2026-08-27",
-            "status": "unchanged"
-          },
-          {
-            "asOf": "2026-08-30",
-            "status": "unchanged"
-          },
-          {
-            "asOf": "2026-08-31",
-            "status": "unchanged"
-          },
-          {
-            "asOf": "2026-09-01",
-            "status": "worsened"
-          },
-          {
-            "asOf": "2026-09-04",
-            "status": "worsened"
-          },
-          {
-            "asOf": "2026-09-05",
-            "status": "unchanged"
-          },
-          {
-            "asOf": "2026-09-06",
-            "status": "unchanged"
-          },
-          {
-            "asOf": "2026-09-07",
-            "status": "unchanged"
-          },
-          {
-            "asOf": "2026-09-08",
-            "status": "unchanged"
-          },
-          {
-            "asOf": "2026-09-09",
-            "status": "unchanged"
-          },
-          {
-            "asOf": "2026-09-10",
-            "status": "unchanged"
-          },
-          {
-            "asOf": "2026-09-13",
-            "status": "unchanged"
-          },
-          {
-            "asOf": "2026-09-16",
-            "status": "unchanged"
-          },
-          {
-            "asOf": "2026-09-17",
-            "status": "unchanged"
-          }
-        ],
-        "id": "constraint-hbm4-memory-allocation-per-accelerator",
-        "reasoning": "No new evidence arrived on how much stacked memory each accelerator gets. The one memory item today, early SK Hynix talks about Intel's Ohio plant, names no volumes and no dates.",
-        "sources": [
-          {
-            "date": "2026-09-16",
-            "outlet": "HotHardware",
-            "tier": "secondary",
-            "title": "HotHardware",
-            "url": "https://hothardware.com/news/sk-hynix-tap-intel-ohio-fab-make-memory-chips-usa"
-          }
-        ],
-        "status": "unchanged",
-        "title": "stacked memory supply",
-        "trackedSince": "2026-08",
-        "worsenedCount": 3
-      },
-      {
-        "assessedAsOf": "2026-09-17",
-        "checkCount": 8,
+        "assessedAsOf": "2026-09-26",
+        "checkCount": 9,
         "history": [
           {
             "asOf": "2026-09-06",
@@ -843,68 +715,72 @@
           {
             "asOf": "2026-09-17",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-09-26",
+            "status": "worsened"
           }
         ],
         "id": "constraint-high-bandwidth-memory-and-server-memory",
-        "reasoning": "Today's gains are in power efficiency, not in memory or packaging. The single memory item, early SK Hynix talks about making memory at Intel's Ohio plant, carries no size and no timeline, so the parts constraint stands where it was.",
+        "reasoning": "A buyer is now spending roughly $1.7 billion ahead of need to secure memory, and a standard 16-rack block of the newest machines needs 331 terabytes of it, so the queue for memory is getting longer.",
         "sources": [
           {
-            "date": "2026-09-16",
-            "outlet": "HotHardware",
-            "tier": "secondary",
-            "title": "HotHardware",
-            "url": "https://hothardware.com/news/sk-hynix-tap-intel-ohio-fab-make-memory-chips-usa"
+            "date": "2026-09-24",
+            "outlet": "SEC EDGAR (Akamai Technologies Inc 8-K, Exhibit 99.1)",
+            "tier": "primary",
+            "title": "SEC EDGAR (Akamai Technologies Inc 8-K, Exhibit 99.1)",
+            "url": "https://www.sec.gov/Archives/edgar/data/0001086222/000119312526401048/d288154dex991.htm"
           },
           {
-            "date": "2026-09-16",
-            "outlet": "CoreWeave (official company blog)",
+            "date": "2026-09-25",
+            "outlet": "TechCrunch",
             "tier": "secondary",
-            "title": "CoreWeave (official company blog)",
-            "url": "https://wf.coreweave.com/blog/what-it-takes-to-bring-up-a-multi-rack-nvidia-vera-rubin-nvl72-cluster"
+            "title": "TechCrunch",
+            "url": "https://techcrunch.com/2026/09/25/anthropic-to-pay-akamai-11-6-billion-over-seven-years-in-cloud-deal/"
+          },
+          {
+            "date": "2026-09-23",
+            "outlet": "supermicro.com",
+            "tier": "secondary",
+            "title": "supermicro.com",
+            "url": "https://www.supermicro.com/en/pressreleases/supermicro-now-shipping-nvidia-vera-rubin-nvl72-racks"
           }
         ],
-        "status": "unchanged",
-        "title": "high-bandwidth memory and packaging slots",
+        "status": "worsened",
+        "title": "high-bandwidth memory allocation",
         "trackedSince": "2026-09",
-        "worsenedCount": 2
+        "worsenedCount": 3
       }
     ],
-    "resolved": []
+    "resolved": [
+      {
+        "finalNote": "No new evidence arrived today on how much memory each accelerator gets; the only fresh figure is per rack, at 20.7 terabytes in the newest racks now shipping.",
+        "id": "constraint-hbm4-memory-allocation-per-accelerator",
+        "resolvedAsOf": "2026-09-26",
+        "title": "stacked memory supply"
+      }
+    ]
   },
   "schemaVersion": "1.2",
   "verdict": {
-    "answer": "Not yet. Rents go up again, and new racks squeeze more out of each megawatt",
+    "answer": "Not yet. Rents go up again, and the hold-up moves to power and permits",
     "chip": {
       "direction": "widening",
       "label": "Gap widening"
     },
     "confidence": "We are confident in this read",
     "question": "Is supply catching up to demand?",
-    "soWhat": "A cloud landlord raises chip rental prices for the second time since May, while the first measured results from Nvidia's newest racks show far more work per unit of power.",
+    "soWhat": "A cloud landlord raises its hourly prices for the second time this year, while a 2.45-gigawatt building site in New Mexico warns it may open late.",
     "sources": [
       {
         "assessment": true,
         "basedOn": [
           {
-            "date": "2026-09-16",
-            "outlet": "KuCoin News (flash article), corroborated by Futu News",
+            "date": "2026-09-26",
+            "outlet": "nebius.com",
             "tier": "secondary",
-            "title": "KuCoin News (flash article), corroborated by Futu News",
-            "url": "https://www.kucoin.com/news/flash/nebius-to-hike-gpu-rental-prices-by-up-to-21-from-october-1"
-          },
-          {
-            "date": "2026-09-17",
-            "outlet": "Nebius AI Cloud (official pricing page)",
-            "tier": "secondary",
-            "title": "Nebius AI Cloud (official pricing page)",
+            "title": "nebius.com",
             "url": "https://nebius.com/prices"
-          },
-          {
-            "date": "2026-09-16",
-            "outlet": "lambda.ai",
-            "tier": "secondary",
-            "title": "lambda.ai",
-            "url": "https://lambda.ai/pricing"
           }
         ]
       }

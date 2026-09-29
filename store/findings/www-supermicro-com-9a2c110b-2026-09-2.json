@@ -1,0 +1,54 @@
+{
+  "id": "www-supermicro-com-9a2c110b-2026-09-2",
+  "statement": "Each Vera Rubin NVL72 rack carries 20.7 TB of HBM4 memory, and a 16-rack Scalable Unit blueprint with 1,152 Rubin GPUs carries 331 TB of HBM4.",
+  "kind": "measured",
+  "value": {
+    "number": 20.7,
+    "unit": "TB_HBM4_per_rack"
+  },
+  "trend": "rising",
+  "why": "HBM content per rack sets how much of the world's high-bandwidth memory supply each unit of accelerator capacity consumes, and it is the tightest link in the chain.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.ai-storage"
+    ],
+    "direction": "mixed",
+    "mechanism": "Rising HBM4 content per shipped rack raises memory draw per deployed GPU, tightening HBM and advanced-packaging supply as Rubin volumes ramp."
+  },
+  "evidence": [
+    {
+      "source": "supermicro.com",
+      "url": "https://www.supermicro.com/en/pressreleases/supermicro-now-shipping-nvidia-vera-rubin-nvl72-racks",
+      "date": "2026-09-23",
+      "excerpt": "Each rack provides '20.7 TB of HBM4 memory' and 'up to 54 TB of LPDDR5X memory.'",
+      "tier": "secondary"
+    },
+    {
+      "source": "supermicro.com",
+      "url": "https://www.supermicro.com/en/pressreleases/supermicro-now-shipping-nvidia-vera-rubin-nvl72-racks",
+      "date": "2026-09-23",
+      "excerpt": "1,152 NVIDIA Rubin GPUs' with '331 TB of HBM4 memory' across '16 compute racks",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor specification sheet in a press release, secondary tier; no HBM supply or bit-growth data accompanies it."
+  },
+  "dispersion": "20.7 TB HBM4 per rack; 331 TB across a 16-rack Scalable Unit.",
+  "asOf": "2026-09",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "Supermicro, NVIDIA",
+  "observedAt": "2026-09-23",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

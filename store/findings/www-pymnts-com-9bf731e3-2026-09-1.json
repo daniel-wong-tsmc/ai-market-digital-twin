@@ -1,0 +1,53 @@
+{
+  "id": "www-pymnts-com-9bf731e3-2026-09-1",
+  "statement": "Goldman Sachs forecasts top-five hyperscaler AI infrastructure spending of $1.2 trillion in 2027, up from $800 billion in 2026, a 54% jump and above the $1.1 trillion Wall Street consensus.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Hyperscaler capex is the single largest source of accelerator demand, and a forecast above consensus points to upward revisions rather than a plateau.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "chips.hbm-memory"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher planned capex at Amazon, Alphabet, Microsoft, Oracle and Meta translates directly into accelerator, memory, facility and power orders."
+  },
+  "evidence": [
+    {
+      "source": "PYMNTS",
+      "url": "https://www.pymnts.com/big-tech/2026/goldman-sachs-projects-big-tech-ai-infrastructure-spending-to-hit-1-2-trillion-in-2027/",
+      "date": "2026-09-25",
+      "excerpt": "Goldman Sachs forecasts hyperscaler AI infrastructure spending will hit $1.2 trillion in 2027, up from $800 billion in 2026. This figure exceeds Wall Street consensus of $1.1 trillion for 2027.",
+      "tier": "secondary"
+    },
+    {
+      "source": "PYMNTS",
+      "url": "https://www.pymnts.com/big-tech/2026/goldman-sachs-projects-big-tech-ai-infrastructure-spending-to-hit-1-2-trillion-in-2027/",
+      "date": "2026-09-25",
+      "excerpt": "a 54% jump in hyperscaler capital expenditures in 2027",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary coverage of a sell-side forecast, not company guidance or a filing; forecasts are estimates rather than realized spend."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 2 -> 3; sources: PYMNTS",
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "Amazon, Alphabet, Microsoft, Oracle, Meta (top-5 US hyperscalers); Goldman Sachs (forecaster)",
+  "observedAt": "2026-09-25",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

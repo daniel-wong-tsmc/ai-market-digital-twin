@@ -1,0 +1,45 @@
+{
+  "id": "techcrunch-com-de27e2eb-2026-09-2",
+  "statement": "Project Jupiter faces permitting and power delays, including an Energy Transfer pipeline permit pushed to February 1, 2027, nearly six months behind schedule, and a November 23 air-quality permit deadline.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Power and permitting, not chips, are increasingly the binding constraint on when new AI capacity can actually run.",
+  "impact": {
+    "targets": [
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "energy.procurement",
+      "infrastructure.datacenter-colo",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Permit slippage on gas supply and air quality stretches the time between an accelerator order and energized capacity, lengthening effective delivery timelines across the build."
+  },
+  "evidence": [
+    {
+      "source": "TechCrunch; Insurance Journal (AP wire republish)",
+      "url": "https://techcrunch.com/2026/09/24/oracle-sends-force-majeure-notice-on-its-new-mexico-stargate-data-center/",
+      "date": "2026-09-24",
+      "excerpt": "faces delays including an Energy Transfer pipeline permit delay pushed to February 1, 2027 (nearly six months behind schedule) and an air-quality permit deadline of November 23",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary wire reporting; no lead-time figure in weeks is stated, so only direction is supported."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "Oracle; Blue Owl Capital (developer unit); Project Jupiter (New Mexico Stargate AI data center campus); OpenAI; SoftBank",
+  "observedAt": "2026-09-24",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

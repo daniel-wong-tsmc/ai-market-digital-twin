@@ -1,0 +1,45 @@
+{
+  "id": "www-tomshardware-com-c7417741-2026-09-2",
+  "statement": "Tom's Hardware reports xAI/SpaceXAI is building a 1.2-gigawatt power plant to bring its installed GPU systems fully online.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Needing to build your own power plant to energize GPUs already on site says power, not silicon, is the gating constraint on deployed capacity.",
+  "impact": {
+    "targets": [
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "energy.electrical-equipment",
+      "infrastructure.datacenter-colo",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "If installed accelerators must wait on self-built generation, the lag between GPU delivery and revenue-producing operation lengthens for the whole build chain."
+  },
+  "evidence": [
+    {
+      "source": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/tech-industry/data-centers/elon-musks-spacexai-to-add-another-660-000-ai-gpus-this-year-nearing-a-total-of-1-44-million-in-operation-firm-is-building-1-2-gigawatt-power-plant-to-bring-systems-fully-online",
+      "date": "2026-09-25",
+      "excerpt": "is building 1.2-gigawatt power plant to bring systems fully online",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Headline-only evidence: the document states the full article body was not retrievable, and no timeline or completion date for the plant is given."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "upstreamLeadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "xAI / SpaceXAI (Colossus 1 and Colossus 2 data centers)",
+  "observedAt": "2026-09-25",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

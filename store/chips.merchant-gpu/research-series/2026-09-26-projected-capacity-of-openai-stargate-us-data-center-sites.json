@@ -1,0 +1,47 @@
+{
+  "seriesName": "Projected capacity of OpenAI Stargate US data center sites",
+  "unit": "gigawatts (GW)",
+  "form": "columns",
+  "sourceName": "Epoch AI",
+  "points": [
+    {
+      "label": "Abilene, Texas",
+      "value": 1.2,
+      "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+      "publishedAt": "2026-04-17"
+    },
+    {
+      "label": "Shackelford County, Texas",
+      "value": 2.0,
+      "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+      "publishedAt": "2026-04-17"
+    },
+    {
+      "label": "Dona Ana County, New Mexico (Project Jupiter)",
+      "value": 2.2,
+      "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+      "publishedAt": "2026-04-17"
+    },
+    {
+      "label": "Milam County, Texas",
+      "value": 1.2,
+      "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+      "publishedAt": "2026-04-17"
+    },
+    {
+      "label": "Port Washington, Wisconsin",
+      "value": 1.3,
+      "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+      "publishedAt": "2026-04-17"
+    },
+    {
+      "label": "Saline Township, Michigan",
+      "value": 1.4,
+      "sourceUrl": "https://epoch.ai/publications/openai-stargate-where-the-us-sites-stand",
+      "publishedAt": "2026-04-17"
+    }
+  ],
+  "pair": false,
+  "notes": "Epoch AI's April 17, 2026 tracker lists projected build-out capacity in GW for each of the seven announced Stargate US sites, all currently at 0 GW online capacity except Abilene (0.3 GW live). This gives scale context for the New Mexico Project Jupiter site named in today's bullet: at 2.2 GW projected, it is the second-largest of the seven Stargate sites, behind only the sum of Abilene's build-out. Note this Epoch AI figure (2.2 GW) differs slightly from the 2.45 GW figure used in today's bullet (from TechCrunch's September 24, 2026 report); the discrepancy likely reflects different snapshots in time or different definitions of full build-out capacity -- flagged here rather than reconciled, since each number is exactly as published by its own source. Lordstown, Ohio's site was excluded as a point because Epoch AI gives it only as a hedge (\"<0.3 GW\"), not a bare number, per the series rules. No timeline/date-of-completion figures were included as points since those are quarter labels, not numeric values, though Epoch AI's table does show Q4 2028 projected completion for the New Mexico site alongside most other non-Abilene sites, which is directly relevant to the 2028 opening date in the bullet.",
+  "bulletIndex": 3
+}

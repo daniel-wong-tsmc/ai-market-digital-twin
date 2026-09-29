@@ -2,8 +2,8 @@
   "scope": "category:chips.merchant-gpu",
   "asOf": "2026-09",
   "mode": "daily",
-  "capturedAt": "2026-09-17T11:46:35Z",
-  "runDir": "work/daily-2026-09-17",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "runDir": "work/daily-2026-09-26",
   "unattended": true,
   "stages": [
     {
@@ -25,27 +25,30 @@
       "assignment_path": "fixtures\\asg.chips.merchant-gpu.json",
       "status": "done",
       "manifestRef": "manifests/chips.merchant-gpu.json",
-      "scorecard": "store/chips.merchant-gpu/2026-09-v12.json",
-      "dmi": 7.973,
-      "smi": -0.627,
-      "priorScorecard": "store/chips.merchant-gpu/2026-09-v11.json",
-      "priorDmi": 7.68,
-      "priorSmi": -0.773,
+      "scorecard": "store/chips.merchant-gpu/2026-09-v13.json",
+      "dmi": 8.633,
+      "smi": -0.96,
+      "priorScorecard": "store/chips.merchant-gpu/2026-09-v12.json",
+      "priorDmi": 7.973,
+      "priorSmi": -0.627,
       "observations": [
-        "Scheduled fire at 19:41 local 2026-09-17 (this instance; capturedAt 2026-09-17T11:46:35Z, already past UTC midnight so no wait was needed). Orientation: main == origin/main == 491b1c0, tree clean, no work/daily-2026-09-17 claim, day-key 09-17 free, only this claude.exe alive. Full cycle run in this session from a fresh run dir.",
-        "DMI 7.68 -> 7.97 (+0.29, all of it newly tracked entities/measures); SMI -0.77 -> -0.63 (+0.15). Report: demand outrunning supply, shortage pressure forming; binding constraint high-bandwidth memory and packaging slots.",
-        "Gather: 10 documents in 1 round (daily cap maxDocuments=10 reached in round 1, 3 web-gatherers x 4/3/3 budget), 1 primary (blogs.nvidia.com energy-management alliance post 09-16) / 9 secondary. L1 dropped 0 known. HuggingNews latest (ai-compute-chips) + 12 detail fetches (12 ok / 0 failed) supplied the leads; every lead pointed at x.com/t.co posts and was chased to a readable publisher page. pursuedDespiteAge 0 (every kept page dated 2026-09-14..09-17). Licensed source fetched: semianalysis.com (Rubin NVL72 agentic-inference newsletter post, blob 04). Leads NOT chased at the cap (skipped[]): Intel ~50% CPU-order fulfillment (stale Gelsinger attribution in the search snippet, needs a fresh chase), Apple AI server on NVLink Fusion, Nebius Madrid '4 million H100-equivalent' target (no primary found), cross-provider GPU marketplace price snapshot search, EDGAR 8-K query for NVDA/AMD/INTC 09-10..09-17, and AMD (gatherer found no new AMD release since 09-10 and wrote nothing rather than pad).",
-        "Extraction: 27 findings, 0 dropped; UNREGISTERED-ENTITY 10 (Anthropic, Rum Group, Arm, Blackstone/Alphabet/Crux AI, CoreWeave/NVIDIA deployed capacity, Huawei/NVIDIA, NVIDIA/CoreWeave Rubin NVL72 perf-per-cost, NVIDIA/Google/Emerald AI, Nebius x2, SK Hynix/Intel). L2 new 19 / update 0 / duplicate 8. Corpus merged 590 (571 aged, 165 faded); 8 intra-batch duplicates dropped by the corpus merge (pymnts, investing.com, semianalysis, kucoin, nebius x3, hothardware).",
-        "Judge: all 3 samples clean on the first pass (no voice-lint, no sufficiency lines, no bypass). Scorecard v12 written on pipeline attempt 1.",
-        "Thesis: clean on attempt 1: 119 judged, 119 applied (57 strengthened / 53 reaffirmed / 8 weakened / 1 adjusted), 0 deferred, 0 retired, 2 new provisional theses proposed (the-leading-vendor-prepays-years-of-memory-supply, china-sets-a-state-target-to-serve-most-of-its-own-chip-demand).",
-        "Implication: clean on attempt 1, 8 lines written to store/implications/chips.merchant-gpu/2026-09.json. The dispatch instruction carried the same reminder as 09-13/09-16 that an uncited '75 percent' gross-margin figure must not be repeated from memory; the emitted prompt file was not touched.",
-        "Narrator: clean on attempt 1: story store/chips.merchant-gpu/story/2026-09-17.json. issues-update assessed 5 / notAssessed 0 / resolved [].",
-        "Citation audit: 20 claims, 0 flagged, 0 skipped - CLEAN (third clean audit in a row). Audit record store/chips.merchant-gpu/audit/2026-09-17.json.",
+        "Scheduled fire at 11:42 local 2026-09-26 (this instance; capturedAt 2026-09-26T18:44:23Z). Orientation: main == origin/main == 7f77f8b, tree clean, no work/daily-2026-09-26 claim, day-key 09-26 free, only this claude.exe alive. Full cycle run in this session from a fresh run dir.",
+        "WALL-CLOCK STALL (the recurring pattern, now inside one session): the session was interrupted by the harness ('Request interrupted by user for tool use') on four subagent dispatches - extraction (09-26), narrator (09-26 -> resumed 09-28 01:31Z), and chart-research bullets 1+2 (09-28 -> resumed 09-29 21:39Z; the bullet-3 agent reported ~44 h of duration). Each interrupted brain dispatch was retried once and succeeded; the deterministic steps between them ran normally. The 09-27 18:31 and 18:37 fires found this instance alive with the uncommitted v13 tree, stopped correctly and committed only HANDOFF notes (42b1a24, 727f94b). Commit landed 2026-09-29.",
+        "DMI 7.97 -> 8.63 (+0.66, all of it newly tracked entities/measures); SMI -0.63 -> -0.96 (-0.33). Report: demand outrunning supply, shortage pressure forming; binding constraint high-bandwidth memory allocation.",
+        "Gather: 10 documents in 2 rounds (round 1: 3 web-gatherers x 4/3/3 budget -> 9 blobs; round 2: 1 web-gatherer x 1 -> the last slot; daily cap maxDocuments=10 reached), 1 primary (sec.gov Akamai 8-K exhibit 99.1, the $11.6B Anthropic agreement) / 9 secondary. L1 dropped 0 known. HuggingNews latest (ai-compute-chips, 30 stories over 09-23..09-25) + 15 detail fetches (15 ok / 0 failed) supplied the leads; every lead pointed at x.com/t.co posts and was chased to a readable publisher/official page. pursuedDespiteAge 0 (every kept page dated 2026-09-23..09-26). Licensed sources fetched: none. Leads NOT chased at the cap (skipped[]): Firmus $10B NVIDIA-chip raise pre-IPO, Anthropic 1 GW direct lease, Alibaba 20 GW cloud plan, Texas 470 GW grid audit, SemiAnalysis ClusterMAX rankings, Nscale IPO prospectus, Musk 110k GB200 fiber-switch follow-up. NVIDIA/AMD/Intel newsrooms and EDGAR 8-Ks: nothing new in the 09-18..09-26 window bearing on GPU demand/supply (gatherer wrote nothing rather than pad).",
+        "One gatherer (slice B) reported seeing an 'MCP Server Instructions / Claude Docs' block in its tool-result stream and ignored it as suspected injection. That block is the harness's own connector text, not page content; no action was taken by the gatherer and none is needed, but it is recorded so the F88 wall's behavior is visible.",
+        "Extraction: 25 findings, 0 dropped; UNREGISTERED-ENTITY 8 (Akamai/Anthropic; the top-5 hyperscalers + Goldman; Google TPU v7 / GB200 / Kimi K3 / Inferact; Nebius; Nscale/NVIDIA/Third Point/Goldman placement agent; Oracle/Blue Owl/Project Jupiter/OpenAI/SoftBank; Supermicro/NVIDIA; xAI/SpaceXAI Colossus). L2 new 21 / update 0 / duplicate 4. Corpus merged 611 (590 aged, 165 faded); 4 intra-batch duplicates dropped by the corpus merge (sec.gov x2 corroborating techcrunch, pymnts, inferact).",
+        "Judge: all 3 samples clean on the first pass (no voice-lint, no sufficiency lines, no bypass). Scorecard v13 written on pipeline attempt 1.",
+        "Thesis: clean on attempt 1: 121 judged, 118 applied (67 strengthened / 46 reaffirmed / 7 weakened / 1 broken), 3 deferred as secondary-only reversals with 2 distinct publishers < 3 (pricing-power-persistence, the-rental-premium-moves-to-the-newest-hardware [the broken verdict, left unapplied], prior-generation-systems-stay-in-service-on-price), 0 retired, 2 new provisional theses proposed (compute-contracts-start-carrying-delay-and-default-clauses, buyers-pre-buy-memory-into-their-own-capital-budgets).",
+        "Implication: clean on attempt 1, 8 lines written to store/implications/chips.merchant-gpu/2026-09.json. The dispatch instruction carried the same reminder as 09-13..09-17 that an uncited '75 percent' gross-margin figure must not be repeated from memory; the emitted prompt file was not touched.",
+        "Narrator: clean on attempt 1 (the first dispatch was interrupted by the harness before any file was written; the retry wrote the answer): story store/chips.merchant-gpu/story/2026-09-26.json. issues-update assessed 5 / notAssessed 0 / resolved [constraint-hbm4-memory-allocation-per-accelerator].",
+        "Citation audit: 20 claims, 0 flagged, 0 skipped - CLEAN (fourth clean audit in a row). Audit record store/chips.merchant-gpu/audit/2026-09-26.json.",
         "issues-open printed opened [constraint-high-bandwidth-memory-and-server-memory] / open 5.",
-        "chart-research: 3 accepted + verified, 0 rejected (Nebius on-demand GPU hourly rental price after the 10-01 increase; CoreWeave MLPerf Training v6.0 DeepSeek-V3 671B training time by GB300 NVL72 cluster size; GPU-chip-backed debt facility size by deal). Survivors in store/chips.merchant-gpu/research-series/.",
-        "chart-fetch (--as-of 2026-09-17): fetched nothing, gpuSpotPrice skipped (not due), staleCalendar [amdDataCenterRevenue, nvdaDataCenterRevenue] unchanged - manifests/chips.merchant-gpu.json still needs fresh next-print dates for both vendors.",
-        "series-refresh: 1 gap (tokenEconomics 2026-08); the reader returned an empty envelope (undisclosed basket, as every prior cycle). Its first envelope carried an extra top-level 'notes' key that this coordinator's dispatch wording had asked for; the strict gate rejected the envelope (extras forbidden), the coordinator stripped that key (candidates list unchanged and empty; raw copy kept at series-candidates-tokenEconomics.raw.json) and re-ingested: written [] / rejected [] / alreadyPresent [].",
-        "F135 run-marker for v12 records storyDate 2026-09-17, wikiSeq 862; WHAT MOVED printed vs the 2026-09-16 run (8 NEW, 2 folded).",
+        "chart-research: 3 prompts emitted; bullets 1 (Nebius price ladder) and 2 (Goldman hyperscaler capex) had their research dispatches interrupted by the harness and were NOT re-dispatched (skipped per the skill's failed-dispatch rule, and to avoid another multi-day stall); bullet 3 answered, 1 accepted + verified, 0 rejected (projected capacity of OpenAI Stargate US data center sites). Survivor in store/chips.merchant-gpu/research-series/.",
+        "Report: the first render was refused by the acronym gate (unknown all-caps tokens K3, LLC above the appendix divider - 'Kimi K3' is Moonshot's model name, 'LLC' the placement agent's legal suffix, both from entity labels). Both were added to registry/acronyms.json 'allowed' per the TCS/MLCC precedent (09-06 274e8cf) and the report re-rendered clean.",
+        "F135 run-marker for v13 records wikiSeq 891 and storyDate 2026-09-29 - the render date, because the report ran after the stall - while the story artifact and this run's capturedAt are 2026-09-26. The ledger is append-only and idempotent; the mismatch is recorded here and in HANDOFF, not edited. WHAT MOVED printed vs the 2026-09-17 run (8 NEW, 1 MOVED).",
+        "chart-fetch (--as-of 2026-09-26): fetched nothing, gpuSpotPrice skipped (not due), staleCalendar [amdDataCenterRevenue, nvdaDataCenterRevenue] unchanged - manifests/chips.merchant-gpu.json still needs fresh next-print dates for both vendors.",
+        "series-refresh: 1 gap (tokenEconomics 2026-08); the reader returned an empty envelope (undisclosed basket, as every prior cycle): written [] / rejected [] / alreadyPresent [].",
         "Two pre-existing tests in tests/test_handoff_integrity.py fail on the COMMITTED HANDOFF.md wording (since 09-01) - unrelated to store/; left for an interactive session."
       ],
       "gather": {
@@ -56,58 +59,58 @@
         "dropped": [],
         "droppedKnown": 0,
         "droppedKnownDetail": [],
-        "rounds": 1,
-        "cap": "maxDocuments=10 (daily cap) reached in round 1; maxSubagentsPerRound=3 (budgets 4/3/3)",
+        "rounds": 2,
+        "cap": "maxDocuments=10 (daily cap) reached in round 2; maxSubagentsPerRound=3 (round-1 budgets 4/3/3, round-2 budget 1)",
         "skipped": [
-          "lead 'Intel fulfills ~50% of CPU orders on AI-inference surge' not chased: maxDocuments reached (search snippet carried a stale Gelsinger attribution; re-chase fresh)",
-          "lead 'Apple AI server on NVIDIA NVLink Fusion (The Information/Bloomberg)' not chased: maxDocuments reached",
-          "lead 'Nebius Madrid hub / 4 million H100-equivalent GPUs' not kept: no primary or readable restatement of the figure found (only an 18 MW Madrid capacity item)",
-          "slice 'cross-provider H100/B200 marketplace rental price snapshot' not run: gatherer budget spent on the four dispatched leads",
-          "slice 'EDGAR 8-K query NVDA/AMD/INTC 2026-09-10..09-17' not run: gatherer budget exhausted",
-          "slice 'AMD headline/forward since 09-10': nothing material found (only analyst-rating items); no blob written",
+          "lead 'Firmus pursues $10B for NVIDIA chips before $5B IPO (Bloomberg 09-23)' not chased: maxDocuments reached",
+          "lead 'Anthropic negotiates 1 GW direct lease for $40B data center project' not chased: maxDocuments reached",
+          "lead 'Alibaba plans 20 GW global cloud capacity' not chased: maxDocuments reached",
+          "lead 'Texas Gov. Abbott halts 470 GW of data center projects for grid audit' not chased: maxDocuments reached",
+          "lead 'Nebius and CoreWeave top SemiAnalysis ClusterMAX rankings' not fetched: licensed source, budget spent",
+          "lead 'Nscale IPO prospectus / SEC filing' not chased: maxDocuments reached",
+          "lead 'Musk follow-up on 110k GB200 fiber-cable switch (elonmuskarchive.org)' not chased: maxDocuments reached",
+          "slice 'NVIDIA/AMD/Intel official newsrooms + EDGAR 8-K 09-18..09-26': nothing new bearing on GPU demand/supply/pricing/export controls; no blob written (AMD items found were July 2026)",
+          "Bloomberg originals (Goldman capex note, Firmus, Alibaba, Anthropic lease) not fetched: paywalled; readable restatements used where kept",
+          "x.com/elonmusk/status/2103329761690865846 direct fetch failed (HTTP 402); Tom's Hardware restatement kept instead",
           "last30days discovery (gather-category 2b) not run: cap already filled by HuggingNews leads + slices"
         ],
         "pursuedDespiteAge": [],
         "huggingnewsFallback": [],
-        "licensedSourcesFetched": [
-          "semianalysis.com"
-        ],
+        "licensedSourcesFetched": [],
         "blobsDropped": []
       },
       "corpus": {
-        "storeInWindow": 571,
+        "storeInWindow": 590,
         "faded": 165,
-        "freshNew": 19,
+        "freshNew": 21,
         "freshUpdate": 0,
-        "freshDuplicate": 8,
-        "merged": 590,
+        "freshDuplicate": 4,
+        "merged": 611,
         "artifacts": [
-          "work/daily-2026-09-17/corpus-coverage.json",
-          "work/daily-2026-09-17/corpus-findings.json",
-          "work/daily-2026-09-17/deduped-fresh.json",
-          "work/daily-2026-09-17/corpus-report.json",
-          "work/daily-2026-09-17/corpus-pipeline-report.json"
+          "work/daily-2026-09-26/corpus-coverage.json",
+          "work/daily-2026-09-26/corpus-findings.json",
+          "work/daily-2026-09-26/deduped-fresh.json",
+          "work/daily-2026-09-26/corpus-report.json",
+          "work/daily-2026-09-26/corpus-pipeline-report.json"
         ]
       },
       "dedupDaily": {
-        "new": 19,
+        "new": 21,
         "update": 0,
-        "duplicate": 8,
-        "report": "store/chips.merchant-gpu/dedup-2026-09-17.json"
+        "duplicate": 4,
+        "report": "store/chips.merchant-gpu/dedup-2026-09-26.json"
       },
       "unregisteredEntities": {
-        "count": 10,
+        "count": 8,
         "names": [
-          "Anthropic, Rum Group",
-          "Arm",
-          "Blackstone, Alphabet (Google), Crux AI",
-          "CoreWeave / NVIDIA (deployed GPU capacity)",
-          "Huawei, NVIDIA",
-          "NVIDIA / CoreWeave (Rubin NVL72 vs GB300 performance-per-cost)",
-          "NVIDIA, Google, Emerald AI",
-          "Nebius (NVIDIA GPU rental/spot pricing)",
-          "Nebius (NVIDIA GPU supply chain)",
-          "SK Hynix, Intel"
+          "Akamai Technologies, Anthropic",
+          "Amazon, Alphabet, Microsoft, Oracle, Meta (top-5 US hyperscalers); Goldman Sachs (forecaster)",
+          "Google TPU v7 Ironwood, Nvidia GB200, Moonshot AI Kimi K3, Inferact",
+          "Nebius",
+          "Nscale Limited (AI neocloud); NVIDIA; Third Point; Goldman Sachs & Co. LLC (placement agent)",
+          "Oracle; Blue Owl Capital (developer unit); Project Jupiter (New Mexico Stargate AI data center campus); OpenAI; SoftBank",
+          "Supermicro, NVIDIA",
+          "xAI / SpaceXAI (Colossus 1 and Colossus 2 data centers)"
         ]
       },
       "webReach": {
@@ -142,21 +145,21 @@
         }
       },
       "answers": {
-        "extract": "work/daily-2026-09-17/extract-answer.json",
-        "judge": "work/daily-2026-09-17/judge-answer.json",
-        "thesis": "work/daily-2026-09-17/thesis-answer.json",
-        "implication": "work/daily-2026-09-17/implication-answer.json",
-        "narrator": "work/daily-2026-09-17/narrator-answer.json"
+        "extract": "work/daily-2026-09-26/extract-answer.json",
+        "judge": "work/daily-2026-09-26/judge-answer.json",
+        "thesis": "work/daily-2026-09-26/thesis-answer.json",
+        "implication": "work/daily-2026-09-26/implication-answer.json",
+        "narrator": "work/daily-2026-09-26/narrator-answer.json"
       },
       "category": "done",
-      "thesis": "done (clean on attempt 1: 119 judged, 119 applied - 57 strengthened / 53 reaffirmed / 8 weakened / 1 adjusted; 2 new provisional theses proposed)",
+      "thesis": "done (clean on attempt 1: 121 judged, 118 applied - 67 strengthened / 46 reaffirmed / 7 weakened / 1 broken; 3 deferred; 2 new provisional theses proposed)",
       "implication": "done (clean on attempt 1; 8 lines)",
-      "narrator": "done (clean on attempt 1)",
+      "narrator": "done (clean on attempt 1; first dispatch harness-interrupted before writing, retried once)",
       "issues-open": "done (opened [constraint-high-bandwidth-memory-and-server-memory], open 5)",
-      "issues-update": "done (assessed 5, notAssessed 0, resolved [])",
+      "issues-update": "done (assessed 5, notAssessed 0, resolved [constraint-hbm4-memory-allocation-per-accelerator])",
       "citation-audit": "clean (claims 20, flagged 0, skipped 0)",
-      "write-back": "done (19 findings routed to 10 pages; wiki-lint exit 0)",
-      "coverage": "done (store/chips.merchant-gpu/coverage-2026-09.json: 11 gaps - 10 source, 1 indicator, 10 required, 0 waived)",
+      "write-back": "done (21 findings routed to 9 pages; wiki-lint exit 0)",
+      "coverage": "done (store/chips.merchant-gpu/coverage-2026-09.json: 8 gaps - 7 source, 1 indicator, 7 required, 0 waived)",
       "stageStatuses": {
         "category": "done",
         "thesis": "done",
@@ -169,7 +172,7 @@
         "main": "deferred"
       },
       "gates": {
-        "voiceLint": "judge: all 3 samples clean first pass. thesis: clean first pass. implication: clean first pass. narrator: clean first pass.",
+        "voiceLint": "judge: all 3 samples clean first pass. thesis: clean first pass. implication: clean first pass. narrator: clean first pass. report: acronym gate refused K3/LLC once; allowlisted, re-rendered clean.",
         "sufficiency": "clean",
         "bypasses": 0,
         "judgeRetry": 0,
@@ -191,13 +194,13 @@
       "Lambda": 0
     },
     "failed": [],
-    "snapshot": "gpu_agent/data/leasing_snapshots/gpu_prices-2026-09-17.csv",
-    "wallSeconds": 51,
-    "note": "Lambda returned 0 rows but reported no failure (same as every prior pull)."
+    "snapshot": "gpu_agent/data/leasing_snapshots/gpu_prices-2026-09-26.csv",
+    "wallSeconds": 40,
+    "note": "Lambda returned 0 rows but reported no failure (same as every prior pull). Pulled on 2026-09-28 01:3xZ (after the first stall), stamped for the cycle day 2026-09-26."
   },
   "priceSync": "done (written gpuSpotPrice 12 / gpuRentalOnDemand 2 / gpuRentalSpot 2 / gpuRental1yr 17; warning: stale price folder, newest hardware price data 260602 - expected)",
   "seriesRefresh": {
-    "asOf": "2026-09-17",
+    "asOf": "2026-09-26",
     "gaps": [
       "tokenEconomics 2026-08"
     ],
@@ -209,9 +212,8 @@
       }
     },
     "candidates": {
-      "tokenEconomics": "work/daily-2026-09-17/series-candidates-tokenEconomics.json"
-    },
-    "envelopeRepair": "tokenEconomics: extra top-level 'notes' key stripped by the coordinator after a gate reject; candidates [] unchanged; raw copy at series-candidates-tokenEconomics.raw.json"
+      "tokenEconomics": "work/daily-2026-09-26/series-candidates-tokenEconomics.json"
+    }
   },
   "v2Shadow": "stamped",
   "chartFetch": {
@@ -231,22 +233,26 @@
   },
   "chartResearch": {
     "accepted": [
-      "store\\chips.merchant-gpu\\research-series\\2026-09-17-nebius-on-demand-gpu-hourly-rental-price-after-october-1-2026-increase.json",
-      "store\\chips.merchant-gpu\\research-series\\2026-09-17-coreweave-mlperf-training-v6-0-deepseek-v3-671b-training-time-by-gpu-cluster-size-nvidia-gb300-nvl72.json",
-      "store\\chips.merchant-gpu\\research-series\\2026-09-17-gpu-chip-backed-debt-facility-size-by-deal.json"
+      "store\\chips.merchant-gpu\\research-series\\2026-09-26-projected-capacity-of-openai-stargate-us-data-center-sites.json"
     ],
     "rejected": [],
     "missing": [],
-    "warnings": []
+    "warnings": [],
+    "skippedDispatch": [
+      "bullet-1 (harness-interrupted dispatch, not re-dispatched)",
+      "bullet-2 (harness-interrupted dispatch, not re-dispatched)"
+    ]
   },
   "dashboardJson": "done (site\\chips.merchant-gpu\\data\\dashboard.json)",
-  "runMarker": "F135 marker appended: asOf 2026-09 v12, wikiSeq 862, storyDate 2026-09-17; WHAT MOVED printed vs the 2026-09-16 run",
+  "runMarker": "F135 marker appended: asOf 2026-09 v13, wikiSeq 891, storyDate 2026-09-29 (render date after the stall; story artifact is 2026-09-26); WHAT MOVED printed vs the 2026-09-17 run",
   "deviations": [
-    "AFK-default: last30days discovery (gather-category step 2b) was NOT run this cycle. The HuggingNews leads plus the three slices already filled all 10 daily-cap slots in round 1, so the extra discovery pass would have had no budget to spend. Same treatment as the 09-06..09-16 records. Reversible: nothing to undo.",
-    "AFK-default: the tokenEconomics series envelope was repaired by the coordinator (the extra top-level 'notes' key that this coordinator's own dispatch wording had requested was removed; the candidates list was empty before and after). No number was added, changed or removed; the reader's raw file is kept beside it. Reversible: nothing landed in the store either way.",
-    "AFK-default: the implication brain's dispatch instruction carried a reminder that the '75 percent' gross-margin figure flagged on 09-09/09-10 was uncited and must not be repeated from memory, plus a no-'leverage'/no-all-caps-names/no-undefined-acronyms caution on the judge, thesis, implication and narrator dispatches. Coordinator wording around the dispatch, like a gate-retry note; the emitted prompt files and hashes were untouched. Reversible: nothing to undo (every seam passed first time and the audit came back clean).",
-    "Extraction was dispatched as the sealed 'brain' agent type (Read on its own prompt file + one Write) rather than a literally tool-less inline dispatch, matching the other four seams (mechanics 1) and the 09-06..09-16 layout. The brain still cannot reach outside its prompt. No prompt text or hash changed.",
-    "Gatherers, the series reader and the chart-research agents were dispatched on Sonnet via the web-gatherer type (the Opus rule binds brain seams only) - same as prior cycles; all five brain seams ran on Opus.",
+    "AFK-default: registry/acronyms.json 'allowed' gained K3 (Moonshot AI's Kimi K3 model name) and LLC (legal suffix in an entity label) so the daily report could render; the gate had refused the brief on these two tokens. Same recipe as TCS on 09-06 (274e8cf) and the F120 allowlist. Reversible: remove the two entries and the next render refuses again; no run data changed.",
+    "AFK-default: chart-research bullets 1 and 2 were NOT re-dispatched after the harness interrupted their research agents (no answer files; the skill treats a failed dispatch as skipped). Chosen to avoid a further multi-day stall on subagent dispatches in this session. Reversible: re-run 'chart-research emit/accept' for 2026-09-26 in an interactive session.",
+    "AFK-default: last30days discovery (gather-category step 2b) was NOT run this cycle. The HuggingNews leads plus the three slices filled all 10 daily-cap slots by round 2. Same treatment as the 09-06..09-17 records. Reversible: nothing to undo.",
+    "AFK-default: the implication brain's dispatch instruction carried a reminder that the '75 percent' gross-margin figure flagged on 09-09/09-10 was uncited and must not be repeated from memory, plus a no-'leverage'/no-all-caps-names/no-undefined-acronyms caution on the judge, thesis, implication and narrator dispatches. Coordinator wording around the dispatch; the emitted prompt files and hashes were untouched. Reversible: nothing to undo (every seam passed first time and the audit came back clean).",
+    "Interrupted brain dispatches (extraction once, narrator once) were retried with the identical prompt; no answer file existed before the retry, so nothing was overwritten. The store carries exactly one answer per seam.",
+    "Extraction was dispatched as the sealed 'brain' agent type (Read on its own prompt file + one Write) rather than a literally tool-less inline dispatch, matching the other four seams (mechanics 1) and the 09-06..09-17 layout. No prompt text or hash changed.",
+    "Gatherers, the series reader and the chart-research agent were dispatched on the web-gatherer type's default model (the Opus rule binds brain seams only) - same as prior cycles; all five brain seams ran on Opus.",
     "Judge answer assembly: the coordinator's assembler accepts either a JSON string literal or a bare JSON object from each brain sample and serializes the object form to the string form the CLI consumes; all three samples this run were string literals; no rating or text was altered."
   ]
 }

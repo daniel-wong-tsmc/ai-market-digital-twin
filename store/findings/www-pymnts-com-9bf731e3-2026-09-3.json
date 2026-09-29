@@ -1,0 +1,44 @@
+{
+  "id": "www-pymnts-com-9bf731e3-2026-09-3",
+  "statement": "Coverage of the same Goldman note reports hyperscalers would need roughly $300 billion of annual AI revenue to break even on these outlays, and that more than a third of 2027 AI investment is expected to be debt-funded.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "Spending that leans on borrowing is far more sensitive to credit conditions and to whether AI revenue actually shows up, which is where a demand air pocket would start.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "If over a third of the build is debt-financed against a $300 billion revenue break-even, tighter credit or slower AI revenue would force capex cuts that hit accelerator orders first."
+  },
+  "evidence": [
+    {
+      "source": "PYMNTS",
+      "url": "https://www.pymnts.com/big-tech/2026/goldman-sachs-projects-big-tech-ai-infrastructure-spending-to-hit-1-2-trillion-in-2027/",
+      "date": "2026-09-25",
+      "excerpt": "the hyperscalers would need annual AI revenues of roughly $300 billion to break even on these outlays, and that more than a third of 2027 AI investment is expected to be debt-funded",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary summary of other outlets' coverage of the same note, read inside a single document; no credit terms or current spreads given."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Amazon, Alphabet, Microsoft, Oracle, Meta (top-5 US hyperscalers); Goldman Sachs (forecaster)",
+  "observedAt": "2026-09-25",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

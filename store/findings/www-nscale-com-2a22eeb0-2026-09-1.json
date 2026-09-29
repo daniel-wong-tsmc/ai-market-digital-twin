@@ -1,0 +1,54 @@
+{
+  "id": "www-nscale-com-2a22eeb0-2026-09-1",
+  "statement": "Nscale raised $3.36 billion in convertible loan notes ahead of a planned NYSE IPO, made up of a $2.36 billion tranche closed immediately plus a $1 billion NVIDIA commitment expected to fund in mid-November 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 3.36,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Neoclouds are the marginal buyers of accelerators, so whether they can raise multi-billion sums decides how much GPU demand actually gets funded.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Fresh pre-IPO capital earmarked for data center expansion funds accelerator and facility purchases that would otherwise be capacity-constrained by financing."
+  },
+  "evidence": [
+    {
+      "source": "Nscale (official press release)",
+      "url": "https://www.nscale.com/press-releases/pre-ipo-convertible-financing",
+      "date": "2026-09-25",
+      "excerpt": "Nscale announced it raised $3.36 billion via convertible loan notes ahead of its planned NYSE IPO. The raise consists of an initial $2.36 billion tranche closed immediately, plus an additional $1 billion commitment from NVIDIA expected to fund in mid-November 2026.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Nscale (official press release)",
+      "url": "https://www.nscale.com/press-releases/pre-ipo-convertible-financing",
+      "date": "2026-09-25",
+      "excerpt": "Proceeds are earmarked for accelerating global data center expansion and supporting AI cloud services demand.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company press release classified as secondary rather than a filing; amounts are self-reported and the $1 billion NVIDIA tranche has not yet funded."
+  },
+  "dispersion": "$2.36B funded now; $1B expected mid-November 2026; a separate ~$3B IPO raise is planned.",
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Nscale Limited (AI neocloud); NVIDIA; Third Point; Goldman Sachs & Co. LLC (placement agent)",
+  "observedAt": "2026-09-25",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

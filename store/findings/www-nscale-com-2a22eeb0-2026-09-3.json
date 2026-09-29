@@ -1,0 +1,49 @@
+{
+  "id": "www-nscale-com-2a22eeb0-2026-09-3",
+  "statement": "NVIDIA is itself an investor in the Nscale raise, committing $1 billion that converts into non-voting shares at IPO.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "When the chip supplier helps fund its own customer, reported demand and supplier support become harder to separate.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Supplier participation in a customer's capital structure ties that customer's accelerator purchases partly to vendor financing rather than purely independent demand."
+  },
+  "evidence": [
+    {
+      "source": "Nscale (official press release)",
+      "url": "https://www.nscale.com/press-releases/pre-ipo-convertible-financing",
+      "date": "2026-09-25",
+      "excerpt": "plus an additional $1 billion commitment from NVIDIA expected to fund in mid-November 2026",
+      "tier": "secondary"
+    },
+    {
+      "source": "Nscale (official press release)",
+      "url": "https://www.nscale.com/press-releases/pre-ipo-convertible-financing",
+      "date": "2026-09-25",
+      "excerpt": "The notes convert automatically into ordinary shares (or non-voting shares in NVIDIA's case) upon completion of Nscale's IPO.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Company press release; no disclosure of any purchase commitments linked to the investment."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Nscale Limited (AI neocloud); NVIDIA; Third Point; Goldman Sachs & Co. LLC (placement agent)",
+  "observedAt": "2026-09-25",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

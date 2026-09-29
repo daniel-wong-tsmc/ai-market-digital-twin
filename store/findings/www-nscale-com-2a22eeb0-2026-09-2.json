@@ -1,0 +1,47 @@
+{
+  "id": "www-nscale-com-2a22eeb0-2026-09-2",
+  "statement": "Nscale states its total contracted value is over $103 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 103.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Contracted value at a single neocloud shows how much forward AI compute demand is already under signature rather than merely forecast.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.networking-fabric"
+    ],
+    "direction": "positive",
+    "mechanism": "A large contracted book obliges the operator to deploy capacity on a schedule, pulling accelerator, fabric and facility purchases forward."
+  },
+  "evidence": [
+    {
+      "source": "Nscale (official press release)",
+      "url": "https://www.nscale.com/press-releases/pre-ipo-convertible-financing",
+      "date": "2026-09-25",
+      "excerpt": "Nscale states its total contracted value (TCV) is 'over $103 billion.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Self-reported company figure in a press release; TCV definition, counterparties and timing are not disclosed in the document."
+  },
+  "dispersion": "Stated as over $103 billion, so 103 is a floor.",
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "Nscale Limited (AI neocloud); NVIDIA; Third Point; Goldman Sachs & Co. LLC (placement agent)",
+  "observedAt": "2026-09-25",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

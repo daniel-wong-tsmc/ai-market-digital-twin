@@ -1,0 +1,209 @@
+{
+  "asOf": "2026-09",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "techcrunch-com-2913d505-2026-09-2",
+      "entity": "Akamai Technologies, Anthropic",
+      "indicatorId": "S10",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "techcrunch-com-2913d505-2026-09-3",
+      "entity": "Akamai Technologies, Anthropic",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-sec-gov-a4a1dfa4-2026-09-2",
+      "entity": "Akamai Technologies, Anthropic",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "techcrunch-com-2913d505-2026-09-1",
+      "entity": "Akamai Technologies, Anthropic",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-pymnts-com-9bf731e3-2026-09-1",
+      "entity": "Amazon, Alphabet, Microsoft, Oracle, Meta (top-5 US hyperscalers); Goldman Sachs (forecaster)",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-pymnts-com-9bf731e3-2026-09-3",
+      "entity": "Amazon, Alphabet, Microsoft, Oracle, Meta (top-5 US hyperscalers); Goldman Sachs (forecaster)",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "inferact-ai-ef541a77-2026-09-1",
+      "entity": "Google TPU v7 Ironwood, Nvidia GB200, Moonshot AI Kimi K3, Inferact",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "nebius-com-3bbd8084-2026-09-1",
+      "entity": "Nebius",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "nebius-com-3bbd8084-2026-09-2",
+      "entity": "Nebius",
+      "indicatorId": "S10",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-nscale-com-2a22eeb0-2026-09-3",
+      "entity": "Nscale Limited (AI neocloud); NVIDIA; Third Point; Goldman Sachs & Co. LLC (placement agent)",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-nscale-com-2a22eeb0-2026-09-1",
+      "entity": "Nscale Limited (AI neocloud); NVIDIA; Third Point; Goldman Sachs & Co. LLC (placement agent)",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-nscale-com-2a22eeb0-2026-09-2",
+      "entity": "Nscale Limited (AI neocloud); NVIDIA; Third Point; Goldman Sachs & Co. LLC (placement agent)",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "techcrunch-com-de27e2eb-2026-09-1",
+      "entity": "Oracle; Blue Owl Capital (developer unit); Project Jupiter (New Mexico Stargate AI data center campus); OpenAI; SoftBank",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "techcrunch-com-de27e2eb-2026-09-3",
+      "entity": "Oracle; Blue Owl Capital (developer unit); Project Jupiter (New Mexico Stargate AI data center campus); OpenAI; SoftBank",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "techcrunch-com-de27e2eb-2026-09-2",
+      "entity": "Oracle; Blue Owl Capital (developer unit); Project Jupiter (New Mexico Stargate AI data center campus); OpenAI; SoftBank",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-supermicro-com-9a2c110b-2026-09-1",
+      "entity": "Supermicro, NVIDIA",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-supermicro-com-9a2c110b-2026-09-2",
+      "entity": "Supermicro, NVIDIA",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-digitimes-com-2d20aaa6-2026-09-1",
+      "entity": "tsmc",
+      "indicatorId": "grossMargin",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-digitimes-com-2d20aaa6-2026-09-2",
+      "entity": "tsmc",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-tomshardware-com-c7417741-2026-09-1",
+      "entity": "xAI / SpaceXAI (Colossus 1 and Colossus 2 data centers)",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-tomshardware-com-c7417741-2026-09-2",
+      "entity": "xAI / SpaceXAI (Colossus 1 and Colossus 2 data centers)",
+      "indicatorId": "upstreamLeadTimes",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [],
+  "findingsDuplicate": [
+    {
+      "findingId": "www-sec-gov-a4a1dfa4-2026-09-3",
+      "entity": "Akamai Technologies, Anthropic",
+      "indicatorId": "S10",
+      "verdict": "duplicate",
+      "priorFindingId": "techcrunch-com-2913d505-2026-09-2",
+      "detail": "corroborates techcrunch-com-2913d505-2026-09-2; evidence merged"
+    },
+    {
+      "findingId": "www-sec-gov-a4a1dfa4-2026-09-1",
+      "entity": "Akamai Technologies, Anthropic",
+      "indicatorId": "rpoBacklog",
+      "verdict": "duplicate",
+      "priorFindingId": "techcrunch-com-2913d505-2026-09-1",
+      "detail": "corroborates techcrunch-com-2913d505-2026-09-1; evidence merged"
+    },
+    {
+      "findingId": "www-pymnts-com-9bf731e3-2026-09-2",
+      "entity": "Amazon, Alphabet, Microsoft, Oracle, Meta (top-5 US hyperscalers); Goldman Sachs (forecaster)",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "inferact-ai-ef541a77-2026-09-2",
+      "entity": "Google TPU v7 Ironwood, Nvidia GB200, Moonshot AI Kimi K3, Inferact",
+      "indicatorId": "S9",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

@@ -1,19 +1,20 @@
 {
- "asOf": "2026-09-17",
+ "asOf": "2026-09-26",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 21,
+   "checkCount": 22,
    "id": "dim-bottleneck",
-   "improvedStreak": 1,
+   "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-17",
+    "assessedAsOf": "2026-09-26",
     "claimFindingIds": [
-     "wf-coreweave-com-c3bb5c08-2026-09-2",
-     "newsletter-semianalysis-com-f8834642-2026-09-2"
+     "techcrunch-com-de27e2eb-2026-09-1",
+     "techcrunch-com-de27e2eb-2026-09-2",
+     "nebius-com-3bbd8084-2026-09-1"
     ],
-    "reasoning": "First measured results on the new racks show 10 times more work per megawatt than the prior generation, and an independent count puts Rubin at 59.4 million tokens a second per megawatt against 28.5 million. Power is a hard limit, so that is real added capacity.",
-    "status": "improved"
+    "reasoning": "A named 2.45-gigawatt site now risks missing its 2028 opening on a permit pushed to February 1, 2027, and rental prices rise again from October 1 - the limit has moved to buildings and power without the chip shortage easing.",
+    "status": "worsened"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -24,20 +25,19 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 12
+   "worsenedCount": 13
   },
   {
-   "checkCount": 21,
+   "checkCount": 22,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-17",
+    "assessedAsOf": "2026-09-26",
     "claimFindingIds": [
-     "www-investing-com-7f27fbd9-2026-09-1",
-     "www-investing-com-2e440991-2026-09-2",
-     "www-investing-com-2e81a8cf-2026-09-2"
+     "inferact-ai-ef541a77-2026-09-1",
+     "techcrunch-com-2913d505-2026-09-3"
     ],
-    "reasoning": "Huawei pulled its next accelerator forward three quarters to the first quarter of 2027, Arm says demand for its new data-center processor is twice its $1 billion target, and $22 billion of new bank money is going into Google's own accelerators rather than merchant chips.",
+    "reasoning": "An independent test put sixteen of Google's own chips at 700 tokens a second against 452 on sixteen Nvidia GB200 chips, and the new Anthropic-Akamai deal is framed as a bet on ordinary server chips rather than GPU training.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -49,19 +49,20 @@
     "kind": "dimension-weak",
     "label": "moat"
    },
-   "worsenedCount": 11
+   "worsenedCount": 12
   },
   {
-   "checkCount": 20,
+   "checkCount": 21,
    "id": "constraint-stacked-memory-and-server-dram",
-   "improvedStreak": 3,
+   "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-17",
+    "assessedAsOf": "2026-09-26",
     "claimFindingIds": [
-     "hothardware-com-eac7ca90-2026-09-1"
+     "techcrunch-com-2913d505-2026-09-2",
+     "www-supermicro-com-9a2c110b-2026-09-2"
     ],
-    "reasoning": "The only memory news today is preliminary: SK Hynix is in early talks to make memory at Intel's Ohio plant, with no investment size and no timeline disclosed. Nothing changes what is available to buy this quarter.",
-    "status": "unchanged"
+    "reasoning": "Akamai is adding about $1.7 billion this year purely to pre-buy memory parts, while each new Vera Rubin rack carries 20.7 terabytes of high-speed memory - demand on the same scarce supply is rising, not falling.",
+    "status": "worsened"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -72,24 +73,24 @@
     "kind": "binding-constraint",
     "label": "HBM and server DRAM supply"
    },
-   "worsenedCount": 8
+   "worsenedCount": 9
   },
   {
-   "checkCount": 18,
+   "checkCount": 19,
    "id": "constraint-hbm4-memory-allocation-per-accelerator",
-   "improvedStreak": 4,
+   "improvedStreak": 5,
    "latest": {
-    "assessedAsOf": "2026-09-17",
+    "assessedAsOf": "2026-09-26",
     "claimFindingIds": [
-     "hothardware-com-eac7ca90-2026-09-1"
+     "www-supermicro-com-9a2c110b-2026-09-2"
     ],
-    "reasoning": "No new evidence arrived on how much stacked memory each accelerator gets. The one memory item today, early SK Hynix talks about Intel's Ohio plant, names no volumes and no dates.",
+    "reasoning": "No new evidence arrived today on how much memory each accelerator gets; the only fresh figure is per rack, at 20.7 terabytes in the newest racks now shipping.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
-   "resolvedAsOf": null,
-   "state": "open",
+   "resolvedAsOf": "2026-09-26",
+   "state": "resolved",
    "title": "stacked memory supply",
    "trigger": {
     "kind": "binding-constraint",
@@ -98,28 +99,28 @@
    "worsenedCount": 3
   },
   {
-   "checkCount": 8,
+   "checkCount": 9,
    "id": "constraint-high-bandwidth-memory-and-server-memory",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-17",
+    "assessedAsOf": "2026-09-26",
     "claimFindingIds": [
-     "hothardware-com-eac7ca90-2026-09-1",
-     "wf-coreweave-com-c3bb5c08-2026-09-2"
+     "techcrunch-com-2913d505-2026-09-2",
+     "www-supermicro-com-9a2c110b-2026-09-2"
     ],
-    "reasoning": "Today's gains are in power efficiency, not in memory or packaging. The single memory item, early SK Hynix talks about making memory at Intel's Ohio plant, carries no size and no timeline, so the parts constraint stands where it was.",
-    "status": "unchanged"
+    "reasoning": "A buyer is now spending roughly $1.7 billion ahead of need to secure memory, and a standard 16-rack block of the newest machines needs 331 terabytes of it, so the queue for memory is getting longer.",
+    "status": "worsened"
    },
    "openedAsOf": "2026-09",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "high-bandwidth memory and packaging slots",
+   "title": "high-bandwidth memory allocation",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "high-bandwidth memory and packaging slots"
+    "label": "high-bandwidth memory allocation"
    },
-   "worsenedCount": 2
+   "worsenedCount": 3
   }
  ],
  "schemaVersion": 1

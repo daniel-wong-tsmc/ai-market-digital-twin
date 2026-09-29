@@ -1,0 +1,68 @@
+{
+  "id": "techcrunch-com-2913d505-2026-09-1",
+  "statement": "TechCrunch reports Anthropic will pay Akamai $11.6 billion over seven years for cloud infrastructure, with the relationship potentially growing to about $20 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 11.6,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A seven-year, multi-billion contracted commitment from a frontier lab is hard evidence of long-dated compute demand and of new non-hyperscaler capacity being built to serve it.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo",
+      "models.frontier-closed",
+      "chips.hbm-memory"
+    ],
+    "direction": "positive",
+    "mechanism": "Contracted spend converts into a capacity build, which pulls through servers, memory and data center space over the life of the agreement."
+  },
+  "evidence": [
+    {
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/09/25/anthropic-to-pay-akamai-11-6-billion-over-seven-years-in-cloud-deal/",
+      "date": "2026-09-25",
+      "excerpt": "Anthropic will pay '$11.6 billion over seven years' to Akamai for cloud infrastructure, with the relationship potentially growing to approximately $20 billion total",
+      "tier": "secondary"
+    },
+    {
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/09/25/anthropic-to-pay-akamai-11-6-billion-over-seven-years-in-cloud-deal/",
+      "date": "2026-09-25",
+      "excerpt": "$150 million to $300 million in 2027, starting in the second half, with revenue reaching an annual pace of about $1.7 billion by the end of 2028",
+      "tier": "secondary"
+    },
+    {
+      "source": "SEC EDGAR (Akamai Technologies Inc 8-K, Exhibit 99.1)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001086222/000119312526401048/d288154dex991.htm",
+      "date": "2026-09-24",
+      "excerpt": "a $11.6 billion contractual commitment over seven years for Anthropic to use Akamai Cloud's distributed AI infrastructure and software, described as supporting Anthropic's accelerating CPU workload demands",
+      "tier": "primary"
+    },
+    {
+      "source": "SEC EDGAR (Akamai Technologies Inc 8-K, Exhibit 99.1)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001086222/000119312526401048/d288154dex991.htm",
+      "date": "2026-09-24",
+      "excerpt": "The agreement provides for potential expansion of the relationship by up to an additional $9 billion, representing a total potential commitment of approximately $20 billion.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary press coverage of a company announcement; no filing text read in this document."
+  },
+  "dispersion": "$11.6B committed; up to about $20B if the relationship expands.",
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Akamai Technologies, Anthropic",
+  "observedAt": "2026-09-25",
+  "capturedAt": "2026-09-26T18:44:23Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
