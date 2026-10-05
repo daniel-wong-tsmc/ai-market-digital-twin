@@ -1,0 +1,46 @@
+{
+  "id": "finance-yahoo-com-7df9e7aa-2026-09-2",
+  "statement": "Bain projects $5 trillion to $6.5 trillion of total data-center spending by 2030 and annual AI infrastructure outlays of about $1.5 trillion by 2031, adding nearly 150 gigawatts and roughly tripling global compute capacity in five years.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A forecast of this trajectory implies sustained upward revision of accelerator, memory and data-center orders for years, which is the core demand case for merchant GPUs.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "energy.cooling"
+    ],
+    "direction": "positive",
+    "mechanism": "Rising planned infrastructure outlays translate into accelerator, memory and power/cooling procurement, since the spend categories named are compute, accelerators and memory chips."
+  },
+  "evidence": [
+    {
+      "source": "Bloomberg (via Yahoo Finance)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/ai-faces-6-trillion-test-010100290.html",
+      "date": "2026-09-28",
+      "excerpt": "By 2031, the firm estimates yearly outlays on AI infrastructure (data centers, computing capacity, accelerators, memory chips) could climb to '$1.5 trillion.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Forecaster projection relayed by one secondary outlet; direction of revision is clear but the level is an estimate."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi (data-center / AI infrastructure industry); Bain & Co (forecaster)",
+  "observedAt": "2026-09-28",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

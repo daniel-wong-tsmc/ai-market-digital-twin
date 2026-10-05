@@ -1,0 +1,44 @@
+{
+  "id": "huggingnews-com-355343ee-2026-09-3",
+  "statement": "AI spending is reported to be extremely concentrated: the top 10% of AI firms account for 99.5% of model-serving spend, and two-thirds of current AI revenue comes from Anthropic and OpenAI.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "If nearly all serving spend and most AI revenue sit with a handful of labs, accelerator demand inherits their funding and roadmap risk rather than being broadly diversified.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Concentrated end-customer spend means a pullback at one or two labs removes a large share of inference and training demand at once."
+  },
+  "evidence": [
+    {
+      "source": "HuggingNews (aggregation)",
+      "url": "https://huggingnews.com/ai/update-us-cloud-giants-boost-ai-capex-outlook-66percent-to-189-trillion-bc651306",
+      "date": "2026-09-29",
+      "excerpt": "the top 10% of AI firms account for '99.5%' of model-serving spend",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Attributed in the document to analyst commentary inside an aggregation, with no primary dataset or filing named."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "hyperscalers (Amazon, Alphabet, Microsoft, Oracle, Meta); Goldman Sachs",
+  "observedAt": "2026-09-29",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

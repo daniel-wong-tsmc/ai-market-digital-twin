@@ -2,19 +2,11 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-09",
-  "capturedAt": "2026-09-27T05:03:07Z",
+  "capturedAt": "2026-09-30T02:57:33Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
   "gaps": [
-    {
-      "type": "source",
-      "id": "lambda-gpu-pricing",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
-      "paywalledNote": null
-    },
     {
       "type": "source",
       "id": "coreweave-pricing",
@@ -33,10 +25,42 @@
     },
     {
       "type": "source",
+      "id": "open-web-gpu-share",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Open-web analyst notes / trade press on GPU market share' was not fetched. URL patterns: ['tomshardware.com', 'anandtech.com', 'techpowerup.com', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "open-web-asic",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Open-web reporting on hyperscaler custom ASICs (competitive alternatives)' was not fetched. URL patterns: ['blog.google', 'aws.amazon.com/machine-learning', 'techcrunch.com', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "channel-checks",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Open-web channel checks: lead times, inventory notes from distributors' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
       "id": "bis-export-controls",
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'BIS export control notices and Federal Register' was not fetched. URL patterns: ['bis.doc.gov', 'federalregister.gov']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "vendor-pr-trade-press",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Vendor press releases + trade press on merchant-GPU design wins' was not fetched. URL patterns: ['nvidianews.nvidia.com', 'ir.amd.com/news-events', 'tomshardware.com', 'semianalysis.com']",
       "paywalledNote": null
     },
     {
@@ -49,14 +73,6 @@
     },
     {
       "type": "source",
-      "id": "gpu-marketplaces",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'GPU marketplaces / resale listings (secondary-market spot price)' was not fetched. URL patterns: ['ebay.com', 'amazon.com', 'newegg.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "ai-app-revenue",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -64,35 +80,43 @@
       "paywalledNote": null
     },
     {
-      "type": "indicator",
-      "id": "gpuSpotPrice",
-      "priority": "optional",
+      "type": "source",
+      "id": "frontier-release-funding",
+      "priority": "required",
       "acquisitionStatus": "not-covered",
-      "reason": "Indicator 'gpuSpotPrice' (dimension: momentum) was not covered. Expected sources: ['gpu-marketplaces'].",
+      "reason": "Source 'Frontier model release and funding trackers (company newsrooms + industry press)' was not fetched. URL patterns: ['openai.com', 'anthropic.com', 'blog.google', 'techcrunch.com', 'semianalysis.com']",
+      "paywalledNote": null
+    },
+    {
+      "type": "source",
+      "id": "upstream-component-leadtimes",
+      "priority": "required",
+      "acquisitionStatus": "not-covered",
+      "reason": "Source 'Upstream component lead-time coverage (optics/CPO, liquid cooling, 800V power, high-end PCB/CCL)' was not fetched. URL patterns: ['digitimes.com', 'tomshardware.com', 'semianalysis.com']",
       "paywalledNote": null
     }
   ],
   "gapCounts": {
-    "total": 8,
-    "source": 7,
-    "indicator": 1,
-    "required": 7,
+    "total": 11,
+    "source": 11,
+    "indicator": 0,
+    "required": 11,
     "preferred": 0,
-    "optional": 1,
+    "optional": 0,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://inferact.ai/blog/tpu-megakernels",
-    "https://nebius.com/prices",
-    "https://techcrunch.com/2026/09/24/oracle-sends-force-majeure-notice-on-its-new-mexico-stargate-data-center/",
-    "https://techcrunch.com/2026/09/25/anthropic-to-pay-akamai-11-6-billion-over-seven-years-in-cloud-deal/",
-    "https://www.digitimes.com/news/a20260924PD214/tsmc-wafer-price-2027-demand.html",
-    "https://www.nscale.com/press-releases/pre-ipo-convertible-financing",
-    "https://www.pymnts.com/big-tech/2026/goldman-sachs-projects-big-tech-ai-infrastructure-spending-to-hit-1-2-trillion-in-2027/",
-    "https://www.sec.gov/Archives/edgar/data/0001086222/000119312526401048/d288154dex991.htm",
-    "https://www.supermicro.com/en/pressreleases/supermicro-now-shipping-nvidia-vera-rubin-nvl72-racks",
-    "https://www.tomshardware.com/tech-industry/data-centers/elon-musks-spacexai-to-add-another-660-000-ai-gpus-this-year-nearing-a-total-of-1-44-million-in-operation-firm-is-building-1-2-gigawatt-power-plant-to-bring-systems-fully-online"
+    "https://finance.biggo.com/news/5e11992e-af92-46f1-b6cc-be2a934e02e3",
+    "https://finance.yahoo.com/technology/ai/articles/ai-faces-6-trillion-test-010100290.html",
+    "https://finance.yahoo.com/technology/articles/china-weighs-allowing-bytedance-alibaba-152402813.html",
+    "https://huggingnews.com/ai/update-us-cloud-giants-boost-ai-capex-outlook-66percent-to-189-trillion-bc651306",
+    "https://uk.finance.yahoo.com/news/nvidia-turns-insurers-spread-risk-052408466.html",
+    "https://www.gurufocus.com/news/9100139/nvidia-announces-180-billion-cloud-contract-with-anthropic-expands-ai-infrastructure-and-buyback-nvda",
+    "https://www.investing.com/news/stock-market-news/anthropics-518-billion-ai-buildout-hinges-largely-on-deals-that-cannot-be-canceled-filing-shows-4922031",
+    "https://www.newegg.com/p/pl?d=h100",
+    "https://www.runpod.io/pricing",
+    "https://www.sec.gov/Archives/edgar/data/2488/000000248826000182/amd-20260926.htm"
   ],
   "judgedIndicatorIds": [
     "D2",
@@ -104,6 +128,7 @@
     "designWins",
     "exportControlExposure",
     "flopsPerDollar",
+    "gpuSpotPrice",
     "grossMargin",
     "hbmSupplyCapex",
     "hyperscalerCapexRevision",

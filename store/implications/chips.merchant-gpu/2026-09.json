@@ -9,64 +9,46 @@
       ],
       "findingIds": [
         "www-digitimes-com-2d20aaa6-2026-09-2",
-        "www-aroged-com-a319f429-2026-09-1",
-        "www-aroged-com-a319f429-2026-09-2"
+        "www-aroged-com-a319f429-2026-09-2",
+        "www-aroged-com-a319f429-2026-09-1"
       ],
       "thesisIds": [
         "broadening-ai-demand-tightens-tsmc-capacity-and-pricing",
         "building-the-plants-is-now-as-slow-as-filling-them"
       ],
-      "watchItem": "Leading-edge wafer demand is booked far ahead of the plants: supply-chain sources put TSMC order visibility at 2030, its own tool demand runs at roughly 1.9 times what it projected in December 2025, and it still cannot meet demand while building about 20 plants at once. The exposure is construction labour and equipment delivery, not orders."
+      "watchItem": "Order visibility now runs to 2030 and your own tool demand is running about 1.9 times the level projected in December 2025, yet you still cannot meet current chip demand while building roughly 20 fabs at once. Watch whether construction labour and equipment delivery, rather than order intake, set how fast leading-edge wafer starts can rise."
     },
     {
       "dimensions": [
         "bottleneck",
-        "strategicRisk"
-      ],
-      "findingIds": [
-        "siliconanalysts-com-ab8c9c31-2026-09-1",
-        "siliconanalysts-com-ab8c9c31-2026-09-2",
-        "supplyics-com-c83015c2-2026-08-3"
-      ],
-      "thesisIds": [
-        "packaging-tightness-starts-to-ease-while-memory-does-not",
-        "ai-packaging-supply-is-concentrated-in-a-few-buyers"
-      ],
-      "watchItem": "Advanced-packaging allocation is again named the binding limit on finished AI system availability, with lines quoted at 52 to 78 weeks against capacity of roughly 105,000 to 130,000 wafers a month by the fourth quarter of 2026. The same capacity is more than 85 percent pre-booked by three customers, with one holding about 60 percent of 2026 slots, so realizable revenue sits with a very short list of buyers."
-    },
-    {
-      "dimensions": [
-        "competitiveStructure",
         "moat"
       ],
       "findingIds": [
-        "cryptobriefing-com-c3c1a1c3-2026-08-1",
-        "cryptobriefing-com-c3c1a1c3-2026-08-2",
-        "siliconanalysts-com-528fac70-2026-07-5"
+        "siliconanalysts-com-ab8c9c31-2026-09-2",
+        "siliconanalysts-com-ab8c9c31-2026-09-1"
       ],
       "thesisIds": [
-        "packaging-work-starts-to-spread-beyond-tsmc",
-        "the-alternative-packaging-route-has-its-own-choke-point"
+        "packaging-tightness-starts-to-ease-while-memory-does-not",
+        "ai-packaging-supply-is-concentrated-in-a-few-buyers",
+        "supply-constraint-binding"
       ],
-      "watchItem": "Packaging work is starting to move to rival suppliers on wait times: Google has ordered more than 3 million units of Intel bridge packaging for 2028 delivery, and Samsung and Amkor routes are quoted at 26 to 39 weeks against 52 to 78 weeks. That is a share exposure in packaging rather than in wafers, and the answer so far is a bridge-style technology developed with Kinsus."
+      "watchItem": "Advanced-packaging allocation, not memory, is again named the binding limit on system availability, with lines quoted at roughly 52 to 78 weeks and capacity near 105,000 to 130,000 wafers a month by the fourth quarter of 2026. The exposure sits in how few buyers hold that booked capacity, because capacity freed by one of them is hard to refill."
     },
     {
       "dimensions": [
-        "competitiveStructure",
-        "momentum"
+        "competitiveStructure"
       ],
       "findingIds": [
+        "www-sec-gov-a82cb219-2026-09-1",
         "www-fool-com-f8289755-2026-09-1",
-        "qz-com-36c37a60-2026-08-1",
-        "www-trendforce-com-01be0e4e-2026-08-1",
-        "moneycheck-com-0c0d636b-2026-09-2"
+        "www-investing-com-a1818002-2026-09-2"
       ],
       "thesisIds": [
         "custom-asic-substitution",
         "custom-chip-revenue-compounds-toward-merchant-scale",
         "model-labs-become-the-biggest-custom-chip-customers"
       ],
-      "watchItem": "The leading-node customer base is broadening from merchant accelerator vendors toward buyer-designed silicon: the largest custom-chip designer guides its artificial-intelligence revenue from about $58 billion this year to $115 billion in 2027 and $230 billion in 2028, Microsoft is negotiating capacity for upward of 300,000 of its own parts for 2027, OpenAI's first inference chip runs on a 3nm process, and Meta names TSMC for production. Wafer demand may hold while the names on the purchase orders change."
+      "watchItem": "Custom accelerator work keeps gaining ground on merchant parts: Broadcom booked $16.7 billion of artificial-intelligence chip revenue in its third quarter, up 221 percent year over year, and guides toward $115 billion in 2027 and $230 billion in 2028. At one leading model lab the largest single hardware obligation is about $161.2 billion of Broadcom equipment leases against up to $84.5 billion of Nvidia-based capacity, which shifts the leading-node customer base toward design houses and labs."
     },
     {
       "dimensions": [
@@ -74,65 +56,87 @@
         "momentum"
       ],
       "findingIds": [
+        "finance-yahoo-com-1404e5b0-2026-09-3",
+        "www-kucoin-com-e27002fe-2026-09-1",
         "www-digitimes-com-2d20aaa6-2026-09-1",
-        "www-freemalaysiatoday-com-7dfc89b4-2026-08-1",
-        "finance-biggo-com-cda170af-2026-08-1",
-        "www-kucoin-com-e27002fe-2026-09-1"
+        "www-taipeitimes-com-fa24bea3-2026-09-3"
       ],
       "thesisIds": [
-        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing",
         "pricing-power-persistence",
-        "the-second-largest-foundry-fills-up-and-raises-prices"
+        "broadening-ai-demand-tightens-tsmc-capacity-and-pricing",
+        "chip-vendors-pass-memory-costs-into-system-prices"
       ],
-      "watchItem": "Price firmness runs the length of the chain right now: wafer price rises of 3 to 6 percent are reported for 2027, Samsung lifted advanced contract prices 10 to 15 percent, Nvidia is passing more than 15 percent into system prices from early next year, and one cloud provider is raising published hourly rental rates 17 to 21 percent from October. The watch-item is whether end buyers keep absorbing these steps."
+      "watchItem": "Scarcity still sets the price along the chain: the leading accelerator vendor can serve only about 70 percent of the demand it sees, one rental provider is raising on-demand rates 17 to 21 percent from October, and wafer price rises of 3 to 6 percent for 2027 are reported as planned. One memory supplier's chief executive already points to limited customer budgets, so watch whether buyer budgets start to cap that pass-through."
     },
     {
       "dimensions": [
-        "unitEconomics",
-        "moat"
+        "bottleneck",
+        "unitEconomics"
       ],
       "findingIds": [
-        "en-sedaily-com-08f31bef-2026-09-3",
-        "nvidianews-nvidia-com-d9b39bc2-2026-08-3",
-        "finance-biggo-com-b332e712-2026-08-3"
+        "parameter-io-718c27d9-2026-09-1",
+        "parameter-io-718c27d9-2026-09-3",
+        "en-sedaily-com-08f31bef-2026-09-1"
       ],
       "thesisIds": [
-        "memory-makers-capture-a-growing-share-of-ai-server-profit",
-        "rising-memory-costs-inflate-ai-server-economics",
-        "memory-takes-the-biggest-slice-of-the-ai-budget"
+        "memory-takes-the-biggest-slice-of-the-ai-budget",
+        "memory-buffers-have-run-down-to-almost-nothing",
+        "memory-supply-is-the-new-choke-point-on-accelerator-shipments"
       ],
-      "watchItem": "Memory suppliers are taking a larger share of each AI server dollar: memory's share of AI infrastructure spending is projected to reach 57 percent in 2027 from 14 percent in 2025, while the leading accelerator vendor guides gross margin to 74.0 percent and names a floor of 71 to 72 percent on memory costs. Logic content competes for a shrinking slice of a growing bill of materials."
+      "watchItem": "Memory is absorbing the budget and the wafers: its share of artificial-intelligence infrastructure spending is forecast to reach 57 percent by 2027 from 14 percent in 2025, and high-bandwidth memory is reported to take roughly three times the wafer capacity of ordinary memory. Stockpiles at the two largest suppliers sit below ten days, so any upset there lands directly on the accelerator builds your packaging slots are reserved for."
     },
     {
       "dimensions": [
         "competitiveStructure",
+        "moat",
         "strategicRisk"
       ],
       "findingIds": [
-        "www-intc-com-9e1300a4-2026-08-2",
-        "www-freemalaysiatoday-com-7dfc89b4-2026-08-3",
-        "www-freemalaysiatoday-com-7dfc89b4-2026-08-4",
-        "techcrunch-com-6b79ddb7-1"
+        "chipsandcheese-com-00291656-2026-09-1",
+        "hothardware-com-eac7ca90-2026-09-1",
+        "www-investing-com-26255b4d-2026-09-1"
       ],
       "thesisIds": [
         "intel-returns-as-a-data-center-supplier",
-        "the-second-largest-foundry-fills-up-and-raises-prices"
+        "memory-based-inference-chips-route-around-the-packaging-bottleneck",
+        "packaging-work-starts-to-spread-beyond-tsmc"
       ],
-      "watchItem": "Second-source contract manufacturing is getting stronger rather than weaker: Intel's foundry revenue reached $5.8 billion, up 31 percent year over year, Samsung expects advanced processes to exceed half its foundry revenue, and a large model developer is in early talks with Samsung for a 2nm custom chip. Samsung still held only 7 percent of foundry revenue against more than 70 percent for TSMC in the first quarter of 2026."
+      "watchItem": "Second-source routes are widening around you: Intel is positioning a data-center inference part carrying up to 480 gigabytes of standard memory instead of high-bandwidth memory, SK Hynix is in early talks to make memory at Intel's Ohio plant, and OpenAI is deepening joint chip work with Samsung alongside the inference chip you already manufacture. Watch which of these turns into booked volume rather than announcement."
     },
     {
       "dimensions": [
-        "strategicRisk"
+        "strategicRisk",
+        "momentum"
       ],
       "findingIds": [
-        "www-freepressjournal-in-36c153cb-2026-08-1",
-        "www-taipeitimes-com-9d7a9c86-2026-09-1"
+        "www-investing-com-a1818002-2026-09-1",
+        "www-investing-com-a1818002-2026-09-3",
+        "huggingnews-com-355343ee-2026-09-2"
       ],
       "thesisIds": [
-        "tariffs-on-finished-ai-hardware-become-a-new-policy-risk",
-        "us-onshoring-broadens-the-ai-hardware-supply-base"
+        "hyperscaler-ai-spending-may-outrun-near-term-returns",
+        "the-revenue-needed-to-pay-for-committed-capacity-is-far-away",
+        "one-lab-s-compute-promises-outrun-its-own-spending-plan"
       ],
-      "watchItem": "Policy ties commercial terms to where plants are built: Washington is preparing semiconductor duties that would reach finished data-centre servers, with duty-free import allowances sized to each company's United States fabrication investment, against planned Arizona investment now totalling $265 billion. The exposure is that the tariff framework is still unwritten, with no rate or start date set."
+      "watchItem": "The committed capacity behind today's orders rests on money not yet earned: one model lab has set out at least $518 billion of infrastructure spending over a decade with about 80 percent non-cancelable, against a $42 billion net loss in 2025, while the largest cloud buyers are reported to sit about $125 billion a year short of break-even on their plans. Watch for the first slipped or renegotiated commitment, because wafer-start and packaging plans are sized against these books."
+    },
+    {
+      "dimensions": [
+        "strategicRisk",
+        "competitiveStructure"
+      ],
+      "findingIds": [
+        "finance-biggo-com-573ade03-2026-09-2",
+        "finance-yahoo-com-0e6c951b-2026-09-1",
+        "finance-yahoo-com-0e6c951b-2026-09-2",
+        "www-qrcodepress-com-eb94a46d-2026-09-2"
+      ],
+      "thesisIds": [
+        "conditional-china-re-opening-with-a-capped-ceiling",
+        "export-control-exposure",
+        "china-sets-a-state-target-to-serve-most-of-its-own-chip-demand"
+      ],
+      "watchItem": "China exposure stays capped and policy-driven: the leading vendor's China revenue fell to $4.55 billion from $9.66 billion a year earlier, Beijing has signalled approval for a workstation-class part that one buyer is reported to plan a million units of, and the state plan targets 76 percent of Chinese chip demand met by domestic suppliers by 2030. Watch the licence terms, since they decide how much of that volume ever reaches your lines."
     }
   ]
 }

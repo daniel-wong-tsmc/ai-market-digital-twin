@@ -1,0 +1,46 @@
+{
+  "id": "huggingnews-com-355343ee-2026-09-1",
+  "statement": "The five largest U.S. cloud providers are reported to have added roughly $750 billion to their combined 2026-2027 AI investment forecasts, bringing the two-year total to about $1.89 trillion, a 66% increase since the start of 2026.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "The direction of hyperscaler capex revision is the single strongest forward driver of merchant-GPU orders, but this document's figures are an aggregation the author could not tie to a primary note.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "chips.hbm-memory",
+      "infrastructure.datacenter-colo",
+      "infrastructure.networking-fabric",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Upward capex revisions at the five largest buyers flow directly into accelerator, memory, fabric and data-center procurement."
+  },
+  "evidence": [
+    {
+      "source": "HuggingNews (aggregation)",
+      "url": "https://huggingnews.com/ai/update-us-cloud-giants-boost-ai-capex-outlook-66percent-to-189-trillion-bc651306",
+      "date": "2026-09-29",
+      "excerpt": "The five largest U.S. cloud providers have accelerated their AI buildout plans, adding roughly '$750 billion' to their combined investment forecasts for 2026 and 2027.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Wire/social aggregation crediting unnamed strategists and social-media posts; the document states no underlying Goldman note or major-wire article confirming the $1.89 trillion two-year figure was found, and the nearest verifiable Goldman figures are different and lower."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "hyperscalers (Amazon, Alphabet, Microsoft, Oracle, Meta); Goldman Sachs",
+  "observedAt": "2026-09-29",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

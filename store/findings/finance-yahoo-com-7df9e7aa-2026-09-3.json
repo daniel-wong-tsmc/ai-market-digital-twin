@@ -1,0 +1,47 @@
+{
+  "id": "finance-yahoo-com-7df9e7aa-2026-09-3",
+  "statement": "The report cites $68 billion of U.S. data-center projects blocked or delayed in the June quarter because of local opposition and resource constraints.",
+  "kind": "measured",
+  "value": {
+    "number": 68.0,
+    "unit": "USD_B"
+  },
+  "trend": "unknown",
+  "why": "Siting and resource friction is a physical ceiling on how fast purchased accelerators can be energized, so it constrains deliverable capacity independently of chip supply.",
+  "impact": {
+    "targets": [
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Blocked or delayed shells and interconnects push out the point at which accelerators can be installed and drawn down, slowing effective capacity growth."
+  },
+  "evidence": [
+    {
+      "source": "Bloomberg (via Yahoo Finance)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/ai-faces-6-trillion-test-010100290.html",
+      "date": "2026-09-28",
+      "excerpt": "the report cites '$68 billion' worth of blocked or delayed projects in the US in the June quarter due to local opposition and resource constraints",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet citing a consultancy report; no primary filing or regulatory docket behind the figure."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "multi (data-center / AI infrastructure industry); Bain & Co (forecaster)",
+  "observedAt": "2026-09-28",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

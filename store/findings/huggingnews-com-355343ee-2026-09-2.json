@@ -1,0 +1,47 @@
+{
+  "id": "huggingnews-com-355343ee-2026-09-2",
+  "statement": "The piece reports the group needs roughly $308 billion of annual AI revenue to break even on the planned capex against an estimated $183 billion of current AI revenue, an annual gap of about $125 billion.",
+  "kind": "measured",
+  "value": {
+    "number": 308.0,
+    "unit": "USD_B"
+  },
+  "trend": "unknown",
+  "why": "A persistent break-even gap of this size is the mechanism by which capex plans get trimmed, so it is the main downside risk sitting under the buildout headlines.",
+  "impact": {
+    "targets": [
+      "infrastructure.hyperscale-cloud",
+      "chips.merchant-gpu",
+      "applications.enterprise-copilots",
+      "models.frontier-closed"
+    ],
+    "direction": "negative",
+    "mechanism": "If AI revenue stays well below the level required to cover depreciation on deployed capex, buyers slow future accelerator orders."
+  },
+  "evidence": [
+    {
+      "source": "HuggingNews (aggregation)",
+      "url": "https://huggingnews.com/ai/update-us-cloud-giants-boost-ai-capex-outlook-66percent-to-189-trillion-bc651306",
+      "date": "2026-09-29",
+      "excerpt": "the group requires roughly '$308 billion' in annual AI revenue to break even on the capex. Current AI revenues are estimated at '$183 billion,' leaving a gap of roughly '$125 billion' annually",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Break-even arithmetic attributed to unnamed strategists inside a social/wire aggregation; no primary research note located."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "hyperscalers (Amazon, Alphabet, Microsoft, Oracle, Meta); Goldman Sachs",
+  "observedAt": "2026-09-29",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

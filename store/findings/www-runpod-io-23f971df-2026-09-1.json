@@ -1,0 +1,52 @@
+{
+  "id": "www-runpod-io-23f971df-2026-09-1",
+  "statement": "RunPod's Secure Cloud on-demand rental starts at $2.89/hr for H100 PCIe and runs to $6.79/hr for B200, with the page's September 2026 repricing described as lifting the mid and frontier bands.",
+  "kind": "measured",
+  "value": {
+    "number": 2.89,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "rising",
+  "why": "Published rental rates are the clearest same-day read on what renting an accelerator costs, and the page states its own recent repricing moved the mid and frontier tiers up; rental price is a display overlay, not a scoring signal.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu"
+    ],
+    "direction": "mixed",
+    "mechanism": "Neocloud list rates set the cost of rented compute; as a price level this is displayed alongside the index rather than scored into it."
+  },
+  "evidence": [
+    {
+      "source": "RunPod (official pricing page)",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-09-29",
+      "excerpt": "'H100 PCIe: $2.89/hr', 'H100 SXM: $3.49/hr', 'H100 NVL: $3.19/hr', 'H200: $4.59/hr', 'B200: $6.79/hr'",
+      "tier": "secondary"
+    },
+    {
+      "source": "RunPod (official pricing page)",
+      "url": "https://www.runpod.io/pricing",
+      "date": "2026-09-29",
+      "excerpt": "states the September 2026 repricing 'lifted the mid and frontier bands of the Secure Cloud card.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Rates read directly off the operator's own published pricing page, but one provider only and the Community Cloud tier was not fully resolved."
+  },
+  "dispersion": "Secure Cloud spans $2.89/hr (H100 PCIe) to $6.79/hr (B200); Community Cloud described as roughly $0.60-$2.00/hr below Secure Cloud for the same models, exact figures unresolved.",
+  "asOf": "2026-09",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "runpod",
+  "observedAt": "2026-09-29",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

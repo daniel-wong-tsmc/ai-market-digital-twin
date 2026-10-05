@@ -1,0 +1,50 @@
+{
+  "id": "uk-finance-yahoo-com-2a9110c1-2026-09-1",
+  "statement": "Nvidia is in early-stage talks with insurers and a reinsurance broker about insuring lenders against neocloud defaults where pledged Nvidia chips cannot be resold for enough to cover the loan, with no deals yet agreed.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Chip-collateral lending is how the marginal neocloud buyer funds purchases; credit enhancement would widen that channel, but the need for it also reveals lender doubt about residual chip values.",
+  "impact": {
+    "targets": [
+      "infrastructure.neocloud",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "mixed",
+    "mechanism": "Insurance wrappers on chip-backed loans lower lenders' loss-given-default and can unlock more debt for smaller GPU cloud operators, while signalling residual-value uncertainty on the collateral itself."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance UK (re-reporting Financial Times)",
+      "url": "https://uk.finance.yahoo.com/news/nvidia-turns-insurers-spread-risk-052408466.html",
+      "date": "2026-09-27",
+      "excerpt": "potential insurance for loans extended to smaller neocloud companies, which could protect lenders if a borrower defaults and Nvidia chips pledged as collateral cannot be resold for enough to cover the debt",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance UK (re-reporting Financial Times)",
+      "url": "https://uk.finance.yahoo.com/news/nvidia-turns-insurers-spread-risk-052408466.html",
+      "date": "2026-09-27",
+      "excerpt": "The report explicitly notes these discussions remain 'at an early stage and may not result in any deals.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary re-reporting of FT sourcing, and the document itself says the talks are early-stage and may not produce deals."
+  },
+  "dispersion": "conflicting same-key reports: statement/trend changed (trend rising -> unknown); sources: Yahoo Finance UK (re-reporting Financial Times)",
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-09-27",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

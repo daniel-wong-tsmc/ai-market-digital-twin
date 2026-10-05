@@ -1,0 +1,186 @@
+{
+  "asOf": "2026-09",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "www-investing-com-a1818002-2026-09-2",
+      "entity": "anthropic",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-0e6c951b-2026-09-2",
+      "entity": "china, nvidia, bytedance, alibaba",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-0e6c951b-2026-09-1",
+      "entity": "china, nvidia, bytedance, alibaba",
+      "indicatorId": "exportControlExposure",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "huggingnews-com-355343ee-2026-09-2",
+      "entity": "hyperscalers (Amazon, Alphabet, Microsoft, Oracle, Meta); Goldman Sachs",
+      "indicatorId": "D2",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "huggingnews-com-355343ee-2026-09-3",
+      "entity": "hyperscalers (Amazon, Alphabet, Microsoft, Oracle, Meta); Goldman Sachs",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "huggingnews-com-355343ee-2026-09-1",
+      "entity": "hyperscalers (Amazon, Alphabet, Microsoft, Oracle, Meta); Goldman Sachs",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-newegg-com-1253a2ab-2026-09-1",
+      "entity": "market",
+      "indicatorId": "gpuSpotPrice",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-7df9e7aa-2026-09-1",
+      "entity": "multi (data-center / AI infrastructure industry); Bain & Co (forecaster)",
+      "indicatorId": "D2",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-7df9e7aa-2026-09-3",
+      "entity": "multi (data-center / AI infrastructure industry); Bain & Co (forecaster)",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-yahoo-com-7df9e7aa-2026-09-2",
+      "entity": "multi (data-center / AI infrastructure industry); Bain & Co (forecaster)",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-biggo-com-573ade03-2026-09-2",
+      "entity": "nvidia, amd, china",
+      "indicatorId": "D2",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "finance-biggo-com-573ade03-2026-09-1",
+      "entity": "nvidia, amd, china",
+      "indicatorId": "exportControlExposure",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-gurufocus-com-8a67226b-2026-09-3",
+      "entity": "nvidia, anthropic",
+      "indicatorId": "customerConcentration",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-gurufocus-com-8a67226b-2026-09-1",
+      "entity": "nvidia, anthropic",
+      "indicatorId": "rpoBacklog",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "www-sec-gov-5fbfae3a-2026-09-1",
+      "entity": "amd",
+      "indicatorId": "designWins",
+      "verdict": "update",
+      "priorFindingId": "ir-amd-com-841cc4c4-2026-09-1",
+      "detail": "statement/trend changed (trend rising -> unknown)"
+    },
+    {
+      "findingId": "www-investing-com-a1818002-2026-09-3",
+      "entity": "anthropic",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "update",
+      "priorFindingId": "www-pymnts-com-d542b456-2026-09-3",
+      "detail": "statement/trend changed (trend falling -> unknown)"
+    },
+    {
+      "findingId": "www-investing-com-a1818002-2026-09-1",
+      "entity": "anthropic",
+      "indicatorId": "rpoBacklog",
+      "verdict": "update",
+      "priorFindingId": "www-pymnts-com-d542b456-2026-09-1",
+      "detail": "value 13.7 -> 518.0 (tol 1%)"
+    },
+    {
+      "findingId": "www-newegg-com-1253a2ab-2026-09-2",
+      "entity": "market",
+      "indicatorId": "leadTimes",
+      "verdict": "update",
+      "priorFindingId": "www-thundercompute-com-481ab4f1-2026-07-2",
+      "detail": "magnitude 2 -> 1"
+    },
+    {
+      "findingId": "uk-finance-yahoo-com-2a9110c1-2026-09-1",
+      "entity": "nvidia",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "update",
+      "priorFindingId": "investinglive-com-da6583e3-2026-08-1",
+      "detail": "statement/trend changed (trend falling -> unknown)"
+    },
+    {
+      "findingId": "www-runpod-io-23f971df-2026-09-1",
+      "entity": "runpod",
+      "indicatorId": "D6",
+      "verdict": "update",
+      "priorFindingId": "www-runpod-io-eb57b35c-2026-09-1",
+      "detail": "value 2.69 -> 2.89 (tol 1%)"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "uk-finance-yahoo-com-2a9110c1-2026-09-2",
+      "entity": "nvidia",
+      "indicatorId": "marginalBuyerFinancing",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    },
+    {
+      "findingId": "www-gurufocus-com-8a67226b-2026-09-2",
+      "entity": "nvidia, anthropic",
+      "indicatorId": "rpoBacklog",
+      "verdict": "duplicate",
+      "priorFindingId": null,
+      "detail": "superseded by intra-batch latest vintage"
+    }
+  ]
+}

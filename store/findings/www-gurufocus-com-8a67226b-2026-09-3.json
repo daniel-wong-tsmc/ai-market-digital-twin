@@ -1,0 +1,43 @@
+{
+  "id": "www-gurufocus-com-8a67226b-2026-09-3",
+  "statement": "The $180 billion is not one contract but a bundle of cloud, equity and infrastructure arrangements routed through Nvidia-backed intermediaries, including a $35 billion Lambda agreement, a $45 billion Nscale agreement and Nvidia's own commitment of up to $10 billion to Anthropic.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "When the vendor funds and guarantees the intermediaries that buy its chips, headline demand and customer concentration are harder to read and the same dollars can be counted more than once.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "models.frontier-closed"
+    ],
+    "direction": "negative",
+    "mechanism": "Vendor equity and guarantees behind a small set of counterparties concentrate credit and demand risk on one lab and a few Nvidia-backed clouds."
+  },
+  "evidence": [
+    {
+      "source": "GuruFocus",
+      "url": "https://www.gurufocus.com/news/9100139/nvidia-announces-180-billion-cloud-contract-with-anthropic-expands-ai-infrastructure-and-buyback-nvda",
+      "date": "2026-09-28",
+      "excerpt": "The $180 billion figure does not represent a single contract; it reflects the cumulative weight of cloud compute agreements, equity commitments, and infrastructure deals binding Nvidia and Anthropic across multiple intermediaries and data center operators.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Structural characterization by one secondary outlet; component figures are not confirmed against filings here."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "customerConcentration",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia, anthropic",
+  "observedAt": "2026-09-28",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

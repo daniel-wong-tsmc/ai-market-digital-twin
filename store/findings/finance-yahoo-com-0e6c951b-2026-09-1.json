@@ -1,0 +1,43 @@
+{
+  "id": "finance-yahoo-com-0e6c951b-2026-09-1",
+  "statement": "Beijing has signaled it intends to approve purchases by ByteDance, Alibaba and other domestic firms of a new Nvidia professional-workstation chip (reported as the RTX PRO 5500) that executives expect to fall outside U.S. export restrictions.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "An approval signal from China's industry ministry would reopen a large licensed demand channel for Nvidia silicon that export controls had largely closed.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "applications.consumer-ai"
+    ],
+    "direction": "positive",
+    "mechanism": "Chinese regulatory approval plus a restriction-compliant part lets large Chinese platforms buy U.S. accelerators again, adding licensed unit demand."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (re-reporting Reuters / The Information)",
+      "url": "https://finance.yahoo.com/technology/articles/china-weighs-allowing-bytedance-alibaba-152402813.html",
+      "date": "2026-09-27",
+      "excerpt": "The Chinese government has signaled it could allow some domestic companies, including ByteDance and Alibaba, to buy a new Nvidia chip for high-end professional computers",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Secondary re-reporting of a single outlet's two anonymous sources; Reuters stated it could not immediately verify the report."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "china, nvidia, bytedance, alibaba",
+  "observedAt": "2026-09-27",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

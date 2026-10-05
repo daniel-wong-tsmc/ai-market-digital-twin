@@ -1,0 +1,48 @@
+{
+  "id": "www-gurufocus-com-8a67226b-2026-09-1",
+  "statement": "Nvidia disclosed that Anthropic's contracted value for cloud services running on Nvidia AI infrastructure has exceeded $180 billion, with Anthropic securing 2.5GW of Nvidia capacity for delivery by 2028.",
+  "kind": "measured",
+  "value": {
+    "number": 180.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A contracted book of this size tied to one lab is a large, dated forward claim on Nvidia capacity and underpins multi-year merchant-GPU shipment expectations.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo",
+      "chips.hbm-memory",
+      "models.reasoning-agentic"
+    ],
+    "direction": "positive",
+    "mechanism": "Contracted cloud-compute value on Nvidia infrastructure converts into accelerator, memory and data-center capacity orders as the gigawatts are delivered."
+  },
+  "evidence": [
+    {
+      "source": "GuruFocus",
+      "url": "https://www.gurufocus.com/news/9100139/nvidia-announces-180-billion-cloud-contract-with-anthropic-expands-ai-infrastructure-and-buyback-nvda",
+      "date": "2026-09-28",
+      "excerpt": "Anthropic's contracted value for cloud services utilizing Nvidia's AI infrastructure has exceeded '$180 billion.'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet describing roadshow remarks; no filing text cited for the aggregate figure."
+  },
+  "dispersion": "conflicting same-key reports: value 279.0 -> 180.0 (tol 1%); sources: GuruFocus",
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "nvidia, anthropic",
+  "observedAt": "2026-09-28",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

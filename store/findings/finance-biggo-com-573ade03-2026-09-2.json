@@ -1,0 +1,44 @@
+{
+  "id": "finance-biggo-com-573ade03-2026-09-2",
+  "statement": "NVIDIA's China revenue fell to $4.55 billion in the quarter cited from $9.66 billion a year earlier, per figures reported in the piece.",
+  "kind": "measured",
+  "value": {
+    "number": 4.55,
+    "unit": "USD_B"
+  },
+  "trend": "falling",
+  "why": "A roughly halved China revenue line removes a large regional pool from the merchant-GPU demand base and explains the intensity of the vendors' lobbying.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu"
+    ],
+    "direction": "negative",
+    "mechanism": "Export licensing limits cut shipments into China, reducing reported regional data-center revenue for the merchant-GPU vendors."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance (via Politico reporting)",
+      "url": "https://finance.biggo.com/news/5e11992e-af92-46f1-b6cc-be2a934e02e3",
+      "date": "2026-09-29",
+      "excerpt": "NVIDIA's China revenue fell to '$4.55 billion (Q1) from $9.66 billion year-over-year'",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Figures quoted secondhand in a secondary aggregation, not read from the vendor's own filing."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia, amd, china",
+  "observedAt": "2026-09-29",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "www-investing-com-a1818002-2026-09-3",
+  "statement": "Anthropic reported a net loss of $42 billion in 2025 while carrying mostly non-cancelable multi-decade infrastructure obligations, and has filed for an IPO only confidentially.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A loss of that scale against take-or-pay commitments makes continued equity-market access the condition for the largest single block of forward compute demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud",
+      "models.frontier-closed"
+    ],
+    "direction": "negative",
+    "mechanism": "If capital markets tighten, a deeply loss-making buyer with fixed obligations becomes a credit risk to the cloud and hardware partners counting on those payments."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/anthropics-518-billion-ai-buildout-hinges-largely-on-deals-that-cannot-be-canceled-filing-shows-4922031",
+      "date": "2026-09-29",
+      "excerpt": "Anthropic reported a net loss of $42 billion in 2025.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Figure from a wire report on a confidential prospectus not publicly available for verification."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "anthropic",
+  "observedAt": "2026-09-29",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

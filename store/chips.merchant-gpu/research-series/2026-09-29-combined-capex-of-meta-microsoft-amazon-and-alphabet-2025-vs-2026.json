@@ -1,0 +1,23 @@
+{
+  "seriesName": "Combined capex of Meta, Microsoft, Amazon, and Alphabet, 2025 vs 2026",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "Yahoo Finance",
+  "points": [
+    {
+      "label": "2025 (record)",
+      "value": 410.0,
+      "sourceUrl": "https://finance.yahoo.com/sectors/technology/article/meta-microsoft-amazon-and-alphabet-are-about-to-spend-a-shocking-amount-of-money-to-dominate-the-ai-era-115359575.html",
+      "publishedAt": "2026-06-03"
+    },
+    {
+      "label": "2026 (planned)",
+      "value": 725.0,
+      "sourceUrl": "https://finance.yahoo.com/sectors/technology/article/meta-microsoft-amazon-and-alphabet-are-about-to-spend-a-shocking-amount-of-money-to-dominate-the-ai-era-115359575.html",
+      "publishedAt": "2026-06-03"
+    }
+  ],
+  "pair": true,
+  "notes": "Both figures come from the same Yahoo Finance article (Brian Sozzi, June 3, 2026): 'Google, Amazon, Microsoft, and Meta collectively plan to allocate $725 billion to capital expenditures in 2026 -- up a staggering 77% from last year's already record-breaking $410 billion.' These are flat, non-ranged figures for the combined four-company total, which directly contextualizes the scale behind the bullet's $1.89 trillion two-year (2026-2027) spending figure. Individual per-company 2026 guidance exists on the same site (e.g. Amazon $200B flat) but Alphabet and Meta are only given as ranges in these sources, so a clean 3+ point same-shape per-company series could not be built without mixing ranges or mixing company-level with combined-level figures; the 2025-vs-2026 combined pair is the most honest series available. Covers only four of the five hyperscalers referenced in the bullet (the bullet's $1.89T figure appears to include a fifth, Oracle); not a direct one-to-one match but useful scale context.",
+  "bulletIndex": 3
+}

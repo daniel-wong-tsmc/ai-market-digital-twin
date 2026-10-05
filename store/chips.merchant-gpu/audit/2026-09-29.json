@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-09-29",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-newegg-com-1253a2ab-2026-09-1",
+        "www-newegg-com-1253a2ab-2026-09-2",
+        "www-runpod-io-23f971df-2026-09-1",
+        "nebius-com-3bbd8084-2026-09-1",
+        "nebius-com-3bbd8084-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-1404e5b0-2026-09-3",
+        "en-sedaily-com-08f31bef-2026-09-1",
+        "en-sedaily-com-08f31bef-2026-09-2",
+        "parameter-io-718c27d9-2026-09-1",
+        "parameter-io-718c27d9-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-a1818002-2026-09-1",
+        "www-investing-com-a1818002-2026-09-2",
+        "www-investing-com-a1818002-2026-09-3",
+        "huggingnews-com-355343ee-2026-09-1",
+        "huggingnews-com-355343ee-2026-09-2",
+        "huggingnews-com-355343ee-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "uk-finance-yahoo-com-2a9110c1-2026-09-1",
+        "finance-yahoo-com-0e6c951b-2026-09-1",
+        "finance-yahoo-com-0e6c951b-2026-09-2",
+        "finance-biggo-com-573ade03-2026-09-1",
+        "finance-biggo-com-573ade03-2026-09-2",
+        "finance-yahoo-com-7df9e7aa-2026-09-1",
+        "finance-yahoo-com-7df9e7aa-2026-09-2",
+        "finance-yahoo-com-7df9e7aa-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "bullet:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-a1818002-2026-09-1",
+        "www-investing-com-a1818002-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "bullet:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-newegg-com-1253a2ab-2026-09-1",
+        "www-newegg-com-1253a2ab-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "bullet:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "huggingnews-com-355343ee-2026-09-1",
+        "huggingnews-com-355343ee-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-bottleneck",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "nebius-com-3bbd8084-2026-09-1",
+        "www-newegg-com-1253a2ab-2026-09-2",
+        "finance-yahoo-com-1404e5b0-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-moat",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-a1818002-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-stacked-memory-and-server-dram",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "en-sedaily-com-08f31bef-2026-09-1",
+        "en-sedaily-com-08f31bef-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-high-bandwidth-memory-and-server-memory",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "parameter-io-718c27d9-2026-09-1",
+        "parameter-io-718c27d9-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-digitimes-com-2d20aaa6-2026-09-2",
+        "www-aroged-com-a319f429-2026-09-2",
+        "www-aroged-com-a319f429-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "siliconanalysts-com-ab8c9c31-2026-09-2",
+        "siliconanalysts-com-ab8c9c31-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-sec-gov-a82cb219-2026-09-1",
+        "www-fool-com-f8289755-2026-09-1",
+        "www-investing-com-a1818002-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-yahoo-com-1404e5b0-2026-09-3",
+        "www-kucoin-com-e27002fe-2026-09-1",
+        "www-digitimes-com-2d20aaa6-2026-09-1",
+        "www-taipeitimes-com-fa24bea3-2026-09-3"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "parameter-io-718c27d9-2026-09-1",
+        "parameter-io-718c27d9-2026-09-3",
+        "en-sedaily-com-08f31bef-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "chipsandcheese-com-00291656-2026-09-1",
+        "hothardware-com-eac7ca90-2026-09-1",
+        "www-investing-com-26255b4d-2026-09-1"
+      ]
+    },
+    {
+      "claimKey": "impl:6",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-investing-com-a1818002-2026-09-1",
+        "www-investing-com-a1818002-2026-09-3",
+        "huggingnews-com-355343ee-2026-09-2"
+      ]
+    },
+    {
+      "claimKey": "impl:7",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "finance-biggo-com-573ade03-2026-09-2",
+        "finance-yahoo-com-0e6c951b-2026-09-1",
+        "finance-yahoo-com-0e6c951b-2026-09-2",
+        "www-qrcodepress-com-eb94a46d-2026-09-2"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 19,
+    "flagged": 0,
+    "skipped": 0
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "headline": "A $518 billion promise, and prices still climbing",
+  "deck": "Memory is still what caps how many chips get built. Today's news was about who pays for them, and whether that money holds.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "The price tags move again",
+      "paragraphs": [
+        "A single Nvidia H100 card sat in stock on Newegg today at a headline price of $34,989.00, with options from $29,500.00. The newer H200 board on the same page was shown as out of stock and coming soon, with no price at all. When the older part is the one you can actually buy, nothing has loosened.",
+        "Renting is no cheaper. RunPod's secure cloud now starts at $2.89 an hour for an H100 and runs to $6.79 for a B200, after a September repricing that lifted the middle and top of its list. Nebius has told customers its on-demand rates rise on October 1: the H100 from $3.85 to $4.50 an hour, the H200 from $4.50 to $5.40, the B200 from $7.15 to $8.50 and the B300 from $7.85 to $9.50. That is its second increase this year, which points to rentable capacity staying scarce rather than slack building up."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "www-newegg-com-1253a2ab-2026-09-1",
+        "www-newegg-com-1253a2ab-2026-09-2",
+        "www-runpod-io-23f971df-2026-09-1",
+        "nebius-com-3bbd8084-2026-09-1",
+        "nebius-com-3bbd8084-2026-09-2"
+      ],
+      "sourceLine": "Newegg listings and the RunPod and Nebius price pages, 26 to 29 September 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://www.newegg.com/p/pl?d=h100",
+          "title": "H100 and H200 card listings",
+          "outlet": "Newegg (marketplace listing search results)",
+          "date": "2026-09-29"
+        },
+        {
+          "url": "https://www.runpod.io/pricing",
+          "title": "Hourly rental price list",
+          "outlet": "RunPod (official pricing page)",
+          "date": "2026-09-29"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Memory is still the ceiling",
+      "paragraphs": [
+        "Nothing today moved the physical limit. Speaking on 9 September, Nvidia's chief executive said the company can currently supply only 70% of the demand it sees, with its largest customer still calling itself short of capacity.",
+        "The reason sits upstream of the chip. Reporting on 7 September put memory stockpiles at Samsung and SK hynix below ten days of supply, and forecasters expect memory demand next year to outgrow memory supply by more than ten percentage points. Memory is also taking over the budget: its share of AI infrastructure spending is seen reaching 57% by 2027, up from 14% in 2025, and high-bandwidth memory needs roughly three times the factory capacity of ordinary memory. Until that changes, more orders simply mean longer queues."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "finance-yahoo-com-1404e5b0-2026-09-3",
+        "en-sedaily-com-08f31bef-2026-09-1",
+        "en-sedaily-com-08f31bef-2026-09-2",
+        "parameter-io-718c27d9-2026-09-1",
+        "parameter-io-718c27d9-2026-09-3"
+      ],
+      "sourceLine": "Seoul Economic Daily and Parameter.io, 7 September 2026; Wall Street Journal-sourced reporting, 9 September 2026.",
+      "relatedDocs": []
+    },
+    {
+      "n": 3,
+      "title": "The biggest buyer's bill is now in writing",
+      "paragraphs": [
+        "Today's real news is about who pays. A confidential prospectus from Anthropic, reported by Reuters, sets out at least $518 billion of AI infrastructure spending over a decade across six partners, with about 80% of it non-cancelable or payable whether the capacity is used or not. The same company reported a net loss of $42 billion for 2025.",
+        "The mix inside that book matters for merchant chips. The largest single piece is about $161.2 billion of Broadcom equipment lease obligations, against up to $84.5 billion for Nvidia-based capacity and more than $20 billion of capacity from Advanced Micro Devices. Custom silicon is no longer a side bet at the margin; it is the biggest line.",
+        "The wider picture rhymes. The five largest American cloud providers have added roughly $750 billion to their combined 2026 and 2027 investment plans, taking the two-year total to about $1.89 trillion, a 66% rise since the start of this year. By the same account the group would need about $308 billion of annual AI revenue to break even, against an estimated $183 billion earned today, and two-thirds of that revenue comes from just two firms. Supply is being built against promises, not receipts."
+      ],
+      "visual": null,
+      "claimFindingIds": [
+        "www-investing-com-a1818002-2026-09-1",
+        "www-investing-com-a1818002-2026-09-2",
+        "www-investing-com-a1818002-2026-09-3",
+        "huggingnews-com-355343ee-2026-09-1",
+        "huggingnews-com-355343ee-2026-09-2",
+        "huggingnews-com-355343ee-2026-09-3"
+      ],
+      "sourceLine": "Reuters via Investing.com and HuggingNews, 29 September 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://www.investing.com/news/stock-market-news/anthropics-518-billion-ai-buildout-hinges-largely-on-deals-that-cannot-be-canceled-filing-shows-4922031",
+          "title": "A $518 billion build-out that mostly cannot be cancelled",
+          "outlet": "Reuters (via Investing.com)",
+          "date": "2026-09-29"
+        },
+        {
+          "url": "https://huggingnews.com/ai/update-us-cloud-giants-boost-ai-capex-outlook-66percent-to-189-trillion-bc651306",
+          "title": "Cloud giants lift two-year AI spending plans to about $1.89 trillion",
+          "outlet": "HuggingNews (aggregation)",
+          "date": "2026-09-29"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "Three things could change the answer. First, the financing. Nvidia is in early talks with insurers and a reinsurance broker about covering lenders when a small cloud provider defaults and the chips pledged against the loan cannot be resold for enough to repay it. No deal has been agreed. Watch whether such cover is actually written, because that is the test of whether banks still believe the collateral.",
+        "Second, China. Beijing has signalled it will let ByteDance, Alibaba and other domestic firms buy a new Nvidia workstation-class part that executives expect to fall outside American export limits, and ByteDance is reported to be planning an order of one million of them. Nvidia's China revenue has already dropped to $4.55 billion from $9.66 billion a year earlier, and Nvidia and Advanced Micro Devices are lobbying to narrow China provisions in next year's defence bill. Licence wording, not appetite, decides whether any of that volume ships.",
+        "Third, the sites. Bain projects $5 trillion to $6.5 trillion of data-centre spending by 2030 and says the industry would need $6 trillion of annual revenue by 2031 to justify it, with today's consumer and business AI services covering up to $1.8 trillion. It also counts $68 billion of American projects blocked or delayed in the June quarter on local opposition and resource limits. Even a kinder memory market would not help if there is nowhere to plug the racks in."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "uk-finance-yahoo-com-2a9110c1-2026-09-1",
+        "finance-yahoo-com-0e6c951b-2026-09-1",
+        "finance-yahoo-com-0e6c951b-2026-09-2",
+        "finance-biggo-com-573ade03-2026-09-1",
+        "finance-biggo-com-573ade03-2026-09-2",
+        "finance-yahoo-com-7df9e7aa-2026-09-1",
+        "finance-yahoo-com-7df9e7aa-2026-09-2",
+        "finance-yahoo-com-7df9e7aa-2026-09-3"
+      ],
+      "sourceLine": "Financial Times and Reuters re-reporting via Yahoo Finance, 27 September 2026; Bloomberg via Yahoo Finance, 28 September 2026; Politico via BigGo Finance, 29 September 2026.",
+      "relatedDocs": [
+        {
+          "url": "https://uk.finance.yahoo.com/news/nvidia-turns-insurers-spread-risk-052408466.html",
+          "title": "Chip maker turns to insurers to spread lending risk",
+          "outlet": "Yahoo Finance UK (re-reporting Financial Times)",
+          "date": "2026-09-27"
+        },
+        {
+          "url": "https://finance.yahoo.com/technology/articles/china-weighs-allowing-bytedance-alibaba-152402813.html",
+          "title": "China weighs letting its big platforms buy a new workstation chip",
+          "outlet": "Yahoo Finance (re-reporting Reuters / The Information)",
+          "date": "2026-09-27"
+        },
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/ai-faces-6-trillion-test-010100290.html",
+          "title": "The industry's $6 trillion revenue test",
+          "outlet": "Bloomberg (via Yahoo Finance)",
+          "date": "2026-09-28"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What a card costs to buy outright, now that the older part is the one in stock.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "Spending on new memory plants is the only thing that lifts the ceiling, and it takes years.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "Finished servers leaving factories is the cleanest check on whether supply is catching up.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-09",
+      "text": "Anthropic's filing put at least $518 billion of compute commitments on the record, about 80% of it non-cancelable.",
+      "scene": 3
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Anthropic's filing sets out at least $518 billion of compute spending over a decade, about 80% non-cancelable, against a $42 billion net loss in 2025.",
+      "claimFindingIds": [
+        "www-investing-com-a1818002-2026-09-1",
+        "www-investing-com-a1818002-2026-09-3"
+      ]
+    },
+    {
+      "text": "Newegg lists an older Nvidia H100 card in stock at $34,989 while the newer H200 board shows no price at all, so scarcity still rules the counter.",
+      "claimFindingIds": [
+        "www-newegg-com-1253a2ab-2026-09-1",
+        "www-newegg-com-1253a2ab-2026-09-2"
+      ]
+    },
+    {
+      "text": "America's five biggest cloud providers now plan about $1.89 trillion of AI spending across 2026 and 2027, needing $308 billion of yearly revenue to break even.",
+      "claimFindingIds": [
+        "huggingnews-com-355343ee-2026-09-1",
+        "huggingnews-com-355343ee-2026-09-2"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "Prices moved against buyers again: Nebius lifts on-demand rates from October 1, the H200 card shows no price on Newegg, and Nvidia still says it can supply only 70% of the demand it sees.",
+      "claimFindingIds": [
+        "nebius-com-3bbd8084-2026-09-1",
+        "www-newegg-com-1253a2ab-2026-09-2",
+        "finance-yahoo-com-1404e5b0-2026-09-3"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "In the biggest buyer's own filing, the largest hardware obligation is about $161.2 billion of Broadcom equipment leases, against up to $84.5 billion of Nvidia-based capacity, so custom silicon now outweighs merchant parts in that book.",
+      "claimFindingIds": [
+        "www-investing-com-a1818002-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "unchanged",
+      "reasoning": "No new memory evidence arrived today. The latest figures, from 7 September, still show Samsung and SK hynix stockpiles below ten days and next year's memory demand outrunning supply by more than ten percentage points.",
+      "claimFindingIds": [
+        "en-sedaily-com-08f31bef-2026-09-1",
+        "en-sedaily-com-08f31bef-2026-09-2"
+      ]
+    },
+    {
+      "issueId": "constraint-high-bandwidth-memory-and-server-memory",
+      "status": "unchanged",
+      "reasoning": "No new high-bandwidth memory evidence arrived today. The standing picture holds: memory's share of AI infrastructure spending is forecast to reach 57% by 2027 from 14% in 2025, and each high-bandwidth part consumes about three times the factory capacity of ordinary memory.",
+      "claimFindingIds": [
+        "parameter-io-718c27d9-2026-09-1",
+        "parameter-io-718c27d9-2026-09-3"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-09-29",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "3cedf30e2b790c898c6c76cdfa3b15f4a6307f0a066493048e4b82b6e1594e11",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-10-05T00:38:41.850271+00:00"
+  }
+}

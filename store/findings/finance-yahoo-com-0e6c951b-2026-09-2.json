@@ -1,0 +1,42 @@
+{
+  "id": "finance-yahoo-com-0e6c951b-2026-09-2",
+  "statement": "ByteDance is reported to plan an order of one million of the new Nvidia professional chips to power its AI models.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "A single-customer order of that unit scale would be a material incremental design win for Nvidia in China, though the figure comes from unverified reporting and carries no registered unit.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "positive",
+    "mechanism": "A large platform committing to a specific Nvidia part locks that part into its inference fleet and pulls through associated memory and board content."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (re-reporting Reuters / The Information)",
+      "url": "https://finance.yahoo.com/technology/articles/china-weighs-allowing-bytedance-alibaba-152402813.html",
+      "date": "2026-09-27",
+      "excerpt": "ByteDance plans to order 1 million of the chips to power its AI models.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Described in the document as a separately reported detail resting on anonymous sourcing that the wire could not verify."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "china, nvidia, bytedance, alibaba",
+  "observedAt": "2026-09-27",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,42 @@
+{
+  "id": "finance-biggo-com-573ade03-2026-09-1",
+  "statement": "Nvidia and AMD are lobbying the administration and Congress to drop or narrow China-related chip export provisions in the FY2027 defense authorization bill, targeting AI OVERWATCH Act language and seeking softer Chip Security Act terms rather than a broad rollback.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Whether the restrictions are codified sets how much Chinese accelerator demand Nvidia and AMD may legally serve and how much compliance/tracking burden ships with each part; the outcome is still open.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups"
+    ],
+    "direction": "mixed",
+    "mechanism": "Statutory export limits and end-use tracking mandates define the legally addressable China market for advanced accelerators and the design/compliance cost of serving it."
+  },
+  "evidence": [
+    {
+      "source": "BigGo Finance (via Politico reporting)",
+      "url": "https://finance.biggo.com/news/5e11992e-af92-46f1-b6cc-be2a934e02e3",
+      "date": "2026-09-29",
+      "excerpt": "Nvidia and AMD are lobbying the Trump administration to pressure Congress into dropping China-related chip export restrictions from the National Defense Authorization Act (fiscal 2027).",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet relaying Politico reporting; no filing, and the legislative outcome is unresolved."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia, amd, china",
+  "observedAt": "2026-09-29",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,48 @@
+{
+  "id": "finance-yahoo-com-7df9e7aa-2026-09-1",
+  "statement": "Bain estimates the global AI industry must generate $6 trillion in annual revenue by 2031 to justify committed data-center capital, with existing consumer and enterprise AI services covering up to $1.8 trillion and leaving a $4.2 trillion revenue shortfall.",
+  "kind": "measured",
+  "value": {
+    "number": 6000.0,
+    "unit": "USD_B"
+  },
+  "trend": "unknown",
+  "why": "The size of the gap between required and identified AI revenue is the central risk to the durability of accelerator demand: if the nascent categories do not arrive, buildout plans get cut.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.hyperscale-cloud",
+      "applications.enterprise-copilots",
+      "applications.consumer-ai"
+    ],
+    "direction": "negative",
+    "mechanism": "Unmonetized capacity eventually forces buyers to slow orders, so a revenue shortfall of this scale is a forward brake on accelerator and data-center demand."
+  },
+  "evidence": [
+    {
+      "source": "Bloomberg (via Yahoo Finance)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/ai-faces-6-trillion-test-010100290.html",
+      "date": "2026-09-28",
+      "excerpt": "Bain & Co. says the global AI industry will need to generate '$6 trillion' in annual revenue by 2031 to justify the scale of capital being deployed on data-center construction worldwide.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Third-party forecast relayed by a single secondary outlet; a projection, not a realized figure."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi (data-center / AI infrastructure industry); Bain & Co (forecaster)",
+  "observedAt": "2026-09-28",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

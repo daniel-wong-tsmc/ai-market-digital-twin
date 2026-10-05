@@ -1,0 +1,44 @@
+{
+  "id": "www-investing-com-a1818002-2026-09-2",
+  "statement": "Within Anthropic's reported partner breakdown, the largest single tranche is about $161.2 billion of Broadcom equipment lease obligations, against up to $84.5 billion for Nvidia-based capacity via a Musk-controlled entity and AMD capacity expected to exceed $20 billion.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "The mix shows a leading lab putting its largest hardware commitment behind custom accelerators rather than merchant GPUs, which matters for where future training and inference sockets land.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "chips.networking-silicon",
+      "chips.eda-ip"
+    ],
+    "direction": "mixed",
+    "mechanism": "Committing the biggest equipment tranche to custom-silicon equipment shifts socket share toward ASIC platforms and away from merchant-GPU platforms at that customer."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/anthropics-518-billion-ai-buildout-hinges-largely-on-deals-that-cannot-be-canceled-filing-shows-4922031",
+      "date": "2026-09-29",
+      "excerpt": "Broadcom: about $161.2 billion of equipment lease obligations, largely non-cancelable, exception for default only.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary wire summary of an undisclosed filing, and the document flags an unresolved discrepancy over whether the $84.5 billion Nvidia-based tranche belongs to xAI or SpaceX."
+  },
+  "dispersion": "Document notes other outlets attribute the same $84.5 billion ceiling to SpaceX rather than xAI; discrepancy unresolved.",
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "anthropic",
+  "observedAt": "2026-09-29",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

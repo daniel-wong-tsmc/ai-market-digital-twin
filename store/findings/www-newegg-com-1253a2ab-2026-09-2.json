@@ -1,0 +1,42 @@
+{
+  "id": "www-newegg-com-1253a2ab-2026-09-2",
+  "statement": "The NVIDIA H200 NVL accelerator card is shown on Newegg as out of stock and coming soon with no price listed, while the older H100 PCIe card is in stock.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Retail unavailability of the newer part alongside availability of the prior generation is a weak but same-day sign that current-generation channel supply is still tight.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hbm-memory"
+    ],
+    "direction": "negative",
+    "mechanism": "No sellable retail inventory of the newer accelerator indicates channel allocation is absorbed upstream, lengthening effective availability for small buyers."
+  },
+  "evidence": [
+    {
+      "source": "Newegg (marketplace listing search results)",
+      "url": "https://www.newegg.com/p/pl?d=h100",
+      "date": "2026-09-29",
+      "excerpt": "Status: 'Out of Stock - Coming Soon' with an 'Auto Notify' option available (no price listed while out of stock)",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "One retailer's stock status is a thin proxy for lead times; no quoted lead-time figure exists in the document."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "leadTimes",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": -1,
+  "magnitude": 1,
+  "entity": "market",
+  "observedAt": "2026-09-29",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

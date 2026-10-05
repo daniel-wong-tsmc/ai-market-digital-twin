@@ -1,19 +1,19 @@
 {
- "asOf": "2026-09-26",
+ "asOf": "2026-09-29",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 22,
+   "checkCount": 23,
    "id": "dim-bottleneck",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-26",
+    "assessedAsOf": "2026-09-29",
     "claimFindingIds": [
-     "techcrunch-com-de27e2eb-2026-09-1",
-     "techcrunch-com-de27e2eb-2026-09-2",
-     "nebius-com-3bbd8084-2026-09-1"
+     "nebius-com-3bbd8084-2026-09-1",
+     "www-newegg-com-1253a2ab-2026-09-2",
+     "finance-yahoo-com-1404e5b0-2026-09-3"
     ],
-    "reasoning": "A named 2.45-gigawatt site now risks missing its 2028 opening on a permit pushed to February 1, 2027, and rental prices rise again from October 1 - the limit has moved to buildings and power without the chip shortage easing.",
+    "reasoning": "Prices moved against buyers again: Nebius lifts on-demand rates from October 1, the H200 card shows no price on Newegg, and Nvidia still says it can supply only 70% of the demand it sees.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -25,19 +25,18 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 13
+   "worsenedCount": 14
   },
   {
-   "checkCount": 22,
+   "checkCount": 23,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-26",
+    "assessedAsOf": "2026-09-29",
     "claimFindingIds": [
-     "inferact-ai-ef541a77-2026-09-1",
-     "techcrunch-com-2913d505-2026-09-3"
+     "www-investing-com-a1818002-2026-09-2"
     ],
-    "reasoning": "An independent test put sixteen of Google's own chips at 700 tokens a second against 452 on sixteen Nvidia GB200 chips, and the new Anthropic-Akamai deal is framed as a bet on ordinary server chips rather than GPU training.",
+    "reasoning": "In the biggest buyer's own filing, the largest hardware obligation is about $161.2 billion of Broadcom equipment leases, against up to $84.5 billion of Nvidia-based capacity, so custom silicon now outweighs merchant parts in that book.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -49,20 +48,20 @@
     "kind": "dimension-weak",
     "label": "moat"
    },
-   "worsenedCount": 12
+   "worsenedCount": 13
   },
   {
-   "checkCount": 21,
+   "checkCount": 22,
    "id": "constraint-stacked-memory-and-server-dram",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-26",
+    "assessedAsOf": "2026-09-29",
     "claimFindingIds": [
-     "techcrunch-com-2913d505-2026-09-2",
-     "www-supermicro-com-9a2c110b-2026-09-2"
+     "en-sedaily-com-08f31bef-2026-09-1",
+     "en-sedaily-com-08f31bef-2026-09-2"
     ],
-    "reasoning": "Akamai is adding about $1.7 billion this year purely to pre-buy memory parts, while each new Vera Rubin rack carries 20.7 terabytes of high-speed memory - demand on the same scarce supply is rising, not falling.",
-    "status": "worsened"
+    "reasoning": "No new memory evidence arrived today. The latest figures, from 7 September, still show Samsung and SK hynix stockpiles below ten days and next year's memory demand outrunning supply by more than ten percentage points.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -99,17 +98,17 @@
    "worsenedCount": 3
   },
   {
-   "checkCount": 9,
+   "checkCount": 10,
    "id": "constraint-high-bandwidth-memory-and-server-memory",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-09-26",
+    "assessedAsOf": "2026-09-29",
     "claimFindingIds": [
-     "techcrunch-com-2913d505-2026-09-2",
-     "www-supermicro-com-9a2c110b-2026-09-2"
+     "parameter-io-718c27d9-2026-09-1",
+     "parameter-io-718c27d9-2026-09-3"
     ],
-    "reasoning": "A buyer is now spending roughly $1.7 billion ahead of need to secure memory, and a standard 16-rack block of the newest machines needs 331 terabytes of it, so the queue for memory is getting longer.",
-    "status": "worsened"
+    "reasoning": "No new high-bandwidth memory evidence arrived today. The standing picture holds: memory's share of AI infrastructure spending is forecast to reach 57% by 2027 from 14% in 2025, and each high-bandwidth part consumes about three times the factory capacity of ordinary memory.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-09",
    "reopenedAsOf": [],

@@ -1,0 +1,56 @@
+{
+  "id": "www-investing-com-a1818002-2026-09-1",
+  "statement": "Anthropic's confidential IPO prospectus, as reported by Reuters, sets out at least $518 billion of AI infrastructure spending over a decade across six partners, with about 80% non-cancelable or payable regardless of usage.",
+  "kind": "measured",
+  "value": {
+    "number": 518.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Non-cancelable commitments of this size are the firmest kind of forward compute demand: they are paid whether or not the capacity is used, so they hold up orders even if usage disappoints.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo",
+      "chips.hbm-memory",
+      "models.frontier-closed"
+    ],
+    "direction": "positive",
+    "mechanism": "Take-or-pay infrastructure obligations to cloud and equipment partners fund accelerator, memory and data-center procurement on a fixed schedule."
+  },
+  "evidence": [
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/anthropics-518-billion-ai-buildout-hinges-largely-on-deals-that-cannot-be-canceled-filing-shows-4922031",
+      "date": "2026-09-29",
+      "excerpt": "Anthropic said it expects to spend at least $518 billion over a decade building AI infrastructure with six partners, according to a confidential IPO prospectus seen by Reuters",
+      "tier": "secondary"
+    },
+    {
+      "source": "Reuters (via Investing.com)",
+      "url": "https://www.investing.com/news/stock-market-news/anthropics-518-billion-ai-buildout-hinges-largely-on-deals-that-cannot-be-canceled-filing-shows-4922031",
+      "date": "2026-09-29",
+      "excerpt": "About 80% of that sum is non-cancelable or requires payment regardless of usage.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Wire report on a confidential prospectus that the document says has not been publicly disclosed, so the filing itself cannot be checked."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "anthropic",
+  "observedAt": "2026-09-29",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

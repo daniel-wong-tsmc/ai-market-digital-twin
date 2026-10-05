@@ -1,0 +1,43 @@
+{
+  "id": "www-sec-gov-5fbfae3a-2026-09-1",
+  "statement": "AMD disclosed in a Form 8-K that it agreed to acquire all equity of World Labs Technologies, Inc. for approximately $8.2 billion paid in AMD common stock, with the share count to be set by a ten-day VWAP before closing.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "An all-stock acquisition of this size moves AMD up the stack into AI model capability, which is how a merchant-GPU challenger creates pull-through demand for its own accelerators.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.multimodal-media",
+      "infrastructure.cluster-software"
+    ],
+    "direction": "positive",
+    "mechanism": "Owning model and software capability gives AMD workloads tuned to its accelerators, strengthening its platform case against the incumbent merchant-GPU stack."
+  },
+  "evidence": [
+    {
+      "source": "SEC EDGAR (AMD Form 8-K)",
+      "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000182/amd-20260926.htm",
+      "date": "2026-09-28",
+      "excerpt": "The filing states AMD entered into an Agreement and Plan of Merger to acquire all of the equity interests in World Labs Technologies, Inc. for a total purchase price of approximately $8.2 billion to be paid in shares of AMD's common stock.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: AMD's own Form 8-K filed with the SEC, Item 3.02, signed by the company's General Counsel."
+  },
+  "dispersion": null,
+  "asOf": "2026-09",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "amd",
+  "observedAt": "2026-09-28",
+  "capturedAt": "2026-09-30T02:44:15Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
