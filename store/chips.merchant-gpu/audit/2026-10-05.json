@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "categoryId": "chips.merchant-gpu",
+  "asOf": "2026-10-05",
+  "claims": [
+    {
+      "claimKey": "scene:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-coreweave-com-48421c71-2026-10-1",
+        "fourweekmba-com-6d405c72-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "scene:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "epoch-ai-66e8920b-2026-10-1",
+        "english-news-cn-da31334c-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "scene:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "huggingnews-com-e065e8b2-2026-10-1",
+        "www-gurufocus-com-272ed1ad-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "scene:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "epoch-ai-66e8920b-2026-10-2",
+        "huggingnews-com-733d4ee5-2026-10-1",
+        "huggingnews-com-733d4ee5-2026-10-2",
+        "blogs-nvidia-com-48789621-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-coreweave-com-48421c71-2026-10-1",
+        "fourweekmba-com-6d405c72-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "epoch-ai-66e8920b-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "bullet:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "huggingnews-com-e065e8b2-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-bottleneck",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "huggingnews-com-e065e8b2-2026-10-1",
+        "epoch-ai-66e8920b-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "issue:dim-moat",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "blog-google-582f7153-2026-10-1",
+        "blogs-nvidia-com-48789621-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-stacked-memory-and-server-dram",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "epoch-ai-66e8920b-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "issue:constraint-high-bandwidth-memory-and-server-memory",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "english-news-cn-da31334c-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "impl:0",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "blogs-nvidia-com-48789621-2026-10-1",
+        "finimize-com-5579c429-2026-10-1",
+        "finimize-com-5579c429-2026-10-2"
+      ]
+    },
+    {
+      "claimKey": "impl:1",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "epoch-ai-66e8920b-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "impl:2",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "qz-com-cda41a40-2026-10-1",
+        "qz-com-cda41a40-2026-10-2",
+        "qz-com-cda41a40-2026-10-3"
+      ]
+    },
+    {
+      "claimKey": "impl:3",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-coreweave-com-48421c71-2026-10-1",
+        "fourweekmba-com-6d405c72-2026-10-1",
+        "english-news-cn-da31334c-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "impl:4",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "www-justice-gov-f7b8acee-2026-10-1",
+        "finance-yahoo-com-1a5cbc0e-2026-10-1",
+        "finance-yahoo-com-1a5cbc0e-2026-10-2"
+      ]
+    },
+    {
+      "claimKey": "impl:5",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "huggingnews-com-733d4ee5-2026-10-1",
+        "huggingnews-com-733d4ee5-2026-10-2",
+        "www-gurufocus-com-aa01ec4f-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "impl:6",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "huggingnews-com-e065e8b2-2026-10-1",
+        "www-gurufocus-com-272ed1ad-2026-10-1"
+      ]
+    },
+    {
+      "claimKey": "impl:7",
+      "verdict": "clean",
+      "flaggedTokens": [],
+      "unresolvedIds": [],
+      "citedFindingIds": [
+        "epoch-ai-66e8920b-2026-10-2"
+      ]
+    }
+  ],
+  "summary": {
+    "claimsAudited": 19,
+    "flagged": 0,
+    "skipped": 0
+  }
+}

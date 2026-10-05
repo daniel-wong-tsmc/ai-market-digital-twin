@@ -2,51 +2,11 @@
   "schemaVersion": "1.0",
   "categoryId": "chips.merchant-gpu",
   "asOf": "2026-10",
-  "capturedAt": "2026-10-05T01:06:16Z",
+  "capturedAt": "2026-10-05T07:19:20Z",
   "manifestRef": "manifests/chips.merchant-gpu.json",
   "manifestVersion": "1.0",
   "manifestAsOf": "2026-06",
   "gaps": [
-    {
-      "type": "source",
-      "id": "nvda-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'NVIDIA earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['investor.nvidia.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "amd-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'AMD earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['ir.amd.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "intc-earnings",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Intel earnings / 10-Q / 10-K / investor relations' was not fetched. URL patterns: ['intc.com', 'sec.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "lambda-gpu-pricing",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Lambda Labs and open-web GPU rental price trackers' was not fetched. URL patterns: ['lambdalabs.com/gpu-cloud', 'vast.ai/pricing', 'runpod.io/pricing']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "coreweave-pricing",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'CoreWeave GPU pricing page' was not fetched. URL patterns: ['coreweave.com']",
-      "paywalledNote": null
-    },
     {
       "type": "source",
       "id": "trendforce-gpu-tracker",
@@ -65,14 +25,6 @@
     },
     {
       "type": "source",
-      "id": "open-web-asic",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Open-web reporting on hyperscaler custom ASICs (competitive alternatives)' was not fetched. URL patterns: ['blog.google', 'aws.amazon.com/machine-learning', 'techcrunch.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "channel-checks",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -85,14 +37,6 @@
       "priority": "required",
       "acquisitionStatus": "not-covered",
       "reason": "Source 'BIS export control notices and Federal Register' was not fetched. URL patterns: ['bis.doc.gov', 'federalregister.gov']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "nvda-10k-risk-factors",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'NVIDIA 10-K risk factor section (geopolitical / export control exposure)' was not fetched. URL patterns: ['investor.nvidia.com/annual-reports', 'sec.gov']",
       "paywalledNote": null
     },
     {
@@ -121,22 +65,6 @@
     },
     {
       "type": "source",
-      "id": "ai-app-revenue",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Hyperscaler AI run-rate and model-lab ARR disclosures' was not fetched. URL patterns: ['microsoft.com', 'blogs.microsoft.com', 'openai.com', 'anthropic.com', 'blog.google', 'aws.amazon.com/machine-learning', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
-      "id": "frontier-release-funding",
-      "priority": "required",
-      "acquisitionStatus": "not-covered",
-      "reason": "Source 'Frontier model release and funding trackers (company newsrooms + industry press)' was not fetched. URL patterns: ['openai.com', 'anthropic.com', 'blog.google', 'techcrunch.com', 'semianalysis.com']",
-      "paywalledNote": null
-    },
-    {
-      "type": "source",
       "id": "upstream-component-leadtimes",
       "priority": "required",
       "acquisitionStatus": "not-covered",
@@ -153,26 +81,25 @@
     }
   ],
   "gapCounts": {
-    "total": 18,
-    "source": 17,
+    "total": 9,
+    "source": 8,
     "indicator": 1,
-    "required": 17,
+    "required": 8,
     "preferred": 0,
     "optional": 1,
     "waived": 0,
     "paywalled": 2
   },
   "judgedUrls": [
-    "https://blogs.nvidia.com/blog/local-ai-dgx-spark-64gb-sync/",
-    "https://english.news.cn/asiapacific/20261001/3cb106dd2d164bfc952f475a78020cfd/c.html",
-    "https://finance.yahoo.com/technology/ai/articles/chinese-state-firm-financed-restricted-132108282.html",
-    "https://finimize.com/content/spacexai-eyes-microsoft-as-demand-for-ai-compute-grows",
-    "https://huggingnews.com/ai/aws-raises-reserved-gpu-prices-15percent-for-4th-straight-quarter-4567621d",
-    "https://huggingnews.com/ai/wall-street-rejects-nvidia-gpu-asset-plan-with-25percent-collateral-dema-4adb2e62",
-    "https://lambda.ai/pricing",
-    "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226",
-    "https://www.gurufocus.com/news/9106855/amazon-plans-8-billion-sale-of-nvidia-chips-to-optimize-balance-sheet",
-    "https://www.justice.gov/opa/pr/california-man-arrested-smuggling-more-300-million-export-controlled-computer-servers-china"
+    "https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-prototype/",
+    "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast/",
+    "https://epoch.ai/publications/estimating-the-agent-population",
+    "https://fourweekmba.com/ai-aws-ec2-capacity-block-rates-october-2026/",
+    "https://huggingnews.com/ai/update-us-data-centers-need-110b-for-45-gw-power-by-2030-a1feccd1",
+    "https://www.coreweave.com/pricing",
+    "https://www.gurufocus.com/news/9106040/japans-140-billion-data-center-investment-plan-with-jera",
+    "https://www.runpod.io/pricing",
+    "https://www.sec.gov/Archives/edgar/data/2488/000000248826000182/amd-20260926.htm"
   ],
   "judgedIndicatorIds": [
     "D2",

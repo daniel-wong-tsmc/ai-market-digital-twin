@@ -1,0 +1,51 @@
+{
+  "id": "epoch-ai-66e8920b-2026-10-1",
+  "statement": "Epoch AI projects cumulative HBM supply rising from 2.21 billion GB in 2025 to 3.75 billion in 2026 and 5.81 billion in 2027, and names HBM availability as the bottleneck on AI hardware production.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "HBM bit supply is the gating input for accelerator output, so a projected multi-year expansion loosens the hard ceiling on deployable GPU capacity while confirming memory is the binding constraint today.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.neocloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Growing cumulative HBM shipments raise the number of accelerators that can be built and served, relieving the memory bottleneck that currently caps concurrent AI workloads."
+  },
+  "evidence": [
+    {
+      "source": "Epoch AI",
+      "url": "https://epoch.ai/publications/estimating-the-agent-population",
+      "date": "2026-10-01",
+      "excerpt": "5.81",
+      "tier": "secondary"
+    },
+    {
+      "source": "Epoch AI",
+      "url": "https://epoch.ai/publications/estimating-the-agent-population",
+      "date": "2026-10-01",
+      "excerpt": "16-56 million concurrent agents",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary-tier research publisher presenting its own forward projection, not a producer filing or shipment report; the indicator's canonical unit is percent year-on-year so no figure is stamped as the value."
+  },
+  "dispersion": "Cumulative HBM supply 2.21bn GB (2025), 3.75bn GB (2026), 5.81bn GB (2027), about 11.77bn GB cumulative shipments through 2027.",
+  "asOf": "2026-10",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "multi (AI chip supply / HBM-constrained hardware, frontier and open models)",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T07:05:01Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

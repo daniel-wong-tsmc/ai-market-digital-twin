@@ -1,0 +1,98 @@
+{
+  "asOf": "2026-10",
+  "docsDroppedKnown": [],
+  "findingsNew": [
+    {
+      "findingId": "blog-google-582f7153-2026-10-1",
+      "entity": "Google / Alphabet (TPU, competitive to NVIDIA/AMD GPU)",
+      "indicatorId": "S9",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-gurufocus-com-272ed1ad-2026-10-1",
+      "entity": "Japan (government), Dell, JERA, Rhaelm, multi (AI data-center / power supply chain)",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "blogs-nvidia-com-48789621-2026-10-2",
+      "entity": "NVIDIA / OpenAI",
+      "indicatorId": "D2",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "blogs-nvidia-com-48789621-2026-10-1",
+      "entity": "NVIDIA / OpenAI",
+      "indicatorId": "designWins",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "www-coreweave-com-48421c71-2026-10-1",
+      "entity": "multi",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "epoch-ai-66e8920b-2026-10-2",
+      "entity": "multi (AI chip supply / HBM-constrained hardware, frontier and open models)",
+      "indicatorId": "apiArr",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "epoch-ai-66e8920b-2026-10-1",
+      "entity": "multi (AI chip supply / HBM-constrained hardware, frontier and open models)",
+      "indicatorId": "hbmSupplyCapex",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "huggingnews-com-e065e8b2-2026-10-1",
+      "entity": "multi (US data-center / power-grid supply chain); Moody's Ratings (forecaster)",
+      "indicatorId": "hyperscalerCapexRevision",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    },
+    {
+      "findingId": "fourweekmba-com-6d405c72-2026-10-1",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "new",
+      "priorFindingId": null,
+      "detail": ""
+    }
+  ],
+  "findingsUpdate": [
+    {
+      "findingId": "www-sec-gov-a8a21aa9-2026-10-1",
+      "entity": "amd",
+      "indicatorId": "S9",
+      "verdict": "update",
+      "priorFindingId": "ir-amd-com-841cc4c4-2026-09-2",
+      "detail": "magnitude 2 -> 1"
+    }
+  ],
+  "findingsDuplicate": [
+    {
+      "findingId": "www-runpod-io-a0639346-2026-10-1",
+      "entity": "nvidia",
+      "indicatorId": "D6",
+      "verdict": "duplicate",
+      "priorFindingId": "www-runpod-io-a325f77d-2026-09-1",
+      "detail": "unchanged within tolerance"
+    }
+  ]
+}

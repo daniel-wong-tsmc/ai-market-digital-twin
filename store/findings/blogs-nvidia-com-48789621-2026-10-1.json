@@ -1,0 +1,51 @@
+{
+  "id": "blogs-nvidia-com-48789621-2026-10-1",
+  "statement": "OpenAI's GPT-6 Astra Ultrafast inference tier is live on NVIDIA Blackwell GPUs, with Vera Rubin GPUs also named, a customer-named design win for NVIDIA's flagship parts.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A flagship inference tier from the largest frontier-model buyer running natively on Blackwell and Rubin anchors merchant-GPU demand for the current and next architecture generation.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "models.reasoning-agentic",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Production deployment of a named commercial inference tier on Blackwell/Rubin locks in merchant-GPU platform demand and the surrounding software stack for serving frontier models."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA (official, blogs.nvidia.com, authored by Dion Harris)",
+      "url": "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast/",
+      "date": "2026-10-01",
+      "excerpt": "is available now in the OpenAI API and to eligible ChatGPT Work and Codex users.",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA (official, blogs.nvidia.com, authored by Dion Harris)",
+      "url": "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast/",
+      "date": "2026-10-01",
+      "excerpt": "NVIDIA's deep investment in tooling and documentation has enabled us to make our models exceptionally good at programming Blackwell and Rubin GPUs.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary-tier vendor publication with named on-record quotes from OpenAI's inference lead and CTO of compute confirming the deployment."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "NVIDIA / OpenAI",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T07:05:01Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

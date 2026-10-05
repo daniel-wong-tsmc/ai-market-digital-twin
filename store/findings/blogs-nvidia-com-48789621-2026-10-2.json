@@ -1,0 +1,50 @@
+{
+  "id": "blogs-nvidia-com-48789621-2026-10-2",
+  "statement": "NVIDIA states GPT-6 Astra Ultrafast delivers up to 8x faster token generation than Astra Standard mode on its GPU architecture and software stack.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A large throughput step-up on the same hardware family raises useful output per deployed GPU, which supports continued data-center GPU spending, but the claim is vendor-sourced and an 8x multiple is not expressible in this indicator's USD_B unit.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "applications.ai-coding"
+    ],
+    "direction": "positive",
+    "mechanism": "Higher token-generation throughput per GPU improves the serving economics of premium inference tiers, encouraging buyers to expand rather than trim accelerator fleets."
+  },
+  "evidence": [
+    {
+      "source": "NVIDIA (official, blogs.nvidia.com, authored by Dion Harris)",
+      "url": "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast/",
+      "date": "2026-10-01",
+      "excerpt": "up to 8x faster token generation than the Astra Standard mode.",
+      "tier": "primary"
+    },
+    {
+      "source": "NVIDIA (official, blogs.nvidia.com, authored by Dion Harris)",
+      "url": "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast/",
+      "date": "2026-10-01",
+      "excerpt": "We used our internal models to optimize inference on NVIDIA GPUs, and NVIDIA's programmability helped us deliver the acceleration behind Astra Ultrafast.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor's own publication making a marketing-framed 'up to' performance claim with no independent benchmark or disclosed test configuration."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "D2",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "NVIDIA / OpenAI",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T07:05:01Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

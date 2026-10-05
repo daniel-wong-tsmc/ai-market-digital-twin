@@ -1,113 +1,101 @@
 {
-  "asOf": "2026-10-04",
+  "asOf": "2026-10-05",
   "bullets": [
     {
       "chart": {
-        "caption": "Found today — single source: GPUSmith.",
-        "form": "columns",
+        "caption": "Found today — single source: CoreWeave (coreweave.com/pricing).",
+        "form": "bars",
         "points": [
           {
             "hollow": false,
-            "label": "Before January 2026 hike",
-            "sourceUrl": "https://gpusmith.com/articles/en/aws-gpu-instance-pricing",
-            "value": 34.61
+            "label": "NVIDIA GH200",
+            "sourceUrl": "https://www.coreweave.com/pricing",
+            "value": 6.5
           },
           {
             "hollow": false,
-            "label": "After January 2026 hike (~15%, most US regions)",
-            "sourceUrl": "https://gpusmith.com/articles/en/aws-gpu-instance-pricing",
-            "value": 39.8
+            "label": "NVIDIA L40",
+            "sourceUrl": "https://www.coreweave.com/pricing",
+            "value": 10.0
           },
           {
             "hollow": false,
-            "label": "After July 2026 hike (~20%)",
-            "sourceUrl": "https://gpusmith.com/articles/en/aws-gpu-instance-pricing",
-            "value": 47.76
+            "label": "NVIDIA L40S",
+            "sourceUrl": "https://www.coreweave.com/pricing",
+            "value": 18.0
+          },
+          {
+            "hollow": false,
+            "label": "NVIDIA RTX PRO 6000 Blackwell (High Memory)",
+            "sourceUrl": "https://www.coreweave.com/pricing",
+            "value": 20.0
+          },
+          {
+            "hollow": false,
+            "label": "NVIDIA A100",
+            "sourceUrl": "https://www.coreweave.com/pricing",
+            "value": 21.6
+          },
+          {
+            "hollow": false,
+            "label": "NVIDIA GB200 NVL72",
+            "sourceUrl": "https://www.coreweave.com/pricing",
+            "value": 42.0
+          },
+          {
+            "hollow": false,
+            "label": "NVIDIA HGX H100",
+            "sourceUrl": "https://www.coreweave.com/pricing",
+            "value": 49.24
+          },
+          {
+            "hollow": false,
+            "label": "NVIDIA HGX H200",
+            "sourceUrl": "https://www.coreweave.com/pricing",
+            "value": 50.44
+          },
+          {
+            "hollow": false,
+            "label": "NVIDIA HGX B200",
+            "sourceUrl": "https://www.coreweave.com/pricing",
+            "value": 68.8
           }
         ],
         "researched": true,
         "source": {
-          "date": "2026-07-26",
-          "outlet": "GPUSmith",
+          "date": "2026-10-05",
+          "outlet": "CoreWeave (coreweave.com/pricing)",
           "tier": "secondary",
-          "title": "AWS p5e.48xlarge EC2 Capacity Block rate through 2026's quarterly hikes",
-          "url": "https://gpusmith.com/articles/en/aws-gpu-instance-pricing"
+          "title": "CoreWeave on-demand GPU instance hourly prices, by GPU type",
+          "url": "https://www.coreweave.com/pricing"
         },
-        "title": "AWS p5e.48xlarge EC2 Capacity Block rate through 2026's quarterly hikes",
-        "unit": "US$ per instance-hour"
+        "title": "CoreWeave on-demand GPU instance hourly prices, by GPU type",
+        "unit": "US$ per hour"
       },
-      "date": "2026-10-04",
+      "date": "2026-10-05",
       "noChartReason": null,
       "sources": [
+        {
+          "date": "2026-10-05",
+          "outlet": "CoreWeave",
+          "tier": "secondary",
+          "title": "CoreWeave",
+          "url": "https://www.coreweave.com/pricing"
+        },
         {
           "date": "2026-10-01",
-          "outlet": "HuggingNews",
+          "outlet": "FourWeekMBA",
           "tier": "secondary",
-          "title": "HuggingNews",
-          "url": "https://huggingnews.com/ai/aws-raises-reserved-gpu-prices-15percent-for-4th-straight-quarter-4567621d"
+          "title": "FourWeekMBA",
+          "url": "https://fourweekmba.com/ai-aws-ec2-capacity-block-rates-october-2026/"
         }
       ],
-      "storyHref": "story/2026-10-04.html",
-      "text": "Amazon's cloud unit raises reserved graphics-chip rates about 15 percent on October 7, its fourth straight quarterly rise, so rentable capacity is still short."
-    },
-    {
-      "chart": {
-        "caption": "Found today — single source: Yahoo Finance.",
-        "form": "columns",
-        "points": [
-          {
-            "hollow": false,
-            "label": "Q3 FY2025 (ended Aug 3, 2025)",
-            "sourceUrl": "https://finance.yahoo.com/news/broadcoms-revenue-reaches-record-high-211205477.html",
-            "value": 5.2
-          },
-          {
-            "hollow": false,
-            "label": "Q1 FY2026 (ended Feb 1, 2026)",
-            "sourceUrl": "https://finance.yahoo.com/news/broadcom-reports-record-q1-revenue-212900474.html",
-            "value": 8.4
-          },
-          {
-            "hollow": false,
-            "label": "Q2 FY2026 (ended May 3, 2026)",
-            "sourceUrl": "https://finance.yahoo.com/markets/stocks/articles/broadcom-inc-announces-second-quarter-201500695.html",
-            "value": 10.8
-          },
-          {
-            "hollow": false,
-            "label": "Q3 FY2026 (ended Aug 2, 2026)",
-            "sourceUrl": "https://finance.yahoo.com/markets/stocks/articles/broadcom-inc-announces-third-quarter-201500781.html",
-            "value": 16.7
-          }
-        ],
-        "researched": true,
-        "source": {
-          "date": "2026-09-02",
-          "outlet": "Yahoo Finance",
-          "tier": "secondary",
-          "title": "Broadcom quarterly AI semiconductor revenue",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/broadcom-inc-announces-third-quarter-201500781.html"
-        },
-        "title": "Broadcom quarterly AI semiconductor revenue",
-        "unit": "US$ billions"
-      },
-      "date": "2026-10-04",
-      "noChartReason": null,
-      "sources": [
-        {
-          "date": "2026-10-02",
-          "outlet": "Quartz (citing Bloomberg reporting)",
-          "tier": "secondary",
-          "title": "Quartz (citing Bloomberg reporting)",
-          "url": "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226"
-        }
-      ],
-      "storyHref": "story/2026-10-04.html",
-      "text": "Broadcom's banks are assembling $60 billion for custom accelerators, and Anthropic has committed $125.2 billion over five years for that non-merchant chip capacity."
+      "storyHref": "story/2026-10-05.html",
+      "text": "CoreWeave lists prior-generation rental capacity at $49.24 an hour today, with newer reserved capacity at $16.146 per chip per hour from October 7."
     },
     {
       "chart": null,
-      "date": "2026-10-04",
+      "date": "2026-10-05",
       "noChartReason": {
         "cause": "estimate-only",
         "reason": "The number we track for this is our own estimate, not a published figure, so we don't draw it."
@@ -115,14 +103,63 @@
       "sources": [
         {
           "date": "2026-10-01",
-          "outlet": "HuggingNews (aggregation attributing Financial Times and Reuters)",
+          "outlet": "Epoch AI",
           "tier": "secondary",
-          "title": "HuggingNews (aggregation attributing Financial Times and Reuters)",
-          "url": "https://huggingnews.com/ai/wall-street-rejects-nvidia-gpu-asset-plan-with-25percent-collateral-dema-4adb2e62"
+          "title": "Epoch AI",
+          "url": "https://epoch.ai/publications/estimating-the-agent-population"
         }
       ],
-      "storyHref": "story/2026-10-04.html",
-      "text": "Lenders refuse chip-backed loans to small cloud providers unless Nvidia posts up to 25 percent collateral, and its $500 billion funding platform had closed nothing by early October."
+      "storyHref": "story/2026-10-05.html",
+      "text": "Independent researchers name stacked memory, the fast memory packaged next to each chip, as the limit on accelerator output through 2027."
+    },
+    {
+      "chart": {
+        "caption": "Found today — single source: Data Centre Digest.",
+        "form": "columns",
+        "points": [
+          {
+            "hollow": false,
+            "label": "2025",
+            "sourceUrl": "https://datacentredigest.com/from-31-to-66-gigawatts-inside-the-power-demand-curve-that-will-reshape-the-us-grid-by-2027/",
+            "value": 31.0
+          },
+          {
+            "hollow": false,
+            "label": "2026",
+            "sourceUrl": "https://datacentredigest.com/from-31-to-66-gigawatts-inside-the-power-demand-curve-that-will-reshape-the-us-grid-by-2027/",
+            "value": 41.0
+          },
+          {
+            "hollow": false,
+            "label": "2027",
+            "sourceUrl": "https://datacentredigest.com/from-31-to-66-gigawatts-inside-the-power-demand-curve-that-will-reshape-the-us-grid-by-2027/",
+            "value": 66.0
+          }
+        ],
+        "researched": true,
+        "source": {
+          "date": "2026-07-06",
+          "outlet": "Data Centre Digest",
+          "tier": "secondary",
+          "title": "US data center power demand forecast (Goldman Sachs Research)",
+          "url": "https://datacentredigest.com/from-31-to-66-gigawatts-inside-the-power-demand-curve-that-will-reshape-the-us-grid-by-2027/"
+        },
+        "title": "US data center power demand forecast (Goldman Sachs Research)",
+        "unit": "gigawatts"
+      },
+      "date": "2026-10-05",
+      "noChartReason": null,
+      "sources": [
+        {
+          "date": "2026-10-01",
+          "outlet": "HuggingNews (citing Moody's Ratings)",
+          "tier": "secondary",
+          "title": "HuggingNews (citing Moody's Ratings)",
+          "url": "https://huggingnews.com/ai/update-us-data-centers-need-110b-for-45-gw-power-by-2030-a1feccd1"
+        }
+      ],
+      "storyHref": "story/2026-10-05.html",
+      "text": "Moody's Ratings puts the bill for powering American data centres at $110 billion and 45 gigawatts of new generation through 2030."
     }
   ],
   "categoryId": "chips.merchant-gpu",
@@ -131,13 +168,6 @@
       "confidence": "Medium — the underlying reports are single-source in places.",
       "direction": "worsening",
       "evidence": [
-        {
-          "date": "2026-08-29",
-          "outlet": "The Motley Fool",
-          "tier": "secondary",
-          "title": "The Motley Fool",
-          "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
-        },
         {
           "date": "2026-08-10",
           "outlet": "Investing.com (transcript of Micron Technology Leadership Forum 2026)",
@@ -151,13 +181,20 @@
           "tier": "secondary",
           "title": "Seoul Economic Daily (en.sedaily.com)",
           "url": "https://en.sedaily.com/finance/2026/09/07/samsung-sk-hynix-memory-stockpiles-fall-below-10-days"
+        },
+        {
+          "date": "2026-08-29",
+          "outlet": "The Motley Fool",
+          "tier": "secondary",
+          "title": "The Motley Fool",
+          "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
         }
       ],
       "id": "bottleneck",
       "plainName": "What is holding shipments back",
       "ratingWord": "Weak",
-      "reasoning": "Nvidia's own supply commitments jumped mainly to lock up memory, and memory cost is up more than 300 percent year on year, so memory now sets the shipment ceiling even as packaging capacity keeps climbing.",
-      "summary": "Micron says it can supply only about half of what customers ask for and calls server memory the single biggest constraint its largest buyers face, while stockpiles at the two Korean suppliers have fallen under ten days.",
+      "reasoning": "Advanced packaging eased as its shortfall narrowed toward a tenth of demand, leaving memory as the tighter of the two limits.",
+      "summary": "One large memory maker says it can commit only about half of what customers ask, Korean supplier stockpiles have fallen below ten days, and the lead vendor's jump in supply commitments went mainly into buying memory.",
       "tone": "bad"
     },
     {
@@ -172,58 +209,58 @@
           "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
         },
         {
-          "date": "2026-09-10",
-          "outlet": "investor.oracle.com",
-          "tier": "secondary",
-          "title": "investor.oracle.com",
-          "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx"
+          "date": "2026-09-02",
+          "outlet": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+          "tier": "primary",
+          "title": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+          "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
         },
         {
-          "date": "2026-09-29",
-          "outlet": "Reuters (via Investing.com)",
+          "date": "2026-09-11",
+          "outlet": "finance.yahoo.com",
           "tier": "secondary",
-          "title": "Reuters (via Investing.com)",
-          "url": "https://www.investing.com/news/stock-market-news/anthropics-518-billion-ai-buildout-hinges-largely-on-deals-that-cannot-be-canceled-filing-shows-4922031"
+          "title": "finance.yahoo.com",
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-ceo-sees-4-trillion-170228673.html"
         }
       ],
       "id": "momentum",
       "plainName": "How hard buyers are buying",
       "ratingWord": "Very strong",
-      "reasoning": "Anthropic's own filing sets out at least $518 billion of infrastructure spending, roughly four-fifths of it payable regardless of use, so buyers are booking years ahead rather than quarters.",
-      "summary": "Nvidia's July-quarter data-center revenue reached about $89 billion, up 117 percent year over year, with the next quarter guided to $108 billion, and Oracle lifted contracted cloud obligations to $664 billion.",
+      "reasoning": "Cloud order books and multi-year power build plans keep lengthening across several buyers, so the pull is broad.",
+      "summary": "Data-centre revenue at the lead accelerator vendor more than doubled year over year, and management says it can grow about 70 percent while unconstrained customer demand grows faster still.",
       "tone": "good"
     },
     {
-      "confidence": "High — drawn from company filings and calls.",
+      "confidence": "Medium — the underlying reports are single-source in places.",
       "direction": "worsening",
       "evidence": [
         {
-          "date": "2026-08-31",
-          "outlet": "ir.amd.com (AMD Investor Relations press release)",
-          "tier": "primary",
-          "title": "ir.amd.com (AMD Investor Relations press release)",
-          "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live"
+          "date": "2026-07-23",
+          "outlet": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+          "tier": "secondary",
+          "title": "ServeTheHome (AMD Advancing AI 2026 Keynote Live Coverage)",
+          "url": "https://www.servethehome.com/amd-advancing-ai-2026-keynote-live-coverage/"
         },
         {
-          "date": "2026-09-29",
-          "outlet": "Reuters (via Investing.com)",
+          "date": "2026-07-13",
+          "outlet": "Foreign Affairs Forum (faf.ae)",
           "tier": "secondary",
-          "title": "Reuters (via Investing.com)",
-          "url": "https://www.investing.com/news/stock-market-news/anthropics-518-billion-ai-buildout-hinges-largely-on-deals-that-cannot-be-canceled-filing-shows-4922031"
+          "title": "Foreign Affairs Forum (faf.ae)",
+          "url": "https://www.faf.ae/home/2026/7/13/silicons-new-sovereignty-how-nvidias-asic-gambit-is-redrawing-the-map-of-global-ai-power"
         },
         {
-          "date": "2026-10-02",
-          "outlet": "Quartz (citing Bloomberg reporting)",
+          "date": "2026-09-15",
+          "outlet": "moneycheck.com",
           "tier": "secondary",
-          "title": "Quartz (citing Bloomberg reporting)",
-          "url": "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226"
+          "title": "moneycheck.com",
+          "url": "https://moneycheck.com/meta-platforms-meta-stock-climbs-on-custom-ai-chip-development-news"
         }
       ],
       "id": "competitiveStructure",
       "plainName": "Whether buyers have a second choice",
       "ratingWord": "Mixed",
-      "reasoning": "A $22 billion loan aimed at Google's own accelerators, Huawei pulling its roadmap forward by three quarters, and a shipping Instinct-plus-Cisco alternative stack all widen the field of non-merchant options.",
-      "summary": "The largest single tranche in Anthropic's reported partner mix is about $161 billion of Broadcom equipment leases against up to $85 billion of Nvidia-based capacity, and a bank group is assembling $60 billion to fund more custom accelerator supply.",
+      "reasoning": "Alternative supply is widening faster than the lead vendor adds output, which keeps pulling the structure away from one supplier.",
+      "summary": "A second merchant source now ships rack-scale systems in production, while custom in-house accelerators grow roughly three times faster than merchant parts and draw their own bank syndicates.",
       "tone": "mixed"
     },
     {
@@ -255,14 +292,21 @@
       "id": "moat",
       "plainName": "How safe NVIDIA's lead looks",
       "ratingWord": "Weak",
-      "reasoning": "Its hold on the high end survives, with Blackwell credited with over 70 percent of top-tier share, so the position is still commanding and still slipping.",
-      "summary": "Nvidia's accelerator share is tracked down from a 2024 peak of 87 percent toward 75 percent this year, with custom chips growing 44 percent against 16 percent for merchant parts and already consuming roughly two-thirds of reported AI compute.",
+      "reasoning": "Pricing power survives on scale and systems bundling, which is a thinner defence than exclusive software was.",
+      "summary": "The lead vendor's accelerator share is projected to slide from its 2024 peak of 87 percent toward 75 percent as custom chips take volume, and roughly two-thirds of compute already runs on silicon the big clouds design themselves.",
       "tone": "bad"
     },
     {
       "confidence": "High — drawn from company filings and calls.",
       "direction": "worsening",
       "evidence": [
+        {
+          "date": "2026-05-20",
+          "outlet": "NVIDIA Investor Relations press release",
+          "tier": "primary",
+          "title": "NVIDIA Investor Relations press release",
+          "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx"
+        },
         {
           "date": "2026-08-04",
           "outlet": "AMD Investor Relations",
@@ -276,20 +320,13 @@
           "tier": "secondary",
           "title": "BigGo Finance (citing NVIDIA Q2 FY2027 earnings call)",
           "url": "https://finance.biggo.com/news/US_NVDA_2026-08-26"
-        },
-        {
-          "date": "2026-08-29",
-          "outlet": "The Motley Fool",
-          "tier": "secondary",
-          "title": "The Motley Fool",
-          "url": "https://www.fool.com/investing/2026/08/29/nvidia-just-locked-in-a-279-billion-bet-on-memory/"
         }
       ],
       "id": "unitEconomics",
       "plainName": "How profitable the sellers are",
       "ratingWord": "Strong",
-      "reasoning": "The slope turned down, though: Nvidia now names a 71 to 72 percent floor and guides to the low 70s by the end of its fiscal year on memory cost, and wafer prices are set to rise again in 2027.",
-      "summary": "Nvidia still earns about three-quarters of revenue as gross margin and TSMC sits near two-thirds, so vendor economics stay strong in absolute terms.",
+      "reasoning": "Memory cost is the one real drag: management now points to a floor in the low seventies, which trims the level without threatening it.",
+      "summary": "The lead vendor still earns roughly 75 percent gross margin, the second merchant source sits in the mid-fifties, and foundry margin rose about nine points year over year.",
       "tone": "good"
     },
     {
@@ -304,25 +341,25 @@
           "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000052/nvda-20260426.htm"
         },
         {
-          "date": "2026-10-01",
-          "outlet": "HuggingNews (aggregation attributing Financial Times and Reuters)",
-          "tier": "secondary",
-          "title": "HuggingNews (aggregation attributing Financial Times and Reuters)",
-          "url": "https://huggingnews.com/ai/wall-street-rejects-nvidia-gpu-asset-plan-with-25percent-collateral-dema-4adb2e62"
-        },
-        {
           "date": "2026-09-29",
           "outlet": "Reuters (via Investing.com)",
           "tier": "secondary",
           "title": "Reuters (via Investing.com)",
           "url": "https://www.investing.com/news/stock-market-news/anthropics-518-billion-ai-buildout-hinges-largely-on-deals-that-cannot-be-canceled-filing-shows-4922031"
+        },
+        {
+          "date": "2026-10-01",
+          "outlet": "HuggingNews (aggregation attributing Financial Times and Reuters)",
+          "tier": "secondary",
+          "title": "HuggingNews (aggregation attributing Financial Times and Reuters)",
+          "url": "https://huggingnews.com/ai/wall-street-rejects-nvidia-gpu-asset-plan-with-25percent-collateral-dema-4adb2e62"
         }
       ],
       "id": "strategicRisk",
       "plainName": "What could go wrong",
       "ratingWord": "Mixed",
-      "reasoning": "Anthropic carries a $42 billion annual loss against mostly non-cancelable multi-decade obligations, the United States Justice Department is probing a $17 billion licensing deal, and China data-center revenue has effectively gone to zero.",
-      "summary": "Lenders now refuse chip-backed loans to small compute providers unless Nvidia posts up to a quarter of the value as collateral, and the $500 billion third-party financing platform had closed nothing by early October.",
+      "reasoning": "Lenders now ask the chip vendor itself to post collateral before funding smaller cloud buyers, the big outside-capital platform has closed nothing, and criminal export cases keep landing.",
+      "summary": "Three direct customers each take a sixth or more of the lead vendor's revenue, and its biggest model-lab buyer carries mostly non-cancelable multi-decade obligations against a large reported loss.",
       "tone": "mixed"
     }
   ],
@@ -397,8 +434,8 @@
       },
       {
         "date": "2026-10-01",
-        "demand": 9.126666666666676,
-        "supply": -0.2533333333333336
+        "demand": 9.280000000000008,
+        "supply": -0.16000000000000025
       }
     ],
     "sources": [
@@ -413,18 +450,18 @@
             "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2027"
           },
           {
-            "date": "2026-08-31",
-            "outlet": "ir.amd.com (AMD Investor Relations press release)",
+            "date": "2026-09-02",
+            "outlet": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
             "tier": "primary",
-            "title": "ir.amd.com (AMD Investor Relations press release)",
-            "url": "https://ir.amd.com/news-events/press-releases/detail/1298/amd-cisco-and-humain-expand-saudi-arabias-ai-infrastructure-as-amd-instinct-systems-go-live"
+            "title": "Broadcom Inc. (SEC EDGAR 8-K Exhibit 99.1)",
+            "url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000076/avgo-08022026x8kxex99.htm"
           },
           {
-            "date": "2026-08-04",
-            "outlet": "AMD Investor Relations",
+            "date": "2026-05-20",
+            "outlet": "NVIDIA Investor Relations press release",
             "tier": "primary",
-            "title": "AMD Investor Relations",
-            "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
+            "title": "NVIDIA Investor Relations press release",
+            "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-First-Quarter-Fiscal-2027/default.aspx"
           }
         ]
       }
@@ -433,13 +470,9 @@
   "issues": {
     "open": [
       {
-        "assessedAsOf": "2026-10-04",
-        "checkCount": 24,
+        "assessedAsOf": "2026-10-05",
+        "checkCount": 25,
         "history": [
-          {
-            "asOf": "2026-08-31",
-            "status": "worsened"
-          },
           {
             "asOf": "2026-09-01",
             "status": "worsened"
@@ -495,39 +528,39 @@
           {
             "asOf": "2026-10-04",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-10-05",
+            "status": "worsened"
           }
         ],
         "id": "dim-bottleneck",
-        "reasoning": "Amazon's cloud unit is raising reserved rates about 15 percent from October 7, a fourth straight quarterly rise, while Korean chip exports hit a record $60.30 billion in September. Output at record levels and prices still climbing means the shortfall has not closed.",
+        "reasoning": "A second physical gate got priced today: Moody's Ratings puts American data-centre power needs at $110 billion and 45 gigawatts of new generation through 2030, while independent researchers still name stacked memory as the limit on accelerator output.",
         "sources": [
           {
             "date": "2026-10-01",
-            "outlet": "HuggingNews",
+            "outlet": "HuggingNews (citing Moody's Ratings)",
             "tier": "secondary",
-            "title": "HuggingNews",
-            "url": "https://huggingnews.com/ai/aws-raises-reserved-gpu-prices-15percent-for-4th-straight-quarter-4567621d"
+            "title": "HuggingNews (citing Moody's Ratings)",
+            "url": "https://huggingnews.com/ai/update-us-data-centers-need-110b-for-45-gw-power-by-2030-a1feccd1"
           },
           {
             "date": "2026-10-01",
-            "outlet": "Xinhua (English edition, wire restatement citing South Korean trade data)",
+            "outlet": "Epoch AI",
             "tier": "secondary",
-            "title": "Xinhua (English edition, wire restatement citing South Korean trade data)",
-            "url": "https://english.news.cn/asiapacific/20261001/3cb106dd2d164bfc952f475a78020cfd/c.html"
+            "title": "Epoch AI",
+            "url": "https://epoch.ai/publications/estimating-the-agent-population"
           }
         ],
         "status": "worsened",
         "title": "Bottleneck",
         "trackedSince": "2026-08",
-        "worsenedCount": 15
+        "worsenedCount": 16
       },
       {
-        "assessedAsOf": "2026-10-04",
-        "checkCount": 24,
+        "assessedAsOf": "2026-10-05",
+        "checkCount": 25,
         "history": [
-          {
-            "asOf": "2026-08-31",
-            "status": "worsened"
-          },
           {
             "asOf": "2026-09-01",
             "status": "worsened"
@@ -583,32 +616,39 @@
           {
             "asOf": "2026-10-04",
             "status": "worsened"
+          },
+          {
+            "asOf": "2026-10-05",
+            "status": "unchanged"
           }
         ],
         "id": "dim-moat",
-        "reasoning": "Anthropic's $125.2 billion five-year lease is for custom chip capacity, and Broadcom's banks are raising $60 billion more to build it. That is a large block of spending aimed away from merchant graphics chips.",
+        "reasoning": "Today's evidence cuts both ways. Google flew a prototype satellite carrying its own in-house chips, while a leading model developer's fastest paid inference tier went live on Nvidia's flagship parts. No net change.",
         "sources": [
           {
-            "date": "2026-10-02",
-            "outlet": "Quartz (citing Bloomberg reporting)",
+            "date": "2026-10-01",
+            "outlet": "NVIDIA (official, blogs.nvidia.com, authored by Dion Harris)",
+            "tier": "primary",
+            "title": "NVIDIA (official, blogs.nvidia.com, authored by Dion Harris)",
+            "url": "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast/"
+          },
+          {
+            "date": "2026-10-01",
+            "outlet": "Google (official blog.google)",
             "tier": "secondary",
-            "title": "Quartz (citing Bloomberg reporting)",
-            "url": "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226"
+            "title": "Google (official blog.google)",
+            "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-prototype/"
           }
         ],
-        "status": "worsened",
+        "status": "unchanged",
         "title": "Moat",
         "trackedSince": "2026-08",
         "worsenedCount": 14
       },
       {
-        "assessedAsOf": "2026-10-04",
-        "checkCount": 23,
+        "assessedAsOf": "2026-10-05",
+        "checkCount": 24,
         "history": [
-          {
-            "asOf": "2026-08-31",
-            "status": "worsened"
-          },
           {
             "asOf": "2026-09-01",
             "status": "worsened"
@@ -664,17 +704,21 @@
           {
             "asOf": "2026-10-04",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-10-05",
+            "status": "unchanged"
           }
         ],
         "id": "constraint-stacked-memory-and-server-dram",
-        "reasoning": "No new supply or inventory figure arrived today. September Korean exports of $60.30 billion came alongside further memory-chip price rises, so output is growing and cost is still climbing at the same time.",
+        "reasoning": "A first explicit supply path arrived without changing the call: cumulative stacked-memory supply is put at 3.75 billion gigabytes this year and 5.81 billion in 2027, and that availability is still named as the binding limit.",
         "sources": [
           {
             "date": "2026-10-01",
-            "outlet": "Xinhua (English edition, wire restatement citing South Korean trade data)",
+            "outlet": "Epoch AI",
             "tier": "secondary",
-            "title": "Xinhua (English edition, wire restatement citing South Korean trade data)",
-            "url": "https://english.news.cn/asiapacific/20261001/3cb106dd2d164bfc952f475a78020cfd/c.html"
+            "title": "Epoch AI",
+            "url": "https://epoch.ai/publications/estimating-the-agent-population"
           }
         ],
         "status": "unchanged",
@@ -683,8 +727,8 @@
         "worsenedCount": 9
       },
       {
-        "assessedAsOf": "2026-10-04",
-        "checkCount": 11,
+        "assessedAsOf": "2026-10-05",
+        "checkCount": 12,
         "history": [
           {
             "asOf": "2026-09-06",
@@ -729,10 +773,14 @@
           {
             "asOf": "2026-10-04",
             "status": "unchanged"
+          },
+          {
+            "asOf": "2026-10-05",
+            "status": "unchanged"
           }
         ],
         "id": "constraint-high-bandwidth-memory-and-server-memory",
-        "reasoning": "Today's findings add no memory capacity number. The one read-across is indirect: record South Korean exports of $60.30 billion with prices still rising, and a fourth quarterly rental-rate increase, point to the same squeeze as last week.",
+        "reasoning": "No new capacity commitment landed today. South Korean semiconductor exports of $60.30 billion in September came alongside further memory price rises, so output is growing and cost is still climbing at once.",
         "sources": [
           {
             "date": "2026-10-01",
@@ -740,17 +788,10 @@
             "tier": "secondary",
             "title": "Xinhua (English edition, wire restatement citing South Korean trade data)",
             "url": "https://english.news.cn/asiapacific/20261001/3cb106dd2d164bfc952f475a78020cfd/c.html"
-          },
-          {
-            "date": "2026-10-01",
-            "outlet": "HuggingNews",
-            "tier": "secondary",
-            "title": "HuggingNews",
-            "url": "https://huggingnews.com/ai/aws-raises-reserved-gpu-prices-15percent-for-4th-straight-quarter-4567621d"
           }
         ],
         "status": "unchanged",
-        "title": "High-bandwidth memory and server DRAM",
+        "title": "high-bandwidth memory allocation",
         "trackedSince": "2026-09",
         "worsenedCount": 3
       }
@@ -766,31 +807,31 @@
   },
   "schemaVersion": "1.2",
   "verdict": {
-    "answer": "Getting closer. A fourth rent rise, and a $60 billion bet on other chips",
+    "answer": "Getting closer. Memory, not factories, is named as the thing holding supply back",
     "chip": {
       "direction": "narrowing",
       "label": "Gap narrowing"
     },
     "confidence": "We are confident in this read",
     "question": "Is supply catching up to demand?",
-    "soWhat": "Renting a graphics chip gets dearer again next week. The big new money being raised this week is for custom silicon, not merchant parts.",
+    "soWhat": "An independent estimate puts the fast memory stacked beside each chip at the front of the queue of limits. The power bill behind the next wave of sites has now been priced too.",
     "sources": [
       {
         "assessment": true,
         "basedOn": [
           {
-            "date": "2026-10-01",
-            "outlet": "HuggingNews",
+            "date": "2026-10-05",
+            "outlet": "CoreWeave",
             "tier": "secondary",
-            "title": "HuggingNews",
-            "url": "https://huggingnews.com/ai/aws-raises-reserved-gpu-prices-15percent-for-4th-straight-quarter-4567621d"
+            "title": "CoreWeave",
+            "url": "https://www.coreweave.com/pricing"
           },
           {
-            "date": "2026-10-04",
-            "outlet": "Lambda (lambda.ai pricing page)",
+            "date": "2026-10-01",
+            "outlet": "FourWeekMBA",
             "tier": "secondary",
-            "title": "Lambda (lambda.ai pricing page)",
-            "url": "https://lambda.ai/pricing"
+            "title": "FourWeekMBA",
+            "url": "https://fourweekmba.com/ai-aws-ec2-capacity-block-rates-october-2026/"
           }
         ]
       }

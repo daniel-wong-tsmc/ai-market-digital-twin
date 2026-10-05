@@ -1,0 +1,49 @@
+{
+  "id": "blog-google-582f7153-2026-10-1",
+  "statement": "Google launched a prototype Project Suncatcher satellite carrying its own TPUs, advancing an in-house silicon path for space-based machine-learning compute rather than third-party merchant GPUs.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Hyperscaler in-house accelerator programs are the principal structural alternative to merchant GPU purchases, so Google extending TPU use into a new compute concept is an alternative-supply signal.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic"
+    ],
+    "direction": "mixed",
+    "mechanism": "A TPU-based compute concept expands hyperscaler-ASIC optionality and marginally reduces future reliance on merchant NVIDIA/AMD GPUs for the same workloads."
+  },
+  "evidence": [
+    {
+      "source": "Google (official blog.google)",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-prototype/",
+      "date": "2026-10-01",
+      "excerpt": "Today, our prototype satellite for Project Suncatcher, built in partnership with Planet, launched into orbit aboard the Transporter-18 rideshare mission with SpaceX.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Google (official blog.google)",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/project-suncatcher-prototype/",
+      "date": "2026-10-01",
+      "excerpt": "gather in-orbit data on how our TPUs handle the physical stress of spaceflight and the radiation and thermal extremes of space",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary-tier publisher (company blog); chip counts, power output and orbit specifics were not present in the fetched page, so no quantitative claim is made."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Google / Alphabet (TPU, competitive to NVIDIA/AMD GPU)",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T07:05:01Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

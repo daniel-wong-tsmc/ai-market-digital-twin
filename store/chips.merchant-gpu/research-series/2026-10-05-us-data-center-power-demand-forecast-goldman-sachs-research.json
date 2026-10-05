@@ -1,0 +1,29 @@
+{
+  "seriesName": "US data center power demand forecast (Goldman Sachs Research)",
+  "unit": "gigawatts",
+  "form": "columns",
+  "sourceName": "Data Centre Digest",
+  "points": [
+    {
+      "label": "2025",
+      "value": 31.0,
+      "sourceUrl": "https://datacentredigest.com/from-31-to-66-gigawatts-inside-the-power-demand-curve-that-will-reshape-the-us-grid-by-2027/",
+      "publishedAt": "2026-07-06"
+    },
+    {
+      "label": "2026",
+      "value": 41.0,
+      "sourceUrl": "https://datacentredigest.com/from-31-to-66-gigawatts-inside-the-power-demand-curve-that-will-reshape-the-us-grid-by-2027/",
+      "publishedAt": "2026-07-06"
+    },
+    {
+      "label": "2027",
+      "value": 66.0,
+      "sourceUrl": "https://datacentredigest.com/from-31-to-66-gigawatts-inside-the-power-demand-curve-that-will-reshape-the-us-grid-by-2027/",
+      "publishedAt": "2026-07-06"
+    }
+  ],
+  "pair": false,
+  "notes": "This series contextualizes the bullet's $110B/45GW-by-2030 power buildout claim by showing the shorter-run trajectory of US data center power demand (2025-2027) that is driving that investment. Figures are Goldman Sachs Research forecasts as reported by Data Centre Digest (datacentredigest.com) on 2026-07-06; all three points come from the same article/page, quoted verbatim as 'a move from 31 GW in 2025 to 41 GW in 2026 and 66 GW in 2027.' These are forecast/projection numbers, not actuals -- presented here as a published forecast, not as a measured outcome. Could not use S&P Global 451 Research or Goldman Sachs' own site directly, as both returned HTTP 403 Forbidden to an automated fetch.",
+  "bulletIndex": 3
+}

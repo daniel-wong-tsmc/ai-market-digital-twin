@@ -1,0 +1,214 @@
+{
+  "headline": "Memory, not factories, is named as the thing holding supply back",
+  "deck": "An independent estimate puts the fast memory stacked beside each chip at the front of the queue of limits. The power bill behind the next wave of sites has now been priced too.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Renting is still expensive today",
+      "paragraphs": [
+        "CoreWeave's public price list, fetched today, shows prior-generation rental capacity at $49.24 an hour. The company gives no earlier rate to compare it with, so read it as a level, not a move.",
+        "The rate cards for newer capacity are higher still. Amazon's cloud unit published reserved rates that take effect on October 7, with its newest top-end capacity at $16.146 per chip per hour. Sellers only publish numbers like these when there is less to rent than buyers want."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per chip"
+      },
+      "claimFindingIds": [
+        "www-coreweave-com-48421c71-2026-10-1",
+        "fourweekmba-com-6d405c72-2026-10-1"
+      ],
+      "sourceLine": "CoreWeave public pricing page; trade summary of Amazon reserved-capacity rates.",
+      "relatedDocs": [
+        {
+          "url": "https://www.coreweave.com/pricing",
+          "title": "CoreWeave public rental price list",
+          "outlet": "CoreWeave",
+          "date": "2026-10-05"
+        },
+        {
+          "url": "https://fourweekmba.com/ai-aws-ec2-capacity-block-rates-october-2026/",
+          "title": "Amazon reserved capacity rates effective October 7",
+          "outlet": "FourWeekMBA",
+          "date": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "The bottleneck gets named and counted",
+      "paragraphs": [
+        "An independent research group published its own count of stacked memory, the fast memory packaged next to each accelerator chip. It puts cumulative supply at 2.21 billion gigabytes in 2025, 3.75 billion this year and 5.81 billion in 2027, and names the availability of that memory as the limit on how many accelerators get built.",
+        "That is the clearest statement yet of why more factories alone do not fix this. Supply is growing fast and is still the binding limit, because each new chip needs more of this memory than the last one did.",
+        "The trade data points the same way. South Korea's semiconductor exports rose 262.8 percent on a year earlier to $60.30 billion in September, passing $60 billion in a single month for the first time, which the report ties to the build-out and to the memory price rises it set off. Record output and record prices at the same time is what a shortage looks like."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "epoch-ai-66e8920b-2026-10-1",
+        "english-news-cn-da31334c-2026-10-1"
+      ],
+      "sourceLine": "Independent research estimate of stacked-memory supply; South Korean trade data via a wire restatement.",
+      "relatedDocs": []
+    },
+    {
+      "n": 3,
+      "title": "Behind the chips, a power bill",
+      "paragraphs": [
+        "A ratings agency put a number on the other gate. Moody's Ratings estimates American data centres need $110 billion of investment to build 45 gigawatts of new generation through 2030, with their power demand doubling before then and the sites taking 10 percent of the country's electricity.",
+        "Buyers are already designing around that. A group including Dell set out a $140 billion data-centre investment plan in Japan, opening with a $15 billion campus of 400 megawatts near Tokyo that is meant to run off the public grid and to start up around 2028, with an ambition of 3 to 4 gigawatts within five years.",
+        "Sites that arrive late do not just delay themselves. Chips that cannot be plugged in are chips that do not relieve the rental queue."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "huggingnews-com-e065e8b2-2026-10-1",
+        "www-gurufocus-com-272ed1ad-2026-10-1"
+      ],
+      "sourceLine": "Moody's Ratings estimate via news aggregation; GuruFocus on the Japanese data-centre plan.",
+      "relatedDocs": [
+        {
+          "url": "https://huggingnews.com/ai/update-us-data-centers-need-110b-for-45-gw-power-by-2030-a1feccd1",
+          "title": "American data centres need 45 gigawatts of new power by 2030",
+          "outlet": "HuggingNews (citing Moody's Ratings)",
+          "date": "2026-10-01"
+        },
+        {
+          "url": "https://www.gurufocus.com/news/9106040/japans-140-billion-data-center-investment-plan-with-jera",
+          "title": "A $140 billion data-centre plan for Japan starts off-grid",
+          "outlet": "GuruFocus",
+          "date": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "First, whether the demand behind the orders can pay. The same research group estimates that running the workloads it projects for 2027 would imply $2.6 trillion to $5.3 trillion a year of spending, against roughly $1 trillion of developer revenue projected by the end of that year. A gap that wide tends to show up as cancelled orders, not merely slower growth.",
+        "Second, the money. Banks and private credit firms are refusing chip-backed loans to smaller cloud providers unless Nvidia posts collateral of up to 25 percent, because lenders write the chips down over three to four years while Nvidia says they last a decade. Nvidia has aimed at more than $500 billion of outside capital for this build and, as of early October, had closed none of it.",
+        "Third, named demand. A leading model developer's fastest paid inference tier is now live on Nvidia's current flagship chips, with its next generation named alongside. Watch whether more buyers name parts that way, because named ramps are the demand that supply has to catch."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "epoch-ai-66e8920b-2026-10-2",
+        "huggingnews-com-733d4ee5-2026-10-1",
+        "huggingnews-com-733d4ee5-2026-10-2",
+        "blogs-nvidia-com-48789621-2026-10-1"
+      ],
+      "sourceLine": "Independent research estimate of 2027 workload spending; news aggregation on lender terms; vendor blog on a named inference deployment.",
+      "relatedDocs": []
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What one chip costs to buy outright, next to what it costs to rent.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "How hard memory makers are spending to add factory output.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Whether the biggest buyers are still raising their spending plans.",
+      "scene": 3
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How many finished machines are actually leaving the factories.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-10",
+      "text": "Published rental rates stay high, with prior-generation capacity listed at $49.24 an hour.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-09",
+      "text": "South Korean semiconductor exports reached $60.30 billion, past $60 billion in a month for the first time.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "CoreWeave lists prior-generation rental capacity at $49.24 an hour today, with newer reserved capacity at $16.146 per chip per hour from October 7.",
+      "claimFindingIds": [
+        "www-coreweave-com-48421c71-2026-10-1",
+        "fourweekmba-com-6d405c72-2026-10-1"
+      ]
+    },
+    {
+      "text": "Independent researchers name stacked memory, the fast memory packaged next to each chip, as the limit on accelerator output through 2027.",
+      "claimFindingIds": [
+        "epoch-ai-66e8920b-2026-10-1"
+      ]
+    },
+    {
+      "text": "Moody's Ratings puts the bill for powering American data centres at $110 billion and 45 gigawatts of new generation through 2030.",
+      "claimFindingIds": [
+        "huggingnews-com-e065e8b2-2026-10-1"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "A second physical gate got priced today: Moody's Ratings puts American data-centre power needs at $110 billion and 45 gigawatts of new generation through 2030, while independent researchers still name stacked memory as the limit on accelerator output.",
+      "claimFindingIds": [
+        "huggingnews-com-e065e8b2-2026-10-1",
+        "epoch-ai-66e8920b-2026-10-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "unchanged",
+      "reasoning": "Today's evidence cuts both ways. Google flew a prototype satellite carrying its own in-house chips, while a leading model developer's fastest paid inference tier went live on Nvidia's flagship parts. No net change.",
+      "claimFindingIds": [
+        "blog-google-582f7153-2026-10-1",
+        "blogs-nvidia-com-48789621-2026-10-1"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "unchanged",
+      "reasoning": "A first explicit supply path arrived without changing the call: cumulative stacked-memory supply is put at 3.75 billion gigabytes this year and 5.81 billion in 2027, and that availability is still named as the binding limit.",
+      "claimFindingIds": [
+        "epoch-ai-66e8920b-2026-10-1"
+      ]
+    },
+    {
+      "issueId": "constraint-high-bandwidth-memory-and-server-memory",
+      "status": "unchanged",
+      "reasoning": "No new capacity commitment landed today. South Korean semiconductor exports of $60.30 billion in September came alongside further memory price rises, so output is growing and cost is still climbing at once.",
+      "claimFindingIds": [
+        "english-news-cn-da31334c-2026-10-1"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-10-05",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "59a1faba1b03fb02ce1151cc79a9ec4aa030c71f83e427748339406d1209fbb2",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-10-05T07:54:19.543770+00:00"
+  }
+}

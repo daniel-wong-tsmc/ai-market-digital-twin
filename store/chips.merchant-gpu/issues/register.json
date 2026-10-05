@@ -1,18 +1,18 @@
 {
- "asOf": "2026-10-04",
+ "asOf": "2026-10-05",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 24,
+   "checkCount": 25,
    "id": "dim-bottleneck",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-10-04",
+    "assessedAsOf": "2026-10-05",
     "claimFindingIds": [
-     "huggingnews-com-5d8c11e7-2026-10-1",
-     "english-news-cn-da31334c-2026-10-1"
+     "huggingnews-com-e065e8b2-2026-10-1",
+     "epoch-ai-66e8920b-2026-10-1"
     ],
-    "reasoning": "Amazon's cloud unit is raising reserved rates about 15 percent from October 7, a fourth straight quarterly rise, while Korean chip exports hit a record $60.30 billion in September. Output at record levels and prices still climbing means the shortfall has not closed.",
+    "reasoning": "A second physical gate got priced today: Moody's Ratings puts American data-centre power needs at $110 billion and 45 gigawatts of new generation through 2030, while independent researchers still name stacked memory as the limit on accelerator output.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -24,20 +24,20 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 15
+   "worsenedCount": 16
   },
   {
-   "checkCount": 24,
+   "checkCount": 25,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-10-04",
+    "assessedAsOf": "2026-10-05",
     "claimFindingIds": [
-     "qz-com-cda41a40-2026-10-1",
-     "qz-com-cda41a40-2026-10-2"
+     "blog-google-582f7153-2026-10-1",
+     "blogs-nvidia-com-48789621-2026-10-1"
     ],
-    "reasoning": "Anthropic's $125.2 billion five-year lease is for custom chip capacity, and Broadcom's banks are raising $60 billion more to build it. That is a large block of spending aimed away from merchant graphics chips.",
-    "status": "worsened"
+    "reasoning": "Today's evidence cuts both ways. Google flew a prototype satellite carrying its own in-house chips, while a leading model developer's fastest paid inference tier went live on Nvidia's flagship parts. No net change.",
+    "status": "unchanged"
    },
    "openedAsOf": "2026-08",
    "reopenedAsOf": [],
@@ -51,15 +51,15 @@
    "worsenedCount": 14
   },
   {
-   "checkCount": 23,
+   "checkCount": 24,
    "id": "constraint-stacked-memory-and-server-dram",
-   "improvedStreak": 1,
+   "improvedStreak": 2,
    "latest": {
-    "assessedAsOf": "2026-10-04",
+    "assessedAsOf": "2026-10-05",
     "claimFindingIds": [
-     "english-news-cn-da31334c-2026-10-1"
+     "epoch-ai-66e8920b-2026-10-1"
     ],
-    "reasoning": "No new supply or inventory figure arrived today. September Korean exports of $60.30 billion came alongside further memory-chip price rises, so output is growing and cost is still climbing at the same time.",
+    "reasoning": "A first explicit supply path arrived without changing the call: cumulative stacked-memory supply is put at 3.75 billion gigabytes this year and 5.81 billion in 2027, and that availability is still named as the binding limit.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
@@ -97,26 +97,25 @@
    "worsenedCount": 3
   },
   {
-   "checkCount": 11,
+   "checkCount": 12,
    "id": "constraint-high-bandwidth-memory-and-server-memory",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-10-04",
+    "assessedAsOf": "2026-10-05",
     "claimFindingIds": [
-     "english-news-cn-da31334c-2026-10-1",
-     "huggingnews-com-5d8c11e7-2026-10-1"
+     "english-news-cn-da31334c-2026-10-1"
     ],
-    "reasoning": "Today's findings add no memory capacity number. The one read-across is indirect: record South Korean exports of $60.30 billion with prices still rising, and a fourth quarterly rental-rate increase, point to the same squeeze as last week.",
+    "reasoning": "No new capacity commitment landed today. South Korean semiconductor exports of $60.30 billion in September came alongside further memory price rises, so output is growing and cost is still climbing at once.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-09",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "High-bandwidth memory and server DRAM",
+   "title": "high-bandwidth memory allocation",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "High-bandwidth memory and server DRAM"
+    "label": "high-bandwidth memory allocation"
    },
    "worsenedCount": 3
   }

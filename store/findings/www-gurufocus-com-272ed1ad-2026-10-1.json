@@ -1,0 +1,53 @@
+{
+  "id": "www-gurufocus-com-272ed1ad-2026-10-1",
+  "statement": "Dell, JERA and UK-based Rhaelm have set out a $140 billion AI data-center investment initiative in Japan, starting with a $15 billion, 400 MW off-grid campus near Tokyo targeted to operate around 2028 and an ambition of 3-4 GW within five years.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A multi-gigawatt, gas-powered buildout outside the US and China widens the geographic base of accelerator demand and shows power procurement, not silicon alone, shaping where capacity lands.",
+  "impact": {
+    "targets": [
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "energy.procurement",
+      "energy.grid-transmission",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "positive",
+    "mechanism": "New dedicated-generation data-center capacity at gigawatt scale creates fresh sites that must be filled with accelerators, adding to forward merchant-GPU and power-equipment demand."
+  },
+  "evidence": [
+    {
+      "source": "GuruFocus",
+      "url": "https://www.gurufocus.com/news/9106040/japans-140-billion-data-center-investment-plan-with-jera",
+      "date": "2026-10-01",
+      "excerpt": "140 billion investment initiative",
+      "tier": "secondary"
+    },
+    {
+      "source": "GuruFocus",
+      "url": "https://www.gurufocus.com/news/9106040/japans-140-billion-data-center-investment-plan-with-jera",
+      "date": "2026-10-01",
+      "excerpt": "400 MW data center",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet describing announced intentions and costed ambitions rather than signed contracts; the indicator's canonical unit is a revision direction, so no figure is stamped as the value."
+  },
+  "dispersion": "$140bn initiative overall; first project $15bn for 400 MW near Tokyo; 3-4 GW ambition within five years costed at $35-45bn per gigawatt; separate Japanese government target of about $206bn by 2035.",
+  "asOf": "2026-10",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Japan (government), Dell, JERA, Rhaelm, multi (AI data-center / power supply chain)",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T07:05:01Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

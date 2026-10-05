@@ -1,0 +1,53 @@
+{
+  "id": "fourweekmba-com-6d405c72-2026-10-1",
+  "statement": "AWS published EC2 Capacity Blocks for ML per-accelerator-hour rates effective October 7, 2026, with P6-B300 at $16.146 per accelerator-hour and no prior rates shown for comparison.",
+  "kind": "measured",
+  "value": {
+    "number": 16.146,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "This is a static rental price level with no stated baseline or change, so it serves as a display overlay on GPU rental pricing rather than a directional signal.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Published reserved-block accelerator rental rates set the visible cost of renting NVIDIA accelerators from a hyperscaler, which anchors buy-versus-rent comparisons without itself indicating a change."
+  },
+  "evidence": [
+    {
+      "source": "FourWeekMBA",
+      "url": "https://fourweekmba.com/ai-aws-ec2-capacity-block-rates-october-2026/",
+      "date": "2026-10-01",
+      "excerpt": "P6-B300: $16.146 per accelerator-hour.",
+      "tier": "secondary"
+    },
+    {
+      "source": "FourWeekMBA",
+      "url": "https://fourweekmba.com/ai-aws-ec2-capacity-block-rates-october-2026/",
+      "date": "2026-10-01",
+      "excerpt": "the page publishes no prior rates. No direction of change -- up, down, or flat -- can be established from what AWS has published.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single secondary outlet restating a vendor pricing page; the article itself states no prior rates are published, and the circulating 15% increase framing traces to an unconfirmed social post."
+  },
+  "dispersion": "Per accelerator-hour: P6-B300 $16.146, P6-B200 $14.208, P5en $7.895, P5e $6.866, P5 $5.970, P4de $2.546, P4d $1.696; GovCloud about 4.17% higher for P6.",
+  "asOf": "2026-10",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T07:05:01Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "www-sec-gov-a8a21aa9-2026-10-1",
+  "statement": "AMD disclosed in a Form 8-K that it agreed on September 26, 2026 to acquire all equity interests in World Labs Technologies for approximately $8.2 billion, paid entirely in AMD common stock.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "An all-stock acquisition of this size is AMD spending balance-sheet capacity to broaden its AI capability stack, which strengthens the credibility of the main alternative to NVIDIA in merchant accelerators.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.ai-silicon-startups",
+      "models.multimodal-media"
+    ],
+    "direction": "positive",
+    "mechanism": "Consolidating an AI technology company into AMD deepens the non-NVIDIA accelerator and software offering available to buyers, widening alternative supply in the merchant-GPU market."
+  },
+  "evidence": [
+    {
+      "source": "SEC EDGAR (AMD Form 8-K)",
+      "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000182/amd-20260926.htm",
+      "date": "2026-09-28",
+      "excerpt": "all of the equity interests in World Labs Technologies, Inc.",
+      "tier": "primary"
+    },
+    {
+      "source": "SEC EDGAR (AMD Form 8-K)",
+      "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000182/amd-20260926.htm",
+      "date": "2026-09-28",
+      "excerpt": "in shares of the Company's common stock, par value $0.01 per share.",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "Primary evidence: AMD's own Form 8-K filed with the SEC and signed by its General Counsel."
+  },
+  "dispersion": "Purchase price about $8.2 billion; final share count to be set by a ten-trading-day volume-weighted average price before closing.",
+  "asOf": "2026-10",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 1,
+  "entity": "amd",
+  "observedAt": "2026-09-28",
+  "capturedAt": "2026-10-05T07:05:01Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

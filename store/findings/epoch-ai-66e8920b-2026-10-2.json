@@ -1,0 +1,52 @@
+{
+  "id": "epoch-ai-66e8920b-2026-10-2",
+  "statement": "Epoch AI estimates that running the projected 2027 agent population at modest utilization would imply $2.6-5.3 trillion a year of API-equivalent spending, far above the roughly $1 trillion of developer revenue projected by end-2027.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "If the compute being built can only be monetized at a fraction of its API-equivalent cost, the revenue base supporting future accelerator orders is thinner than the hardware ramp implies.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.frontier-closed",
+      "models.open-weight",
+      "infrastructure.neocloud",
+      "applications.agent-platforms"
+    ],
+    "direction": "negative",
+    "mechanism": "A gap between implied inference spending and realistic developer revenue constrains API monetization, which is the cash flow that ultimately funds GPU purchases."
+  },
+  "evidence": [
+    {
+      "source": "Epoch AI",
+      "url": "https://epoch.ai/publications/estimating-the-agent-population",
+      "date": "2026-10-01",
+      "excerpt": "$2.6-5.3 trillion a year",
+      "tier": "secondary"
+    },
+    {
+      "source": "Epoch AI",
+      "url": "https://epoch.ai/publications/estimating-the-agent-population",
+      "date": "2026-10-01",
+      "excerpt": "1.9 billion concurrent agents",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Scenario arithmetic from a single secondary publisher resting on utilization and efficiency assumptions that the report itself spans across a 24 million to 24 billion worker range."
+  },
+  "dispersion": "Implied API-equivalent spend $2.6-5.3 trillion a year against roughly $1 trillion of projected developer revenue by end-2027.",
+  "asOf": "2026-10",
+  "indicatorId": "apiArr",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi (AI chip supply / HBM-constrained hardware, frontier and open models)",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T07:05:01Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

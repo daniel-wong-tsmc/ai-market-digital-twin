@@ -1,0 +1,53 @@
+{
+  "id": "www-coreweave-com-48421c71-2026-10-1",
+  "statement": "CoreWeave's public pricing page lists on-demand NVIDIA HGX H100 capacity at $49.24 per hour, with no prior rate shown for comparison.",
+  "kind": "measured",
+  "value": {
+    "number": 49.24,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "This is a static published rental level with no stated baseline or change, so it functions as a price overlay on GPU rental economics rather than a directional demand or supply signal.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Published neocloud on-demand rates set the visible rental cost of NVIDIA accelerators and anchor committed-contract negotiations, without by itself indicating a change in either direction."
+  },
+  "evidence": [
+    {
+      "source": "CoreWeave",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-10-05",
+      "excerpt": "NVIDIA HGX H100: $49.24 per hour on-demand.",
+      "tier": "secondary"
+    },
+    {
+      "source": "CoreWeave",
+      "url": "https://www.coreweave.com/pricing",
+      "date": "2026-10-05",
+      "excerpt": "up to 60% discounts over our On-Demand prices for committed usage",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Vendor list page read live and classified secondary tier; no reserved-contract figures are published and no prior rates appear, so no change can be established."
+  },
+  "dispersion": "North America on-demand per hour: HGX H100 $49.24, HGX H200 $50.44, GB200 NVL72 $42.00, HGX B200 $68.80; committed usage discounted up to 60%.",
+  "asOf": "2026-10",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "multi",
+  "observedAt": "2026-10-05",
+  "capturedAt": "2026-10-05T07:05:01Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

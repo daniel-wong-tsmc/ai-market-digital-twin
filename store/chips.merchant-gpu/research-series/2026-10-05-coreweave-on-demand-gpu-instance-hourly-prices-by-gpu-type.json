@@ -1,0 +1,65 @@
+{
+  "seriesName": "CoreWeave on-demand GPU instance hourly prices, by GPU type",
+  "unit": "US$ per hour",
+  "form": "bars",
+  "sourceName": "CoreWeave (coreweave.com/pricing)",
+  "points": [
+    {
+      "label": "NVIDIA GH200",
+      "value": 6.5,
+      "sourceUrl": "https://www.coreweave.com/pricing",
+      "publishedAt": "2026-10-05"
+    },
+    {
+      "label": "NVIDIA L40",
+      "value": 10.0,
+      "sourceUrl": "https://www.coreweave.com/pricing",
+      "publishedAt": "2026-10-05"
+    },
+    {
+      "label": "NVIDIA L40S",
+      "value": 18.0,
+      "sourceUrl": "https://www.coreweave.com/pricing",
+      "publishedAt": "2026-10-05"
+    },
+    {
+      "label": "NVIDIA RTX PRO 6000 Blackwell (High Memory)",
+      "value": 20.0,
+      "sourceUrl": "https://www.coreweave.com/pricing",
+      "publishedAt": "2026-10-05"
+    },
+    {
+      "label": "NVIDIA A100",
+      "value": 21.6,
+      "sourceUrl": "https://www.coreweave.com/pricing",
+      "publishedAt": "2026-10-05"
+    },
+    {
+      "label": "NVIDIA GB200 NVL72",
+      "value": 42.0,
+      "sourceUrl": "https://www.coreweave.com/pricing",
+      "publishedAt": "2026-10-05"
+    },
+    {
+      "label": "NVIDIA HGX H100",
+      "value": 49.24,
+      "sourceUrl": "https://www.coreweave.com/pricing",
+      "publishedAt": "2026-10-05"
+    },
+    {
+      "label": "NVIDIA HGX H200",
+      "value": 50.44,
+      "sourceUrl": "https://www.coreweave.com/pricing",
+      "publishedAt": "2026-10-05"
+    },
+    {
+      "label": "NVIDIA HGX B200",
+      "value": 68.8,
+      "sourceUrl": "https://www.coreweave.com/pricing",
+      "publishedAt": "2026-10-05"
+    }
+  ],
+  "pair": false,
+  "notes": "All nine figures are read directly off CoreWeave's own public on-demand pricing page (coreweave.com/pricing), which is the same page already cited for the bullet's $49.24/hr HGX H100 rate. This gives the H100 rate context against CoreWeave's own other GPU tiers (older A100/L40 cheaper, newer Blackwell GB200/B200 pricier), rather than against AWS's $16.146/hr Capacity Block rate, because that AWS figure lives on a different site (fourweekmba.com) and rule 5 forbids mixing sites within one series. The page is a live, undated pricing page, not a dated news article, so there is no separate 'publication date' distinct from the access date; publishedAt above is the date this page was read (2026-10-05) and should be understood as 'current as of' rather than a fixed historical publish date. Two tiers shown on the page (GB300 NVL72, HGX B300, and RTX PRO 6000 Standard Memory) list 'Contact sales' instead of a number and were correctly left out per rule 1/9 (no invented figure). This series does not include the October 7 AWS reserved-capacity rate from the bullet; that number's only known home in our research was fourweekmba.com, a different site, so it could not be combined here without violating rule 5.",
+  "bulletIndex": 1
+}

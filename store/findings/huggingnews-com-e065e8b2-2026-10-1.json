@@ -1,0 +1,53 @@
+{
+  "id": "huggingnews-com-e065e8b2-2026-10-1",
+  "statement": "Moody's Ratings estimates US data centers will need $110 billion of investment to build 45 GW of new power generation through 2030, with facility power demand doubling before 2030 and data centers consuming 10% of US electricity.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A rating agency sizing the power buildout required to serve data centers is forward evidence that AI infrastructure spending plans keep expanding, and that electricity is the pacing constraint on accelerator deployment.",
+  "impact": {
+    "targets": [
+      "energy.power-generation",
+      "energy.grid-transmission",
+      "energy.electrical-equipment",
+      "energy.procurement",
+      "infrastructure.datacenter-colo",
+      "chips.merchant-gpu"
+    ],
+    "direction": "positive",
+    "mechanism": "Committed power-generation investment is a prerequisite for energizing new GPU capacity, so a rising required-investment estimate signals continued upward pressure on data-center and accelerator buildout plans."
+  },
+  "evidence": [
+    {
+      "source": "HuggingNews (citing Moody's Ratings)",
+      "url": "https://huggingnews.com/ai/update-us-data-centers-need-110b-for-45-gw-power-by-2030-a1feccd1",
+      "date": "2026-10-01",
+      "excerpt": "110 billion",
+      "tier": "secondary"
+    },
+    {
+      "source": "HuggingNews (citing Moody's Ratings)",
+      "url": "https://huggingnews.com/ai/update-us-data-centers-need-110b-for-45-gw-power-by-2030-a1feccd1",
+      "date": "2026-10-01",
+      "excerpt": "power demand for these facilities will double before 2030",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Secondary aggregator reposting a Moody's note first reported in mid-September 2026; the original Moody's publication was not fetched and the indicator's canonical unit is a revision direction, so no figure is stamped as the value."
+  },
+  "dispersion": "$110 billion of investment for 45 GW through 2030; data centers at 10% of US electricity by 2030.",
+  "asOf": "2026-10",
+  "indicatorId": "hyperscalerCapexRevision",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "multi (US data-center / power-grid supply chain); Moody's Ratings (forecaster)",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T07:05:01Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
