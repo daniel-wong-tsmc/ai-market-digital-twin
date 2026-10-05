@@ -1,19 +1,18 @@
 {
- "asOf": "2026-09-29",
+ "asOf": "2026-10-04",
  "categoryId": "chips.merchant-gpu",
  "issues": [
   {
-   "checkCount": 23,
+   "checkCount": 24,
    "id": "dim-bottleneck",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-29",
+    "assessedAsOf": "2026-10-04",
     "claimFindingIds": [
-     "nebius-com-3bbd8084-2026-09-1",
-     "www-newegg-com-1253a2ab-2026-09-2",
-     "finance-yahoo-com-1404e5b0-2026-09-3"
+     "huggingnews-com-5d8c11e7-2026-10-1",
+     "english-news-cn-da31334c-2026-10-1"
     ],
-    "reasoning": "Prices moved against buyers again: Nebius lifts on-demand rates from October 1, the H200 card shows no price on Newegg, and Nvidia still says it can supply only 70% of the demand it sees.",
+    "reasoning": "Amazon's cloud unit is raising reserved rates about 15 percent from October 7, a fourth straight quarterly rise, while Korean chip exports hit a record $60.30 billion in September. Output at record levels and prices still climbing means the shortfall has not closed.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -25,18 +24,19 @@
     "kind": "dimension-weak",
     "label": "bottleneck"
    },
-   "worsenedCount": 14
+   "worsenedCount": 15
   },
   {
-   "checkCount": 23,
+   "checkCount": 24,
    "id": "dim-moat",
    "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-29",
+    "assessedAsOf": "2026-10-04",
     "claimFindingIds": [
-     "www-investing-com-a1818002-2026-09-2"
+     "qz-com-cda41a40-2026-10-1",
+     "qz-com-cda41a40-2026-10-2"
     ],
-    "reasoning": "In the biggest buyer's own filing, the largest hardware obligation is about $161.2 billion of Broadcom equipment leases, against up to $84.5 billion of Nvidia-based capacity, so custom silicon now outweighs merchant parts in that book.",
+    "reasoning": "Anthropic's $125.2 billion five-year lease is for custom chip capacity, and Broadcom's banks are raising $60 billion more to build it. That is a large block of spending aimed away from merchant graphics chips.",
     "status": "worsened"
    },
    "openedAsOf": "2026-08",
@@ -48,19 +48,18 @@
     "kind": "dimension-weak",
     "label": "moat"
    },
-   "worsenedCount": 13
+   "worsenedCount": 14
   },
   {
-   "checkCount": 22,
+   "checkCount": 23,
    "id": "constraint-stacked-memory-and-server-dram",
-   "improvedStreak": 0,
+   "improvedStreak": 1,
    "latest": {
-    "assessedAsOf": "2026-09-29",
+    "assessedAsOf": "2026-10-04",
     "claimFindingIds": [
-     "en-sedaily-com-08f31bef-2026-09-1",
-     "en-sedaily-com-08f31bef-2026-09-2"
+     "english-news-cn-da31334c-2026-10-1"
     ],
-    "reasoning": "No new memory evidence arrived today. The latest figures, from 7 September, still show Samsung and SK hynix stockpiles below ten days and next year's memory demand outrunning supply by more than ten percentage points.",
+    "reasoning": "No new supply or inventory figure arrived today. September Korean exports of $60.30 billion came alongside further memory-chip price rises, so output is growing and cost is still climbing at the same time.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-08",
@@ -98,26 +97,26 @@
    "worsenedCount": 3
   },
   {
-   "checkCount": 10,
+   "checkCount": 11,
    "id": "constraint-high-bandwidth-memory-and-server-memory",
-   "improvedStreak": 1,
+   "improvedStreak": 0,
    "latest": {
-    "assessedAsOf": "2026-09-29",
+    "assessedAsOf": "2026-10-04",
     "claimFindingIds": [
-     "parameter-io-718c27d9-2026-09-1",
-     "parameter-io-718c27d9-2026-09-3"
+     "english-news-cn-da31334c-2026-10-1",
+     "huggingnews-com-5d8c11e7-2026-10-1"
     ],
-    "reasoning": "No new high-bandwidth memory evidence arrived today. The standing picture holds: memory's share of AI infrastructure spending is forecast to reach 57% by 2027 from 14% in 2025, and each high-bandwidth part consumes about three times the factory capacity of ordinary memory.",
+    "reasoning": "Today's findings add no memory capacity number. The one read-across is indirect: record South Korean exports of $60.30 billion with prices still rising, and a fourth quarterly rental-rate increase, point to the same squeeze as last week.",
     "status": "unchanged"
    },
    "openedAsOf": "2026-09",
    "reopenedAsOf": [],
    "resolvedAsOf": null,
    "state": "open",
-   "title": "high-bandwidth memory allocation",
+   "title": "High-bandwidth memory and server DRAM",
    "trigger": {
     "kind": "binding-constraint",
-    "label": "high-bandwidth memory allocation"
+    "label": "High-bandwidth memory and server DRAM"
    },
    "worsenedCount": 3
   }

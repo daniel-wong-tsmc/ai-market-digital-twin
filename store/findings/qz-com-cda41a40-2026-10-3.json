@@ -1,0 +1,51 @@
+{
+  "id": "qz-com-cda41a40-2026-10-3",
+  "statement": "Large banks including Bank of America, Citigroup and Morgan Stanley are set to send syndication letters for the 42 billion dollar senior-secured tranche, with Blackstone putting up 9 billion dollars of its own capital in the junior tranche, which the report frames as a gauge of continued appetite for funding AI infrastructure.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Mainstream banks and a large private-capital firm committing their own money to AI compute debt indicates financing for accelerator buildouts is still available at scale, which supports the buyers at the margin of the market.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "chips.hyperscaler-asic",
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud"
+    ],
+    "direction": "positive",
+    "mechanism": "Available syndicated debt and committed private capital let compute buyers fund hardware purchases they could not pay for from cash flow, sustaining accelerator orders across both merchant and custom silicon."
+  },
+  "evidence": [
+    {
+      "source": "Quartz (citing Bloomberg reporting)",
+      "url": "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226",
+      "date": "2026-10-02",
+      "excerpt": "putting up $9 billion of its own capital and planning to syndicate the rest",
+      "tier": "secondary"
+    },
+    {
+      "source": "Quartz (citing Bloomberg reporting)",
+      "url": "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226",
+      "date": "2026-10-02",
+      "excerpt": "seen as a gauge of continued appetite for funding AI infrastructure buildout at a time of public pushback against data-center construction",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single open-web restatement of paywalled reporting; the syndication had not closed at publication."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Broadcom, Blackstone, Bank of America, Citigroup, Morgan Stanley",
+  "observedAt": "2026-10-02",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

@@ -1,0 +1,55 @@
+{
+  "id": "qz-com-cda41a40-2026-10-1",
+  "statement": "Anthropic has committed 125.2 billion dollars under a five-year lease for tensor processing unit computing capacity, of which Broadcom has agreed to lend up to 42 billion dollars, and is expected to become Broadcom's largest compute customer in 2027.",
+  "kind": "measured",
+  "value": {
+    "number": 125.2,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "A commitment of this size locked into custom accelerators for five years is compute demand that will not be met by merchant graphics processors, so it shifts a large block of future spending away from the merchant category.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "models.frontier-closed",
+      "chips.foundry-packaging"
+    ],
+    "direction": "mixed",
+    "mechanism": "A five-year custom-accelerator lease of this scale confirms very large frontier-model compute demand while directing it to a custom silicon supplier rather than to merchant accelerators, and it books large advanced-packaging and foundry volume."
+  },
+  "evidence": [
+    {
+      "source": "Quartz (citing Bloomberg reporting)",
+      "url": "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226",
+      "date": "2026-10-02",
+      "excerpt": "Broadcom has agreed to lend Anthropic up to $42 billion to help cover infrastructure spending, which would cover approximately one-third of the $125.2 billion Anthropic has committed under a five-year lease for tensor processing unit computing capacity.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Quartz (citing Bloomberg reporting)",
+      "url": "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226",
+      "date": "2026-10-02",
+      "excerpt": "Anthropic is expected to become Broadcom's largest compute customer in 2027.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Open-web restatement of paywalled Bloomberg reporting; no filing was fetched and the corroborating outlets are only summarised inside this document."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 3,
+  "entity": "Broadcom, Anthropic",
+  "observedAt": "2026-10-02",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

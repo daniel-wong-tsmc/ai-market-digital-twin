@@ -1,0 +1,45 @@
+{
+  "id": "lambda-ai-f54e534c-2026-10-1",
+  "statement": "Lambda's public on-demand price for Nvidia B200 SXM6 capacity is $6.69 per GPU per hour in the eight-GPU configuration, as listed on its pricing page fetched October 4, 2026, with no prior rate or effective date shown.",
+  "kind": "measured",
+  "value": {
+    "number": 6.69,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "unknown",
+  "why": "This is a static listed rental level with no stated baseline or change on the page, so it is useful only as a current price marker for the newest widely rented accelerator.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Listed rental rates set the revenue a specialist cloud provider can earn per accelerator hour, which over time shapes how many accelerators it can justify buying; with no baseline here, the level carries no direction."
+  },
+  "evidence": [
+    {
+      "source": "Lambda (lambda.ai pricing page)",
+      "url": "https://lambda.ai/pricing",
+      "date": "2026-10-04",
+      "excerpt": "NVIDIA B200 SXM6 -- 8x GPU: '$6.69' per GPU/hour",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Provider's own public price list, but no effective or last-updated date is shown on the page."
+  },
+  "dispersion": "conflicting same-key reports: value 3.99 -> 6.69 (tol 1%); sources: Lambda (lambda.ai pricing page)",
+  "asOf": "2026-10",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 0,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "lambda-labs",
+  "observedAt": "2026-10-04",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

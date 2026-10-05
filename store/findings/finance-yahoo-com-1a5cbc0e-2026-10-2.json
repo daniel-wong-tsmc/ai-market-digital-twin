@@ -1,0 +1,49 @@
+{
+  "id": "finance-yahoo-com-1a5cbc0e-2026-10-2",
+  "statement": "After scrutiny began, Semi-Tech Leasing refiled the same credit-registry documents with hardware descriptions, supplier names and server model numbers removed, while Nvidia said it is looking into the report and will work with its server-maker customer to investigate.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Scrubbing identifying hardware detail from public credit filings makes diversion harder to detect from the outside, so published China exposure understates the real figure and the vendor faces an open compliance investigation.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud"
+    ],
+    "direction": "negative",
+    "mechanism": "Less transparent paperwork around restricted-part financing raises the chance of new licence conditions, end-use audits and partner restrictions that constrain where the vendor's top accelerators may be sold."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (restatement of Bloomberg reporting)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/chinese-state-firm-financed-restricted-132108282.html",
+      "date": "2026-10-02",
+      "excerpt": "Semi-Tech Leasing refiled the same credit-registry documents with hardware descriptions, supplier names, and server model numbers stripped out",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (restatement of Bloomberg reporting)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/chinese-state-firm-financed-restricted-132108282.html",
+      "date": "2026-10-02",
+      "excerpt": "looking into this report and will work with our OEM customer to investigate",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single open-web restatement of paywalled reporting, though it carries direct on-record vendor and server-maker statements."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Nvidia / Semi-Tech Leasing Group / Asustek Computer",
+  "observedAt": "2026-10-02",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

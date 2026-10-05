@@ -1,0 +1,53 @@
+{
+  "id": "huggingnews-com-5d8c11e7-2026-10-1",
+  "statement": "Amazon's cloud unit is raising reserved GPU capacity rates in all regions from October 7, 2026, with B300 accelerator rates going to $16.146 per hour from $14.04, a rise of about 15 percent and the fourth straight quarterly increase in 2026.",
+  "kind": "measured",
+  "value": {
+    "number": 16.146,
+    "unit": "USD_per_gpu_hr"
+  },
+  "trend": "rising",
+  "why": "A stated prior rate and a stated increase make this a real price change rather than a static quote, and a fourth consecutive quarterly rise on reserved top-end capacity shows buyers still paying up for scarce accelerator hours.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Repeated increases in reserved accelerator rental rates signal demand running ahead of available capacity, which supports further accelerator purchases while raising the compute bill for renters."
+  },
+  "evidence": [
+    {
+      "source": "HuggingNews",
+      "url": "https://huggingnews.com/ai/aws-raises-reserved-gpu-prices-15percent-for-4th-straight-quarter-4567621d",
+      "date": "2026-10-01",
+      "excerpt": "B300 accelerator rates increasing to $16.146 per hour from $14.04",
+      "tier": "secondary"
+    },
+    {
+      "source": "HuggingNews",
+      "url": "https://huggingnews.com/ai/aws-raises-reserved-gpu-prices-15percent-for-4th-straight-quarter-4567621d",
+      "date": "2026-10-01",
+      "excerpt": "bringing year to date increases for H100 and B300 models to between 40% and 75%",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single aggregator report of a provider price change; the provider's own pricing page was not fetched."
+  },
+  "dispersion": "conflicting same-key reports: value 5.97 -> 16.146 (tol 1%); sources: HuggingNews",
+  "asOf": "2026-10",
+  "indicatorId": "D6",
+  "side": "price",
+  "polarityDemand": 1,
+  "polaritySupply": -1,
+  "magnitude": 2,
+  "entity": "Amazon Web Services (Amazon's cloud unit)",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

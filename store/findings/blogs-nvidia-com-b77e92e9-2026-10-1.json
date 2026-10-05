@@ -1,0 +1,51 @@
+{
+  "id": "blogs-nvidia-com-b77e92e9-2026-10-1",
+  "statement": "Nvidia introduced a 64GB unified-memory configuration of DGX Spark starting at $4,999, available October 23, 2026 from six system-builder partners (Acer, Asus, Dell, Gigabyte, HP and MSI), supporting models up to 100 billion parameters on one device and up to 200 billion parameters when two units are clustered.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A cheaper entry configuration that keeps the same Grace Blackwell superchip and software stack, shipped by six named system builders, widens the installed base of Nvidia desktop accelerators for locally run model work.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "models.small-ondevice",
+      "models.open-weight",
+      "applications.ai-coding"
+    ],
+    "direction": "positive",
+    "mechanism": "A lower-priced configuration carried by six system builders cuts the entry cost of on-premises Nvidia accelerator hardware, pulling more developer workloads onto Nvidia silicon and onto locally run open-weight and small on-device models."
+  },
+  "evidence": [
+    {
+      "source": "Nvidia (official blog)",
+      "url": "https://blogs.nvidia.com/blog/local-ai-dgx-spark-64gb-sync/",
+      "date": "2026-10-02",
+      "excerpt": "New 64GB unified-memory configuration of DGX Spark starting at $4,999, available Friday, October 23, 2026, from OEM partners Acer, ASUS, Dell, Gigabyte, HP and MSI.",
+      "tier": "primary"
+    },
+    {
+      "source": "Nvidia (official blog)",
+      "url": "https://blogs.nvidia.com/blog/local-ai-dgx-spark-64gb-sync/",
+      "date": "2026-10-02",
+      "excerpt": "two clustered 64 GB systems delivered up to 1.7x performance compared with a single system",
+      "tier": "primary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "high",
+    "basis": "First-party vendor announcement on the maker's own blog, naming price, availability date and the shipping partners."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "designWins",
+  "side": "structural",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "nvidia",
+  "observedAt": "2026-10-02",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

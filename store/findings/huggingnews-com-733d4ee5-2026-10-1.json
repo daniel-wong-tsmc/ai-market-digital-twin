@@ -1,0 +1,50 @@
+{
+  "id": "huggingnews-com-733d4ee5-2026-10-1",
+  "statement": "Banks and private credit firms are refusing asset-backed GPU financing for small AI cloud providers unless Nvidia posts collateral of up to 25 percent, with lenders writing the chips down over three to four years against Nvidia's claim that they last a decade.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "If lenders will only fund accelerator purchases with a vendor guarantee behind them, the marginal buyers of merchant accelerators have less borrowing capacity, and a three-to-four-year write-down assumption raises their cost of capital.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Tighter credit terms and a demand for vendor collateral shrink the pool of debt available to smaller cloud providers, slowing their accelerator orders and pushing residual-value risk back onto the chipmaker's own balance sheet."
+  },
+  "evidence": [
+    {
+      "source": "HuggingNews (aggregation attributing Financial Times and Reuters)",
+      "url": "https://huggingnews.com/ai/wall-street-rejects-nvidia-gpu-asset-plan-with-25percent-collateral-dema-4adb2e62",
+      "date": "2026-10-01",
+      "excerpt": "banks underwriting GPUs on a 3 to 4 year schedule compared to Nvidia's claim that they last a decade",
+      "tier": "secondary"
+    },
+    {
+      "source": "HuggingNews (aggregation attributing Financial Times and Reuters)",
+      "url": "https://huggingnews.com/ai/wall-street-rejects-nvidia-gpu-asset-plan-with-25percent-collateral-dema-4adb2e62",
+      "date": "2026-10-01",
+      "excerpt": "Nvidia plans to provide residual-value guarantees capped at 25% per deal, with each guarantee subject to individual assessment.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "One fetched aggregator restatement of paywalled originals; the corroborating outlets are quoted inside this single document rather than separately fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Nvidia / Wall Street banks and private credit firms",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

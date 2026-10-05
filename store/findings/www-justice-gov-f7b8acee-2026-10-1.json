@@ -1,0 +1,50 @@
+{
+  "id": "www-justice-gov-f7b8acee-2026-10-1",
+  "statement": "The U.S. Department of Justice announced on October 1, 2026 the arrest of a California man on a three-count indictment alleging his company bought and smuggled more than 300 million dollars of export-controlled high-end servers containing U.S.-made graphics processors to China between 2023 and 2024, including one purchase order for 27 servers worth 7.6 million dollars.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A criminal case of this size shows both that unauthorised Chinese demand for top-end accelerators is large and that U.S. enforcement is actively closing those channels, which cuts the market the vendor can legally serve.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Active prosecution of diversion channels removes gray-market volume and raises compliance burdens on resellers and server makers, shrinking legally addressable accelerator demand even as it evidences strong unmet Chinese appetite."
+  },
+  "evidence": [
+    {
+      "source": "U.S. Department of Justice, Office of Public Affairs",
+      "url": "https://www.justice.gov/opa/pr/california-man-arrested-smuggling-more-300-million-export-controlled-computer-servers-china",
+      "date": "2026-10-01",
+      "excerpt": "more than $300 million worth of export-controlled high-end computer servers",
+      "tier": "secondary"
+    },
+    {
+      "source": "U.S. Department of Justice, Office of Public Affairs",
+      "url": "https://www.justice.gov/opa/pr/california-man-arrested-smuggling-more-300-million-export-controlled-computer-servers-china",
+      "date": "2026-10-01",
+      "excerpt": "The National Security Division will protect the American advantage in the chips that power this technology.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Government press release, but the figures are untested indictment allegations and the chipmaker is not named as a party."
+  },
+  "dispersion": "conflicting same-key reports: magnitude 1 -> 2; sources: U.S. Department of Justice, Office of Public Affairs",
+  "asOf": "2026-10",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Earthmade Computer Inc. / Greg Lui / China",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

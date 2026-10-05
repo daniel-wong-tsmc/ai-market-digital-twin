@@ -1,0 +1,246 @@
+{
+  "headline": "A fourth rent rise, and a $60 billion bet on other chips",
+  "deck": "Renting a graphics chip gets dearer again next week. The big new money being raised this week is for custom silicon, not merchant parts.",
+  "scenes": [
+    {
+      "n": 1,
+      "title": "Rent goes up again, right on schedule",
+      "paragraphs": [
+        "Amazon's cloud unit told customers it will raise reserved graphics-chip rates in every region from October 7. Its B300 machines go to $16.146 an hour from $14.04, about 15 percent more. That is the fourth quarterly increase this year.",
+        "Renting is still the cheap way in for most buyers. Lambda's public list, fetched today, shows Nvidia B200 capacity at $6.69 per chip per hour in the eight-chip setup. Sellers only move prices this way when there is less to rent than people want."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "gpuSpotPrice",
+        "label": "Street price per GPU"
+      },
+      "claimFindingIds": [
+        "huggingnews-com-5d8c11e7-2026-10-1",
+        "lambda-ai-f54e534c-2026-10-1"
+      ],
+      "sourceLine": "HuggingNews report on Amazon reserved-capacity rates; Lambda public pricing page.",
+      "relatedDocs": [
+        {
+          "url": "https://huggingnews.com/ai/aws-raises-reserved-gpu-prices-15percent-for-4th-straight-quarter-4567621d",
+          "title": "Amazon's cloud unit lifts reserved graphics-chip rates for a fourth quarter",
+          "outlet": "HuggingNews",
+          "date": "2026-10-01"
+        },
+        {
+          "url": "https://lambda.ai/pricing",
+          "title": "Lambda public rental price list",
+          "outlet": "Lambda (lambda.ai)",
+          "date": "2026-10-04"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "title": "Running flat out, and still charging more",
+      "paragraphs": [
+        "The reason sits upstream. South Korea's semiconductor exports reached $60.30 billion in September, up 262.8 percent on a year earlier and past $60 billion in a single month for the first time. The trade data ties that to the AI build-out and to the memory-chip price rises it set off.",
+        "Costs look set to keep climbing. The biggest contract chip manufacturer was reported on September 24 to be planning wafer price rises of 3 to 6 percent for 2027, with larger increases possible on AI orders. Record output and record prices at the same time is what a shortage looks like."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hbmSupplyCapex",
+        "label": "Memory factory spending"
+      },
+      "claimFindingIds": [
+        "english-news-cn-da31334c-2026-10-1",
+        "www-digitimes-com-2d20aaa6-2026-09-1"
+      ],
+      "sourceLine": "South Korean trade data via Xinhua; trade-press reporting on 2027 wafer prices.",
+      "relatedDocs": [
+        {
+          "url": "https://english.news.cn/asiapacific/20261001/3cb106dd2d164bfc952f475a78020cfd/c.html",
+          "title": "South Korean chip exports top $60 billion in a month for the first time",
+          "outlet": "Xinhua (English edition, wire restatement citing South Korean trade data)",
+          "date": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "title": "The scarce thing now is funding",
+      "paragraphs": [
+        "Broadcom's bank group is assembling $60 billion of fresh financing for AI chips: a $42 billion senior secured piece and an $18 billion junior piece led by Blackstone, which is putting up $9 billion of its own capital. The money is for custom accelerator capacity, with Anthropic the named buyer. Anthropic has committed $125.2 billion under a five-year lease for that capacity, of which Broadcom has agreed to lend up to $42 billion.",
+        "Smaller buyers get a colder reception. Banks and private credit firms are refusing chip-backed loans to small AI cloud providers unless Nvidia posts collateral of up to 25 percent, because lenders write the chips down over three to four years while Nvidia says they last a decade. Nvidia has aimed at more than $500 billion of outside capital for AI infrastructure and, as of early October, had closed nothing.",
+        "Even the largest buyers are rearranging their books. Amazon said on October 1 it plans to sell about $8 billion of high-end Nvidia chips into a newly formed vehicle and lease the same hardware back, offering outside investors debt and an equity stake of up to 10 percent. Nothing is agreed or signed."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "hyperscalerCapexRevision",
+        "label": "Big buyers' spending plans"
+      },
+      "claimFindingIds": [
+        "qz-com-cda41a40-2026-10-1",
+        "qz-com-cda41a40-2026-10-2",
+        "huggingnews-com-733d4ee5-2026-10-1",
+        "huggingnews-com-733d4ee5-2026-10-2",
+        "www-gurufocus-com-aa01ec4f-2026-10-1"
+      ],
+      "sourceLine": "Quartz, citing Bloomberg, on the Broadcom financing; HuggingNews on lender terms; GuruFocus on Amazon's planned chip sale.",
+      "relatedDocs": [
+        {
+          "url": "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226",
+          "title": "Banks line up $60 billion for custom AI chip capacity",
+          "outlet": "Quartz (qz.com), citing Bloomberg reporting",
+          "date": "2026-10-02"
+        },
+        {
+          "url": "https://www.gurufocus.com/news/9106855/amazon-plans-8-billion-sale-of-nvidia-chips-to-optimize-balance-sheet",
+          "title": "Amazon plans an $8 billion chip sale and leaseback",
+          "outlet": "GuruFocus",
+          "date": "2026-10-01"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "title": "What to watch next",
+      "paragraphs": [
+        "First, whether the $42 billion senior piece actually sells. Large banks including Bank of America, Citigroup and Morgan Stanley are set to send syndication letters, and that is the live test of how much appetite there still is to fund this build. Watch Amazon's $8 billion vehicle the same way: it has been announced, not closed.",
+        "Second, demand at the front of the queue. SpaceXAI plans to deploy about 420,000 Nvidia processors in November and to start a $1.1 billion-a-month compute contract in December, with Anthropic and Google among the customers it says have committed. If those switch on, the queue for rentable capacity gets longer, not shorter.",
+        "Third, leakage. The United States Justice Department announced an arrest on October 1 over more than $300 million of export-controlled servers sent to China, and a Chinese state-linked lender is reported to have financed more than 700 servers, including Asustek machines built on restricted Nvidia B300 chips. If restricted parts keep reaching buyers who cannot legally have them, the real gap between supply and demand is wider than the official figures show."
+      ],
+      "visual": {
+        "kind": "spark",
+        "seriesId": "odmMonthlyAiRevenue",
+        "label": "Servers actually shipped"
+      },
+      "claimFindingIds": [
+        "qz-com-cda41a40-2026-10-3",
+        "www-gurufocus-com-aa01ec4f-2026-10-1",
+        "finimize-com-5579c429-2026-10-1",
+        "finimize-com-5579c429-2026-10-2",
+        "www-justice-gov-f7b8acee-2026-10-1",
+        "finance-yahoo-com-1a5cbc0e-2026-10-1"
+      ],
+      "sourceLine": "Quartz, citing Bloomberg; GuruFocus; Finimize; United States Justice Department; Yahoo Finance, restating Bloomberg.",
+      "relatedDocs": [
+        {
+          "url": "https://finimize.com/content/spacexai-eyes-microsoft-as-demand-for-ai-compute-grows",
+          "title": "SpaceXAI lines up monthly compute commitments and a November deployment",
+          "outlet": "Finimize",
+          "date": "2026-10-01"
+        },
+        {
+          "url": "https://www.justice.gov/opa/pr/california-man-arrested-smuggling-more-300-million-export-controlled-computer-servers-china",
+          "title": "California man arrested over export-controlled servers sent to China",
+          "outlet": "U.S. Department of Justice, Office of Public Affairs",
+          "date": "2026-10-01"
+        },
+        {
+          "url": "https://finance.yahoo.com/technology/ai/articles/chinese-state-firm-financed-restricted-132108282.html",
+          "title": "Chinese state-linked lender reported to have financed restricted servers",
+          "outlet": "Yahoo Finance (restatement of Bloomberg reporting)",
+          "date": "2026-10-02"
+        }
+      ]
+    }
+  ],
+  "kpiPicks": [
+    {
+      "indicatorId": "gpuSpotPrice",
+      "whyCaption": "What one card costs to buy outright, next to what it costs to rent.",
+      "scene": 1
+    },
+    {
+      "indicatorId": "hbmSupplyCapex",
+      "whyCaption": "How hard memory makers are spending to add factory output.",
+      "scene": 2
+    },
+    {
+      "indicatorId": "hyperscalerCapexRevision",
+      "whyCaption": "Whether the biggest buyers are still raising their spending plans.",
+      "scene": 3
+    },
+    {
+      "indicatorId": "odmMonthlyAiRevenue",
+      "whyCaption": "How many finished AI servers are actually leaving the factories.",
+      "scene": 4
+    }
+  ],
+  "calloutMonths": [
+    {
+      "monthKey": "2026-10",
+      "text": "Reserved rental rates rise again from October 7, the fourth quarterly increase this year.",
+      "scene": 1
+    },
+    {
+      "monthKey": "2026-09",
+      "text": "South Korean chip exports passed $60 billion in a single month for the first time.",
+      "scene": 2
+    }
+  ],
+  "bullets": [
+    {
+      "text": "Amazon's cloud unit raises reserved graphics-chip rates about 15 percent on October 7, its fourth straight quarterly rise, so rentable capacity is still short.",
+      "claimFindingIds": [
+        "huggingnews-com-5d8c11e7-2026-10-1"
+      ]
+    },
+    {
+      "text": "Broadcom's banks are assembling $60 billion for custom accelerators, and Anthropic has committed $125.2 billion over five years for that non-merchant chip capacity.",
+      "claimFindingIds": [
+        "qz-com-cda41a40-2026-10-2",
+        "qz-com-cda41a40-2026-10-1"
+      ]
+    },
+    {
+      "text": "Lenders refuse chip-backed loans to small cloud providers unless Nvidia posts up to 25 percent collateral, and its $500 billion funding platform had closed nothing by early October.",
+      "claimFindingIds": [
+        "huggingnews-com-733d4ee5-2026-10-1",
+        "huggingnews-com-733d4ee5-2026-10-2"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "issueId": "dim-bottleneck",
+      "status": "worsened",
+      "reasoning": "Amazon's cloud unit is raising reserved rates about 15 percent from October 7, a fourth straight quarterly rise, while Korean chip exports hit a record $60.30 billion in September. Output at record levels and prices still climbing means the shortfall has not closed.",
+      "claimFindingIds": [
+        "huggingnews-com-5d8c11e7-2026-10-1",
+        "english-news-cn-da31334c-2026-10-1"
+      ]
+    },
+    {
+      "issueId": "dim-moat",
+      "status": "worsened",
+      "reasoning": "Anthropic's $125.2 billion five-year lease is for custom chip capacity, and Broadcom's banks are raising $60 billion more to build it. That is a large block of spending aimed away from merchant graphics chips.",
+      "claimFindingIds": [
+        "qz-com-cda41a40-2026-10-1",
+        "qz-com-cda41a40-2026-10-2"
+      ]
+    },
+    {
+      "issueId": "constraint-stacked-memory-and-server-dram",
+      "status": "unchanged",
+      "reasoning": "No new supply or inventory figure arrived today. September Korean exports of $60.30 billion came alongside further memory-chip price rises, so output is growing and cost is still climbing at the same time.",
+      "claimFindingIds": [
+        "english-news-cn-da31334c-2026-10-1"
+      ]
+    },
+    {
+      "issueId": "constraint-high-bandwidth-memory-and-server-memory",
+      "status": "unchanged",
+      "reasoning": "Today's findings add no memory capacity number. The one read-across is indirect: record South Korean exports of $60.30 billion with prices still rising, and a fourth quarterly rental-rate increase, point to the same squeeze as last week.",
+      "claimFindingIds": [
+        "english-news-cn-da31334c-2026-10-1",
+        "huggingnews-com-5d8c11e7-2026-10-1"
+      ]
+    }
+  ],
+  "schemaVersion": 3,
+  "categoryId": "chips.merchant-gpu",
+  "storyDate": "2026-10-04",
+  "narratorMeta": {
+    "model": "opus",
+    "promptHash": "0e3e2632e35f96d5b1d70c16a84216db6cbefa4c923c3343d7d945dfff5cc323",
+    "retries": 0,
+    "fellBack": false,
+    "wroteAt": "2026-10-05T01:49:29.457351+00:00"
+  }
+}

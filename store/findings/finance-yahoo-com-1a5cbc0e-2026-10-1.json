@@ -1,0 +1,50 @@
+{
+  "id": "finance-yahoo-com-1a5cbc0e-2026-10-1",
+  "statement": "A Chinese state-linked financing company, Semi-Tech Leasing Group, is reported to have funded purchases by Glory View Technology of more than 700 servers worth more than 3 billion yuan (440 million dollars), including one contract for 32 Asustek Computer servers powered by Nvidia's export-restricted B300 Blackwell chips, with servers reportedly deployed in a China Mobile data center in Zhongwei, Ningxia.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "Restricted top-end Nvidia parts reaching Chinese buyers through state-linked financing points to a live unauthorised channel, which raises the odds of tighter licensing, customer audits and lost legitimate China revenue for the chipmaker and its server partners.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "infrastructure.neocloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Evidence of restricted parts flowing to China on state-backed credit shows unmet Chinese appetite for merchant accelerators, but it invites stricter export licensing and partner compliance checks that cut the addressable market and add legal risk for the vendor and its server builders."
+  },
+  "evidence": [
+    {
+      "source": "Yahoo Finance (restatement of Bloomberg reporting)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/chinese-state-firm-financed-restricted-132108282.html",
+      "date": "2026-10-02",
+      "excerpt": "more than 700 servers totaling more than 3 billion yuan ($440 million) in financing",
+      "tier": "secondary"
+    },
+    {
+      "source": "Yahoo Finance (restatement of Bloomberg reporting)",
+      "url": "https://finance.yahoo.com/technology/ai/articles/chinese-state-firm-financed-restricted-132108282.html",
+      "date": "2026-10-02",
+      "excerpt": "32 Asustek Computer servers powered by Nvidia's restricted B300 Blackwell chips",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Open-web restatement of paywalled Bloomberg reporting; the original was not fetched and no filing or enforcement document corroborates it."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "exportControlExposure",
+  "side": "structural",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "Nvidia / Semi-Tech Leasing Group / Glory View Technology / Asustek Computer / China Mobile",
+  "observedAt": "2026-10-02",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

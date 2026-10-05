@@ -1,0 +1,50 @@
+{
+  "id": "huggingnews-com-733d4ee5-2026-10-2",
+  "statement": "Nvidia has targeted more than 500 billion dollars of third-party capital for AI infrastructure but, as of early October 2026, had not closed any transaction tied to the platform.",
+  "kind": "observed",
+  "value": null,
+  "trend": "falling",
+  "why": "A very large funding ambition with nothing closed so far means the outside money that was meant to pay for future accelerator purchases is not yet in place, so stated pipeline should not be read as funded demand.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "negative",
+    "mechanism": "Until outside lenders and investors actually commit, the planned third-party funding cannot convert into accelerator orders, leaving near-term purchases dependent on the buyers' own balance sheets."
+  },
+  "evidence": [
+    {
+      "source": "HuggingNews (aggregation attributing Financial Times and Reuters)",
+      "url": "https://huggingnews.com/ai/wall-street-rejects-nvidia-gpu-asset-plan-with-25percent-collateral-dema-4adb2e62",
+      "date": "2026-10-01",
+      "excerpt": "has targeted more than $500B in third party capital for AI infrastructure",
+      "tier": "secondary"
+    },
+    {
+      "source": "HuggingNews (aggregation attributing Financial Times and Reuters)",
+      "url": "https://huggingnews.com/ai/wall-street-rejects-nvidia-gpu-asset-plan-with-25percent-collateral-dema-4adb2e62",
+      "date": "2026-10-01",
+      "excerpt": "As of early October 2026, Nvidia had not closed any transactions tied to the platform.",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single open-web aggregation of paywalled reporting; no filing or vendor statement confirms the target or the absence of closed deals."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": -1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "nvidia",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

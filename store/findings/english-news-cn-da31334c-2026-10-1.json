@@ -1,0 +1,54 @@
+{
+  "id": "english-news-cn-da31334c-2026-10-1",
+  "statement": "South Korea's semiconductor exports rose 262.8 percent year on year to 60.30 billion dollars in September 2026, passing 60 billion dollars in a single month for the first time, which the report ties to expanding AI infrastructure investment and resulting memory-chip price increases.",
+  "kind": "measured",
+  "value": {
+    "number": 262.8,
+    "unit": "pct_yoy"
+  },
+  "trend": "rising",
+  "why": "South Korea is the main source of high-bandwidth memory used in AI accelerators, so a record single month of chip exports shows memory output and shipments running at full stretch while prices climb.",
+  "impact": {
+    "targets": [
+      "chips.hbm-memory",
+      "chips.merchant-gpu",
+      "chips.foundry-packaging",
+      "infrastructure.hyperscale-cloud"
+    ],
+    "direction": "mixed",
+    "mechanism": "Record memory shipments feed accelerator assembly and so ease one supply bottleneck, but the accompanying memory price increases raise the component cost inside every accelerator and server built from them."
+  },
+  "evidence": [
+    {
+      "source": "Xinhua (English edition, wire restatement citing South Korean trade data)",
+      "url": "https://english.news.cn/asiapacific/20261001/3cb106dd2d164bfc952f475a78020cfd/c.html",
+      "date": "2026-10-01",
+      "excerpt": "skyrocketed 262.8 percent to 60.30 billion dollars, crossing 60 billion dollars for the first time",
+      "tier": "secondary"
+    },
+    {
+      "source": "Xinhua (English edition, wire restatement citing South Korean trade data)",
+      "url": "https://english.news.cn/asiapacific/20261001/3cb106dd2d164bfc952f475a78020cfd/c.html",
+      "date": "2026-10-01",
+      "excerpt": "the continuous expansion of AI infrastructure investments that led to price hikes in memory chips",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single open-web wire restatement of national trade statistics; no primary trade-ministry release was fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "hbmSupplyCapex",
+  "side": "supply",
+  "polarityDemand": 0,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "South Korea government / SK Hynix / Samsung (memory and AI chip exports)",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

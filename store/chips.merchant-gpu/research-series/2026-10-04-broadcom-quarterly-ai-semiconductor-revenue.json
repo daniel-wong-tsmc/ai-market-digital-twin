@@ -1,0 +1,35 @@
+{
+  "seriesName": "Broadcom quarterly AI semiconductor revenue",
+  "unit": "US$ billions",
+  "form": "columns",
+  "sourceName": "Yahoo Finance",
+  "points": [
+    {
+      "label": "Q3 FY2025 (ended Aug 3, 2025)",
+      "value": 5.2,
+      "sourceUrl": "https://finance.yahoo.com/news/broadcoms-revenue-reaches-record-high-211205477.html",
+      "publishedAt": "2025-09-04"
+    },
+    {
+      "label": "Q1 FY2026 (ended Feb 1, 2026)",
+      "value": 8.4,
+      "sourceUrl": "https://finance.yahoo.com/news/broadcom-reports-record-q1-revenue-212900474.html",
+      "publishedAt": "2026-03-04"
+    },
+    {
+      "label": "Q2 FY2026 (ended May 3, 2026)",
+      "value": 10.8,
+      "sourceUrl": "https://finance.yahoo.com/markets/stocks/articles/broadcom-inc-announces-second-quarter-201500695.html",
+      "publishedAt": "2026-06-03"
+    },
+    {
+      "label": "Q3 FY2026 (ended Aug 2, 2026)",
+      "value": 16.7,
+      "sourceUrl": "https://finance.yahoo.com/markets/stocks/articles/broadcom-inc-announces-third-quarter-201500781.html",
+      "publishedAt": "2026-09-02"
+    }
+  ],
+  "pair": false,
+  "notes": "This series shows the rapid growth of Broadcom's custom AI accelerator (non-merchant chip) business -- the same business line the bullet's $60 billion bank financing and Anthropic's $125.2 billion commitment are meant to fund capacity for. All four figures are actual reported quarterly results (not guidance) quoted verbatim from Broadcom's own earnings-announcement articles as republished/reported on finance.yahoo.com, each a separate article URL on the same site. Q4 FY2025 ($6.5 billion, ~74% YoY, reported Dec 2025) exists as a published actual figure but I could not confirm it on a finance.yahoo.com page within budget, so it was left out rather than guessed. Figures published only as forward guidance (e.g. the Q4 FY2026 $21.7 billion and FY2026/FY2027/FY2028 outlook figures) were excluded per the no-forecast rule. Did not use qz.com, cnbc.com (403 blocked), fool.com (listed as blocked), sec.gov (listed as blocked), or investors.broadcom.com (repeated timeouts/connection resets when fetched directly, suggesting it would also fail an automated-reader check).",
+  "bulletIndex": 2
+}

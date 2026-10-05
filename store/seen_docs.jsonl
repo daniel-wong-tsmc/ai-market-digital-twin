@@ -489,3 +489,13 @@
 {"url": "https://www.newegg.com/p/pl?d=h100", "hash": "6d2290affe8b9101ad9e7964afd86d6db54207a34c68f27e0877eea06db659bd", "asOf": "2026-09"}
 {"url": "https://www.runpod.io/pricing", "hash": "24e488c66c3824ecd7bacd3516dea35145b7a40079c58ca135a6419dcc42669a", "asOf": "2026-09"}
 {"url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000182/amd-20260926.htm", "hash": "7b10582f1adb00c6e93de6384515e1e8ababfa6afd03bf9be78bbdcc7038b323", "asOf": "2026-09"}
+{"url": "https://blogs.nvidia.com/blog/local-ai-dgx-spark-64gb-sync", "hash": "806867b1740c3ad976a6c53a6144b837b51367bd1bf17403a7278a4ddfab95e2", "asOf": "2026-10"}
+{"url": "https://english.news.cn/asiapacific/20261001/3cb106dd2d164bfc952f475a78020cfd/c.html", "hash": "3b604880d432f9af92c89dfd05ed2e0c6d460f5e6f7004aaf394b893e684c9c7", "asOf": "2026-10"}
+{"url": "https://finance.yahoo.com/technology/ai/articles/chinese-state-firm-financed-restricted-132108282.html", "hash": "4f54c71273e61bd179fe0bbabbe0af3156aff23471f605ecb39be7875bed0732", "asOf": "2026-10"}
+{"url": "https://finimize.com/content/spacexai-eyes-microsoft-as-demand-for-ai-compute-grows", "hash": "40208f97b980b1e92ecfde67d2c646b0c046d48db83bbb1292fb5100b6113749", "asOf": "2026-10"}
+{"url": "https://huggingnews.com/ai/aws-raises-reserved-gpu-prices-15percent-for-4th-straight-quarter-4567621d", "hash": "0d369710142387389b6de80caf4d6504522db8a80f243673f6a3b15b561597db", "asOf": "2026-10"}
+{"url": "https://huggingnews.com/ai/wall-street-rejects-nvidia-gpu-asset-plan-with-25percent-collateral-dema-4adb2e62", "hash": "6258092a775d67ac528c3b219996b218b6ff48cdb4c3a338468b2a29aa11e527", "asOf": "2026-10"}
+{"url": "https://lambda.ai/pricing", "hash": "a7680a6247fe3bc9dd175c30849c02ab6d30a6d5b84b0a7fc501b9a4fc678da1", "asOf": "2026-10"}
+{"url": "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226", "hash": "84ecbd7e7e53c62c7941954df8ac427a497c56145bd3853b6ad83cf0f2f69c48", "asOf": "2026-10"}
+{"url": "https://www.gurufocus.com/news/9106855/amazon-plans-8-billion-sale-of-nvidia-chips-to-optimize-balance-sheet", "hash": "a827cc552fb992bbb4c287315afba677e88528ef533a6c528f02e3ccceafddd1", "asOf": "2026-10"}
+{"url": "https://www.justice.gov/opa/pr/california-man-arrested-smuggling-more-300-million-export-controlled-computer-servers-china", "hash": "e55364bd658f7772f462d52223f7b75eef9fcb198af004023effbd2b5b062268", "asOf": "2026-10"}

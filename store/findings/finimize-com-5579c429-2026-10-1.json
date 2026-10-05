@@ -1,0 +1,54 @@
+{
+  "id": "finimize-com-5579c429-2026-10-1",
+  "statement": "SpaceXAI aims to start a 1.1 billion dollar-a-month compute contract in December 2026 and says it has lined up billions of dollars of monthly commitments from customers including Anthropic and Google.",
+  "kind": "measured",
+  "value": {
+    "number": 1.1,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Signed monthly compute commitments of this size are forward revenue backing a buildout of Nvidia-powered capacity, so they translate fairly directly into accelerator orders.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "positive",
+    "mechanism": "Contracted monthly payments from large model developers fund further purchases of merchant accelerators and the data-center capacity to host them."
+  },
+  "evidence": [
+    {
+      "source": "Finimize",
+      "url": "https://finimize.com/content/spacexai-eyes-microsoft-as-demand-for-ai-compute-grows",
+      "date": "2026-10-01",
+      "excerpt": "aims to deploy about 420,000 Nvidia processors in November and start a $1.1 billion-a-month contract in December",
+      "tier": "secondary"
+    },
+    {
+      "source": "Finimize",
+      "url": "https://finimize.com/content/spacexai-eyes-microsoft-as-demand-for-ai-compute-grows",
+      "date": "2026-10-01",
+      "excerpt": "lined up billions of dollars in monthly commitments from customers including Anthropic",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single open-web outlet reporting company plans; no contract filing or vendor confirmation was fetched."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "SpaceXAI / xAI",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

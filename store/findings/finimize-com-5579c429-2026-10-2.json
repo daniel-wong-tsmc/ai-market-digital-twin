@@ -1,0 +1,51 @@
+{
+  "id": "finimize-com-5579c429-2026-10-2",
+  "statement": "SpaceXAI plans to deploy about 420,000 Nvidia processors in November 2026 and is in talks with Microsoft about leasing further server capacity to expand its Nvidia-powered computing footprint.",
+  "kind": "observed",
+  "value": null,
+  "trend": "rising",
+  "why": "A planned single-month deployment of this scale, plus leasing talks to add more, indicates accelerator intake continuing at a high rate rather than pausing.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.neocloud",
+      "infrastructure.hyperscale-cloud",
+      "energy.power-generation"
+    ],
+    "direction": "positive",
+    "mechanism": "Bringing a large tranche of accelerators online in one month absorbs merchant-GPU supply and draws on leased data-center space and power."
+  },
+  "evidence": [
+    {
+      "source": "Finimize",
+      "url": "https://finimize.com/content/spacexai-eyes-microsoft-as-demand-for-ai-compute-grows",
+      "date": "2026-10-01",
+      "excerpt": "SpaceXAI is talking with Microsoft about leasing server capacity as it races to expand its Nvidia-powered computing footprint.",
+      "tier": "secondary"
+    },
+    {
+      "source": "Finimize",
+      "url": "https://finimize.com/content/spacexai-eyes-microsoft-as-demand-for-ai-compute-grows",
+      "date": "2026-10-01",
+      "excerpt": "aims to deploy about 420,000 Nvidia processors in November and start a $1.1 billion-a-month contract in December",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single open-web outlet restating company statements of intent; deployment plans are not yet confirmed shipments."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "rpoBacklog",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 2,
+  "entity": "SpaceXAI / xAI, Microsoft",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

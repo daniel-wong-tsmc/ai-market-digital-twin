@@ -1,0 +1,29 @@
+{
+  "seriesName": "AWS p5e.48xlarge EC2 Capacity Block rate through 2026's quarterly hikes",
+  "unit": "US$ per instance-hour",
+  "form": "columns",
+  "sourceName": "GPUSmith",
+  "points": [
+    {
+      "label": "Before January 2026 hike",
+      "value": 34.61,
+      "sourceUrl": "https://gpusmith.com/articles/en/aws-gpu-instance-pricing",
+      "publishedAt": "2026-07-26"
+    },
+    {
+      "label": "After January 2026 hike (~15%, most US regions)",
+      "value": 39.8,
+      "sourceUrl": "https://gpusmith.com/articles/en/aws-gpu-instance-pricing",
+      "publishedAt": "2026-07-26"
+    },
+    {
+      "label": "After July 2026 hike (~20%)",
+      "value": 47.76,
+      "sourceUrl": "https://gpusmith.com/articles/en/aws-gpu-instance-pricing",
+      "publishedAt": "2026-07-26"
+    }
+  ],
+  "pair": false,
+  "notes": "All three bare numbers are quoted from a single GPUSmith article (published 2026-07-26) that traces the p5e.48xlarge EC2 Capacity Block instance-hour rate through AWS's January 2026 and July 2026 quarterly price hikes. This instance type (p5e, H100-class) is not the same one named in today's bullet (B300, which GPUSmith only gives a single July 2026 figure for: $112.32/instance-hour = $14.04/accelerator-hour, matching the bullet's pre-October baseline), but it is published by the same site and shows the same quarter-over-quarter upward pattern the bullet describes. The October 2026 figure itself (the bullet's actual subject) is not yet published on this page -- GPUSmith's piece predates the October 7 hike and only notes AWS's pricing page says prices are 'scheduled to be updated next in October, 2026.' Treat this chart as context for the pricing-hike pattern, not direct confirmation of the October number in the bullet.",
+  "bulletIndex": 1
+}

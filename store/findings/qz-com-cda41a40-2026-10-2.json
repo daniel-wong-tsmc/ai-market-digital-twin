@@ -1,0 +1,55 @@
+{
+  "id": "qz-com-cda41a40-2026-10-2",
+  "statement": "Broadcom's bank syndicate is assembling 60 billion dollars of fresh AI chip financing, split into a 42 billion dollar senior-secured tranche and an 18 billion dollar junior tranche led by Blackstone, to fund custom accelerator capacity for Anthropic and others, following an April agreement with Broadcom and Google for roughly 3.5 gigawatts of computing capacity.",
+  "kind": "measured",
+  "value": {
+    "number": 60.0,
+    "unit": "USD_B"
+  },
+  "trend": "rising",
+  "why": "Debt of this size raised specifically for custom accelerators expands the non-merchant route to large-scale compute, which competes with merchant accelerators for the same model-training workloads.",
+  "impact": {
+    "targets": [
+      "chips.hyperscaler-asic",
+      "chips.merchant-gpu",
+      "infrastructure.datacenter-colo",
+      "energy.power-generation",
+      "chips.hbm-memory"
+    ],
+    "direction": "mixed",
+    "mechanism": "Funded custom-silicon capacity grows the alternative to merchant accelerators for frontier training, while the gigawatt-scale footprint it pays for pulls on data-center space, power and memory supply shared with merchant accelerator systems."
+  },
+  "evidence": [
+    {
+      "source": "Quartz (citing Bloomberg reporting)",
+      "url": "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226",
+      "date": "2026-10-02",
+      "excerpt": "$42 billion Class A senior-secured tranche",
+      "tier": "secondary"
+    },
+    {
+      "source": "Quartz (citing Bloomberg reporting)",
+      "url": "https://qz.com/broadcom-60-billion-debt-financing-anthropic-ai-chips-100226",
+      "date": "2026-10-02",
+      "excerpt": "announced in April an expanded agreement with Broadcom and Google for roughly 3.5 gigawatts of computing capacity",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "medium",
+    "basis": "Single fetched open-web restatement of paywalled reporting on a deal still being syndicated."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "S9",
+  "side": "supply",
+  "polarityDemand": -1,
+  "polaritySupply": 1,
+  "magnitude": 2,
+  "entity": "Broadcom, Anthropic",
+  "observedAt": "2026-10-02",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}

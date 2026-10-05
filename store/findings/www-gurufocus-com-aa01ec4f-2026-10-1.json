@@ -1,0 +1,50 @@
+{
+  "id": "www-gurufocus-com-aa01ec4f-2026-10-1",
+  "statement": "Amazon announced on October 1, 2026 plans to sell about 8 billion dollars of high-end Nvidia chips into a newly formed special purpose vehicle and lease the same Grace Blackwell hardware back, with outside investors offered debt and an equity stake of up to 10 percent, though no rate, tenor, lender, arranger or closing date has been disclosed and nothing is agreed or signed.",
+  "kind": "observed",
+  "value": null,
+  "trend": "unknown",
+  "why": "Moving installed accelerators off the balance sheet while continuing to operate them is a way for a very large buyer to keep purchasing hardware without stretching its own credit, so if it works it supports continued accelerator orders; but nothing is signed, so it is only a proposal.",
+  "impact": {
+    "targets": [
+      "chips.merchant-gpu",
+      "infrastructure.hyperscale-cloud",
+      "infrastructure.datacenter-colo"
+    ],
+    "direction": "mixed",
+    "mechanism": "Selling and leasing back deployed accelerators would free balance-sheet room for a top buyer to keep ordering, and would also test whether outside investors will treat accelerators as financeable assets; failure to place the deal would signal the opposite."
+  },
+  "evidence": [
+    {
+      "source": "GuruFocus",
+      "url": "https://www.gurufocus.com/news/9106855/amazon-plans-8-billion-sale-of-nvidia-chips-to-optimize-balance-sheet",
+      "date": "2026-10-01",
+      "excerpt": "Amazon would transfer thousands of Grace Blackwell chips, currently deployed in its U.S. data centers, to the SPV and lease them back",
+      "tier": "secondary"
+    },
+    {
+      "source": "GuruFocus",
+      "url": "https://www.gurufocus.com/news/9106855/amazon-plans-8-billion-sale-of-nvidia-chips-to-optimize-balance-sheet",
+      "date": "2026-10-01",
+      "excerpt": "nothing in the report is agreed or signed -- no rate, tenor, lender, arranger, or closing date has been disclosed",
+      "tier": "secondary"
+    }
+  ],
+  "reasoning": null,
+  "confidence": {
+    "level": "low",
+    "basis": "Single open-web outlet describing an unsigned proposal with no terms disclosed and no first-party confirmation."
+  },
+  "dispersion": null,
+  "asOf": "2026-10",
+  "indicatorId": "marginalBuyerFinancing",
+  "side": "demand",
+  "polarityDemand": 1,
+  "polaritySupply": 0,
+  "magnitude": 1,
+  "entity": "Amazon, Nvidia",
+  "observedAt": "2026-10-01",
+  "capturedAt": "2026-10-05T00:40:20Z",
+  "extractionModel": "claude-opus-4-8",
+  "schemaVersion": "1.2"
+}
